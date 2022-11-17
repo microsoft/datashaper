@@ -3,74 +3,27 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Field } from '@datashaper/schema'
+import { generateCodebook } from '@datashaper/tables'
 import type { ComponentStory } from '@storybook/react'
-import { useEffect, useState } from 'react'
+import { fromCSV } from 'arquero'
+import { useState } from 'react'
 
 import { CodebookFieldEditor } from './CodebookFieldEditor.js'
 
-const codebookResult = {
-	$schema: 'http://json-schema.org/draft-07/schema#',
-	id: 'http://json-schema.org/draft-07/schema#',
-	name: 'Generator',
-	fields: [
-		{
-			name: 'index',
-			type: 'number',
-			nature: 'nominal',
-			metadata: {
-				maximum: 15,
-				minimum: 0,
-			},
-		},
-		{
-			name: 'int',
-			type: 'number',
-			nature: 'nominal',
-		},
-		{
-			name: 'float',
-			type: 'number',
-			nature: 'nominal',
-		},
-		{
-			name: 'boolean',
-			type: 'boolean',
-			nature: 'nominal',
-		},
-		{
-			name: 'string',
-			type: 'string',
-			nature: 'nominal',
-			metadata: {
-				count: 15,
-			},
-		},
-		{
-			name: 'date',
-			type: 'string',
-			nature: 'nominal',
-		},
-		{
-			name: 'array',
-			type: 'array',
-			nature: 'nominal',
-		},
-		{
-			name: 'obj',
-			type: 'object',
-			nature: 'nominal',
-		},
-	] as Field[],
-}
-
+const tbl = fromCSV(`ID,diagnosis,test
+0, 0, 0
+1, 0, 0
+2, 1, 1
+3, 3, 3
+4, 1, 1
+5, 2, 2
+6, 3, 3`)
 export const Single: ComponentStory<
 	typeof CodebookFieldEditor
 > = (): JSX.Element => {
+	const codebookResult = generateCodebook(tbl)
 	const [field, setField] = useState(codebookResult.fields[0] as Field)
 
-	useEffect(() => {
-		console.log({ field })
-	}, [field])
 	return <CodebookFieldEditor field={field} onChange={setField} />
 }
 

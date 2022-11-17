@@ -25,16 +25,10 @@ export function useTextChange(
 }
 export function useDropdownChange(
 	onChange: (params: any) => void,
-): (
-	event: React.FormEvent<HTMLDivElement>,
-	option?: IDropdownOption<any> | undefined,
-) => void {
+): (name: string, option?: IDropdownOption<any> | undefined) => void {
 	return useCallback(
-		(
-			event: React.FormEvent<HTMLDivElement>,
-			option?: IDropdownOption<any> | undefined,
-		) => {
-			onChange({ [event.currentTarget.title]: option?.key })
+		(name: string, option?: IDropdownOption<any> | undefined) => {
+			onChange({ [name]: option?.key })
 		},
 		[onChange],
 	)

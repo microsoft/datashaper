@@ -12,6 +12,7 @@ import {
 	useTextChange,
 } from './CodebookFieldEditor.hooks.js'
 import type { CodebookFieldEditorProps } from './CodebookFieldEditor.types.js'
+import { CodebookFields } from './CodebookFieldEditor.types.js'
 import { MappingField } from './MappingField.js'
 import { StatsField } from './StatsField.js'
 
@@ -23,8 +24,22 @@ const variableNatureOptions = Object.values(VariableNature).map(d => ({
 	key: d,
 	text: d,
 }))
+
+const defaultFields = [
+	CodebookFields.DisplayName,
+	CodebookFields.Description,
+	CodebookFields.DataType,
+	CodebookFields.DataNature,
+	CodebookFields.Units,
+	CodebookFields.Mapping,
+]
 export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
-	function CodebookFieldEditor({ field, onChange }) {
+	function CodebookFieldEditor({
+		field,
+		onChange,
+		showInlineLabel,
+		showFields = defaultFields,
+	}) {
 		const onChangeField = useCallback(
 			(val: any) => {
 				onChange({ ...field, ...val })
@@ -38,51 +53,73 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 		return (
 			<Container>
 				<StatsField onChange={onChange} field={field}></StatsField>
-				<FieldContainer className="field">
-					<TextField
-						disabled={field.exclude}
-						name="displayName"
-						value={field.title}
-						onChange={onChangeTextField}
+				{showFields.includes(CodebookFields.DisplayName) && (
+					<FieldContainer className="field">
+						<TextField
+							label={showInlineLabel ? 'Display name' : undefined}
+							disabled={field.exclude}
+							name="displayName"
+							value={field.title}
+							onChange={onChangeTextField}
+						/>
+					</FieldContainer>
+				)}
+				{showFields.includes(CodebookFields.Description) && (
+					<FieldContainer className="field">
+						<TextField
+							label={showInlineLabel ? 'Description' : undefined}
+							multiline
+							disabled={field.exclude}
+							rows={3}
+							name="description"
+							value={field.description}
+							onChange={onChangeTextField}
+						/>
+					</FieldContainer>
+				)}
+				{showFields.includes(CodebookFields.DataType) && (
+					<FieldContainer className="field">
+						<Dropdown
+							label={showInlineLabel ? 'Data type' : undefined}
+							title="type"
+							disabled={field.exclude}
+							selectedKey={field.type}
+							options={dataTypeOptions}
+							onChange={(_, opt) => onChangeDropdown('type', opt)}
+						/>
+					</FieldContainer>
+				)}
+				{showFields.includes(CodebookFields.DataNature) && (
+					<FieldContainer className="field">
+						<Dropdown
+							label={showInlineLabel ? 'Data nature' : undefined}
+							title="nature"
+							disabled={field.exclude}
+							selectedKey={field.nature}
+							options={variableNatureOptions}
+							onChange={(_, opt) => onChangeDropdown('nature', opt)}
+						/>
+					</FieldContainer>
+				)}
+
+				{showFields.includes(CodebookFields.Units) && (
+					<FieldContainer className="field">
+						<TextField
+							label={showInlineLabel ? 'Units' : undefined}
+							disabled={field.exclude}
+							name="unit"
+							value={field.unit}
+							onChange={onChangeTextField}
+						/>
+					</FieldContainer>
+				)}
+				{showFields.includes(CodebookFields.Mapping) && (
+					<MappingField
+						field={field}
+						showInlineLabel={showInlineLabel}
+						onChange={onChange}
 					/>
-				</FieldContainer>
-				<FieldContainer className="field">
-					<TextField
-						multiline
-						disabled={field.exclude}
-						rows={3}
-						name="description"
-						value={field.description}
-						onChange={onChangeTextField}
-					/>
-				</FieldContainer>
-				<FieldContainer className="field">
-					<Dropdown
-						title="type"
-						disabled={field.exclude}
-						selectedKey={field.type}
-						options={dataTypeOptions}
-						onChange={onChangeDropdown}
-					/>
-				</FieldContainer>
-				<FieldContainer className="field">
-					<Dropdown
-						title="nature"
-						disabled={field.exclude}
-						selectedKey={field.nature}
-						options={variableNatureOptions}
-						onChange={onChangeDropdown}
-					/>
-				</FieldContainer>
-				<FieldContainer className="field">
-					<TextField
-						disabled={field.exclude}
-						name="unit"
-						value={field.unit}
-						onChange={onChangeTextField}
-					/>
-				</FieldContainer>
-				<MappingField field={field} onChange={onChange} />
+				)}
 			</Container>
 		)
 	},
@@ -96,6 +133,9 @@ const Container = styled.div`
 
 	.field {
 		padding: 10px;
+	}
+	label {
+		padding: unset;
 	}
 	.field:not(:last-child) {
 		border-bottom: 1px solid black;
