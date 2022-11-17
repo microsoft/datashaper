@@ -16,6 +16,7 @@ export declare enum StatsColumnType
 |  --- | --- | --- |
 |  Count | <code>&quot;count&quot;</code> |  |
 |  Distinct | <code>&quot;distinct&quot;</code> |  |
+|  Example | <code>&quot;example&quot;</code> |  |
 |  Invalid | <code>&quot;invalid&quot;</code> |  |
 |  Max | <code>&quot;max&quot;</code> |  |
 |  Mean | <code>&quot;mean&quot;</code> |  |

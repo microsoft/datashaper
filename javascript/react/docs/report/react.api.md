@@ -331,6 +331,8 @@ export enum StatsColumnType {
     // (undocumented)
     Distinct = "distinct",
     // (undocumented)
+    Example = "example",
+    // (undocumented)
     Invalid = "invalid",
     // (undocumented)
     Max = "max",

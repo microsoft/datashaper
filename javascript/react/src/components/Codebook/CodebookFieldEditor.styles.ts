@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import styled from '@essex/styled-components'
 import type { ITheme } from '@fluentui/react'
 import { Label } from '@fluentui/react'
-import styled from 'styled-components'
 
 export const FieldContainer = styled.div``
 export const OutsideLabel = styled(Label)`

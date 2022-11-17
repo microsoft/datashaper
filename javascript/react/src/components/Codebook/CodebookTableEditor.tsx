@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Field } from '@datashaper/schema'
+import styled from '@essex/styled-components'
 import { memo, useCallback } from 'react'
-import styled from 'styled-components'
 
 import { CodebookFieldEditor } from './CodebookFieldEditor.js'
 import type { CodebookTableEditorProps } from './CodebookTableEditor.types.js'
@@ -18,9 +18,12 @@ export const CodebookTableEditor: React.FC<CodebookTableEditorProps> = memo(
 	}) {
 		const onChangeField = useCallback(
 			(newField: Field) => {
-				const arr = [...fields]
-				const index = arr.findIndex(x => x.name === newField.name)
-				onChange([...arr.slice(0, index), newField, ...arr.slice(index + 1)])
+				const fieldIndex = fields.findIndex(x => x.name === newField.name)
+				onChange([
+					...fields.slice(0, fieldIndex),
+					newField,
+					...fields.slice(fieldIndex + 1),
+				])
 			},
 			[onChange, fields],
 		)

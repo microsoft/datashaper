@@ -3555,6 +3555,27 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "@datashaper/react!StatsColumnType.Example:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Example = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"example\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Example"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "@datashaper/react!StatsColumnType.Invalid:member",
               "docComment": "",
               "excerptTokens": [

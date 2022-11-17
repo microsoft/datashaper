@@ -2,16 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { IColumn } from '@fluentui/react'
-import { Checkbox, Label } from '@fluentui/react'
-import type { FormEvent } from 'react'
-import { memo, useCallback } from 'react'
-import styled from 'styled-components'
+import { type IColumn, Checkbox } from '@fluentui/react'
+import { type FormEvent, memo, useCallback } from 'react'
 
+import { StatsColumnType } from '../ArqueroDetailsList/ArqueroDetailsList.types.js'
 import { HistogramColumnHeader } from '../ArqueroDetailsList/renderers/HistogramColumnHeader.js'
 import { StatsColumnHeader } from '../ArqueroDetailsList/renderers/StatsColumnHeader.js'
-import { StatsColumnType } from '../index.js'
 import type { CodebookFieldEditorProps } from './CodebookFieldEditor.types.js'
+import { Container, FieldName, Flex } from './StatsField.styles.js'
 
 const DEFAULT_STATS = [
 	StatsColumnType.Count,
@@ -19,6 +17,8 @@ const DEFAULT_STATS = [
 	StatsColumnType.Max,
 	StatsColumnType.Example,
 ]
+
+const histogramColumn = { currentWidth: 200 } as IColumn
 export const StatsField: React.FC<CodebookFieldEditorProps> = memo(
 	function StatsField({ field, onChange }) {
 		const onChangeExclude = useCallback(
@@ -42,19 +42,10 @@ export const StatsField: React.FC<CodebookFieldEditorProps> = memo(
 					field={field}
 				></StatsColumnHeader>
 				<HistogramColumnHeader
-					column={{ currentWidth: 200 } as IColumn}
+					column={histogramColumn}
 					field={field}
 				></HistogramColumnHeader>
 			</Container>
 		)
 	},
 )
-
-const Container = styled.div``
-
-const Flex = styled.div`
-	display: flex;
-`
-const FieldName = styled(Label)`
-	margin: auto;
-`

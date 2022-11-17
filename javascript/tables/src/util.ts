@@ -12,7 +12,7 @@ export function formatNumberStr(
 	decimal = DECIMAL_DEFAULT,
 	thousands = THOUSANDS_DEFAULT,
 ): string {
-	return value.toString().replaceAll(thousands, '').replace(decimal, '.')
+	return value.replaceAll(thousands, '').replace(decimal, '.')
 }
 
 export function getDate(value: string): Date {

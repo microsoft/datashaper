@@ -20,7 +20,7 @@ import {
 	CodebookFields,
 	DEFAULT_CODEBOOK_FIELDS,
 } from './CodebookFieldEditor.types.js'
-import { MappingField } from './MappingField.js'
+import { MappingFields } from './MappingFields.js'
 import { StatsField } from './StatsField.js'
 
 export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
@@ -123,7 +123,7 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 				{showFields.includes(CodebookFields.Mapping) && (
 					<>
 						{showOutsideLabel && <OutsideLabel>Mapping</OutsideLabel>}
-						<MappingField
+						<MappingFields
 							field={field}
 							showInlineLabel={showInlineLabel}
 							onChange={onChange}
