@@ -3,15 +3,18 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { DataType, VariableNature } from '@datashaper/schema'
-import type { ITheme } from '@fluentui/react'
-import { Dropdown, Label, TextField } from '@fluentui/react'
+import { Dropdown, TextField } from '@fluentui/react'
 import { memo, useCallback } from 'react'
-import styled from 'styled-components'
 
 import {
 	useDropdownChange,
 	useTextChange,
 } from './CodebookFieldEditor.hooks.js'
+import {
+	Container,
+	FieldContainer,
+	OutsideLabel,
+} from './CodebookFieldEditor.styles.js'
 import type { CodebookFieldEditorProps } from './CodebookFieldEditor.types.js'
 import {
 	CodebookFields,
@@ -19,15 +22,6 @@ import {
 } from './CodebookFieldEditor.types.js'
 import { MappingField } from './MappingField.js'
 import { StatsField } from './StatsField.js'
-
-const dataTypeOptions = Object.values(DataType).map(d => ({
-	key: d,
-	text: d,
-}))
-const variableNatureOptions = Object.values(VariableNature).map(d => ({
-	key: d,
-	text: d,
-}))
 
 export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 	function CodebookFieldEditor({
@@ -141,27 +135,11 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 	},
 )
 
-const FieldContainer = styled.div``
-const OutsideLabel = styled(Label)`
-	position: absolute;
-	left: 3px;
-	margin-top: 10px;
-`
-
-const Container = styled.div`
-	min-width: 220px;
-	max-width: 220px;
-	border: 1px solid
-		${({ theme }: { theme: ITheme }) => theme.palette.neutralTertiaryAlt};
-
-	.field {
-		padding: 10px;
-	}
-	label {
-		padding-top: unset;
-	}
-	.field:not(:last-child) {
-		border-bottom: 1px solid
-			${({ theme }: { theme: ITheme }) => theme.palette.neutralTertiaryAlt};
-	}
-`
+const dataTypeOptions = Object.values(DataType).map(d => ({
+	key: d,
+	text: d,
+}))
+const variableNatureOptions = Object.values(VariableNature).map(d => ({
+	key: d,
+	text: d,
+}))

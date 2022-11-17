@@ -2,15 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { CodebookSchema, Field } from '@datashaper/schema'
+import type { CodebookSchema } from '@datashaper/schema'
 import type { ComponentStory } from '@storybook/react'
 import { useState } from 'react'
 
-import { CodebookFieldEditor } from './CodebookFieldEditor.js'
 import {
 	CodebookFields,
 	DEFAULT_CODEBOOK_FIELDS,
 } from './CodebookFieldEditor.types.js'
+import { CodebookTableEditor } from './CodebookTableEditor.js'
 
 const codebookResult = {
 	$schema: 'http://json-schema.org/draft-07/schema#',
@@ -103,17 +103,22 @@ const codebookResult = {
 	],
 } as CodebookSchema
 
-const Template: ComponentStory<typeof CodebookFieldEditor> = ({
+const Template: ComponentStory<typeof CodebookTableEditor> = ({
 	...args
 }): JSX.Element => {
-	const [field, setField] = useState(codebookResult.fields[0] as Field)
+	const [fields, setFields] = useState(codebookResult.fields)
 
-	return <CodebookFieldEditor field={field} onChange={setField} {...args} />
+	return <CodebookTableEditor fields={fields} onChange={setFields} {...args} />
+}
+
+export const Table = Template.bind({})
+Table.args = {
+	showFields: DEFAULT_CODEBOOK_FIELDS,
 }
 
 const storyMetadata = {
-	title: 'Components/CodebookFieldEditor',
-	component: CodebookFieldEditor,
+	title: 'Components/CodebookTableEditor',
+	component: CodebookTableEditor,
 	argTypes: {
 		showInlineLabel: {
 			control: 'boolean',
@@ -130,12 +135,6 @@ const storyMetadata = {
 			],
 		},
 	},
-}
-
-export const Single = Template.bind({})
-Single.args = {
-	showInlineLabel: true,
-	showFields: DEFAULT_CODEBOOK_FIELDS,
 }
 
 export default storyMetadata
