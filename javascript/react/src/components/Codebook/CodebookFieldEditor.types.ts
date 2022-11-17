@@ -17,5 +17,15 @@ export interface CodebookFieldEditorProps {
 	field: Field
 	onChange: (field: Field) => void
 	showInlineLabel?: boolean
+	showOutsideLabel?: boolean
 	showFields?: CodebookFields[]
 }
+
+export const DEFAULT_CODEBOOK_FIELDS = [
+	CodebookFields.DisplayName,
+	CodebookFields.Description,
+	CodebookFields.DataType,
+	CodebookFields.DataNature,
+	CodebookFields.Units,
+	CodebookFields.Mapping,
+]

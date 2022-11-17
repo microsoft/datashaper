@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { DataType, VariableNature } from '@datashaper/schema'
-import { Dropdown, TextField } from '@fluentui/react'
+import type { ITheme } from '@fluentui/react'
+import { Dropdown, Label, TextField } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
 
@@ -12,7 +13,10 @@ import {
 	useTextChange,
 } from './CodebookFieldEditor.hooks.js'
 import type { CodebookFieldEditorProps } from './CodebookFieldEditor.types.js'
-import { CodebookFields } from './CodebookFieldEditor.types.js'
+import {
+	CodebookFields,
+	DEFAULT_CODEBOOK_FIELDS,
+} from './CodebookFieldEditor.types.js'
 import { MappingField } from './MappingField.js'
 import { StatsField } from './StatsField.js'
 
@@ -25,20 +29,13 @@ const variableNatureOptions = Object.values(VariableNature).map(d => ({
 	text: d,
 }))
 
-const defaultFields = [
-	CodebookFields.DisplayName,
-	CodebookFields.Description,
-	CodebookFields.DataType,
-	CodebookFields.DataNature,
-	CodebookFields.Units,
-	CodebookFields.Mapping,
-]
 export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 	function CodebookFieldEditor({
 		field,
 		onChange,
 		showInlineLabel,
-		showFields = defaultFields,
+		showOutsideLabel = false,
+		showFields = DEFAULT_CODEBOOK_FIELDS,
 	}) {
 		const onChangeField = useCallback(
 			(val: any) => {
@@ -51,74 +48,93 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 		const onChangeDropdown = useDropdownChange(onChangeField)
 
 		return (
-			<Container>
+			<Container className="codebook-column">
 				<StatsField onChange={onChange} field={field}></StatsField>
 				{showFields.includes(CodebookFields.DisplayName) && (
-					<FieldContainer className="field">
-						<TextField
-							label={showInlineLabel ? 'Display name' : undefined}
-							disabled={field.exclude}
-							name="displayName"
-							value={field.title}
-							onChange={onChangeTextField}
-						/>
-					</FieldContainer>
+					<>
+						{showOutsideLabel && <OutsideLabel>Display</OutsideLabel>}
+						<FieldContainer className="field">
+							<TextField
+								label={showInlineLabel ? 'Display name' : undefined}
+								disabled={field.exclude}
+								name="displayName"
+								value={field.title}
+								onChange={onChangeTextField}
+							/>
+						</FieldContainer>
+					</>
 				)}
 				{showFields.includes(CodebookFields.Description) && (
-					<FieldContainer className="field">
-						<TextField
-							label={showInlineLabel ? 'Description' : undefined}
-							multiline
-							disabled={field.exclude}
-							rows={3}
-							name="description"
-							value={field.description}
-							onChange={onChangeTextField}
-						/>
-					</FieldContainer>
+					<>
+						{showOutsideLabel && <OutsideLabel>Description</OutsideLabel>}
+						<FieldContainer className="field">
+							<TextField
+								label={showInlineLabel ? 'Description' : undefined}
+								multiline
+								resizable={false}
+								disabled={field.exclude}
+								rows={3}
+								name="description"
+								value={field.description}
+								onChange={onChangeTextField}
+							/>
+						</FieldContainer>
+					</>
 				)}
 				{showFields.includes(CodebookFields.DataType) && (
-					<FieldContainer className="field">
-						<Dropdown
-							label={showInlineLabel ? 'Data type' : undefined}
-							title="type"
-							disabled={field.exclude}
-							selectedKey={field.type}
-							options={dataTypeOptions}
-							onChange={(_, opt) => onChangeDropdown('type', opt)}
-						/>
-					</FieldContainer>
+					<>
+						{showOutsideLabel && <OutsideLabel>Data type</OutsideLabel>}
+						<FieldContainer className="field">
+							<Dropdown
+								label={showInlineLabel ? 'Data type' : undefined}
+								title="type"
+								disabled={field.exclude}
+								selectedKey={field.type}
+								options={dataTypeOptions}
+								onChange={(_, opt) => onChangeDropdown('type', opt)}
+							/>
+						</FieldContainer>
+					</>
 				)}
 				{showFields.includes(CodebookFields.DataNature) && (
-					<FieldContainer className="field">
-						<Dropdown
-							label={showInlineLabel ? 'Data nature' : undefined}
-							title="nature"
-							disabled={field.exclude}
-							selectedKey={field.nature}
-							options={variableNatureOptions}
-							onChange={(_, opt) => onChangeDropdown('nature', opt)}
-						/>
-					</FieldContainer>
+					<>
+						{showOutsideLabel && <OutsideLabel>Data nature</OutsideLabel>}
+						<FieldContainer className="field">
+							<Dropdown
+								label={showInlineLabel ? 'Data nature' : undefined}
+								title="nature"
+								disabled={field.exclude}
+								selectedKey={field.nature}
+								options={variableNatureOptions}
+								onChange={(_, opt) => onChangeDropdown('nature', opt)}
+							/>
+						</FieldContainer>
+					</>
 				)}
 
 				{showFields.includes(CodebookFields.Units) && (
-					<FieldContainer className="field">
-						<TextField
-							label={showInlineLabel ? 'Units' : undefined}
-							disabled={field.exclude}
-							name="unit"
-							value={field.unit}
-							onChange={onChangeTextField}
-						/>
-					</FieldContainer>
+					<>
+						{showOutsideLabel && <OutsideLabel>Units</OutsideLabel>}
+						<FieldContainer className="field">
+							<TextField
+								label={showInlineLabel ? 'Units' : undefined}
+								disabled={field.exclude}
+								name="unit"
+								value={field.unit}
+								onChange={onChangeTextField}
+							/>
+						</FieldContainer>
+					</>
 				)}
 				{showFields.includes(CodebookFields.Mapping) && (
-					<MappingField
-						field={field}
-						showInlineLabel={showInlineLabel}
-						onChange={onChange}
-					/>
+					<>
+						{showOutsideLabel && <OutsideLabel>Mapping</OutsideLabel>}
+						<MappingField
+							field={field}
+							showInlineLabel={showInlineLabel}
+							onChange={onChange}
+						/>
+					</>
 				)}
 			</Container>
 		)
@@ -126,10 +142,17 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 )
 
 const FieldContainer = styled.div``
+const OutsideLabel = styled(Label)`
+	position: absolute;
+	left: 3px;
+	margin-top: 10px;
+`
 
 const Container = styled.div`
-	width: 220px;
-	border: 1px solid black;
+	min-width: 220px;
+	max-width: 220px;
+	border: 1px solid
+		${({ theme }: { theme: ITheme }) => theme.palette.neutralTertiaryAlt};
 
 	.field {
 		padding: 10px;
@@ -138,6 +161,7 @@ const Container = styled.div`
 		padding: unset;
 	}
 	.field:not(:last-child) {
-		border-bottom: 1px solid black;
+		border-bottom: 1px solid
+			${({ theme }: { theme: ITheme }) => theme.palette.neutralTertiaryAlt};
 	}
 `
