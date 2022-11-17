@@ -15,14 +15,15 @@ import {
 } from './CodebookFieldEditor.types.js'
 import { CodebookTableEditor } from './CodebookTableEditor.js'
 
-const tbl = fromCSV(`ID,diagnosis,test, test2, test3, test4
-0, 0, 0,abc, kli,lop
-1, 0, 0,abc, kli,lop
-2, 1, 1,abc, kli,lop
-3, 3, 3,abc, kli,lop
-4, 1, 1,abc, kli,lop
-5, 2, 2,abc, kli,lop
-6, 3, 3,abc, kli,lop`)
+const tbl = fromCSV(`ID,diagnosis,test, letter, letter2, letter3
+0, 0, 0,abc, def, ghi
+1, 0, 0,abc, def, ghi
+2, 1, 1,abc, def, ghi
+3, 3, 3,abc, def, ghi
+4, 1, 1,abc, def, ghi
+5, 2, 2,abc, def, ghi
+6, 3, 3,abc, def, ghi`)
+
 const Template: ComponentStory<typeof CodebookFieldEditor> = ({
 	...args
 }): JSX.Element => {

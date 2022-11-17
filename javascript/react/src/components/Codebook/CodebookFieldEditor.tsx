@@ -158,7 +158,7 @@ const Container = styled.div`
 		padding: 10px;
 	}
 	label {
-		padding: unset;
+		padding-top: unset;
 	}
 	.field:not(:last-child) {
 		border-bottom: 1px solid

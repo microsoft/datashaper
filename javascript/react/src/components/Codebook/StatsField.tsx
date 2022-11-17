@@ -22,17 +22,12 @@ export const StatsField: React.FC<CodebookFieldEditorProps> = memo(
 			},
 			[onChange, field],
 		)
-		console.log(field.name)
 
 		return (
 			<Container className="field">
 				<Flex>
-					<Checkbox
-						styles={{ root: { width: '30%' } }}
-						checked={field.exclude}
-						onChange={onChangeExclude}
-					/>
-					<Label>{field.name}</Label>
+					<Checkbox checked={field.exclude} onChange={onChangeExclude} />
+					<FieldName>{field.name}</FieldName>
 				</Flex>
 				<StatsColumnHeader field={field}></StatsColumnHeader>
 				<HistogramColumnHeader field={field}></HistogramColumnHeader>
@@ -45,4 +40,7 @@ const Container = styled.div``
 
 const Flex = styled.div`
 	display: flex;
+`
+const FieldName = styled(Label)`
+	margin: auto;
 `

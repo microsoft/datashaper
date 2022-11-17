@@ -87,13 +87,20 @@ export const MappingField: React.FC<CodebookFieldEditorProps> = memo(
 
 		return (
 			<FlexColumn className="field">
-				{showInlineLabel ? <Label>Mapping</Label> : null}
+				{showInlineLabel ? (
+					<Label disabled={field.exclude}>Mapping</Label>
+				) : null}
 				{values &&
 					Object.keys(values).map((v: any, index: number) => (
 						<MappingContainer key={index}>
 							<FlexColumn style={{ flex: 1 }}>
 								{index === 0 && (
-									<Label style={{ paddingTop: 'unset' }}>Value</Label>
+									<Label
+										disabled={field.exclude}
+										style={{ paddingTop: 'unset' }}
+									>
+										Value
+									</Label>
 								)}
 								<TextField
 									disabled={field.exclude}
@@ -104,7 +111,12 @@ export const MappingField: React.FC<CodebookFieldEditorProps> = memo(
 							</FlexColumn>
 							<FlexColumn style={{ flex: 2 }}>
 								{index === 0 && (
-									<Label style={{ paddingTop: 'unset' }}>Display</Label>
+									<Label
+										disabled={field.exclude}
+										style={{ paddingTop: 'unset' }}
+									>
+										Display
+									</Label>
 								)}
 								<TextField
 									disabled={field.exclude || values[v] === null}
@@ -126,7 +138,11 @@ export const MappingField: React.FC<CodebookFieldEditorProps> = memo(
 					))}
 				<MappingContainer>
 					<FlexColumn style={{ flex: 1 }}>
-						{!values && <Label style={{ paddingTop: 'unset' }}>Value</Label>}
+						{!values && (
+							<Label disabled={field.exclude} style={{ paddingTop: 'unset' }}>
+								Value
+							</Label>
+						)}
 						<TextField
 							disabled={field.exclude}
 							name="value"
@@ -135,7 +151,11 @@ export const MappingField: React.FC<CodebookFieldEditorProps> = memo(
 						/>
 					</FlexColumn>
 					<FlexColumn style={{ flex: 2 }}>
-						{!values && <Label style={{ paddingTop: 'unset' }}>Display</Label>}
+						{!values && (
+							<Label disabled={field.exclude} style={{ paddingTop: 'unset' }}>
+								Display
+							</Label>
+						)}
 						<TextField
 							disabled={field.exclude}
 							name="display"
