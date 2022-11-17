@@ -29,22 +29,20 @@ export const CodebookTableEditor: React.FC<CodebookTableEditorProps> = memo(
 		)
 
 		return (
-			<div>
-				<Container>
-					{fields.map((f: Field, index: number) => {
-						return (
-							<CodebookFieldEditor
-								key={index}
-								field={f}
-								onChange={onChangeField}
-								showInlineLabel={showInlineLabel}
-								showOutsideLabel={index === 0}
-								showFields={showFields}
-							/>
-						)
-					})}
-				</Container>
-			</div>
+			<Container>
+				{fields.map((f: Field, index: number) => {
+					return (
+						<CodebookFieldEditor
+							key={index}
+							field={f}
+							onChange={onChangeField}
+							showInlineLabel={showInlineLabel}
+							showOutsideLabel={index === 0}
+							showFields={showFields}
+						/>
+					)
+				})}
+			</Container>
 		)
 	},
 )
