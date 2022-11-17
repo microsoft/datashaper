@@ -32,7 +32,11 @@ export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 				// data type is on the field, not the meta...
 				const value: any = stat === StatsColumnType.Type ? field.type : st[stat]
 				return (
-					<StatCell name={stat} value={value} key={`${column.key}-${stat}`} />
+					<StatCell
+						name={stat}
+						value={value}
+						key={`${column?.key || field.name}-${stat}`}
+					/>
 				)
 			})
 		}, [field, column, stats])

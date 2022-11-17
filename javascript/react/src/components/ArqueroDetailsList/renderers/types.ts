@@ -62,9 +62,12 @@ export interface RichCellProps extends FormattedCellProps {
 	validationResult?: ValidationResult
 }
 
-export interface RichHeaderProps extends IDetailsColumnProps {
+export interface RichHeaderProps
+	extends Omit<IDetailsColumnProps, 'column' | 'columnIndex'> {
 	field: Field
 	color?: string
+	columnIndex?: number
+	column?: IColumn
 	stats?: string[]
 	onSelect?: ColumnSelectFunction
 }
