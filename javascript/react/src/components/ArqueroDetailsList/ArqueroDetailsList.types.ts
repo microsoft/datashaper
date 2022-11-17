@@ -56,6 +56,7 @@ export enum StatsColumnType {
 	Mean = 'mean',
 	Median = 'median',
 	Stdev = 'stdev',
+	Example = 'example',
 }
 
 export interface DetailsListFeatures {

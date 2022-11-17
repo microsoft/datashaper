@@ -15,6 +15,7 @@ const Template: ComponentStory<typeof ArqueroDetailsList> = (
 	{ loaded: { stocks } }: any,
 ): JSX.Element => {
 	const metadata = useMemo(() => introspect(stocks, true), [stocks])
+	console.log(metadata)
 	return (
 		<div style={{ height: 600 }}>
 			<ArqueroDetailsList {...args} table={stocks} metadata={metadata} />

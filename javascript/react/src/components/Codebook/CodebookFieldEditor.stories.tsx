@@ -2,10 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Field } from '@datashaper/schema'
-import { generateCodebook } from '@datashaper/tables'
+import type { CodebookSchema, Field } from '@datashaper/schema'
 import type { ComponentStory } from '@storybook/react'
-import { fromCSV } from 'arquero'
 import { useState } from 'react'
 
 import { CodebookFieldEditor } from './CodebookFieldEditor.js'
@@ -15,19 +13,100 @@ import {
 } from './CodebookFieldEditor.types.js'
 import { CodebookTableEditor } from './CodebookTableEditor.js'
 
-const tbl = fromCSV(`ID,diagnosis,test, letter, letter2, letter3
-0, 0, 0,abc, def, ghi
-1, 0, 0,abc, def, ghi
-2, 1, 1,abc, def, ghi
-3, 3, 3,abc, def, ghi
-4, 1, 1,abc, def, ghi
-5, 2, 2,abc, def, ghi
-6, 3, 3,abc, def, ghi`)
+const codebookResult = {
+	$schema: 'http://json-schema.org/draft-07/schema#',
+	id: 'http://json-schema.org/draft-07/schema#',
+	name: 'Generator',
+	fields: [
+		{
+			name: 'ID',
+			type: 'number',
+			nature: 'ordinal',
+			metadata: {
+				bins: [
+					{
+						min: 5.87,
+						count: 759,
+					},
+					{
+						min: 358.428,
+						count: 0,
+					},
+					{
+						min: 710.986,
+						count: 1,
+					},
+					{
+						min: 1063.5439999999999,
+						count: 74,
+					},
+					{
+						min: 1416.1019999999999,
+						count: 164,
+					},
+					{
+						min: 1768.6599999999999,
+						count: 75,
+					},
+					{
+						min: 2121.218,
+						count: 43,
+					},
+					{
+						min: 2473.776,
+						count: 21,
+					},
+					{
+						min: 2826.334,
+						count: 72,
+					},
+					{
+						min: 3178.892,
+						count: 56,
+					},
+				],
+				count: 1265,
+				distinct: 1182,
+				max: 3531.45,
+				mean: 891.7830434782592,
+				median: 201.91,
+				min: 5.87,
+				mode: 9.15,
+				stdev: 1075.6086847575084,
+				example: 5,
+			},
+		},
+		{
+			name: 'diagnosis',
+			type: 'number',
+			nature: 'discrete',
+		},
+		{
+			name: 'test',
+			type: 'number',
+			nature: 'discrete',
+		},
+		{
+			name: ' letter',
+			type: 'string',
+			nature: 'nominal',
+		},
+		{
+			name: ' letter2',
+			type: 'string',
+			nature: 'nominal',
+		},
+		{
+			name: ' letter3',
+			type: 'string',
+			nature: 'nominal',
+		},
+	],
+} as CodebookSchema
 
 const Template: ComponentStory<typeof CodebookFieldEditor> = ({
 	...args
 }): JSX.Element => {
-	const codebookResult = generateCodebook(tbl)
 	const [field, setField] = useState(codebookResult.fields[0] as Field)
 
 	return <CodebookFieldEditor field={field} onChange={setField} {...args} />
@@ -35,7 +114,6 @@ const Template: ComponentStory<typeof CodebookFieldEditor> = ({
 const TableTemplate: ComponentStory<typeof CodebookFieldEditor> = ({
 	...args
 }): JSX.Element => {
-	const codebookResult = generateCodebook(tbl)
 	const [fields, setFields] = useState(codebookResult.fields)
 
 	return <CodebookTableEditor fields={fields} onChange={setFields} {...args} />

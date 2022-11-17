@@ -17,6 +17,7 @@ export const SparkbarCell: React.FC<ColumnCellChartProps> = memo(
 	function SparkbarCell({ item, column }) {
 		const values = getValue(item, column) || EMPTY_ARRAY
 		const dimensions = useCellDimensions(column)
+
 		return (
 			<Sparkbar
 				data={values}
