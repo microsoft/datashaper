@@ -18,7 +18,7 @@ const DEFAULT_STATS = [
 	StatsColumnType.Example,
 ]
 
-const histogramColumn = { currentWidth: 210 } as IColumn
+const histogramColumn = { currentWidth: 230 } as IColumn
 export const StatsField: React.FC<CodebookFieldEditorProps> = memo(
 	function StatsField({ field, onChange, tableView }) {
 		const onChangeExclude = useCallback(

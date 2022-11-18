@@ -14,8 +14,8 @@ export const OutsideLabel = styled(Label)`
 `
 
 export const Container = styled.div`
-	min-width: 220px;
-	max-width: 220px;
+	min-width: 240px;
+	max-width: 240px;
 	border: 1px solid
 		${({ theme }: { theme: ITheme }) => theme.palette.neutralTertiaryAlt};
 

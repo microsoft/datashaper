@@ -5,7 +5,7 @@
 import { DataType } from '@datashaper/schema'
 import { coerce } from '@datashaper/tables'
 import type { IDropdownOption } from '@fluentui/react'
-import { Dropdown, SpinButton } from '@fluentui/react'
+import { Dropdown, mergeStyleSets, SpinButton } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
 import { CalendarPicker } from '../../../controls/index.js'
@@ -22,12 +22,14 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 		onKeyChange,
 		onValueChange,
 		isKey,
+		dropdownStyles,
 	}) {
 		const booleanOptions: IDropdownOption[] = [
 			{ key: 'true', text: 'true' },
 			{ key: 'false', text: 'false' },
 		]
 
+		const styles = mergeStyleSets(narrowerDropdownStyles, dropdownStyles)
 		const onSelectDate = useCallback(
 			(date: Date): void => {
 				const val = coerce(date, dataType)
@@ -92,7 +94,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 						onChange={onChangeTextFieldValue}
 						placeholder={placeholder}
 						value={value}
-						styles={narrowerDropdownStyles}
+						styles={styles}
 					></TextValue>
 				) : null}
 
@@ -101,7 +103,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 						min={0}
 						step={1}
 						value={value}
-						styles={narrowerDropdownStyles}
+						styles={styles}
 						onChange={spinButtonOnChange}
 					/>
 				) : null}
@@ -110,7 +112,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 					<Dropdown
 						selectedKey={value.toString()}
 						options={booleanOptions}
-						styles={narrowerDropdownStyles}
+						styles={styles}
 						onChange={dropDownOnChange}
 					/>
 				) : null}
