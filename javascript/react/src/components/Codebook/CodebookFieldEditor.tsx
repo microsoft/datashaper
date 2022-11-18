@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { DataType, VariableNature } from '@datashaper/schema'
-import { Dropdown, TextField } from '@fluentui/react'
+import { EnumDropdown } from '@essex/components'
+import { TextField } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
 import {
@@ -87,13 +88,13 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 					<>
 						{tableView && !hideLabel && <OutsideLabel>Data type</OutsideLabel>}
 						<FieldContainer className="field">
-							<Dropdown
+							<EnumDropdown
+								enumeration={DataType}
 								styles={{ title: { border: 'unset' } }}
 								label={!tableView && !hideLabel ? 'Data type' : undefined}
 								title="type"
 								disabled={field.exclude}
 								selectedKey={field.type}
-								options={dataTypeOptions}
 								onChange={(_, opt) => onChangeDropdown('type', opt)}
 							/>
 						</FieldContainer>
@@ -105,13 +106,13 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 							<OutsideLabel>Data nature</OutsideLabel>
 						)}
 						<FieldContainer className="field">
-							<Dropdown
+							<EnumDropdown
 								styles={{ title: { border: 'unset' } }}
 								label={!tableView && !hideLabel ? 'Data nature' : undefined}
 								title="nature"
 								disabled={field.exclude}
 								selectedKey={field.nature}
-								options={variableNatureOptions}
+								enumeration={VariableNature}
 								onChange={(_, opt) => onChangeDropdown('nature', opt)}
 							/>
 						</FieldContainer>
@@ -148,12 +149,3 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 		)
 	},
 )
-
-const dataTypeOptions = Object.values(DataType).map(d => ({
-	key: d,
-	text: d,
-}))
-const variableNatureOptions = Object.values(VariableNature).map(d => ({
-	key: d,
-	text: d,
-}))
