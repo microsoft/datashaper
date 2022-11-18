@@ -22,9 +22,10 @@ export interface DataShaperAppProps {
 	 * TODO: this should be handled internally
 	 */
 	appResources?: ResourceTreeData[]
+
 	/**
-	 * The child node to render
-	 * TODO: handle this internally
+	 * The child node to render as the "Front Page" of the app.
+	 * This is the default view when no resource is selected
 	 */
 	children: React.ReactNode
 
@@ -37,11 +38,6 @@ export interface DataShaperAppProps {
 	 * Handle selection of a resource tree item
 	 */
 	onSelect?: (resource: ResourceTreeData) => void
-
-	/**
-	 * The default component to render when no resource is selected
-	 */
-	frontPage?: React.ComponentType
 
 	/**
 	 * Custom resource renderers

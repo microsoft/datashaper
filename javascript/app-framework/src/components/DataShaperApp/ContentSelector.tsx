@@ -4,7 +4,7 @@
  */
 import type { DataTable } from '@datashaper/workflow'
 import { Spinner } from '@fluentui/react'
-import React, { memo } from 'react'
+import { memo } from 'react'
 
 import { useDataTable } from '../../hooks/useDataTable.js'
 import {
@@ -14,20 +14,15 @@ import {
 	TableEditor,
 	WorkflowEditor,
 } from '../editors/index.js'
-
-export interface ContentSelectorProps {
-	handler?: string
-	args?: string[]
-	handlers?: Record<string, React.ComponentType<{ args: string[] }>>
-	frontPage?: React.ComponentType
-}
+import type { ContentSelectorProps } from './ContentSelector.types.js'
 
 const emptyArray = Object.freeze([]) as any
+
 export const ContentSelector: React.FC<ContentSelectorProps> = memo(
-	function ContentSelector({ handler, args, handlers, frontPage: FrontPage }) {
+	function ContentSelector({ handler, args, handlers, children }) {
 		if (handler == null) {
-			if (FrontPage != null) {
-				return <FrontPage />
+			if (children != null) {
+				return <>{children}</>
 			}
 			return null
 		} else {

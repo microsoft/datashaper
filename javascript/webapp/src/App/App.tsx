@@ -10,6 +10,7 @@ import { memo, Suspense, useCallback, useState } from 'react'
 import { RecoilRoot } from 'recoil'
 
 import { Layout } from '../components/Layout.js'
+import { About } from './About.js'
 import { ErrorBoundary } from './ErrorBoundary.js'
 import { StyleContext } from './StyleContext.js'
 
@@ -30,7 +31,7 @@ export const App: React.FC = memo(function App() {
 								selectedKey={selectedKey}
 								onSelect={onSelect}
 							>
-								<div></div>
+								<About />
 							</DataShaperApp>
 						</Layout>
 					</StyleContext>
