@@ -4,30 +4,13 @@
  */
 import type { Field } from '@datashaper/schema'
 import styled from '@essex/styled-components'
-import { memo, useCallback } from 'react'
+import { memo } from 'react'
 
 import { CodebookFieldEditor } from './CodebookFieldEditor.js'
 import type { CodebookTableEditorProps } from './CodebookTableEditor.types.js'
 
 export const CodebookTableEditor: React.FC<CodebookTableEditorProps> = memo(
-	function CodebookTableEditor({
-		fields,
-		onChange,
-		showInlineLabel,
-		showFields,
-	}) {
-		const onChangeField = useCallback(
-			(newField: Field) => {
-				const fieldIndex = fields.findIndex(x => x.name === newField.name)
-				onChange([
-					...fields.slice(0, fieldIndex),
-					newField,
-					...fields.slice(fieldIndex + 1),
-				])
-			},
-			[onChange, fields],
-		)
-
+	function CodebookTableEditor({ fields, onChange, showFields, hideLabel }) {
 		return (
 			<Container>
 				{fields.map((f: Field, index: number) => {
@@ -35,10 +18,16 @@ export const CodebookTableEditor: React.FC<CodebookTableEditorProps> = memo(
 						<CodebookFieldEditor
 							key={index}
 							field={f}
-							onChange={onChangeField}
-							showInlineLabel={showInlineLabel}
-							showOutsideLabel={index === 0}
+							onChange={(newField: Field) =>
+								onChange([
+									...fields.slice(0, index),
+									newField,
+									...fields.slice(index + 1),
+								])
+							}
 							showFields={showFields}
+							hideLabel={index > 0 || hideLabel}
+							tableView
 						/>
 					)
 				})}

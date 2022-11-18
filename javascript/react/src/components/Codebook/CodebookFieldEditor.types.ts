@@ -16,8 +16,8 @@ export enum CodebookFields {
 export interface CodebookFieldEditorProps {
 	field: Field
 	onChange: (field: Field) => void
-	showInlineLabel?: boolean
-	showOutsideLabel?: boolean
+	tableView?: boolean
+	hideLabel?: boolean
 	showFields?: CodebookFields[]
 }
 

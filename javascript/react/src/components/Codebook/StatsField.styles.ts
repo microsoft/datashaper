@@ -5,7 +5,9 @@
 import styled from '@essex/styled-components'
 import { Label } from '@fluentui/react'
 
-export const Container = styled.div``
+export const Container = styled.div`
+	padding: 5px 5px;
+`
 
 export const Flex = styled.div`
 	display: flex;

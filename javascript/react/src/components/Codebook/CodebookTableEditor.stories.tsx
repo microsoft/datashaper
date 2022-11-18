@@ -12,6 +12,32 @@ import {
 } from './CodebookFieldEditor.types.js'
 import { CodebookTableEditor } from './CodebookTableEditor.js'
 
+const storyMetadata = {
+	title: 'Components/CodebookTableEditor',
+	component: CodebookTableEditor,
+	argTypes: {
+		tableView: {
+			control: 'boolean',
+		},
+		hideLabel: {
+			control: 'boolean',
+		},
+		showFields: {
+			control: 'inline-check',
+			options: [
+				CodebookFields.DisplayName,
+				CodebookFields.Description,
+				CodebookFields.DataType,
+				CodebookFields.DataNature,
+				CodebookFields.Units,
+				CodebookFields.Mapping,
+			],
+		},
+	},
+}
+
+export default storyMetadata
+
 const codebookResult = {
 	$schema: 'http://json-schema.org/draft-07/schema#',
 	id: 'http://json-schema.org/draft-07/schema#',
@@ -114,27 +140,5 @@ const Template: ComponentStory<typeof CodebookTableEditor> = ({
 export const Table = Template.bind({})
 Table.args = {
 	showFields: DEFAULT_CODEBOOK_FIELDS,
+	tableView: true,
 }
-
-const storyMetadata = {
-	title: 'Components/CodebookTableEditor',
-	component: CodebookTableEditor,
-	argTypes: {
-		showInlineLabel: {
-			control: 'boolean',
-		},
-		showFields: {
-			control: 'inline-check',
-			options: [
-				CodebookFields.DisplayName,
-				CodebookFields.Description,
-				CodebookFields.DataType,
-				CodebookFields.DataNature,
-				CodebookFields.Units,
-				CodebookFields.Mapping,
-			],
-		},
-	},
-}
-
-export default storyMetadata

@@ -3,7 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-export * from './CodebookFieldEditor.js'
-export * from './CodebookFieldEditor.types.js'
-export * from './CodebookTableEditor.js'
-export * from './CodebookTableEditor.types.js'
+export { CodebookFieldEditor } from './CodebookFieldEditor.js'
+export {
+	type CodebookFieldEditorProps,
+	CodebookFields,
+} from './CodebookFieldEditor.types.js'
+export { CodebookTableEditor } from './CodebookTableEditor.js'
+export { type CodebookTableEditorProps } from './CodebookTableEditor.types.js'

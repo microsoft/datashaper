@@ -19,9 +19,6 @@ export const Container = styled.div`
 	border: 1px solid
 		${({ theme }: { theme: ITheme }) => theme.palette.neutralTertiaryAlt};
 
-	.field {
-		padding: 10px;
-	}
 	label {
 		padding-top: unset;
 	}

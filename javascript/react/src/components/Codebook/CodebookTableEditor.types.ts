@@ -9,6 +9,6 @@ import type { CodebookFields } from './CodebookFieldEditor.types.js'
 export interface CodebookTableEditorProps {
 	fields: Field[]
 	onChange: (fields: Field[]) => void
-	showInlineLabel?: boolean
 	showFields?: CodebookFields[]
+	hideLabel?: boolean
 }

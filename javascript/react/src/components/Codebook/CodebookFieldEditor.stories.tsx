@@ -12,6 +12,31 @@ import {
 	DEFAULT_CODEBOOK_FIELDS,
 } from './CodebookFieldEditor.types.js'
 
+const storyMetadata = {
+	title: 'Components/CodebookFieldEditor',
+	component: CodebookFieldEditor,
+	argTypes: {
+		tableView: {
+			control: 'boolean',
+		},
+		hideLabel: {
+			control: 'boolean',
+		},
+		showFields: {
+			control: 'inline-check',
+			options: [
+				CodebookFields.DisplayName,
+				CodebookFields.Description,
+				CodebookFields.DataType,
+				CodebookFields.DataNature,
+				CodebookFields.Units,
+				CodebookFields.Mapping,
+			],
+		},
+	},
+}
+export default storyMetadata
+
 const codebookResult = {
 	$schema: 'http://json-schema.org/draft-07/schema#',
 	id: 'http://json-schema.org/draft-07/schema#',
@@ -111,31 +136,8 @@ const Template: ComponentStory<typeof CodebookFieldEditor> = ({
 	return <CodebookFieldEditor field={field} onChange={setField} {...args} />
 }
 
-const storyMetadata = {
-	title: 'Components/CodebookFieldEditor',
-	component: CodebookFieldEditor,
-	argTypes: {
-		showInlineLabel: {
-			control: 'boolean',
-		},
-		showFields: {
-			control: 'inline-check',
-			options: [
-				CodebookFields.DisplayName,
-				CodebookFields.Description,
-				CodebookFields.DataType,
-				CodebookFields.DataNature,
-				CodebookFields.Units,
-				CodebookFields.Mapping,
-			],
-		},
-	},
-}
-
 export const Single = Template.bind({})
 Single.args = {
-	showInlineLabel: true,
+	tableView: false,
 	showFields: DEFAULT_CODEBOOK_FIELDS,
 }
-
-export default storyMetadata

@@ -23,7 +23,7 @@ interface NewValueField {
 	display: string
 }
 export const MappingFields: React.FC<CodebookFieldEditorProps> = memo(
-	function MappingFields({ field, showInlineLabel, onChange }) {
+	function MappingFields({ field, tableView, onChange, hideLabel }) {
 		const [values, setValues] = useState(field.mapping)
 
 		useEffect(() => {
@@ -43,7 +43,7 @@ export const MappingFields: React.FC<CodebookFieldEditorProps> = memo(
 
 		return (
 			<FlexColumn className="field">
-				{showInlineLabel ? (
+				{!tableView && !hideLabel ? (
 					<Label disabled={field.exclude}>Mapping</Label>
 				) : null}
 				{values &&

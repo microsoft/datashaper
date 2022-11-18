@@ -27,8 +27,8 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 	function CodebookFieldEditor({
 		field,
 		onChange,
-		showInlineLabel,
-		showOutsideLabel = false,
+		tableView,
+		hideLabel,
 		showFields = DEFAULT_CODEBOOK_FIELDS,
 	}) {
 		const onChangeField = useCallback(
@@ -43,13 +43,18 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 
 		return (
 			<Container className="codebook-column">
-				<StatsField onChange={onChange} field={field}></StatsField>
+				<StatsField
+					tableView={tableView}
+					onChange={onChange}
+					field={field}
+				></StatsField>
 				{showFields.includes(CodebookFields.DisplayName) && (
 					<>
-						{showOutsideLabel && <OutsideLabel>Display</OutsideLabel>}
+						{tableView && !hideLabel && <OutsideLabel>Display</OutsideLabel>}
 						<FieldContainer className="field">
 							<TextField
-								label={showInlineLabel ? 'Display name' : undefined}
+								label={!tableView && !hideLabel ? 'Display' : undefined}
+								borderless
 								disabled={field.exclude}
 								name="displayName"
 								value={field.title}
@@ -60,10 +65,13 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 				)}
 				{showFields.includes(CodebookFields.Description) && (
 					<>
-						{showOutsideLabel && <OutsideLabel>Description</OutsideLabel>}
+						{tableView && !hideLabel && (
+							<OutsideLabel>Description</OutsideLabel>
+						)}
 						<FieldContainer className="field">
 							<TextField
-								label={showInlineLabel ? 'Description' : undefined}
+								label={!tableView && !hideLabel ? 'Description' : undefined}
+								borderless
 								multiline
 								resizable={false}
 								disabled={field.exclude}
@@ -77,10 +85,11 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 				)}
 				{showFields.includes(CodebookFields.DataType) && (
 					<>
-						{showOutsideLabel && <OutsideLabel>Data type</OutsideLabel>}
+						{tableView && !hideLabel && <OutsideLabel>Data type</OutsideLabel>}
 						<FieldContainer className="field">
 							<Dropdown
-								label={showInlineLabel ? 'Data type' : undefined}
+								styles={{ title: { border: 'unset' } }}
+								label={!tableView && !hideLabel ? 'Data type' : undefined}
 								title="type"
 								disabled={field.exclude}
 								selectedKey={field.type}
@@ -92,10 +101,13 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 				)}
 				{showFields.includes(CodebookFields.DataNature) && (
 					<>
-						{showOutsideLabel && <OutsideLabel>Data nature</OutsideLabel>}
+						{tableView && !hideLabel && (
+							<OutsideLabel>Data nature</OutsideLabel>
+						)}
 						<FieldContainer className="field">
 							<Dropdown
-								label={showInlineLabel ? 'Data nature' : undefined}
+								styles={{ title: { border: 'unset' } }}
+								label={!tableView && !hideLabel ? 'Data nature' : undefined}
 								title="nature"
 								disabled={field.exclude}
 								selectedKey={field.nature}
@@ -108,10 +120,11 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 
 				{showFields.includes(CodebookFields.Units) && (
 					<>
-						{showOutsideLabel && <OutsideLabel>Units</OutsideLabel>}
+						{tableView && !hideLabel && <OutsideLabel>Units</OutsideLabel>}
 						<FieldContainer className="field">
 							<TextField
-								label={showInlineLabel ? 'Units' : undefined}
+								label={!tableView && !hideLabel ? 'Units' : undefined}
+								borderless
 								disabled={field.exclude}
 								name="unit"
 								value={field.unit}
@@ -122,10 +135,11 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 				)}
 				{showFields.includes(CodebookFields.Mapping) && (
 					<>
-						{showOutsideLabel && <OutsideLabel>Mapping</OutsideLabel>}
+						{tableView && !hideLabel && <OutsideLabel>Mapping</OutsideLabel>}
 						<MappingFields
 							field={field}
-							showInlineLabel={showInlineLabel}
+							hideLabel={!hideLabel}
+							tableView={tableView}
 							onChange={onChange}
 						/>
 					</>
