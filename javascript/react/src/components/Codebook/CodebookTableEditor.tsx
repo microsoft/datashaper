@@ -10,7 +10,7 @@ import { CodebookFieldEditor } from './CodebookFieldEditor.js'
 import type { CodebookTableEditorProps } from './CodebookTableEditor.types.js'
 
 export const CodebookTableEditor: React.FC<CodebookTableEditorProps> = memo(
-	function CodebookTableEditor({ fields, onChange, showFields, hideLabel }) {
+	function CodebookTableEditor({ fields, onChange, visibleFields, hideLabel }) {
 		return (
 			<Container>
 				{fields.map((f: Field, index: number) => {
@@ -25,7 +25,7 @@ export const CodebookTableEditor: React.FC<CodebookTableEditorProps> = memo(
 									...fields.slice(index + 1),
 								])
 							}
-							showFields={showFields}
+							visibleFields={visibleFields}
 							hideLabel={index > 0 || hideLabel}
 							tableView
 						/>

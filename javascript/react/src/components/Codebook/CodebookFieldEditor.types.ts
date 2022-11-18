@@ -18,7 +18,7 @@ export interface CodebookFieldEditorProps {
 	onChange: (field: Field) => void
 	tableView?: boolean
 	hideLabel?: boolean
-	showFields?: CodebookFields[]
+	visibleFields?: CodebookFields[]
 }
 
 export const DEFAULT_CODEBOOK_FIELDS = [

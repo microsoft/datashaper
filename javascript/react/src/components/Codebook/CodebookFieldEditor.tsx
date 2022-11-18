@@ -6,6 +6,7 @@ import { DataType, VariableNature } from '@datashaper/schema'
 import { EnumDropdown } from '@essex/components'
 import { TextField } from '@fluentui/react'
 import { memo, useCallback } from 'react'
+import { If, Then } from 'react-if'
 
 import {
 	useDropdownChange,
@@ -30,8 +31,13 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 		onChange,
 		tableView,
 		hideLabel,
-		showFields = DEFAULT_CODEBOOK_FIELDS,
+		visibleFields = DEFAULT_CODEBOOK_FIELDS,
 	}) {
+		const visibleFieldsSet = new Set<CodebookFields>()
+
+		visibleFields.forEach(unit => {
+			visibleFieldsSet.add(unit)
+		})
 		const onChangeField = useCallback(
 			(val: any) => {
 				onChange({ ...field, ...val })
@@ -49,8 +55,8 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 					onChange={onChange}
 					field={field}
 				></StatsField>
-				{showFields.includes(CodebookFields.DisplayName) && (
-					<>
+				<If condition={visibleFieldsSet.has(CodebookFields.DisplayName)}>
+					<Then>
 						{tableView && !hideLabel && <OutsideLabel>Display</OutsideLabel>}
 						<FieldContainer className="field">
 							<TextField
@@ -62,10 +68,10 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 								onChange={onChangeTextField}
 							/>
 						</FieldContainer>
-					</>
-				)}
-				{showFields.includes(CodebookFields.Description) && (
-					<>
+					</Then>
+				</If>
+				<If condition={visibleFieldsSet.has(CodebookFields.Description)}>
+					<Then>
 						{tableView && !hideLabel && (
 							<OutsideLabel>Description</OutsideLabel>
 						)}
@@ -82,10 +88,10 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 								onChange={onChangeTextField}
 							/>
 						</FieldContainer>
-					</>
-				)}
-				{showFields.includes(CodebookFields.DataType) && (
-					<>
+					</Then>
+				</If>
+				<If condition={visibleFieldsSet.has(CodebookFields.DataType)}>
+					<Then>
 						{tableView && !hideLabel && <OutsideLabel>Data type</OutsideLabel>}
 						<FieldContainer className="field">
 							<EnumDropdown
@@ -98,10 +104,10 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 								onChange={(_, opt) => onChangeDropdown('type', opt)}
 							/>
 						</FieldContainer>
-					</>
-				)}
-				{showFields.includes(CodebookFields.DataNature) && (
-					<>
+					</Then>
+				</If>
+				<If condition={visibleFieldsSet.has(CodebookFields.DataNature)}>
+					<Then>
 						{tableView && !hideLabel && (
 							<OutsideLabel>Data nature</OutsideLabel>
 						)}
@@ -116,11 +122,10 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 								onChange={(_, opt) => onChangeDropdown('nature', opt)}
 							/>
 						</FieldContainer>
-					</>
-				)}
-
-				{showFields.includes(CodebookFields.Units) && (
-					<>
+					</Then>
+				</If>
+				<If condition={visibleFieldsSet.has(CodebookFields.Units)}>
+					<Then>
 						{tableView && !hideLabel && <OutsideLabel>Units</OutsideLabel>}
 						<FieldContainer className="field">
 							<TextField
@@ -132,10 +137,10 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 								onChange={onChangeTextField}
 							/>
 						</FieldContainer>
-					</>
-				)}
-				{showFields.includes(CodebookFields.Mapping) && (
-					<>
+					</Then>
+				</If>
+				<If condition={visibleFieldsSet.has(CodebookFields.Mapping)}>
+					<Then>
 						{tableView && !hideLabel && <OutsideLabel>Mapping</OutsideLabel>}
 						<MappingFields
 							field={field}
@@ -143,8 +148,8 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 							tableView={tableView}
 							onChange={onChange}
 						/>
-					</>
-				)}
+					</Then>
+				</If>
 			</Container>
 		)
 	},

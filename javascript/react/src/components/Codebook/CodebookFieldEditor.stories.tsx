@@ -22,7 +22,7 @@ const storyMetadata = {
 		hideLabel: {
 			control: 'boolean',
 		},
-		showFields: {
+		visibleFields: {
 			control: 'inline-check',
 			options: [
 				CodebookFields.DisplayName,
@@ -139,5 +139,5 @@ const Template: ComponentStory<typeof CodebookFieldEditor> = ({
 export const Single = Template.bind({})
 Single.args = {
 	tableView: false,
-	showFields: DEFAULT_CODEBOOK_FIELDS,
+	visibleFields: DEFAULT_CODEBOOK_FIELDS,
 }
