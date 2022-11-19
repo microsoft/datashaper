@@ -10,6 +10,12 @@
 export interface SchemaResource<T> 
 ```
 
+## Properties
+
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [profile?](./workflow.schemaresource.profile.md) |  | string | <i>(Optional)</i> |
+
 ## Methods
 
 |  Method | Description |

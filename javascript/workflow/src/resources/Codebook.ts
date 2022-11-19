@@ -17,6 +17,8 @@ export class Codebook
 	implements SchemaResource<CodebookSchema>
 {
 	public readonly $schema = LATEST_CODEBOOK_SCHEMA
+	public readonly profile = 'codebook'
+
 	private _fields: Field[] = []
 
 	public constructor(codebook?: CodebookSchema) {

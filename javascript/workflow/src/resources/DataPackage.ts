@@ -28,7 +28,7 @@ import {
 } from './utils.js'
 
 const log = debug('datashaper')
-const DATA_FILE_PREFIX = `data/`
+const DATA_FILE_PREFIX = 'data/'
 
 export class DataPackage
 	extends Named

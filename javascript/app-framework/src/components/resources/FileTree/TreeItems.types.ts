@@ -6,7 +6,6 @@ import type { ResourceTreeData } from './FileTree.types.js'
 
 export interface TreeItemsProps {
 	expanded: boolean
-	appLinks: ResourceTreeData[]
 	selectedRoute?: string
 	onSelect?: (resource: ResourceTreeData) => void
 }

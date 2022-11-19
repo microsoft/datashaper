@@ -31,6 +31,7 @@ export class DataTable
 	implements SchemaResource<DataTableSchema>
 {
 	public readonly $schema = LATEST_DATATABLE_SCHEMA
+	public readonly profile = 'datatable'
 	private readonly _source = new BehaviorSubject<Maybe<ColumnTable>>(undefined)
 	private readonly _inputs = new Map<
 		string,

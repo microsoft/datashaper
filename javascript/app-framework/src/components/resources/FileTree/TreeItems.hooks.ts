@@ -10,11 +10,17 @@ import { useDataPackage } from '../../../hooks/useDataPackage.js'
 import type { ResourceTreeData } from './FileTree.types.js'
 import { groupTables } from './groupTables.js'
 
-export function useTreeItems(): ResourceTreeData[] {
+export function useTreeItems(): [
+	// Data Items
+	ResourceTreeData[],
+	// App Items
+	ResourceTreeData[],
+] {
 	const pkg = useDataPackage()
 	const observable = useMemo(
 		() => pkg.tableStore.tables$.pipe(map(tables => groupTables(tables))),
 		[pkg],
 	)
-	return useObservableState(observable, () => [])
+	const dataItems = useObservableState(observable, () => [])
+	return [dataItems, []]
 }

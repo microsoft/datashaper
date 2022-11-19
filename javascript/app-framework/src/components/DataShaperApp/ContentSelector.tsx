@@ -16,10 +16,14 @@ import {
 } from '../editors/index.js'
 import type { ContentSelectorProps } from './ContentSelector.types.js'
 
-const emptyArray = Object.freeze([]) as any
-
 export const ContentSelector: React.FC<ContentSelectorProps> = memo(
-	function ContentSelector({ handler, args, handlers, children }) {
+	function ContentSelector({
+		handler,
+		args,
+		plugins,
+		pluginInstance,
+		children,
+	}) {
 		if (handler == null) {
 			if (children != null) {
 				return <>{children}</>
@@ -37,10 +41,10 @@ export const ContentSelector: React.FC<ContentSelectorProps> = memo(
 						tableName={args[0] as string}
 					/>
 				)
-			} else if (handlers != null) {
-				const CustomHandler = handlers[handler]
+			} else if (plugins.length != null) {
+				const CustomHandler = plugins.find(p => p.profile === handler)
 				if (CustomHandler != null) {
-					return <CustomHandler args={args ?? emptyArray} />
+					return CustomHandler.render(instance)
 				}
 			}
 			return <div>Could not render content for handler type {handler}.</div>

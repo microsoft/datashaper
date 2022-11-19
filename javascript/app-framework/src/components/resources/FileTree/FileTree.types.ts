@@ -13,8 +13,7 @@ export interface FileTreeProps {
 	selectedFileId?: string
 	expanded: boolean
 	toggleExpanded: () => void
-	examples?: FileDefinition[]
-	appResources: ResourceTreeData[]
+	examples: FileDefinition[]
 	selectedKey?: string
 	onSelect?: (resource: ResourceTreeData) => void
 }

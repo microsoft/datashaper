@@ -34,6 +34,7 @@ export declare class Workflow extends Resource implements SchemaResource<Workflo
 |  [length$](./workflow.workflow.length_.md) | <code>readonly</code> | Observable&lt;number&gt; |  |
 |  [outputNames](./workflow.workflow.outputnames.md) | <code>readonly</code> | string\[\] |  |
 |  [outputNames$](./workflow.workflow.outputnames_.md) | <code>readonly</code> | Observable&lt;string\[\]&gt; |  |
+|  [profile](./workflow.workflow.profile.md) | <code>readonly</code> | (not declared) |  |
 |  [steps](./workflow.workflow.steps.md) | <code>readonly</code> | [Step](./workflow.step.md)<!-- -->\[\] |  |
 |  [steps$](./workflow.workflow.steps_.md) | <code>readonly</code> | BehaviorSubject&lt;[Step](./workflow.step.md)<!-- -->\[\]&gt; |  |
 

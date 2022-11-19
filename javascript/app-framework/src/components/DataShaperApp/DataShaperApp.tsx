@@ -25,9 +25,8 @@ export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 	function DataShaperApp({
 		className,
 		examples = emptyArray,
-		appResources = emptyArray,
 		selectedKey,
-		handlers,
+		plugins,
 		onSelect,
 		children,
 	}) {
@@ -58,14 +57,13 @@ export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 						expanded={expanded}
 						toggleExpanded={onToggle}
 						style={fileTreeStyle}
-						appResources={appResources}
 						examples={examples}
 						selectedKey={selectedKey}
 						onSelect={onSelect}
 					/>
 				</Allotment.Pane>
 				<Allotment.Pane>
-					<ContentSelector handler={handler} args={args} handlers={handlers}>
+					<ContentSelector handler={handler} args={args} handlers={plugins}>
 						{children}
 					</ContentSelector>
 				</Allotment.Pane>

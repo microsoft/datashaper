@@ -37,6 +37,7 @@ export class Workflow
 {
 	private static readonly validator = createSchemaValidator()
 	public readonly $schema = LATEST_WORKFLOW_SCHEMA
+	public readonly profile = 'workflow'
 	// Workflow Data Fields
 	private readonly _steps = new BehaviorSubject<Step[]>([])
 	private readonly _numSteps = this._steps.pipe(map(steps => steps.length))

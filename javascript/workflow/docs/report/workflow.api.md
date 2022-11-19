@@ -146,6 +146,8 @@ export class Codebook extends Resource implements SchemaResource<CodebookSchema>
     // (undocumented)
     loadSchema(value: Maybe<CodebookSchema>, quiet?: boolean): void;
     // (undocumented)
+    readonly profile = "codebook";
+    // (undocumented)
     toSchema(): CodebookSchema;
 }
 
@@ -249,6 +251,8 @@ export class DataTable extends Resource implements SchemaResource<DataTableSchem
     get output(): Maybe_2<TableContainer>;
     // (undocumented)
     readonly parser: ParserOptions;
+    // (undocumented)
+    readonly profile = "datatable";
     // (undocumented)
     readonly shape: DataShape;
     // (undocumented)
@@ -655,6 +659,8 @@ export const sample: (id: string) => StepNode<TableContainer<unknown>, SampleArg
 // @public (undocumented)
 export interface SchemaResource<T> {
     loadSchema(schema: Maybe<T>, quiet?: boolean): void;
+    // (undocumented)
+    profile?: string;
     toSchema(): T;
 }
 
@@ -829,6 +835,8 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     get outputNames$(): Observable<string[]>;
     // (undocumented)
     get outputNames(): string[];
+    // (undocumented)
+    readonly profile = "workflow";
     read$(name?: string): Observable<Maybe<TableContainer>>;
     read(name?: string): Maybe<TableContainer>;
     // (undocumented)
