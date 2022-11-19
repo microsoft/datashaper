@@ -3,11 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { BaseFile } from '@datashaper/utilities'
-import { DirectionalHint } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
 import { memo, useState } from 'react'
 
-import { Tooltip } from '../../util/index.js'
 import { FileImport } from './FileImport.js'
 import {
 	useFileManagementCommands,
@@ -21,10 +19,10 @@ import {
 	ExpandButton,
 	icons,
 	MenuContainer,
-	tooltipStyles,
 	useCommandbarStyles,
 } from './FileTree.styles.js'
 import type { FileTreeProps } from './FileTree.types.js'
+import { FileTreeTooltip as Tooltip } from './FileTreeTooltip.js'
 import { TreeItems } from './TreeItems.js'
 
 const emptyArray: any[] = Object.freeze([]) as any
@@ -53,11 +51,7 @@ export const FileTree: React.FC<FileTreeProps> = memo(function FileTree({
 					<Commands items={commands} styles={commandBarStyles} />
 				) : (
 					<>
-						<Tooltip
-							directionalHint={DirectionalHint.rightCenter}
-							styles={tooltipStyles}
-							content="Open"
-						>
+						<Tooltip content="Open">
 							<CollapsedButton
 								styles={collapsedButtonStyles}
 								iconProps={icons.openFile}
@@ -66,11 +60,7 @@ export const FileTree: React.FC<FileTreeProps> = memo(function FileTree({
 								}}
 							/>
 						</Tooltip>
-						<Tooltip
-							directionalHint={DirectionalHint.rightCenter}
-							styles={tooltipStyles}
-							content="Save"
-						>
+						<Tooltip content="Save">
 							<CollapsedButton
 								styles={collapsedButtonStyles}
 								iconProps={icons.save}
@@ -90,8 +80,6 @@ export const FileTree: React.FC<FileTreeProps> = memo(function FileTree({
 				/>
 			</MenuContainer>
 			<Tooltip
-				directionalHint={DirectionalHint.rightCenter}
-				styles={tooltipStyles}
 				content={expanded ? 'Show less information' : 'Show more information'}
 			>
 				<ExpandButton
