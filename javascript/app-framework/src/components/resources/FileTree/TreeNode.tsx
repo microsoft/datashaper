@@ -2,11 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { DirectionalHint } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
 import { Tooltip } from '../../util/index.js'
-import { ItemIcon, tooltipStyles, TreeItem } from './FileTree.styles.js'
+import { ItemIcon, TreeItem } from './FileTree.styles.js'
 import type { TreeNodeProps } from './TreeNode.types.js'
 
 export const TreeNode: React.FC<TreeNodeProps> = memo(function TreeNode({
@@ -16,7 +15,7 @@ export const TreeNode: React.FC<TreeNodeProps> = memo(function TreeNode({
 	selectedRoute,
 	expanded,
 }) {
-	const treeItemStyle = { textAlign: !expanded ? 'center' : 'inherit' }
+	const treeItemStyle = { textAlign: expanded ? 'inheric' : 'center' }
 	const itemIconStyle = { marginRight: expanded ? '10px' : '23px' }
 
 	const children = node.children?.map(child => {
@@ -39,26 +38,18 @@ export const TreeNode: React.FC<TreeNodeProps> = memo(function TreeNode({
 		[onSelectItem, node],
 	)
 	return (
-		<>
-			<TreeItem
-				key={node.key}
-				title={expanded ? node.title : ''}
-				onClick={handleOnClick}
-				selected={selected}
-				style={treeItemStyle}
-			>
-				<Tooltip
-					directionalHint={DirectionalHint.rightCenter}
-					styles={tooltipStyles}
-					content={node.title}
-					calloutProps={{ hidden: expanded }}
-				>
-					<ItemIcon style={itemIconStyle} iconName={node.icon} />
-					{expanded ? node.title : ''}
-				</Tooltip>
-				{expanded ? children : null}
-			</TreeItem>
-			{!expanded ? children : null}
-		</>
+		<TreeItem
+			key={node.key}
+			title={expanded ? node.title : ''}
+			onClick={handleOnClick}
+			selected={selected}
+			style={treeItemStyle}
+		>
+			<Tooltip content={node.title} calloutProps={{ hidden: expanded }}>
+				<ItemIcon style={itemIconStyle} iconName={node.icon} />
+				{expanded ? node.title : ''}
+			</Tooltip>
+			{expanded ? children : null}
+		</TreeItem>
 	)
 })
