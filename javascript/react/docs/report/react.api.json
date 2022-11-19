@@ -3606,7 +3606,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "\"max\""
+                  "text": "\"maximum\""
                 }
               ],
               "initializerTokenRange": {
@@ -3669,7 +3669,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "\"min\""
+                  "text": "\"minimum\""
                 }
               ],
               "initializerTokenRange": {
@@ -6345,6 +6345,398 @@
             }
           ],
           "name": "useGroupHeaderRenderer"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useHandleDelete:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useHandleDelete(mapList: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Record",
+              "canonicalReference": "!Record:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "Value",
+              "canonicalReference": "@datashaper/schema!Value:type"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "Value",
+              "canonicalReference": "@datashaper/schema!Value:type"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": ", onChange?: "
+            },
+            {
+              "kind": "Content",
+              "text": "(mapping: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Record",
+              "canonicalReference": "!Record:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "Value",
+              "canonicalReference": "@datashaper/schema!Value:type"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "Value",
+              "canonicalReference": "@datashaper/schema!Value:type"
+            },
+            {
+              "kind": "Content",
+              "text": ">) => void"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "(value: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Value",
+              "canonicalReference": "@datashaper/schema!Value:type"
+            },
+            {
+              "kind": "Content",
+              "text": ") => void"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 16,
+            "endIndex": 19
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "mapList",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 7
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "onChange",
+              "parameterTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 15
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "useHandleDelete"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useHandleKeyChange:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useHandleKeyChange(mapList: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Record",
+              "canonicalReference": "!Record:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "Value",
+              "canonicalReference": "@datashaper/schema!Value:type"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "Value",
+              "canonicalReference": "@datashaper/schema!Value:type"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": ", onChange?: "
+            },
+            {
+              "kind": "Content",
+              "text": "(mapping: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Record",
+              "canonicalReference": "!Record:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "Value",
+              "canonicalReference": "@datashaper/schema!Value:type"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "Value",
+              "canonicalReference": "@datashaper/schema!Value:type"
+            },
+            {
+              "kind": "Content",
+              "text": ">) => void"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "(previousKey: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Value",
+              "canonicalReference": "@datashaper/schema!Value:type"
+            },
+            {
+              "kind": "Content",
+              "text": ", newKey: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Value",
+              "canonicalReference": "@datashaper/schema!Value:type"
+            },
+            {
+              "kind": "Content",
+              "text": ") => void"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 16,
+            "endIndex": 21
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "mapList",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 7
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "onChange",
+              "parameterTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 15
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "useHandleKeyChange"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useHandleValueChange:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useHandleValueChange(mapList: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Record",
+              "canonicalReference": "!Record:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "Value",
+              "canonicalReference": "@datashaper/schema!Value:type"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "Value",
+              "canonicalReference": "@datashaper/schema!Value:type"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": ", dataType?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "DataType",
+              "canonicalReference": "@datashaper/schema!DataType:enum"
+            },
+            {
+              "kind": "Content",
+              "text": ", onChange?: "
+            },
+            {
+              "kind": "Content",
+              "text": "(mapping: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Record",
+              "canonicalReference": "!Record:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "Value",
+              "canonicalReference": "@datashaper/schema!Value:type"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "Value",
+              "canonicalReference": "@datashaper/schema!Value:type"
+            },
+            {
+              "kind": "Content",
+              "text": ">) => void"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "(key: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Value",
+              "canonicalReference": "@datashaper/schema!Value:type"
+            },
+            {
+              "kind": "Content",
+              "text": ", newValue: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Value",
+              "canonicalReference": "@datashaper/schema!Value:type"
+            },
+            {
+              "kind": "Content",
+              "text": ") => void"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 18,
+            "endIndex": 23
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "mapList",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 7
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "dataType",
+              "parameterTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 9
+              },
+              "isOptional": true
+            },
+            {
+              "parameterName": "onChange",
+              "parameterTypeTokenRange": {
+                "startIndex": 10,
+                "endIndex": 17
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "useHandleValueChange"
         },
         {
           "kind": "Function",

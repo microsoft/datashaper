@@ -9,10 +9,6 @@ import { memo, useCallback } from 'react'
 import { If, Then } from 'react-if'
 
 import {
-	useDropdownChange,
-	useTextChange,
-} from './CodebookFieldEditor.hooks.js'
-import {
 	Container,
 	FieldContainer,
 	OutsideLabel,
@@ -34,19 +30,16 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 		visibleFields = DEFAULT_CODEBOOK_FIELDS,
 	}) {
 		const visibleFieldsSet = new Set<CodebookFields>()
-
 		visibleFields.forEach(unit => {
 			visibleFieldsSet.add(unit)
 		})
+
 		const onChangeField = useCallback(
 			(val: any) => {
 				onChange({ ...field, ...val })
 			},
 			[field, onChange],
 		)
-
-		const onChangeTextField = useTextChange(onChangeField)
-		const onChangeDropdown = useDropdownChange(onChangeField)
 
 		return (
 			<Container className="codebook-column">
@@ -65,7 +58,7 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 								disabled={field.exclude}
 								name="displayName"
 								value={field.title}
-								onChange={onChangeTextField}
+								onChange={(_, val) => onChangeField({ ...field, title: val })}
 							/>
 						</FieldContainer>
 					</Then>
@@ -85,7 +78,9 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 								rows={3}
 								name="description"
 								value={field.description}
-								onChange={onChangeTextField}
+								onChange={(_, val) =>
+									onChangeField({ ...field, description: val })
+								}
 							/>
 						</FieldContainer>
 					</Then>
@@ -101,7 +96,9 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 								title="type"
 								disabled={field.exclude}
 								selectedKey={field.type}
-								onChange={(_, opt) => onChangeDropdown('type', opt)}
+								onChange={(_, opt) =>
+									onChangeField({ ...field, type: opt?.key })
+								}
 							/>
 						</FieldContainer>
 					</Then>
@@ -119,7 +116,9 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 								disabled={field.exclude}
 								selectedKey={field.nature}
 								enumeration={VariableNature}
-								onChange={(_, opt) => onChangeDropdown('nature', opt)}
+								onChange={(_, opt) =>
+									onChangeField({ ...field, nature: opt?.key })
+								}
 							/>
 						</FieldContainer>
 					</Then>
@@ -134,7 +133,7 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 								disabled={field.exclude}
 								name="unit"
 								value={field.unit}
-								onChange={onChangeTextField}
+								onChange={(_, val) => onChangeField({ ...field, unit: val })}
 							/>
 						</FieldContainer>
 					</Then>

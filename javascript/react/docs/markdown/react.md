@@ -40,6 +40,9 @@
 |  [useFormattedNumber(value, formatter)](./react.useformattednumber.md) |  |
 |  [useGetColumnValidationErrors(validationResult)](./react.usegetcolumnvalidationerrors.md) |  |
 |  [useGroupHeaderRenderer(table, computedMetadata, groupHeaderFunction, lazyLoadGroups)](./react.usegroupheaderrenderer.md) | Overrides the default group header rendering so we can inject customization |
+|  [useHandleDelete(mapList, onChange)](./react.usehandledelete.md) |  |
+|  [useHandleKeyChange(mapList, onChange)](./react.usehandlekeychange.md) |  |
+|  [useHandleValueChange(mapList, dataType, onChange)](./react.usehandlevaluechange.md) |  |
 |  [useHeaderCommandBarDefaults(props, far, colors)](./react.useheadercommandbardefaults.md) | Helper to create the props necessary for the default inverted management bar. Basic colors can be customized, but note that if you do not want an always-inverted bar like that used in the DataShaper webapp, you may want to just tweak the Fluent styles as normal. |
 |  [useIconProps(validationResult)](./react.useiconprops.md) |  |
 |  [useIncrementingColumnColorScale(meta)](./react.useincrementingcolumncolorscale.md) | Creates a thematic nominal color scale function that auto-increments for the numeric columns in a table. |

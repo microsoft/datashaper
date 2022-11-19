@@ -8,6 +8,7 @@ import styled from '@essex/styled-components'
 import { ActionButton } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
+import { useMappingPairs } from '../../../../hooks/controls/useMappingPairs.js'
 import {
 	useColumnType,
 	useHandleDelete,
@@ -15,7 +16,6 @@ import {
 	useHandleValueChange,
 	useStepDataTable,
 } from '../../../../hooks/index.js'
-import { useMappingPairs } from '../../../controls/MappingFields/MappingFields.js'
 import type { StepFormProps } from '../types.js'
 import {
 	useColumnValues,
@@ -65,7 +65,7 @@ export const RecodeForm: React.FC<StepFormProps<RecodeArgs>> = memo(
 		const handleButtonClick = useHandleAddButtonClick(step, values, onChange)
 
 		const columnPairs = useMappingPairs(
-			step.args,
+			step.args.mapping,
 			dataType,
 			handleRecodeKeyChange,
 			handleRecodeValueChange,

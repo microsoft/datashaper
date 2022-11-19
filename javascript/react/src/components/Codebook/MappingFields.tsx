@@ -6,16 +6,21 @@ import type { Value } from '@datashaper/schema'
 import { DataType } from '@datashaper/schema'
 import { ActionButton } from '@fluentui/react'
 import { memo, useCallback, useEffect, useState } from 'react'
-import styled from 'styled-components'
 
+import { useMappingPairs } from '../../hooks/controls/useMappingPairs.js'
 import {
 	useHandleDelete,
 	useHandleKeyChange,
 	useHandleValueChange,
 } from '../../hooks/index.js'
-import { useMappingPairs } from '../controls/MappingFields/MappingFields.js'
 import type { CodebookFieldEditorProps } from './CodebookFieldEditor.types.js'
 import { useHandleAddButtonClick } from './MappingFields.hooks.js'
+import {
+	addIconProps,
+	ColumnPairs,
+	Container,
+	dropdownStyles,
+} from './MappingFields.styles.js'
 
 export const MappingFields: React.FC<CodebookFieldEditorProps> = memo(
 	function MappingFields({ field, onChange }) {
@@ -66,17 +71,3 @@ export const MappingFields: React.FC<CodebookFieldEditorProps> = memo(
 		)
 	},
 )
-
-const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-`
-const ColumnPairs = styled.div`
-	margin-top: 8px;
-	display: flex;
-	flex-direction: column;
-	gap: 5px;
-`
-
-const addIconProps = { iconName: 'Add' }
-const dropdownStyles = { root: { width: 92 } }

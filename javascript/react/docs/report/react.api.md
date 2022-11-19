@@ -36,7 +36,7 @@ import type { TableContainer } from '@datashaper/tables';
 import type { TableMetadata } from '@datashaper/tables';
 import type { ValidationResult } from '@datashaper/schema';
 import type { ValidationTestResult } from '@datashaper/schema';
-import type { Value } from '@datashaper/schema';
+import { Value } from '@datashaper/schema';
 import { Workflow } from '@datashaper/workflow';
 
 // Warning: (ae-missing-release-tag) "ArqueroDetailsList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -335,13 +335,13 @@ export enum StatsColumnType {
     // (undocumented)
     Invalid = "invalid",
     // (undocumented)
-    Max = "max",
+    Max = "maximum",
     // (undocumented)
     Mean = "mean",
     // (undocumented)
     Median = "median",
     // (undocumented)
-    Min = "min",
+    Min = "minimum",
     // (undocumented)
     Mode = "mode",
     // (undocumented)
@@ -526,6 +526,21 @@ export function useGetColumnValidationErrors(validationResult?: ValidationResult
 //
 // @public
 export function useGroupHeaderRenderer(table: ColumnTable, computedMetadata?: TableMetadata, groupHeaderFunction?: GroupHeaderFunction, lazyLoadGroups?: boolean): IRenderFunction<IDetailsGroupDividerProps>;
+
+// Warning: (ae-missing-release-tag) "useHandleDelete" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useHandleDelete(mapList: Record<Value, Value>, onChange?: (mapping: Record<Value, Value>) => void): (value: Value) => void;
+
+// Warning: (ae-missing-release-tag) "useHandleKeyChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useHandleKeyChange(mapList: Record<Value, Value>, onChange?: (mapping: Record<Value, Value>) => void): (previousKey: Value, newKey: Value) => void;
+
+// Warning: (ae-missing-release-tag) "useHandleValueChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useHandleValueChange(mapList: Record<Value, Value>, dataType?: DataType, onChange?: (mapping: Record<Value, Value>) => void): (key: Value, newValue: Value) => void;
 
 // Warning: (ae-missing-release-tag) "useHeaderCommandBarDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

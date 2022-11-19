@@ -3,17 +3,17 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import styled from '@essex/styled-components'
-import { Label } from '@fluentui/react'
 
-export const MappingContainer = styled.div`
-	column-gap: 5px;
-	display: flex;
-`
-export const FlexColumn = styled.div`
+export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	row-gap: 5px;
 `
-export const FieldLabel = styled(Label)`
-	padding-top: unset;
+export const ColumnPairs = styled.div`
+	margin-top: 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
 `
+
+export const addIconProps = { iconName: 'Add' }
+export const dropdownStyles = { root: { width: 92 } }

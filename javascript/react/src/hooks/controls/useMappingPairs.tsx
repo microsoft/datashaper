@@ -14,8 +14,8 @@ import type {
 import { Icon, IconButton } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 
-import { EMPTY_OBJECT } from '../../../empty.js'
-import { DataTypeField } from '../../verbs/forms/shared/DataTypeField.js'
+import { DataTypeField } from '../../components/verbs/forms/shared/DataTypeField.js'
+import { EMPTY_OBJECT } from '../../empty.js'
 
 export function useMappingPairs(
 	mapping: Record<Value, Value>,
@@ -27,14 +27,14 @@ export function useMappingPairs(
 		ITextFieldStyleProps,
 		ITextFieldStyles
 	>,
-) {
+): JSX.Element[] {
 	return useMemo(() => {
 		return Object.entries(mapping || EMPTY_OBJECT).map((valuePair, index) => {
 			return (
 				<ColumnPair
 					valuePair={valuePair}
 					dataType={dataType}
-					key={`column-Recode-${index}`}
+					key={`column-Mapping-${index}`}
 					onKeyChange={onKeyChange}
 					onValueChange={onValueChange}
 					onDelete={onDelete}
