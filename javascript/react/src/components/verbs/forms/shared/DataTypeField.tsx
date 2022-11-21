@@ -82,6 +82,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 			},
 			[onKeyChange, onValueChange, isKey, value, keyValue],
 		)
+		console.log(value)
 
 		return (
 			<Container>
@@ -97,12 +98,11 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 						styles={styles}
 					></TextValue>
 				) : null}
-
 				{dataType === DataType.Number ? (
 					<SpinButton
 						min={0}
 						step={1}
-						value={value}
+						defaultValue={value ?? ' '}
 						styles={styles}
 						onChange={spinButtonOnChange}
 					/>

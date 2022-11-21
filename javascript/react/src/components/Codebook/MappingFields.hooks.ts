@@ -12,10 +12,10 @@ export function useHandleAddButtonClick(
 	dataType?: DataType,
 ): () => void {
 	return useCallback(() => {
-		const newValue = dataType === DataType.Number ? '0' : ''
+		const newValue = dataType === DataType.Number ? 0 : ''
 		onChange?.({
 			...values,
-			[newValue]: newValue,
+			' ': newValue,
 		})
 	}, [onChange, dataType, values])
 }

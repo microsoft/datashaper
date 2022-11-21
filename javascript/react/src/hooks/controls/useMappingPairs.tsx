@@ -66,7 +66,7 @@ const ColumnPair: React.FC<{
 	// the old value will always come off the map as a string key
 	// coerce it to the column type for proper comparison
 	const [o, q] = valuePair
-	let keyValue = coerce(o, dataType)
+	let keyValue = o !== ' ' ? coerce(o, dataType) : o
 	const propertyValue = coerce(q, dataType)
 
 	if (dataType === DataType.Boolean) {
