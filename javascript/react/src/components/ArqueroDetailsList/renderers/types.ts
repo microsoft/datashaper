@@ -4,7 +4,11 @@
  */
 
 import type { Field, ValidationResult } from '@datashaper/schema'
-import type { IColumn, IDetailsRowProps } from '@fluentui/react'
+import type {
+	IColumn,
+	IDetailsColumnProps,
+	IDetailsRowProps,
+} from '@fluentui/react'
 
 import type { ColumnSelectFunction, DropdownOptionSelect } from '../index.js'
 
@@ -58,10 +62,9 @@ export interface RichCellProps extends FormattedCellProps {
 	validationResult?: ValidationResult
 }
 
-export interface StatsHeaderProps {
+export interface RichHeaderProps extends Partial<IDetailsColumnProps> {
 	field: Field
 	color?: string
-	column?: IColumn
 	stats?: string[]
 	onSelect?: ColumnSelectFunction
 }
