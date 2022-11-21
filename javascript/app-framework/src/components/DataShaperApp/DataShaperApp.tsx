@@ -4,7 +4,7 @@
  */
 import { useBoolean } from '@fluentui/react-hooks'
 import { type AllotmentHandle, Allotment } from 'allotment'
-import { memo, useRef } from 'react'
+import { memo, useMemo, useRef } from 'react'
 
 import { FileTree } from '../resources/index.js'
 import { ContentSelector } from './ContentSelector.js'
@@ -45,6 +45,8 @@ export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 		// const plugin = plugins.find(p => p.resource === selectedResource)
 		// const plugin?.render(selectedData)
 
+		const fileTreePlugins = useMemo(() => new Map(), [])
+
 		return (
 			<Allotment
 				className={className}
@@ -64,6 +66,7 @@ export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 						style={fileTreeStyle}
 						examples={examples}
 						selectedKey={selectedKey}
+						plugins={fileTreePlugins}
 						onSelect={onSelect}
 					/>
 				</Allotment.Pane>

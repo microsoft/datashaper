@@ -53,7 +53,7 @@ function defineTestCase(parentPath: string, test: string) {
 
 		expect(datapackage.resources.size).toEqual(expected.tables.length)
 		for (const table of expected.tables) {
-			const found = datapackage.resources.get(table.name)
+			const found = datapackage.resources.getResource(table.name)
 			expect(found).toBeDefined()
 			expect(found?.workflow.length).toEqual(table.workflowLength ?? 0)
 			expect(found?.output?.table?.numRows()).toBeGreaterThan(0)

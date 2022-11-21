@@ -14,9 +14,10 @@ import { TreeNode } from './TreeNode.js'
 export const TreeItems: React.FC<TreeItemsProps> = memo(function TreeItems({
 	expanded,
 	selectedRoute,
+	plugins,
 	onSelect,
 }) {
-	const [dataItems, appItems] = useTreeItems()
+	const [dataItems, appItems] = useTreeItems(plugins)
 	const handleSelect = useCallback(
 		(item: ResourceTreeData) => onSelect?.(item),
 		[onSelect],

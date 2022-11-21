@@ -14,10 +14,11 @@ import {
 } from '@datashaper/schema'
 import Blob from 'cross-blob'
 import debug from 'debug'
+import type { Observable } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs'
 
 import { DataTable } from './DataTable.js'
 import { Named } from './Named.js'
-import { ResourceStore } from './ResourceStore.js'
 import type { ResourceHandler, SchemaResource } from './types.js'
 import {
 	isCodebook,
@@ -36,25 +37,63 @@ export class DataPackage
 {
 	public readonly $schema = LATEST_DATAPACKAGE_SCHEMA
 	public readonly profile = 'datapackage'
-	private _resourceStore: ResourceStore = new ResourceStore()
 
 	/**
 	 * A map of profile-name to resource hnadler
 	 */
 	private _resourceHandlers: ResourceHandler[] = []
+	public _resources = new BehaviorSubject<SchemaResource[]>([])
 
 	public constructor(public dataPackage?: DataPackageSchema) {
 		super()
 		this.loadSchema(dataPackage)
 	}
 
-	public clear(): void {
-		this._resourceStore.clear()
+	public get resources(): SchemaResource[] {
+		return this._resources.value
+	}
+
+	public get resources$(): Observable<SchemaResource[]> {
+		return this._resources
+	}
+
+	public get size(): number {
+		return this.resources.length
+	}
+
+	public get size$(): Observable<number> {
+		return this._resources.pipe(map(r => r.length))
+	}
+
+	public get names(): string[] {
+		return this.resources.map(r => r.name).filter(t => !!t) as string[]
+	}
+
+	public get names$(): Observable<string[]> {
+		return this._resources.pipe(map(r => r.map(t => t.name)))
+	}
+
+	public addResource(resource: SchemaResource): void {
+		this._resources.next([
+			// TODO: filter by id or name to guarantee uniqueness?
+			...this.resources,
+			resource,
+		])
 		this._onChange.next()
 	}
 
-	public get resources(): ResourceStore {
-		return this._resourceStore
+	public removeResource(name: string): void {
+		this._resources.next(this.resources.filter(t => name !== t.name))
+		this._onChange.next()
+	}
+
+	public getResource(name: string): SchemaResource | undefined {
+		return this.resources.find(t => t.name === name)
+	}
+
+	public clear(): void {
+		this._resources.next([])
+		this._onChange.next()
 	}
 
 	/**
@@ -69,7 +108,7 @@ export class DataPackage
 	public override toSchema(): DataPackageSchema {
 		return createDataPackageSchemaObject({
 			...super.toSchema(),
-			resources: this._resourceStore.resources.map(t => t.toSchema()),
+			resources: this.resources.map(t => t.toSchema()),
 		})
 	}
 
@@ -77,35 +116,40 @@ export class DataPackage
 		const resources: string[] = []
 		const files = new Map<string, Blob>()
 
-		for (const table of this._resourceStore.resources) {
-			const asset = (name: string) => `data/${table.name}/${name}`
+		for (const resource of this.resources) {
+			const asset = (name: string) => `data/${resource.name}/${name}`
 
 			const sources: string[] = []
-			// Save the source data CSV/JSON
-			if (table.data != null) {
-				const dataFileName = asset(`${table.name}.${table.format}`)
-				files.set(dataFileName, table.data)
-				sources.push(dataFileName)
-			}
 
-			// Save the Worfklow
-			if (table.workflow.length > 0) {
-				const workflowFileName = asset(`workflow.json`)
-				files.set(workflowFileName, write(table.workflow))
-				sources.push(workflowFileName)
-			}
+			if (isDataTableResource(resource)) {
+				// Save the source data CSV/JSON
+				if (resource.data != null) {
+					const dataFileName = asset(`${resource.name}.${resource.format}`)
+					files.set(dataFileName, resource.data)
+					sources.push(dataFileName)
+				}
 
-			// Save the Codebook
-			if (table.codebook.fields.length > 0) {
-				const codebookFileName = asset(`codebook.json`)
-				files.set(codebookFileName, write(table.codebook))
-				sources.push(codebookFileName)
-			}
+				// Save the Worfklow
+				if (resource.workflow.length > 0) {
+					const workflowFileName = asset(`workflow.json`)
+					files.set(workflowFileName, write(resource.workflow))
+					sources.push(workflowFileName)
+				}
 
-			// Save the DataTable
-			const dataTableFileName = asset(`datatable.json`)
-			files.set(dataTableFileName, write(table, { sources }))
-			resources.push(dataTableFileName)
+				// Save the Codebook
+				if (resource.codebook.fields.length > 0) {
+					const codebookFileName = asset(`codebook.json`)
+					files.set(codebookFileName, write(resource.codebook))
+					sources.push(codebookFileName)
+				}
+
+				// Save the DataTable
+				const dataTableFileName = asset(`datatable.json`)
+				files.set(dataTableFileName, write(resource, { sources }))
+				resources.push(dataTableFileName)
+			} else {
+				console.log('TODO: persist non-table resources')
+			}
 		}
 
 		for (const handler of this._resourceHandlers) {
@@ -135,14 +179,14 @@ export class DataPackage
 				if (isDataTable(resource)) {
 					const table = new DataTable(resource)
 					await this._loadTableSources(table, resource, files)
-					this._resourceStore.add(table)
+					this.addResource(table)
 				} else {
 					await this._tryLoadCustomResource(resource, files)
 				}
 			}
 		}
 
-		for (const table of this._resourceStore.resources) {
+		for (const table of this.resources) {
 			table.connect(this.resources)
 		}
 
@@ -219,3 +263,7 @@ const write = (asset: { toSchema: () => any }, extra: any = {}): Blob =>
 	toBlob({ ...asset.toSchema(), ...extra })
 const toString = (obj: unknown): string => JSON.stringify(obj, null, 2)
 const toBlob = (obj: unknown): Blob => new Blob([toString(obj)])
+
+function isDataTableResource(resource: SchemaResource): resource is DataTable {
+	return resource?.profile === 'datatable'
+}

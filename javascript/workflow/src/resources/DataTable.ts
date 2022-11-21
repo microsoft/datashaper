@@ -162,7 +162,7 @@ export class DataTable
 			store.names.forEach(name =>
 				this._inputs.set(
 					name,
-					store.get(name)?.output$ ?? (EMPTY as Observable<any>),
+					store.getResource(name)?.output$ ?? (EMPTY as Observable<any>),
 				),
 			)
 			// Set the input name from the source

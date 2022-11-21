@@ -13,7 +13,7 @@ export function useDataTables(): DataTable[] {
 	const dp = useContext(DataPackageContext)
 	const observable = useMemo(
 		() =>
-			dp.resources.resources$.pipe(
+			dp.resources$.pipe(
 				map(resources => {
 					return resources.filter(r => r.profile === 'datatable') as DataTable[]
 				}),
