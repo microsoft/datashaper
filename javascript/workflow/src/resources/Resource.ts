@@ -8,12 +8,20 @@ import type { Maybe } from '../primitives.js'
 import { Named } from './Named.js'
 import type { SchemaResource } from './types.js'
 
-export class Resource
+export abstract class Resource
 	extends Named
-	implements
-		Omit<ResourceSchema, '$schema' | 'profile'>,
-		SchemaResource<Omit<ResourceSchema, '$schema' | 'profile' | 'sources'>>
+	implements ResourceSchema, SchemaResource
 {
+	/**
+	 * Gets the resource schema
+	 */
+	public abstract get $schema(): string
+
+	/**
+	 * Gets the resource profile
+	 */
+	public abstract get profile(): string
+
 	private _path: ResourceSchema['path']
 	private _homepage: string | undefined
 	private _license: string | undefined
@@ -45,9 +53,11 @@ export class Resource
 		this._onChange.next()
 	}
 
-	public override toSchema(): Omit<ResourceSchema, '$schema' | 'profile'> {
+	public override toSchema(): ResourceSchema {
 		return {
 			...super.toSchema(),
+			$schema: this.$schema,
+			profile: this.profile,
 			path: this.path,
 			homepage: this.homepage,
 			license: this.license,
@@ -55,7 +65,7 @@ export class Resource
 	}
 
 	public override loadSchema(
-		value: Maybe<Omit<ResourceSchema, '$schema' | 'profile'>>,
+		value: Maybe<ResourceSchema>,
 		quiet = false,
 	): void {
 		super.loadSchema(value, true)

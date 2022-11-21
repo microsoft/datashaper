@@ -4,6 +4,8 @@
 
 ## FileTreeProps.onSelect property
 
+Event handler for when a resource is selected
+
 <b>Signature:</b>
 
 ```typescript

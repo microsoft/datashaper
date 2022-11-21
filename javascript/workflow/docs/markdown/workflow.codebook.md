@@ -24,7 +24,9 @@ export declare class Codebook extends Resource implements SchemaResource<Codeboo
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [$schema](./workflow.codebook._schema.md) | <code>readonly</code> | string |  |
+|  [defaultName](./workflow.codebook.defaultname.md) | <code>readonly</code> | string |  |
 |  [fields](./workflow.codebook.fields.md) |  | Field\[\] |  |
+|  [profile](./workflow.codebook.profile.md) | <code>readonly</code> | (not declared) |  |
 
 ## Methods
 

@@ -17,6 +17,12 @@ export class Codebook
 	implements SchemaResource<CodebookSchema>
 {
 	public readonly $schema = LATEST_CODEBOOK_SCHEMA
+	public readonly profile = 'codebook'
+
+	public override get defaultName(): string {
+		return 'codebook.json'
+	}
+
 	private _fields: Field[] = []
 
 	public constructor(codebook?: CodebookSchema) {

@@ -7,14 +7,10 @@ import { v4 } from 'uuid'
 
 import type { Maybe } from '../primitives.js'
 import { Observed } from './Observed.js'
-import type { SchemaResource } from './types.js'
 
-export class Named
-	extends Observed
-	implements
-		Omit<NamedSchema, 'profile' | '$schema'>,
-		SchemaResource<NamedSchema>
-{
+export abstract class Named extends Observed implements NamedSchema {
+	public abstract get defaultName(): string
+
 	private _id: string = v4()
 	private _name = ''
 	private _title: string | undefined
@@ -67,7 +63,7 @@ export class Named
 
 	public loadSchema(schema: Maybe<NamedSchema>, quiet = false): void {
 		this._id = schema?.id ?? v4()
-		this._name = schema?.name ?? ''
+		this._name = schema?.name ?? this.defaultName
 		this._title = schema?.title
 		this._description = schema?.description
 		if (!quiet) {

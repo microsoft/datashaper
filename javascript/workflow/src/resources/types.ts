@@ -7,7 +7,16 @@ import type { ResourceSchema } from '@datashaper/schema'
 
 import type { Maybe } from '../primitives.js'
 
-export interface SchemaResource<T> {
+export interface SchemaResource<T extends ResourceSchema = ResourceSchema> {
+	/** The resource name */
+	name: string
+
+	/** The resource profile */
+	profile: string
+
+	/** Child sources */
+	sources?: SchemaResource[]
+
 	/**
 	 * Save the resource out to a schema object
 	 */

@@ -4,8 +4,10 @@
 
 ## FileTreeProps.examples property
 
+Examples to present to the user in the command-bar menu
+
 <b>Signature:</b>
 
 ```typescript
-examples?: FileDefinition[];
+examples: FileDefinition[];
 ```

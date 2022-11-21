@@ -14,5 +14,5 @@ export interface TableEditorProps
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [dataTable](./app-framework.tableeditorprops.datatable.md) |  | DataTable |  |
+|  [resource](./app-framework.tableeditorprops.resource.md) |  | DataTable |  |
 

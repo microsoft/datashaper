@@ -4,6 +4,8 @@
 
 ## FileTreeProps.style property
 
+The static CSS style to apply to the outer container
+
 <b>Signature:</b>
 
 ```typescript

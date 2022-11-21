@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Profile } from '@datashaper/schema/dist/Profile.js'
 import type { DataTable } from '@datashaper/workflow'
 import type {
 	ICommandBarItemProps,
@@ -13,16 +12,6 @@ import type {
 
 import { icons } from './FileTree.styles.js'
 import type { FileDefinition, ResourceTreeData } from './FileTree.types.js'
-
-function generateKey({
-	table,
-	resource,
-}: {
-	table: string
-	resource: Profile
-}): string {
-	return `table.${resource}|${table}`
-}
 
 /**
  * Get a listing of the table packages with hierarchical resources.
@@ -49,22 +38,19 @@ export function groupTables(tables: DataTable[]): ResourceTreeData[] {
 }
 
 function resourceNode(table: DataTable): ResourceTreeData {
+	const pathItems = (table.path as string).split('/')
+	const title =
+		pathItems[pathItems.length - 1] ?? `${table.name}.${table.format}`
 	return {
-		key: generateKey({
-			table: table.name,
-			resource: 'datasource',
-		}),
-		title: `${table.name}.${table.format}`,
+		href: `/resource/${table.name}/${title}`,
+		title,
 		icon: 'Database',
 	}
 }
 
 function datasourceNode(table: DataTable): ResourceTreeData {
 	return {
-		key: generateKey({
-			table: table.name,
-			resource: 'source',
-		}),
+		href: `/resource/${table.name}/datatable.json`,
 		title: 'datatable.json',
 		icon: 'PageData',
 	}
@@ -72,10 +58,7 @@ function datasourceNode(table: DataTable): ResourceTreeData {
 
 function workflowNode(table: DataTable): ResourceTreeData {
 	return {
-		key: generateKey({
-			table: table.name,
-			resource: 'workflow',
-		}),
+		href: `/resource/${table.name}/workflow.json`,
 		icon: 'SetAction',
 		title: 'workflow.json',
 	}
@@ -83,10 +66,7 @@ function workflowNode(table: DataTable): ResourceTreeData {
 
 function codebookNode(table: DataTable): ResourceTreeData {
 	return {
-		key: generateKey({
-			table: table.name,
-			resource: 'codebook',
-		}),
+		href: `/resource/${table.name}/codebook.json`,
 		icon: 'FormLibraryMirrored',
 		title: 'codebook.json',
 	}
@@ -97,10 +77,7 @@ function bundleNode(
 	children: ResourceTreeData[],
 ): ResourceTreeData {
 	return {
-		key: generateKey({
-			table: table.name,
-			resource: 'bundle',
-		}),
+		href: `/resource/${table.name}`,
 		icon: 'ViewAll',
 		title: table.name,
 		children,

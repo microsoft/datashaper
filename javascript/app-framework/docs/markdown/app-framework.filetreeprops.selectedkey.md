@@ -4,6 +4,8 @@
 
 ## FileTreeProps.selectedKey property
 
+The currently selected item
+
 <b>Signature:</b>
 
 ```typescript

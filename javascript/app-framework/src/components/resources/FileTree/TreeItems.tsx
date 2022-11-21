@@ -13,11 +13,11 @@ import { TreeNode } from './TreeNode.js'
 
 export const TreeItems: React.FC<TreeItemsProps> = memo(function TreeItems({
 	expanded,
-	appLinks,
 	selectedRoute,
+	plugins,
 	onSelect,
 }) {
-	const items = useTreeItems()
+	const [dataItems, appItems] = useTreeItems(plugins)
 	const handleSelect = useCallback(
 		(item: ResourceTreeData) => onSelect?.(item),
 		[onSelect],
@@ -25,23 +25,23 @@ export const TreeItems: React.FC<TreeItemsProps> = memo(function TreeItems({
 
 	return (
 		<TreeView>
-			{items.map((i: ResourceTreeData) => (
+			{dataItems.map((i: ResourceTreeData) => (
 				<TreeNode
 					expanded={expanded}
-					key={i.key}
+					key={i.href}
 					node={i}
-					selected={i.key === selectedRoute}
+					selected={i.href === selectedRoute}
 					selectedRoute={selectedRoute}
 					onSelectItem={handleSelect}
 				/>
 			))}
-			{items.length > 0 ? <Separator /> : null}
-			{appLinks.map((i: ResourceTreeData) => (
+			{appItems.length > 0 ? <Separator /> : null}
+			{appItems.map((i: ResourceTreeData) => (
 				<TreeNode
 					expanded={expanded}
-					key={i.key}
+					key={i.href}
 					node={i}
-					selected={selectedRoute?.includes(i.key)}
+					selected={selectedRoute?.includes(i.href)}
 					selectedRoute={selectedRoute}
 					onSelectItem={handleSelect}
 				/>

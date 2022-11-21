@@ -4,7 +4,8 @@
  */
 import type React from 'react'
 
-import type { FileDefinition, ResourceTreeData } from '../resources/index.js'
+import type { DataShaperAppPlugin } from '../../types.js'
+import type { FileDefinition } from '../resources/index.js'
 
 export interface DataShaperAppProps {
 	/**
@@ -18,29 +19,13 @@ export interface DataShaperAppProps {
 	examples?: FileDefinition[]
 
 	/**
-	 * The application resources to render in the file tree.
-	 * TODO: this should be handled internally
-	 */
-	appResources?: ResourceTreeData[]
-
-	/**
 	 * The child node to render as the "Front Page" of the app.
 	 * This is the default view when no resource is selected
 	 */
 	children: React.ReactNode
 
 	/**
-	 * The currently selected route
-	 */
-	selectedKey?: string
-
-	/**
-	 * Handle selection of a resource tree item
-	 */
-	onSelect?: (resource: ResourceTreeData) => void
-
-	/**
 	 * Custom resource renderers
 	 */
-	handlers?: Record<string, React.ComponentType<{ args: string[] }>>
+	plugins?: DataShaperAppPlugin[]
 }

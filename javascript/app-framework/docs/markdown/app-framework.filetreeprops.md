@@ -14,13 +14,12 @@ export interface FileTreeProps
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [appResources](./app-framework.filetreeprops.appresources.md) |  | [ResourceTreeData](./app-framework.resourcetreedata.md)<!-- -->\[\] |  |
-|  [className?](./app-framework.filetreeprops.classname.md) |  | string | <i>(Optional)</i> |
-|  [examples?](./app-framework.filetreeprops.examples.md) |  | [FileDefinition](./app-framework.filedefinition.md)<!-- -->\[\] | <i>(Optional)</i> |
-|  [expanded](./app-framework.filetreeprops.expanded.md) |  | boolean |  |
-|  [onSelect?](./app-framework.filetreeprops.onselect.md) |  | (resource: [ResourceTreeData](./app-framework.resourcetreedata.md)<!-- -->) =&gt; void | <i>(Optional)</i> |
-|  [selectedFileId?](./app-framework.filetreeprops.selectedfileid.md) |  | string | <i>(Optional)</i> |
-|  [selectedKey?](./app-framework.filetreeprops.selectedkey.md) |  | string | <i>(Optional)</i> |
-|  [style?](./app-framework.filetreeprops.style.md) |  | React.CSSProperties | <i>(Optional)</i> |
-|  [toggleExpanded](./app-framework.filetreeprops.toggleexpanded.md) |  | () =&gt; void |  |
+|  [className?](./app-framework.filetreeprops.classname.md) |  | string | <i>(Optional)</i> The class attribute to specify on the outer container |
+|  [examples](./app-framework.filetreeprops.examples.md) |  | [FileDefinition](./app-framework.filedefinition.md)<!-- -->\[\] | Examples to present to the user in the command-bar menu |
+|  [expanded](./app-framework.filetreeprops.expanded.md) |  | boolean | Whether the file-tree pane is expanded (full-width) |
+|  [onSelect?](./app-framework.filetreeprops.onselect.md) |  | (resource: [ResourceTreeData](./app-framework.resourcetreedata.md)<!-- -->) =&gt; void | <i>(Optional)</i> Event handler for when a resource is selected |
+|  [plugins](./app-framework.filetreeprops.plugins.md) |  | Map&lt;string, [DataShaperAppPlugin](./app-framework.datashaperappplugin.md)<!-- -->&gt; | A map of profile-name to tree-node generator |
+|  [selectedKey?](./app-framework.filetreeprops.selectedkey.md) |  | string | <i>(Optional)</i> The currently selected item |
+|  [style?](./app-framework.filetreeprops.style.md) |  | React.CSSProperties | <i>(Optional)</i> The static CSS style to apply to the outer container |
+|  [toggleExpanded](./app-framework.filetreeprops.toggleexpanded.md) |  | () =&gt; void | Toggle the file-tree expansion |
 

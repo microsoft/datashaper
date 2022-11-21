@@ -14,5 +14,5 @@ export interface WorkflowEditorProps
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [dataTable](./app-framework.workfloweditorprops.datatable.md) |  | DataTable |  |
+|  [resource](./app-framework.workfloweditorprops.resource.md) |  | Workflow |  |
 

@@ -5,5 +5,5 @@
 import type { DataTable } from '@datashaper/workflow'
 
 export interface TableEditorProps {
-	dataTable: DataTable
+	resource: DataTable
 }
