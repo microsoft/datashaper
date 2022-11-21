@@ -58,7 +58,7 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 								disabled={field.exclude}
 								name="displayName"
 								value={field.title}
-								onChange={(_, val) => onChangeField({ ...field, title: val })}
+								onChange={(_, val) => onChangeField({ title: val })}
 							/>
 						</FieldContainer>
 					</Then>
@@ -78,9 +78,7 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 								rows={3}
 								name="description"
 								value={field.description}
-								onChange={(_, val) =>
-									onChangeField({ ...field, description: val })
-								}
+								onChange={(_, val) => onChangeField({ description: val })}
 							/>
 						</FieldContainer>
 					</Then>
@@ -96,9 +94,7 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 								title="type"
 								disabled={field.exclude}
 								selectedKey={field.type}
-								onChange={(_, opt) =>
-									onChangeField({ ...field, type: opt?.key })
-								}
+								onChange={(_, opt) => onChangeField({ type: opt?.key })}
 							/>
 						</FieldContainer>
 					</Then>
@@ -116,9 +112,7 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 								disabled={field.exclude}
 								selectedKey={field.nature}
 								enumeration={VariableNature}
-								onChange={(_, opt) =>
-									onChangeField({ ...field, nature: opt?.key })
-								}
+								onChange={(_, opt) => onChangeField({ nature: opt?.key })}
 							/>
 						</FieldContainer>
 					</Then>
@@ -133,7 +127,7 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 								disabled={field.exclude}
 								name="unit"
 								value={field.unit}
-								onChange={(_, val) => onChangeField({ ...field, unit: val })}
+								onChange={(_, val) => onChangeField({ unit: val })}
 							/>
 						</FieldContainer>
 					</Then>
