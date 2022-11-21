@@ -6,6 +6,7 @@ import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
 import { DataPackage } from '../resources/DataPackage.js'
+import type { DataTable } from '../resources/DataTable.js'
 
 // Set the root cwd to the package root.
 // this makes loading datafiles by file-url in the project more straightforward
@@ -27,11 +28,11 @@ function doDescribe(targetPath: string) {
 		describe(entry, () => {
 			const entryPath = path.join(targetPath, entry)
 			if (fs.existsSync(path.join(entryPath, 'datapackage.json'))) {
-				if (!fs.existsSync(path.join(entryPath, '.skip'))) {
+				if (fs.existsSync(path.join(entryPath, '.skip'))) {
+					console.log('Skipping test case: ', entryPath)
+				} else {
 					// If a workflow file exists, define a test case for it
 					defineTestCase(targetPath, entry)
-				} else {
-					console.log('Skipping test case: ', entryPath)
 				}
 			} else {
 				// Otherwise; keep describing down until we find test cases
@@ -51,9 +52,9 @@ function defineTestCase(parentPath: string, test: string) {
 		const datapackage = new DataPackage()
 		await datapackage.load(assets)
 
-		expect(datapackage.resources.size).toEqual(expected.tables.length)
+		expect(datapackage.size).toEqual(expected.tables.length)
 		for (const table of expected.tables) {
-			const found = datapackage.resources.getResource(table.name)
+			const found = datapackage.getResource(table.name) as DataTable
 			expect(found).toBeDefined()
 			expect(found?.workflow.length).toEqual(table.workflowLength ?? 0)
 			expect(found?.output?.table?.numRows()).toBeGreaterThan(0)
