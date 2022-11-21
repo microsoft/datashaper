@@ -28,8 +28,8 @@ export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 		appResources = emptyArray,
 		selectedKey,
 		handlers,
-		frontPage,
 		onSelect,
+		children,
 	}) {
 		const fileTreeStyle = useFileTreeStyle()
 		const ref = useRef<AllotmentHandle | null>(null)
@@ -65,12 +65,9 @@ export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 					/>
 				</Allotment.Pane>
 				<Allotment.Pane>
-					<ContentSelector
-						frontPage={frontPage}
-						handler={handler}
-						args={args}
-						handlers={handlers}
-					/>
+					<ContentSelector handler={handler} args={args} handlers={handlers}>
+						{children}
+					</ContentSelector>
 				</Allotment.Pane>
 			</Allotment>
 		)

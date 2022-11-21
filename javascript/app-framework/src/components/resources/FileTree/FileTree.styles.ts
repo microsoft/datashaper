@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ICommandBarStyles, IStyle } from '@fluentui/react'
+import type { ICommandBarStyles } from '@fluentui/react'
 import {
 	CommandBar,
 	CommandBarButton,
@@ -60,14 +60,6 @@ export const ExpandButton = styled(IconButton)`
 export const collapsedButtonStyles = {
 	menuIcon: { display: 'none' },
 	flexContainer: { marginRight: '10px' },
-}
-
-export const tooltipStyles = {
-	root: {
-		overflow: 'hidden',
-		textOverflow: 'ellipsis',
-		width: '100%',
-	} as IStyle,
 }
 
 export const icons = {
