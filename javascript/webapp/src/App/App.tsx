@@ -7,7 +7,7 @@ import 'allotment/dist/style.css'
 import { DataShaperApp } from '@datashaper/app-framework'
 import { Spinner } from '@fluentui/react'
 import { memo, Suspense } from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
 
 import { Layout } from '../components/Layout.js'
@@ -19,7 +19,7 @@ export const App: React.FC = memo(function App() {
 	return (
 		<ErrorBoundary>
 			<RecoilRoot>
-				<BrowserRouter>
+				<HashRouter>
 					<Suspense fallback={<Spinner />}>
 						<StyleContext>
 							<Layout>
@@ -29,7 +29,7 @@ export const App: React.FC = memo(function App() {
 							</Layout>
 						</StyleContext>
 					</Suspense>
-				</BrowserRouter>
+				</HashRouter>
 			</RecoilRoot>
 		</ErrorBoundary>
 	)
