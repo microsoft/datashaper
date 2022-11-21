@@ -58,7 +58,7 @@ export interface RichCellProps extends FormattedCellProps {
 	validationResult?: ValidationResult
 }
 
-export interface RichHeaderProps {
+export interface StatsHeaderProps {
 	field: Field
 	color?: string
 	column?: IColumn

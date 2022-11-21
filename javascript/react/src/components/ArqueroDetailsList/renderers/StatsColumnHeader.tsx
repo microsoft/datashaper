@@ -11,14 +11,14 @@ import { StatsColumnType } from '../ArqueroDetailsList.types.js'
 import { StatCell } from './StatCell.js'
 import { DEFAULT_STATS } from './StatsColumnHeader.constants.js'
 import { useTooltip } from './StatsColumnHeader.hooks.js'
-import type { RichHeaderProps } from './types.js'
+import type { StatsHeaderProps } from './types.js'
 
 /**
  * Renders a column header with basic stats.
  * The list of stats is configurable, but we aren't exposing that in the table yet.
  * Note that the size is fixed to accommodate only four, so we would need a dynamic header size.
  */
-export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
+export const StatsColumnHeader: React.FC<StatsHeaderProps> = memo(
 	function StatsColumnHeader({
 		field,
 		stats = DEFAULT_STATS,

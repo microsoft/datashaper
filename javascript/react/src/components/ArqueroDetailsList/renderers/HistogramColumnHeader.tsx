@@ -16,14 +16,14 @@ import {
 	useStyles,
 	useTooltip,
 } from './HistogramColumnHeader.hooks.js'
-import type { RichHeaderProps } from './types.js'
+import type { StatsHeaderProps } from './types.js'
 
 /**
  * Renders a histogram for column values in the header.
  * For numbers it will use the bin partitioning.
  * For strings it will be the unique counts (if categories exist).
  */
-export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
+export const HistogramColumnHeader: React.FC<StatsHeaderProps> = memo(
 	function HistogramColumnHeader({ field, color, ...props }) {
 		const { column, onSelect } = props
 		const dimensions = useCellDimensions(column, false)
