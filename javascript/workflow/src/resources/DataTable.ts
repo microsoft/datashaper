@@ -17,10 +17,10 @@ import type { Observable } from 'rxjs'
 import { BehaviorSubject, EMPTY, map } from 'rxjs'
 
 import { Codebook } from './Codebook.js'
+import type { DataPackage } from './DataPackage.js'
 import { DataShape } from './DataShape.js'
 import { ParserOptions } from './ParserOptions.js'
 import { Resource } from './Resource.js'
-import type { ResourceStore } from './ResourceStore.js'
 import type { SchemaResource } from './types.js'
 import { Workflow } from './Workflow/Workflow.js'
 
@@ -45,6 +45,7 @@ export class DataTable
 	public readonly shape = new DataShape()
 	public readonly codebook = new Codebook()
 	public readonly workflow = new Workflow()
+	public readonly defaultName = 'datatable.json'
 
 	private disposables: Array<() => void> = []
 
@@ -70,15 +71,15 @@ export class DataTable
 	}
 
 	private refreshSource = (): void => {
-		if (!this._rawData) {
-			this._source.next(undefined)
-		} else {
-			readTable(this._rawData, this)
+		if (this._rawData != null) {
+			readTable(this._rawData, this.toSchema())
 				.then(t => this._source.next(t))
 				.catch(err => {
 					log('error reading blob', err)
 					throw err
 				})
+		} else {
+			this._source.next(undefined)
 		}
 		this._onChange.next()
 	}
@@ -129,6 +130,18 @@ export class DataTable
 		return this._output.value
 	}
 
+	public get sources(): SchemaResource[] {
+		const result = []
+		if (this.workflow) {
+			result.push(this.workflow)
+		}
+		if (this.codebook) {
+			result.push(this.codebook)
+		}
+
+		return result
+	}
+
 	public override toSchema(): DataTableSchema {
 		return createDataTableSchemaObject({
 			...super.toSchema(),
@@ -155,14 +168,20 @@ export class DataTable
 		}
 	}
 
-	public connect(store: ResourceStore): void {
+	public connect(dp: DataPackage): void {
 		const rebindInputs = () => {
 			this._inputs.clear()
+
+			const tableNames = dp.resources
+				.filter(r => r.profile === 'datatable')
+				.map(r => r.name)
+
 			// Set the sibling table inputs
-			store.names.forEach(name =>
+			tableNames.forEach(name =>
 				this._inputs.set(
 					name,
-					store.getResource(name)?.output$ ?? (EMPTY as Observable<any>),
+					(dp.getResource(name) as DataTable)?.output$ ??
+						(EMPTY as Observable<any>),
 				),
 			)
 			// Set the input name from the source
@@ -173,7 +192,7 @@ export class DataTable
 			this.rebindWorkflowInput()
 		}
 
-		store.onChange(rebindInputs)
+		dp.onChange(rebindInputs)
 		rebindInputs()
 	}
 

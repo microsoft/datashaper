@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class Observed 
+export declare abstract class Observed 
 ```
 
 ## Properties

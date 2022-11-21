@@ -53,7 +53,7 @@ function useAddTable(): AddTableHandler {
 			)
 			table.name = name
 			table.data = file
-			store.tableStore.add(table)
+			store.addResource(table)
 		},
 		[store],
 	)

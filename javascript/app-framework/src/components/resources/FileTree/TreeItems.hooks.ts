@@ -3,18 +3,16 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { DataTable } from '@datashaper/workflow'
-import type { SchemaResource } from '@datashaper/workflow'
 import { useObservableState } from 'observable-hooks'
 import { useMemo } from 'react'
 import { map } from 'rxjs'
 
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
+import type { DataShaperAppPlugin } from '../../../types.js'
 import type { ResourceTreeData } from './FileTree.types.js'
 import { groupTables } from './groupTables.js'
 
-export function useTreeItems(
-	plugins: Map<string, (r: SchemaResource) => ResourceTreeData>,
-): [
+export function useTreeItems(plugins: Map<string, DataShaperAppPlugin>): [
 	// Data Items
 	ResourceTreeData[],
 	// App Items
@@ -32,7 +30,13 @@ export function useTreeItems(
 
 					const tableTreeItems = groupTables(tables)
 					const appTreeItems = other
-						.map(r => plugins.get(r.profile)?.(r))
+						.map(r => {
+							return {
+								href: `/app/${r.profile}/${r.name}`,
+								title: r.name,
+								icon: plugins.get(r.profile)?.fileTreeIconName ?? '',
+							}
+						})
 						.filter(t => t != null) as ResourceTreeData[]
 
 					return [tableTreeItems, appTreeItems] as [
@@ -41,7 +45,7 @@ export function useTreeItems(
 					]
 				}),
 			),
-		[pkg],
+		[pkg, plugins],
 	)
 	return useObservableState(observable, () => [[], []])
 }

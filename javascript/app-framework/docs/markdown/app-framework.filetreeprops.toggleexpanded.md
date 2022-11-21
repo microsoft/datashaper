@@ -4,6 +4,8 @@
 
 ## FileTreeProps.toggleExpanded property
 
+Toggle the file-tree expansion
+
 <b>Signature:</b>
 
 ```typescript

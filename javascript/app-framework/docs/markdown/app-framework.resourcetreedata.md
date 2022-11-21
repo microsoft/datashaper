@@ -17,7 +17,7 @@ export interface ResourceTreeData
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [children?](./app-framework.resourcetreedata.children.md) |  | [ResourceTreeData](./app-framework.resourcetreedata.md)<!-- -->\[\] | <i>(Optional)</i> Child node Data |
+|  [href](./app-framework.resourcetreedata.href.md) |  | string | The resource render route |
 |  [icon?](./app-framework.resourcetreedata.icon.md) |  | string | <i>(Optional)</i> The icon to use in the file tree |
-|  [key](./app-framework.resourcetreedata.key.md) |  | string | The unique node key |
 |  [title](./app-framework.resourcetreedata.title.md) |  | string | The node text to use. Default=id |
 

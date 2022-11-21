@@ -26,6 +26,7 @@ export declare class DataTable extends Resource implements SchemaResource<DataTa
 |  [$schema](./workflow.datatable._schema.md) | <code>readonly</code> | string |  |
 |  [codebook](./workflow.datatable.codebook.md) | <code>readonly</code> | [Codebook](./workflow.codebook.md) |  |
 |  [data](./workflow.datatable.data.md) |  | Blob \| undefined |  |
+|  [defaultName](./workflow.datatable.defaultname.md) | <code>readonly</code> | (not declared) |  |
 |  [format](./workflow.datatable.format.md) |  | DataFormat |  |
 |  [name](./workflow.datatable.name.md) |  | string |  |
 |  [output](./workflow.datatable.output.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt; |  |
@@ -35,13 +36,14 @@ export declare class DataTable extends Resource implements SchemaResource<DataTa
 |  [shape](./workflow.datatable.shape.md) | <code>readonly</code> | [DataShape](./workflow.datashape.md) |  |
 |  [source](./workflow.datatable.source.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;ColumnTable&gt; |  |
 |  [source$](./workflow.datatable.source_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;ColumnTable&gt;&gt; |  |
+|  [sources](./workflow.datatable.sources.md) | <code>readonly</code> | [SchemaResource](./workflow.schemaresource.md)<!-- -->\[\] |  |
 |  [workflow](./workflow.datatable.workflow.md) | <code>readonly</code> | [Workflow](./workflow.workflow.md) |  |
 
 ## Methods
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [connect(store)](./workflow.datatable.connect.md) |  |  |
+|  [connect(dp)](./workflow.datatable.connect.md) |  |  |
 |  [dispose()](./workflow.datatable.dispose.md) |  |  |
 |  [loadSchema(schema, quiet)](./workflow.datatable.loadschema.md) |  |  |
 |  [toSchema()](./workflow.datatable.toschema.md) |  |  |

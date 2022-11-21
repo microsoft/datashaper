@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-connect(store: TableStore): void;
+connect(dp: DataPackage): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  store | TableStore |  |
+|  dp | [DataPackage](./workflow.datapackage.md) |  |
 
 <b>Returns:</b>
 

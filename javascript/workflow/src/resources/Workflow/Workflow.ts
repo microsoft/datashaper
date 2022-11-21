@@ -67,6 +67,10 @@ export class Workflow
 	)
 	private _disposables: Array<() => void> = []
 
+	public override get defaultName(): string {
+		return 'workflow.json'
+	}
+
 	public constructor(input?: WorkflowSchema, private _strictInputs = false) {
 		super()
 		this.loadSchema(input, true)
@@ -90,7 +94,9 @@ export class Workflow
 		> => {
 			const steps = this.steps
 			// Returns the default output of the final node
-			if (steps.length === 0) return this._defaultInput
+			if (steps.length === 0) {
+				return this._defaultInput
+			}
 			const lastStepId = steps[steps.length - 1]!.id
 			const lastNode = this.getNode(lastStepId)
 			// Nodes use BehaviorSubject internally

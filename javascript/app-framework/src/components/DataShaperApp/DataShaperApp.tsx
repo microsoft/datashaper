@@ -4,12 +4,14 @@
  */
 import { useBoolean } from '@fluentui/react-hooks'
 import { type AllotmentHandle, Allotment } from 'allotment'
-import { memo, useMemo, useRef } from 'react'
+import { memo, useCallback, useMemo, useRef } from 'react'
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 
+import type { DataShaperAppPlugin } from '../../types.js'
+import type { ResourceTreeData } from '../resources/index.js'
 import { FileTree } from '../resources/index.js'
-import { ContentSelector } from './ContentSelector.js'
 import {
-	useHandlerArgs,
+	useDataPackageResourceRoutes,
 	useOnChangeWidth,
 	useOnToggle,
 } from './DataShaperApp.hooks.js'
@@ -25,11 +27,10 @@ export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 	function DataShaperApp({
 		className,
 		examples = emptyArray,
-		selectedKey,
-		plugins,
-		onSelect,
+		plugins: inputPlugins,
 		children,
 	}) {
+		const navigate = useNavigate()
 		const fileTreeStyle = useFileTreeStyle()
 		const ref = useRef<AllotmentHandle | null>(null)
 		const [
@@ -38,14 +39,21 @@ export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 		] = useBoolean(true)
 		const onToggle = useOnToggle(ref, expanded, toggleExpanded)
 		const onChangeWidth = useOnChangeWidth(expanded, collapse, expand)
-		const { handler, args } = useHandlerArgs(selectedKey)
 
-		// TODO: selected resource
-		const selectedData = 'TODO'
-		// const plugin = plugins.find(p => p.resource === selectedResource)
-		// const plugin?.render(selectedData)
+		const selectedKey = useLocation().pathname
+		const onSelect = useCallback(
+			(v: ResourceTreeData) => {
+				navigate(v.href)
+			},
+			[navigate],
+		)
 
-		const fileTreePlugins = useMemo(() => new Map(), [])
+		const plugins = useMemo(() => {
+			const result = new Map<string, DataShaperAppPlugin>()
+			inputPlugins?.forEach(p => result.set(p.profile, p))
+			return result
+		}, [inputPlugins])
+		const resourceRoutes = useDataPackageResourceRoutes(plugins)
 
 		return (
 			<Allotment
@@ -66,16 +74,29 @@ export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 						style={fileTreeStyle}
 						examples={examples}
 						selectedKey={selectedKey}
-						plugins={fileTreePlugins}
+						plugins={plugins}
 						onSelect={onSelect}
 					/>
 				</Allotment.Pane>
 				<Allotment.Pane>
-					<ContentSelector handler={handler} args={args} handlers={plugins}>
-						{children}
-					</ContentSelector>
+					{/* TODO: detect whether a router is in use, conditionally render router tag */}
+					<Routes>
+						<Route path="/" element={children} />
+						{resourceRoutes.map(r => (
+							<Route
+								key={r.path}
+								path={r.path}
+								element={<r.renderer {...r.props} />}
+							/>
+						))}
+						<Route path="*" element={<NoMatch />} />
+					</Routes>
 				</Allotment.Pane>
 			</Allotment>
 		)
 	},
 )
+
+function NoMatch() {
+	return <div style={{ padding: 25 }}>No Route Matched</div>
+}

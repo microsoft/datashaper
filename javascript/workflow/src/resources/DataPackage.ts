@@ -14,7 +14,7 @@ import {
 } from '@datashaper/schema'
 import Blob from 'cross-blob'
 import debug from 'debug'
-import type { Observable } from 'rxjs';
+import type { Observable } from 'rxjs'
 import { BehaviorSubject, map } from 'rxjs'
 
 import { DataTable } from './DataTable.js'
@@ -37,6 +37,7 @@ export class DataPackage
 {
 	public readonly $schema = LATEST_DATAPACKAGE_SCHEMA
 	public readonly profile = 'datapackage'
+	public readonly defaultName = 'datapackage.json'
 
 	/**
 	 * A map of profile-name to resource hnadler
@@ -131,20 +132,20 @@ export class DataPackage
 
 				// Save the Worfklow
 				if (resource.workflow.length > 0) {
-					const workflowFileName = asset(`workflow.json`)
+					const workflowFileName = asset('workflow.json')
 					files.set(workflowFileName, write(resource.workflow))
 					sources.push(workflowFileName)
 				}
 
 				// Save the Codebook
 				if (resource.codebook.fields.length > 0) {
-					const codebookFileName = asset(`codebook.json`)
+					const codebookFileName = asset('codebook.json')
 					files.set(codebookFileName, write(resource.codebook))
 					sources.push(codebookFileName)
 				}
 
 				// Save the DataTable
-				const dataTableFileName = asset(`datatable.json`)
+				const dataTableFileName = asset('datatable.json')
 				files.set(dataTableFileName, write(resource, { sources }))
 				resources.push(dataTableFileName)
 			} else {
@@ -165,7 +166,7 @@ export class DataPackage
 		this.clear()
 		const dataPackageBlob = files.get('datapackage.json')
 		if (dataPackageBlob == null) {
-			throw new Error(`file list must contain datapackage.json`)
+			throw new Error('file list must contain datapackage.json')
 		}
 		const schema = JSON.parse(await dataPackageBlob.text()) as DataPackageSchema
 		this.loadSchema(schema, true)
@@ -187,7 +188,9 @@ export class DataPackage
 		}
 
 		for (const table of this.resources) {
-			table.connect(this.resources)
+			if (isDataTableResource(table)) {
+				table.connect(this)
+			}
 		}
 
 		// Load custom resource files
@@ -261,8 +264,8 @@ export class DataPackage
 
 const write = (asset: { toSchema: () => any }, extra: any = {}): Blob =>
 	toBlob({ ...asset.toSchema(), ...extra })
-const toString = (obj: unknown): string => JSON.stringify(obj, null, 2)
-const toBlob = (obj: unknown): Blob => new Blob([toString(obj)])
+const toStr = (obj: unknown): string => JSON.stringify(obj, null, 2)
+const toBlob = (obj: unknown): Blob => new Blob([toStr(obj)])
 
 function isDataTableResource(resource: SchemaResource): resource is DataTable {
 	return resource?.profile === 'datatable'

@@ -38,6 +38,10 @@ export const ExpandButton = styled(IconButton)`
 `
 
 export const icons = {
+	table: { iconName: 'Table' },
+	save: { iconName: 'Save' },
 	expand: { iconName: 'DoubleChevronRight12' },
 	collapse: { iconName: 'DoubleChevronLeft12' },
+	project: { iconName: 'ZipFolder' },
+	openFile: { iconName: 'FabricOpenFolderHorizontal' },
 }

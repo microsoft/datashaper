@@ -38,7 +38,7 @@ import {
 import type { TableEditorProps } from './TableEditor.types.js'
 
 export const TableEditor: React.FC<TableEditorProps> = memo(
-	function TableEditor({ dataTable }) {
+	function TableEditor({ resource: dataTable }) {
 		// Primary State
 		const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
 		const table = useDataTableOutput(dataTable)

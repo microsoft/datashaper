@@ -4,8 +4,10 @@
 
 ## SchemaResource.profile property
 
+The resource profile
+
 <b>Signature:</b>
 
 ```typescript
-profile?: string;
+profile: string;
 ```

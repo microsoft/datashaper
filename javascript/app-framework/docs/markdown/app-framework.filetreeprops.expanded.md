@@ -4,6 +4,8 @@
 
 ## FileTreeProps.expanded property
 
+Whether the file-tree pane is expanded (full-width)
+
 <b>Signature:</b>
 
 ```typescript

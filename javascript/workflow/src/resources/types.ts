@@ -14,7 +14,7 @@ export interface SchemaResource<T extends ResourceSchema = ResourceSchema> {
 	/** The resource profile */
 	profile: string
 
-	/** Child sour8ces */
+	/** Child sources */
 	sources?: SchemaResource[]
 
 	/**

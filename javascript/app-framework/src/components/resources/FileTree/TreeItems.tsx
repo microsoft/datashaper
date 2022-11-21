@@ -28,9 +28,9 @@ export const TreeItems: React.FC<TreeItemsProps> = memo(function TreeItems({
 			{dataItems.map((i: ResourceTreeData) => (
 				<TreeNode
 					expanded={expanded}
-					key={i.key}
+					key={i.href}
 					node={i}
-					selected={i.key === selectedRoute}
+					selected={i.href === selectedRoute}
 					selectedRoute={selectedRoute}
 					onSelectItem={handleSelect}
 				/>
@@ -39,9 +39,9 @@ export const TreeItems: React.FC<TreeItemsProps> = memo(function TreeItems({
 			{appItems.map((i: ResourceTreeData) => (
 				<TreeNode
 					expanded={expanded}
-					key={i.key}
+					key={i.href}
 					node={i}
-					selected={selectedRoute?.includes(i.key)}
+					selected={selectedRoute?.includes(i.href)}
 					selectedRoute={selectedRoute}
 					onSelectItem={handleSelect}
 				/>

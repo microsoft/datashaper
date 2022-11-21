@@ -31,6 +31,7 @@ import type { ResourceHandler } from '@datashaper/workflow';
 import type { ResourceSchema } from '@datashaper/schema';
 import { StyledComponent } from 'styled-components';
 import type { TableContainer } from '@datashaper/tables';
+import type { Workflow } from '@datashaper/workflow';
 
 // Warning: (ae-missing-release-tag) "AddTableHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -95,6 +96,17 @@ export const DataPackageContext: Context<DataPackage>;
 // @public (undocumented)
 export const DataShaperApp: React.FC<DataShaperAppProps>;
 
+// Warning: (ae-missing-release-tag) "DataShaperAppPlugin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface DataShaperAppPlugin {
+    fileTreeIconName: string;
+    profile: string;
+    renderer: React_2.ComponentType<{
+        resource: unknown;
+    }>;
+}
+
 // Warning: (ae-missing-release-tag) "DataSourceEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -155,23 +167,13 @@ export const FileTree: React.FC<FileTreeProps>;
 //
 // @public (undocumented)
 export interface FileTreeProps {
-    // (undocumented)
-    appResources: ResourceTreeData[];
-    // (undocumented)
     className?: string;
-    // (undocumented)
-    examples?: FileDefinition[];
-    // (undocumented)
+    examples: FileDefinition[];
     expanded: boolean;
-    // (undocumented)
     onSelect?: (resource: ResourceTreeData) => void;
-    // (undocumented)
-    selectedFileId?: string;
-    // (undocumented)
+    plugins: Map<string, DataShaperAppPlugin>;
     selectedKey?: string;
-    // (undocumented)
     style?: React.CSSProperties;
-    // (undocumented)
     toggleExpanded: () => void;
 }
 
@@ -310,8 +312,8 @@ export function removeExtension(fileName: string): string;
 // @public
 export interface ResourceTreeData {
     children?: ResourceTreeData[];
+    href: string;
     icon?: string;
-    key: string;
     title: string;
 }
 
@@ -333,7 +335,7 @@ export const TableEditor: React.FC<TableEditorProps>;
 // @public (undocumented)
 export interface TableEditorProps {
     // (undocumented)
-    dataTable: DataTable;
+    resource: DataTable;
 }
 
 // Warning: (ae-missing-release-tag) "TableLayoutOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -453,7 +455,7 @@ export const WorkflowEditor: React.FC<WorkflowEditorProps>;
 // @public (undocumented)
 export interface WorkflowEditorProps {
     // (undocumented)
-    dataTable: DataTable;
+    resource: Workflow;
 }
 
 // (No @packageDocumentation comment for this package)

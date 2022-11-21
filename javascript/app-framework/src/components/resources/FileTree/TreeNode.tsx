@@ -19,11 +19,11 @@ export const TreeNode: React.FC<TreeNodeProps> = memo(function TreeNode({
 	const itemIconStyle = { marginRight: expanded ? '10px' : '23px' }
 
 	const children = node.children?.map(child => {
-		const selected = child.key === selectedRoute
+		const selected = child.href === selectedRoute
 		return (
 			<TreeNode
 				expanded={expanded}
-				key={child.key}
+				key={child.href}
 				node={child}
 				selected={selected}
 				onSelectItem={onSelectItem}
@@ -39,7 +39,6 @@ export const TreeNode: React.FC<TreeNodeProps> = memo(function TreeNode({
 	)
 	return (
 		<TreeItem
-			key={node.key}
 			title={expanded ? node.title : ''}
 			onClick={handleOnClick}
 			selected={selected}

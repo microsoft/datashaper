@@ -38,6 +38,7 @@
 |  Interface | Description |
 |  --- | --- |
 |  [CodebookEditorProps](./app-framework.codebookeditorprops.md) |  |
+|  [DataShaperAppPlugin](./app-framework.datashaperappplugin.md) |  |
 |  [DataSourceEditorProps](./app-framework.datasourceeditorprops.md) |  |
 |  [FileDefinition](./app-framework.filedefinition.md) |  |
 |  [FileNameProps](./app-framework.filenameprops.md) |  |

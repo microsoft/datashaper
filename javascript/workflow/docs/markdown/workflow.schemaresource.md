@@ -7,14 +7,16 @@
 <b>Signature:</b>
 
 ```typescript
-export interface SchemaResource<T> 
+export interface SchemaResource<T extends ResourceSchema = ResourceSchema> 
 ```
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [profile?](./workflow.schemaresource.profile.md) |  | string | <i>(Optional)</i> |
+|  [name](./workflow.schemaresource.name.md) |  | string | The resource name |
+|  [profile](./workflow.schemaresource.profile.md) |  | string | The resource profile |
+|  [sources?](./workflow.schemaresource.sources.md) |  | [SchemaResource](./workflow.schemaresource.md)<!-- -->\[\] | <i>(Optional)</i> Child sources |
 
 ## Methods
 

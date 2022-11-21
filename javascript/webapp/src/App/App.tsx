@@ -4,9 +4,10 @@
  */
 import 'allotment/dist/style.css'
 
-import { type ResourceTreeData, DataShaperApp } from '@datashaper/app-framework'
+import { DataShaperApp } from '@datashaper/app-framework'
 import { Spinner } from '@fluentui/react'
-import { memo, Suspense, useCallback, useState } from 'react'
+import { memo, Suspense } from 'react'
+import { BrowserRouter } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
 
 import { Layout } from '../components/Layout.js'
@@ -15,27 +16,20 @@ import { ErrorBoundary } from './ErrorBoundary.js'
 import { StyleContext } from './StyleContext.js'
 
 export const App: React.FC = memo(function App() {
-	const [selectedKey, setSelectedKey] = useState<string | undefined>()
-	const onSelect = useCallback(
-		(v: ResourceTreeData) => setSelectedKey(v.key),
-		[setSelectedKey],
-	)
 	return (
 		<ErrorBoundary>
 			<RecoilRoot>
-				<Suspense fallback={<Spinner />}>
-					<StyleContext>
-						<Layout>
-							<DataShaperApp
-								examples={examples}
-								selectedKey={selectedKey}
-								onSelect={onSelect}
-							>
-								<About />
-							</DataShaperApp>
-						</Layout>
-					</StyleContext>
-				</Suspense>
+				<BrowserRouter>
+					<Suspense fallback={<Spinner />}>
+						<StyleContext>
+							<Layout>
+								<DataShaperApp examples={examples}>
+									<About />
+								</DataShaperApp>
+							</Layout>
+						</StyleContext>
+					</Suspense>
+				</BrowserRouter>
 			</RecoilRoot>
 		</ErrorBoundary>
 	)

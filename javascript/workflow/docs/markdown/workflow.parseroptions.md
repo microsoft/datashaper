@@ -7,11 +7,11 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class ParserOptions extends Observed implements ParserOptionsSchema, SchemaResource<ParserOptionsSchema> 
+export declare class ParserOptions extends Observed implements ParserOptionsSchema 
 ```
 <b>Extends:</b> [Observed](./workflow.observed.md)
 
-<b>Implements:</b> ParserOptionsSchema, [SchemaResource](./workflow.schemaresource.md)<!-- -->&lt;ParserOptionsSchema&gt;
+<b>Implements:</b> ParserOptionsSchema
 
 ## Constructors
 

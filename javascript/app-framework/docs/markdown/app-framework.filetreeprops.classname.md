@@ -4,6 +4,8 @@
 
 ## FileTreeProps.className property
 
+The class attribute to specify on the outer container
+
 <b>Signature:</b>
 
 ```typescript

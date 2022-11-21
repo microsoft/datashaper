@@ -62,6 +62,7 @@
 		"react-dropzone": "^12.1.0",
 		"react-error-boundary": "^3.1.4",
 		"react-is": "^18.2.0",
+		"react-router-dom": "^6.4.3",
 		"recoil": "^0.7.6",
 		"redbox-react": "^1.6.0",
 		"rxjs": "^7.5.7",
