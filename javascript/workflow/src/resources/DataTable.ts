@@ -20,7 +20,7 @@ import { Codebook } from './Codebook.js'
 import { DataShape } from './DataShape.js'
 import { ParserOptions } from './ParserOptions.js'
 import { Resource } from './Resource.js'
-import type { TableStore } from './TableStore.js'
+import type { ResourceStore } from './ResourceStore.js'
 import type { SchemaResource } from './types.js'
 import { Workflow } from './Workflow/Workflow.js'
 
@@ -155,7 +155,7 @@ export class DataTable
 		}
 	}
 
-	public connect(store: TableStore): void {
+	public connect(store: ResourceStore): void {
 		const rebindInputs = () => {
 			this._inputs.clear()
 			// Set the sibling table inputs

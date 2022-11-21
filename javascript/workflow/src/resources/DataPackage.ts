@@ -17,7 +17,7 @@ import debug from 'debug'
 
 import { DataTable } from './DataTable.js'
 import { Named } from './Named.js'
-import { TableStore } from './TableStore.js'
+import { ResourceStore } from './ResourceStore.js'
 import type { ResourceHandler, SchemaResource } from './types.js'
 import {
 	isCodebook,
@@ -35,7 +35,9 @@ export class DataPackage
 	implements SchemaResource<DataPackageSchema>
 {
 	public readonly $schema = LATEST_DATAPACKAGE_SCHEMA
-	private _tableStore: TableStore = new TableStore()
+	public readonly profile = 'datapackage'
+	private _resourceStore: ResourceStore = new ResourceStore()
+
 	/**
 	 * A map of profile-name to resource hnadler
 	 */
@@ -47,12 +49,12 @@ export class DataPackage
 	}
 
 	public clear(): void {
-		this._tableStore.clear()
+		this._resourceStore.clear()
 		this._onChange.next()
 	}
 
-	public get tableStore(): TableStore {
-		return this._tableStore
+	public get resources(): ResourceStore {
+		return this._resourceStore
 	}
 
 	/**
@@ -67,7 +69,7 @@ export class DataPackage
 	public override toSchema(): DataPackageSchema {
 		return createDataPackageSchemaObject({
 			...super.toSchema(),
-			resources: this._tableStore.tables.map(t => t.toSchema()),
+			resources: this._resourceStore.resources.map(t => t.toSchema()),
 		})
 	}
 
@@ -75,7 +77,7 @@ export class DataPackage
 		const resources: string[] = []
 		const files = new Map<string, Blob>()
 
-		for (const table of this._tableStore.tables) {
+		for (const table of this._resourceStore.resources) {
 			const asset = (name: string) => `data/${table.name}/${name}`
 
 			const sources: string[] = []
@@ -133,15 +135,15 @@ export class DataPackage
 				if (isDataTable(resource)) {
 					const table = new DataTable(resource)
 					await this._loadTableSources(table, resource, files)
-					this._tableStore.add(table)
+					this._resourceStore.add(table)
 				} else {
 					await this._tryLoadCustomResource(resource, files)
 				}
 			}
 		}
 
-		for (const table of this._tableStore.tables) {
-			table.connect(this.tableStore)
+		for (const table of this._resourceStore.resources) {
+			table.connect(this.resources)
 		}
 
 		// Load custom resource files

@@ -4,11 +4,21 @@
  */
 import type { DataTable } from '@datashaper/workflow'
 import { useObservableState } from 'observable-hooks'
-import { useContext } from 'react'
+import { useContext, useMemo } from 'react'
+import { map } from 'rxjs'
 
 import { DataPackageContext } from '../context/index.js'
 
 export function useDataTables(): DataTable[] {
 	const dp = useContext(DataPackageContext)
-	return useObservableState(dp.tableStore.tables$, () => [])
+	const observable = useMemo(
+		() =>
+			dp.resources.resources$.pipe(
+				map(resources => {
+					return resources.filter(r => r.profile === 'datatable') as DataTable[]
+				}),
+			),
+		[dp],
+	)
+	return useObservableState(observable, () => [])
 }

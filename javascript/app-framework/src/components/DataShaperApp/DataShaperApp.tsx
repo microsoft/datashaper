@@ -40,6 +40,11 @@ export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 		const onChangeWidth = useOnChangeWidth(expanded, collapse, expand)
 		const { handler, args } = useHandlerArgs(selectedKey)
 
+		// TODO: selected resource
+		const selectedData = 'TODO'
+		// const plugin = plugins.find(p => p.resource === selectedResource)
+		// const plugin?.render(selectedData)
+
 		return (
 			<Allotment
 				className={className}
