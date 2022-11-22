@@ -1,8 +1,0 @@
-{
-	"$schema": "https://microsoft.github.io/datashaper/schema/databundle/v1.json",
-	"name": "nhefs",
-	"title": "NHEFS",
-	"profile": "databundle",
-	"datatable": "nhefs/datatable.json",
-	"codebook": "nhefs/codebook.json"
-}

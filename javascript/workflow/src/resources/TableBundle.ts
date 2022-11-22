@@ -157,7 +157,7 @@ export class TableBundle extends Resource implements ResourceSchema {
 			this._inputs.clear()
 
 			const tableNames = dp.resources
-				.filter(r => r.profile === 'databundle')
+				.filter(r => r.profile === 'tablebundle')
 				.map(r => r.name)
 
 			// Set the sibling table inputs
