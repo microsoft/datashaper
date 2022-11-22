@@ -1,0 +1,6 @@
+{
+	"name": "nhefs-transformed",
+	"title": "NHEFS (prepared)",
+	"profile": "databundle",
+	"workflow": "nhefs-transformed/workflow.json"
+}

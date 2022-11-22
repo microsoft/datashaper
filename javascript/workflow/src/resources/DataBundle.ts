@@ -44,10 +44,10 @@ export class DataBundle
 
 	private _wfDisposables: Array<() => void> = []
 	private _cbDisposables: Array<() => void> = []
+	private _dtDisposables: Array<() => void> = []
 
 	public constructor(databundle?: DataBundleSchema) {
 		super()
-
 		this.loadSchema(databundle)
 		this.rebindWorkflowInput()
 	}
@@ -57,8 +57,23 @@ export class DataBundle
 	}
 
 	public set datatable(datatable: DataTable | undefined) {
+		this._dtDisposables.forEach(d => d())
+		this._dtDisposables = []
+
 		this._datatable = datatable
 		this.rebindWorkflowInput()
+		if (datatable != null) {
+			const sub = datatable.output$.subscribe(tbl => {
+				// wire up latest input
+				this._source.next(tbl)
+
+				// if no workflow, pipe to output
+				if (this.workflow == null) {
+					this._output.next({ id: this.name, table: tbl })
+				}
+			})
+			this._dtDisposables.push(() => sub.unsubscribe())
+		}
 		this._onChange.next()
 	}
 

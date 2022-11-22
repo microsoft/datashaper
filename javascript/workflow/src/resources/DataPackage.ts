@@ -70,11 +70,7 @@ export class DataPackage
 	}
 
 	public addResource(resource: SchemaResource): void {
-		this._resources.next([
-			// TODO: filter by id or name to guarantee uniqueness?
-			...this.resources,
-			resource,
-		])
+		this._resources.next([...this.resources, resource])
 		this._onChange.next()
 	}
 

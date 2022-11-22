@@ -3,148 +3,149 @@
 	"name": "nhefs",
 	"resources": [
 		{
-			"$schema": "https://microsoft.github.io/datashaper/schema/datatable/v1.json",
-			"profile": "datatable",
 			"name": "nhefs",
-			"path": "https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/1268/20/nhefs.csv",
-			"format": "csv",
-			"layout": "micro",
-			"sources": [
-				{
-					"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v2.json",
-					"steps": [
-						{
-							"verb": "window",
-							"args": {
-								"operation": "row_number",
-								"to": "index"
-							}
-						},
-						{
-							"verb": "select",
-							"args": {
-								"columns": [
-									"index",
-									"sex",
-									"age",
-									"race",
-									"education",
-									"wt71",
-									"wt82_71",
-									"smokeintensity",
-									"smkintensity82_71",
-									"active",
-									"exercise",
-									"smokeyrs"
-								]
-							}
-						},
-						{
-							"verb": "rename",
-							"args": {
-								"columns": {
-									"sex": "sex",
-									"age": "age",
-									"race": "race",
-									"education": "education",
-									"wt71": "weight_1971",
-									"wt82_71": "weight_change",
-									"smokeintensity": "smoke_intensity_1971",
-									"smkintensity82_71": "smoke_intensity_change",
-									"active": "active",
-									"exercise": "exercise",
-									"smokeyrs": "smoke_years"
-								}
-							}
-						},
-						{
-							"verb": "derive",
-							"args": {
-								"to": "smoke_intensity_change_pct",
-								"column1": "smoke_intensity_change",
-								"operator": "/",
-								"column2": "smoke_intensity_1971"
-							}
-						},
-						{
-							"verb": "binarize",
-							"args": {
-								"to": "smoke_reduction_25pct",
-								"column": "smoke_intensity_change_pct",
-								"criteria": [
-									{
-										"operator": "<=",
-										"type": "value",
-										"value": "-0.25"
-									}
-								]
-							}
-						},
-						{
-							"verb": "binarize",
-							"args": {
-								"to": "smoke_reduction_50pct",
-								"column": "smoke_intensity_change_pct",
-								"criteria": [
-									{
-										"operator": "<=",
-										"type": "value",
-										"value": "-0.5"
-									}
-								]
-							}
-						},
-						{
-							"verb": "binarize",
-							"args": {
-								"to": "smoke_reduction_75pct",
-								"column": "smoke_intensity_change_pct",
-								"criteria": [
-									{
-										"operator": "<=",
-										"type": "value",
-										"value": "-0.75"
-									}
-								]
-							}
-						},
-						{
-							"verb": "binarize",
-							"args": {
-								"to": "quit_smoking",
-								"column": "smoke_intensity_change_pct",
-								"criteria": [
-									{
-										"operator": "=",
-										"type": "value",
-										"value": "-1"
-									}
-								]
-							}
-						},
-						{
-							"verb": "binarize",
-							"args": {
-								"to": "subject_inclusion",
-								"column": "weight_change",
-								"criteria": [
-									{
-										"operator": "is not empty"
-									}
-								]
-							}
-						},
-						{
-							"verb": "convert",
-							"args": {
-								"type": "float",
-								"formatPattern": "%Y-%m-%d",
-								"columns": ["weight_change"]
+			"profile": "databundle",
+			"datatable": {
+				"$schema": "https://microsoft.github.io/datashaper/schema/datatable/v1.json",
+				"profile": "datatable",
+				"path": "https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/1268/20/nhefs.csv",
+				"format": "csv",
+				"layout": "micro"
+			},
+			"workflow": {
+				"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v2.json",
+				"steps": [
+					{
+						"verb": "window",
+						"args": {
+							"operation": "row_number",
+							"to": "index"
+						}
+					},
+					{
+						"verb": "select",
+						"args": {
+							"columns": [
+								"index",
+								"sex",
+								"age",
+								"race",
+								"education",
+								"wt71",
+								"wt82_71",
+								"smokeintensity",
+								"smkintensity82_71",
+								"active",
+								"exercise",
+								"smokeyrs"
+							]
+						}
+					},
+					{
+						"verb": "rename",
+						"args": {
+							"columns": {
+								"sex": "sex",
+								"age": "age",
+								"race": "race",
+								"education": "education",
+								"wt71": "weight_1971",
+								"wt82_71": "weight_change",
+								"smokeintensity": "smoke_intensity_1971",
+								"smkintensity82_71": "smoke_intensity_change",
+								"active": "active",
+								"exercise": "exercise",
+								"smokeyrs": "smoke_years"
 							}
 						}
-					]
-				}
-			]
+					},
+					{
+						"verb": "derive",
+						"args": {
+							"to": "smoke_intensity_change_pct",
+							"column1": "smoke_intensity_change",
+							"operator": "/",
+							"column2": "smoke_intensity_1971"
+						}
+					},
+					{
+						"verb": "binarize",
+						"args": {
+							"to": "smoke_reduction_25pct",
+							"column": "smoke_intensity_change_pct",
+							"criteria": [
+								{
+									"operator": "<=",
+									"type": "value",
+									"value": "-0.25"
+								}
+							]
+						}
+					},
+					{
+						"verb": "binarize",
+						"args": {
+							"to": "smoke_reduction_50pct",
+							"column": "smoke_intensity_change_pct",
+							"criteria": [
+								{
+									"operator": "<=",
+									"type": "value",
+									"value": "-0.5"
+								}
+							]
+						}
+					},
+					{
+						"verb": "binarize",
+						"args": {
+							"to": "smoke_reduction_75pct",
+							"column": "smoke_intensity_change_pct",
+							"criteria": [
+								{
+									"operator": "<=",
+									"type": "value",
+									"value": "-0.75"
+								}
+							]
+						}
+					},
+					{
+						"verb": "binarize",
+						"args": {
+							"to": "quit_smoking",
+							"column": "smoke_intensity_change_pct",
+							"criteria": [
+								{
+									"operator": "=",
+									"type": "value",
+									"value": "-1"
+								}
+							]
+						}
+					},
+					{
+						"verb": "binarize",
+						"args": {
+							"to": "subject_inclusion",
+							"column": "weight_change",
+							"criteria": [
+								{
+									"operator": "is not empty"
+								}
+							]
+						}
+					},
+					{
+						"verb": "convert",
+						"args": {
+							"type": "float",
+							"formatPattern": "%Y-%m-%d",
+							"columns": ["weight_change"]
+						}
+					}
+				]
+			}
 		}
 	]
 }
