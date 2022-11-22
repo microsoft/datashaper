@@ -1,4 +1,5 @@
 /* eslint-disable jest/expect-expect, jest/valid-title */
+import type { ResourceRelationship } from '@datashaper/schema'
 import Blob from 'cross-blob'
 import fs from 'fs'
 import fsp from 'fs/promises'
@@ -103,7 +104,9 @@ async function checkPersisted(files: Map<string, Blob>, expected: any) {
 		if (table.workflowLength != null) {
 			const wfFile = `data/${table.name}/workflow.json`
 			const workflowBlob = files.get(wfFile)
-			expect(tableJson.sources).toContain(wfFile)
+			expect(
+				tableJson.sources.map((s: ResourceRelationship) => s.source),
+			).toContain(wfFile)
 			expect(workflowBlob).toBeDefined()
 			const workflowJson = JSON.parse(await workflowBlob!.text())
 			expect(workflowJson.steps).toHaveLength(table.workflowLength)

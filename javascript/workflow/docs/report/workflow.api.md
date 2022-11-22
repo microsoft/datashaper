@@ -812,6 +812,8 @@ export class TableBundle extends Resource implements ResourceSchema {
     // (undocumented)
     readonly profile = "tablebundle";
     // (undocumented)
+    get sources(): Resource[];
+    // (undocumented)
     toSchema(): ResourceSchema;
     // (undocumented)
     get workflow(): Workflow | undefined;

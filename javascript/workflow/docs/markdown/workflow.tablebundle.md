@@ -31,6 +31,7 @@ export declare class TableBundle extends Resource implements ResourceSchema
 |  [output](./workflow.tablebundle.output.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt; |  |
 |  [output$](./workflow.tablebundle.output_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt;&gt; |  |
 |  [profile](./workflow.tablebundle.profile.md) | <code>readonly</code> | (not declared) |  |
+|  [sources](./workflow.tablebundle.sources.md) | <code>readonly</code> | [Resource](./workflow.resource.md)<!-- -->\[\] |  |
 |  [workflow](./workflow.tablebundle.workflow.md) |  | [Workflow](./workflow.workflow.md) \| undefined |  |
 
 ## Methods
