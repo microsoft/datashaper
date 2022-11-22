@@ -170,18 +170,6 @@ export interface ParserOptionsEditorProps {
     dataTable: DataTable;
 }
 
-// Warning: (ae-missing-release-tag) "PersistenceContext" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const PersistenceContext: Context<PersistenceService>;
-
-// Warning: (ae-missing-release-tag) "PersistenceProvider" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const PersistenceProvider: React.FC<{
-    children: JSX.Element;
-}>;
-
 // Warning: (ae-missing-release-tag) "PersistenceService" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
