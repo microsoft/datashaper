@@ -6,7 +6,6 @@ import {
 	type DataPackage,
 	type Resource,
 	isDataTable,
-	isTableBundle,
 } from '@datashaper/workflow'
 import { useDebounceFn } from 'ahooks'
 import type { AllotmentHandle } from 'allotment'
@@ -133,19 +132,8 @@ function addSources(
 		}
 
 		/** Descend into child resources */
-		const children = (resource as any).sources ?? []
-		if (isTableBundle(resource)) {
-			if (resource.datatable) {
-				children.push(resource.datatable)
-			}
-			if (resource.workflow) {
-				children.push(resource.workflow)
-			}
-			if (resource.codebook) {
-				children.push(resource.codebook)
-			}
-		}
-		if (children.length > 0) {
+		const children = (resource as any).sources
+		if (children?.length > 0) {
 			addSources(result, children, plugins, `${root}/${resource.name}`)
 		}
 	}

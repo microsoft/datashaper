@@ -45,6 +45,20 @@ export class TableBundle extends Resource implements ResourceSchema {
 		this.rebindWorkflowInput()
 	}
 
+	public get sources(): Resource[] {
+		const result: Resource[] = []
+		if (this.datatable != null) {
+			result.push(this.datatable)
+		}
+		if (this.codebook != null) {
+			result.push(this.codebook)
+		}
+		if (this.workflow != null) {
+			result.push(this.workflow)
+		}
+		return result
+	}
+
 	public get datatable(): DataTable | undefined {
 		return this._datatable
 	}
