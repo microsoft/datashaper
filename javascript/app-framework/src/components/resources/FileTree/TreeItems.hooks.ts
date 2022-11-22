@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DataTable } from '@datashaper/workflow'
+import type { DataBundle, SchemaResource } from '@datashaper/workflow'
 import { useObservableState } from 'observable-hooks'
 import { useMemo } from 'react'
 import { map } from 'rxjs'
@@ -23,10 +23,8 @@ export function useTreeItems(plugins: Map<string, DataShaperAppPlugin>): [
 		() =>
 			pkg.resources$.pipe(
 				map(resources => {
-					const tables = resources.filter(
-						r => r.profile === 'datatable',
-					) as DataTable[]
-					const other = resources.filter(r => r.profile !== 'datatable')
+					const tables = resources.filter(isDataBundleResource)
+					const other = resources.filter(r => r.profile !== 'databundle')
 
 					const tableTreeItems = groupTables(tables)
 					const appTreeItems = other
@@ -48,4 +46,10 @@ export function useTreeItems(plugins: Map<string, DataShaperAppPlugin>): [
 		[pkg, plugins],
 	)
 	return useObservableState(observable, () => [[], []])
+}
+
+function isDataBundleResource(
+	resource: SchemaResource,
+): resource is DataBundle {
+	return resource.profile === 'databundle'
 }

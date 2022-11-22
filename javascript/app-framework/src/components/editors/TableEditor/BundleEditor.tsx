@@ -13,20 +13,21 @@ import {
 	useOnSaveStep,
 	useWorkflowInputTableNames,
 } from '@datashaper/react'
+import { Workflow } from '@datashaper/workflow'
 import { ToolPanel } from '@essex/components'
 import { CommandBar } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import { useObservableState } from 'observable-hooks'
 import { memo, useMemo, useState } from 'react'
 
-import { useDataTableOutput } from '../../../hooks/index.js'
+import { useDataBundleOutput } from '../../../hooks/index.js'
 import {
 	useColumnState,
 	useHistoryButtonCommandBar,
 	useSelectedTable,
 	useStepListener,
 	useTableName,
-} from './TableEditor.hooks.js'
+} from './BundleEditor.hooks.js'
 import {
 	Container,
 	DetailsListContainer,
@@ -34,14 +35,17 @@ import {
 	useTableHeaderColors,
 	useTableHeaderStyles,
 	useToolPanelStyles,
-} from './TableEditor.styles.js'
-import type { TableEditorProps } from './TableEditor.types.js'
+} from './BundleEditor.styles.js'
+import type { BundleEditorProps } from './BundleEditor.types.js'
 
-export const TableEditor: React.FC<TableEditorProps> = memo(
+export const BundleEditor: React.FC<BundleEditorProps> = memo(
 	function TableEditor({ resource: dataTable }) {
 		// Primary State
 		const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
-		const table = useDataTableOutput(dataTable)
+		const table = useDataBundleOutput(dataTable)
+		if (dataTable.workflow == null) {
+			dataTable.workflow = new Workflow()
+		}
 		const workflow = dataTable.workflow
 		const [selectedId, setSelectedId] = useState<string | undefined>(table?.id)
 		const [selectedColumn, onColumnClick] = useColumnState()

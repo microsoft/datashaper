@@ -37,6 +37,7 @@
 |  Function | Description |
 |  --- | --- |
 |  [createCodebookSchemaObject(input)](./schema.createcodebookschemaobject.md) |  |
+|  [createDataBundleSchemaObject(input)](./schema.createdatabundleschemaobject.md) |  |
 |  [createDataPackageSchemaObject(input)](./schema.createdatapackageschemaobject.md) |  |
 |  [createDataTableSchemaObject(input)](./schema.createdatatableschemaobject.md) |  |
 |  [createSchemaValidator()](./schema.createschemavalidator.md) |  |
@@ -57,6 +58,7 @@
 |  [Constraints](./schema.constraints.md) | Validation constraints for a field. |
 |  [ConvertArgs](./schema.convertargs.md) |  |
 |  [Criterion](./schema.criterion.md) |  |
+|  [DataBundleSchema](./schema.databundleschema.md) | This defines the data-bundle schema, which is a collection of table-centric resources. The data-table represents the data-source and parsing options. The codebook represents interpretation options and data-type mappings. The workflow represents data-wrangling steps. |
 |  [DataPackageSchema](./schema.datapackageschema.md) | Defines a Data Package, which is a collection of data resources such as files and schemas. Loosely based on the Frictionless spec, but modified where needed to meet our needs. https://specs.frictionlessdata.io/data-package/ |
 |  [DataShape](./schema.datashape.md) | Defines parameters for understanding the logical structure of data contents. |
 |  [DataTableSchema](./schema.datatableschema.md) | This defines the table-containing resource type. A dataset can be embedded directly using the <code>data</code> property, or it can be linked to a raw file using the <code>path</code>. If the latter, optional format and parsing options can be applied to aid interpreting the file contents. resource profile: 'datatable' |
@@ -107,6 +109,7 @@
 |  Variable | Description |
 |  --- | --- |
 |  [LATEST\_CODEBOOK\_SCHEMA](./schema.latest_codebook_schema.md) |  |
+|  [LATEST\_DATABUNDLE\_SCHEMA](./schema.latest_databundle_schema.md) |  |
 |  [LATEST\_DATAPACKAGE\_SCHEMA](./schema.latest_datapackage_schema.md) |  |
 |  [LATEST\_DATATABLE\_SCHEMA](./schema.latest_datatable_schema.md) |  |
 |  [LATEST\_WORKFLOW\_SCHEMA](./schema.latest_workflow_schema.md) |  |

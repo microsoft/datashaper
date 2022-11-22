@@ -6,13 +6,13 @@ import type { IButtonStyles, ICommandBarItemProps } from '@fluentui/react'
 import { useTheme } from '@fluentui/react'
 import { useMemo } from 'react'
 
-import { useDataTables } from './useDataTables.js'
+import { useDataBundles } from './useDataBundles.js'
 
 export function useDatasetMenuItems(
 	selected: string | undefined,
 	onClick: (tableName: string) => void,
 ): ICommandBarItemProps {
-	const tables = useDataTables()
+	const tables = useDataBundles()
 	const buttonStyles = useMenuButtonStyles()
 	const subMenuProps = useMemo(
 		() => ({

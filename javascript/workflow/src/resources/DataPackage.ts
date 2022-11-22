@@ -4,8 +4,8 @@
  */
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-assignment */
 import type {
+	DataBundleSchema,
 	DataPackageSchema,
-	DataTableSchema,
 	ResourceSchema,
 } from '@datashaper/schema'
 import {
@@ -13,22 +13,17 @@ import {
 	LATEST_DATAPACKAGE_SCHEMA,
 } from '@datashaper/schema'
 import Blob from 'cross-blob'
-import debug from 'debug'
 import type { Observable } from 'rxjs'
 import { BehaviorSubject, map } from 'rxjs'
 
+import { Codebook } from './Codebook.js'
+import { DataBundle } from './DataBundle.js'
 import { DataTable } from './DataTable.js'
 import { Named } from './Named.js'
 import type { ResourceHandler, SchemaResource } from './types.js'
-import {
-	isCodebook,
-	isDataTable,
-	isWorkflow,
-	resolveRawData,
-	toResourceSchema,
-} from './utils.js'
+import { isDataBundle, resolveRawData, toResourceSchema } from './utils.js'
+import { Workflow } from './Workflow/Workflow.js'
 
-const log = debug('datashaper')
 const DATA_FILE_PREFIX = 'data/'
 
 export class DataPackage
@@ -122,32 +117,43 @@ export class DataPackage
 
 			const sources: string[] = []
 
-			if (isDataTableResource(resource)) {
-				// Save the source data CSV/JSON
-				if (resource.data != null) {
-					const dataFileName = asset(`${resource.name}.${resource.format}`)
-					files.set(dataFileName, resource.data)
-					sources.push(dataFileName)
+			if (isDataBundleResource(resource)) {
+				let dataTableFileName: string | undefined
+				let workflowFileName: string | undefined
+				let codebookFileName: string | undefined
+
+				// Save the DataTable
+				if (resource.datatable != null) {
+					const dtSources: string[] = []
+					// Save the source data CSV/JSON
+					if (resource.datatable.data != null) {
+						const dataFileName = asset(
+							`${resource.name}.${resource.datatable?.format}`,
+						)
+						files.set(dataFileName, resource?.datatable.data)
+						dtSources.push(dataFileName)
+					}
+					dataTableFileName = asset('datatable.json')
+					files.set(dataTableFileName, write(resource, { sources: dtSources }))
+					resources.push(dataTableFileName)
 				}
 
 				// Save the Worfklow
-				if (resource.workflow.length > 0) {
-					const workflowFileName = asset('workflow.json')
+				if (resource.workflow != null) {
+					workflowFileName = asset('workflow.json')
 					files.set(workflowFileName, write(resource.workflow))
 					sources.push(workflowFileName)
 				}
 
 				// Save the Codebook
-				if (resource.codebook.fields.length > 0) {
-					const codebookFileName = asset('codebook.json')
+				if (resource.codebook != null) {
+					codebookFileName = asset('codebook.json')
 					files.set(codebookFileName, write(resource.codebook))
 					sources.push(codebookFileName)
 				}
 
-				// Save the DataTable
-				const dataTableFileName = asset('datatable.json')
-				files.set(dataTableFileName, write(resource, { sources }))
-				resources.push(dataTableFileName)
+				// Save the DataBundle
+				files.set(asset('databundle.json'), write(resource, { sources }))
 			} else {
 				console.log('TODO: persist non-table resources')
 			}
@@ -177,10 +183,10 @@ export class DataPackage
 				if (!resource) {
 					continue
 				}
-				if (isDataTable(resource)) {
-					const table = new DataTable(resource)
-					await this._loadTableSources(table, resource, files)
-					this.addResource(table)
+				if (isDataBundle(resource)) {
+					const bundle = new DataBundle(resource)
+					await this._loadBundleSources(bundle, resource, files)
+					this.addResource(bundle)
 				} else {
 					await this._tryLoadCustomResource(resource, files)
 				}
@@ -188,7 +194,7 @@ export class DataPackage
 		}
 
 		for (const table of this.resources) {
-			if (isDataTableResource(table)) {
+			if (isDataBundleResource(table)) {
 				table.connect(this)
 			}
 		}
@@ -220,44 +226,35 @@ export class DataPackage
 		}
 	}
 
-	private async _loadTableSources(
-		table: DataTable,
-		schema: DataTableSchema,
+	private async _loadBundleSources(
+		bundle: DataBundle,
+		schema: DataBundleSchema,
 		files: Map<string, Blob>,
 	): Promise<void> {
-		if (table.path != null) {
-			if (typeof table.path === 'string') {
-				table.data = await resolveRawData(table.path, files)
-			} else if (Array.isArray(table.path) && table.path.length > 0) {
-				// TODO: handle multipart sources
-				const firstPath = table.path[0]
-				if (firstPath != null) {
-					table.data = await resolveRawData(firstPath, files)
-				}
+		const readSchema = async <T>(
+			content: string | T,
+		): Promise<T | undefined> => {
+			return typeof content === 'string'
+				? ((await toResourceSchema(content, files)) as T)
+				: content
+		}
+
+		if (schema.datatable != null) {
+			bundle.datatable = new DataTable(await readSchema(schema.datatable))
+
+			// Locate the raw source data for the datatable type
+			if (typeof bundle.datatable.path === 'string') {
+				bundle.datatable.data = await resolveRawData(
+					bundle.datatable.path,
+					files,
+				)
 			}
 		}
-		if (schema?.sources != null) {
-			for (const r of schema?.sources ?? []) {
-				try {
-					// TODO: if it's a string, it's a nested data-table
-					// we don't handle those yet
-					const res = await toResourceSchema(r, files)
-					if (!res) {
-						log('cannot resolve resource', r)
-						continue
-					}
-					if (isWorkflow(res)) {
-						table.workflow.loadSchema(res)
-					} else if (isCodebook(res)) {
-						table.codebook.loadSchema(res)
-					} else {
-						log('unknown resource type', res)
-					}
-				} catch (err) {
-					log('error loading resource', err)
-					throw err
-				}
-			}
+		if (schema.codebook != null) {
+			bundle.codebook = new Codebook(await readSchema(schema.codebook))
+		}
+		if (schema.workflow != null) {
+			bundle.workflow = new Workflow(await readSchema(schema.workflow))
 		}
 	}
 }
@@ -267,6 +264,8 @@ const write = (asset: { toSchema: () => any }, extra: any = {}): Blob =>
 const toStr = (obj: unknown): string => JSON.stringify(obj, null, 2)
 const toBlob = (obj: unknown): Blob => new Blob([toStr(obj)])
 
-function isDataTableResource(resource: SchemaResource): resource is DataTable {
-	return resource?.profile === 'datatable'
+function isDataBundleResource(
+	resource: SchemaResource,
+): resource is DataBundle {
+	return resource?.profile === 'databundle'
 }

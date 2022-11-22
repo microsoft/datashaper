@@ -9,13 +9,17 @@
  */
 export type Profile =
 	/**
-	 * This is the profile name for a Codebook.
+	 * This is the profile name for a data bundle
 	 */
-	| 'codebook'
+	| 'databundle'
 	/**
 	 * This is the profile name for a DataTable
 	 */
 	| 'datatable'
+	/**
+	 * This is the profile name for a Codebook.
+	 */
+	| 'codebook'
 	/**
 	 * This is the profile name for a Workflow.
 	 */

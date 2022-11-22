@@ -24,11 +24,11 @@
 |  [loadCsvTable(file, options)](./app-framework.loadcsvtable.md) |  |
 |  [loadJsonTable(file, orientation)](./app-framework.loadjsontable.md) |  |
 |  [removeExtension(fileName)](./app-framework.removeextension.md) |  |
+|  [useDataBundle(name)](./app-framework.usedatabundle.md) |  |
+|  [useDataBundleOutput(pkg)](./app-framework.usedatabundleoutput.md) | Uses the latest table from a data package. This is updatde as the package changes |
+|  [useDataBundles()](./app-framework.usedatabundles.md) |  |
 |  [useDataPackage()](./app-framework.usedatapackage.md) |  |
 |  [useDatasetMenuItems(selected, onClick)](./app-framework.usedatasetmenuitems.md) |  |
-|  [useDataTable(name)](./app-framework.usedatatable.md) |  |
-|  [useDataTableOutput(pkg)](./app-framework.usedatatableoutput.md) | Uses the latest table from a data package. This is updatde as the package changes |
-|  [useDataTables()](./app-framework.usedatatables.md) |  |
 |  [useDataTableSource(pkg)](./app-framework.usedatatablesource.md) | Use the raw source table from a data package without any workflow applied to it. |
 |  [useMenuButtonStyles()](./app-framework.usemenubuttonstyles.md) |  |
 |  [usePersistenceService()](./app-framework.usepersistenceservice.md) |  |
@@ -37,6 +37,7 @@
 
 |  Interface | Description |
 |  --- | --- |
+|  [BundleEditorProps](./app-framework.bundleeditorprops.md) |  |
 |  [CodebookEditorProps](./app-framework.codebookeditorprops.md) |  |
 |  [DataShaperAppPlugin](./app-framework.datashaperappplugin.md) |  |
 |  [DataSourceEditorProps](./app-framework.datasourceeditorprops.md) |  |
@@ -50,7 +51,6 @@
 |  [RawTableProps](./app-framework.rawtableprops.md) |  |
 |  [RawTableViewerProps](./app-framework.rawtableviewerprops.md) |  |
 |  [ResourceTreeData](./app-framework.resourcetreedata.md) | Data attached to resource-tree nodes |
-|  [TableEditorProps](./app-framework.tableeditorprops.md) |  |
 |  [ViewOptionsProps](./app-framework.viewoptionsprops.md) |  |
 |  [WorkflowEditorProps](./app-framework.workfloweditorprops.md) |  |
 
@@ -58,6 +58,7 @@
 
 |  Variable | Description |
 |  --- | --- |
+|  [BundleEditor](./app-framework.bundleeditor.md) |  |
 |  [choiceGroupStyles](./app-framework.choicegroupstyles.md) |  |
 |  [CodebookEditor](./app-framework.codebookeditor.md) |  |
 |  [Container](./app-framework.container.md) |  |
@@ -77,7 +78,6 @@
 |  [RawTableDefaultFeatures](./app-framework.rawtabledefaultfeatures.md) |  |
 |  [RawTableViewer](./app-framework.rawtableviewer.md) |  |
 |  [TableDelimiterOptions](./app-framework.tabledelimiteroptions.md) |  |
-|  [TableEditor](./app-framework.tableeditor.md) |  |
 |  [TableLayoutOptions](./app-framework.tablelayoutoptions.md) |  |
 |  [TablePreview](./app-framework.tablepreview.md) |  |
 |  [TableStoreProvider](./app-framework.tablestoreprovider.md) |  |

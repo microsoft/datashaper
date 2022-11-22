@@ -597,6 +597,87 @@
         },
         {
           "kind": "Variable",
+          "canonicalReference": "@datashaper/app-framework!BundleEditor:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "BundleEditor: "
+            },
+            {
+              "kind": "Reference",
+              "text": "React.FC",
+              "canonicalReference": "@types/react!~React.FC:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "BundleEditorProps",
+              "canonicalReference": "@datashaper/app-framework!BundleEditorProps:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "BundleEditor",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 5
+          }
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/app-framework!BundleEditorProps:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface BundleEditorProps "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "BundleEditorProps",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!BundleEditorProps#resource:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "resource: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataBundle",
+                  "canonicalReference": "@datashaper/workflow!DataBundle:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "resource",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Variable",
           "canonicalReference": "@datashaper/app-framework!choiceGroupStyles:var",
           "docComment": "",
           "excerptTokens": [
@@ -669,17 +750,17 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!CodebookEditorProps#dataTable:member",
+              "canonicalReference": "@datashaper/app-framework!CodebookEditorProps#resource:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "dataTable: "
+                  "text": "resource: "
                 },
                 {
                   "kind": "Reference",
-                  "text": "DataTable",
-                  "canonicalReference": "@datashaper/workflow!DataTable:class"
+                  "text": "Codebook",
+                  "canonicalReference": "@datashaper/workflow!Codebook:class"
                 },
                 {
                   "kind": "Content",
@@ -689,7 +770,7 @@
               "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "dataTable",
+              "name": "resource",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -2847,87 +2928,6 @@
         },
         {
           "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!TableEditor:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "TableEditor: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "TableEditorProps",
-              "canonicalReference": "@datashaper/app-framework!TableEditorProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "TableEditor",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/app-framework!TableEditorProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface TableEditorProps "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "TableEditorProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!TableEditorProps#resource:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "resource: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "DataTable",
-                  "canonicalReference": "@datashaper/workflow!DataTable:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "resource",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Variable",
           "canonicalReference": "@datashaper/app-framework!TableLayoutOptions:var",
           "docComment": "",
           "excerptTokens": [
@@ -3117,6 +3117,150 @@
         },
         {
           "kind": "Function",
+          "canonicalReference": "@datashaper/app-framework!useDataBundle:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useDataBundle(name: "
+            },
+            {
+              "kind": "Content",
+              "text": "string | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "DataBundle",
+              "canonicalReference": "@datashaper/workflow!DataBundle:class"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 5
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "name",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "useDataBundle"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/app-framework!useDataBundleOutput:function(1)",
+          "docComment": "/**\n * Uses the latest table from a data package. This is updatde as the package changes\n *\n * @param pkg - The data package to load the table from\n *\n * @returns The latest table\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useDataBundleOutput(pkg: "
+            },
+            {
+              "kind": "Reference",
+              "text": "DataBundle",
+              "canonicalReference": "@datashaper/workflow!DataBundle:class"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Maybe",
+              "canonicalReference": "@datashaper/workflow!Maybe:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "TableContainer",
+              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 4,
+            "endIndex": 8
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "pkg",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "useDataBundleOutput"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/app-framework!useDataBundles:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useDataBundles(): "
+            },
+            {
+              "kind": "Reference",
+              "text": "DataBundle",
+              "canonicalReference": "@datashaper/workflow!DataBundle:class"
+            },
+            {
+              "kind": "Content",
+              "text": "[]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 3
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [],
+          "name": "useDataBundles"
+        },
+        {
+          "kind": "Function",
           "canonicalReference": "@datashaper/app-framework!useDataPackage:function(1)",
           "docComment": "",
           "excerptTokens": [
@@ -3203,150 +3347,6 @@
             }
           ],
           "name": "useDatasetMenuItems"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/app-framework!useDataTable:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function useDataTable(name: "
-            },
-            {
-              "kind": "Content",
-              "text": "string | undefined"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Reference",
-              "text": "DataTable",
-              "canonicalReference": "@datashaper/workflow!DataTable:class"
-            },
-            {
-              "kind": "Content",
-              "text": " | undefined"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 3,
-            "endIndex": 5
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "name",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            }
-          ],
-          "name": "useDataTable"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/app-framework!useDataTableOutput:function(1)",
-          "docComment": "/**\n * Uses the latest table from a data package. This is updatde as the package changes\n *\n * @param pkg - The data package to load the table from\n *\n * @returns The latest table\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function useDataTableOutput(pkg: "
-            },
-            {
-              "kind": "Reference",
-              "text": "DataTable",
-              "canonicalReference": "@datashaper/workflow!DataTable:class"
-            },
-            {
-              "kind": "Content",
-              "text": " | undefined"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Reference",
-              "text": "Maybe",
-              "canonicalReference": "@datashaper/workflow!Maybe:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 4,
-            "endIndex": 8
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "pkg",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              },
-              "isOptional": false
-            }
-          ],
-          "name": "useDataTableOutput"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/app-framework!useDataTables:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function useDataTables(): "
-            },
-            {
-              "kind": "Reference",
-              "text": "DataTable",
-              "canonicalReference": "@datashaper/workflow!DataTable:class"
-            },
-            {
-              "kind": "Content",
-              "text": "[]"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 3
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [],
-          "name": "useDataTables"
         },
         {
           "kind": "Function",

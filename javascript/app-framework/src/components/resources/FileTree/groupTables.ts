@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { DataTable } from '@datashaper/workflow'
+import type { DataBundle } from '@datashaper/workflow'
 import type {
 	ICommandBarItemProps,
 	IContextualMenuItem,
@@ -16,19 +16,19 @@ import type { FileDefinition, ResourceTreeData } from './FileTree.types.js'
 /**
  * Get a listing of the table packages with hierarchical resources.
  */
-export function groupTables(tables: DataTable[]): ResourceTreeData[] {
+export function groupTables(bundles: DataBundle[]): ResourceTreeData[] {
 	const result: ResourceTreeData[] = []
 
-	tables.forEach(table => {
+	bundles.forEach(table => {
 		const children: ResourceTreeData[] = []
-		if (table.data != null) {
+		if (table?.datatable?.data != null) {
 			children.push(resourceNode(table))
 			children.push(datasourceNode(table))
 		}
-		if (table.codebook.fields.length > 0) {
+		if (table.codebook?.fields?.length) {
 			children.push(codebookNode(table))
 		}
-		if (table.workflow.length > 0) {
+		if (table.workflow?.length) {
 			children.push(workflowNode(table))
 		}
 
@@ -37,10 +37,11 @@ export function groupTables(tables: DataTable[]): ResourceTreeData[] {
 	return result
 }
 
-function resourceNode(table: DataTable): ResourceTreeData {
-	const pathItems = (table.path as string).split('/')
+function resourceNode(table: DataBundle): ResourceTreeData {
+	const pathItems = (table.datatable?.path as string).split('/')
 	const title =
-		pathItems[pathItems.length - 1] ?? `${table.name}.${table.format}`
+		pathItems[pathItems.length - 1] ??
+		`${table.name}.${table.datatable?.format}`
 	return {
 		href: `/resource/${table.name}/${title}`,
 		title,
@@ -48,7 +49,7 @@ function resourceNode(table: DataTable): ResourceTreeData {
 	}
 }
 
-function datasourceNode(table: DataTable): ResourceTreeData {
+function datasourceNode(table: DataBundle): ResourceTreeData {
 	return {
 		href: `/resource/${table.name}/datatable.json`,
 		title: 'datatable.json',
@@ -56,7 +57,7 @@ function datasourceNode(table: DataTable): ResourceTreeData {
 	}
 }
 
-function workflowNode(table: DataTable): ResourceTreeData {
+function workflowNode(table: DataBundle): ResourceTreeData {
 	return {
 		href: `/resource/${table.name}/workflow.json`,
 		icon: 'SetAction',
@@ -64,7 +65,7 @@ function workflowNode(table: DataTable): ResourceTreeData {
 	}
 }
 
-function codebookNode(table: DataTable): ResourceTreeData {
+function codebookNode(table: DataBundle): ResourceTreeData {
 	return {
 		href: `/resource/${table.name}/codebook.json`,
 		icon: 'FormLibraryMirrored',
@@ -73,7 +74,7 @@ function codebookNode(table: DataTable): ResourceTreeData {
 }
 
 function bundleNode(
-	table: DataTable,
+	table: DataBundle,
 	children: ResourceTreeData[],
 ): ResourceTreeData {
 	return {

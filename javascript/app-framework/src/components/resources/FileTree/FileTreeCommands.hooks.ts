@@ -8,8 +8,8 @@ import { useTheme } from '@fluentui/react'
 import { useCallback, useContext, useMemo } from 'react'
 
 import { PersistenceContext } from '../../../context/index.js'
+import { useDataBundles } from '../../../hooks/useDataBundles.js'
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
-import { useDataTables } from '../../../hooks/useDataTables.js'
 import { TABLE_TYPES, ZIP_TYPES } from './FileTree.constants.js'
 import type { FileDefinition } from './FileTree.types.js'
 import { createCommandBar, openProps, saveProps } from './groupTables.js'
@@ -24,7 +24,7 @@ export function useFileManagementCommands(
 	onOpenCommands: IContextualMenuItem[]
 	onSaveCommands: IContextualMenuItem[]
 } {
-	const tables = useDataTables()
+	const tables = useDataBundles()
 	const hasDataPackages = tables.length > 0
 	const uploadZip = useUploadZip()
 	const onClickDownloadZip = useDownloadZip()

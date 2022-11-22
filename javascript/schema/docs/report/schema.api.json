@@ -1726,6 +1726,65 @@
         },
         {
           "kind": "Function",
+          "canonicalReference": "@datashaper/schema!createDataBundleSchemaObject:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function createDataBundleSchemaObject(input: "
+            },
+            {
+              "kind": "Reference",
+              "text": "FactoryInput",
+              "canonicalReference": "@datashaper/schema!FactoryInput:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "DataBundleSchema",
+              "canonicalReference": "@datashaper/schema!DataBundleSchema:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "DataBundleSchema",
+              "canonicalReference": "@datashaper/schema!DataBundleSchema:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 6,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "input",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "createDataBundleSchemaObject"
+        },
+        {
+          "kind": "Function",
           "canonicalReference": "@datashaper/schema!createDataPackageSchemaObject:function(1)",
           "docComment": "",
           "excerptTokens": [
@@ -2056,6 +2115,133 @@
             }
           ],
           "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!DataBundleSchema:interface",
+          "docComment": "/**\n * This defines the data-bundle schema, which is a collection of table-centric resources. The data-table represents the data-source and parsing options. The codebook represents interpretation options and data-type mappings. The workflow represents data-wrangling steps.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface DataBundleSchema extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "ResourceSchema",
+              "canonicalReference": "@datashaper/schema!ResourceSchema:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "DataBundleSchema",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!DataBundleSchema#codebook:member",
+              "docComment": "/**\n * Resource path to the codebook file, which contains the interpretation options and data-type mappings.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "codebook?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CodebookSchema",
+                  "canonicalReference": "@datashaper/schema!CodebookSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "codebook",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!DataBundleSchema#datatable:member",
+              "docComment": "/**\n * Resource path to the datatable file, which contains the data source and parsing options.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "datatable?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataTableSchema",
+                  "canonicalReference": "@datashaper/schema!DataTableSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "datatable",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!DataBundleSchema#workflow:member",
+              "docComment": "/**\n * Resource path to the workflow file, which contains the data-wrangling steps.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "workflow?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorkflowSchema",
+                  "canonicalReference": "@datashaper/schema!WorkflowSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "workflow",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            }
+          ]
         },
         {
           "kind": "Enum",
@@ -5968,6 +6154,28 @@
           "isReadonly": true,
           "releaseTag": "Public",
           "name": "LATEST_CODEBOOK_SCHEMA",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@datashaper/schema!LATEST_DATABUNDLE_SCHEMA:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "LATEST_DATABUNDLE_SCHEMA: "
+            },
+            {
+              "kind": "Content",
+              "text": "string"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "LATEST_DATABUNDLE_SCHEMA",
           "variableTypeTokenRange": {
             "startIndex": 1,
             "endIndex": 2

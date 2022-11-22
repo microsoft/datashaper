@@ -4,7 +4,7 @@
  */
 import { useHeaderCommandBarDefaults } from '@datashaper/react'
 import type { TableContainer } from '@datashaper/tables'
-import type { DataTable, Step,Workflow } from '@datashaper/workflow'
+import type { DataBundle, Step, Workflow } from '@datashaper/workflow'
 import type {
 	IColumn,
 	ICommandBarItemProps,
@@ -16,23 +16,23 @@ import {
 	buttonStyles,
 	icons,
 	useTableHeaderColors,
-} from './TableEditor.styles.js'
+} from './BundleEditor.styles.js'
 
 export function useSelectedTable(
-	dataTable: DataTable,
+	dataBundle: DataBundle,
 	selectedTableId: string | undefined,
 ): TableContainer | undefined {
 	return useMemo((): TableContainer | undefined => {
-		if (dataTable.name === selectedTableId) {
+		if (dataBundle.name === selectedTableId && dataBundle?.datatable != null) {
 			// if we select the original table name, use the workflow default input
-			return { table: dataTable.source, id: selectedTableId ?? '' }
+			return { table: dataBundle.datatable.output, id: selectedTableId ?? '' }
 		} else {
 			// try to use the given table name to read the step, otherwise use the default output
-			const table = dataTable.workflow.read(selectedTableId)
-			const defaultOutput = dataTable.workflow.read()
+			const table = dataBundle.workflow?.read(selectedTableId)
+			const defaultOutput = dataBundle.workflow?.read()
 			return table ?? defaultOutput
 		}
-	}, [dataTable, selectedTableId])
+	}, [dataBundle, selectedTableId])
 }
 
 export function useColumnState(): [
@@ -52,17 +52,19 @@ export function useColumnState(): [
 }
 
 export function useTableName(
-	dataTable: DataTable,
+	dataTable: DataBundle,
 	selectedTableId: string | undefined,
 ): string {
 	const { workflow } = dataTable
 	return useMemo(() => {
 		let name: string | undefined = undefined
-		const stepIndex = workflow.steps.findIndex(x => x.id === selectedTableId)
-		// if the step index is the final step, use the default datatable name
-		if (stepIndex < workflow.steps.length - 1) {
-			const step = workflow.steps[stepIndex]
-			name = (step?.id || step?.verb)?.toLocaleUpperCase()
+		if (workflow != null) {
+			const stepIndex = workflow.steps.findIndex(x => x.id === selectedTableId)
+			// if the step index is the final step, use the default datatable name
+			if (stepIndex < workflow.steps.length - 1) {
+				const step = workflow.steps[stepIndex]
+				name = (step?.id || step?.verb)?.toLocaleUpperCase()
+			}
 		}
 		return name || dataTable.name
 	}, [workflow, selectedTableId, dataTable.name])

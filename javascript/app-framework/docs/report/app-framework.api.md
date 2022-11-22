@@ -8,8 +8,10 @@
 
 import type { ArqueroDetailsListProps } from '@datashaper/react';
 import type { BaseFile } from '@datashaper/utilities';
+import type { Codebook } from '@datashaper/workflow';
 import type ColumnTable from 'arquero/dist/types/table/column-table.js';
 import { Context } from 'react';
+import type { DataBundle } from '@datashaper/workflow';
 import type { DataFormat } from '@datashaper/schema';
 import { DataOrientation } from '@datashaper/schema';
 import { DataPackage } from '@datashaper/workflow';
@@ -57,6 +59,19 @@ export class AppResourceHandler<JsonForm> implements ResourceHandler {
     save(files: Map<string, Blob>): Promise<string[]>;
 }
 
+// Warning: (ae-missing-release-tag) "BundleEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const BundleEditor: React.FC<BundleEditorProps>;
+
+// Warning: (ae-missing-release-tag) "BundleEditorProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface BundleEditorProps {
+    // (undocumented)
+    resource: DataBundle;
+}
+
 // Warning: (ae-missing-release-tag) "choiceGroupStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -77,7 +92,7 @@ export const CodebookEditor: React.FC<CodebookEditorProps>;
 // @public (undocumented)
 export interface CodebookEditorProps {
     // (undocumented)
-    dataTable: DataTable;
+    resource: Codebook;
 }
 
 // Warning: (ae-missing-release-tag) "Container" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -325,19 +340,6 @@ export const TableDelimiterOptions: React.FC<{
     selected?: string;
 }>;
 
-// Warning: (ae-missing-release-tag) "TableEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const TableEditor: React.FC<TableEditorProps>;
-
-// Warning: (ae-missing-release-tag) "TableEditorProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface TableEditorProps {
-    // (undocumented)
-    resource: DataTable;
-}
-
 // Warning: (ae-missing-release-tag) "TableLayoutOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -368,6 +370,21 @@ export const TableStoreProvider: React.FC<{
 // @public (undocumented)
 export const Tooltip: React.FC<React.PropsWithChildren<ITooltipHostProps>>;
 
+// Warning: (ae-missing-release-tag) "useDataBundle" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useDataBundle(name: string | undefined): DataBundle | undefined;
+
+// Warning: (ae-missing-release-tag) "useDataBundleOutput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useDataBundleOutput(pkg: DataBundle | undefined): Maybe<TableContainer>;
+
+// Warning: (ae-missing-release-tag) "useDataBundles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useDataBundles(): DataBundle[];
+
 // Warning: (ae-missing-release-tag) "useDataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -377,21 +394,6 @@ export function useDataPackage(): DataPackage;
 //
 // @public (undocumented)
 export function useDatasetMenuItems(selected: string | undefined, onClick: (tableName: string) => void): ICommandBarItemProps;
-
-// Warning: (ae-missing-release-tag) "useDataTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useDataTable(name: string | undefined): DataTable | undefined;
-
-// Warning: (ae-missing-release-tag) "useDataTableOutput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useDataTableOutput(pkg: DataTable | undefined): Maybe<TableContainer>;
-
-// Warning: (ae-missing-release-tag) "useDataTables" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useDataTables(): DataTable[];
 
 // Warning: (ae-missing-release-tag) "useDataTableSource" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

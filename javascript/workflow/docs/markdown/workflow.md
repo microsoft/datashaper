@@ -10,6 +10,7 @@
 |  --- | --- |
 |  [BaseNode](./workflow.basenode.md) |  |
 |  [Codebook](./workflow.codebook.md) |  |
+|  [DataBundle](./workflow.databundle.md) |  |
 |  [DataPackage](./workflow.datapackage.md) |  |
 |  [DataShape](./workflow.datashape.md) |  |
 |  [DataTable](./workflow.datatable.md) |  |

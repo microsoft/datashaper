@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export * from './Codebook.js'
+export * from './DataBundle.js'
 export * from './DataPackage.js'
 export * from './DataShape.js'
 export * from './DataTable.js'

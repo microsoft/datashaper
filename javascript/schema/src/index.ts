@@ -4,6 +4,7 @@
  */
 export * from './codebook/index.js'
 export * from './data.js'
+export * from './databundle/index.js'
 export * from './datapackage/index.js'
 export * from './datatable/index.js'
 export * from './enums.js'

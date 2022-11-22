@@ -13,6 +13,7 @@ import type { BooleanArgs } from '@datashaper/schema';
 import type { CodebookSchema } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table.js';
 import type { ConvertArgs } from '@datashaper/schema';
+import { DataBundleSchema } from '@datashaper/schema';
 import { DataFormat } from '@datashaper/schema';
 import type { DataNature } from '@datashaper/schema';
 import type { DataOrientation } from '@datashaper/schema';
@@ -179,6 +180,43 @@ export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 // @public (undocumented)
 export function createNode(step: Step): Node_2<TableContainer>;
 
+// Warning: (ae-missing-release-tag) "DataBundle" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class DataBundle extends Resource implements SchemaResource<DataBundleSchema> {
+    // (undocumented)
+    readonly $schema: string;
+    constructor(databundle?: DataBundleSchema);
+    // (undocumented)
+    get codebook(): Codebook | undefined;
+    set codebook(codebook: Codebook | undefined);
+    // (undocumented)
+    connect(dp: DataPackage): void;
+    // (undocumented)
+    get datatable(): DataTable | undefined;
+    set datatable(datatable: DataTable | undefined);
+    // (undocumented)
+    readonly defaultName = "databundle.json";
+    // (undocumented)
+    dispose(): void;
+    // (undocumented)
+    loadSchema(schema: Maybe_2<DataBundleSchema>, quiet?: boolean): void;
+    // (undocumented)
+    get name(): string;
+    set name(value: string);
+    // (undocumented)
+    get output$(): Observable<Maybe_2<TableContainer>>;
+    // (undocumented)
+    get output(): Maybe_2<TableContainer>;
+    // (undocumented)
+    readonly profile = "databundle";
+    // (undocumented)
+    toSchema(): DataBundleSchema;
+    // (undocumented)
+    get workflow(): Workflow | undefined;
+    set workflow(workflow: Workflow | undefined);
+}
+
 // Warning: (ae-missing-release-tag) "DataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -251,10 +289,6 @@ export class DataTable extends Resource implements SchemaResource<DataTableSchem
     readonly $schema: string;
     constructor(datatable?: DataTableSchema);
     // (undocumented)
-    readonly codebook: Codebook;
-    // (undocumented)
-    connect(dp: DataPackage): void;
-    // (undocumented)
     get data(): Blob | undefined;
     set data(value: Blob | undefined);
     // (undocumented)
@@ -270,9 +304,9 @@ export class DataTable extends Resource implements SchemaResource<DataTableSchem
     get name(): string;
     set name(value: string);
     // (undocumented)
-    get output$(): Observable<Maybe_2<TableContainer>>;
+    get output$(): Observable<Maybe_2<ColumnTable>>;
     // (undocumented)
-    get output(): Maybe_2<TableContainer>;
+    get output(): Maybe_2<ColumnTable>;
     // (undocumented)
     readonly parser: ParserOptions;
     // (undocumented)
@@ -280,15 +314,7 @@ export class DataTable extends Resource implements SchemaResource<DataTableSchem
     // (undocumented)
     readonly shape: DataShape;
     // (undocumented)
-    get source$(): Observable<Maybe_2<ColumnTable>>;
-    // (undocumented)
-    get source(): Maybe_2<ColumnTable>;
-    // (undocumented)
-    get sources(): SchemaResource[];
-    // (undocumented)
     toSchema(): DataTableSchema;
-    // (undocumented)
-    readonly workflow: Workflow;
 }
 
 // Warning: (ae-missing-release-tag) "decode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

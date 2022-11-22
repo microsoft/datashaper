@@ -164,6 +164,11 @@ export interface ConvertArgs extends InputColumnArgs, OutputColumnArgs {
 // @public (undocumented)
 export function createCodebookSchemaObject(input: FactoryInput<CodebookSchema>): CodebookSchema;
 
+// Warning: (ae-missing-release-tag) "createDataBundleSchemaObject" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function createDataBundleSchemaObject(input: FactoryInput<DataBundleSchema>): DataBundleSchema;
+
 // Warning: (ae-missing-release-tag) "createDataPackageSchemaObject" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -192,6 +197,15 @@ export interface Criterion {
     operator: NumericComparisonOperator | StringComparisonOperator | BooleanComparisonOperator | DateComparisonOperator;
     type: FilterCompareType;
     value?: Value;
+}
+
+// Warning: (ae-missing-release-tag) "DataBundleSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface DataBundleSchema extends ResourceSchema {
+    codebook?: string | CodebookSchema;
+    datatable?: string | DataTableSchema;
+    workflow?: string | WorkflowSchema;
 }
 
 // Warning: (ae-missing-release-tag) "DataFormat" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -591,6 +605,11 @@ export enum JoinStrategy {
 //
 // @public (undocumented)
 export const LATEST_CODEBOOK_SCHEMA: string;
+
+// Warning: (ae-missing-release-tag) "LATEST_DATABUNDLE_SCHEMA" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const LATEST_DATABUNDLE_SCHEMA: string;
 
 // Warning: (ae-missing-release-tag) "LATEST_DATAPACKAGE_SCHEMA" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

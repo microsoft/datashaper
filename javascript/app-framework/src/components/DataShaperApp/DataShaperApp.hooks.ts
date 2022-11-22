@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type {
+	DataBundle,
 	DataPackage,
 	DataTable,
 	SchemaResource,
@@ -15,10 +16,10 @@ import { useCallback, useEffect, useState } from 'react'
 import { useDataPackage } from '../../hooks/useDataPackage.js'
 import type { DataShaperAppPlugin } from '../../types.js'
 import {
+	BundleEditor,
 	CodebookEditor,
 	DataSourceEditor,
 	RawTableViewer,
-	TableEditor,
 	WorkflowEditor,
 } from '../editors/index.js'
 
@@ -106,36 +107,46 @@ function addSources(
 			DEFAULT_HANDLERS[resource.profile] ||
 			plugins.get(resource.profile)?.renderer
 
-		if (renderer != null) {
+		// Special case for raw resources embedded in datatable under `path` property
+		// and or datatable.json
+		if (isDataTableResource(resource)) {
+			if (resource.path != null && typeof resource.path === 'string') {
+				const pathItems = resource.path.split('/') ?? []
+				const lastPathItem = pathItems[pathItems.length - 1]
+				result.push({
+					path: `${root}/${lastPathItem}`,
+					renderer: RawTableViewer as any,
+					props: { dataTable: resource },
+				})
+				result.push({
+					path: `${root}/datatable.json`,
+					renderer: DataSourceEditor as any,
+					props: { dataTable: resource },
+				})
+			}
+		} else if (renderer != null) {
 			result.push({
 				path: `${root}/${resource.name}`,
 				renderer: renderer as any,
 				props: { resource },
 			})
-
-			// Special case for raw resources embedded in datatable under `path` property
-			// and or datatable.json
-			if (isDataTableResource(resource)) {
-				if (resource.path != null && typeof resource.path === 'string') {
-					const pathItems = resource.path.split('/') ?? []
-					const lastPathItem = pathItems[pathItems.length - 1]
-					result.push({
-						path: `${root}/${resource.name}/${lastPathItem}`,
-						renderer: RawTableViewer as any,
-						props: { dataTable: resource },
-					})
-					result.push({
-						path: `${root}/${resource.name}/datatable.json`,
-						renderer: DataSourceEditor as any,
-						props: { dataTable: resource },
-					})
-				}
-			}
 		}
 
 		/** Descend into child resources */
-		if (resource.sources != null) {
-			addSources(result, resource.sources, plugins, `${root}/${resource.name}`)
+		const children = (resource as any).sources ?? []
+		if (isDataBundleResource(resource)) {
+			if (resource.datatable) {
+				children.push(resource.datatable)
+			}
+			if (resource.workflow) {
+				children.push(resource.workflow)
+			}
+			if (resource.codebook) {
+				children.push(resource.codebook)
+			}
+		}
+		if (children.length > 0) {
+			addSources(result, children, plugins, `${root}/${resource.name}`)
 		}
 	}
 }
@@ -144,10 +155,15 @@ function isDataTableResource(res: SchemaResource): res is DataTable {
 	return res.profile === 'datatable'
 }
 
+function isDataBundleResource(res: SchemaResource): res is DataBundle {
+	return res.profile === 'databundle'
+}
+
 const DEFAULT_HANDLERS: Record<string, React.ComponentType<any>> = {
+	databundle: BundleEditor,
 	codebook: CodebookEditor,
 	source: DataSourceEditor,
-	datatable: TableEditor,
+	datatable: BundleEditor,
 	workflow: WorkflowEditor,
 	datasource: RawTableViewer,
 }

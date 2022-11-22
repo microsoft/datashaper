@@ -4,6 +4,7 @@
  */
 import type {
 	CodebookSchema,
+	DataBundleSchema,
 	DataTableSchema,
 	ResourceSchema,
 	WorkflowSchema,
@@ -24,6 +25,13 @@ export const isCodebook = (
 	r == null
 		? false
 		: r.profile === 'codebook' || r.$schema.indexOf('/codebook/') > -1
+
+export const isDataBundle = (
+	r: ResourceSchema | undefined,
+): r is DataBundleSchema =>
+	r == null
+		? false
+		: r.profile === 'databundle' || r.$schema?.indexOf('/databundle/') > -1
 
 export const isDataTable = (
 	r: ResourceSchema | undefined,
