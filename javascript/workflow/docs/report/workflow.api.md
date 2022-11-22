@@ -8,12 +8,10 @@ import type { AggregateArgs } from '@datashaper/schema';
 import { BehaviorSubject } from 'rxjs';
 import type { BinArgs } from '@datashaper/schema';
 import type { BinarizeArgs } from '@datashaper/schema';
-import { default as Blob_2 } from 'cross-blob';
 import type { BooleanArgs } from '@datashaper/schema';
 import type { CodebookSchema } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table.js';
 import type { ConvertArgs } from '@datashaper/schema';
-import type { DataBundleSchema } from '@datashaper/schema';
 import { DataFormat } from '@datashaper/schema';
 import type { DataNature } from '@datashaper/schema';
 import type { DataOrientation } from '@datashaper/schema';
@@ -44,6 +42,7 @@ import type { ParserOptions as ParserOptions_2 } from '@datashaper/schema';
 import type { PivotArgs } from '@datashaper/schema';
 import type { PortBinding } from '@datashaper/schema';
 import type { RecodeArgs } from '@datashaper/schema';
+import type { ResourceRelationship } from '@datashaper/schema';
 import type { ResourceSchema } from '@datashaper/schema';
 import type { RollupArgs } from '@datashaper/schema';
 import type { SampleArgs } from '@datashaper/schema';
@@ -137,7 +136,7 @@ export function cloneStep(step: Step<unknown>, columnNames?: string[]): Step<unk
 // Warning: (ae-missing-release-tag) "Codebook" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export class Codebook extends Resource implements SchemaResource<CodebookSchema> {
+export class Codebook extends Resource {
     // (undocumented)
     readonly $schema: string;
     constructor(codebook?: CodebookSchema);
@@ -180,52 +179,15 @@ export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 // @public (undocumented)
 export function createNode(step: Step): Node_2<TableContainer>;
 
-// Warning: (ae-missing-release-tag) "DataBundle" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export class DataBundle extends Resource implements SchemaResource<DataBundleSchema> {
-    // (undocumented)
-    readonly $schema: string;
-    constructor(databundle?: DataBundleSchema);
-    // (undocumented)
-    get codebook(): Codebook | undefined;
-    set codebook(codebook: Codebook | undefined);
-    // (undocumented)
-    connect(dp: DataPackage): void;
-    // (undocumented)
-    get datatable(): DataTable | undefined;
-    set datatable(datatable: DataTable | undefined);
-    // (undocumented)
-    readonly defaultName = "databundle.json";
-    // (undocumented)
-    dispose(): void;
-    // (undocumented)
-    loadSchema(schema: Maybe_2<DataBundleSchema>, quiet?: boolean): void;
-    // (undocumented)
-    get name(): string;
-    set name(value: string);
-    // (undocumented)
-    get output$(): Observable<Maybe_2<TableContainer>>;
-    // (undocumented)
-    get output(): Maybe_2<TableContainer>;
-    // (undocumented)
-    readonly profile = "databundle";
-    // (undocumented)
-    toSchema(): DataBundleSchema;
-    // (undocumented)
-    get workflow(): Workflow | undefined;
-    set workflow(workflow: Workflow | undefined);
-}
-
 // Warning: (ae-missing-release-tag) "DataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export class DataPackage extends Named implements SchemaResource<DataPackageSchema> {
+export class DataPackage extends Resource {
     // (undocumented)
     readonly $schema: string;
     constructor(dataPackage?: DataPackageSchema | undefined);
     // (undocumented)
-    addResource(resource: SchemaResource): void;
+    addResource(resource: Resource): void;
     addResourceHandler(handler: ResourceHandler): void;
     // (undocumented)
     clear(): void;
@@ -234,9 +196,9 @@ export class DataPackage extends Named implements SchemaResource<DataPackageSche
     // (undocumented)
     readonly defaultName = "datapackage.json";
     // (undocumented)
-    getResource(name: string): SchemaResource | undefined;
+    getResource(name: string): Resource | undefined;
     // (undocumented)
-    load(files: Map<string, Blob_2>, quiet?: boolean): Promise<void>;
+    load(files: Map<string, Blob>, quiet?: boolean): Promise<void>;
     // (undocumented)
     get names$(): Observable<string[]>;
     // (undocumented)
@@ -246,13 +208,13 @@ export class DataPackage extends Named implements SchemaResource<DataPackageSche
     // (undocumented)
     removeResource(name: string): void;
     // (undocumented)
-    get resources$(): Observable<SchemaResource[]>;
+    get resources$(): Observable<Resource[]>;
     // (undocumented)
-    get resources(): SchemaResource[];
+    get resources(): Resource[];
     // (undocumented)
-    _resources: BehaviorSubject<SchemaResource<ResourceSchema>[]>;
+    _resources: BehaviorSubject<Resource[]>;
     // (undocumented)
-    save(): Promise<Map<string, Blob_2>>;
+    save(): Promise<Map<string, Blob>>;
     // (undocumented)
     get size$(): Observable<number>;
     // (undocumented)
@@ -284,7 +246,7 @@ export class DataShape extends Observed implements DataShape_2 {
 // Warning: (ae-missing-release-tag) "DataTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export class DataTable extends Resource implements SchemaResource<DataTableSchema> {
+export class DataTable extends Resource {
     // (undocumented)
     readonly $schema: string;
     constructor(datatable?: DataTableSchema);
@@ -430,6 +392,26 @@ export const impute: (id: string) => StepNode<TableContainer<unknown>, ImputeArg
 // @public (undocumented)
 export const intersect: (id: string) => SetOperationNode<unknown>;
 
+// Warning: (ae-missing-release-tag) "isCodebook" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const isCodebook: (r: Resource | undefined) => boolean;
+
+// Warning: (ae-missing-release-tag) "isCodebookSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const isCodebookSchema: (r: ResourceSchema | undefined) => r is CodebookSchema;
+
+// Warning: (ae-missing-release-tag) "isDataTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const isDataTable: (r: Resource | undefined) => r is DataTable;
+
+// Warning: (ae-missing-release-tag) "isDataTableSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const isDataTableSchema: (r: ResourceSchema | undefined) => r is DataTableSchema;
+
 // Warning: (ae-missing-release-tag) "isDefaultInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -479,6 +461,31 @@ export function isNumericInputStep(step: Step): boolean;
 //
 // @public
 export function isOutputColumnStep(step: Step): boolean;
+
+// Warning: (ae-missing-release-tag) "isResourceRelationship" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const isResourceRelationship: (item: string | ResourceSchema | ResourceRelationship) => item is ResourceRelationship;
+
+// Warning: (ae-missing-release-tag) "isTableBundle" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const isTableBundle: (r: Resource | undefined) => r is TableBundle;
+
+// Warning: (ae-missing-release-tag) "isTableBundleSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const isTableBundleSchema: (r: ResourceSchema | undefined) => r is ResourceSchema;
+
+// Warning: (ae-missing-release-tag) "isWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const isWorkflow: (r: Resource | undefined) => boolean;
+
+// Warning: (ae-missing-release-tag) "isWorkflowSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const isWorkflowSchema: (r: ResourceSchema | undefined) => r is WorkflowSchema;
 
 // Warning: (ae-forgotten-export) The symbol "JoinNode" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "join" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -673,7 +680,7 @@ export const rename: (id: string) => StepNode<TableContainer<unknown>, InputColu
 // Warning: (ae-missing-release-tag) "Resource" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export abstract class Resource extends Named implements ResourceSchema, SchemaResource {
+export abstract class Resource extends Named implements ResourceSchema, Resource {
     abstract get $schema(): string;
     // (undocumented)
     get homepage(): string | undefined;
@@ -695,9 +702,11 @@ export abstract class Resource extends Named implements ResourceSchema, SchemaRe
 //
 // @public (undocumented)
 export interface ResourceHandler {
-    canLoad(resource: ResourceSchema, files: Map<string, Blob>): boolean;
-    load(data: ResourceSchema, files: Map<string, Blob>): Promise<void>;
-    save(files: Map<string, Blob>): Promise<string[]>;
+    // (undocumented)
+    connect(dp: DataPackage): void;
+    load(data: ResourceSchema, files: Map<string, Blob>): Promise<Resource[]>;
+    profile: string;
+    save(data: Resource, files: Map<string, Blob>): Promise<string[]>;
 }
 
 // Warning: (ae-missing-release-tag) "rollup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -709,17 +718,6 @@ export const rollup: (id: string) => StepNode<TableContainer<unknown>, RollupArg
 //
 // @public (undocumented)
 export const sample: (id: string) => StepNode<TableContainer<unknown>, SampleArgs>;
-
-// Warning: (ae-missing-release-tag) "SchemaResource" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface SchemaResource<T extends ResourceSchema = ResourceSchema> {
-    loadSchema(schema: Maybe<T>, quiet?: boolean): void;
-    name: string;
-    profile: string;
-    sources?: SchemaResource[];
-    toSchema(): T;
-}
 
 // Warning: (ae-missing-release-tag) "select" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -782,6 +780,43 @@ export class StepNode<T, Args> extends BaseNode<T, Args> {
 //
 // @public (undocumented)
 export function stepNodeFactory<T, Args>(stepFunction: StepFunction<T, Args>): (id: string) => StepNode<T, Args>;
+
+// Warning: (ae-missing-release-tag) "TableBundle" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class TableBundle extends Resource implements ResourceSchema {
+    // (undocumented)
+    readonly $schema: string;
+    constructor(data?: Resource);
+    // (undocumented)
+    get codebook(): Codebook | undefined;
+    set codebook(codebook: Codebook | undefined);
+    // (undocumented)
+    connect(dp: DataPackage): void;
+    // (undocumented)
+    get datatable(): DataTable | undefined;
+    set datatable(datatable: DataTable | undefined);
+    // (undocumented)
+    readonly defaultName = "tablebundle.json";
+    // (undocumented)
+    dispose(): void;
+    // (undocumented)
+    loadSchema(schema: Maybe_2<Resource>, quiet?: boolean): void;
+    // (undocumented)
+    get name(): string;
+    set name(value: string);
+    // (undocumented)
+    get output$(): Observable<Maybe_2<TableContainer>>;
+    // (undocumented)
+    get output(): Maybe_2<TableContainer>;
+    // (undocumented)
+    readonly profile = "tablebundle";
+    // (undocumented)
+    toSchema(): ResourceSchema;
+    // (undocumented)
+    get workflow(): Workflow | undefined;
+    set workflow(workflow: Workflow | undefined);
+}
 
 // Warning: (ae-missing-release-tag) "TableExportOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -851,7 +886,7 @@ export { window_2 as window }
 // Warning: (ae-missing-release-tag) "Workflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export class Workflow extends Resource implements SchemaResource<WorkflowSchema> {
+export class Workflow extends Resource {
     // (undocumented)
     readonly $schema: string;
     constructor(input?: WorkflowSchema, _strictInputs?: boolean);

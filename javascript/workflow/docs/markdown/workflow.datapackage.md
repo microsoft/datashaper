@@ -7,11 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class DataPackage extends Named implements SchemaResource<DataPackageSchema> 
+export declare class DataPackage extends Resource 
 ```
-<b>Extends:</b> [Named](./workflow.named.md)
-
-<b>Implements:</b> [SchemaResource](./workflow.schemaresource.md)<!-- -->&lt;DataPackageSchema&gt;
+<b>Extends:</b> [Resource](./workflow.resource.md)
 
 ## Constructors
 
@@ -23,15 +21,15 @@ export declare class DataPackage extends Named implements SchemaResource<DataPac
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [\_resources](./workflow.datapackage._resources.md) |  | BehaviorSubject&lt;[SchemaResource](./workflow.schemaresource.md)<!-- -->&lt;ResourceSchema&gt;\[\]&gt; |  |
+|  [\_resources](./workflow.datapackage._resources.md) |  | BehaviorSubject&lt;[Resource](./workflow.resource.md)<!-- -->\[\]&gt; |  |
 |  [$schema](./workflow.datapackage._schema.md) | <code>readonly</code> | string |  |
 |  [dataPackage?](./workflow.datapackage.datapackage.md) |  | DataPackageSchema \| undefined | <i>(Optional)</i> |
 |  [defaultName](./workflow.datapackage.defaultname.md) | <code>readonly</code> | (not declared) |  |
 |  [names](./workflow.datapackage.names.md) | <code>readonly</code> | string\[\] |  |
 |  [names$](./workflow.datapackage.names_.md) | <code>readonly</code> | Observable&lt;string\[\]&gt; |  |
 |  [profile](./workflow.datapackage.profile.md) | <code>readonly</code> | (not declared) |  |
-|  [resources](./workflow.datapackage.resources.md) | <code>readonly</code> | [SchemaResource](./workflow.schemaresource.md)<!-- -->\[\] |  |
-|  [resources$](./workflow.datapackage.resources_.md) | <code>readonly</code> | Observable&lt;[SchemaResource](./workflow.schemaresource.md)<!-- -->\[\]&gt; |  |
+|  [resources](./workflow.datapackage.resources.md) | <code>readonly</code> | [Resource](./workflow.resource.md)<!-- -->\[\] |  |
+|  [resources$](./workflow.datapackage.resources_.md) | <code>readonly</code> | Observable&lt;[Resource](./workflow.resource.md)<!-- -->\[\]&gt; |  |
 |  [size](./workflow.datapackage.size.md) | <code>readonly</code> | number |  |
 |  [size$](./workflow.datapackage.size_.md) | <code>readonly</code> | Observable&lt;number&gt; |  |
 

@@ -10,7 +10,6 @@
 |  --- | --- |
 |  [BaseNode](./workflow.basenode.md) |  |
 |  [Codebook](./workflow.codebook.md) |  |
-|  [DataBundle](./workflow.databundle.md) |  |
 |  [DataPackage](./workflow.datapackage.md) |  |
 |  [DataShape](./workflow.datashape.md) |  |
 |  [DataTable](./workflow.datatable.md) |  |
@@ -21,6 +20,7 @@
 |  [ParserOptions](./workflow.parseroptions.md) |  |
 |  [Resource](./workflow.resource.md) |  |
 |  [StepNode](./workflow.stepnode.md) |  |
+|  [TableBundle](./workflow.tablebundle.md) |  |
 |  [Workflow](./workflow.workflow.md) |  |
 
 ## Enumerations
@@ -66,7 +66,6 @@
 |  [Node\_2](./workflow.node_2.md) | A graph processing node |
 |  [NodeBinding](./workflow.nodebinding.md) | A binding for a value being emitted from a node |
 |  [ResourceHandler](./workflow.resourcehandler.md) |  |
-|  [SchemaResource](./workflow.schemaresource.md) |  |
 |  [Step](./workflow.step.md) | Resolved step data, used in living workflows |
 |  [StepInput](./workflow.stepinput.md) | Step input data for parsing workflow schemas |
 |  [TableExportOptions](./workflow.tableexportoptions.md) | Options for exporting data-tables within Workflow instances.w |
@@ -93,7 +92,16 @@
 |  [groupby](./workflow.groupby.md) |  |
 |  [impute](./workflow.impute.md) |  |
 |  [intersect](./workflow.intersect.md) |  |
+|  [isCodebook](./workflow.iscodebook.md) |  |
+|  [isCodebookSchema](./workflow.iscodebookschema.md) |  |
+|  [isDataTable](./workflow.isdatatable.md) |  |
+|  [isDataTableSchema](./workflow.isdatatableschema.md) |  |
 |  [isDefaultInput](./workflow.isdefaultinput.md) |  |
+|  [isResourceRelationship](./workflow.isresourcerelationship.md) |  |
+|  [isTableBundle](./workflow.istablebundle.md) |  |
+|  [isTableBundleSchema](./workflow.istablebundleschema.md) |  |
+|  [isWorkflow](./workflow.isworkflow.md) |  |
+|  [isWorkflowSchema](./workflow.isworkflowschema.md) |  |
 |  [merge](./workflow.merge.md) |  |
 |  [onehot](./workflow.onehot.md) |  |
 |  [orderby](./workflow.orderby.md) |  |

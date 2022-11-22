@@ -6,11 +6,10 @@ import type { ResourceSchema } from '@datashaper/schema'
 
 import type { Maybe } from '../primitives.js'
 import { Named } from './Named.js'
-import type { SchemaResource } from './types.js'
 
 export abstract class Resource
 	extends Named
-	implements ResourceSchema, SchemaResource
+	implements ResourceSchema, Resource
 {
 	/**
 	 * Gets the resource schema

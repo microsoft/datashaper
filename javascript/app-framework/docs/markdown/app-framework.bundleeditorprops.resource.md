@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-resource: DataBundle;
+resource: TableBundle;
 ```

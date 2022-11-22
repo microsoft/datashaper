@@ -14,5 +14,5 @@ export interface BundleEditorProps
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [resource](./app-framework.bundleeditorprops.resource.md) |  | DataBundle |  |
+|  [resource](./app-framework.bundleeditorprops.resource.md) |  | TableBundle |  |
 

@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-_resources: BehaviorSubject<SchemaResource<ResourceSchema>[]>;
+_resources: BehaviorSubject<Resource[]>;
 ```

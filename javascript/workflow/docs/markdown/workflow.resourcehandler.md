@@ -10,11 +10,17 @@
 export interface ResourceHandler 
 ```
 
+## Properties
+
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [profile](./workflow.resourcehandler.profile.md) |  | string | The profile name of the resource |
+
 ## Methods
 
 |  Method | Description |
 |  --- | --- |
-|  [canLoad(resource, files)](./workflow.resourcehandler.canload.md) | Determine if the resource-handler can handle a given resource. It is suggested that implementers check <code>resource.profile</code> to determine this. |
+|  [connect(dp)](./workflow.resourcehandler.connect.md) |  |
 |  [load(data, files)](./workflow.resourcehandler.load.md) | Load a specific resource |
-|  [save(files)](./workflow.resourcehandler.save.md) | Save custom resources into the files map. |
+|  [save(data, files)](./workflow.resourcehandler.save.md) | Save custom resources into the files map. |
 

@@ -2,24 +2,57 @@
 	"name": "Companies",
 	"resources": [
 		{
-			"profile": "datatable",
 			"name": "companies",
-			"path": "data/companies.csv"
+			"profile": "databundle",
+			"sources": [
+				{
+					"rel": "source",
+					"source": {
+						"profile": "datatable",
+						"path": "data/companies.csv"
+					}
+				}
+			]
 		},
 		{
-			"profile": "datatable",
 			"name": "companies2",
-			"path": "data/companies2.csv"
+			"profile": "databundle",
+			"sources": [
+				{
+					"rel": "source",
+					"source": {
+						"profile": "datatable",
+						"path": "data/companies2.csv"
+					}
+				}
+			]
 		},
 		{
-			"profile": "datatable",
 			"name": "products",
-			"path": "data/products.csv"
+			"profile": "databundle",
+			"sources": [
+				{
+					"rel": "source",
+					"source": {
+						"profile": "datatable",
+						"name": "companies",
+						"path": "data/products.csv"
+					}
+				}
+			]
 		},
 		{
-			"profile": "datatable",
 			"name": "stocks",
-			"path": "data/stocks.csv"
+			"profile": "databundle",
+			"sources": [
+				{
+					"rel": "source",
+					"source": {
+						"profile": "datatable",
+						"path": "data/stocks.csv"
+					}
+				}
+			]
 		}
 	]
 }

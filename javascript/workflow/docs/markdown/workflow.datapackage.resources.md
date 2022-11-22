@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-get resources(): SchemaResource[];
+get resources(): Resource[];
 ```

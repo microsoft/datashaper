@@ -20,7 +20,7 @@ import { useBoolean } from '@fluentui/react-hooks'
 import { useObservableState } from 'observable-hooks'
 import { memo, useMemo, useState } from 'react'
 
-import { useDataBundleOutput } from '../../../hooks/index.js'
+import { useTableBundleOutput } from '../../../hooks/index.js'
 import {
 	useColumnState,
 	useHistoryButtonCommandBar,
@@ -42,7 +42,7 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 	function TableEditor({ resource: dataTable }) {
 		// Primary State
 		const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
-		const table = useDataBundleOutput(dataTable)
+		const table = useTableBundleOutput(dataTable)
 		if (dataTable.workflow == null) {
 			dataTable.workflow = new Workflow()
 		}

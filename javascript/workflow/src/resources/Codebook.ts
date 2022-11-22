@@ -10,12 +10,8 @@ import {
 
 import type { Maybe } from '../primitives.js'
 import { Resource } from './Resource.js'
-import type { SchemaResource } from './types.js'
 
-export class Codebook
-	extends Resource
-	implements SchemaResource<CodebookSchema>
-{
+export class Codebook extends Resource {
 	public readonly $schema = LATEST_CODEBOOK_SCHEMA
 	public readonly profile = 'codebook'
 

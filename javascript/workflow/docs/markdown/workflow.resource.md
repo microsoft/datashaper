@@ -7,11 +7,11 @@
 <b>Signature:</b>
 
 ```typescript
-export declare abstract class Resource extends Named implements ResourceSchema, SchemaResource 
+export declare abstract class Resource extends Named implements ResourceSchema, Resource 
 ```
 <b>Extends:</b> [Named](./workflow.named.md)
 
-<b>Implements:</b> ResourceSchema, [SchemaResource](./workflow.schemaresource.md)
+<b>Implements:</b> ResourceSchema, [Resource](./workflow.resource.md)
 
 ## Properties
 

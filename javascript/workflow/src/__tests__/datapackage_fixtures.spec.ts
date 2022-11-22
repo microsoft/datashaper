@@ -5,8 +5,8 @@ import fsp from 'fs/promises'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
-import type { DataBundle } from '../resources/DataBundle.js'
-import { DataPackage } from '../resources/DataPackage.js'
+import { DataPackage } from '../resources/DataPackage/DataPackage.js'
+import type { TableBundle } from '../resources/TableBundle.js'
 
 // Set the root cwd to the package root.
 // this makes loading datafiles by file-url in the project more straightforward
@@ -54,7 +54,7 @@ function defineTestCase(parentPath: string, test: string) {
 
 		expect(datapackage.size).toEqual(expected.tables.length)
 		for (const table of expected.tables) {
-			const found = datapackage.getResource(table.name) as DataBundle
+			const found = datapackage.getResource(table.name) as TableBundle
 			expect(found).toBeDefined()
 			expect(found?.workflow?.length ?? 0).toEqual(table.workflowLength ?? 0)
 			expect(found?.output?.table?.numRows()).toBeGreaterThan(0)

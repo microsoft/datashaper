@@ -2,19 +2,20 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { CodebookSchema } from '@datashaper/schema'
+import {
+	type CodebookSchema,
+	createCodebookSchemaObject,
+} from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { guessDataTypeFromValues } from './guessDataTypeFromValues.js'
 import { inferNatureFromValues } from './inferNatureFromValues.js'
 
 export function generateCodebook(table: ColumnTable): CodebookSchema {
-	const codebookResult: CodebookSchema = {
-		$schema: 'http://json-schema.org/draft-07/schema#',
-		id: 'http://json-schema.org/draft-07/schema#',
+	const codebookResult: CodebookSchema = createCodebookSchemaObject({
 		name: 'Generator',
 		fields: [],
-	}
+	})
 
 	table.columnNames().forEach(column => {
 		const values: string[] = table.array(column) as string[]

@@ -7,11 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class DataTable extends Resource implements SchemaResource<DataTableSchema> 
+export declare class DataTable extends Resource 
 ```
 <b>Extends:</b> [Resource](./workflow.resource.md)
-
-<b>Implements:</b> [SchemaResource](./workflow.schemaresource.md)<!-- -->&lt;DataTableSchema&gt;
 
 ## Constructors
 

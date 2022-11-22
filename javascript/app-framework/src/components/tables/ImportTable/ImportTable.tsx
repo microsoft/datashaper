@@ -17,7 +17,7 @@ import {
 	loadJsonTable,
 	removeExtension,
 } from '../../../util/index.js'
-import { FileName } from '../../util/index.js'
+import { FileName } from '../../app/FileName/index.js'
 import { TableDelimiterOptions } from '../TableDelimiterOptions/TableDelimiterOptions.js'
 import { TableLayoutOptions } from '../TableLayoutOptions/TableLayoutOptions.js'
 import { TablePreview } from '../TablePreview/TablePreview.js'

@@ -18,14 +18,10 @@ import { BehaviorSubject } from 'rxjs'
 import { DataShape } from './DataShape.js'
 import { ParserOptions } from './ParserOptions.js'
 import { Resource } from './Resource.js'
-import type { SchemaResource } from './types.js'
 
 const log = debug('datashaper')
 
-export class DataTable
-	extends Resource
-	implements SchemaResource<DataTableSchema>
-{
+export class DataTable extends Resource {
 	public readonly $schema = LATEST_DATATABLE_SCHEMA
 	public readonly profile = 'datatable'
 	private readonly _output = new BehaviorSubject<Maybe<ColumnTable>>(undefined)

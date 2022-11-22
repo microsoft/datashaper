@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-get resources$(): Observable<SchemaResource[]>;
+get resources$(): Observable<Resource[]>;
 ```
