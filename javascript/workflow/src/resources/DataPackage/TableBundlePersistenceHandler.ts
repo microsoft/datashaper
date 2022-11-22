@@ -5,6 +5,7 @@
 import type {
 	CodebookSchema,
 	DataTableSchema,
+	ResourceRelationship,
 	ResourceSchema,
 	WorkflowSchema,
 } from '@datashaper/schema'
@@ -32,7 +33,7 @@ export class TableBundlePersistenceHandler implements ResourceHandler {
 		files: Map<string, Blob>,
 	): Promise<string[]> {
 		const asset = (name: string) => `data/${resource.name}/${name}`
-		const sources: string[] = []
+		const sources: ResourceRelationship[] = []
 		let dataTableFileName: string | undefined
 		let workflowFileName: string | undefined
 		let codebookFileName: string | undefined
@@ -49,22 +50,25 @@ export class TableBundlePersistenceHandler implements ResourceHandler {
 				dtSources.push(dataFileName)
 			}
 			dataTableFileName = asset('datatable.json')
-			files.set(dataTableFileName, write(resource, { sources: dtSources }))
-			sources.push(dataTableFileName)
+			files.set(
+				dataTableFileName,
+				write(resource.datatable, { sources: dtSources }),
+			)
+			sources.push({ rel: 'source', source: dataTableFileName })
 		}
 
 		// Save the Worfklow
 		if (resource.workflow != null) {
 			workflowFileName = asset('workflow.json')
 			files.set(workflowFileName, write(resource.workflow))
-			sources.push(workflowFileName)
+			sources.push({ rel: 'workflow', source: workflowFileName })
 		}
 
 		// Save the Codebook
 		if (resource.codebook != null) {
 			codebookFileName = asset('codebook.json')
 			files.set(codebookFileName, write(resource.codebook))
-			sources.push(codebookFileName)
+			sources.push({ rel: 'codebook', source: codebookFileName })
 		}
 
 		// Save the DataBundle
