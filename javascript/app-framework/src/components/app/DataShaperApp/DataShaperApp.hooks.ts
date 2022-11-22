@@ -152,7 +152,7 @@ function addSources(
 }
 
 const DEFAULT_HANDLERS: Record<string, React.ComponentType<any>> = {
-	databundle: BundleEditor,
+	tablebundle: BundleEditor,
 	codebook: CodebookEditor,
 	source: DataSourceEditor,
 	datatable: BundleEditor,

@@ -24,7 +24,7 @@ export function useTreeItems(plugins: Map<string, DataShaperAppPlugin>): [
 			pkg.resources$.pipe(
 				map(resources => {
 					const tables = resources.filter(isTableBundle)
-					const other = resources.filter(r => r.profile !== 'databundle')
+					const other = resources.filter(r => r.profile !== 'tablebundle')
 
 					const tableTreeItems = groupTables(tables)
 					const appTreeItems = other

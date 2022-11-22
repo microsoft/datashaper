@@ -9,10 +9,6 @@
  */
 export type Profile =
 	/**
-	 * This is the profile name for a data bundle
-	 */
-	| 'databundle'
-	/**
 	 * This is the profile name for a DataTable
 	 */
 	| 'datatable'

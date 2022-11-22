@@ -16,7 +16,7 @@ export function useTableBundles(): TableBundle[] {
 			dp.resources$.pipe(
 				map(resources => {
 					return resources.filter(
-						r => r.profile === 'databundle',
+						r => r.profile === 'tablebundle',
 					) as TableBundle[]
 				}),
 			),
