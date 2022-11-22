@@ -8,7 +8,7 @@ import {
 	createDataPackageSchemaObject,
 	LATEST_DATAPACKAGE_SCHEMA,
 } from '@datashaper/schema'
-import type { Observable } from 'rxjs'
+import type { Observable } from 'rxjs';
 import { BehaviorSubject, map } from 'rxjs'
 
 import { Resource } from '../Resource.js'
@@ -103,6 +103,11 @@ export class DataPackage extends Resource {
 			const handler = this._resourceHandlers.get(resource.profile)
 			if (handler) {
 				resources.push(...(await handler.save(resource, files)))
+			} else {
+				console.error(
+					"no persistence handler available for resource's profile",
+					resource.profile,
+				)
 			}
 		}
 

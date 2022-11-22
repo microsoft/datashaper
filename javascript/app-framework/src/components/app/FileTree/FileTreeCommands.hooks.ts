@@ -5,10 +5,10 @@
 import { type BaseFile, createBaseFile } from '@datashaper/utilities'
 import type { ICommandBarItemProps, IContextualMenuItem } from '@fluentui/react'
 import { useTheme } from '@fluentui/react'
-import { useCallback, useContext, useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 
-import { PersistenceContext } from '../../../context/index.js'
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
+import { usePersistenceService } from '../../../hooks/usePersistenceService.js'
 import { useTableBundles } from '../../../hooks/useTableBundles.js'
 import { TABLE_TYPES, ZIP_TYPES } from './FileTree.constants.js'
 import type { FileDefinition } from './FileTree.types.js'
@@ -91,7 +91,7 @@ export function useFileManagementCommands(
 }
 
 function useUploadZip(): (file: BaseFile) => void {
-	const persistence = useContext(PersistenceContext)
+	const persistence = usePersistenceService()
 	return useCallback(
 		(file: BaseFile) =>
 			void persistence
@@ -102,7 +102,7 @@ function useUploadZip(): (file: BaseFile) => void {
 }
 
 function useDownloadZip(): () => void {
-	const persistence = useContext(PersistenceContext)
+	const persistence = usePersistenceService()
 	return useCallback(
 		() =>
 			void persistence
