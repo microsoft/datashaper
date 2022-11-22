@@ -102,6 +102,17 @@ export enum BooleanOperator {
     XOR = "xor"
 }
 
+// Warning: (ae-missing-release-tag) "BundleSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface BundleSchema {
+    // (undocumented)
+    $schema: string;
+    accepts: RelationshipConstraint[];
+    // Warning: (ae-forgotten-export) The symbol "Profile" needs to be exported by the entry point index.d.ts
+    profile?: Profile;
+}
+
 // Warning: (ae-missing-release-tag) "Category" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -118,6 +129,8 @@ export interface Category {
 export interface CodebookSchema extends ResourceSchema {
     // (undocumented)
     fields: Field[];
+    // (undocumented)
+    profile: 'codebook';
 }
 
 // Warning: (ae-missing-release-tag) "CodebookStrategy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -164,11 +177,6 @@ export interface ConvertArgs extends InputColumnArgs, OutputColumnArgs {
 // @public (undocumented)
 export function createCodebookSchemaObject(input: FactoryInput<CodebookSchema>): CodebookSchema;
 
-// Warning: (ae-missing-release-tag) "createDataBundleSchemaObject" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function createDataBundleSchemaObject(input: FactoryInput<DataBundleSchema>): DataBundleSchema;
-
 // Warning: (ae-missing-release-tag) "createDataPackageSchemaObject" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -197,15 +205,6 @@ export interface Criterion {
     operator: NumericComparisonOperator | StringComparisonOperator | BooleanComparisonOperator | DateComparisonOperator;
     type: FilterCompareType;
     value?: Value;
-}
-
-// Warning: (ae-missing-release-tag) "DataBundleSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface DataBundleSchema extends ResourceSchema {
-    codebook?: string | CodebookSchema;
-    datatable?: string | DataTableSchema;
-    workflow?: string | WorkflowSchema;
 }
 
 // Warning: (ae-missing-release-tag) "DataFormat" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -241,6 +240,8 @@ export enum DataOrientation {
 export interface DataPackageSchema extends Named {
     // (undocumented)
     $schema: string;
+    // (undocumented)
+    profile: 'datapackage';
     resources: (string | ResourceSchema)[];
 }
 
@@ -262,6 +263,8 @@ export interface DataTableSchema extends ResourceSchema {
     encoding?: string;
     format?: DataFormat;
     parser?: ParserOptions;
+    // (undocumented)
+    profile: 'datatable';
     rows?: number;
     shape?: DataShape;
     typeHints?: TypeHints;
@@ -800,10 +803,29 @@ export interface RecodeArgs extends InputColumnArgs, OutputColumnArgs {
     mapping: Record<Value, Value>;
 }
 
+// Warning: (ae-missing-release-tag) "RelationshipConstraint" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface RelationshipConstraint {
+    accepts: Profile[];
+    description?: string;
+    multi?: boolean;
+    rel: string;
+    title?: string;
+}
+
 // Warning: (ae-missing-release-tag) "RenameArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type RenameArgs = InputColumnRecordArgs;
+
+// Warning: (ae-missing-release-tag) "ResourceRelationship" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface ResourceRelationship {
+    rel: string;
+    source: string | ResourceSchema;
+}
 
 // Warning: (ae-missing-release-tag) "ResourceSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -814,9 +836,8 @@ export interface ResourceSchema extends Named {
     homepage?: string;
     license?: string;
     path?: string | string[];
-    // Warning: (ae-forgotten-export) The symbol "Profile" needs to be exported by the entry point index.d.ts
     profile?: Profile;
-    sources?: (string | ResourceSchema)[];
+    sources?: (string | ResourceSchema | ResourceRelationship)[];
 }
 
 // Warning: (ae-missing-release-tag) "RollupArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1211,6 +1232,8 @@ export enum WindowFunction {
 export interface WorkflowSchema extends ResourceSchema {
     input?: string[];
     output: string[];
+    // (undocumented)
+    profile: 'workflow';
     steps?: Step[];
 }
 

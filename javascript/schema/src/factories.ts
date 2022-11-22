@@ -6,13 +6,12 @@ import { v4 } from 'uuid'
 
 import { versions } from '../versions.js'
 import type { CodebookSchema } from './codebook/CodebookSchema.js'
-import type { DataBundleSchema } from './databundle/DataBundleSchema.js'
 import type { DataPackageSchema } from './datapackage/DataPackageSchema.js'
 import type { DataTableSchema } from './datatable/DataTableSchema.js'
 import type { WorkflowSchema } from './workflow/WorkflowSchema.js'
 
 export const LATEST_WORKFLOW_SCHEMA = `https://microsoft.github.io/datashaper/schema/workflow/v${versions.workflow}.json`
-export const LATEST_DATABUNDLE_SCHEMA = `https://microsoft.github.io/datashaper/schema/databundle/v${versions.databundle}.json`
+export const LATEST_DATABUNDLE_SCHEMA = `https://microsoft.github.io/datashaper/schema/databundle/v${versions.bundle}.json`
 export const LATEST_DATAPACKAGE_SCHEMA = `https://microsoft.github.io/datashaper/schema/datapackage/v${versions.datapackage}.json`
 export const LATEST_DATATABLE_SCHEMA = `https://microsoft.github.io/datashaper/schema/datatable/v${versions.datatable}.json`
 export const LATEST_CODEBOOK_SCHEMA = `https://microsoft.github.io/datashaper/schema/codebook/v${versions.codebook}.json`
@@ -27,6 +26,7 @@ export function createDataPackageSchemaObject(
 ): DataPackageSchema {
 	return {
 		$schema: LATEST_DATATABLE_SCHEMA,
+		profile: 'datapackage',
 		id: input.id ?? v4(),
 		name: input.name ?? 'DataPackage',
 		...input,
@@ -41,18 +41,6 @@ export function createWorkflowSchemaObject(
 		id: input.id ?? v4(),
 		name: input.name ?? 'Workflow',
 		profile: 'workflow',
-		...input,
-	}
-}
-
-export function createDataBundleSchemaObject(
-	input: FactoryInput<DataBundleSchema>,
-): DataBundleSchema {
-	return {
-		$schema: LATEST_DATABUNDLE_SCHEMA,
-		id: input.id ?? v4(),
-		name: input.name ?? 'DataBundle',
-		profile: 'databundle',
 		...input,
 	}
 }

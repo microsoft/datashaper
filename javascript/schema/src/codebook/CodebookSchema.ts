@@ -13,5 +13,6 @@ import type { Field } from './Field.js'
  * resource profile: 'codebook'
  */
 export interface CodebookSchema extends ResourceSchema {
+	profile: 'codebook'
 	fields: Field[]
 }

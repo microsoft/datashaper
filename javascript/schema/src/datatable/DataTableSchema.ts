@@ -16,6 +16,8 @@ import type { TypeHints } from './TypeHints.js'
  * resource profile: 'datatable'
  */
 export interface DataTableSchema extends ResourceSchema {
+	profile: 'datatable'
+
 	/**
 	 * Option to embed the data directly in the JSON descriptor.
 	 */

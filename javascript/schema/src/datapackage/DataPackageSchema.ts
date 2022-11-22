@@ -12,6 +12,7 @@ import type { ResourceSchema } from './ResourceSchema.js'
  */
 export interface DataPackageSchema extends Named {
 	$schema: string
+	profile: 'datapackage'
 	/**
 	 * List of Resources that make up the data package.
 	 * May also be a list of raw strings which are paths to Resource files in the bundle.

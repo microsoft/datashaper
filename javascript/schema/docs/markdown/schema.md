@@ -37,7 +37,6 @@
 |  Function | Description |
 |  --- | --- |
 |  [createCodebookSchemaObject(input)](./schema.createcodebookschemaobject.md) |  |
-|  [createDataBundleSchemaObject(input)](./schema.createdatabundleschemaobject.md) |  |
 |  [createDataPackageSchemaObject(input)](./schema.createdatapackageschemaobject.md) |  |
 |  [createDataTableSchemaObject(input)](./schema.createdatatableschemaobject.md) |  |
 |  [createSchemaValidator()](./schema.createschemavalidator.md) |  |
@@ -53,12 +52,12 @@
 |  [BinArgs](./schema.binargs.md) |  |
 |  [BinarizeArgs](./schema.binarizeargs.md) |  |
 |  [BooleanArgs](./schema.booleanargs.md) |  |
+|  [BundleSchema](./schema.bundleschema.md) | A schema for defining custom bundle types. |
 |  [Category](./schema.category.md) |  |
 |  [CodebookSchema](./schema.codebookschema.md) | This contains all of the field-level details for interpreting a dataset, including data types, mapping, and metadata. Note that with persisted metadata and field examples, a dataset can often be visualized and described to the user without actually loading the source file. resource profile: 'codebook' |
 |  [Constraints](./schema.constraints.md) | Validation constraints for a field. |
 |  [ConvertArgs](./schema.convertargs.md) |  |
 |  [Criterion](./schema.criterion.md) |  |
-|  [DataBundleSchema](./schema.databundleschema.md) | This defines the data-bundle schema, which is a collection of table-centric resources. The data-table represents the data-source and parsing options. The codebook represents interpretation options and data-type mappings. The workflow represents data-wrangling steps. |
 |  [DataPackageSchema](./schema.datapackageschema.md) | Defines a Data Package, which is a collection of data resources such as files and schemas. Loosely based on the Frictionless spec, but modified where needed to meet our needs. https://specs.frictionlessdata.io/data-package/ |
 |  [DataShape](./schema.datashape.md) | Defines parameters for understanding the logical structure of data contents. |
 |  [DataTableSchema](./schema.datatableschema.md) | This defines the table-containing resource type. A dataset can be embedded directly using the <code>data</code> property, or it can be linked to a raw file using the <code>path</code>. If the latter, optional format and parsing options can be applied to aid interpreting the file contents. resource profile: 'datatable' |
@@ -91,6 +90,8 @@
 |  [ParserOptions](./schema.parseroptions.md) | Parsing options for delimited files. This is a mix of the options from pandas and spark. |
 |  [PivotArgs](./schema.pivotargs.md) |  |
 |  [RecodeArgs](./schema.recodeargs.md) |  |
+|  [RelationshipConstraint](./schema.relationshipconstraint.md) |  |
+|  [ResourceRelationship](./schema.resourcerelationship.md) | An explicit resource relationship |
 |  [ResourceSchema](./schema.resourceschema.md) | Parent class for any resource type understood by the system. Any object type that extends from Resouce is expected to have a standalone schema published. For project state, this can be left as generic as possible for now. |
 |  [RollupArgs](./schema.rollupargs.md) |  |
 |  [SampleArgs](./schema.sampleargs.md) |  |
