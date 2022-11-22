@@ -13,7 +13,7 @@ import type { BooleanArgs } from '@datashaper/schema';
 import type { CodebookSchema } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table.js';
 import type { ConvertArgs } from '@datashaper/schema';
-import { DataBundleSchema } from '@datashaper/schema';
+import type { DataBundleSchema } from '@datashaper/schema';
 import { DataFormat } from '@datashaper/schema';
 import type { DataNature } from '@datashaper/schema';
 import type { DataOrientation } from '@datashaper/schema';
