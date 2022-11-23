@@ -5,7 +5,7 @@
 import { KnownProfile } from '@datashaper/schema'
 import type { DataTable } from '@datashaper/workflow'
 
-import type { ProfileHandlerPlugin} from '../../../types.js';
+import type { ProfilePlugin } from '../../../types.js'
 import { ResourceGroup } from '../../../types.js'
 import {
 	BundleEditor,
@@ -15,7 +15,7 @@ import {
 	WorkflowEditor,
 } from '../../editors/index.js'
 
-export const KNOWN_PROFILE_PLUGINS: ProfileHandlerPlugin[] = [
+export const KNOWN_PROFILE_PLUGINS: ProfilePlugin[] = [
 	{
 		profile: KnownProfile.TableBundle,
 		renderer: BundleEditor,

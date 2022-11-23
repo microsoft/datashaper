@@ -4,7 +4,7 @@
  */
 import type React from 'react'
 
-import type { ProfileHandlerPlugin } from '../../../types.js'
+import type { ProfilePlugin } from '../../../types.js'
 import type { FileDefinition } from '../FileTree/index.js'
 
 export interface DataShaperAppProps {
@@ -27,7 +27,5 @@ export interface DataShaperAppProps {
 	/**
 	 * Custom profile renderers
 	 */
-	profiles?: ProfileHandlerPlugin[]
-
-	// TODO: new action button for augmenting the commandbar? e.g. new ACTIONS
+	profiles?: ProfilePlugin[]
 }

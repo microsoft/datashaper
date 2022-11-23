@@ -697,6 +697,11 @@ export abstract class Resource extends Named implements ResourceSchema, Resource
     set path(value: ResourceSchema['path']);
     abstract get profile(): Profile;
     // (undocumented)
+    get sources(): Resource[];
+    set sources(value: Resource[]);
+    // (undocumented)
+    protected sourcesToSchema(): Maybe<ResourceSchema[]>;
+    // (undocumented)
     toSchema(): ResourceSchema;
 }
 
@@ -815,6 +820,7 @@ export class TableBundle extends Resource {
     readonly profile = KnownProfile.TableBundle;
     // (undocumented)
     get sources(): Resource[];
+    set sources(_value: Resource[]);
     // (undocumented)
     toSchema(): ResourceSchema;
     // (undocumented)

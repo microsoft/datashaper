@@ -26,6 +26,7 @@ import type { Maybe } from '@datashaper/workflow';
 import type { ParserOptions } from '@datashaper/schema';
 import type { default as React_2 } from 'react';
 import type { Resource } from '@datashaper/workflow';
+import type { ResourceHandler } from '@datashaper/workflow';
 import { StyledComponent } from 'styled-components';
 import type { TableBundle } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
@@ -168,10 +169,11 @@ export interface PersistenceService {
     save(projectName?: string): Promise<void>;
 }
 
-// Warning: (ae-missing-release-tag) "ProfileHandlerPlugin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ProfilePlugin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ProfileHandlerPlugin<T extends Resource = any> {
+export interface ProfilePlugin<T extends Resource = any> {
+    dataHandler?: ResourceHandler;
     group?: ResourceGroup;
     iconName: string;
     onGenerateRoutes?: (resource: T, parentPath: string, resourcePath: string) => {

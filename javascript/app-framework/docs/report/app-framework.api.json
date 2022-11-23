@@ -1249,12 +1249,12 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@datashaper/app-framework!ProfileHandlerPlugin:interface",
+          "canonicalReference": "@datashaper/app-framework!ProfilePlugin:interface",
           "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface ProfileHandlerPlugin<T extends "
+              "text": "export interface ProfilePlugin<T extends "
             },
             {
               "kind": "Reference",
@@ -1288,12 +1288,40 @@
               }
             }
           ],
-          "name": "ProfileHandlerPlugin",
+          "name": "ProfilePlugin",
           "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!ProfileHandlerPlugin#group:member",
+              "canonicalReference": "@datashaper/app-framework!ProfilePlugin#dataHandler:member",
+              "docComment": "/**\n * The persistence handler to use for this profile\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "dataHandler?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceHandler",
+                  "canonicalReference": "@datashaper/workflow!ResourceHandler:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "dataHandler",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ProfilePlugin#group:member",
               "docComment": "/**\n * The grouping for this resource type. The default is 'app'. This grouping determines what resources this is rendered with in the tree-view.\n */\n",
               "excerptTokens": [
                 {
@@ -1321,7 +1349,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!ProfileHandlerPlugin#iconName:member",
+              "canonicalReference": "@datashaper/app-framework!ProfilePlugin#iconName:member",
               "docComment": "/**\n * The icon name to use in the file-tree\n */\n",
               "excerptTokens": [
                 {
@@ -1348,7 +1376,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!ProfileHandlerPlugin#onGenerateRoutes:member",
+              "canonicalReference": "@datashaper/app-framework!ProfilePlugin#onGenerateRoutes:member",
               "docComment": "/**\n * Event handler for when the resource is undergoing route generation. A route is always generated for the resource; any related routes may be retured here.\n *\n * @param resource - The resource that routes are being generated for.\n *\n * @param parentPath - The current path context being used for generation. This is the parent path of the resource.\n *\n * @param resourcePath - The resource path that was used for the resource.\n */\n",
               "excerptTokens": [
                 {
@@ -1402,7 +1430,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!ProfileHandlerPlugin#profile:member",
+              "canonicalReference": "@datashaper/app-framework!ProfilePlugin#profile:member",
               "docComment": "/**\n * The profile name to register within the app framework. This is used to identify the plugin and should be unique.\n */\n",
               "excerptTokens": [
                 {
@@ -1429,7 +1457,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!ProfileHandlerPlugin#renderer:member",
+              "canonicalReference": "@datashaper/app-framework!ProfilePlugin#renderer:member",
               "docComment": "/**\n * Render the plugin\n */\n",
               "excerptTokens": [
                 {

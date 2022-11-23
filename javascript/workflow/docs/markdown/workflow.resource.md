@@ -22,11 +22,13 @@ export declare abstract class Resource extends Named implements ResourceSchema, 
 |  [license](./workflow.resource.license.md) |  | string \| undefined |  |
 |  [path](./workflow.resource.path.md) |  | ResourceSchema\['path'\] |  |
 |  [profile](./workflow.resource.profile.md) | <code>readonly</code> | Profile | Gets the resource profile |
+|  [sources](./workflow.resource.sources.md) |  | [Resource](./workflow.resource.md)<!-- -->\[\] |  |
 
 ## Methods
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
 |  [loadSchema(value, quiet)](./workflow.resource.loadschema.md) |  |  |
+|  [sourcesToSchema()](./workflow.resource.sourcestoschema.md) | <code>protected</code> |  |
 |  [toSchema()](./workflow.resource.toschema.md) |  |  |
 

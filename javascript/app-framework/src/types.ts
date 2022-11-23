@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Resource } from '@datashaper/workflow'
+import type { Resource, ResourceHandler } from '@datashaper/workflow'
 
 /**
  * Data attached to resource-tree nodes
@@ -39,7 +39,7 @@ export interface ResourceRoute {
 	props: any
 }
 
-export interface ProfileHandlerPlugin<T extends Resource = any> {
+export interface ProfilePlugin<T extends Resource = any> {
 	/**
 	 * The profile name to register within the app framework.
 	 * This is used to identify the plugin and should be unique.
@@ -61,6 +61,11 @@ export interface ProfileHandlerPlugin<T extends Resource = any> {
 	 * Render the plugin
 	 */
 	renderer: React.ComponentType<{ resource: T }>
+
+	/**
+	 * The persistence handler to use for this profile
+	 */
+	dataHandler?: ResourceHandler
 
 	/**
 	 * Event handler for when the resource is undergoing route generation.

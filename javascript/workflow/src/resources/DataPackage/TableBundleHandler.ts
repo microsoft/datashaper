@@ -8,10 +8,9 @@ import type {
 	ResourceRelationship,
 	ResourceSchema,
 	TableBundleSchema,
-	WorkflowSchema} from '@datashaper/schema';
-import {
-	KnownProfile
-, TableBundleRel } from '@datashaper/schema'
+	WorkflowSchema,
+} from '@datashaper/schema'
+import { KnownProfile, TableBundleRel } from '@datashaper/schema'
 
 import { Codebook } from '../Codebook.js'
 import { DataTable } from '../DataTable.js'
@@ -23,7 +22,7 @@ import { Workflow } from '../Workflow/Workflow.js'
 import type { DataPackage } from './DataPackage.js'
 import { write } from './io.js'
 
-export class TableBundlePersistenceHandler implements ResourceHandler {
+export class TableBundleHandler implements ResourceHandler {
 	public readonly profile = KnownProfile.TableBundle
 	private _dataPackage: DataPackage | undefined
 

@@ -9,15 +9,11 @@ import { map } from 'rxjs'
 
 import { emptyArray } from '../../../empty.js'
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
-import type {
-	ProfileHandlerPlugin,
-	ResourceRoute} from '../../../types.js';
-import {
-	ResourceGroup
-} from '../../../types.js'
+import type { ProfilePlugin, ResourceRoute } from '../../../types.js'
+import { ResourceGroup } from '../../../types.js'
 
 export function useResourceRoutes(
-	plugins: Map<string, ProfileHandlerPlugin>,
+	plugins: Map<string, ProfilePlugin>,
 ): ResourceRoute[][] {
 	const pkg = useDataPackage()
 	const observable = useMemo(
@@ -37,7 +33,7 @@ export function useResourceRoutes(
 
 function getFileTreeItem(
 	resource: Resource,
-	plugins: Map<string, ProfileHandlerPlugin>,
+	plugins: Map<string, ProfilePlugin>,
 	parentRoute = '/resource',
 ): ResourceRoute[] {
 	const plugin = plugins.get(resource.profile)!
@@ -65,7 +61,7 @@ function getFileTreeItem(
 
 function groupResources(
 	resources: Resource[],
-	plugins: Map<string, ProfileHandlerPlugin>,
+	plugins: Map<string, ProfilePlugin>,
 ): Resource[][] {
 	const dataResources: Resource[] = []
 	const appResources: Resource[] = []
