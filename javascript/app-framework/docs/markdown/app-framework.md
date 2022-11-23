@@ -59,6 +59,7 @@
 |  [CodebookEditor](./app-framework.codebookeditor.md) |  |
 |  [Container](./app-framework.container.md) |  |
 |  [DataPackageContext](./app-framework.datapackagecontext.md) |  |
+|  [DataPackageProvider](./app-framework.datapackageprovider.md) |  |
 |  [DataShaperApp](./app-framework.datashaperapp.md) | A component for rendering a data-shaper application. This includes a resource management UI area and a main area that renders selected content based on its profile type. It is expected that this application is rendered under a react-router Router component. |
 |  [DataSourceEditor](./app-framework.datasourceeditor.md) |  |
 |  [HeadersOption](./app-framework.headersoption.md) |  |
@@ -72,7 +73,6 @@
 |  [TableDelimiterOptions](./app-framework.tabledelimiteroptions.md) |  |
 |  [TableLayoutOptions](./app-framework.tablelayoutoptions.md) |  |
 |  [TablePreview](./app-framework.tablepreview.md) |  |
-|  [TableStoreProvider](./app-framework.tablestoreprovider.md) |  |
 |  [viewOptions](./app-framework.viewoptions.md) |  |
 |  [ViewOptions](./app-framework.viewoptions.md) |  |
 |  [WorkflowEditor](./app-framework.workfloweditor.md) |  |

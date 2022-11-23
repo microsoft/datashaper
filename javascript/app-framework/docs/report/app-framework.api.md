@@ -78,6 +78,13 @@ export const Container: StyledComponent<"div", any, {}, never>;
 // @public (undocumented)
 export const DataPackageContext: Context<DataPackage>;
 
+// Warning: (ae-missing-release-tag) "DataPackageProvider" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const DataPackageProvider: React.FC<{
+    children: JSX.Element;
+}>;
+
 // Warning: (ae-forgotten-export) The symbol "DataShaperAppProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "DataShaperApp" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -278,13 +285,6 @@ export const TablePreview: React.FC<{
     table?: ColumnTable;
     error?: string;
     showType?: boolean;
-}>;
-
-// Warning: (ae-missing-release-tag) "TableStoreProvider" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const TableStoreProvider: React.FC<{
-    children: JSX.Element;
 }>;
 
 // Warning: (ae-missing-release-tag) "useDataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

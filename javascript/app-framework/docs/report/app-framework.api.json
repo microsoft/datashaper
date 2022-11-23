@@ -429,6 +429,42 @@
         },
         {
           "kind": "Variable",
+          "canonicalReference": "@datashaper/app-framework!DataPackageProvider:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "DataPackageProvider: "
+            },
+            {
+              "kind": "Reference",
+              "text": "React.FC",
+              "canonicalReference": "@types/react!~React.FC:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<{\n    children: "
+            },
+            {
+              "kind": "Reference",
+              "text": "JSX.Element",
+              "canonicalReference": "@types/react!~__global.JSX.Element:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n}>"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "DataPackageProvider",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 5
+          }
+        },
+        {
+          "kind": "Variable",
           "canonicalReference": "@datashaper/app-framework!DataShaperApp:var",
           "docComment": "/**\n * A component for rendering a data-shaper application. This includes a resource management UI area and a main area that renders selected content based on its profile type. It is expected that this application is rendered under a react-router Router component.\n */\n",
           "excerptTokens": [
@@ -2185,42 +2221,6 @@
           "isReadonly": true,
           "releaseTag": "Public",
           "name": "TablePreview",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!TableStoreProvider:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "TableStoreProvider: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<{\n    children: "
-            },
-            {
-              "kind": "Reference",
-              "text": "JSX.Element",
-              "canonicalReference": "@types/react!~__global.JSX.Element:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ";\n}>"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "TableStoreProvider",
           "variableTypeTokenRange": {
             "startIndex": 1,
             "endIndex": 5
