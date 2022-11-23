@@ -14,8 +14,9 @@ export interface ProfileHandlerPlugin<T extends Resource = any>
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [group?](./app-framework.profilehandlerplugin.group.md) |  | [ResourceGroup](./app-framework.resourcegroup.md) | <i>(Optional)</i> The grouping for this resource type. The default is 'app'. This grouping determines what resources this is rendered with in the tree-view. |
 |  [iconName](./app-framework.profilehandlerplugin.iconname.md) |  | string | The icon name to use in the file-tree |
-|  [onGenerateRoutes?](./app-framework.profilehandlerplugin.ongenerateroutes.md) |  | (resource: T, pathContext: string) =&gt; [GeneratedRoute](./app-framework.generatedroute.md)<!-- -->\[\] \| undefined | <i>(Optional)</i> Event handler for when the resource is undergoing route generation. A route is always generated for the resource; any related routes may be retured here. |
+|  [onGenerateRoutes?](./app-framework.profilehandlerplugin.ongenerateroutes.md) |  | (resource: T, parentPath: string, resourcePath: string) =&gt; { preItemSiblings?: [ResourceRoute](./app-framework.resourceroute.md)<!-- -->\[\]; postItemSiblings?: [ResourceRoute](./app-framework.resourceroute.md)<!-- -->\[\]; children?: [ResourceRoute](./app-framework.resourceroute.md)<!-- -->\[\]; } \| undefined | <i>(Optional)</i> Event handler for when the resource is undergoing route generation. A route is always generated for the resource; any related routes may be retured here. |
 |  [profile](./app-framework.profilehandlerplugin.profile.md) |  | string | The profile name to register within the app framework. This is used to identify the plugin and should be unique. |
 |  [renderer](./app-framework.profilehandlerplugin.renderer.md) |  | React.ComponentType&lt;{ resource: T; }&gt; | Render the plugin |
 

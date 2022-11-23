@@ -8,10 +8,11 @@ import { memo, useCallback, useRef } from 'react'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 
 import { EMPTY_ARRAY } from '../../../empty.js'
-import type { ResourceTreeData } from '../FileTree/index.js'
+import type { ResourceRoute } from '../../../types.js'
 import { FileTree } from '../FileTree/index.js'
+import { useResourceRoutes } from '../FileTree/TreeItems.hooks.js'
 import {
-	useDataPackageResourceRoutes,
+	useFlattened,
 	useOnChangeWidth,
 	useOnToggle,
 	useRegisteredProfiles,
@@ -44,17 +45,15 @@ export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 		] = useBoolean(true)
 		const onToggle = useOnToggle(ref, expanded, toggleExpanded)
 		const onChangeWidth = useOnChangeWidth(expanded, collapse, expand)
-
 		const selectedKey = useLocation().pathname
 		const onSelect = useCallback(
-			(v: ResourceTreeData) => {
-				navigate(v.href)
-			},
+			(v: ResourceRoute) => navigate(v.href),
 			[navigate],
 		)
 
 		const plugins = useRegisteredProfiles(profiles)
-		const routes = useDataPackageResourceRoutes(plugins)
+		const resources = useResourceRoutes(plugins)
+		const flattenedRoutes = useFlattened(resources)
 
 		return (
 			<Allotment
@@ -70,22 +69,22 @@ export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 					minSize={PANE_COLLAPSED_SIZE}
 				>
 					<FileTree
+						resources={resources}
 						expanded={expanded}
 						toggleExpanded={onToggle}
 						style={fileTreeStyle}
 						examples={examples}
 						selectedKey={selectedKey}
-						plugins={plugins}
 						onSelect={onSelect}
 					/>
 				</Allotment.Pane>
 				<Allotment.Pane>
 					<Routes>
 						<Route path="/" element={children} />
-						{routes.map(r => (
+						{flattenedRoutes.map(r => (
 							<Route
-								key={r.path}
-								path={r.path}
+								key={r.href}
+								path={r.href}
 								element={<r.renderer {...r.props} />}
 							/>
 						))}

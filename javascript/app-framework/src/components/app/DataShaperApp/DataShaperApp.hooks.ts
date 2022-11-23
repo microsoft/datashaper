@@ -2,15 +2,22 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DataPackage, Resource } from '@datashaper/workflow'
+import type { Resource } from '@datashaper/workflow'
 import { useDebounceFn } from 'ahooks'
 import type { AllotmentHandle } from 'allotment'
+import { useObservableState } from 'observable-hooks'
 import type React from 'react'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useMemo } from 'react'
+import { map } from 'rxjs'
 
-import { EMPTY_ARRAY } from '../../../empty.js'
+import { EMPTY_ARRAY,emptyArray } from '../../../empty.js'
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
-import type { GeneratedRoute, ProfileHandlerPlugin } from '../../../types.js'
+import type {
+	ProfileHandlerPlugin,
+	ResourceRoute} from '../../../types.js';
+import {
+	ResourceGroup
+} from '../../../types.js'
 import { KNOWN_PROFILE_PLUGINS } from './DataShaperApp.constants.js'
 
 const BREAK_WIDTH = 150
@@ -58,55 +65,6 @@ export function useOnChangeWidth(
 	).run
 }
 
-export function useDataPackageResourceRoutes(
-	plugins: Map<string, ProfileHandlerPlugin>,
-): GeneratedRoute[] {
-	const dp = useDataPackage()
-	const [result, setResult] = useState<GeneratedRoute[]>([])
-	useEffect(() => {
-		setResult(getRoutes(dp, plugins))
-		return dp.onChange(() => setResult(getRoutes(dp, plugins)))
-	}, [dp, plugins])
-	return result
-}
-
-function getRoutes(
-	dp: DataPackage,
-	plugins: Map<string, ProfileHandlerPlugin>,
-): GeneratedRoute[] {
-	const result: GeneratedRoute[] = []
-	addSources(result, dp.resources, plugins)
-	return result
-}
-
-function addSources(
-	result: GeneratedRoute[],
-	resources: Resource[],
-	plugins: Map<string, ProfileHandlerPlugin>,
-	root = '/resource',
-) {
-	for (const resource of resources) {
-		const plugin = plugins.get(resource.profile)
-
-		if (plugin != null) {
-			const resourceRoute = {
-				path: `${root}/${resource.name}`,
-				renderer: plugin.renderer,
-				props: { resource },
-			}
-			const extraRoutes = plugin.onGenerateRoutes?.(resource, root)
-			result.push(resourceRoute, ...(extraRoutes ?? EMPTY_ARRAY))
-		} else {
-			console.error('could not find renderer for profile', resource.profile)
-		}
-		/** Descend into child resources */
-		const children = (resource as any).sources
-		if (children?.length > 0) {
-			addSources(result, children, plugins, `${root}/${resource.name}`)
-		}
-	}
-}
-
 export function useRegisteredProfiles(
 	profiles: ProfileHandlerPlugin[] | undefined,
 ): Map<string, ProfileHandlerPlugin> {
@@ -120,4 +78,86 @@ export function useRegisteredProfiles(
 		}
 		return result
 	}, [profiles])
+}
+
+export function useResourceRoutes(
+	plugins: Map<string, ProfileHandlerPlugin>,
+): ResourceRoute[][] {
+	const pkg = useDataPackage()
+	const observable = useMemo(
+		() =>
+			pkg.resources$.pipe(
+				map(resources => {
+					const groups = groupResources(resources, plugins)
+					return groups.map(g =>
+						g.map(r => getFileTreeItem(r, plugins)).flatMap(x => x),
+					)
+				}),
+			),
+		[pkg, plugins],
+	)
+	return useObservableState(observable, () => [])
+}
+
+function getFileTreeItem(
+	resource: Resource,
+	plugins: Map<string, ProfileHandlerPlugin>,
+	parentRoute = '/resource',
+): ResourceRoute[] {
+	const plugin = plugins.get(resource.profile)
+	if (plugin == null) {
+		throw new Error('No plugin for profile: ' + resource.profile)
+	}
+	const href = `${parentRoute}/${resource.name}`
+	const root: ResourceRoute = {
+		href,
+		title: resource.name,
+		icon: plugin.iconName,
+		renderer: plugin.renderer,
+		props: { resource },
+	}
+	const extraRoutes = plugin?.onGenerateRoutes?.(resource, parentRoute, href)
+
+	const children: ResourceRoute[] = extraRoutes?.children ?? []
+	for (const r of resource.sources ?? emptyArray) {
+		children.push(...getFileTreeItem(r, plugins, href))
+	}
+	root.children = children
+	return [
+		...(extraRoutes?.preItemSiblings ?? EMPTY_ARRAY),
+		root,
+		...(extraRoutes?.postItemSiblings ?? EMPTY_ARRAY),
+	]
+}
+
+function groupResources(
+	resources: Resource[],
+	plugins: Map<string, ProfileHandlerPlugin>,
+): Resource[][] {
+	const dataResources: Resource[] = []
+	const appResources: Resource[] = []
+	for (const r of resources) {
+		const plugin = plugins.get(r.profile)
+		if (plugin?.group === ResourceGroup.Data) {
+			dataResources.push(r)
+		} else {
+			appResources.push(r)
+		}
+	}
+	return [dataResources, appResources]
+}
+
+export function useFlattened(routes: ResourceRoute[][]) {
+	return useMemo(() => {
+		const result: ResourceRoute[] = []
+		for (const group of routes) {
+			for (const r of group) {
+				result.push(r)
+				if (r.children != null) {
+					result.push(...r.children)
+				}
+			}
+		}
+		return result
+	}, [routes])
 }

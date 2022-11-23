@@ -24,6 +24,7 @@ export abstract class Resource
 	private _path: ResourceSchema['path']
 	private _homepage: string | undefined
 	private _license: string | undefined
+	private _sources: Resource[] = []
 
 	public get path(): ResourceSchema['path'] {
 		return this._path
@@ -52,6 +53,15 @@ export abstract class Resource
 		this._onChange.next()
 	}
 
+	public get sources(): Resource[] {
+		return this._sources
+	}
+
+	public set sources(value: Resource[]) {
+		this._sources = value
+		this._onChange.next()
+	}
+
 	public override toSchema(): ResourceSchema {
 		return {
 			...super.toSchema(),
@@ -60,7 +70,19 @@ export abstract class Resource
 			path: this.path,
 			homepage: this.homepage,
 			license: this.license,
+			sources: this.sourcesToSchema() ?? [],
 		}
+	}
+
+	/**
+	 *
+	 * @returns The serialized resources array
+	 */
+	protected sourcesToSchema(): Maybe<ResourceSchema[]> {
+		// the default behavior is to not serialize sources.
+		// this is because data bundles usually write these into the blob archive, which is not available here.
+		// if you want to serialize sources, override this method.
+		return undefined
 	}
 
 	public override loadSchema(

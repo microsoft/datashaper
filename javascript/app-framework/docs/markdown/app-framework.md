@@ -14,6 +14,7 @@
 
 |  Enumeration | Description |
 |  --- | --- |
+|  [ResourceGroup](./app-framework.resourcegroup.md) |  |
 |  [ViewType](./app-framework.viewtype.md) |  |
 
 ## Functions
@@ -39,13 +40,13 @@
 |  [BundleEditorProps](./app-framework.bundleeditorprops.md) |  |
 |  [CodebookEditorProps](./app-framework.codebookeditorprops.md) |  |
 |  [DataSourceEditorProps](./app-framework.datasourceeditorprops.md) |  |
-|  [GeneratedRoute](./app-framework.generatedroute.md) |  |
 |  [JsonEditorProps](./app-framework.jsoneditorprops.md) |  |
 |  [ParserOptionsEditorProps](./app-framework.parseroptionseditorprops.md) |  |
 |  [PersistenceService](./app-framework.persistenceservice.md) | The Persistence Service available in the application. This service is responsible for saving and loading data packages. |
 |  [ProfileHandlerPlugin](./app-framework.profilehandlerplugin.md) |  |
 |  [RawTableProps](./app-framework.rawtableprops.md) |  |
 |  [RawTableViewerProps](./app-framework.rawtableviewerprops.md) |  |
+|  [ResourceRoute](./app-framework.resourceroute.md) | Data attached to resource-tree nodes |
 |  [ViewOptionsProps](./app-framework.viewoptionsprops.md) |  |
 |  [WorkflowEditorProps](./app-framework.workfloweditorprops.md) |  |
 

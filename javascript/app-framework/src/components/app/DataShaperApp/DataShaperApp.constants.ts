@@ -5,7 +5,8 @@
 import { KnownProfile } from '@datashaper/schema'
 import type { DataTable } from '@datashaper/workflow'
 
-import type { ProfileHandlerPlugin } from '../../../types.js'
+import type { ProfileHandlerPlugin} from '../../../types.js';
+import { ResourceGroup } from '../../../types.js'
 import {
 	BundleEditor,
 	CodebookEditor,
@@ -19,11 +20,13 @@ export const KNOWN_PROFILE_PLUGINS: ProfileHandlerPlugin[] = [
 		profile: KnownProfile.TableBundle,
 		renderer: BundleEditor,
 		iconName: 'ViewAll',
+		group: ResourceGroup.Data,
 	},
 	{
 		profile: KnownProfile.DataTable,
 		renderer: DataSourceEditor,
 		iconName: 'PageData',
+		group: ResourceGroup.Data,
 		onGenerateRoutes(resource: DataTable, pathContext) {
 			const dataPath = Array.isArray(resource.path)
 				? resource.path[0]
@@ -31,13 +34,19 @@ export const KNOWN_PROFILE_PLUGINS: ProfileHandlerPlugin[] = [
 			if (dataPath != null) {
 				const pathItems = dataPath.split('/') ?? []
 				const lastPathItem = pathItems[pathItems.length - 1]
-				return [
-					{
-						path: `${pathContext}/${lastPathItem}`,
-						renderer: RawTableViewer,
-						props: { dataTable: resource },
-					},
-				]
+				if (lastPathItem != null) {
+					return {
+						preItemSiblings: [
+							{
+								title: lastPathItem,
+								href: `${pathContext}/${lastPathItem}`,
+								icon: 'Database',
+								renderer: RawTableViewer,
+								props: { dataTable: resource },
+							},
+						],
+					}
+				}
 			}
 		},
 	},
@@ -45,10 +54,12 @@ export const KNOWN_PROFILE_PLUGINS: ProfileHandlerPlugin[] = [
 		profile: KnownProfile.Codebook,
 		renderer: CodebookEditor,
 		iconName: 'FormLibraryMirrored',
+		group: ResourceGroup.Data,
 	},
 	{
 		profile: KnownProfile.Workflow,
 		renderer: WorkflowEditor,
 		iconName: 'SetAction',
+		group: ResourceGroup.Data,
 	},
 ]

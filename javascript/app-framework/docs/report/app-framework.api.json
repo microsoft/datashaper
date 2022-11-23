@@ -714,109 +714,6 @@
           ]
         },
         {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/app-framework!GeneratedRoute:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface GeneratedRoute "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "GeneratedRoute",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!GeneratedRoute#path:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "path: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "path",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!GeneratedRoute#props:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "props: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "any"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "props",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!GeneratedRoute#renderer:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "renderer: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "React.ComponentType",
-                  "canonicalReference": "@types/react!~React.ComponentType:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<any>"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "renderer",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
           "kind": "Variable",
           "canonicalReference": "@datashaper/app-framework!HeadersOption:var",
           "docComment": "",
@@ -1396,6 +1293,34 @@
           "members": [
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ProfileHandlerPlugin#group:member",
+              "docComment": "/**\n * The grouping for this resource type. The default is 'app'. This grouping determines what resources this is rendered with in the tree-view.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "group?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceGroup",
+                  "canonicalReference": "@datashaper/app-framework!ResourceGroup:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "group",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!ProfileHandlerPlugin#iconName:member",
               "docComment": "/**\n * The icon name to use in the file-tree\n */\n",
               "excerptTokens": [
@@ -1424,7 +1349,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!ProfileHandlerPlugin#onGenerateRoutes:member",
-              "docComment": "/**\n * Event handler for when the resource is undergoing route generation. A route is always generated for the resource; any related routes may be retured here.\n *\n * @param resource - The resource that routes are being generated for.\n *\n * @param pathContext - The current path context being used for generation. This is the parent path of the resource.\n */\n",
+              "docComment": "/**\n * Event handler for when the resource is undergoing route generation. A route is always generated for the resource; any related routes may be retured here.\n *\n * @param resource - The resource that routes are being generated for.\n *\n * @param parentPath - The current path context being used for generation. This is the parent path of the resource.\n *\n * @param resourcePath - The resource path that was used for the resource.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1432,16 +1357,34 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "(resource: T, pathContext: string) => "
+                  "text": "(resource: T, parentPath: string, resourcePath: string) => {\n        preItemSiblings?: "
                 },
                 {
                   "kind": "Reference",
-                  "text": "GeneratedRoute",
-                  "canonicalReference": "@datashaper/app-framework!GeneratedRoute:interface"
+                  "text": "ResourceRoute",
+                  "canonicalReference": "@datashaper/app-framework!ResourceRoute:interface"
                 },
                 {
                   "kind": "Content",
-                  "text": "[] | undefined"
+                  "text": "[];\n        postItemSiblings?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceRoute",
+                  "canonicalReference": "@datashaper/app-framework!ResourceRoute:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[];\n        children?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceRoute",
+                  "canonicalReference": "@datashaper/app-framework!ResourceRoute:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[];\n    } | undefined"
                 },
                 {
                   "kind": "Content",
@@ -1454,7 +1397,7 @@
               "name": "onGenerateRoutes",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 4
+                "endIndex": 8
               }
             },
             {
@@ -1836,6 +1779,253 @@
             }
           ],
           "name": "removeExtension"
+        },
+        {
+          "kind": "Enum",
+          "canonicalReference": "@datashaper/app-framework!ResourceGroup:enum",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare enum ResourceGroup "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ResourceGroup",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/app-framework!ResourceGroup.Apps:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Apps = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"apps\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Apps"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/app-framework!ResourceGroup.Data:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Data = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"data\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Data"
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/app-framework!ResourceRoute:interface",
+          "docComment": "/**\n * Data attached to resource-tree nodes\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface ResourceRoute "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ResourceRoute",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ResourceRoute#children:member",
+              "docComment": "/**\n * Child node Data\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "children?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceRoute",
+                  "canonicalReference": "@datashaper/app-framework!ResourceRoute:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "children",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ResourceRoute#href:member",
+              "docComment": "/**\n * The resource render route\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "href: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "href",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ResourceRoute#icon:member",
+              "docComment": "/**\n * The icon to use in the file tree\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "icon?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "icon",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ResourceRoute#props:member",
+              "docComment": "/**\n * The render props to use for this node\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "props: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "any"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "props",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ResourceRoute#renderer:member",
+              "docComment": "/**\n * The renderer to use for this node\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "renderer: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "React.ComponentType",
+                  "canonicalReference": "@types/react!~React.ComponentType:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<any>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "renderer",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ResourceRoute#title:member",
+              "docComment": "/**\n * The node text to use. Default=id\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "title: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "title",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
         },
         {
           "kind": "Variable",

@@ -107,18 +107,6 @@ export class DefaultPersistenceService implements PersistenceService {
     save(projectName?: string): Promise<void>;
 }
 
-// Warning: (ae-missing-release-tag) "GeneratedRoute" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface GeneratedRoute {
-    // (undocumented)
-    path: string;
-    // (undocumented)
-    props: any;
-    // (undocumented)
-    renderer: React.ComponentType<any>;
-}
-
 // Warning: (ae-missing-release-tag) "HeadersOption" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -184,8 +172,13 @@ export interface PersistenceService {
 //
 // @public (undocumented)
 export interface ProfileHandlerPlugin<T extends Resource = any> {
+    group?: ResourceGroup;
     iconName: string;
-    onGenerateRoutes?: (resource: T, pathContext: string) => GeneratedRoute[] | undefined;
+    onGenerateRoutes?: (resource: T, parentPath: string, resourcePath: string) => {
+        preItemSiblings?: ResourceRoute[];
+        postItemSiblings?: ResourceRoute[];
+        children?: ResourceRoute[];
+    } | undefined;
     profile: string;
     renderer: React.ComponentType<{
         resource: T;
@@ -236,6 +229,28 @@ export interface RawTableViewerProps {
 //
 // @public (undocumented)
 export function removeExtension(fileName: string): string;
+
+// Warning: (ae-missing-release-tag) "ResourceGroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum ResourceGroup {
+    // (undocumented)
+    Apps = "apps",
+    // (undocumented)
+    Data = "data"
+}
+
+// Warning: (ae-missing-release-tag) "ResourceRoute" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface ResourceRoute {
+    children?: ResourceRoute[];
+    href: string;
+    icon?: string;
+    props: any;
+    renderer: React.ComponentType<any>;
+    title: string;
+}
 
 // Warning: (ae-missing-release-tag) "TableDelimiterOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

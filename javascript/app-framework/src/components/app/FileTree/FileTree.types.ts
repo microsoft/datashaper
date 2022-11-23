@@ -7,7 +7,7 @@ import type { DataShape } from '@datashaper/schema/dist/datatable/DataShape.js'
 import type { TableContainer } from '@datashaper/tables'
 import type { BaseFile } from '@datashaper/utilities'
 
-import type { ProfileHandlerPlugin } from '../../../index.js'
+import type { ResourceRoute } from '../../../index.js'
 
 export interface FileTreeProps {
 	/**
@@ -36,14 +36,14 @@ export interface FileTreeProps {
 	examples: FileDefinition[]
 
 	/**
-	 * A map of profile-name to tree-node generator
+	 * The resource groups to render
 	 */
-	plugins: Map<string, ProfileHandlerPlugin>
+	resources: ResourceRoute[][]
 
 	/**
 	 * Event handler for when a resource is selected
 	 */
-	onSelect?: (resource: ResourceTreeData) => void
+	onSelect?: (resource: ResourceRoute) => void
 
 	/**
 	 * The currently selected item
@@ -68,29 +68,4 @@ export type AddTableHandler = (
 export interface FileDefinition {
 	name: string
 	url: string
-}
-
-/**
- * Data attached to resource-tree nodes
- */
-export interface ResourceTreeData {
-	/**
-	 * The resource render route
-	 */
-	href: string
-
-	/**
-	 * The node text to use. Default=id
-	 */
-	title: string
-
-	/**
-	 * The icon to use in the file tree
-	 */
-	icon?: string
-
-	/**
-	 * Child node Data
-	 */
-	children?: ResourceTreeData[]
 }

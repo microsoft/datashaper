@@ -12,7 +12,11 @@ import { usePersistenceService } from '../../../hooks/usePersistenceService.js'
 import { useTableBundles } from '../../../hooks/useTableBundles.js'
 import { TABLE_TYPES, ZIP_TYPES } from './FileTree.constants.js'
 import type { FileDefinition } from './FileTree.types.js'
-import { createCommandBar, openProps, saveProps } from './groupTables.js'
+import {
+	createCommandBar,
+	openProps,
+	saveProps,
+} from './FileTreeCommands.utils.js'
 
 export function useFileManagementCommands(
 	examples: FileDefinition[],
