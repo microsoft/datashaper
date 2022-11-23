@@ -22,7 +22,7 @@ export const FileTree: React.FC<FileTreeProps> = memo(function FileTree({
 	examples,
 	selectedKey,
 	resources,
-	toggleExpanded,
+	onToggleExpanded,
 	onSelect,
 }) {
 	const expandCollapseTooltip = expanded
@@ -41,7 +41,7 @@ export const FileTree: React.FC<FileTreeProps> = memo(function FileTree({
 			</MenuContainer>
 			<Tooltip content={expandCollapseTooltip}>
 				<ExpandButton
-					onClick={toggleExpanded}
+					onClick={onToggleExpanded}
 					iconProps={expanded ? icons.collapse : icons.expand}
 				/>
 			</Tooltip>

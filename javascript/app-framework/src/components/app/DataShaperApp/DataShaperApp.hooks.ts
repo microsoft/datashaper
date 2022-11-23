@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Resource } from '@datashaper/workflow'
+import { useBoolean } from '@fluentui/react-hooks'
 import { useDebounceFn } from 'ahooks'
 import type { AllotmentHandle } from 'allotment'
 import { useObservableState } from 'observable-hooks'
@@ -19,7 +20,19 @@ import { KNOWN_PROFILE_PLUGINS } from './DataShaperApp.constants.js'
 const BREAK_WIDTH = 150
 const COLLAPSED_WIDTH = 60
 
-export function useOnToggle(
+export function useExpandedState(
+	ref: React.MutableRefObject<AllotmentHandle | null>,
+): [boolean, () => void, (sizes: number[]) => void] {
+	const [
+		expanded,
+		{ toggle: toggleExpanded, setTrue: expand, setFalse: collapse },
+	] = useBoolean(true)
+	const onChangeWidth = useOnChangeWidth(expanded, collapse, expand)
+	const onToggle = useOnToggle(ref, expanded, toggleExpanded)
+	return [expanded, onToggle, onChangeWidth]
+}
+
+function useOnToggle(
 	ref: React.MutableRefObject<AllotmentHandle | null>,
 	expanded: boolean,
 	toggleExpanded: () => void,
@@ -34,7 +47,7 @@ export function useOnToggle(
 	}, [ref, expanded, toggleExpanded])
 }
 
-export function useOnChangeWidth(
+function useOnChangeWidth(
 	expanded: boolean,
 	collapse: () => void,
 	expand: () => void,

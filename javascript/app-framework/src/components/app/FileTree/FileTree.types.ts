@@ -28,7 +28,7 @@ export interface FileTreeProps {
 	/**
 	 * Toggle the file-tree expansion
 	 */
-	toggleExpanded: () => void
+	onToggleExpanded: () => void
 
 	/**
 	 * Examples to present to the user in the command-bar menu
