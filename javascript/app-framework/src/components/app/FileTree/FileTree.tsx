@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import merge from 'lodash-es/merge.js'
 import { memo } from 'react'
 
 import {
@@ -20,29 +19,29 @@ export const FileTree: React.FC<FileTreeProps> = memo(function FileTree({
 	style,
 	className,
 	expanded,
-	toggleExpanded,
 	examples,
 	selectedKey,
-	plugins,
+	resources,
+	onToggleExpanded,
 	onSelect,
 }) {
 	const expandCollapseTooltip = expanded
 		? 'Show less information'
 		: 'Show more information'
 	return (
-		<Container style={merge({ width: 'auto' }, style)} className={className}>
+		<Container style={style} className={className}>
 			<MenuContainer>
 				<FileTreeCommands expanded={expanded} examples={examples} />
 				<TreeItems
+					resources={resources}
 					expanded={expanded}
 					selectedRoute={selectedKey}
-					plugins={plugins}
 					onSelect={onSelect}
 				/>
 			</MenuContainer>
 			<Tooltip content={expandCollapseTooltip}>
 				<ExpandButton
-					onClick={toggleExpanded}
+					onClick={onToggleExpanded}
 					iconProps={expanded ? icons.collapse : icons.expand}
 				/>
 			</Tooltip>

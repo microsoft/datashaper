@@ -14,6 +14,7 @@
 
 |  Enumeration | Description |
 |  --- | --- |
+|  [ResourceGroup](./app-framework.resourcegroup.md) |  |
 |  [ViewType](./app-framework.viewtype.md) |  |
 
 ## Functions
@@ -38,13 +39,14 @@
 |  --- | --- |
 |  [BundleEditorProps](./app-framework.bundleeditorprops.md) |  |
 |  [CodebookEditorProps](./app-framework.codebookeditorprops.md) |  |
-|  [DataShaperAppPlugin](./app-framework.datashaperappplugin.md) |  |
 |  [DataSourceEditorProps](./app-framework.datasourceeditorprops.md) |  |
 |  [JsonEditorProps](./app-framework.jsoneditorprops.md) |  |
 |  [ParserOptionsEditorProps](./app-framework.parseroptionseditorprops.md) |  |
 |  [PersistenceService](./app-framework.persistenceservice.md) | The Persistence Service available in the application. This service is responsible for saving and loading data packages. |
+|  [ProfilePlugin](./app-framework.profileplugin.md) |  |
 |  [RawTableProps](./app-framework.rawtableprops.md) |  |
 |  [RawTableViewerProps](./app-framework.rawtableviewerprops.md) |  |
+|  [ResourceRoute](./app-framework.resourceroute.md) | Data attached to resource-tree nodes |
 |  [ViewOptionsProps](./app-framework.viewoptionsprops.md) |  |
 |  [WorkflowEditorProps](./app-framework.workfloweditorprops.md) |  |
 
@@ -57,7 +59,8 @@
 |  [CodebookEditor](./app-framework.codebookeditor.md) |  |
 |  [Container](./app-framework.container.md) |  |
 |  [DataPackageContext](./app-framework.datapackagecontext.md) |  |
-|  [DataShaperApp](./app-framework.datashaperapp.md) |  |
+|  [DataPackageProvider](./app-framework.datapackageprovider.md) |  |
+|  [DataShaperApp](./app-framework.datashaperapp.md) | A component for rendering a data-shaper application. This includes a resource management UI area and a main area that renders selected content based on its profile type. It is expected that this application is rendered under a react-router Router component. |
 |  [DataSourceEditor](./app-framework.datasourceeditor.md) |  |
 |  [HeadersOption](./app-framework.headersoption.md) |  |
 |  [JsonEditor](./app-framework.jsoneditor.md) |  |
@@ -70,7 +73,6 @@
 |  [TableDelimiterOptions](./app-framework.tabledelimiteroptions.md) |  |
 |  [TableLayoutOptions](./app-framework.tablelayoutoptions.md) |  |
 |  [TablePreview](./app-framework.tablepreview.md) |  |
-|  [TableStoreProvider](./app-framework.tablestoreprovider.md) |  |
 |  [viewOptions](./app-framework.viewoptions.md) |  |
 |  [ViewOptions](./app-framework.viewoptions.md) |  |
 |  [WorkflowEditor](./app-framework.workfloweditor.md) |  |

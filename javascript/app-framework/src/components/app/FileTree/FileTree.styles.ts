@@ -21,6 +21,7 @@ export const Container = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 	height: 100%;
+	width: auto;
 `
 
 export const MenuContainer = styled.div`

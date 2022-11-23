@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { TableBundle } from '@datashaper/workflow'
 import type {
 	ICommandBarItemProps,
 	IContextualMenuItem,
@@ -11,78 +10,7 @@ import type {
 } from '@fluentui/react'
 
 import { icons } from './FileTree.styles.js'
-import type { FileDefinition, ResourceTreeData } from './FileTree.types.js'
-
-/**
- * Get a listing of the table packages with hierarchical resources.
- */
-export function groupTables(bundles: TableBundle[]): ResourceTreeData[] {
-	const result: ResourceTreeData[] = []
-
-	bundles.forEach(table => {
-		const children: ResourceTreeData[] = []
-		if (table?.input?.data != null) {
-			children.push(resourceNode(table))
-			children.push(datasourceNode(table))
-		}
-		if (table.codebook?.fields?.length) {
-			children.push(codebookNode(table))
-		}
-		if (table.workflow?.length) {
-			children.push(workflowNode(table))
-		}
-
-		result.push(bundleNode(table, children))
-	})
-	return result
-}
-
-function resourceNode(table: TableBundle): ResourceTreeData {
-	const pathItems = (table.input?.path as string).split('/')
-	const title =
-		pathItems[pathItems.length - 1] ?? `${table.name}.${table.input?.format}`
-	return {
-		href: `/resource/${table.name}/${title}`,
-		title,
-		icon: 'Database',
-	}
-}
-
-function datasourceNode(table: TableBundle): ResourceTreeData {
-	return {
-		href: `/resource/${table.name}/datatable.json`,
-		title: 'datatable.json',
-		icon: 'PageData',
-	}
-}
-
-function workflowNode(table: TableBundle): ResourceTreeData {
-	return {
-		href: `/resource/${table.name}/workflow.json`,
-		icon: 'SetAction',
-		title: 'workflow.json',
-	}
-}
-
-function codebookNode(table: TableBundle): ResourceTreeData {
-	return {
-		href: `/resource/${table.name}/codebook.json`,
-		icon: 'FormLibraryMirrored',
-		title: 'codebook.json',
-	}
-}
-
-function bundleNode(
-	table: TableBundle,
-	children: ResourceTreeData[],
-): ResourceTreeData {
-	return {
-		href: `/resource/${table.name}`,
-		icon: 'ViewAll',
-		title: table.name,
-		children,
-	}
-}
+import type { FileDefinition } from './FileTree.types.js'
 
 export function openProps(
 	examples: FileDefinition[],

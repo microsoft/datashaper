@@ -2,30 +2,37 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	type DataPackage,
-	type Resource,
-	isDataTable,
-} from '@datashaper/workflow'
+import type { Resource } from '@datashaper/workflow'
+import { useBoolean } from '@fluentui/react-hooks'
 import { useDebounceFn } from 'ahooks'
 import type { AllotmentHandle } from 'allotment'
+import { useObservableState } from 'observable-hooks'
 import type React from 'react'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useMemo } from 'react'
+import { map } from 'rxjs'
 
+import { EMPTY_ARRAY, emptyArray } from '../../../empty.js'
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
-import type { DataShaperAppPlugin } from '../../../types.js'
-import {
-	BundleEditor,
-	CodebookEditor,
-	DataSourceEditor,
-	RawTableViewer,
-	WorkflowEditor,
-} from '../../editors/index.js'
+import type { ProfilePlugin, ResourceRoute } from '../../../types.js'
+import { ResourceGroup } from '../../../types.js'
+import { KNOWN_PROFILE_PLUGINS } from './DataShaperApp.constants.js'
 
 const BREAK_WIDTH = 150
 const COLLAPSED_WIDTH = 60
 
-export function useOnToggle(
+export function useExpandedState(
+	ref: React.MutableRefObject<AllotmentHandle | null>,
+): [boolean, () => void, (sizes: number[]) => void] {
+	const [
+		expanded,
+		{ toggle: toggleExpanded, setTrue: expand, setFalse: collapse },
+	] = useBoolean(true)
+	const onChangeWidth = useOnChangeWidth(expanded, collapse, expand)
+	const onToggle = useOnToggle(ref, expanded, toggleExpanded)
+	return [expanded, onToggle, onChangeWidth]
+}
+
+function useOnToggle(
 	ref: React.MutableRefObject<AllotmentHandle | null>,
 	expanded: boolean,
 	toggleExpanded: () => void,
@@ -40,7 +47,7 @@ export function useOnToggle(
 	}, [ref, expanded, toggleExpanded])
 }
 
-export function useOnChangeWidth(
+function useOnChangeWidth(
 	expanded: boolean,
 	collapse: () => void,
 	expand: () => void,
@@ -67,83 +74,107 @@ export function useOnChangeWidth(
 	).run
 }
 
-export interface GeneratedRoute {
-	path: string
-	renderer: React.ComponentType
-	props: any
-}
-
-export function useDataPackageResourceRoutes(
-	plugins: Map<string, DataShaperAppPlugin>,
-): GeneratedRoute[] {
+export function useRegisteredProfiles(
+	profiles: ProfilePlugin[] | undefined,
+): Map<string, ProfilePlugin> {
 	const dp = useDataPackage()
-	const [result, setResult] = useState<GeneratedRoute[]>([])
-	useEffect(() => {
-		setResult(getRoutes(dp, plugins))
-		return dp.onChange(() => setResult(getRoutes(dp, plugins)))
-	}, [dp, plugins])
-	return result
-}
-
-function getRoutes(
-	dp: DataPackage,
-	plugins: Map<string, DataShaperAppPlugin>,
-): GeneratedRoute[] {
-	const result: GeneratedRoute[] = []
-	addSources(result, dp.resources, plugins)
-	return result
-}
-
-function addSources(
-	result: GeneratedRoute[],
-	resources: Resource[],
-	plugins: Map<string, DataShaperAppPlugin>,
-	root = '/resource',
-) {
-	for (const resource of resources) {
-		// TODO: check plugins
-		const renderer =
-			DEFAULT_HANDLERS[resource.profile] ||
-			plugins.get(resource.profile)?.renderer
-
-		// Special case for raw resources embedded in datatable under `path` property
-		// and or datatable.json
-		if (isDataTable(resource)) {
-			if (resource.path != null && typeof resource.path === 'string') {
-				const pathItems = resource.path.split('/') ?? []
-				const lastPathItem = pathItems[pathItems.length - 1]
-				result.push({
-					path: `${root}/${lastPathItem}`,
-					renderer: RawTableViewer as any,
-					props: { dataTable: resource },
-				})
-				result.push({
-					path: `${root}/datatable.json`,
-					renderer: DataSourceEditor as any,
-					props: { dataTable: resource },
-				})
+	return useMemo<Map<string, ProfilePlugin>>(() => {
+		const result = new Map<string, ProfilePlugin>()
+		const register = (p: ProfilePlugin) => {
+			result.set(p.profile, p)
+			if (p.dataHandler) {
+				dp.addResourceHandler(p.dataHandler)
 			}
-		} else if (renderer != null) {
-			result.push({
-				path: `${root}/${resource.name}`,
-				renderer: renderer as any,
-				props: { resource },
-			})
 		}
 
-		/** Descend into child resources */
-		const children = (resource as any).sources
-		if (children?.length > 0) {
-			addSources(result, children, plugins, `${root}/${resource.name}`)
+		for (const p of KNOWN_PROFILE_PLUGINS) {
+			register(p)
+		}
+		for (const p of profiles ?? EMPTY_ARRAY) {
+			register(p)
+		}
+		return result
+	}, [profiles])
+}
+
+export function useResourceRoutes(
+	plugins: Map<string, ProfilePlugin>,
+): ResourceRoute[][] {
+	const pkg = useDataPackage()
+	const observable = useMemo(
+		() =>
+			pkg.resources$.pipe(
+				map(resources => {
+					const groups = groupResources(resources, plugins)
+					return groups.map(g =>
+						g.map(r => getFileTreeItem(r, plugins)).flatMap(x => x),
+					)
+				}),
+			),
+		[pkg, plugins],
+	)
+	return useObservableState(observable, () => [])
+}
+
+function getFileTreeItem(
+	resource: Resource,
+	plugins: Map<string, ProfilePlugin>,
+	parentRoute = '/resource',
+): ResourceRoute[] {
+	const plugin = plugins.get(resource.profile)
+	if (plugin == null) {
+		throw new Error('No plugin for profile: ' + resource.profile)
+	}
+	const href = `${parentRoute}/${resource.name}`
+	const root: ResourceRoute = {
+		href,
+		title: resource.name,
+		icon: plugin.iconName,
+		renderer: plugin.renderer,
+		props: { resource },
+	}
+	const extraRoutes = plugin?.onGenerateRoutes?.(resource, parentRoute, href)
+
+	const children: ResourceRoute[] = extraRoutes?.children ?? []
+	for (const r of resource.sources ?? emptyArray) {
+		children.push(...getFileTreeItem(r, plugins, href))
+	}
+	root.children = children
+	return [
+		...(extraRoutes?.preItemSiblings ?? EMPTY_ARRAY),
+		root,
+		...(extraRoutes?.postItemSiblings ?? EMPTY_ARRAY),
+	]
+}
+
+function groupResources(
+	resources: Resource[],
+	plugins: Map<string, ProfilePlugin>,
+): Resource[][] {
+	const dataResources: Resource[] = []
+	const appResources: Resource[] = []
+	for (const r of resources) {
+		const plugin = plugins.get(r.profile)
+		if (plugin?.group === ResourceGroup.Data) {
+			dataResources.push(r)
+		} else {
+			appResources.push(r)
 		}
 	}
+	return [dataResources, appResources]
 }
 
-const DEFAULT_HANDLERS: Record<string, React.ComponentType<any>> = {
-	tablebundle: BundleEditor,
-	codebook: CodebookEditor,
-	source: DataSourceEditor,
-	datatable: BundleEditor,
-	workflow: WorkflowEditor,
-	datasource: RawTableViewer,
+export function useFlattened(routes: ResourceRoute[][]) {
+	return useMemo(() => {
+		const result: ResourceRoute[] = []
+		for (const group of routes) {
+			for (const r of group) {
+				result.push(r)
+				if (r.children != null) {
+					result.push(...r.children)
+				}
+			}
+		}
+		return result
+	}, [routes])
 }

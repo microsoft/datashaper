@@ -8,4 +8,6 @@
 
 ```typescript
 get sources(): Resource[];
+
+set sources(_value: Resource[]);
 ```

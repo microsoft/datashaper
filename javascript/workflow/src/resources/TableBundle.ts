@@ -45,7 +45,7 @@ export class TableBundle extends Resource {
 		this.rebindWorkflowInput()
 	}
 
-	public get sources(): Resource[] {
+	public override get sources(): Resource[] {
 		const result: Resource[] = []
 		if (this.input != null) {
 			result.push(this.input)
@@ -57,6 +57,10 @@ export class TableBundle extends Resource {
 			result.push(this.workflow)
 		}
 		return result
+	}
+
+	public override set sources(_value: Resource[]) {
+		throw new Error('tablebundle sources are read-only')
 	}
 
 	public get input(): DataTable | undefined {

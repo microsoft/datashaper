@@ -25,6 +25,8 @@ import { ITextFieldProps } from '@fluentui/react';
 import type { Maybe } from '@datashaper/workflow';
 import type { ParserOptions } from '@datashaper/schema';
 import type { default as React_2 } from 'react';
+import type { Resource } from '@datashaper/workflow';
+import type { ResourceHandler } from '@datashaper/workflow';
 import { StyledComponent } from 'styled-components';
 import type { TableBundle } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
@@ -76,22 +78,18 @@ export const Container: StyledComponent<"div", any, {}, never>;
 // @public (undocumented)
 export const DataPackageContext: Context<DataPackage>;
 
+// Warning: (ae-missing-release-tag) "DataPackageProvider" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const DataPackageProvider: React.FC<{
+    children: JSX.Element;
+}>;
+
 // Warning: (ae-forgotten-export) The symbol "DataShaperAppProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "DataShaperApp" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export const DataShaperApp: React.FC<DataShaperAppProps>;
-
-// Warning: (ae-missing-release-tag) "DataShaperAppPlugin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface DataShaperAppPlugin {
-    fileTreeIconName: string;
-    profile: string;
-    renderer: React_2.ComponentType<{
-        resource: unknown;
-    }>;
-}
 
 // Warning: (ae-missing-release-tag) "DataSourceEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -103,7 +101,7 @@ export const DataSourceEditor: React.FC<DataSourceEditorProps>;
 // @public (undocumented)
 export interface DataSourceEditorProps {
     // (undocumented)
-    dataTable: DataTable;
+    resource: DataTable;
 }
 
 // Warning: (ae-missing-release-tag) "DefaultPersistenceService" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -178,6 +176,24 @@ export interface PersistenceService {
     save(projectName?: string): Promise<void>;
 }
 
+// Warning: (ae-missing-release-tag) "ProfilePlugin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ProfilePlugin<T extends Resource = any> {
+    dataHandler?: ResourceHandler;
+    group?: ResourceGroup;
+    iconName: string;
+    onGenerateRoutes?: (resource: T, parentPath: string, resourcePath: string) => {
+        preItemSiblings?: ResourceRoute[];
+        postItemSiblings?: ResourceRoute[];
+        children?: ResourceRoute[];
+    } | undefined;
+    profile: string;
+    renderer: React.ComponentType<{
+        resource: T;
+    }>;
+}
+
 // Warning: (ae-missing-release-tag) "RadioGroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -223,6 +239,28 @@ export interface RawTableViewerProps {
 // @public (undocumented)
 export function removeExtension(fileName: string): string;
 
+// Warning: (ae-missing-release-tag) "ResourceGroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum ResourceGroup {
+    // (undocumented)
+    Apps = "apps",
+    // (undocumented)
+    Data = "data"
+}
+
+// Warning: (ae-missing-release-tag) "ResourceRoute" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface ResourceRoute {
+    children?: ResourceRoute[];
+    href: string;
+    icon?: string;
+    props: any;
+    renderer: React.ComponentType<any>;
+    title: string;
+}
+
 // Warning: (ae-missing-release-tag) "TableDelimiterOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -247,13 +285,6 @@ export const TablePreview: React.FC<{
     table?: ColumnTable;
     error?: string;
     showType?: boolean;
-}>;
-
-// Warning: (ae-missing-release-tag) "TableStoreProvider" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const TableStoreProvider: React.FC<{
-    children: JSX.Element;
 }>;
 
 // Warning: (ae-missing-release-tag) "useDataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

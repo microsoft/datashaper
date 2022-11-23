@@ -3,9 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-assignment */
-import type { DataPackageSchema} from '@datashaper/schema';
-import { 	createDataPackageSchemaObject,
-KnownProfile ,
+import type { DataPackageSchema } from '@datashaper/schema'
+import {
+	createDataPackageSchemaObject,
+	KnownProfile,
 	LATEST_DATAPACKAGE_SCHEMA,
 } from '@datashaper/schema'
 import type { Observable } from 'rxjs'
@@ -15,7 +16,7 @@ import { Resource } from '../Resource.js'
 import type { ResourceHandler } from '../types.js'
 import { toResourceSchema } from '../utils.js'
 import { write } from './io.js'
-import { TableBundlePersistenceHandler } from './TableBundlePersistenceHandler.js'
+import { TableBundleHandler } from './TableBundleHandler.js'
 
 export class DataPackage extends Resource {
 	public readonly $schema = LATEST_DATAPACKAGE_SCHEMA
@@ -30,7 +31,7 @@ export class DataPackage extends Resource {
 
 	public constructor(public dataPackage?: DataPackageSchema) {
 		super()
-		const tableBundleHandler = new TableBundlePersistenceHandler()
+		const tableBundleHandler = new TableBundleHandler()
 		tableBundleHandler.connect(this)
 		this.addResourceHandler(tableBundleHandler)
 		this.loadSchema(dataPackage)
