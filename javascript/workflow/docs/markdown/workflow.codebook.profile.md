@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-readonly profile = "codebook";
+readonly profile = KnownProfile.Codebook;
 ```

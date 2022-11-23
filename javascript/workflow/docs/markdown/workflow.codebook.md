@@ -7,11 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class Codebook extends Resource implements SchemaResource<CodebookSchema> 
+export declare class Codebook extends Resource 
 ```
 <b>Extends:</b> [Resource](./workflow.resource.md)
-
-<b>Implements:</b> [SchemaResource](./workflow.schemaresource.md)<!-- -->&lt;CodebookSchema&gt;
 
 ## Constructors
 

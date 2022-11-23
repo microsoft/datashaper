@@ -1,0 +1,11 @@
+{
+	"name": "nhefs-transformed",
+	"title": "NHEFS (prepared)",
+	"profile": "tablebundle",
+	"sources": [
+		{
+			"rel": "workflow",
+			"source": "nhefs-transformed/workflow.json"
+		}
+	]
+}

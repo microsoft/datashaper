@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-getResource(name: string): SchemaResource | undefined;
+getResource(name: string): Resource | undefined;
 ```
 
 ## Parameters
@@ -18,5 +18,5 @@ getResource(name: string): SchemaResource | undefined;
 
 <b>Returns:</b>
 
-[SchemaResource](./workflow.schemaresource.md) \| undefined
+[Resource](./workflow.resource.md) \| undefined
 

@@ -2,15 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ResourceSchema } from '@datashaper/schema'
+import type { Profile, ResourceSchema } from '@datashaper/schema'
 
 import type { Maybe } from '../primitives.js'
 import { Named } from './Named.js'
-import type { SchemaResource } from './types.js'
 
 export abstract class Resource
 	extends Named
-	implements ResourceSchema, SchemaResource
+	implements ResourceSchema, Resource
 {
 	/**
 	 * Gets the resource schema
@@ -20,7 +19,7 @@ export abstract class Resource
 	/**
 	 * Gets the resource profile
 	 */
-	public abstract get profile(): string
+	public abstract get profile(): Profile
 
 	private _path: ResourceSchema['path']
 	private _homepage: string | undefined

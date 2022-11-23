@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-readonly profile = "workflow";
+readonly profile = KnownProfile.Workflow;
 ```

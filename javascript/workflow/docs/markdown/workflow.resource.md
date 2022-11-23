@@ -7,11 +7,11 @@
 <b>Signature:</b>
 
 ```typescript
-export declare abstract class Resource extends Named implements ResourceSchema, SchemaResource 
+export declare abstract class Resource extends Named implements ResourceSchema, Resource 
 ```
 <b>Extends:</b> [Named](./workflow.named.md)
 
-<b>Implements:</b> ResourceSchema, [SchemaResource](./workflow.schemaresource.md)
+<b>Implements:</b> ResourceSchema, [Resource](./workflow.resource.md)
 
 ## Properties
 
@@ -21,7 +21,7 @@ export declare abstract class Resource extends Named implements ResourceSchema, 
 |  [homepage](./workflow.resource.homepage.md) |  | string \| undefined |  |
 |  [license](./workflow.resource.license.md) |  | string \| undefined |  |
 |  [path](./workflow.resource.path.md) |  | ResourceSchema\['path'\] |  |
-|  [profile](./workflow.resource.profile.md) | <code>readonly</code> | string | Gets the resource profile |
+|  [profile](./workflow.resource.profile.md) | <code>readonly</code> | Profile | Gets the resource profile |
 
 ## Methods
 

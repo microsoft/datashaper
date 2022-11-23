@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-addResource(resource: SchemaResource): void;
+addResource(resource: Resource): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  resource | [SchemaResource](./workflow.schemaresource.md) |  |
+|  resource | [Resource](./workflow.resource.md) |  |
 
 <b>Returns:</b>
 

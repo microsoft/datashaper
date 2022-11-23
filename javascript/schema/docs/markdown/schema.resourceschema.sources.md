@@ -9,5 +9,5 @@ List of resources that underly this resource. This gives us the ability to creat
 <b>Signature:</b>
 
 ```typescript
-sources?: (string | ResourceSchema)[];
+sources?: (string | ResourceSchema | ResourceRelationship)[];
 ```

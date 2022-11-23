@@ -9,13 +9,14 @@ Save custom resources into the files map.
 <b>Signature:</b>
 
 ```typescript
-save(files: Map<string, Blob>): Promise<string[]>;
+save(data: Resource, files: Map<string, Blob>): Promise<string[]>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
+|  data | [Resource](./workflow.resource.md) |  |
 |  files | Map&lt;string, Blob&gt; | the data files in the package |
 
 <b>Returns:</b>

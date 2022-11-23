@@ -1,12 +1,13 @@
 /* eslint-disable jest/expect-expect, jest/valid-title */
+import type { ResourceRelationship } from '@datashaper/schema'
 import Blob from 'cross-blob'
 import fs from 'fs'
 import fsp from 'fs/promises'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
-import { DataPackage } from '../resources/DataPackage.js'
-import type { DataTable } from '../resources/DataTable.js'
+import { DataPackage } from '../resources/DataPackage/DataPackage.js'
+import type { TableBundle } from '../resources/TableBundle.js'
 
 // Set the root cwd to the package root.
 // this makes loading datafiles by file-url in the project more straightforward
@@ -54,9 +55,9 @@ function defineTestCase(parentPath: string, test: string) {
 
 		expect(datapackage.size).toEqual(expected.tables.length)
 		for (const table of expected.tables) {
-			const found = datapackage.getResource(table.name) as DataTable
+			const found = datapackage.getResource(table.name) as TableBundle
 			expect(found).toBeDefined()
-			expect(found?.workflow.length).toEqual(table.workflowLength ?? 0)
+			expect(found?.workflow?.length ?? 0).toEqual(table.workflowLength ?? 0)
 			expect(found?.output?.table?.numRows()).toBeGreaterThan(0)
 			expect(found?.output?.table?.numCols()).toBeGreaterThan(0)
 		}
@@ -96,14 +97,16 @@ async function checkPersisted(files: Map<string, Blob>, expected: any) {
 	expect(dataPackage.resources).toHaveLength(expected.tables.length)
 
 	for (const table of expected.tables) {
-		const tableBlob = files.get(`data/${table.name}/datatable.json`)
+		const tableBlob = files.get(`data/${table.name}/databundle.json`)
 		expect(tableBlob).toBeDefined()
 		const tableJson = JSON.parse(await tableBlob!.text())
 
 		if (table.workflowLength != null) {
 			const wfFile = `data/${table.name}/workflow.json`
 			const workflowBlob = files.get(wfFile)
-			expect(tableJson.sources).toContain(wfFile)
+			expect(
+				tableJson.sources.map((s: ResourceRelationship) => s.source),
+			).toContain(wfFile)
 			expect(workflowBlob).toBeDefined()
 			const workflowJson = JSON.parse(await workflowBlob!.text())
 			expect(workflowJson.steps).toHaveLength(table.workflowLength)

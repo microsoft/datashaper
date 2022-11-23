@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-readonly profile = "datapackage";
+readonly profile = KnownProfile.DataPackage;
 ```

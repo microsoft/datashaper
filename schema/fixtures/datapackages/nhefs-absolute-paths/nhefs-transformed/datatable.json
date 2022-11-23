@@ -1,7 +1,0 @@
-{
-	"$schema": "https://microsoft.github.io/datashaper/schema/datatable/v1.json",
-	"name": "nhefs-transformed",
-	"title": "NHEFS (prepared)",
-	"profile": "datatable",
-	"sources": ["nhefs-transformed/workflow.json"]
-}

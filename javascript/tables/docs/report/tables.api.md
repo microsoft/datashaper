@@ -4,7 +4,7 @@
 
 ```ts
 
-import type { CodebookSchema } from '@datashaper/schema';
+import { CodebookSchema } from '@datashaper/schema';
 import { CodebookStrategy } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { default as ColumnTable_2 } from 'arquero/dist/types/table/column-table.js';
