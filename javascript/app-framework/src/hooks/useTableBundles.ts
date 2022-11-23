@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { KnownProfile } from '@datashaper/schema'
 import type { TableBundle } from '@datashaper/workflow'
 import { useObservableState } from 'observable-hooks'
 import { useContext, useMemo } from 'react'
@@ -16,7 +17,7 @@ export function useTableBundles(): TableBundle[] {
 			dp.resources$.pipe(
 				map(resources => {
 					return resources.filter(
-						r => r.profile === 'tablebundle',
+						r => r.profile === KnownProfile.TableBundle,
 					) as TableBundle[]
 				}),
 			),
