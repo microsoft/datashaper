@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ResourceSchema } from '@datashaper/schema';
-import { KnownProfile , LATEST_TABLEBUNDLE_SCHEMA } from '@datashaper/schema'
+import type { ResourceSchema, TableBundleSchema } from '@datashaper/schema'
+import { KnownProfile, LATEST_TABLEBUNDLE_SCHEMA } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import { introspect } from '@datashaper/tables'
 import type { Maybe } from '@datashaper/workflow'
@@ -14,10 +14,10 @@ import { BehaviorSubject, EMPTY, map } from 'rxjs'
 import type { Codebook } from './Codebook.js'
 import type { DataPackage } from './DataPackage/DataPackage.js'
 import type { DataTable } from './DataTable.js'
-import { Resource as TableBundle } from './Resource.js'
+import { Resource } from './Resource.js'
 import type { Workflow } from './Workflow/Workflow.js'
 
-export class TableBundle extends TableBundle implements ResourceSchema {
+export class TableBundle extends Resource {
 	public readonly $schema = LATEST_TABLEBUNDLE_SCHEMA
 	public readonly profile = KnownProfile.TableBundle
 	public readonly defaultName = 'tablebundle.json'
@@ -39,16 +39,16 @@ export class TableBundle extends TableBundle implements ResourceSchema {
 	private _cbDisposables: Array<() => void> = []
 	private _dtDisposables: Array<() => void> = []
 
-	public constructor(data?: TableBundle) {
+	public constructor(data?: TableBundleSchema) {
 		super()
 		this.loadSchema(data)
 		this.rebindWorkflowInput()
 	}
 
-	public get sources(): TableBundle[] {
-		const result: TableBundle[] = []
-		if (this.datatable != null) {
-			result.push(this.datatable)
+	public get sources(): Resource[] {
+		const result: Resource[] = []
+		if (this.input != null) {
+			result.push(this.input)
 		}
 		if (this.codebook != null) {
 			result.push(this.codebook)
@@ -59,11 +59,11 @@ export class TableBundle extends TableBundle implements ResourceSchema {
 		return result
 	}
 
-	public get datatable(): DataTable | undefined {
+	public get input(): DataTable | undefined {
 		return this._datatable
 	}
 
-	public set datatable(datatable: DataTable | undefined) {
+	public set input(datatable: DataTable | undefined) {
 		this._dtDisposables.forEach(d => d())
 		this._dtDisposables = []
 
@@ -158,7 +158,7 @@ export class TableBundle extends TableBundle implements ResourceSchema {
 	}
 
 	public override loadSchema(
-		schema: Maybe<TableBundle>,
+		schema: Maybe<TableBundleSchema>,
 		quiet?: boolean,
 	): void {
 		super.loadSchema(schema, true)
@@ -205,8 +205,8 @@ export class TableBundle extends TableBundle implements ResourceSchema {
 			/**
 			 * Set the default input to the datatable output
 			 */
-			if (this.datatable != null) {
-				this.workflow.defaultInput$ = this.datatable.output$.pipe(
+			if (this.input != null) {
+				this.workflow.defaultInput$ = this.input.output$.pipe(
 					map(table => ({
 						table,
 						id: this.name,

@@ -7,10 +7,11 @@ import type {
 	DataTableSchema,
 	ResourceRelationship,
 	ResourceSchema,
+	TableBundleSchema,
 	WorkflowSchema} from '@datashaper/schema';
 import {
-	TableBundleRel
-} from '@datashaper/schema'
+	KnownProfile
+, TableBundleRel } from '@datashaper/schema'
 
 import { Codebook } from '../Codebook.js'
 import { DataTable } from '../DataTable.js'
@@ -23,7 +24,7 @@ import type { DataPackage } from './DataPackage.js'
 import { write } from './io.js'
 
 export class TableBundlePersistenceHandler implements ResourceHandler {
-	public readonly profile = 'tablebundle'
+	public readonly profile = KnownProfile.TableBundle
 	private _dataPackage: DataPackage | undefined
 
 	public connect(dp: DataPackage) {
@@ -41,20 +42,18 @@ export class TableBundlePersistenceHandler implements ResourceHandler {
 		let codebookFileName: string | undefined
 
 		// Save the DataTable
-		if (resource.datatable != null) {
+		if (resource.input != null) {
 			const dtSources: string[] = []
 			// Save the source data CSV/JSON
-			if (resource.datatable.data != null) {
-				const dataFileName = asset(
-					`${resource.name}.${resource.datatable?.format}`,
-				)
-				files.set(dataFileName, resource?.datatable.data)
+			if (resource.input.data != null) {
+				const dataFileName = asset(`${resource.name}.${resource.input?.format}`)
+				files.set(dataFileName, resource?.input.data)
 				dtSources.push(dataFileName)
 			}
 			dataTableFileName = asset('datatable.json')
 			files.set(
 				dataTableFileName,
-				write(resource.datatable, { sources: dtSources }),
+				write(resource.input, { sources: dtSources }),
 			)
 			sources.push({ rel: TableBundleRel.Input, source: dataTableFileName })
 		}
@@ -81,7 +80,7 @@ export class TableBundlePersistenceHandler implements ResourceHandler {
 	}
 
 	public async load(
-		data: Resource,
+		data: TableBundleSchema,
 		files: Map<string, Blob>,
 	): Promise<Resource[]> {
 		const bundle = new TableBundle(data)
@@ -112,13 +111,10 @@ export class TableBundlePersistenceHandler implements ResourceHandler {
 		)
 
 		if (datatableSchema != null) {
-			bundle.datatable = new DataTable(datatableSchema)
+			bundle.input = new DataTable(datatableSchema)
 			// Locate the raw source data for the datatable type
-			if (typeof bundle.datatable.path === 'string') {
-				bundle.datatable.data = await resolveRawData(
-					bundle.datatable.path,
-					files,
-				)
+			if (typeof bundle.input.path === 'string') {
+				bundle.input.data = await resolveRawData(bundle.input.path, files)
 			}
 		}
 		if (codebookSchema != null) {

@@ -7,7 +7,7 @@
 			"profile": "tablebundle",
 			"sources": [
 				{
-					"rel": "source",
+					"rel": "input",
 					"source": {
 						"$schema": "https://microsoft.github.io/datashaper/schema/datatable/v1.json",
 						"profile": "datatable",

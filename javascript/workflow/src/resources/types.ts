@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { ResourceSchema } from '@datashaper/schema'
+import type { Profile, ResourceSchema } from '@datashaper/schema'
 
 import type { DataPackage } from './DataPackage/DataPackage.js'
 import type { Resource } from './Resource.js'
@@ -18,7 +18,7 @@ export interface ResourceHandler {
 	/**
 	 * The profile name of the resource
 	 */
-	profile: string
+	profile: Profile
 
 	/**
 	 * Save custom resources into the files map.

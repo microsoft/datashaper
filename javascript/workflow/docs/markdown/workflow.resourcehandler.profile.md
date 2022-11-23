@@ -9,5 +9,5 @@ The profile name of the resource
 <b>Signature:</b>
 
 ```typescript
-profile: string;
+profile: Profile;
 ```

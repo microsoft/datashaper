@@ -5,7 +5,7 @@
 	"profile": "tablebundle",
 	"sources": [
 		{
-			"rel": "source",
+			"rel": "input",
 			"source": "nhefs/datatable.json"
 		},
 		{

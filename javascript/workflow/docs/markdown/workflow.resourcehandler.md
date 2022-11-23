@@ -14,7 +14,7 @@ export interface ResourceHandler
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [profile](./workflow.resourcehandler.profile.md) |  | string | The profile name of the resource |
+|  [profile](./workflow.resourcehandler.profile.md) |  | Profile | The profile name of the resource |
 
 ## Methods
 

@@ -6,7 +6,7 @@
 			"profile": "databundle",
 			"sources": [
 				{
-					"rel": "source",
+					"rel": "input",
 					"source": {
 						"profile": "datatable",
 						"path": "data/companies.csv"
@@ -19,7 +19,7 @@
 			"profile": "databundle",
 			"sources": [
 				{
-					"rel": "source",
+					"rel": "input",
 					"source": {
 						"profile": "datatable",
 						"path": "data/companies2.csv"
@@ -32,7 +32,7 @@
 			"profile": "databundle",
 			"sources": [
 				{
-					"rel": "source",
+					"rel": "input",
 					"source": {
 						"profile": "datatable",
 						"name": "companies",
@@ -46,7 +46,7 @@
 			"profile": "databundle",
 			"sources": [
 				{
-					"rel": "source",
+					"rel": "input",
 					"source": {
 						"profile": "datatable",
 						"path": "data/stocks.csv"

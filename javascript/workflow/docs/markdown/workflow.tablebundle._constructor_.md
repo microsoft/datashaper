@@ -9,12 +9,12 @@ Constructs a new instance of the `TableBundle` class
 <b>Signature:</b>
 
 ```typescript
-constructor(data?: Resource);
+constructor(data?: TableBundleSchema);
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  data | [Resource](./workflow.resource.md) | <i>(Optional)</i> |
+|  data | TableBundleSchema | <i>(Optional)</i> |
 

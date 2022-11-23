@@ -7,11 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class TableBundle extends Resource implements ResourceSchema 
+export declare class TableBundle extends Resource 
 ```
 <b>Extends:</b> [Resource](./workflow.resource.md)
-
-<b>Implements:</b> ResourceSchema
 
 ## Constructors
 
@@ -25,8 +23,8 @@ export declare class TableBundle extends Resource implements ResourceSchema
 |  --- | --- | --- | --- |
 |  [$schema](./workflow.tablebundle._schema.md) | <code>readonly</code> | string |  |
 |  [codebook](./workflow.tablebundle.codebook.md) |  | [Codebook](./workflow.codebook.md) \| undefined |  |
-|  [datatable](./workflow.tablebundle.datatable.md) |  | [DataTable](./workflow.datatable.md) \| undefined |  |
 |  [defaultName](./workflow.tablebundle.defaultname.md) | <code>readonly</code> | (not declared) |  |
+|  [input](./workflow.tablebundle.input.md) |  | [DataTable](./workflow.datatable.md) \| undefined |  |
 |  [name](./workflow.tablebundle.name.md) |  | string |  |
 |  [output](./workflow.tablebundle.output.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt; |  |
 |  [output$](./workflow.tablebundle.output_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt;&gt; |  |

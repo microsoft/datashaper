@@ -7,7 +7,7 @@
 			"profile": "tablebundle",
 			"sources": [
 				{
-					"rel": "source",
+					"rel": "input",
 					"source": {
 						"profile": "datatable",
 						"path": "https://raw.githubusercontent.com/stccenter/COVID-19/master/prediction/patiant-level%20fatality/data/small%20records.csv",

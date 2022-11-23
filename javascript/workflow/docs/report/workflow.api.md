@@ -9,19 +9,19 @@ import { BehaviorSubject } from 'rxjs';
 import type { BinArgs } from '@datashaper/schema';
 import type { BinarizeArgs } from '@datashaper/schema';
 import type { BooleanArgs } from '@datashaper/schema';
-import { CodebookSchema } from '@datashaper/schema';
+import type { CodebookSchema } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table.js';
 import type { ConvertArgs } from '@datashaper/schema';
 import { DataFormat } from '@datashaper/schema';
 import type { DataNature } from '@datashaper/schema';
 import type { DataOrientation } from '@datashaper/schema';
-import { DataPackageSchema } from '@datashaper/schema';
+import type { DataPackageSchema } from '@datashaper/schema';
 import type { DataShape as DataShape_2 } from '@datashaper/schema/dist/datatable/DataShape.js';
-import { DataTableSchema } from '@datashaper/schema';
+import type { DataTableSchema } from '@datashaper/schema';
 import type { DeriveArgs } from '@datashaper/schema';
 import type { EncodeDecodeArgs } from '@datashaper/schema';
 import type { EraseArgs } from '@datashaper/schema';
-import { Field } from '@datashaper/schema';
+import type { Field } from '@datashaper/schema';
 import type { FillArgs } from '@datashaper/schema';
 import type { FilterArgs } from '@datashaper/schema';
 import type { FoldArgs } from '@datashaper/schema';
@@ -43,18 +43,19 @@ import type { PivotArgs } from '@datashaper/schema';
 import type { PortBinding } from '@datashaper/schema';
 import type { Profile } from '@datashaper/schema';
 import type { RecodeArgs } from '@datashaper/schema';
-import { ResourceRelationship } from '@datashaper/schema';
-import { ResourceSchema } from '@datashaper/schema';
+import type { ResourceRelationship } from '@datashaper/schema';
+import type { ResourceSchema } from '@datashaper/schema';
 import type { RollupArgs } from '@datashaper/schema';
 import type { SampleArgs } from '@datashaper/schema';
 import type { SetOp } from '@datashaper/schema';
 import type { SpreadArgs } from '@datashaper/schema';
 import { Subject } from 'rxjs';
+import type { TableBundleSchema } from '@datashaper/schema';
 import { TableContainer } from '@datashaper/tables';
 import type { UnhotArgs } from '@datashaper/schema';
 import type { Verb } from '@datashaper/schema';
 import type { WindowArgs } from '@datashaper/schema';
-import { WorkflowSchema } from '@datashaper/schema';
+import type { WorkflowSchema } from '@datashaper/schema';
 
 // Warning: (ae-missing-release-tag) "aggregate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -706,7 +707,7 @@ export interface ResourceHandler {
     // (undocumented)
     connect(dp: DataPackage): void;
     load(data: ResourceSchema, files: Map<string, Blob>): Promise<Resource[]>;
-    profile: string;
+    profile: Profile;
     save(data: Resource, files: Map<string, Blob>): Promise<string[]>;
 }
 
@@ -785,24 +786,24 @@ export function stepNodeFactory<T, Args>(stepFunction: StepFunction<T, Args>): (
 // Warning: (ae-missing-release-tag) "TableBundle" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export class TableBundle extends Resource implements ResourceSchema {
+export class TableBundle extends Resource {
     // (undocumented)
     readonly $schema: string;
-    constructor(data?: Resource);
+    constructor(data?: TableBundleSchema);
     // (undocumented)
     get codebook(): Codebook | undefined;
     set codebook(codebook: Codebook | undefined);
     // (undocumented)
     connect(dp: DataPackage): void;
     // (undocumented)
-    get datatable(): DataTable | undefined;
-    set datatable(datatable: DataTable | undefined);
-    // (undocumented)
     readonly defaultName = "tablebundle.json";
     // (undocumented)
     dispose(): void;
     // (undocumented)
-    loadSchema(schema: Maybe_2<Resource>, quiet?: boolean): void;
+    get input(): DataTable | undefined;
+    set input(datatable: DataTable | undefined);
+    // (undocumented)
+    loadSchema(schema: Maybe_2<TableBundleSchema>, quiet?: boolean): void;
     // (undocumented)
     get name(): string;
     set name(value: string);

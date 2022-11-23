@@ -21,7 +21,7 @@ export function groupTables(bundles: TableBundle[]): ResourceTreeData[] {
 
 	bundles.forEach(table => {
 		const children: ResourceTreeData[] = []
-		if (table?.datatable?.data != null) {
+		if (table?.input?.data != null) {
 			children.push(resourceNode(table))
 			children.push(datasourceNode(table))
 		}
@@ -38,10 +38,9 @@ export function groupTables(bundles: TableBundle[]): ResourceTreeData[] {
 }
 
 function resourceNode(table: TableBundle): ResourceTreeData {
-	const pathItems = (table.datatable?.path as string).split('/')
+	const pathItems = (table.input?.path as string).split('/')
 	const title =
-		pathItems[pathItems.length - 1] ??
-		`${table.name}.${table.datatable?.format}`
+		pathItems[pathItems.length - 1] ?? `${table.name}.${table.input?.format}`
 	return {
 		href: `/resource/${table.name}/${title}`,
 		title,

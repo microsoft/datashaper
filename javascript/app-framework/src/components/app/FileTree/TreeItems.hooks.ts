@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { KnownProfile } from '@datashaper/schema'
 import { isTableBundle } from '@datashaper/workflow'
 import { useObservableState } from 'observable-hooks'
 import { useMemo } from 'react'
@@ -24,7 +25,9 @@ export function useTreeItems(plugins: Map<string, DataShaperAppPlugin>): [
 			pkg.resources$.pipe(
 				map(resources => {
 					const tables = resources.filter(isTableBundle)
-					const other = resources.filter(r => r.profile !== 'tablebundle')
+					const other = resources.filter(
+						r => r.profile !== KnownProfile.TableBundle,
+					)
 
 					const tableTreeItems = groupTables(tables)
 					const appTreeItems = other

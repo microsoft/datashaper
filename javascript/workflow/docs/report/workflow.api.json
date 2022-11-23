@@ -8907,8 +8907,9 @@
                   "text": "profile: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "string"
+                  "kind": "Reference",
+                  "text": "Profile",
+                  "canonicalReference": "@datashaper/schema!Profile:type"
                 },
                 {
                   "kind": "Content",
@@ -9919,15 +9920,6 @@
             },
             {
               "kind": "Content",
-              "text": " implements "
-            },
-            {
-              "kind": "Reference",
-              "text": "ResourceSchema",
-              "canonicalReference": "@datashaper/schema!ResourceSchema:interface"
-            },
-            {
-              "kind": "Content",
               "text": " "
             }
           ],
@@ -9946,8 +9938,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "Resource",
-                  "canonicalReference": "@datashaper/workflow!Resource:class"
+                  "text": "TableBundleSchema",
+                  "canonicalReference": "@datashaper/schema!TableBundleSchema:interface"
                 },
                 {
                   "kind": "Content",
@@ -10090,49 +10082,6 @@
             },
             {
               "kind": "Property",
-              "canonicalReference": "@datashaper/workflow!TableBundle#datatable:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get datatable(): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "DataTable",
-                  "canonicalReference": "@datashaper/workflow!DataTable:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": " | undefined"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";\n\nset datatable(datatable: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "DataTable",
-                  "canonicalReference": "@datashaper/workflow!DataTable:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": " | undefined);"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "datatable",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              },
-              "isStatic": false,
-              "isProtected": false
-            },
-            {
-              "kind": "Property",
               "canonicalReference": "@datashaper/workflow!TableBundle#defaultName:member",
               "docComment": "",
               "excerptTokens": [
@@ -10195,6 +10144,49 @@
               "name": "dispose"
             },
             {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!TableBundle#input:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get input(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataTable",
+                  "canonicalReference": "@datashaper/workflow!DataTable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n\nset input(datatable: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataTable",
+                  "canonicalReference": "@datashaper/workflow!DataTable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined);"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "input",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!TableBundle#loadSchema:member(1)",
               "docComment": "",
@@ -10214,8 +10206,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "Resource",
-                  "canonicalReference": "@datashaper/workflow!Resource:class"
+                  "text": "TableBundleSchema",
+                  "canonicalReference": "@datashaper/schema!TableBundleSchema:interface"
                 },
                 {
                   "kind": "Content",
@@ -10542,12 +10534,7 @@
             "startIndex": 1,
             "endIndex": 2
           },
-          "implementsTokenRanges": [
-            {
-              "startIndex": 3,
-              "endIndex": 4
-            }
-          ]
+          "implementsTokenRanges": []
         },
         {
           "kind": "Interface",
