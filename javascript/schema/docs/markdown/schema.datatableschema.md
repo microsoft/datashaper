@@ -22,7 +22,7 @@ export interface DataTableSchema extends ResourceSchema
 |  [encoding?](./schema.datatableschema.encoding.md) |  | string | <i>(Optional)</i> String encoding. Default: "utf-8". |
 |  [format?](./schema.datatableschema.format.md) |  | [DataFormat](./schema.dataformat.md) | <i>(Optional)</i> File format of the resource to inform load/parse. Note that if the data property is present, this is assumed to be "JSON". Default: "csv". |
 |  [parser?](./schema.datatableschema.parser.md) |  | [ParserOptions](./schema.parseroptions.md) | <i>(Optional)</i> Parser options for interpreting a CSV or other text file that needs parse instruction. |
-|  [profile](./schema.datatableschema.profile.md) |  | 'datatable' |  |
+|  [profile](./schema.datatableschema.profile.md) |  | [KnownProfile.DataTable](./schema.knownprofile.md) |  |
 |  [rows?](./schema.datatableschema.rows.md) |  | number | <i>(Optional)</i> Number of rows in the data. |
 |  [shape?](./schema.datatableschema.shape.md) |  | [DataShape](./schema.datashape.md) | <i>(Optional)</i> Defines the shape and structure of stored data. |
 |  [typeHints?](./schema.datatableschema.typehints.md) |  | [TypeHints](./schema.typehints.md) | <i>(Optional)</i> Options for converting string values to strict types. Note that options related to data typing only apply if type detection is turned on. Otherwise all cell values are treated as strings. Defaults based on pandas: https://pandas.pydata.org/pandas-docs/stable/user\_guide/io.html\#csv-text-files |

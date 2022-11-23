@@ -21,7 +21,7 @@ export declare abstract class Resource extends Named implements ResourceSchema, 
 |  [homepage](./workflow.resource.homepage.md) |  | string \| undefined |  |
 |  [license](./workflow.resource.license.md) |  | string \| undefined |  |
 |  [path](./workflow.resource.path.md) |  | ResourceSchema\['path'\] |  |
-|  [profile](./workflow.resource.profile.md) | <code>readonly</code> | string | Gets the resource profile |
+|  [profile](./workflow.resource.profile.md) | <code>readonly</code> | Profile | Gets the resource profile |
 
 ## Methods
 

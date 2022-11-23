@@ -3,12 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-assignment */
-import type { DataPackageSchema } from '@datashaper/schema'
-import {
-	createDataPackageSchemaObject,
+import type { DataPackageSchema} from '@datashaper/schema';
+import { 	createDataPackageSchemaObject,
+KnownProfile ,
 	LATEST_DATAPACKAGE_SCHEMA,
 } from '@datashaper/schema'
-import type { Observable } from 'rxjs';
+import type { Observable } from 'rxjs'
 import { BehaviorSubject, map } from 'rxjs'
 
 import { Resource } from '../Resource.js'
@@ -19,7 +19,7 @@ import { TableBundlePersistenceHandler } from './TableBundlePersistenceHandler.j
 
 export class DataPackage extends Resource {
 	public readonly $schema = LATEST_DATAPACKAGE_SCHEMA
-	public readonly profile = 'datapackage'
+	public readonly profile = KnownProfile.DataPackage
 	public readonly defaultName = 'datapackage.json'
 
 	/**

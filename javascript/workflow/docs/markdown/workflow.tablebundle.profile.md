@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-readonly profile = "tablebundle";
+readonly profile = KnownProfile.TableBundle;
 ```

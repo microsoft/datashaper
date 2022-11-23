@@ -9,5 +9,5 @@ Gets the resource profile
 <b>Signature:</b>
 
 ```typescript
-abstract get profile(): string;
+abstract get profile(): Profile;
 ```

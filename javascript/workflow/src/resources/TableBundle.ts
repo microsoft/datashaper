@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ResourceSchema } from '@datashaper/schema'
-import { LATEST_DATABUNDLE_SCHEMA } from '@datashaper/schema'
+import type { ResourceSchema } from '@datashaper/schema';
+import { KnownProfile , LATEST_TABLEBUNDLE_SCHEMA } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import { introspect } from '@datashaper/tables'
 import type { Maybe } from '@datashaper/workflow'
@@ -14,12 +14,12 @@ import { BehaviorSubject, EMPTY, map } from 'rxjs'
 import type { Codebook } from './Codebook.js'
 import type { DataPackage } from './DataPackage/DataPackage.js'
 import type { DataTable } from './DataTable.js'
-import { Resource } from './Resource.js'
+import { Resource as TableBundle } from './Resource.js'
 import type { Workflow } from './Workflow/Workflow.js'
 
-export class TableBundle extends Resource implements ResourceSchema {
-	public readonly $schema = LATEST_DATABUNDLE_SCHEMA
-	public readonly profile = 'tablebundle'
+export class TableBundle extends TableBundle implements ResourceSchema {
+	public readonly $schema = LATEST_TABLEBUNDLE_SCHEMA
+	public readonly profile = KnownProfile.TableBundle
 	public readonly defaultName = 'tablebundle.json'
 
 	private readonly _source = new BehaviorSubject<Maybe<ColumnTable>>(undefined)
@@ -39,14 +39,14 @@ export class TableBundle extends Resource implements ResourceSchema {
 	private _cbDisposables: Array<() => void> = []
 	private _dtDisposables: Array<() => void> = []
 
-	public constructor(data?: Resource) {
+	public constructor(data?: TableBundle) {
 		super()
 		this.loadSchema(data)
 		this.rebindWorkflowInput()
 	}
 
-	public get sources(): Resource[] {
-		const result: Resource[] = []
+	public get sources(): TableBundle[] {
+		const result: TableBundle[] = []
 		if (this.datatable != null) {
 			result.push(this.datatable)
 		}
@@ -157,7 +157,10 @@ export class TableBundle extends Resource implements ResourceSchema {
 		}
 	}
 
-	public override loadSchema(schema: Maybe<Resource>, quiet?: boolean): void {
+	public override loadSchema(
+		schema: Maybe<TableBundle>,
+		quiet?: boolean,
+	): void {
 		super.loadSchema(schema, true)
 		this._inputs.clear()
 

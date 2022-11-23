@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-profile: 'codebook';
+profile: KnownProfile.Codebook;
 ```

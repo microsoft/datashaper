@@ -15,7 +15,7 @@ export interface BundleSchema {
 	 * Unknown resource types can be interrogated to determine if the format is understandable by an existing component.
 	 * Note that this could be inferred from $schema, but a simple string here is easier to deal with in code.
 	 */
-	profile?: Profile
+	profile?: string
 	/**
 	 * The kinds of relationships that may be defined in bundle sources.
 	 */

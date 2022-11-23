@@ -9,19 +9,19 @@ import { BehaviorSubject } from 'rxjs';
 import type { BinArgs } from '@datashaper/schema';
 import type { BinarizeArgs } from '@datashaper/schema';
 import type { BooleanArgs } from '@datashaper/schema';
-import type { CodebookSchema } from '@datashaper/schema';
+import { CodebookSchema } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table.js';
 import type { ConvertArgs } from '@datashaper/schema';
 import { DataFormat } from '@datashaper/schema';
 import type { DataNature } from '@datashaper/schema';
 import type { DataOrientation } from '@datashaper/schema';
-import type { DataPackageSchema } from '@datashaper/schema';
+import { DataPackageSchema } from '@datashaper/schema';
 import type { DataShape as DataShape_2 } from '@datashaper/schema/dist/datatable/DataShape.js';
-import type { DataTableSchema } from '@datashaper/schema';
+import { DataTableSchema } from '@datashaper/schema';
 import type { DeriveArgs } from '@datashaper/schema';
 import type { EncodeDecodeArgs } from '@datashaper/schema';
 import type { EraseArgs } from '@datashaper/schema';
-import type { Field } from '@datashaper/schema';
+import { Field } from '@datashaper/schema';
 import type { FillArgs } from '@datashaper/schema';
 import type { FilterArgs } from '@datashaper/schema';
 import type { FoldArgs } from '@datashaper/schema';
@@ -41,9 +41,10 @@ import type { OrderbyArgs } from '@datashaper/schema';
 import type { ParserOptions as ParserOptions_2 } from '@datashaper/schema';
 import type { PivotArgs } from '@datashaper/schema';
 import type { PortBinding } from '@datashaper/schema';
+import type { Profile } from '@datashaper/schema';
 import type { RecodeArgs } from '@datashaper/schema';
-import type { ResourceRelationship } from '@datashaper/schema';
-import type { ResourceSchema } from '@datashaper/schema';
+import { ResourceRelationship } from '@datashaper/schema';
+import { ResourceSchema } from '@datashaper/schema';
 import type { RollupArgs } from '@datashaper/schema';
 import type { SampleArgs } from '@datashaper/schema';
 import type { SetOp } from '@datashaper/schema';
@@ -53,7 +54,7 @@ import { TableContainer } from '@datashaper/tables';
 import type { UnhotArgs } from '@datashaper/schema';
 import type { Verb } from '@datashaper/schema';
 import type { WindowArgs } from '@datashaper/schema';
-import type { WorkflowSchema } from '@datashaper/schema';
+import { WorkflowSchema } from '@datashaper/schema';
 
 // Warning: (ae-missing-release-tag) "aggregate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -148,7 +149,7 @@ export class Codebook extends Resource {
     // (undocumented)
     loadSchema(value: Maybe<CodebookSchema>, quiet?: boolean): void;
     // (undocumented)
-    readonly profile = "codebook";
+    readonly profile = KnownProfile.Codebook;
     // (undocumented)
     toSchema(): CodebookSchema;
 }
@@ -204,7 +205,7 @@ export class DataPackage extends Resource {
     // (undocumented)
     get names(): string[];
     // (undocumented)
-    readonly profile = "datapackage";
+    readonly profile = KnownProfile.DataPackage;
     // (undocumented)
     removeResource(name: string): void;
     // (undocumented)
@@ -272,7 +273,7 @@ export class DataTable extends Resource {
     // (undocumented)
     readonly parser: ParserOptions;
     // (undocumented)
-    readonly profile = "datatable";
+    readonly profile = KnownProfile.DataTable;
     // (undocumented)
     readonly shape: DataShape;
     // (undocumented)
@@ -693,7 +694,7 @@ export abstract class Resource extends Named implements ResourceSchema, Resource
     // (undocumented)
     get path(): ResourceSchema['path'];
     set path(value: ResourceSchema['path']);
-    abstract get profile(): string;
+    abstract get profile(): Profile;
     // (undocumented)
     toSchema(): ResourceSchema;
 }
@@ -810,7 +811,7 @@ export class TableBundle extends Resource implements ResourceSchema {
     // (undocumented)
     get output(): Maybe_2<TableContainer>;
     // (undocumented)
-    readonly profile = "tablebundle";
+    readonly profile = KnownProfile.TableBundle;
     // (undocumented)
     get sources(): Resource[];
     // (undocumented)
@@ -932,7 +933,7 @@ export class Workflow extends Resource {
     // (undocumented)
     get outputNames(): string[];
     // (undocumented)
-    readonly profile = "workflow";
+    readonly profile = KnownProfile.Workflow;
     read$(name?: string): Observable<Maybe<TableContainer>>;
     read(name?: string): Maybe<TableContainer>;
     // (undocumented)

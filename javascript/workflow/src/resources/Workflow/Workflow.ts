@@ -2,10 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { NamedPortBinding, WorkflowSchema } from '@datashaper/schema'
+import type {
+	NamedPortBinding,
+	WorkflowSchema} from '@datashaper/schema';
 import {
 	createSchemaValidator,
 	createWorkflowSchemaObject,
+	KnownProfile
+,
 	LATEST_WORKFLOW_SCHEMA,
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
@@ -33,7 +37,7 @@ type TableSubject = BehaviorSubject<Maybe<TableContainer>>
 export class Workflow extends Resource {
 	private static readonly validator = createSchemaValidator()
 	public readonly $schema = LATEST_WORKFLOW_SCHEMA
-	public readonly profile = 'workflow'
+	public readonly profile = KnownProfile.Workflow
 	// Workflow Data Fields
 	private readonly _steps = new BehaviorSubject<Step[]>([])
 	private readonly _numSteps = this._steps.pipe(map(steps => steps.length))

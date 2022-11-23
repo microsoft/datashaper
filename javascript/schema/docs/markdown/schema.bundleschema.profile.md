@@ -9,5 +9,5 @@ Defines the resource type. Known resource types should have accommpanying proces
 <b>Signature:</b>
 
 ```typescript
-profile?: Profile;
+profile?: string;
 ```

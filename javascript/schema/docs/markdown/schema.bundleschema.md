@@ -18,5 +18,5 @@ export interface BundleSchema
 |  --- | --- | --- | --- |
 |  [$schema](./schema.bundleschema._schema.md) |  | string |  |
 |  [accepts](./schema.bundleschema.accepts.md) |  | [RelationshipConstraint](./schema.relationshipconstraint.md)<!-- -->\[\] | The kinds of relationships that may be defined in bundle sources. |
-|  [profile?](./schema.bundleschema.profile.md) |  | Profile | <i>(Optional)</i> Defines the resource type. Known resource types should have accommpanying processors and rendering components. Unknown resource types can be interrogated to determine if the format is understandable by an existing component. Note that this could be inferred from $schema, but a simple string here is easier to deal with in code. |
+|  [profile?](./schema.bundleschema.profile.md) |  | string | <i>(Optional)</i> Defines the resource type. Known resource types should have accommpanying processors and rendering components. Unknown resource types can be interrogated to determine if the format is understandable by an existing component. Note that this could be inferred from $schema, but a simple string here is easier to deal with in code. |
 

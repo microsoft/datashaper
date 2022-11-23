@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DataTableSchema } from '@datashaper/schema'
-import {
-	createDataTableSchemaObject,
+import type { DataTableSchema} from '@datashaper/schema';
+import { 	createDataTableSchemaObject,
 	DataFormat,
+KnownProfile ,
 	LATEST_DATATABLE_SCHEMA,
 } from '@datashaper/schema'
 import { readTable } from '@datashaper/tables'
@@ -23,7 +23,7 @@ const log = debug('datashaper')
 
 export class DataTable extends Resource {
 	public readonly $schema = LATEST_DATATABLE_SCHEMA
-	public readonly profile = 'datatable'
+	public readonly profile = KnownProfile.DataTable
 	private readonly _output = new BehaviorSubject<Maybe<ColumnTable>>(undefined)
 
 	public readonly parser = new ParserOptions()

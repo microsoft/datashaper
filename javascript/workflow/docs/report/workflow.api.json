@@ -1796,8 +1796,9 @@
                   "text": "readonly profile = "
                 },
                 {
-                  "kind": "Content",
-                  "text": "\"codebook\""
+                  "kind": "Reference",
+                  "text": "KnownProfile.Codebook",
+                  "canonicalReference": "@datashaper/schema!KnownProfile.Codebook:member"
                 },
                 {
                   "kind": "Content",
@@ -2657,8 +2658,9 @@
                   "text": "readonly profile = "
                 },
                 {
-                  "kind": "Content",
-                  "text": "\"datapackage\""
+                  "kind": "Reference",
+                  "text": "KnownProfile.DataPackage",
+                  "canonicalReference": "@datashaper/schema!KnownProfile.DataPackage:member"
                 },
                 {
                   "kind": "Content",
@@ -3729,8 +3731,9 @@
                   "text": "readonly profile = "
                 },
                 {
-                  "kind": "Content",
-                  "text": "\"datatable\""
+                  "kind": "Reference",
+                  "text": "KnownProfile.DataTable",
+                  "canonicalReference": "@datashaper/schema!KnownProfile.DataTable:member"
                 },
                 {
                   "kind": "Content",
@@ -8677,8 +8680,9 @@
                   "text": "abstract get profile(): "
                 },
                 {
-                  "kind": "Content",
-                  "text": "string"
+                  "kind": "Reference",
+                  "text": "Profile",
+                  "canonicalReference": "@datashaper/schema!Profile:type"
                 },
                 {
                   "kind": "Content",
@@ -10401,8 +10405,9 @@
                   "text": "readonly profile = "
                 },
                 {
-                  "kind": "Content",
-                  "text": "\"tablebundle\""
+                  "kind": "Reference",
+                  "text": "KnownProfile.TableBundle",
+                  "canonicalReference": "@datashaper/schema!KnownProfile.TableBundle:member"
                 },
                 {
                   "kind": "Content",
@@ -12210,8 +12215,9 @@
                   "text": "readonly profile = "
                 },
                 {
-                  "kind": "Content",
-                  "text": "\"workflow\""
+                  "kind": "Reference",
+                  "text": "KnownProfile.Workflow",
+                  "canonicalReference": "@datashaper/schema!KnownProfile.Workflow:member"
                 },
                 {
                   "kind": "Content",

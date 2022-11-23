@@ -7,7 +7,9 @@ import type {
 	DataTableSchema,
 	ResourceRelationship,
 	ResourceSchema,
-	WorkflowSchema,
+	WorkflowSchema} from '@datashaper/schema';
+import {
+	TableBundleRel
 } from '@datashaper/schema'
 
 import { Codebook } from '../Codebook.js'
@@ -54,21 +56,21 @@ export class TableBundlePersistenceHandler implements ResourceHandler {
 				dataTableFileName,
 				write(resource.datatable, { sources: dtSources }),
 			)
-			sources.push({ rel: 'source', source: dataTableFileName })
+			sources.push({ rel: TableBundleRel.Input, source: dataTableFileName })
 		}
 
 		// Save the Worfklow
 		if (resource.workflow != null) {
 			workflowFileName = asset('workflow.json')
 			files.set(workflowFileName, write(resource.workflow))
-			sources.push({ rel: 'workflow', source: workflowFileName })
+			sources.push({ rel: TableBundleRel.Workflow, source: workflowFileName })
 		}
 
 		// Save the Codebook
 		if (resource.codebook != null) {
 			codebookFileName = asset('codebook.json')
 			files.set(codebookFileName, write(resource.codebook))
-			sources.push({ rel: 'codebook', source: codebookFileName })
+			sources.push({ rel: TableBundleRel.Codebook, source: codebookFileName })
 		}
 
 		// Save the DataBundle
@@ -94,17 +96,17 @@ export class TableBundlePersistenceHandler implements ResourceHandler {
 		files: Map<string, Blob>,
 	): Promise<void> {
 		const datatableSchema = await findRel<DataTableSchema>(
-			'source',
+			TableBundleRel.Input,
 			schema,
 			files,
 		)
 		const codebookSchema = await findRel<CodebookSchema>(
-			'codebook',
+			TableBundleRel.Codebook,
 			schema,
 			files,
 		)
 		const workflowSchema = await findRel<WorkflowSchema>(
-			'workflow',
+			TableBundleRel.Workflow,
 			schema,
 			files,
 		)

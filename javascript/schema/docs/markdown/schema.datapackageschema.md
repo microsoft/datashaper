@@ -18,6 +18,6 @@ export interface DataPackageSchema extends Named
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [$schema](./schema.datapackageschema._schema.md) |  | string |  |
-|  [profile](./schema.datapackageschema.profile.md) |  | 'datapackage' |  |
+|  [profile](./schema.datapackageschema.profile.md) |  | [KnownProfile.DataPackage](./schema.knownprofile.md) |  |
 |  [resources](./schema.datapackageschema.resources.md) |  | (string \| [ResourceSchema](./schema.resourceschema.md)<!-- -->)\[\] | List of Resources that make up the data package. May also be a list of raw strings which are paths to Resource files in the bundle. |
 

@@ -14,7 +14,7 @@ export interface RelationshipConstraint
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [accepts](./schema.relationshipconstraint.accepts.md) |  | Profile\[\] | The kinds of profiles that are accepted in this relationship |
+|  [accepts](./schema.relationshipconstraint.accepts.md) |  | [Profile](./schema.profile.md)<!-- -->\[\] | The kinds of profiles that are accepted in this relationship |
 |  [description?](./schema.relationshipconstraint.description.md) |  | string | <i>(Optional)</i> Description of the named resource. |
 |  [multi?](./schema.relationshipconstraint.multi.md) |  | boolean | <i>(Optional)</i> Whether multiple relationships of this kind may be defined on a resource Defaults to false |
 |  [rel](./schema.relationshipconstraint.rel.md) |  | string | The relationship definition |

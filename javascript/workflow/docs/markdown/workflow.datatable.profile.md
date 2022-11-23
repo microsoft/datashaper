@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-readonly profile = "datatable";
+readonly profile = KnownProfile.DataTable;
 ```

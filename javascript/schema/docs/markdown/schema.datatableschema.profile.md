@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-profile: 'datatable';
+profile: KnownProfile.DataTable;
 ```
