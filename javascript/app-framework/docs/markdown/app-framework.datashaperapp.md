@@ -4,6 +4,8 @@
 
 ## DataShaperApp variable
 
+A component for rendering a data-shaper application. This includes a resource management UI area and a main area that renders selected content based on its profile type. It is expected that this application is rendered under a react-router Router component.
+
 <b>Signature:</b>
 
 ```typescript

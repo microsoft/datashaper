@@ -7,7 +7,7 @@ import type { DataShape } from '@datashaper/schema/dist/datatable/DataShape.js'
 import type { TableContainer } from '@datashaper/tables'
 import type { BaseFile } from '@datashaper/utilities'
 
-import type { DataShaperAppPlugin } from '../../../index.js'
+import type { ProfileHandlerPlugin } from '../../../index.js'
 
 export interface FileTreeProps {
 	/**
@@ -38,7 +38,7 @@ export interface FileTreeProps {
 	/**
 	 * A map of profile-name to tree-node generator
 	 */
-	plugins: Map<string, DataShaperAppPlugin>
+	plugins: Map<string, ProfileHandlerPlugin>
 
 	/**
 	 * Event handler for when a resource is selected

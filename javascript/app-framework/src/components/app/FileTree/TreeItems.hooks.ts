@@ -9,11 +9,11 @@ import { useMemo } from 'react'
 import { map } from 'rxjs'
 
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
-import type { DataShaperAppPlugin } from '../../../types.js'
+import type { ProfileHandlerPlugin } from '../../../types.js'
 import type { ResourceTreeData } from './FileTree.types.js'
 import { groupTables } from './groupTables.js'
 
-export function useTreeItems(plugins: Map<string, DataShaperAppPlugin>): [
+export function useTreeItems(plugins: Map<string, ProfileHandlerPlugin>): [
 	// Data Items
 	ResourceTreeData[],
 	// App Items
@@ -35,7 +35,7 @@ export function useTreeItems(plugins: Map<string, DataShaperAppPlugin>): [
 							return {
 								href: `/app/${r.profile}/${r.name}`,
 								title: r.name,
-								icon: plugins.get(r.profile)?.fileTreeIconName ?? '',
+								icon: plugins.get(r.profile)?.iconName ?? '',
 							}
 						})
 						.filter(t => t != null) as ResourceTreeData[]

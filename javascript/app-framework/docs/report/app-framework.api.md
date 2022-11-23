@@ -25,6 +25,7 @@ import { ITextFieldProps } from '@fluentui/react';
 import type { Maybe } from '@datashaper/workflow';
 import type { ParserOptions } from '@datashaper/schema';
 import type { default as React_2 } from 'react';
+import type { Resource } from '@datashaper/workflow';
 import { StyledComponent } from 'styled-components';
 import type { TableBundle } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
@@ -79,19 +80,8 @@ export const DataPackageContext: Context<DataPackage>;
 // Warning: (ae-forgotten-export) The symbol "DataShaperAppProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "DataShaperApp" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export const DataShaperApp: React.FC<DataShaperAppProps>;
-
-// Warning: (ae-missing-release-tag) "DataShaperAppPlugin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface DataShaperAppPlugin {
-    fileTreeIconName: string;
-    profile: string;
-    renderer: React_2.ComponentType<{
-        resource: unknown;
-    }>;
-}
 
 // Warning: (ae-missing-release-tag) "DataSourceEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -103,7 +93,7 @@ export const DataSourceEditor: React.FC<DataSourceEditorProps>;
 // @public (undocumented)
 export interface DataSourceEditorProps {
     // (undocumented)
-    dataTable: DataTable;
+    resource: DataTable;
 }
 
 // Warning: (ae-missing-release-tag) "DefaultPersistenceService" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -115,6 +105,18 @@ export class DefaultPersistenceService implements PersistenceService {
     load(pkg: BaseFile): Promise<void>;
     // (undocumented)
     save(projectName?: string): Promise<void>;
+}
+
+// Warning: (ae-missing-release-tag) "GeneratedRoute" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface GeneratedRoute {
+    // (undocumented)
+    path: string;
+    // (undocumented)
+    props: any;
+    // (undocumented)
+    renderer: React.ComponentType<any>;
 }
 
 // Warning: (ae-missing-release-tag) "HeadersOption" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -176,6 +178,18 @@ export interface ParserOptionsEditorProps {
 export interface PersistenceService {
     load(file: BaseFile): Promise<void>;
     save(projectName?: string): Promise<void>;
+}
+
+// Warning: (ae-missing-release-tag) "ProfileHandlerPlugin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ProfileHandlerPlugin<T extends Resource = any> {
+    iconName: string;
+    onGenerateRoutes?: (resource: T, pathContext: string) => GeneratedRoute[] | undefined;
+    profile: string;
+    renderer: React.ComponentType<{
+        resource: T;
+    }>;
 }
 
 // Warning: (ae-missing-release-tag) "RadioGroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

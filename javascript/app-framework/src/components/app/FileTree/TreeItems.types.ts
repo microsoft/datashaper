@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DataShaperAppPlugin } from '../../../types.js'
+import type { ProfileHandlerPlugin } from '../../../types.js'
 import type { ResourceTreeData } from './FileTree.types.js'
 
 export interface TreeItemsProps {
@@ -13,5 +13,5 @@ export interface TreeItemsProps {
 	/**
 	 * A map of profile-name to tree-node generator
 	 */
-	plugins: Map<string, DataShaperAppPlugin>
+	plugins: Map<string, ProfileHandlerPlugin>
 }

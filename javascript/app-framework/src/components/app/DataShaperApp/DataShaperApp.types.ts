@@ -4,7 +4,7 @@
  */
 import type React from 'react'
 
-import type { DataShaperAppPlugin } from '../../../types.js'
+import type { ProfileHandlerPlugin } from '../../../types.js'
 import type { FileDefinition } from '../FileTree/index.js'
 
 export interface DataShaperAppProps {
@@ -25,7 +25,9 @@ export interface DataShaperAppProps {
 	children: React.ReactNode
 
 	/**
-	 * Custom resource renderers
+	 * Custom profile renderers
 	 */
-	plugins?: DataShaperAppPlugin[]
+	profiles?: ProfileHandlerPlugin[]
+
+	// TODO: new action button for augmenting the commandbar? e.g. new ACTIONS
 }

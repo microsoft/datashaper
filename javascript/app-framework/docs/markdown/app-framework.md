@@ -38,11 +38,12 @@
 |  --- | --- |
 |  [BundleEditorProps](./app-framework.bundleeditorprops.md) |  |
 |  [CodebookEditorProps](./app-framework.codebookeditorprops.md) |  |
-|  [DataShaperAppPlugin](./app-framework.datashaperappplugin.md) |  |
 |  [DataSourceEditorProps](./app-framework.datasourceeditorprops.md) |  |
+|  [GeneratedRoute](./app-framework.generatedroute.md) |  |
 |  [JsonEditorProps](./app-framework.jsoneditorprops.md) |  |
 |  [ParserOptionsEditorProps](./app-framework.parseroptionseditorprops.md) |  |
 |  [PersistenceService](./app-framework.persistenceservice.md) | The Persistence Service available in the application. This service is responsible for saving and loading data packages. |
+|  [ProfileHandlerPlugin](./app-framework.profilehandlerplugin.md) |  |
 |  [RawTableProps](./app-framework.rawtableprops.md) |  |
 |  [RawTableViewerProps](./app-framework.rawtableviewerprops.md) |  |
 |  [ViewOptionsProps](./app-framework.viewoptionsprops.md) |  |
@@ -57,7 +58,7 @@
 |  [CodebookEditor](./app-framework.codebookeditor.md) |  |
 |  [Container](./app-framework.container.md) |  |
 |  [DataPackageContext](./app-framework.datapackagecontext.md) |  |
-|  [DataShaperApp](./app-framework.datashaperapp.md) |  |
+|  [DataShaperApp](./app-framework.datashaperapp.md) | A component for rendering a data-shaper application. This includes a resource management UI area and a main area that renders selected content based on its profile type. It is expected that this application is rendered under a react-router Router component. |
 |  [DataSourceEditor](./app-framework.datasourceeditor.md) |  |
 |  [HeadersOption](./app-framework.headersoption.md) |  |
 |  [JsonEditor](./app-framework.jsoneditor.md) |  |

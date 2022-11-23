@@ -4,16 +4,17 @@
  */
 import { useBoolean } from '@fluentui/react-hooks'
 import { type AllotmentHandle, Allotment } from 'allotment'
-import { memo, useCallback, useMemo, useRef } from 'react'
+import { memo, useCallback, useRef } from 'react'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 
-import type { DataShaperAppPlugin } from '../../../types.js'
+import { EMPTY_ARRAY } from '../../../empty.js'
 import type { ResourceTreeData } from '../FileTree/index.js'
 import { FileTree } from '../FileTree/index.js'
 import {
 	useDataPackageResourceRoutes,
 	useOnChangeWidth,
 	useOnToggle,
+	useRegisteredProfiles,
 } from './DataShaperApp.hooks.js'
 import { useFileTreeStyle } from './DataShaperApp.styles.js'
 import type { DataShaperAppProps } from './DataShaperApp.types.js'
@@ -21,13 +22,17 @@ import type { DataShaperAppProps } from './DataShaperApp.types.js'
 const PANE_EXPANDED_SIZE = 300
 const PANE_COLLAPSED_SIZE = 60
 
-const emptyArray = Object.freeze([]) as any
-
+/**
+ * A component for rendering a data-shaper application.
+ * This includes a resource management UI area and a main area that renders selected content based on its profile type.
+ * It is expected that this application is rendered under a react-router Router component.
+ *
+ */
 export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 	function DataShaperApp({
 		className,
-		examples = emptyArray,
-		plugins: inputPlugins,
+		examples = EMPTY_ARRAY,
+		profiles,
 		children,
 	}) {
 		const navigate = useNavigate()
@@ -48,12 +53,8 @@ export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 			[navigate],
 		)
 
-		const plugins = useMemo(() => {
-			const result = new Map<string, DataShaperAppPlugin>()
-			inputPlugins?.forEach(p => result.set(p.profile, p))
-			return result
-		}, [inputPlugins])
-		const resourceRoutes = useDataPackageResourceRoutes(plugins)
+		const plugins = useRegisteredProfiles(profiles)
+		const routes = useDataPackageResourceRoutes(plugins)
 
 		return (
 			<Allotment
@@ -79,10 +80,9 @@ export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 					/>
 				</Allotment.Pane>
 				<Allotment.Pane>
-					{/* TODO: detect whether a router is in use, conditionally render router tag */}
 					<Routes>
 						<Route path="/" element={children} />
-						{resourceRoutes.map(r => (
+						{routes.map(r => (
 							<Route
 								key={r.path}
 								path={r.path}

@@ -2,25 +2,16 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	type DataPackage,
-	type Resource,
-	isDataTable,
-} from '@datashaper/workflow'
+import type { DataPackage, Resource } from '@datashaper/workflow'
 import { useDebounceFn } from 'ahooks'
 import type { AllotmentHandle } from 'allotment'
 import type React from 'react'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
+import { EMPTY_ARRAY } from '../../../empty.js'
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
-import type { DataShaperAppPlugin } from '../../../types.js'
-import {
-	BundleEditor,
-	CodebookEditor,
-	DataSourceEditor,
-	RawTableViewer,
-	WorkflowEditor,
-} from '../../editors/index.js'
+import type { GeneratedRoute, ProfileHandlerPlugin } from '../../../types.js'
+import { KNOWN_PROFILE_PLUGINS } from './DataShaperApp.constants.js'
 
 const BREAK_WIDTH = 150
 const COLLAPSED_WIDTH = 60
@@ -67,14 +58,8 @@ export function useOnChangeWidth(
 	).run
 }
 
-export interface GeneratedRoute {
-	path: string
-	renderer: React.ComponentType
-	props: any
-}
-
 export function useDataPackageResourceRoutes(
-	plugins: Map<string, DataShaperAppPlugin>,
+	plugins: Map<string, ProfileHandlerPlugin>,
 ): GeneratedRoute[] {
 	const dp = useDataPackage()
 	const [result, setResult] = useState<GeneratedRoute[]>([])
@@ -87,7 +72,7 @@ export function useDataPackageResourceRoutes(
 
 function getRoutes(
 	dp: DataPackage,
-	plugins: Map<string, DataShaperAppPlugin>,
+	plugins: Map<string, ProfileHandlerPlugin>,
 ): GeneratedRoute[] {
 	const result: GeneratedRoute[] = []
 	addSources(result, dp.resources, plugins)
@@ -97,40 +82,23 @@ function getRoutes(
 function addSources(
 	result: GeneratedRoute[],
 	resources: Resource[],
-	plugins: Map<string, DataShaperAppPlugin>,
+	plugins: Map<string, ProfileHandlerPlugin>,
 	root = '/resource',
 ) {
 	for (const resource of resources) {
-		// TODO: check plugins
-		const renderer =
-			DEFAULT_HANDLERS[resource.profile] ||
-			plugins.get(resource.profile)?.renderer
+		const plugin = plugins.get(resource.profile)
 
-		// Special case for raw resources embedded in datatable under `path` property
-		// and or datatable.json
-		if (isDataTable(resource)) {
-			if (resource.path != null && typeof resource.path === 'string') {
-				const pathItems = resource.path.split('/') ?? []
-				const lastPathItem = pathItems[pathItems.length - 1]
-				result.push({
-					path: `${root}/${lastPathItem}`,
-					renderer: RawTableViewer as any,
-					props: { dataTable: resource },
-				})
-				result.push({
-					path: `${root}/datatable.json`,
-					renderer: DataSourceEditor as any,
-					props: { dataTable: resource },
-				})
-			}
-		} else if (renderer != null) {
-			result.push({
+		if (plugin != null) {
+			const resourceRoute = {
 				path: `${root}/${resource.name}`,
-				renderer: renderer as any,
+				renderer: plugin.renderer,
 				props: { resource },
-			})
+			}
+			const extraRoutes = plugin.onGenerateRoutes?.(resource, root)
+			result.push(resourceRoute, ...(extraRoutes ?? EMPTY_ARRAY))
+		} else {
+			console.error('could not find renderer for profile', resource.profile)
 		}
-
 		/** Descend into child resources */
 		const children = (resource as any).sources
 		if (children?.length > 0) {
@@ -139,11 +107,17 @@ function addSources(
 	}
 }
 
-const DEFAULT_HANDLERS: Record<string, React.ComponentType<any>> = {
-	tablebundle: BundleEditor,
-	codebook: CodebookEditor,
-	source: DataSourceEditor,
-	datatable: BundleEditor,
-	workflow: WorkflowEditor,
-	datasource: RawTableViewer,
+export function useRegisteredProfiles(
+	profiles: ProfileHandlerPlugin[] | undefined,
+): Map<string, ProfileHandlerPlugin> {
+	return useMemo<Map<string, ProfileHandlerPlugin>>(() => {
+		const result = new Map<string, ProfileHandlerPlugin>()
+		for (const p of KNOWN_PROFILE_PLUGINS) {
+			result.set(p.profile, p)
+		}
+		for (const p of profiles ?? EMPTY_ARRAY) {
+			result.set(p.profile, p)
+		}
+		return result
+	}, [profiles])
 }
