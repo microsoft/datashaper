@@ -14,5 +14,5 @@ export interface DataSourceEditorProps
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [dataTable](./app-framework.datasourceeditorprops.datatable.md) |  | DataTable |  |
+|  [resource](./app-framework.datasourceeditorprops.resource.md) |  | DataTable |  |
 

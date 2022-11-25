@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ResourceSchema } from '../datapackage/ResourceSchema.js'
+import type { KnownProfile } from '../Profile.js'
 import type { Field } from './Field.js'
 
 /**
@@ -13,5 +14,6 @@ import type { Field } from './Field.js'
  * resource profile: 'codebook'
  */
 export interface CodebookSchema extends ResourceSchema {
+	profile: KnownProfile.Codebook
 	fields: Field[]
 }

@@ -6,7 +6,7 @@ import { Subject } from 'rxjs'
 
 import type { Unsubscribe } from '../primitives.js'
 
-export class Observed {
+export abstract class Observed {
 	protected _onChange = new Subject<void>()
 
 	public onChange(handler: () => void, fireSync?: boolean): Unsubscribe {

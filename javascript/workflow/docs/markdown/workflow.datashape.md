@@ -7,11 +7,11 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class DataShape extends Observed implements DataShapeSchema, SchemaResource<DataShapeSchema> 
+export declare class DataShape extends Observed implements DataShapeSchema 
 ```
 <b>Extends:</b> [Observed](./workflow.observed.md)
 
-<b>Implements:</b> DataShapeSchema, [SchemaResource](./workflow.schemaresource.md)<!-- -->&lt;DataShapeSchema&gt;
+<b>Implements:</b> DataShapeSchema
 
 ## Constructors
 

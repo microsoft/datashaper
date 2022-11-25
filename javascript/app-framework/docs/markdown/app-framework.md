@@ -8,13 +8,13 @@
 
 |  Class | Description |
 |  --- | --- |
-|  [AppResourceHandler](./app-framework.appresourcehandler.md) |  |
 |  [DefaultPersistenceService](./app-framework.defaultpersistenceservice.md) |  |
 
 ## Enumerations
 
 |  Enumeration | Description |
 |  --- | --- |
+|  [ResourceGroup](./app-framework.resourcegroup.md) |  |
 |  [ViewType](./app-framework.viewtype.md) |  |
 
 ## Functions
@@ -26,30 +26,27 @@
 |  [removeExtension(fileName)](./app-framework.removeextension.md) |  |
 |  [useDataPackage()](./app-framework.usedatapackage.md) |  |
 |  [useDatasetMenuItems(selected, onClick)](./app-framework.usedatasetmenuitems.md) |  |
-|  [useDataTable(name)](./app-framework.usedatatable.md) |  |
-|  [useDataTableOutput(pkg)](./app-framework.usedatatableoutput.md) | Uses the latest table from a data package. This is updatde as the package changes |
-|  [useDataTables()](./app-framework.usedatatables.md) |  |
 |  [useDataTableSource(pkg)](./app-framework.usedatatablesource.md) | Use the raw source table from a data package without any workflow applied to it. |
 |  [useMenuButtonStyles()](./app-framework.usemenubuttonstyles.md) |  |
 |  [usePersistenceService()](./app-framework.usepersistenceservice.md) |  |
+|  [useTableBundle(name)](./app-framework.usetablebundle.md) |  |
+|  [useTableBundleOutput(pkg)](./app-framework.usetablebundleoutput.md) | Uses the latest table from a data package. This is updatde as the package changes |
+|  [useTableBundles()](./app-framework.usetablebundles.md) |  |
 
 ## Interfaces
 
 |  Interface | Description |
 |  --- | --- |
+|  [BundleEditorProps](./app-framework.bundleeditorprops.md) |  |
 |  [CodebookEditorProps](./app-framework.codebookeditorprops.md) |  |
 |  [DataSourceEditorProps](./app-framework.datasourceeditorprops.md) |  |
-|  [FileDefinition](./app-framework.filedefinition.md) |  |
-|  [FileNameProps](./app-framework.filenameprops.md) |  |
-|  [FileTreeProps](./app-framework.filetreeprops.md) |  |
-|  [FileTreeTypes](./app-framework.filetreetypes.md) |  |
 |  [JsonEditorProps](./app-framework.jsoneditorprops.md) |  |
 |  [ParserOptionsEditorProps](./app-framework.parseroptionseditorprops.md) |  |
 |  [PersistenceService](./app-framework.persistenceservice.md) | The Persistence Service available in the application. This service is responsible for saving and loading data packages. |
+|  [ProfilePlugin](./app-framework.profileplugin.md) |  |
 |  [RawTableProps](./app-framework.rawtableprops.md) |  |
 |  [RawTableViewerProps](./app-framework.rawtableviewerprops.md) |  |
-|  [ResourceTreeData](./app-framework.resourcetreedata.md) | Data attached to resource-tree nodes |
-|  [TableEditorProps](./app-framework.tableeditorprops.md) |  |
+|  [ResourceRoute](./app-framework.resourceroute.md) | Data attached to resource-tree nodes |
 |  [ViewOptionsProps](./app-framework.viewoptionsprops.md) |  |
 |  [WorkflowEditorProps](./app-framework.workfloweditorprops.md) |  |
 
@@ -57,37 +54,26 @@
 
 |  Variable | Description |
 |  --- | --- |
+|  [BundleEditor](./app-framework.bundleeditor.md) |  |
 |  [choiceGroupStyles](./app-framework.choicegroupstyles.md) |  |
 |  [CodebookEditor](./app-framework.codebookeditor.md) |  |
 |  [Container](./app-framework.container.md) |  |
 |  [DataPackageContext](./app-framework.datapackagecontext.md) |  |
-|  [DataShaperApp](./app-framework.datashaperapp.md) |  |
+|  [DataPackageProvider](./app-framework.datapackageprovider.md) |  |
+|  [DataShaperApp](./app-framework.datashaperapp.md) | A component for rendering a data-shaper application. This includes a resource management UI area and a main area that renders selected content based on its profile type. It is expected that this application is rendered under a react-router Router component. |
 |  [DataSourceEditor](./app-framework.datasourceeditor.md) |  |
-|  [FileName](./app-framework.filename.md) |  |
-|  [FileTree](./app-framework.filetree.md) |  |
 |  [HeadersOption](./app-framework.headersoption.md) |  |
 |  [JsonEditor](./app-framework.jsoneditor.md) |  |
 |  [OtherTextField](./app-framework.othertextfield.md) |  |
 |  [ParserOptionsEditor](./app-framework.parseroptionseditor.md) |  |
-|  [PersistenceContext](./app-framework.persistencecontext.md) |  |
-|  [PersistenceProvider](./app-framework.persistenceprovider.md) |  |
 |  [RadioGroup](./app-framework.radiogroup.md) |  |
 |  [RawTable](./app-framework.rawtable.md) |  |
 |  [RawTableDefaultFeatures](./app-framework.rawtabledefaultfeatures.md) |  |
 |  [RawTableViewer](./app-framework.rawtableviewer.md) |  |
 |  [TableDelimiterOptions](./app-framework.tabledelimiteroptions.md) |  |
-|  [TableEditor](./app-framework.tableeditor.md) |  |
 |  [TableLayoutOptions](./app-framework.tablelayoutoptions.md) |  |
 |  [TablePreview](./app-framework.tablepreview.md) |  |
-|  [TableStoreProvider](./app-framework.tablestoreprovider.md) |  |
-|  [Tooltip](./app-framework.tooltip.md) |  |
 |  [viewOptions](./app-framework.viewoptions.md) |  |
 |  [ViewOptions](./app-framework.viewoptions.md) |  |
 |  [WorkflowEditor](./app-framework.workfloweditor.md) |  |
-
-## Type Aliases
-
-|  Type Alias | Description |
-|  --- | --- |
-|  [AddTableHandler](./app-framework.addtablehandler.md) |  |
 

@@ -2,35 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	CodebookSchema,
-	DataTableSchema,
-	ResourceSchema,
-	WorkflowSchema,
-} from '@datashaper/schema'
+import type { ResourceSchema } from '@datashaper/schema'
 
 import { fetchFile } from '../util/network.js'
-
-export const isWorkflow = (
-	r: ResourceSchema | undefined,
-): r is WorkflowSchema =>
-	r == null
-		? false
-		: r.profile === 'workflow' || r.$schema.indexOf('/workflow/') > -1
-
-export const isCodebook = (
-	r: ResourceSchema | undefined,
-): r is CodebookSchema =>
-	r == null
-		? false
-		: r.profile === 'codebook' || r.$schema.indexOf('/codebook/') > -1
-
-export const isDataTable = (
-	r: ResourceSchema | undefined,
-): r is DataTableSchema =>
-	r == null
-		? false
-		: r.profile === 'datatable' || r.$schema?.indexOf('/datatable/') > -1
+import { isResourceRelationship } from './predicates.js'
 
 export const isRawData = (
 	r: string | ResourceSchema,
@@ -51,13 +26,29 @@ export const isRawData = (
 	}
 	return false
 }
-
 export async function toResourceSchema(
 	item: string | ResourceSchema,
 	files: Map<string, Blob>,
 ): Promise<ResourceSchema | undefined> {
 	// if the item is a string, look up the resource in the files map
 	return typeof item === 'string' ? parseFileContent(item, files) : item
+}
+
+export async function findRel<T extends ResourceSchema = ResourceSchema>(
+	rel: string,
+	resource: ResourceSchema,
+	files: Map<string, Blob>,
+): Promise<T | undefined> {
+	if (resource.sources) {
+		for (const source of resource.sources) {
+			if (isResourceRelationship(source)) {
+				if (source.rel === rel) {
+					const result = await toResourceSchema(source.source, files)
+					return result as T
+				}
+			}
+		}
+	}
 }
 
 async function parseFileContent(item: string, files: Map<string, Blob>) {

@@ -2,10 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { NamedPortBinding, WorkflowSchema } from '@datashaper/schema'
+import type {
+	NamedPortBinding,
+	WorkflowSchema} from '@datashaper/schema';
 import {
 	createSchemaValidator,
 	createWorkflowSchemaObject,
+	KnownProfile
+,
 	LATEST_WORKFLOW_SCHEMA,
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
@@ -18,7 +22,6 @@ import type { Node, SocketName } from '../../dataflow/types.js'
 import type { Maybe } from '../../primitives.js'
 import { fetchJson } from '../../util/network.js'
 import { Resource } from '../Resource.js'
-import type { SchemaResource } from '../types.js'
 import { createNode } from './createNode.js'
 import { readStep } from './readStep.js'
 import type { Step, StepInput, TableExportOptions } from './types.js'
@@ -31,12 +34,10 @@ const DEFAULT_INPUT = '__DEFAULT_INPUT__'
 export type TableObservable = Observable<Maybe<TableContainer>>
 type TableSubject = BehaviorSubject<Maybe<TableContainer>>
 
-export class Workflow
-	extends Resource
-	implements SchemaResource<WorkflowSchema>
-{
+export class Workflow extends Resource {
 	private static readonly validator = createSchemaValidator()
 	public readonly $schema = LATEST_WORKFLOW_SCHEMA
+	public readonly profile = KnownProfile.Workflow
 	// Workflow Data Fields
 	private readonly _steps = new BehaviorSubject<Step[]>([])
 	private readonly _numSteps = this._steps.pipe(map(steps => steps.length))
@@ -66,6 +67,10 @@ export class Workflow
 	)
 	private _disposables: Array<() => void> = []
 
+	public override get defaultName(): string {
+		return 'workflow.json'
+	}
+
 	public constructor(input?: WorkflowSchema, private _strictInputs = false) {
 		super()
 		this.loadSchema(input, true)
@@ -89,7 +94,9 @@ export class Workflow
 		> => {
 			const steps = this.steps
 			// Returns the default output of the final node
-			if (steps.length === 0) return this._defaultInput
+			if (steps.length === 0) {
+				return this._defaultInput
+			}
 			const lastStepId = steps[steps.length - 1]!.id
 			const lastNode = this.getNode(lastStepId)
 			// Nodes use BehaviorSubject internally

@@ -10,6 +10,7 @@ import type { Step } from './Step.js'
  * resource profile: 'workflow'
  */
 export interface WorkflowSchema extends ResourceSchema {
+	profile: 'workflow'
 	/**
 	 * The workflow steps
 	 */

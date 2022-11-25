@@ -102,6 +102,16 @@ export enum BooleanOperator {
     XOR = "xor"
 }
 
+// Warning: (ae-missing-release-tag) "BundleSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface BundleSchema {
+    // (undocumented)
+    $schema: string;
+    accepts: RelationshipConstraint[];
+    profile?: string;
+}
+
 // Warning: (ae-missing-release-tag) "Category" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -118,6 +128,8 @@ export interface Category {
 export interface CodebookSchema extends ResourceSchema {
     // (undocumented)
     fields: Field[];
+    // (undocumented)
+    profile: KnownProfile.Codebook;
 }
 
 // Warning: (ae-missing-release-tag) "CodebookStrategy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -179,6 +191,11 @@ export function createDataTableSchemaObject(input: FactoryInput<DataTableSchema>
 // @public (undocumented)
 export function createSchemaValidator(): Ajv;
 
+// Warning: (ae-missing-release-tag) "createTableBundleSchemaObject" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function createTableBundleSchemaObject(input: FactoryInput<TableBundleSchema>): TableBundleSchema;
+
 // Warning: (ae-missing-release-tag) "createWorkflowSchemaObject" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -227,6 +244,8 @@ export enum DataOrientation {
 export interface DataPackageSchema extends Named {
     // (undocumented)
     $schema: string;
+    // (undocumented)
+    profile: KnownProfile.DataPackage;
     resources: (string | ResourceSchema)[];
 }
 
@@ -248,6 +267,8 @@ export interface DataTableSchema extends ResourceSchema {
     encoding?: string;
     format?: DataFormat;
     parser?: ParserOptions;
+    // (undocumented)
+    profile: KnownProfile.DataTable;
     rows?: number;
     shape?: DataShape;
     typeHints?: TypeHints;
@@ -587,6 +608,22 @@ export enum JoinStrategy {
     SemiJoin = "semi join"
 }
 
+// Warning: (ae-missing-release-tag) "KnownProfile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum KnownProfile {
+    // (undocumented)
+    Codebook = "codebook",
+    // (undocumented)
+    DataPackage = "datapackage",
+    // (undocumented)
+    DataTable = "datatable",
+    // (undocumented)
+    TableBundle = "tablebundle",
+    // (undocumented)
+    Workflow = "workflow"
+}
+
 // Warning: (ae-missing-release-tag) "LATEST_CODEBOOK_SCHEMA" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -601,6 +638,11 @@ export const LATEST_DATAPACKAGE_SCHEMA: string;
 //
 // @public (undocumented)
 export const LATEST_DATATABLE_SCHEMA: string;
+
+// Warning: (ae-missing-release-tag) "LATEST_TABLEBUNDLE_SCHEMA" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const LATEST_TABLEBUNDLE_SCHEMA: string;
 
 // Warning: (ae-missing-release-tag) "LATEST_WORKFLOW_SCHEMA" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -774,6 +816,15 @@ export interface PivotArgs extends InputKeyValueArgs {
 // @public (undocumented)
 export type PortBinding = string | NamedPortBinding;
 
+// Warning: (ae-missing-release-tag) "Profile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export type Profile = KnownProfile
+/**
+* Any other custom profile string can be specified by applications.
+*/
+| string;
+
 // Warning: (ae-missing-release-tag) "RecodeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -781,10 +832,29 @@ export interface RecodeArgs extends InputColumnArgs, OutputColumnArgs {
     mapping: Record<Value, Value>;
 }
 
+// Warning: (ae-missing-release-tag) "RelationshipConstraint" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface RelationshipConstraint {
+    accepts: Profile[];
+    description?: string;
+    multi?: boolean;
+    rel: string;
+    title?: string;
+}
+
 // Warning: (ae-missing-release-tag) "RenameArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type RenameArgs = InputColumnRecordArgs;
+
+// Warning: (ae-missing-release-tag) "ResourceRelationship" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface ResourceRelationship {
+    rel: string;
+    source: string | ResourceSchema;
+}
 
 // Warning: (ae-missing-release-tag) "ResourceSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -795,9 +865,8 @@ export interface ResourceSchema extends Named {
     homepage?: string;
     license?: string;
     path?: string | string[];
-    // Warning: (ae-forgotten-export) The symbol "Profile" needs to be exported by the entry point index.d.ts
     profile?: Profile;
-    sources?: (string | ResourceSchema)[];
+    sources?: (string | ResourceSchema | ResourceRelationship)[];
 }
 
 // Warning: (ae-missing-release-tag) "RollupArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -993,6 +1062,36 @@ export enum StringComparisonOperator {
     RegularExpression = "regex",
     // (undocumented)
     StartsWith = "starts with"
+}
+
+// Warning: (ae-missing-release-tag) "TableBundleRel" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum TableBundleRel {
+    // (undocumented)
+    Codebook = "codebook",
+    // (undocumented)
+    Input = "input",
+    // (undocumented)
+    Workflow = "workflow"
+}
+
+// Warning: (ae-missing-release-tag) "TableBundleSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface TableBundleSchema extends ResourceSchema {
+    // (undocumented)
+    profile: KnownProfile.TableBundle;
+    sources?: Array<{
+        rel: TableBundleRel.Input;
+        source: string | DataTableSchema;
+    } | {
+        rel: TableBundleRel.Codebook;
+        source: string | CodebookSchema;
+    } | {
+        rel: TableBundleRel.Workflow;
+        source: string | WorkflowSchema;
+    }>;
 }
 
 // Warning: (ae-missing-release-tag) "TypeHints" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1192,6 +1291,8 @@ export enum WindowFunction {
 export interface WorkflowSchema extends ResourceSchema {
     input?: string[];
     output: string[];
+    // (undocumented)
+    profile: 'workflow';
     steps?: Step[];
 }
 

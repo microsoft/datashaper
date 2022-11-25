@@ -173,427 +173,85 @@
       "preserveMemberOrder": false,
       "members": [
         {
-          "kind": "TypeAlias",
-          "canonicalReference": "@datashaper/app-framework!AddTableHandler:type",
+          "kind": "Variable",
+          "canonicalReference": "@datashaper/app-framework!BundleEditor:var",
           "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type AddTableHandler = "
-            },
-            {
-              "kind": "Content",
-              "text": "(parser: "
+              "text": "BundleEditor: "
             },
             {
               "kind": "Reference",
-              "text": "ParserOptions",
-              "canonicalReference": "@datashaper/schema!ParserOptions:interface"
+              "text": "React.FC",
+              "canonicalReference": "@types/react!~React.FC:type"
             },
             {
               "kind": "Content",
-              "text": ", file: "
+              "text": "<"
             },
             {
               "kind": "Reference",
-              "text": "BaseFile",
-              "canonicalReference": "@datashaper/utilities!BaseFile:class"
+              "text": "BundleEditorProps",
+              "canonicalReference": "@datashaper/app-framework!BundleEditorProps:interface"
             },
             {
               "kind": "Content",
-              "text": ", table: "
-            },
-            {
-              "kind": "Reference",
-              "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ", fileType: "
-            },
-            {
-              "kind": "Reference",
-              "text": "DataFormat",
-              "canonicalReference": "@datashaper/schema!DataFormat:enum"
-            },
-            {
-              "kind": "Content",
-              "text": ", shape: "
-            },
-            {
-              "kind": "Reference",
-              "text": "DataShape",
-              "canonicalReference": "@datashaper/schema!DataShape:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ") => void"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
+              "text": ">"
             }
           ],
+          "isReadonly": true,
           "releaseTag": "Public",
-          "name": "AddTableHandler",
-          "typeTokenRange": {
+          "name": "BundleEditor",
+          "variableTypeTokenRange": {
             "startIndex": 1,
-            "endIndex": 12
+            "endIndex": 5
           }
         },
         {
-          "kind": "Class",
-          "canonicalReference": "@datashaper/app-framework!AppResourceHandler:class",
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/app-framework!BundleEditorProps:interface",
           "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class AppResourceHandler<JsonForm> implements "
-            },
-            {
-              "kind": "Reference",
-              "text": "ResourceHandler",
-              "canonicalReference": "@datashaper/workflow!ResourceHandler:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " "
+              "text": "export interface BundleEditorProps "
             }
           ],
           "releaseTag": "Public",
-          "typeParameters": [
-            {
-              "typeParameterName": "JsonForm",
-              "constraintTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              },
-              "defaultTypeTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              }
-            }
-          ],
-          "name": "AppResourceHandler",
+          "name": "BundleEditorProps",
           "preserveMemberOrder": false,
           "members": [
             {
-              "kind": "Constructor",
-              "canonicalReference": "@datashaper/app-framework!AppResourceHandler:constructor(1)",
-              "docComment": "/**\n * Constructs a new instance of the `AppResourceHandler` class\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "constructor(name: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", profile: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", getProjectJson: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "() => JsonForm"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", loadProjectJson: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(json: JsonForm) => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ");"
-                }
-              ],
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "name",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": false
-                },
-                {
-                  "parameterName": "profile",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 3,
-                    "endIndex": 4
-                  },
-                  "isOptional": false
-                },
-                {
-                  "parameterName": "getProjectJson",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 5,
-                    "endIndex": 6
-                  },
-                  "isOptional": false
-                },
-                {
-                  "parameterName": "loadProjectJson",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 7,
-                    "endIndex": 8
-                  },
-                  "isOptional": false
-                }
-              ]
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "@datashaper/app-framework!AppResourceHandler#canLoad:member(1)",
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!BundleEditorProps#resource:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "canLoad(resource: "
+                  "text": "resource: "
                 },
                 {
                   "kind": "Reference",
-                  "text": "ResourceSchema",
-                  "canonicalReference": "@datashaper/schema!ResourceSchema:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
+                  "text": "TableBundle",
+                  "canonicalReference": "@datashaper/workflow!TableBundle:class"
                 },
                 {
                   "kind": "Content",
                   "text": ";"
                 }
               ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "resource",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": false
-                }
-              ],
-              "isOptional": false,
-              "name": "canLoad"
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "@datashaper/app-framework!AppResourceHandler#load:member(1)",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "load(resource: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ResourceSchema",
-                  "canonicalReference": "@datashaper/schema!ResourceSchema:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": " & {\n        data: JsonForm;\n    }"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Promise",
-                  "canonicalReference": "!Promise:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<void>"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 6
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "resource",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 3
-                  },
-                  "isOptional": false
-                }
-              ],
-              "isOptional": false,
-              "name": "load"
-            },
-            {
-              "kind": "Property",
-              "canonicalReference": "@datashaper/app-framework!AppResourceHandler#name:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly name: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "name",
+              "name": "resource",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              },
-              "isStatic": false,
-              "isProtected": false
-            },
-            {
-              "kind": "Property",
-              "canonicalReference": "@datashaper/app-framework!AppResourceHandler#profile:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly profile: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "profile",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isStatic": false,
-              "isProtected": false
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "@datashaper/app-framework!AppResourceHandler#save:member(1)",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "save(files: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Map",
-                  "canonicalReference": "!Map:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<string, "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Blob",
-                  "canonicalReference": "!Blob:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Promise",
-                  "canonicalReference": "!Promise:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<string[]>"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 8
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "files",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 5
-                  },
-                  "isOptional": false
-                }
-              ],
-              "isOptional": false,
-              "name": "save"
+              }
             }
           ],
-          "implementsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 2
-            }
-          ]
+          "extendsTokenRanges": []
         },
         {
           "kind": "Variable",
@@ -669,17 +327,17 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!CodebookEditorProps#dataTable:member",
+              "canonicalReference": "@datashaper/app-framework!CodebookEditorProps#resource:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "dataTable: "
+                  "text": "resource: "
                 },
                 {
                   "kind": "Reference",
-                  "text": "DataTable",
-                  "canonicalReference": "@datashaper/workflow!DataTable:class"
+                  "text": "Codebook",
+                  "canonicalReference": "@datashaper/workflow!Codebook:class"
                 },
                 {
                   "kind": "Content",
@@ -689,7 +347,7 @@
               "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "dataTable",
+              "name": "resource",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -771,8 +429,44 @@
         },
         {
           "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!DataShaperApp:var",
+          "canonicalReference": "@datashaper/app-framework!DataPackageProvider:var",
           "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "DataPackageProvider: "
+            },
+            {
+              "kind": "Reference",
+              "text": "React.FC",
+              "canonicalReference": "@types/react!~React.FC:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<{\n    children: "
+            },
+            {
+              "kind": "Reference",
+              "text": "JSX.Element",
+              "canonicalReference": "@types/react!~__global.JSX.Element:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n}>"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "DataPackageProvider",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 5
+          }
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@datashaper/app-framework!DataShaperApp:var",
+          "docComment": "/**\n * A component for rendering a data-shaper application. This includes a resource management UI area and a main area that renders selected content based on its profile type. It is expected that this application is rendered under a react-router Router component.\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -857,12 +551,12 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!DataSourceEditorProps#dataTable:member",
+              "canonicalReference": "@datashaper/app-framework!DataSourceEditorProps#resource:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "dataTable: "
+                  "text": "resource: "
                 },
                 {
                   "kind": "Reference",
@@ -877,7 +571,7 @@
               "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "dataTable",
+              "name": "resource",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -1054,626 +748,6 @@
               "endIndex": 2
             }
           ]
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/app-framework!FileDefinition:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface FileDefinition "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "FileDefinition",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!FileDefinition#name:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "name: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "name",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!FileDefinition#url:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "url: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "url",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!FileName:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "FileName: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "FileNameProps",
-              "canonicalReference": "@datashaper/app-framework!FileNameProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "FileName",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/app-framework!FileNameProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface FileNameProps "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "FileNameProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!FileNameProps#name:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "name: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "name",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!FileNameProps#path:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "path?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "path",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!FileNameProps#setName:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "setName: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(name: string) => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "setName",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!FileTree:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "FileTree: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "FileTreeProps",
-              "canonicalReference": "@datashaper/app-framework!FileTreeProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "FileTree",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/app-framework!FileTreeProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface FileTreeProps "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "FileTreeProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!FileTreeProps#appResources:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "appResources: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ResourceTreeData",
-                  "canonicalReference": "@datashaper/app-framework!ResourceTreeData:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "appResources",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!FileTreeProps#className:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "className?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "className",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!FileTreeProps#examples:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "examples?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "FileDefinition",
-                  "canonicalReference": "@datashaper/app-framework!FileDefinition:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "examples",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!FileTreeProps#expanded:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "expanded: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "expanded",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!FileTreeProps#onSelect:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onSelect?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(resource: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ResourceTreeData",
-                  "canonicalReference": "@datashaper/app-framework!ResourceTreeData:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ") => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "onSelect",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 4
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!FileTreeProps#selectedFileId:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "selectedFileId?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "selectedFileId",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!FileTreeProps#selectedKey:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "selectedKey?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "selectedKey",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!FileTreeProps#style:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "style?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "React.CSSProperties",
-                  "canonicalReference": "@types/react!~React.CSSProperties:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "style",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!FileTreeProps#toggleExpanded:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "toggleExpanded: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "() => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "toggleExpanded",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/app-framework!FileTreeTypes:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface FileTreeTypes "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "FileTreeTypes",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!FileTreeTypes#className:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "className?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "className",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!FileTreeTypes#selectedFileId:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "selectedFileId?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "selectedFileId",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!FileTreeTypes#style:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "style?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "React.CSSProperties",
-                  "canonicalReference": "@types/react!~React.CSSProperties:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "style",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
         },
         {
           "kind": "Variable",
@@ -2092,82 +1166,6 @@
           "extendsTokenRanges": []
         },
         {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!PersistenceContext:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "PersistenceContext: "
-            },
-            {
-              "kind": "Content",
-              "text": "import(\"react\")."
-            },
-            {
-              "kind": "Reference",
-              "text": "Context",
-              "canonicalReference": "@types/react!~React.Context:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "PersistenceService",
-              "canonicalReference": "@datashaper/app-framework!PersistenceService:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "PersistenceContext",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 6
-          }
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!PersistenceProvider:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "PersistenceProvider: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<{\n    children: "
-            },
-            {
-              "kind": "Reference",
-              "text": "JSX.Element",
-              "canonicalReference": "@types/react!~__global.JSX.Element:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ";\n}>"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "PersistenceProvider",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
           "kind": "Interface",
           "canonicalReference": "@datashaper/app-framework!PersistenceService:interface",
           "docComment": "/**\n * The Persistence Service available in the application. This service is responsible for saving and loading data packages.\n */\n",
@@ -2281,6 +1279,249 @@
                 }
               ],
               "name": "save"
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/app-framework!ProfilePlugin:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface ProfilePlugin<T extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Resource",
+              "canonicalReference": "@datashaper/workflow!Resource:class"
+            },
+            {
+              "kind": "Content",
+              "text": " = "
+            },
+            {
+              "kind": "Content",
+              "text": "any"
+            },
+            {
+              "kind": "Content",
+              "text": "> "
+            }
+          ],
+          "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            }
+          ],
+          "name": "ProfilePlugin",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ProfilePlugin#dataHandler:member",
+              "docComment": "/**\n * The persistence handler to use for this profile\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "dataHandler?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceHandler",
+                  "canonicalReference": "@datashaper/workflow!ResourceHandler:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "dataHandler",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ProfilePlugin#group:member",
+              "docComment": "/**\n * The grouping for this resource type. The default is 'app'. This grouping determines what resources this is rendered with in the tree-view.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "group?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceGroup",
+                  "canonicalReference": "@datashaper/app-framework!ResourceGroup:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "group",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ProfilePlugin#iconName:member",
+              "docComment": "/**\n * The icon name to use in the file-tree\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "iconName: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "iconName",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ProfilePlugin#onGenerateRoutes:member",
+              "docComment": "/**\n * Event handler for when the resource is undergoing route generation. A route is always generated for the resource; any related routes may be retured here.\n *\n * @param resource - The resource that routes are being generated for.\n *\n * @param parentPath - The current path context being used for generation. This is the parent path of the resource.\n *\n * @param resourcePath - The resource path that was used for the resource.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "onGenerateRoutes?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(resource: T, parentPath: string, resourcePath: string) => {\n        preItemSiblings?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceRoute",
+                  "canonicalReference": "@datashaper/app-framework!ResourceRoute:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[];\n        postItemSiblings?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceRoute",
+                  "canonicalReference": "@datashaper/app-framework!ResourceRoute:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[];\n        children?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceRoute",
+                  "canonicalReference": "@datashaper/app-framework!ResourceRoute:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[];\n    } | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "onGenerateRoutes",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ProfilePlugin#profile:member",
+              "docComment": "/**\n * The profile name to register within the app framework. This is used to identify the plugin and should be unique.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "profile: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "profile",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ProfilePlugin#renderer:member",
+              "docComment": "/**\n * Render the plugin\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "renderer: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "React.ComponentType",
+                  "canonicalReference": "@types/react!~React.ComponentType:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<{\n        resource: T;\n    }>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "renderer",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
             }
           ],
           "extendsTokenRanges": []
@@ -2604,22 +1845,80 @@
           "name": "removeExtension"
         },
         {
+          "kind": "Enum",
+          "canonicalReference": "@datashaper/app-framework!ResourceGroup:enum",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare enum ResourceGroup "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ResourceGroup",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/app-framework!ResourceGroup.Apps:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Apps = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"apps\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Apps"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/app-framework!ResourceGroup.Data:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Data = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"data\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Data"
+            }
+          ]
+        },
+        {
           "kind": "Interface",
-          "canonicalReference": "@datashaper/app-framework!ResourceTreeData:interface",
+          "canonicalReference": "@datashaper/app-framework!ResourceRoute:interface",
           "docComment": "/**\n * Data attached to resource-tree nodes\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface ResourceTreeData "
+              "text": "export interface ResourceRoute "
             }
           ],
           "releaseTag": "Public",
-          "name": "ResourceTreeData",
+          "name": "ResourceRoute",
           "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!ResourceTreeData#children:member",
+              "canonicalReference": "@datashaper/app-framework!ResourceRoute#children:member",
               "docComment": "/**\n * Child node Data\n */\n",
               "excerptTokens": [
                 {
@@ -2628,8 +1927,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "ResourceTreeData",
-                  "canonicalReference": "@datashaper/app-framework!ResourceTreeData:interface"
+                  "text": "ResourceRoute",
+                  "canonicalReference": "@datashaper/app-framework!ResourceRoute:interface"
                 },
                 {
                   "kind": "Content",
@@ -2651,7 +1950,34 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!ResourceTreeData#icon:member",
+              "canonicalReference": "@datashaper/app-framework!ResourceRoute#href:member",
+              "docComment": "/**\n * The resource render route\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "href: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "href",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ResourceRoute#icon:member",
               "docComment": "/**\n * The icon to use in the file tree\n */\n",
               "excerptTokens": [
                 {
@@ -2678,16 +2004,16 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!ResourceTreeData#key:member",
-              "docComment": "/**\n * The unique node key\n */\n",
+              "canonicalReference": "@datashaper/app-framework!ResourceRoute#props:member",
+              "docComment": "/**\n * The render props to use for this node\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "key: "
+                  "text": "props: "
                 },
                 {
                   "kind": "Content",
-                  "text": "string"
+                  "text": "any"
                 },
                 {
                   "kind": "Content",
@@ -2697,7 +2023,7 @@
               "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "key",
+              "name": "props",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -2705,7 +2031,39 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!ResourceTreeData#title:member",
+              "canonicalReference": "@datashaper/app-framework!ResourceRoute#renderer:member",
+              "docComment": "/**\n * The renderer to use for this node\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "renderer: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "React.ComponentType",
+                  "canonicalReference": "@types/react!~React.ComponentType:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<any>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "renderer",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ResourceRoute#title:member",
               "docComment": "/**\n * The node text to use. Default=id\n */\n",
               "excerptTokens": [
                 {
@@ -2759,87 +2117,6 @@
             "startIndex": 1,
             "endIndex": 3
           }
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!TableEditor:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "TableEditor: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "TableEditorProps",
-              "canonicalReference": "@datashaper/app-framework!TableEditorProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "TableEditor",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/app-framework!TableEditorProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface TableEditorProps "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "TableEditorProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!TableEditorProps#dataTable:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "dataTable: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "DataTable",
-                  "canonicalReference": "@datashaper/workflow!DataTable:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "dataTable",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
         },
         {
           "kind": "Variable",
@@ -2950,87 +2227,6 @@
           }
         },
         {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!TableStoreProvider:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "TableStoreProvider: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<{\n    children: "
-            },
-            {
-              "kind": "Reference",
-              "text": "JSX.Element",
-              "canonicalReference": "@types/react!~__global.JSX.Element:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ";\n}>"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "TableStoreProvider",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!Tooltip:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "Tooltip: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "React.PropsWithChildren",
-              "canonicalReference": "@types/react!~React.PropsWithChildren:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "ITooltipHostProps",
-              "canonicalReference": "@fluentui/react!ITooltipHostProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">>"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "Tooltip",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 7
-          }
-        },
-        {
           "kind": "Function",
           "canonicalReference": "@datashaper/app-framework!useDataPackage:function(1)",
           "docComment": "",
@@ -3118,150 +2314,6 @@
             }
           ],
           "name": "useDatasetMenuItems"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/app-framework!useDataTable:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function useDataTable(name: "
-            },
-            {
-              "kind": "Content",
-              "text": "string | undefined"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Reference",
-              "text": "DataTable",
-              "canonicalReference": "@datashaper/workflow!DataTable:class"
-            },
-            {
-              "kind": "Content",
-              "text": " | undefined"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 3,
-            "endIndex": 5
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "name",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            }
-          ],
-          "name": "useDataTable"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/app-framework!useDataTableOutput:function(1)",
-          "docComment": "/**\n * Uses the latest table from a data package. This is updatde as the package changes\n *\n * @param pkg - The data package to load the table from\n *\n * @returns The latest table\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function useDataTableOutput(pkg: "
-            },
-            {
-              "kind": "Reference",
-              "text": "DataTable",
-              "canonicalReference": "@datashaper/workflow!DataTable:class"
-            },
-            {
-              "kind": "Content",
-              "text": " | undefined"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Reference",
-              "text": "Maybe",
-              "canonicalReference": "@datashaper/workflow!Maybe:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 4,
-            "endIndex": 8
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "pkg",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              },
-              "isOptional": false
-            }
-          ],
-          "name": "useDataTableOutput"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/app-framework!useDataTables:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function useDataTables(): "
-            },
-            {
-              "kind": "Reference",
-              "text": "DataTable",
-              "canonicalReference": "@datashaper/workflow!DataTable:class"
-            },
-            {
-              "kind": "Content",
-              "text": "[]"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 3
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [],
-          "name": "useDataTables"
         },
         {
           "kind": "Function",
@@ -3381,6 +2433,150 @@
           "overloadIndex": 1,
           "parameters": [],
           "name": "usePersistenceService"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/app-framework!useTableBundle:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useTableBundle(name: "
+            },
+            {
+              "kind": "Content",
+              "text": "string | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "TableBundle",
+              "canonicalReference": "@datashaper/workflow!TableBundle:class"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 5
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "name",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "useTableBundle"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/app-framework!useTableBundleOutput:function(1)",
+          "docComment": "/**\n * Uses the latest table from a data package. This is updatde as the package changes\n *\n * @param pkg - The data package to load the table from\n *\n * @returns The latest table\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useTableBundleOutput(pkg: "
+            },
+            {
+              "kind": "Reference",
+              "text": "TableBundle",
+              "canonicalReference": "@datashaper/workflow!TableBundle:class"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Maybe",
+              "canonicalReference": "@datashaper/workflow!Maybe:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "TableContainer",
+              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 4,
+            "endIndex": 8
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "pkg",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "useTableBundleOutput"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/app-framework!useTableBundles:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useTableBundles(): "
+            },
+            {
+              "kind": "Reference",
+              "text": "TableBundle",
+              "canonicalReference": "@datashaper/workflow!TableBundle:class"
+            },
+            {
+              "kind": "Content",
+              "text": "[]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 3
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [],
+          "name": "useTableBundles"
         },
         {
           "kind": "Variable",
@@ -3640,17 +2836,17 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!WorkflowEditorProps#dataTable:member",
+              "canonicalReference": "@datashaper/app-framework!WorkflowEditorProps#resource:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "dataTable: "
+                  "text": "resource: "
                 },
                 {
                   "kind": "Reference",
-                  "text": "DataTable",
-                  "canonicalReference": "@datashaper/workflow!DataTable:class"
+                  "text": "Workflow",
+                  "canonicalReference": "@datashaper/workflow!Workflow:class"
                 },
                 {
                   "kind": "Content",
@@ -3660,7 +2856,7 @@
               "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "dataTable",
+              "name": "resource",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

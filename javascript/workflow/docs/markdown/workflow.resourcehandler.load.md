@@ -9,7 +9,7 @@ Load a specific resource
 <b>Signature:</b>
 
 ```typescript
-load(data: ResourceSchema, files: Map<string, Blob>): Promise<void>;
+load(data: ResourceSchema, files: Map<string, Blob>): Promise<Resource[]>;
 ```
 
 ## Parameters
@@ -21,5 +21,5 @@ load(data: ResourceSchema, files: Map<string, Blob>): Promise<void>;
 
 <b>Returns:</b>
 
-Promise&lt;void&gt;
+Promise&lt;[Resource](./workflow.resource.md)<!-- -->\[\]&gt;
 

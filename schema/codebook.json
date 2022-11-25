@@ -235,6 +235,27 @@
         "Record<any,any>": {
             "type": "object"
         },
+        "ResourceRelationship": {
+            "description": "An explicit resource relationship",
+            "properties": {
+                "rel": {
+                    "description": "The relationship type",
+                    "type": "string"
+                },
+                "source": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/ResourceSchema"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "The linked or embedded resource"
+                }
+            },
+            "type": "object"
+        },
         "ResourceSchema": {
             "description": "Parent class for any resource type understood by the system.\nAny object type that extends from Resouce is expected to have a standalone schema published.\nFor project state, this can be left as generic as possible for now.",
             "properties": {
@@ -285,6 +306,9 @@
                         "anyOf": [
                             {
                                 "$ref": "#/definitions/ResourceSchema"
+                            },
+                            {
+                                "$ref": "#/definitions/ResourceRelationship"
                             },
                             {
                                 "type": "string"
@@ -359,6 +383,9 @@
         },
         "profile": {
             "description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
+            "enum": [
+                "codebook"
+            ],
             "type": "string"
         },
         "sources": {
@@ -367,6 +394,9 @@
                 "anyOf": [
                     {
                         "$ref": "#/definitions/ResourceSchema"
+                    },
+                    {
+                        "$ref": "#/definitions/ResourceRelationship"
                     },
                     {
                         "type": "string"

@@ -7,9 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-toSchema(): Omit<ResourceSchema, '$schema' | 'profile'>;
+toSchema(): ResourceSchema;
 ```
 <b>Returns:</b>
 
-Omit&lt;ResourceSchema, '$schema' \| 'profile'&gt;
+ResourceSchema
 
