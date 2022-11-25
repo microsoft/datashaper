@@ -147,12 +147,3 @@ export function iqr(values: number[], opts?: IQROptions) {
 export interface IQROptions {
 	sorted: boolean
 }
-
-export interface FDOptions {
-	type: FDType
-}
-
-export enum FDType {
-	Width = 'width',
-	Bins = 'bins',
-}
