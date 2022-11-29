@@ -102,13 +102,16 @@ function makeNavLink(
 	resource: ResourceRoute,
 	onSelect: (v: ResourceRoute) => void,
 ): INavLink {
+	const numChildren = resource.children?.length ?? 0
+
 	return {
 		name: resource.title,
+		iconProps: {
+			iconName: resource.icon,
+			styles: { root: { marginLeft: 25 } },
+		},
 		url: '',
-		icon:
-			resource.children && resource.children.length > 0
-				? undefined
-				: resource.icon,
+		icon: numChildren > 0 ? undefined : resource.icon,
 		key: resource.href,
 		links: resource.children?.map(c => makeNavLink(c, onSelect)),
 		onClick: () => onSelect(resource),
