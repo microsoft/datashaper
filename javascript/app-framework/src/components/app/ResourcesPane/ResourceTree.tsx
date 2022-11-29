@@ -2,7 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { INavLink, IRenderFunction } from '@fluentui/react'
+import type {
+	IContextualMenuItem,
+	INavLink,
+	IRenderFunction,
+} from '@fluentui/react'
 import { Nav } from '@fluentui/react'
 import { memo } from 'react'
 
@@ -24,6 +28,10 @@ export const ResourceTree: React.FC<ResourceTreeProps> = memo(
 	},
 )
 const renderLink: IRenderFunction<INavLink> = (
-	props?: INavLink,
+	props?: INavLink & { menuItems?: IContextualMenuItem[] },
 	defaultRender?: (props?: INavLink | undefined) => JSX.Element | null,
-): JSX.Element | null => <TreeLink>{defaultRender?.(props) ?? null}</TreeLink>
+): JSX.Element | null => (
+	<TreeLink menuItems={props?.menuItems}>
+		{defaultRender?.(props) ?? null}
+	</TreeLink>
+)

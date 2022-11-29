@@ -133,7 +133,7 @@ function getFileTreeItem(
 		renderer: plugin.renderer,
 		props: { resource },
 	}
-	const extraRoutes = plugin?.onGenerateRoutes?.(resource, parentRoute, href)
+	const extraRoutes = plugin?.onGetRoutes?.(resource, parentRoute, href)
 
 	const children: ResourceRoute[] = extraRoutes?.children ?? []
 	for (const r of resource.sources ?? emptyArray) {

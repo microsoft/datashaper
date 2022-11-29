@@ -27,6 +27,7 @@ export class DataPackage extends Resource {
 	 * A map of profile-name to resource hnadler
 	 */
 	private _resourceHandlers: Map<string, ResourceHandler> = new Map()
+	private _resourceDisposables: Map<string, () => void> = new Map()
 	public _resources = new BehaviorSubject<Resource[]>([])
 
 	public constructor(public dataPackage?: DataPackageSchema) {
@@ -63,10 +64,16 @@ export class DataPackage extends Resource {
 
 	public addResource(resource: Resource): void {
 		this._resources.next([...this.resources, resource])
+		this._resourceDisposables.set(
+			resource.name,
+			resource.onChange(() => this._resources.next(this.resources)),
+		)
+		resource.onDispose(() => this.removeResource(resource.name))
 		this._onChange.next()
 	}
 
 	public removeResource(name: string): void {
+		this._resourceDisposables.get(name)?.()
 		this._resources.next(this.resources.filter(t => name !== t.name))
 		this._onChange.next()
 	}

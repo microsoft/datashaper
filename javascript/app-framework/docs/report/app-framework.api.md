@@ -20,10 +20,11 @@ import { IChoiceGroupProps } from '@fluentui/react';
 import type { IChoiceGroupStyleProps } from '@fluentui/react';
 import type { IChoiceGroupStyles } from '@fluentui/react';
 import type { ICommandBarItemProps } from '@fluentui/react';
+import type { IContextualMenuItem } from '@fluentui/react';
 import type { IStyleFunctionOrObject } from '@fluentui/react';
 import { ITextFieldProps } from '@fluentui/react';
 import type { Maybe } from '@datashaper/workflow';
-import { MutableRefObject } from 'react';
+import type { MutableRefObject } from 'react';
 import type { ParserOptions } from '@datashaper/schema';
 import type { default as React_2 } from 'react';
 import type { Resource } from '@datashaper/workflow';
@@ -184,7 +185,8 @@ export interface ProfilePlugin<T extends Resource = any> {
     dataHandler?: ResourceHandler;
     group?: ResourceGroup;
     iconName: string;
-    onGenerateRoutes?: (resource: T, parentPath: string, resourcePath: string) => {
+    onGetMenuItems?: (resource: T) => IContextualMenuItem[];
+    onGetRoutes?: (resource: T, parentPath: string, resourcePath: string) => {
         preItemSiblings?: ResourceRoute[];
         postItemSiblings?: ResourceRoute[];
         children?: ResourceRoute[];
@@ -258,6 +260,7 @@ export interface ResourceRoute {
     children?: ResourceRoute[];
     href: string;
     icon?: string;
+    menuItems?: IContextualMenuItem[];
     props: any;
     renderer: React.ComponentType<any>;
     title: string;

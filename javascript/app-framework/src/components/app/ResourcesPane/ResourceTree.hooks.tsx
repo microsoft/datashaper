@@ -3,7 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Resource } from '@datashaper/workflow'
-import type { INavLink, INavLinkGroup } from '@fluentui/react'
+import type {
+	IContextualMenuItem,
+	INavLink,
+	INavLinkGroup,
+} from '@fluentui/react'
 import { useObservableState } from 'observable-hooks'
 import { useMemo } from 'react'
 import { map } from 'rxjs'
@@ -23,7 +27,7 @@ export function useResourceRoutes(
 				map(resources => {
 					const groups = groupResources(resources, plugins)
 					return groups.map(g =>
-						g.map(r => getFileTreeItem(r, plugins)).flatMap(x => x),
+						g.map(r => makeResourceRoute(r, plugins)).flatMap(x => x),
 					)
 				}),
 			),
@@ -32,7 +36,7 @@ export function useResourceRoutes(
 	return useObservableState(observable, () => [])
 }
 
-function getFileTreeItem(
+function makeResourceRoute(
 	resource: Resource,
 	plugins: Map<string, ProfilePlugin>,
 	parentRoute = '/resource',
@@ -44,14 +48,16 @@ function getFileTreeItem(
 		title: resource.name,
 		icon: plugin.iconName,
 		renderer: plugin.renderer,
+		menuItems: plugin.onGetMenuItems?.(resource),
 		props: { resource },
 	}
-	const extraRoutes = plugin?.onGenerateRoutes?.(resource, parentRoute, href)
+	const extraRoutes = plugin?.onGetRoutes?.(resource, parentRoute, href)
 
 	const children: ResourceRoute[] = extraRoutes?.children ?? []
 	for (const r of resource.sources ?? emptyArray) {
-		children.push(...getFileTreeItem(r, plugins, href))
+		children.push(...makeResourceRoute(r, plugins, href))
 	}
+
 	root.children = children
 	return [
 		...(extraRoutes?.preItemSiblings ?? []),
@@ -89,9 +95,7 @@ export function useNavGroups(
 			for (const resource of group) {
 				links.push(makeNavLink(resource, onSelect))
 			}
-			result.push({
-				links: links,
-			})
+			result.push({ links })
 		}
 
 		return result
@@ -101,7 +105,7 @@ export function useNavGroups(
 function makeNavLink(
 	resource: ResourceRoute,
 	onSelect: (v: ResourceRoute) => void,
-): INavLink {
+): INavLink & { menuItems?: IContextualMenuItem[] } {
 	const numChildren = resource.children?.length ?? 0
 
 	return {
@@ -114,6 +118,7 @@ function makeNavLink(
 		icon: numChildren > 0 ? undefined : resource.icon,
 		key: resource.href,
 		links: resource.children?.map(c => makeNavLink(c, onSelect)),
+		menuItems: resource.menuItems,
 		onClick: () => onSelect(resource),
 	}
 }

@@ -2,14 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	NamedPortBinding,
-	WorkflowSchema} from '@datashaper/schema';
+import type { NamedPortBinding, WorkflowSchema } from '@datashaper/schema'
 import {
 	createSchemaValidator,
 	createWorkflowSchemaObject,
-	KnownProfile
-,
+	KnownProfile,
 	LATEST_WORKFLOW_SCHEMA,
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
@@ -77,7 +74,7 @@ export class Workflow extends Resource {
 		this._graph.add(observableNode(DEFAULT_INPUT, this._defaultInput))
 	}
 
-	public dispose(): void {
+	public override dispose(): void {
 		this._defaultInputSubscription?.unsubscribe()
 		this._defaultInputSubscription = undefined
 		this._defaultOutputSubscription?.unsubscribe()
@@ -86,6 +83,7 @@ export class Workflow extends Resource {
 		this._tableSubscriptions.clear()
 		this._graph.clear()
 		this._disposables.forEach(d => d())
+		super.dispose()
 	}
 
 	private rebindDefaultOutput() {

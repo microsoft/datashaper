@@ -2,10 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DataTableSchema} from '@datashaper/schema';
-import { 	createDataTableSchemaObject,
+import type { DataTableSchema } from '@datashaper/schema'
+import {
+	createDataTableSchemaObject,
 	DataFormat,
-KnownProfile ,
+	KnownProfile,
 	LATEST_DATATABLE_SCHEMA,
 } from '@datashaper/schema'
 import { readTable } from '@datashaper/tables'
@@ -42,8 +43,9 @@ export class DataTable extends Resource {
 		this.loadSchema(datatable)
 	}
 
-	public dispose(): void {
+	public override dispose(): void {
 		this.disposables.forEach(d => d())
+		super.dispose()
 	}
 
 	private refreshData = (): void => {

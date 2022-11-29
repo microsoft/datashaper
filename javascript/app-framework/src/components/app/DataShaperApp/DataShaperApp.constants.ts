@@ -3,7 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { KnownProfile } from '@datashaper/schema'
-import type { DataTable } from '@datashaper/workflow'
+import {
+	type TableBundle,
+	Codebook,
+	DataTable,
+	Workflow,
+} from '@datashaper/workflow'
+import type { IContextualMenuItem } from '@fluentui/react'
 
 import type { ProfilePlugin } from '../../../types.js'
 import { ResourceGroup } from '../../../types.js'
@@ -22,6 +28,43 @@ export const KNOWN_PROFILE_PLUGINS: ProfilePlugin[] = [
 		renderer: BundleEditor,
 		iconName: 'ViewAll',
 		group: ResourceGroup.Data,
+		onGetMenuItems: (resource: TableBundle) => {
+			const result: IContextualMenuItem[] = [
+				{
+					key: 'delete',
+					text: 'Delete',
+					onClick: () => resource.dispose(),
+				},
+			]
+			if (resource.input == null) {
+				result.push({
+					key: 'add-datatable',
+					text: 'Add Datatable',
+					onClick: () => {
+						resource.input = new DataTable()
+					},
+				})
+			}
+			if (resource.workflow == null) {
+				result.push({
+					key: 'add-workflow',
+					text: 'Add Workflow',
+					onClick: () => {
+						resource.workflow = new Workflow()
+					},
+				})
+			}
+			if (resource.codebook == null) {
+				result.push({
+					key: 'add-codebook',
+					text: 'Add Codebook',
+					onClick: () => {
+						resource.codebook = new Codebook()
+					},
+				})
+			}
+			return result
+		},
 	},
 	{
 		profile: KnownProfile.DataTable,
@@ -29,7 +72,16 @@ export const KNOWN_PROFILE_PLUGINS: ProfilePlugin[] = [
 		renderer: DataSourceEditor,
 		iconName: 'PageData',
 		group: ResourceGroup.Data,
-		onGenerateRoutes(resource: DataTable, pathContext) {
+		onGetMenuItems: (resource: TableBundle) => {
+			return [
+				{
+					key: 'delete',
+					text: 'Delete',
+					onClick: () => resource.dispose(),
+				},
+			]
+		},
+		onGetRoutes(resource: DataTable, pathContext) {
 			const dataPath = Array.isArray(resource.path)
 				? resource.path[0]
 				: resource.path
@@ -58,6 +110,15 @@ export const KNOWN_PROFILE_PLUGINS: ProfilePlugin[] = [
 		renderer: CodebookEditor,
 		iconName: 'FormLibraryMirrored',
 		group: ResourceGroup.Data,
+		onGetMenuItems: (resource: Codebook) => {
+			return [
+				{
+					key: 'delete',
+					text: 'Delete',
+					onClick: () => resource.dispose(),
+				},
+			]
+		},
 	},
 	{
 		profile: KnownProfile.Workflow,
@@ -65,5 +126,14 @@ export const KNOWN_PROFILE_PLUGINS: ProfilePlugin[] = [
 		renderer: WorkflowEditor,
 		iconName: 'SetAction',
 		group: ResourceGroup.Data,
+		onGetMenuItems: (resource: Workflow) => {
+			return [
+				{
+					key: 'delete',
+					text: 'Delete',
+					onClick: () => resource.dispose(),
+				},
+			]
+		},
 	},
 ]

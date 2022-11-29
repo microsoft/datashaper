@@ -73,6 +73,7 @@ export class TableBundle extends Resource {
 
 		this._datatable = datatable
 		this.rebindWorkflowInput()
+
 		if (datatable != null) {
 			const sub = datatable.output$.subscribe(tbl => {
 				// wire up latest input
@@ -84,6 +85,13 @@ export class TableBundle extends Resource {
 				}
 			})
 			this._dtDisposables.push(() => sub.unsubscribe())
+
+			datatable.onDispose(() => (this.input = undefined))
+		} else {
+			this._source.next(undefined)
+			if (this.workflow == null) {
+				this._output.next({ id: this.name, table: undefined })
+			}
 		}
 		this._onChange.next()
 	}
@@ -102,6 +110,7 @@ export class TableBundle extends Resource {
 			this._cbDisposables.push(
 				codebook.onChange(() => this.rebindWorkflowInput()),
 			)
+			codebook.onDispose(() => (this.codebook = undefined))
 		}
 
 		this.rebindWorkflowInput()
@@ -122,15 +131,18 @@ export class TableBundle extends Resource {
 			this._wfDisposables.push(workflow.onChange(() => this._onChange.next()))
 			const sub = workflow.read$()?.subscribe(tbl => this._output.next(tbl))
 			this._wfDisposables.push(() => sub?.unsubscribe())
+
+			workflow.onDispose(() => (this.workflow = undefined))
 		}
 
 		this.rebindWorkflowInput()
 		this._onChange.next()
 	}
 
-	public dispose(): void {
+	public override dispose(): void {
 		this._wfDisposables.forEach(d => d())
 		this.workflow?.dispose()
+		super.dispose()
 	}
 
 	// #region Class Fields

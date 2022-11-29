@@ -1412,12 +1412,48 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!ProfilePlugin#onGenerateRoutes:member",
+              "canonicalReference": "@datashaper/app-framework!ProfilePlugin#onGetMenuItems:member",
+              "docComment": "/**\n * Create contextual menu items for a resource\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "onGetMenuItems?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(resource: T) => "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "IContextualMenuItem",
+                  "canonicalReference": "@fluentui/react!IContextualMenuItem:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "onGetMenuItems",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 4
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ProfilePlugin#onGetRoutes:member",
               "docComment": "/**\n * Event handler for when the resource is undergoing route generation. A route is always generated for the resource; any related routes may be retured here.\n *\n * @param resource - The resource that routes are being generated for.\n *\n * @param parentPath - The current path context being used for generation. This is the parent path of the resource.\n *\n * @param resourcePath - The resource path that was used for the resource.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "onGenerateRoutes?: "
+                  "text": "onGetRoutes?: "
                 },
                 {
                   "kind": "Content",
@@ -1458,7 +1494,7 @@
               "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
-              "name": "onGenerateRoutes",
+              "name": "onGetRoutes",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 8
@@ -2027,6 +2063,38 @@
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ResourceRoute#menuItems:member",
+              "docComment": "/**\n * Contextual Menu items for this resource\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "menuItems?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "IContextualMenuItem",
+                  "canonicalReference": "@fluentui/react!IContextualMenuItem:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "menuItems",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
               }
             },
             {
