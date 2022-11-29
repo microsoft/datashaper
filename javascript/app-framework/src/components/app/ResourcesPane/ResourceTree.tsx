@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { INavLink, IRenderFunction} from '@fluentui/react';
+import type { INavLink, IRenderFunction } from '@fluentui/react'
 import { Nav } from '@fluentui/react'
 import { memo } from 'react'
 
@@ -23,10 +23,7 @@ export const ResourceTree: React.FC<ResourceTreeProps> = memo(
 		)
 	},
 )
-const renderLink: IRenderFunction<INavLink> = function renderLink(
+const renderLink: IRenderFunction<INavLink> = (
 	props?: INavLink,
 	defaultRender?: (props?: INavLink | undefined) => JSX.Element | null,
-): JSX.Element | null {
-	const result = defaultRender?.(props) ?? null
-	return <TreeLink>{result}</TreeLink>
-}
+): JSX.Element | null => <TreeLink>{defaultRender?.(props) ?? null}</TreeLink>

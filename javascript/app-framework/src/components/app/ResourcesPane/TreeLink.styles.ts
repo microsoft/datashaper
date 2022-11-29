@@ -18,5 +18,6 @@ export const Container = styled.div`
 
 export const HoverIcon = styled(Icon)`
 	visibility: hidden;
-	font-size: 20px;
+	font-size: 18px;
+	transform: rotate(90deg);
 `

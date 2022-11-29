@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useBoolean } from '@fluentui/react-hooks'
-import type React from 'react';
 import { useCallback } from 'react'
 
 export function useMenuShowState(): {
@@ -15,8 +14,8 @@ export function useMenuShowState(): {
 
 	const onToggle = useCallback(
 		(e: React.MouseEvent<unknown>) => {
+			e.stopPropagation()
 			toggleMenu()
-			e.preventDefault()
 		},
 		[toggleMenu],
 	)
