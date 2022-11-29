@@ -1794,10 +1794,6 @@ __metadata:
     "@fluentui/react": ^8.101.0
     "@fluentui/react-hooks": ^8.6.13
     "@fluentui/utilities": ^8.13.3
-    "@fluentui/web-components": ^2.5.8
-    "@microsoft/fast-element": ^1.11.0
-    "@microsoft/fast-foundation": ^2.47.0
-    "@microsoft/fast-react-wrapper": ^0.3.15
     "@monaco-editor/react": ^4.4.6
     "@storybook/react": ^6.5.13
     "@thematic/core": ^3.1.1
@@ -2840,19 +2836,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui/web-components@npm:^2.5.8":
-  version: 2.5.8
-  resolution: "@fluentui/web-components@npm:2.5.8"
-  dependencies:
-    "@microsoft/fast-colors": ^5.3.0
-    "@microsoft/fast-element": ^1.11.0
-    "@microsoft/fast-foundation": ^2.47.0
-    "@microsoft/fast-web-utilities": ^5.4.0
-    tslib: ^1.13.0
-  checksum: 0522789e377605051be9285fb006ce83eceb565cfae8b0a91081b0ce938976e1a01f4c9d72b11972f0761938116c2566b0656fe4019fd98e1ed6b2882ede2d8f
-  languageName: node
-  linkType: hard
-
 "@gar/promisify@npm:^1.0.1, @gar/promisify@npm:^1.1.3":
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
@@ -3448,53 +3431,6 @@ __metadata:
   bin:
     api-extractor: bin/api-extractor
   checksum: caef6be19454c513ead3da38bf756936d84abf7109beeb80d82e5a42465a5a1a947aa91c69294a106aba5769b6eedb0edc47f1e79ca0fd2a4359dc0509142219
-  languageName: node
-  linkType: hard
-
-"@microsoft/fast-colors@npm:^5.3.0":
-  version: 5.3.1
-  resolution: "@microsoft/fast-colors@npm:5.3.1"
-  checksum: ff87f402faadb4b5aeee3d27762566c11807f927cd4012b8bbc7f073ca68de0e2197f95330ff5dfd7038f4b4f0e2f51b11feb64c5d570f5c598d37850a5daf60
-  languageName: node
-  linkType: hard
-
-"@microsoft/fast-element@npm:^1.11.0":
-  version: 1.11.0
-  resolution: "@microsoft/fast-element@npm:1.11.0"
-  checksum: 1fab25a7956cd40e0b51d7bbd01b57e620e140634abac83826b51ceac5b5c2ac4b1343e1e2253bf319a8f6f7a8391a2465e3b88d8a906029b17e05a6dfdd462c
-  languageName: node
-  linkType: hard
-
-"@microsoft/fast-foundation@npm:^2.47.0":
-  version: 2.47.0
-  resolution: "@microsoft/fast-foundation@npm:2.47.0"
-  dependencies:
-    "@microsoft/fast-element": ^1.11.0
-    "@microsoft/fast-web-utilities": ^5.4.1
-    tabbable: ^5.2.0
-    tslib: ^1.13.0
-  checksum: 065a70bf7399f068a876c9b78d9c2e3474fe764cb9865635a55474b47020329f6f0a7f5e2aba6abe9076e7fe6868028852b7460e6c099d5b669fa5c4a8613762
-  languageName: node
-  linkType: hard
-
-"@microsoft/fast-react-wrapper@npm:^0.3.15":
-  version: 0.3.15
-  resolution: "@microsoft/fast-react-wrapper@npm:0.3.15"
-  dependencies:
-    "@microsoft/fast-element": ^1.11.0
-    "@microsoft/fast-foundation": ^2.47.0
-  peerDependencies:
-    react: ">=16.9.0"
-  checksum: d00f2979eb061c3a1ec2e0b724cb054eb51a1010826e35d4add3d3f4acc4d855859bb176c46f15b49b3c3b1f10c156a255e39cf1402eed52bc28fc8bd5b80af9
-  languageName: node
-  linkType: hard
-
-"@microsoft/fast-web-utilities@npm:^5.4.0, @microsoft/fast-web-utilities@npm:^5.4.1":
-  version: 5.4.1
-  resolution: "@microsoft/fast-web-utilities@npm:5.4.1"
-  dependencies:
-    exenv-es6: ^1.1.1
-  checksum: 303e87847f962944f474e3716c3eb305668243916ca9e0719e26bb9a32346144bc958d915c103776b3e552cea0f0f6233f839fad66adfdf96a8436b947288ca7
   languageName: node
   linkType: hard
 
@@ -11151,13 +11087,6 @@ __metadata:
     signal-exit: ^3.0.7
     strip-final-newline: ^3.0.0
   checksum: 1a4af799839134f5c72eb63d525b87304c1114a63aa71676c91d57ccef2e26f2f53e14c11384ab11c4ec479be1efa83d11c8190e00040355c2c5c3364327fa8e
-  languageName: node
-  linkType: hard
-
-"exenv-es6@npm:^1.1.1":
-  version: 1.1.1
-  resolution: "exenv-es6@npm:1.1.1"
-  checksum: 7f2aa12025e6f06c48dc286f380cf3183bb19c6017b36d91695034a3e5124a7235c4f8ff24ca2eb88ae801322f0f99605cedfcfd996a5fcbba7669320e2a448e
   languageName: node
   linkType: hard
 
@@ -19516,13 +19445,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tabbable@npm:^5.2.0":
-  version: 5.3.3
-  resolution: "tabbable@npm:5.3.3"
-  checksum: 1aa56e1bb617cc10616c407f4e756f0607f3e2d30f9803664d70b85db037ca27e75918ed1c71443f3dc902e21dc9f991ce4b52d63a538c9b69b3218d3babcd70
-  languageName: node
-  linkType: hard
-
 "table-layout@npm:^1.0.2":
   version: 1.0.2
   resolution: "table-layout@npm:1.0.2"
@@ -20001,7 +19923,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^1.10.0, tslib@npm:^1.13.0, tslib@npm:^1.8.1, tslib@npm:^1.9.3":
+"tslib@npm:^1.10.0, tslib@npm:^1.8.1, tslib@npm:^1.9.3":
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
   checksum: dbe628ef87f66691d5d2959b3e41b9ca0045c3ee3c7c7b906cc1e328b39f199bb1ad9e671c39025bd56122ac57dfbf7385a94843b1cc07c60a4db74795829acd

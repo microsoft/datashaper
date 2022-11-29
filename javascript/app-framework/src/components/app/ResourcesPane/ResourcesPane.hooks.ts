@@ -12,7 +12,7 @@ import { useCallback, useContext } from 'react'
 import { DataPackageContext } from '../../../context/index.js'
 import { removeExtension } from '../../../util/index.js'
 import type { OpenTableHandler } from '../../tables/ImportTable/ImportTable.types.js'
-import type { AddTableHandler } from './FileTree.types.js'
+import type { AddTableHandler } from './ResourcesPane.types.js'
 
 export function useOnOpenTable(
 	file: BaseFile,

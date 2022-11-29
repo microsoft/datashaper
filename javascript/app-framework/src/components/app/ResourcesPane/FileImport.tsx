@@ -7,7 +7,7 @@ import { memo, useCallback } from 'react'
 
 import { ImportTable } from '../../tables/ImportTable/ImportTable.js'
 import type { FileImportProps } from './FileImport.types.js'
-import { useOnOpenTable } from './FileTree.hooks.js'
+import { useOnOpenTable } from './ResourcesPane.hooks.js'
 
 export const FileImport: React.FC<FileImportProps> = memo(function FileImport({
 	file,

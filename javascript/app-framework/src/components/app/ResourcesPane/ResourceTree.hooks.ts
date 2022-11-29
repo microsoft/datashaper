@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Resource } from '@datashaper/workflow'
+import type { INavLink, INavLinkGroup } from '@fluentui/react'
 import { useObservableState } from 'observable-hooks'
 import { useMemo } from 'react'
 import { map } from 'rxjs'
@@ -74,4 +75,42 @@ function groupResources(
 		}
 	}
 	return [dataResources, appResources]
+}
+
+export function useNavGroups(
+	resources: ResourceRoute[][],
+	onSelect: (v: ResourceRoute) => void,
+): INavLinkGroup[] {
+	return useMemo<INavLinkGroup[]>(() => {
+		const result: INavLinkGroup[] = []
+
+		for (const group of resources) {
+			const links: INavLink[] = []
+			for (const resource of group) {
+				links.push(makeNavLink(resource, onSelect))
+			}
+			result.push({
+				links: links,
+			})
+		}
+
+		return result
+	}, [resources])
+}
+
+function makeNavLink(
+	resource: ResourceRoute,
+	onSelect: (v: ResourceRoute) => void,
+): INavLink {
+	return {
+		name: resource.title,
+		url: '',
+		icon:
+			resource.children && resource.children.length > 0
+				? undefined
+				: resource.icon,
+		key: resource.href,
+		links: resource.children?.map(c => makeNavLink(c, onSelect)),
+		onClick: () => onSelect(resource),
+	}
 }

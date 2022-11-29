@@ -2,5 +2,5 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-export * from './FileTree.js'
-export * from './FileTree.types.js'
+export * from './ResourcesPane.js'
+export * from './ResourcesPane.types.js'

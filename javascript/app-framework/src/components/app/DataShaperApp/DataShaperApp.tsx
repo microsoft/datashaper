@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { AllotmentHandle } from 'allotment';
+import type { AllotmentHandle } from 'allotment'
 import { Allotment } from 'allotment'
 import { memo, useCallback, useRef } from 'react'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
@@ -10,8 +10,8 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { DataPackageProvider } from '../../../context/index.js'
 import { EMPTY_ARRAY } from '../../../empty.js'
 import type { ResourceRoute } from '../../../types.js'
-import { FileTree } from '../FileTree/index.js'
-import { useResourceRoutes } from '../FileTree/TreeItems.hooks.js'
+import { ResourcesPane } from '../ResourcesPane/index.js'
+import { useResourceRoutes } from '../ResourcesPane/ResourceTree.hooks.js'
 import {
 	useExpandedState,
 	useFlattened,
@@ -72,7 +72,7 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 				maxSize={PANE_EXPANDED_SIZE}
 				minSize={PANE_COLLAPSED_SIZE}
 			>
-				<FileTree
+				<ResourcesPane
 					resources={resources}
 					expanded={expanded}
 					onToggleExpanded={onToggle}
