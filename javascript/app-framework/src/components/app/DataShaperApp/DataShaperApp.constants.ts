@@ -21,6 +21,12 @@ import {
 	WorkflowEditor,
 } from '../../editors/index.js'
 
+const icons = {
+	codebook: 'FormLibraryMirrored',
+	workflow: 'SetAction',
+	datatable: 'PageData',
+}
+
 export const KNOWN_PROFILE_PLUGINS: ProfilePlugin[] = [
 	{
 		profile: KnownProfile.TableBundle,
@@ -29,17 +35,12 @@ export const KNOWN_PROFILE_PLUGINS: ProfilePlugin[] = [
 		iconName: 'ViewAll',
 		group: ResourceGroup.Data,
 		onGetMenuItems: (resource: TableBundle) => {
-			const result: IContextualMenuItem[] = [
-				{
-					key: 'delete',
-					text: 'Delete',
-					onClick: () => resource.dispose(),
-				},
-			]
+			const result: IContextualMenuItem[] = []
 			if (resource.input == null) {
 				result.push({
 					key: 'add-datatable',
 					text: 'Add Datatable',
+					iconProps: { iconName: icons.datatable },
 					onClick: () => {
 						resource.input = new DataTable()
 					},
@@ -49,6 +50,7 @@ export const KNOWN_PROFILE_PLUGINS: ProfilePlugin[] = [
 				result.push({
 					key: 'add-workflow',
 					text: 'Add Workflow',
+					iconProps: { iconName: icons.workflow },
 					onClick: () => {
 						resource.workflow = new Workflow()
 					},
@@ -58,6 +60,7 @@ export const KNOWN_PROFILE_PLUGINS: ProfilePlugin[] = [
 				result.push({
 					key: 'add-codebook',
 					text: 'Add Codebook',
+					iconProps: { iconName: icons.codebook },
 					onClick: () => {
 						resource.codebook = new Codebook()
 					},
@@ -70,17 +73,8 @@ export const KNOWN_PROFILE_PLUGINS: ProfilePlugin[] = [
 		profile: KnownProfile.DataTable,
 		title: 'Datatable',
 		renderer: DataSourceEditor,
-		iconName: 'PageData',
+		iconName: icons.datatable,
 		group: ResourceGroup.Data,
-		onGetMenuItems: (resource: TableBundle) => {
-			return [
-				{
-					key: 'delete',
-					text: 'Delete',
-					onClick: () => resource.dispose(),
-				},
-			]
-		},
 		onGetRoutes(resource: DataTable, pathContext) {
 			const dataPath = Array.isArray(resource.path)
 				? resource.path[0]
@@ -108,32 +102,14 @@ export const KNOWN_PROFILE_PLUGINS: ProfilePlugin[] = [
 		profile: KnownProfile.Codebook,
 		title: 'Codebook',
 		renderer: CodebookEditor,
-		iconName: 'FormLibraryMirrored',
+		iconName: icons.codebook,
 		group: ResourceGroup.Data,
-		onGetMenuItems: (resource: Codebook) => {
-			return [
-				{
-					key: 'delete',
-					text: 'Delete',
-					onClick: () => resource.dispose(),
-				},
-			]
-		},
 	},
 	{
 		profile: KnownProfile.Workflow,
 		title: 'Workflow',
 		renderer: WorkflowEditor,
-		iconName: 'SetAction',
+		iconName: icons.workflow,
 		group: ResourceGroup.Data,
-		onGetMenuItems: (resource: Workflow) => {
-			return [
-				{
-					key: 'delete',
-					text: 'Delete',
-					onClick: () => resource.dispose(),
-				},
-			]
-		},
 	},
 ]
