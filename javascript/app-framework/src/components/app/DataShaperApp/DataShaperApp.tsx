@@ -11,7 +11,6 @@ import { DataPackageProvider } from '../../../context/index.js'
 import { EMPTY_ARRAY } from '../../../empty.js'
 import type { ResourceRoute } from '../../../types.js'
 import { ResourcesPane } from '../ResourcesPane/index.js'
-import { useResourceRoutes } from '../ResourcesPane/ResourceTree.hooks.js'
 import {
 	useExpandedState,
 	useFlattened,
@@ -19,6 +18,7 @@ import {
 } from './DataShaperApp.hooks.js'
 import { useFileTreeStyle } from './DataShaperApp.styles.js'
 import type { DataShaperAppProps } from './DataShaperApp.types.js'
+import { useResourceRoutes } from './useResourceRoutes.js'
 
 const PANE_EXPANDED_SIZE = 300
 const PANE_COLLAPSED_SIZE = 60

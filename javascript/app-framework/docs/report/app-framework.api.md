@@ -20,9 +20,11 @@ import { IChoiceGroupProps } from '@fluentui/react';
 import type { IChoiceGroupStyleProps } from '@fluentui/react';
 import type { IChoiceGroupStyles } from '@fluentui/react';
 import type { ICommandBarItemProps } from '@fluentui/react';
+import type { IContextualMenuItem } from '@fluentui/react';
 import type { IStyleFunctionOrObject } from '@fluentui/react';
 import { ITextFieldProps } from '@fluentui/react';
 import type { Maybe } from '@datashaper/workflow';
+import type { MutableRefObject } from 'react';
 import type { ParserOptions } from '@datashaper/schema';
 import type { default as React_2 } from 'react';
 import type { Resource } from '@datashaper/workflow';
@@ -183,7 +185,8 @@ export interface ProfilePlugin<T extends Resource = any> {
     dataHandler?: ResourceHandler;
     group?: ResourceGroup;
     iconName: string;
-    onGenerateRoutes?: (resource: T, parentPath: string, resourcePath: string) => {
+    onGetMenuItems?: (resource: T) => IContextualMenuItem[];
+    onGetRoutes?: (resource: T, parentPath: string, resourcePath: string) => {
         preItemSiblings?: ResourceRoute[];
         postItemSiblings?: ResourceRoute[];
         children?: ResourceRoute[];
@@ -257,6 +260,7 @@ export interface ResourceRoute {
     children?: ResourceRoute[];
     href: string;
     icon?: string;
+    menuItems?: IContextualMenuItem[];
     props: any;
     renderer: React.ComponentType<any>;
     title: string;
@@ -307,6 +311,11 @@ export function useDataTableSource(pkg: DataTable | undefined): Maybe<ColumnTabl
 //
 // @public (undocumented)
 export function useMenuButtonStyles(): IButtonStyles;
+
+// Warning: (ae-missing-release-tag) "useOnOutsideClick" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useOnOutsideClick(ref: MutableRefObject<HTMLElement | null>, onClickOutside: () => void): void;
 
 // Warning: (ae-missing-release-tag) "usePersistenceService" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

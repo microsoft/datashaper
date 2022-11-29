@@ -3,14 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Resource } from '@datashaper/workflow'
-import type { INavLink, INavLinkGroup } from '@fluentui/react'
 import { useObservableState } from 'observable-hooks'
 import { useMemo } from 'react'
 import { map } from 'rxjs'
 
-import { emptyArray } from '../../../empty.js'
+import { EMPTY_ARRAY } from '../../../empty.js'
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
-import type { ProfilePlugin, ResourceRoute } from '../../../types.js'
+import type { ProfilePlugin, ResourceRoute } from '../../../types.js';
 import { ResourceGroup } from '../../../types.js'
 
 export function useResourceRoutes(
@@ -23,7 +22,7 @@ export function useResourceRoutes(
 				map(resources => {
 					const groups = groupResources(resources, plugins)
 					return groups.map(g =>
-						g.map(r => getFileTreeItem(r, plugins)).flatMap(x => x),
+						g.map(r => makeResourceRoute(r, plugins)).flatMap(x => x),
 					)
 				}),
 			),
@@ -32,7 +31,7 @@ export function useResourceRoutes(
 	return useObservableState(observable, () => [])
 }
 
-function getFileTreeItem(
+function makeResourceRoute(
 	resource: Resource,
 	plugins: Map<string, ProfilePlugin>,
 	parentRoute = '/resource',
@@ -44,14 +43,24 @@ function getFileTreeItem(
 		title: resource.name,
 		icon: plugin.iconName,
 		renderer: plugin.renderer,
+		menuItems: [
+			...(plugin.onGetMenuItems?.(resource) ?? EMPTY_ARRAY),
+			{
+				key: 'delete',
+				text: 'Delete',
+				iconProps: { iconName: 'Delete' },
+				onClick: () => resource.dispose(),
+			},
+		],
 		props: { resource },
 	}
-	const extraRoutes = plugin?.onGenerateRoutes?.(resource, parentRoute, href)
+	const extraRoutes = plugin?.onGetRoutes?.(resource, parentRoute, href)
 
 	const children: ResourceRoute[] = extraRoutes?.children ?? []
-	for (const r of resource.sources ?? emptyArray) {
-		children.push(...getFileTreeItem(r, plugins, href))
+	for (const r of resource.sources ?? EMPTY_ARRAY) {
+		children.push(...makeResourceRoute(r, plugins, href))
 	}
+
 	root.children = children
 	return [
 		...(extraRoutes?.preItemSiblings ?? []),
@@ -75,42 +84,4 @@ function groupResources(
 		}
 	}
 	return [dataResources, appResources]
-}
-
-export function useNavGroups(
-	resources: ResourceRoute[][],
-	onSelect: (v: ResourceRoute) => void,
-): INavLinkGroup[] {
-	return useMemo<INavLinkGroup[]>(() => {
-		const result: INavLinkGroup[] = []
-
-		for (const group of resources) {
-			const links: INavLink[] = []
-			for (const resource of group) {
-				links.push(makeNavLink(resource, onSelect))
-			}
-			result.push({
-				links: links,
-			})
-		}
-
-		return result
-	}, [resources])
-}
-
-function makeNavLink(
-	resource: ResourceRoute,
-	onSelect: (v: ResourceRoute) => void,
-): INavLink {
-	return {
-		name: resource.title,
-		url: '',
-		icon:
-			resource.children && resource.children.length > 0
-				? undefined
-				: resource.icon,
-		key: resource.href,
-		links: resource.children?.map(c => makeNavLink(c, onSelect)),
-		onClick: () => onSelect(resource),
-	}
 }

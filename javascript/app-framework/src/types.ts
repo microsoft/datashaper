@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Resource, ResourceHandler } from '@datashaper/workflow'
+import type { IContextualMenuItem } from '@fluentui/react'
 
 /**
  * Data attached to resource-tree nodes
@@ -27,6 +28,11 @@ export interface ResourceRoute {
 	 * Child node Data
 	 */
 	children?: ResourceRoute[]
+
+	/**
+	 * Contextual Menu items for this resource
+	 */
+	menuItems?: IContextualMenuItem[]
 
 	/**
 	 * The renderer to use for this node
@@ -73,6 +79,11 @@ export interface ProfilePlugin<T extends Resource = any> {
 	dataHandler?: ResourceHandler
 
 	/**
+	 * Create contextual menu items for a resource
+	 */
+	onGetMenuItems?: (resource: T) => IContextualMenuItem[]
+
+	/**
 	 * Event handler for when the resource is undergoing route generation.
 	 * A route is always generated for the resource; any related routes may be retured here.
 	 *
@@ -80,7 +91,7 @@ export interface ProfilePlugin<T extends Resource = any> {
 	 * @param parentPath - The current path context being used for generation. This is the parent path of the resource.
 	 * @param resourcePath - The resource path that was used for the resource.
 	 */
-	onGenerateRoutes?: (
+	onGetRoutes?: (
 		resource: T,
 		parentPath: string,
 		resourcePath: string,
