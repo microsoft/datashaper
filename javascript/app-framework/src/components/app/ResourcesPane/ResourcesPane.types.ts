@@ -9,7 +9,7 @@ import type { BaseFile } from '@datashaper/utilities'
 
 import type { ResourceRoute } from '../../../index.js'
 
-export interface FileTreeProps {
+export interface ResourcesPaneProps {
 	/**
 	 * The static CSS style to apply to the outer container
 	 */
@@ -43,7 +43,7 @@ export interface FileTreeProps {
 	/**
 	 * Event handler for when a resource is selected
 	 */
-	onSelect?: (resource: ResourceRoute) => void
+	onSelect: (resource: ResourceRoute) => void
 
 	/**
 	 * The currently selected item

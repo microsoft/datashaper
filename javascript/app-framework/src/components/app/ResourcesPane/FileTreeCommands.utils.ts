@@ -9,10 +9,21 @@ import type {
 	ITheme,
 } from '@fluentui/react'
 
-import { icons } from './FileTree.styles.js'
-import type { FileDefinition } from './FileTree.types.js'
+import { icons } from './ResourcesPane.styles.js'
+import type { FileDefinition } from './ResourcesPane.types.js'
 
-export function openProps(
+export function newMenuItems(onNewTable: () => void) {
+	return [
+		{
+			key: 'newTable',
+			text: 'Table',
+			iconProps: icons.table,
+			onClick: onNewTable,
+		},
+	]
+}
+
+export function openMenuItems(
 	examples: FileDefinition[],
 	onClickExample: (example: FileDefinition) => void,
 	onClickUploadTable: () => void,
@@ -48,7 +59,7 @@ export function openProps(
 	return result
 }
 
-export function saveProps(
+export function saveMenuItems(
 	onClickDownloadZip: () => void,
 ): IContextualMenuItem[] {
 	return [
@@ -63,12 +74,26 @@ export function saveProps(
 
 export function createCommandBar(
 	expanded: boolean,
-	hasDataPackages: boolean,
+	isSaveEnabled: boolean,
+	_newProps: IContextualMenuItem[],
 	openProps: IContextualMenuItem[],
 	saveProps: IContextualMenuItem[],
 	theme: ITheme,
 ): ICommandBarItemProps[] {
 	return [
+		// {
+		// 	key: 'new',
+		// 	text: expanded ? 'New' : '',
+		// 	iconProps: icons.newFile,
+		// 	subMenuProps: {
+		// 		items: newProps,
+		// 	},
+		// 	buttonStyles: {
+		// 		root: {
+		// 			background: theme.palette.neutralLighter,
+		// 		},
+		// 	},
+		// },
 		{
 			key: 'open',
 			text: expanded ? 'Open' : null,
@@ -88,7 +113,7 @@ export function createCommandBar(
 			text: expanded ? 'Save' : null,
 			iconProps: icons.save,
 			iconOnly: !expanded,
-			disabled: !hasDataPackages,
+			disabled: !isSaveEnabled,
 			subMenuProps: {
 				items: saveProps,
 			},

@@ -4,10 +4,10 @@
  */
 import type { ResourceRoute } from '../../../types.js'
 
-export interface TreeNodeProps {
-	node: ResourceRoute
+export interface ResourceTreeProps {
 	expanded: boolean
-	selected?: boolean
 	selectedRoute?: string
-	onSelectItem: (item: ResourceRoute) => void
+	resources: ResourceRoute[][]
+
+	onSelect: (resource: ResourceRoute) => void
 }

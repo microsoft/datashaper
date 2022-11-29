@@ -192,6 +192,7 @@ export interface ProfilePlugin<T extends Resource = any> {
     renderer: React.ComponentType<{
         resource: T;
     }>;
+    title: string;
 }
 
 // Warning: (ae-missing-release-tag) "RadioGroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

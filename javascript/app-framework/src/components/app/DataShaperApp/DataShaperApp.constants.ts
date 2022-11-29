@@ -18,12 +18,14 @@ import {
 export const KNOWN_PROFILE_PLUGINS: ProfilePlugin[] = [
 	{
 		profile: KnownProfile.TableBundle,
+		title: 'Table',
 		renderer: BundleEditor,
 		iconName: 'ViewAll',
 		group: ResourceGroup.Data,
 	},
 	{
 		profile: KnownProfile.DataTable,
+		title: 'Datatable',
 		renderer: DataSourceEditor,
 		iconName: 'PageData',
 		group: ResourceGroup.Data,
@@ -52,12 +54,14 @@ export const KNOWN_PROFILE_PLUGINS: ProfilePlugin[] = [
 	},
 	{
 		profile: KnownProfile.Codebook,
+		title: 'Codebook',
 		renderer: CodebookEditor,
 		iconName: 'FormLibraryMirrored',
 		group: ResourceGroup.Data,
 	},
 	{
 		profile: KnownProfile.Workflow,
+		title: 'Workflow',
 		renderer: WorkflowEditor,
 		iconName: 'SetAction',
 		group: ResourceGroup.Data,

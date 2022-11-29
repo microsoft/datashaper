@@ -10,13 +10,14 @@ import { useCallback, useMemo } from 'react'
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
 import { usePersistenceService } from '../../../hooks/usePersistenceService.js'
 import { useTableBundles } from '../../../hooks/useTableBundles.js'
-import { TABLE_TYPES, ZIP_TYPES } from './FileTree.constants.js'
-import type { FileDefinition } from './FileTree.types.js'
 import {
 	createCommandBar,
-	openProps,
-	saveProps,
+	newMenuItems,
+	openMenuItems,
+	saveMenuItems,
 } from './FileTreeCommands.utils.js'
+import { TABLE_TYPES, ZIP_TYPES } from './ResourcesPane.constants.js'
+import type { FileDefinition } from './ResourcesPane.types.js'
 
 export function useFileManagementCommands(
 	examples: FileDefinition[],
@@ -64,8 +65,13 @@ export function useFileManagementCommands(
 		[dataPackage],
 	)
 
-	const onOpenCommands = useMemo(() => {
-		return openProps(
+	const newCommands = useMemo(() => {
+		const onNewTable = () => null
+		return newMenuItems(onNewTable)
+	}, [])
+
+	const openCommands = useMemo(() => {
+		return openMenuItems(
 			examples,
 			onClickExample,
 			onClickUploadTable,
@@ -73,8 +79,8 @@ export function useFileManagementCommands(
 		)
 	}, [examples, onClickExample, onClickUploadTable, onClickUploadZip])
 
-	const onSaveCommands = useMemo(
-		() => saveProps(onClickDownloadZip),
+	const saveCommands = useMemo(
+		() => saveMenuItems(onClickDownloadZip),
 		[onClickDownloadZip],
 	)
 
@@ -84,14 +90,19 @@ export function useFileManagementCommands(
 			createCommandBar(
 				expanded,
 				hasDataPackages,
-				onOpenCommands,
-				onSaveCommands,
+				newCommands,
+				openCommands,
+				saveCommands,
 				theme,
 			),
-		[theme, hasDataPackages, expanded, onOpenCommands, onSaveCommands],
+		[theme, hasDataPackages, expanded, openCommands, saveCommands],
 	)
 
-	return { commands, onOpenCommands, onSaveCommands }
+	return {
+		commands,
+		onOpenCommands: openCommands,
+		onSaveCommands: saveCommands,
+	}
 }
 
 function useUploadZip(): (file: BaseFile) => void {

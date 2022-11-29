@@ -20,4 +20,5 @@ export interface ProfilePlugin<T extends Resource = any>
 |  [onGenerateRoutes?](./app-framework.profileplugin.ongenerateroutes.md) |  | (resource: T, parentPath: string, resourcePath: string) =&gt; { preItemSiblings?: [ResourceRoute](./app-framework.resourceroute.md)<!-- -->\[\]; postItemSiblings?: [ResourceRoute](./app-framework.resourceroute.md)<!-- -->\[\]; children?: [ResourceRoute](./app-framework.resourceroute.md)<!-- -->\[\]; } \| undefined | <i>(Optional)</i> Event handler for when the resource is undergoing route generation. A route is always generated for the resource; any related routes may be retured here. |
 |  [profile](./app-framework.profileplugin.profile.md) |  | string | The profile name to register within the app framework. This is used to identify the plugin and should be unique. |
 |  [renderer](./app-framework.profileplugin.renderer.md) |  | React.ComponentType&lt;{ resource: T; }&gt; | Render the plugin |
+|  [title](./app-framework.profileplugin.title.md) |  | string | A friendly title for the profile, used for resource creation. (e.g. "New <title>") |
 

@@ -2,19 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Icon, IconButton } from '@fluentui/react'
-import {
-	fluentTreeItem,
-	fluentTreeView,
-	provideFluentDesignSystem,
-} from '@fluentui/web-components'
-import { provideReactWrapper } from '@microsoft/fast-react-wrapper'
-import React from 'react'
+import { IconButton } from '@fluentui/react'
 import styled from 'styled-components'
-
-const { wrap } = provideReactWrapper(React, provideFluentDesignSystem())
-const FluentTreeItem = wrap(fluentTreeItem())
-export const TreeView = wrap(fluentTreeView())
 
 export const Container = styled.div`
 	display: flex;
@@ -27,13 +16,6 @@ export const Container = styled.div`
 export const MenuContainer = styled.div`
 	width: 100%;
 `
-
-export const ItemIcon = styled(Icon)``
-
-export const TreeItem = styled(FluentTreeItem)`
-	align-items: center;
-`
-
 export const ExpandButton = styled(IconButton)`
 	width: inherit;
 `
@@ -45,4 +27,5 @@ export const icons = {
 	collapse: { iconName: 'DoubleChevronLeft12' },
 	project: { iconName: 'ZipFolder' },
 	openFile: { iconName: 'FabricOpenFolderHorizontal' },
+	newFile: { iconName: 'NewFolder' },
 }

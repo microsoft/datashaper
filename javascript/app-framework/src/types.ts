@@ -47,6 +47,11 @@ export interface ProfilePlugin<T extends Resource = any> {
 	profile: string
 
 	/**
+	 * A friendly title for the profile, used for resource creation. (e.g. "New <title>")
+	 */
+	title: string
+
+	/**
 	 * The grouping for this resource type. The default is 'app'.
 	 * This grouping determines what resources this is rendered with in the tree-view.
 	 */

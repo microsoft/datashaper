@@ -6,7 +6,6 @@ import type { BaseFile } from '@datashaper/utilities'
 import { memo, useState } from 'react'
 
 import { FileImport } from './FileImport.js'
-import type { FileDefinition } from './FileTree.types.js'
 import {
 	useFileManagementCommands,
 	useOnOpenFileRequested,
@@ -19,6 +18,7 @@ import {
 	useCommandbarStyles,
 } from './FileTreeCommands.styles.js'
 import { FileTreeTooltip as Tooltip } from './FileTreeTooltip.js'
+import type { FileDefinition } from './ResourcesPane.types.js'
 
 export interface FileTreeCommandsProps {
 	expanded: boolean
