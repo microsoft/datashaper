@@ -1,6 +1,12 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { KnownProfile } from '@datashaper/schema'
 import { Codebook } from '@datashaper/workflow'
-import { CodebookEditor, ResourceGroup, ProfilePlugin } from '../../index.js'
+
+import type { ProfilePlugin } from '../../index.js'
+import { CodebookEditor, ResourceGroup } from '../../index.js'
 
 export class CodebookPlugin implements ProfilePlugin<Codebook> {
 	public readonly profile = KnownProfile.Codebook

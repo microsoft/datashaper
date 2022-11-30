@@ -1,6 +1,12 @@
-import { DataTable } from '@datashaper/workflow'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { KnownProfile } from '@datashaper/schema'
-import { ProfilePlugin, ResourceGroup } from '../../types.js'
+import { DataTable } from '@datashaper/workflow'
+
+import type { GeneratedExtraRoutes, ProfilePlugin } from '../../types.js'
+import { ResourceGroup } from '../../types.js'
 import { DataSourceEditor, RawTableViewer } from '../editors/index.js'
 
 export class DataTablePlugin implements ProfilePlugin<DataTable> {
@@ -14,7 +20,10 @@ export class DataTablePlugin implements ProfilePlugin<DataTable> {
 		return new DataTable()
 	}
 
-	public onGetRoutes(resource: DataTable, pathContext: string) {
+	public onGetRoutes(
+		resource: DataTable,
+		pathContext: string,
+	): GeneratedExtraRoutes | undefined {
 		const dataPath = Array.isArray(resource.path)
 			? resource.path[0]
 			: resource.path

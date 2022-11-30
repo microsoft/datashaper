@@ -139,11 +139,11 @@ export function useAppServices(): {
 				showRename()
 				return new Promise((resolve, reject) => {
 					setAcceptRename((name: string | undefined) => {
-						hideRename()
 						if (name != null) {
 							resource.name = name
 							resolve(name)
 						}
+						hideRename()
 					})
 					setDismissRename(() => {
 						hideRename()
@@ -152,7 +152,7 @@ export function useAppServices(): {
 				})
 			},
 		}
-	}, [showRename, setRenameResource])
+	}, [showRename, setRenameResource, hideRename])
 
 	return useMemo(
 		() => ({
@@ -164,6 +164,6 @@ export function useAppServices(): {
 				onAccept: acceptRename,
 			},
 		}),
-		[api, renameResource],
+		[api, renameResource, dismissRename, acceptRename, isRenameOpen],
 	)
 }

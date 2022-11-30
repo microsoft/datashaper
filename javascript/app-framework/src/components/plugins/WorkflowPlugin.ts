@@ -1,6 +1,12 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { KnownProfile } from '@datashaper/schema'
 import { Workflow } from '@datashaper/workflow'
-import { WorkflowEditor, ResourceGroup, ProfilePlugin } from '../../index.js'
+
+import type { ProfilePlugin } from '../../index.js'
+import { ResourceGroup, WorkflowEditor } from '../../index.js'
 
 export class WorkflowPlugin implements ProfilePlugin<Workflow> {
 	public readonly profile = KnownProfile.Workflow

@@ -27,7 +27,7 @@ export function useNavGroups(
 		}
 
 		return result
-	}, [resources])
+	}, [resources, onSelect])
 }
 
 function makeNavLink(

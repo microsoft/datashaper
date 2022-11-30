@@ -1,22 +1,26 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+import type { IButtonStyles, IIconProps } from '@fluentui/react'
 import {
 	DefaultButton,
-	PrimaryButton,
 	FontWeights,
 	getTheme,
-	IButtonStyles,
 	IconButton,
-	IIconProps,
 	mergeStyleSets,
 	Modal,
+	PrimaryButton,
 	TextField,
 } from '@fluentui/react'
 import { memo, useCallback, useState } from 'react'
+
 import type { RenameModalProps } from './RenameModal.types.js'
 
 export const RenameModal: React.FC<RenameModalProps> = memo(
 	function RenameModal({ isOpen, resource, onAccept, onDismiss }) {
 		const [result, setResult] = useState(resource?.title)
-		const onOkClick = useCallback(() => onAccept(result), [result])
+		const onOkClick = useCallback(() => onAccept(result), [result, onAccept])
 		const onTextFieldChange = useCallback(
 			(_ev: unknown, v: string | undefined) => setResult(v),
 			[setResult],

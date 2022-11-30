@@ -6,7 +6,8 @@ import type { DataFormat, ParserOptions } from '@datashaper/schema'
 import type { DataShape } from '@datashaper/schema/dist/datatable/DataShape.js'
 import type { TableContainer } from '@datashaper/tables'
 import type { BaseFile } from '@datashaper/utilities'
-import type { ResourceRoute, ProfilePlugin } from '../../../index.js'
+
+import type { ProfilePlugin, ResourceRoute } from '../../../index.js'
 
 export interface ResourcesPaneProps {
 	/**

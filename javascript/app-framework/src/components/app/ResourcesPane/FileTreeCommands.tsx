@@ -4,8 +4,8 @@
  */
 import type { BaseFile } from '@datashaper/utilities'
 import { memo, useState } from 'react'
-import type { ProfilePlugin } from '../../../types.js'
 
+import type { ProfilePlugin } from '../../../types.js'
 import { FileImport } from './FileImport.js'
 import {
 	useFileManagementCommands,

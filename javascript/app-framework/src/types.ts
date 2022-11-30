@@ -118,13 +118,13 @@ export interface ProfilePlugin<T extends Resource = any> {
 		resource: T,
 		parentPath: string,
 		resourcePath: string,
-	) =>
-		| {
-				preItemSiblings?: ResourceRoute[]
-				postItemSiblings?: ResourceRoute[]
-				children?: ResourceRoute[]
-		  }
-		| undefined
+	) => GeneratedExtraRoutes | undefined
+}
+
+export interface GeneratedExtraRoutes {
+	preItemSiblings?: ResourceRoute[]
+	postItemSiblings?: ResourceRoute[]
+	children?: ResourceRoute[]
 }
 
 export enum ResourceGroup {
