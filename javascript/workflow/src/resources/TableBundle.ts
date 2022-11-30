@@ -2,14 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	ResourceSchema,
-	TableBundleSchema} from '@datashaper/schema';
+import type { ResourceSchema, TableBundleSchema } from '@datashaper/schema'
 import {
-	CodebookStrategy
-, KnownProfile, LATEST_TABLEBUNDLE_SCHEMA } from '@datashaper/schema'
+	CodebookStrategy,
+	KnownProfile,
+	LATEST_TABLEBUNDLE_SCHEMA,
+} from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import { applyCodebook,introspect } from '@datashaper/tables'
+import { applyCodebook, introspect } from '@datashaper/tables'
 import type { Maybe } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import type { Observable } from 'rxjs'
@@ -247,13 +247,10 @@ export class TableBundle extends Resource {
 	}
 
 	private encode(inputTable: Maybe<ColumnTable>) {
-		return this.codebook != null && inputTable != null
-			? applyCodebook(
-					inputTable,
-					this.codebook,
-					CodebookStrategy.DataTypeAndMapping,
-					this.input?.toSchema(),
-			  )
+		const numFields = this.codebook?.fields.length ?? 0
+
+		return numFields > 0 && inputTable != null
+			? applyCodebook(inputTable, this.codebook, CodebookStrategy.MappingOnly)
 			: inputTable
 	}
 }
