@@ -7,7 +7,7 @@ import { useBoolean } from '@fluentui/react-hooks'
 import { useDebounceFn } from 'ahooks'
 import type { AllotmentHandle } from 'allotment'
 import type React from 'react'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 import { EMPTY_ARRAY } from '../../../empty.js'
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
@@ -110,12 +110,60 @@ export function useFlattened(routes: ResourceRoute[][]): ResourceRoute[] {
 	}, [routes])
 }
 
-export function useAppServices(
-	renameResource: (resource: Resource) => Promise<string>,
-): AppServices {
-	return useMemo<AppServices>(() => {
+export function useAppServices(): {
+	api: AppServices
+	rename: {
+		resource: Resource | undefined
+		isOpen: boolean
+		onDismiss: () => void
+		onAccept: (name: string | undefined) => void
+	}
+} {
+	const [isRenameOpen, { setTrue: showRename, setFalse: hideRename }] =
+		useBoolean(false)
+	const [renameResource, setRenameResource] = useState<Resource | undefined>()
+	const [acceptRename, setAcceptRename] = useState<
+		(value: string | undefined) => void
+	>(() => null)
+	const [dismissRename, setDismissRename] = useState<() => void>(() => null)
+
+	const api = useMemo<AppServices>(() => {
 		return {
-			renameResource,
+			/**
+			 * Initiates a resource rename
+			 * @param resource - The resource to renamew
+			 * @returns A promise that resolves to the new name of the resource
+			 */
+			renameResource: (resource: Resource) => {
+				setRenameResource(resource)
+				showRename()
+				return new Promise((resolve, reject) => {
+					setAcceptRename((name: string | undefined) => {
+						hideRename()
+						if (name != null) {
+							resource.name = name
+							resolve(name)
+						}
+					})
+					setDismissRename(() => {
+						hideRename()
+						reject('cancelled')
+					})
+				})
+			},
 		}
-	}, [renameResource])
+	}, [showRename, setRenameResource])
+
+	return useMemo(
+		() => ({
+			api,
+			rename: {
+				resource: renameResource,
+				isOpen: isRenameOpen,
+				onDismiss: dismissRename,
+				onAccept: acceptRename,
+			},
+		}),
+		[api, renameResource],
+	)
 }
