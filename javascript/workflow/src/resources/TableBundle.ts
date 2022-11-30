@@ -247,9 +247,9 @@ export class TableBundle extends Resource {
 	}
 
 	private encode(inputTable: Maybe<ColumnTable>) {
-		const numFields = this.codebook?.fields.length ?? 0
-
-		return numFields > 0 && inputTable != null
+		return this.codebook != null &&
+			this.codebook.fields.length > 0 &&
+			inputTable != null
 			? applyCodebook(inputTable, this.codebook, CodebookStrategy.MappingOnly)
 			: inputTable
 	}
