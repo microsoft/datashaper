@@ -2,19 +2,22 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { IButtonStyles, IIconProps } from '@fluentui/react'
 import {
 	DefaultButton,
-	FontWeights,
-	getTheme,
 	IconButton,
-	mergeStyleSets,
 	Modal,
 	PrimaryButton,
 	TextField,
 } from '@fluentui/react'
 import { memo, useCallback, useState } from 'react'
 
+import {
+	buttonRowStyle,
+	cancelIcon,
+	okButtonStyle,
+	useContentStyles,
+	useIconButtonStyles,
+} from './RenameModal.styles.js'
 import type { RenameModalProps } from './RenameModal.types.js'
 
 export const RenameModal: React.FC<RenameModalProps> = memo(
@@ -25,6 +28,8 @@ export const RenameModal: React.FC<RenameModalProps> = memo(
 			(_ev: unknown, v: string | undefined) => setResult(v),
 			[setResult],
 		)
+		const contentStyles = useContentStyles()
+		const iconButtonStyles = useIconButtonStyles()
 		return (
 			<Modal
 				titleAriaId={'rename-modal'}
@@ -61,53 +66,3 @@ export const RenameModal: React.FC<RenameModalProps> = memo(
 		)
 	},
 )
-
-const theme = getTheme()
-const iconButtonStyles: Partial<IButtonStyles> = {
-	root: {
-		color: theme.palette.neutralPrimary,
-		marginLeft: 'auto',
-		marginTop: '4px',
-		marginRight: '2px',
-	},
-	rootHovered: {
-		color: theme.palette.neutralDark,
-	},
-}
-const buttonRowStyle: React.CSSProperties = {
-	marginTop: 5,
-	display: 'flex',
-	flexDirection: 'row',
-	justifyContent: 'flex-end',
-}
-const okButtonStyle = { marginRight: 5 }
-const cancelIcon: IIconProps = { iconName: 'Cancel' }
-const contentStyles = mergeStyleSets({
-	container: {
-		display: 'flex',
-		flexFlow: 'column nowrap',
-		alignItems: 'stretch',
-	},
-	header: [
-		theme.fonts.xLargePlus,
-		{
-			flex: '1 1 auto',
-			borderTop: `4px solid ${theme.palette.themePrimary}`,
-			color: theme.palette.neutralPrimary,
-			display: 'flex',
-			alignItems: 'center',
-			fontWeight: FontWeights.semibold,
-			padding: '12px 12px 14px 24px',
-		},
-	],
-	body: {
-		flex: '4 4 auto',
-		padding: '0 24px 24px 24px',
-		overflowY: 'hidden',
-		selectors: {
-			p: { margin: '14px 0' },
-			'p:first-child': { marginTop: 0 },
-			'p:last-child': { marginBottom: 0 },
-		},
-	},
-})
