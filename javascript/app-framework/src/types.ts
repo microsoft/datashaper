@@ -2,7 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Resource, ResourceHandler } from '@datashaper/workflow'
+import type {
+	DataPackage,
+	Resource,
+	ResourceHandler,
+} from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
 
 /**
@@ -77,14 +81,9 @@ export interface ProfilePlugin<T extends Resource = any> {
 	iconName: string
 
 	/**
-	 * Determines whether this profile can be created from the 'new' menu
-	 */
-	isTopLevel?: boolean
-
-	/**
 	 * Initialize the plugin with application-level services
 	 */
-	initialize?: (api: AppServices) => void
+	initialize?: (api: AppServices, dp: DataPackage) => void
 
 	/**
 	 * Render the plugin
@@ -102,9 +101,16 @@ export interface ProfilePlugin<T extends Resource = any> {
 	createResource: () => T
 
 	/**
+	 * Gets commands for the plugin
+	 */
+	getCommandBarCommands?: (
+		section: CommandBarSection,
+	) => IContextualMenuItem[] | undefined
+
+	/**
 	 * Create contextual menu items for a resource
 	 */
-	onGetMenuItems?: (resource: T) => IContextualMenuItem[]
+	getMenuItems?: (resource: T) => IContextualMenuItem[]
 
 	/**
 	 * Event handler for when the resource is undergoing route generation.
@@ -114,11 +120,17 @@ export interface ProfilePlugin<T extends Resource = any> {
 	 * @param parentPath - The current path context being used for generation. This is the parent path of the resource.
 	 * @param resourcePath - The resource path that was used for the resource.
 	 */
-	onGetRoutes?: (
+	getRoutes?: (
 		resource: T,
 		parentPath: string,
 		resourcePath: string,
 	) => GeneratedExtraRoutes | undefined
+}
+
+export enum CommandBarSection {
+	New = 'newMenu',
+	Open = 'openMenu',
+	Save = 'saveMenu',
 }
 
 export interface GeneratedExtraRoutes {

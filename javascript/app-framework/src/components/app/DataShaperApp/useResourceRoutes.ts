@@ -50,7 +50,7 @@ function makeResourceRoute(
 		icon: plugin.iconName,
 		renderer: plugin.renderer,
 		menuItems: [
-			...(plugin.onGetMenuItems?.(resource) ?? EMPTY_ARRAY),
+			...(plugin.getMenuItems?.(resource) ?? EMPTY_ARRAY),
 			{
 				key: 'rename',
 				text: 'Rename',
@@ -68,7 +68,7 @@ function makeResourceRoute(
 		],
 		props: { resource },
 	}
-	const extraRoutes = plugin?.onGetRoutes?.(resource, parentRoute, href)
+	const extraRoutes = plugin?.getRoutes?.(resource, parentRoute, href)
 
 	const children: ResourceRoute[] = extraRoutes?.children ?? []
 	for (const r of resource.sources ?? EMPTY_ARRAY) {

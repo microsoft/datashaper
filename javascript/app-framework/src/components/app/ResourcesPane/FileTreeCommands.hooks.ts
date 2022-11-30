@@ -10,7 +10,8 @@ import { useCallback, useMemo } from 'react'
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
 import { usePersistenceService } from '../../../hooks/usePersistenceService.js'
 import { useTableBundles } from '../../../hooks/useTableBundles.js'
-import type { ProfilePlugin } from '../../../types.js'
+import type { ProfilePlugin } from '../../../types.js';
+import { CommandBarSection } from '../../../types.js'
 import {
 	createCommandBar,
 	openMenuItems,
@@ -67,37 +68,27 @@ export function useFileManagementCommands(
 		[dataPackage],
 	)
 
-	const newCommands = useMemo<IContextualMenuItem[]>(() => {
-		const result: IContextualMenuItem[] = []
-		for (const plugin of plugins.values()) {
-			if (plugin.isTopLevel && plugin.createResource) {
-				result.push({
-					key: plugin.profile,
-					text: `New ${plugin.title}`,
-					onClick: () => {
-						const resource = plugin.createResource?.()
-						resource.name = dataPackage.suggestResourceName(resource.name)
-						dataPackage.addResource(resource)
-					},
-				})
-			}
-		}
-		return result
-	}, [dataPackage, plugins])
+	const newCommands = useMemo<IContextualMenuItem[]>(
+		() => getPluginCommands(CommandBarSection.New, plugins),
+		[dataPackage, plugins],
+	)
 
 	const openCommands = useMemo(() => {
-		return openMenuItems(
+		const result = openMenuItems(
 			examples,
 			onClickExample,
 			onClickUploadTable,
 			onClickUploadZip,
 		)
-	}, [examples, onClickExample, onClickUploadTable, onClickUploadZip])
+		result.push(...getPluginCommands(CommandBarSection.Open, plugins))
+		return result
+	}, [examples, plugins, onClickExample, onClickUploadTable, onClickUploadZip])
 
-	const saveCommands = useMemo(
-		() => saveMenuItems(onClickDownloadZip),
-		[onClickDownloadZip],
-	)
+	const saveCommands = useMemo(() => {
+		const result = saveMenuItems(onClickDownloadZip)
+		result.push(...getPluginCommands(CommandBarSection.Save, plugins))
+		return result
+	}, [onClickDownloadZip])
 
 	const theme = useTheme()
 	const commands = useMemo<ICommandBarItemProps[]>(
@@ -179,4 +170,18 @@ export function useOnOpenFileRequested(): (
 			}
 		})
 	}, [])
+}
+
+function getPluginCommands(
+	section: CommandBarSection,
+	plugins: Map<string, ProfilePlugin>,
+): IContextualMenuItem[] {
+	const result: IContextualMenuItem[] = []
+	for (const plugin of plugins.values()) {
+		const dynamicItems = plugin.getCommandBarCommands?.(section)
+		if (dynamicItems) {
+			result.push(...dynamicItems)
+		}
+	}
+	return result
 }

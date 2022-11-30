@@ -23,7 +23,7 @@ export class DataTablePlugin implements ProfilePlugin<DataTable> {
 		return new DataTable()
 	}
 
-	public onGetRoutes(
+	public getRoutes(
 		resource: DataTable,
 		pathContext: string,
 	): GeneratedExtraRoutes | undefined {

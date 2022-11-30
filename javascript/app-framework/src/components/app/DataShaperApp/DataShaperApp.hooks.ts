@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Resource } from '@datashaper/workflow'
-import { useBoolean } from '@fluentui/react-hooks'
+import { useBoolean, useConst } from '@fluentui/react-hooks'
 import { useDebounceFn } from 'ahooks'
 import type { AllotmentHandle } from 'allotment'
 import type React from 'react'
@@ -11,15 +11,33 @@ import { useCallback, useMemo, useState } from 'react'
 
 import { EMPTY_ARRAY } from '../../../empty.js'
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
+import { CodebookPlugin } from '../../../plugins/CodebookPlugin.js'
+import { DataTablePlugin } from '../../../plugins/DataTablePlugin.js'
+import { TableBundlePlugin } from '../../../plugins/TableBundlePlugin.js'
+import { WorkflowPlugin } from '../../../plugins/WorkflowPlugin.js'
 import type {
 	AppServices,
 	ProfilePlugin,
 	ResourceRoute,
 } from '../../../types.js'
-import { KNOWN_PROFILE_PLUGINS } from './DataShaperApp.constants.js'
 
 const BREAK_WIDTH = 150
 const COLLAPSED_WIDTH = 60
+
+export function useKnownProfilePlugins(): ProfilePlugin[] {
+	return useConst(() => {
+		const datatablePlugin = new DataTablePlugin()
+		const codebookPlugin = new CodebookPlugin()
+		const workflowPlugin = new WorkflowPlugin()
+		const tableBundlePlugin = new TableBundlePlugin(
+			datatablePlugin,
+			codebookPlugin,
+			workflowPlugin,
+		)
+
+		return [datatablePlugin, codebookPlugin, tableBundlePlugin, workflowPlugin]
+	})
+}
 
 export function useExpandedState(
 	ref: React.MutableRefObject<AllotmentHandle | null>,
@@ -80,11 +98,13 @@ export function useRegisteredProfiles(
 	profiles: ProfilePlugin[] | undefined,
 ): Map<string, ProfilePlugin> {
 	const dp = useDataPackage()
+	const knownProfiles = useKnownProfilePlugins()
+
 	return useMemo<Map<string, ProfilePlugin>>(() => {
-		const allPlugins = [...KNOWN_PROFILE_PLUGINS, ...(profiles ?? EMPTY_ARRAY)]
+		const allPlugins = [...knownProfiles, ...(profiles ?? EMPTY_ARRAY)]
 		const result = new Map<string, ProfilePlugin>()
 		for (const p of allPlugins) {
-			p.initialize?.(api)
+			p.initialize?.(api, dp)
 			result.set(p.profile, p)
 			// add data-handlers to the workflow package
 			if (p.dataHandler) {
@@ -92,7 +112,7 @@ export function useRegisteredProfiles(
 			}
 		}
 		return result
-	}, [dp, api, profiles])
+	}, [dp, api, profiles, knownProfiles])
 }
 
 export function useFlattened(routes: ResourceRoute[][]): ResourceRoute[] {
