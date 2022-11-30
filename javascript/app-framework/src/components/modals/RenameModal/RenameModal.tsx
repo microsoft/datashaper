@@ -1,4 +1,6 @@
 import {
+	DefaultButton,
+	PrimaryButton,
 	FontWeights,
 	getTheme,
 	IButtonStyles,
@@ -6,12 +8,19 @@ import {
 	IIconProps,
 	mergeStyleSets,
 	Modal,
+	TextField,
 } from '@fluentui/react'
-import { memo } from 'react'
+import { memo, useCallback, useState } from 'react'
 import type { RenameModalProps } from './RenameModal.types.js'
 
 export const RenameModal: React.FC<RenameModalProps> = memo(
-	function RenameModal({ isOpen, onDismiss }) {
+	function RenameModal({ isOpen, resource, onAccept, onDismiss }) {
+		const [result, setResult] = useState(resource?.title)
+		const onOkClick = useCallback(() => onAccept(result), [result])
+		const onTextFieldChange = useCallback(
+			(_ev: unknown, v: string | undefined) => setResult(v),
+			[setResult],
+		)
 		return (
 			<Modal
 				titleAriaId={'rename-modal'}
@@ -30,16 +39,19 @@ export const RenameModal: React.FC<RenameModalProps> = memo(
 					/>
 				</div>
 				<div className={contentStyles.body}>
-					<p>
-						Mauris at nunc eget lectus lobortis facilisis et eget magna.
-						Vestibulum venenatis augue sapien, rhoncus faucibus magna semper
-						eget. Proin rutrum libero sagittis sapien aliquet auctor.
-						Suspendisse tristique a magna at facilisis. Duis rhoncus feugiat
-						magna in rutrum. Suspendisse semper, dolor et vestibulum lacinia,
-						nunc felis malesuada ex, nec hendrerit justo ex et massa. Quisque
-						quis mollis nulla. Nam commodo est ornare, rhoncus odio eu, pharetra
-						tellus. Nunc sed velit mi.
-					</p>
+					<TextField
+						label="Rename resource"
+						defaultValue={resource?.name}
+						onChange={onTextFieldChange}
+					/>
+					<div style={buttonRowStyle}>
+						<PrimaryButton
+							text="OK"
+							style={okButtonStyle}
+							onClick={onOkClick}
+						/>
+						<DefaultButton text="Cancel" onClick={onDismiss} />
+					</div>
 				</div>
 			</Modal>
 		)
@@ -58,6 +70,13 @@ const iconButtonStyles: Partial<IButtonStyles> = {
 		color: theme.palette.neutralDark,
 	},
 }
+const buttonRowStyle: React.CSSProperties = {
+	marginTop: 5,
+	display: 'flex',
+	flexDirection: 'row',
+	justifyContent: 'flex-end',
+}
+const okButtonStyle = { marginRight: 5 }
 const cancelIcon: IIconProps = { iconName: 'Cancel' }
 const contentStyles = mergeStyleSets({
 	container: {

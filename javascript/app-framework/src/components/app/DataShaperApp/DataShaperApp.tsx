@@ -3,9 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useBoolean } from '@fluentui/react-hooks'
+import type { Resource } from '@datashaper/workflow'
 import type { AllotmentHandle } from 'allotment'
 import { Allotment } from 'allotment'
-import { memo, useCallback, useRef } from 'react'
+import { memo, useCallback, useRef, useState } from 'react'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 
 import { DataPackageProvider } from '../../../context/index.js'
@@ -22,6 +23,7 @@ import {
 import { useFileTreeStyle } from './DataShaperApp.styles.js'
 import type { DataShaperAppProps } from './DataShaperApp.types.js'
 import { useResourceRoutes } from './useResourceRoutes.js'
+import { reject } from 'lodash-es'
 
 const PANE_EXPANDED_SIZE = 300
 const PANE_COLLAPSED_SIZE = 60
@@ -55,6 +57,7 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 		isRenameModalOpen,
 		{ setTrue: showRenameModal, setFalse: hideRenameModal },
 	] = useBoolean(false)
+	const [renameResource, setRenameResource] = useState<Resource | undefined>()
 
 	const navigate = useNavigate()
 	const fileTreeStyle = useFileTreeStyle()
@@ -63,10 +66,39 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 		(v: ResourceRoute) => navigate(v.href),
 		[navigate],
 	)
-	const api = useAppServices(showRenameModal)
+	const [resolve, setResolve] = useState<(value: string) => void>(
+		() => () => {},
+	)
+	const [reject, setReject] = useState<(error: unknown) => void>(() => () => {})
+	const api = useAppServices(resource => {
+		setRenameResource(resource)
+		showRenameModal()
+		return new Promise((resolve, reject) => {
+			setResolve(resolve)
+			setReject(reject)
+		})
+	})
+	const onAcceptRename = useCallback(
+		(name: string | undefined) => {
+			hideRenameModal()
+			if (name != null && renameResource != null) {
+				renameResource.name = name
+				resolve(name)
+			} else {
+				reject('invalid name')
+			}
+		},
+		[renameResource, resolve, reject, hideRenameModal],
+	)
+	const onCancelRename = useCallback(() => {
+		hideRenameModal()
+		reject('cancelled')
+	}, [reject])
+
 	const plugins = useRegisteredProfiles(api, profiles)
 	const resources = useResourceRoutes(plugins)
 	const flattenedRoutes = useFlattened(resources)
+
 	return (
 		<Allotment
 			className={className}
@@ -104,7 +136,12 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 					<Route path="*" element={<NoMatch />} />
 				</Routes>
 				<>
-					<RenameModal isOpen={isRenameModalOpen} onDismiss={hideRenameModal} />
+					<RenameModal
+						resource={renameResource}
+						isOpen={isRenameModalOpen}
+						onDismiss={onCancelRename}
+						onAccept={onAcceptRename}
+					/>
 				</>
 			</Allotment.Pane>
 		</Allotment>

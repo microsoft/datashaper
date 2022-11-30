@@ -11,7 +11,7 @@ import {
 } from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
 
-import type { AppServices, ProfilePlugin} from '../../types.js';
+import type { AppServices, ProfilePlugin } from '../../types.js'
 import { ResourceGroup } from '../../types.js'
 import { BundleEditor } from '../editors/index.js'
 

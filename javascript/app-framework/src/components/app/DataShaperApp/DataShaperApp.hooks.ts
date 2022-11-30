@@ -110,13 +110,12 @@ export function useFlattened(routes: ResourceRoute[][]): ResourceRoute[] {
 	}, [routes])
 }
 
-export function useAppServices(show: () => void): AppServices {
+export function useAppServices(
+	renameResource: (resource: Resource) => Promise<string>,
+): AppServices {
 	return useMemo<AppServices>(() => {
 		return {
-			renameResource: async (resource: Resource): Promise<string> => {
-				show()
-				return ''
-			},
+			renameResource,
 		}
-	}, [show])
+	}, [renameResource])
 }
