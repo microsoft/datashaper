@@ -70,7 +70,6 @@ export function useFileManagementCommands(
 	const newCommands = useMemo<IContextualMenuItem[]>(() => {
 		const result: IContextualMenuItem[] = []
 		for (const plugin of plugins.values()) {
-			console.log('P', plugin)
 			if (plugin.isTopLevel && plugin.createResource) {
 				result.push({
 					key: plugin.profile,

@@ -11,9 +11,9 @@ import {
 } from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
 
-import type { AppServices, ProfilePlugin } from '../../types.js'
-import { ResourceGroup } from '../../types.js'
-import { BundleEditor } from '../editors/index.js'
+import { BundleEditor } from '../components/editors/index.js'
+import type { ProfilePlugin } from '../types.js'
+import { ResourceGroup } from '../types.js'
 
 export class TableBundlePlugin implements ProfilePlugin<TableBundle> {
 	public readonly profile = KnownProfile.TableBundle
@@ -22,7 +22,6 @@ export class TableBundlePlugin implements ProfilePlugin<TableBundle> {
 	public readonly iconName = 'ViewAll'
 	public readonly group = ResourceGroup.Data
 	public readonly isTopLevel = true
-	private api: AppServices | undefined
 
 	public constructor(
 		private readonly datatablePlugin: ProfilePlugin<DataTable>,
@@ -36,19 +35,8 @@ export class TableBundlePlugin implements ProfilePlugin<TableBundle> {
 		return result
 	}
 
-	public initialize(api: AppServices): void {
-		this.api = api
-	}
-
 	public onGetMenuItems(resource: TableBundle): IContextualMenuItem[] {
 		const result: IContextualMenuItem[] = [
-			{
-				key: 'rename',
-				text: 'Rename',
-				onClick: () => {
-					this.api!.renameResource(resource)
-				},
-			},
 			// {
 			// 	key: 'new-derived-table',
 			// 	text: 'New Derived Table',

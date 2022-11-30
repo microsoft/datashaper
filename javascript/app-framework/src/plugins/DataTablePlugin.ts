@@ -5,9 +5,12 @@
 import { KnownProfile } from '@datashaper/schema'
 import { DataTable } from '@datashaper/workflow'
 
-import type { GeneratedExtraRoutes, ProfilePlugin } from '../../types.js'
-import { ResourceGroup } from '../../types.js'
-import { DataSourceEditor, RawTableViewer } from '../editors/index.js'
+import {
+	DataSourceEditor,
+	RawTableViewer,
+} from '../components/editors/index.js'
+import type { GeneratedExtraRoutes, ProfilePlugin } from '../types.js'
+import { ResourceGroup } from '../types.js'
 
 export class DataTablePlugin implements ProfilePlugin<DataTable> {
 	public readonly profile = KnownProfile.DataTable

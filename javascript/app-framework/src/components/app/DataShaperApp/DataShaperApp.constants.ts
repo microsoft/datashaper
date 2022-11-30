@@ -3,13 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { ProfilePlugin } from '../../../types.js'
 import {
 	CodebookPlugin,
 	DataTablePlugin,
 	TableBundlePlugin,
-	WorkflowPlugin
-} from '../../plugins/index.js'
+	WorkflowPlugin,
+} from '../../../plugins/index.js'
+import type { ProfilePlugin } from '../../../types.js'
 
 const datatablePlugin = new DataTablePlugin()
 const codebookPlugin = new CodebookPlugin()

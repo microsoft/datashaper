@@ -122,10 +122,12 @@ export function useAppServices(): {
 	const [isRenameOpen, { setTrue: showRename, setFalse: hideRename }] =
 		useBoolean(false)
 	const [renameResource, setRenameResource] = useState<Resource | undefined>()
-	const [acceptRename, setAcceptRename] = useState<
-		(value: string | undefined) => void
-	>(() => null)
-	const [dismissRename, setDismissRename] = useState<() => void>(() => null)
+	const [acceptRename, setAcceptRename] = useState<{
+		handle: (value: string | undefined) => void
+	}>({ handle: () => null })
+	const [dismissRename, setDismissRename] = useState<{ handle: () => void }>({
+		handle: () => null,
+	})
 
 	const api = useMemo<AppServices>(() => {
 		return {
@@ -138,16 +140,20 @@ export function useAppServices(): {
 				setRenameResource(resource)
 				showRename()
 				return new Promise((resolve, reject) => {
-					setAcceptRename((name: string | undefined) => {
-						if (name != null) {
-							resource.name = name
-							resolve(name)
-						}
-						hideRename()
+					setAcceptRename({
+						handle: (name: string | undefined) => {
+							if (name != null) {
+								resource.name = name
+								resolve(name)
+							}
+							hideRename()
+						},
 					})
-					setDismissRename(() => {
-						hideRename()
-						reject('cancelled')
+					setDismissRename({
+						handle: () => {
+							hideRename()
+							reject('cancelled')
+						},
 					})
 				})
 			},
@@ -160,10 +166,16 @@ export function useAppServices(): {
 			rename: {
 				resource: renameResource,
 				isOpen: isRenameOpen,
-				onDismiss: dismissRename,
-				onAccept: acceptRename,
+				onDismiss: dismissRename.handle,
+				onAccept: acceptRename.handle,
 			},
 		}),
-		[api, renameResource, dismissRename, acceptRename, isRenameOpen],
+		[
+			api,
+			renameResource,
+			dismissRename.handle,
+			acceptRename.handle,
+			isRenameOpen,
+		],
 	)
 }

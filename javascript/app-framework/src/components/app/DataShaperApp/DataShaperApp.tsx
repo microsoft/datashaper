@@ -69,7 +69,7 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 	} = useAppServices()
 
 	const plugins = useRegisteredProfiles(api, profiles)
-	const resources = useResourceRoutes(plugins)
+	const resources = useResourceRoutes(api, plugins)
 	const flattenedRoutes = useFlattened(resources)
 
 	return (
