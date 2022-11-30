@@ -5,3 +5,6 @@ declined:
   - "@datashaper/app-framework"
   - "@datashaper/react"
   - "@datashaper/webapp"
+
+undecided:
+  - "@datashaper/schema"
