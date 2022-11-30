@@ -10,9 +10,9 @@ import { useCallback, useMemo } from 'react'
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
 import { usePersistenceService } from '../../../hooks/usePersistenceService.js'
 import { useTableBundles } from '../../../hooks/useTableBundles.js'
+import type { ProfilePlugin } from '../../../types.js'
 import {
 	createCommandBar,
-	newMenuItems,
 	openMenuItems,
 	saveMenuItems,
 } from './FileTreeCommands.utils.js'
@@ -24,10 +24,12 @@ export function useFileManagementCommands(
 	expanded: boolean,
 	onOpenFileRequested: (acceptedFiles: string[]) => Promise<BaseFile>,
 	setFile: (file: BaseFile) => void,
+	plugins: Map<string, ProfilePlugin>,
 ): {
 	commands: ICommandBarItemProps[]
 	onOpenCommands: IContextualMenuItem[]
 	onSaveCommands: IContextualMenuItem[]
+	newCommands: IContextualMenuItem[]
 } {
 	const tables = useTableBundles()
 	const hasDataPackages = tables.length > 0
@@ -65,10 +67,24 @@ export function useFileManagementCommands(
 		[dataPackage],
 	)
 
-	const newCommands = useMemo(() => {
-		const onNewTable = () => null
-		return newMenuItems(onNewTable)
-	}, [])
+	const newCommands = useMemo<IContextualMenuItem[]>(() => {
+		const result: IContextualMenuItem[] = []
+		for (const plugin of plugins.values()) {
+			console.log('P', plugin)
+			if (plugin.isTopLevel && plugin.createResource) {
+				result.push({
+					key: plugin.profile,
+					text: `New ${plugin.title}`,
+					onClick: () => {
+						const resource = plugin.createResource?.()
+						resource.name = dataPackage.suggestResourceName(resource.name)
+						dataPackage.addResource(resource)
+					},
+				})
+			}
+		}
+		return result
+	}, [dataPackage, plugins])
 
 	const openCommands = useMemo(() => {
 		return openMenuItems(
@@ -95,11 +111,12 @@ export function useFileManagementCommands(
 				saveCommands,
 				theme,
 			),
-		[theme, hasDataPackages, expanded, openCommands, saveCommands],
+		[theme, hasDataPackages, expanded, openCommands, saveCommands, newCommands],
 	)
 
 	return {
 		commands,
+		newCommands,
 		onOpenCommands: openCommands,
 		onSaveCommands: saveCommands,
 	}

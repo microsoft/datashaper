@@ -12,17 +12,6 @@ import type {
 import { icons } from './ResourcesPane.styles.js'
 import type { FileDefinition } from './ResourcesPane.types.js'
 
-export function newMenuItems(onNewTable: () => void) {
-	return [
-		{
-			key: 'newTable',
-			text: 'Table',
-			iconProps: icons.table,
-			onClick: onNewTable,
-		},
-	]
-}
-
 export function openMenuItems(
 	examples: FileDefinition[],
 	onClickExample: (example: FileDefinition) => void,
@@ -75,25 +64,25 @@ export function saveMenuItems(
 export function createCommandBar(
 	expanded: boolean,
 	isSaveEnabled: boolean,
-	_newProps: IContextualMenuItem[],
+	newProps: IContextualMenuItem[],
 	openProps: IContextualMenuItem[],
 	saveProps: IContextualMenuItem[],
 	theme: ITheme,
 ): ICommandBarItemProps[] {
 	return [
-		// {
-		// 	key: 'new',
-		// 	text: expanded ? 'New' : '',
-		// 	iconProps: icons.newFile,
-		// 	subMenuProps: {
-		// 		items: newProps,
-		// 	},
-		// 	buttonStyles: {
-		// 		root: {
-		// 			background: theme.palette.neutralLighter,
-		// 		},
-		// 	},
-		// },
+		{
+			key: 'new',
+			text: expanded ? 'New' : '',
+			iconProps: icons.newFile,
+			subMenuProps: {
+				items: newProps,
+			},
+			buttonStyles: {
+				root: {
+					background: theme.palette.neutralLighter,
+				},
+			},
+		},
 		{
 			key: 'open',
 			text: expanded ? 'Open' : null,

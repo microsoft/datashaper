@@ -45,6 +45,14 @@ export interface ResourceRoute {
 	props: any
 }
 
+export interface AppServices {
+	/**
+	 * Show the resource rename dialog
+	 * @param resource - the resource to rename
+	 */
+	renameResource(resource: Resource): Promise<string>
+}
+
 export interface ProfilePlugin<T extends Resource = any> {
 	/**
 	 * The profile name to register within the app framework.
@@ -69,6 +77,16 @@ export interface ProfilePlugin<T extends Resource = any> {
 	iconName: string
 
 	/**
+	 * Determines whether this profile can be created from the 'new' menu
+	 */
+	isTopLevel?: boolean
+
+	/**
+	 * Initialize the plugin with application-level services
+	 */
+	initialize?: (api: AppServices) => void
+
+	/**
 	 * Render the plugin
 	 */
 	renderer: React.ComponentType<{ resource: T }>
@@ -77,6 +95,11 @@ export interface ProfilePlugin<T extends Resource = any> {
 	 * The persistence handler to use for this profile
 	 */
 	dataHandler?: ResourceHandler
+
+	/**
+	 * Creates a new resource of this type
+	 */
+	createResource: () => T
 
 	/**
 	 * Create contextual menu items for a resource

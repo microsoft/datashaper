@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { useBoolean } from '@fluentui/react-hooks'
 import type { AllotmentHandle } from 'allotment'
 import { Allotment } from 'allotment'
 import { memo, useCallback, useRef } from 'react'
@@ -10,8 +11,10 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { DataPackageProvider } from '../../../context/index.js'
 import { EMPTY_ARRAY } from '../../../empty.js'
 import type { ResourceRoute } from '../../../types.js'
+import { RenameModal } from '../../modals/index.js'
 import { ResourcesPane } from '../ResourcesPane/index.js'
 import {
+	useAppServices,
 	useExpandedState,
 	useFlattened,
 	useRegisteredProfiles,
@@ -48,6 +51,10 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 }) {
 	const ref = useRef<AllotmentHandle | null>(null)
 	const [expanded, onToggle, onChangeWidth] = useExpandedState(ref)
+	const [
+		isRenameModalOpen,
+		{ setTrue: showRenameModal, setFalse: hideRenameModal },
+	] = useBoolean(false)
 
 	const navigate = useNavigate()
 	const fileTreeStyle = useFileTreeStyle()
@@ -56,7 +63,8 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 		(v: ResourceRoute) => navigate(v.href),
 		[navigate],
 	)
-	const plugins = useRegisteredProfiles(profiles)
+	const api = useAppServices(showRenameModal)
+	const plugins = useRegisteredProfiles(api, profiles)
 	const resources = useResourceRoutes(plugins)
 	const flattenedRoutes = useFlattened(resources)
 	return (
@@ -75,10 +83,11 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 				<ResourcesPane
 					resources={resources}
 					expanded={expanded}
-					onToggleExpanded={onToggle}
+					plugins={plugins}
 					style={fileTreeStyle}
-					examples={examples}
 					selectedKey={selectedKey}
+					examples={examples}
+					onToggleExpanded={onToggle}
 					onSelect={onSelect}
 				/>
 			</Allotment.Pane>
@@ -94,6 +103,9 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 					))}
 					<Route path="*" element={<NoMatch />} />
 				</Routes>
+				<>
+					<RenameModal isOpen={isRenameModalOpen} onDismiss={hideRenameModal} />
+				</>
 			</Allotment.Pane>
 		</Allotment>
 	)

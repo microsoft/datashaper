@@ -25,6 +25,7 @@ export const collapsedButtonStyles = {
 }
 
 export const icons = {
+	newFile: { iconName: 'NewFolder' },
 	openFile: { iconName: 'FabricOpenFolderHorizontal' },
 	save: { iconName: 'Save' },
 	table: { iconName: 'Table' },

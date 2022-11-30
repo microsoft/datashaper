@@ -72,6 +72,15 @@ export class DataPackage extends Resource {
 		this._onChange.next()
 	}
 
+	public suggestResourceName(name: string): string {
+		const baseName = name
+		let nameIdx = 1
+		while (this.names.includes(name)) {
+			name = `${baseName} (${nameIdx++})`
+		}
+		return name
+	}
+
 	public removeResource(name: string): void {
 		this._resourceDisposables.get(name)?.()
 		this._resources.next(this.resources.filter(t => name !== t.name))

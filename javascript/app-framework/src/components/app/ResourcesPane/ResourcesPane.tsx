@@ -23,6 +23,7 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 		examples,
 		selectedKey,
 		resources,
+		plugins,
 		onToggleExpanded,
 		onSelect,
 	}) {
@@ -32,7 +33,11 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 		return (
 			<Container style={style} className={className}>
 				<MenuContainer>
-					<FileTreeCommands expanded={expanded} examples={examples} />
+					<FileTreeCommands
+						expanded={expanded}
+						examples={examples}
+						plugins={plugins}
+					/>
 					<ResourceTree
 						resources={resources}
 						expanded={expanded}

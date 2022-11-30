@@ -9,7 +9,7 @@ import { map } from 'rxjs'
 
 import { EMPTY_ARRAY } from '../../../empty.js'
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
-import type { ProfilePlugin, ResourceRoute } from '../../../types.js';
+import type { ProfilePlugin, ResourceRoute } from '../../../types.js'
 import { ResourceGroup } from '../../../types.js'
 
 export function useResourceRoutes(
