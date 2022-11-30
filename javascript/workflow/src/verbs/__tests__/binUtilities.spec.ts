@@ -11,14 +11,14 @@ import {
 	riceStrategy,
 	scottStrategy,
 	sqrtStrategy,
-	standarDeviation,
+	standardDeviation,
 	sturgesStrategy,
 } from '../util/binUtilities.js'
 
 describe('bin utilities tests', () => {
 	describe('standard deviation test', () => {
 		const arrayValues = [12, 15, 17, 20, 30, 31, 43, 44, 54]
-		const result = standarDeviation(arrayValues)
+		const result = standardDeviation(arrayValues)
 
 		it('algorithm result', () => {
 			expect(result).toBe(14.825)

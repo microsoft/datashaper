@@ -90,6 +90,19 @@ export const BinFormBase: React.FC<StepFormBaseProps<BinArgs>> = memo(
 						},
 					},
 				),
+				checkbox(
+					'Round bin',
+					step.args.roundBin,
+					(s, opt) => (s.args.roundBin = opt as boolean),
+					{
+						styles: {
+							root: {
+								marginTop: 8,
+							},
+						},
+						advanced: true,
+					},
+				),
 			],
 			[step],
 		)

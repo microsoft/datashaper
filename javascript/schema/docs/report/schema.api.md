@@ -43,6 +43,8 @@ export interface BinArgs extends InputColumnArgs, OutputColumnArgs {
     min?: number;
     printRange?: boolean;
     // (undocumented)
+    roundBin?: boolean;
+    // (undocumented)
     strategy: BinStrategy;
 }
 
@@ -59,9 +61,23 @@ export enum BinStrategy {
     // (undocumented)
     Auto = "auto",
     // (undocumented)
+    Doane = "doane",
+    // (undocumented)
+    Fd = "fd",
+    // (undocumented)
     FixedCount = "fixed count",
     // (undocumented)
-    FixedWidth = "fixed width"
+    FixedWidth = "fixed width",
+    // (undocumented)
+    Rice = "rice",
+    // (undocumented)
+    Scott = "scott",
+    // (undocumented)
+    Sqrt = "sqrt",
+    // (undocumented)
+    Stone = "stone",
+    // (undocumented)
+    Sturges = "sturges"
 }
 
 // Warning: (ae-missing-release-tag) "BooleanArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

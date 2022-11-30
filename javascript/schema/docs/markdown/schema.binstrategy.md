@@ -15,6 +15,13 @@ export declare enum BinStrategy
 |  Member | Value | Description |
 |  --- | --- | --- |
 |  Auto | <code>&quot;auto&quot;</code> |  |
+|  Doane | <code>&quot;doane&quot;</code> |  |
+|  Fd | <code>&quot;fd&quot;</code> |  |
 |  FixedCount | <code>&quot;fixed count&quot;</code> |  |
 |  FixedWidth | <code>&quot;fixed width&quot;</code> |  |
+|  Rice | <code>&quot;rice&quot;</code> |  |
+|  Scott | <code>&quot;scott&quot;</code> |  |
+|  Sqrt | <code>&quot;sqrt&quot;</code> |  |
+|  Stone | <code>&quot;stone&quot;</code> |  |
+|  Sturges | <code>&quot;sturges&quot;</code> |  |
 

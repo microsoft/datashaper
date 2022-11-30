@@ -3,11 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { default as quantile } from 'compute-quantile'
-import * as isObject from 'validate.io-object'
 
 /*
  */
-export function autoStrategy(values: number[]) {
+export function autoStrategy(values: number[], roundBin: boolean) {
 	const sturgesResult = sturgesStrategy(values)
 	const fdResult = fdStrategy(values)
 
@@ -28,7 +27,7 @@ export function doaneStrategy(values: number[]): number {
 	let sum = 0
 
 	values.forEach(val => {
-		sum = sum + val
+		sum = sum + val !== undefined ? val : 0
 	})
 
 	const sumThird = Math.pow(sum, 3)
@@ -45,14 +44,13 @@ export function doaneStrategy(values: number[]): number {
 /*
  */
 export function scottStrategy(values: number[]) {
-	return 3.49 * standarDeviation(values) * Math.pow(values.length, -1 / 3)
+	return 3.49 * standardDeviation(values) * Math.pow(values.length, -1 / 3)
 }
 
 /*
  */
 export function stoneStrategy(values: number[]): number {
-	console.log(values)
-	return 0
+	return values.length
 }
 
 /*
@@ -102,21 +100,21 @@ function ascending(a: number, b: number) {
 	return a - b
 }
 
-export function standarDeviation(values: number[]) {
+export function standardDeviation(values: number[], precision = 3) {
 	const N = values.length
 	let sum = 0
 	let squareNumbersSum = 0
 
 	values.forEach(val => {
-		sum = sum + val
-		squareNumbersSum = squareNumbersSum + val * val
+		sum = sum + val !== undefined ? val : 0
+		squareNumbersSum = squareNumbersSum + val !== undefined ? val * val : 0
 	})
 
 	const variance = (squareNumbersSum - (sum * sum) / N) / (N - 1)
 
 	const standarDeviationResult = Math.sqrt(variance)
 
-	return Number(standarDeviationResult.toFixed(3))
+	return Number.parseFloat(standarDeviationResult.toFixed(precision))
 }
 
 /*
@@ -125,17 +123,12 @@ export function iqr(values: number[], opts?: IQROptions) {
 	if (!Array.isArray(values)) {
 		throw new TypeError('iqr()::invalid input argument. Must provide an array.')
 	}
-	if (arguments.length > 1) {
-		if (!isObject(opts)) {
-			throw new TypeError(
-				'iqr()::invalid input argument. Options should be an object.',
-			)
-		}
-	} else {
+	if (opts === undefined) {
 		opts = {
 			sorted: false,
 		}
 	}
+
 	if (opts !== undefined && !opts.sorted) {
 		values = values.slice()
 		values.sort(ascending)

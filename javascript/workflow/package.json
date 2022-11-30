@@ -43,8 +43,7 @@
 		"debug": "^4.3.4",
 		"lodash-es": "^4.17.21",
 		"rxjs": "^7.5.7",
-		"uuid": "^9.0.0",
-		"validate.io-object": "^1.0.4"
+		"uuid": "^9.0.0"
 	},
 	"devDependencies": {
 		"@essex/jest-config": "^21.0.16",

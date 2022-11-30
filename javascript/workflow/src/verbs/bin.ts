@@ -8,6 +8,16 @@ import { fixedBinStep } from '@datashaper/tables'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
+import {
+	autoStrategy,
+	doaneStrategy,
+	fdStrategy,
+	riceStrategy,
+	scottStrategy,
+	sqrtStrategy,
+	stoneStrategy,
+	sturgesStrategy,
+} from './util/binUtilities.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 
@@ -32,12 +42,26 @@ function binExpr(input: ColumnTable, args: BinArgs) {
 }
 
 function computeBins(input: ColumnTable, args: BinArgs) {
-	const { strategy, column, fixedwidth, fixedcount } = args
+	const { strategy, column, fixedwidth, fixedcount, roundBin } = args
 	const stats = getStats(input, column, args.min, args.max)
 	const [min, max] = stats
 	switch (strategy) {
 		case BinStrategy.Auto:
-			return input.derive({ bins: op.bins(column) }).get('bins', 0)
+			return [min, max, autoStrategy(input.array(column), roundBin)]
+		case BinStrategy.Fd:
+			return [min, max, fdStrategy(input.array(column))]
+		case BinStrategy.Doane:
+			return [min, max, doaneStrategy(input.array(column))]
+		case BinStrategy.Scott:
+			return [min, max, scottStrategy(input.array(column))]
+		case BinStrategy.Stone:
+			return [min, max, stoneStrategy(input.array(column))]
+		case BinStrategy.Rice:
+			return [min, max, riceStrategy(input.array(column))]
+		case BinStrategy.Sturges:
+			return [min, max, sturgesStrategy(input.array(column))]
+		case BinStrategy.Sqrt:
+			return [min, max, sqrtStrategy(input.array(column))]
 		case BinStrategy.FixedWidth:
 			if (!fixedwidth) {
 				throw new Error('Must supply a bin width')

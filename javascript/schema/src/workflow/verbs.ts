@@ -257,12 +257,20 @@ export interface AggregateArgs extends RollupArgs {
 
 export enum BinStrategy {
 	Auto = 'auto',
+	Fd = 'fd',
+	Doane = 'doane',
+	Scott = 'scott',
+	Stone = 'stone',
+	Rice = 'rice',
+	Sturges = 'sturges',
+	Sqrt = 'sqrt',
 	FixedCount = 'fixed count',
 	FixedWidth = 'fixed width',
 }
 
 export interface BinArgs extends InputColumnArgs, OutputColumnArgs {
 	strategy: BinStrategy
+	roundBin?: boolean
 	/**
 	 * Fixed number of bins.
 	 * Note that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary -

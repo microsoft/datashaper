@@ -101,6 +101,9 @@
                     "description": "If true, the range for each bin will be printed as the cell value instead of the truncated numeric value.\nThis is useful for treating the",
                     "type": "boolean"
                 },
+                "roundBin": {
+                    "type": "boolean"
+                },
                 "strategy": {
                     "$ref": "#/definitions/BinStrategy"
                 },
@@ -114,8 +117,15 @@
         "BinStrategy": {
             "enum": [
                 "auto",
+                "doane",
+                "fd",
                 "fixed count",
-                "fixed width"
+                "fixed width",
+                "rice",
+                "scott",
+                "sqrt",
+                "stone",
+                "sturges"
             ],
             "type": "string"
         },

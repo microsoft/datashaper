@@ -2141,7 +2141,6 @@ __metadata:
     rxjs: ^7.5.7
     typescript: ^4.8.4
     uuid: ^9.0.0
-    validate.io-object: ^1.0.4
   peerDependencies:
     "@types/node": "*"
     arquero: ^5.1.0
@@ -20726,7 +20725,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"validate.io-object@npm:^1.0.0, validate.io-object@npm:^1.0.4":
+"validate.io-object@npm:^1.0.0":
   version: 1.0.4
   resolution: "validate.io-object@npm:1.0.4"
   dependencies:
