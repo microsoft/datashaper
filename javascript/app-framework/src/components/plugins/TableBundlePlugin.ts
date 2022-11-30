@@ -1,13 +1,19 @@
-import {
-	TableBundle,
-	type DataTable,
-	type Codebook,
-	type Workflow,
-} from '@datashaper/workflow'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { KnownProfile } from '@datashaper/schema'
-import { AppServices, ProfilePlugin, ResourceGroup } from '../../types.js'
-import { BundleEditor } from '../editors/index.js'
+import {
+	type Codebook,
+	type DataTable,
+	type Workflow,
+	TableBundle,
+} from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
+
+import type { AppServices, ProfilePlugin} from '../../types.js';
+import { ResourceGroup } from '../../types.js'
+import { BundleEditor } from '../editors/index.js'
 
 export class TableBundlePlugin implements ProfilePlugin<TableBundle> {
 	public readonly profile = KnownProfile.TableBundle
@@ -43,6 +49,16 @@ export class TableBundlePlugin implements ProfilePlugin<TableBundle> {
 					this.api!.renameResource(resource)
 				},
 			},
+			// {
+			// 	key: 'new-derived-table',
+			// 	text: 'New Derived Table',
+			// 	onClick: () => {},
+			// },
+			// {
+			// 	key: 'add-symlink',
+			// 	text: 'Add Table Link',
+			// 	onClick: () => {},
+			// },
 		]
 		if (resource.input == null) {
 			result.push({
