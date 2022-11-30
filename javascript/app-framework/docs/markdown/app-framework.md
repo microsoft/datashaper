@@ -38,9 +38,11 @@
 
 |  Interface | Description |
 |  --- | --- |
+|  [AppServices](./app-framework.appservices.md) |  |
 |  [BundleEditorProps](./app-framework.bundleeditorprops.md) |  |
 |  [CodebookEditorProps](./app-framework.codebookeditorprops.md) |  |
 |  [DataSourceEditorProps](./app-framework.datasourceeditorprops.md) |  |
+|  [GeneratedExtraRoutes](./app-framework.generatedextraroutes.md) |  |
 |  [JsonEditorProps](./app-framework.jsoneditorprops.md) |  |
 |  [ParserOptionsEditorProps](./app-framework.parseroptionseditorprops.md) |  |
 |  [PersistenceService](./app-framework.persistenceservice.md) | The Persistence Service available in the application. This service is responsible for saving and loading data packages. |

@@ -9,9 +9,5 @@ Event handler for when the resource is undergoing route generation. A route is a
 <b>Signature:</b>
 
 ```typescript
-onGetRoutes?: (resource: T, parentPath: string, resourcePath: string) => {
-        preItemSiblings?: ResourceRoute[];
-        postItemSiblings?: ResourceRoute[];
-        children?: ResourceRoute[];
-    } | undefined;
+onGetRoutes?: (resource: T, parentPath: string, resourcePath: string) => GeneratedExtraRoutes | undefined;
 ```

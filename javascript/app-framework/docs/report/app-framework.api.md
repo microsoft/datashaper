@@ -34,6 +34,13 @@ import type { TableBundle } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
 import type { Workflow } from '@datashaper/workflow';
 
+// Warning: (ae-missing-release-tag) "AppServices" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface AppServices {
+    renameResource(resource: Resource): Promise<string>;
+}
+
 // Warning: (ae-missing-release-tag) "BundleEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -117,6 +124,18 @@ export class DefaultPersistenceService implements PersistenceService {
     save(projectName?: string): Promise<void>;
 }
 
+// Warning: (ae-missing-release-tag) "GeneratedExtraRoutes" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface GeneratedExtraRoutes {
+    // (undocumented)
+    children?: ResourceRoute[];
+    // (undocumented)
+    postItemSiblings?: ResourceRoute[];
+    // (undocumented)
+    preItemSiblings?: ResourceRoute[];
+}
+
 // Warning: (ae-missing-release-tag) "HeadersOption" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -182,15 +201,14 @@ export interface PersistenceService {
 //
 // @public (undocumented)
 export interface ProfilePlugin<T extends Resource = any> {
+    createResource: () => T;
     dataHandler?: ResourceHandler;
     group?: ResourceGroup;
     iconName: string;
+    initialize?: (api: AppServices) => void;
+    isTopLevel?: boolean;
     onGetMenuItems?: (resource: T) => IContextualMenuItem[];
-    onGetRoutes?: (resource: T, parentPath: string, resourcePath: string) => {
-        preItemSiblings?: ResourceRoute[];
-        postItemSiblings?: ResourceRoute[];
-        children?: ResourceRoute[];
-    } | undefined;
+    onGetRoutes?: (resource: T, parentPath: string, resourcePath: string) => GeneratedExtraRoutes | undefined;
     profile: string;
     renderer: React.ComponentType<{
         resource: T;
