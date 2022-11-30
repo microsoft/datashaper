@@ -77,6 +77,18 @@ export interface CodebookEditorProps {
     resource: Codebook;
 }
 
+// Warning: (ae-missing-release-tag) "CommandBarSection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum CommandBarSection {
+    // (undocumented)
+    New = "newMenu",
+    // (undocumented)
+    Open = "openMenu",
+    // (undocumented)
+    Save = "saveMenu"
+}
+
 // Warning: (ae-missing-release-tag) "Container" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -203,12 +215,12 @@ export interface PersistenceService {
 export interface ProfilePlugin<T extends Resource = any> {
     createResource: () => T;
     dataHandler?: ResourceHandler;
+    getCommandBarCommands?: (section: CommandBarSection) => IContextualMenuItem[] | undefined;
+    getMenuItems?: (resource: T) => IContextualMenuItem[];
+    getRoutes?: (resource: T, parentPath: string, resourcePath: string) => GeneratedExtraRoutes | undefined;
     group?: ResourceGroup;
     iconName: string;
-    initialize?: (api: AppServices) => void;
-    isTopLevel?: boolean;
-    onGetMenuItems?: (resource: T) => IContextualMenuItem[];
-    onGetRoutes?: (resource: T, parentPath: string, resourcePath: string) => GeneratedExtraRoutes | undefined;
+    initialize?: (api: AppServices, dp: DataPackage) => void;
     profile: string;
     renderer: React.ComponentType<{
         resource: T;

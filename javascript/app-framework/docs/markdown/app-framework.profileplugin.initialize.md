@@ -9,5 +9,5 @@ Initialize the plugin with application-level services
 <b>Signature:</b>
 
 ```typescript
-initialize?: (api: AppServices) => void;
+initialize?: (api: AppServices, dp: DataPackage) => void;
 ```

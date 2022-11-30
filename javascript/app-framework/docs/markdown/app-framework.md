@@ -14,6 +14,7 @@
 
 |  Enumeration | Description |
 |  --- | --- |
+|  [CommandBarSection](./app-framework.commandbarsection.md) |  |
 |  [ResourceGroup](./app-framework.resourcegroup.md) |  |
 |  [ViewType](./app-framework.viewtype.md) |  |
 
