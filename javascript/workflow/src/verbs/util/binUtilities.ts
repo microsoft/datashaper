@@ -6,7 +6,7 @@ import { default as quantile } from 'compute-quantile'
 
 /*
  */
-export function autoStrategy(values: number[], roundBin: boolean) {
+export function autoStrategy(values: number[]) {
 	const sturgesResult = sturgesStrategy(values)
 	const fdResult = fdStrategy(values)
 
@@ -17,7 +17,7 @@ export function autoStrategy(values: number[], roundBin: boolean) {
  */
 export function fdStrategy(values: number[]): number {
 	const iqrResult = iqr(values)
-	return (2 * iqrResult) / Math.pow(values.length, 1 / 3)
+	return 2 * (iqrResult / Math.pow(values.length, 1 / 3))
 }
 
 /*
@@ -27,7 +27,7 @@ export function doaneStrategy(values: number[]): number {
 	let sum = 0
 
 	values.forEach(val => {
-		sum = sum + val !== undefined ? val : 0
+		sum = sum + val
 	})
 
 	const sumThird = Math.pow(sum, 3)
@@ -45,12 +45,6 @@ export function doaneStrategy(values: number[]): number {
  */
 export function scottStrategy(values: number[]) {
 	return 3.49 * standardDeviation(values) * Math.pow(values.length, -1 / 3)
-}
-
-/*
- */
-export function stoneStrategy(values: number[]): number {
-	return values.length
 }
 
 /*
@@ -106,15 +100,15 @@ export function standardDeviation(values: number[], precision = 3) {
 	let squareNumbersSum = 0
 
 	values.forEach(val => {
-		sum = sum + val !== undefined ? val : 0
-		squareNumbersSum = squareNumbersSum + val !== undefined ? val * val : 0
+		sum = sum + val
+		squareNumbersSum = squareNumbersSum + val * val
 	})
 
 	const variance = (squareNumbersSum - (sum * sum) / N) / (N - 1)
 
 	const standarDeviationResult = Math.sqrt(variance)
 
-	return Number.parseFloat(standarDeviationResult.toFixed(precision))
+	return Number(standarDeviationResult.toFixed(precision))
 }
 
 /*

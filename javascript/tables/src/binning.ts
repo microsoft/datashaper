@@ -50,9 +50,9 @@ export function fixedBinCount(
  */
 export function fixedBinStep(
 	column: string,
-	min: number,
-	max: number,
-	step: number,
+	min = 0,
+	max = 0,
+	step = 0,
 	clamped = false,
 	format = false,
 ): string | object {

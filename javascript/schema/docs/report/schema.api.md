@@ -75,8 +75,6 @@ export enum BinStrategy {
     // (undocumented)
     Sqrt = "sqrt",
     // (undocumented)
-    Stone = "stone",
-    // (undocumented)
     Sturges = "sturges"
 }
 

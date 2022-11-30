@@ -842,27 +842,6 @@
             },
             {
               "kind": "EnumMember",
-              "canonicalReference": "@datashaper/schema!BinStrategy.Stone:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "Stone = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "\"stone\""
-                }
-              ],
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "name": "Stone"
-            },
-            {
-              "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!BinStrategy.Sturges:member",
               "docComment": "",
               "excerptTokens": [

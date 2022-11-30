@@ -260,7 +260,6 @@ export enum BinStrategy {
 	Fd = 'fd',
 	Doane = 'doane',
 	Scott = 'scott',
-	Stone = 'stone',
 	Rice = 'rice',
 	Sturges = 'sturges',
 	Sqrt = 'sqrt',

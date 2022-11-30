@@ -57,6 +57,14 @@ def bin(
         bin_edges = np.histogram_bin_edges(
             input_table[column], bins="auto", range=min_max
         )
+    elif bin_strategy == BinStrategy.Fd:
+        bin_edges = np.histogram_bin_edges(
+            input_table[column], bins="fd", range=min_max
+        )
+    elif bin_strategy == BinStrategy.Sturges:
+        bin_edges = np.histogram_bin_edges(
+            input_table[column], bins="sturges", range=min_max
+        )    
     elif bin_strategy == BinStrategy.FixedCount and fixedcount is not None:
         bin_edges = np.histogram_bin_edges(
             input_table[column], bins=fixedcount, range=min_max

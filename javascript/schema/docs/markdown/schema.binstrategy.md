@@ -22,6 +22,5 @@ export declare enum BinStrategy
 |  Rice | <code>&quot;rice&quot;</code> |  |
 |  Scott | <code>&quot;scott&quot;</code> |  |
 |  Sqrt | <code>&quot;sqrt&quot;</code> |  |
-|  Stone | <code>&quot;stone&quot;</code> |  |
 |  Sturges | <code>&quot;sturges&quot;</code> |  |
 
