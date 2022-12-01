@@ -12,12 +12,13 @@ import {
 import type { GeneratedExtraRoutes, ProfilePlugin } from '../types.js'
 import { ResourceGroup } from '../types.js'
 
-export class DataTablePlugin implements ProfilePlugin<DataTable> {
+export class DataTableProfile implements ProfilePlugin<DataTable> {
 	public readonly profile = KnownProfile.DataTable
 	public readonly title = 'Datatable'
 	public readonly renderer = DataSourceEditor
 	public readonly iconName = 'PageData'
 	public readonly group = ResourceGroup.Data
+	public readonly dataHandler = null
 
 	public createResource(): DataTable {
 		return new DataTable()

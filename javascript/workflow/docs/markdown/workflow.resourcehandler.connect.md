@@ -2,21 +2,10 @@
 
 [Home](./index.md) &gt; [@datashaper/workflow](./workflow.md) &gt; [ResourceHandler](./workflow.resourcehandler.md) &gt; [connect](./workflow.resourcehandler.connect.md)
 
-## ResourceHandler.connect() method
+## ResourceHandler.connect property
 
 <b>Signature:</b>
 
 ```typescript
-connect(dp: DataPackage): void;
+connect?: (dp: DataPackage) => void;
 ```
-
-## Parameters
-
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  dp | [DataPackage](./workflow.datapackage.md) | The datapackage to connect to |
-
-<b>Returns:</b>
-
-void
-

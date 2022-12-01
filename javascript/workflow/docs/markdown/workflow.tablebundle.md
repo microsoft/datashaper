@@ -23,7 +23,6 @@ export declare class TableBundle extends Resource
 |  --- | --- | --- | --- |
 |  [$schema](./workflow.tablebundle._schema.md) | <code>readonly</code> | string |  |
 |  [codebook](./workflow.tablebundle.codebook.md) |  | [Codebook](./workflow.codebook.md) \| undefined |  |
-|  [defaultName](./workflow.tablebundle.defaultname.md) | <code>readonly</code> | (not declared) |  |
 |  [input](./workflow.tablebundle.input.md) |  | [DataTable](./workflow.datatable.md) \| undefined |  |
 |  [name](./workflow.tablebundle.name.md) |  | string |  |
 |  [output](./workflow.tablebundle.output.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt; |  |
@@ -37,6 +36,7 @@ export declare class TableBundle extends Resource
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
 |  [connect(dp)](./workflow.tablebundle.connect.md) |  |  |
+|  [defaultName()](./workflow.tablebundle.defaultname.md) |  |  |
 |  [dispose()](./workflow.tablebundle.dispose.md) |  |  |
 |  [loadSchema(schema, quiet)](./workflow.tablebundle.loadschema.md) |  |  |
 |  [toSchema()](./workflow.tablebundle.toschema.md) |  |  |

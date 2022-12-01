@@ -103,7 +103,7 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 						<Route
 							key={r.href}
 							path={r.href}
-							element={<r.renderer {...r.props} />}
+							element={<MatchedRoute key={r.href} data={r} />}
 						/>
 					))}
 					<Route path="*" element={<NoMatch />} />
@@ -120,6 +120,12 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 		</Allotment>
 	)
 })
+
+const MatchedRoute: React.FC<{ data: ResourceRoute }> = memo(
+	function MatchedRoute({ data: { props, renderer: R } }) {
+		return <R {...props} />
+	},
+)
 
 function NoMatch() {
 	return <div style={{ padding: 25 }}>No Route Matched</div>

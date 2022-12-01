@@ -143,7 +143,7 @@ export class Codebook extends Resource {
     readonly $schema: string;
     constructor(codebook?: CodebookSchema);
     // (undocumented)
-    get defaultName(): string;
+    defaultName(): string;
     // (undocumented)
     get fields(): Field[];
     set fields(value: Field[]);
@@ -196,7 +196,7 @@ export class DataPackage extends Resource {
     // (undocumented)
     dataPackage?: DataPackageSchema | undefined;
     // (undocumented)
-    readonly defaultName = "datapackage.json";
+    defaultName(): string;
     // (undocumented)
     getResource(name: string): Resource | undefined;
     // (undocumented)
@@ -258,7 +258,7 @@ export class DataTable extends Resource {
     get data(): Blob | undefined;
     set data(value: Blob | undefined);
     // (undocumented)
-    readonly defaultName = "datatable.json";
+    defaultName(): string;
     // (undocumented)
     dispose(): void;
     // (undocumented)
@@ -497,6 +497,19 @@ export const isWorkflowSchema: (r: ResourceSchema | undefined) => r is WorkflowS
 // @public (undocumented)
 export function join(id: string): JoinNode;
 
+// Warning: (ae-missing-release-tag) "JsonDataHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class JsonDataHandler<T extends Resource> implements ResourceHandler {
+    constructor(profile: string, createResource: () => T);
+    // (undocumented)
+    load(data: ResourceSchema): Promise<Resource[]>;
+    // (undocumented)
+    readonly profile: string;
+    // (undocumented)
+    save(resource: T, files: Map<string, Blob>): Promise<string[]>;
+}
+
 // Warning: (ae-forgotten-export) The symbol "LookupNode" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "lookup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -518,7 +531,7 @@ export const merge: (id: string) => StepNode<TableContainer<unknown>, MergeArgs>
 // @public (undocumented)
 export abstract class Named extends Observed implements Named_2 {
     // (undocumented)
-    abstract get defaultName(): string;
+    abstract defaultName(): string;
     // (undocumented)
     get description(): string | undefined;
     set description(value: string | undefined);
@@ -718,7 +731,7 @@ export abstract class Resource extends Named implements ResourceSchema, Resource
 // @public (undocumented)
 export interface ResourceHandler {
     // (undocumented)
-    connect(dp: DataPackage): void;
+    connect?: (dp: DataPackage) => void;
     load(data: ResourceSchema, files: Map<string, Blob>): Promise<Resource[]>;
     profile: Profile;
     save(data: Resource, files: Map<string, Blob>): Promise<string[]>;
@@ -809,7 +822,7 @@ export class TableBundle extends Resource {
     // (undocumented)
     connect(dp: DataPackage): void;
     // (undocumented)
-    readonly defaultName = "tablebundle.json";
+    defaultName(): string;
     // (undocumented)
     dispose(): void;
     // (undocumented)
@@ -834,6 +847,20 @@ export class TableBundle extends Resource {
     // (undocumented)
     get workflow(): Workflow | undefined;
     set workflow(workflow: Workflow | undefined);
+}
+
+// Warning: (ae-missing-release-tag) "TableBundleHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class TableBundleHandler implements ResourceHandler {
+    // (undocumented)
+    connect(dp: DataPackage): void;
+    // (undocumented)
+    load(data: TableBundleSchema, files: Map<string, Blob>): Promise<Resource[]>;
+    // (undocumented)
+    readonly profile = KnownProfile.TableBundle;
+    // (undocumented)
+    save(resource: TableBundle, files: Map<string, Blob>): Promise<string[]>;
 }
 
 // Warning: (ae-missing-release-tag) "TableExportOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -926,7 +953,7 @@ export class Workflow extends Resource {
     get defaultInput(): Maybe<TableContainer>;
     set defaultInput(source: Maybe<TableContainer>);
     // (undocumented)
-    get defaultName(): string;
+    defaultName(): string;
     // (undocumented)
     dispose(): void;
     // (undocumented)

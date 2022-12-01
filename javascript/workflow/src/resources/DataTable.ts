@@ -29,7 +29,10 @@ export class DataTable extends Resource {
 
 	public readonly parser = new ParserOptions()
 	public readonly shape = new DataShape()
-	public readonly defaultName = 'datatable.json'
+
+	public override defaultName(): string {
+		return 'datatable.json'
+	}
 
 	private disposables: Array<() => void> = []
 

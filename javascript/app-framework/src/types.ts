@@ -92,8 +92,9 @@ export interface ProfilePlugin<T extends Resource = any> {
 
 	/**
 	 * The persistence handler to use for this profile
+	 * null: no persistence
 	 */
-	dataHandler?: ResourceHandler
+	dataHandler?: ResourceHandler | null
 
 	/**
 	 * Creates a new resource of this type

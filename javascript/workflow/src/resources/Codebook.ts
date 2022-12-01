@@ -2,9 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { CodebookSchema, Field} from '@datashaper/schema';
-import { 	createCodebookSchemaObject,
-KnownProfile ,
+import type { CodebookSchema, Field } from '@datashaper/schema'
+import {
+	createCodebookSchemaObject,
+	KnownProfile,
 	LATEST_CODEBOOK_SCHEMA,
 } from '@datashaper/schema'
 
@@ -15,7 +16,7 @@ export class Codebook extends Resource {
 	public readonly $schema = LATEST_CODEBOOK_SCHEMA
 	public readonly profile = KnownProfile.Codebook
 
-	public override get defaultName(): string {
+	public override defaultName(): string {
 		return 'codebook.json'
 	}
 

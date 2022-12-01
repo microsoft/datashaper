@@ -13,7 +13,7 @@ export interface ResourceHandler {
 	 *
 	 * @param dp - The datapackage to connect to
 	 */
-	connect(dp: DataPackage): void
+	connect?: (dp: DataPackage) => void
 
 	/**
 	 * The profile name of the resource

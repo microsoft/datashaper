@@ -64,7 +64,7 @@ export class Workflow extends Resource {
 	)
 	private _disposables: Array<() => void> = []
 
-	public override get defaultName(): string {
+	public override defaultName(): string {
 		return 'workflow.json'
 	}
 

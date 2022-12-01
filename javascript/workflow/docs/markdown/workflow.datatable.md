@@ -23,7 +23,6 @@ export declare class DataTable extends Resource
 |  --- | --- | --- | --- |
 |  [$schema](./workflow.datatable._schema.md) | <code>readonly</code> | string |  |
 |  [data](./workflow.datatable.data.md) |  | Blob \| undefined |  |
-|  [defaultName](./workflow.datatable.defaultname.md) | <code>readonly</code> | (not declared) |  |
 |  [format](./workflow.datatable.format.md) |  | DataFormat |  |
 |  [name](./workflow.datatable.name.md) |  | string |  |
 |  [output](./workflow.datatable.output.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;ColumnTable&gt; |  |
@@ -36,6 +35,7 @@ export declare class DataTable extends Resource
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
+|  [defaultName()](./workflow.datatable.defaultname.md) |  |  |
 |  [dispose()](./workflow.datatable.dispose.md) |  |  |
 |  [loadSchema(schema, quiet)](./workflow.datatable.loadschema.md) |  |  |
 |  [toSchema()](./workflow.datatable.toschema.md) |  |  |

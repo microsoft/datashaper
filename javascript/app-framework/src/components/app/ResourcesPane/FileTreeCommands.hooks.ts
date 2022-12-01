@@ -9,8 +9,7 @@ import { useCallback, useMemo } from 'react'
 
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
 import { usePersistenceService } from '../../../hooks/usePersistenceService.js'
-import { useTableBundles } from '../../../hooks/useTableBundles.js'
-import type { ProfilePlugin } from '../../../types.js';
+import type { ProfilePlugin } from '../../../types.js'
 import { CommandBarSection } from '../../../types.js'
 import {
 	createCommandBar,
@@ -32,11 +31,10 @@ export function useFileManagementCommands(
 	onSaveCommands: IContextualMenuItem[]
 	newCommands: IContextualMenuItem[]
 } {
-	const tables = useTableBundles()
-	const hasDataPackages = tables.length > 0
 	const uploadZip = useUploadZip()
 	const onClickDownloadZip = useDownloadZip()
 	const dataPackage = useDataPackage()
+	const hasResources = dataPackage.resources.length > 0
 
 	const onClickUploadTable = useCallback(
 		() =>
@@ -70,7 +68,7 @@ export function useFileManagementCommands(
 
 	const newCommands = useMemo<IContextualMenuItem[]>(
 		() => getPluginCommands(CommandBarSection.New, plugins),
-		[dataPackage, plugins],
+		[plugins],
 	)
 
 	const openCommands = useMemo(() => {
@@ -88,20 +86,20 @@ export function useFileManagementCommands(
 		const result = saveMenuItems(onClickDownloadZip)
 		result.push(...getPluginCommands(CommandBarSection.Save, plugins))
 		return result
-	}, [onClickDownloadZip])
+	}, [plugins, onClickDownloadZip])
 
 	const theme = useTheme()
 	const commands = useMemo<ICommandBarItemProps[]>(
 		() =>
 			createCommandBar(
 				expanded,
-				hasDataPackages,
+				hasResources,
 				newCommands,
 				openCommands,
 				saveCommands,
 				theme,
 			),
-		[theme, hasDataPackages, expanded, openCommands, saveCommands, newCommands],
+		[theme, hasResources, expanded, openCommands, saveCommands, newCommands],
 	)
 
 	return {

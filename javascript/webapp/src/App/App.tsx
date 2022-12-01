@@ -4,21 +4,21 @@
  */
 import 'allotment/dist/style.css'
 
-import { DataShaperApp, type ProfilePlugin } from '@datashaper/app-framework'
+import { type ProfilePlugin, DataShaperApp } from '@datashaper/app-framework'
 import { Spinner } from '@fluentui/react'
-import { memo, useMemo, Suspense } from 'react'
+import { useConst } from '@fluentui/react-hooks'
+import { memo, Suspense } from 'react'
 import { HashRouter } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
 
 import { Layout } from '../components/Layout.js'
+import { TestAppProfile } from '../profiles/index.js'
 import { About } from './About.js'
 import { ErrorBoundary } from './ErrorBoundary.js'
 import { StyleContext } from './StyleContext.js'
 
 export const App: React.FC = memo(function App() {
-	const customProfiles = useMemo<ProfilePlugin[]>(() => [
-		new TestAppCustomProfile(),
-	])
+	const customProfiles = useConst<ProfilePlugin[]>(() => [new TestAppProfile()])
 	return (
 		<ErrorBoundary>
 			<RecoilRoot>
