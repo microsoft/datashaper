@@ -222,6 +222,8 @@ export class DataPackage extends Resource {
     // (undocumented)
     get size(): number;
     // (undocumented)
+    suggestResourceName(name: string): string;
+    // (undocumented)
     toSchema(): DataPackageSchema;
 }
 
@@ -606,9 +608,15 @@ export function observableNode<T>(id: string, source: Observable<Maybe<T>>): Obs
 // @public (undocumented)
 export abstract class Observed {
     // (undocumented)
+    dispose(): void;
+    // (undocumented)
     onChange(handler: () => void, fireSync?: boolean): Unsubscribe;
     // (undocumented)
     protected _onChange: Subject<void>;
+    // (undocumented)
+    onDispose(handler: () => void): Unsubscribe;
+    // (undocumented)
+    protected _onDispose: Subject<void>;
 }
 
 // Warning: (ae-missing-release-tag) "onehot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

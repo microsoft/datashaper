@@ -2924,6 +2924,53 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!DataPackage#suggestResourceName:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "suggestResourceName(name: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "name",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "name": "suggestResourceName"
+            },
+            {
+              "kind": "Method",
               "canonicalReference": "@datashaper/workflow!DataPackage#toSchema:member(1)",
               "docComment": "",
               "excerptTokens": [
@@ -7561,6 +7608,70 @@
               "isProtected": true
             },
             {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!Observed#_onDispose:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "protected _onDispose: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Subject",
+                  "canonicalReference": "rxjs!Subject:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "_onDispose",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": true
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!Observed#dispose:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "dispose(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "name": "dispose"
+            },
+            {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!Observed#onChange:member(1)",
               "docComment": "",
@@ -7623,6 +7734,54 @@
               ],
               "isOptional": false,
               "name": "onChange"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!Observed#onDispose:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "onDispose(handler: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "() => void"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Unsubscribe",
+                  "canonicalReference": "@datashaper/workflow!Unsubscribe:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "handler",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "name": "onDispose"
             }
           ],
           "implementsTokenRanges": []

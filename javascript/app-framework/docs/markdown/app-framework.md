@@ -14,6 +14,7 @@
 
 |  Enumeration | Description |
 |  --- | --- |
+|  [CommandBarSection](./app-framework.commandbarsection.md) |  |
 |  [ResourceGroup](./app-framework.resourcegroup.md) |  |
 |  [ViewType](./app-framework.viewtype.md) |  |
 
@@ -28,6 +29,7 @@
 |  [useDatasetMenuItems(selected, onClick)](./app-framework.usedatasetmenuitems.md) |  |
 |  [useDataTableSource(pkg)](./app-framework.usedatatablesource.md) | Use the raw source table from a data package without any workflow applied to it. |
 |  [useMenuButtonStyles()](./app-framework.usemenubuttonstyles.md) |  |
+|  [useOnOutsideClick(ref, onClickOutside)](./app-framework.useonoutsideclick.md) | Hook that alerts clicks outside of the passed ref |
 |  [usePersistenceService()](./app-framework.usepersistenceservice.md) |  |
 |  [useTableBundle(name)](./app-framework.usetablebundle.md) |  |
 |  [useTableBundleOutput(pkg)](./app-framework.usetablebundleoutput.md) | Uses the latest table from a data package. This is updatde as the package changes |
@@ -37,9 +39,11 @@
 
 |  Interface | Description |
 |  --- | --- |
+|  [AppServices](./app-framework.appservices.md) |  |
 |  [BundleEditorProps](./app-framework.bundleeditorprops.md) |  |
 |  [CodebookEditorProps](./app-framework.codebookeditorprops.md) |  |
 |  [DataSourceEditorProps](./app-framework.datasourceeditorprops.md) |  |
+|  [GeneratedExtraRoutes](./app-framework.generatedextraroutes.md) |  |
 |  [JsonEditorProps](./app-framework.jsoneditorprops.md) |  |
 |  [ParserOptionsEditorProps](./app-framework.parseroptionseditorprops.md) |  |
 |  [PersistenceService](./app-framework.persistenceservice.md) | The Persistence Service available in the application. This service is responsible for saving and loading data packages. |

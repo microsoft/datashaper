@@ -3,9 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ResourceSchema, TableBundleSchema } from '@datashaper/schema'
-import { KnownProfile, LATEST_TABLEBUNDLE_SCHEMA } from '@datashaper/schema'
+import {
+	CodebookStrategy,
+	KnownProfile,
+	LATEST_TABLEBUNDLE_SCHEMA,
+} from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import { introspect } from '@datashaper/tables'
+import { applyCodebook, introspect } from '@datashaper/tables'
 import type { Maybe } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import type { Observable } from 'rxjs'
@@ -73,17 +77,26 @@ export class TableBundle extends Resource {
 
 		this._datatable = datatable
 		this.rebindWorkflowInput()
+
 		if (datatable != null) {
 			const sub = datatable.output$.subscribe(tbl => {
+				const table = this.encode(tbl)
 				// wire up latest input
-				this._source.next(tbl)
+				this._source.next(table)
 
 				// if no workflow, pipe to output
 				if (this.workflow == null) {
-					this._output.next({ id: this.name, table: tbl })
+					this._output.next({ id: this.name, table })
 				}
 			})
 			this._dtDisposables.push(() => sub.unsubscribe())
+
+			datatable.onDispose(() => (this.input = undefined))
+		} else {
+			this._source.next(undefined)
+			if (this.workflow == null) {
+				this._output.next({ id: this.name, table: undefined })
+			}
 		}
 		this._onChange.next()
 	}
@@ -102,6 +115,7 @@ export class TableBundle extends Resource {
 			this._cbDisposables.push(
 				codebook.onChange(() => this.rebindWorkflowInput()),
 			)
+			codebook.onDispose(() => (this.codebook = undefined))
 		}
 
 		this.rebindWorkflowInput()
@@ -122,15 +136,18 @@ export class TableBundle extends Resource {
 			this._wfDisposables.push(workflow.onChange(() => this._onChange.next()))
 			const sub = workflow.read$()?.subscribe(tbl => this._output.next(tbl))
 			this._wfDisposables.push(() => sub?.unsubscribe())
+
+			workflow.onDispose(() => (this.workflow = undefined))
 		}
 
 		this.rebindWorkflowInput()
 		this._onChange.next()
 	}
 
-	public dispose(): void {
+	public override dispose(): void {
 		this._wfDisposables.forEach(d => d())
 		this.workflow?.dispose()
+		super.dispose()
 	}
 
 	// #region Class Fields
@@ -211,12 +228,14 @@ export class TableBundle extends Resource {
 			 */
 			if (this.input != null) {
 				this.workflow.defaultInput$ = this.input.output$.pipe(
-					map(table => ({
-						table,
-						id: this.name,
-						// TODO: let parsing layer deal with this
-						metadata: table && introspect(table, true),
-					})),
+					map(table => {
+						return {
+							table: this.encode(table),
+							id: this.name,
+							// TODO: let parsing layer deal with this
+							metadata: table && introspect(table, true),
+						}
+					}),
 				)
 			}
 
@@ -225,5 +244,21 @@ export class TableBundle extends Resource {
 			 */
 			this.workflow.addInputs(this._inputs)
 		}
+	}
+
+	private encode(inputTable: Maybe<ColumnTable>) {
+		if (
+			inputTable == null ||
+			this.codebook == null ||
+			this.codebook.fields.length === 0
+		) {
+			return inputTable
+		}
+		return applyCodebook(
+			inputTable,
+			this.codebook,
+			CodebookStrategy.DataTypeAndMapping,
+			this._datatable?.toSchema(),
+		)
 	}
 }

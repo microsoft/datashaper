@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { AllotmentHandle } from 'allotment';
+import type { AllotmentHandle } from 'allotment'
 import { Allotment } from 'allotment'
 import { memo, useCallback, useRef } from 'react'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
@@ -10,15 +10,17 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { DataPackageProvider } from '../../../context/index.js'
 import { EMPTY_ARRAY } from '../../../empty.js'
 import type { ResourceRoute } from '../../../types.js'
-import { FileTree } from '../FileTree/index.js'
-import { useResourceRoutes } from '../FileTree/TreeItems.hooks.js'
+import { RenameModal } from '../../modals/index.js'
+import { ResourcesPane } from '../ResourcesPane/index.js'
 import {
+	useAppServices,
 	useExpandedState,
 	useFlattened,
 	useRegisteredProfiles,
 } from './DataShaperApp.hooks.js'
 import { useFileTreeStyle } from './DataShaperApp.styles.js'
 import type { DataShaperAppProps } from './DataShaperApp.types.js'
+import { useResourceRoutes } from './useResourceRoutes.js'
 
 const PANE_EXPANDED_SIZE = 300
 const PANE_COLLAPSED_SIZE = 60
@@ -56,9 +58,20 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 		(v: ResourceRoute) => navigate(v.href),
 		[navigate],
 	)
-	const plugins = useRegisteredProfiles(profiles)
-	const resources = useResourceRoutes(plugins)
+	const {
+		api,
+		rename: {
+			isOpen: isRenameOpen,
+			resource: renameResource,
+			onDismiss: onCancelRename,
+			onAccept: onAcceptRename,
+		},
+	} = useAppServices()
+
+	const plugins = useRegisteredProfiles(api, profiles)
+	const resources = useResourceRoutes(api, plugins)
 	const flattenedRoutes = useFlattened(resources)
+
 	return (
 		<Allotment
 			className={className}
@@ -72,13 +85,14 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 				maxSize={PANE_EXPANDED_SIZE}
 				minSize={PANE_COLLAPSED_SIZE}
 			>
-				<FileTree
+				<ResourcesPane
 					resources={resources}
 					expanded={expanded}
-					onToggleExpanded={onToggle}
+					plugins={plugins}
 					style={fileTreeStyle}
-					examples={examples}
 					selectedKey={selectedKey}
+					examples={examples}
+					onToggleExpanded={onToggle}
 					onSelect={onSelect}
 				/>
 			</Allotment.Pane>
@@ -94,6 +108,14 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 					))}
 					<Route path="*" element={<NoMatch />} />
 				</Routes>
+				<>
+					<RenameModal
+						resource={renameResource}
+						isOpen={isRenameOpen}
+						onDismiss={onCancelRename}
+						onAccept={onAcceptRename}
+					/>
+				</>
 			</Allotment.Pane>
 		</Allotment>
 	)

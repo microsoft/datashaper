@@ -26,7 +26,7 @@ export class TableBundleHandler implements ResourceHandler {
 	public readonly profile = KnownProfile.TableBundle
 	private _dataPackage: DataPackage | undefined
 
-	public connect(dp: DataPackage) {
+	public connect(dp: DataPackage): void {
 		this._dataPackage = dp
 	}
 
@@ -93,20 +93,12 @@ export class TableBundleHandler implements ResourceHandler {
 		schema: ResourceSchema,
 		files: Map<string, Blob>,
 	): Promise<void> {
-		const datatableSchema = await findRel<DataTableSchema>(
-			TableBundleRel.Input,
-			schema,
-			files,
-		)
-		const codebookSchema = await findRel<CodebookSchema>(
-			TableBundleRel.Codebook,
-			schema,
-			files,
-		)
-		const workflowSchema = await findRel<WorkflowSchema>(
-			TableBundleRel.Workflow,
-			schema,
-			files,
+		const [datatableSchema, codebookSchema, workflowSchema] = await Promise.all(
+			[
+				await findRel<DataTableSchema>(TableBundleRel.Input, schema, files),
+				await findRel<CodebookSchema>(TableBundleRel.Codebook, schema, files),
+				await findRel<WorkflowSchema>(TableBundleRel.Workflow, schema, files),
+			],
 		)
 
 		if (datatableSchema != null) {

@@ -20,9 +20,11 @@ import { IChoiceGroupProps } from '@fluentui/react';
 import type { IChoiceGroupStyleProps } from '@fluentui/react';
 import type { IChoiceGroupStyles } from '@fluentui/react';
 import type { ICommandBarItemProps } from '@fluentui/react';
+import type { IContextualMenuItem } from '@fluentui/react';
 import type { IStyleFunctionOrObject } from '@fluentui/react';
 import { ITextFieldProps } from '@fluentui/react';
 import type { Maybe } from '@datashaper/workflow';
+import type { MutableRefObject } from 'react';
 import type { ParserOptions } from '@datashaper/schema';
 import type { default as React_2 } from 'react';
 import type { Resource } from '@datashaper/workflow';
@@ -31,6 +33,13 @@ import { StyledComponent } from 'styled-components';
 import type { TableBundle } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
 import type { Workflow } from '@datashaper/workflow';
+
+// Warning: (ae-missing-release-tag) "AppServices" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface AppServices {
+    renameResource(resource: Resource): Promise<string>;
+}
 
 // Warning: (ae-missing-release-tag) "BundleEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -66,6 +75,18 @@ export const CodebookEditor: React.FC<CodebookEditorProps>;
 export interface CodebookEditorProps {
     // (undocumented)
     resource: Codebook;
+}
+
+// Warning: (ae-missing-release-tag) "CommandBarSection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum CommandBarSection {
+    // (undocumented)
+    New = "newMenu",
+    // (undocumented)
+    Open = "openMenu",
+    // (undocumented)
+    Save = "saveMenu"
 }
 
 // Warning: (ae-missing-release-tag) "Container" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -113,6 +134,18 @@ export class DefaultPersistenceService implements PersistenceService {
     load(pkg: BaseFile): Promise<void>;
     // (undocumented)
     save(projectName?: string): Promise<void>;
+}
+
+// Warning: (ae-missing-release-tag) "GeneratedExtraRoutes" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface GeneratedExtraRoutes {
+    // (undocumented)
+    children?: ResourceRoute[];
+    // (undocumented)
+    postItemSiblings?: ResourceRoute[];
+    // (undocumented)
+    preItemSiblings?: ResourceRoute[];
 }
 
 // Warning: (ae-missing-release-tag) "HeadersOption" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -180,18 +213,19 @@ export interface PersistenceService {
 //
 // @public (undocumented)
 export interface ProfilePlugin<T extends Resource = any> {
+    createResource: () => T;
     dataHandler?: ResourceHandler;
+    getCommandBarCommands?: (section: CommandBarSection) => IContextualMenuItem[] | undefined;
+    getMenuItems?: (resource: T) => IContextualMenuItem[];
+    getRoutes?: (resource: T, parentPath: string, resourcePath: string) => GeneratedExtraRoutes | undefined;
     group?: ResourceGroup;
     iconName: string;
-    onGenerateRoutes?: (resource: T, parentPath: string, resourcePath: string) => {
-        preItemSiblings?: ResourceRoute[];
-        postItemSiblings?: ResourceRoute[];
-        children?: ResourceRoute[];
-    } | undefined;
+    initialize?: (api: AppServices, dp: DataPackage) => void;
     profile: string;
     renderer: React.ComponentType<{
         resource: T;
     }>;
+    title: string;
 }
 
 // Warning: (ae-missing-release-tag) "RadioGroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -256,6 +290,7 @@ export interface ResourceRoute {
     children?: ResourceRoute[];
     href: string;
     icon?: string;
+    menuItems?: IContextualMenuItem[];
     props: any;
     renderer: React.ComponentType<any>;
     title: string;
@@ -306,6 +341,11 @@ export function useDataTableSource(pkg: DataTable | undefined): Maybe<ColumnTabl
 //
 // @public (undocumented)
 export function useMenuButtonStyles(): IButtonStyles;
+
+// Warning: (ae-missing-release-tag) "useOnOutsideClick" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useOnOutsideClick(ref: MutableRefObject<HTMLElement | null>, onClickOutside: () => void): void;
 
 // Warning: (ae-missing-release-tag) "usePersistenceService" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

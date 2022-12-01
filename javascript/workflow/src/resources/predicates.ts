@@ -7,10 +7,9 @@ import type {
 	DataTableSchema,
 	ResourceRelationship,
 	ResourceSchema,
-	WorkflowSchema} from '@datashaper/schema';
-import {
-	KnownProfile
+	WorkflowSchema,
 } from '@datashaper/schema'
+import { KnownProfile } from '@datashaper/schema'
 
 import type { DataTable } from './DataTable.js'
 import type { Resource } from './Resource.js'
@@ -24,7 +23,7 @@ export const isWorkflowSchema = (
 		: r.profile === KnownProfile.Workflow ||
 		  r.$schema.indexOf('/workflow/') > -1
 
-export const isWorkflow = (r: Resource | undefined) =>
+export const isWorkflow = (r: Resource | undefined): boolean =>
 	r == null ? false : r.profile === KnownProfile.Workflow
 
 export const isCodebookSchema = (
@@ -35,7 +34,7 @@ export const isCodebookSchema = (
 		: r.profile === KnownProfile.Codebook ||
 		  r.$schema.indexOf('/codebook/') > -1
 
-export const isCodebook = (r: Resource | undefined) =>
+export const isCodebook = (r: Resource | undefined): boolean =>
 	r == null ? false : r.profile === KnownProfile.Codebook
 
 export const isTableBundleSchema = (
