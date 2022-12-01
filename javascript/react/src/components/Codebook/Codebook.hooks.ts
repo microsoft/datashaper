@@ -10,9 +10,9 @@ import {
 	DATA_NATURE,
 	DATA_TYPE,
 	DESCRIPTION,
+	DISPLAY_NAME,
 	MAPPING_FIELD,
 	MAPPING_WRAPPER,
-	NAME,
 	STATS_WRAPPER,
 	UNITS,
 } from './Codebook.types.js'
@@ -23,7 +23,7 @@ export interface FieldHeights {
 }
 export function useFieldHeights(): FieldHeights {
 	const [heights, setHeights] = useState<Record<string, number>>({
-		name: NAME,
+		displayName: DISPLAY_NAME,
 		description: DESCRIPTION,
 		units: UNITS,
 		dataType: DATA_TYPE,

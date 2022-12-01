@@ -9,7 +9,7 @@ import { useDefaultStyles } from './Codebook.styles.js'
 import { CodebookDataNatureField } from './CodebookDataNatureField.js'
 import { CodebookDataTypeField } from './CodebookDataTypeField.js'
 import { CodebookDescriptionField } from './CodebookDescriptionField.js'
-import { CodebookDisplayField } from './CodebookDisplayField.js'
+import { CodebookDisplayNameField } from './CodebookDisplayNameField.js'
 import type { CodebookFieldEditorProps } from './CodebookFieldEditor.types.js'
 import { CodebookStatsField } from './CodebookStatsField.js'
 import { CodebookUnitField } from './CodebookUnitField.js'
@@ -22,14 +22,14 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 		return (
 			<div style={_styles.root}>
 				<CodebookStatsField
-					styles={_styles}
+					styles={_styles.statsWrapper}
 					onChangeField={onChangeField}
 					field={field}
 				/>
-				<CodebookDisplayField
-					label="Name"
+				<CodebookDisplayNameField
+					label="Display name"
 					field={field}
-					styles={_styles.name}
+					styles={_styles.displayName}
 					onChangeField={onChangeField}
 				/>
 

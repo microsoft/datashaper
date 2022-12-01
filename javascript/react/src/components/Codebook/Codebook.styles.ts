@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Theme } from '@fluentui/react'
+import type { IDropdownStyles, ITextFieldStyles, Theme } from '@fluentui/react'
 import { useTheme } from '@fluentui/react'
 import type { CSSProperties } from 'react'
 import { useMemo } from 'react'
@@ -44,14 +44,14 @@ export function useDefaultStyles(
 				borderBottom: 'unset',
 				...styles?.root,
 			},
-			name: {
+			displayName: {
 				root: {
 					padding: 10,
-					height: heights?.get('name'),
+					height: heights?.get('displayName'),
 					borderBottom: `1px solid ${theme.palette.neutralTertiaryAlt}`,
 				},
-				...styles?.name,
-			},
+				...styles?.displayName,
+			} as ITextFieldStyles,
 			description: {
 				root: {
 					padding: 10,
@@ -59,7 +59,7 @@ export function useDefaultStyles(
 					borderBottom: `1px solid ${theme.palette.neutralTertiaryAlt}`,
 				},
 				...styles?.description,
-			},
+			} as ITextFieldStyles,
 			units: {
 				root: {
 					padding: 10,
@@ -67,7 +67,7 @@ export function useDefaultStyles(
 					borderBottom: `1px solid ${theme.palette.neutralTertiaryAlt}`,
 				},
 				...styles?.units,
-			},
+			} as ITextFieldStyles,
 			dataType: {
 				root: {
 					padding: 10,
@@ -75,7 +75,7 @@ export function useDefaultStyles(
 					borderBottom: `1px solid ${theme.palette.neutralTertiaryAlt}`,
 				},
 				...styles?.dataType,
-			},
+			} as IDropdownStyles,
 			dataNature: {
 				root: {
 					padding: 10,
@@ -83,11 +83,18 @@ export function useDefaultStyles(
 					borderBottom: `1px solid ${theme.palette.neutralTertiaryAlt}`,
 				},
 				...styles?.dataNature,
-			},
+			} as IDropdownStyles,
 			statsWrapper: {
-				height: heights?.get('statsWrapper'),
-				padding: 10,
-				borderBottom: `1px solid ${theme.palette.neutralTertiaryAlt}`,
+				root: {
+					height: heights?.get('statsWrapper'),
+					padding: 10,
+					borderBottom: `1px solid ${theme.palette.neutralTertiaryAlt}`,
+				},
+				checkbox: {
+					root: {
+						visibility: 'hidden',
+					},
+				},
 				...styles?.statsWrapper,
 			},
 		}),

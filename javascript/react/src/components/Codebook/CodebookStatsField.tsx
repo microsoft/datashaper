@@ -37,7 +37,7 @@ export const CodebookStatsField: React.FC<CodebookStatsFieldProps> = memo(
 				setColumn({
 					currentWidth:
 						(wrapperRef?.current?.clientWidth || 0) -
-						(Number(styles?.statsWrapper?.padding || 0) * 2 ?? 0),
+						(Number(styles?.root?.padding || 0) * 2 ?? 0),
 				} as IColumn)
 			}
 		}, [wrapperRef, histogramColumn, styles])
@@ -54,7 +54,7 @@ export const CodebookStatsField: React.FC<CodebookStatsFieldProps> = memo(
 		)
 
 		return (
-			<div ref={wrapperRef} style={styles?.statsWrapper}>
+			<div ref={wrapperRef} style={styles?.root}>
 				<Flex>
 					<Checkbox
 						styles={styles?.checkbox}

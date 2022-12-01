@@ -9,17 +9,17 @@ import type { CodebookTextFieldProps } from './Codebook.types.js'
 
 export const CodebookDescriptionField: React.FC<CodebookTextFieldProps> = memo(
 	function CodebookDescriptionField(props) {
-		const { styles, field, onChangeInput, onChange } = props
+		const { styles, field, onChangeField, onChange } = props
 
 		const onChangeValue = useCallback(
 			(
 				_: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
 				description?: string,
 			) => {
-				onChangeInput?.({ ...field, description })
+				onChangeField?.({ ...field, description })
 				onChange?.(_, description)
 			},
-			[onChangeInput, onChange, field],
+			[onChangeField, onChange, field],
 		)
 
 		return (

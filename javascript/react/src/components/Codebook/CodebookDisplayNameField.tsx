@@ -7,8 +7,8 @@ import { memo, useCallback } from 'react'
 
 import type { CodebookTextFieldProps } from './Codebook.types.js'
 
-export const CodebookDisplayField: React.FC<CodebookTextFieldProps> = memo(
-	function CodebookDisplayField(props) {
+export const CodebookDisplayNameField: React.FC<CodebookTextFieldProps> = memo(
+	function CodebookDisplayNameField(props) {
 		const { styles, field, onChangeField } = props
 
 		const onChange = useCallback(

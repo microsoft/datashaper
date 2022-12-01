@@ -6,6 +6,7 @@ import type { Field } from '@datashaper/schema'
 import { DataType, VariableNature } from '@datashaper/schema'
 import styled from '@essex/styled-components'
 import { Label, useTheme } from '@fluentui/react'
+import type { CSSProperties } from 'react'
 import { memo, useCallback } from 'react'
 
 import { useFieldHeights, useUpdateMappingHeights } from './Codebook.hooks.js'
@@ -13,7 +14,7 @@ import { getRootStyle } from './Codebook.styles.js'
 import { CodebookDataNatureField } from './CodebookDataNatureField.js'
 import { CodebookDataTypeField } from './CodebookDataTypeField.js'
 import { CodebookDescriptionField } from './CodebookDescriptionField.js'
-import { CodebookDisplayField } from './CodebookDisplayField.js'
+import { CodebookDisplayNameField } from './CodebookDisplayNameField.js'
 import { CodebookStatsField } from './CodebookStatsField.js'
 import { useTableDefaultStyles } from './CodebookTableEditor.styles.js'
 import type { CodebookTableEditorProps } from './CodebookTableEditor.types.js'
@@ -24,7 +25,7 @@ export const CodebookTableEditor: React.FC<CodebookTableEditorProps> = memo(
 	function CodebookTableEditor({ fields, onChangeFields, styles }) {
 		const heights = useFieldHeights()
 		const theme = useTheme()
-		const _styles = useTableDefaultStyles(styles, undefined, heights)
+		const _styles = useTableDefaultStyles(styles, heights)
 
 		const onUpdateHeight = useUpdateMappingHeights(heights)
 
@@ -45,43 +46,31 @@ export const CodebookTableEditor: React.FC<CodebookTableEditorProps> = memo(
 			<div style={_styles?.tableWrapper}>
 				<div style={_styles?.labelWrapper}>
 					<Label
-						style={{
-							height: heights.get('name'),
-							padding: 'unset',
-						}}
+						style={
+							_styles?.displayName?.subComponentStyles?.label as CSSProperties
+						}
 					>
-						Name
+						Display name
 					</Label>
 					<Label
-						style={{
-							height: heights.get('description'),
-							padding: 'unset',
-						}}
+						style={
+							_styles?.description?.subComponentStyles?.label as CSSProperties
+						}
 					>
 						Description
 					</Label>
-					<Label
-						style={{
-							height: heights.get('dataType'),
-							padding: 'unset',
-						}}
-					>
+					<Label style={_styles?.dataType?.label as CSSProperties}>
 						Data type
 					</Label>
 					<Label
-						style={{
-							height: heights.get('dataNature'),
-							padding: 'unset',
-							whiteSpace: 'pre',
-						}}
+						style={
+							_styles?.dataNature?.subComponentStyles?.label as CSSProperties
+						}
 					>
 						Data nature
 					</Label>
 					<Label
-						style={{
-							height: heights.get('units'),
-							padding: 'unset',
-						}}
+						style={_styles?.units?.subComponentStyles?.label as CSSProperties}
 					>
 						Units
 					</Label>
@@ -95,15 +84,15 @@ export const CodebookTableEditor: React.FC<CodebookTableEditorProps> = memo(
 								style={getRootStyle(theme, field.exclude, _styles.root)}
 							>
 								<CodebookStatsField
-									styles={_styles}
+									styles={_styles.statsWrapper}
 									onChangeField={(field: Field) => onChangeField(field, index)}
 									field={field}
 								/>
 
-								<CodebookDisplayField
+								<CodebookDisplayNameField
 									borderless
 									field={field}
-									styles={_styles.name}
+									styles={_styles.displayName}
 									onChangeField={(field: Field) => onChangeField(field, index)}
 								/>
 

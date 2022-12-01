@@ -3,21 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type {
-	ICheckboxProps,
-	ICheckboxStyleProps,
-	ICheckboxStyles,
-	IColumn,
-	IStyleFunctionOrObject,
-} from '@fluentui/react'
+import type { ICheckboxProps, ICheckboxStyles, IColumn } from '@fluentui/react'
+import type { CSSProperties } from 'react'
 
-import type {
-	CodebookDefaultProps,
-	CodebookDefaultStyles,
-} from './Codebook.types.js'
+import type { CodebookDefaultProps } from './Codebook.types.js'
 
-export interface CodebookStatsStyles extends CodebookDefaultStyles {
-	checkbox?: IStyleFunctionOrObject<ICheckboxStyleProps, ICheckboxStyles>
+export interface CodebookStatsStyles {
+	root?: CSSProperties
+	checkbox?: ICheckboxStyles
 }
 export interface CodebookStatsFieldProps extends CodebookDefaultProps {
 	showExclude?: boolean
