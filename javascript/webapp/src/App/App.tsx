@@ -4,9 +4,9 @@
  */
 import 'allotment/dist/style.css'
 
-import { DataShaperApp } from '@datashaper/app-framework'
+import { DataShaperApp, type ProfilePlugin } from '@datashaper/app-framework'
 import { Spinner } from '@fluentui/react'
-import { memo, Suspense } from 'react'
+import { memo, useMemo, Suspense } from 'react'
 import { HashRouter } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
 
@@ -16,6 +16,9 @@ import { ErrorBoundary } from './ErrorBoundary.js'
 import { StyleContext } from './StyleContext.js'
 
 export const App: React.FC = memo(function App() {
+	const customProfiles = useMemo<ProfilePlugin[]>(() => [
+		new TestAppCustomProfile(),
+	])
 	return (
 		<ErrorBoundary>
 			<RecoilRoot>
@@ -23,7 +26,7 @@ export const App: React.FC = memo(function App() {
 					<Suspense fallback={<Spinner />}>
 						<StyleContext>
 							<Layout>
-								<DataShaperApp examples={examples}>
+								<DataShaperApp examples={examples} profiles={customProfiles}>
 									<About />
 								</DataShaperApp>
 							</Layout>
