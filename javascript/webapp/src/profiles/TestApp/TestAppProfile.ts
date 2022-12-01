@@ -5,6 +5,7 @@
 import type { AppServices, ProfilePlugin } from '@datashaper/app-framework'
 import { CommandBarSection, ResourceGroup } from '@datashaper/app-framework'
 import type { DataPackage } from '@datashaper/workflow'
+import type { IContextualMenuItem } from '@fluentui/react'
 
 import { TEST_APP_PROFILE } from './constants.js'
 import { TestApp } from './TestApp.js'

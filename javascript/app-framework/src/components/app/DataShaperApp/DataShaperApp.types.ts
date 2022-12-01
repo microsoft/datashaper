@@ -25,6 +25,11 @@ export interface DataShaperAppProps {
 	children: React.ReactNode
 
 	/**
+	 * The React node to render when the selected resource cannot be found
+	 */
+	fallback?: React.ReactNode
+
+	/**
 	 * Custom profile renderers
 	 */
 	profiles?: ProfilePlugin[]
