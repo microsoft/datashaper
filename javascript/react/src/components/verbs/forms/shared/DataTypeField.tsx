@@ -23,6 +23,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 		onValueChange,
 		isKey,
 		dropdownStyles,
+		disabled,
 	}) {
 		const booleanOptions: IDropdownOption[] = [
 			{ key: 'true', text: 'true' },
@@ -82,12 +83,15 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 			},
 			[onKeyChange, onValueChange, isKey, value, keyValue],
 		)
-		console.log(value)
 
 		return (
 			<Container>
 				{dataType === DataType.Date ? (
-					<CalendarPicker onSelectDate={onSelectDate} value={value} />
+					<CalendarPicker
+						onSelectDate={onSelectDate}
+						disabled={disabled}
+						value={value}
+					/>
 				) : null}
 
 				{dataType === DataType.String ? (
@@ -96,6 +100,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 						placeholder={placeholder}
 						value={value}
 						styles={styles}
+						disabled={disabled}
 					></TextValue>
 				) : null}
 				{dataType === DataType.Number ? (
@@ -105,6 +110,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 						defaultValue={value}
 						styles={styles}
 						onChange={spinButtonOnChange}
+						disabled={disabled}
 					/>
 				) : null}
 
@@ -114,6 +120,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 						options={booleanOptions}
 						styles={styles}
 						onChange={dropDownOnChange}
+						disabled={disabled}
 					/>
 				) : null}
 			</Container>

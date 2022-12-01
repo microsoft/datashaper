@@ -2,30 +2,16 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Field } from '@datashaper/schema'
 
-export enum CodebookFields {
-	DisplayName = 'display name',
-	Description = 'description',
-	DataType = 'data type',
-	DataNature = 'data nature',
-	Units = 'units',
-	Mapping = 'mapping',
+import type {
+	CodebookDefaultProps,
+	CodebookDefaultStyles,
+} from './Codebook.types.js'
+import type { CodebookMappingStyles } from './MappingFields.types.js'
+
+export interface CodebookFieldEditorStyles extends CodebookDefaultStyles {
+	mapping?: CodebookMappingStyles
 }
-
-export interface CodebookFieldEditorProps {
-	field: Field
-	onChange: (field: Field) => void
-	tableView?: boolean
-	hideLabel?: boolean
-	visibleFields?: CodebookFields[]
+export interface CodebookFieldEditorProps extends CodebookDefaultProps {
+	styles?: CodebookFieldEditorStyles
 }
-
-export const DEFAULT_CODEBOOK_FIELDS = [
-	CodebookFields.DisplayName,
-	CodebookFields.Description,
-	CodebookFields.DataType,
-	CodebookFields.DataNature,
-	CodebookFields.Units,
-	CodebookFields.Mapping,
-]

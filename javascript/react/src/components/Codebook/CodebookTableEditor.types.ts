@@ -4,11 +4,17 @@
  */
 import type { Field } from '@datashaper/schema'
 
-import type { CodebookFields } from './CodebookFieldEditor.types.js'
+import type { CodebookDefaultStyles } from './Codebook.types.js'
 
 export interface CodebookTableEditorProps {
 	fields: Field[]
-	onChange: (fields: Field[]) => void
-	visibleFields?: CodebookFields[]
+	onChangeFields: (fields: Field[]) => void
 	hideLabel?: boolean
+	styles?: CodebookTableStyles
+}
+
+export interface CodebookTableStyles extends CodebookDefaultStyles {
+	tableWrapper?: React.CSSProperties
+	labelWrapper?: React.CSSProperties
+	label?: React.CSSProperties
 }

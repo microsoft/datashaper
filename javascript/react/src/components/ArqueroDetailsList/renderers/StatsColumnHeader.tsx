@@ -24,6 +24,7 @@ export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 		stats = DEFAULT_STATS,
 		column,
 		onSelect,
+		disabled,
 	}) {
 		const theme = useTheme()
 		const cells = useMemo(() => {
@@ -48,14 +49,17 @@ export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 				height: stats.length * STATS_HEADER_ITEM_HEIGHT,
 				fontWeight: 'normal',
 				fontSize: 10,
-				color: theme.palette.neutralSecondary,
+				color: disabled
+					? theme.palette.neutralTertiary
+					: theme.palette.neutralSecondary,
 				cursor: onSelect ? 'pointer' : 'inherit',
 			}
-		}, [onSelect, theme, stats])
+		}, [onSelect, theme, stats, disabled])
 
 		const handleOnClick = useCallback(
-			(e: React.MouseEvent<HTMLElement, MouseEvent>) => onSelect?.(e, column),
-			[column, onSelect],
+			(e: React.MouseEvent<HTMLElement, MouseEvent>) =>
+				!disabled && onSelect?.(e, column),
+			[column, disabled, onSelect],
 		)
 
 		return (

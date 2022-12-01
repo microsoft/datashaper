@@ -7,33 +7,11 @@ import type { ComponentStory } from '@storybook/react'
 import { useState } from 'react'
 
 import { CodebookFieldEditor } from './CodebookFieldEditor.js'
-import {
-	CodebookFields,
-	DEFAULT_CODEBOOK_FIELDS,
-} from './CodebookFieldEditor.types.js'
 
 const storyMetadata = {
 	title: 'Components/CodebookFieldEditor',
 	component: CodebookFieldEditor,
-	argTypes: {
-		tableView: {
-			control: 'boolean',
-		},
-		hideLabel: {
-			control: 'boolean',
-		},
-		visibleFields: {
-			control: 'inline-check',
-			options: [
-				CodebookFields.DisplayName,
-				CodebookFields.Description,
-				CodebookFields.DataType,
-				CodebookFields.DataNature,
-				CodebookFields.Units,
-				CodebookFields.Mapping,
-			],
-		},
-	},
+	argTypes: {},
 }
 export default storyMetadata
 
@@ -133,11 +111,12 @@ const Template: ComponentStory<typeof CodebookFieldEditor> = ({
 }): JSX.Element => {
 	const [field, setField] = useState(codebookResult.fields[0] as Field)
 
-	return <CodebookFieldEditor field={field} onChange={setField} {...args} />
+	return (
+		<CodebookFieldEditor field={field} onChangeField={setField} {...args} />
+	)
 }
 
-export const Single = Template.bind({})
-Single.args = {
-	tableView: false,
-	visibleFields: DEFAULT_CODEBOOK_FIELDS,
-}
+export const CodebookFieldEditorStory = Template.bind({})
+CodebookFieldEditorStory.storyName = 'Codebook Field Editor'
+
+CodebookFieldEditorStory.args = {}

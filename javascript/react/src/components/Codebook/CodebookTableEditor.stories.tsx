@@ -6,34 +6,12 @@ import type { CodebookSchema } from '@datashaper/schema'
 import type { ComponentStory } from '@storybook/react'
 import { useState } from 'react'
 
-import {
-	CodebookFields,
-	DEFAULT_CODEBOOK_FIELDS,
-} from './CodebookFieldEditor.types.js'
 import { CodebookTableEditor } from './CodebookTableEditor.js'
 
 const storyMetadata = {
 	title: 'Components/CodebookTableEditor',
 	component: CodebookTableEditor,
-	argTypes: {
-		tableView: {
-			control: 'boolean',
-		},
-		hideLabel: {
-			control: 'boolean',
-		},
-		visibleFields: {
-			control: 'inline-check',
-			options: [
-				CodebookFields.DisplayName,
-				CodebookFields.Description,
-				CodebookFields.DataType,
-				CodebookFields.DataNature,
-				CodebookFields.Units,
-				CodebookFields.Mapping,
-			],
-		},
-	},
+	argTypes: {},
 }
 
 export default storyMetadata
@@ -134,11 +112,17 @@ const Template: ComponentStory<typeof CodebookTableEditor> = ({
 }): JSX.Element => {
 	const [fields, setFields] = useState(codebookResult.fields)
 
-	return <CodebookTableEditor fields={fields} onChange={setFields} {...args} />
+	return (
+		<CodebookTableEditor fields={fields} onChangeFields={setFields} {...args} />
+	)
 }
 
-export const Table = Template.bind({})
-Table.args = {
-	visibleFields: DEFAULT_CODEBOOK_FIELDS,
-	tableView: true,
+export const CodebookTableEditorStory = Template.bind({})
+CodebookTableEditorStory.storyName = 'Codebook Table Editor'
+CodebookTableEditorStory.args = {
+	styles: {
+		input: {
+			borderless: true,
+		},
+	},
 }

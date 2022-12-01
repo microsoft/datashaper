@@ -3,147 +3,69 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { DataType, VariableNature } from '@datashaper/schema'
-import { EnumDropdown } from '@essex/components'
-import { TextField } from '@fluentui/react'
-import { memo, useCallback } from 'react'
-import { If, Then } from 'react-if'
+import { memo } from 'react'
 
-import {
-	Container,
-	FieldContainer,
-	OutsideLabel,
-} from './CodebookFieldEditor.styles.js'
+import { useDefaultStyles } from './Codebook.styles.js'
+import { CodebookDataNatureField } from './CodebookDataNatureField.js'
+import { CodebookDataTypeField } from './CodebookDataTypeField.js'
+import { CodebookDescriptionField } from './CodebookDescriptionField.js'
+import { CodebookDisplayField } from './CodebookDisplayField.js'
 import type { CodebookFieldEditorProps } from './CodebookFieldEditor.types.js'
-import {
-	CodebookFields,
-	DEFAULT_CODEBOOK_FIELDS,
-} from './CodebookFieldEditor.types.js'
+import { CodebookStatsField } from './CodebookStatsField.js'
+import { CodebookUnitField } from './CodebookUnitField.js'
 import { MappingFields } from './MappingFields.js'
-import { StatsField } from './StatsField.js'
 
 export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
-	function CodebookFieldEditor({
-		field,
-		onChange,
-		tableView,
-		hideLabel,
-		visibleFields = DEFAULT_CODEBOOK_FIELDS,
-	}) {
-		const visibleFieldsSet = new Set<CodebookFields>()
-		visibleFields.forEach(unit => {
-			visibleFieldsSet.add(unit)
-		})
-
-		const onChangeField = useCallback(
-			(val: any) => {
-				onChange({ ...field, ...val })
-			},
-			[field, onChange],
-		)
+	function CodebookFieldEditor({ styles, field, onChangeField }) {
+		const _styles = useDefaultStyles(styles)
 
 		return (
-			<Container className="codebook-column">
-				<StatsField
-					tableView={tableView}
-					onChange={onChange}
+			<div style={_styles.root}>
+				<CodebookStatsField
+					styles={_styles}
+					onChangeField={onChangeField}
 					field={field}
-				></StatsField>
-				<If condition={visibleFieldsSet.has(CodebookFields.DisplayName)}>
-					<Then>
-						{tableView && !hideLabel && <OutsideLabel>Display</OutsideLabel>}
-						<FieldContainer className="field">
-							<TextField
-								label={!tableView && !hideLabel ? 'Display' : undefined}
-								borderless
-								disabled={field.exclude}
-								name="displayName"
-								value={field.title}
-								onChange={(_, val) => onChangeField({ title: val })}
-							/>
-						</FieldContainer>
-					</Then>
-				</If>
-				<If condition={visibleFieldsSet.has(CodebookFields.Description)}>
-					<Then>
-						{tableView && !hideLabel && (
-							<OutsideLabel>Description</OutsideLabel>
-						)}
-						<FieldContainer className="field">
-							<TextField
-								label={!tableView && !hideLabel ? 'Description' : undefined}
-								borderless
-								multiline
-								resizable={false}
-								disabled={field.exclude}
-								rows={3}
-								name="description"
-								value={field.description}
-								onChange={(_, val) => onChangeField({ description: val })}
-							/>
-						</FieldContainer>
-					</Then>
-				</If>
-				<If condition={visibleFieldsSet.has(CodebookFields.DataType)}>
-					<Then>
-						{tableView && !hideLabel && <OutsideLabel>Data type</OutsideLabel>}
-						<FieldContainer className="field">
-							<EnumDropdown
-								enumeration={DataType}
-								styles={{ title: { border: 'unset' } }}
-								label={!tableView && !hideLabel ? 'Data type' : undefined}
-								title="type"
-								disabled={field.exclude}
-								selectedKey={field.type}
-								onChange={(_, opt) => onChangeField({ type: opt?.key })}
-							/>
-						</FieldContainer>
-					</Then>
-				</If>
-				<If condition={visibleFieldsSet.has(CodebookFields.DataNature)}>
-					<Then>
-						{tableView && !hideLabel && (
-							<OutsideLabel>Data nature</OutsideLabel>
-						)}
-						<FieldContainer className="field">
-							<EnumDropdown
-								styles={{ title: { border: 'unset' } }}
-								label={!tableView && !hideLabel ? 'Data nature' : undefined}
-								title="nature"
-								disabled={field.exclude}
-								selectedKey={field.nature}
-								enumeration={VariableNature}
-								onChange={(_, opt) => onChangeField({ nature: opt?.key })}
-							/>
-						</FieldContainer>
-					</Then>
-				</If>
-				<If condition={visibleFieldsSet.has(CodebookFields.Units)}>
-					<Then>
-						{tableView && !hideLabel && <OutsideLabel>Units</OutsideLabel>}
-						<FieldContainer className="field">
-							<TextField
-								label={!tableView && !hideLabel ? 'Units' : undefined}
-								borderless
-								disabled={field.exclude}
-								name="unit"
-								value={field.unit}
-								onChange={(_, val) => onChangeField({ unit: val })}
-							/>
-						</FieldContainer>
-					</Then>
-				</If>
-				<If condition={visibleFieldsSet.has(CodebookFields.Mapping)}>
-					<Then>
-						{tableView && !hideLabel && <OutsideLabel>Mapping</OutsideLabel>}
-						<MappingFields
-							field={field}
-							hideLabel={!hideLabel}
-							tableView={tableView}
-							onChange={onChange}
-						/>
-					</Then>
-				</If>
-			</Container>
+				/>
+				<CodebookDisplayField
+					label="Name"
+					field={field}
+					styles={_styles.name}
+					onChangeField={onChangeField}
+				/>
+
+				<CodebookDescriptionField
+					label="Description"
+					field={field}
+					styles={_styles.description}
+					onChangeField={onChangeField}
+				/>
+				<CodebookDataTypeField
+					enumeration={DataType}
+					field={field}
+					label="Data type"
+					styles={_styles.dataType}
+					onChangeField={onChangeField}
+				/>
+				<CodebookDataNatureField
+					enumeration={VariableNature}
+					field={field}
+					label="Data nature"
+					styles={_styles.dataNature}
+					onChangeField={onChangeField}
+				/>
+				<CodebookUnitField
+					label="Units"
+					field={field}
+					styles={_styles.units}
+					onChangeField={onChangeField}
+				/>
+				<MappingFields
+					label="Mapping"
+					styles={_styles?.mapping}
+					field={field}
+					onChangeField={onChangeField}
+				/>
+			</div>
 		)
 	},
 )

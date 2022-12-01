@@ -18,4 +18,5 @@ export interface DataTypeFieldProps {
 		ITextFieldStyleProps,
 		ITextFieldStyles
 	>
+	disabled?: boolean
 }

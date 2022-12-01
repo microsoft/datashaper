@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Sparkbar } from '@essex/charts-react'
-import { TooltipHost } from '@fluentui/react'
+import { TooltipHost, useTheme } from '@fluentui/react'
 import { memo, useCallback, useMemo, useState } from 'react'
 
 import { EMPTY_ARRAY } from '../../../empty.js'
@@ -25,8 +25,12 @@ import type { RichHeaderProps } from './types.js'
  */
 export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 	function HistogramColumnHeader({ field, color, ...props }) {
-		const { column, onSelect } = props
+		const { column, onSelect, disabled } = props
 		const dimensions = useCellDimensions(column, false)
+		const theme = useTheme()
+		const _color = useMemo((): string | undefined => {
+			return disabled ? theme.palette.neutralTertiary : color
+		}, [color, disabled, theme])
 
 		const categorical = field.type === 'string'
 
@@ -45,8 +49,9 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 		const enough = field.metadata?.distinct || 0
 		const calloutProps = useCalloutProps(id)
 		const handleOnClick = useCallback(
-			(e: React.MouseEvent<HTMLElement, MouseEvent>) => onSelect?.(e, column),
-			[column, onSelect],
+			(e: React.MouseEvent<HTMLElement, MouseEvent>) =>
+				!disabled && onSelect?.(e, column),
+			[column, onSelect, disabled],
 		)
 
 		return (
@@ -59,7 +64,7 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 								data={values}
 								width={dimensions.width - 1}
 								height={dimensions.height}
-								color={color}
+								color={_color}
 								legend={legend}
 								onBarHover={handleBarHover}
 							/>

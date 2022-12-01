@@ -4,7 +4,7 @@
  */
 import type { Value } from '@datashaper/schema'
 import { DataType } from '@datashaper/schema'
-import { ActionButton } from '@fluentui/react'
+import { ActionButton, Label } from '@fluentui/react'
 import { memo, useCallback, useEffect, useState } from 'react'
 
 import { useMappingPairs } from '../../hooks/controls/useMappingPairs.js'
@@ -13,17 +13,14 @@ import {
 	useHandleKeyChange,
 	useHandleValueChange,
 } from '../../hooks/index.js'
-import type { CodebookFieldEditorProps } from './CodebookFieldEditor.types.js'
 import { useHandleAddButtonClick } from './MappingFields.hooks.js'
-import {
-	addIconProps,
-	ColumnPairs,
-	Container,
-	dropdownStyles,
-} from './MappingFields.styles.js'
+import { addIconProps, useMappingStyles } from './MappingFields.styles.js'
+import type { CodebookMappingFieldProps } from './MappingFields.types.js'
 
-export const MappingFields: React.FC<CodebookFieldEditorProps> = memo(
-	function MappingFields({ field, onChange }) {
+export const MappingFields: React.FC<CodebookMappingFieldProps> = memo(
+	function MappingFields(props) {
+		const { field, onChangeField, styles, label } = props
+		const _styles = useMappingStyles(field.exclude, styles)
 		const [values, setValues] = useState<Record<Value, Value>>(
 			field.mapping || {},
 		)
@@ -34,9 +31,9 @@ export const MappingFields: React.FC<CodebookFieldEditorProps> = memo(
 
 		const onUpdateMapping = useCallback(
 			(mapping: Record<any, any>) => {
-				onChange({ ...field, mapping })
+				onChangeField?.({ ...field, mapping })
 			},
-			[onChange, field],
+			[onChangeField, field],
 		)
 
 		const handleRecodeKeyChange = useHandleKeyChange(values, onUpdateMapping)
@@ -58,16 +55,23 @@ export const MappingFields: React.FC<CodebookFieldEditorProps> = memo(
 			handleRecodeKeyChange,
 			handleRecodeValueChange,
 			handleRecodeDelete,
-			dropdownStyles,
+			_styles?.dropdownStyles,
+			field.exclude,
 		)
 
 		return (
-			<Container>
-				<ColumnPairs>{columnPairs}</ColumnPairs>
-				<ActionButton onClick={handleButtonClick} iconProps={addIconProps}>
+			<div style={_styles.root}>
+				{label && <Label>{label}</Label>}
+				<div style={_styles?.columnPairs}>{columnPairs}</div>
+				<ActionButton
+					styles={_styles?.addButton}
+					disabled={field.exclude}
+					onClick={handleButtonClick}
+					iconProps={addIconProps}
+				>
 					Add mapping
 				</ActionButton>
-			</Container>
+			</div>
 		)
 	},
 )

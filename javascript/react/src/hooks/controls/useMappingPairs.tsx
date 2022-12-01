@@ -27,6 +27,7 @@ export function useMappingPairs(
 		ITextFieldStyleProps,
 		ITextFieldStyles
 	>,
+	disabled?: boolean,
 ): JSX.Element[] {
 	return useMemo(() => {
 		return Object.entries(mapping || EMPTY_OBJECT).map((valuePair, index) => {
@@ -39,10 +40,19 @@ export function useMappingPairs(
 					onValueChange={onValueChange}
 					onDelete={onDelete}
 					dropdownStyles={dropdownStyles}
+					disabled={disabled}
 				/>
 			)
 		})
-	}, [mapping, dataType, dropdownStyles, onKeyChange, onValueChange, onDelete])
+	}, [
+		mapping,
+		dataType,
+		dropdownStyles,
+		disabled,
+		onKeyChange,
+		onValueChange,
+		onDelete,
+	])
 }
 
 const ColumnPair: React.FC<{
@@ -55,6 +65,7 @@ const ColumnPair: React.FC<{
 		ITextFieldStyleProps,
 		ITextFieldStyles
 	>
+	disabled?: boolean
 }> = memo(function ColumnPair({
 	valuePair,
 	dataType,
@@ -62,6 +73,7 @@ const ColumnPair: React.FC<{
 	onValueChange,
 	onDelete,
 	dropdownStyles,
+	disabled,
 }) {
 	// the old value will always come off the map as a string key
 	// coerce it to the column type for proper comparison
@@ -87,6 +99,7 @@ const ColumnPair: React.FC<{
 				isKey={true}
 				keyValue={keyValue}
 				dropdownStyles={dropdownStyles}
+				disabled={disabled}
 			/>
 
 			<Icon
@@ -103,12 +116,14 @@ const ColumnPair: React.FC<{
 				onValueChange={onValueChange}
 				isKey={false}
 				dropdownStyles={dropdownStyles}
+				disabled={disabled}
 			/>
 
 			<IconButton
 				title={'Remove this mapping'}
 				iconProps={deleteIconProps}
 				onClick={handleDeleteClick}
+				disabled={disabled}
 			/>
 		</ColumnPairContainer>
 	)

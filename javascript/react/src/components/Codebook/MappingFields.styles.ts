@@ -2,18 +2,44 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import styled from '@essex/styled-components'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+import { useTheme } from '@fluentui/react'
+import { useMemo } from 'react'
 
-export const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-`
-export const ColumnPairs = styled.div`
-	margin-top: 8px;
-	display: flex;
-	flex-direction: column;
-	gap: 5px;
-`
+import type { CodebookMappingStyles } from './MappingFields.types.js'
+
+export function useMappingStyles(
+	disabled?: boolean,
+	styles?: CodebookMappingStyles,
+): CodebookMappingStyles {
+	const theme = useTheme()
+	return useMemo(
+		() => ({
+			root: {
+				display: 'flex',
+				flexDirection: 'column',
+				padding: '10px',
+				borderBottom: `1px solid ${theme.palette.neutralTertiaryAlt}`,
+				backgroundColor: disabled
+					? theme.palette.neutralLighter
+					: theme.palette.white,
+				...styles?.root,
+			},
+			dropdownStyles: { root: { width: 87 }, ...styles?.dropdownStyles },
+			columnPairs: {
+				marginTop: '8px',
+				display: 'flex',
+				flexDirection: 'column',
+				gap: '5px',
+				...styles?.columnPairs,
+			},
+			addButton: styles?.addButton,
+		}),
+		[styles, disabled, theme],
+	)
+}
 
 export const addIconProps = { iconName: 'Add' }
-export const dropdownStyles = { root: { width: 92 } }

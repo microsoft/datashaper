@@ -67,6 +67,7 @@ export interface RichHeaderProps extends Partial<IDetailsColumnProps> {
 	color?: string
 	stats?: string[]
 	onSelect?: ColumnSelectFunction
+	disabled?: boolean
 }
 
 export interface RichRowProps extends IDetailsRowProps {
