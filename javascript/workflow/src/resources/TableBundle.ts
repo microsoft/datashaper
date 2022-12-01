@@ -247,10 +247,18 @@ export class TableBundle extends Resource {
 	}
 
 	private encode(inputTable: Maybe<ColumnTable>) {
-		return this.codebook != null &&
-			this.codebook.fields.length > 0 &&
-			inputTable != null
-			? applyCodebook(inputTable, this.codebook, CodebookStrategy.MappingOnly)
-			: inputTable
+		if (
+			inputTable == null ||
+			this.codebook == null ||
+			this.codebook.fields.length === 0
+		) {
+			return inputTable
+		}
+		return applyCodebook(
+			inputTable,
+			this.codebook,
+			CodebookStrategy.DataTypeAndMapping,
+			this._datatable?.toSchema(),
+		)
 	}
 }
