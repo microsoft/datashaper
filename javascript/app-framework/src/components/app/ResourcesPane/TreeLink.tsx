@@ -2,18 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { IContextualMenuItem } from '@fluentui/react'
 import { ContextualMenu } from '@fluentui/react'
 import { memo, useRef } from 'react'
 
 import { useOnOutsideClick } from '../../../hooks/index.js'
 import { useMenuShowState } from './TreeLink.hooks.js'
 import { Container, HoverIcon } from './TreeLink.styles.js'
-
-export interface TreeLinkProps {
-	children: React.ReactNode
-	menuItems?: IContextualMenuItem[]
-}
+import type { TreeLinkProps } from './TreeLink.types.js'
 
 export const TreeLink: React.FC<TreeLinkProps> = memo(function TreeLink({
 	children,

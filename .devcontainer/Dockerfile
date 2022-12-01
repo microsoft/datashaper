@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:0-16
+FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:16
 
 # ** [Optional] Uncomment this section to install additional packages. **
 # USER root

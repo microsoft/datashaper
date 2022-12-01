@@ -34,6 +34,13 @@ import type { TableBundle } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
 import type { Workflow } from '@datashaper/workflow';
 
+// Warning: (ae-missing-release-tag) "AppServices" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface AppServices {
+    renameResource(resource: Resource): Promise<string>;
+}
+
 // Warning: (ae-missing-release-tag) "BundleEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -68,6 +75,18 @@ export const CodebookEditor: React.FC<CodebookEditorProps>;
 export interface CodebookEditorProps {
     // (undocumented)
     resource: Codebook;
+}
+
+// Warning: (ae-missing-release-tag) "CommandBarSection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum CommandBarSection {
+    // (undocumented)
+    New = "newMenu",
+    // (undocumented)
+    Open = "openMenu",
+    // (undocumented)
+    Save = "saveMenu"
 }
 
 // Warning: (ae-missing-release-tag) "Container" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -115,6 +134,18 @@ export class DefaultPersistenceService implements PersistenceService {
     load(pkg: BaseFile): Promise<void>;
     // (undocumented)
     save(projectName?: string): Promise<void>;
+}
+
+// Warning: (ae-missing-release-tag) "GeneratedExtraRoutes" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface GeneratedExtraRoutes {
+    // (undocumented)
+    children?: ResourceRoute[];
+    // (undocumented)
+    postItemSiblings?: ResourceRoute[];
+    // (undocumented)
+    preItemSiblings?: ResourceRoute[];
 }
 
 // Warning: (ae-missing-release-tag) "HeadersOption" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -182,15 +213,14 @@ export interface PersistenceService {
 //
 // @public (undocumented)
 export interface ProfilePlugin<T extends Resource = any> {
+    createResource: () => T;
     dataHandler?: ResourceHandler;
+    getCommandBarCommands?: (section: CommandBarSection) => IContextualMenuItem[] | undefined;
+    getMenuItems?: (resource: T) => IContextualMenuItem[];
+    getRoutes?: (resource: T, parentPath: string, resourcePath: string) => GeneratedExtraRoutes | undefined;
     group?: ResourceGroup;
     iconName: string;
-    onGetMenuItems?: (resource: T) => IContextualMenuItem[];
-    onGetRoutes?: (resource: T, parentPath: string, resourcePath: string) => {
-        preItemSiblings?: ResourceRoute[];
-        postItemSiblings?: ResourceRoute[];
-        children?: ResourceRoute[];
-    } | undefined;
+    initialize?: (api: AppServices, dp: DataPackage) => void;
     profile: string;
     renderer: React.ComponentType<{
         resource: T;

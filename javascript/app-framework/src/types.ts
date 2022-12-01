@@ -2,7 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Resource, ResourceHandler } from '@datashaper/workflow'
+import type {
+	DataPackage,
+	Resource,
+	ResourceHandler,
+} from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
 
 /**
@@ -45,6 +49,14 @@ export interface ResourceRoute {
 	props: any
 }
 
+export interface AppServices {
+	/**
+	 * Show the resource rename dialog
+	 * @param resource - the resource to rename
+	 */
+	renameResource(resource: Resource): Promise<string>
+}
+
 export interface ProfilePlugin<T extends Resource = any> {
 	/**
 	 * The profile name to register within the app framework.
@@ -69,6 +81,11 @@ export interface ProfilePlugin<T extends Resource = any> {
 	iconName: string
 
 	/**
+	 * Initialize the plugin with application-level services
+	 */
+	initialize?: (api: AppServices, dp: DataPackage) => void
+
+	/**
 	 * Render the plugin
 	 */
 	renderer: React.ComponentType<{ resource: T }>
@@ -79,9 +96,21 @@ export interface ProfilePlugin<T extends Resource = any> {
 	dataHandler?: ResourceHandler
 
 	/**
+	 * Creates a new resource of this type
+	 */
+	createResource: () => T
+
+	/**
+	 * Gets commands for the plugin
+	 */
+	getCommandBarCommands?: (
+		section: CommandBarSection,
+	) => IContextualMenuItem[] | undefined
+
+	/**
 	 * Create contextual menu items for a resource
 	 */
-	onGetMenuItems?: (resource: T) => IContextualMenuItem[]
+	getMenuItems?: (resource: T) => IContextualMenuItem[]
 
 	/**
 	 * Event handler for when the resource is undergoing route generation.
@@ -91,17 +120,23 @@ export interface ProfilePlugin<T extends Resource = any> {
 	 * @param parentPath - The current path context being used for generation. This is the parent path of the resource.
 	 * @param resourcePath - The resource path that was used for the resource.
 	 */
-	onGetRoutes?: (
+	getRoutes?: (
 		resource: T,
 		parentPath: string,
 		resourcePath: string,
-	) =>
-		| {
-				preItemSiblings?: ResourceRoute[]
-				postItemSiblings?: ResourceRoute[]
-				children?: ResourceRoute[]
-		  }
-		| undefined
+	) => GeneratedExtraRoutes | undefined
+}
+
+export enum CommandBarSection {
+	New = 'newMenu',
+	Open = 'openMenu',
+	Save = 'saveMenu',
+}
+
+export interface GeneratedExtraRoutes {
+	preItemSiblings?: ResourceRoute[]
+	postItemSiblings?: ResourceRoute[]
+	children?: ResourceRoute[]
 }
 
 export enum ResourceGroup {

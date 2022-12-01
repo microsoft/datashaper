@@ -10,8 +10,10 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { DataPackageProvider } from '../../../context/index.js'
 import { EMPTY_ARRAY } from '../../../empty.js'
 import type { ResourceRoute } from '../../../types.js'
+import { RenameModal } from '../../modals/index.js'
 import { ResourcesPane } from '../ResourcesPane/index.js'
 import {
+	useAppServices,
 	useExpandedState,
 	useFlattened,
 	useRegisteredProfiles,
@@ -56,9 +58,20 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 		(v: ResourceRoute) => navigate(v.href),
 		[navigate],
 	)
-	const plugins = useRegisteredProfiles(profiles)
-	const resources = useResourceRoutes(plugins)
+	const {
+		api,
+		rename: {
+			isOpen: isRenameOpen,
+			resource: renameResource,
+			onDismiss: onCancelRename,
+			onAccept: onAcceptRename,
+		},
+	} = useAppServices()
+
+	const plugins = useRegisteredProfiles(api, profiles)
+	const resources = useResourceRoutes(api, plugins)
 	const flattenedRoutes = useFlattened(resources)
+
 	return (
 		<Allotment
 			className={className}
@@ -75,10 +88,11 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 				<ResourcesPane
 					resources={resources}
 					expanded={expanded}
-					onToggleExpanded={onToggle}
+					plugins={plugins}
 					style={fileTreeStyle}
-					examples={examples}
 					selectedKey={selectedKey}
+					examples={examples}
+					onToggleExpanded={onToggle}
 					onSelect={onSelect}
 				/>
 			</Allotment.Pane>
@@ -94,6 +108,14 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 					))}
 					<Route path="*" element={<NoMatch />} />
 				</Routes>
+				<>
+					<RenameModal
+						resource={renameResource}
+						isOpen={isRenameOpen}
+						onDismiss={onCancelRename}
+						onAccept={onAcceptRename}
+					/>
+				</>
 			</Allotment.Pane>
 		</Allotment>
 	)

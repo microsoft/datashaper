@@ -50,18 +50,23 @@ function defineTestCase(parentPath: string, test: string) {
 	it(testName, async () => {
 		const assets = await readDataPackageFiles(casePath)
 		const expected = await readJson(path.join(casePath, 'expected.json'))
-		const datapackage = new DataPackage()
-		await datapackage.load(assets)
+		let datapackage: DataPackage | undefined
+		try {
+			datapackage = new DataPackage()
+			await datapackage.load(assets)
 
-		expect(datapackage.size).toEqual(expected.tables.length)
-		for (const table of expected.tables) {
-			const found = datapackage.getResource(table.name) as TableBundle
-			expect(found).toBeDefined()
-			expect(found?.workflow?.length ?? 0).toEqual(table.workflowLength ?? 0)
-			expect(found?.output?.table?.numRows()).toBeGreaterThan(0)
-			expect(found?.output?.table?.numCols()).toBeGreaterThan(0)
+			expect(datapackage.size).toEqual(expected.tables.length)
+			for (const table of expected.tables) {
+				const found = datapackage.getResource(table.name) as TableBundle
+				expect(found).toBeDefined()
+				expect(found?.workflow?.length ?? 0).toEqual(table.workflowLength ?? 0)
+				expect(found?.output?.table?.numRows()).toBeGreaterThan(0)
+				expect(found?.output?.table?.numCols()).toBeGreaterThan(0)
+			}
+			await checkPersisted(await datapackage.save(), expected)
+		} finally {
+			datapackage?.dispose()
 		}
-		await checkPersisted(await datapackage.save(), expected)
 	})
 }
 

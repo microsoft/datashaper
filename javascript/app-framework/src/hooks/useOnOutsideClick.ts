@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { MutableRefObject} from 'react';
+import type { MutableRefObject } from 'react'
 import { useEffect } from 'react'
 
 /**
@@ -11,7 +11,7 @@ import { useEffect } from 'react'
 export function useOnOutsideClick(
 	ref: MutableRefObject<HTMLElement | null>,
 	onClickOutside: () => void,
-) {
+): void {
 	useEffect(() => {
 		/**
 		 * Alert if clicked on outside of element

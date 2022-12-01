@@ -9,10 +9,15 @@ import { map } from 'rxjs'
 
 import { EMPTY_ARRAY } from '../../../empty.js'
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
-import type { ProfilePlugin, ResourceRoute } from '../../../types.js';
+import type {
+	AppServices,
+	ProfilePlugin,
+	ResourceRoute,
+} from '../../../types.js'
 import { ResourceGroup } from '../../../types.js'
 
 export function useResourceRoutes(
+	services: AppServices,
 	plugins: Map<string, ProfilePlugin>,
 ): ResourceRoute[][] {
 	const pkg = useDataPackage()
@@ -22,7 +27,7 @@ export function useResourceRoutes(
 				map(resources => {
 					const groups = groupResources(resources, plugins)
 					return groups.map(g =>
-						g.map(r => makeResourceRoute(r, plugins)).flatMap(x => x),
+						g.map(r => makeResourceRoute(r, services, plugins)).flatMap(x => x),
 					)
 				}),
 			),
@@ -33,6 +38,7 @@ export function useResourceRoutes(
 
 function makeResourceRoute(
 	resource: Resource,
+	services: AppServices,
 	plugins: Map<string, ProfilePlugin>,
 	parentRoute = '/resource',
 ): ResourceRoute[] {
@@ -44,7 +50,15 @@ function makeResourceRoute(
 		icon: plugin.iconName,
 		renderer: plugin.renderer,
 		menuItems: [
-			...(plugin.onGetMenuItems?.(resource) ?? EMPTY_ARRAY),
+			...(plugin.getMenuItems?.(resource) ?? EMPTY_ARRAY),
+			{
+				key: 'rename',
+				text: 'Rename',
+				iconProps: { iconName: 'Rename' },
+				onClick: () => {
+					services.renameResource(resource)
+				},
+			},
 			{
 				key: 'delete',
 				text: 'Delete',
@@ -54,11 +68,11 @@ function makeResourceRoute(
 		],
 		props: { resource },
 	}
-	const extraRoutes = plugin?.onGetRoutes?.(resource, parentRoute, href)
+	const extraRoutes = plugin?.getRoutes?.(resource, parentRoute, href)
 
 	const children: ResourceRoute[] = extraRoutes?.children ?? []
 	for (const r of resource.sources ?? EMPTY_ARRAY) {
-		children.push(...makeResourceRoute(r, plugins, href))
+		children.push(...makeResourceRoute(r, services, plugins, href))
 	}
 
 	root.children = children

@@ -7,7 +7,7 @@ import type { DataShape } from '@datashaper/schema/dist/datatable/DataShape.js'
 import type { TableContainer } from '@datashaper/tables'
 import type { BaseFile } from '@datashaper/utilities'
 
-import type { ResourceRoute } from '../../../index.js'
+import type { ProfilePlugin, ResourceRoute } from '../../../index.js'
 
 export interface ResourcesPaneProps {
 	/**
@@ -49,6 +49,8 @@ export interface ResourcesPaneProps {
 	 * The currently selected item
 	 */
 	selectedKey?: string
+
+	plugins: Map<string, ProfilePlugin>
 }
 
 export interface FileTreeTypes {

@@ -10,9 +10,10 @@ import { useCallback, useMemo } from 'react'
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
 import { usePersistenceService } from '../../../hooks/usePersistenceService.js'
 import { useTableBundles } from '../../../hooks/useTableBundles.js'
+import type { ProfilePlugin } from '../../../types.js';
+import { CommandBarSection } from '../../../types.js'
 import {
 	createCommandBar,
-	newMenuItems,
 	openMenuItems,
 	saveMenuItems,
 } from './FileTreeCommands.utils.js'
@@ -24,10 +25,12 @@ export function useFileManagementCommands(
 	expanded: boolean,
 	onOpenFileRequested: (acceptedFiles: string[]) => Promise<BaseFile>,
 	setFile: (file: BaseFile) => void,
+	plugins: Map<string, ProfilePlugin>,
 ): {
 	commands: ICommandBarItemProps[]
 	onOpenCommands: IContextualMenuItem[]
 	onSaveCommands: IContextualMenuItem[]
+	newCommands: IContextualMenuItem[]
 } {
 	const tables = useTableBundles()
 	const hasDataPackages = tables.length > 0
@@ -65,24 +68,27 @@ export function useFileManagementCommands(
 		[dataPackage],
 	)
 
-	const newCommands = useMemo(() => {
-		const onNewTable = () => null
-		return newMenuItems(onNewTable)
-	}, [])
+	const newCommands = useMemo<IContextualMenuItem[]>(
+		() => getPluginCommands(CommandBarSection.New, plugins),
+		[dataPackage, plugins],
+	)
 
 	const openCommands = useMemo(() => {
-		return openMenuItems(
+		const result = openMenuItems(
 			examples,
 			onClickExample,
 			onClickUploadTable,
 			onClickUploadZip,
 		)
-	}, [examples, onClickExample, onClickUploadTable, onClickUploadZip])
+		result.push(...getPluginCommands(CommandBarSection.Open, plugins))
+		return result
+	}, [examples, plugins, onClickExample, onClickUploadTable, onClickUploadZip])
 
-	const saveCommands = useMemo(
-		() => saveMenuItems(onClickDownloadZip),
-		[onClickDownloadZip],
-	)
+	const saveCommands = useMemo(() => {
+		const result = saveMenuItems(onClickDownloadZip)
+		result.push(...getPluginCommands(CommandBarSection.Save, plugins))
+		return result
+	}, [onClickDownloadZip])
 
 	const theme = useTheme()
 	const commands = useMemo<ICommandBarItemProps[]>(
@@ -95,11 +101,12 @@ export function useFileManagementCommands(
 				saveCommands,
 				theme,
 			),
-		[theme, hasDataPackages, expanded, openCommands, saveCommands],
+		[theme, hasDataPackages, expanded, openCommands, saveCommands, newCommands],
 	)
 
 	return {
 		commands,
+		newCommands,
 		onOpenCommands: openCommands,
 		onSaveCommands: saveCommands,
 	}
@@ -163,4 +170,18 @@ export function useOnOpenFileRequested(): (
 			}
 		})
 	}, [])
+}
+
+function getPluginCommands(
+	section: CommandBarSection,
+	plugins: Map<string, ProfilePlugin>,
+): IContextualMenuItem[] {
+	const result: IContextualMenuItem[] = []
+	for (const plugin of plugins.values()) {
+		const dynamicItems = plugin.getCommandBarCommands?.(section)
+		if (dynamicItems) {
+			result.push(...dynamicItems)
+		}
+	}
+	return result
 }

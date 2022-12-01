@@ -222,6 +222,8 @@ export class DataPackage extends Resource {
     // (undocumented)
     get size(): number;
     // (undocumented)
+    suggestResourceName(name: string): string;
+    // (undocumented)
     toSchema(): DataPackageSchema;
 }
 
