@@ -5,7 +5,9 @@
 import { type BaseFile, createBaseFile } from '@datashaper/utilities'
 import type { ICommandBarItemProps, IContextualMenuItem } from '@fluentui/react'
 import { useTheme } from '@fluentui/react'
+import { useObservable, useObservableState } from 'observable-hooks'
 import { useCallback, useMemo } from 'react'
+import { map } from 'rxjs'
 
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
 import { usePersistenceService } from '../../../hooks/usePersistenceService.js'
@@ -34,7 +36,12 @@ export function useFileManagementCommands(
 	const uploadZip = useUploadZip()
 	const onClickDownloadZip = useDownloadZip()
 	const dataPackage = useDataPackage()
-	const hasResources = dataPackage.resources.length > 0
+	const numResourcesObservable = useObservable(
+		() => dataPackage.resources$.pipe(map(r => r.length)),
+		[dataPackage],
+	)
+
+	const numResources = useObservableState(numResourcesObservable, 0)
 
 	const onClickUploadTable = useCallback(
 		() =>
@@ -93,13 +100,13 @@ export function useFileManagementCommands(
 		() =>
 			createCommandBar(
 				expanded,
-				hasResources,
+				numResources > 0,
 				newCommands,
 				openCommands,
 				saveCommands,
 				theme,
 			),
-		[theme, hasResources, expanded, openCommands, saveCommands, newCommands],
+		[theme, numResources, expanded, openCommands, saveCommands, newCommands],
 	)
 
 	return {
