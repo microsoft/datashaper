@@ -8,8 +8,8 @@ import type { Step } from '@datashaper/workflow'
 import { readStep } from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
 import { CommandBar } from '@fluentui/react'
-import { useObservableState } from 'observable-hooks'
-import { memo, useCallback, useMemo, useState } from 'react'
+import { useObservable, useObservableState } from 'observable-hooks'
+import { memo, useCallback, useState } from 'react'
 import { map } from 'rxjs'
 import styled from 'styled-components'
 
@@ -84,7 +84,7 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 			],
 		)
 
-		const allTablesLengthObservable = useMemo(
+		const allTablesLengthObservable = useObservable(
 			() => workflow.allTableNames$.pipe(map(tables => tables.length)),
 			[workflow],
 		)
