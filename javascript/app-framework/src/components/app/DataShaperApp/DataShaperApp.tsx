@@ -101,20 +101,11 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 				<Routes>
 					<Route path="/" element={children} />
 					{flattenedRoutes.map(r => (
-						<>
-							<Route
-								key={r.href}
-								path={r.href}
-								element={<MatchedRoute key={r.href} data={r} />}
-							/>
-							{(r.children?.length ?? 0) > 0 ? (
-								<Route
-									key={`${r.href}/*`}
-									path={`${r.href}/*`}
-									element={<MatchedRoute key={`${r.href}/*`} data={r} />}
-								/>
-							) : null}
-						</>
+						<Route
+							key={r.href}
+							path={(r.children?.length ?? 0) > 0 ? r.href : `${r.href}/*`}
+							element={<MatchedRoute key={r.href} data={r} />}
+						/>
 					))}
 					<Route path="*" element={fallback} />
 				</Routes>
@@ -132,7 +123,7 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 })
 
 const MatchedRoute: React.FC<{ data: ResourceRoute }> = memo(
-	function MatchedRoute({ data: { props, renderer: R } }) {
-		return <R {...props} />
+	function MatchedRoute({ data: { props, renderer: R, href } }) {
+		return <R href={href} {...props} />
 	},
 )
