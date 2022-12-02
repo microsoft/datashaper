@@ -29,12 +29,12 @@ export class TableBundle extends Resource {
 		return 'tablebundle.json'
 	}
 
-	private readonly _source = new BehaviorSubject<Maybe<ColumnTable>>(undefined)
+	private readonly _source$ = new BehaviorSubject<Maybe<ColumnTable>>(undefined)
 	private readonly _inputs = new Map<
 		string,
 		Observable<Maybe<TableContainer>>
 	>()
-	private readonly _output = new BehaviorSubject<Maybe<TableContainer>>(
+	private readonly _output$ = new BehaviorSubject<Maybe<TableContainer>>(
 		undefined,
 	)
 
@@ -85,20 +85,20 @@ export class TableBundle extends Resource {
 			const sub = datatable.output$.subscribe(tbl => {
 				const table = this.encode(tbl)
 				// wire up latest input
-				this._source.next(table)
+				this._source$.next(table)
 
 				// if no workflow, pipe to output
 				if (this.workflow == null) {
-					this._output.next({ id: this.name, table })
+					this._output$.next({ id: this.name, table })
 				}
 			})
 			this._dtDisposables.push(() => sub.unsubscribe())
 
 			datatable.onDispose(() => (this.input = undefined))
 		} else {
-			this._source.next(undefined)
+			this._source$.next(undefined)
 			if (this.workflow == null) {
-				this._output.next({ id: this.name, table: undefined })
+				this._output$.next({ id: this.name, table: undefined })
 			}
 		}
 		this._onChange.next()
@@ -137,7 +137,7 @@ export class TableBundle extends Resource {
 
 		if (workflow != null) {
 			this._wfDisposables.push(workflow.onChange(() => this._onChange.next()))
-			const sub = workflow.read$()?.subscribe(tbl => this._output.next(tbl))
+			const sub = workflow.read$()?.subscribe(tbl => this._output$.next(tbl))
 			this._wfDisposables.push(() => sub?.unsubscribe())
 
 			workflow.onDispose(() => (this.workflow = undefined))
@@ -167,11 +167,11 @@ export class TableBundle extends Resource {
 	// #endregion
 
 	public get output$(): Observable<Maybe<TableContainer>> {
-		return this._output
+		return this._output$
 	}
 
 	public get output(): Maybe<TableContainer> {
-		return this._output.value
+		return this._output$.value
 	}
 
 	public override toSchema(): ResourceSchema {
@@ -212,7 +212,7 @@ export class TableBundle extends Resource {
 			// Set the input name from the source
 			this._inputs.set(
 				this.name,
-				this._source.pipe(map(tbl => ({ id: this.name, table: tbl }))),
+				this._source$.pipe(map(tbl => ({ id: this.name, table: tbl }))),
 			)
 			this.rebindWorkflowInput()
 		}

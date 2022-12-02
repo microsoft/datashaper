@@ -200,6 +200,10 @@ export class DataPackage extends Resource {
     // (undocumented)
     getResource(name: string): Resource | undefined;
     // (undocumented)
+    get isEmpty$(): Observable<boolean>;
+    // (undocumented)
+    get isEmpty(): boolean;
+    // (undocumented)
     load(files: Map<string, Blob>, quiet?: boolean): Promise<void>;
     // (undocumented)
     get names$(): Observable<string[]>;
@@ -213,8 +217,6 @@ export class DataPackage extends Resource {
     get resources$(): Observable<Resource[]>;
     // (undocumented)
     get resources(): Resource[];
-    // (undocumented)
-    _resources: BehaviorSubject<Resource[]>;
     // (undocumented)
     save(): Promise<Map<string, Blob>>;
     // (undocumented)

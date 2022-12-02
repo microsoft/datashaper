@@ -31,7 +31,10 @@ export class DataPackage extends Resource {
 	 */
 	private _resourceHandlers: Map<string, ResourceHandler> = new Map()
 	private _resourceDisposables: Map<string, () => void> = new Map()
-	public _resources = new BehaviorSubject<Resource[]>([])
+	private _resources$ = new BehaviorSubject<Resource[]>([])
+	private _names$ = this._resources$.pipe(map(r => r.map(t => t.name)))
+	private _size$ = this._resources$.pipe(map(r => r.length))
+	private _isEmpty$ = this._size$.pipe(map(n => n === 0))
 
 	public constructor(public dataPackage?: DataPackageSchema) {
 		super()
@@ -41,11 +44,11 @@ export class DataPackage extends Resource {
 	}
 
 	public get resources(): Resource[] {
-		return this._resources.value
+		return this._resources$.value
 	}
 
 	public get resources$(): Observable<Resource[]> {
-		return this._resources
+		return this._resources$
 	}
 
 	public get size(): number {
@@ -53,7 +56,7 @@ export class DataPackage extends Resource {
 	}
 
 	public get size$(): Observable<number> {
-		return this._resources.pipe(map(r => r.length))
+		return this._size$
 	}
 
 	public get names(): string[] {
@@ -61,14 +64,22 @@ export class DataPackage extends Resource {
 	}
 
 	public get names$(): Observable<string[]> {
-		return this._resources.pipe(map(r => r.map(t => t.name)))
+		return this._names$
+	}
+
+	public get isEmpty(): boolean {
+		return this.size === 0
+	}
+
+	public get isEmpty$(): Observable<boolean> {
+		return this._isEmpty$
 	}
 
 	public addResource(resource: Resource): void {
-		this._resources.next([...this.resources, resource])
+		this._resources$.next([...this.resources, resource])
 		this._resourceDisposables.set(
 			resource.name,
-			resource.onChange(() => this._resources.next(this.resources)),
+			resource.onChange(() => this._resources$.next(this.resources)),
 		)
 		resource.onDispose(() => this.removeResource(resource.name))
 		this._onChange.next()
@@ -85,7 +96,7 @@ export class DataPackage extends Resource {
 
 	public removeResource(name: string): void {
 		this._resourceDisposables.get(name)?.()
-		this._resources.next(this.resources.filter(t => name !== t.name))
+		this._resources$.next(this.resources.filter(t => name !== t.name))
 		this._onChange.next()
 	}
 
@@ -94,7 +105,7 @@ export class DataPackage extends Resource {
 	}
 
 	public clear(): void {
-		this._resources.next([])
+		this._resources$.next([])
 		this._onChange.next()
 	}
 
