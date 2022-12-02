@@ -47,6 +47,7 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 	examples = EMPTY_ARRAY,
 	profiles,
 	children,
+	fallback = children,
 }) {
 	const ref = useRef<AllotmentHandle | null>(null)
 	const [expanded, onToggle, onChangeWidth] = useExpandedState(ref)
@@ -103,10 +104,10 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 						<Route
 							key={r.href}
 							path={r.href}
-							element={<r.renderer {...r.props} />}
+							element={<MatchedRoute key={r.href} data={r} />}
 						/>
 					))}
-					<Route path="*" element={<NoMatch />} />
+					<Route path="*" element={fallback} />
 				</Routes>
 				<>
 					<RenameModal
@@ -121,6 +122,8 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 	)
 })
 
-function NoMatch() {
-	return <div style={{ padding: 25 }}>No Route Matched</div>
-}
+const MatchedRoute: React.FC<{ data: ResourceRoute }> = memo(
+	function MatchedRoute({ data: { props, renderer: R } }) {
+		return <R {...props} />
+	},
+)

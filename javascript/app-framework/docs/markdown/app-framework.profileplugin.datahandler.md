@@ -4,10 +4,10 @@
 
 ## ProfilePlugin.dataHandler property
 
-The persistence handler to use for this profile
+The persistence handler to use for this profile null: no persistence
 
 <b>Signature:</b>
 
 ```typescript
-dataHandler?: ResourceHandler;
+dataHandler?: ResourceHandler | null;
 ```

@@ -24,7 +24,10 @@ import type { Workflow } from './Workflow/Workflow.js'
 export class TableBundle extends Resource {
 	public readonly $schema = LATEST_TABLEBUNDLE_SCHEMA
 	public readonly profile = KnownProfile.TableBundle
-	public readonly defaultName = 'tablebundle.json'
+
+	public override defaultName(): string {
+		return 'tablebundle.json'
+	}
 
 	private readonly _source = new BehaviorSubject<Maybe<ColumnTable>>(undefined)
 	private readonly _inputs = new Map<

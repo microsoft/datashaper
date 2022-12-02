@@ -8,12 +8,13 @@ import { Workflow } from '@datashaper/workflow'
 import type { ProfilePlugin } from '../index.js'
 import { ResourceGroup, WorkflowEditor } from '../index.js'
 
-export class WorkflowPlugin implements ProfilePlugin<Workflow> {
+export class WorkflowProfile implements ProfilePlugin<Workflow> {
 	public readonly profile = KnownProfile.Workflow
 	public readonly title = 'Workflow'
 	public readonly renderer = WorkflowEditor
 	public readonly iconName = 'SetAction'
 	public readonly group = ResourceGroup.Data
+	public readonly dataHandler = null
 
 	public createResource(): Workflow {
 		return new Workflow()

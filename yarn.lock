@@ -1818,6 +1818,7 @@ __metadata:
     react-dom: ^18.2.0
     react-if: ^4.1.4
     react-router-dom: ^6.4.3
+    recoil: ^0.7.6
     resolve-typescript-plugin: ^1.2.0
     rxjs: ^7.5.7
     styled-components: ^5.3.6
@@ -1835,6 +1836,7 @@ __metadata:
     "@thematic/react": "*"
     arquero: ">= 5.1.0"
     react: ">= 17.0.2"
+    recoil: ">= 0.7.6"
     styled-components: ">= 5.3.0"
   languageName: unknown
   linkType: soft

@@ -17,7 +17,6 @@ export declare abstract class Named extends Observed implements NamedSchema
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [defaultName](./workflow.named.defaultname.md) | <code>readonly</code> | string |  |
 |  [description](./workflow.named.description.md) |  | string \| undefined |  |
 |  [id](./workflow.named.id.md) |  | string |  |
 |  [name](./workflow.named.name.md) |  | string |  |
@@ -27,6 +26,7 @@ export declare abstract class Named extends Observed implements NamedSchema
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
+|  [defaultName()](./workflow.named.defaultname.md) |  |  |
 |  [loadSchema(schema, quiet)](./workflow.named.loadschema.md) |  |  |
 |  [toSchema()](./workflow.named.toschema.md) |  |  |
 

@@ -2,10 +2,14 @@
 
 [Home](./index.md) &gt; [@datashaper/workflow](./workflow.md) &gt; [DataTable](./workflow.datatable.md) &gt; [defaultName](./workflow.datatable.defaultname.md)
 
-## DataTable.defaultName property
+## DataTable.defaultName() method
 
 <b>Signature:</b>
 
 ```typescript
-readonly defaultName = "datatable.json";
+defaultName(): string;
 ```
+<b>Returns:</b>
+
+string
+

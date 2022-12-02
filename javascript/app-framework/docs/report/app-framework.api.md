@@ -25,10 +25,12 @@ import type { IStyleFunctionOrObject } from '@fluentui/react';
 import { ITextFieldProps } from '@fluentui/react';
 import type { Maybe } from '@datashaper/workflow';
 import type { MutableRefObject } from 'react';
+import type { MutableSnapshot } from 'recoil';
 import type { ParserOptions } from '@datashaper/schema';
 import type { default as React_2 } from 'react';
 import type { Resource } from '@datashaper/workflow';
 import type { ResourceHandler } from '@datashaper/workflow';
+import type { Snapshot } from 'recoil';
 import { StyledComponent } from 'styled-components';
 import type { TableBundle } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
@@ -214,7 +216,7 @@ export interface PersistenceService {
 // @public (undocumented)
 export interface ProfilePlugin<T extends Resource = any> {
     createResource: () => T;
-    dataHandler?: ResourceHandler;
+    dataHandler?: ResourceHandler | null;
     getCommandBarCommands?: (section: CommandBarSection) => IContextualMenuItem[] | undefined;
     getMenuItems?: (resource: T) => IContextualMenuItem[];
     getRoutes?: (resource: T, parentPath: string, resourcePath: string) => GeneratedExtraRoutes | undefined;
@@ -266,6 +268,25 @@ export const RawTableViewer: React.FC<RawTableViewerProps>;
 export interface RawTableViewerProps {
     // (undocumented)
     dataTable: DataTable;
+}
+
+// Warning: (ae-missing-release-tag) "RecoilBasedProfileHost" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const RecoilBasedProfileHost: React.FC<RecoilBasedProfileHostProps<any>>;
+
+// Warning: (ae-missing-release-tag) "RecoilBasedProfileHostProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface RecoilBasedProfileHostProps<T extends Resource> {
+    // (undocumented)
+    children: React.ReactNode;
+    // (undocumented)
+    loadState: (resource: T, snap: MutableSnapshot) => void;
+    // (undocumented)
+    resource: T;
+    // (undocumented)
+    saveState: (resource: T, snap: Snapshot) => void;
 }
 
 // Warning: (ae-missing-release-tag) "removeExtension" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

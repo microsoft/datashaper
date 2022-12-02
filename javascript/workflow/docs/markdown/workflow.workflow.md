@@ -26,7 +26,6 @@ export declare class Workflow extends Resource
 |  [allTableNames$](./workflow.workflow.alltablenames_.md) | <code>readonly</code> | Observable&lt;string\[\]&gt; | Get an observable of the names of all declared inputs and outputs. This does not include the default input or default output tables. |
 |  [defaultInput](./workflow.workflow.defaultinput.md) |  | [Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt; |  |
 |  [defaultInput$](./workflow.workflow.defaultinput_.md) |  | [TableObservable](./workflow.tableobservable.md) |  |
-|  [defaultName](./workflow.workflow.defaultname.md) | <code>readonly</code> | string |  |
 |  [inputNames](./workflow.workflow.inputnames.md) | <code>readonly</code> | string\[\] |  |
 |  [inputNames$](./workflow.workflow.inputnames_.md) | <code>readonly</code> | Observable&lt;string\[\]&gt; |  |
 |  [length](./workflow.workflow.length.md) | <code>readonly</code> | number |  |
@@ -48,6 +47,7 @@ export declare class Workflow extends Resource
 |  [addInputTables(inputs)](./workflow.workflow.addinputtables.md) |  |  |
 |  [addOutput(name)](./workflow.workflow.addoutput.md) |  | Add an output binding |
 |  [addStep(stepInput)](./workflow.workflow.addstep.md) |  | Adds a step to the pipeline |
+|  [defaultName()](./workflow.workflow.defaultname.md) |  |  |
 |  [dispose()](./workflow.workflow.dispose.md) |  |  |
 |  [hasInputName(input)](./workflow.workflow.hasinputname.md) |  |  |
 |  [hasOutputName(name)](./workflow.workflow.hasoutputname.md) |  |  |

@@ -12,15 +12,15 @@ import type {
 } from '@datashaper/schema'
 import { KnownProfile, TableBundleRel } from '@datashaper/schema'
 
-import { Codebook } from '../Codebook.js'
-import { DataTable } from '../DataTable.js'
-import type { Resource } from '../Resource.js'
-import { TableBundle } from '../TableBundle.js'
-import type { ResourceHandler } from '../types.js'
-import { findRel, resolveRawData } from '../utils.js'
-import { Workflow } from '../Workflow/Workflow.js'
-import type { DataPackage } from './DataPackage.js'
-import { write } from './io.js'
+import { Codebook } from '../../Codebook.js'
+import { DataTable } from '../../DataTable.js'
+import type { Resource } from '../../Resource.js'
+import { TableBundle } from '../../TableBundle.js'
+import type { ResourceHandler } from '../../types.js'
+import { findRel, resolveRawData } from '../../utils.js'
+import { Workflow } from '../../Workflow/Workflow.js'
+import type { DataPackage } from '../DataPackage.js'
+import { write } from '../io.js'
 
 export class TableBundleHandler implements ResourceHandler {
 	public readonly profile = KnownProfile.TableBundle

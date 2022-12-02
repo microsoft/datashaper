@@ -14,13 +14,13 @@ export interface ResourceHandler
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [connect?](./workflow.resourcehandler.connect.md) |  | (dp: [DataPackage](./workflow.datapackage.md)<!-- -->) =&gt; void | <i>(Optional)</i> |
 |  [profile](./workflow.resourcehandler.profile.md) |  | Profile | The profile name of the resource |
 
 ## Methods
 
 |  Method | Description |
 |  --- | --- |
-|  [connect(dp)](./workflow.resourcehandler.connect.md) |  |
 |  [load(data, files)](./workflow.resourcehandler.load.md) | Load a specific resource |
 |  [save(data, files)](./workflow.resourcehandler.save.md) | Save custom resources into the files map. |
 

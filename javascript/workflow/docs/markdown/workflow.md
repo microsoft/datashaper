@@ -14,6 +14,7 @@
 |  [DataShape](./workflow.datashape.md) |  |
 |  [DataTable](./workflow.datatable.md) |  |
 |  [DefaultGraph](./workflow.defaultgraph.md) |  |
+|  [JsonDataHandler](./workflow.jsondatahandler.md) |  |
 |  [Named](./workflow.named.md) |  |
 |  [ObservableNode](./workflow.observablenode.md) |  |
 |  [Observed](./workflow.observed.md) |  |
@@ -21,6 +22,7 @@
 |  [Resource](./workflow.resource.md) |  |
 |  [StepNode](./workflow.stepnode.md) |  |
 |  [TableBundle](./workflow.tablebundle.md) |  |
+|  [TableBundleHandler](./workflow.tablebundlehandler.md) |  |
 |  [Workflow](./workflow.workflow.md) |  |
 
 ## Enumerations

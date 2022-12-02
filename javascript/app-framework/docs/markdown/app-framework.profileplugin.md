@@ -15,7 +15,7 @@ export interface ProfilePlugin<T extends Resource = any>
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [createResource](./app-framework.profileplugin.createresource.md) |  | () =&gt; T | Creates a new resource of this type |
-|  [dataHandler?](./app-framework.profileplugin.datahandler.md) |  | ResourceHandler | <i>(Optional)</i> The persistence handler to use for this profile |
+|  [dataHandler?](./app-framework.profileplugin.datahandler.md) |  | ResourceHandler \| null | <i>(Optional)</i> The persistence handler to use for this profile null: no persistence |
 |  [getCommandBarCommands?](./app-framework.profileplugin.getcommandbarcommands.md) |  | (section: [CommandBarSection](./app-framework.commandbarsection.md)<!-- -->) =&gt; IContextualMenuItem\[\] \| undefined | <i>(Optional)</i> Gets commands for the plugin |
 |  [getMenuItems?](./app-framework.profileplugin.getmenuitems.md) |  | (resource: T) =&gt; IContextualMenuItem\[\] | <i>(Optional)</i> Create contextual menu items for a resource |
 |  [getRoutes?](./app-framework.profileplugin.getroutes.md) |  | (resource: T, parentPath: string, resourcePath: string) =&gt; [GeneratedExtraRoutes](./app-framework.generatedextraroutes.md) \| undefined | <i>(Optional)</i> Event handler for when the resource is undergoing route generation. A route is always generated for the resource; any related routes may be retured here. |
