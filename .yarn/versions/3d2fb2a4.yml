@@ -1,5 +1,0 @@
-releases:
-  "@datashaper/app-framework": patch
-
-declined:
-  - "@datashaper/webapp"
