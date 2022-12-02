@@ -9,12 +9,10 @@ import type { CodebookDefaultStyles } from './Codebook.types.js'
 export interface CodebookTableEditorProps {
 	fields: Field[]
 	onChangeFields: (fields: Field[]) => void
-	hideLabel?: boolean
 	styles?: CodebookTableStyles
 }
 
 export interface CodebookTableStyles extends CodebookDefaultStyles {
 	tableWrapper?: React.CSSProperties
 	labelWrapper?: React.CSSProperties
-	label?: React.CSSProperties
 }

@@ -33,6 +33,7 @@
 |  [useComboBoxChangeHandler(step, updateFn, onChange)](./react.usecomboboxchangehandler.md) | Creates a callback handler for changing the step based on a combobox value. This only handles basic cases where the combobox option key can be set on the step using an object path. |
 |  [useComboBoxInputValueChangeHandler(step, updateFn, onChange)](./react.usecomboboxinputvaluechangehandler.md) | Creates a callback handler for changing the step based on a combobox value. This only handles basic cases where the combobox option key can be set on the step using an object path. |
 |  [useCommandBarColorDefaults(colors)](./react.usecommandbarcolordefaults.md) |  |
+|  [useDefaultStyles(styles, heights)](./react.usedefaultstyles.md) |  |
 |  [useDetailsHeaderRenderer()](./react.usedetailsheaderrenderer.md) | Overrides the default details header rendering so we can inject customization |
 |  [useDetailsListStyles(isHeaderFixed, features, styles, hasColumnClick, compact)](./react.usedetailsliststyles.md) | Create a DetailsHeader style with enough height to handle the options we've turned on. Each one requires a small amount of vertical space that stacks up. |
 |  [useDropdownChangeAllHandler(step, updateFn, onChange)](./react.usedropdownchangeallhandler.md) |  |
@@ -89,6 +90,12 @@
 |  [ArqueroDetailsListProps](./react.arquerodetailslistprops.md) |  |
 |  [ArqueroTableHeaderProps](./react.arquerotableheaderprops.md) |  |
 |  [ArqueroTableHeaderStyles](./react.arquerotableheaderstyles.md) |  |
+|  [CodebookDefaultProps](./react.codebookdefaultprops.md) |  |
+|  [CodebookDefaultStyles](./react.codebookdefaultstyles.md) |  |
+|  [CodebookEnumDropdownFieldProps](./react.codebookenumdropdownfieldprops.md) |  |
+|  [CodebookFieldEditorProps](./react.codebookfieldeditorprops.md) |  |
+|  [CodebookTableEditorProps](./react.codebooktableeditorprops.md) |  |
+|  [CodebookTextFieldProps](./react.codebooktextfieldprops.md) |  |
 |  [ColumnOptions](./react.columnoptions.md) |  |
 |  [CommandBarColors](./react.commandbarcolors.md) |  |
 |  [DetailsListFeatures](./react.detailslistfeatures.md) |  |
@@ -106,6 +113,13 @@
 |  --- | --- |
 |  [ArqueroDetailsList](./react.arquerodetailslist.md) | Renders an arquero table using a fluent DetailsList. |
 |  [ArqueroTableHeader](./react.arquerotableheader.md) |  |
+|  [CodebookDataNatureField](./react.codebookdatanaturefield.md) |  |
+|  [CodebookDescriptionField](./react.codebookdescriptionfield.md) |  |
+|  [CodebookDisplayNameField](./react.codebookdisplaynamefield.md) |  |
+|  [CodebookFieldEditor](./react.codebookfieldeditor.md) |  |
+|  [CodebookStatsField](./react.codebookstatsfield.md) |  |
+|  [CodebookTableEditor](./react.codebooktableeditor.md) |  |
+|  [CodebookUnitField](./react.codebookunitfield.md) |  |
 |  [Guidance](./react.guidance.md) |  |
 |  [StepList](./react.steplist.md) |  |
 |  [TableCommands](./react.tablecommands.md) |  |
