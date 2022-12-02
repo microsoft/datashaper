@@ -101,11 +101,20 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 				<Routes>
 					<Route path="/" element={children} />
 					{flattenedRoutes.map(r => (
-						<Route
-							key={r.href}
-							path={r.href}
-							element={<MatchedRoute key={r.href} data={r} />}
-						/>
+						<>
+							<Route
+								key={r.href}
+								path={r.href}
+								element={<MatchedRoute key={r.href} data={r} />}
+							/>
+							{(r.children?.length ?? 0) > 0 ? (
+								<Route
+									key={`${r.href}/*`}
+									path={`${r.href}/*`}
+									element={<MatchedRoute key={`${r.href}/*`} data={r} />}
+								/>
+							) : null}
+						</>
 					))}
 					<Route path="*" element={fallback} />
 				</Routes>
