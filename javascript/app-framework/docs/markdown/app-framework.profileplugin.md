@@ -23,6 +23,6 @@ export interface ProfilePlugin<T extends Resource = any>
 |  [iconName](./app-framework.profileplugin.iconname.md) |  | string | The icon name to use in the file-tree |
 |  [initialize?](./app-framework.profileplugin.initialize.md) |  | (api: [AppServices](./app-framework.appservices.md)<!-- -->, dp: DataPackage) =&gt; void | <i>(Optional)</i> Initialize the plugin with application-level services |
 |  [profile](./app-framework.profileplugin.profile.md) |  | string | The profile name to register within the app framework. This is used to identify the plugin and should be unique. |
-|  [renderer](./app-framework.profileplugin.renderer.md) |  | React.ComponentType&lt;{ resource: T; }&gt; | Render the plugin |
+|  [renderer](./app-framework.profileplugin.renderer.md) |  | React.ComponentType&lt;{ href: string; resource: T; }&gt; | Render the plugin |
 |  [title](./app-framework.profileplugin.title.md) |  | string | A friendly title for the profile, used for resource creation. (e.g. "New <title>") |
 
