@@ -1906,7 +1906,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<{\n        resource: T;\n    }>"
+                  "text": "<{\n        href: string;\n        resource: T;\n    }>"
                 },
                 {
                   "kind": "Content",

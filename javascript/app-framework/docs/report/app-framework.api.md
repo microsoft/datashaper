@@ -225,6 +225,7 @@ export interface ProfilePlugin<T extends Resource = any> {
     initialize?: (api: AppServices, dp: DataPackage) => void;
     profile: string;
     renderer: React.ComponentType<{
+        href: string;
         resource: T;
     }>;
     title: string;
