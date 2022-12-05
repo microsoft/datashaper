@@ -22,7 +22,6 @@ export declare class Codebook extends Resource
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [$schema](./workflow.codebook._schema.md) | <code>readonly</code> | string |  |
-|  [defaultName](./workflow.codebook.defaultname.md) | <code>readonly</code> | string |  |
 |  [fields](./workflow.codebook.fields.md) |  | Field\[\] |  |
 |  [profile](./workflow.codebook.profile.md) | <code>readonly</code> | (not declared) |  |
 
@@ -30,6 +29,7 @@ export declare class Codebook extends Resource
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
+|  [defaultName()](./workflow.codebook.defaultname.md) |  |  |
 |  [loadSchema(value, quiet)](./workflow.codebook.loadschema.md) |  |  |
 |  [toSchema()](./workflow.codebook.toschema.md) |  |  |
 

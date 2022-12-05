@@ -25,11 +25,14 @@ const log = debug('datashaper')
 export class DataTable extends Resource {
 	public readonly $schema = LATEST_DATATABLE_SCHEMA
 	public readonly profile = KnownProfile.DataTable
-	private readonly _output = new BehaviorSubject<Maybe<ColumnTable>>(undefined)
+	private readonly _output$ = new BehaviorSubject<Maybe<ColumnTable>>(undefined)
 
 	public readonly parser = new ParserOptions()
 	public readonly shape = new DataShape()
-	public readonly defaultName = 'datatable.json'
+
+	public override defaultName(): string {
+		return 'datatable.json'
+	}
 
 	private disposables: Array<() => void> = []
 
@@ -51,13 +54,13 @@ export class DataTable extends Resource {
 	private refreshData = (): void => {
 		if (this._rawData != null) {
 			readTable(this._rawData, this.toSchema())
-				.then(t => this._output.next(t))
+				.then(t => this._output$.next(t))
 				.catch(err => {
 					log('error reading blob', err)
 					throw err
 				})
 		} else {
-			this._output.next(undefined)
+			this._output$.next(undefined)
 		}
 		this._onChange.next()
 	}
@@ -92,11 +95,11 @@ export class DataTable extends Resource {
 	// #endregion
 
 	public get output$(): Observable<Maybe<ColumnTable>> {
-		return this._output
+		return this._output$
 	}
 
 	public get output(): Maybe<ColumnTable> {
-		return this._output.value
+		return this._output$.value
 	}
 
 	public override toSchema(): DataTableSchema {

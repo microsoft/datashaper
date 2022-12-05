@@ -21,10 +21,10 @@ export declare class DataPackage extends Resource
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [\_resources](./workflow.datapackage._resources.md) |  | BehaviorSubject&lt;[Resource](./workflow.resource.md)<!-- -->\[\]&gt; |  |
 |  [$schema](./workflow.datapackage._schema.md) | <code>readonly</code> | string |  |
 |  [dataPackage?](./workflow.datapackage.datapackage.md) |  | DataPackageSchema \| undefined | <i>(Optional)</i> |
-|  [defaultName](./workflow.datapackage.defaultname.md) | <code>readonly</code> | (not declared) |  |
+|  [isEmpty](./workflow.datapackage.isempty.md) | <code>readonly</code> | boolean |  |
+|  [isEmpty$](./workflow.datapackage.isempty_.md) | <code>readonly</code> | Observable&lt;boolean&gt; |  |
 |  [names](./workflow.datapackage.names.md) | <code>readonly</code> | string\[\] |  |
 |  [names$](./workflow.datapackage.names_.md) | <code>readonly</code> | Observable&lt;string\[\]&gt; |  |
 |  [profile](./workflow.datapackage.profile.md) | <code>readonly</code> | (not declared) |  |
@@ -40,6 +40,7 @@ export declare class DataPackage extends Resource
 |  [addResource(resource)](./workflow.datapackage.addresource.md) |  |  |
 |  [addResourceHandler(handler)](./workflow.datapackage.addresourcehandler.md) |  | Registers a new handler for processing resources. |
 |  [clear()](./workflow.datapackage.clear.md) |  |  |
+|  [defaultName()](./workflow.datapackage.defaultname.md) |  |  |
 |  [getResource(name)](./workflow.datapackage.getresource.md) |  |  |
 |  [load(files, quiet)](./workflow.datapackage.load.md) |  |  |
 |  [removeResource(name)](./workflow.datapackage.removeresource.md) |  |  |

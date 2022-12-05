@@ -2,10 +2,14 @@
 
 [Home](./index.md) &gt; [@datashaper/workflow](./workflow.md) &gt; [Workflow](./workflow.workflow.md) &gt; [defaultName](./workflow.workflow.defaultname.md)
 
-## Workflow.defaultName property
+## Workflow.defaultName() method
 
 <b>Signature:</b>
 
 ```typescript
-get defaultName(): string;
+defaultName(): string;
 ```
+<b>Returns:</b>
+
+string
+

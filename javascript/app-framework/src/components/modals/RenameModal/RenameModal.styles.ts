@@ -2,11 +2,19 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { IButtonStyles, IIconProps} from '@fluentui/react';
-import { FontWeights, mergeStyleSets,useTheme  } from '@fluentui/react'
+import type {
+	IButtonStyles,
+	IIconProps,
+	IProcessedStyleSet,
+} from '@fluentui/react'
+import { FontWeights, mergeStyleSets, useTheme } from '@fluentui/react'
 import { useMemo } from 'react'
 
-export function useContentStyles() {
+export function useContentStyles(): IProcessedStyleSet<{
+	container: any
+	header: any
+	body: any
+}> {
 	const theme = useTheme()
 	return useMemo(
 		() =>

@@ -50,6 +50,7 @@
 |  [ProfilePlugin](./app-framework.profileplugin.md) |  |
 |  [RawTableProps](./app-framework.rawtableprops.md) |  |
 |  [RawTableViewerProps](./app-framework.rawtableviewerprops.md) |  |
+|  [RecoilBasedProfileHostProps](./app-framework.recoilbasedprofilehostprops.md) |  |
 |  [ResourceRoute](./app-framework.resourceroute.md) | Data attached to resource-tree nodes |
 |  [ViewOptionsProps](./app-framework.viewoptionsprops.md) |  |
 |  [WorkflowEditorProps](./app-framework.workfloweditorprops.md) |  |
@@ -74,6 +75,7 @@
 |  [RawTable](./app-framework.rawtable.md) |  |
 |  [RawTableDefaultFeatures](./app-framework.rawtabledefaultfeatures.md) |  |
 |  [RawTableViewer](./app-framework.rawtableviewer.md) |  |
+|  [RecoilBasedProfileHost](./app-framework.recoilbasedprofilehost.md) |  |
 |  [TableDelimiterOptions](./app-framework.tabledelimiteroptions.md) |  |
 |  [TableLayoutOptions](./app-framework.tablelayoutoptions.md) |  |
 |  [TablePreview](./app-framework.tablepreview.md) |  |

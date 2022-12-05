@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Resource } from '@datashaper/workflow'
+import { type Resource, JsonDataHandler } from '@datashaper/workflow'
 import { useBoolean, useConst } from '@fluentui/react-hooks'
 import { useDebounceFn } from 'ahooks'
 import type { AllotmentHandle } from 'allotment'
@@ -11,10 +11,10 @@ import { useCallback, useMemo, useState } from 'react'
 
 import { EMPTY_ARRAY } from '../../../empty.js'
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
-import { CodebookPlugin } from '../../../plugins/CodebookPlugin.js'
-import { DataTablePlugin } from '../../../plugins/DataTablePlugin.js'
-import { TableBundlePlugin } from '../../../plugins/TableBundlePlugin.js'
-import { WorkflowPlugin } from '../../../plugins/WorkflowPlugin.js'
+import { CodebookProfile } from '../../../profiles/CodebookProfile.js'
+import { DataTableProfile } from '../../../profiles/DataTableProfile.js'
+import { TableBundleProfile } from '../../../profiles/TableBundleProfile.js'
+import { WorkflowProfile } from '../../../profiles/WorkflowProfile.js'
 import type {
 	AppServices,
 	ProfilePlugin,
@@ -26,10 +26,10 @@ const COLLAPSED_WIDTH = 60
 
 export function useKnownProfilePlugins(): ProfilePlugin[] {
 	return useConst(() => {
-		const datatablePlugin = new DataTablePlugin()
-		const codebookPlugin = new CodebookPlugin()
-		const workflowPlugin = new WorkflowPlugin()
-		const tableBundlePlugin = new TableBundlePlugin(
+		const datatablePlugin = new DataTableProfile()
+		const codebookPlugin = new CodebookProfile()
+		const workflowPlugin = new WorkflowProfile()
+		const tableBundlePlugin = new TableBundleProfile(
 			datatablePlugin,
 			codebookPlugin,
 			workflowPlugin,
@@ -101,7 +101,10 @@ export function useRegisteredProfiles(
 	const knownProfiles = useKnownProfilePlugins()
 
 	return useMemo<Map<string, ProfilePlugin>>(() => {
-		const allPlugins = [...knownProfiles, ...(profiles ?? EMPTY_ARRAY)]
+		const allPlugins: ProfilePlugin[] = [
+			...knownProfiles,
+			...(profiles ?? EMPTY_ARRAY),
+		]
 		const result = new Map<string, ProfilePlugin>()
 		for (const p of allPlugins) {
 			p.initialize?.(api, dp)
@@ -109,6 +112,9 @@ export function useRegisteredProfiles(
 			// add data-handlers to the workflow package
 			if (p.dataHandler) {
 				dp.addResourceHandler(p.dataHandler)
+			} else if (p.dataHandler !== null) {
+				// We use null to signal that not handler should be auto-defined
+				dp.addResourceHandler(new JsonDataHandler(p.profile, p.createResource))
 			}
 		}
 		return result

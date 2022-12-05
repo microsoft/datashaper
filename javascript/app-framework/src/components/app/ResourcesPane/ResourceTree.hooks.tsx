@@ -26,7 +26,7 @@ export function useNavGroups(
 			result.push({ links })
 		}
 
-		return result
+		return result.filter(g => g.links.length > 0)
 	}, [resources, onSelect])
 }
 

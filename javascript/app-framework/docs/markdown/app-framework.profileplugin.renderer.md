@@ -10,6 +10,7 @@ Render the plugin
 
 ```typescript
 renderer: React.ComponentType<{
+        href: string;
         resource: T;
     }>;
 ```

@@ -88,12 +88,13 @@ export interface ProfilePlugin<T extends Resource = any> {
 	/**
 	 * Render the plugin
 	 */
-	renderer: React.ComponentType<{ resource: T }>
+	renderer: React.ComponentType<{ href: string; resource: T }>
 
 	/**
 	 * The persistence handler to use for this profile
+	 * null: no persistence
 	 */
-	dataHandler?: ResourceHandler
+	dataHandler?: ResourceHandler | null
 
 	/**
 	 * Creates a new resource of this type

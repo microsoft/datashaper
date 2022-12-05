@@ -15,35 +15,40 @@ import { BehaviorSubject, map } from 'rxjs'
 import { Resource } from '../Resource.js'
 import type { ResourceHandler } from '../types.js'
 import { toResourceSchema } from '../utils.js'
+import { TableBundleHandler } from './handlers/TableBundleHandler.js'
 import { write } from './io.js'
-import { TableBundleHandler } from './TableBundleHandler.js'
 
 export class DataPackage extends Resource {
 	public readonly $schema = LATEST_DATAPACKAGE_SCHEMA
 	public readonly profile = KnownProfile.DataPackage
-	public readonly defaultName = 'datapackage.json'
+
+	public override defaultName(): string {
+		return 'datapackage.json'
+	}
 
 	/**
 	 * A map of profile-name to resource hnadler
 	 */
 	private _resourceHandlers: Map<string, ResourceHandler> = new Map()
 	private _resourceDisposables: Map<string, () => void> = new Map()
-	public _resources = new BehaviorSubject<Resource[]>([])
+	private _resources$ = new BehaviorSubject<Resource[]>([])
+	private _names$ = this._resources$.pipe(map(r => r.map(t => t.name)))
+	private _size$ = this._resources$.pipe(map(r => r.length))
+	private _isEmpty$ = this._size$.pipe(map(n => n === 0))
 
 	public constructor(public dataPackage?: DataPackageSchema) {
 		super()
 		const tableBundleHandler = new TableBundleHandler()
-		tableBundleHandler.connect(this)
 		this.addResourceHandler(tableBundleHandler)
 		this.loadSchema(dataPackage)
 	}
 
 	public get resources(): Resource[] {
-		return this._resources.value
+		return this._resources$.value
 	}
 
 	public get resources$(): Observable<Resource[]> {
-		return this._resources
+		return this._resources$
 	}
 
 	public get size(): number {
@@ -51,7 +56,7 @@ export class DataPackage extends Resource {
 	}
 
 	public get size$(): Observable<number> {
-		return this._resources.pipe(map(r => r.length))
+		return this._size$
 	}
 
 	public get names(): string[] {
@@ -59,14 +64,22 @@ export class DataPackage extends Resource {
 	}
 
 	public get names$(): Observable<string[]> {
-		return this._resources.pipe(map(r => r.map(t => t.name)))
+		return this._names$
+	}
+
+	public get isEmpty(): boolean {
+		return this.size === 0
+	}
+
+	public get isEmpty$(): Observable<boolean> {
+		return this._isEmpty$
 	}
 
 	public addResource(resource: Resource): void {
-		this._resources.next([...this.resources, resource])
+		this._resources$.next([...this.resources, resource])
 		this._resourceDisposables.set(
 			resource.name,
-			resource.onChange(() => this._resources.next(this.resources)),
+			resource.onChange(() => this._resources$.next(this.resources)),
 		)
 		resource.onDispose(() => this.removeResource(resource.name))
 		this._onChange.next()
@@ -83,7 +96,7 @@ export class DataPackage extends Resource {
 
 	public removeResource(name: string): void {
 		this._resourceDisposables.get(name)?.()
-		this._resources.next(this.resources.filter(t => name !== t.name))
+		this._resources$.next(this.resources.filter(t => name !== t.name))
 		this._onChange.next()
 	}
 
@@ -92,7 +105,7 @@ export class DataPackage extends Resource {
 	}
 
 	public clear(): void {
-		this._resources.next([])
+		this._resources$.next([])
 		this._onChange.next()
 	}
 
@@ -102,6 +115,7 @@ export class DataPackage extends Resource {
 	 * @param handler - the resource handler
 	 */
 	public addResourceHandler(handler: ResourceHandler): void {
+		handler.connect?.(this)
 		this._resourceHandlers.set(handler.profile, handler)
 	}
 
@@ -121,9 +135,8 @@ export class DataPackage extends Resource {
 			if (handler) {
 				resources.push(...(await handler.save(resource, files)))
 			} else {
-				console.error(
-					"no persistence handler available for resource's profile",
-					resource.profile,
+				throw new Error(
+					'no handler defined for resource profile: ' + resource.profile,
 				)
 			}
 		}
@@ -141,15 +154,18 @@ export class DataPackage extends Resource {
 		const schema = JSON.parse(await dataPackageBlob.text()) as DataPackageSchema
 		this.loadSchema(schema, true)
 
-		if (schema?.resources && files) {
-			for (const r of schema?.resources ?? []) {
+		const resources = schema?.resources
+		if (resources && files) {
+			for (const r of resources) {
 				const resource = await toResourceSchema(r, files)
 				if (!resource || !resource.profile) {
-					continue
+					throw new Error('resource invalid')
 				}
 				const handler = this._resourceHandlers.get(resource.profile)
 				if (!handler) {
-					continue
+					throw new Error(
+						'no handler defined for resource profile: ' + resource.profile,
+					)
 				}
 
 				const resources = await handler.load(resource, files)

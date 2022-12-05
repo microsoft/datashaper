@@ -2,10 +2,14 @@
 
 [Home](./index.md) &gt; [@datashaper/workflow](./workflow.md) &gt; [TableBundle](./workflow.tablebundle.md) &gt; [defaultName](./workflow.tablebundle.defaultname.md)
 
-## TableBundle.defaultName property
+## TableBundle.defaultName() method
 
 <b>Signature:</b>
 
 ```typescript
-readonly defaultName = "tablebundle.json";
+defaultName(): string;
 ```
+<b>Returns:</b>
+
+string
+

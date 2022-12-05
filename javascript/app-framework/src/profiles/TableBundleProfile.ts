@@ -3,26 +3,27 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { KnownProfile } from '@datashaper/schema'
-import type {
-	DataPackage} from '@datashaper/workflow';
+import type { DataPackage } from '@datashaper/workflow'
 import {
 	type Codebook,
 	type DataTable,
 	type Workflow,
 	TableBundle,
+	TableBundleHandler,
 } from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
 
 import { BundleEditor } from '../components/editors/index.js'
-import type { AppServices, ProfilePlugin } from '../types.js';
-import { CommandBarSection , ResourceGroup } from '../types.js'
+import type { AppServices, ProfilePlugin } from '../types.js'
+import { CommandBarSection, ResourceGroup } from '../types.js'
 
-export class TableBundlePlugin implements ProfilePlugin<TableBundle> {
+export class TableBundleProfile implements ProfilePlugin<TableBundle> {
 	public readonly profile = KnownProfile.TableBundle
 	public readonly title = 'Table'
 	public readonly renderer = BundleEditor
 	public readonly iconName = 'ViewAll'
 	public readonly group = ResourceGroup.Data
+	public readonly dataHandler = new TableBundleHandler()
 
 	private _dataPackage: DataPackage | undefined
 
@@ -42,7 +43,9 @@ export class TableBundlePlugin implements ProfilePlugin<TableBundle> {
 		return result
 	}
 
-	public getCommandBarCommands(section: CommandBarSection) {
+	public getCommandBarCommands(
+		section: CommandBarSection,
+	): IContextualMenuItem[] | undefined {
 		const dp = this._dataPackage
 		if (dp == null) {
 			throw new Error('Data package not initialized')

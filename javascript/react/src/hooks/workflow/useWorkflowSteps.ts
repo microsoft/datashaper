@@ -3,8 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step, Workflow } from '@datashaper/workflow'
-import { useObservableState } from 'observable-hooks'
-import { useMemo } from 'react'
+import { useObservable, useObservableState } from 'observable-hooks'
 import { map } from 'rxjs'
 
 import { EMPTY_ARRAY } from '../../empty.js'
@@ -19,7 +18,7 @@ export function useWorkflowSteps(
 	workflow: Workflow,
 	order = DisplayOrder.LastOnTop,
 ): Step[] {
-	const observable = useMemo(
+	const observable = useObservable(
 		() => workflow.steps$.pipe(map(s => orderSteps(s, order))),
 		[workflow, order],
 	)

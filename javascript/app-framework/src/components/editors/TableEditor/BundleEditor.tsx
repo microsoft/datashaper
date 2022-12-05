@@ -39,14 +39,14 @@ import {
 import type { BundleEditorProps } from './BundleEditor.types.js'
 
 export const BundleEditor: React.FC<BundleEditorProps> = memo(
-	function TableEditor({ resource: dataTable }) {
+	function BundleEditor({ resource }) {
 		// Primary State
 		const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
-		const table = useTableBundleOutput(dataTable)
-		if (dataTable.workflow == null) {
-			dataTable.workflow = new Workflow()
+		const table = useTableBundleOutput(resource)
+		if (resource.workflow == null) {
+			resource.workflow = new Workflow()
 		}
-		const workflow = dataTable.workflow
+		const workflow = resource.workflow
 		const [selectedId, setSelectedId] = useState<string | undefined>(table?.id)
 		const [selectedColumn, onColumnClick] = useColumnState()
 
@@ -57,8 +57,8 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 			() => `Workflow steps (${numSteps})`,
 			[numSteps],
 		)
-		const tableName = useTableName(dataTable, selectedId)
-		const selectedTable = useSelectedTable(dataTable, selectedId)
+		const tableName = useTableName(resource, selectedId)
+		const selectedTable = useSelectedTable(resource, selectedId)
 		const historyButtonCommandBar = useHistoryButtonCommandBar(
 			isCollapsed,
 			numSteps,

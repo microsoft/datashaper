@@ -2,10 +2,14 @@
 
 [Home](./index.md) &gt; [@datashaper/workflow](./workflow.md) &gt; [DataPackage](./workflow.datapackage.md) &gt; [defaultName](./workflow.datapackage.defaultname.md)
 
-## DataPackage.defaultName property
+## DataPackage.defaultName() method
 
 <b>Signature:</b>
 
 ```typescript
-readonly defaultName = "datapackage.json";
+defaultName(): string;
 ```
+<b>Returns:</b>
+
+string
+

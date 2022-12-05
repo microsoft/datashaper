@@ -31,7 +31,7 @@ export function useResourceRoutes(
 					)
 				}),
 			),
-		[pkg, plugins],
+		[pkg, services, plugins],
 	)
 	return useObservableState(observable, () => [])
 }
