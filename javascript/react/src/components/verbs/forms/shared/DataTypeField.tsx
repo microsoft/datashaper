@@ -107,7 +107,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 					<SpinButton
 						min={0}
 						step={1}
-						defaultValue={value}
+						value={value}
 						styles={styles}
 						onChange={spinButtonOnChange}
 						disabled={disabled}
