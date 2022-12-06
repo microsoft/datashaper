@@ -5,9 +5,9 @@
 
 export { useDefaultStyles } from './Codebook.styles.js'
 export type {
-	CodebookDefaultProps,
-	CodebookDefaultStyles,
 	CodebookEnumDropdownFieldProps,
+	CodebookPropsBase,
+	CodebookStyles,
 	CodebookTextFieldProps,
 } from './Codebook.types.js'
 export { CodebookDataNatureField } from './CodebookDataNatureField.js'

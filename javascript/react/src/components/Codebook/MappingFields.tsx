@@ -36,13 +36,13 @@ export const MappingFields: React.FC<CodebookMappingFieldProps> = memo(
 			[onChangeField, field],
 		)
 
-		const handleRecodeKeyChange = useHandleKeyChange(values, onUpdateMapping)
-		const handleRecodeValueChange = useHandleValueChange(
+		const handleKeyChange = useHandleKeyChange(values, onUpdateMapping)
+		const handleValueChange = useHandleValueChange(
 			values,
 			field.type,
 			onUpdateMapping,
 		)
-		const handleRecodeDelete = useHandleDelete(values, onUpdateMapping)
+		const handleDelete = useHandleDelete(values, onUpdateMapping)
 		const handleButtonClick = useHandleAddButtonClick(
 			onUpdateMapping,
 			values,
@@ -52,9 +52,9 @@ export const MappingFields: React.FC<CodebookMappingFieldProps> = memo(
 		const columnPairs = useMappingPairs(
 			field.mapping ?? {},
 			field.type ?? DataType.String,
-			handleRecodeKeyChange,
-			handleRecodeValueChange,
-			handleRecodeDelete,
+			handleKeyChange,
+			handleValueChange,
+			handleDelete,
 			_styles?.dropdownStyles,
 			field.exclude,
 		)

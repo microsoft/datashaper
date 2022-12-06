@@ -9,7 +9,7 @@ import { Label, useTheme } from '@fluentui/react'
 import type { CSSProperties } from 'react'
 import { memo, useCallback } from 'react'
 
-import { useFieldHeights, useUpdateMappingHeights } from './Codebook.hooks.js'
+import { useFieldHeights } from './Codebook.hooks.js'
 import { getRootStyle } from './Codebook.styles.js'
 import { CodebookDataNatureField } from './CodebookDataNatureField.js'
 import { CodebookDataTypeField } from './CodebookDataTypeField.js'
@@ -27,19 +27,17 @@ export const CodebookTableEditor: React.FC<CodebookTableEditorProps> = memo(
 		const theme = useTheme()
 		const _styles = useTableDefaultStyles(styles, heights)
 
-		const onUpdateHeight = useUpdateMappingHeights(heights)
-
 		const onChangeField = useCallback(
-			(field: any, index: number) => {
+			(field: Field, index: number) => {
 				const newFields = [
 					...fields.slice(0, index),
 					field as Field,
 					...fields.slice(index + 1),
 				]
 				onChangeFields(newFields)
-				onUpdateHeight(newFields)
+				heights.updateAllMapping(newFields)
 			},
-			[onChangeFields, onUpdateHeight, fields],
+			[onChangeFields, heights, fields],
 		)
 
 		return (

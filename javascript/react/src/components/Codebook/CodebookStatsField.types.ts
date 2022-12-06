@@ -6,15 +6,15 @@
 import type { ICheckboxProps, ICheckboxStyles, IColumn } from '@fluentui/react'
 import type { CSSProperties } from 'react'
 
-import type { CodebookDefaultProps } from './Codebook.types.js'
+import type { CodebookPropsBase } from './Codebook.types.js'
 
 export interface CodebookStatsStyles {
 	root?: CSSProperties
-	checkbox?: ICheckboxStyles
+	checkbox?: Partial<ICheckboxStyles>
 }
-export interface CodebookStatsFieldProps extends CodebookDefaultProps {
+export interface CodebookStatsFieldProps extends CodebookPropsBase {
 	showExclude?: boolean
 	styles?: CodebookStatsStyles
-	checkbox?: ICheckboxProps
+	checkbox?: Partial<ICheckboxProps>
 	histogramColumn?: IColumn
 }

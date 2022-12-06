@@ -13,11 +13,11 @@ export const CodebookDisplayNameField: React.FC<CodebookTextFieldProps> = memo(
 
 		const onChange = useCallback(
 			(
-				_: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
+				_ev: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
 				title?: string,
 			) => {
 				onChangeField?.({ ...field, title })
-				props.onChange?.(_, title)
+				props.onChange?.(_ev, title)
 			},
 			[onChangeField, props, field],
 		)

@@ -22,7 +22,7 @@ export function useMappingPairs(
 	dataType: DataType,
 	onKeyChange: (oldKey: Value, newKey: Value) => void,
 	onValueChange: (key: Value, newValue: Value) => void,
-	onDelete: (value: Value) => void,
+	onDelete: (key: Value) => void,
 	dropdownStyles?: IStyleFunctionOrObject<
 		ITextFieldStyleProps,
 		ITextFieldStyles
@@ -60,7 +60,7 @@ const ColumnPair: React.FC<{
 	dataType: DataType
 	onKeyChange: (oldKey: Value, newKey: Value) => void
 	onValueChange: (key: Value, newValue: Value) => void
-	onDelete: (value: Value) => void
+	onDelete: (key: Value) => void
 	dropdownStyles?: IStyleFunctionOrObject<
 		ITextFieldStyleProps,
 		ITextFieldStyles

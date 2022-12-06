@@ -13,11 +13,11 @@ export const CodebookUnitField: React.FC<CodebookTextFieldProps> = memo(
 
 		const onChangeValue = useCallback(
 			(
-				_: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
+				_ev: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
 				unit?: string,
 			) => {
 				onChangeField?.({ ...field, unit })
-				onChange?.(_, unit)
+				onChange?.(_ev, unit)
 			},
 			[onChangeField, onChange, field],
 		)

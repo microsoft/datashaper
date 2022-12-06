@@ -18,7 +18,7 @@ import { MappingFields } from './MappingFields.js'
 export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 	function CodebookFieldEditor({ styles, field, onChangeField }) {
 		const _styles = useDefaultStyles(styles)
-
+		console.log(_styles)
 		return (
 			<div style={_styles.root}>
 				<CodebookStatsField

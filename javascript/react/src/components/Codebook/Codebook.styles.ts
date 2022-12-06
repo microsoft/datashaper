@@ -4,100 +4,100 @@
  */
 import type { IDropdownStyles, ITextFieldStyles, Theme } from '@fluentui/react'
 import { useTheme } from '@fluentui/react'
+import merge from 'lodash-es/merge.js'
 import type { CSSProperties } from 'react'
 import { useMemo } from 'react'
 
+import { FIELD_PADDING } from './Codebook.constants.js'
 import type { FieldHeights } from './Codebook.hooks.js'
-import type { CodebookDefaultStyles } from './Codebook.types.js'
+import type { CodebookStyles } from './Codebook.types.js'
 
 export function getRootStyle(
 	theme: Theme,
 	disabled?: boolean,
 	style?: CSSProperties,
 ): CSSProperties {
-	return {
-		backgroundColor: disabled
-			? theme.palette.neutralLighter
-			: theme.palette.white,
-		...style,
-	}
+	return merge(
+		{
+			backgroundColor: disabled
+				? theme.palette.neutralLighter
+				: theme.palette.white,
+		},
+		style,
+	)
 }
 
 export function useDefaultStyles(
-	styles?: CodebookDefaultStyles,
+	styles?: CodebookStyles,
 	heights?: FieldHeights,
-): CodebookDefaultStyles {
+): CodebookStyles {
 	const theme = useTheme()
+	const border = `1px solid ${theme.palette.neutralTertiaryAlt}`
 	return useMemo(
-		() => ({
-			mapping: {
-				root: {
-					height: heights?.get('mappingWrapper'),
-					...styles?.mapping?.root,
-				},
-				...styles?.mapping,
-			},
-			root: {
-				width: 240,
-				flex: 'none',
-				border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
-				borderBottom: 'unset',
-				...styles?.root,
-			},
-			displayName: {
-				root: {
-					padding: 10,
-					height: heights?.get('displayName'),
-					borderBottom: `1px solid ${theme.palette.neutralTertiaryAlt}`,
-				},
-				...styles?.displayName,
-			} as ITextFieldStyles,
-			description: {
-				root: {
-					padding: 10,
-					height: heights?.get('description'),
-					borderBottom: `1px solid ${theme.palette.neutralTertiaryAlt}`,
-				},
-				...styles?.description,
-			} as ITextFieldStyles,
-			units: {
-				root: {
-					padding: 10,
-					height: heights?.get('units'),
-					borderBottom: `1px solid ${theme.palette.neutralTertiaryAlt}`,
-				},
-				...styles?.units,
-			} as ITextFieldStyles,
-			dataType: {
-				root: {
-					padding: 10,
-					height: heights?.get('dataType'),
-					borderBottom: `1px solid ${theme.palette.neutralTertiaryAlt}`,
-				},
-				...styles?.dataType,
-			} as IDropdownStyles,
-			dataNature: {
-				root: {
-					padding: 10,
-					height: heights?.get('dataNature'),
-					borderBottom: `1px solid ${theme.palette.neutralTertiaryAlt}`,
-				},
-				...styles?.dataNature,
-			} as IDropdownStyles,
-			statsWrapper: {
-				root: {
-					height: heights?.get('statsWrapper'),
-					padding: 10,
-					borderBottom: `1px solid ${theme.palette.neutralTertiaryAlt}`,
-				},
-				checkbox: {
+		() =>
+			merge(
+				{
+					mapping: {
+						root: {
+							height: heights?.get('mappingWrapper'),
+						},
+					},
 					root: {
-						visibility: 'hidden',
+						width: 240,
+						flex: 'none',
+						border,
+						borderBottom: 'unset',
+					},
+					displayName: {
+						root: {
+							padding: FIELD_PADDING,
+							height: heights?.get('displayName'),
+							borderBottom: border,
+						},
+					} as ITextFieldStyles,
+					description: {
+						root: {
+							padding: FIELD_PADDING,
+							height: heights?.get('description'),
+							borderBottom: border,
+						},
+					} as ITextFieldStyles,
+					units: {
+						root: {
+							padding: FIELD_PADDING,
+							height: heights?.get('units'),
+							borderBottom: border,
+						},
+					} as ITextFieldStyles,
+					dataType: {
+						root: {
+							padding: FIELD_PADDING,
+							height: heights?.get('dataType'),
+							borderBottom: border,
+						},
+					} as IDropdownStyles,
+					dataNature: {
+						root: {
+							padding: FIELD_PADDING,
+							height: heights?.get('dataNature'),
+							borderBottom: border,
+						},
+					} as IDropdownStyles,
+					statsWrapper: {
+						root: {
+							height: heights?.get('statsWrapper'),
+							padding: FIELD_PADDING,
+							borderBottom: border,
+						},
+						checkbox: {
+							root: {
+								visibility: 'hidden',
+							},
+						},
 					},
 				},
-				...styles?.statsWrapper,
-			},
-		}),
-		[theme, styles, heights],
+				styles,
+			),
+		[theme, border, styles, heights],
 	)
 }

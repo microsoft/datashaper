@@ -53,11 +53,12 @@ export function useHandleValueChange(
 export function useHandleDelete(
 	mapList: Record<Value, Value>,
 	onChange?: (mapping: Record<Value, Value>) => void,
-): (value: Value) => void {
+): (key: Value) => void {
 	return useCallback(
-		value => {
+		key => {
 			const mapping = { ...mapList }
-			delete mapping[value]
+			console.log(mapping)
+			delete mapping[key]
 			onChange?.(mapping)
 		},
 		[mapList, onChange],

@@ -4,7 +4,7 @@
  */
 import type { Field } from '@datashaper/schema'
 
-import type { CodebookDefaultStyles } from './Codebook.types.js'
+import type { CodebookStyles } from './Codebook.types.js'
 
 export interface CodebookTableEditorProps {
 	fields: Field[]
@@ -12,7 +12,7 @@ export interface CodebookTableEditorProps {
 	styles?: CodebookTableStyles
 }
 
-export interface CodebookTableStyles extends CodebookDefaultStyles {
+export interface CodebookTableStyles extends CodebookStyles {
 	tableWrapper?: React.CSSProperties
 	labelWrapper?: React.CSSProperties
 }

@@ -4,7 +4,7 @@
  */
 
 import type { Field } from '@datashaper/schema'
-import { useCallback, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import {
 	DATA_NATURE,
@@ -15,12 +15,9 @@ import {
 	MAPPING_WRAPPER,
 	STATS_WRAPPER,
 	UNITS,
-} from './Codebook.types.js'
+} from './Codebook.constants.js'
+import type { FieldHeights } from './Codebook.types.js'
 
-export interface FieldHeights {
-	get: (key: string) => number | undefined
-	set: (key: string, value: number) => void
-}
 export function useFieldHeights(): FieldHeights {
 	const [heights, setHeights] = useState<Record<string, number>>({
 		displayName: DISPLAY_NAME,
@@ -31,34 +28,28 @@ export function useFieldHeights(): FieldHeights {
 		statsWrapper: STATS_WRAPPER,
 		mappingWrapper: MAPPING_WRAPPER,
 	})
-	return useMemo(
-		() => ({
-			get: (key: string) => heights[key],
-			set: (key: string, value: number) =>
-				setHeights(prev => ({
-					...prev,
-					[key]: value,
-				})),
-		}),
-		[heights, setHeights],
-	)
-}
-
-export function useUpdateMappingHeights(
-	heights: FieldHeights,
-): (newFields: Field[]) => void {
-	return useCallback(
-		(newFields: Field[]) => {
+	return useMemo(() => {
+		const get = (key: string) => heights[key]
+		const set = (key: string, value: number) =>
+			setHeights(prev => ({
+				...prev,
+				[key]: value,
+			}))
+		const updateAllMapping = (newFields: Field[]) => {
 			const max = Math.max(
 				...newFields.map(x => Object.keys(x?.mapping || {}).length),
 			)
-			const actual = heights.get('mappingWrapper') || 0
+			const actual = get('mappingWrapper') || 0
 			const newHeight = MAPPING_WRAPPER + max * MAPPING_FIELD
 
 			if (actual !== newHeight) {
-				heights.set('mappingWrapper', newHeight)
+				set('mappingWrapper', newHeight)
 			}
-		},
-		[heights],
-	)
+		}
+		return {
+			get,
+			set,
+			updateAllMapping,
+		}
+	}, [heights, setHeights])
 }

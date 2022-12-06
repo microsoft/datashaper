@@ -2,11 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
-/*!
- * Copyright (c) Microsoft. All rights reserved.
- * Licensed under the MIT license. See LICENSE file in the project.
- */
 import type { Field } from '@datashaper/schema'
 import type { EnumDropdownProps } from '@essex/components'
 import type {
@@ -18,35 +13,32 @@ import type {
 import type { CodebookStatsStyles } from './CodebookStatsField.types.js'
 import type { CodebookMappingStyles } from './MappingFields.types.js'
 
-export const DISPLAY_NAME = 53
-export const DESCRIPTION = 83
-export const UNITS = 53
-export const DATA_TYPE = 53
-export const DATA_NATURE = 53
-export const STATS_WRAPPER = 127
-export const MAPPING_WRAPPER = 69
-export const MAPPING_FIELD = 32
-
-export interface CodebookDefaultStyles {
+export interface CodebookStyles {
 	root?: React.CSSProperties
 	mapping?: CodebookMappingStyles
 	statsWrapper?: CodebookStatsStyles
-	displayName?: ITextFieldStyles
-	description?: ITextFieldStyles
-	units?: ITextFieldStyles
-	dataType?: IDropdownStyles
-	dataNature?: IDropdownStyles
+	displayName?: Partial<ITextFieldStyles>
+	description?: Partial<ITextFieldStyles>
+	units?: Partial<ITextFieldStyles>
+	dataType?: Partial<IDropdownStyles>
+	dataNature?: Partial<IDropdownStyles>
 }
 
-export interface CodebookDefaultProps {
+export interface CodebookPropsBase {
 	field: Field
 	onChangeField?: (field: Field) => void
 }
 
 export interface CodebookTextFieldProps
-	extends CodebookDefaultProps,
+	extends CodebookPropsBase,
 		ITextFieldProps {}
 
 export interface CodebookEnumDropdownFieldProps
-	extends CodebookDefaultProps,
+	extends CodebookPropsBase,
 		EnumDropdownProps<unknown> {}
+
+export interface FieldHeights {
+	get: (key: string) => number | undefined
+	set: (key: string, value: number) => void
+	updateAllMapping: (newFields: Field[]) => void
+}
