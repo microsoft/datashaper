@@ -43,8 +43,6 @@ export interface BinArgs extends InputColumnArgs, OutputColumnArgs {
     min?: number;
     printRange?: boolean;
     // (undocumented)
-    roundBin?: boolean;
-    // (undocumented)
     strategy: BinStrategy;
 }
 

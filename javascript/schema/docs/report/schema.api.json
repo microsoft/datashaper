@@ -550,33 +550,6 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!BinArgs#roundBin:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "roundBin?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "roundBin",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!BinArgs#strategy:member",
               "docComment": "",
               "excerptTokens": [

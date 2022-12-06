@@ -21,6 +21,5 @@ export interface BinArgs extends InputColumnArgs, OutputColumnArgs
 |  [max?](./schema.binargs.max.md) |  | number | <i>(Optional)</i> Max boundary to categorize values into. If cell values are above this, they will default to +Infinity unless clamped. |
 |  [min?](./schema.binargs.min.md) |  | number | <i>(Optional)</i> Min boundary to categorize values into. If cell values are below this, they will default to -Infinity unless clamped. |
 |  [printRange?](./schema.binargs.printrange.md) |  | boolean | <i>(Optional)</i> If true, the range for each bin will be printed as the cell value instead of the truncated numeric value. This is useful for treating the |
-|  [roundBin?](./schema.binargs.roundbin.md) |  | boolean | <i>(Optional)</i> |
 |  [strategy](./schema.binargs.strategy.md) |  | [BinStrategy](./schema.binstrategy.md) |  |
 

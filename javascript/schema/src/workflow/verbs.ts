@@ -269,7 +269,6 @@ export enum BinStrategy {
 
 export interface BinArgs extends InputColumnArgs, OutputColumnArgs {
 	strategy: BinStrategy
-	roundBin?: boolean
 	/**
 	 * Fixed number of bins.
 	 * Note that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary -

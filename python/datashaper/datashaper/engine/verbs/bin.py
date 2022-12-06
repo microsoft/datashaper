@@ -11,6 +11,7 @@ from datashaper.types import BinStrategy
 
 
 def __get_bucket_value(bin_edges, inds, n, clamped, min_max, value, printRange):
+    print(bin_edges)
     if value < min_max[0]:
         if printRange:
             return f"<{min_max[0]}"
@@ -65,6 +66,22 @@ def bin(
         bin_edges = np.histogram_bin_edges(
             input_table[column], bins="sturges", range=min_max
         )    
+    elif bin_strategy == BinStrategy.Doane:
+        bin_edges = np.histogram_bin_edges(
+            input_table[column], bins="doane", range=min_max
+        ) 
+    elif bin_strategy == BinStrategy.Scott:
+        bin_edges = np.histogram_bin_edges(
+            input_table[column], bins="scott", range=min_max
+        ) 
+    elif bin_strategy == BinStrategy.Rice:
+        bin_edges = np.histogram_bin_edges(
+            input_table[column], bins="rice", range=min_max
+        ) 
+    elif bin_strategy == BinStrategy.Sqrt:
+        bin_edges = np.histogram_bin_edges(
+            input_table[column], bins="sqrt", range=min_max
+        ) 
     elif bin_strategy == BinStrategy.FixedCount and fixedcount is not None:
         bin_edges = np.histogram_bin_edges(
             input_table[column], bins=fixedcount, range=min_max
