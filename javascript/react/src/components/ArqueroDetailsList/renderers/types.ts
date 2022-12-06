@@ -62,11 +62,12 @@ export interface RichCellProps extends FormattedCellProps {
 	validationResult?: ValidationResult
 }
 
-export interface RichHeaderProps extends IDetailsColumnProps {
+export interface RichHeaderProps extends Partial<IDetailsColumnProps> {
 	field: Field
 	color?: string
 	stats?: string[]
 	onSelect?: ColumnSelectFunction
+	disabled?: boolean
 }
 
 export interface RichRowProps extends IDetailsRowProps {

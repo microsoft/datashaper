@@ -16,11 +16,12 @@ export declare enum StatsColumnType
 |  --- | --- | --- |
 |  Count | <code>&quot;count&quot;</code> |  |
 |  Distinct | <code>&quot;distinct&quot;</code> |  |
+|  Example | <code>&quot;example&quot;</code> |  |
 |  Invalid | <code>&quot;invalid&quot;</code> |  |
-|  Max | <code>&quot;max&quot;</code> |  |
+|  Max | <code>&quot;maximum&quot;</code> |  |
 |  Mean | <code>&quot;mean&quot;</code> |  |
 |  Median | <code>&quot;median&quot;</code> |  |
-|  Min | <code>&quot;min&quot;</code> |  |
+|  Min | <code>&quot;minimum&quot;</code> |  |
 |  Mode | <code>&quot;mode&quot;</code> |  |
 |  Stdev | <code>&quot;stdev&quot;</code> |  |
 |  Type | <code>&quot;type&quot;</code> |  |

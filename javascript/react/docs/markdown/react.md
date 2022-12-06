@@ -33,6 +33,7 @@
 |  [useComboBoxChangeHandler(step, updateFn, onChange)](./react.usecomboboxchangehandler.md) | Creates a callback handler for changing the step based on a combobox value. This only handles basic cases where the combobox option key can be set on the step using an object path. |
 |  [useComboBoxInputValueChangeHandler(step, updateFn, onChange)](./react.usecomboboxinputvaluechangehandler.md) | Creates a callback handler for changing the step based on a combobox value. This only handles basic cases where the combobox option key can be set on the step using an object path. |
 |  [useCommandBarColorDefaults(colors)](./react.usecommandbarcolordefaults.md) |  |
+|  [useDefaultStyles(styles, heights)](./react.usedefaultstyles.md) |  |
 |  [useDetailsHeaderRenderer()](./react.usedetailsheaderrenderer.md) | Overrides the default details header rendering so we can inject customization |
 |  [useDetailsListStyles(isHeaderFixed, features, styles, hasColumnClick, compact)](./react.usedetailsliststyles.md) | Create a DetailsHeader style with enough height to handle the options we've turned on. Each one requires a small amount of vertical space that stacks up. |
 |  [useDropdownChangeAllHandler(step, updateFn, onChange)](./react.usedropdownchangeallhandler.md) |  |
@@ -40,6 +41,9 @@
 |  [useFormattedNumber(value, formatter)](./react.useformattednumber.md) |  |
 |  [useGetColumnValidationErrors(validationResult)](./react.usegetcolumnvalidationerrors.md) |  |
 |  [useGroupHeaderRenderer(table, computedMetadata, groupHeaderFunction, lazyLoadGroups)](./react.usegroupheaderrenderer.md) | Overrides the default group header rendering so we can inject customization |
+|  [useHandleDelete(mapList, onChange)](./react.usehandledelete.md) |  |
+|  [useHandleKeyChange(mapList, onChange)](./react.usehandlekeychange.md) |  |
+|  [useHandleValueChange(mapList, dataType, onChange)](./react.usehandlevaluechange.md) |  |
 |  [useHeaderCommandBarDefaults(props, far, colors)](./react.useheadercommandbardefaults.md) | Helper to create the props necessary for the default inverted management bar. Basic colors can be customized, but note that if you do not want an always-inverted bar like that used in the DataShaper webapp, you may want to just tweak the Fluent styles as normal. |
 |  [useIconProps(validationResult)](./react.useiconprops.md) |  |
 |  [useIncrementingColumnColorScale(meta)](./react.useincrementingcolumncolorscale.md) | Creates a thematic nominal color scale function that auto-increments for the numeric columns in a table. |
@@ -86,6 +90,12 @@
 |  [ArqueroDetailsListProps](./react.arquerodetailslistprops.md) |  |
 |  [ArqueroTableHeaderProps](./react.arquerotableheaderprops.md) |  |
 |  [ArqueroTableHeaderStyles](./react.arquerotableheaderstyles.md) |  |
+|  [CodebookEnumDropdownFieldProps](./react.codebookenumdropdownfieldprops.md) |  |
+|  [CodebookFieldEditorProps](./react.codebookfieldeditorprops.md) |  |
+|  [CodebookPropsBase](./react.codebookpropsbase.md) |  |
+|  [CodebookStyles](./react.codebookstyles.md) |  |
+|  [CodebookTableEditorProps](./react.codebooktableeditorprops.md) |  |
+|  [CodebookTextFieldProps](./react.codebooktextfieldprops.md) |  |
 |  [ColumnOptions](./react.columnoptions.md) |  |
 |  [CommandBarColors](./react.commandbarcolors.md) |  |
 |  [DetailsListFeatures](./react.detailslistfeatures.md) |  |
@@ -103,6 +113,13 @@
 |  --- | --- |
 |  [ArqueroDetailsList](./react.arquerodetailslist.md) | Renders an arquero table using a fluent DetailsList. |
 |  [ArqueroTableHeader](./react.arquerotableheader.md) |  |
+|  [CodebookDataNatureField](./react.codebookdatanaturefield.md) |  |
+|  [CodebookDescriptionField](./react.codebookdescriptionfield.md) |  |
+|  [CodebookDisplayNameField](./react.codebookdisplaynamefield.md) |  |
+|  [CodebookFieldEditor](./react.codebookfieldeditor.md) |  |
+|  [CodebookStatsField](./react.codebookstatsfield.md) |  |
+|  [CodebookTableEditor](./react.codebooktableeditor.md) |  |
+|  [CodebookUnitField](./react.codebookunitfield.md) |  |
 |  [Guidance](./react.guidance.md) |  |
 |  [StepList](./react.steplist.md) |  |
 |  [TableCommands](./react.tablecommands.md) |  |

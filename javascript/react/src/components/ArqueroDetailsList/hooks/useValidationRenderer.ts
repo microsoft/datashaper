@@ -23,7 +23,7 @@ const getResults = (value: any, validationResult?: ValidationResult) => {
 	const resultTestValidationList: ValidationTestResult[] = []
 
 	if (validationResult !== undefined) {
-		validationResult.errors.map((e: FieldError) => {
+		validationResult.errors.forEach((e: FieldError) => {
 			if (e.callbackFunction !== undefined) {
 				resultTestValidationList.push(e.callbackFunction([value], false))
 			}
