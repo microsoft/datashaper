@@ -1,6 +1,27 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
+        "ResourceRelationship": {
+            "description": "An explicit resource relationship",
+            "properties": {
+                "rel": {
+                    "description": "The relationship type",
+                    "type": "string"
+                },
+                "source": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/ResourceSchema"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "The linked or embedded resource"
+                }
+            },
+            "type": "object"
+        },
         "ResourceSchema": {
             "description": "Parent class for any resource type understood by the system.\nAny object type that extends from Resouce is expected to have a standalone schema published.\nFor project state, this can be left as generic as possible for now.",
             "properties": {
@@ -53,6 +74,9 @@
                                 "$ref": "#/definitions/ResourceSchema"
                             },
                             {
+                                "$ref": "#/definitions/ResourceRelationship"
+                            },
+                            {
                                 "type": "string"
                             }
                         ]
@@ -82,6 +106,12 @@
         },
         "name": {
             "description": "User-specified name. This will serve as the local id (i.e., like a filename.) and should be URI-compatible.\nThis should be editable, just like any other filename on a file system.",
+            "type": "string"
+        },
+        "profile": {
+            "enum": [
+                "datapackage"
+            ],
             "type": "string"
         },
         "resources": {

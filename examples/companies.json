@@ -1,0 +1,58 @@
+{
+	"name": "Companies",
+	"resources": [
+		{
+			"name": "companies",
+			"profile": "databundle",
+			"sources": [
+				{
+					"rel": "input",
+					"source": {
+						"profile": "datatable",
+						"path": "data/companies.csv"
+					}
+				}
+			]
+		},
+		{
+			"name": "companies2",
+			"profile": "databundle",
+			"sources": [
+				{
+					"rel": "input",
+					"source": {
+						"profile": "datatable",
+						"path": "data/companies2.csv"
+					}
+				}
+			]
+		},
+		{
+			"name": "products",
+			"profile": "databundle",
+			"sources": [
+				{
+					"rel": "input",
+					"source": {
+						"profile": "datatable",
+						"name": "companies",
+						"path": "data/products.csv"
+					}
+				}
+			]
+		},
+		{
+			"name": "stocks",
+			"profile": "databundle",
+			"sources": [
+				{
+					"rel": "input",
+					"source": {
+						"profile": "datatable",
+						"path": "data/stocks.csv"
+					}
+				}
+			]
+		}
+	]
+}
