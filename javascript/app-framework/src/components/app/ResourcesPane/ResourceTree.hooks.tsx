@@ -2,51 +2,63 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	IContextualMenuItem,
-	INavLink,
-	INavLinkGroup,
-} from '@fluentui/react'
-import { useMemo } from 'react'
+import type { TreeItem } from '@essex/components'
+import { useCallback, useMemo } from 'react'
 
 import type { ResourceRoute } from '../../../types.js'
 
-export function useNavGroups(
-	resources: ResourceRoute[][],
-	onSelect: (v: ResourceRoute) => void,
-): INavLinkGroup[] {
-	return useMemo<INavLinkGroup[]>(() => {
-		const result: INavLinkGroup[] = []
-
-		for (const group of resources) {
-			const links: INavLink[] = []
+export function useTreeGroups(groups: ResourceRoute[][]): TreeItem[][] {
+	return useMemo(() => {
+		return groups.map(group => {
+			const result: TreeItem[] = []
 			for (const resource of group) {
-				links.push(makeNavLink(resource, onSelect))
+				result.push(makeTreeItem(resource))
 			}
-			result.push({ links })
-		}
-
-		return result.filter(g => g.links.length > 0)
-	}, [resources, onSelect])
+			return result
+		})
+	}, [groups])
 }
 
-function makeNavLink(
-	resource: ResourceRoute,
+// this is a temporary workaround for the fact that the Tree component
+// doesn't support individual onClicks so we have to look up the item
+export function useItemClick(
+	resources: ResourceRoute[][],
 	onSelect: (v: ResourceRoute) => void,
-): INavLink & { menuItems?: IContextualMenuItem[] } {
-	const numChildren = resource.children?.length ?? 0
-
-	return {
-		name: resource.title,
-		iconProps: {
-			iconName: resource.icon,
-			styles: { root: { marginLeft: 25 } },
+) {
+	const map = useMemo(() => {
+		const result = new Map<string, ResourceRoute>()
+		const walk = (res: ResourceRoute) => {
+			result.set(res.href, res)
+			for (const child of res.children ?? []) {
+				walk(child)
+			}
+		}
+		for (const group of resources) {
+			for (const resource of group) {
+				walk(resource)
+			}
+		}
+		return result
+	}, [resources])
+	return useCallback(
+		(item: TreeItem) => {
+			const match = map.get(item.key)
+			onSelect(match!)
 		},
-		url: '',
-		icon: numChildren > 0 ? undefined : resource.icon,
+		[map, onSelect],
+	)
+}
+
+function makeTreeItem(resource: ResourceRoute): TreeItem {
+	const numChildren = resource.children?.length ?? 0
+	return {
 		key: resource.href,
-		links: resource.children?.map(c => makeNavLink(c, onSelect)),
+		text: resource.title,
+		iconName: resource.icon,
+		children:
+			numChildren > 0
+				? resource.children?.map(c => makeTreeItem(c))
+				: undefined,
 		menuItems: resource.menuItems,
-		onClick: () => onSelect(resource),
 	}
 }
