@@ -3,7 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { type BaseFile, createBaseFile } from '@datashaper/utilities'
-import type { ICommandBarItemProps, IContextualMenuItem } from '@fluentui/react'
+import type {
+	ICommandBarItemProps,
+	IContextualMenuItem,
+	IIconProps,
+} from '@fluentui/react'
 import { useTheme } from '@fluentui/react'
 import { useObservableState } from 'observable-hooks'
 import { useCallback, useMemo } from 'react'
@@ -45,60 +49,42 @@ export function useFileManagementCommands(
 	const saveCommands = useSaveMenuCommands(plugins)
 	const openCommands = useOpenMenuItems(examples, plugins, setFile)
 	const theme = useTheme()
-
+	const buttonStyles = useMemo(
+		() => ({
+			root: {
+				background: theme.palette.neutralLighter,
+			},
+		}),
+		[theme],
+	)
+	const createItem = useCallback(
+		(
+			text: string,
+			iconProps: IIconProps,
+			items: IContextualMenuItem[],
+			extra: Partial<ICommandBarItemProps> = {},
+		): ICommandBarItemProps => {
+			return {
+				key: text,
+				text: expanded ? text : undefined,
+				iconOnly: !expanded,
+				iconProps,
+				buttonStyles,
+				subMenuProps: { items },
+				...extra,
+			}
+		},
+		[buttonStyles, expanded],
+	)
 	const commands = useMemo<ICommandBarItemProps[]>(
 		() => [
-			{
-				key: 'new',
-				text: expanded ? 'New' : '',
-				iconProps: icons.newFile,
-				subMenuProps: {
-					items: newCommands,
-				},
-				buttonStyles: {
-					root: {
-						background: theme.palette.neutralLighter,
-					},
-				},
-			},
-			{
-				key: 'open',
-				text: expanded ? 'Open' : undefined,
-				iconProps: icons.openFile,
-				iconOnly: !expanded,
-				subMenuProps: {
-					items: openCommands,
-				},
-				buttonStyles: {
-					root: {
-						background: theme.palette.neutralLighter,
-					},
-				},
-			},
-			{
-				key: 'save',
-				text: expanded ? 'Save' : undefined,
-				iconProps: icons.save,
-				iconOnly: !expanded,
+			createItem('New', icons.newFile, newCommands),
+			createItem('Open', icons.openFile, openCommands),
+			createItem('Save', icons.save, saveCommands, {
 				disabled: isDataPackageEmpty,
-				subMenuProps: {
-					items: saveCommands,
-				},
-				buttonStyles: {
-					root: {
-						background: theme.palette.neutralLighter,
-					},
-				},
-			},
+			}),
 		],
-		[
-			theme,
-			newCommands,
-			openCommands,
-			saveCommands,
-			expanded,
-			isDataPackageEmpty,
-		],
+		[newCommands, openCommands, saveCommands, isDataPackageEmpty],
 	)
 
 	return {
