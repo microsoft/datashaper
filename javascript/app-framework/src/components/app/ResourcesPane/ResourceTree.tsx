@@ -3,49 +3,33 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Tree } from '@essex/components'
-import type {
-	IContextualMenuItem,
-	INavLink,
-	IRenderFunction,
-} from '@fluentui/react'
-import { Nav } from '@fluentui/react'
-import { memo, useCallback } from 'react'
+import { memo } from 'react'
+import styled from 'styled-components'
 
-import {
-	useItemClick,
-	useNavGroups,
-	useTreeItems,
-} from './ResourceTree.hooks.js'
+import { useItemClick, useTreeGroups } from './ResourceTree.hooks.js'
 import type { ResourceTreeProps } from './ResourceTree.types.js'
-import { TreeLink } from './TreeLink.js'
 
 export const ResourceTree: React.FC<ResourceTreeProps> = memo(
 	function ResourceTree({ resources, selectedRoute, onSelect }) {
-		const navGroups = useNavGroups(resources, onSelect)
-		const treeItems = useTreeItems(resources)
-		console.log('tree items', treeItems)
+		const groups = useTreeGroups(resources)
 		const onItemClick = useItemClick(resources, onSelect)
 		return (
-			<>
-				{/* <Nav
-				groups={navGroups}
-				selectedKey={selectedRoute}
-				onRenderLink={renderLink}
-			/> */}
-				<Tree
-					items={treeItems}
-					selectedKey={selectedRoute}
-					onItemClick={onItemClick}
-				/>
-			</>
+			<Container>
+				{groups.map((group, index) => (
+					<Tree
+						key={`tree-group-${index}`}
+						items={group}
+						selectedKey={selectedRoute}
+						onItemClick={onItemClick}
+					/>
+				))}
+			</Container>
 		)
 	},
 )
-const renderLink: IRenderFunction<INavLink> = (
-	props?: INavLink & { menuItems?: IContextualMenuItem[] },
-	defaultRender?: (props?: INavLink | undefined) => JSX.Element | null,
-): JSX.Element | null => (
-	<TreeLink menuItems={props?.menuItems}>
-		{defaultRender?.(props) ?? null}
-	</TreeLink>
-)
+
+const Container = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+`

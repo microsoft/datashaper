@@ -4,7 +4,7 @@
  */
 import type { AllotmentHandle } from 'allotment'
 import { Allotment } from 'allotment'
-import { memo, useCallback, useRef } from 'react'
+import { memo, useCallback, useMemo, useRef } from 'react'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 
 import { DataPackageProvider } from '../../../context/index.js'
@@ -54,7 +54,8 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 
 	const navigate = useNavigate()
 	const fileTreeStyle = useFileTreeStyle()
-	const selectedKey = useLocation().pathname
+	const pathname = useLocation().pathname
+	const selectedKey = useMemo(() => decodeURI(pathname), [pathname])
 	const onSelect = useCallback(
 		(v: ResourceRoute) => navigate(v.href),
 		[navigate],
