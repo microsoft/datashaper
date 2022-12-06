@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { type Value, DataType } from '@datashaper/schema'
+import { type Value,DataType } from '@datashaper/schema'
 import { useCallback } from 'react'
 
 export function useHandleKeyChange(
@@ -57,7 +57,6 @@ export function useHandleDelete(
 	return useCallback(
 		key => {
 			const mapping = { ...mapList }
-			console.log(mapping)
 			delete mapping[key]
 			onChange?.(mapping)
 		},
