@@ -8,19 +8,16 @@
  * The core profiles for DataShaper are defined here, but any application can define one as a string.
  */
 export type Profile =
-	/**
-	 * This is the profile name for a Codebook.
-	 */
-	| 'codebook'
-	/**
-	 * This is the profile name for a DataTable
-	 */
-	| 'datatable'
-	/**
-	 * This is the profile name for a Workflow.
-	 */
-	| 'workflow'
+	| KnownProfile
 	/**
 	 * Any other custom profile string can be specified by applications.
 	 */
 	| string
+
+export enum KnownProfile {
+	DataPackage = 'datapackage',
+	DataTable = 'datatable',
+	Codebook = 'codebook',
+	Workflow = 'workflow',
+	TableBundle = 'tablebundle',
+}

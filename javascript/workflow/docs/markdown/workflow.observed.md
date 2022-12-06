@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class Observed 
+export declare abstract class Observed 
 ```
 
 ## Properties
@@ -15,10 +15,13 @@ export declare class Observed
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [\_onChange](./workflow.observed._onchange.md) | <code>protected</code> | Subject&lt;void&gt; |  |
+|  [\_onDispose](./workflow.observed._ondispose.md) | <code>protected</code> | Subject&lt;void&gt; |  |
 
 ## Methods
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
+|  [dispose()](./workflow.observed.dispose.md) |  |  |
 |  [onChange(handler, fireSync)](./workflow.observed.onchange.md) |  |  |
+|  [onDispose(handler)](./workflow.observed.ondispose.md) |  |  |
 

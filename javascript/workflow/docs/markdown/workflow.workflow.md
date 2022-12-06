@@ -7,11 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class Workflow extends Resource implements SchemaResource<WorkflowSchema> 
+export declare class Workflow extends Resource 
 ```
 <b>Extends:</b> [Resource](./workflow.resource.md)
-
-<b>Implements:</b> [SchemaResource](./workflow.schemaresource.md)<!-- -->&lt;WorkflowSchema&gt;
 
 ## Constructors
 
@@ -34,6 +32,7 @@ export declare class Workflow extends Resource implements SchemaResource<Workflo
 |  [length$](./workflow.workflow.length_.md) | <code>readonly</code> | Observable&lt;number&gt; |  |
 |  [outputNames](./workflow.workflow.outputnames.md) | <code>readonly</code> | string\[\] |  |
 |  [outputNames$](./workflow.workflow.outputnames_.md) | <code>readonly</code> | Observable&lt;string\[\]&gt; |  |
+|  [profile](./workflow.workflow.profile.md) | <code>readonly</code> | (not declared) |  |
 |  [steps](./workflow.workflow.steps.md) | <code>readonly</code> | [Step](./workflow.step.md)<!-- -->\[\] |  |
 |  [steps$](./workflow.workflow.steps_.md) | <code>readonly</code> | BehaviorSubject&lt;[Step](./workflow.step.md)<!-- -->\[\]&gt; |  |
 
@@ -48,6 +47,7 @@ export declare class Workflow extends Resource implements SchemaResource<Workflo
 |  [addInputTables(inputs)](./workflow.workflow.addinputtables.md) |  |  |
 |  [addOutput(name)](./workflow.workflow.addoutput.md) |  | Add an output binding |
 |  [addStep(stepInput)](./workflow.workflow.addstep.md) |  | Adds a step to the pipeline |
+|  [defaultName()](./workflow.workflow.defaultname.md) |  |  |
 |  [dispose()](./workflow.workflow.dispose.md) |  |  |
 |  [hasInputName(input)](./workflow.workflow.hasinputname.md) |  |  |
 |  [hasOutputName(name)](./workflow.workflow.hasoutputname.md) |  |  |

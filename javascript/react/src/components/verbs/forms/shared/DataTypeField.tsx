@@ -5,7 +5,7 @@
 import { DataType } from '@datashaper/schema'
 import { coerce } from '@datashaper/tables'
 import type { IDropdownOption } from '@fluentui/react'
-import { Dropdown, SpinButton } from '@fluentui/react'
+import { Dropdown, mergeStyleSets, SpinButton } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
 import { CalendarPicker } from '../../../controls/index.js'
@@ -22,12 +22,15 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 		onKeyChange,
 		onValueChange,
 		isKey,
+		dropdownStyles,
+		disabled,
 	}) {
 		const booleanOptions: IDropdownOption[] = [
 			{ key: 'true', text: 'true' },
 			{ key: 'false', text: 'false' },
 		]
 
+		const styles = mergeStyleSets(narrowerDropdownStyles, dropdownStyles)
 		const onSelectDate = useCallback(
 			(date: Date): void => {
 				const val = coerce(date, dataType)
@@ -84,7 +87,11 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 		return (
 			<Container>
 				{dataType === DataType.Date ? (
-					<CalendarPicker onSelectDate={onSelectDate} value={value} />
+					<CalendarPicker
+						onSelectDate={onSelectDate}
+						disabled={disabled}
+						value={value}
+					/>
 				) : null}
 
 				{dataType === DataType.String ? (
@@ -92,17 +99,18 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 						onChange={onChangeTextFieldValue}
 						placeholder={placeholder}
 						value={value}
-						styles={narrowerDropdownStyles}
+						styles={styles}
+						disabled={disabled}
 					></TextValue>
 				) : null}
-
 				{dataType === DataType.Number ? (
 					<SpinButton
 						min={0}
 						step={1}
 						value={value}
-						styles={narrowerDropdownStyles}
+						styles={styles}
 						onChange={spinButtonOnChange}
+						disabled={disabled}
 					/>
 				) : null}
 
@@ -110,8 +118,9 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 					<Dropdown
 						selectedKey={value.toString()}
 						options={booleanOptions}
-						styles={narrowerDropdownStyles}
+						styles={styles}
 						onChange={dropDownOnChange}
+						disabled={disabled}
 					/>
 				) : null}
 			</Container>

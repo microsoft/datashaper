@@ -5,18 +5,21 @@
 import type { CodebookSchema, Field } from '@datashaper/schema'
 import {
 	createCodebookSchemaObject,
+	KnownProfile,
 	LATEST_CODEBOOK_SCHEMA,
 } from '@datashaper/schema'
 
 import type { Maybe } from '../primitives.js'
 import { Resource } from './Resource.js'
-import type { SchemaResource } from './types.js'
 
-export class Codebook
-	extends Resource
-	implements SchemaResource<CodebookSchema>
-{
+export class Codebook extends Resource {
 	public readonly $schema = LATEST_CODEBOOK_SCHEMA
+	public readonly profile = KnownProfile.Codebook
+
+	public override defaultName(): string {
+		return 'codebook.json'
+	}
+
 	private _fields: Field[] = []
 
 	public constructor(codebook?: CodebookSchema) {

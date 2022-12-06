@@ -4,6 +4,7 @@
  */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-argument */
 import Editor from '@monaco-editor/react'
+import { useThematic } from '@thematic/react'
 import { useDebounceFn } from 'ahooks'
 import { memo } from 'react'
 
@@ -14,6 +15,8 @@ export const JsonEditor: React.FC<JsonEditorProps> = memo(function JsonEditor({
 	onChange,
 }) {
 	const { run: handleEditorChange } = useDebounceFn(onChange, { wait: 1000 })
+	const theme = useThematic()
+	const themeName = theme.variant === 'dark' ? 'vs-dark' : 'light'
 
 	return (
 		<Editor
@@ -22,6 +25,7 @@ export const JsonEditor: React.FC<JsonEditorProps> = memo(function JsonEditor({
 			defaultValue={content}
 			value={content}
 			onChange={handleEditorChange}
+			theme={themeName}
 		/>
 	)
 })

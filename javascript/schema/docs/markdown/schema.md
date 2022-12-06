@@ -21,6 +21,7 @@
 |  [FieldAggregateOperation](./schema.fieldaggregateoperation.md) | This is the subset of aggregate functions that can operate on a single field so we don't accommodate additional args. See https://uwdata.github.io/arquero/api/op\#aggregate-functions |
 |  [FilterCompareType](./schema.filtercomparetype.md) |  |
 |  [JoinStrategy](./schema.joinstrategy.md) |  |
+|  [KnownProfile](./schema.knownprofile.md) |  |
 |  [MathOperator](./schema.mathoperator.md) |  |
 |  [MergeStrategy](./schema.mergestrategy.md) |  |
 |  [NumericComparisonOperator](./schema.numericcomparisonoperator.md) |  |
@@ -28,6 +29,7 @@
 |  [SetOp](./schema.setop.md) |  |
 |  [SortDirection](./schema.sortdirection.md) |  |
 |  [StringComparisonOperator](./schema.stringcomparisonoperator.md) |  |
+|  [TableBundleRel](./schema.tablebundlerel.md) |  |
 |  [VariableNature](./schema.variablenature.md) | Describes the semantic shape of a variable. This has particular effect on how we display and compare data, such as using line charts for continuous versus bar charts for categorical. This mostly applies to numeric variables, but strings for instance can be categorial. |
 |  [Verb](./schema.verb.md) |  |
 |  [WindowFunction](./schema.windowfunction.md) | These are operations that perform windowed compute. See https://uwdata.github.io/arquero/api/op\#window-functions |
@@ -40,6 +42,7 @@
 |  [createDataPackageSchemaObject(input)](./schema.createdatapackageschemaobject.md) |  |
 |  [createDataTableSchemaObject(input)](./schema.createdatatableschemaobject.md) |  |
 |  [createSchemaValidator()](./schema.createschemavalidator.md) |  |
+|  [createTableBundleSchemaObject(input)](./schema.createtablebundleschemaobject.md) |  |
 |  [createWorkflowSchemaObject(input)](./schema.createworkflowschemaobject.md) |  |
 
 ## Interfaces
@@ -52,6 +55,7 @@
 |  [BinArgs](./schema.binargs.md) |  |
 |  [BinarizeArgs](./schema.binarizeargs.md) |  |
 |  [BooleanArgs](./schema.booleanargs.md) |  |
+|  [BundleSchema](./schema.bundleschema.md) | A schema for defining custom bundle types. |
 |  [Category](./schema.category.md) |  |
 |  [CodebookSchema](./schema.codebookschema.md) | This contains all of the field-level details for interpreting a dataset, including data types, mapping, and metadata. Note that with persisted metadata and field examples, a dataset can often be visualized and described to the user without actually loading the source file. resource profile: 'codebook' |
 |  [Constraints](./schema.constraints.md) | Validation constraints for a field. |
@@ -89,11 +93,14 @@
 |  [ParserOptions](./schema.parseroptions.md) | Parsing options for delimited files. This is a mix of the options from pandas and spark. |
 |  [PivotArgs](./schema.pivotargs.md) |  |
 |  [RecodeArgs](./schema.recodeargs.md) |  |
+|  [RelationshipConstraint](./schema.relationshipconstraint.md) |  |
+|  [ResourceRelationship](./schema.resourcerelationship.md) | An explicit resource relationship |
 |  [ResourceSchema](./schema.resourceschema.md) | Parent class for any resource type understood by the system. Any object type that extends from Resouce is expected to have a standalone schema published. For project state, this can be left as generic as possible for now. |
 |  [RollupArgs](./schema.rollupargs.md) |  |
 |  [SampleArgs](./schema.sampleargs.md) |  |
 |  [SpreadArgs](./schema.spreadargs.md) |  |
 |  [StepJsonCommon](./schema.stepjsoncommon.md) | Common step properties |
+|  [TableBundleSchema](./schema.tablebundleschema.md) |  |
 |  [TypeHints](./schema.typehints.md) | Configuration values for interpreting data types when parsing a delimited file. By default, all values are read as strings - applying these type hints can derive primitive types from the strings. |
 |  [UnhotArgs](./schema.unhotargs.md) |  |
 |  [ValidationResult](./schema.validationresult.md) |  |
@@ -109,6 +116,7 @@
 |  [LATEST\_CODEBOOK\_SCHEMA](./schema.latest_codebook_schema.md) |  |
 |  [LATEST\_DATAPACKAGE\_SCHEMA](./schema.latest_datapackage_schema.md) |  |
 |  [LATEST\_DATATABLE\_SCHEMA](./schema.latest_datatable_schema.md) |  |
+|  [LATEST\_TABLEBUNDLE\_SCHEMA](./schema.latest_tablebundle_schema.md) |  |
 |  [LATEST\_WORKFLOW\_SCHEMA](./schema.latest_workflow_schema.md) |  |
 
 ## Type Aliases
@@ -119,6 +127,7 @@
 |  [FactoryInput](./schema.factoryinput.md) |  |
 |  [GroupbyArgs](./schema.groupbyargs.md) |  |
 |  [PortBinding](./schema.portbinding.md) |  |
+|  [Profile](./schema.profile.md) | Resources must have a profile, which is a key defining how it should be interpreted. Profiles are essentially shorthand for a schema URL. The core profiles for DataShaper are defined here, but any application can define one as a string. |
 |  [RenameArgs](./schema.renameargs.md) |  |
 |  [SelectArgs](./schema.selectargs.md) |  |
 |  [Step](./schema.step.md) | Specification for step items |

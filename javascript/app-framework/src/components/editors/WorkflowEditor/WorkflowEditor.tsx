@@ -9,9 +9,9 @@ import { useContent, useOnChange } from './WorkflowEditor.hooks.js'
 import type { WorkflowEditorProps } from './WorkflowEditor.types.js'
 
 export const WorkflowEditor: React.FC<WorkflowEditorProps> = memo(
-	function WorkflowEditor({ dataTable }) {
-		const content = useContent(dataTable)
-		const onChange = useOnChange(dataTable)
+	function WorkflowEditor({ resource }) {
+		const content = useContent(resource)
+		const onChange = useOnChange(resource)
 		return <JsonEditor content={content} onChange={onChange} />
 	},
 )

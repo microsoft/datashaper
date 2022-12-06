@@ -4,6 +4,7 @@
  */
 import type { DataFormat } from '../data.js'
 import type { ResourceSchema } from '../datapackage/ResourceSchema.js'
+import type { KnownProfile } from '../Profile.js'
 import type { DataShape } from './DataShape.js'
 import type { ParserOptions } from './ParserOptions.js'
 import type { TypeHints } from './TypeHints.js'
@@ -16,6 +17,8 @@ import type { TypeHints } from './TypeHints.js'
  * resource profile: 'datatable'
  */
 export interface DataTableSchema extends ResourceSchema {
+	profile: KnownProfile.DataTable
+
 	/**
 	 * Option to embed the data directly in the JSON descriptor.
 	 */

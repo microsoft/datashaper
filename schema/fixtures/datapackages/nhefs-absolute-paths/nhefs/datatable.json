@@ -1,12 +1,9 @@
 {
 	"$schema": "https://microsoft.github.io/datashaper/schema/datatable/v1.json",
-	"name": "nhefs",
-	"title": "NHEFS",
 	"profile": "datatable",
 	"description": "File parsing options for the nhefs.csv source file. Note that the defaults are sufficient.",
 	"path": "https://raw.githubusercontent.com/ainaimi/SER_2018/master/nhefs.csv",
 	"homepage": "https://wwwn.cdc.gov/nchs/nhanes/nhefs/default.aspx/",
 	"format": "csv",
-	"layout": "micro",
-	"sources": ["nhefs/codebook.json"]
+	"layout": "micro"
 }

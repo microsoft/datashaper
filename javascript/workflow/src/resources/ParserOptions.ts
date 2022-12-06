@@ -6,7 +6,6 @@ import type { ParserOptions as ParserOptionsSchema } from '@datashaper/schema'
 
 import type { Maybe } from '../primitives.js'
 import { Observed } from './Observed.js'
-import type { SchemaResource } from './types.js'
 
 const DEFAULT_DELIMITER = ','
 const DEFAULT_QUOTE = '"'
@@ -15,10 +14,7 @@ const DEFAULT_SKIP_BLANK_LINES = true
 const DEFAULT_SKIP_ROWS = 0
 const DEFAULT_READ_ROWS = Infinity
 
-export class ParserOptions
-	extends Observed
-	implements ParserOptionsSchema, SchemaResource<ParserOptionsSchema>
-{
+export class ParserOptions extends Observed implements ParserOptionsSchema {
 	private _delimiter: string
 	private _names: string[] | undefined
 	private _lineTerminator: string

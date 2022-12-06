@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Named } from '../Named.js'
+import type { KnownProfile } from '../Profile.js'
 import type { ResourceSchema } from './ResourceSchema.js'
 
 /**
@@ -12,6 +13,7 @@ import type { ResourceSchema } from './ResourceSchema.js'
  */
 export interface DataPackageSchema extends Named {
 	$schema: string
+	profile: KnownProfile.DataPackage
 	/**
 	 * List of Resources that make up the data package.
 	 * May also be a list of raw strings which are paths to Resource files in the bundle.

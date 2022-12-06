@@ -12,7 +12,7 @@ import { useContent, useOnChange } from './DataSourceEditor.hooks.js'
 import type { DataSourceEditorProps } from './DataSourceEditor.types.js'
 
 export const DataSourceEditor: React.FC<DataSourceEditorProps> = memo(
-	function DataSourceEditor({ dataTable }) {
+	function DataSourceEditor({ resource: dataTable }) {
 		const [viewType, setViewType] = useState(ViewType.Interactive)
 		const content = useContent(dataTable)
 		const onChange = useOnChange(dataTable)

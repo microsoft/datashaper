@@ -25,9 +25,9 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	public id: NodeId = uuid()
 
 	// Observable Outputs
-	private _config = new BehaviorSubject<Maybe<Config>>(undefined)
-	private _output = new BehaviorSubject<Maybe<T>>(undefined)
-	private _bindings = new BehaviorSubject<NodeBinding<T>[]>([])
+	private _config$ = new BehaviorSubject<Maybe<Config>>(undefined)
+	private _output$ = new BehaviorSubject<Maybe<T>>(undefined)
+	private _bindings$ = new BehaviorSubject<NodeBinding<T>[]>([])
 
 	// Input Subscriptions
 	private _inputValues = new Map<SocketName, BehaviorSubject<Maybe<T>>>()
@@ -41,15 +41,15 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	public constructor(public readonly inputs: SocketName[] = []) {}
 
 	public get config$(): Observable<Maybe<Config>> {
-		return this._config
+		return this._config$
 	}
 
 	public get config(): Maybe<Config> {
-		return this._config.value
+		return this._config$.value
 	}
 
 	public set config(value: Maybe<Config>) {
-		this._config.next(value)
+		this._config$.next(value)
 		void this.recalculate()
 	}
 
@@ -59,15 +59,15 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 
 	public binding(name: SocketName = DEFAULT_INPUT_NAME): Maybe<NodeBinding<T>> {
 		name = this.verifyInputSocketName(name)
-		return this._bindings.value.find(i => i.input === name)
+		return this.bindings.find(i => i.input === name)
 	}
 
 	public get bindings$(): Observable<NodeBinding<T>[]> {
-		return this._bindings
+		return this._bindings$
 	}
 
 	public get bindings(): NodeBinding<T>[] {
-		return this._bindings.value
+		return this._bindings$.value
 	}
 
 	protected inputValue(name: SocketName = DEFAULT_INPUT_NAME): Maybe<T> {
@@ -106,11 +106,11 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	// #region output
 
 	public get output$(): Observable<Maybe<T>> {
-		return this._output
+		return this._output$
 	}
 
 	public get output(): Maybe<T> {
-		return this._output.value
+		return this._output$.value
 	}
 
 	// #endregion outputs
@@ -137,7 +137,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 
 		const bindSingleInput = (binding: NodeBinding<T>) => {
 			const addBinding = () => {
-				this._bindings.next([
+				this._bindings$.next([
 					...this.bindings.filter(i => i.input !== input),
 					binding,
 				])
@@ -201,8 +201,8 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	}
 
 	private unbindSilent(name: SocketName): void {
-		if (this._bindings.value.some(i => i.input === name)) {
-			this._bindings.next(this._bindings.value.filter(i => i.input !== name))
+		if (this._bindings$.value.some(i => i.input === name)) {
+			this._bindings$.next(this._bindings$.value.filter(i => i.input !== name))
 		}
 		this._inputSubscriptions.get(name)?.unsubscribe()
 		this._inputSubscriptions.delete(name)
@@ -258,7 +258,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 */
 	protected emit = (value: Maybe<T>): void => {
 		if (value !== this.output) {
-			this._output.next(value)
+			this._output$.next(value)
 		}
 	}
 
@@ -267,7 +267,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * @param name - The input socket name
 	 */
 	protected emitError = (error: unknown): void => {
-		this._output.error(error)
+		this._output$.error(error)
 	}
 
 	// #endregion

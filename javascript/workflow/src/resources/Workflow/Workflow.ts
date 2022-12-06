@@ -6,6 +6,7 @@ import type { NamedPortBinding, WorkflowSchema } from '@datashaper/schema'
 import {
 	createSchemaValidator,
 	createWorkflowSchemaObject,
+	KnownProfile,
 	LATEST_WORKFLOW_SCHEMA,
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
@@ -18,7 +19,6 @@ import type { Node, SocketName } from '../../dataflow/types.js'
 import type { Maybe } from '../../primitives.js'
 import { fetchJson } from '../../util/network.js'
 import { Resource } from '../Resource.js'
-import type { SchemaResource } from '../types.js'
 import { createNode } from './createNode.js'
 import { readStep } from './readStep.js'
 import type { Step, StepInput, TableExportOptions } from './types.js'
@@ -31,21 +31,22 @@ const DEFAULT_INPUT = '__DEFAULT_INPUT__'
 export type TableObservable = Observable<Maybe<TableContainer>>
 type TableSubject = BehaviorSubject<Maybe<TableContainer>>
 
-export class Workflow
-	extends Resource
-	implements SchemaResource<WorkflowSchema>
-{
+export class Workflow extends Resource {
 	private static readonly validator = createSchemaValidator()
 	public readonly $schema = LATEST_WORKFLOW_SCHEMA
+	public readonly profile = KnownProfile.Workflow
+
 	// Workflow Data Fields
-	private readonly _steps = new BehaviorSubject<Step[]>([])
-	private readonly _numSteps = this._steps.pipe(map(steps => steps.length))
-	private readonly _inputNames = new BehaviorSubject<string[]>([])
-	private readonly _outputNames = new BehaviorSubject<string[]>([])
-	private readonly _allTableNames = this._outputNames
-		.pipe(mergeWith(this._inputNames))
+	private readonly _steps$ = new BehaviorSubject<Step[]>([])
+	private readonly _numSteps$ = this._steps$.pipe(map(steps => steps.length))
+	private readonly _inputNames$ = new BehaviorSubject<string[]>([])
+	private readonly _outputNames$ = new BehaviorSubject<string[]>([])
+	private readonly _allTableNames$ = this._outputNames$
+		.pipe(mergeWith(this._inputNames$))
 		.pipe(
-			map(() => unique(this._outputNames.value.concat(this._inputNames.value))),
+			map(() =>
+				unique(this._outputNames$.value.concat(this._inputNames$.value)),
+			),
 		)
 
 	// The dataflow graph
@@ -57,22 +58,26 @@ export class Workflow
 	private readonly _tableSubscriptions: Map<string, Subscription> = new Map()
 	private readonly _tables = new Map<string, TableSubject>()
 	private _defaultOutputSubscription: Subscription | undefined
-	private readonly _defaultOutput = new BehaviorSubject<Maybe<TableContainer>>(
+	private readonly _defaultOutput$ = new BehaviorSubject<Maybe<TableContainer>>(
 		undefined,
 	)
 	private _defaultInputSubscription: Subscription | undefined
-	private readonly _defaultInput = new BehaviorSubject<Maybe<TableContainer>>(
+	private readonly _defaultInput$ = new BehaviorSubject<Maybe<TableContainer>>(
 		undefined,
 	)
 	private _disposables: Array<() => void> = []
 
+	public override defaultName(): string {
+		return 'workflow.json'
+	}
+
 	public constructor(input?: WorkflowSchema, private _strictInputs = false) {
 		super()
 		this.loadSchema(input, true)
-		this._graph.add(observableNode(DEFAULT_INPUT, this._defaultInput))
+		this._graph.add(observableNode(DEFAULT_INPUT, this._defaultInput$))
 	}
 
-	public dispose(): void {
+	public override dispose(): void {
 		this._defaultInputSubscription?.unsubscribe()
 		this._defaultInputSubscription = undefined
 		this._defaultOutputSubscription?.unsubscribe()
@@ -81,6 +86,7 @@ export class Workflow
 		this._tableSubscriptions.clear()
 		this._graph.clear()
 		this._disposables.forEach(d => d())
+		super.dispose()
 	}
 
 	private rebindDefaultOutput() {
@@ -89,7 +95,9 @@ export class Workflow
 		> => {
 			const steps = this.steps
 			// Returns the default output of the final node
-			if (steps.length === 0) return this._defaultInput
+			if (steps.length === 0) {
+				return this._defaultInput$
+			}
 			const lastStepId = steps[steps.length - 1]!.id
 			const lastNode = this.getNode(lastStepId)
 			// Nodes use BehaviorSubject internally
@@ -97,7 +105,7 @@ export class Workflow
 		}
 		this._defaultOutputSubscription?.unsubscribe()
 		this._defaultOutputSubscription = defaultOutputObservable()?.subscribe(
-			value => this._defaultOutput.next({ ...value, id: this.name }),
+			value => this._defaultOutput$.next({ ...value, id: this.name }),
 		)
 	}
 
@@ -128,7 +136,7 @@ export class Workflow
 
 	private _read(name?: string) {
 		if (name == null) {
-			return this._defaultOutput
+			return this._defaultOutput$
 		}
 		const [result, created] = this._ensureTable(name)
 		if (created && name && this._graph.hasNode(name)) {
@@ -159,7 +167,7 @@ export class Workflow
 	 * This does not include the default input or default output tables.
 	 */
 	public get allTableNames$(): Observable<string[]> {
-		return this._allTableNames
+		return this._allTableNames$
 	}
 
 	/**
@@ -171,23 +179,23 @@ export class Workflow
 	}
 
 	public get inputNames(): string[] {
-		return this._inputNames.value
+		return this._inputNames$.value
 	}
 
 	public get inputNames$(): Observable<string[]> {
-		return this._inputNames
+		return this._inputNames$
 	}
 
 	public addInputName(input: string): void {
 		if (!this.hasInputName(input)) {
-			this._inputNames.next([...this.inputNames, input])
+			this._inputNames$.next([...this.inputNames, input])
 			this._onChange.next()
 		}
 	}
 
 	public removeInputName(input: string): void {
 		if (!this.hasInputName(input)) {
-			this._inputNames.next([...this.inputNames].filter(i => i !== input))
+			this._inputNames$.next([...this.inputNames].filter(i => i !== input))
 			this._onChange.next()
 		}
 	}
@@ -197,24 +205,24 @@ export class Workflow
 	}
 
 	public get defaultInput$(): TableObservable {
-		return this._defaultInput
+		return this._defaultInput$
 	}
 
 	public set defaultInput$(source: TableObservable) {
 		this._defaultInputSubscription?.unsubscribe()
 		this._defaultInputSubscription = source.subscribe(value =>
-			this._defaultInput.next(value),
+			this._defaultInput$.next(value),
 		)
 		this.configureAllSteps()
 		this._onChange.next()
 	}
 
 	public get defaultInput(): Maybe<TableContainer> {
-		return this._defaultInput.value
+		return this._defaultInput$.value
 	}
 
 	public set defaultInput(source: Maybe<TableContainer>) {
-		this._defaultInput.next(source)
+		this._defaultInput$.next(source)
 		this.configureAllSteps()
 		this._onChange.next()
 	}
@@ -330,11 +338,11 @@ export class Workflow
 	}
 
 	public get outputNames(): string[] {
-		return this._outputNames.value
+		return this._outputNames$.value
 	}
 
 	public get outputNames$(): Observable<string[]> {
-		return this._outputNames
+		return this._outputNames$
 	}
 
 	/**
@@ -345,7 +353,7 @@ export class Workflow
 		if (this.hasOutputName(name) || this.hasInputName(name)) {
 			throw new Error('new output name must be unique among outputs & inputs')
 		}
-		this._outputNames.next([...this._outputNames.value, name])
+		this._outputNames$.next([...this._outputNames$.value, name])
 		this.observeOutput(name)
 		this._onChange.next()
 	}
@@ -355,7 +363,7 @@ export class Workflow
 	 * @param name - the output name to remove
 	 */
 	public removeOutput(name: string): void {
-		this._outputNames.next(this.outputNames.filter(t => t !== name))
+		this._outputNames$.next(this.outputNames.filter(t => t !== name))
 		this._tables.delete(name)
 		this._onChange.next()
 	}
@@ -364,19 +372,19 @@ export class Workflow
 
 	// #region Steps
 	public get steps(): Step[] {
-		return this._steps.value
+		return this._steps$.value
 	}
 
 	public get steps$(): BehaviorSubject<Step[]> {
-		return this._steps
+		return this._steps$
 	}
 
 	public get length(): number {
-		return this._steps.value.length
+		return this._steps$.value.length
 	}
 
 	public get length$(): Observable<number> {
-		return this._numSteps
+		return this._numSteps$
 	}
 
 	/**
@@ -390,7 +398,7 @@ export class Workflow
 			steps.length > 0 ? steps[steps.length - 1] : undefined,
 		)
 		// mutate the steps so that equality checks will detect that the steps changed (e.g. memo, hook deps)
-		this._steps.next([...steps, newStep])
+		this._steps$.next([...steps, newStep])
 		this.addWorkflowStepToGraph(newStep)
 
 		// Use this new step's output as the default output for the workflow
@@ -427,7 +435,7 @@ export class Workflow
 		// Remove the step from the graph
 		this._graph.remove(step.id)
 
-		this._steps.next([...steps.slice(0, index), ...steps.slice(index + 1)])
+		this._steps$.next([...steps.slice(0, index), ...steps.slice(index + 1)])
 		this.rebindDefaultOutput()
 		this._onChange.next()
 	}
@@ -437,7 +445,7 @@ export class Workflow
 		const prevVersion = steps[index]!
 		const step = readStep(stepInput, steps[index - 1])
 		const node = this.getNode(step.id)
-		this._steps.next([
+		this._steps$.next([
 			...steps.slice(0, index),
 			step,
 			...steps.slice(index + 1),
@@ -523,10 +531,10 @@ export class Workflow
 			result.set(name, this._tables.get(name)!.value)
 
 		if (includeDefaultOutput) {
-			result.set('default', this._defaultOutput.value)
+			result.set('default', this._defaultOutput$.value)
 		}
 		if (includeDefaultInput) {
-			result.set('defaultInput', this._defaultInput.value)
+			result.set('defaultInput', this._defaultInput$.value)
 		}
 		if (includeInputs) {
 			this.inputNames.forEach(addTable)
@@ -544,7 +552,7 @@ export class Workflow
 		const addTable = (name: string) =>
 			result.push(this._tables.get(name)!.value)
 		if (includeDefaultInput) {
-			result.push(this._defaultInput.value)
+			result.push(this._defaultInput$.value)
 		}
 		if (includeInputs) {
 			this.inputNames.forEach(addTable)
@@ -552,7 +560,7 @@ export class Workflow
 		this.outputNames.forEach(addTable)
 
 		if (includeDefaultOutput) {
-			result.push(this._defaultOutput.value)
+			result.push(this._defaultOutput$.value)
 		}
 		return result
 	}
@@ -577,14 +585,14 @@ export class Workflow
 				prev = step
 				return step
 			})
-			this._steps.next(newSteps ?? [])
-			this._inputNames.next(unique(schema?.input ?? []))
-			this._outputNames.next(schema?.output ?? [])
+			this._steps$.next(newSteps ?? [])
+			this._inputNames$.next(unique(schema?.input ?? []))
+			this._outputNames$.next(schema?.output ?? [])
 		}
 
 		const syncWorkflowStateIntoGraph = () => {
 			this._graph.clear()
-			this._graph.add(observableNode(DEFAULT_INPUT, this._defaultInput))
+			this._graph.add(observableNode(DEFAULT_INPUT, this._defaultInput$))
 			for (const step of this.steps) {
 				this.addWorkflowStepToGraph(step)
 			}

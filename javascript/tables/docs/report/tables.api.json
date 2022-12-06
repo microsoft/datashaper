@@ -1053,7 +1053,7 @@
             },
             {
               "kind": "Content",
-              "text": "string"
+              "text": "string | number"
             },
             {
               "kind": "Content",

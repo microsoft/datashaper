@@ -14,5 +14,5 @@ export interface CodebookEditorProps
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [dataTable](./app-framework.codebookeditorprops.datatable.md) |  | DataTable |  |
+|  [resource](./app-framework.codebookeditorprops.resource.md) |  | Codebook |  |
 

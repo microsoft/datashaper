@@ -7,12 +7,8 @@ import type { DataShape as DataShapeSchema } from '@datashaper/schema/dist/datat
 
 import type { Maybe } from '../primitives.js'
 import { Observed } from './Observed.js'
-import type { SchemaResource } from './types.js'
 
-export class DataShape
-	extends Observed
-	implements DataShapeSchema, SchemaResource<DataShapeSchema>
-{
+export class DataShape extends Observed implements DataShapeSchema {
 	private _orientation: DataOrientation | undefined
 	private _nature: DataNature | undefined
 	private _matrix: [width: number, height: number] | undefined

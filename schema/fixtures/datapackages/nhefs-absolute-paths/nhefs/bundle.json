@@ -1,0 +1,16 @@
+{
+	"$schema": "https://microsoft.github.io/datashaper/schema/databundle/v1.json",
+	"name": "nhefs",
+	"title": "NHEFS",
+	"profile": "tablebundle",
+	"sources": [
+		{
+			"rel": "input",
+			"source": "nhefs/datatable.json"
+		},
+		{
+			"rel": "codebook",
+			"source": "nhefs/codebook.json"
+		}
+	]
+}

@@ -4,7 +4,7 @@
 
 ```ts
 
-import type { CodebookSchema } from '@datashaper/schema';
+import { CodebookSchema } from '@datashaper/schema';
 import { CodebookStrategy } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { default as ColumnTable_2 } from 'arquero/dist/types/table/column-table.js';
@@ -84,7 +84,7 @@ export function formatIfNumber(value: Value): string | Value;
 // Warning: (ae-missing-release-tag) "formatNumberStr" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function formatNumberStr(value: string, decimal?: string, thousands?: string): string;
+export function formatNumberStr(value: string | number, decimal?: string, thousands?: string): string;
 
 // Warning: (ae-missing-release-tag) "generateCodebook" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

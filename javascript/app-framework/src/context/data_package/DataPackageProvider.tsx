@@ -8,8 +8,8 @@ import { memo, useMemo } from 'react'
 
 import { DataPackageContext } from './DataPackageContext.js'
 
-export const TableStoreProvider: React.FC<{ children: JSX.Element }> = memo(
-	function TableStoreProvider({ children }) {
+export const DataPackageProvider: React.FC<{ children: JSX.Element }> = memo(
+	function DataPackageProvider({ children }) {
 		const store = useMemo(() => new DataPackage(), [])
 
 		return (

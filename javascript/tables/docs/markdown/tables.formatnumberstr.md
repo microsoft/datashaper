@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function formatNumberStr(value: string, decimal?: string, thousands?: string): string;
+export declare function formatNumberStr(value: string | number, decimal?: string, thousands?: string): string;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  value | string |  |
+|  value | string \| number |  |
 |  decimal | string | <i>(Optional)</i> |
 |  thousands | string | <i>(Optional)</i> |
 

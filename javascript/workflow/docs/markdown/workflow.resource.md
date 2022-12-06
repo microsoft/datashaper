@@ -7,24 +7,28 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class Resource extends Named implements Omit<ResourceSchema, '$schema' | 'profile'>, SchemaResource<Omit<ResourceSchema, '$schema' | 'profile' | 'sources'>> 
+export declare abstract class Resource extends Named implements ResourceSchema, Resource 
 ```
 <b>Extends:</b> [Named](./workflow.named.md)
 
-<b>Implements:</b> Omit&lt;ResourceSchema, '$schema' \| 'profile'&gt;, [SchemaResource](./workflow.schemaresource.md)<!-- -->&lt;Omit&lt;ResourceSchema, '$schema' \| 'profile' \| 'sources'&gt;&gt;
+<b>Implements:</b> ResourceSchema, [Resource](./workflow.resource.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [$schema](./workflow.resource._schema.md) | <code>readonly</code> | string | Gets the resource schema |
 |  [homepage](./workflow.resource.homepage.md) |  | string \| undefined |  |
 |  [license](./workflow.resource.license.md) |  | string \| undefined |  |
 |  [path](./workflow.resource.path.md) |  | ResourceSchema\['path'\] |  |
+|  [profile](./workflow.resource.profile.md) | <code>readonly</code> | Profile | Gets the resource profile |
+|  [sources](./workflow.resource.sources.md) |  | [Resource](./workflow.resource.md)<!-- -->\[\] |  |
 
 ## Methods
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
 |  [loadSchema(value, quiet)](./workflow.resource.loadschema.md) |  |  |
+|  [sourcesToSchema()](./workflow.resource.sourcestoschema.md) | <code>protected</code> |  |
 |  [toSchema()](./workflow.resource.toschema.md) |  |  |
 

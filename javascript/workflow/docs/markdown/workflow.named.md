@@ -7,11 +7,11 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class Named extends Observed implements Omit<NamedSchema, 'profile' | '$schema'>, SchemaResource<NamedSchema> 
+export declare abstract class Named extends Observed implements NamedSchema 
 ```
 <b>Extends:</b> [Observed](./workflow.observed.md)
 
-<b>Implements:</b> Omit&lt;NamedSchema, 'profile' \| '$schema'&gt;, [SchemaResource](./workflow.schemaresource.md)<!-- -->&lt;NamedSchema&gt;
+<b>Implements:</b> NamedSchema
 
 ## Properties
 
@@ -26,6 +26,7 @@ export declare class Named extends Observed implements Omit<NamedSchema, 'profil
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
+|  [defaultName()](./workflow.named.defaultname.md) |  |  |
 |  [loadSchema(schema, quiet)](./workflow.named.loadschema.md) |  |  |
 |  [toSchema()](./workflow.named.toschema.md) |  |  |
 

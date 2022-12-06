@@ -8,10 +8,13 @@ import toNumber from 'lodash-es/toNumber.js'
 import { DECIMAL_DEFAULT, THOUSANDS_DEFAULT } from './typeHints.defaults.js'
 
 export function formatNumberStr(
-	value: string,
+	value: string | number,
 	decimal = DECIMAL_DEFAULT,
 	thousands = THOUSANDS_DEFAULT,
 ): string {
+	if (typeof value === 'number') {
+		value = value.toString()
+	}
 	return value.replaceAll(thousands, '').replace(decimal, '.')
 }
 

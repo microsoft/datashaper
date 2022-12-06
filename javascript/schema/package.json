@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/schema",
-	"version": "8.1.1",
+	"version": "8.3.0",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -11,7 +11,9 @@
 		"codebook": "1.0.0",
 		"datapackage": "1.0.0",
 		"datatable": "1.0.0",
-		"workflow": "2.0.0"
+		"workflow": "2.0.0",
+		"bundle": "0.1.0",
+		"tablebundle": "0.1.0"
 	},
 	"sideEffects": false,
 	"author": "Nathan Evans <naevans@microsoft.com>",
@@ -35,13 +37,15 @@
 	"scripts": {
 		"clean": "essex clean dist docs versions.js versions.d.ts",
 		"_transpile": "essex build --docs",
-		"_bundle_schemas": "run-p bundle-codebook bundle-datapackage bundle-datatable bundle-workflow",
+		"_bundle_schemas": "run-p bundle-codebook bundle-datapackage bundle-datatable bundle-bundle bundle-workflow bundle-tablebundle",
 		"build": "run-p _transpile _bundle_schemas",
 		"lint": "essex lint --fix",
 		"test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
 		"bundle-codebook": "typescript-json-schema tsconfig.json CodebookSchema > ../../schema/codebook.json",
 		"bundle-datapackage": "typescript-json-schema tsconfig.json DataPackageSchema > ../../schema/datapackage.json",
+		"bundle-bundle": "typescript-json-schema tsconfig.json BundleSchema > ../../schema/bundle.json",
 		"bundle-datatable": "typescript-json-schema tsconfig.json DataTableSchema > ../../schema/datatable.json",
+		"bundle-tablebundle": "typescript-json-schema tsconfig.json TableBundleSchema > ../../schema/tablebundle.json",
 		"bundle-workflow": "typescript-json-schema tsconfig.json WorkflowSchema > ../../schema/workflow.json",
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},

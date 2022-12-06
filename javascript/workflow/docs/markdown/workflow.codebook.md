@@ -7,11 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class Codebook extends Resource implements SchemaResource<CodebookSchema> 
+export declare class Codebook extends Resource 
 ```
 <b>Extends:</b> [Resource](./workflow.resource.md)
-
-<b>Implements:</b> [SchemaResource](./workflow.schemaresource.md)<!-- -->&lt;CodebookSchema&gt;
 
 ## Constructors
 
@@ -25,11 +23,13 @@ export declare class Codebook extends Resource implements SchemaResource<Codeboo
 |  --- | --- | --- | --- |
 |  [$schema](./workflow.codebook._schema.md) | <code>readonly</code> | string |  |
 |  [fields](./workflow.codebook.fields.md) |  | Field\[\] |  |
+|  [profile](./workflow.codebook.profile.md) | <code>readonly</code> | (not declared) |  |
 
 ## Methods
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
+|  [defaultName()](./workflow.codebook.defaultname.md) |  |  |
 |  [loadSchema(value, quiet)](./workflow.codebook.loadschema.md) |  |  |
 |  [toSchema()](./workflow.codebook.toschema.md) |  |  |
 

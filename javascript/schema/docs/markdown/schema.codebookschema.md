@@ -18,4 +18,5 @@ export interface CodebookSchema extends ResourceSchema
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [fields](./schema.codebookschema.fields.md) |  | [Field](./schema.field.md)<!-- -->\[\] |  |
+|  [profile](./schema.codebookschema.profile.md) |  | [KnownProfile.Codebook](./schema.knownprofile.md) |  |
 
