@@ -60,11 +60,7 @@ export const CodebookTableEditor: React.FC<CodebookTableEditorProps> = memo(
 					<Label style={_styles?.dataType?.label as CSSProperties}>
 						Data type
 					</Label>
-					<Label
-						style={
-							_styles?.dataNature?.subComponentStyles?.label as CSSProperties
-						}
-					>
+					<Label style={_styles?.dataNature?.label as CSSProperties}>
 						Data nature
 					</Label>
 					<Label

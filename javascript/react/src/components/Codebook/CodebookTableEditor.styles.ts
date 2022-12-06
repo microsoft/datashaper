@@ -70,7 +70,7 @@ export function useTableDefaultStyles(
 					dataNature: {
 						title: { border: 'unset' },
 						label: {
-							height: (defaultStyles?.dataType?.root as IRawStyle).height,
+							height: (defaultStyles?.dataNature?.root as IRawStyle).height,
 							padding: 'unset',
 							whiteSpace: 'pre',
 						},
