@@ -9,8 +9,7 @@ import type { CSSProperties } from 'react'
 import { useMemo } from 'react'
 
 import { FIELD_PADDING } from './Codebook.constants.js'
-import type { FieldHeights } from './Codebook.hooks.js'
-import type { CodebookStyles } from './Codebook.types.js'
+import type { CodebookStyles, FieldHeights } from './Codebook.types.js'
 
 export function getRootStyle(
 	theme: Theme,

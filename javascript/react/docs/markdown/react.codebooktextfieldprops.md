@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface CodebookTextFieldProps extends CodebookDefaultProps, ITextFieldProps 
+export interface CodebookTextFieldProps extends CodebookPropsBase, ITextFieldProps 
 ```
-<b>Extends:</b> [CodebookDefaultProps](./react.codebookdefaultprops.md)<!-- -->, ITextFieldProps
+<b>Extends:</b> [CodebookPropsBase](./react.codebookpropsbase.md)<!-- -->, ITextFieldProps
 

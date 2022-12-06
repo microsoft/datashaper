@@ -7,9 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-export interface CodebookFieldEditorProps extends CodebookDefaultProps 
+export interface CodebookFieldEditorProps extends CodebookPropsBase 
 ```
-<b>Extends:</b> [CodebookDefaultProps](./react.codebookdefaultprops.md)
+<b>Extends:</b> [CodebookPropsBase](./react.codebookpropsbase.md)
 
 ## Properties
 

@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface CodebookEnumDropdownFieldProps extends CodebookDefaultProps, EnumDropdownProps<unknown> 
+export interface CodebookEnumDropdownFieldProps extends CodebookPropsBase, EnumDropdownProps<unknown> 
 ```
-<b>Extends:</b> [CodebookDefaultProps](./react.codebookdefaultprops.md)<!-- -->, EnumDropdownProps&lt;unknown&gt;
+<b>Extends:</b> [CodebookPropsBase](./react.codebookpropsbase.md)<!-- -->, EnumDropdownProps&lt;unknown&gt;
 

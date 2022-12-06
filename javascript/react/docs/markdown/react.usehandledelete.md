@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function useHandleDelete(mapList: Record<Value, Value>, onChange?: (mapping: Record<Value, Value>) => void): (value: Value) => void;
+export declare function useHandleDelete(mapList: Record<Value, Value>, onChange?: (mapping: Record<Value, Value>) => void): (key: Value) => void;
 ```
 
 ## Parameters
@@ -19,5 +19,5 @@ export declare function useHandleDelete(mapList: Record<Value, Value>, onChange?
 
 <b>Returns:</b>
 
-(value: Value) =&gt; void
+(key: Value) =&gt; void
 

@@ -7,17 +7,17 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function useDefaultStyles(styles?: CodebookDefaultStyles, heights?: FieldHeights): CodebookDefaultStyles;
+export declare function useDefaultStyles(styles?: CodebookStyles, heights?: FieldHeights): CodebookStyles;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  styles | [CodebookDefaultStyles](./react.codebookdefaultstyles.md) | <i>(Optional)</i> |
+|  styles | [CodebookStyles](./react.codebookstyles.md) | <i>(Optional)</i> |
 |  heights | FieldHeights | <i>(Optional)</i> |
 
 <b>Returns:</b>
 
-[CodebookDefaultStyles](./react.codebookdefaultstyles.md)
+[CodebookStyles](./react.codebookstyles.md)
 

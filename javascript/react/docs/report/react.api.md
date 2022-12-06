@@ -139,42 +139,6 @@ export function checkedItemsCommand(list: string[], checked?: string[], onCheckC
 // @public (undocumented)
 export const CodebookDataNatureField: React.FC<CodebookEnumDropdownFieldProps>;
 
-// Warning: (ae-missing-release-tag) "CodebookDefaultProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface CodebookDefaultProps {
-    // (undocumented)
-    field: Field;
-    // (undocumented)
-    onChangeField?: (field: Field) => void;
-}
-
-// Warning: (ae-missing-release-tag) "CodebookDefaultStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface CodebookDefaultStyles {
-    // (undocumented)
-    dataNature?: IDropdownStyles;
-    // (undocumented)
-    dataType?: IDropdownStyles;
-    // (undocumented)
-    description?: ITextFieldStyles;
-    // (undocumented)
-    displayName?: ITextFieldStyles;
-    // Warning: (ae-forgotten-export) The symbol "CodebookMappingStyles" needs to be exported by the entry point index.d.ts
-    //
-    // (undocumented)
-    mapping?: CodebookMappingStyles;
-    // (undocumented)
-    root?: React.CSSProperties;
-    // Warning: (ae-forgotten-export) The symbol "CodebookStatsStyles" needs to be exported by the entry point index.d.ts
-    //
-    // (undocumented)
-    statsWrapper?: CodebookStatsStyles;
-    // (undocumented)
-    units?: ITextFieldStyles;
-}
-
 // Warning: (ae-missing-release-tag) "CodebookDescriptionField" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -188,7 +152,7 @@ export const CodebookDisplayNameField: React.FC<CodebookTextFieldProps>;
 // Warning: (ae-missing-release-tag) "CodebookEnumDropdownFieldProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface CodebookEnumDropdownFieldProps extends CodebookDefaultProps, EnumDropdownProps<unknown> {
+export interface CodebookEnumDropdownFieldProps extends CodebookPropsBase, EnumDropdownProps<unknown> {
 }
 
 // Warning: (ae-missing-release-tag) "CodebookFieldEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -199,11 +163,21 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps>;
 // Warning: (ae-missing-release-tag) "CodebookFieldEditorProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface CodebookFieldEditorProps extends CodebookDefaultProps {
+export interface CodebookFieldEditorProps extends CodebookPropsBase {
     // Warning: (ae-forgotten-export) The symbol "CodebookFieldEditorStyles" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
     styles?: CodebookFieldEditorStyles;
+}
+
+// Warning: (ae-missing-release-tag) "CodebookPropsBase" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface CodebookPropsBase {
+    // (undocumented)
+    field: Field;
+    // (undocumented)
+    onChangeField?: (field: Field) => void;
 }
 
 // Warning: (ae-forgotten-export) The symbol "CodebookStatsFieldProps" needs to be exported by the entry point index.d.ts
@@ -211,6 +185,32 @@ export interface CodebookFieldEditorProps extends CodebookDefaultProps {
 //
 // @public (undocumented)
 export const CodebookStatsField: React.FC<CodebookStatsFieldProps>;
+
+// Warning: (ae-missing-release-tag) "CodebookStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface CodebookStyles {
+    // (undocumented)
+    dataNature?: Partial<IDropdownStyles>;
+    // (undocumented)
+    dataType?: Partial<IDropdownStyles>;
+    // (undocumented)
+    description?: Partial<ITextFieldStyles>;
+    // (undocumented)
+    displayName?: Partial<ITextFieldStyles>;
+    // Warning: (ae-forgotten-export) The symbol "CodebookMappingStyles" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    mapping?: CodebookMappingStyles;
+    // (undocumented)
+    root?: React.CSSProperties;
+    // Warning: (ae-forgotten-export) The symbol "CodebookStatsStyles" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    statsWrapper?: CodebookStatsStyles;
+    // (undocumented)
+    units?: Partial<ITextFieldStyles>;
+}
 
 // Warning: (ae-missing-release-tag) "CodebookTableEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -234,7 +234,7 @@ export interface CodebookTableEditorProps {
 // Warning: (ae-missing-release-tag) "CodebookTextFieldProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface CodebookTextFieldProps extends CodebookDefaultProps, ITextFieldProps {
+export interface CodebookTextFieldProps extends CodebookPropsBase, ITextFieldProps {
 }
 
 // Warning: (ae-missing-release-tag) "CodebookUnitField" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -613,7 +613,7 @@ export function useCommandBarColorDefaults(colors?: Partial<CommandBarColors>): 
 // Warning: (ae-missing-release-tag) "useDefaultStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useDefaultStyles(styles?: CodebookDefaultStyles, heights?: FieldHeights): CodebookDefaultStyles;
+export function useDefaultStyles(styles?: CodebookStyles, heights?: FieldHeights): CodebookStyles;
 
 // Warning: (ae-missing-release-tag) "useDetailsHeaderRenderer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -653,7 +653,7 @@ export function useGroupHeaderRenderer(table: ColumnTable, computedMetadata?: Ta
 // Warning: (ae-missing-release-tag) "useHandleDelete" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useHandleDelete(mapList: Record<Value, Value>, onChange?: (mapping: Record<Value, Value>) => void): (value: Value) => void;
+export function useHandleDelete(mapList: Record<Value, Value>, onChange?: (mapping: Record<Value, Value>) => void): (key: Value) => void;
 
 // Warning: (ae-missing-release-tag) "useHandleKeyChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
