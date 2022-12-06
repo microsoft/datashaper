@@ -7,10 +7,7 @@ import { memo, useState } from 'react'
 
 import type { ProfilePlugin } from '../../../types.js'
 import { FileImport } from './FileImport.js'
-import {
-	useFileManagementCommands,
-	useOnOpenFileRequested,
-} from './FileTreeCommands.hooks.js'
+import { useFileManagementCommands } from './FileTreeCommands.hooks.js'
 import {
 	CollapsedButton,
 	collapsedButtonStyles,
@@ -30,15 +27,8 @@ export const FileTreeCommands: React.FC<FileTreeCommandsProps> = memo(
 	function FileTreeCommands({ expanded, examples, plugins }) {
 		const commandBarStyles = useCommandbarStyles()
 		const [file, setFile] = useState<BaseFile | undefined>()
-		const onOpenFileRequested = useOnOpenFileRequested()
 		const { commands, onOpenCommands, newCommands, onSaveCommands } =
-			useFileManagementCommands(
-				examples,
-				expanded,
-				onOpenFileRequested,
-				setFile,
-				plugins,
-			)
+			useFileManagementCommands(examples, expanded, setFile, plugins)
 
 		return (
 			<>
