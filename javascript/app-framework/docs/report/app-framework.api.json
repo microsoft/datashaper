@@ -242,87 +242,6 @@
         },
         {
           "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!BundleEditor:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "BundleEditor: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "BundleEditorProps",
-              "canonicalReference": "@datashaper/app-framework!BundleEditorProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "BundleEditor",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/app-framework!BundleEditorProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface BundleEditorProps "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "BundleEditorProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!BundleEditorProps#resource:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "resource: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "TableBundle",
-                  "canonicalReference": "@datashaper/workflow!TableBundle:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "resource",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Variable",
           "canonicalReference": "@datashaper/app-framework!choiceGroupStyles:var",
           "docComment": "",
           "excerptTokens": [
@@ -648,12 +567,12 @@
         },
         {
           "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!DataSourceEditor:var",
+          "canonicalReference": "@datashaper/app-framework!DataTableEditor:var",
           "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "DataSourceEditor: "
+              "text": "DataTableEditor: "
             },
             {
               "kind": "Reference",
@@ -666,8 +585,8 @@
             },
             {
               "kind": "Reference",
-              "text": "DataSourceEditorProps",
-              "canonicalReference": "@datashaper/app-framework!DataSourceEditorProps:interface"
+              "text": "DataTableEditorProps",
+              "canonicalReference": "@datashaper/app-framework!DataTableEditorProps:interface"
             },
             {
               "kind": "Content",
@@ -676,7 +595,7 @@
           ],
           "isReadonly": true,
           "releaseTag": "Public",
-          "name": "DataSourceEditor",
+          "name": "DataTableEditor",
           "variableTypeTokenRange": {
             "startIndex": 1,
             "endIndex": 5
@@ -684,21 +603,21 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@datashaper/app-framework!DataSourceEditorProps:interface",
+          "canonicalReference": "@datashaper/app-framework!DataTableEditorProps:interface",
           "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface DataSourceEditorProps "
+              "text": "export interface DataTableEditorProps "
             }
           ],
           "releaseTag": "Public",
-          "name": "DataSourceEditorProps",
+          "name": "DataTableEditorProps",
           "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!DataSourceEditorProps#resource:member",
+              "canonicalReference": "@datashaper/app-framework!DataTableEditorProps#resource:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -2743,6 +2662,87 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "title",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@datashaper/app-framework!TableBundleEditor:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "TableBundleEditor: "
+            },
+            {
+              "kind": "Reference",
+              "text": "React.FC",
+              "canonicalReference": "@types/react!~React.FC:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "TableBundleEditorProps",
+              "canonicalReference": "@datashaper/app-framework!TableBundleEditorProps:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "TableBundleEditor",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 5
+          }
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/app-framework!TableBundleEditorProps:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface TableBundleEditorProps "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "TableBundleEditorProps",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!TableBundleEditorProps#resource:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "resource: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TableBundle",
+                  "canonicalReference": "@datashaper/workflow!TableBundle:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "resource",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

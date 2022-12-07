@@ -40,9 +40,8 @@
 |  Interface | Description |
 |  --- | --- |
 |  [AppServices](./app-framework.appservices.md) |  |
-|  [BundleEditorProps](./app-framework.bundleeditorprops.md) |  |
 |  [CodebookEditorProps](./app-framework.codebookeditorprops.md) |  |
-|  [DataSourceEditorProps](./app-framework.datasourceeditorprops.md) |  |
+|  [DataTableEditorProps](./app-framework.datatableeditorprops.md) |  |
 |  [GeneratedExtraRoutes](./app-framework.generatedextraroutes.md) |  |
 |  [JsonEditorProps](./app-framework.jsoneditorprops.md) |  |
 |  [ParserOptionsEditorProps](./app-framework.parseroptionseditorprops.md) |  |
@@ -52,6 +51,7 @@
 |  [RawTableViewerProps](./app-framework.rawtableviewerprops.md) |  |
 |  [RecoilBasedProfileHostProps](./app-framework.recoilbasedprofilehostprops.md) |  |
 |  [ResourceRoute](./app-framework.resourceroute.md) | Data attached to resource-tree nodes |
+|  [TableBundleEditorProps](./app-framework.tablebundleeditorprops.md) |  |
 |  [ViewOptionsProps](./app-framework.viewoptionsprops.md) |  |
 |  [WorkflowEditorProps](./app-framework.workfloweditorprops.md) |  |
 
@@ -59,14 +59,13 @@
 
 |  Variable | Description |
 |  --- | --- |
-|  [BundleEditor](./app-framework.bundleeditor.md) |  |
 |  [choiceGroupStyles](./app-framework.choicegroupstyles.md) |  |
 |  [CodebookEditor](./app-framework.codebookeditor.md) |  |
 |  [Container](./app-framework.container.md) |  |
 |  [DataPackageContext](./app-framework.datapackagecontext.md) |  |
 |  [DataPackageProvider](./app-framework.datapackageprovider.md) |  |
 |  [DataShaperApp](./app-framework.datashaperapp.md) | A component for rendering a data-shaper application. This includes a resource management UI area and a main area that renders selected content based on its profile type. It is expected that this application is rendered under a react-router Router component. |
-|  [DataSourceEditor](./app-framework.datasourceeditor.md) |  |
+|  [DataTableEditor](./app-framework.datatableeditor.md) |  |
 |  [HeadersOption](./app-framework.headersoption.md) |  |
 |  [JsonEditor](./app-framework.jsoneditor.md) |  |
 |  [OtherTextField](./app-framework.othertextfield.md) |  |
@@ -76,6 +75,7 @@
 |  [RawTableDefaultFeatures](./app-framework.rawtabledefaultfeatures.md) |  |
 |  [RawTableViewer](./app-framework.rawtableviewer.md) |  |
 |  [RecoilBasedProfileHost](./app-framework.recoilbasedprofilehost.md) |  |
+|  [TableBundleEditor](./app-framework.tablebundleeditor.md) |  |
 |  [TableDelimiterOptions](./app-framework.tabledelimiteroptions.md) |  |
 |  [TableLayoutOptions](./app-framework.tablelayoutoptions.md) |  |
 |  [TablePreview](./app-framework.tablepreview.md) |  |
