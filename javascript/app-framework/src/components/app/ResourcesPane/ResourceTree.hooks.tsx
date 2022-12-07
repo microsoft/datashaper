@@ -24,7 +24,7 @@ export function useTreeGroups(groups: ResourceRoute[][]): TreeItem[][] {
 export function useItemClick(
 	resources: ResourceRoute[][],
 	onSelect: (v: ResourceRoute) => void,
-) {
+): (item: TreeItem) => void {
 	const map = useMemo(() => {
 		const result = new Map<string, ResourceRoute>()
 		const walk = (res: ResourceRoute) => {
