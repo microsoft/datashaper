@@ -1,6 +1,9 @@
 releases:
   "@datashaper/app-framework": patch
   "@datashaper/react": patch
+  "@datashaper/schema": patch
+  "@datashaper/tables": patch
+  "@datashaper/utilities": patch
   "@datashaper/workflow": minor
 
 declined:
