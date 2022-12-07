@@ -5,8 +5,9 @@
 import { Subject } from 'rxjs'
 
 import type { Unsubscribe } from '../primitives.js'
+import type { Disposable } from './types.js'
 
-export abstract class Observed {
+export abstract class Observed implements Disposable {
 	protected _onChange = new Subject<void>()
 	protected _onDispose = new Subject<void>()
 

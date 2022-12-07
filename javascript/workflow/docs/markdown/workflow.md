@@ -64,6 +64,8 @@
 
 |  Interface | Description |
 |  --- | --- |
+|  [Disposable](./workflow.disposable.md) |  |
+|  [Emitter](./workflow.emitter.md) | A data emitter for a type of output |
 |  [Graph](./workflow.graph.md) |  |
 |  [Node\_2](./workflow.node_2.md) | A graph processing node |
 |  [NodeBinding](./workflow.nodebinding.md) | A binding for a value being emitted from a node |
@@ -133,6 +135,7 @@
 |  [NodeId](./workflow.nodeid.md) |  |
 |  [SocketName](./workflow.socketname.md) |  |
 |  [StepFunction](./workflow.stepfunction.md) |  |
+|  [TableEmitter](./workflow.tableemitter.md) | An emitter for TableContainers |
 |  [TableObservable](./workflow.tableobservable.md) | The workflow object manages mutable data for a workflow specification |
 |  [Unsubscribe](./workflow.unsubscribe.md) |  |
 |  [VariadicNodeBinding](./workflow.variadicnodebinding.md) |  |

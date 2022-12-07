@@ -7,8 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-export declare abstract class Observed 
+export declare abstract class Observed implements Disposable 
 ```
+<b>Implements:</b> [Disposable](./workflow.disposable.md)
 
 ## Properties
 

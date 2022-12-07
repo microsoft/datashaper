@@ -9,7 +9,7 @@ Use the raw source table from a data package without any workflow applied to it.
 <b>Signature:</b>
 
 ```typescript
-export declare function useDataTableSource(pkg: DataTable | undefined): Maybe<ColumnTable>;
+export declare function useDataTableSource(pkg: DataTable | undefined): Maybe<TableContainer>;
 ```
 
 ## Parameters
@@ -20,6 +20,6 @@ export declare function useDataTableSource(pkg: DataTable | undefined): Maybe<Co
 
 <b>Returns:</b>
 
-Maybe&lt;ColumnTable&gt;
+Maybe&lt;TableContainer&gt;
 
 

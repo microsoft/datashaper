@@ -25,7 +25,7 @@ export function useSelectedTable(
 	return useMemo((): TableContainer | undefined => {
 		if (bundle.name === selectedTableId && bundle?.input != null) {
 			// if we select the original table name, use the workflow default input
-			return { table: bundle.input.output, id: selectedTableId ?? '' }
+			return { ...bundle.input.output, id: selectedTableId ?? '' }
 		} else {
 			// try to use the given table name to read the step, otherwise use the default output
 			const table = bundle.workflow?.read(selectedTableId)

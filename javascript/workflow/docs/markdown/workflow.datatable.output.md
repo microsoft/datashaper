@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-get output(): Maybe<ColumnTable>;
+get output(): Maybe<TableContainer>;
 ```

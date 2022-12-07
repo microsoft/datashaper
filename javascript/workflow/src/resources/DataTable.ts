@@ -9,23 +9,25 @@ import {
 	KnownProfile,
 	LATEST_DATATABLE_SCHEMA,
 } from '@datashaper/schema'
+import type { TableContainer } from '@datashaper/tables'
 import { readTable } from '@datashaper/tables'
 import type { Maybe } from '@datashaper/workflow'
-import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import debug from 'debug'
-import type { Observable } from 'rxjs'
-import { BehaviorSubject } from 'rxjs'
+import { type Observable, BehaviorSubject } from 'rxjs'
 
 import { DataShape } from './DataShape.js'
 import { ParserOptions } from './ParserOptions.js'
 import { Resource } from './Resource.js'
+import type { TableEmitter } from './types.js'
 
 const log = debug('datashaper')
 
-export class DataTable extends Resource {
+export class DataTable extends Resource implements TableEmitter {
 	public readonly $schema = LATEST_DATATABLE_SCHEMA
 	public readonly profile = KnownProfile.DataTable
-	private readonly _output$ = new BehaviorSubject<Maybe<ColumnTable>>(undefined)
+	private readonly _output$ = new BehaviorSubject<Maybe<TableContainer>>(
+		undefined,
+	)
 
 	public readonly parser = new ParserOptions()
 	public readonly shape = new DataShape()
@@ -54,7 +56,7 @@ export class DataTable extends Resource {
 	private refreshData = (): void => {
 		if (this._rawData != null) {
 			readTable(this._rawData, this.toSchema())
-				.then(t => this._output$.next(t))
+				.then(t => this._output$.next({ table: t, id: this.name }))
 				.catch(err => {
 					log('error reading blob', err)
 					throw err
@@ -94,11 +96,11 @@ export class DataTable extends Resource {
 	}
 	// #endregion
 
-	public get output$(): Observable<Maybe<ColumnTable>> {
+	public get output$(): Observable<Maybe<TableContainer>> {
 		return this._output$
 	}
 
-	public get output(): Maybe<ColumnTable> {
+	public get output(): Maybe<TableContainer> {
 		return this._output$.value
 	}
 

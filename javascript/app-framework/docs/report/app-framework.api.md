@@ -357,7 +357,7 @@ export function useDatasetMenuItems(selected: string | undefined, onClick: (tabl
 // Warning: (ae-missing-release-tag) "useDataTableSource" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useDataTableSource(pkg: DataTable | undefined): Maybe<ColumnTable>;
+export function useDataTableSource(pkg: DataTable | undefined): Maybe<TableContainer>;
 
 // Warning: (ae-missing-release-tag) "useMenuButtonStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
