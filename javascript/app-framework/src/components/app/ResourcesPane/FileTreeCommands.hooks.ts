@@ -84,7 +84,7 @@ export function useFileManagementCommands(
 				disabled: isDataPackageEmpty,
 			}),
 		],
-		[newCommands, openCommands, saveCommands, isDataPackageEmpty],
+		[createItem, newCommands, openCommands, saveCommands, isDataPackageEmpty],
 	)
 
 	return {
@@ -129,7 +129,7 @@ function useSaveMenuCommands(
 		]
 		result.push(...getPluginCommands(CommandBarSection.Save, plugins))
 		return result
-	}, [onClickDownloadZip])
+	}, [plugins, onClickDownloadZip])
 }
 
 function useDownloadZip(): () => void {
