@@ -7,7 +7,9 @@ import type { Field } from '@datashaper/schema'
 import type { Codebook } from '@datashaper/workflow'
 import { useCallback } from 'react'
 
-export function useOnFieldsChanged(resource: Codebook) {
+export function useOnFieldsChanged(
+	resource: Codebook,
+): (fields: Field[]) => void {
 	return useCallback(
 		(fields: Field[]) => {
 			resource.fields = fields

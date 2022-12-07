@@ -39,7 +39,7 @@
 		"_transpile": "essex build --docs",
 		"_bundle_schemas": "run-p bundle-codebook bundle-datapackage bundle-datatable bundle-bundle bundle-workflow bundle-tablebundle",
 		"build": "run-p _transpile _bundle_schemas",
-		"lint": "essex lint --fix",
+		"lint": "essex lint --fix --strict",
 		"test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
 		"bundle-codebook": "typescript-json-schema tsconfig.json CodebookSchema > ../../schema/codebook.json",
 		"bundle-datapackage": "typescript-json-schema tsconfig.json DataPackageSchema > ../../schema/datapackage.json",

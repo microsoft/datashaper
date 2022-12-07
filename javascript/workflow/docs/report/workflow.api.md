@@ -144,6 +144,8 @@ export class Codebook extends Resource {
     // (undocumented)
     defaultName(): string;
     // (undocumented)
+    get fields$(): Observable<Field[]>;
+    // (undocumented)
     get fields(): Field[];
     set fields(value: Field[]);
     // (undocumented)

@@ -97,6 +97,6 @@ export function useDefaultStyles(
 				},
 				styles,
 			),
-		[theme, border, styles, heights],
+		[border, styles, heights],
 	)
 }

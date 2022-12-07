@@ -28,7 +28,7 @@
 	},
 	"scripts": {
 		"clean": "essex clean dist docs",
-		"lint": "essex lint --fix",
+		"lint": "essex lint --fix --strict",
 		"test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
 		"build": "essex build --docs --skipExportCheck",
 		"release": "yarn npm publish --tolerate-republish --access public"

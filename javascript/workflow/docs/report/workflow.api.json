@@ -1711,6 +1711,49 @@
               "isProtected": false
             },
             {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!Codebook#fields$:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get fields$(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Observable",
+                  "canonicalReference": "rxjs!Observable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Field",
+                  "canonicalReference": "@datashaper/schema!Field:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "fields$",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!Codebook#loadSchema:member(1)",
               "docComment": "",
