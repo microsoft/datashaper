@@ -26,7 +26,7 @@
 		"bundle": "essex bundle && shx cp -r public/* build/",
 		"start": "essex serve",
 		"start:webapp": "yarn start",
-		"lint": "essex lint --fix"
+		"lint": "essex lint --fix --strict"
 	},
 	"dependencies": {
 		"@datashaper/app-framework": "workspace:^",
