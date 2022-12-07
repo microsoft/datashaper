@@ -12,6 +12,7 @@ export const WorkflowEditor: React.FC<WorkflowEditorProps> = memo(
 	function WorkflowEditor({ resource }) {
 		const content = useContent(resource)
 		const onChange = useOnChange(resource)
+		// TODO: use JsonModeEditor, add interactive view
 		return <JsonEditor content={content} onChange={onChange} />
 	},
 )

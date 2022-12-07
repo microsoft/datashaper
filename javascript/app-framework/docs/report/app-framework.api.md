@@ -43,19 +43,6 @@ export interface AppServices {
     renameResource(resource: Resource): Promise<string>;
 }
 
-// Warning: (ae-missing-release-tag) "BundleEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const BundleEditor: React.FC<BundleEditorProps>;
-
-// Warning: (ae-missing-release-tag) "BundleEditorProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface BundleEditorProps {
-    // (undocumented)
-    resource: TableBundle;
-}
-
 // Warning: (ae-missing-release-tag) "choiceGroupStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -114,15 +101,15 @@ export const DataPackageProvider: React.FC<{
 // @public
 export const DataShaperApp: React.FC<DataShaperAppProps>;
 
-// Warning: (ae-missing-release-tag) "DataSourceEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "DataTableEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const DataSourceEditor: React.FC<DataSourceEditorProps>;
+export const DataTableEditor: React.FC<DataTableEditorProps>;
 
-// Warning: (ae-missing-release-tag) "DataSourceEditorProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "DataTableEditorProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface DataSourceEditorProps {
+export interface DataTableEditorProps {
     // (undocumented)
     resource: DataTable;
 }
@@ -316,6 +303,19 @@ export interface ResourceRoute {
     props: any;
     renderer: React.ComponentType<any>;
     title: string;
+}
+
+// Warning: (ae-missing-release-tag) "TableBundleEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const TableBundleEditor: React.FC<TableBundleEditorProps>;
+
+// Warning: (ae-missing-release-tag) "TableBundleEditorProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface TableBundleEditorProps {
+    // (undocumented)
+    resource: TableBundle;
 }
 
 // Warning: (ae-missing-release-tag) "TableDelimiterOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
