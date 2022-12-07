@@ -23,6 +23,7 @@ export declare class Codebook extends Resource
 |  --- | --- | --- | --- |
 |  [$schema](./workflow.codebook._schema.md) | <code>readonly</code> | string |  |
 |  [fields](./workflow.codebook.fields.md) |  | Field\[\] |  |
+|  [fields$](./workflow.codebook.fields_.md) | <code>readonly</code> | Observable&lt;Field\[\]&gt; |  |
 |  [profile](./workflow.codebook.profile.md) | <code>readonly</code> | (not declared) |  |
 
 ## Methods

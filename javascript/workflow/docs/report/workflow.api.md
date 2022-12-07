@@ -35,7 +35,7 @@ import type { Maybe as Maybe_2 } from '@datashaper/workflow';
 import type { MergeArgs } from '@datashaper/schema';
 import type { Named as Named_2 } from '@datashaper/schema';
 import type { NamedPortBinding } from '@datashaper/schema';
-import type { Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import type { OnehotArgs } from '@datashaper/schema';
 import type { OrderbyArgs } from '@datashaper/schema';
 import type { ParserOptions as ParserOptions_2 } from '@datashaper/schema';
@@ -144,6 +144,8 @@ export class Codebook extends Resource {
     constructor(codebook?: CodebookSchema);
     // (undocumented)
     defaultName(): string;
+    // (undocumented)
+    get fields$(): Observable<Field[]>;
     // (undocumented)
     get fields(): Field[];
     set fields(value: Field[]);
