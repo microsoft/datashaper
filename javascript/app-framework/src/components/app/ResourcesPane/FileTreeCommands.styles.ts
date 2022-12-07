@@ -21,7 +21,7 @@ export const Commands = styled(CommandBar)`
 
 export const collapsedButtonStyles = {
 	menuIcon: { display: 'none' },
-	flexContainer: { marginRight: '10px' },
+	flexContainer: { marginRight: 10, marginTop: 15 },
 }
 
 export const icons = {
