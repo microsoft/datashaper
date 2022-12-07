@@ -27,7 +27,7 @@ export const FileTreeCommands: React.FC<FileTreeCommandsProps> = memo(
 	function FileTreeCommands({ expanded, examples, plugins }) {
 		const commandBarStyles = useCommandbarStyles()
 		const [file, setFile] = useState<BaseFile | undefined>()
-		const { commands, onOpenCommands, newCommands, onSaveCommands } =
+		const { commands, openCommands, newCommands, saveCommands } =
 			useFileManagementCommands(examples, expanded, setFile, plugins)
 
 		return (
@@ -51,7 +51,7 @@ export const FileTreeCommands: React.FC<FileTreeCommandsProps> = memo(
 								styles={collapsedButtonStyles}
 								iconProps={icons.openFile}
 								menuProps={{
-									items: onOpenCommands,
+									items: openCommands,
 								}}
 							/>
 						</Tooltip>
@@ -60,7 +60,7 @@ export const FileTreeCommands: React.FC<FileTreeCommandsProps> = memo(
 								styles={collapsedButtonStyles}
 								iconProps={icons.save}
 								menuProps={{
-									items: onSaveCommands,
+									items: saveCommands,
 								}}
 							/>
 						</Tooltip>

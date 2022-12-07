@@ -36,8 +36,8 @@ export function useFileManagementCommands(
 	plugins: Map<string, ProfilePlugin>,
 ): {
 	commands: ICommandBarItemProps[]
-	onOpenCommands: IContextualMenuItem[]
-	onSaveCommands: IContextualMenuItem[]
+	openCommands: IContextualMenuItem[]
+	saveCommands: IContextualMenuItem[]
 	newCommands: IContextualMenuItem[]
 } {
 	const dataPackage = useDataPackage()
@@ -90,8 +90,8 @@ export function useFileManagementCommands(
 	return {
 		commands,
 		newCommands,
-		onOpenCommands: openCommands,
-		onSaveCommands: saveCommands,
+		openCommands,
+		saveCommands,
 	}
 }
 
