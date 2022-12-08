@@ -49,6 +49,7 @@ import type { SampleArgs } from '@datashaper/schema';
 import type { SetOp } from '@datashaper/schema';
 import type { SpreadArgs } from '@datashaper/schema';
 import { Subject } from 'rxjs';
+import type { Subscription } from 'rxjs';
 import type { TableBundleSchema } from '@datashaper/schema';
 import { TableContainer } from '@datashaper/tables';
 import type { UnhotArgs } from '@datashaper/schema';
@@ -143,6 +144,8 @@ export class Codebook extends Resource {
     constructor(codebook?: CodebookSchema);
     // (undocumented)
     defaultName(): string;
+    // (undocumented)
+    dispose(): void;
     // (undocumented)
     get fields$(): Observable<Field[]>;
     // (undocumented)
@@ -325,18 +328,10 @@ export const derive: (id: string) => StepNode<TableContainer<unknown>, DeriveArg
 // @public (undocumented)
 export const difference: (id: string) => SetOperationNode<unknown>;
 
-// Warning: (ae-missing-release-tag) "Disposable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface Disposable {
-    dispose(): void;
-    onDispose(callback: () => void): Unsubscribe;
-}
-
 // Warning: (ae-missing-release-tag) "Emitter" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface Emitter<T> extends Disposable {
+export interface Emitter<T> extends Resource {
     readonly output$: Observable<Maybe<T>>;
     readonly output: Maybe<T>;
 }
@@ -635,20 +630,17 @@ export class ObservableNode<T> extends BaseNode<T, void> {
 // @public (undocumented)
 export function observableNode<T>(id: string, source: Observable<Maybe<T>>): ObservableNode<T>;
 
+// Warning: (ae-forgotten-export) The symbol "Disposable" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "Observed" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export abstract class Observed implements Disposable {
+export abstract class Observed extends Disposable {
     // (undocumented)
     dispose(): void;
     // (undocumented)
     onChange(handler: () => void, fireSync?: boolean): Unsubscribe;
     // (undocumented)
     protected _onChange: Subject<void>;
-    // (undocumented)
-    onDispose(handler: () => void): Unsubscribe;
-    // (undocumented)
-    protected _onDispose: Subject<void>;
 }
 
 // Warning: (ae-missing-release-tag) "onehot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -845,8 +837,8 @@ export class TableBundle extends Resource implements TableEmitter {
     // (undocumented)
     dispose(): void;
     // (undocumented)
-    get input(): (Resource & TableEmitter) | undefined;
-    set input(input: (Resource & TableEmitter) | undefined);
+    get input(): TableEmitter | undefined;
+    set input(input: TableEmitter | undefined);
     // (undocumented)
     loadSchema(schema: Maybe_2<TableBundleSchema>, quiet?: boolean): void;
     // (undocumented)

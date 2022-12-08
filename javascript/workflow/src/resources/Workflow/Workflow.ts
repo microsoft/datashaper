@@ -9,12 +9,12 @@ import {
 	LATEST_WORKFLOW_SCHEMA,
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import type { Observable, Subscription } from 'rxjs'
+import type { Observable } from 'rxjs'
 import { BehaviorSubject, map, mergeWith, of } from 'rxjs'
 
+import { RemoveMode, TableManager } from '../../dataflow/TableManager.js'
 import type { Node } from '../../dataflow/types.js'
 import type { Maybe } from '../../primitives.js'
-import { DelegateSubject } from '../../util/rx.js'
 import { Resource } from '../Resource.js'
 import { GraphManager } from './GraphManager.js'
 import type { Step, StepInput, TableExportOptions } from './types.js'
@@ -25,9 +25,11 @@ import { WorkflowSchemaValidator } from './WorkflowSchemaValidator.js'
  * The workflow object manages mutable data for a workflow specification
  */
 export type TableObservable = Observable<Maybe<TableContainer>>
-type TableSubject = BehaviorSubject<Maybe<TableContainer>>
 
 export class Workflow extends Resource {
+	public override defaultName(): string {
+		return 'workflow.json'
+	}
 	public readonly $schema = LATEST_WORKFLOW_SCHEMA
 	public readonly profile = KnownProfile.Workflow
 
@@ -45,18 +47,11 @@ export class Workflow extends Resource {
 	//
 	// Output tracking - observables, data cache, subscriptions
 	//
-	private readonly _tableSubscriptions: Map<string, Subscription> = new Map()
-	private readonly _tables = new Map<string, TableSubject>()
-	private readonly _defaultOutput$ = new DelegateSubject<TableContainer>()
-	private readonly _defaultInput$ = new DelegateSubject<TableContainer>()
 	private _disposables: Array<() => void> = []
 
 	// The dataflow graph
-	private readonly _graphMgr = new GraphManager(this._defaultInput$)
-
-	public override defaultName(): string {
-		return 'workflow.json'
-	}
+	private readonly _tableMgr = new TableManager()
+	private readonly _graphMgr = new GraphManager(this._tableMgr.in$)
 
 	public constructor(input?: WorkflowSchema, private _strictInputs = false) {
 		super()
@@ -64,18 +59,11 @@ export class Workflow extends Resource {
 	}
 
 	public override dispose(): void {
-		this._defaultInput$.dispose()
-		this._defaultOutput$.dispose()
-		this._tableSubscriptions.forEach(s => s.unsubscribe())
-		this._tableSubscriptions.clear()
-		this._graphMgr.dispose()
 		this._disposables.forEach(d => d())
+		this._graphMgr.dispose()
+		this._tableMgr.dispose()
 		this._inputNames$.complete()
 		this._outputNames$.complete()
-		for (const t of this._tables.values()) {
-			t.complete()
-		}
-
 		super.dispose()
 	}
 
@@ -86,7 +74,7 @@ export class Workflow extends Resource {
 			const steps = this.steps
 			// Returns the default output of the final node
 			if (steps.length === 0) {
-				return this._defaultInput$
+				return this._tableMgr.in$
 			}
 			const lastStepId = steps[steps.length - 1]!.id
 			const lastNode = this.getNode(lastStepId)
@@ -94,7 +82,7 @@ export class Workflow extends Resource {
 			return lastNode.output$ as Observable<Maybe<TableContainer>>
 		}
 
-		this._defaultOutput$.input = defaultOutputObservable()
+		this._tableMgr.setDefaultOutputSource(defaultOutputObservable())
 	}
 
 	/**
@@ -115,11 +103,11 @@ export class Workflow extends Resource {
 		return this._read(name)
 	}
 
-	private _read(name?: string) {
+	private _read(name?: string): BehaviorSubject<Maybe<TableContainer>> {
 		if (name == null) {
-			return this._defaultOutput$
+			return this._tableMgr.out$
 		}
-		const [result, created] = this._ensureTable(name)
+		const [result, created] = this._tableMgr.ensure(name)
 		if (created) {
 			this.observeOutput(name)
 		}
@@ -180,21 +168,21 @@ export class Workflow extends Resource {
 	}
 
 	public get defaultInput$(): TableObservable {
-		return this._defaultInput$
+		return this._tableMgr.in$
 	}
 
 	public set defaultInput$(source: TableObservable) {
-		this._defaultInput$.input = source
+		this._tableMgr.setDefaultInputSource(source)
 		this._graphMgr.configureAllSteps()
 		this._onChange.next()
 	}
 
 	public get defaultInput(): Maybe<TableContainer> {
-		return this._defaultInput$.value
+		return this._tableMgr.in$.value
 	}
 
 	public set defaultInput(source: Maybe<TableContainer>) {
-		this._defaultInput$.next(source)
+		this._tableMgr.setDefaultInput(source)
 		this._graphMgr.configureAllSteps()
 		this._onChange.next()
 	}
@@ -235,10 +223,7 @@ export class Workflow extends Resource {
 
 	private _removeInputObservableSilent(id: string): void {
 		this._graphMgr.removeNode(id)
-		this._tableSubscriptions.get(id)?.unsubscribe()
-		this._tableSubscriptions.delete(id)
-		// leave the client read subjects alone, but clear out the current value
-		this._tables.get(id)?.next(undefined)
+		this._tableMgr.remove(id, RemoveMode.Soft)
 	}
 
 	/**
@@ -257,26 +242,8 @@ export class Workflow extends Resource {
 	}
 
 	private _bindInputObservable(id: string, source: TableObservable): void {
-		this._removeInputObservableSilent(id)
-		const [subject] = this._ensureTable(id)
-		const subscription = source.subscribe(s => subject.next(s))
-		this._tables.set(id, subject)
-		this._tableSubscriptions.set(id, subscription)
-		this._graphMgr.createNode(id, subject)
-	}
-
-	private _ensureTable(
-		id: string,
-	): [BehaviorSubject<Maybe<TableContainer>>, boolean] {
-		let created = false
-		if (!this._tables.has(id)) {
-			this._tables.set(
-				id,
-				new BehaviorSubject<Maybe<TableContainer>>(undefined),
-			)
-			created = true
-		}
-		return [this._tables.get(id)!, created]
+		const d$ = this._tableMgr.setSource(id, source)
+		this._graphMgr.createNode(id, d$)
 	}
 
 	private _assertInputName(id: string | undefined): void {
@@ -336,7 +303,7 @@ export class Workflow extends Resource {
 	 */
 	public removeOutput(name: string): void {
 		this._outputNames$.next(this.outputNames.filter(t => t !== name))
-		this._tables.delete(name)
+		this._tableMgr.remove(name, RemoveMode.Hard)
 		this._onChange.next()
 	}
 
@@ -399,21 +366,13 @@ export class Workflow extends Resource {
 		includeDefaultOutput,
 		includeInputs,
 	}: TableExportOptions = {}): Map<string, Maybe<TableContainer>> {
-		const result = new Map<string, Maybe<TableContainer>>()
-		const addTable = (name: string) =>
-			result.set(name, this._tables.get(name)!.value)
-
-		if (includeDefaultOutput) {
-			result.set('default', this._defaultOutput$.value)
-		}
-		if (includeDefaultInput) {
-			result.set('defaultInput', this._defaultInput$.value)
-		}
-		if (includeInputs) {
-			this.inputNames.forEach(addTable)
-		}
-		this.outputNames.forEach(addTable)
-		return result
+		return this._tableMgr.toMap(
+			includeInputs
+				? [...this.inputNames, ...this.outputNames]
+				: this.outputNames,
+			includeDefaultInput,
+			includeDefaultOutput,
+		)
 	}
 
 	public toArray({
@@ -421,21 +380,13 @@ export class Workflow extends Resource {
 		includeDefaultOutput,
 		includeInputs,
 	}: TableExportOptions = {}): Maybe<TableContainer>[] {
-		const result: Maybe<TableContainer>[] = []
-		const addTable = (name: string) =>
-			result.push(this._tables.get(name)!.value)
-		if (includeDefaultInput) {
-			result.push(this._defaultInput$.value)
-		}
-		if (includeInputs) {
-			this.inputNames.forEach(addTable)
-		}
-		this.outputNames.forEach(addTable)
-
-		if (includeDefaultOutput) {
-			result.push(this._defaultOutput$.value)
-		}
-		return result
+		return this._tableMgr.toArray(
+			includeInputs
+				? [...this.inputNames, ...this.outputNames]
+				: this.outputNames,
+			includeDefaultInput,
+			includeDefaultOutput,
+		)
 	}
 
 	public override toSchema(): WorkflowSchema {
@@ -462,20 +413,10 @@ export class Workflow extends Resource {
 	}
 
 	private observeOutput(name: string) {
-		const lazyCreateOutputTable = () => {
-			if (!this._tables.has(name)) {
-				this._tables.set(
-					name,
-					new BehaviorSubject<Maybe<TableContainer>>(undefined),
-				)
-			}
-			return this._tables.get(name) as BehaviorSubject<Maybe<TableContainer>>
-		}
-
-		const outputTable = lazyCreateOutputTable()
-		const sub = this.getNode(name).output$.subscribe(it =>
-			outputTable.next(it && { ...it, id: name }),
-		)
+		const [outputTable] = this._tableMgr.ensure(name)
+		const sub = this.getNode(name)
+			.output$.pipe(map(it => it && { ...it, id: name }))
+			.subscribe(outputTable)
 		this._disposables.push(() => sub.unsubscribe())
 	}
 

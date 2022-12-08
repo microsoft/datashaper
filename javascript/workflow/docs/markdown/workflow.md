@@ -64,7 +64,6 @@
 
 |  Interface | Description |
 |  --- | --- |
-|  [Disposable](./workflow.disposable.md) |  |
 |  [Emitter](./workflow.emitter.md) | A data emitter for a type of output |
 |  [Graph](./workflow.graph.md) |  |
 |  [Node\_2](./workflow.node_2.md) | A graph processing node |

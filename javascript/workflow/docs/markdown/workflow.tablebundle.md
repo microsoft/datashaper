@@ -25,7 +25,7 @@ export declare class TableBundle extends Resource implements TableEmitter
 |  --- | --- | --- | --- |
 |  [$schema](./workflow.tablebundle._schema.md) | <code>readonly</code> | string |  |
 |  [codebook](./workflow.tablebundle.codebook.md) |  | [Codebook](./workflow.codebook.md) \| undefined |  |
-|  [input](./workflow.tablebundle.input.md) |  | ([Resource](./workflow.resource.md) &amp; [TableEmitter](./workflow.tableemitter.md)<!-- -->) \| undefined |  |
+|  [input](./workflow.tablebundle.input.md) |  | [TableEmitter](./workflow.tableemitter.md) \| undefined |  |
 |  [name](./workflow.tablebundle.name.md) |  | string |  |
 |  [output](./workflow.tablebundle.output.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt; |  |
 |  [output$](./workflow.tablebundle.output_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt;&gt; |  |

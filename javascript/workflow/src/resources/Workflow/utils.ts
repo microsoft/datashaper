@@ -21,7 +21,7 @@ export function unique<T>(arr: T[]): T[] {
 
 export function isVariadicSocketName(
 	input: SocketName,
-	binding: NamedPortBinding | NamedPortBinding[],
-): binding is NamedPortBinding[] {
+	_binding: NamedPortBinding | NamedPortBinding[],
+): _binding is NamedPortBinding[] {
 	return input === 'others'
 }

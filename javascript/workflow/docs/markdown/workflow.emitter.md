@@ -9,9 +9,9 @@ A data emitter for a type of output
 <b>Signature:</b>
 
 ```typescript
-export interface Emitter<T> extends Disposable 
+export interface Emitter<T> extends Resource 
 ```
-<b>Extends:</b> [Disposable](./workflow.disposable.md)
+<b>Extends:</b> [Resource](./workflow.resource.md)
 
 ## Properties
 

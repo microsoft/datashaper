@@ -31,6 +31,7 @@ export declare class Codebook extends Resource
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
 |  [defaultName()](./workflow.codebook.defaultname.md) |  |  |
+|  [dispose()](./workflow.codebook.dispose.md) |  |  |
 |  [loadSchema(value, quiet)](./workflow.codebook.loadschema.md) |  |  |
 |  [toSchema()](./workflow.codebook.toschema.md) |  |  |
 
