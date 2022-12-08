@@ -63,7 +63,7 @@ export function useTableName(
 ): string {
 	const { workflow } = dataTable
 	return useMemo(() => {
-		let name: string | undefined = undefined
+		let name: string | undefined
 		if (workflow != null) {
 			const stepIndex = workflow.steps.findIndex(x => x.id === selectedTableId)
 			// if the step index is the final step, use the default datatable name
