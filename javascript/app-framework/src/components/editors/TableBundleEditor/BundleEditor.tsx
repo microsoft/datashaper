@@ -11,7 +11,6 @@ import {
 	useOnCreateStep,
 	useOnDeleteStep,
 	useOnSaveStep,
-	useWorkflowInputTableNames,
 } from '@datashaper/react'
 import { Workflow } from '@datashaper/workflow'
 import { ToolPanel } from '@essex/components'
@@ -20,12 +19,10 @@ import { useBoolean } from '@fluentui/react-hooks'
 import { useObservableState } from 'observable-hooks'
 import { memo, useMemo, useState } from 'react'
 
-import { useTableBundleOutput } from '../../../hooks/index.js'
 import {
 	useColumnState,
 	useHistoryButtonCommandBar,
 	useSelectedTable,
-	useStepListener,
 	useTableName,
 } from './BundleEditor.hooks.js'
 import {
@@ -42,16 +39,14 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 	function BundleEditor({ resource }) {
 		// Primary State
 		const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
-		const table = useTableBundleOutput(resource)
 		if (resource.workflow == null) {
 			resource.workflow = new Workflow()
 		}
 		const workflow = resource.workflow
-		const [selectedId, setSelectedId] = useState<string | undefined>(table?.id)
+		const [selectedId, setSelectedId] = useState<string | undefined>(undefined)
 		const [selectedColumn, onColumnClick] = useColumnState()
 
 		// Derived State
-		const inputNames = useWorkflowInputTableNames(workflow)
 		const numSteps = useObservableState(workflow.length$, workflow.length)
 		const toolPanelHeader = useMemo(
 			() => `Workflow steps (${numSteps})`,
@@ -73,9 +68,6 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 		const onSave = useOnSaveStep(workflow)
 		const onCreate = useOnCreateStep(onSave, setSelectedId)
 		const onDelete = useOnDeleteStep(workflow)
-
-		// Side Effects
-		useStepListener(workflow, setSelectedId, inputNames)
 
 		return selectedTable?.table == null ? null : (
 			<Container collapsed={isCollapsed}>

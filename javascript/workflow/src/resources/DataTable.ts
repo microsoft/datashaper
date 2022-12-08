@@ -36,21 +36,14 @@ export class DataTable extends Resource implements TableEmitter {
 		return 'datatable.json'
 	}
 
-	private disposables: Array<() => void> = []
-
 	private _format: DataFormat = DataFormat.CSV
 	private _rawData: Blob | undefined
 
 	public constructor(datatable?: DataTableSchema) {
 		super()
-		this.disposables.push(this.parser.onChange(this.refreshData))
-		this.disposables.push(this.shape.onChange(this.refreshData))
+		this.onDispose(this.parser.onChange(this.refreshData))
+		this.onDispose(this.shape.onChange(this.refreshData))
 		this.loadSchema(datatable)
-	}
-
-	public override dispose(): void {
-		this.disposables.forEach(d => d())
-		super.dispose()
 	}
 
 	private refreshData = (): void => {
@@ -127,5 +120,10 @@ export class DataTable extends Resource implements TableEmitter {
 		if (!quiet) {
 			this._onChange.next()
 		}
+	}
+
+	public override dispose(): void {
+		this._output$.complete()
+		super.dispose()
 	}
 }

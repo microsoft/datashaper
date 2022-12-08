@@ -86,6 +86,15 @@ export class Workflow extends Resource {
 		this._tableSubscriptions.clear()
 		this._graph.clear()
 		this._disposables.forEach(d => d())
+		this._steps$.complete()
+		this._inputNames$.complete()
+		this._outputNames$.complete()
+		this._defaultInput$.complete()
+		this._defaultOutput$.complete()
+		for (const t of this._tables.values()) {
+			t.complete()
+		}
+
 		super.dispose()
 	}
 

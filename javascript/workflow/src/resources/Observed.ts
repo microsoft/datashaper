@@ -5,12 +5,10 @@
 import { Subject } from 'rxjs'
 
 import type { Unsubscribe } from '../primitives.js'
-import type { Disposable } from './types.js'
+import { Disposable } from './Disposable.js'
 
-export abstract class Observed implements Disposable {
+export abstract class Observed extends Disposable {
 	protected _onChange = new Subject<void>()
-	protected _onDispose = new Subject<void>()
-
 	public onChange(handler: () => void, fireSync?: boolean): Unsubscribe {
 		const sub = this._onChange.subscribe(handler)
 		if (fireSync) {
@@ -19,14 +17,8 @@ export abstract class Observed implements Disposable {
 		return () => sub.unsubscribe()
 	}
 
-	public onDispose(handler: () => void): Unsubscribe {
-		const sub = this._onDispose.subscribe(handler)
-		return () => sub.unsubscribe()
-	}
-
-	public dispose(): void {
-		this._onDispose.next()
-		this._onDispose.complete()
+	public override dispose(): void {
 		this._onChange.complete()
+		super.dispose()
 	}
 }

@@ -8,7 +8,7 @@ import {
 	KnownProfile,
 	LATEST_CODEBOOK_SCHEMA,
 } from '@datashaper/schema'
-import { type Observable,BehaviorSubject } from 'rxjs'
+import { type Observable, BehaviorSubject } from 'rxjs'
 
 import type { Maybe } from '../primitives.js'
 import { Resource } from './Resource.js'
@@ -57,5 +57,10 @@ export class Codebook extends Resource {
 		if (!quiet) {
 			this._onChange.next()
 		}
+	}
+
+	public override dispose(): void {
+		this._fields$.complete()
+		super.dispose()
 	}
 }

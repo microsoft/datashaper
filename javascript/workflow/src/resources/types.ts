@@ -7,7 +7,7 @@ import type { Profile, ResourceSchema } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import type { Observable } from 'rxjs'
 
-import type { Maybe, Unsubscribe } from '../primitives.js'
+import type { Maybe } from '../primitives.js'
 import type { DataPackage } from './DataPackage/DataPackage.js'
 import type { Resource } from './Resource.js'
 
@@ -38,24 +38,10 @@ export interface ResourceHandler {
 	load(data: ResourceSchema, files: Map<string, Blob>): Promise<Resource[]>
 }
 
-export interface Disposable {
-	/**
-	 * Dispose the resource
-	 */
-	dispose(): void
-
-	/**
-	 * Subscribe to the event when the resource is disposed
-	 * @param callback - THe callback to call when the resource is disposed
-	 * @returns A function that unsubscribes the callback
-	 */
-	onDispose(callback: () => void): Unsubscribe
-}
-
 /**
  * A data emitter for a type of output
  */
-export interface Emitter<T> extends Disposable {
+export interface Emitter<T> extends Resource {
 	/**
 	 * The output value stream
 	 */
