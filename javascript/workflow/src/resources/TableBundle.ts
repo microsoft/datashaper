@@ -87,9 +87,7 @@ export class TableBundle extends Resource implements TableEmitter {
 		if (input != null) {
 			const d = new Disposable()
 			d.onDispose(
-				input.output$
-					.pipe(map(this.encodeTable))
-					.subscribe(t => this._input$.next(this.encodeTable(t))),
+				input.output$.pipe(map(this.encodeTable)).subscribe(this._input$),
 			)
 			d.onDispose(input.onDispose(() => (this.input = undefined)))
 			this._disposeInputConnections = d
@@ -243,12 +241,9 @@ export class TableBundle extends Resource implements TableEmitter {
 		// Establish the table-bundle output
 		this._disposeOutputSub?.dispose()
 		const d = new Disposable()
-		d.onDispose(out$.pipe(map(this.renameTable)).subscribe(this.emit))
+		d.onDispose(out$.pipe(map(this.renameTable)).subscribe(this._output$))
 		this._disposeOutputSub = d
 	}
-
-	private emit = (table: Maybe<TableContainer>): void =>
-		this._output$.next(table)
 
 	private encodeTable = (t: Maybe<TableContainer>): Maybe<TableContainer> => {
 		const codebook = this.codebook
