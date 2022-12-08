@@ -17,16 +17,16 @@
 					}
 				},
 				{
-					"rel": "workflow",
+					"rel": "codebook",
 					"source": {
-						"profile": "workflow",
-						"steps": [
+						"id": "3a4d44da-ea51-4077-9ed6-0a7803e40f9f",
+						"profile": "codebook",
+						"fields": [
 							{
-								"verb": "rename",
-								"args": {
-									"columns": {
-										"sex": "sex (female)"
-									}
+								"name": "sex",
+								"mapping": {
+									"0": "Female",
+									"1": "Male"
 								}
 							}
 						]
@@ -60,7 +60,7 @@
 								"args": {
 									"columns": [
 										"index",
-										"sex (female)",
+										"sex",
 										"age",
 										"race",
 										"education",
@@ -255,7 +255,7 @@
 										"qsmk",
 										"sbp",
 										"school",
-										"sex (female)",
+										"sex",
 										"smkintensity82_71",
 										"smokeintensity",
 										"smokeyrs",

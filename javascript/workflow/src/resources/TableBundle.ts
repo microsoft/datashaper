@@ -44,7 +44,7 @@ export class TableBundle extends Resource implements TableEmitter {
 	private _codebook: Codebook | undefined
 	private _workflow: Workflow | undefined
 
-	private _inputRedirectOnDispose: Unsubscribe | undefined
+	private _outputSubOnDispose: Unsubscribe | undefined
 	private _workflowOnDispose: Unsubscribe | undefined
 	private _codebookOnDispose: Unsubscribe | undefined
 	private _disposeInputListeners: Unsubscribe | undefined
@@ -82,10 +82,9 @@ export class TableBundle extends Resource implements TableEmitter {
 		this._input = input
 
 		if (input != null) {
-			const sub = input.output$
-				// rename the container
-				.pipe(map(tbl => ({ ...tbl, name: this.name } as TableContainer)))
-				.subscribe(tbl => this._input$.next(this.encode(tbl)))
+			const sub = input.output$.subscribe(t =>
+				this._input$.next(this.encodeTable(t)),
+			)
 
 			const unsubOnDispose = input.onDispose(() => (this.input = undefined))
 			this._disposeInputListeners = () => {
@@ -107,7 +106,7 @@ export class TableBundle extends Resource implements TableEmitter {
 		this._codebook = codebook
 
 		if (codebook != null) {
-			const unsubOnChange = codebook.onChange(() => this.bindDataflow())
+			const unsubOnChange = codebook.onChange(this.bindDataflow)
 			const unsubOnDispose = codebook.onDispose(
 				() => (this.codebook = undefined),
 			)
@@ -131,13 +130,11 @@ export class TableBundle extends Resource implements TableEmitter {
 
 		if (workflow != null) {
 			const unsubOnChange = workflow.onChange(() => this._onChange.next())
-			const sub = workflow.read$()?.subscribe(tbl => this._output$.next(tbl))
 			const unsubOnDispose = workflow.onDispose(
 				() => (this.workflow = undefined),
 			)
 
 			this._workflowOnDispose = () => {
-				sub.unsubscribe()
 				unsubOnChange()
 				unsubOnDispose()
 			}
@@ -219,41 +216,55 @@ export class TableBundle extends Resource implements TableEmitter {
 		rebindInputs()
 	}
 
-	private bindDataflow() {
-		this._inputRedirectOnDispose?.()
+	private bindDataflow = () => {
+		this._outputSubOnDispose?.()
+
+		let outputObservable: Observable<Maybe<TableContainer>>
 
 		// Establish workflow inputs
 		if (this.workflow != null) {
-			// Set the default input to the datatable output
 			if (this.input != null) {
 				this.workflow.defaultInput$ = this.input.output$
 			}
-
-			// Add other named inputs from the tablestore
 			this.workflow.addInputs(this._inputs)
+			outputObservable = this.workflow.read$()
 		} else {
-			// Direct the input to the output port
-			const sub = this._input$.subscribe(tbl => this._output$.next(tbl))
+			// Redirect input to output
+			outputObservable = this._input$
 			this._output$.next(this._input$.value)
-			this._inputRedirectOnDispose = () => sub.unsubscribe()
 		}
+
+		const sub = outputObservable.subscribe(t =>
+			this._output$.next(this.renameTableContainer(t)),
+		)
+		this._outputSubOnDispose = () => sub.unsubscribe()
 	}
 
-	private encode(inputTable: Maybe<TableContainer>): Maybe<TableContainer> {
+	private encodeTable = (
+		table: Maybe<TableContainer>,
+	): Maybe<TableContainer> => {
+		const codebook = this.codebook
 		if (
-			inputTable?.table == null ||
-			this.codebook == null ||
-			this.codebook.fields.length === 0
+			table?.table == null ||
+			codebook == null ||
+			codebook.fields.length === 0
 		) {
-			return inputTable
+			console.log('skip encoding', this.name)
+			return table
 		}
-		return {
-			...inputTable,
-			table: applyCodebook(
-				inputTable.table,
-				this.codebook,
-				CodebookStrategy.DataTypeAndMapping,
-			),
-		}
+
+		const encodedTable = applyCodebook(
+			table.table,
+			codebook!,
+			CodebookStrategy.DataTypeAndMapping,
+		)
+		console.log('encoding', this.name, encodedTable)
+		return { ...table, table: encodedTable }
+	}
+
+	private renameTableContainer = (
+		table: Maybe<TableContainer>,
+	): Maybe<TableContainer> => {
+		return table == null ? table : { ...table, id: this.name }
 	}
 }
