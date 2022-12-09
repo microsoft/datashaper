@@ -3008,8 +3008,8 @@
             },
             {
               "kind": "Reference",
-              "text": "ColumnTable",
-              "canonicalReference": "arquero!default:class"
+              "text": "TableContainer",
+              "canonicalReference": "@datashaper/tables!TableContainer:interface"
             },
             {
               "kind": "Content",

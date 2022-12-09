@@ -3,8 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@datashaper/tables'
-import type { DataTable, Maybe,TableBundle } from '@datashaper/workflow'
-import type ColumnTable from 'arquero/dist/types/table/column-table.js'
+import type { DataTable, Maybe, TableBundle } from '@datashaper/workflow'
 import { useObservableState } from 'observable-hooks'
 import { from } from 'rxjs'
 
@@ -26,7 +25,7 @@ export function useTableBundleOutput(
  */
 export function useDataTableSource(
 	pkg: DataTable | undefined,
-): Maybe<ColumnTable> {
+): Maybe<TableContainer> {
 	return useObservableState(pkg?.output$ ?? none(), () => pkg?.output)
 }
 

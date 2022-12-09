@@ -19,6 +19,7 @@ describe('The Workflow Resource', () => {
 	test('runs a single step with normal input/output', () => {
 		const g = new Workflow({
 			id: 'test workflow',
+			profile: 'workflow',
 			$schema:
 				'https://microsoft.github.io/datashaper/schema/workflow/workflow.json',
 			name: 'test',
@@ -39,6 +40,7 @@ describe('The Workflow Resource', () => {
 
 		expect(g).toBeDefined()
 		const result = g.read()
+		expect(result?.table).toBeDefined()
 		expect(result?.table?.numCols()).toBe(2)
 		expect(result?.table?.numRows()).toBe(4)
 		expect(g.outputNames).toEqual([])
@@ -47,6 +49,7 @@ describe('The Workflow Resource', () => {
 	test('runs a single step with named output', () => {
 		const g = new Workflow({
 			id: 'test workflow',
+			profile: 'workflow',
 			$schema:
 				'https://microsoft.github.io/datashaper/schema/workflow/workflow.json',
 			name: 'test',
@@ -87,6 +90,7 @@ describe('The Workflow Resource', () => {
 	test('runs multiple steps with normal input/output and all intermediates', () => {
 		const g = new Workflow({
 			id: 'test workflow',
+			profile: 'workflow',
 			$schema:
 				'https://microsoft.github.io/datashaper/schema/workflow/workflow.json',
 			name: 'test',
@@ -116,6 +120,7 @@ describe('The Workflow Resource', () => {
 		expect(g).toBeDefined()
 		const result = g.read()
 		expect(result).toBeDefined()
+		expect(result?.table).toBeDefined()
 		expect(result?.table?.numCols()).toBe(3)
 		expect(result?.table?.numRows()).toBe(4)
 		expect(result?.table?.columnNames()).toEqual(['ID', 'filled', 'filled2'])

@@ -44,9 +44,10 @@ export class TableBundleHandler implements ResourceHandler {
 		if (resource.input != null) {
 			const dtSources: string[] = []
 			// Save the source data CSV/JSON
-			if (resource.input.data != null) {
-				const dataFileName = asset(`${resource.name}.${resource.input?.format}`)
-				files.set(dataFileName, resource?.input.data)
+			const dataTable = resource.input as DataTable
+			if (dataTable.data != null) {
+				const dataFileName = asset(`${resource.name}.${dataTable.format}`)
+				files.set(dataFileName, dataTable.data)
 				dtSources.push(dataFileName)
 			}
 			dataTableFileName = asset('datatable.json')
@@ -102,11 +103,12 @@ export class TableBundleHandler implements ResourceHandler {
 		)
 
 		if (datatableSchema != null) {
-			bundle.input = new DataTable(datatableSchema)
+			const dataTable = new DataTable(datatableSchema)
 			// Locate the raw source data for the datatable type
-			if (typeof bundle.input.path === 'string') {
-				bundle.input.data = await resolveRawData(bundle.input.path, files)
+			if (typeof dataTable.path === 'string') {
+				dataTable.data = await resolveRawData(dataTable.path, files)
 			}
+			bundle.input = dataTable
 		}
 		if (codebookSchema != null) {
 			bundle.codebook = new Codebook(codebookSchema)

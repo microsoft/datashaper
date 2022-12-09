@@ -1668,6 +1668,36 @@
               "name": "defaultName"
             },
             {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!Codebook#dispose:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "dispose(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "name": "dispose"
+            },
+            {
               "kind": "Property",
               "canonicalReference": "@datashaper/workflow!Codebook#fields:member",
               "docComment": "",
@@ -3384,6 +3414,15 @@
             },
             {
               "kind": "Content",
+              "text": " implements "
+            },
+            {
+              "kind": "Reference",
+              "text": "TableEmitter",
+              "canonicalReference": "@datashaper/workflow!TableEmitter:type"
+            },
+            {
+              "kind": "Content",
               "text": " "
             }
           ],
@@ -3721,8 +3760,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "ColumnTable",
-                  "canonicalReference": "arquero!default:class"
+                  "text": "TableContainer",
+                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
                 },
                 {
                   "kind": "Content",
@@ -3773,8 +3812,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "ColumnTable",
-                  "canonicalReference": "arquero!default:class"
+                  "text": "TableContainer",
+                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
                 },
                 {
                   "kind": "Content",
@@ -3926,7 +3965,12 @@
             "startIndex": 1,
             "endIndex": 2
           },
-          "implementsTokenRanges": []
+          "implementsTokenRanges": [
+            {
+              "startIndex": 3,
+              "endIndex": 4
+            }
+          ]
         },
         {
           "kind": "Variable",
@@ -4457,6 +4501,123 @@
             "startIndex": 1,
             "endIndex": 4
           }
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/workflow!Emitter:interface",
+          "docComment": "/**\n * A data emitter for a type of output\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface Emitter<T> extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Resource",
+              "canonicalReference": "@datashaper/workflow!Resource:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "Emitter",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/workflow!Emitter#output:member",
+              "docComment": "/**\n * The current output value\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly output: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Maybe",
+                  "canonicalReference": "@datashaper/workflow!Maybe:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "output",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/workflow!Emitter#output$:member",
+              "docComment": "/**\n * The output value stream\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly output$: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Observable",
+                  "canonicalReference": "rxjs!Observable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Maybe",
+                  "canonicalReference": "@datashaper/workflow!Maybe:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T>>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "output$",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            }
+          ]
         },
         {
           "kind": "Variable",
@@ -7899,7 +8060,16 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare abstract class Observed "
+              "text": "export declare abstract class Observed extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Disposable",
+              "canonicalReference": "@datashaper/workflow!Disposable:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
           "releaseTag": "Public",
@@ -7933,40 +8103,6 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "_onChange",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              },
-              "isStatic": false,
-              "isProtected": true
-            },
-            {
-              "kind": "Property",
-              "canonicalReference": "@datashaper/workflow!Observed#_onDispose:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "protected _onDispose: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Subject",
-                  "canonicalReference": "rxjs!Subject:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<void>"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "_onDispose",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
@@ -8067,56 +8203,12 @@
               ],
               "isOptional": false,
               "name": "onChange"
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "@datashaper/workflow!Observed#onDispose:member(1)",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onDispose(handler: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "() => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Unsubscribe",
-                  "canonicalReference": "@datashaper/workflow!Unsubscribe:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "handler",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": false
-                }
-              ],
-              "isOptional": false,
-              "name": "onDispose"
             }
           ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
           "implementsTokenRanges": []
         },
         {
@@ -10489,6 +10581,15 @@
             },
             {
               "kind": "Content",
+              "text": " implements "
+            },
+            {
+              "kind": "Reference",
+              "text": "TableEmitter",
+              "canonicalReference": "@datashaper/workflow!TableEmitter:type"
+            },
+            {
+              "kind": "Content",
               "text": " "
             }
           ],
@@ -10720,8 +10821,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "DataTable",
-                  "canonicalReference": "@datashaper/workflow!DataTable:class"
+                  "text": "TableEmitter",
+                  "canonicalReference": "@datashaper/workflow!TableEmitter:type"
                 },
                 {
                   "kind": "Content",
@@ -10729,12 +10830,12 @@
                 },
                 {
                   "kind": "Content",
-                  "text": ";\n\nset input(datatable: "
+                  "text": ";\n\nset input(input: "
                 },
                 {
                   "kind": "Reference",
-                  "text": "DataTable",
-                  "canonicalReference": "@datashaper/workflow!DataTable:class"
+                  "text": "TableEmitter",
+                  "canonicalReference": "@datashaper/workflow!TableEmitter:type"
                 },
                 {
                   "kind": "Content",
@@ -11109,7 +11210,12 @@
             "startIndex": 1,
             "endIndex": 2
           },
-          "implementsTokenRanges": []
+          "implementsTokenRanges": [
+            {
+              "startIndex": 3,
+              "endIndex": 4
+            }
+          ]
         },
         {
           "kind": "Class",
@@ -11398,6 +11504,45 @@
               "endIndex": 2
             }
           ]
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@datashaper/workflow!TableEmitter:type",
+          "docComment": "/**\n * An emitter for TableContainers\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type TableEmitter = "
+            },
+            {
+              "kind": "Reference",
+              "text": "Emitter",
+              "canonicalReference": "@datashaper/workflow!Emitter:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "TableContainer",
+              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "TableEmitter",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 5
+          }
         },
         {
           "kind": "Interface",
@@ -12431,7 +12576,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "addStep(stepInput: "
+                  "text": "addStep(input: "
                 },
                 {
                   "kind": "Reference",
@@ -12462,7 +12607,7 @@
               "overloadIndex": 1,
               "parameters": [
                 {
-                  "parameterName": "stepInput",
+                  "parameterName": "input",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
@@ -13228,7 +13373,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "removeInputName(input: "
+                  "text": "removeInputName(name: "
                 },
                 {
                   "kind": "Content",
@@ -13257,7 +13402,7 @@
               "overloadIndex": 1,
               "parameters": [
                 {
-                  "parameterName": "input",
+                  "parameterName": "name",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2

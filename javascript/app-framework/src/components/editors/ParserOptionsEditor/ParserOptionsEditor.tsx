@@ -186,7 +186,7 @@ export const ParserOptionsEditor: React.FC<ParserOptionsEditorProps> = memo(
 				</ParserOptionsContainer>
 				<PreviewContainer>
 					<PreviewLabel>Preview</PreviewLabel>
-					{table && <TablePreview table={table} />}
+					{table?.table && <TablePreview table={table.table} />}
 				</PreviewContainer>
 			</Container>
 		)
