@@ -45,20 +45,6 @@ function computeBins(input: ColumnTable, args: BinArgs) {
 	const stats = getStats(input, column, args.min, args.max)
 	const [min, max] = stats
 	switch (strategy) {
-		case BinStrategy.Auto:
-			return [min, max, autoStrategy(input.array(column))]
-		case BinStrategy.Fd:
-			return [min, max, fdStrategy(input.array(column))]
-		case BinStrategy.Doane:
-			return [min, max, doaneStrategy(input.array(column))]
-		case BinStrategy.Scott:
-			return [min, max, scottStrategy(input.array(column))]
-		case BinStrategy.Rice:
-			return [min, max, riceStrategy(input.array(column))]
-		case BinStrategy.Sturges:
-			return [min, max, sturgesStrategy(input.array(column))]
-		case BinStrategy.Sqrt:
-			return [min, max, sqrtStrategy(input.array(column))]
 		case BinStrategy.FixedWidth:
 			if (!fixedwidth) {
 				throw new Error('Must supply a bin width')
@@ -69,6 +55,32 @@ function computeBins(input: ColumnTable, args: BinArgs) {
 				throw new Error('Must supply a bin count')
 			}
 			return [min, max, (max - min) / fixedcount]
+		default:
+			return [min, max, estimateBins(strategy, input.array(column), min, max)]
+	}
+}
+
+function estimateBins(
+	strategy: BinStrategy,
+	values: number[],
+	min: number,
+	max: number,
+): number {
+	switch (strategy) {
+		case BinStrategy.Auto:
+			return Math.round(Math.ceil((max - min) / autoStrategy(values)))
+		case BinStrategy.Fd:
+			return Math.round(Math.ceil((max - min) / fdStrategy(values)))
+		case BinStrategy.Doane:
+			return Math.round(Math.ceil((max - min) / doaneStrategy(values)))
+		case BinStrategy.Scott:
+			return Math.round(Math.ceil((max - min) / scottStrategy(values)))
+		case BinStrategy.Rice:
+			return Math.round(Math.ceil((max - min) / riceStrategy(values)))
+		case BinStrategy.Sturges:
+			return Math.round(Math.ceil((max - min) / sturgesStrategy(values)))
+		case BinStrategy.Sqrt:
+			return Math.round(Math.ceil((max - min) / sqrtStrategy(values)))
 		default:
 			throw new Error(`Unsupported bin strategy ${strategy}`)
 	}
