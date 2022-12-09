@@ -4,6 +4,8 @@
 
 ## ArqueroTableHeaderProps.styles property
 
+The table styles
+
 <b>Signature:</b>
 
 ```typescript

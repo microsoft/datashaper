@@ -8,87 +8,25 @@
 
 |  Enumeration | Description |
 |  --- | --- |
-|  [DisplayOrder](./react.displayorder.md) |  |
-|  [StatsColumnType](./react.statscolumntype.md) |  |
+|  [DisplayOrder](./react.displayorder.md) | The vertical display ordering for workflow steps. |
+|  [StatsColumnType](./react.statscolumntype.md) | Available column statistics to show in the Arquero Details List |
 
 ## Functions
 
 |  Function | Description |
 |  --- | --- |
-|  [checkedItemsCommand(list, checked, onCheckChange, props)](./react.checkeditemscommand.md) | Constructs a command for listing out items with checks |
-|  [downloadCommand(table, downloadFilename, props)](./react.downloadcommand.md) | Constructs a download command. When clicked, will save the current table to a csv. |
-|  [getLeftColumn(step)](./react.getleftcolumn.md) |  |
-|  [getRightColumn(step)](./react.getrightcolumn.md) |  |
-|  [getSimpleDropdownOptions(list)](./react.getsimpledropdownoptions.md) |  |
-|  [tableMenuCommand(tables, selectedKey, onChange, props)](./react.tablemenucommand.md) | Displays a table name along with a dropdown menu for selection of different tables. |
-|  [useCellDimensions(column, considerCompactMode)](./react.usecelldimensions.md) |  |
-|  [useCheckboxChangeHandler(step, updateFn, onChange)](./react.usecheckboxchangehandler.md) |  |
-|  [useColumnNames(table, filter)](./react.usecolumnnames.md) |  |
-|  [useColumnNamesList(table, columns)](./react.usecolumnnameslist.md) | Creates a list of column names for the table. If there are no columns supplied it will use the list from the table itself. Otherwise it will use the provided columns under the assumption the user has configured them as desired. |
-|  [useColumns(table, validationResult, metadata, columns, onColumnSelect, onSort, options, virtualColumns)](./react.usecolumns.md) | Overlays a number of special features onto the IColumn objects for a table. This includes overridden renderers to support our sorting, selection, and data visualization. |
-|  [useColumnsMetadata(table, filter)](./react.usecolumnsmetadata.md) |  |
-|  [useColumnStyles(clickable, separator)](./react.usecolumnstyles.md) |  |
-|  [useColumnType(table, column)](./react.usecolumntype.md) |  |
-|  [useColumnValueOptions(column, table, values, filter)](./react.usecolumnvalueoptions.md) |  |
-|  [useComboBoxChangeHandler(step, updateFn, onChange)](./react.usecomboboxchangehandler.md) | Creates a callback handler for changing the step based on a combobox value. This only handles basic cases where the combobox option key can be set on the step using an object path. |
-|  [useComboBoxInputValueChangeHandler(step, updateFn, onChange)](./react.usecomboboxinputvaluechangehandler.md) | Creates a callback handler for changing the step based on a combobox value. This only handles basic cases where the combobox option key can be set on the step using an object path. |
-|  [useCommandBarColorDefaults(colors)](./react.usecommandbarcolordefaults.md) |  |
-|  [useDefaultStyles(styles, heights)](./react.usedefaultstyles.md) |  |
-|  [useDetailsHeaderRenderer()](./react.usedetailsheaderrenderer.md) | Overrides the default details header rendering so we can inject customization |
-|  [useDetailsListStyles(isHeaderFixed, features, styles, hasColumnClick, compact)](./react.usedetailsliststyles.md) | Create a DetailsHeader style with enough height to handle the options we've turned on. Each one requires a small amount of vertical space that stacks up. |
-|  [useDropdownChangeAllHandler(step, updateFn, onChange)](./react.usedropdownchangeallhandler.md) |  |
-|  [useDropdownChangeHandler(step, updateFn, onChange)](./react.usedropdownchangehandler.md) | Creates a callback handler for changing the step based on a dropdown value. This only handles basic cases where the dropdown option key can be set on the step using an object path. |
-|  [useFormattedNumber(value, formatter)](./react.useformattednumber.md) |  |
-|  [useGetColumnValidationErrors(validationResult)](./react.usegetcolumnvalidationerrors.md) |  |
-|  [useGroupHeaderRenderer(table, computedMetadata, groupHeaderFunction, lazyLoadGroups)](./react.usegroupheaderrenderer.md) | Overrides the default group header rendering so we can inject customization |
-|  [useHandleDelete(mapList, onChange)](./react.usehandledelete.md) |  |
-|  [useHandleKeyChange(mapList, onChange)](./react.usehandlekeychange.md) |  |
-|  [useHandleValueChange(mapList, dataType, onChange)](./react.usehandlevaluechange.md) |  |
+|  [useDefaultCodebookStyles(styles, heights)](./react.usedefaultcodebookstyles.md) |  |
 |  [useHeaderCommandBarDefaults(props, far, colors)](./react.useheadercommandbardefaults.md) | Helper to create the props necessary for the default inverted management bar. Basic colors can be customized, but note that if you do not want an always-inverted bar like that used in the DataShaper webapp, you may want to just tweak the Fluent styles as normal. |
-|  [useIconProps(validationResult)](./react.useiconprops.md) |  |
-|  [useIncrementingColumnColorScale(meta)](./react.useincrementingcolumncolorscale.md) | Creates a thematic nominal color scale function that auto-increments for the numeric columns in a table. |
-|  [useLeftColumn(step)](./react.useleftcolumn.md) |  |
-|  [useModalState(onShow, onHide)](./react.usemodalstate.md) | A hook to consolidate view-state for modals |
-|  [useOnCreateStep(save, selectOutput, dismissModal)](./react.useoncreatestep.md) |  |
-|  [useOnDeleteStep(workflow)](./react.useondeletestep.md) |  |
-|  [useOnDeleteStepColumn(step, onChange)](./react.useondeletestepcolumn.md) |  |
-|  [useOnDuplicateStep(workflow, table, onSave)](./react.useonduplicatestep.md) |  |
-|  [useOnEditStep(setStep, setStepIndex, showTableModal)](./react.useoneditstep.md) | A hook to get the onEditStep callback |
-|  [useOnSaveStep(workflow)](./react.useonsavestep.md) |  |
-|  [useOnStepOutputChanged(workflow)](./react.useonstepoutputchanged.md) | This hooks handles managing a step's output within the workflow. This hook assumes that each step will have a single output, which will become an invariant we expand upon in the future. |
-|  [useOnStepSave(workflow)](./react.useonstepsave.md) |  |
-|  [useOnUpdateStep(workflow)](./react.useonupdatestep.md) |  |
-|  [useReifiedTable(table)](./react.usereifiedtable.md) |  |
-|  [useRightColumn(step)](./react.userightcolumn.md) |  |
-|  [useSimpleDropdownOptions(list)](./react.usesimpledropdownoptions.md) | Make a basic set of string options from an array |
-|  [useSlicedTable(table, offset, limit)](./react.useslicedtable.md) |  |
-|  [useSortedGroups(table, column, sort, entries)](./react.usesortedgroups.md) | Sort top level group headers if the table is grouped, there isn't any column sorted or if the respective column is sorted |
-|  [useSortedTable(table, column, sort)](./react.usesortedtable.md) |  |
-|  [useSortHandling(allowSorting, defaultSortColumn, defaultSortDirection)](./react.usesorthandling.md) |  |
-|  [useSpinButtonChangeHandler(step, updateFn, onChange)](./react.usespinbuttonchangehandler.md) | Enforces numeric values for a SpinButton onChange. |
-|  [useStepDataTable(step, workflow, input, table)](./react.usestepdatatable.md) |  |
-|  [useStepOutputs(workflow)](./react.usestepoutputs.md) | create a parallel array of output names for the steps |
-|  [useStripedRowsRenderer(striped, columnBorders, compactRowHeight)](./react.usestripedrowsrenderer.md) |  |
-|  [useSubsetTable(table, columns)](./react.usesubsettable.md) |  |
-|  [useSuggestedTableName(workflow)](./react.usesuggestedtablename.md) | Returns a hook to generate a new table name based on the given input e.g. "join" could result in "join 1" or "join 2" depending on how many collisions occur. |
-|  [useTableDropdownOptions(workflow)](./react.usetabledropdownoptions.md) | Creates a dropdown list of id-names from the tables in a store TODO: for any given step, we should only show the tables created \*prior\* to this step, potentially via an optional filter callback on store.list. As it is, whenever the store is updated all the table dropdowns get the results. |
-|  [useTextFieldChangeHandler(step, updateFn, onChange)](./react.usetextfieldchangehandler.md) |  |
-|  [useValidationIconProps(iconProps, validationResult)](./react.usevalidationiconprops.md) |  |
-|  [useValidationRenderer(value, validationResult)](./react.usevalidationrenderer.md) |  |
-|  [useWorkflow(input, inputs)](./react.useworkflow.md) |  |
-|  [useWorkflowDataTable(id, workflow, existingTable)](./react.useworkflowdatatable.md) |  |
-|  [useWorkflowInputTableNames(workflow)](./react.useworkflowinputtablenames.md) | Creates a dropdown list of id-names from the tables in a store TODO: for any given step, we should only show the tables created \*prior\* to this step, potentially via an optional filter callback on store.list. As it is, whenever the store is updated all the table dropdowns get the results. |
-|  [useWorkflowListener(workflow, setWorkflow)](./react.useworkflowlistener.md) |  |
-|  [useWorkflowOutputListener(workflow, setOutput)](./react.useworkflowoutputlistener.md) |  |
-|  [useWorkflowSteps(workflow, order)](./react.useworkflowsteps.md) | Gets the workflow processing steps |
-|  [visibleColumnsCommand(table, columns, onCheckChange, props)](./react.visiblecolumnscommand.md) | Constructs a visible columns command. This is a dropdown button that lists all of the columns in a table, with checks next to the visible ones. |
+|  [useOnCreateStep(save, selectOutput, dismissModal)](./react.useoncreatestep.md) | Get a function to call when a step is created |
+|  [useOnDeleteStep(workflow)](./react.useondeletestep.md) | Creates a callback that may be used to delete steps by index |
+|  [useOnSaveStep(workflow)](./react.useonsavestep.md) | Creates a callback that may be used to save a step |
 
 ## Interfaces
 
 |  Interface | Description |
 |  --- | --- |
-|  [ArqueroDetailsListProps](./react.arquerodetailslistprops.md) |  |
-|  [ArqueroTableHeaderProps](./react.arquerotableheaderprops.md) |  |
+|  [ArqueroDetailsListProps](./react.arquerodetailslistprops.md) | Props for the Arquero Details List component |
+|  [ArqueroTableHeaderProps](./react.arquerotableheaderprops.md) | Props for the ArqueroTableHeader component |
 |  [ArqueroTableHeaderStyles](./react.arquerotableheaderstyles.md) |  |
 |  [CodebookEnumDropdownFieldProps](./react.codebookenumdropdownfieldprops.md) |  |
 |  [CodebookFieldEditorProps](./react.codebookfieldeditorprops.md) |  |
@@ -96,13 +34,10 @@
 |  [CodebookStyles](./react.codebookstyles.md) |  |
 |  [CodebookTableEditorProps](./react.codebooktableeditorprops.md) |  |
 |  [CodebookTextFieldProps](./react.codebooktextfieldprops.md) |  |
-|  [ColumnOptions](./react.columnoptions.md) |  |
 |  [CommandBarColors](./react.commandbarcolors.md) |  |
 |  [DetailsListFeatures](./react.detailslistfeatures.md) |  |
 |  [GroupedVerbs](./react.groupedverbs.md) |  |
-|  [GuidanceProps](./react.guidanceprops.md) |  |
-|  [ModalState](./react.modalstate.md) |  |
-|  [SortParameters](./react.sortparameters.md) |  |
+|  [GuidanceProps](./react.guidanceprops.md) | Props for the Guidance component |
 |  [StepHistoryStyles](./react.stephistorystyles.md) |  |
 |  [StepListProps](./react.steplistprops.md) |  |
 |  [TableCommandsProps](./react.tablecommandsprops.md) |  |
@@ -112,7 +47,7 @@
 |  Variable | Description |
 |  --- | --- |
 |  [ArqueroDetailsList](./react.arquerodetailslist.md) | Renders an arquero table using a fluent DetailsList. |
-|  [ArqueroTableHeader](./react.arquerotableheader.md) |  |
+|  [ArqueroTableHeader](./react.arquerotableheader.md) | Renders a header for an Arquero table |
 |  [CodebookDataNatureField](./react.codebookdatanaturefield.md) |  |
 |  [CodebookDescriptionField](./react.codebookdescriptionfield.md) |  |
 |  [CodebookDisplayNameField](./react.codebookdisplaynamefield.md) |  |
@@ -120,7 +55,7 @@
 |  [CodebookStatsField](./react.codebookstatsfield.md) |  |
 |  [CodebookTableEditor](./react.codebooktableeditor.md) |  |
 |  [CodebookUnitField](./react.codebookunitfield.md) |  |
-|  [Guidance](./react.guidance.md) |  |
+|  [Guidance](./react.guidance.md) | A component for rendering guidance information on verb usage. |
 |  [StepList](./react.steplist.md) |  |
 |  [TableCommands](./react.tablecommands.md) |  |
 
@@ -128,16 +63,9 @@
 
 |  Type Alias | Description |
 |  --- | --- |
-|  [CheckboxChangeHandler](./react.checkboxchangehandler.md) |  |
 |  [ColumnRenderFunction](./react.columnrenderfunction.md) |  |
 |  [ColumnSelectFunction](./react.columnselectfunction.md) |  |
-|  [ComboBoxChangeHandler](./react.comboboxchangehandler.md) |  |
-|  [ComboBoxInputValueChangeHandler](./react.comboboxinputvaluechangehandler.md) |  |
-|  [DropdownChangeAllHandler](./react.dropdownchangeallhandler.md) |  |
-|  [DropdownChangeHandler](./react.dropdownchangehandler.md) |  |
 |  [DropdownOptionSelect](./react.dropdownoptionselect.md) |  |
 |  [GroupHeaderFunction](./react.groupheaderfunction.md) |  |
 |  [SaveMetadataFunction](./react.savemetadatafunction.md) |  |
-|  [SpinButtonChangeHandler](./react.spinbuttonchangehandler.md) |  |
-|  [TextFieldChangeHandler](./react.textfieldchangehandler.md) |  |
 

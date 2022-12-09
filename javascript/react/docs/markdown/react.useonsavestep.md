@@ -4,6 +4,8 @@
 
 ## useOnSaveStep() function
 
+Creates a callback that may be used to save a step
+
 <b>Signature:</b>
 
 ```typescript

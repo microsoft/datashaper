@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-export { useDefaultStyles } from './Codebook.styles.js'
+export { useDefaultCodebookStyles } from './Codebook.styles.js'
 export type {
 	CodebookEnumDropdownFieldProps,
 	CodebookPropsBase,

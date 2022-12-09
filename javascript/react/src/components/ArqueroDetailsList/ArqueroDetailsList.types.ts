@@ -45,6 +45,9 @@ export type ColumnSelectFunction = (
 	column?: IColumn | undefined,
 ) => void
 
+/**
+ * Available column statistics to show in the Arquero Details List
+ */
 export enum StatsColumnType {
 	Type = 'type',
 	Count = 'count',
@@ -119,6 +122,9 @@ export interface DetailsListFeatures {
 	commandBar?: IRenderFunction<IDetailsColumnProps>[]
 }
 
+/**
+ * Props for the Arquero Details List component
+ */
 export interface ArqueroDetailsListProps
 	extends Omit<IDetailsListProps, 'items'> {
 	table: ColumnTable

@@ -4,6 +4,8 @@
 
 ## ArqueroTableHeaderProps.showRowCount property
 
+Whether to show the row count
+
 <b>Signature:</b>
 
 ```typescript

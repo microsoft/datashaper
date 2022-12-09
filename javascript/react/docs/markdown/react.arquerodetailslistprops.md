@@ -4,6 +4,8 @@
 
 ## ArqueroDetailsListProps interface
 
+Props for the Arquero Details List component
+
 <b>Signature:</b>
 
 ```typescript

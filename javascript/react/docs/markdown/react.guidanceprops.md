@@ -4,6 +4,8 @@
 
 ## GuidanceProps interface
 
+Props for the Guidance component
+
 <b>Signature:</b>
 
 ```typescript

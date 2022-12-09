@@ -5,7 +5,7 @@
 import { DataType, VariableNature } from '@datashaper/schema'
 import { memo } from 'react'
 
-import { useDefaultStyles } from './Codebook.styles.js'
+import { useDefaultCodebookStyles } from './Codebook.styles.js'
 import { CodebookDataNatureField } from './CodebookDataNatureField.js'
 import { CodebookDataTypeField } from './CodebookDataTypeField.js'
 import { CodebookDescriptionField } from './CodebookDescriptionField.js'
@@ -17,7 +17,7 @@ import { MappingFields } from './MappingFields.js'
 
 export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 	function CodebookFieldEditor({ styles, field, onChangeField }) {
-		const _styles = useDefaultStyles(styles)
+		const _styles = useDefaultCodebookStyles(styles)
 
 		return (
 			<div style={_styles.root}>

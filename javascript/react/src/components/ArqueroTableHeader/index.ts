@@ -4,9 +4,3 @@
  */
 export { ArqueroTableHeader } from './ArqueroTableHeader.js'
 export * from './ArqueroTableHeader.types.js'
-export {
-	checkedItemsCommand,
-	downloadCommand,
-	tableMenuCommand,
-	visibleColumnsCommand,
-} from './commands/index.js'

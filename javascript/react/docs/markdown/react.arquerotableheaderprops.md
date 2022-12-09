@@ -4,6 +4,8 @@
 
 ## ArqueroTableHeaderProps interface
 
+Props for the ArqueroTableHeader component
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,14 +16,14 @@ export interface ArqueroTableHeaderProps
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [background?](./react.arquerotableheaderprops.background.md) |  | string | <i>(Optional)</i> |
-|  [color?](./react.arquerotableheaderprops.color.md) |  | string | <i>(Optional)</i> |
-|  [commandBar?](./react.arquerotableheaderprops.commandbar.md) |  | ReactElement&lt;any, any&gt; | <i>(Optional)</i> |
-|  [farCommandBar?](./react.arquerotableheaderprops.farcommandbar.md) |  | ReactElement&lt;any, any&gt; | <i>(Optional)</i> |
-|  [name?](./react.arquerotableheaderprops.name.md) |  | string | <i>(Optional)</i> |
-|  [showColumnCount?](./react.arquerotableheaderprops.showcolumncount.md) |  | boolean | <i>(Optional)</i> |
-|  [showRowCount?](./react.arquerotableheaderprops.showrowcount.md) |  | boolean | <i>(Optional)</i> |
-|  [styles?](./react.arquerotableheaderprops.styles.md) |  | [ArqueroTableHeaderStyles](./react.arquerotableheaderstyles.md) | <i>(Optional)</i> |
-|  [table](./react.arquerotableheaderprops.table.md) |  | ColumnTable |  |
-|  [visibleColumns?](./react.arquerotableheaderprops.visiblecolumns.md) |  | string\[\] | <i>(Optional)</i> |
+|  [background?](./react.arquerotableheaderprops.background.md) |  | string | <i>(Optional)</i> The table background color |
+|  [color?](./react.arquerotableheaderprops.color.md) |  | string | <i>(Optional)</i> The table color |
+|  [commandBar?](./react.arquerotableheaderprops.commandbar.md) |  | ReactElement&lt;any, any&gt; | <i>(Optional)</i> The optional command bar |
+|  [farCommandBar?](./react.arquerotableheaderprops.farcommandbar.md) |  | ReactElement&lt;any, any&gt; | <i>(Optional)</i> The optional far-command bar |
+|  [name?](./react.arquerotableheaderprops.name.md) |  | string | <i>(Optional)</i> The table name |
+|  [showColumnCount?](./react.arquerotableheaderprops.showcolumncount.md) |  | boolean | <i>(Optional)</i> Whether to show the column count |
+|  [showRowCount?](./react.arquerotableheaderprops.showrowcount.md) |  | boolean | <i>(Optional)</i> Whether to show the row count |
+|  [styles?](./react.arquerotableheaderprops.styles.md) |  | [ArqueroTableHeaderStyles](./react.arquerotableheaderstyles.md) | <i>(Optional)</i> The table styles |
+|  [table](./react.arquerotableheaderprops.table.md) |  | ColumnTable | The arquero table to render |
+|  [visibleColumns?](./react.arquerotableheaderprops.visiblecolumns.md) |  | string\[\] | <i>(Optional)</i> Column-names that are visible |
 

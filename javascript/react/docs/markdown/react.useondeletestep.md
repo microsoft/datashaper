@@ -4,6 +4,8 @@
 
 ## useOnDeleteStep() function
 
+Creates a callback that may be used to delete steps by index
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,9 +16,11 @@ export declare function useOnDeleteStep(workflow: Workflow): (index: number) => 
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  workflow | Workflow |  |
+|  workflow | Workflow | The dat workflow |
 
 <b>Returns:</b>
 
 (index: number) =&gt; void
+
+A callback that may be used to delete steps by index
 

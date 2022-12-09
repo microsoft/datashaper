@@ -4,6 +4,8 @@
 
 ## ArqueroTableHeaderProps.visibleColumns property
 
+Column-names that are visible
+
 <b>Signature:</b>
 
 ```typescript

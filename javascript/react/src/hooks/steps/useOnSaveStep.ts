@@ -8,7 +8,7 @@ import { useCallback } from 'react'
 import { useOnStepOutputChanged, useOnStepSave } from '../index.js'
 
 /**
- *
+ * Creates a callback that may be used to save a step
  * @param workflow - The workflow
  * @returns A callback to use when saving a step, either new or existing
  */

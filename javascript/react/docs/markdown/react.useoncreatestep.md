@@ -4,6 +4,8 @@
 
 ## useOnCreateStep() function
 
+Get a function to call when a step is created
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,11 +16,12 @@ export declare function useOnCreateStep(save: (step: Step, index: number | undef
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  save | (step: Step, index: number \| undefined) =&gt; void |  |
-|  selectOutput | undefined \| ((name: string) =&gt; void) |  |
-|  dismissModal | () =&gt; void | <i>(Optional)</i> |
+|  save | (step: Step, index: number \| undefined) =&gt; void | The save function to call when the step is created |
+|  selectOutput | undefined \| ((name: string) =&gt; void) | A function to select the output after the step is created |
+|  dismissModal | () =&gt; void | <i>(Optional)</i> The function used to dismill the modal |
 
 <b>Returns:</b>
 
 (step: Step, output: string \| undefined, index: number \| undefined) =&gt; void
+
 

@@ -26,7 +26,13 @@ export function getRootStyle(
 	)
 }
 
-export function useDefaultStyles(
+/**
+ *
+ * @param styles - The styles input object
+ * @param heights  - The field heights to use
+ * @returns - A set of codebook styles to use
+ */
+export function useDefaultCodebookStyles(
 	styles?: CodebookStyles,
 	heights?: FieldHeights,
 ): CodebookStyles {
