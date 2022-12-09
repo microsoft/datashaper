@@ -34,12 +34,7 @@ export class Workflow extends Resource {
 	public readonly $schema = LATEST_WORKFLOW_SCHEMA
 	public readonly profile = KnownProfile.Workflow
 
-	//
-	// Output tracking - observables, data cache, subscriptions
-	//
-	private _disposables: Array<() => void> = []
-
-	// The dataflow graph
+	// Delegated Facade Managers
 	private readonly _nameMgr = new NameManager()
 	private readonly _tableMgr = new TableManager()
 	private readonly _graphMgr = new GraphManager(this._tableMgr.in$)
@@ -50,7 +45,6 @@ export class Workflow extends Resource {
 	}
 
 	public override dispose(): void {
-		this._disposables.forEach(d => d())
 		this._graphMgr.dispose()
 		this._tableMgr.dispose()
 		this._nameMgr.dispose()
@@ -380,7 +374,7 @@ export class Workflow extends Resource {
 		const sub = this.getNode(name)
 			.output$.pipe(map(it => it && { ...it, id: name }))
 			.subscribe(outputTable)
-		this._disposables.push(() => sub.unsubscribe())
+		this.onDispose(sub)
 	}
 
 	public static async validate(workflowJson: WorkflowSchema): Promise<boolean> {

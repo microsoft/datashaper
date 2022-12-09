@@ -5,7 +5,7 @@
 ```ts
 
 import type { AggregateArgs } from '@datashaper/schema';
-import { BehaviorSubject } from 'rxjs';
+import type { BehaviorSubject } from 'rxjs';
 import type { BinArgs } from '@datashaper/schema';
 import type { BinarizeArgs } from '@datashaper/schema';
 import type { BooleanArgs } from '@datashaper/schema';
