@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@datashaper/tables'
-import type { Observable } from 'rxjs';
-import { BehaviorSubject, from,map } from 'rxjs'
+import type { Observable } from 'rxjs'
+import { BehaviorSubject, from, map } from 'rxjs'
 
 import { DefaultGraph } from '../../dataflow/DefaultGraph.js'
 import { observableNode } from '../../dataflow/index.js'
@@ -199,7 +199,7 @@ export class GraphManager extends Disposable {
 		}
 	}
 
-	public removeInput(id: string) {
+	public removeInput(id: string): void {
 		this._inputDelegates.delete(id)
 		this._graph.remove(id)
 		this.configureAllSteps()
