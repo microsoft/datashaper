@@ -193,6 +193,18 @@ export class GraphManager extends Disposable {
 		}
 	}
 
+	public get lastOutput$(): Observable<Maybe<TableContainer>> | undefined {
+		const steps = this.steps
+		// Returns the default output of the final node
+		if (steps.length === 0) {
+			return undefined
+		}
+		const lastStepId = steps[steps.length - 1]!.id
+		const lastNode = this.getNode(lastStepId)
+		// Nodes use BehaviorSubject internally
+		return lastNode.output$ as Observable<Maybe<TableContainer>>
+	}
+
 	public createNode(
 		id: string,
 		Observable: Observable<Maybe<TableContainer>>,

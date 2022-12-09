@@ -9,14 +9,15 @@ import {
 	LATEST_WORKFLOW_SCHEMA,
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import type { Observable } from 'rxjs'
-import { BehaviorSubject, map, mergeWith, of } from 'rxjs'
+import type { BehaviorSubject, Observable } from 'rxjs'
+import { map, of } from 'rxjs'
 
 import { RemoveMode, TableManager } from '../../dataflow/TableManager.js'
 import type { Node } from '../../dataflow/types.js'
 import type { Maybe } from '../../primitives.js'
 import { Resource } from '../Resource.js'
 import { GraphManager } from './GraphManager.js'
+import { NameManager } from './NameManager.js'
 import type { Step, StepInput, TableExportOptions } from './types.js'
 import { unique } from './utils.js'
 import { WorkflowSchemaValidator } from './WorkflowSchemaValidator.js'
@@ -33,23 +34,13 @@ export class Workflow extends Resource {
 	public readonly $schema = LATEST_WORKFLOW_SCHEMA
 	public readonly profile = KnownProfile.Workflow
 
-	// Workflow Data Fields
-	private readonly _inputNames$ = new BehaviorSubject<string[]>([])
-	private readonly _outputNames$ = new BehaviorSubject<string[]>([])
-	private readonly _allTableNames$ = this._outputNames$
-		.pipe(mergeWith(this._inputNames$))
-		.pipe(
-			map(() =>
-				unique(this._outputNames$.value.concat(this._inputNames$.value)),
-			),
-		)
-
 	//
 	// Output tracking - observables, data cache, subscriptions
 	//
 	private _disposables: Array<() => void> = []
 
 	// The dataflow graph
+	private readonly _nameMgr = new NameManager()
 	private readonly _tableMgr = new TableManager()
 	private readonly _graphMgr = new GraphManager(this._tableMgr.in$)
 
@@ -62,27 +53,13 @@ export class Workflow extends Resource {
 		this._disposables.forEach(d => d())
 		this._graphMgr.dispose()
 		this._tableMgr.dispose()
-		this._inputNames$.complete()
-		this._outputNames$.complete()
+		this._nameMgr.dispose()
 		super.dispose()
 	}
 
 	private rebindDefaultOutput() {
-		const defaultOutputObservable = (): Maybe<
-			Observable<Maybe<TableContainer>>
-		> => {
-			const steps = this.steps
-			// Returns the default output of the final node
-			if (steps.length === 0) {
-				return this._tableMgr.in$
-			}
-			const lastStepId = steps[steps.length - 1]!.id
-			const lastNode = this.getNode(lastStepId)
-			// Nodes use BehaviorSubject internally
-			return lastNode.output$ as Observable<Maybe<TableContainer>>
-		}
-
-		this._tableMgr.setDefaultOutputSource(defaultOutputObservable())
+		const data$ = this._graphMgr.lastOutput$ ?? this._tableMgr.in$
+		this._tableMgr.setDefaultOutputSource(data$)
 	}
 
 	/**
@@ -130,7 +107,7 @@ export class Workflow extends Resource {
 	 * This does not include the default input or default output tables.
 	 */
 	public get allTableNames$(): Observable<string[]> {
-		return this._allTableNames$
+		return this._nameMgr.all$
 	}
 
 	/**
@@ -142,29 +119,27 @@ export class Workflow extends Resource {
 	}
 
 	public get inputNames(): string[] {
-		return this._inputNames$.value
+		return this._nameMgr.inputs
 	}
 
 	public get inputNames$(): Observable<string[]> {
-		return this._inputNames$
+		return this._nameMgr.inputs$
 	}
 
 	public addInputName(input: string): void {
-		if (!this.hasInputName(input)) {
-			this._inputNames$.next([...this.inputNames, input])
+		if (!this._nameMgr.addInput(input)) {
 			this._onChange.next()
 		}
 	}
 
 	public removeInputName(input: string): void {
-		if (!this.hasInputName(input)) {
-			this._inputNames$.next([...this.inputNames].filter(i => i !== input))
+		if (!this._nameMgr.removeInput(input)) {
 			this._onChange.next()
 		}
 	}
 
 	public hasInputName(input: string): boolean {
-		return this.inputNames.some(i => i === input)
+		return this._nameMgr.hasInput(input)
 	}
 
 	public get defaultInput$(): TableObservable {
@@ -247,41 +222,26 @@ export class Workflow extends Resource {
 	}
 
 	private _assertInputName(id: string | undefined): void {
-		// if id is undefined, we're binding the default input
-		if (id !== undefined && !this.hasInputName(id)) {
-			if (this._strictInputs) {
-				throw new Error(`input name ${id} not declared`)
-			} else {
-				this.addInputName(id)
-			}
-		}
+		this._nameMgr.assertInput(id, this._strictInputs)
 	}
 
 	// #endregion
 
 	// #region Outputs
 	public hasOutputName(name: string): boolean {
-		return this.outputNames.some(i => i === name)
+		return this._nameMgr.hasOutput(name)
 	}
 
 	public suggestOutputName(name: string): string {
-		const originalName = name.replace(/( \(\d+\))/, '')
-		let derivedName = originalName
-		let count = 1
-
-		while (this.hasOutputName(derivedName)) {
-			derivedName = `${originalName} (${count})`
-			count++
-		}
-		return derivedName
+		return this._nameMgr.suggestOutputName(name)
 	}
 
 	public get outputNames(): string[] {
-		return this._outputNames$.value
+		return this._nameMgr.outputs
 	}
 
 	public get outputNames$(): Observable<string[]> {
-		return this._outputNames$
+		return this._nameMgr.outputs$
 	}
 
 	/**
@@ -292,7 +252,7 @@ export class Workflow extends Resource {
 		if (this.hasOutputName(name) || this.hasInputName(name)) {
 			throw new Error('new output name must be unique among outputs & inputs')
 		}
-		this._outputNames$.next([...this._outputNames$.value, name])
+		this._nameMgr.addOutput(name)
 		this.observeOutput(name)
 		this._onChange.next()
 	}
@@ -302,9 +262,10 @@ export class Workflow extends Resource {
 	 * @param name - the output name to remove
 	 */
 	public removeOutput(name: string): void {
-		this._outputNames$.next(this.outputNames.filter(t => t !== name))
-		this._tableMgr.remove(name, RemoveMode.Hard)
-		this._onChange.next()
+		if (this._nameMgr.removeOutput(name)) {
+			this._tableMgr.remove(name, RemoveMode.Hard)
+			this._onChange.next()
+		}
 	}
 
 	// #endregion
@@ -404,8 +365,10 @@ export class Workflow extends Resource {
 	): void {
 		super.loadSchema(schema, true)
 		this._graphMgr.setSteps(schema?.steps?.map(i => i as StepInput) ?? [])
-		this._inputNames$.next(unique(schema?.input ?? []))
-		this._outputNames$.next(schema?.output ?? [])
+		this._nameMgr.setNames(
+			unique(schema?.input ?? []),
+			unique(schema?.output ?? []),
+		)
 		this.rebindDefaultOutput()
 		if (!quiet) {
 			this._onChange.next()
