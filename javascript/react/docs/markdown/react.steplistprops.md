@@ -20,6 +20,6 @@ export interface StepListProps
 |  [order?](./react.steplistprops.order.md) |  | [DisplayOrder](./react.displayorder.md) | <i>(Optional)</i> |
 |  [selectedKey?](./react.steplistprops.selectedkey.md) |  | string | <i>(Optional)</i> Id of the selected step |
 |  [showSelectButtons?](./react.steplistprops.showselectbuttons.md) |  | boolean | <i>(Optional)</i> Indicates whether the original/latest buttons will be shown. Note that they will have no effect if you do not supply an onSelect handler too. |
-|  [styles?](./react.steplistprops.styles.md) |  | [StepHistoryStyles](./react.stephistorystyles.md) | <i>(Optional)</i> |
+|  [styles?](./react.steplistprops.styles.md) |  | [StepListStyles](./react.stepliststyles.md) | <i>(Optional)</i> |
 |  [workflow](./react.steplistprops.workflow.md) |  | Workflow |  |
 

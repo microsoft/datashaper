@@ -231,22 +231,6 @@ export enum StatsColumnType {
     Type = "type"
 }
 
-// Warning: (ae-missing-release-tag) "StepHistoryStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface StepHistoryStyles {
-    // (undocumented)
-    buttonContainer?: CSSProperties;
-    // (undocumented)
-    root?: CSSProperties;
-    // Warning: (ae-forgotten-export) The symbol "StepHeaderStyles" needs to be exported by the entry point index.d.ts
-    //
-    // (undocumented)
-    stepHeaders?: StepHeaderStyles;
-    // (undocumented)
-    stepsContainer?: CSSProperties;
-}
-
 // Warning: (ae-missing-release-tag) "StepList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -267,9 +251,25 @@ export interface StepListProps {
     selectedKey?: string;
     showSelectButtons?: boolean;
     // (undocumented)
-    styles?: StepHistoryStyles;
+    styles?: StepListStyles;
     // (undocumented)
     workflow: Workflow;
+}
+
+// Warning: (ae-missing-release-tag) "StepListStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StepListStyles {
+    // (undocumented)
+    buttonContainer?: CSSProperties;
+    // (undocumented)
+    root?: CSSProperties;
+    // Warning: (ae-forgotten-export) The symbol "StepHeaderStyles" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    stepHeaders?: StepHeaderStyles;
+    // (undocumented)
+    stepsContainer?: CSSProperties;
 }
 
 // Warning: (ae-missing-release-tag) "TableCommands" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -312,21 +312,6 @@ export function useDefaultCodebookStyles(styles?: CodebookStyles, heights?: Fiel
 //
 // @public
 export function useHeaderCommandBarDefaults(props?: Partial<ICommandBarProps>, far?: boolean, colors?: Partial<CommandBarColors>): ICommandBarProps;
-
-// Warning: (ae-missing-release-tag) "useOnCreateStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useOnCreateStep(save: (step: Step, index: number | undefined) => void, selectOutput: undefined | ((name: string) => void), dismissModal?: () => void): (step: Step, output: string | undefined, index: number | undefined) => void;
-
-// Warning: (ae-missing-release-tag) "useOnDeleteStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useOnDeleteStep(workflow: Workflow): (index: number) => void;
-
-// Warning: (ae-missing-release-tag) "useOnSaveStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useOnSaveStep(workflow: Workflow): (step: Step, index: number | undefined) => void;
 
 // (No @packageDocumentation comment for this package)
 

@@ -17,9 +17,6 @@
 |  --- | --- |
 |  [useDefaultCodebookStyles(styles, heights)](./react.usedefaultcodebookstyles.md) | Generates the default codebook styles |
 |  [useHeaderCommandBarDefaults(props, far, colors)](./react.useheadercommandbardefaults.md) | Helper to create the props necessary for the default inverted management bar. Basic colors can be customized, but note that if you do not want an always-inverted bar like that used in the DataShaper webapp, you may want to just tweak the Fluent styles as normal. |
-|  [useOnCreateStep(save, selectOutput, dismissModal)](./react.useoncreatestep.md) | Get a function to call when a step is created |
-|  [useOnDeleteStep(workflow)](./react.useondeletestep.md) | Creates a callback that may be used to delete steps by index |
-|  [useOnSaveStep(workflow)](./react.useonsavestep.md) | Creates a callback that may be used to save a step |
 
 ## Interfaces
 
@@ -32,8 +29,8 @@
 |  [CodebookProps](./react.codebookprops.md) | Props for the CodebookEditor component |
 |  [CommandBarColors](./react.commandbarcolors.md) |  |
 |  [GuidanceProps](./react.guidanceprops.md) | Props for the Guidance component |
-|  [StepHistoryStyles](./react.stephistorystyles.md) |  |
 |  [StepListProps](./react.steplistprops.md) |  |
+|  [StepListStyles](./react.stepliststyles.md) |  |
 |  [TableCommandsProps](./react.tablecommandsprops.md) |  |
 
 ## Variables
