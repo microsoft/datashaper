@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-removeInputName(input: string): void;
+removeInputName(name: string): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  input | string |  |
+|  name | string |  |
 
 <b>Returns:</b>
 

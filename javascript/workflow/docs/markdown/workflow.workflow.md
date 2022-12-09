@@ -46,7 +46,7 @@ export declare class Workflow extends Resource
 |  [addInputTable(table, id)](./workflow.workflow.addinputtable.md) |  | Add a named input |
 |  [addInputTables(inputs)](./workflow.workflow.addinputtables.md) |  |  |
 |  [addOutput(name)](./workflow.workflow.addoutput.md) |  | Add an output binding |
-|  [addStep(stepInput)](./workflow.workflow.addstep.md) |  | Adds a step to the pipeline |
+|  [addStep(input)](./workflow.workflow.addstep.md) |  | Adds a step to the pipeline |
 |  [defaultName()](./workflow.workflow.defaultname.md) |  |  |
 |  [dispose()](./workflow.workflow.dispose.md) |  |  |
 |  [hasInputName(input)](./workflow.workflow.hasinputname.md) |  |  |
@@ -54,7 +54,7 @@ export declare class Workflow extends Resource
 |  [loadSchema(schema, quiet)](./workflow.workflow.loadschema.md) |  |  |
 |  [read(name)](./workflow.workflow.read.md) |  | Observe an output name |
 |  [read$(name)](./workflow.workflow.read_.md) |  | Observe an output name |
-|  [removeInputName(input)](./workflow.workflow.removeinputname.md) |  |  |
+|  [removeInputName(name)](./workflow.workflow.removeinputname.md) |  |  |
 |  [removeInputObservable(id)](./workflow.workflow.removeinputobservable.md) |  |  |
 |  [removeOutput(name)](./workflow.workflow.removeoutput.md) |  | Remove an output binding |
 |  [removeStep(index)](./workflow.workflow.removestep.md) |  |  |

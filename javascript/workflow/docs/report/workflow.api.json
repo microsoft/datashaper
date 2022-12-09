@@ -12576,7 +12576,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "addStep(stepInput: "
+                  "text": "addStep(input: "
                 },
                 {
                   "kind": "Reference",
@@ -12607,7 +12607,7 @@
               "overloadIndex": 1,
               "parameters": [
                 {
-                  "parameterName": "stepInput",
+                  "parameterName": "input",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
@@ -13373,7 +13373,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "removeInputName(input: "
+                  "text": "removeInputName(name: "
                 },
                 {
                   "kind": "Content",
@@ -13402,7 +13402,7 @@
               "overloadIndex": 1,
               "parameters": [
                 {
-                  "parameterName": "input",
+                  "parameterName": "name",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2

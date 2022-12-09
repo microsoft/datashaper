@@ -959,7 +959,7 @@ export class Workflow extends Resource {
     // (undocumented)
     addInputTables(inputs: TableContainer[]): void;
     addOutput(name: string): void;
-    addStep(stepInput: StepInput): Step;
+    addStep(input: StepInput): Step;
     get allTableNames$(): Observable<string[]>;
     get allTableNames(): string[];
     // (undocumented)
@@ -995,7 +995,7 @@ export class Workflow extends Resource {
     read$(name?: string): Observable<Maybe<TableContainer>>;
     read(name?: string): Maybe<TableContainer>;
     // (undocumented)
-    removeInputName(input: string): void;
+    removeInputName(name: string): void;
     // (undocumented)
     removeInputObservable(id: string): void;
     removeOutput(name: string): void;
