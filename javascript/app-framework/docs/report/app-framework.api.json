@@ -241,109 +241,6 @@
           "extendsTokenRanges": []
         },
         {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!choiceGroupStyles:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "choiceGroupStyles: "
-            },
-            {
-              "kind": "Content",
-              "text": "{\n    flexContainer: {\n        display: string;\n        gap: string;\n    };\n}"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "choiceGroupStyles",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 2
-          }
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!CodebookEditor:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "CodebookEditor: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "CodebookEditorProps",
-              "canonicalReference": "@datashaper/app-framework!CodebookEditorProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "CodebookEditor",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/app-framework!CodebookEditorProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface CodebookEditorProps "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "CodebookEditorProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!CodebookEditorProps#resource:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "resource: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Codebook",
-                  "canonicalReference": "@datashaper/workflow!Codebook:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "resource",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
           "kind": "Enum",
           "canonicalReference": "@datashaper/app-framework!CommandBarSection:enum",
           "docComment": "",
@@ -424,113 +321,6 @@
         },
         {
           "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!Container:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "Container: "
-            },
-            {
-              "kind": "Content",
-              "text": "import(\"styled-components\")."
-            },
-            {
-              "kind": "Reference",
-              "text": "StyledComponent",
-              "canonicalReference": "@types/styled-components!StyledComponent:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<\"div\", any, {}, never>"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "Container",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 4
-          }
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!DataPackageContext:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "DataPackageContext: "
-            },
-            {
-              "kind": "Content",
-              "text": "import(\"react\")."
-            },
-            {
-              "kind": "Reference",
-              "text": "Context",
-              "canonicalReference": "@types/react!~React.Context:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "DataPackage",
-              "canonicalReference": "@datashaper/workflow!DataPackage:class"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "DataPackageContext",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 6
-          }
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!DataPackageProvider:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "DataPackageProvider: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<{\n    children: "
-            },
-            {
-              "kind": "Reference",
-              "text": "JSX.Element",
-              "canonicalReference": "@types/react!~__global.JSX.Element:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ";\n}>"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "DataPackageProvider",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Variable",
           "canonicalReference": "@datashaper/app-framework!DataShaperApp:var",
           "docComment": "/**\n * A component for rendering a data-shaper application. This includes a resource management UI area and a main area that renders selected content based on its profile type. It is expected that this application is rendered under a react-router Router component.\n */\n",
           "excerptTokens": [
@@ -566,68 +356,32 @@
           }
         },
         {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!DataTableEditor:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "DataTableEditor: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "DataTableEditorProps",
-              "canonicalReference": "@datashaper/app-framework!DataTableEditorProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "DataTableEditor",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
           "kind": "Interface",
-          "canonicalReference": "@datashaper/app-framework!DataTableEditorProps:interface",
+          "canonicalReference": "@datashaper/app-framework!DataShaperAppProps:interface",
           "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface DataTableEditorProps "
+              "text": "export interface DataShaperAppProps "
             }
           ],
           "releaseTag": "Public",
-          "name": "DataTableEditorProps",
+          "name": "DataShaperAppProps",
           "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!DataTableEditorProps#resource:member",
-              "docComment": "",
+              "canonicalReference": "@datashaper/app-framework!DataShaperAppProps#children:member",
+              "docComment": "/**\n * The child node to render as the \"Front Page\" of the app. This is the default view when no resource is selected\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "resource: "
+                  "text": "children: "
                 },
                 {
                   "kind": "Reference",
-                  "text": "DataTable",
-                  "canonicalReference": "@datashaper/workflow!DataTable:class"
+                  "text": "React.ReactNode",
+                  "canonicalReference": "@types/react!~React.ReactNode:type"
                 },
                 {
                   "kind": "Content",
@@ -637,132 +391,20 @@
               "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "resource",
+              "name": "children",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
               }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Class",
-          "canonicalReference": "@datashaper/app-framework!DefaultPersistenceService:class",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare class DefaultPersistenceService implements "
             },
             {
-              "kind": "Reference",
-              "text": "PersistenceService",
-              "canonicalReference": "@datashaper/app-framework!PersistenceService:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "DefaultPersistenceService",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "Constructor",
-              "canonicalReference": "@datashaper/app-framework!DefaultPersistenceService:constructor(1)",
-              "docComment": "/**\n * Constructs a new instance of the `DefaultPersistenceService` class\n */\n",
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!DataShaperAppProps#className:member",
+              "docComment": "/**\n * CSS Classname\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "constructor(dataPackage: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "DataPackage",
-                  "canonicalReference": "@datashaper/workflow!DataPackage:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ");"
-                }
-              ],
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "dataPackage",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": false
-                }
-              ]
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "@datashaper/app-framework!DefaultPersistenceService#load:member(1)",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "load(pkg: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "BaseFile",
-                  "canonicalReference": "@datashaper/utilities!BaseFile:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Promise",
-                  "canonicalReference": "!Promise:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<void>"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 5
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "pkg",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": false
-                }
-              ],
-              "isOptional": false,
-              "name": "load"
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "@datashaper/app-framework!DefaultPersistenceService#save:member(1)",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "save(projectName?: "
+                  "text": "className?: "
                 },
                 {
                   "kind": "Content",
@@ -770,50 +412,112 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "): "
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "className",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!DataShaperAppProps#examples:member",
+              "docComment": "/**\n * Examples to provide\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "examples?: "
                 },
                 {
                   "kind": "Reference",
-                  "text": "Promise",
-                  "canonicalReference": "!Promise:interface"
+                  "text": "FileDefinition",
+                  "canonicalReference": "@datashaper/app-framework!FileDefinition:interface"
                 },
                 {
                   "kind": "Content",
-                  "text": "<void>"
+                  "text": "[]"
                 },
                 {
                   "kind": "Content",
                   "text": ";"
                 }
               ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 5
-              },
+              "isReadonly": false,
+              "isOptional": true,
               "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
+              "name": "examples",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!DataShaperAppProps#fallback:member",
+              "docComment": "/**\n * The React node to render when the selected resource cannot be found\n */\n",
+              "excerptTokens": [
                 {
-                  "parameterName": "projectName",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": true
+                  "kind": "Content",
+                  "text": "fallback?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "React.ReactNode",
+                  "canonicalReference": "@types/react!~React.ReactNode:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
                 }
               ],
-              "isOptional": false,
-              "name": "save"
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "fallback",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!DataShaperAppProps#profiles:member",
+              "docComment": "/**\n * Custom profile renderers\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "profiles?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ProfilePlugin",
+                  "canonicalReference": "@datashaper/app-framework!ProfilePlugin:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "profiles",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
             }
           ],
-          "implementsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 2
-            }
-          ]
+          "extendsTokenRanges": []
         },
         {
           "kind": "Interface",
@@ -924,540 +628,6 @@
                 "startIndex": 1,
                 "endIndex": 3
               }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!HeadersOption:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "HeadersOption: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<{\n    headers: string[] | undefined;\n    onChange: (val: string[] | undefined) => void;\n    headersChecked: boolean;\n    toggleHeaders: () => void;\n}>"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "HeadersOption",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 3
-          }
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!JsonEditor:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "JsonEditor: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "JsonEditorProps",
-              "canonicalReference": "@datashaper/app-framework!JsonEditorProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "JsonEditor",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/app-framework!JsonEditorProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface JsonEditorProps "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "JsonEditorProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!JsonEditorProps#content:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "content: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "content",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!JsonEditorProps#onChange:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onChange: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(content: string | undefined) => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "onChange",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/app-framework!loadCsvTable:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function loadCsvTable(file: "
-            },
-            {
-              "kind": "Reference",
-              "text": "BaseFile",
-              "canonicalReference": "@datashaper/utilities!BaseFile:class"
-            },
-            {
-              "kind": "Content",
-              "text": ", options?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "ParserOptions",
-              "canonicalReference": "@datashaper/schema!ParserOptions:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Reference",
-              "text": "Promise",
-              "canonicalReference": "!Promise:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "ColumnTable",
-              "canonicalReference": "arquero!default:class"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 5,
-            "endIndex": 9
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "file",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            },
-            {
-              "parameterName": "options",
-              "parameterTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
-              },
-              "isOptional": true
-            }
-          ],
-          "name": "loadCsvTable"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/app-framework!loadJsonTable:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function loadJsonTable(file: "
-            },
-            {
-              "kind": "Reference",
-              "text": "BaseFile",
-              "canonicalReference": "@datashaper/utilities!BaseFile:class"
-            },
-            {
-              "kind": "Content",
-              "text": ", orientation: "
-            },
-            {
-              "kind": "Reference",
-              "text": "DataOrientation",
-              "canonicalReference": "@datashaper/schema!DataOrientation:enum"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Reference",
-              "text": "Promise",
-              "canonicalReference": "!Promise:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "ColumnTable",
-              "canonicalReference": "arquero!default:class"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 5,
-            "endIndex": 9
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "file",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            },
-            {
-              "parameterName": "orientation",
-              "parameterTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
-              },
-              "isOptional": false
-            }
-          ],
-          "name": "loadJsonTable"
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!OtherTextField:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "OtherTextField: "
-            },
-            {
-              "kind": "Content",
-              "text": "import(\"styled-components\")."
-            },
-            {
-              "kind": "Reference",
-              "text": "StyledComponent",
-              "canonicalReference": "@types/styled-components!StyledComponent:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<import(\"react\")."
-            },
-            {
-              "kind": "Reference",
-              "text": "FunctionComponent",
-              "canonicalReference": "@types/react!~React.FunctionComponent:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "<import(\"@fluentui/react\")."
-            },
-            {
-              "kind": "Reference",
-              "text": "ITextFieldProps",
-              "canonicalReference": "@fluentui/react!ITextFieldProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">, any, {}, never>"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "OtherTextField",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 8
-          }
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!ParserOptionsEditor:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "ParserOptionsEditor: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "ParserOptionsEditorProps",
-              "canonicalReference": "@datashaper/app-framework!ParserOptionsEditorProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "ParserOptionsEditor",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/app-framework!ParserOptionsEditorProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface ParserOptionsEditorProps "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "ParserOptionsEditorProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!ParserOptionsEditorProps#dataTable:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "dataTable: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "DataTable",
-                  "canonicalReference": "@datashaper/workflow!DataTable:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "dataTable",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/app-framework!PersistenceService:interface",
-          "docComment": "/**\n * The Persistence Service available in the application. This service is responsible for saving and loading data packages.\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface PersistenceService "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "PersistenceService",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "MethodSignature",
-              "canonicalReference": "@datashaper/app-framework!PersistenceService#load:member(1)",
-              "docComment": "/**\n * Load a data-package file from zip file contents.\n *\n * @param file - The zip file containing the data-package to load\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "load(file: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "BaseFile",
-                  "canonicalReference": "@datashaper/utilities!BaseFile:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Promise",
-                  "canonicalReference": "!Promise:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<void>"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 5
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "file",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": false
-                }
-              ],
-              "name": "load"
-            },
-            {
-              "kind": "MethodSignature",
-              "canonicalReference": "@datashaper/app-framework!PersistenceService#save:member(1)",
-              "docComment": "/**\n * Save a data-package to a zip file and download to the client machine.\n *\n * @param projectName - the project name to save. Default is 'project\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "save(projectName?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Promise",
-                  "canonicalReference": "!Promise:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<void>"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": false,
-              "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 5
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "projectName",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": true
-                }
-              ],
-              "name": "save"
             }
           ],
           "extendsTokenRanges": []
@@ -1873,280 +1043,6 @@
         },
         {
           "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!RadioGroup:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "RadioGroup: "
-            },
-            {
-              "kind": "Content",
-              "text": "import(\"styled-components\")."
-            },
-            {
-              "kind": "Reference",
-              "text": "StyledComponent",
-              "canonicalReference": "@types/styled-components!StyledComponent:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<import(\"react\")."
-            },
-            {
-              "kind": "Reference",
-              "text": "FunctionComponent",
-              "canonicalReference": "@types/react!~React.FunctionComponent:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "<import(\"@fluentui/react\")."
-            },
-            {
-              "kind": "Reference",
-              "text": "IChoiceGroupProps",
-              "canonicalReference": "@fluentui/react!IChoiceGroupProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">, any, {}, never>"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "RadioGroup",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 8
-          }
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!RawTable:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "RawTable: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "RawTableProps",
-              "canonicalReference": "@datashaper/app-framework!RawTableProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "RawTable",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!RawTableDefaultFeatures:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "RawTableDefaultFeatures: "
-            },
-            {
-              "kind": "Content",
-              "text": "{\n    statsColumnHeaders: boolean;\n}"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "RawTableDefaultFeatures",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 2
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/app-framework!RawTableProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface RawTableProps extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "ArqueroDetailsListProps",
-              "canonicalReference": "@datashaper/react!ArqueroDetailsListProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "RawTableProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!RawTableProps#error:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "error?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "error",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!RawTableProps#table:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "table: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ColumnTable",
-                  "canonicalReference": "arquero!default:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "table",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 2
-            }
-          ]
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!RawTableViewer:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "RawTableViewer: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "RawTableViewerProps",
-              "canonicalReference": "@datashaper/app-framework!RawTableViewerProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "RawTableViewer",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/app-framework!RawTableViewerProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface RawTableViewerProps "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "RawTableViewerProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!RawTableViewerProps#dataTable:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "dataTable: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "DataTable",
-                  "canonicalReference": "@datashaper/workflow!DataTable:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "dataTable",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Variable",
           "canonicalReference": "@datashaper/app-framework!RecoilBasedProfileHost:var",
           "docComment": "",
           "excerptTokens": [
@@ -2346,50 +1242,6 @@
             }
           ],
           "extendsTokenRanges": []
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/app-framework!removeExtension:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function removeExtension(fileName: "
-            },
-            {
-              "kind": "Content",
-              "text": "string"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Content",
-              "text": "string"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 3,
-            "endIndex": 4
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "fileName",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            }
-          ],
-          "name": "removeExtension"
         },
         {
           "kind": "Enum",
@@ -2669,222 +1521,6 @@
             }
           ],
           "extendsTokenRanges": []
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!TableBundleEditor:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "TableBundleEditor: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "TableBundleEditorProps",
-              "canonicalReference": "@datashaper/app-framework!TableBundleEditorProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "TableBundleEditor",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/app-framework!TableBundleEditorProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface TableBundleEditorProps "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "TableBundleEditorProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!TableBundleEditorProps#resource:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "resource: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "TableBundle",
-                  "canonicalReference": "@datashaper/workflow!TableBundle:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "resource",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!TableDelimiterOptions:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "TableDelimiterOptions: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<{\n    onChange: (option: string) => void;\n    selected?: string;\n}>"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "TableDelimiterOptions",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 3
-          }
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!TableLayoutOptions:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "TableLayoutOptions: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<{\n    selected?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "DataOrientation",
-              "canonicalReference": "@datashaper/schema!DataOrientation:enum"
-            },
-            {
-              "kind": "Content",
-              "text": ";\n    onChange: (orientation: "
-            },
-            {
-              "kind": "Reference",
-              "text": "DataOrientation",
-              "canonicalReference": "@datashaper/schema!DataOrientation:enum"
-            },
-            {
-              "kind": "Content",
-              "text": ") => void;\n    styles?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "IStyleFunctionOrObject",
-              "canonicalReference": "@fluentui/merge-styles!IStyleFunctionOrObject:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "IChoiceGroupStyleProps",
-              "canonicalReference": "@fluentui/react!IChoiceGroupStyleProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ", "
-            },
-            {
-              "kind": "Reference",
-              "text": "IChoiceGroupStyles",
-              "canonicalReference": "@fluentui/react!IChoiceGroupStyles:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">;\n}>"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "TableLayoutOptions",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 13
-          }
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!TablePreview:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "TablePreview: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<{\n    table?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "ColumnTable",
-              "canonicalReference": "arquero!default:class"
-            },
-            {
-              "kind": "Content",
-              "text": ";\n    error?: string;\n    showType?: boolean;\n}>"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "TablePreview",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
         },
         {
           "kind": "Function",
@@ -3311,293 +1947,6 @@
           "overloadIndex": 1,
           "parameters": [],
           "name": "useTableBundles"
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!viewOptions:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "viewOptions: "
-            },
-            {
-              "kind": "Content",
-              "text": "{\n    key: "
-            },
-            {
-              "kind": "Reference",
-              "text": "ViewType",
-              "canonicalReference": "@datashaper/app-framework!ViewType:enum"
-            },
-            {
-              "kind": "Content",
-              "text": ";\n    text: string;\n    iconProps: {\n        iconName: string;\n    };\n    title: string;\n}[]"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "viewOptions",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 4
-          }
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!ViewOptions:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "ViewOptions: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "ViewOptionsProps",
-              "canonicalReference": "@datashaper/app-framework!ViewOptionsProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "ViewOptions",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/app-framework!ViewOptionsProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface ViewOptionsProps "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "ViewOptionsProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!ViewOptionsProps#onChange:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onChange: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(viewType: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ViewType",
-                  "canonicalReference": "@datashaper/app-framework!ViewType:enum"
-                },
-                {
-                  "kind": "Content",
-                  "text": ") => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "onChange",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 4
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!ViewOptionsProps#selected:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "selected: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ViewType",
-                  "canonicalReference": "@datashaper/app-framework!ViewType:enum"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "selected",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Enum",
-          "canonicalReference": "@datashaper/app-framework!ViewType:enum",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare enum ViewType "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "ViewType",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "EnumMember",
-              "canonicalReference": "@datashaper/app-framework!ViewType.Interactive:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "Interactive = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "\"interactive\""
-                }
-              ],
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "name": "Interactive"
-            },
-            {
-              "kind": "EnumMember",
-              "canonicalReference": "@datashaper/app-framework!ViewType.RawFile:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "RawFile = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "\"rawFile\""
-                }
-              ],
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "name": "RawFile"
-            }
-          ]
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/app-framework!WorkflowEditor:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "WorkflowEditor: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "WorkflowEditorProps",
-              "canonicalReference": "@datashaper/app-framework!WorkflowEditorProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "WorkflowEditor",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/app-framework!WorkflowEditorProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface WorkflowEditorProps "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "WorkflowEditorProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!WorkflowEditorProps#resource:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "resource: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Workflow",
-                  "canonicalReference": "@datashaper/workflow!Workflow:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "resource",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
         }
       ]
     }

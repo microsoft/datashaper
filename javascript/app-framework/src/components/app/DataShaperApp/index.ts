@@ -3,3 +3,4 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export * from './DataShaperApp.js'
+export * from './DataShaperApp.types.js'

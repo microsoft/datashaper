@@ -5,5 +5,5 @@
 
 export * from './components/index.js'
 export { DisplayOrder } from './enums.js'
-export * from './hooks/public.js'
+export { useHeaderCommandBarDefaults } from './hooks/index.js'
 export type { CommandBarColors } from './types.js'

@@ -11,5 +11,5 @@ export declare function usePersistenceService(): PersistenceService;
 ```
 <b>Returns:</b>
 
-[PersistenceService](./app-framework.persistenceservice.md)
+PersistenceService
 
