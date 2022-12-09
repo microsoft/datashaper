@@ -10,8 +10,8 @@ import type {
 	ITextFieldStyles,
 } from '@fluentui/react'
 
-import type { CodebookStatsStyles } from './CodebookStatsField.types.js'
-import type { CodebookMappingStyles } from './MappingFields.types.js'
+import type { CodebookStatsStyles } from './CodebookStatsField/index.js'
+import type { CodebookMappingStyles } from './MappingFields/index.js'
 
 export interface CodebookStyles {
 	root?: React.CSSProperties

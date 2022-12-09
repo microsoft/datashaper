@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { CodebookPropsBase, CodebookStyles } from './Codebook.types.js'
-import type { CodebookMappingStyles } from './MappingFields.types.js'
+import type { CodebookMappingStyles } from '../MappingFields/index.js'
+import type { CodebookPropsBase, CodebookStyles } from '../types.js'
 
 export interface CodebookFieldEditorStyles extends CodebookStyles {
 	mapping?: CodebookMappingStyles

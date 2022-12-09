@@ -3,24 +3,15 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TextField } from '@fluentui/react'
-import { memo, useCallback } from 'react'
+import { memo } from 'react'
 
-import type { CodebookTextFieldProps } from './Codebook.types.js'
+import type { CodebookTextFieldProps } from '../types.js'
+import { useOnChange } from './CodebookDisplayNameField.hooks.js'
 
 export const CodebookDisplayNameField: React.FC<CodebookTextFieldProps> = memo(
 	function CodebookDisplayNameField(props) {
-		const { styles, field, onChangeField } = props
-
-		const onChange = useCallback(
-			(
-				_ev: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
-				title?: string,
-			) => {
-				onChangeField?.({ ...field, title })
-				props.onChange?.(_ev, title)
-			},
-			[onChangeField, props, field],
-		)
+		const { styles, field } = props
+		const onChange = useOnChange(props)
 
 		return (
 			<TextField

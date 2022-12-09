@@ -7,12 +7,12 @@ import { DataType } from '@datashaper/schema'
 import { ActionButton, Label } from '@fluentui/react'
 import { memo, useCallback, useEffect, useState } from 'react'
 
-import { useMappingPairs } from '../../hooks/controls/useMappingPairs.js'
+import { useMappingPairs } from '../../../hooks/controls/useMappingPairs.js'
 import {
 	useHandleDelete,
 	useHandleKeyChange,
 	useHandleValueChange,
-} from '../../hooks/index.js'
+} from '../../../hooks/index.js'
 import { useHandleAddButtonClick } from './MappingFields.hooks.js'
 import { addIconProps, useMappingStyles } from './MappingFields.styles.js'
 import type { CodebookMappingFieldProps } from './MappingFields.types.js'

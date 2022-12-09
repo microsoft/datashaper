@@ -6,9 +6,9 @@ import type { IRawStyle } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
 import { useMemo } from 'react'
 
-import { useDefaultCodebookStyles } from './Codebook.styles.js'
-import type { FieldHeights } from './Codebook.types.js'
-import type { CodebookTableStyles } from './CodebookEditor.types.js'
+import { useDefaultCodebookStyles } from '../styles.js'
+import type { FieldHeights } from '../types.js'
+import type { CodebookTableStyles } from './Codebook.types.js'
 
 export function useTableDefaultStyles(
 	styles?: CodebookTableStyles,

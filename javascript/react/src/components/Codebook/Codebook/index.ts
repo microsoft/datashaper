@@ -2,6 +2,5 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
-export { type CodebookProps,Codebook } from './Codebook/index.js'
-export { useDefaultCodebookStyles } from './styles.js'
+export * from './Codebook.js'
+export * from './Codebook.types.js'

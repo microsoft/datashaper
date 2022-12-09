@@ -10,7 +10,7 @@ import type {
 } from '@fluentui/react'
 import type { IStyleFunctionOrObject } from '@fluentui/utilities'
 
-import type { CodebookPropsBase } from './Codebook.types.js'
+import type { CodebookPropsBase } from '../types.js'
 
 export interface CodebookMappingStyles {
 	dropdownStyles?: IStyleFunctionOrObject<

@@ -4,9 +4,12 @@
  */
 import type { Field } from '@datashaper/schema'
 
-import type { CodebookStyles } from './Codebook.types.js'
+import type { CodebookStyles } from '../types.js'
 
-export interface CodebookTableEditorProps {
+/**
+ * Props for the CodebookEditor component
+ */
+export interface CodebookProps {
 	fields: Field[]
 	onChangeFields: (fields: Field[]) => void
 	styles?: CodebookTableStyles

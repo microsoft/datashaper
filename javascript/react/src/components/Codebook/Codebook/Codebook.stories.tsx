@@ -6,11 +6,11 @@ import type { CodebookSchema } from '@datashaper/schema'
 import type { ComponentStory } from '@storybook/react'
 import { useState } from 'react'
 
-import { CodebookEditor } from './CodebookEditor.js'
+import { Codebook } from './Codebook.js'
 
 const storyMetadata = {
-	title: 'Components/CodebookTableEditor',
-	component: CodebookEditor,
+	title: 'Components/Codebook',
+	component: Codebook,
 	argTypes: {},
 }
 
@@ -107,17 +107,17 @@ const codebookResult = {
 	],
 } as CodebookSchema
 
-const Template: ComponentStory<typeof CodebookEditor> = ({
+const Template: ComponentStory<typeof Codebook> = ({
 	...args
 }): JSX.Element => {
 	const [fields, setFields] = useState(codebookResult.fields)
 
-	return <CodebookEditor fields={fields} onChangeFields={setFields} {...args} />
+	return <Codebook fields={fields} onChangeFields={setFields} {...args} />
 }
 
-export const CodebookTableEditorStory = Template.bind({})
-CodebookTableEditorStory.storyName = 'Codebook Table Editor'
-CodebookTableEditorStory.args = {
+export const CodebookStory = Template.bind({})
+CodebookStory.storyName = 'Codebook Raw Editor'
+CodebookStory.args = {
 	styles: {
 		input: {
 			borderless: true,

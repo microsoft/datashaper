@@ -5,15 +5,15 @@
 import { DataType, VariableNature } from '@datashaper/schema'
 import { memo } from 'react'
 
-import { useDefaultCodebookStyles } from './Codebook.styles.js'
-import { CodebookDataNatureField } from './CodebookDataNatureField.js'
-import { CodebookDataTypeField } from './CodebookDataTypeField.js'
-import { CodebookDescriptionField } from './CodebookDescriptionField.js'
-import { CodebookDisplayNameField } from './CodebookDisplayNameField.js'
+import { CodebookDataNatureField } from '../CodebookDataNatureField/index.js'
+import { CodebookDataTypeField } from '../CodebookDataTypeField/index.js'
+import { CodebookDescriptionField } from '../CodebookDescriptionField/index.js'
+import { CodebookDisplayNameField } from '../CodebookDisplayNameField/index.js'
+import { CodebookStatsField } from '../CodebookStatsField/index.js'
+import { CodebookUnitField } from '../CodebookUnitField/index.js'
+import { MappingFields } from '../MappingFields/MappingFields.js'
+import { useDefaultCodebookStyles } from '../styles.js'
 import type { CodebookFieldEditorProps } from './CodebookFieldEditor.types.js'
-import { CodebookStatsField } from './CodebookStatsField.js'
-import { CodebookUnitField } from './CodebookUnitField.js'
-import { MappingFields } from './MappingFields.js'
 
 export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 	function CodebookFieldEditor({ styles, field, onChangeField }) {

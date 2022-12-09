@@ -8,8 +8,8 @@ import merge from 'lodash-es/merge.js'
 import type { CSSProperties } from 'react'
 import { useMemo } from 'react'
 
-import { FIELD_PADDING } from './Codebook.constants.js'
-import type { CodebookStyles, FieldHeights } from './Codebook.types.js'
+import { FIELD_PADDING } from './constants.js'
+import type { CodebookStyles, FieldHeights } from './types.js'
 
 export function getRootStyle(
 	theme: Theme,

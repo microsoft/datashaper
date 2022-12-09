@@ -6,7 +6,7 @@
 import type { ICheckboxProps, ICheckboxStyles, IColumn } from '@fluentui/react'
 import type { CSSProperties } from 'react'
 
-import type { CodebookPropsBase } from './Codebook.types.js'
+import type { CodebookPropsBase } from '../types.js'
 
 export interface CodebookStatsStyles {
 	root?: CSSProperties

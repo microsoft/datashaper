@@ -15,8 +15,8 @@ import {
 	MAPPING_WRAPPER,
 	STATS_WRAPPER,
 	UNITS,
-} from './Codebook.constants.js'
-import type { FieldHeights } from './Codebook.types.js'
+} from './constants.js'
+import type { FieldHeights } from './types.js'
 
 export function useFieldHeights(): FieldHeights {
 	const [heights, setHeights] = useState<Record<string, number>>({
