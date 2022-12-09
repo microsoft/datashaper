@@ -10,7 +10,10 @@ export function useOnChangeValue({
 	onChange,
 	onChangeField,
 	field,
-}: CodebookTextFieldProps) {
+}: CodebookTextFieldProps): (
+	_ev: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
+	unit?: string,
+) => void {
 	return useCallback(
 		(
 			_ev: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,

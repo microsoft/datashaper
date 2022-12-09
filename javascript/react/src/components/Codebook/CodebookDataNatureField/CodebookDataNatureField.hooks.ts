@@ -4,7 +4,7 @@
  */
 import type { VariableNature } from '@datashaper/schema'
 import type { IDropdownOption } from '@fluentui/react'
-import type { FormEvent} from 'react';
+import type { FormEvent } from 'react'
 import { useCallback } from 'react'
 
 import type { CodebookEnumDropdownFieldProps } from '../types.js'
@@ -13,7 +13,11 @@ export function useOnChangeValue({
 	field,
 	onChange,
 	onChangeField,
-}: CodebookEnumDropdownFieldProps) {
+}: CodebookEnumDropdownFieldProps): (
+	event: FormEvent<HTMLDivElement>,
+	option?: IDropdownOption<any>,
+	index?: number | undefined,
+) => void {
 	return useCallback(
 		(
 			event: FormEvent<HTMLDivElement>,

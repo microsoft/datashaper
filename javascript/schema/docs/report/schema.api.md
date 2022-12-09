@@ -126,7 +126,6 @@ export interface Category {
 //
 // @public
 export interface CodebookSchema extends ResourceSchema {
-    // (undocumented)
     fields: Field[];
     // (undocumented)
     profile: KnownProfile.Codebook;

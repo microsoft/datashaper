@@ -12,7 +12,11 @@ export function useOnChangeValue({
 	field,
 	onChange,
 	onChangeField,
-}: CodebookEnumDropdownFieldProps) {
+}: CodebookEnumDropdownFieldProps): (
+	_ev: React.FormEvent<HTMLDivElement>,
+	option?: IDropdownOption<any>,
+	index?: number | undefined,
+) => void {
 	return useCallback(
 		(
 			event: FormEvent<HTMLDivElement>,
