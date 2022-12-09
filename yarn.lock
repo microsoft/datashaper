@@ -2122,7 +2122,6 @@ __metadata:
     "@essex/jest-config": ^21.0.16
     "@essex/scripts": ^22.1.0
     "@essex/tsconfig-base": ^1.0.2
-    "@types/compute-quantile": ^1
     "@types/d3-time-format": ^4.0.0
     "@types/debug": ^4.1.7
     "@types/jest": ^29.2.2
@@ -2131,13 +2130,13 @@ __metadata:
     "@types/uuid": ^8.3.4
     ajv: ^8.11.0
     arquero: ^5.1.0
-    compute-quantile: ^1.0.1
     cross-blob: ^3.0.2
     cross-fetch: ^3.1.5
     d3-time-format: ^4.1.0
     debug: ^4.3.4
     jest: ^29.3.1
     lodash-es: ^4.17.21
+    percentile: ^1.6.0
     regenerator-runtime: ^0.13.10
     rxjs: ^7.5.7
     typescript: ^4.8.4
@@ -5387,13 +5386,6 @@ __metadata:
   version: 5.0.2
   resolution: "@types/command-line-usage@npm:5.0.2"
   checksum: 9c0eabf5e86a405d118dcfb5f4bceae43080efe603a0f240664716a05283dcb389e94e999188d12b10a0aa4452a920445131f1011e7484403f146607cd2577f0
-  languageName: node
-  linkType: hard
-
-"@types/compute-quantile@npm:^1":
-  version: 1.0.1
-  resolution: "@types/compute-quantile@npm:1.0.1"
-  checksum: b4a64122c93ee9feb296001bc2cba7a9bc6be206107f324a674ee96930053054dfbc7a89ad2d1d9df1ac6444444f1bc0a043fad67957da81e3ed4cc42807096a
   languageName: node
   linkType: hard
 
@@ -8963,15 +8955,6 @@ __metadata:
     safe-buffer: 5.1.2
     vary: ~1.1.2
   checksum: 35c0f2eb1f28418978615dc1bc02075b34b1568f7f56c62d60f4214d4b7cc00d0f6d282b5f8a954f59872396bd770b6b15ffd8aa94c67d4bce9b8887b906999b
-  languageName: node
-  linkType: hard
-
-"compute-quantile@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "compute-quantile@npm:1.0.1"
-  dependencies:
-    validate.io-object: ^1.0.0
-  checksum: 8a9e267bf823daca3d7def6816b13e8ad112741fd8c69be850937425834039487307d98dc3b73d36a6cfcfebb66debc8224a433612b7d1af50ba199d5e7fef51
   languageName: node
   linkType: hard
 
@@ -16589,6 +16572,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"percentile@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "percentile@npm:1.6.0"
+  checksum: 3d8d6f929acdaacfca6c82f69d55fccfc2b1a7756a2726bbe4e46747170c2fd3bb1c640a7a679816a4a9550ba33e6b733be19c7d1531c61b9f088e01abfb132a
+  languageName: node
+  linkType: hard
+
 "picocolors@npm:^0.2.1":
   version: 0.2.1
   resolution: "picocolors@npm:0.2.1"
@@ -20673,22 +20663,6 @@ __metadata:
     spdx-correct: ^3.0.0
     spdx-expression-parse: ^3.0.0
   checksum: 35703ac889d419cf2aceef63daeadbe4e77227c39ab6287eeb6c1b36a746b364f50ba22e88591f5d017bc54685d8137bc2d328d0a896e4d3fd22093c0f32a9ad
-  languageName: node
-  linkType: hard
-
-"validate.io-array@npm:^1.0.1":
-  version: 1.0.6
-  resolution: "validate.io-array@npm:1.0.6"
-  checksum: 54eca83ebc702e3e46499f9d9e77287a95ae25c4e727cd2fafee29c7333b3a36cca0c5d8f090b9406262786de80750fba85e7e7ef41e20bf8cc67d5570de449b
-  languageName: node
-  linkType: hard
-
-"validate.io-object@npm:^1.0.0":
-  version: 1.0.4
-  resolution: "validate.io-object@npm:1.0.4"
-  dependencies:
-    validate.io-array: ^1.0.1
-  checksum: 153edd9d5c291d09fdd09c6a949659efb1ee002931b6c84fde0e5bde540a0d65c772b47dda5674d5e5f0785a2339b1847852f21f1d7d9db1b0b97a516ad0b45f
   languageName: node
   linkType: hard
 

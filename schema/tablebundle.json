@@ -114,8 +114,14 @@
         "BinStrategy": {
             "enum": [
                 "auto",
+                "doane",
+                "fd",
                 "fixed count",
-                "fixed width"
+                "fixed width",
+                "rice",
+                "scott",
+                "sqrt",
+                "sturges"
             ],
             "type": "string"
         },

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { default as quantile } from 'compute-quantile'
+import { default as percentile } from 'percentile'
 
 /*
  */
@@ -10,13 +10,15 @@ export function autoStrategy(values: number[]) {
 	const sturgesResult = sturgesStrategy(values)
 	const fdResult = fdStrategy(values)
 
-	return Math.max(sturgesResult, fdResult)
+	const width = Math.max(sturgesResult, fdResult)
+	return width
 }
 
 /*
  */
 export function fdStrategy(values: number[]): number {
 	const iqrResult = iqr(values)
+
 	return 2 * (iqrResult / Math.pow(values.length, 1 / 3))
 }
 
@@ -44,21 +46,22 @@ export function doaneStrategy(values: number[]): number {
 /*
  */
 export function scottStrategy(values: number[]) {
-	return 3.49 * standardDeviation(values) * Math.pow(values.length, -1 / 3)
+	return (
+		standardDeviation(values) *
+		Math.cbrt((24 * Math.sqrt(Math.PI)) / values.length)
+	)
 }
 
 /*
  */
 export function riceStrategy(values: number[]) {
-	return 2 * Math.cbrt(values.length)
+	return 2 * Math.pow(values.length, 1 / 3)
 }
 
 /*
  */
 export function sturgesStrategy(values: number[]) {
-	const [min = -1, max = -1] = getBoundaries(values)
-	const R = max - min
-	const width = R / (1 + 3.322 * Math.log10(values.length))
+	const width = Math.log2(values.length) + 1
 	return width
 }
 
@@ -66,32 +69,6 @@ export function sturgesStrategy(values: number[]) {
  */
 export function sqrtStrategy(values: number[]): number {
 	return Math.sqrt(values.length)
-}
-
-/*
- */
-export function getBoundaries(values: number[]) {
-	if (values.length > 0) {
-		let [min, max] = [values[0], values[0]]
-
-		if (min !== undefined && max !== undefined) {
-			values.forEach((value: number) => {
-				if (value !== undefined && min !== undefined && min > value) min = value
-
-				if (value !== undefined && max !== undefined && max < value) max = value
-			})
-		}
-
-		return [min, max]
-	}
-
-	return [-1, -1]
-}
-
-/*
- */
-function ascending(a: number, b: number) {
-	return a - b
 }
 
 export function standardDeviation(values: number[], precision = 3) {
@@ -113,24 +90,15 @@ export function standardDeviation(values: number[], precision = 3) {
 
 /*
  */
-export function iqr(values: number[], opts?: IQROptions) {
-	if (!Array.isArray(values)) {
-		throw new TypeError('iqr()::invalid input argument. Must provide an array.')
-	}
-	if (opts === undefined) {
-		opts = {
-			sorted: false,
-		}
-	}
-
-	if (opts !== undefined && !opts.sorted) {
-		values = values.slice()
-		values.sort(ascending)
-		opts.sorted = true
-	}
-	return quantile(values, 0.75, opts) - quantile(values, 0.25, opts)
+function ascending(a: number, b: number) {
+	return a - b
 }
 
-export interface IQROptions {
-	sorted: boolean
+/*
+ */
+export function iqr(values: number[]) {
+	values.sort(ascending)
+	const q1: number = percentile(25, values) as number
+	const q3: number = percentile(75, values) as number
+	return q3 - q1
 }
