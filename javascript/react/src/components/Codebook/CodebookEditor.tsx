@@ -15,14 +15,14 @@ import { CodebookDataNatureField } from './CodebookDataNatureField.js'
 import { CodebookDataTypeField } from './CodebookDataTypeField.js'
 import { CodebookDescriptionField } from './CodebookDescriptionField.js'
 import { CodebookDisplayNameField } from './CodebookDisplayNameField.js'
+import { useTableDefaultStyles } from './CodebookEditor.styles.js'
+import type { CodebookTableEditorProps } from './CodebookEditor.types.js'
 import { CodebookStatsField } from './CodebookStatsField.js'
-import { useTableDefaultStyles } from './CodebookTableEditor.styles.js'
-import type { CodebookTableEditorProps } from './CodebookTableEditor.types.js'
 import { CodebookUnitField } from './CodebookUnitField.js'
 import { MappingFields } from './MappingFields.js'
 
-export const CodebookTableEditor: React.FC<CodebookTableEditorProps> = memo(
-	function CodebookTableEditor({ fields, onChangeFields, styles }) {
+export const CodebookEditor: React.FC<CodebookTableEditorProps> = memo(
+	function CodebookEditor({ fields, onChangeFields, styles }) {
 		const heights = useFieldHeights()
 		const theme = useTheme()
 		const _styles = useTableDefaultStyles(styles, heights)

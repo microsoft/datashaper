@@ -8,7 +8,7 @@ import { useMemo } from 'react'
 
 import { useDefaultCodebookStyles } from './Codebook.styles.js'
 import type { FieldHeights } from './Codebook.types.js'
-import type { CodebookTableStyles } from './CodebookTableEditor.types.js'
+import type { CodebookTableStyles } from './CodebookEditor.types.js'
 
 export function useTableDefaultStyles(
 	styles?: CodebookTableStyles,
