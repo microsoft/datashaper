@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { CodebookTableEditor } from '@datashaper/react'
+import { Codebook } from '@datashaper/react'
 import { useObservableState } from 'observable-hooks'
 import { memo } from 'react'
 
@@ -17,10 +17,7 @@ export const CodebookEditor: React.FC<CodebookEditorProps> = memo(
 
 		return (
 			<JsonModeEditor resource={resource}>
-				<CodebookTableEditor
-					fields={fields}
-					onChangeFields={handleFieldsChanged}
-				/>
+				<Codebook fields={fields} onChangeFields={handleFieldsChanged} />
 			</JsonModeEditor>
 		)
 	},

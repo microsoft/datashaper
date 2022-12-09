@@ -8,7 +8,7 @@ import type { CSSProperties } from 'react'
 import type { DisplayOrder } from '../../enums.js'
 import type { StepHeaderStyles } from './StepHeader.types.js'
 
-export interface StepHistoryStyles {
+export interface StepListStyles {
 	root?: CSSProperties
 	buttonContainer?: CSSProperties
 	stepsContainer?: CSSProperties
@@ -30,5 +30,5 @@ export interface StepListProps {
 	onDelete?: (index: number) => void
 	onSelect?: (name: string) => void
 	onSave?: (step: Step, index?: number) => void
-	styles?: StepHistoryStyles
+	styles?: StepListStyles
 }

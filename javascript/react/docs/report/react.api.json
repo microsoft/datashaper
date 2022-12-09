@@ -210,6 +210,420 @@
         },
         {
           "kind": "Interface",
+          "canonicalReference": "@datashaper/react!ArqueroDetailsListFeatures:interface",
+          "docComment": "/**\n * Feature flags and configuration for the Arquero Details List component\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface ArqueroDetailsListFeatures "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ArqueroDetailsListFeatures",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!ArqueroDetailsListFeatures#commandBar:member",
+              "docComment": "/**\n * Receive elements to render in the column header as commands, passing the column details to be used in the component\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "commandBar?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "IRenderFunction",
+                  "canonicalReference": "@fluentui/utilities!IRenderFunction:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "IDetailsColumnProps",
+                  "canonicalReference": "@fluentui/react!IDetailsColumnProps:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "commandBar",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!ArqueroDetailsListFeatures#histogramColumnHeaders:member",
+              "docComment": "/**\n * Include histograms in the headers of numeric columns.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "histogramColumnHeaders?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "histogramColumnHeaders",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!ArqueroDetailsListFeatures#lazyLoadGroups:member",
+              "docComment": "/**\n * Collapse most groups so we can lazy load them. Default as true\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "lazyLoadGroups?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "lazyLoadGroups",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!ArqueroDetailsListFeatures#showBooleanSymbol:member",
+              "docComment": "/**\n * Without smartCells, if datatype is boolean, shows a symbol\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "showBooleanSymbol?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "showBooleanSymbol",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!ArqueroDetailsListFeatures#showCategoricalBar:member",
+              "docComment": "/**\n * Without smartCells, if datatype is array, shows a categorical bar\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "showCategoricalBar?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "showCategoricalBar",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!ArqueroDetailsListFeatures#showDateFormatted:member",
+              "docComment": "/**\n * Without smartCells, if datatype is date, shows the date formatted\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "showDateFormatted?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "showDateFormatted",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!ArqueroDetailsListFeatures#showDropdown:member",
+              "docComment": "/**\n * Without smartCells, If datatype is array, shows a dropdown with the values\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "showDropdown?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "showDropdown",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!ArqueroDetailsListFeatures#showNumberMagnitude:member",
+              "docComment": "/**\n * Without smartCells, if datatype is number, shows the magnitude of the value\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "showNumberMagnitude?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "showNumberMagnitude",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!ArqueroDetailsListFeatures#showSparkbar:member",
+              "docComment": "/**\n * Without smartCells, if datatype is array, shows a sparkbar\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "showSparkbar?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "showSparkbar",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!ArqueroDetailsListFeatures#showSparkline:member",
+              "docComment": "/**\n * Without smartCells, if datatype is array, shows a sparkline\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "showSparkline?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "showSparkline",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!ArqueroDetailsListFeatures#smartCells:member",
+              "docComment": "/**\n * Use embedded charts and vis based on data types and cell contents.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "smartCells?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "smartCells",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!ArqueroDetailsListFeatures#smartHeaders:member",
+              "docComment": "/**\n * Includes stats and histograms in the headers of columns\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "smartHeaders?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "smartHeaders",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!ArqueroDetailsListFeatures#statsColumnHeaders:member",
+              "docComment": "/**\n * Include stats in the headers of columns.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "statsColumnHeaders?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "statsColumnHeaders",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!ArqueroDetailsListFeatures#statsColumnTypes:member",
+              "docComment": "/**\n * If statsColumnHeaders or smartHeaders is true the user can pass which stats he wants\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "statsColumnTypes?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "StatsColumnType",
+                  "canonicalReference": "@datashaper/react!StatsColumnType:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "statsColumnTypes",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
           "canonicalReference": "@datashaper/react!ArqueroDetailsListProps:interface",
           "docComment": "/**\n * Props for the Arquero Details List component\n */\n",
           "excerptTokens": [
@@ -337,8 +751,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "DetailsListFeatures",
-                  "canonicalReference": "@datashaper/react!DetailsListFeatures:interface"
+                  "text": "ArqueroDetailsListFeatures",
+                  "canonicalReference": "@datashaper/react!ArqueroDetailsListFeatures:interface"
                 },
                 {
                   "kind": "Content",
@@ -1183,12 +1597,12 @@
         },
         {
           "kind": "Variable",
-          "canonicalReference": "@datashaper/react!CodebookDataNatureField:var",
+          "canonicalReference": "@datashaper/react!Codebook:var",
           "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "CodebookDataNatureField: "
+              "text": "Codebook: "
             },
             {
               "kind": "Reference",
@@ -1201,8 +1615,8 @@
             },
             {
               "kind": "Reference",
-              "text": "CodebookEnumDropdownFieldProps",
-              "canonicalReference": "@datashaper/react!CodebookEnumDropdownFieldProps:interface"
+              "text": "CodebookProps",
+              "canonicalReference": "@datashaper/react!CodebookProps:interface"
             },
             {
               "kind": "Content",
@@ -1211,79 +1625,7 @@
           ],
           "isReadonly": true,
           "releaseTag": "Public",
-          "name": "CodebookDataNatureField",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/react!CodebookDescriptionField:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "CodebookDescriptionField: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "CodebookTextFieldProps",
-              "canonicalReference": "@datashaper/react!CodebookTextFieldProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "CodebookDescriptionField",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/react!CodebookDisplayNameField:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "CodebookDisplayNameField: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "CodebookTextFieldProps",
-              "canonicalReference": "@datashaper/react!CodebookTextFieldProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "CodebookDisplayNameField",
+          "name": "Codebook",
           "variableTypeTokenRange": {
             "startIndex": 1,
             "endIndex": 5
@@ -1291,622 +1633,21 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@datashaper/react!CodebookEnumDropdownFieldProps:interface",
-          "docComment": "",
+          "canonicalReference": "@datashaper/react!CodebookProps:interface",
+          "docComment": "/**\n * Props for the CodebookEditor component\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface CodebookEnumDropdownFieldProps extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "CodebookPropsBase",
-              "canonicalReference": "@datashaper/react!CodebookPropsBase:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ", "
-            },
-            {
-              "kind": "Reference",
-              "text": "EnumDropdownProps",
-              "canonicalReference": "@essex/components!EnumDropdownProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "<unknown>"
-            },
-            {
-              "kind": "Content",
-              "text": " "
+              "text": "export interface CodebookProps "
             }
           ],
           "releaseTag": "Public",
-          "name": "CodebookEnumDropdownFieldProps",
-          "preserveMemberOrder": false,
-          "members": [],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 2
-            },
-            {
-              "startIndex": 3,
-              "endIndex": 5
-            }
-          ]
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/react!CodebookFieldEditor:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "CodebookFieldEditor: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "CodebookFieldEditorProps",
-              "canonicalReference": "@datashaper/react!CodebookFieldEditorProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "CodebookFieldEditor",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/react!CodebookFieldEditorProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface CodebookFieldEditorProps extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "CodebookPropsBase",
-              "canonicalReference": "@datashaper/react!CodebookPropsBase:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "CodebookFieldEditorProps",
+          "name": "CodebookProps",
           "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!CodebookFieldEditorProps#styles:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "styles?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "CodebookFieldEditorStyles",
-                  "canonicalReference": "@datashaper/react!CodebookFieldEditorStyles:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "styles",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 2
-            }
-          ]
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/react!CodebookPropsBase:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface CodebookPropsBase "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "CodebookPropsBase",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!CodebookPropsBase#field:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "field: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Field",
-                  "canonicalReference": "@datashaper/schema!Field:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "field",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!CodebookPropsBase#onChangeField:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onChangeField?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(field: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Field",
-                  "canonicalReference": "@datashaper/schema!Field:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ") => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "onChangeField",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 4
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/react!CodebookStatsField:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "CodebookStatsField: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "CodebookStatsFieldProps",
-              "canonicalReference": "@datashaper/react!CodebookStatsFieldProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "CodebookStatsField",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/react!CodebookStyles:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface CodebookStyles "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "CodebookStyles",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!CodebookStyles#dataNature:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "dataNature?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Partial",
-                  "canonicalReference": "!Partial:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<"
-                },
-                {
-                  "kind": "Reference",
-                  "text": "IDropdownStyles",
-                  "canonicalReference": "@fluentui/react!IDropdownStyles:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "dataNature",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 5
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!CodebookStyles#dataType:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "dataType?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Partial",
-                  "canonicalReference": "!Partial:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<"
-                },
-                {
-                  "kind": "Reference",
-                  "text": "IDropdownStyles",
-                  "canonicalReference": "@fluentui/react!IDropdownStyles:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "dataType",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 5
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!CodebookStyles#description:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "description?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Partial",
-                  "canonicalReference": "!Partial:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<"
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ITextFieldStyles",
-                  "canonicalReference": "@fluentui/react!ITextFieldStyles:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "description",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 5
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!CodebookStyles#displayName:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "displayName?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Partial",
-                  "canonicalReference": "!Partial:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<"
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ITextFieldStyles",
-                  "canonicalReference": "@fluentui/react!ITextFieldStyles:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "displayName",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 5
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!CodebookStyles#mapping:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "mapping?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "CodebookMappingStyles",
-                  "canonicalReference": "@datashaper/react!CodebookMappingStyles:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "mapping",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!CodebookStyles#root:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "root?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "React.CSSProperties",
-                  "canonicalReference": "@types/react!~React.CSSProperties:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "root",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!CodebookStyles#statsWrapper:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "statsWrapper?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "CodebookStatsStyles",
-                  "canonicalReference": "@datashaper/react!CodebookStatsStyles:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "statsWrapper",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!CodebookStyles#units:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "units?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Partial",
-                  "canonicalReference": "!Partial:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<"
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ITextFieldStyles",
-                  "canonicalReference": "@fluentui/react!ITextFieldStyles:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "units",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 5
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/react!CodebookTableEditor:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "CodebookTableEditor: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "CodebookTableEditorProps",
-              "canonicalReference": "@datashaper/react!CodebookTableEditorProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "CodebookTableEditor",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/react!CodebookTableEditorProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface CodebookTableEditorProps "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "CodebookTableEditorProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!CodebookTableEditorProps#fields:member",
+              "canonicalReference": "@datashaper/react!CodebookProps#fields:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -1938,7 +1679,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!CodebookTableEditorProps#onChangeFields:member",
+              "canonicalReference": "@datashaper/react!CodebookProps#onChangeFields:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -1974,7 +1715,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!CodebookTableEditorProps#styles:member",
+              "canonicalReference": "@datashaper/react!CodebookProps#styles:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -2002,85 +1743,6 @@
             }
           ],
           "extendsTokenRanges": []
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/react!CodebookTextFieldProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface CodebookTextFieldProps extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "CodebookPropsBase",
-              "canonicalReference": "@datashaper/react!CodebookPropsBase:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ", "
-            },
-            {
-              "kind": "Reference",
-              "text": "ITextFieldProps",
-              "canonicalReference": "@fluentui/react!ITextFieldProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "CodebookTextFieldProps",
-          "preserveMemberOrder": false,
-          "members": [],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 2
-            },
-            {
-              "startIndex": 3,
-              "endIndex": 4
-            }
-          ]
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/react!CodebookUnitField:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "CodebookUnitField: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "CodebookTextFieldProps",
-              "canonicalReference": "@datashaper/react!CodebookTextFieldProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "CodebookUnitField",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
         },
         {
           "kind": "TypeAlias",
@@ -2375,420 +2037,6 @@
           "extendsTokenRanges": []
         },
         {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/react!DetailsListFeatures:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface DetailsListFeatures "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "DetailsListFeatures",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DetailsListFeatures#commandBar:member",
-              "docComment": "/**\n * Receive elements to render in the column header as commands, passing the column details to be used in the component\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "commandBar?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "IRenderFunction",
-                  "canonicalReference": "@fluentui/utilities!IRenderFunction:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<"
-                },
-                {
-                  "kind": "Reference",
-                  "text": "IDetailsColumnProps",
-                  "canonicalReference": "@fluentui/react!IDetailsColumnProps:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "commandBar",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 5
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DetailsListFeatures#histogramColumnHeaders:member",
-              "docComment": "/**\n * Include histograms in the headers of numeric columns.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "histogramColumnHeaders?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "histogramColumnHeaders",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DetailsListFeatures#lazyLoadGroups:member",
-              "docComment": "/**\n * Collapse most groups so we can lazy load them. Default as true\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "lazyLoadGroups?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "lazyLoadGroups",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DetailsListFeatures#showBooleanSymbol:member",
-              "docComment": "/**\n * Without smartCells, if datatype is boolean, shows a symbol\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "showBooleanSymbol?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "showBooleanSymbol",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DetailsListFeatures#showCategoricalBar:member",
-              "docComment": "/**\n * Without smartCells, if datatype is array, shows a categorical bar\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "showCategoricalBar?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "showCategoricalBar",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DetailsListFeatures#showDateFormatted:member",
-              "docComment": "/**\n * Without smartCells, if datatype is date, shows the date formatted\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "showDateFormatted?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "showDateFormatted",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DetailsListFeatures#showDropdown:member",
-              "docComment": "/**\n * Without smartCells, If datatype is array, shows a dropdown with the values\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "showDropdown?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "showDropdown",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DetailsListFeatures#showNumberMagnitude:member",
-              "docComment": "/**\n * Without smartCells, if datatype is number, shows the magnitude of the value\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "showNumberMagnitude?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "showNumberMagnitude",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DetailsListFeatures#showSparkbar:member",
-              "docComment": "/**\n * Without smartCells, if datatype is array, shows a sparkbar\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "showSparkbar?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "showSparkbar",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DetailsListFeatures#showSparkline:member",
-              "docComment": "/**\n * Without smartCells, if datatype is array, shows a sparkline\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "showSparkline?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "showSparkline",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DetailsListFeatures#smartCells:member",
-              "docComment": "/**\n * Use embedded charts and vis based on data types and cell contents.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "smartCells?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "smartCells",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DetailsListFeatures#smartHeaders:member",
-              "docComment": "/**\n * Includes stats and histograms in the headers of columns\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "smartHeaders?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "smartHeaders",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DetailsListFeatures#statsColumnHeaders:member",
-              "docComment": "/**\n * Include stats in the headers of columns.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "statsColumnHeaders?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "statsColumnHeaders",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DetailsListFeatures#statsColumnTypes:member",
-              "docComment": "/**\n * If statsColumnHeaders or smartHeaders is true the user can pass which stats he wants\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "statsColumnTypes?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "StatsColumnType",
-                  "canonicalReference": "@datashaper/react!StatsColumnType:enum"
-                },
-                {
-                  "kind": "Content",
-                  "text": "[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "statsColumnTypes",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
           "kind": "Enum",
           "canonicalReference": "@datashaper/react!DisplayOrder:enum",
           "docComment": "/**\n * The vertical display ordering for workflow steps.\n */\n",
@@ -2897,104 +2145,6 @@
             "startIndex": 1,
             "endIndex": 8
           }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/react!GroupedVerbs:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface GroupedVerbs "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "GroupedVerbs",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!GroupedVerbs#alwaysEnabled:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "alwaysEnabled?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "alwaysEnabled",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!GroupedVerbs#label:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "label: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "label",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!GroupedVerbs#verbs:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "verbs: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "verbs",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
         },
         {
           "kind": "TypeAlias",
@@ -4180,7 +3330,7 @@
         {
           "kind": "Function",
           "canonicalReference": "@datashaper/react!useDefaultCodebookStyles:function(1)",
-          "docComment": "/**\n * @param styles - The styles input object\n *\n * @param heights - The field heights to use\n *\n * @returns - A set of codebook styles to use\n */\n",
+          "docComment": "/**\n * Generates the default codebook styles\n *\n * @param styles - The styles input object\n *\n * @param heights - The field heights to use\n *\n * @returns - A set of codebook styles to use\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",

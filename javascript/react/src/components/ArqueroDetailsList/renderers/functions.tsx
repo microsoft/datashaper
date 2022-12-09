@@ -10,7 +10,7 @@ import type {
 } from '@fluentui/react'
 
 import type {
-	DetailsListFeatures,
+	ArqueroDetailsListFeatures,
 	DropdownOptionSelect,
 	StatsColumnType,
 } from '../ArqueroDetailsList.types.js'
@@ -44,7 +44,7 @@ export const createRenderSmartCell = (
 	}
 
 export const createRenderFeaturesCell = (
-	features: DetailsListFeatures,
+	features: ArqueroDetailsListFeatures,
 	field?: Field,
 	color?: string,
 	onSelect?: ColumnSelectFunction,

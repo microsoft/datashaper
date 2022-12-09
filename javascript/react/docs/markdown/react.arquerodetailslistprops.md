@@ -20,7 +20,7 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
 |  [compactRowHeight?](./react.arquerodetailslistprops.compactrowheight.md) |  | number | <i>(Optional)</i> If compact = true, override the default height. FluentUI hard-codes the compact height, so this gives us a way to customize how dense the rows are. Note that if compact = false (the default), this has no effect. |
 |  [defaultSortColumn?](./react.arquerodetailslistprops.defaultsortcolumn.md) |  | string | <i>(Optional)</i> Default sort column |
 |  [defaultSortDirection?](./react.arquerodetailslistprops.defaultsortdirection.md) |  | SortDirection | <i>(Optional)</i> Resizable sort direction |
-|  [features?](./react.arquerodetailslistprops.features.md) |  | [DetailsListFeatures](./react.detailslistfeatures.md) | <i>(Optional)</i> |
+|  [features?](./react.arquerodetailslistprops.features.md) |  | [ArqueroDetailsListFeatures](./react.arquerodetailslistfeatures.md) | <i>(Optional)</i> |
 |  [fill?](./react.arquerodetailslistprops.fill.md) |  | boolean | <i>(Optional)</i> Indicates that the table should fill its container space, including the use of pseudo columns and rows to present a "spreadsheet-like" view. |
 |  [isHeaderFixed?](./react.arquerodetailslistprops.isheaderfixed.md) |  | boolean | <i>(Optional)</i> Fixed headers on top when scrolling |
 |  [limit?](./react.arquerodetailslistprops.limit.md) |  | number | <i>(Optional)</i> |

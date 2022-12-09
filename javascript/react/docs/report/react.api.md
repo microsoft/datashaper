@@ -8,10 +8,8 @@
 
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { CSSProperties } from 'react';
-import type { EnumDropdownProps } from '@essex/components';
 import type { Field } from '@datashaper/schema';
 import type { IButtonStyles } from '@fluentui/react';
-import type { ICheckboxProps } from '@fluentui/react';
 import type { ICheckboxStyles } from '@fluentui/react';
 import type { IColumn } from '@fluentui/react';
 import type { ICommandBarProps } from '@fluentui/react';
@@ -22,7 +20,6 @@ import type { IDropdownOption } from '@fluentui/react';
 import type { IDropdownStyles } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import type { IStyleFunctionOrObject } from '@fluentui/utilities';
-import type { ITextFieldProps } from '@fluentui/react';
 import type { ITextFieldStyleProps } from '@fluentui/react';
 import type { ITextFieldStyles } from '@fluentui/react';
 import type { ReactElement } from 'react';
@@ -38,6 +35,26 @@ import type { Workflow } from '@datashaper/workflow';
 // @public
 export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps>;
 
+// Warning: (ae-missing-release-tag) "ArqueroDetailsListFeatures" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface ArqueroDetailsListFeatures {
+    commandBar?: IRenderFunction<IDetailsColumnProps>[];
+    histogramColumnHeaders?: boolean;
+    lazyLoadGroups?: boolean;
+    showBooleanSymbol?: boolean;
+    showCategoricalBar?: boolean;
+    showDateFormatted?: boolean;
+    showDropdown?: boolean;
+    showNumberMagnitude?: boolean;
+    showSparkbar?: boolean;
+    showSparkline?: boolean;
+    smartCells?: boolean;
+    smartHeaders?: boolean;
+    statsColumnHeaders?: boolean;
+    statsColumnTypes?: StatsColumnType[];
+}
+
 // Warning: (ae-missing-release-tag) "ArqueroDetailsListProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -46,7 +63,7 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     defaultSortColumn?: string;
     defaultSortDirection?: SortDirection;
     // (undocumented)
-    features?: DetailsListFeatures;
+    features?: ArqueroDetailsListFeatures;
     fill?: boolean;
     isHeaderFixed?: boolean;
     // (undocumented)
@@ -99,93 +116,15 @@ export interface ArqueroTableHeaderStyles {
     root?: CSSProperties;
 }
 
-// Warning: (ae-missing-release-tag) "CodebookDataNatureField" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Codebook" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const CodebookDataNatureField: React.FC<CodebookEnumDropdownFieldProps>;
+export const Codebook: React.FC<CodebookProps>;
 
-// Warning: (ae-missing-release-tag) "CodebookDescriptionField" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CodebookProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
-export const CodebookDescriptionField: React.FC<CodebookTextFieldProps>;
-
-// Warning: (ae-missing-release-tag) "CodebookDisplayNameField" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const CodebookDisplayNameField: React.FC<CodebookTextFieldProps>;
-
-// Warning: (ae-missing-release-tag) "CodebookEnumDropdownFieldProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface CodebookEnumDropdownFieldProps extends CodebookPropsBase, EnumDropdownProps<unknown> {
-}
-
-// Warning: (ae-missing-release-tag) "CodebookFieldEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps>;
-
-// Warning: (ae-missing-release-tag) "CodebookFieldEditorProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface CodebookFieldEditorProps extends CodebookPropsBase {
-    // Warning: (ae-forgotten-export) The symbol "CodebookFieldEditorStyles" needs to be exported by the entry point index.d.ts
-    //
-    // (undocumented)
-    styles?: CodebookFieldEditorStyles;
-}
-
-// Warning: (ae-missing-release-tag) "CodebookPropsBase" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface CodebookPropsBase {
-    // (undocumented)
-    field: Field;
-    // (undocumented)
-    onChangeField?: (field: Field) => void;
-}
-
-// Warning: (ae-forgotten-export) The symbol "CodebookStatsFieldProps" needs to be exported by the entry point index.d.ts
-// Warning: (ae-missing-release-tag) "CodebookStatsField" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const CodebookStatsField: React.FC<CodebookStatsFieldProps>;
-
-// Warning: (ae-missing-release-tag) "CodebookStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface CodebookStyles {
-    // (undocumented)
-    dataNature?: Partial<IDropdownStyles>;
-    // (undocumented)
-    dataType?: Partial<IDropdownStyles>;
-    // (undocumented)
-    description?: Partial<ITextFieldStyles>;
-    // (undocumented)
-    displayName?: Partial<ITextFieldStyles>;
-    // Warning: (ae-forgotten-export) The symbol "CodebookMappingStyles" needs to be exported by the entry point index.d.ts
-    //
-    // (undocumented)
-    mapping?: CodebookMappingStyles;
-    // (undocumented)
-    root?: React.CSSProperties;
-    // Warning: (ae-forgotten-export) The symbol "CodebookStatsStyles" needs to be exported by the entry point index.d.ts
-    //
-    // (undocumented)
-    statsWrapper?: CodebookStatsStyles;
-    // (undocumented)
-    units?: Partial<ITextFieldStyles>;
-}
-
-// Warning: (ae-missing-release-tag) "CodebookTableEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const CodebookTableEditor: React.FC<CodebookTableEditorProps>;
-
-// Warning: (ae-missing-release-tag) "CodebookTableEditorProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface CodebookTableEditorProps {
+// @public
+export interface CodebookProps {
     // (undocumented)
     fields: Field[];
     // (undocumented)
@@ -195,17 +134,6 @@ export interface CodebookTableEditorProps {
     // (undocumented)
     styles?: CodebookTableStyles;
 }
-
-// Warning: (ae-missing-release-tag) "CodebookTextFieldProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface CodebookTextFieldProps extends CodebookPropsBase, ITextFieldProps {
-}
-
-// Warning: (ae-missing-release-tag) "CodebookUnitField" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const CodebookUnitField: React.FC<CodebookTextFieldProps>;
 
 // Warning: (ae-missing-release-tag) "ColumnRenderFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -237,26 +165,6 @@ export interface CommandBarColors {
     pressed: string;
 }
 
-// Warning: (ae-missing-release-tag) "DetailsListFeatures" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface DetailsListFeatures {
-    commandBar?: IRenderFunction<IDetailsColumnProps>[];
-    histogramColumnHeaders?: boolean;
-    lazyLoadGroups?: boolean;
-    showBooleanSymbol?: boolean;
-    showCategoricalBar?: boolean;
-    showDateFormatted?: boolean;
-    showDropdown?: boolean;
-    showNumberMagnitude?: boolean;
-    showSparkbar?: boolean;
-    showSparkline?: boolean;
-    smartCells?: boolean;
-    smartHeaders?: boolean;
-    statsColumnHeaders?: boolean;
-    statsColumnTypes?: StatsColumnType[];
-}
-
 // Warning: (ae-missing-release-tag) "DisplayOrder" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -269,18 +177,6 @@ export enum DisplayOrder {
 //
 // @public (undocumented)
 export type DropdownOptionSelect = ((event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption<any> | undefined, index?: number | undefined) => void) | undefined;
-
-// Warning: (ae-missing-release-tag) "GroupedVerbs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface GroupedVerbs {
-    // (undocumented)
-    alwaysEnabled?: boolean;
-    // (undocumented)
-    label: string;
-    // (undocumented)
-    verbs: string[];
-}
 
 // Warning: (ae-missing-release-tag) "GroupHeaderFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -405,10 +301,11 @@ export interface TableCommandsProps {
     workflow: Workflow;
 }
 
+// Warning: (ae-forgotten-export) The symbol "CodebookStyles" needs to be exported by the entry point index.d.ts
 // Warning: (ae-forgotten-export) The symbol "FieldHeights" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "useDefaultCodebookStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export function useDefaultCodebookStyles(styles?: CodebookStyles, heights?: FieldHeights): CodebookStyles;
 
 // Warning: (ae-missing-release-tag) "useHeaderCommandBarDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

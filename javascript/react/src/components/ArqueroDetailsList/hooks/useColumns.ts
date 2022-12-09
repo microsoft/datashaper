@@ -15,8 +15,8 @@ import { useMemo } from 'react'
 
 import { EMPTY_ARRAY, emptyArray } from '../../../empty.js'
 import type {
+	ArqueroDetailsListFeatures,
 	ColumnSelectFunction,
-	DetailsListFeatures,
 	DropdownOptionSelect,
 } from '../index.js'
 import {
@@ -36,7 +36,7 @@ import {
 import { useCountMinWidth } from './useCountMinWidth.js'
 
 export interface ColumnOptions {
-	features?: DetailsListFeatures
+	features?: ArqueroDetailsListFeatures
 	sortColumn?: string
 	sortDirection?: SortDirection
 	selectedColumn?: string

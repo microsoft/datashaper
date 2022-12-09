@@ -14,7 +14,7 @@ import type { RowObject } from 'arquero/dist/types/table/table'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import type {
-	DetailsListFeatures,
+	ArqueroDetailsListFeatures,
 	GroupHeaderFunction,
 } from './ArqueroDetailsList.types.js'
 import { debounceFn, groupBuilder } from './ArqueroDetailsList.utils.js'
@@ -25,7 +25,7 @@ import { useItems } from './hooks/useItems.js'
 export function useVirtualizedItems(
 	table: ColumnTable,
 	columns: IColumn[] | undefined,
-	features: DetailsListFeatures,
+	features: ArqueroDetailsListFeatures,
 	fill: boolean,
 	compact: boolean,
 	compactRowHeight: number,
@@ -54,7 +54,7 @@ export function useGroups(
 	sliced: ColumnTable,
 	items: any[],
 	sortDirection: SortDirection | undefined,
-	features: DetailsListFeatures,
+	features: ArqueroDetailsListFeatures,
 	sortColumn: string | undefined,
 ): undefined | Array<ReturnType<typeof groupBuilder>> {
 	// if the table is grouped, groups the information in a way we can iterate
@@ -149,7 +149,7 @@ export function useGroupProps(
 	table: ColumnTable,
 	metadata: TableMetadata | undefined,
 	onRenderGroupHeader: GroupHeaderFunction | undefined,
-	features: DetailsListFeatures,
+	features: ArqueroDetailsListFeatures,
 ): IDetailsGroupRenderProps {
 	const onRenderHeader = useGroupHeaderRenderer(
 		table,

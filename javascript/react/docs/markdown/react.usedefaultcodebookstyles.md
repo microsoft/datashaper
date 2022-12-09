@@ -4,6 +4,8 @@
 
 ## useDefaultCodebookStyles() function
 
+Generates the default codebook styles
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,12 +16,12 @@ export declare function useDefaultCodebookStyles(styles?: CodebookStyles, height
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  styles | [CodebookStyles](./react.codebookstyles.md) | <i>(Optional)</i> The styles input object |
+|  styles | CodebookStyles | <i>(Optional)</i> The styles input object |
 |  heights | FieldHeights | <i>(Optional)</i> The field heights to use |
 
 <b>Returns:</b>
 
-[CodebookStyles](./react.codebookstyles.md)
+CodebookStyles
 
 - A set of codebook styles to use
 

@@ -27,7 +27,7 @@ export function getRootStyle(
 }
 
 /**
- *
+ * Generates the default codebook styles
  * @param styles - The styles input object
  * @param heights  - The field heights to use
  * @returns - A set of codebook styles to use

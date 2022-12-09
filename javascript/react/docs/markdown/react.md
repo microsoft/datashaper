@@ -15,7 +15,7 @@
 
 |  Function | Description |
 |  --- | --- |
-|  [useDefaultCodebookStyles(styles, heights)](./react.usedefaultcodebookstyles.md) |  |
+|  [useDefaultCodebookStyles(styles, heights)](./react.usedefaultcodebookstyles.md) | Generates the default codebook styles |
 |  [useHeaderCommandBarDefaults(props, far, colors)](./react.useheadercommandbardefaults.md) | Helper to create the props necessary for the default inverted management bar. Basic colors can be customized, but note that if you do not want an always-inverted bar like that used in the DataShaper webapp, you may want to just tweak the Fluent styles as normal. |
 |  [useOnCreateStep(save, selectOutput, dismissModal)](./react.useoncreatestep.md) | Get a function to call when a step is created |
 |  [useOnDeleteStep(workflow)](./react.useondeletestep.md) | Creates a callback that may be used to delete steps by index |
@@ -25,18 +25,12 @@
 
 |  Interface | Description |
 |  --- | --- |
+|  [ArqueroDetailsListFeatures](./react.arquerodetailslistfeatures.md) | Feature flags and configuration for the Arquero Details List component |
 |  [ArqueroDetailsListProps](./react.arquerodetailslistprops.md) | Props for the Arquero Details List component |
 |  [ArqueroTableHeaderProps](./react.arquerotableheaderprops.md) | Props for the ArqueroTableHeader component |
 |  [ArqueroTableHeaderStyles](./react.arquerotableheaderstyles.md) |  |
-|  [CodebookEnumDropdownFieldProps](./react.codebookenumdropdownfieldprops.md) |  |
-|  [CodebookFieldEditorProps](./react.codebookfieldeditorprops.md) |  |
-|  [CodebookPropsBase](./react.codebookpropsbase.md) |  |
-|  [CodebookStyles](./react.codebookstyles.md) |  |
-|  [CodebookTableEditorProps](./react.codebooktableeditorprops.md) |  |
-|  [CodebookTextFieldProps](./react.codebooktextfieldprops.md) |  |
+|  [CodebookProps](./react.codebookprops.md) | Props for the CodebookEditor component |
 |  [CommandBarColors](./react.commandbarcolors.md) |  |
-|  [DetailsListFeatures](./react.detailslistfeatures.md) |  |
-|  [GroupedVerbs](./react.groupedverbs.md) |  |
 |  [GuidanceProps](./react.guidanceprops.md) | Props for the Guidance component |
 |  [StepHistoryStyles](./react.stephistorystyles.md) |  |
 |  [StepListProps](./react.steplistprops.md) |  |
@@ -48,13 +42,7 @@
 |  --- | --- |
 |  [ArqueroDetailsList](./react.arquerodetailslist.md) | Renders an arquero table using a fluent DetailsList. |
 |  [ArqueroTableHeader](./react.arquerotableheader.md) | Renders a header for an Arquero table |
-|  [CodebookDataNatureField](./react.codebookdatanaturefield.md) |  |
-|  [CodebookDescriptionField](./react.codebookdescriptionfield.md) |  |
-|  [CodebookDisplayNameField](./react.codebookdisplaynamefield.md) |  |
-|  [CodebookFieldEditor](./react.codebookfieldeditor.md) |  |
-|  [CodebookStatsField](./react.codebookstatsfield.md) |  |
-|  [CodebookTableEditor](./react.codebooktableeditor.md) |  |
-|  [CodebookUnitField](./react.codebookunitfield.md) |  |
+|  [Codebook](./react.codebook.md) |  |
 |  [Guidance](./react.guidance.md) | A component for rendering guidance information on verb usage. |
 |  [StepList](./react.steplist.md) |  |
 |  [TableCommands](./react.tablecommands.md) |  |

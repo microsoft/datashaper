@@ -62,7 +62,10 @@ export enum StatsColumnType {
 	Example = 'example',
 }
 
-export interface DetailsListFeatures {
+/**
+ * Feature flags and configuration for the Arquero Details List component
+ */
+export interface ArqueroDetailsListFeatures {
 	/**
 	 * Includes stats and histograms in the headers of columns
 	 */
@@ -129,7 +132,7 @@ export interface ArqueroDetailsListProps
 	extends Omit<IDetailsListProps, 'items'> {
 	table: ColumnTable
 	validationResult?: ValidationResult
-	features?: DetailsListFeatures
+	features?: ArqueroDetailsListFeatures
 	/**
 	 * Optional metadata to use for column smart features.
 	 * Use this if you need to cache expensive stats computes separately
