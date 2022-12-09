@@ -3,13 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@datashaper/tables'
-import type { Observable } from 'rxjs'
-import { BehaviorSubject, map } from 'rxjs'
+import type { Observable } from 'rxjs';
+import { BehaviorSubject, from,map } from 'rxjs'
 
 import { DefaultGraph } from '../../dataflow/DefaultGraph.js'
 import { observableNode } from '../../dataflow/index.js'
 import type { Node } from '../../dataflow/types.js'
 import type { Maybe } from '../../primitives.js'
+import { DelegateSubject } from '../../util/DelegateSubject.js'
 import { Disposable } from '../Disposable.js'
 import { createNode } from './createNode.js'
 import { readStep } from './readStep.js'
@@ -27,6 +28,10 @@ export class GraphManager extends Disposable {
 	private readonly _defaultInputNode: Node<TableContainer>
 	private readonly _steps$ = new BehaviorSubject<Step[]>([])
 	private readonly _numSteps$ = this._steps$.pipe(map(steps => steps.length))
+	private readonly _inputDelegates = new Map<
+		string,
+		DelegateSubject<TableContainer>
+	>()
 
 	public constructor(defaultInput$: Observable<Maybe<TableContainer>>) {
 		super()
@@ -51,10 +56,15 @@ export class GraphManager extends Disposable {
 	}
 
 	public setSteps(steps: StepInput[]): void {
-		// Update the graph state
 		this._graph.clear()
-		this._graph.add(this._defaultInputNode)
 
+		// Re-add input nodes
+		this._graph.add(this._defaultInputNode)
+		for (const [key, value] of this._inputDelegates) {
+			this._graph.add(observableNode(key, value))
+		}
+
+		// Re-add step nodes
 		for (const step of steps) {
 			this.addStep(step)
 		}
@@ -78,20 +88,18 @@ export class GraphManager extends Disposable {
 		return this._graph.hasNode(id)
 	}
 
-	public addStep(stepInput: StepInput): Step {
+	public addStep(input: StepInput): Step {
 		const steps = this.steps
-		const newStep = readStep(
-			stepInput,
-			steps.length > 0 ? steps[steps.length - 1] : undefined,
-		)
+		const prevStep = steps.length > 0 ? steps[steps.length - 1] : undefined
+		const step = readStep(input, steps.length > 0 ? prevStep : undefined)
+
 		// mutate the steps so that equality checks will detect that the steps changed (e.g. memo, hook deps)
-		const node = createNode(newStep)
-		this._graph.add(node)
-		this.configureStep(newStep, steps[steps.length - 1])
+		this._graph.add(createNode(step))
+		this.configureStep(step, prevStep)
 
 		// emit the new steps array
-		this._steps$.next([...steps, newStep])
-		return newStep
+		this._steps$.next([...steps, step])
+		return step
 	}
 
 	public removeStep(index: number): Node<TableContainer> {
@@ -147,49 +155,13 @@ export class GraphManager extends Disposable {
 		return step
 	}
 
-	public configureStep(step: Step, prevStep: Step | undefined): void {
-		const node = this.getNode(step.id)
-		node.config = step.args
-		const bindDefinedInputs = () => {
-			for (const [input, binding] of Object.entries(step.input)) {
-				// Bind variadic input
-				if (isVariadicSocketName(input, binding)) {
-					node.bind(binding.map(b => ({ node: this.getNode(b.node) })))
-				} else if (this.hasNode(binding.node)) {
-					// Bind the named input
-					node.bind({ input, node: this.getNode(binding.node) })
-				}
-			}
-		}
-
-		// if any inputs nodes are in the graph, bind them
-		if (hasDefinedInputs(step)) {
-			bindDefinedInputs()
-		} else if (prevStep == null) {
-			node.bind({ node: this.getDefaultInput() })
-		} else if (prevStep != null) {
-			node.bind({ node: this.getNode(prevStep.id) })
-		} else {
-			throw new Error(`cannot bind step input`)
-		}
-	}
-
-	public getOrCreateNode(
-		id: string,
-		getSource: (id: string) => Observable<Maybe<TableContainer>> | undefined,
-	): Node<TableContainer> {
+	public getOrCreateNode(id: string): Node<TableContainer> {
 		const g = this._graph
 		if (g.hasNode(id)) {
 			// try to find the named node in the graph
 			return g.node(id)
 		} else {
-			// try to create a new node by locating the observable source
-			const source = getSource(id)
-			if (source != null) {
-				return this.createNode(id, source)
-			} else {
-				throw new Error(`could not get or create node with id: "${id}"`)
-			}
+			return this.createNode(id, from([]))
 		}
 	}
 
@@ -205,11 +177,39 @@ export class GraphManager extends Disposable {
 		return lastNode.output$ as Observable<Maybe<TableContainer>>
 	}
 
+	public setSource(id: string, value: Observable<Maybe<TableContainer>>): void {
+		const input = this._inputDelegates.get(id)
+		if (input == null) {
+			throw new Error(`input ${id} not observed`)
+		}
+		input.input = value
+	}
+
+	public ensureInput(id: string): void {
+		if (this._inputDelegates.has(id)) {
+			return
+		}
+		if (this._graph.hasNode(id)) {
+			throw new Error(`node ${id} already exists without an input seam`)
+		} else {
+			const stream = new DelegateSubject<TableContainer>()
+			this._inputDelegates.set(id, stream)
+			const node = observableNode(id, stream)
+			this._graph.add(node)
+		}
+	}
+
+	public removeInput(id: string) {
+		this._inputDelegates.delete(id)
+		this._graph.remove(id)
+		this.configureAllSteps()
+	}
+
 	public createNode(
 		id: string,
-		Observable: Observable<Maybe<TableContainer>>,
+		value: Observable<Maybe<TableContainer>>,
 	): Node<TableContainer> {
-		const node = observableNode(id, Observable)
+		const node = observableNode(id, value)
 		this._graph.add(node)
 		return node
 	}
@@ -223,6 +223,31 @@ export class GraphManager extends Disposable {
 		for (const step of this.steps) {
 			this.configureStep(step, prevStep)
 			prevStep = step
+		}
+	}
+
+	private configureStep(step: Step, prevStep: Step | undefined): void {
+		const node = this.getNode(step.id)
+		node.config = step.args
+
+		// if any inputs nodes are in the graph, bind them
+		if (hasDefinedInputs(step)) {
+			for (const [input, binding] of Object.entries(step.input)) {
+				if (isVariadicSocketName(input, binding)) {
+					// Bind variadic input
+					node.bind(binding.map(b => ({ node: this.getNode(b.node) })))
+				} else if (this.hasNode(binding.node)) {
+					// Bind Non-Variadic Input
+					const inputNode = this.getNode(binding.node)
+					node.bind({ input, node: inputNode })
+				}
+			}
+		} else if (prevStep == null) {
+			node.bind({ node: this.getDefaultInput() })
+		} else if (prevStep != null) {
+			node.bind({ node: this.getNode(prevStep.id) })
+		} else {
+			throw new Error(`cannot bind step input`)
 		}
 	}
 }

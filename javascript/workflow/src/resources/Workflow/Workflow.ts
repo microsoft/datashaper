@@ -13,7 +13,6 @@ import type { BehaviorSubject, Observable } from 'rxjs'
 import { map, of } from 'rxjs'
 
 import { RemoveMode, TableManager } from '../../dataflow/TableManager.js'
-import type { Node } from '../../dataflow/types.js'
 import type { Maybe } from '../../primitives.js'
 import { Resource } from '../Resource.js'
 import { GraphManager } from './GraphManager.js'
@@ -42,6 +41,7 @@ export class Workflow extends Resource {
 	public constructor(input?: WorkflowSchema, private _strictInputs = false) {
 		super()
 		this.loadSchema(input, true)
+		this.rebindDefaultOutput()
 	}
 
 	public override dispose(): void {
@@ -86,13 +86,6 @@ export class Workflow extends Resource {
 		return result
 	}
 
-	private getNode(id: string): Node<TableContainer> {
-		return this._graphMgr.getOrCreateNode(id, (id: string) => {
-			if (this.hasInputName(id)) {
-				return this.read$(id)
-			}
-		})
-	}
 	// #endregion
 
 	// #region Inputs
@@ -123,12 +116,15 @@ export class Workflow extends Resource {
 
 	public addInputName(input: string): void {
 		if (!this._nameMgr.addInput(input)) {
+			this._graphMgr.ensureInput(input)
 			this._onChange.next()
 		}
 	}
 
-	public removeInputName(input: string): void {
-		if (!this._nameMgr.removeInput(input)) {
+	public removeInputName(name: string): void {
+		if (!this._nameMgr.removeInput(name)) {
+			this._graphMgr.removeInput(name)
+			this._tableMgr.remove(name, RemoveMode.Hard)
 			this._onChange.next()
 		}
 	}
@@ -179,6 +175,7 @@ export class Workflow extends Resource {
 		}
 
 		for (const [id, source] of values.entries()) {
+			this._graphMgr.ensureInput(id)
 			this._bindInputObservable(id, source)
 		}
 
@@ -213,7 +210,7 @@ export class Workflow extends Resource {
 
 	private _bindInputObservable(id: string, source: TableObservable): void {
 		const d$ = this._tableMgr.setSource(id, source)
-		this._graphMgr.createNode(id, d$)
+		this._graphMgr.setSource(id, d$)
 	}
 
 	private _assertInputName(id: string | undefined): void {
@@ -286,8 +283,8 @@ export class Workflow extends Resource {
 	 * Adds a step to the pipeline
 	 * @param step - the step to add
 	 */
-	public addStep(stepInput: StepInput): Step {
-		const newStep = this._graphMgr.addStep(stepInput)
+	public addStep(input: StepInput): Step {
+		const newStep = this._graphMgr.addStep(input)
 		// Use this new step's output as the default output for the workflow
 		this.rebindDefaultOutput()
 		this._onChange.next()
@@ -359,11 +356,13 @@ export class Workflow extends Resource {
 		quiet?: boolean,
 	): void {
 		super.loadSchema(schema, true)
+		const input = unique(schema?.input ?? [])
+		const output = unique(schema?.output ?? [])
+
+		this._nameMgr.setNames(input, output)
+		input.forEach(i => this._graphMgr.ensureInput(i))
+
 		this._graphMgr.setSteps(schema?.steps?.map(i => i as StepInput) ?? [])
-		this._nameMgr.setNames(
-			unique(schema?.input ?? []),
-			unique(schema?.output ?? []),
-		)
 		this.rebindDefaultOutput()
 		if (!quiet) {
 			this._onChange.next()
@@ -372,8 +371,8 @@ export class Workflow extends Resource {
 
 	private observeOutput(name: string) {
 		const [outputTable] = this._tableMgr.ensure(name)
-		const sub = this.getNode(name).output$.subscribe(outputTable)
-		this.onDispose(sub)
+		const n = this._graphMgr.getOrCreateNode(name)
+		outputTable.input = n.output$
 	}
 
 	public static async validate(workflowJson: WorkflowSchema): Promise<boolean> {

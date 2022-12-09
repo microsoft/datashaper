@@ -7,7 +7,7 @@ import type { BehaviorSubject, Observable } from 'rxjs'
 
 import type { Maybe } from '../primitives.js'
 import type { TableObservable } from '../resources/index.js'
-import { DelegateSubject } from '../util/rx.js'
+import { DelegateSubject } from '../util/DelegateSubject.js'
 
 export enum RemoveMode {
 	Hard = 'hard',
@@ -53,7 +53,6 @@ export class TableManager {
 	): Observable<Maybe<TableContainer>> {
 		const [subject] = this.ensure(id)
 		subject.input = source
-		this._tables.set(id, subject)
 		return subject
 	}
 

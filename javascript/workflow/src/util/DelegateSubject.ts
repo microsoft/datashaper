@@ -14,12 +14,18 @@ export class DelegateSubject<T> extends BehaviorSubject<Maybe<T>> {
 	private _subscription: Subscription | undefined
 
 	public set input(value: Observable<Maybe<T>> | undefined) {
-		this._subscription?.unsubscribe()
-		if (value) {
-			this._subscription = value.subscribe(this)
+		this.detach()
+
+		if (value != null) {
+			this._subscription = value.subscribe(v => this.next(v))
 		} else {
 			this.next(undefined)
 		}
+	}
+
+	private detach(): void {
+		this._subscription?.unsubscribe()
+		this._subscription = undefined
 	}
 
 	public dispose(): void {
