@@ -19,6 +19,7 @@ describe('The Workflow Resource', () => {
 	test('runs a single step with normal input/output', () => {
 		const g = new Workflow({
 			id: 'test workflow',
+			profile: 'workflow',
 			$schema:
 				'https://microsoft.github.io/datashaper/schema/workflow/workflow.json',
 			name: 'test',
@@ -47,6 +48,7 @@ describe('The Workflow Resource', () => {
 	test('runs a single step with named output', () => {
 		const g = new Workflow({
 			id: 'test workflow',
+			profile: 'workflow',
 			$schema:
 				'https://microsoft.github.io/datashaper/schema/workflow/workflow.json',
 			name: 'test',
@@ -87,6 +89,7 @@ describe('The Workflow Resource', () => {
 	test('runs multiple steps with normal input/output and all intermediates', () => {
 		const g = new Workflow({
 			id: 'test workflow',
+			profile: 'workflow',
 			$schema:
 				'https://microsoft.github.io/datashaper/schema/workflow/workflow.json',
 			name: 'test',

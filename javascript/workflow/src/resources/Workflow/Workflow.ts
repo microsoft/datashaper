@@ -62,7 +62,8 @@ export class Workflow extends Resource {
 	 * If no observable is ready yet, a new observable will be created
 	 */
 	public read(name?: string): Maybe<TableContainer> {
-		return this._read(name).value
+		const result = this._read(name).value
+		return { ...(result ?? {}), id: name ?? this.name }
 	}
 
 	/**
@@ -71,7 +72,7 @@ export class Workflow extends Resource {
 	 * If no observable is ready yet, a new observable will be created
 	 */
 	public read$(name?: string): Observable<Maybe<TableContainer>> {
-		return this._read(name)
+		return this._read(name).pipe(map(this.renameTo(name ?? this.name)))
 	}
 
 	private _read(name?: string): BehaviorSubject<Maybe<TableContainer>> {
@@ -371,13 +372,18 @@ export class Workflow extends Resource {
 
 	private observeOutput(name: string) {
 		const [outputTable] = this._tableMgr.ensure(name)
-		const sub = this.getNode(name)
-			.output$.pipe(map(it => it && { ...it, id: name }))
-			.subscribe(outputTable)
+		const sub = this.getNode(name).output$.subscribe(outputTable)
 		this.onDispose(sub)
 	}
 
 	public static async validate(workflowJson: WorkflowSchema): Promise<boolean> {
 		return WorkflowSchemaValidator.validate(workflowJson)
 	}
+
+	private renameTo =
+		(name: string) =>
+		(table: Maybe<TableContainer>): TableContainer => ({
+			...(table ?? {}),
+			id: name,
+		})
 }
