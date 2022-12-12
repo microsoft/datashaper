@@ -4,7 +4,7 @@
  */
 import { default as percentile } from 'percentile'
 
-export function autoStrategy(values: number[]) {
+export function autoStrategy(values: number[]): number {
 	const sturgesResult = sturgesStrategy(values)
 	const fdResult = fdStrategy(values)
 
@@ -37,18 +37,18 @@ export function doaneStrategy(values: number[]): number {
 	return width
 }
 
-export function scottStrategy(values: number[]) {
+export function scottStrategy(values: number[]): number {
 	return (
 		standardDeviation(values) *
 		Math.cbrt((24 * Math.sqrt(Math.PI)) / values.length)
 	)
 }
 
-export function riceStrategy(values: number[]) {
+export function riceStrategy(values: number[]): number {
 	return 2 * Math.pow(values.length, 1 / 3)
 }
 
-export function sturgesStrategy(values: number[]) {
+export function sturgesStrategy(values: number[]): number {
 	const width = Math.log2(values.length) + 1
 	return width
 }
@@ -57,7 +57,7 @@ export function sqrtStrategy(values: number[]): number {
 	return Math.sqrt(values.length)
 }
 
-export function standardDeviation(values: number[], precision = 3) {
+export function standardDeviation(values: number[], precision = 3): number {
 	const N = values.length
 	let sum = 0
 	let squareNumbersSum = 0
@@ -74,11 +74,11 @@ export function standardDeviation(values: number[], precision = 3) {
 	return Number(standarDeviationResult.toFixed(precision))
 }
 
-function ascending(a: number, b: number) {
+function ascending(a: number, b: number): number {
 	return a - b
 }
 
-export function iqr(values: number[]) {
+export function iqr(values: number[]): number {
 	values.sort(ascending)
 	const q1: number = percentile(25, values) as number
 	const q3: number = percentile(75, values) as number
