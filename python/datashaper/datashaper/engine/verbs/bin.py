@@ -93,7 +93,6 @@ def bin(
         )
 
     inds = np.digitize(input_table[column], bin_edges)
-    
     value_edges = [
         __get_bucket_value(
             bin_edges,
