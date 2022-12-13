@@ -1788,18 +1788,18 @@ __metadata:
     "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/workflow": "workspace:^"
-    "@essex/components": ^3.3.0
+    "@essex/components": ^3.4.0
     "@essex/scripts": ^22.1.0
     "@essex/tsconfig-base": ^1.0.2
-    "@fluentui/react": ^8.103.5
+    "@fluentui/react": ^8.103.8
     "@fluentui/react-hooks": ^8.6.14
     "@fluentui/utilities": ^8.13.4
     "@monaco-editor/react": ^4.4.6
     "@storybook/react": ^6.5.13
-    "@thematic/core": ^4.0.1
-    "@thematic/d3": ^2.0.16
-    "@thematic/fluent": ^5.0.2
-    "@thematic/react": ^2.1.3
+    "@thematic/core": ^4.0.2
+    "@thematic/d3": ^2.0.17
+    "@thematic/fluent": ^5.0.3
+    "@thematic/react": ^2.1.4
     "@types/debug": ^4.1.7
     "@types/lodash-es": ^4.17.6
     "@types/node": ^18.11.9
@@ -1875,19 +1875,19 @@ __metadata:
     "@datashaper/utilities": "workspace:^"
     "@datashaper/verb-guidance": "workspace:^"
     "@datashaper/workflow": "workspace:^"
-    "@essex/charts-react": ^1.1.2
-    "@essex/components": ^3.3.0
+    "@essex/charts-react": ^1.1.3
+    "@essex/components": ^3.4.0
     "@essex/scripts": ^22.1.0
-    "@essex/styled-components": ^0.0.4
+    "@essex/styled-components": ^0.0.5
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/font-icons-mdl2": ^8.5.4
-    "@fluentui/react": ^8.103.5
+    "@fluentui/react": ^8.103.8
     "@fluentui/react-hooks": ^8.6.14
     "@fluentui/utilities": ^8.13.4
-    "@thematic/core": ^4.0.1
-    "@thematic/d3": ^2.0.16
-    "@thematic/fluent": ^5.0.2
-    "@thematic/react": ^2.1.3
+    "@thematic/core": ^4.0.2
+    "@thematic/d3": ^2.0.17
+    "@thematic/fluent": ^5.0.3
+    "@thematic/react": ^2.1.4
     "@types/d3-format": ^3.0.1
     "@types/debug": ^4.1.7
     "@types/lodash": ^4.14.188
@@ -1958,11 +1958,11 @@ __metadata:
     "@babel/preset-typescript": ^7.18.6
     "@datashaper/react": "workspace:^"
     "@datashaper/webapp": "workspace:^"
-    "@essex/components": ^3.3.0
+    "@essex/components": ^3.4.0
     "@essex/scripts": ^22.1.0
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/font-icons-mdl2": ^8.5.4
-    "@fluentui/react": ^8.103.5
+    "@fluentui/react": ^8.103.8
     "@fluentui/react-hooks": ^8.6.14
     "@fluentui/utilities": ^8.13.4
     "@mdx-js/react": ^1.6.22
@@ -1976,10 +1976,10 @@ __metadata:
     "@storybook/manager-webpack4": ^6.5.13
     "@storybook/react": ^6.5.13
     "@storybook/testing-library": ^0.0.13
-    "@thematic/core": ^4.0.1
-    "@thematic/d3": ^2.0.16
-    "@thematic/fluent": ^5.0.2
-    "@thematic/react": ^2.1.3
+    "@thematic/core": ^4.0.2
+    "@thematic/d3": ^2.0.17
+    "@thematic/fluent": ^5.0.3
+    "@thematic/react": ^2.1.4
     "@types/open-wc__webpack-import-meta-loader": ^0.4.2
     arquero: ^5.1.0
     babel-loader: ^8.3.0
@@ -2066,18 +2066,18 @@ __metadata:
     "@datashaper/utilities": "workspace:^"
     "@datashaper/verb-guidance": "workspace:^"
     "@datashaper/workflow": "workspace:^"
-    "@essex/components": ^3.3.0
-    "@essex/hooks": ^4.0.13
+    "@essex/components": ^3.4.0
+    "@essex/hooks": ^4.0.14
     "@essex/scripts": ^22.1.0
     "@essex/webpack-config": ^21.0.8
     "@fluentui/font-icons-mdl2": ^8.5.4
-    "@fluentui/react": ^8.103.5
+    "@fluentui/react": ^8.103.8
     "@fluentui/react-hooks": ^8.6.14
     "@fluentui/utilities": ^8.13.4
-    "@thematic/core": ^4.0.1
-    "@thematic/d3": ^2.0.16
-    "@thematic/fluent": ^5.0.2
-    "@thematic/react": ^2.1.3
+    "@thematic/core": ^4.0.2
+    "@thematic/d3": ^2.0.17
+    "@thematic/fluent": ^5.0.3
+    "@thematic/react": ^2.1.4
     "@types/chroma-js": ^2.1.4
     "@types/debug": ^4.1.7
     "@types/lodash": ^4.14.188
@@ -2088,7 +2088,6 @@ __metadata:
     "@types/react-is": ^17.0.3
     "@types/react-router-dom": ^5.3.3
     "@types/styled-components": ^5.1.26
-    "@uifabric/icons": ^7.9.5
     ahooks: ^3.7.2
     allotment: ^1.17.0
     arquero: ^5.1.0
@@ -2283,9 +2282,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/charts-react@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "@essex/charts-react@npm:1.1.2"
+"@essex/charts-react@npm:^1.1.3":
+  version: 1.1.3
+  resolution: "@essex/charts-react@npm:1.1.3"
   dependencies:
     d3-format: ^3.1.0
     d3-scale: ^4.0.2
@@ -2297,7 +2296,7 @@ __metadata:
     "@thematic/d3": ^1.3.0
     "@thematic/react": ^1.3.0
     react: ">= 18"
-  checksum: cac3864c20c1f1d890d47a1a45a63a6ca94ba9e269cf7cf19583255246bebf18ee90e09d68376438800fa0cc5feb9d6dec24b7e6d4cb9bd9aacd8ac776d323c7
+  checksum: b19041408aba575ac05c9e587cdb72feeb03555dbf1e7adbc0e546c93aa006d36861e8e6bd60dbfa3e890845172a56136521dd14dfedc5175058ef05a55ac6e7
   languageName: node
   linkType: hard
 
@@ -2336,6 +2335,43 @@ __metadata:
     react: ">= 18"
     react-dom: ">= 18"
   checksum: 1c97a8846b3e48c37a896e20c022a8aadac0a7a161beb4843769da77df0a6b6f818d14a90acce821c4db5044ab85993d821f54e31a85821715c628ce4ca1f033
+  languageName: node
+  linkType: hard
+
+"@essex/components@npm:^3.4.0":
+  version: 3.4.0
+  resolution: "@essex/components@npm:3.4.0"
+  dependencies:
+    "@essex/hooks": ^4.0.14
+    "@essex/react-animate-height": ^2.1.4
+    "@essex/toolbox": ^3.0.10
+    "@fluentui/utilities": ^8.13.4
+    "@types/d3-array": ^3.0.3
+    "@types/d3-axis": ^3.0.1
+    "@types/d3-brush": ^3.0.1
+    "@types/d3-scale": ^4.0.2
+    "@types/d3-selection": ^3.0.3
+    d3-array: ^3.2.1
+    d3-axis: ^3.0.0
+    d3-brush: ^3.0.0
+    d3-scale: ^4.0.2
+    d3-selection: ^3.0.0
+    lodash-es: ^4.17.21
+    react-if: ^4.1.4
+  peerDependencies:
+    "@fluentui/react": ">= 7.114.2"
+    "@thematic/color": ">= 0.8.0"
+    "@thematic/core": ">= 0.8.0"
+    "@thematic/d3": ">= 0.8.0"
+    "@thematic/fluent": ">= 0.8.0"
+    "@thematic/react": ">= 0.8.0"
+    "@types/d3": "*"
+    "@types/d3-axis": ^2.0.0
+    "@types/node": "*"
+    "@types/react": ">= 18"
+    react: ">= 18"
+    react-dom: ">= 18"
+  checksum: 57b5c8c1551f1d3ca58b99e669d6fda12a1b5d776b274c2d0f2b7e76987887d22cfa9c20d649be75fadeff207007e66c80033e8827a16f1f44725dcebb5454c5
   languageName: node
   linkType: hard
 
@@ -2398,6 +2434,21 @@ __metadata:
     "@types/react-dom": "*"
     react: ">= 18"
   checksum: 7d54bbae6c023db2d3a9ccc857bdeb71d7265d5e1997e016ad25f89358600330b62f1712eda320a081bf485af6aac8bbf453abc9ad94c6a8c80c5b15a4dcca1f
+  languageName: node
+  linkType: hard
+
+"@essex/hooks@npm:^4.0.14":
+  version: 4.0.14
+  resolution: "@essex/hooks@npm:4.0.14"
+  dependencies:
+    "@essex/toolbox": ^3.0.10
+    lodash-es: ^4.17.21
+  peerDependencies:
+    "@types/node": "*"
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ">= 18"
+  checksum: cd0e010ff982c0fc048150c0eb85d16c54a22ec9e4d658fbd72cb8b9fa5beca8f05e94f6adb614ba5ca7af7b86a72974958c5029d4b792d1e7c3610fdee8e9ad
   languageName: node
   linkType: hard
 
@@ -2532,12 +2583,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/styled-components@npm:^0.0.4":
-  version: 0.0.4
-  resolution: "@essex/styled-components@npm:0.0.4"
+"@essex/styled-components@npm:^0.0.5":
+  version: 0.0.5
+  resolution: "@essex/styled-components@npm:0.0.5"
   peerDependencies:
     styled-components: ">= 5"
-  checksum: 0949f0caed711fe6729e3013c37834a1fea81a2cdd33a0aafadc0676685329bbd953ae084e277bb16084a4c0ec5d41530de2fe37674e6a0c5c00c9e223abfeff
+  checksum: 6c9a0c3bceb5de5d9325ef6379f9bf9a55bd36efdbe8398bcb5feb4f5345c8cbd162337a63e96b448a7ace7066d984cc24a7604af38963711d87d93cf0f19955
   languageName: node
   linkType: hard
 
@@ -2549,6 +2600,13 @@ __metadata:
     lodash: ^4.17.21
     tslib: ^2.4.0
   checksum: c28d74d6ef7332609205cc66bef66cd714d539ff4554dc0e0e7c3f2c8816fc1b6d28c2cb4dfa5df27f5e3c1fc07d39236e6527ac2eeb96b37b85e6101b43e711
+  languageName: node
+  linkType: hard
+
+"@essex/toolbox@npm:^3.0.10":
+  version: 3.0.10
+  resolution: "@essex/toolbox@npm:3.0.10"
+  checksum: db640a059d04ffc5e8ea9a1e96fce6a4eb7f17271a27f03669de49db293a34c1eae8378b8f88b133e1f84d31829385f9385a91268b1c176b06daef0ceb7410f6
   languageName: node
   linkType: hard
 
@@ -2615,16 +2673,6 @@ __metadata:
     "@fluentui/set-version": ^8.2.3
     tslib: ^2.1.0
   checksum: f2ef98efbf19003cc1b88a9ad19dec774ae2391a665a4288357ccafb26ab4a27ce22259e108faf760141c69315d41ec3c396c1286746538900d0d2c0c39be4dc
-  languageName: node
-  linkType: hard
-
-"@fluentui/dom-utilities@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "@fluentui/dom-utilities@npm:1.1.2"
-  dependencies:
-    "@uifabric/set-version": ^7.0.24
-    tslib: ^1.10.0
-  checksum: 4b837f1fdb29e576e61fde4f57f68776e953c42e109c204a64bdd5ec261ead5053394717de853a275ed37fb51fa0504219e56497a3cd4cde7ec2e6f623df23ad
   languageName: node
   linkType: hard
 
@@ -2742,9 +2790,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui/react@npm:^8.103.5":
-  version: 8.103.5
-  resolution: "@fluentui/react@npm:8.103.5"
+"@fluentui/react@npm:^8.103.8":
+  version: 8.103.8
+  resolution: "@fluentui/react@npm:8.103.8"
   dependencies:
     "@fluentui/date-time-utilities": ^8.5.3
     "@fluentui/font-icons-mdl2": ^8.5.4
@@ -2765,7 +2813,7 @@ __metadata:
     "@types/react-dom": ">=16.8.0 <19.0.0"
     react: ">=16.8.0 <19.0.0"
     react-dom: ">=16.8.0 <19.0.0"
-  checksum: 1f9818ec9e864c59ca16fccd08958864c022bb3b801adb4af12644373bec75ed8e3dbc7c121415bd0f02285caa529b88346eb5a90e97e6a53fa15804418a8c7e
+  checksum: d554fd8d7273e013e8b09e8c43bbca1e590639e7838e5a2fa443a2520d5a89c7b3ea1c7334d087ae370ac1dad8c00f416696fd27d3eb441fb0b3ecbba4e068e5
   languageName: node
   linkType: hard
 
@@ -2789,23 +2837,6 @@ __metadata:
     "@microsoft/load-themed-styles": ^1.10.26
     tslib: ^2.1.0
   checksum: 5c5d13ff2aafaca1c9b2c513da16d746f0868606cb5994131b5469cd153e2f7d4e0c35dbfe9649a68d9e47b127ca70aa2efe6146c67db7b26f9f9a0b1959ced2
-  languageName: node
-  linkType: hard
-
-"@fluentui/theme@npm:^1.7.13":
-  version: 1.7.13
-  resolution: "@fluentui/theme@npm:1.7.13"
-  dependencies:
-    "@uifabric/merge-styles": ^7.20.2
-    "@uifabric/set-version": ^7.0.24
-    "@uifabric/utilities": ^7.38.2
-    tslib: ^1.10.0
-  peerDependencies:
-    "@types/react": ">=16.8.0 <18.0.0"
-    "@types/react-dom": ">=16.8.0 <18.0.0"
-    react: ">=16.8.0 <18.0.0"
-    react-dom: ">=16.8.0 <18.0.0"
-  checksum: 0eb822748b2bbeaea5afa65d8e596056673e14ac7876aa2ef817a8b3935596202d8b6df56208c45349b67b8e03bde475a56a02ab43be408f5f3f3f38f7c45cd5
   languageName: node
   linkType: hard
 
@@ -5164,9 +5195,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thematic/color@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "@thematic/color@npm:4.0.1"
+"@thematic/color@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "@thematic/color@npm:4.0.2"
   dependencies:
     chroma-js: ^2.4.2
     color-blind: ^0.1.3
@@ -5179,15 +5210,15 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: 236f3e405581e56b990aa6af47e2122f26f9edf91181e614fd1b66aba28c3b2e994a1d6c61acd10d1e08d6b1f046e43d3dc4c68fea413a57ca2c2a0eaf517737
+  checksum: ae1749b4039df801d4aa21d8845da562cae413fc5af8a0580894e02662680d343f81612a48d662873444f3aad49d787120db3d8536a88dd8108a867f96eb416c
   languageName: node
   linkType: hard
 
-"@thematic/core@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "@thematic/core@npm:4.0.1"
+"@thematic/core@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "@thematic/core@npm:4.0.2"
   dependencies:
-    "@thematic/color": ^4.0.1
+    "@thematic/color": ^4.0.2
     d3-scale: ^4.0.2
     lodash-es: ^4.17.21
     murmurhash-js: ^1.0.0
@@ -5199,15 +5230,15 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: e9353a1a0b2749e3070d1f2812b96b5b14d1d92845ef8aa7587ef6e632e9af1662be6b91182a7e1c24eb9ceb4121e42b5dbb9e9356ccdbb7ea86c57854901dc4
+  checksum: 564fcb8ee3a2c96e5ed92a27dc2bf0c5269f5c28c935e9c681cc7c42ea0c69997b77348bee1aa1c2d34a8d903cfe5a4c45b0739965008772dcd0c4cc5824602d
   languageName: node
   linkType: hard
 
-"@thematic/d3@npm:^2.0.16":
-  version: 2.0.16
-  resolution: "@thematic/d3@npm:2.0.16"
+"@thematic/d3@npm:^2.0.17":
+  version: 2.0.17
+  resolution: "@thematic/d3@npm:2.0.17"
   dependencies:
-    "@thematic/core": ^4.0.1
+    "@thematic/core": ^4.0.2
     d3-axis: ^3.0.0
     d3-selection: ^3.0.0
   peerDependencies:
@@ -5221,24 +5252,24 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: 942536a200c84312cbd094d3ac6f0c586c228971d564dd33c6bae3f5e2cea5e90a0578d42ea3b7e8cb031df0fc5218fff687b67a5a026626272899ef06295954
+  checksum: 8e893783acde264732dbcddbcdd506783a9973bda2e752b19efcf49184054a8912b1a093f597b0307c442300507f27755af125c7cf0f3ec4a3aab645713ad40f
   languageName: node
   linkType: hard
 
-"@thematic/fluent@npm:^5.0.2":
-  version: 5.0.2
-  resolution: "@thematic/fluent@npm:5.0.2"
+"@thematic/fluent@npm:^5.0.3":
+  version: 5.0.3
+  resolution: "@thematic/fluent@npm:5.0.3"
   dependencies:
     "@essex/components": ^3.3.0
-    "@thematic/color": ^4.0.1
-    "@thematic/core": ^4.0.1
-    "@thematic/d3": ^2.0.16
-    "@thematic/react": ^2.1.3
+    "@thematic/color": ^4.0.2
+    "@thematic/core": ^4.0.2
+    "@thematic/d3": ^2.0.17
     ahooks: ^3.7.2
     d3-scale: ^4.0.2
     lodash-es: ^4.17.21
   peerDependencies:
     "@fluentui/react": ">= 8"
+    "@thematic/react": ^2.1.4
     "@types/node": "*"
     "@types/react": ">= 17"
     react: ">= 17"
@@ -5251,16 +5282,16 @@ __metadata:
       optional: true
     react:
       optional: false
-  checksum: ca1eee68250ad1169f2b42bc5db1e9e1bee2cda55ec4897d94dfc1111103a86478311794d133308d711ba4bbc35e064b70627d5051604522ef6c1ea3dd204dc1
+  checksum: 888ff8002e917bac299b0167c32f9b211d59e1fcfc59e7b00e9a3b8ba96a5a832416517d418f8b8725a4c415c56fae38eecc20a35e5d861800cc276202643c43
   languageName: node
   linkType: hard
 
-"@thematic/react@npm:^2.1.3":
-  version: 2.1.3
-  resolution: "@thematic/react@npm:2.1.3"
+"@thematic/react@npm:^2.1.4":
+  version: 2.1.4
+  resolution: "@thematic/react@npm:2.1.4"
   dependencies:
-    "@thematic/color": ^4.0.1
-    "@thematic/core": ^4.0.1
+    "@thematic/color": ^4.0.2
+    "@thematic/core": ^4.0.2
   peerDependencies:
     "@types/node": "*"
     "@types/react": ">= 17"
@@ -5272,7 +5303,7 @@ __metadata:
       optional: true
     react:
       optional: false
-  checksum: 52f100898055da5401b25f2ccd8af67154d1cf349c9c57c755171a33757dd914c977d31e0a5eaa8a362e62badcab3c301fcec1dddf987f90f4e6459d1f1a3677
+  checksum: 9caf6ecfa96a6cd4d72c0a67b224ea7c58072a8b2308f0795b5665e23708fbfa2cd1ad40bf9272c01bfcb275728d7b0178a8f04d22500e5f4c6ed66398a44c00
   languageName: node
   linkType: hard
 
@@ -6294,69 +6325,6 @@ __metadata:
     "@typescript-eslint/types": 5.42.1
     eslint-visitor-keys: ^3.3.0
   checksum: d36c59da7bf3b3c150c12cbe4b0331edc15253f59599ec3d8b873b2a3d9fc7a4fea11490c1b20d972afcdc9c842deb5ada527ea9c538aa7e87555699d9a59f24
-  languageName: node
-  linkType: hard
-
-"@uifabric/icons@npm:^7.9.5":
-  version: 7.9.5
-  resolution: "@uifabric/icons@npm:7.9.5"
-  dependencies:
-    "@uifabric/set-version": ^7.0.24
-    "@uifabric/styling": ^7.25.1
-    "@uifabric/utilities": ^7.38.2
-    tslib: ^1.10.0
-  checksum: a2a5b23eeb6abf5d35497a93df93f85b1ef0ad48b419a3023eb828c02c1a7edcad274c490641b27d39b2969ec5b4e212e30a01e169ca600efe6d8d03bceca695
-  languageName: node
-  linkType: hard
-
-"@uifabric/merge-styles@npm:^7.20.2":
-  version: 7.20.2
-  resolution: "@uifabric/merge-styles@npm:7.20.2"
-  dependencies:
-    "@uifabric/set-version": ^7.0.24
-    tslib: ^1.10.0
-  checksum: 9cd59b3189838abae937fa6914878afd3d18c9b1d423eb71641c5a456518966244b8703dc12271dd4dc76d1edd2ce4a389087f10be33db88a8d90a3e91edb54b
-  languageName: node
-  linkType: hard
-
-"@uifabric/set-version@npm:^7.0.24":
-  version: 7.0.24
-  resolution: "@uifabric/set-version@npm:7.0.24"
-  dependencies:
-    tslib: ^1.10.0
-  checksum: 5d4f69596946f4128539c65e357b4c6a62e0eebe5037f87ec5c31f48eb1c7f0ccd68277b55ade5cc49012c49506f5a292a716eabff68ad0ac928bece7fb783c3
-  languageName: node
-  linkType: hard
-
-"@uifabric/styling@npm:^7.25.1":
-  version: 7.25.1
-  resolution: "@uifabric/styling@npm:7.25.1"
-  dependencies:
-    "@fluentui/theme": ^1.7.13
-    "@microsoft/load-themed-styles": ^1.10.26
-    "@uifabric/merge-styles": ^7.20.2
-    "@uifabric/set-version": ^7.0.24
-    "@uifabric/utilities": ^7.38.2
-    tslib: ^1.10.0
-  checksum: f3da19539b56cd5e53765389aefd1c1d4ec2766e64591b8ec9b9415c15f07805fa91aa6da68827d99f0f517db214b7474c00548df19f5eaab6f98a9a7bf124e1
-  languageName: node
-  linkType: hard
-
-"@uifabric/utilities@npm:^7.38.2":
-  version: 7.38.2
-  resolution: "@uifabric/utilities@npm:7.38.2"
-  dependencies:
-    "@fluentui/dom-utilities": ^1.1.2
-    "@uifabric/merge-styles": ^7.20.2
-    "@uifabric/set-version": ^7.0.24
-    prop-types: ^15.7.2
-    tslib: ^1.10.0
-  peerDependencies:
-    "@types/react": ">=16.8.0 <18.0.0"
-    "@types/react-dom": ">=16.8.0 <18.0.0"
-    react: ">=16.8.0 <18.0.0"
-    react-dom: ">=16.8.0 <18.0.0"
-  checksum: 45e91a0e0f08bfe5c31bbaa46f47b9bce61da200b103fbbf8b0d358963f4e192e2dc31723100c93186c9b8c1b9f2364d1a4a159fed77ba9eab933385591d0f82
   languageName: node
   linkType: hard
 
@@ -9444,6 +9412,15 @@ __metadata:
   dependencies:
     internmap: 1 - 2
   checksum: e236f6670b60b64abb6c435da25b5cbbdc2c7c0decdbf9355bc4cf6803d6da4fa820b7b78b9cbd127edb493555934a9788d45084c2f39d7c2e1a2b7aa48264a4
+  languageName: node
+  linkType: hard
+
+"d3-array@npm:^3.2.1":
+  version: 3.2.1
+  resolution: "d3-array@npm:3.2.1"
+  dependencies:
+    internmap: 1 - 2
+  checksum: 0bed33cc33b70f9d48ccef3e7a5956e134862e09179bf14df0bf9c8fc0ec02b8f847d4f5e1d32729cd5e02032af1d0a32bcc968ff1333795028455a749994623
   languageName: node
   linkType: hard
 
@@ -19944,7 +19921,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^1.10.0, tslib@npm:^1.8.1, tslib@npm:^1.9.3":
+"tslib@npm:^1.8.1, tslib@npm:^1.9.3":
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
   checksum: dbe628ef87f66691d5d2959b3e41b9ca0045c3ee3c7c7b906cc1e328b39f199bb1ad9e671c39025bd56122ac57dfbf7385a94843b1cc07c60a4db74795829acd
