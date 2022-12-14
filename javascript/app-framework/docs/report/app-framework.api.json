@@ -863,8 +863,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "ResourceGroup",
-                  "canonicalReference": "@datashaper/app-framework!ResourceGroup:enum"
+                  "text": "ResourceGroupType",
+                  "canonicalReference": "@datashaper/app-framework!ResourceGroupType:enum"
                 },
                 {
                   "kind": "Content",
@@ -1245,21 +1245,21 @@
         },
         {
           "kind": "Enum",
-          "canonicalReference": "@datashaper/app-framework!ResourceGroup:enum",
+          "canonicalReference": "@datashaper/app-framework!ResourceGroupType:enum",
           "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare enum ResourceGroup "
+              "text": "export declare enum ResourceGroupType "
             }
           ],
           "releaseTag": "Public",
-          "name": "ResourceGroup",
+          "name": "ResourceGroupType",
           "preserveMemberOrder": false,
           "members": [
             {
               "kind": "EnumMember",
-              "canonicalReference": "@datashaper/app-framework!ResourceGroup.Apps:member",
+              "canonicalReference": "@datashaper/app-framework!ResourceGroupType.Apps:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -1280,7 +1280,7 @@
             },
             {
               "kind": "EnumMember",
-              "canonicalReference": "@datashaper/app-framework!ResourceGroup.Data:member",
+              "canonicalReference": "@datashaper/app-framework!ResourceGroupType.Data:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -1514,6 +1514,83 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "title",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/app-framework!ResourceRouteGroup:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface ResourceRouteGroup "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ResourceRouteGroup",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ResourceRouteGroup#resources:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "resources: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceRoute",
+                  "canonicalReference": "@datashaper/app-framework!ResourceRoute:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "resources",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ResourceRouteGroup#type:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceGroupType",
+                  "canonicalReference": "@datashaper/app-framework!ResourceGroupType:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "type",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

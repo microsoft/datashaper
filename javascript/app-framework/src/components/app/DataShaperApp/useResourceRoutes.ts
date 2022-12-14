@@ -13,22 +13,29 @@ import type {
 	AppServices,
 	ProfilePlugin,
 	ResourceRoute,
+	ResourceRouteGroup,
 } from '../../../types.js'
-import { ResourceGroup } from '../../../types.js'
-
+import { ResourceGroupType } from '../../../types.js'
 export function useResourceRoutes(
 	services: AppServices,
 	plugins: Map<string, ProfilePlugin>,
-): ResourceRoute[][] {
+): ResourceRouteGroup[] {
 	const pkg = useDataPackage()
 	const observable = useMemo(
 		() =>
 			pkg.resources$.pipe(
 				map(resources => {
-					const groups = groupResources(resources, plugins)
-					return groups.map(g =>
-						g.map(r => makeResourceRoute(r, services, plugins)).flatMap(x => x),
-					)
+					const grouped = groupResources(resources, plugins)
+					const groups: ResourceRouteGroup[] = []
+					grouped.forEach((resources, type) => {
+						groups.push({
+							type,
+							resources: resources
+								.map(r => makeResourceRoute(r, services, plugins))
+								.flatMap(x => x),
+						})
+					})
+					return groups
 				}),
 			),
 		[pkg, services, plugins],
@@ -86,16 +93,18 @@ function makeResourceRoute(
 function groupResources(
 	resources: Resource[],
 	plugins: Map<string, ProfilePlugin>,
-): Resource[][] {
-	const dataResources: Resource[] = []
-	const appResources: Resource[] = []
+): Map<ResourceGroupType, Resource[]> {
+	const map = new Map<ResourceGroupType, Resource[]>([
+		[ResourceGroupType.Data, []],
+		[ResourceGroupType.Apps, []],
+	])
 	for (const r of resources) {
 		const plugin = plugins.get(r.profile)
-		if (plugin?.group === ResourceGroup.Data) {
-			dataResources.push(r)
+		if (plugin?.group === ResourceGroupType.Data) {
+			map.get(ResourceGroupType.Data)!.push(r)
 		} else {
-			appResources.push(r)
+			map.get(ResourceGroupType.Apps)!.push(r)
 		}
 	}
-	return [dataResources, appResources]
+	return map
 }

@@ -9,7 +9,7 @@
 |  Enumeration | Description |
 |  --- | --- |
 |  [CommandBarSection](./app-framework.commandbarsection.md) |  |
-|  [ResourceGroup](./app-framework.resourcegroup.md) |  |
+|  [ResourceGroupType](./app-framework.resourcegrouptype.md) |  |
 
 ## Functions
 
@@ -35,6 +35,7 @@
 |  [ProfilePlugin](./app-framework.profileplugin.md) |  |
 |  [RecoilBasedProfileHostProps](./app-framework.recoilbasedprofilehostprops.md) |  |
 |  [ResourceRoute](./app-framework.resourceroute.md) | Data attached to resource-tree nodes |
+|  [ResourceRouteGroup](./app-framework.resourceroutegroup.md) |  |
 
 ## Variables
 

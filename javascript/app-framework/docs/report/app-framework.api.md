@@ -79,7 +79,7 @@ export interface ProfilePlugin<T extends Resource = any> {
     getCommandBarCommands?: (section: CommandBarSection) => IContextualMenuItem[] | undefined;
     getMenuItems?: (resource: T) => IContextualMenuItem[];
     getRoutes?: (resource: T, parentPath: string, resourcePath: string) => GeneratedExtraRoutes | undefined;
-    group?: ResourceGroup;
+    group?: ResourceGroupType;
     iconName: string;
     initialize?: (api: AppServices, dp: DataPackage) => void;
     profile: string;
@@ -109,10 +109,10 @@ export interface RecoilBasedProfileHostProps<T extends Resource> {
     saveState: (resource: T, snap: Snapshot) => void;
 }
 
-// Warning: (ae-missing-release-tag) "ResourceGroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ResourceGroupType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export enum ResourceGroup {
+export enum ResourceGroupType {
     // (undocumented)
     Apps = "apps",
     // (undocumented)
@@ -130,6 +130,16 @@ export interface ResourceRoute {
     props: any;
     renderer: React.ComponentType<any>;
     title: string;
+}
+
+// Warning: (ae-missing-release-tag) "ResourceRouteGroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ResourceRouteGroup {
+    // (undocumented)
+    resources: ResourceRoute[];
+    // (undocumented)
+    type: ResourceGroupType;
 }
 
 // Warning: (ae-missing-release-tag) "useDataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
