@@ -54,7 +54,7 @@
 		"tslib": "^2.4.1"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^22.1.0",
+		"@essex/scripts": "^22.2.0",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@fluentui/react": "^8.103.8",
 		"@fluentui/react-hooks": "^8.6.14",
@@ -65,11 +65,11 @@
 		"@thematic/react": "^2.1.4",
 		"@types/d3-format": "^3.0.1",
 		"@types/debug": "^4.1.7",
-		"@types/lodash": "^4.14.188",
+		"@types/lodash": "^4.14.191",
 		"@types/lodash-es": "^4.17.6",
-		"@types/node": "^18.11.9",
-		"@types/react": "^18.0.25",
-		"@types/react-dom": "^18.0.8",
+		"@types/node": "^18.11.15",
+		"@types/react": "^18.0.26",
+		"@types/react-dom": "^18.0.9",
 		"@types/react-is": "^17.0.3",
 		"@types/styled-components": "^5.1.26",
 		"add": "^2.0.6",
@@ -77,7 +77,7 @@
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"styled-components": "^5.3.6",
-		"typescript": "^4.8.4"
+		"typescript": "^4.9.4"
 	},
 	"peerDependencies": {
 		"@fluentui/react": "^8.24.0",
