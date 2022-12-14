@@ -1745,6 +1745,93 @@
           "extendsTokenRanges": []
         },
         {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/react!CodebookTableStyles:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface CodebookTableStyles extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "CodebookStyles",
+              "canonicalReference": "@datashaper/react!CodebookStyles:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "CodebookTableStyles",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!CodebookTableStyles#labelWrapper:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "labelWrapper?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "React.CSSProperties",
+                  "canonicalReference": "@types/react!~React.CSSProperties:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "labelWrapper",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!CodebookTableStyles#tableWrapper:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "tableWrapper?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "React.CSSProperties",
+                  "canonicalReference": "@types/react!~React.CSSProperties:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "tableWrapper",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            }
+          ]
+        },
+        {
           "kind": "TypeAlias",
           "canonicalReference": "@datashaper/react!ColumnRenderFunction:type",
           "docComment": "",
