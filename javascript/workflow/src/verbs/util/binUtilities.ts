@@ -4,83 +4,99 @@
  */
 import { default as percentile } from 'percentile'
 
-export function calculateAutoBinCount(
+export function calculateWidthAuto(
 	min: number,
 	max: number,
 	values: number[],
 ): number {
-	const fdResult = calculateBinCountWithBinWidth(
-		min,
-		max,
-		calculateBinWidthFd(values),
-	)
-	const sturgesResult = calculateBinCountWithNumberOfBins(
-		min,
-		max,
-		calculateNumberOfBinsSturges(values),
-	)
+	const fdResult = calculateWidthFd(values)
+	const sturgesResult = calculateWidthSturges(min, max, values)
 	return Math.max(fdResult, sturgesResult)
 }
 
-export function calculateBinWidthFd(values: number[]): number {
+export function calculateWidthFd(values: number[]): number {
 	const iqrResult = iqr(values)
-
-	return 2 * (iqrResult / Math.pow(values.length, 1 / 3))
+	return 2 * iqrResult * Math.pow(values.length, -1 / 3)
 }
 
-export function calculateNumberOfBinsDoane(values: number[]): number {
-	const N = values.length
-	let sum = 0
-
-	values.forEach(val => {
-		sum = sum + val
-	})
-
-	const sumThird = Math.pow(sum, 3)
-	const sumSqrt = Math.pow(sum, 2)
-
-	const squareB = sumThird / Math.pow(sumSqrt, 3 / 2)
-	const oSquareB = Math.sqrt((6 * (N - 2)) / ((N + 1) * (N + 3)))
-
-	const width = Math.log2(N) + 1 + Math.log2(1 + squareB / oSquareB)
-
-	return width
-}
-
-export function calculateBinWidthScott(values: number[]): number {
+export function calculateWidthScott(values: number[]): number {
 	return (
-		standardDeviation(values) *
-		Math.cbrt((24 * Math.sqrt(Math.PI)) / values.length)
+		Math.pow(
+			(24.0 * Math.pow(Math.sqrt(Math.PI), 0.5)) / values.length,
+			1 / 3,
+		) * standardDeviation(values)
 	)
 }
 
-export function calculateNumberOfBinsRice(values: number[]): number {
-	return 2 * Math.pow(values.length, 1 / 3)
-}
-
-export function calculateNumberOfBinsSturges(values: number[]): number {
-	const width = Math.log2(values.length) + 1
-	return width
-}
-
-export function calculateNumberOfBinsSqrt(values: number[]): number {
-	return Math.sqrt(values.length)
-}
-
-export function calculateBinCountWithNumberOfBins(
+export function calculateWidthRice(
 	min: number,
 	max: number,
-	nh: number,
+	values: number[],
 ): number {
-	return (max - min) / nh
+	return (max - min) / (2.0 * Math.pow(values.length, 1 / 3))
 }
 
-export function calculateBinCountWithBinWidth(
+export function calculateWidthSturges(
 	min: number,
 	max: number,
-	h: number,
+	values: number[],
 ): number {
-	return (max - min) / Math.round(Math.ceil((max - min) / h))
+	return (max - min) / (Math.log2(values.length) + 1)
+}
+
+export function calculateWidthSqrt(
+	min: number,
+	max: number,
+	values: number[],
+): number {
+	return (max - min) / Math.sqrt(values.length)
+}
+
+export function calculateWidthDoane(
+	min: number,
+	max: number,
+	values: number[],
+): number {
+	if (values.length > 2) {
+		const sg1 = Math.sqrt(
+			(6.0 * (values.length - 2)) /
+				((values.length + 1.0) * (values.length + 3)),
+		)
+		const sigma = standardDeviation(values)
+		if (sigma > 0.0) {
+			const temp: number[] = []
+			const mean: number = values.reduce((a, b) => a + b, 0) / values.length
+
+			values.forEach((element: number) => {
+				temp.push(element - mean)
+			})
+
+			for (let i = 0; i < temp.length; i++) {
+				temp[i] = temp[i]! / sigma
+			}
+
+			for (let i = 0; i < temp.length; i++) {
+				temp[i] = Math.pow(temp[i]!, 3)
+			}
+
+			const g1 = temp.reduce((a, b) => a + b, 0) / temp.length
+
+			return (
+				(max - min) /
+				(1.0 + Math.log2(values.length) + Math.log2(1.0 + Math.abs(g1) / sg1))
+			)
+		}
+	}
+
+	return 0.0
+}
+
+export function calculateBinCount(
+	min: number,
+	max: number,
+	width: number,
+): number {
+	return Math.round(Math.ceil((max - min) / width))
 }
 
 export function standardDeviation(values: number[], precision = 3): number {
@@ -94,7 +110,6 @@ export function standardDeviation(values: number[], precision = 3): number {
 	})
 
 	const variance = (squareNumbersSum - (sum * sum) / N) / (N - 1)
-
 	const standarDeviationResult = Math.sqrt(variance)
 
 	return Number(standarDeviationResult.toFixed(precision))

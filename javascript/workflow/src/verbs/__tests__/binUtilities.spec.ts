@@ -4,13 +4,13 @@
  */
 
 import {
-	calculateAutoBinCount,
-	calculateBinWidthFd,
-	calculateBinWidthScott,
-	calculateNumberOfBinsDoane,
-	calculateNumberOfBinsRice,
-	calculateNumberOfBinsSqrt,
-	calculateNumberOfBinsSturges,
+	calculateWidthAuto,
+	calculateWidthDoane,
+	calculateWidthFd,
+	calculateWidthRice,
+	calculateWidthScott,
+	calculateWidthSqrt,
+	calculateWidthSturges,
 	iqr,
 	standardDeviation,
 } from '../util/binUtilities.js'
@@ -40,7 +40,7 @@ describe('bin utilities tests', () => {
 			170, 180, 190, 200,
 		]
 
-		const result = calculateBinWidthFd(arrayValues)
+		const result = calculateWidthFd(arrayValues)
 
 		it('algorithm result', () => {
 			expect(result).toBe(73.68062997280774)
@@ -53,10 +53,10 @@ describe('bin utilities tests', () => {
 			170, 180, 190, 200,
 		]
 
-		const result = calculateNumberOfBinsSturges(arrayValues)
+		const result = calculateWidthSturges(10, 200, arrayValues)
 
 		it('algorithm result', () => {
-			expect(result).toBe(5.321928094887363)
+			expect(result).toBe(35.70134669473044)
 		})
 	})
 
@@ -66,10 +66,10 @@ describe('bin utilities tests', () => {
 			170, 180, 190, 200,
 		]
 
-		const result = calculateNumberOfBinsRice(arrayValues)
+		const result = calculateWidthRice(10, 200, arrayValues)
 
 		it('algorithm result', () => {
-			expect(result).toBe(5.428835233189813)
+			expect(result).toBe(34.99829923708368)
 		})
 	})
 
@@ -79,10 +79,10 @@ describe('bin utilities tests', () => {
 			170, 180, 190, 200,
 		]
 
-		const result = calculateBinWidthScott(arrayValues)
+		const result = calculateWidthScott(arrayValues)
 
 		it('algorithm result', () => {
-			expect(result).toBe(76.08298919235817)
+			expect(result).toBe(69.16054564802737)
 		})
 	})
 
@@ -92,10 +92,10 @@ describe('bin utilities tests', () => {
 			170, 180, 190, 200,
 		]
 
-		const result = calculateNumberOfBinsDoane(arrayValues)
+		const result = calculateWidthDoane(10, 200, arrayValues)
 
 		it('algorithm result', () => {
-			expect(result).toBe(6.961050453244353)
+			expect(result).toBe(35.70134669473044)
 		})
 	})
 
@@ -105,10 +105,10 @@ describe('bin utilities tests', () => {
 			170, 180, 190, 200,
 		]
 
-		const result = calculateNumberOfBinsSqrt(arrayValues)
+		const result = calculateWidthSqrt(10, 200, arrayValues)
 
 		it('algorithm result', () => {
-			expect(result).toBe(4.47213595499958)
+			expect(result).toBe(42.485291572496)
 		})
 	})
 
@@ -118,10 +118,10 @@ describe('bin utilities tests', () => {
 			170, 180, 190, 200,
 		]
 
-		const result = calculateAutoBinCount(10, 200, arrayValues)
+		const result = calculateWidthAuto(10, 200, arrayValues)
 
 		it('algorithm result', () => {
-			expect(result).toBe(63.333333333333336)
+			expect(result).toBe(73.68062997280774)
 		})
 	})
 })

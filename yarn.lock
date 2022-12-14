@@ -2134,6 +2134,7 @@ __metadata:
     cross-fetch: ^3.1.5
     d3-time-format: ^4.1.0
     debug: ^4.3.4
+    exact-linspace: ^1.0.14
     jest: ^29.3.1
     lodash-es: ^4.17.21
     percentile: ^1.6.0
@@ -11018,6 +11019,13 @@ __metadata:
     node-gyp: latest
     safe-buffer: ^5.1.1
   checksum: ad4e1577f1a6b721c7800dcc7c733fe01f6c310732bb5bf2240245c2a5b45a38518b91d8be2c610611623160b9d1c0e91f1ce96d639f8b53e8894625cf20fa45
+  languageName: node
+  linkType: hard
+
+"exact-linspace@npm:^1.0.14":
+  version: 1.0.14
+  resolution: "exact-linspace@npm:1.0.14"
+  checksum: d97b3b5ff7f1e8f7dd27412675b5d20fdd7fffee89be8d431d98ccec5907d6e194375b866d399938a05cf2098fc1443dd5308d53ba4d4c3628b0faad70634683
   languageName: node
   linkType: hard
 

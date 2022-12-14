@@ -7,17 +7,17 @@ import { BinStrategy } from '@datashaper/schema'
 import { fixedBinStep } from '@datashaper/tables'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { default as linspace } from 'exact-linspace'
 
 import {
-	calculateAutoBinCount,
-	calculateBinCountWithBinWidth,
-	calculateBinCountWithNumberOfBins,
-	calculateBinWidthFd,
-	calculateBinWidthScott,
-	calculateNumberOfBinsDoane,
-	calculateNumberOfBinsRice,
-	calculateNumberOfBinsSqrt,
-	calculateNumberOfBinsSturges,
+	calculateBinCount,
+	calculateWidthAuto,
+	calculateWidthDoane,
+	calculateWidthFd,
+	calculateWidthRice,
+	calculateWidthScott,
+	calculateWidthSqrt,
+	calculateWidthSturges,
 } from './util/binUtilities.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
@@ -57,12 +57,17 @@ function computeBins(input: ColumnTable, args: BinArgs) {
 				throw new Error('Must supply a bin count')
 			}
 			return [min, max, (max - min) / fixedcount]
-		default:
-			return [min, max, estimateBins(strategy, input.array(column), min, max)]
+		default: {
+			const width = estimateWidth(strategy, input.array(column), min, max)
+			const numBins = calculateBinCount(min, max, width)
+			const binEdges = linspace(min, max, numBins + 1)
+
+			return [min, max, binEdges[1]! - binEdges[0]!]
+		}
 	}
 }
 
-function estimateBins(
+function estimateWidth(
 	strategy: BinStrategy,
 	values: number[],
 	min: number,
@@ -70,43 +75,19 @@ function estimateBins(
 ): number {
 	switch (strategy) {
 		case BinStrategy.Auto:
-			return calculateAutoBinCount(min, max, values)
+			return calculateWidthAuto(min, max, values)
 		case BinStrategy.Fd:
-			return calculateBinCountWithBinWidth(
-				min,
-				max,
-				calculateBinWidthFd(values),
-			)
+			return calculateWidthFd(values)
 		case BinStrategy.Doane:
-			return calculateBinCountWithNumberOfBins(
-				min,
-				max,
-				calculateNumberOfBinsDoane(values),
-			)
+			return calculateWidthDoane(min, max, values)
 		case BinStrategy.Scott:
-			return calculateBinCountWithBinWidth(
-				min,
-				max,
-				calculateBinWidthScott(values),
-			)
+			return calculateWidthScott(values)
 		case BinStrategy.Rice:
-			return calculateBinCountWithNumberOfBins(
-				min,
-				max,
-				calculateNumberOfBinsRice(values),
-			)
+			return calculateWidthRice(min, max, values)
 		case BinStrategy.Sturges:
-			return calculateBinCountWithNumberOfBins(
-				min,
-				max,
-				calculateNumberOfBinsSturges(values),
-			)
+			return calculateWidthSturges(min, max, values)
 		case BinStrategy.Sqrt:
-			return calculateBinCountWithNumberOfBins(
-				min,
-				max,
-				calculateNumberOfBinsSqrt(values),
-			)
+			return calculateWidthSqrt(min, max, values)
 		default:
 			throw new Error(`Unsupported bin strategy ${strategy}`)
 	}
