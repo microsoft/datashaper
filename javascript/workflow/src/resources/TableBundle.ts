@@ -270,9 +270,10 @@ export class TableBundle extends Resource implements TableEmitter {
 
 	private populateCodebook() {
 		if (this.codebook?.fields.length === 0 && this.input?.output?.table) {
-			const name = this.codebook.name
-			this.codebook.loadSchema(generateCodebook(this.input.output?.table))
-			this.codebook.name = name
+			this.codebook.loadSchema({
+				...generateCodebook(this.input.output?.table),
+				name: this.codebook.name,
+			})
 		}
 	}
 }
