@@ -19,15 +19,397 @@
 				{
 					"rel": "codebook",
 					"source": {
-						"id": "3a4d44da-ea51-4077-9ed6-0a7803e40f9f",
+						"$schema": "https://microsoft.github.io/datashaper/schema/codebook/v1.0.0.json",
+						"id": "2f96dd43-db18-4513-87c3-53e46a2c354b",
+						"name": "codebook.json",
 						"profile": "codebook",
+						"sources": [],
 						"fields": [
 							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "seqn",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "qsmk",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "death",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "yrdth",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "modth",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "dadth",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "sbp",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "dbp",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
 								"name": "sex",
 								"mapping": {
-									"0": "Female",
-									"1": "Male"
+									"0": "Male",
+									"1": "Female"
 								}
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "age",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "race",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "income",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "marital",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "school",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "education",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "ht",
+								"type": "number",
+								"nature": "continuous"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "wt71",
+								"type": "number",
+								"nature": "continuous"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "wt82",
+								"type": "number",
+								"nature": "continuous"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "wt82_71",
+								"type": "number",
+								"nature": "continuous"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "birthplace",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "smokeintensity",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "smkintensity82_71",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "smokeyrs",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "asthma",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "bronch",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "tb",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "hf",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "hbp",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "pepticulcer",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "colitis",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "hepatitis",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "chroniccough",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "hayfever",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "diabetes",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "polio",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "tumor",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "nervousbreak",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "alcoholpy",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "alcoholfreq",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "alcoholtype",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "alcoholhowmuch",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "pica",
+								"type": "number",
+								"nature": "ordinal"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "headache",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "otherpain",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "weakheart",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "allergies",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "nerves",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "lackpep",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "hbpmed",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "boweltrouble",
+								"type": "number",
+								"nature": "ordinal"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "wtloss",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "infection",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "active",
+								"type": "number",
+								"nature": "ordinal"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "exercise",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "birthcontrol",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "pregnancies",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "cholesterol",
+								"type": "number",
+								"nature": "discrete"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "hightax82",
+								"type": "number",
+								"nature": "binary"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "price71",
+								"type": "number",
+								"nature": "continuous"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "price82",
+								"type": "number",
+								"nature": "continuous"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "tax71",
+								"type": "number",
+								"nature": "continuous"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "tax82",
+								"type": "number",
+								"nature": "continuous"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "price71_82",
+								"type": "number",
+								"nature": "continuous"
+							},
+							{
+								"id": "http://json-schema.org/draft-07/schema#",
+								"name": "tax71_82",
+								"type": "number",
+								"nature": "continuous"
 							}
 						]
 					}
