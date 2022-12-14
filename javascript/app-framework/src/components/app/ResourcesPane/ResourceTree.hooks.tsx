@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TreeGroup, TreeItem } from '@essex/components'
-import { useCallback, useMemo } from 'react'
+import { useMemo } from 'react'
 
 import type { ResourceRoute, ResourceRouteGroup } from '../../../types.js'
 import { ResourceGroupType } from '../../../types.js'
@@ -30,49 +30,25 @@ function groupName(group: ResourceRouteGroup) {
  * @param groups
  * @returns
  */
-export function useTreeItems(groups: ResourceRouteGroup[]): TreeGroup[] {
+export function useTreeItems(
+	groups: ResourceRouteGroup[],
+	onSelect: (v: ResourceRoute) => void,
+): TreeGroup[] {
 	return useMemo(
 		() =>
 			groups.flatMap(group =>
-				group.resources.map(resource => makeTreeItem(resource, group.type)),
+				group.resources.map(resource =>
+					makeTreeItem(resource, group.type, onSelect),
+				),
 			),
-		[groups],
-	)
-}
-
-// this is a temporary workaround for the fact that the Tree component
-// doesn't support individual onClicks so we have to look up the item
-export function useItemClick(
-	resources: ResourceRouteGroup[],
-	onSelect: (v: ResourceRoute) => void,
-): (item: TreeItem) => void {
-	const map = useMemo(() => {
-		const result = new Map<string, ResourceRoute>()
-		const walk = (res: ResourceRoute) => {
-			result.set(res.href, res)
-			for (const child of res.children ?? []) {
-				walk(child)
-			}
-		}
-		for (const group of resources) {
-			for (const resource of group.resources) {
-				walk(resource)
-			}
-		}
-		return result
-	}, [resources])
-	return useCallback(
-		(item: TreeItem) => {
-			const match = map.get(item.key)
-			onSelect(match!)
-		},
-		[map, onSelect],
+		[groups, onSelect],
 	)
 }
 
 function makeTreeItem(
 	resource: ResourceRoute,
 	group?: ResourceGroupType,
+	onSelect?: (v: ResourceRoute) => void,
 ): TreeItem {
 	const numChildren = resource.children?.length ?? 0
 	return {
@@ -82,8 +58,9 @@ function makeTreeItem(
 		group,
 		children:
 			numChildren > 0
-				? resource.children?.map(c => makeTreeItem(c, group))
+				? resource.children?.map(c => makeTreeItem(c, group, onSelect))
 				: undefined,
 		menuItems: resource.menuItems,
+		onClick: () => onSelect?.(resource),
 	}
 }
