@@ -27,6 +27,7 @@
 |  [ArqueroTableHeaderProps](./react.arquerotableheaderprops.md) | Props for the ArqueroTableHeader component |
 |  [ArqueroTableHeaderStyles](./react.arquerotableheaderstyles.md) |  |
 |  [CodebookProps](./react.codebookprops.md) | Props for the CodebookEditor component |
+|  [CodebookTableStyles](./react.codebooktablestyles.md) |  |
 |  [CommandBarColors](./react.commandbarcolors.md) |  |
 |  [GuidanceProps](./react.guidanceprops.md) | Props for the Guidance component |
 |  [StepListProps](./react.steplistprops.md) |  |

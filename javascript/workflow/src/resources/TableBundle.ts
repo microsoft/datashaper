@@ -9,7 +9,7 @@ import {
 	LATEST_TABLEBUNDLE_SCHEMA,
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import { applyCodebook } from '@datashaper/tables'
+import { applyCodebook, generateCodebook } from '@datashaper/tables'
 import type { Maybe } from '@datashaper/workflow'
 import type { Observable } from 'rxjs'
 import { BehaviorSubject, EMPTY, map } from 'rxjs'
@@ -85,6 +85,7 @@ export class TableBundle extends Resource implements TableEmitter {
 		this._input = input
 
 		if (input != null) {
+			this.populateCodebook()
 			const d = new Disposable()
 			d.onDispose(
 				input.output$.pipe(map(this.encodeTable)).subscribe(this._input$),
@@ -103,9 +104,11 @@ export class TableBundle extends Resource implements TableEmitter {
 
 	public set codebook(codebook: Codebook | undefined) {
 		this.disposeCodebookConnections()
+
 		this._codebook = codebook
 
 		if (codebook != null) {
+			this.populateCodebook()
 			const d = new Disposable()
 			d.onDispose(codebook.onChange(this.bindDataflow))
 			d.onDispose(codebook.onDispose(() => (this.codebook = undefined)))
@@ -263,5 +266,14 @@ export class TableBundle extends Resource implements TableEmitter {
 		table: Maybe<TableContainer>,
 	): Maybe<TableContainer> => {
 		return table == null ? table : { ...table, id: this.name }
+	}
+
+	private populateCodebook() {
+		if (this.codebook?.fields.length === 0 && this.input?.output?.table) {
+			this.codebook.loadSchema({
+				...generateCodebook(this.input.output?.table),
+				name: this.codebook.name,
+			})
+		}
 	}
 }

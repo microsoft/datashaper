@@ -18,5 +18,5 @@ export interface CodebookProps
 |  --- | --- | --- | --- |
 |  [fields](./react.codebookprops.fields.md) |  | Field\[\] |  |
 |  [onChangeFields](./react.codebookprops.onchangefields.md) |  | (fields: Field\[\]) =&gt; void |  |
-|  [styles?](./react.codebookprops.styles.md) |  | CodebookTableStyles | <i>(Optional)</i> |
+|  [styles?](./react.codebookprops.styles.md) |  | [CodebookTableStyles](./react.codebooktablestyles.md) | <i>(Optional)</i> |
 

@@ -1138,8 +1138,21 @@
             },
             {
               "kind": "Reference",
+              "text": "Omit",
+              "canonicalReference": "!Omit:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
               "text": "CodebookSchema",
               "canonicalReference": "@datashaper/schema!CodebookSchema:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", 'name'>"
             },
             {
               "kind": "Content",
@@ -1148,7 +1161,7 @@
           ],
           "returnTypeTokenRange": {
             "startIndex": 3,
-            "endIndex": 4
+            "endIndex": 7
           },
           "releaseTag": "Public",
           "overloadIndex": 1,

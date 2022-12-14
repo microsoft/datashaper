@@ -129,10 +129,19 @@ export interface CodebookProps {
     fields: Field[];
     // (undocumented)
     onChangeFields: (fields: Field[]) => void;
-    // Warning: (ae-forgotten-export) The symbol "CodebookTableStyles" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     styles?: CodebookTableStyles;
+}
+
+// Warning: (ae-forgotten-export) The symbol "CodebookStyles" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "CodebookTableStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface CodebookTableStyles extends CodebookStyles {
+    // (undocumented)
+    labelWrapper?: React.CSSProperties;
+    // (undocumented)
+    tableWrapper?: React.CSSProperties;
 }
 
 // Warning: (ae-missing-release-tag) "ColumnRenderFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -301,7 +310,6 @@ export interface TableCommandsProps {
     workflow: Workflow;
 }
 
-// Warning: (ae-forgotten-export) The symbol "CodebookStyles" needs to be exported by the entry point index.d.ts
 // Warning: (ae-forgotten-export) The symbol "FieldHeights" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "useDefaultCodebookStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

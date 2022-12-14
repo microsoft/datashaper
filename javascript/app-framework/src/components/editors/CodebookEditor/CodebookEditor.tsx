@@ -11,13 +11,17 @@ import { useOnFieldsChanged } from './CodebookEditor.hooks.js'
 import type { CodebookEditorProps } from './CodebookEditor.types.js'
 
 export const CodebookEditor: React.FC<CodebookEditorProps> = memo(
-	function CodebookEditor({ resource }) {
+	function CodebookEditor({ resource, styles }) {
 		const handleFieldsChanged = useOnFieldsChanged(resource)
 		const fields = useObservableState(resource.fields$, resource.fields)
 
 		return (
 			<JsonModeEditor resource={resource}>
-				<Codebook fields={fields} onChangeFields={handleFieldsChanged} />
+				<Codebook
+					fields={fields}
+					onChangeFields={handleFieldsChanged}
+					styles={styles}
+				/>
 			</JsonModeEditor>
 		)
 	},
