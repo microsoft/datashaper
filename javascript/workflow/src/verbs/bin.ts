@@ -9,13 +9,15 @@ import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import {
-	autoStrategy,
-	doaneStrategy,
-	fdStrategy,
-	riceStrategy,
-	scottStrategy,
-	sqrtStrategy,
-	sturgesStrategy,
+	calculateAutoBinCount,
+	calculateBinCountWithBinWidth,
+	calculateBinCountWithNumberOfBins,
+	calculateBinWidthFd,
+	calculateBinWidthScott,
+	calculateNumberOfBinsDoane,
+	calculateNumberOfBinsRice,
+	calculateNumberOfBinsSqrt,
+	calculateNumberOfBinsSturges,
 } from './util/binUtilities.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
@@ -68,19 +70,43 @@ function estimateBins(
 ): number {
 	switch (strategy) {
 		case BinStrategy.Auto:
-			return Math.round(Math.ceil((max - min) / autoStrategy(values)))
+			return calculateAutoBinCount(min, max, values)
 		case BinStrategy.Fd:
-			return Math.round(Math.ceil((max - min) / fdStrategy(values)))
+			return calculateBinCountWithBinWidth(
+				min,
+				max,
+				calculateBinWidthFd(values),
+			)
 		case BinStrategy.Doane:
-			return Math.round(Math.ceil((max - min) / doaneStrategy(values)))
+			return calculateBinCountWithNumberOfBins(
+				min,
+				max,
+				calculateNumberOfBinsDoane(values),
+			)
 		case BinStrategy.Scott:
-			return Math.round(Math.ceil((max - min) / scottStrategy(values)))
+			return calculateBinCountWithBinWidth(
+				min,
+				max,
+				calculateBinWidthScott(values),
+			)
 		case BinStrategy.Rice:
-			return Math.round(Math.ceil((max - min) / riceStrategy(values)))
+			return calculateBinCountWithNumberOfBins(
+				min,
+				max,
+				calculateNumberOfBinsRice(values),
+			)
 		case BinStrategy.Sturges:
-			return Math.round(Math.ceil((max - min) / sturgesStrategy(values)))
+			return calculateBinCountWithNumberOfBins(
+				min,
+				max,
+				calculateNumberOfBinsSturges(values),
+			)
 		case BinStrategy.Sqrt:
-			return Math.round(Math.ceil((max - min) / sqrtStrategy(values)))
+			return calculateBinCountWithNumberOfBins(
+				min,
+				max,
+				calculateNumberOfBinsSqrt(values),
+			)
 		default:
 			throw new Error(`Unsupported bin strategy ${strategy}`)
 	}

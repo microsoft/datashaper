@@ -4,21 +4,31 @@
  */
 import { default as percentile } from 'percentile'
 
-export function autoStrategy(values: number[]): number {
-	const sturgesResult = sturgesStrategy(values)
-	const fdResult = fdStrategy(values)
-
-	const width = Math.max(sturgesResult, fdResult)
-	return width
+export function calculateAutoBinCount(
+	min: number,
+	max: number,
+	values: number[],
+): number {
+	const fdResult = calculateBinCountWithBinWidth(
+		min,
+		max,
+		calculateBinWidthFd(values),
+	)
+	const sturgesResult = calculateBinCountWithNumberOfBins(
+		min,
+		max,
+		calculateNumberOfBinsSturges(values),
+	)
+	return Math.max(fdResult, sturgesResult)
 }
 
-export function fdStrategy(values: number[]): number {
+export function calculateBinWidthFd(values: number[]): number {
 	const iqrResult = iqr(values)
 
 	return 2 * (iqrResult / Math.pow(values.length, 1 / 3))
 }
 
-export function doaneStrategy(values: number[]): number {
+export function calculateNumberOfBinsDoane(values: number[]): number {
 	const N = values.length
 	let sum = 0
 
@@ -37,24 +47,40 @@ export function doaneStrategy(values: number[]): number {
 	return width
 }
 
-export function scottStrategy(values: number[]): number {
+export function calculateBinWidthScott(values: number[]): number {
 	return (
 		standardDeviation(values) *
 		Math.cbrt((24 * Math.sqrt(Math.PI)) / values.length)
 	)
 }
 
-export function riceStrategy(values: number[]): number {
+export function calculateNumberOfBinsRice(values: number[]): number {
 	return 2 * Math.pow(values.length, 1 / 3)
 }
 
-export function sturgesStrategy(values: number[]): number {
+export function calculateNumberOfBinsSturges(values: number[]): number {
 	const width = Math.log2(values.length) + 1
 	return width
 }
 
-export function sqrtStrategy(values: number[]): number {
+export function calculateNumberOfBinsSqrt(values: number[]): number {
 	return Math.sqrt(values.length)
+}
+
+export function calculateBinCountWithNumberOfBins(
+	min: number,
+	max: number,
+	nh: number,
+): number {
+	return (max - min) / nh
+}
+
+export function calculateBinCountWithBinWidth(
+	min: number,
+	max: number,
+	h: number,
+): number {
+	return (max - min) / Math.round(Math.ceil((max - min) / h))
 }
 
 export function standardDeviation(values: number[], precision = 3): number {
