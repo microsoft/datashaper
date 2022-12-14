@@ -9,5 +9,5 @@ The grouping for this resource type. The default is 'app'. This grouping determi
 <b>Signature:</b>
 
 ```typescript
-group?: ResourceGroup;
+group?: ResourceGroupType;
 ```

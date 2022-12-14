@@ -7,7 +7,11 @@ import type { DataShape } from '@datashaper/schema/dist/datatable/DataShape.js'
 import type { TableContainer } from '@datashaper/tables'
 import type { BaseFile } from '@datashaper/utilities'
 
-import type { ProfilePlugin, ResourceRoute } from '../../../index.js'
+import type {
+	ProfilePlugin,
+	ResourceRoute,
+	ResourceRouteGroup,
+} from '../../../index.js'
 
 export interface ResourcesPaneProps {
 	/**
@@ -38,7 +42,7 @@ export interface ResourcesPaneProps {
 	/**
 	 * The resource groups to render
 	 */
-	resources: ResourceRoute[][]
+	resources: ResourceRouteGroup[]
 
 	/**
 	 * Event handler for when a resource is selected

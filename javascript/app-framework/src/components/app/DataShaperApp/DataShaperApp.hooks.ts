@@ -19,6 +19,7 @@ import type {
 	AppServices,
 	ProfilePlugin,
 	ResourceRoute,
+	ResourceRouteGroup,
 } from '../../../types.js'
 
 const BREAK_WIDTH = 150
@@ -121,11 +122,11 @@ export function useRegisteredProfiles(
 	}, [dp, api, profiles, knownProfiles])
 }
 
-export function useFlattened(routes: ResourceRoute[][]): ResourceRoute[] {
+export function useFlattened(routes: ResourceRouteGroup[]): ResourceRoute[] {
 	return useMemo<ResourceRoute[]>(() => {
 		const result: ResourceRoute[] = []
 		for (const group of routes) {
-			for (const r of group) {
+			for (const r of group.resources) {
 				result.push(r)
 				if (r.children != null) {
 					result.push(...r.children)

@@ -1788,7 +1788,7 @@ __metadata:
     "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/workflow": "workspace:^"
-    "@essex/components": ^3.4.0
+    "@essex/components": ^3.4.1
     "@essex/scripts": ^22.1.0
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/react": ^8.103.8
@@ -1876,7 +1876,7 @@ __metadata:
     "@datashaper/verb-guidance": "workspace:^"
     "@datashaper/workflow": "workspace:^"
     "@essex/charts-react": ^1.1.3
-    "@essex/components": ^3.4.0
+    "@essex/components": ^3.4.1
     "@essex/scripts": ^22.1.0
     "@essex/styled-components": ^0.0.5
     "@essex/tsconfig-base": ^1.0.2
@@ -1958,7 +1958,7 @@ __metadata:
     "@babel/preset-typescript": ^7.18.6
     "@datashaper/react": "workspace:^"
     "@datashaper/webapp": "workspace:^"
-    "@essex/components": ^3.4.0
+    "@essex/components": ^3.4.1
     "@essex/scripts": ^22.1.0
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/font-icons-mdl2": ^8.5.4
@@ -2066,7 +2066,7 @@ __metadata:
     "@datashaper/utilities": "workspace:^"
     "@datashaper/verb-guidance": "workspace:^"
     "@datashaper/workflow": "workspace:^"
-    "@essex/components": ^3.4.0
+    "@essex/components": ^3.4.1
     "@essex/hooks": ^4.0.14
     "@essex/scripts": ^22.1.0
     "@essex/webpack-config": ^21.0.8
@@ -2338,9 +2338,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/components@npm:^3.4.0":
-  version: 3.4.0
-  resolution: "@essex/components@npm:3.4.0"
+"@essex/components@npm:^3.4.1":
+  version: 3.4.1
+  resolution: "@essex/components@npm:3.4.1"
   dependencies:
     "@essex/hooks": ^4.0.14
     "@essex/react-animate-height": ^2.1.4
@@ -2371,7 +2371,7 @@ __metadata:
     "@types/react": ">= 18"
     react: ">= 18"
     react-dom: ">= 18"
-  checksum: 57b5c8c1551f1d3ca58b99e669d6fda12a1b5d776b274c2d0f2b7e76987887d22cfa9c20d649be75fadeff207007e66c80033e8827a16f1f44725dcebb5454c5
+  checksum: fe0fdca2b4e450264a5f8ca44da94b3ea85f5ce41f0272bb7302b91991de2bfbf5884bbab0648f58ef10ec6073ce2d21934a273fd26ec19aa1ac17bd443cf060
   languageName: node
   linkType: hard
 
