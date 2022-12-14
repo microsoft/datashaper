@@ -15,7 +15,7 @@
 |  Enumeration | Description |
 |  --- | --- |
 |  [CommandBarSection](./app-framework.commandbarsection.md) |  |
-|  [ResourceGroup](./app-framework.resourcegroup.md) |  |
+|  [ResourceGroupType](./app-framework.resourcegrouptype.md) |  |
 |  [ViewType](./app-framework.viewtype.md) |  |
 
 ## Functions
@@ -51,6 +51,7 @@
 |  [RawTableViewerProps](./app-framework.rawtableviewerprops.md) |  |
 |  [RecoilBasedProfileHostProps](./app-framework.recoilbasedprofilehostprops.md) |  |
 |  [ResourceRoute](./app-framework.resourceroute.md) | Data attached to resource-tree nodes |
+|  [ResourceRouteGroup](./app-framework.resourceroutegroup.md) |  |
 |  [TableBundleEditorProps](./app-framework.tablebundleeditorprops.md) |  |
 |  [ViewOptionsProps](./app-framework.viewoptionsprops.md) |  |
 |  [WorkflowEditorProps](./app-framework.workfloweditorprops.md) |  |
