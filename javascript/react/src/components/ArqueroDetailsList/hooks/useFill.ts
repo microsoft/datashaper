@@ -15,14 +15,14 @@ import {
 	HISTOGRAM_HEADER_HEIGHT,
 	STATS_HEADER_ITEM_HEIGHT,
 } from '../ArqueroDetailsList.constants.js'
-import type { DetailsListFeatures } from '../ArqueroDetailsList.types.js'
+import type { ArqueroDetailsListFeatures } from '../ArqueroDetailsList.types.js'
 
 export function useFill(
 	table: ColumnTable,
 	columns: IColumn[] | undefined,
 	ref: any,
 	fill: boolean,
-	features: DetailsListFeatures,
+	features: ArqueroDetailsListFeatures,
 	options: {
 		compact: boolean
 		compactRowHeight: number
@@ -52,7 +52,7 @@ function useVirtualRows(
 	table: ColumnTable,
 	columns: IColumn[] | undefined,
 	fill: boolean,
-	features: DetailsListFeatures,
+	features: ArqueroDetailsListFeatures,
 	options: { compact: boolean; compactRowHeight: number },
 	size: { width: number; height: number } | undefined,
 ) {
@@ -131,7 +131,7 @@ function useVirtualColumns(
 	return virtualColumns
 }
 
-function computeHeaderHeight(features: DetailsListFeatures) {
+function computeHeaderHeight(features: ArqueroDetailsListFeatures) {
 	let base = BASE_HEADER_HEIGHT
 	if (features.smartHeaders || features.statsColumnHeaders) {
 		const cellHeight = STATS_HEADER_ITEM_HEIGHT

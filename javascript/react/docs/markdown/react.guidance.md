@@ -4,6 +4,8 @@
 
 ## Guidance variable
 
+A component for rendering guidance information on verb usage.
+
 <b>Signature:</b>
 
 ```typescript

@@ -5,8 +5,9 @@
 import { KnownProfile } from '@datashaper/schema'
 import { Workflow } from '@datashaper/workflow'
 
+import { WorkflowEditor } from '../components/editors/index.js'
 import type { ProfilePlugin } from '../index.js'
-import { ResourceGroupType, WorkflowEditor } from '../index.js'
+import { ResourceGroupType } from '../index.js'
 
 export class WorkflowProfile implements ProfilePlugin<Workflow> {
 	public readonly profile = KnownProfile.Workflow

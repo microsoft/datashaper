@@ -4,4 +4,3 @@
  */
 export * from './ArqueroDetailsList.js'
 export * from './ArqueroDetailsList.types.js'
-export * from './hooks/index.js'

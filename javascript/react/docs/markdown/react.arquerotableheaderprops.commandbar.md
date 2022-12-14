@@ -4,6 +4,8 @@
 
 ## ArqueroTableHeaderProps.commandBar property
 
+The optional command bar
+
 <b>Signature:</b>
 
 ```typescript

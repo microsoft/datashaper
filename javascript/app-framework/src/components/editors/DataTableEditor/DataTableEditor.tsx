@@ -4,8 +4,8 @@
  */
 import { memo } from 'react'
 
-import { JsonModeEditor } from '../JsonModeEditor/JsonModeEditor.js'
-import { ParserOptionsEditor } from '../ParserOptionsEditor/ParserOptionsEditor.js'
+import { JsonModeEditor } from '../JsonModeEditor/index.js'
+import { ParserOptionsEditor } from '../ParserOptionsEditor/index.js'
 import type { DataTableEditorProps } from './DataTableEditor.types.js'
 
 export const DataTableEditor: React.FC<DataTableEditorProps> = memo(

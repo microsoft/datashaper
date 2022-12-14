@@ -29,12 +29,12 @@
 	},
 	"devDependencies": {
 		"@essex/eslint-config": "^20.3.5",
-		"@essex/eslint-plugin": "^20.3.11",
-		"@essex/jest-config": "^21.0.16",
-		"@essex/prettier-config": "^18.0.3",
-		"@essex/scripts": "^22.1.0",
-		"@types/jest": "^29.2.2",
-		"@types/node": "^18.11.9",
+		"@essex/eslint-plugin": "^20.3.12",
+		"@essex/jest-config": "^21.0.17",
+		"@essex/prettier-config": "^18.0.4",
+		"@essex/scripts": "^22.2.0",
+		"@types/jest": "^29.2.4",
+		"@types/node": "^18.11.15",
 		"@types/semver": "^7.3.13",
 		"arquero": "^5.1.0",
 		"eslint": "^8.27.0",
@@ -44,7 +44,7 @@
 		"prettier": "^2.7.1",
 		"semver": "^7.3.8",
 		"turbo": "^1.6.3",
-		"typescript": "^4.8.4"
+		"typescript": "^4.9.4"
 	},
 	"workspaces": [
 		"javascript/*"

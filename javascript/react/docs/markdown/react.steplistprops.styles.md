@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-styles?: StepHistoryStyles;
+styles?: StepListStyles;
 ```

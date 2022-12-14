@@ -5,7 +5,7 @@
 import type { TableMetadata } from '@datashaper/tables'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import type { DetailsListFeatures } from '../../../../ArqueroDetailsList/ArqueroDetailsList.types.js'
+import type { ArqueroDetailsListFeatures } from '../../../../ArqueroDetailsList/ArqueroDetailsList.types.js'
 
 export interface ColumnConfig {
 	width?: number
@@ -19,7 +19,7 @@ export interface TableProps {
 	table: ColumnTable
 	metadata?: TableMetadata
 	config?: ColumnConfigMap
-	features?: DetailsListFeatures
+	features?: ArqueroDetailsListFeatures
 	compact?: boolean
 	onRenameTable?: (name: string) => void
 }

@@ -4,6 +4,8 @@
 
 ## DisplayOrder enum
 
+The vertical display ordering for workflow steps.
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,6 +16,6 @@ export declare enum DisplayOrder
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  FirstOnTop | <code>&quot;first-on-top&quot;</code> |  |
-|  LastOnTop | <code>&quot;last-on-top&quot;</code> |  |
+|  FirstOnTop | <code>&quot;first-on-top&quot;</code> | Render the first step on the top of the view |
+|  LastOnTop | <code>&quot;last-on-top&quot;</code> | Render the last step on top of the view |
 

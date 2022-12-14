@@ -7,7 +7,7 @@ import { useTheme } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
 import { useMemo } from 'react'
 
-import type { DetailsListFeatures } from '../index.js'
+import type { ArqueroDetailsListFeatures } from '../index.js'
 
 /**
  * Create a DetailsHeader style with enough height to handle the options we've turned on.
@@ -17,7 +17,7 @@ import type { DetailsListFeatures } from '../index.js'
  */
 export function useDetailsListStyles(
 	isHeaderFixed: boolean,
-	features?: DetailsListFeatures,
+	features?: ArqueroDetailsListFeatures,
 	styles?: IDetailsListStyles,
 	hasColumnClick?: boolean,
 	compact?: boolean,

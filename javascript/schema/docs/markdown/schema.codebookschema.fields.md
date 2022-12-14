@@ -4,6 +4,8 @@
 
 ## CodebookSchema.fields property
 
+The per-field encodings. These contain interpretive information about the data.
+
 <b>Signature:</b>
 
 ```typescript

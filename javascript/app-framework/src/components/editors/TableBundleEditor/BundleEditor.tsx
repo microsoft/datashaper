@@ -8,9 +8,6 @@ import {
 	DisplayOrder,
 	StepList,
 	TableCommands,
-	useOnCreateStep,
-	useOnDeleteStep,
-	useOnSaveStep,
 } from '@datashaper/react'
 import { Workflow } from '@datashaper/workflow'
 import { ToolPanel } from '@essex/components'
@@ -22,6 +19,9 @@ import { memo, useMemo, useState } from 'react'
 import {
 	useColumnState,
 	useHistoryButtonCommandBar,
+	useOnCreateStep,
+	useOnDeleteStep,
+	useOnSaveStep,
 	useSelectedTable,
 	useTableName,
 } from './BundleEditor.hooks.js'

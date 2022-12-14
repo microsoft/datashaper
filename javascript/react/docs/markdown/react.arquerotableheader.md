@@ -4,6 +4,8 @@
 
 ## ArqueroTableHeader variable
 
+Renders a header for an Arquero table
+
 <b>Signature:</b>
 
 ```typescript

@@ -17,6 +17,9 @@ import {
 import type { ArqueroTableHeaderProps } from './index.js'
 import { TableName } from './TableName.js'
 
+/**
+ * Renders a header for an Arquero table
+ */
 export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 	function ArqueroTableHeader({
 		table,

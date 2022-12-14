@@ -6,64 +6,27 @@
 
 /// <reference types="react" />
 
-import type { ArqueroDetailsListProps } from '@datashaper/react';
 import type { BaseFile } from '@datashaper/utilities';
-import type { Codebook } from '@datashaper/workflow';
-import type ColumnTable from 'arquero/dist/types/table/column-table.js';
-import { Context } from 'react';
-import { DataOrientation } from '@datashaper/schema';
-import { DataPackage } from '@datashaper/workflow';
+import type { DataPackage } from '@datashaper/workflow';
 import type { DataTable } from '@datashaper/workflow';
-import { FunctionComponent } from 'react';
 import type { IButtonStyles } from '@fluentui/react';
-import { IChoiceGroupProps } from '@fluentui/react';
-import type { IChoiceGroupStyleProps } from '@fluentui/react';
-import type { IChoiceGroupStyles } from '@fluentui/react';
 import type { ICommandBarItemProps } from '@fluentui/react';
 import type { IContextualMenuItem } from '@fluentui/react';
-import type { IStyleFunctionOrObject } from '@fluentui/react';
-import { ITextFieldProps } from '@fluentui/react';
 import type { Maybe } from '@datashaper/workflow';
 import type { MutableRefObject } from 'react';
 import type { MutableSnapshot } from 'recoil';
-import type { ParserOptions } from '@datashaper/schema';
 import type { default as React_2 } from 'react';
 import type { Resource } from '@datashaper/workflow';
 import type { ResourceHandler } from '@datashaper/workflow';
 import type { Snapshot } from 'recoil';
-import { StyledComponent } from 'styled-components';
 import type { TableBundle } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
-import type { Workflow } from '@datashaper/workflow';
 
 // Warning: (ae-missing-release-tag) "AppServices" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export interface AppServices {
     renameResource(resource: Resource): Promise<string>;
-}
-
-// Warning: (ae-missing-release-tag) "choiceGroupStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const choiceGroupStyles: {
-    flexContainer: {
-        display: string;
-        gap: string;
-    };
-};
-
-// Warning: (ae-missing-release-tag) "CodebookEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const CodebookEditor: React.FC<CodebookEditorProps>;
-
-// Warning: (ae-missing-release-tag) "CodebookEditorProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface CodebookEditorProps {
-    // (undocumented)
-    resource: Codebook;
 }
 
 // Warning: (ae-missing-release-tag) "CommandBarSection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -78,51 +41,21 @@ export enum CommandBarSection {
     Save = "saveMenu"
 }
 
-// Warning: (ae-missing-release-tag) "Container" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const Container: StyledComponent<"div", any, {}, never>;
-
-// Warning: (ae-missing-release-tag) "DataPackageContext" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const DataPackageContext: Context<DataPackage>;
-
-// Warning: (ae-missing-release-tag) "DataPackageProvider" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const DataPackageProvider: React.FC<{
-    children: JSX.Element;
-}>;
-
-// Warning: (ae-forgotten-export) The symbol "DataShaperAppProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "DataShaperApp" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export const DataShaperApp: React.FC<DataShaperAppProps>;
 
-// Warning: (ae-missing-release-tag) "DataTableEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "DataShaperAppProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const DataTableEditor: React.FC<DataTableEditorProps>;
-
-// Warning: (ae-missing-release-tag) "DataTableEditorProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface DataTableEditorProps {
-    // (undocumented)
-    resource: DataTable;
-}
-
-// Warning: (ae-missing-release-tag) "DefaultPersistenceService" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export class DefaultPersistenceService implements PersistenceService {
-    constructor(dataPackage: DataPackage);
-    // (undocumented)
-    load(pkg: BaseFile): Promise<void>;
-    // (undocumented)
-    save(projectName?: string): Promise<void>;
+export interface DataShaperAppProps {
+    children: React_2.ReactNode;
+    className?: string;
+    // Warning: (ae-forgotten-export) The symbol "FileDefinition" needs to be exported by the entry point index.d.ts
+    examples?: FileDefinition[];
+    fallback?: React_2.ReactNode;
+    profiles?: ProfilePlugin[];
 }
 
 // Warning: (ae-missing-release-tag) "GeneratedExtraRoutes" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -135,67 +68,6 @@ export interface GeneratedExtraRoutes {
     postItemSiblings?: ResourceRoute[];
     // (undocumented)
     preItemSiblings?: ResourceRoute[];
-}
-
-// Warning: (ae-missing-release-tag) "HeadersOption" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const HeadersOption: React.FC<{
-    headers: string[] | undefined;
-    onChange: (val: string[] | undefined) => void;
-    headersChecked: boolean;
-    toggleHeaders: () => void;
-}>;
-
-// Warning: (ae-missing-release-tag) "JsonEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const JsonEditor: React.FC<JsonEditorProps>;
-
-// Warning: (ae-missing-release-tag) "JsonEditorProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface JsonEditorProps {
-    // (undocumented)
-    content: string;
-    // (undocumented)
-    onChange: (content: string | undefined) => void;
-}
-
-// Warning: (ae-missing-release-tag) "loadCsvTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function loadCsvTable(file: BaseFile, options?: ParserOptions): Promise<ColumnTable>;
-
-// Warning: (ae-missing-release-tag) "loadJsonTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function loadJsonTable(file: BaseFile, orientation: DataOrientation): Promise<ColumnTable>;
-
-// Warning: (ae-missing-release-tag) "OtherTextField" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const OtherTextField: StyledComponent<FunctionComponent<ITextFieldProps>, any, {}, never>;
-
-// Warning: (ae-missing-release-tag) "ParserOptionsEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const ParserOptionsEditor: React.FC<ParserOptionsEditorProps>;
-
-// Warning: (ae-missing-release-tag) "ParserOptionsEditorProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ParserOptionsEditorProps {
-    // (undocumented)
-    dataTable: DataTable;
-}
-
-// Warning: (ae-missing-release-tag) "PersistenceService" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface PersistenceService {
-    load(file: BaseFile): Promise<void>;
-    save(projectName?: string): Promise<void>;
 }
 
 // Warning: (ae-missing-release-tag) "ProfilePlugin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -218,46 +90,6 @@ export interface ProfilePlugin<T extends Resource = any> {
     title: string;
 }
 
-// Warning: (ae-missing-release-tag) "RadioGroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const RadioGroup: StyledComponent<FunctionComponent<IChoiceGroupProps>, any, {}, never>;
-
-// Warning: (ae-missing-release-tag) "RawTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const RawTable: React.FC<RawTableProps>;
-
-// Warning: (ae-missing-release-tag) "RawTableDefaultFeatures" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const RawTableDefaultFeatures: {
-    statsColumnHeaders: boolean;
-};
-
-// Warning: (ae-missing-release-tag) "RawTableProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface RawTableProps extends ArqueroDetailsListProps {
-    // (undocumented)
-    error?: string;
-    // (undocumented)
-    table: ColumnTable;
-}
-
-// Warning: (ae-missing-release-tag) "RawTableViewer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const RawTableViewer: React.FC<RawTableViewerProps>;
-
-// Warning: (ae-missing-release-tag) "RawTableViewerProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface RawTableViewerProps {
-    // (undocumented)
-    dataTable: DataTable;
-}
-
 // Warning: (ae-missing-release-tag) "RecoilBasedProfileHost" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -276,11 +108,6 @@ export interface RecoilBasedProfileHostProps<T extends Resource> {
     // (undocumented)
     saveState: (resource: T, snap: Snapshot) => void;
 }
-
-// Warning: (ae-missing-release-tag) "removeExtension" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function removeExtension(fileName: string): string;
 
 // Warning: (ae-missing-release-tag) "ResourceGroupType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -315,45 +142,6 @@ export interface ResourceRouteGroup {
     type: ResourceGroupType;
 }
 
-// Warning: (ae-missing-release-tag) "TableBundleEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const TableBundleEditor: React.FC<TableBundleEditorProps>;
-
-// Warning: (ae-missing-release-tag) "TableBundleEditorProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface TableBundleEditorProps {
-    // (undocumented)
-    resource: TableBundle;
-}
-
-// Warning: (ae-missing-release-tag) "TableDelimiterOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const TableDelimiterOptions: React.FC<{
-    onChange: (option: string) => void;
-    selected?: string;
-}>;
-
-// Warning: (ae-missing-release-tag) "TableLayoutOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const TableLayoutOptions: React.FC<{
-    selected?: DataOrientation;
-    onChange: (orientation: DataOrientation) => void;
-    styles?: IStyleFunctionOrObject<IChoiceGroupStyleProps, IChoiceGroupStyles>;
-}>;
-
-// Warning: (ae-missing-release-tag) "TablePreview" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const TablePreview: React.FC<{
-    table?: ColumnTable;
-    error?: string;
-    showType?: boolean;
-}>;
-
 // Warning: (ae-missing-release-tag) "useDataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -379,6 +167,7 @@ export function useMenuButtonStyles(): IButtonStyles;
 // @public
 export function useOnOutsideClick(ref: MutableRefObject<HTMLElement | null>, onClickOutside: () => void): void;
 
+// Warning: (ae-forgotten-export) The symbol "PersistenceService" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "usePersistenceService" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -398,56 +187,6 @@ export function useTableBundleOutput(pkg: TableBundle | undefined): Maybe<TableC
 //
 // @public (undocumented)
 export function useTableBundles(): TableBundle[];
-
-// Warning: (ae-missing-release-tag) "ViewOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const ViewOptions: React.FC<ViewOptionsProps>;
-
-// Warning: (ae-missing-release-tag) "viewOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const viewOptions: {
-    key: ViewType;
-    text: string;
-    iconProps: {
-        iconName: string;
-    };
-    title: string;
-}[];
-
-// Warning: (ae-missing-release-tag) "ViewOptionsProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ViewOptionsProps {
-    // (undocumented)
-    onChange: (viewType: ViewType) => void;
-    // (undocumented)
-    selected: ViewType;
-}
-
-// Warning: (ae-missing-release-tag) "ViewType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export enum ViewType {
-    // (undocumented)
-    Interactive = "interactive",
-    // (undocumented)
-    RawFile = "rawFile"
-}
-
-// Warning: (ae-missing-release-tag) "WorkflowEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const WorkflowEditor: React.FC<WorkflowEditorProps>;
-
-// Warning: (ae-missing-release-tag) "WorkflowEditorProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface WorkflowEditorProps {
-    // (undocumented)
-    resource: Workflow;
-}
 
 // (No @packageDocumentation comment for this package)
 

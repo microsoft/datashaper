@@ -15,5 +15,9 @@ import type { Field } from './Field.js'
  */
 export interface CodebookSchema extends ResourceSchema {
 	profile: KnownProfile.Codebook
+
+	/**
+	 * The per-field encodings. These contain interpretive information about the data.
+	 */
 	fields: Field[]
 }
