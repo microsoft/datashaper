@@ -3,6 +3,8 @@ releases:
   "@datashaper/react": major
   "@datashaper/schema": patch
   "@datashaper/tables": patch
+  "@datashaper/utilities": patch
+  "@datashaper/verb-guidance": patch
   "@datashaper/workflow": patch
 
 declined:
