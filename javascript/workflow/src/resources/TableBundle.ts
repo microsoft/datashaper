@@ -272,7 +272,6 @@ export class TableBundle extends Resource implements TableEmitter {
 		if (this.codebook?.fields.length === 0 && this.input?.output?.table) {
 			const name = this.codebook.name
 			this.codebook.loadSchema(generateCodebook(this.input.output?.table))
-			// generatecodebook will inject the name "generated"
 			this.codebook.name = name
 		}
 	}
