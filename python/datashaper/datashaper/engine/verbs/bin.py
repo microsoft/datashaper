@@ -68,7 +68,7 @@ def bin(
     elif bin_strategy == BinStrategy.Doane:
         bin_edges = np.histogram_bin_edges(
             input_table[column], bins="doane", range=min_max
-        ) 
+        )
     elif bin_strategy == BinStrategy.Scott:
         bin_edges = np.histogram_bin_edges(
             input_table[column], bins="scott", range=min_max
@@ -76,11 +76,11 @@ def bin(
     elif bin_strategy == BinStrategy.Rice:
         bin_edges = np.histogram_bin_edges(
             input_table[column], bins="rice", range=min_max
-        ) 
+        )
     elif bin_strategy == BinStrategy.Sqrt:
         bin_edges = np.histogram_bin_edges(
             input_table[column], bins="sqrt", range=min_max
-        ) 
+        )
     elif bin_strategy == BinStrategy.FixedCount and fixedcount is not None:
         bin_edges = np.histogram_bin_edges(
             input_table[column], bins=fixedcount, range=min_max
