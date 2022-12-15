@@ -21,6 +21,8 @@ const schema = await readJson(path.join(SCHEMA_PATH, 'workflow.json'))
 const ajv = createSchemaValidator()
 const validateJson = ajv.compile(schema)
 
+const FLOAT_COMPARISON_DECIMALS = 5
+
 /**
  * Create top-level describes for each test category (top-level folders)
  */
@@ -139,7 +141,9 @@ function compareTables(
 }
 
 function compareValue(expected: any, actual: any): void {
-	if (
+	if (typeof expected === 'number' || typeof actual === 'number') {
+		expect(actual).toBeCloseTo(expected, FLOAT_COMPARISON_DECIMALS)
+	} else if (
 		(typeof expected === 'string' && castable[typeof actual]) ||
 		(typeof actual === 'string' && castable[typeof expected])
 	) {
