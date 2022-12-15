@@ -141,7 +141,12 @@ function compareTables(
 }
 
 function compareValue(expected: any, actual: any): void {
-	if (typeof expected === 'number' || typeof actual === 'number') {
+	if (
+		typeof expected === 'number' &&
+		!Number.isNaN(expected) &&
+		typeof actual === 'number' &&
+		!Number.isNaN(actual)
+	) {
 		expect(actual).toBeCloseTo(expected, FLOAT_COMPARISON_DECIMALS)
 	} else if (
 		(typeof expected === 'string' && castable[typeof actual]) ||
