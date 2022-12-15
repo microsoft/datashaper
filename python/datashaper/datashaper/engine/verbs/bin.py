@@ -14,15 +14,15 @@ def __get_bucket_value(bin_edges, inds, n, clamped, min_max, value, printRange):
     if value < min_max[0]:
         if printRange:
             return f"<{min_max[0]}"
-        return -np.inf if not clamped else int(bin_edges[0])
+        return -np.inf if not clamped else bin_edges[0]
     elif value > min_max[1]:
         if printRange:
             return f">{int(min_max[1])}"
-        return np.inf if not clamped else int(bin_edges[-2])
+        return np.inf if not clamped else bin_edges[-2]
     elif value == bin_edges[-1]:
         if printRange:
             return f"{int(bin_edges[-2])} to {min_max[1]}"
-        return int(bin_edges[-2])
+        return bin_edges[-2]
     index = min(inds[n] - 1, len(bin_edges) - 1)
     if printRange:
         return (
