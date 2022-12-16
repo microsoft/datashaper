@@ -108,18 +108,18 @@ function bin(min: number, max: number, step: number, clamped: boolean) {
 			return candidate
 		}
 
-		/*if(candidate === ultimate){
+		if (candidate === ultimate) {
 			return penultimate
-		}else if(candidate < ultimate){
+		} else if (candidate < ultimate) {
 			return ultimate
 		}
-		
-		if(candidate >= max){
+
+		if (candidate >= max) {
 			return penultimate
 		}
 
-		return candidate*/
+		return candidate
 
-		return candidate === max && rebinmax ? penultimate : candidate
+		//return candidate === max && rebinmax ? penultimate : candidate
 	}
 }
