@@ -13,16 +13,16 @@ import {
 } from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
 
-import { BundleEditor } from '../components/editors/index.js'
+import { TableBundleEditor } from '../components/editors/index.js'
 import type { AppServices, ProfilePlugin } from '../types.js'
-import { CommandBarSection, ResourceGroup } from '../types.js'
+import { CommandBarSection, ResourceGroupType } from '../types.js'
 
 export class TableBundleProfile implements ProfilePlugin<TableBundle> {
 	public readonly profile = KnownProfile.TableBundle
 	public readonly title = 'Table'
-	public readonly renderer = BundleEditor
+	public readonly renderer = TableBundleEditor
 	public readonly iconName = 'ViewAll'
-	public readonly group = ResourceGroup.Data
+	public readonly group = ResourceGroupType.Data
 	public readonly dataHandler = new TableBundleHandler()
 
 	private _dataPackage: DataPackage | undefined

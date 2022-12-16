@@ -4,27 +4,17 @@
 
 ## app-framework package
 
-## Classes
-
-|  Class | Description |
-|  --- | --- |
-|  [DefaultPersistenceService](./app-framework.defaultpersistenceservice.md) |  |
-
 ## Enumerations
 
 |  Enumeration | Description |
 |  --- | --- |
 |  [CommandBarSection](./app-framework.commandbarsection.md) |  |
-|  [ResourceGroup](./app-framework.resourcegroup.md) |  |
-|  [ViewType](./app-framework.viewtype.md) |  |
+|  [ResourceGroupType](./app-framework.resourcegrouptype.md) |  |
 
 ## Functions
 
 |  Function | Description |
 |  --- | --- |
-|  [loadCsvTable(file, options)](./app-framework.loadcsvtable.md) |  |
-|  [loadJsonTable(file, orientation)](./app-framework.loadjsontable.md) |  |
-|  [removeExtension(fileName)](./app-framework.removeextension.md) |  |
 |  [useDataPackage()](./app-framework.usedatapackage.md) |  |
 |  [useDatasetMenuItems(selected, onClick)](./app-framework.usedatasetmenuitems.md) |  |
 |  [useDataTableSource(pkg)](./app-framework.usedatatablesource.md) | Use the raw source table from a data package without any workflow applied to it. |
@@ -40,46 +30,17 @@
 |  Interface | Description |
 |  --- | --- |
 |  [AppServices](./app-framework.appservices.md) |  |
-|  [BundleEditorProps](./app-framework.bundleeditorprops.md) |  |
-|  [CodebookEditorProps](./app-framework.codebookeditorprops.md) |  |
-|  [DataSourceEditorProps](./app-framework.datasourceeditorprops.md) |  |
+|  [DataShaperAppProps](./app-framework.datashaperappprops.md) |  |
 |  [GeneratedExtraRoutes](./app-framework.generatedextraroutes.md) |  |
-|  [JsonEditorProps](./app-framework.jsoneditorprops.md) |  |
-|  [ParserOptionsEditorProps](./app-framework.parseroptionseditorprops.md) |  |
-|  [PersistenceService](./app-framework.persistenceservice.md) | The Persistence Service available in the application. This service is responsible for saving and loading data packages. |
 |  [ProfilePlugin](./app-framework.profileplugin.md) |  |
-|  [RawTableProps](./app-framework.rawtableprops.md) |  |
-|  [RawTableViewerProps](./app-framework.rawtableviewerprops.md) |  |
 |  [RecoilBasedProfileHostProps](./app-framework.recoilbasedprofilehostprops.md) |  |
 |  [ResourceRoute](./app-framework.resourceroute.md) | Data attached to resource-tree nodes |
-|  [ViewOptionsProps](./app-framework.viewoptionsprops.md) |  |
-|  [WorkflowEditorProps](./app-framework.workfloweditorprops.md) |  |
+|  [ResourceRouteGroup](./app-framework.resourceroutegroup.md) |  |
 
 ## Variables
 
 |  Variable | Description |
 |  --- | --- |
-|  [BundleEditor](./app-framework.bundleeditor.md) |  |
-|  [choiceGroupStyles](./app-framework.choicegroupstyles.md) |  |
-|  [CodebookEditor](./app-framework.codebookeditor.md) |  |
-|  [Container](./app-framework.container.md) |  |
-|  [DataPackageContext](./app-framework.datapackagecontext.md) |  |
-|  [DataPackageProvider](./app-framework.datapackageprovider.md) |  |
 |  [DataShaperApp](./app-framework.datashaperapp.md) | A component for rendering a data-shaper application. This includes a resource management UI area and a main area that renders selected content based on its profile type. It is expected that this application is rendered under a react-router Router component. |
-|  [DataSourceEditor](./app-framework.datasourceeditor.md) |  |
-|  [HeadersOption](./app-framework.headersoption.md) |  |
-|  [JsonEditor](./app-framework.jsoneditor.md) |  |
-|  [OtherTextField](./app-framework.othertextfield.md) |  |
-|  [ParserOptionsEditor](./app-framework.parseroptionseditor.md) |  |
-|  [RadioGroup](./app-framework.radiogroup.md) |  |
-|  [RawTable](./app-framework.rawtable.md) |  |
-|  [RawTableDefaultFeatures](./app-framework.rawtabledefaultfeatures.md) |  |
-|  [RawTableViewer](./app-framework.rawtableviewer.md) |  |
 |  [RecoilBasedProfileHost](./app-framework.recoilbasedprofilehost.md) |  |
-|  [TableDelimiterOptions](./app-framework.tabledelimiteroptions.md) |  |
-|  [TableLayoutOptions](./app-framework.tablelayoutoptions.md) |  |
-|  [TablePreview](./app-framework.tablepreview.md) |  |
-|  [viewOptions](./app-framework.viewoptions.md) |  |
-|  [ViewOptions](./app-framework.viewoptions.md) |  |
-|  [WorkflowEditor](./app-framework.workfloweditor.md) |  |
 

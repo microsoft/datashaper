@@ -9,19 +9,19 @@ import {
 	LATEST_TABLEBUNDLE_SCHEMA,
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import { applyCodebook, introspect } from '@datashaper/tables'
+import { applyCodebook, generateCodebook } from '@datashaper/tables'
 import type { Maybe } from '@datashaper/workflow'
-import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import type { Observable } from 'rxjs'
 import { BehaviorSubject, EMPTY, map } from 'rxjs'
 
 import type { Codebook } from './Codebook.js'
 import type { DataPackage } from './DataPackage/DataPackage.js'
-import type { DataTable } from './DataTable.js'
+import { Disposable } from './Disposable.js'
 import { Resource } from './Resource.js'
+import type { TableEmitter } from './types.js'
 import type { Workflow } from './Workflow/Workflow.js'
 
-export class TableBundle extends Resource {
+export class TableBundle extends Resource implements TableEmitter {
 	public readonly $schema = LATEST_TABLEBUNDLE_SCHEMA
 	public readonly profile = KnownProfile.TableBundle
 
@@ -29,7 +29,9 @@ export class TableBundle extends Resource {
 		return 'tablebundle.json'
 	}
 
-	private readonly _source$ = new BehaviorSubject<Maybe<ColumnTable>>(undefined)
+	private readonly _input$ = new BehaviorSubject<Maybe<TableContainer>>(
+		undefined,
+	)
 	private readonly _inputs = new Map<
 		string,
 		Observable<Maybe<TableContainer>>
@@ -38,23 +40,27 @@ export class TableBundle extends Resource {
 		undefined,
 	)
 
-	private _datatable: DataTable | undefined
+	private _input: TableEmitter | undefined
 	private _codebook: Codebook | undefined
 	private _workflow: Workflow | undefined
 
-	private _wfDisposables: Array<() => void> = []
-	private _cbDisposables: Array<() => void> = []
-	private _dtDisposables: Array<() => void> = []
+	/**
+	 * These disposables are for tracking connections and event-bindings
+	 */
+	private _disposeOutputSub: Disposable | undefined
+	private _disposeWorkflowConnections: Disposable | undefined
+	private _disposeCodebookConnections: Disposable | undefined
+	private _disposeInputConnections: Disposable | undefined
 
 	public constructor(data?: TableBundleSchema) {
 		super()
 		this.loadSchema(data)
-		this.rebindWorkflowInput()
+		this.bindDataflow()
 	}
 
 	public override get sources(): Resource[] {
 		const result: Resource[] = []
-		if (this.input != null) {
+		if (this.input != null && this.input.profile === KnownProfile.DataTable) {
 			result.push(this.input)
 		}
 		if (this.codebook != null) {
@@ -70,37 +76,25 @@ export class TableBundle extends Resource {
 		throw new Error('tablebundle sources are read-only')
 	}
 
-	public get input(): DataTable | undefined {
-		return this._datatable
+	public get input(): TableEmitter | undefined {
+		return this._input
 	}
 
-	public set input(datatable: DataTable | undefined) {
-		this._dtDisposables.forEach(d => d())
-		this._dtDisposables = []
+	public set input(input: TableEmitter | undefined) {
+		this.disposeInputConnections()
+		this._input = input
 
-		this._datatable = datatable
-		this.rebindWorkflowInput()
-
-		if (datatable != null) {
-			const sub = datatable.output$.subscribe(tbl => {
-				const table = this.encode(tbl)
-				// wire up latest input
-				this._source$.next(table)
-
-				// if no workflow, pipe to output
-				if (this.workflow == null) {
-					this._output$.next({ id: this.name, table })
-				}
-			})
-			this._dtDisposables.push(() => sub.unsubscribe())
-
-			datatable.onDispose(() => (this.input = undefined))
-		} else {
-			this._source$.next(undefined)
-			if (this.workflow == null) {
-				this._output$.next({ id: this.name, table: undefined })
-			}
+		if (input != null) {
+			this.populateCodebook()
+			const d = new Disposable()
+			d.onDispose(
+				input.output$.pipe(map(this.encodeTable)).subscribe(this._input$),
+			)
+			d.onDispose(input.onDispose(() => (this.input = undefined)))
+			this._disposeInputConnections = d
 		}
+
+		this.bindDataflow()
 		this._onChange.next()
 	}
 
@@ -109,19 +103,19 @@ export class TableBundle extends Resource {
 	}
 
 	public set codebook(codebook: Codebook | undefined) {
-		this._cbDisposables.forEach(d => d())
-		this._cbDisposables = []
+		this.disposeCodebookConnections()
 
 		this._codebook = codebook
 
 		if (codebook != null) {
-			this._cbDisposables.push(
-				codebook.onChange(() => this.rebindWorkflowInput()),
-			)
-			codebook.onDispose(() => (this.codebook = undefined))
+			this.populateCodebook()
+			const d = new Disposable()
+			d.onDispose(codebook.onChange(this.bindDataflow))
+			d.onDispose(codebook.onDispose(() => (this.codebook = undefined)))
+			this._disposeCodebookConnections = d
 		}
 
-		this.rebindWorkflowInput()
+		this.bindDataflow()
 		this._onChange.next()
 	}
 
@@ -130,26 +124,29 @@ export class TableBundle extends Resource {
 	}
 
 	public set workflow(workflow: Workflow | undefined) {
-		this._wfDisposables.forEach(d => d())
-		this._wfDisposables = []
-
+		this.disposeWorkflowConnections()
 		this._workflow = workflow
 
 		if (workflow != null) {
-			this._wfDisposables.push(workflow.onChange(() => this._onChange.next()))
-			const sub = workflow.read$()?.subscribe(tbl => this._output$.next(tbl))
-			this._wfDisposables.push(() => sub?.unsubscribe())
-
-			workflow.onDispose(() => (this.workflow = undefined))
+			const d = new Disposable()
+			d.onDispose(workflow.onChange(() => this._onChange.next()))
+			d.onDispose(workflow.onDispose(() => (this.workflow = undefined)))
+			this._disposeWorkflowConnections = d
 		}
 
-		this.rebindWorkflowInput()
+		this.bindDataflow()
 		this._onChange.next()
 	}
 
 	public override dispose(): void {
-		this._wfDisposables.forEach(d => d())
+		this.disposeInputConnections()
+		this.disposeCodebookConnections()
+		this.disposeWorkflowConnections()
 		this.workflow?.dispose()
+		this.codebook?.dispose()
+		this.input?.dispose()
+		this._input$.complete()
+		this._output$.complete()
 		super.dispose()
 	}
 
@@ -160,7 +157,7 @@ export class TableBundle extends Resource {
 
 	public override set name(value: string) {
 		super.name = value
-		this.rebindWorkflowInput()
+		this.bindDataflow()
 		this._onChange.next()
 	}
 
@@ -193,6 +190,21 @@ export class TableBundle extends Resource {
 		}
 	}
 
+	private disposeInputConnections() {
+		this._disposeInputConnections?.dispose()
+		this._disposeInputConnections = undefined
+	}
+
+	private disposeWorkflowConnections() {
+		this._disposeWorkflowConnections?.dispose()
+		this._disposeWorkflowConnections = undefined
+	}
+
+	private disposeCodebookConnections() {
+		this._disposeCodebookConnections?.dispose()
+		this._disposeCodebookConnections = undefined
+	}
+
 	public connect(dp: DataPackage): void {
 		const rebindInputs = () => {
 			this._inputs.clear()
@@ -210,58 +222,58 @@ export class TableBundle extends Resource {
 				),
 			)
 			// Set the input name from the source
-			this._inputs.set(
-				this.name,
-				this._source$.pipe(map(tbl => ({ id: this.name, table: tbl }))),
-			)
-			this.rebindWorkflowInput()
+			this._inputs.set(this.name, this._input$)
+			this.bindDataflow()
 		}
 
 		dp.onChange(rebindInputs)
 		rebindInputs()
 	}
 
-	private rebindWorkflowInput() {
-		/**
-		 * Establish workflow inputs
-		 */
-		if (this.workflow != null) {
-			/**
-			 * Set the default input to the datatable output
-			 */
-			if (this.input != null) {
-				this.workflow.defaultInput$ = this.input.output$.pipe(
-					map(table => {
-						return {
-							table: this.encode(table),
-							id: this.name,
-							// TODO: let parsing layer deal with this
-							metadata: table && introspect(table, true),
-						}
-					}),
-				)
-			}
+	private bindDataflow = () => {
+		// by default, pipe the input to the output
+		let out$: Observable<Maybe<TableContainer>> = this._input$
 
-			/**
-			 * Add other named inputs from the tablestore
-			 */
+		// Setup workflow inputs, bind workflow to output
+		if (this.workflow != null) {
+			this.workflow.defaultInput$ = this._input$
 			this.workflow.addInputs(this._inputs)
+			out$ = this.workflow.read$()
 		}
+
+		// Establish the table-bundle output
+		this._disposeOutputSub?.dispose()
+		const d = new Disposable()
+		d.onDispose(out$.pipe(map(this.renameTable)).subscribe(this._output$))
+		this._disposeOutputSub = d
 	}
 
-	private encode(inputTable: Maybe<ColumnTable>) {
-		if (
-			inputTable == null ||
-			this.codebook == null ||
-			this.codebook.fields.length === 0
-		) {
-			return inputTable
+	private encodeTable = (t: Maybe<TableContainer>): Maybe<TableContainer> => {
+		const codebook = this.codebook
+		if (t?.table == null || codebook == null || codebook.fields.length === 0) {
+			return t
 		}
-		return applyCodebook(
-			inputTable,
-			this.codebook,
+
+		const encodedTable = applyCodebook(
+			t.table,
+			codebook!,
 			CodebookStrategy.DataTypeAndMapping,
-			this._datatable?.toSchema(),
 		)
+		return { ...t, table: encodedTable }
+	}
+
+	private renameTable = (
+		table: Maybe<TableContainer>,
+	): Maybe<TableContainer> => {
+		return table == null ? table : { ...table, id: this.name }
+	}
+
+	private populateCodebook() {
+		if (this.codebook?.fields.length === 0 && this.input?.output?.table) {
+			this.codebook.loadSchema({
+				...generateCodebook(this.input.output?.table),
+				name: this.codebook.name,
+			})
+		}
 	}
 }

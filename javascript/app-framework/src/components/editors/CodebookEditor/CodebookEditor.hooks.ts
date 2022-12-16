@@ -3,20 +3,17 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-argument */
+import type { Field } from '@datashaper/schema'
 import type { Codebook } from '@datashaper/workflow'
 import { useCallback } from 'react'
 
-export function useContent(codebook: Codebook): string {
-	return JSON.stringify(codebook.toSchema(), null, 2)
-}
-
-export function useOnChange(
-	codebook: Codebook,
-): (value: string | undefined) => void {
+export function useOnFieldsChanged(
+	resource: Codebook,
+): (fields: Field[]) => void {
 	return useCallback(
-		(value: string | undefined) => {
-			codebook.loadSchema(value ? JSON.parse(value) : null)
+		(fields: Field[]) => {
+			resource.fields = fields
 		},
-		[codebook],
+		[resource],
 	)
 }

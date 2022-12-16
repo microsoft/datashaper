@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { AppServices, ProfilePlugin } from '@datashaper/app-framework'
-import { CommandBarSection, ResourceGroup } from '@datashaper/app-framework'
+import { CommandBarSection, ResourceGroupType } from '@datashaper/app-framework'
 import type { DataPackage } from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
 
@@ -16,7 +16,7 @@ export class TestAppProfile implements ProfilePlugin<TestAppResource> {
 	public readonly title = 'Test App'
 	public readonly iconName = 'TestBeaker'
 	public readonly renderer = TestApp
-	public readonly group = ResourceGroup.Apps
+	public readonly group = ResourceGroupType.Apps
 	private _dataPackage: DataPackage | undefined
 
 	public initialize(_api: AppServices, dataPackage: DataPackage): void {

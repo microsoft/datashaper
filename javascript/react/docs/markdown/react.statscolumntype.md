@@ -4,6 +4,8 @@
 
 ## StatsColumnType enum
 
+Available column statistics to show in the Arquero Details List
+
 <b>Signature:</b>
 
 ```typescript

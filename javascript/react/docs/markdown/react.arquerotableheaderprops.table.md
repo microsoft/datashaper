@@ -4,6 +4,8 @@
 
 ## ArqueroTableHeaderProps.table property
 
+The arquero table to render
+
 <b>Signature:</b>
 
 ```typescript

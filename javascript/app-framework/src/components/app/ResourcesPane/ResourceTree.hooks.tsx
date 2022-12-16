@@ -2,51 +2,65 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	IContextualMenuItem,
-	INavLink,
-	INavLinkGroup,
-} from '@fluentui/react'
+import type { TreeGroup, TreeItem } from '@essex/components'
 import { useMemo } from 'react'
 
-import type { ResourceRoute } from '../../../types.js'
+import type { ResourceRoute, ResourceRouteGroup } from '../../../types.js'
+import { ResourceGroupType } from '../../../types.js'
 
-export function useNavGroups(
-	resources: ResourceRoute[][],
-	onSelect: (v: ResourceRoute) => void,
-): INavLinkGroup[] {
-	return useMemo<INavLinkGroup[]>(() => {
-		const result: INavLinkGroup[] = []
-
-		for (const group of resources) {
-			const links: INavLink[] = []
-			for (const resource of group) {
-				links.push(makeNavLink(resource, onSelect))
-			}
-			result.push({ links })
-		}
-
-		return result.filter(g => g.links.length > 0)
-	}, [resources, onSelect])
+/**
+ * Extract the grouping instructions for the Tree component.
+ * @param groups
+ * @returns
+ */
+export function useTreeGroups(groups: ResourceRouteGroup[]): TreeGroup[] {
+	return useMemo(
+		() => groups.map(g => ({ key: g.type, text: groupName(g) })),
+		[groups],
+	)
 }
 
-function makeNavLink(
-	resource: ResourceRoute,
-	onSelect: (v: ResourceRoute) => void,
-): INavLink & { menuItems?: IContextualMenuItem[] } {
-	const numChildren = resource.children?.length ?? 0
+function groupName(group: ResourceRouteGroup) {
+	return group.type === ResourceGroupType.Data ? 'Data files' : 'Analysis apps'
+}
 
+/**
+ * Extract a flat list of TreeItems for the Tree, with each assigned to a group
+ * that aligns with the grouping instructions.
+ * @param groups
+ * @returns
+ */
+export function useTreeItems(
+	groups: ResourceRouteGroup[],
+	onSelect: (v: ResourceRoute) => void,
+): TreeGroup[] {
+	return useMemo(
+		() =>
+			groups.flatMap(group =>
+				group.resources.map(resource =>
+					makeTreeItem(resource, group.type, onSelect),
+				),
+			),
+		[groups, onSelect],
+	)
+}
+
+function makeTreeItem(
+	resource: ResourceRoute,
+	group?: ResourceGroupType,
+	onSelect?: (v: ResourceRoute) => void,
+): TreeItem {
+	const numChildren = resource.children?.length ?? 0
 	return {
-		name: resource.title,
-		iconProps: {
-			iconName: resource.icon,
-			styles: { root: { marginLeft: 25 } },
-		},
-		url: '',
-		icon: numChildren > 0 ? undefined : resource.icon,
 		key: resource.href,
-		links: resource.children?.map(c => makeNavLink(c, onSelect)),
+		text: resource.title,
+		iconName: resource.icon,
+		group,
+		children:
+			numChildren > 0
+				? resource.children?.map(c => makeTreeItem(c, group, onSelect))
+				: undefined,
 		menuItems: resource.menuItems,
-		onClick: () => onSelect(resource),
+		onClick: () => onSelect?.(resource),
 	}
 }

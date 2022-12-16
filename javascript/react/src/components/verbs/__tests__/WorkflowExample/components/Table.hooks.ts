@@ -7,7 +7,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 
 import { useHeaderCommandBarDefaults } from '../../../../../hooks/index.js'
-import { downloadCommand } from '../../../../ArqueroTableHeader/index.js'
+import { downloadCommand } from '../../../../ArqueroTableHeader/commands/downloadCommand.js'
 import type { ColumnConfigMap } from './Table.types.js'
 
 export function useFarCommandBar(table: ColumnTable): ICommandBarProps {

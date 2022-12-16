@@ -73,7 +73,7 @@ export interface ProfilePlugin<T extends Resource = any> {
 	 * The grouping for this resource type. The default is 'app'.
 	 * This grouping determines what resources this is rendered with in the tree-view.
 	 */
-	group?: ResourceGroup
+	group?: ResourceGroupType
 
 	/**
 	 * The icon name to use in the file-tree
@@ -140,7 +140,12 @@ export interface GeneratedExtraRoutes {
 	children?: ResourceRoute[]
 }
 
-export enum ResourceGroup {
+export enum ResourceGroupType {
 	Data = 'data',
 	Apps = 'apps',
+}
+
+export interface ResourceRouteGroup {
+	type: ResourceGroupType
+	resources: ResourceRoute[]
 }

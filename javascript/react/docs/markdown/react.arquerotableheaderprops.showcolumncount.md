@@ -4,6 +4,8 @@
 
 ## ArqueroTableHeaderProps.showColumnCount property
 
+Whether to show the column count
+
 <b>Signature:</b>
 
 ```typescript

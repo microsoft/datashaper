@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-get input(): DataTable | undefined;
+get input(): TableEmitter | undefined;
 
-set input(datatable: DataTable | undefined);
+set input(input: TableEmitter | undefined);
 ```

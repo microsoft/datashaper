@@ -5,19 +5,16 @@
 import { KnownProfile } from '@datashaper/schema'
 import { DataTable } from '@datashaper/workflow'
 
-import {
-	DataSourceEditor,
-	RawTableViewer,
-} from '../components/editors/index.js'
+import { DataTableEditor, RawTableViewer } from '../components/editors/index.js'
 import type { GeneratedExtraRoutes, ProfilePlugin } from '../types.js'
-import { ResourceGroup } from '../types.js'
+import { ResourceGroupType } from '../types.js'
 
 export class DataTableProfile implements ProfilePlugin<DataTable> {
 	public readonly profile = KnownProfile.DataTable
 	public readonly title = 'Datatable'
-	public readonly renderer = DataSourceEditor
+	public readonly renderer = DataTableEditor
 	public readonly iconName = 'PageData'
-	public readonly group = ResourceGroup.Data
+	public readonly group = ResourceGroupType.Data
 	public readonly dataHandler = null
 
 	public createResource(): DataTable {

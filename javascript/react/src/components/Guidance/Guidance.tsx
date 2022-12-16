@@ -15,6 +15,9 @@ import {
 import { ButtonWrapper, Container, Icon, icons } from './Guidance.styles.js'
 import type { GuidanceProps } from './Guidance.types.js'
 
+/**
+ * A component for rendering guidance information on verb usage.
+ */
 export const Guidance: React.FC<GuidanceProps> = memo(function Guidance({
 	name = '',
 	index,

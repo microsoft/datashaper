@@ -4,6 +4,8 @@
 
 ## ArqueroTableHeaderProps.farCommandBar property
 
+The optional far-command bar
+
 <b>Signature:</b>
 
 ```typescript

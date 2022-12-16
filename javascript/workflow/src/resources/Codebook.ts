@@ -8,6 +8,7 @@ import {
 	KnownProfile,
 	LATEST_CODEBOOK_SCHEMA,
 } from '@datashaper/schema'
+import { type Observable, BehaviorSubject } from 'rxjs'
 
 import type { Maybe } from '../primitives.js'
 import { Resource } from './Resource.js'
@@ -20,19 +21,23 @@ export class Codebook extends Resource {
 		return 'codebook.json'
 	}
 
-	private _fields: Field[] = []
+	private _fields$ = new BehaviorSubject<Field[]>([])
 
 	public constructor(codebook?: CodebookSchema) {
 		super()
 		this.loadSchema(codebook)
 	}
 
+	public get fields$(): Observable<Field[]> {
+		return this._fields$
+	}
+
 	public get fields(): Field[] {
-		return this._fields
+		return this._fields$.value
 	}
 
 	public set fields(value: Field[]) {
-		this._fields = value
+		this._fields$.next(value)
 		this._onChange.next()
 	}
 
@@ -52,5 +57,10 @@ export class Codebook extends Resource {
 		if (!quiet) {
 			this._onChange.next()
 		}
+	}
+
+	public override dispose(): void {
+		this._fields$.complete()
+		super.dispose()
 	}
 }

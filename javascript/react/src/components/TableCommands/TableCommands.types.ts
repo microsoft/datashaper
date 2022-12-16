@@ -22,6 +22,9 @@ export interface TableCommandsProps {
 	commandBarProps?: Partial<ICommandBarProps>
 }
 
+/**
+ * Verb grouping configuration
+ */
 export interface GroupedVerbs {
 	label: string
 	verbs: string[]

@@ -5,12 +5,11 @@
 ```ts
 
 import type { AggregateArgs } from '@datashaper/schema';
-import { BehaviorSubject } from 'rxjs';
+import type { BehaviorSubject } from 'rxjs';
 import type { BinArgs } from '@datashaper/schema';
 import type { BinarizeArgs } from '@datashaper/schema';
 import type { BooleanArgs } from '@datashaper/schema';
 import type { CodebookSchema } from '@datashaper/schema';
-import type ColumnTable from 'arquero/dist/types/table/column-table.js';
 import type { ConvertArgs } from '@datashaper/schema';
 import { DataFormat } from '@datashaper/schema';
 import type { DataNature } from '@datashaper/schema';
@@ -35,7 +34,7 @@ import type { Maybe as Maybe_2 } from '@datashaper/workflow';
 import type { MergeArgs } from '@datashaper/schema';
 import type { Named as Named_2 } from '@datashaper/schema';
 import type { NamedPortBinding } from '@datashaper/schema';
-import type { Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import type { OnehotArgs } from '@datashaper/schema';
 import type { OrderbyArgs } from '@datashaper/schema';
 import type { ParserOptions as ParserOptions_2 } from '@datashaper/schema';
@@ -50,6 +49,7 @@ import type { SampleArgs } from '@datashaper/schema';
 import type { SetOp } from '@datashaper/schema';
 import type { SpreadArgs } from '@datashaper/schema';
 import { Subject } from 'rxjs';
+import type { Subscription } from 'rxjs';
 import type { TableBundleSchema } from '@datashaper/schema';
 import { TableContainer } from '@datashaper/tables';
 import type { UnhotArgs } from '@datashaper/schema';
@@ -144,6 +144,10 @@ export class Codebook extends Resource {
     constructor(codebook?: CodebookSchema);
     // (undocumented)
     defaultName(): string;
+    // (undocumented)
+    dispose(): void;
+    // (undocumented)
+    get fields$(): Observable<Field[]>;
     // (undocumented)
     get fields(): Field[];
     set fields(value: Field[]);
@@ -252,7 +256,7 @@ export class DataShape extends Observed implements DataShape_2 {
 // Warning: (ae-missing-release-tag) "DataTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export class DataTable extends Resource {
+export class DataTable extends Resource implements TableEmitter {
     // (undocumented)
     readonly $schema: string;
     constructor(datatable?: DataTableSchema);
@@ -272,9 +276,9 @@ export class DataTable extends Resource {
     get name(): string;
     set name(value: string);
     // (undocumented)
-    get output$(): Observable<Maybe_2<ColumnTable>>;
+    get output$(): Observable<Maybe_2<TableContainer>>;
     // (undocumented)
-    get output(): Maybe_2<ColumnTable>;
+    get output(): Maybe_2<TableContainer>;
     // (undocumented)
     readonly parser: ParserOptions;
     // (undocumented)
@@ -323,6 +327,14 @@ export const derive: (id: string) => StepNode<TableContainer<unknown>, DeriveArg
 //
 // @public (undocumented)
 export const difference: (id: string) => SetOperationNode<unknown>;
+
+// Warning: (ae-missing-release-tag) "Emitter" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface Emitter<T> extends Resource {
+    readonly output$: Observable<Maybe<T>>;
+    readonly output: Maybe<T>;
+}
 
 // Warning: (ae-missing-release-tag) "encode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -618,20 +630,17 @@ export class ObservableNode<T> extends BaseNode<T, void> {
 // @public (undocumented)
 export function observableNode<T>(id: string, source: Observable<Maybe<T>>): ObservableNode<T>;
 
+// Warning: (ae-forgotten-export) The symbol "Disposable" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "Observed" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export abstract class Observed {
+export abstract class Observed extends Disposable {
     // (undocumented)
     dispose(): void;
     // (undocumented)
     onChange(handler: () => void, fireSync?: boolean): Unsubscribe;
     // (undocumented)
     protected _onChange: Subject<void>;
-    // (undocumented)
-    onDispose(handler: () => void): Unsubscribe;
-    // (undocumented)
-    protected _onDispose: Subject<void>;
 }
 
 // Warning: (ae-missing-release-tag) "onehot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -814,7 +823,7 @@ export function stepNodeFactory<T, Args>(stepFunction: StepFunction<T, Args>): (
 // Warning: (ae-missing-release-tag) "TableBundle" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export class TableBundle extends Resource {
+export class TableBundle extends Resource implements TableEmitter {
     // (undocumented)
     readonly $schema: string;
     constructor(data?: TableBundleSchema);
@@ -828,8 +837,8 @@ export class TableBundle extends Resource {
     // (undocumented)
     dispose(): void;
     // (undocumented)
-    get input(): DataTable | undefined;
-    set input(datatable: DataTable | undefined);
+    get input(): TableEmitter | undefined;
+    set input(input: TableEmitter | undefined);
     // (undocumented)
     loadSchema(schema: Maybe_2<TableBundleSchema>, quiet?: boolean): void;
     // (undocumented)
@@ -864,6 +873,11 @@ export class TableBundleHandler implements ResourceHandler {
     // (undocumented)
     save(resource: TableBundle, files: Map<string, Blob>): Promise<string[]>;
 }
+
+// Warning: (ae-missing-release-tag) "TableEmitter" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export type TableEmitter = Emitter<TableContainer>;
 
 // Warning: (ae-missing-release-tag) "TableExportOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -945,7 +959,7 @@ export class Workflow extends Resource {
     // (undocumented)
     addInputTables(inputs: TableContainer[]): void;
     addOutput(name: string): void;
-    addStep(stepInput: StepInput): Step;
+    addStep(input: StepInput): Step;
     get allTableNames$(): Observable<string[]>;
     get allTableNames(): string[];
     // (undocumented)
@@ -981,7 +995,7 @@ export class Workflow extends Resource {
     read$(name?: string): Observable<Maybe<TableContainer>>;
     read(name?: string): Maybe<TableContainer>;
     // (undocumented)
-    removeInputName(input: string): void;
+    removeInputName(name: string): void;
     // (undocumented)
     removeInputObservable(id: string): void;
     removeOutput(name: string): void;

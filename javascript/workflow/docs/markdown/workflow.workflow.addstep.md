@@ -9,14 +9,14 @@ Adds a step to the pipeline
 <b>Signature:</b>
 
 ```typescript
-addStep(stepInput: StepInput): Step;
+addStep(input: StepInput): Step;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  stepInput | [StepInput](./workflow.stepinput.md) |  |
+|  input | [StepInput](./workflow.stepinput.md) |  |
 
 <b>Returns:</b>
 

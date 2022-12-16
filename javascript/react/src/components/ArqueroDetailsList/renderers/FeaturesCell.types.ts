@@ -4,10 +4,10 @@
  */
 import type { ValidationResult } from '@datashaper/schema'
 
-import type { DetailsListFeatures } from '../ArqueroDetailsList.types.js'
+import type { ArqueroDetailsListFeatures } from '../ArqueroDetailsList.types.js'
 import type { RichCellProps } from './types.js'
 
 export interface FeatureCellProps extends RichCellProps {
-	features: DetailsListFeatures
+	features: ArqueroDetailsListFeatures
 	validationResult?: ValidationResult
 }

@@ -6,7 +6,7 @@ import type { DataFormat, DataShape, ParserOptions } from '@datashaper/schema'
 import { createDataTableSchemaObject } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import type { BaseFile } from '@datashaper/utilities'
-import { DataTable } from '@datashaper/workflow'
+import { DataTable, TableBundle } from '@datashaper/workflow'
 import { useCallback, useContext } from 'react'
 
 import { DataPackageContext } from '../../../context/index.js'
@@ -51,9 +51,15 @@ function useAddTable(): AddTableHandler {
 					format,
 				}),
 			)
-			table.name = name
 			table.data = file
-			store.addResource(table)
+			table.name = 'datatable.json'
+			table.path = id
+
+			const tableBundle = new TableBundle()
+			tableBundle.input = table
+			tableBundle.name = name
+
+			store.addResource(tableBundle)
 		},
 		[store],
 	)

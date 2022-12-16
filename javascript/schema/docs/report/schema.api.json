@@ -1392,7 +1392,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!CodebookSchema#fields:member",
-              "docComment": "",
+              "docComment": "/**\n * The per-field encodings. These contain interpretive information about the data.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

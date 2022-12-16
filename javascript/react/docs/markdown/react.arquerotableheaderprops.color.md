@@ -4,6 +4,8 @@
 
 ## ArqueroTableHeaderProps.color property
 
+The table color
+
 <b>Signature:</b>
 
 ```typescript

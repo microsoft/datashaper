@@ -17,6 +17,6 @@ export interface CodebookSchema extends ResourceSchema
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [fields](./schema.codebookschema.fields.md) |  | [Field](./schema.field.md)<!-- -->\[\] |  |
+|  [fields](./schema.codebookschema.fields.md) |  | [Field](./schema.field.md)<!-- -->\[\] | The per-field encodings. These contain interpretive information about the data. |
 |  [profile](./schema.codebookschema.profile.md) |  | [KnownProfile.Codebook](./schema.knownprofile.md) |  |
 

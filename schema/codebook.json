@@ -346,6 +346,7 @@
             "type": "string"
         },
         "fields": {
+            "description": "The per-field encodings. These contain interpretive information about the data.",
             "items": {
                 "$ref": "#/definitions/Field"
             },
