@@ -95,6 +95,7 @@ function bin(min: number, max: number, step: number, clamped: boolean) {
 		// this is due to arquero's exclusive max bound, which will just bin those exact
 		// matches into the final bin, disrupting the expected bin count by adding one
 		const candidate = op.bin(value, min, max, step)
+
 		if (clamped) {
 			if (candidate === -Infinity) {
 				return min
@@ -102,6 +103,23 @@ function bin(min: number, max: number, step: number, clamped: boolean) {
 				return rebinmax ? penultimate : ultimate
 			}
 		}
+
+		if (candidate === -Infinity || candidate === Infinity) {
+			return candidate
+		}
+
+		/*if(candidate === ultimate){
+			return penultimate
+		}else if(candidate < ultimate){
+			return ultimate
+		}
+		
+		if(candidate >= max){
+			return penultimate
+		}
+
+		return candidate*/
+
 		return candidate === max && rebinmax ? penultimate : candidate
 	}
 }
