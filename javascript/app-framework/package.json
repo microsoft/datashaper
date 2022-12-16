@@ -32,7 +32,7 @@
 		"@datashaper/workflow": "workspace:^",
 		"@monaco-editor/react": "^4.4.6",
 		"ahooks": "^3.7.2",
-		"allotment": "^1.17.1",
+		"allotment": "1.17.0",
 		"debug": "^4.3.4",
 		"lodash-es": "^4.17.21",
 		"observable-hooks": "^4.2.1",

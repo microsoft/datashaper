@@ -1891,7 +1891,7 @@ __metadata:
     "@types/styled-components": ^5.1.26
     add: ^2.0.6
     ahooks: ^3.7.2
-    allotment: ^1.17.1
+    allotment: 1.17.0
     arquero: ^5.1.0
     babel-loader: ^9.1.0
     debug: ^4.3.4
@@ -1987,7 +1987,7 @@ __metadata:
     debug: ^4.3.4
     immer: ^9.0.16
     lodash-es: ^4.17.21
-    markdown-to-jsx: ^7.1.7
+    markdown-to-jsx: ^7.1.8
     observable-hooks: ^4.2.1
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -2172,7 +2172,7 @@ __metadata:
     "@types/react-router-dom": ^5.3.3
     "@types/styled-components": ^5.1.26
     ahooks: ^3.7.2
-    allotment: ^1.17.1
+    allotment: 1.17.0
     arquero: ^5.1.0
     chroma-js: 2.4.2
     debug: ^4.3.4
@@ -7220,9 +7220,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"allotment@npm:^1.17.1":
-  version: 1.17.1
-  resolution: "allotment@npm:1.17.1"
+"allotment@npm:1.17.0":
+  version: 1.17.0
+  resolution: "allotment@npm:1.17.0"
   dependencies:
     classnames: ^2.3.0
     eventemitter3: ^4.0.0
@@ -7233,7 +7233,7 @@ __metadata:
   peerDependencies:
     react: ^17.0.0 || ^18.0.0
     react-dom: ^17.0.0 || ^18.0.0
-  checksum: 2e63a86875c98737befc4d82252f43f279874c91fd039cf2dc62fbaf8522cfb9687c2d2db8c802242131c630ce8a55de2ad04886c277434505d9b8cdeb0d2cd0
+  checksum: 0ad579a514ca98099b3630aad540df14042610a6da8439f6a7ea7815f87c4f5a9c4ecce3a10779d67c8adaf5b2245880242b92e2f1570691e0c5b20d2c68959b
   languageName: node
   linkType: hard
 
@@ -15274,12 +15274,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"markdown-to-jsx@npm:^7.1.7":
-  version: 7.1.7
-  resolution: "markdown-to-jsx@npm:7.1.7"
+"markdown-to-jsx@npm:^7.1.8":
+  version: 7.1.8
+  resolution: "markdown-to-jsx@npm:7.1.8"
   peerDependencies:
     react: ">= 0.14.0"
-  checksum: b2c0ea7d0988fad0c709989b3b1b3a5600d1e80b60266f9618386f7afead4a6b5eba9ee1a3943df6a3dcb1599ea89e58467d1b17b6dd3af3c60984c60a85d06d
+  checksum: 4823f90e8bd6734b9a4ad206d217c55358268974e219e0edf3c64407336a14116921cad8c577c54b4bf0349412751ab25f3b6265c8b5a99207a5f6e364716636
   languageName: node
   linkType: hard
 
