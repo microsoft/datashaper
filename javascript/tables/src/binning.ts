@@ -86,7 +86,7 @@ export function fixedBinStep(
  * https://numpy.org/doc/stable/reference/generated/numpy.histogram.html
  */
 function bin(min: number, max: number, step: number, clamped: boolean) {
-	const count = Math.ceil((max - min) / step)
+	const count = Math.floor((max - min) / step)
 	const ultimate = min + step * count
 	const penultimate = min + step * (count - 1)
 	const rebinmax = ultimate >= max
@@ -110,8 +110,6 @@ function bin(min: number, max: number, step: number, clamped: boolean) {
 
 		if (candidate === ultimate) {
 			return penultimate
-		} else if (candidate < ultimate) {
-			return ultimate
 		}
 
 		if (candidate >= max) {
@@ -119,7 +117,5 @@ function bin(min: number, max: number, step: number, clamped: boolean) {
 		}
 
 		return candidate
-
-		//return candidate === max && rebinmax ? penultimate : candidate
 	}
 }

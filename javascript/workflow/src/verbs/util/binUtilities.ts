@@ -11,7 +11,7 @@ export function calculateWidthAuto(
 ): number {
 	const fdResult = calculateWidthFd(values)
 	const sturgesResult = calculateWidthSturges(min, max, values)
-	return Math.max(fdResult, sturgesResult)
+	return Math.min(fdResult, sturgesResult)
 }
 
 export function calculateWidthFd(values: number[]): number {
