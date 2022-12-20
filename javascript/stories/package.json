@@ -15,7 +15,7 @@
 		"@datashaper/webapp": "workspace:^",
 		"@essex/components": "^3.4.1",
 		"@fluentui/font-icons-mdl2": "^8.5.4",
-		"@fluentui/react": "^8.103.8",
+		"@fluentui/react": "^8.103.9",
 		"@fluentui/react-hooks": "^8.6.14",
 		"@fluentui/utilities": "^8.13.4",
 		"@thematic/core": "^4.0.2",
@@ -48,7 +48,7 @@
 		"@storybook/react": "^6.5.14",
 		"@storybook/testing-library": "^0.0.13",
 		"@types/open-wc__webpack-import-meta-loader": "^0.4.2",
-		"babel-loader": "^8.3.0",
-		"resolve-typescript-plugin": "^1.2.0"
+		"babel-loader": "^9.1.0",
+		"resolve-typescript-plugin": "^2.0.0"
 	}
 }

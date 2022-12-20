@@ -37,11 +37,11 @@
 		"@types/node": "^18.11.15",
 		"@types/semver": "^7.3.13",
 		"arquero": "^5.1.0",
-		"eslint": "^8.27.0",
+		"eslint": "^8.29.0",
 		"husky": "^8.0.2",
-		"lint-staged": "^13.0.3",
+		"lint-staged": "^13.1.0",
 		"npm-run-all": "^4.1.5",
-		"prettier": "^2.7.1",
+		"prettier": "^2.8.1",
 		"semver": "^7.3.8",
 		"turbo": "^1.6.3",
 		"typescript": "^4.9.4"
@@ -49,5 +49,5 @@
 	"workspaces": [
 		"javascript/*"
 	],
-	"packageManager": "yarn@3.2.4"
+	"packageManager": "yarn@3.3.0"
 }
