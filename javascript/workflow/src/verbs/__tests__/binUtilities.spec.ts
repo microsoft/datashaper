@@ -121,7 +121,7 @@ describe('bin utilities tests', () => {
 		const result = calculateWidthAuto(10, 200, arrayValues)
 
 		it('algorithm result', () => {
-			expect(result).toBe(73.68062997280774)
+			expect(result).toBe(35.70134669473044)
 		})
 	})
 })
