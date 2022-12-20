@@ -18,12 +18,13 @@ import {
 	useFlattened,
 	useRegisteredProfiles,
 } from './DataShaperApp.hooks.js'
-import { useFileTreeStyle } from './DataShaperApp.styles.js'
+import {
+	PANE_COLLAPSED_SIZE,
+	PANE_EXPANDED_SIZE,
+	useFileTreeStyle,
+} from './DataShaperApp.styles.js'
 import type { DataShaperAppProps } from './DataShaperApp.types.js'
 import { useResourceRoutes } from './useResourceRoutes.js'
-
-const PANE_EXPANDED_SIZE = 300
-const PANE_COLLAPSED_SIZE = 60
 
 /**
  * A component for rendering a data-shaper application.

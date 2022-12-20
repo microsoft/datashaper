@@ -6,6 +6,10 @@
 import { useTheme } from '@fluentui/react'
 import { useMemo } from 'react'
 
+export const PANE_BREAK_WIDTH = 150
+export const PANE_EXPANDED_SIZE = 300
+export const PANE_COLLAPSED_SIZE = 36
+
 export function useFileTreeStyle(): React.CSSProperties {
 	const theme = useTheme()
 	return useMemo(
