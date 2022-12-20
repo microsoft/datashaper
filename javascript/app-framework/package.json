@@ -42,10 +42,10 @@
 		"yarn": "^1.22.19"
 	},
 	"devDependencies": {
-		"@essex/components": "^3.4.1",
+		"@essex/components": "^3.5.0",
 		"@essex/scripts": "^22.2.0",
 		"@essex/tsconfig-base": "^1.0.2",
-		"@fluentui/react": "^8.103.9",
+		"@fluentui/react": "^8.103.10",
 		"@fluentui/react-hooks": "^8.6.14",
 		"@fluentui/utilities": "^8.13.4",
 		"@storybook/react": "^6.5.14",
