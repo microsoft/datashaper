@@ -13,7 +13,7 @@
 					"rel": "input",
 					"source": {
 						"profile": "datatable",
-						"path": "https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/1268/20/nhefs.csv"
+						"data": "https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/1268/20/nhefs.csv"
 					}
 				},
 				{
@@ -2999,7 +2999,7 @@
 					"rel": "input",
 					"source": {
 						"profile": "datatable",
-						"path": "https://cdn.jsdelivr.net/gh/synth-inference/synthdid@master/data/california_prop99.csv",
+						"data": "https://cdn.jsdelivr.net/gh/synth-inference/synthdid@master/data/california_prop99.csv",
 						"parser": {
 							"delimiter": ";"
 						}

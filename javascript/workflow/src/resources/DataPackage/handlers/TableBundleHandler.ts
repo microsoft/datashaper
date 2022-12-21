@@ -105,8 +105,8 @@ export class TableBundleHandler implements ResourceHandler {
 		if (datatableSchema != null) {
 			const dataTable = new DataTable(datatableSchema)
 			// Locate the raw source data for the datatable type
-			if (typeof dataTable.path === 'string') {
-				dataTable.data = await resolveRawData(dataTable.path, files)
+			if (typeof dataTable.data === 'string') {
+				dataTable.data = await resolveRawData(dataTable.data, files)
 			}
 			bundle.input = dataTable
 		}
