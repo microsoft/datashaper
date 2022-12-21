@@ -33,6 +33,16 @@ def __get_bucket_value(bin_edges, inds, n, clamped, min_max, value, printRange):
     return bin_edges[index]
 
 
+__bin_edges_mapping = {
+    BinStrategy.Auto: lambda column, range: np.histogram_bin_edges(column, bins="auto", range=range),
+    BinStrategy.Fd: lambda column, range: np.histogram_bin_edges(column, bins="fd", range=range),
+    BinStrategy.Sturges: lambda column, range: np.histogram_bin_edges(column, bins="sturges", range=range),
+    BinStrategy.Doane: lambda column, range: np.histogram_bin_edges(column, bins="doane", range=range),
+    BinStrategy.Scott: lambda column, range: np.histogram_bin_edges(column, bins="scott", range=range),
+    BinStrategy.Rice: lambda column, range: np.histogram_bin_edges(column, bins="rice", range=range),
+    BinStrategy.Sqrt: lambda column, range: np.histogram_bin_edges(column, bins="sqrt", range=range)
+}
+
 def bin(
     input: VerbInput,
     to: str,
@@ -53,35 +63,7 @@ def bin(
         else (np.min(input_table[column]), np.max(input_table[column]))
     )
 
-    if bin_strategy == BinStrategy.Auto:
-        bin_edges = np.histogram_bin_edges(
-            input_table[column], bins="auto", range=min_max
-        )
-    elif bin_strategy == BinStrategy.Fd:
-        bin_edges = np.histogram_bin_edges(
-            input_table[column], bins="fd", range=min_max
-        )
-    elif bin_strategy == BinStrategy.Sturges:
-        bin_edges = np.histogram_bin_edges(
-            input_table[column], bins="sturges", range=min_max
-        )
-    elif bin_strategy == BinStrategy.Doane:
-        bin_edges = np.histogram_bin_edges(
-            input_table[column], bins="doane", range=min_max
-        )
-    elif bin_strategy == BinStrategy.Scott:
-        bin_edges = np.histogram_bin_edges(
-            input_table[column], bins="scott", range=min_max
-        )
-    elif bin_strategy == BinStrategy.Rice:
-        bin_edges = np.histogram_bin_edges(
-            input_table[column], bins="rice", range=min_max
-        )
-    elif bin_strategy == BinStrategy.Sqrt:
-        bin_edges = np.histogram_bin_edges(
-            input_table[column], bins="sqrt", range=min_max
-        )
-    elif bin_strategy == BinStrategy.FixedCount and fixedcount is not None:
+    if bin_strategy == BinStrategy.FixedCount and fixedcount is not None:
         bin_edges = np.histogram_bin_edges(
             input_table[column], bins=fixedcount, range=min_max
         )
@@ -91,7 +73,8 @@ def bin(
             bins=np.arange(min_max[0], min_max[1] + fixedwidth, fixedwidth, dtype=int),
             range=min_max,
         )
-        print(bin_edges)
+    else:
+        bin_edges = __bin_edges_mapping[bin_strategy](input_table[column], min_max)
 
     inds = np.digitize(input_table[column], bin_edges)
     value_edges = [
