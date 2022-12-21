@@ -37,7 +37,8 @@ export class DataTable extends Resource implements TableEmitter {
 	}
 
 	private _format: DataFormat = DataFormat.CSV
-	private _rawData: Blob | undefined
+	private _data: Blob | undefined
+	private _dataRef: string | string[] | undefined
 
 	public constructor(datatable?: DataTableSchema) {
 		super()
@@ -47,8 +48,8 @@ export class DataTable extends Resource implements TableEmitter {
 	}
 
 	private refreshData = (): void => {
-		if (this._rawData != null) {
-			readTable(this._rawData, this.toSchema())
+		if (this._data != null) {
+			readTable(this._data, this.toSchema())
 				.then(t => this._output$.next({ table: t, id: this.name }))
 				.catch(err => {
 					log('error reading blob', err)
@@ -71,12 +72,21 @@ export class DataTable extends Resource implements TableEmitter {
 	}
 
 	public get data(): Blob | undefined {
-		return this._rawData
+		return this._data
 	}
 
 	public set data(value: Blob | undefined) {
-		this._rawData = value
+		this._data = value
 		this.refreshData()
+	}
+
+	public get dataRef(): string | string[] | undefined {
+		return this._dataRef
+	}
+
+	public set dataRef(value: string | string[] | undefined) {
+		this._dataRef = value
+		this._onChange.next()
 	}
 
 	public get format(): DataFormat {
@@ -116,6 +126,19 @@ export class DataTable extends Resource implements TableEmitter {
 		// which will trigger refreshSource
 		this.parser.loadSchema(schema?.parser, true)
 		this.shape.loadSchema(schema?.shape, true)
+		this.dataRef = schema?.dataRef
+
+		if (schema?.data != null) {
+			if (typeof schema.data === 'string') {
+				// pass in raw CSV data
+				this.data = new Blob([schema.data])
+			} else {
+				// pass in encoded JSON data
+				this.data = new Blob([JSON.stringify(schema.data)], {
+					type: 'application/json',
+				})
+			}
+		}
 
 		if (!quiet) {
 			this._onChange.next()

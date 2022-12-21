@@ -39,10 +39,12 @@ export async function findRel<T extends ResourceSchema = ResourceSchema>(
 	resource: ResourceSchema,
 	files: Map<string, Blob>,
 ): Promise<T | undefined> {
+	console.log('find rel', rel, files)
 	if (resource.sources) {
 		for (const source of resource.sources) {
-			if (isResourceRelationship(source)) {
-				if (source.rel === rel) {
+			if (isResourceRelationship(source) && source.rel === rel) {
+				if (source.source) {
+					// Return an embedded source
 					const result = await toResourceSchema(source.source, files)
 					return result as T
 				}
@@ -59,7 +61,7 @@ async function parseFileContent(item: string, files: Map<string, Blob>) {
 	try {
 		return JSON.parse(resourceText)
 	} catch (e) {
-		console.error('error parsing resource ' + item, e)
+		console.error(`error parsing resource ${item}`, e)
 		return undefined
 	}
 }

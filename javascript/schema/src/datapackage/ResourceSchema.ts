@@ -12,6 +12,11 @@ import type { Profile } from '../Profile.js'
 export interface ResourceSchema extends Named {
 	$schema: string
 	/**
+	 * The relationship of this resource to the parent resource.
+	 * default = profile value.
+	 */
+	rel?: string
+	/**
 	 * Defines the resource type.
 	 * Known resource types should have accommpanying processors and rendering components.
 	 * Unknown resource types can be interrogated to determine if the format is understandable by an existing component.
@@ -19,10 +24,9 @@ export interface ResourceSchema extends Named {
 	 */
 	profile?: Profile
 	/**
-	 * URI-compliant path to the resource (local or remote).
-	 * If array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).
+	 * URI-compliant path to the referenced resource (local or remote).
 	 */
-	path?: string | string[]
+	path?: string
 	/**
 	 * URL to a public webpage that describes this resource.
 	 */
@@ -40,19 +44,5 @@ export interface ResourceSchema extends Named {
 	 * to create a fully-realized, strongly typed, and transformed output table.
 	 * Entire Resource objects may be embedded here, or a string path to the Resource definition JSON.
 	 */
-	sources?: (string | ResourceSchema | ResourceRelationship)[]
-}
-
-/**
- * An explicit resource relationship
- */
-export interface ResourceRelationship {
-	/**
-	 * The relationship type
-	 */
-	rel: string
-	/**
-	 * The linked or embedded resource
-	 */
-	source: string | ResourceSchema
+	sources?: (string | ResourceSchema)[]
 }

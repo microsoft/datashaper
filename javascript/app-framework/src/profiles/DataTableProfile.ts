@@ -6,7 +6,7 @@ import { KnownProfile } from '@datashaper/schema'
 import { DataTable } from '@datashaper/workflow'
 
 import { DataTableEditor, RawTableViewer } from '../components/editors/index.js'
-import type { GeneratedExtraRoutes, ProfilePlugin } from '../types.js'
+import type { GeneratedExtraRoutes, ProfilePlugin , ResourceRoute } from '../types.js'
 import { ResourceGroupType } from '../types.js'
 
 export class DataTableProfile implements ProfilePlugin<DataTable> {
@@ -25,24 +25,30 @@ export class DataTableProfile implements ProfilePlugin<DataTable> {
 		resource: DataTable,
 		pathContext: string,
 	): GeneratedExtraRoutes | undefined {
-		const dataPath = Array.isArray(resource.path)
-			? resource.path[0]
-			: resource.path
-		if (dataPath != null) {
-			const pathItems = dataPath.split('/') ?? []
+		const createSibling = (
+			dataRef: string,
+			defaultTitle: string,
+		): ResourceRoute => {
+			const pathItems = dataRef.split('/') ?? []
 			const lastPathItem = pathItems[pathItems.length - 1]
-			if (lastPathItem != null) {
-				return {
-					preItemSiblings: [
-						{
-							title: lastPathItem,
-							href: `${pathContext}/${lastPathItem}`,
-							icon: 'Database',
-							renderer: RawTableViewer,
-							props: { dataTable: resource },
-						},
-					],
-				}
+			return {
+				title: lastPathItem ?? defaultTitle,
+				href: `${pathContext}/${lastPathItem}`,
+				icon: 'Database',
+				renderer: RawTableViewer,
+				props: { dataTable: resource },
+			}
+		}
+		const dataRef = resource.dataRef
+		if (dataRef != null) {
+			// If multiple data refs, create a sibling for each
+			const preItemSiblings: ResourceRoute[] = Array.isArray(dataRef)
+				? dataRef.map((ref, index) => createSibling(ref, `data-${index}}`))
+				: [createSibling(dataRef, 'data')]
+
+			if (preItemSiblings.length > 0) {
+				console.log('SIBS', preItemSiblings)
+				return { preItemSiblings }
 			}
 		}
 	}

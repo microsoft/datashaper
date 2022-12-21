@@ -73,16 +73,19 @@ export class TableBundleProfile implements ProfilePlugin<TableBundle> {
 		resource: TableBundle,
 		pathContext: string,
 	): GeneratedExtraRoutes | undefined {
-		if (resource.input != null) {
-			console.log('YO', resource.input)
+		if (
+			resource.input != null &&
+			resource.input.profile === KnownProfile.TableBundle
+		) {
+			console.log('ADD LINK')
 			return {
 				children: [
 					{
 						title: 'input',
 						href: pathContext,
-						icon: 'Database',
+						icon: 'Link',
 						renderer: TableBundleEditor,
-						props: { resource },
+						props: { resource: resource.input },
 					},
 				],
 			}

@@ -218,7 +218,7 @@ export class TableBundle extends Resource implements TableEmitter {
 				this._inputs.set(
 					name,
 					(dp.getResource(name) as TableBundle)?.output$ ??
-						(EMPTY as Observable<any>),
+						(EMPTY as Observable<unknown>),
 				),
 			)
 			// Set the input name from the source

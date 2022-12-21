@@ -21,8 +21,19 @@ export interface DataTableSchema extends ResourceSchema {
 
 	/**
 	 * Option to embed the data directly in the JSON descriptor.
+	 *
+	 * Valid data formats are:
+	 * * string: raw CSV data, parsed according to the `parser` options
+	 * * array: raw JSON data, parsed according to the `shape` options
 	 */
-	data?: any
+	data?: string | unknown[]
+
+	/**
+	 * The path to the data file. This may be a URL or the path of a local file.
+	 * If an array is specified, then the data is assumed to be split across multiple files.
+	 */
+	dataRef?: string | string[]
+
 	/**
 	 * File format of the resource to inform load/parse.
 	 * Note that if the data property is present, this is assumed to be "JSON".

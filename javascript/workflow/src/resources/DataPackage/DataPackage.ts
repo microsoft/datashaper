@@ -3,7 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-assignment */
-import type { DataPackageSchema } from '@datashaper/schema'
+import type {
+	DataPackageSchema,
+	ResourceRelationship,
+	ResourceSchema,
+} from '@datashaper/schema'
 import {
 	createDataPackageSchemaObject,
 	KnownProfile,
@@ -12,6 +16,7 @@ import {
 import type { Observable } from 'rxjs'
 import { BehaviorSubject, map } from 'rxjs'
 
+import { isResourceRelationship } from '../predicates.js'
 import { Resource } from '../Resource.js'
 import type { ResourceHandler } from '../types.js'
 import { toResourceSchema } from '../utils.js'
@@ -136,7 +141,7 @@ export class DataPackage extends Resource {
 				resources.push(...(await handler.save(resource, files)))
 			} else {
 				throw new Error(
-					'no handler defined for resource profile: ' + resource.profile,
+					`no handler defined for resource profile: ${resource.profile}`,
 				)
 			}
 		}
@@ -155,16 +160,18 @@ export class DataPackage extends Resource {
 		this.loadSchema(schema, true)
 
 		const resources = schema?.resources
+		writeEmbeddedResourcesIntoFiles(resources, files)
+
 		if (resources && files) {
 			for (const r of resources) {
 				const resource = await toResourceSchema(r, files)
-				if (!resource || !resource.profile) {
+				if (!resource?.profile) {
 					throw new Error('resource invalid')
 				}
 				const handler = this._resourceHandlers.get(resource.profile)
 				if (!handler) {
 					throw new Error(
-						'no handler defined for resource profile: ' + resource.profile,
+						`no handler defined for resource profile: ${resource.profile}`,
 					)
 				}
 
@@ -175,6 +182,24 @@ export class DataPackage extends Resource {
 
 		if (!quiet) {
 			this._onChange.next()
+		}
+	}
+}
+
+function writeEmbeddedResourcesIntoFiles(
+	resources: Array<string | ResourceSchema | ResourceRelationship>,
+	files: Map<string, Blob>,
+	root = '',
+) {
+	for (const res of resources) {
+		if (typeof res !== 'string') {
+			if (!isResourceRelationship(res)) {
+				const resourcePath = res?.path ?? `${root}/${res?.name}`
+				files.set(resourcePath, new Blob([JSON.stringify(res)]))
+				if (res.sources) {
+					writeEmbeddedResourcesIntoFiles(res.sources, files, resourcePath)
+				}
+			}
 		}
 	}
 }

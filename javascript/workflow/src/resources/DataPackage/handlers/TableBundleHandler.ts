@@ -105,8 +105,14 @@ export class TableBundleHandler implements ResourceHandler {
 		if (datatableSchema != null) {
 			const dataTable = new DataTable(datatableSchema)
 			// Locate the raw source data for the datatable type
-			if (typeof dataTable.data === 'string') {
-				dataTable.data = await resolveRawData(dataTable.data, files)
+			if (typeof dataTable.dataRef === 'string') {
+				dataTable.data = await resolveRawData(dataTable.dataRef, files)
+			} else if (Array.isArray(dataTable.dataRef)) {
+				// TODO: verify that this actually works
+				const shards = await Promise.all(
+					dataTable.dataRef.map(d => resolveRawData(d, files)),
+				)
+				dataTable.data = new Blob(shards)
 			}
 			bundle.input = dataTable
 		}
