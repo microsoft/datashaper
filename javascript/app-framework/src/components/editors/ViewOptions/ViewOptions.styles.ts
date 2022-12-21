@@ -8,7 +8,11 @@ import styled from 'styled-components'
 export const ViewOptionsContainer = styled.div`
 	display: flex;
 	justify-content: end;
-	padding: 13px;
+	min-height: 45px;
+	align-items: center;
+	padding-right: 5px;
+	background: ${({ theme }) => theme.palette.neutralLighter};
+	border-bottom: 1px solid ${({ theme }) => theme.palette.neutralTertiaryAlt};
 `
 
 export const icons = {

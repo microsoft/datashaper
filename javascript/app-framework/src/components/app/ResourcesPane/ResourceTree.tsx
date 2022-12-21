@@ -6,6 +6,7 @@ import { Tree } from '@essex/components'
 import { memo } from 'react'
 
 import { useTreeGroups, useTreeItems } from './ResourceTree.hooks.js'
+import { treeStyles } from './ResourceTree.styles.js'
 import type { ResourceTreeProps } from './ResourceTree.types.js'
 
 export const ResourceTree: React.FC<ResourceTreeProps> = memo(
@@ -18,6 +19,7 @@ export const ResourceTree: React.FC<ResourceTreeProps> = memo(
 				items={items}
 				selectedKey={selectedRoute}
 				narrow={!expanded}
+				styles={treeStyles}
 			/>
 		)
 	},

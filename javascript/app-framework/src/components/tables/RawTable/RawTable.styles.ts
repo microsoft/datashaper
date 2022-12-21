@@ -15,6 +15,9 @@ export const DatasetContainer = styled.div`
 export const DetailsContainer = styled.div`
 	display: flex;
 	justify-content: flex-end;
+	align-items: center;
+	height: 35px;
+	min-height: 35px;
 `
 export const DetailsText = styled.span`
 	font-size: 11px;

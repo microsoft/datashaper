@@ -4,7 +4,7 @@
  */
 import { useHeaderCommandBarDefaults } from '@datashaper/react'
 import type { TableContainer } from '@datashaper/tables'
-import type { Maybe, Step,TableBundle, Workflow } from '@datashaper/workflow'
+import type { Maybe, Step, TableBundle, Workflow } from '@datashaper/workflow'
 import type {
 	IColumn,
 	ICommandBarItemProps,
@@ -17,6 +17,7 @@ import type { Observable } from 'rxjs'
 import {
 	buttonStyles,
 	icons,
+	useCommandBarStyles,
 	useTableHeaderColors,
 } from './BundleEditor.styles.js'
 
@@ -81,6 +82,8 @@ export function useHistoryButtonCommandBar(
 	numSteps: number | undefined,
 	toggleCollapsed: () => void,
 ): ICommandBarProps {
+	const styles = useCommandBarStyles()
+	const colors = useTableHeaderColors()
 	const base = useMemo(
 		() => ({
 			items: [
@@ -95,15 +98,10 @@ export function useHistoryButtonCommandBar(
 				} as ICommandBarItemProps,
 			],
 			id: 'historyButton',
-			styles: {
-				root: {
-					height: 43,
-				},
-			},
+			styles,
 		}),
-		[isCollapsed, numSteps, toggleCollapsed],
+		[isCollapsed, numSteps, toggleCollapsed, styles],
 	)
-	const colors = useTableHeaderColors()
 	return useHeaderCommandBarDefaults(base, true, colors)
 }
 
