@@ -286,7 +286,7 @@
         {
           "kind": "Interface",
           "canonicalReference": "@datashaper/schema!Bin:interface",
-          "docComment": "",
+          "docComment": "/**\n * Describes a data bin in terms of inclusive lower bound and count of values in the bin.\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1172,7 +1172,7 @@
         {
           "kind": "Interface",
           "canonicalReference": "@datashaper/schema!Category:interface",
-          "docComment": "",
+          "docComment": "/**\n * Describes a nomincal category in terms of category name and count of values in the category.\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",

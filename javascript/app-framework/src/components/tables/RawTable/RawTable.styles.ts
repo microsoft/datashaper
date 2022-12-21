@@ -4,7 +4,6 @@
  */
 
 import type { ArqueroTableHeaderStyles } from '@datashaper/react'
-import type { ITheme } from '@fluentui/react'
 import { MessageBar, useTheme } from '@fluentui/react'
 import { useMemo } from 'react'
 import styled from 'styled-components'

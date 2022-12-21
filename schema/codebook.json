@@ -2,6 +2,7 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
         "Bin": {
+            "description": "Describes a data bin in terms of inclusive lower bound and count of values in the bin.",
             "properties": {
                 "count": {
                     "type": "number"
@@ -16,6 +17,7 @@
             "type": "object"
         },
         "Category": {
+            "description": "Describes a nomincal category in terms of category name and count of values in the category.",
             "properties": {
                 "count": {
                     "type": "number"

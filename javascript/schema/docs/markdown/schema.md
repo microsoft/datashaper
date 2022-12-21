@@ -51,12 +51,12 @@
 |  --- | --- |
 |  [AggregateArgs](./schema.aggregateargs.md) |  |
 |  [BasicInput](./schema.basicinput.md) | Single-input, single-output step I/O |
-|  [Bin](./schema.bin.md) |  |
+|  [Bin](./schema.bin.md) | Describes a data bin in terms of inclusive lower bound and count of values in the bin. |
 |  [BinArgs](./schema.binargs.md) |  |
 |  [BinarizeArgs](./schema.binarizeargs.md) |  |
 |  [BooleanArgs](./schema.booleanargs.md) |  |
 |  [BundleSchema](./schema.bundleschema.md) | A schema for defining custom bundle types. |
-|  [Category](./schema.category.md) |  |
+|  [Category](./schema.category.md) | Describes a nomincal category in terms of category name and count of values in the category. |
 |  [CodebookSchema](./schema.codebookschema.md) | This contains all of the field-level details for interpreting a dataset, including data types, mapping, and metadata. Note that with persisted metadata and field examples, a dataset can often be visualized and described to the user without actually loading the source file. resource profile: 'codebook' |
 |  [Constraints](./schema.constraints.md) | Validation constraints for a field. |
 |  [ConvertArgs](./schema.convertargs.md) |  |

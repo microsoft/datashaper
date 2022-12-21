@@ -39,8 +39,8 @@ export function stats(
 		const optn =
 			type === DataType.Number
 				? {
-						min: optStats[`${cur}.min`],
-						max: optStats[`${cur}.max`],
+						minimum: optStats[`${cur}.minimum`],
+						maximum: optStats[`${cur}.maximum`],
 						mean: optStats[`${cur}.mean`],
 						median: optStats[`${cur}.median`],
 						stdev: optStats[`${cur}.stdev`],
@@ -82,8 +82,8 @@ function optionalStats(
 		const mode = reqStats[`${cur}.mode`]
 		const type = determineType(mode)
 		if (type === DataType.Number || type === DataType.Date) {
-			acc[`${cur}.min`] = op.min(cur)
-			acc[`${cur}.max`] = op.max(cur)
+			acc[`${cur}.minimum`] = op.min(cur)
+			acc[`${cur}.maximum`] = op.max(cur)
 			acc[`${cur}.mean`] = op.mean(cur)
 			acc[`${cur}.median`] = op.median(cur)
 			acc[`${cur}.stdev`] = op.stdev(cur)
@@ -106,8 +106,8 @@ function binning(
 	})
 	const numeric = table.columnNames(filter)
 	const binArgs = numeric.reduce((acc, cur) => {
-		const min = optStats[`${cur}.min`]
-		const max = optStats[`${cur}.max`]
+		const min = optStats[`${cur}.minimum`]
+		const max = optStats[`${cur}.maximum`]
 		const distinct = reqStats[`${cur}.distinct`]
 		if (distinct > 10) {
 			acc[cur] = fixedBinCount(cur, min, max, 10, true)
@@ -120,8 +120,8 @@ function binning(
 	// note that only bins with at least one entry will have a row,
 	// so we could have less than 10 bins - hence the fill
 	const counted = numeric.reduce((acc, cur) => {
-		const min = optStats[`${cur}.min`]
-		const max = optStats[`${cur}.max`]
+		const min = optStats[`${cur}.minimum`]
+		const max = optStats[`${cur}.maximum`]
 		const distinct = reqStats[`${cur}.distinct`]
 		const bins = binRollup
 			.groupby(cur)

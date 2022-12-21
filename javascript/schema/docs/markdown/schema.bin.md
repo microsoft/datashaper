@@ -4,6 +4,8 @@
 
 ## Bin interface
 
+Describes a data bin in terms of inclusive lower bound and count of values in the bin.
+
 <b>Signature:</b>
 
 ```typescript
