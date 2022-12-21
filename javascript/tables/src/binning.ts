@@ -108,10 +108,6 @@ function bin(min: number, max: number, step: number, clamped: boolean) {
 			return candidate
 		}
 
-		if (candidate === ultimate) {
-			return penultimate
-		}
-
 		if (candidate >= max) {
 			return penultimate
 		}

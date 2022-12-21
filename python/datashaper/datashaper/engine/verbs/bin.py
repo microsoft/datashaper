@@ -91,6 +91,7 @@ def bin(
             bins=np.arange(min_max[0], min_max[1] + fixedwidth, fixedwidth, dtype=int),
             range=min_max,
         )
+        print(bin_edges)
 
     inds = np.digitize(input_table[column], bin_edges)
     value_edges = [
