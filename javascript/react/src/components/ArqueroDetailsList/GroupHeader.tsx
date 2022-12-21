@@ -45,7 +45,7 @@ export const GroupHeader: React.FC<React.PropsWithChildren<GroupHeaderProps>> =
 			return lazyLoadGroups && (group?.level as number) > 0 && !manualToggle
 		}, [group, lazyLoadGroups, manualToggle])
 
-		const levelButtonProps = useLevelButtonProps(group.isCollapsed)
+		const levelButtonProps = useLevelButtonProps(group?.isCollapsed)
 
 		return (
 			<HeaderContainer
