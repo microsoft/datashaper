@@ -34,14 +34,29 @@ def __get_bucket_value(bin_edges, inds, n, clamped, min_max, value, printRange):
 
 
 __bin_edges_mapping = {
-    BinStrategy.Auto: lambda column, range: np.histogram_bin_edges(column, bins="auto", range=range),
-    BinStrategy.Fd: lambda column, range: np.histogram_bin_edges(column, bins="fd", range=range),
-    BinStrategy.Sturges: lambda column, range: np.histogram_bin_edges(column, bins="sturges", range=range),
-    BinStrategy.Doane: lambda column, range: np.histogram_bin_edges(column, bins="doane", range=range),
-    BinStrategy.Scott: lambda column, range: np.histogram_bin_edges(column, bins="scott", range=range),
-    BinStrategy.Rice: lambda column, range: np.histogram_bin_edges(column, bins="rice", range=range),
-    BinStrategy.Sqrt: lambda column, range: np.histogram_bin_edges(column, bins="sqrt", range=range)
+    BinStrategy.Auto: lambda column, range: np.histogram_bin_edges(
+        column, bins="auto", range=range
+    ),
+    BinStrategy.Fd: lambda column, range: np.histogram_bin_edges(
+        column, bins="fd", range=range
+    ),
+    BinStrategy.Sturges: lambda column, range: np.histogram_bin_edges(
+        column, bins="sturges", range=range
+    ),
+    BinStrategy.Doane: lambda column, range: np.histogram_bin_edges(
+        column, bins="doane", range=range
+    ),
+    BinStrategy.Scott: lambda column, range: np.histogram_bin_edges(
+        column, bins="scott", range=range
+    ),
+    BinStrategy.Rice: lambda column, range: np.histogram_bin_edges(
+        column, bins="rice", range=range
+    ),
+    BinStrategy.Sqrt: lambda column, range: np.histogram_bin_edges(
+        column, bins="sqrt", range=range
+    ),
 }
+
 
 def bin(
     input: VerbInput,
