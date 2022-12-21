@@ -2747,12 +2747,13 @@
 			"profile": "tablebundle",
 			"sources": [
 				{
+					"rel": "input",
+					"$ref": "nhefs"
+				},
+				{
 					"rel": "workflow",
 					"source": {
 						"profile": "workflow",
-						"input": [
-							"nhefs"
-						],
 						"steps": [
 							{
 								"verb": "window",
@@ -2892,12 +2893,13 @@
 			"profile": "tablebundle",
 			"sources": [
 				{
+					"rel": "input",
+					"$ref": "nhefs"
+				},
+				{
 					"rel": "workflow",
 					"source": {
 						"profile": "workflow",
-						"input": [
-							"nhefs"
-						],
 						"steps": [
 							{
 								"verb": "erase",

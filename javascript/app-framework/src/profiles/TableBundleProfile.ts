@@ -14,7 +14,11 @@ import {
 import type { IContextualMenuItem } from '@fluentui/react'
 
 import { TableBundleEditor } from '../components/editors/index.js'
-import type { AppServices, ProfilePlugin } from '../types.js'
+import type {
+	AppServices,
+	GeneratedExtraRoutes,
+	ProfilePlugin,
+} from '../types.js'
 import { CommandBarSection, ResourceGroupType } from '../types.js'
 
 export class TableBundleProfile implements ProfilePlugin<TableBundle> {
@@ -62,6 +66,26 @@ export class TableBundleProfile implements ProfilePlugin<TableBundle> {
 					},
 				},
 			]
+		}
+	}
+
+	public getRoutes(
+		resource: TableBundle,
+		pathContext: string,
+	): GeneratedExtraRoutes | undefined {
+		if (resource.input != null) {
+			console.log('YO', resource.input)
+			return {
+				children: [
+					{
+						title: 'input',
+						href: pathContext,
+						icon: 'Database',
+						renderer: TableBundleEditor,
+						props: { resource },
+					},
+				],
+			}
 		}
 	}
 
