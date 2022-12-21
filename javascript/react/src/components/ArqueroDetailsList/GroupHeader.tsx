@@ -6,7 +6,11 @@ import type { IGroup } from '@fluentui/react'
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Else, If, Then } from 'react-if'
 
-import { useCountChildren, useIntersection } from './GroupHeader.hooks.js'
+import {
+	useCountChildren,
+	useIntersection,
+	useLevelButtonProps,
+} from './GroupHeader.hooks.js'
 import {
 	Bold,
 	HeaderContainer,
@@ -41,6 +45,8 @@ export const GroupHeader: React.FC<React.PropsWithChildren<GroupHeaderProps>> =
 			return lazyLoadGroups && (group?.level as number) > 0 && !manualToggle
 		}, [group, lazyLoadGroups, manualToggle])
 
+		const levelButtonProps = useLevelButtonProps(group.isCollapsed)
+
 		return (
 			<HeaderContainer
 				// uses the ref to toggle if element is into view if the user didn't toggled it with the button
@@ -49,12 +55,7 @@ export const GroupHeader: React.FC<React.PropsWithChildren<GroupHeaderProps>> =
 				}
 				groupLevel={group?.level as number}
 			>
-				<LevelButton
-					onClick={onManualLevelToggle}
-					iconProps={{
-						iconName: group?.isCollapsed ? 'ChevronRight' : 'ChevronDown',
-					}}
-				/>
+				<LevelButton onClick={onManualLevelToggle} {...levelButtonProps} />
 				<If condition={!!children}>
 					<Then>{children}</Then>
 					<Else>

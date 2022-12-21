@@ -16,7 +16,7 @@ export const HeaderContainer = styled.div<{ groupLevel: number }>`
 `
 
 export const LevelButton = styled(IconButton as any)`
-	width: 48px;
+	width: 32px;
 `
 
 export const HeaderDetailsText = styled.span`

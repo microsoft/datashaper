@@ -4,7 +4,8 @@
  */
 
 import type { IGroup } from '@fluentui/react'
-import { useCallback, useEffect, useState } from 'react'
+import { useTheme } from '@fluentui/react'
+import { useCallback, useEffect, useMemo,useState } from 'react'
 
 export function useIntersection(
 	element: HTMLDivElement | undefined,
@@ -37,4 +38,22 @@ export function useCountChildren(): (children: IGroup[]) => number {
 		return total
 	}, [])
 	return countChildren
+}
+
+export function useLevelButtonProps(collapsed = false) {
+	const theme = useTheme()
+	return useMemo(
+		() => ({
+			iconProps: {
+				iconName: collapsed ? 'ChevronRight' : 'ChevronDown',
+				styles: {
+					root: {
+						fontSize: 10,
+						color: theme.palette.neutralSecondary,
+					},
+				},
+			},
+		}),
+		[collapsed, theme],
+	)
 }
