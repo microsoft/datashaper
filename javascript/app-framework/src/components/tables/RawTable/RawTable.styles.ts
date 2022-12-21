@@ -3,8 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import type { ArqueroTableHeaderStyles } from '@datashaper/react'
 import type { ITheme } from '@fluentui/react'
-import { MessageBar } from '@fluentui/react'
+import { MessageBar, useTheme } from '@fluentui/react'
+import { useMemo } from 'react'
 import styled from 'styled-components'
 
 export const DatasetContainer = styled.div`
@@ -12,24 +14,24 @@ export const DatasetContainer = styled.div`
 	height: 100%;
 `
 
-export const DetailsContainer = styled.div`
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
-	height: 35px;
-	min-height: 35px;
-`
-export const DetailsText = styled.span`
-	font-size: 11px;
-	padding-right: 12px;
-	color: ${({ theme }: { theme: ITheme }) => theme.palette.neutralSecondary};
-`
 export const Message = styled(MessageBar)`
 	margin-top: 10px;
 `
 
 export const DetailsListContainer = styled.div`
-	height: 250px;
-	border-top: 1px solid
-		${({ theme }: { theme: ITheme }) => theme.palette.neutralTertiaryAlt};
+	height: 100%;
 `
+
+export function useHeaderStyles(): ArqueroTableHeaderStyles {
+	const theme = useTheme()
+	return useMemo(
+		() => ({
+			root: {
+				background: theme.palette.white,
+				height: 36,
+				borderBottom: `1px solid ${theme.palette.neutralTertiaryAlt}`,
+			},
+		}),
+		[theme],
+	)
+}
