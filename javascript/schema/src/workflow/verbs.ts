@@ -257,6 +257,12 @@ export interface AggregateArgs extends RollupArgs {
 
 export enum BinStrategy {
 	Auto = 'auto',
+	Fd = 'fd',
+	Doane = 'doane',
+	Scott = 'scott',
+	Rice = 'rice',
+	Sturges = 'sturges',
+	Sqrt = 'sqrt',
 	FixedCount = 'fixed count',
 	FixedWidth = 'fixed width',
 }

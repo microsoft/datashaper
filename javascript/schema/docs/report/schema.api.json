@@ -668,6 +668,48 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!BinStrategy.Doane:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Doane = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"doane\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Doane"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!BinStrategy.Fd:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Fd = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"fd\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Fd"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!BinStrategy.FixedCount:member",
               "docComment": "",
               "excerptTokens": [
@@ -707,6 +749,90 @@
               },
               "releaseTag": "Public",
               "name": "FixedWidth"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!BinStrategy.Rice:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Rice = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"rice\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Rice"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!BinStrategy.Scott:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Scott = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"scott\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Scott"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!BinStrategy.Sqrt:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Sqrt = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"sqrt\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Sqrt"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!BinStrategy.Sturges:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Sturges = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"sturges\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Sturges"
             }
           ]
         },

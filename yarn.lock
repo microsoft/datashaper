@@ -2216,8 +2216,10 @@ __metadata:
     cross-fetch: ^3.1.5
     d3-time-format: ^4.1.0
     debug: ^4.3.4
+    exact-linspace: ^1.0.14
     jest: ^29.3.1
     lodash-es: ^4.17.21
+    percentile: ^1.6.0
     regenerator-runtime: ^0.13.11
     rxjs: ^7.8.0
     typescript: ^4.9.4
@@ -11281,6 +11283,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"exact-linspace@npm:^1.0.14":
+  version: 1.0.14
+  resolution: "exact-linspace@npm:1.0.14"
+  checksum: d97b3b5ff7f1e8f7dd27412675b5d20fdd7fffee89be8d431d98ccec5907d6e194375b866d399938a05cf2098fc1443dd5308d53ba4d4c3628b0faad70634683
+  languageName: node
+  linkType: hard
+
 "exec-sh@npm:^0.3.2":
   version: 0.3.6
   resolution: "exec-sh@npm:0.3.6"
@@ -16840,6 +16849,13 @@ __metadata:
     safe-buffer: ^5.0.1
     sha.js: ^2.4.8
   checksum: 2c950a100b1da72123449208e231afc188d980177d021d7121e96a2de7f2abbc96ead2b87d03d8fe5c318face097f203270d7e27908af9f471c165a4e8e69c92
+  languageName: node
+  linkType: hard
+
+"percentile@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "percentile@npm:1.6.0"
+  checksum: 3d8d6f929acdaacfca6c82f69d55fccfc2b1a7756a2726bbe4e46747170c2fd3bb1c640a7a679816a4a9550ba33e6b733be19c7d1531c61b9f088e01abfb132a
   languageName: node
   linkType: hard
 

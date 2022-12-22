@@ -7,7 +7,18 @@ import { BinStrategy } from '@datashaper/schema'
 import { fixedBinStep } from '@datashaper/tables'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { default as linspace } from 'exact-linspace'
 
+import {
+	calculateBinCount,
+	calculateWidthAuto,
+	calculateWidthDoane,
+	calculateWidthFd,
+	calculateWidthRice,
+	calculateWidthScott,
+	calculateWidthSqrt,
+	calculateWidthSturges,
+} from './util/binUtilities.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 
@@ -36,8 +47,6 @@ function computeBins(input: ColumnTable, args: BinArgs) {
 	const stats = getStats(input, column, args.min, args.max)
 	const [min, max] = stats
 	switch (strategy) {
-		case BinStrategy.Auto:
-			return input.derive({ bins: op.bins(column) }).get('bins', 0)
 		case BinStrategy.FixedWidth:
 			if (!fixedwidth) {
 				throw new Error('Must supply a bin width')
@@ -48,6 +57,37 @@ function computeBins(input: ColumnTable, args: BinArgs) {
 				throw new Error('Must supply a bin count')
 			}
 			return [min, max, (max - min) / fixedcount]
+		default: {
+			const width = estimateWidth(strategy, input.array(column), min, max)
+			const numBins = calculateBinCount(min, max, width)
+			const binEdges = linspace(min, max, numBins + 1)
+
+			return [min, max, binEdges[1]! - binEdges[0]!]
+		}
+	}
+}
+
+function estimateWidth(
+	strategy: BinStrategy,
+	values: number[],
+	min: number,
+	max: number,
+): number {
+	switch (strategy) {
+		case BinStrategy.Auto:
+			return calculateWidthAuto(min, max, values)
+		case BinStrategy.Fd:
+			return calculateWidthFd(values)
+		case BinStrategy.Doane:
+			return calculateWidthDoane(min, max, values)
+		case BinStrategy.Scott:
+			return calculateWidthScott(values)
+		case BinStrategy.Rice:
+			return calculateWidthRice(min, max, values)
+		case BinStrategy.Sturges:
+			return calculateWidthSturges(min, max, values)
+		case BinStrategy.Sqrt:
+			return calculateWidthSqrt(min, max, values)
 		default:
 			throw new Error(`Unsupported bin strategy ${strategy}`)
 	}

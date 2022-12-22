@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ArqueroDetailsList,ArqueroTableHeader } from '@datashaper/react'
+import { ArqueroDetailsList, ArqueroTableHeader } from '@datashaper/react'
 import { MessageBarType } from '@fluentui/react'
 import { memo } from 'react'
 
