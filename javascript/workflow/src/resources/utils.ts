@@ -5,7 +5,6 @@
 import type { ResourceSchema } from '@datashaper/schema'
 
 import { fetchFile } from '../util/network.js'
-import { isResourceRelationship } from './predicates.js'
 
 export const isRawData = (
 	r: string | ResourceSchema,
@@ -41,9 +40,9 @@ export async function findRel<T extends ResourceSchema = ResourceSchema>(
 ): Promise<T | undefined> {
 	if (resource.sources) {
 		for (const source of resource.sources) {
-			if (isResourceRelationship(source)) {
+			if (typeof source !== 'string') {
 				if (source.rel === rel) {
-					const result = await toResourceSchema(source.source, files)
+					const result = await toResourceSchema(source, files)
 					return result as T
 				}
 			}
@@ -59,7 +58,7 @@ async function parseFileContent(item: string, files: Map<string, Blob>) {
 	try {
 		return JSON.parse(resourceText)
 	} catch (e) {
-		console.error('error parsing resource ' + item, e)
+		console.error(`error parsing resource ${item}`, e)
 		return undefined
 	}
 }

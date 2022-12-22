@@ -17,7 +17,6 @@ export interface Named
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [description?](./schema.named.description.md) |  | string | <i>(Optional)</i> Description of the named resource. |
-|  [id](./schema.named.id.md) |  | string | Generated guid, immutable. This can be used for stable referencing. |
 |  [name](./schema.named.name.md) |  | string | User-specified name. This will serve as the local id (i.e., like a filename.) and should be URI-compatible. This should be editable, just like any other filename on a file system. |
 |  [title?](./schema.named.title.md) |  | string | <i>(Optional)</i> Friendly name of the resource. Used for display only. |
 

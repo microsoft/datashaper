@@ -6108,60 +6108,6 @@
         },
         {
           "kind": "Variable",
-          "canonicalReference": "@datashaper/workflow!isResourceRelationship:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "isResourceRelationship: "
-            },
-            {
-              "kind": "Content",
-              "text": "(item: string | "
-            },
-            {
-              "kind": "Reference",
-              "text": "ResourceSchema",
-              "canonicalReference": "@datashaper/schema!ResourceSchema:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " | "
-            },
-            {
-              "kind": "Reference",
-              "text": "ResourceRelationship",
-              "canonicalReference": "@datashaper/schema!ResourceRelationship:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ") => "
-            },
-            {
-              "kind": "Reference",
-              "text": "item",
-              "canonicalReference": "@datashaper/workflow!~item"
-            },
-            {
-              "kind": "Content",
-              "text": " is "
-            },
-            {
-              "kind": "Reference",
-              "text": "ResourceRelationship",
-              "canonicalReference": "@datashaper/schema!ResourceRelationship:interface"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "isResourceRelationship",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 9
-          }
-        },
-        {
-          "kind": "Variable",
           "canonicalReference": "@datashaper/workflow!isTableBundle:var",
           "docComment": "",
           "excerptTokens": [
@@ -6861,35 +6807,6 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "description",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isStatic": false,
-              "isProtected": false
-            },
-            {
-              "kind": "Property",
-              "canonicalReference": "@datashaper/workflow!Named#id:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get id(): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";\n\nset id(value: string);"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "id",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -9280,6 +9197,49 @@
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!Resource#rel:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get rel(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceSchema",
+                  "canonicalReference": "@datashaper/schema!ResourceSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "['rel']"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n\nset rel(value: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceSchema",
+                  "canonicalReference": "@datashaper/schema!ResourceSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "['rel']);"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "rel",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
               },
               "isStatic": false,
               "isProtected": false

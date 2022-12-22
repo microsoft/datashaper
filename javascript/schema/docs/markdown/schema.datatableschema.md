@@ -18,7 +18,7 @@ export interface DataTableSchema extends ResourceSchema
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [columns?](./schema.datatableschema.columns.md) |  | number | <i>(Optional)</i> Number of columns in the data. |
-|  [data?](./schema.datatableschema.data.md) |  | any | <i>(Optional)</i> Option to embed the data directly in the JSON descriptor. |
+|  [data?](./schema.datatableschema.data.md) |  | string \| unknown\[\] | <i>(Optional)</i> Option to embed the data directly in the JSON descriptor. Valid data formats are: - string: raw CSV data, parsed according to the <code>parser</code> options - array: raw JSON data, parsed according to the <code>shape</code> options |
 |  [encoding?](./schema.datatableschema.encoding.md) |  | string | <i>(Optional)</i> String encoding. Default: "utf-8". |
 |  [format?](./schema.datatableschema.format.md) |  | [DataFormat](./schema.dataformat.md) | <i>(Optional)</i> File format of the resource to inform load/parse. Note that if the data property is present, this is assumed to be "JSON". Default: "csv". |
 |  [parser?](./schema.datatableschema.parser.md) |  | [ParserOptions](./schema.parseroptions.md) | <i>(Optional)</i> Parser options for interpreting a CSV or other text file that needs parse instruction. |
