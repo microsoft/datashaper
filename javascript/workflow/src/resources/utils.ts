@@ -41,7 +41,10 @@ export async function findRel<T extends ResourceSchema = ResourceSchema>(
 	if (resource.sources) {
 		for (const source of resource.sources) {
 			if (typeof source !== 'string') {
-				if (source.rel === rel) {
+				if (
+					(source.rel != null && source.rel === rel) ||
+					source.profile === rel
+				) {
 					const result = await toResourceSchema(source, files)
 					return result as T
 				}
