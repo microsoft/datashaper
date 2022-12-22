@@ -6,11 +6,11 @@
 	"sources": [
 		{
 			"rel": "input",
-			"source": "nhefs/datatable.json"
+			"path": "nhefs/datatable.json"
 		},
 		{
 			"rel": "codebook",
-			"source": "nhefs/codebook.json"
+			"path": "nhefs/codebook.json"
 		}
 	]
 }

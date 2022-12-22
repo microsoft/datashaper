@@ -4,6 +4,10 @@
 
 ## TableBundleSchema interface
 
+A table bundle encapsulates table-specific resources into a single resource with a prescribed workflow.
+
+A tablebundle requires a `source` entry with rel="input" for the source table. A tablebundle may also include `source` entries with rel="codebook" and rel="workflow" for interpretation and processing of the source data table.
+
 <b>Signature:</b>
 
 ```typescript
@@ -16,5 +20,4 @@ export interface TableBundleSchema extends ResourceSchema
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [profile](./schema.tablebundleschema.profile.md) |  | [KnownProfile.TableBundle](./schema.knownprofile.md) |  |
-|  [sources?](./schema.tablebundleschema.sources.md) |  | Array&lt;{ rel: [TableBundleRel.Input](./schema.tablebundlerel.md)<!-- -->; source: string \| [DataTableSchema](./schema.datatableschema.md)<!-- -->; } \| { rel: [TableBundleRel.Codebook](./schema.tablebundlerel.md)<!-- -->; source: string \| [CodebookSchema](./schema.codebookschema.md)<!-- -->; } \| { rel: [TableBundleRel.Workflow](./schema.tablebundlerel.md)<!-- -->; source: string \| [WorkflowSchema](./schema.workflowschema.md)<!-- -->; }&gt; | <i>(Optional)</i> The sources that compose a table bundle. |
 

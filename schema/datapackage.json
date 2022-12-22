@@ -1,31 +1,11 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
-        "ResourceRelationship": {
-            "description": "An explicit resource relationship",
-            "properties": {
-                "rel": {
-                    "description": "The relationship type",
-                    "type": "string"
-                },
-                "source": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/ResourceSchema"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ],
-                    "description": "The linked or embedded resource"
-                }
-            },
-            "type": "object"
-        },
         "ResourceSchema": {
             "description": "Parent class for any resource type understood by the system.\nAny object type that extends from Resouce is expected to have a standalone schema published.\nFor project state, this can be left as generic as possible for now.",
             "properties": {
                 "$schema": {
+                    "description": "The JSON schema for this resource.",
                     "type": "string"
                 },
                 "description": {
@@ -34,10 +14,6 @@
                 },
                 "homepage": {
                     "description": "URL to a public webpage that describes this resource.",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "Generated guid, immutable.\nThis can be used for stable referencing.",
                     "type": "string"
                 },
                 "license": {
@@ -60,10 +36,14 @@
                             "type": "string"
                         }
                     ],
-                    "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables)."
+                    "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).\nURI-compliant path to the referenced resource (local or remote)."
                 },
                 "profile": {
                     "description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
+                    "type": "string"
+                },
+                "rel": {
+                    "description": "The relationship of this resource to the parent resource.",
                     "type": "string"
                 },
                 "sources": {
@@ -72,9 +52,6 @@
                         "anyOf": [
                             {
                                 "$ref": "#/definitions/ResourceSchema"
-                            },
-                            {
-                                "$ref": "#/definitions/ResourceRelationship"
                             },
                             {
                                 "type": "string"
@@ -98,10 +75,6 @@
         },
         "description": {
             "description": "Description of the named resource.",
-            "type": "string"
-        },
-        "id": {
-            "description": "Generated guid, immutable.\nThis can be used for stable referencing.",
             "type": "string"
         },
         "name": {

@@ -5,7 +5,7 @@
 	"sources": [
 		{
 			"rel": "workflow",
-			"source": "nhefs-transformed/workflow.json"
+			"path": "nhefs-transformed/workflow.json"
 		}
 	]
 }

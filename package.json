@@ -49,5 +49,5 @@
 	"workspaces": [
 		"javascript/*"
 	],
-	"packageManager": "yarn@3.3.0"
+	"packageManager": "yarn@3.3.1"
 }

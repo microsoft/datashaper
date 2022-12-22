@@ -18,7 +18,6 @@ export declare abstract class Named extends Observed implements NamedSchema
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [description](./workflow.named.description.md) |  | string \| undefined |  |
-|  [id](./workflow.named.id.md) |  | string |  |
 |  [name](./workflow.named.name.md) |  | string |  |
 |  [title](./workflow.named.title.md) |  | string \| undefined |  |
 

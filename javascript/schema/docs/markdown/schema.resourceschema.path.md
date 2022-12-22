@@ -4,7 +4,7 @@
 
 ## ResourceSchema.path property
 
-URI-compliant path to the resource (local or remote). If array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).
+URI-compliant path to the resource (local or remote). If array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables). URI-compliant path to the referenced resource (local or remote).
 
 <b>Signature:</b>
 
