@@ -5,6 +5,7 @@
 import type { ResourceSchema } from '@datashaper/schema'
 
 import { fetchFile } from '../util/network.js'
+import { isDataTableSchema } from './predicates.js'
 
 export const isRawData = (
 	r: string | ResourceSchema,
@@ -45,12 +46,34 @@ export async function findRel<T extends ResourceSchema = ResourceSchema>(
 					(source.rel != null && source.rel === rel) ||
 					source.profile === rel
 				) {
-					const result = await toResourceSchema(source, files)
+					const resourceTarget = isReferencedResource(source)
+						? (source.path as string)
+						: source
+					const result = await toResourceSchema(resourceTarget, files)
 					return result as T
 				}
 			}
 		}
 	}
+}
+
+function isReferencedResource(source: ResourceSchema): boolean {
+	// TODO: register path-handling logic on a per-schema basis?
+	if (isDataTableSchema(source)) {
+		// data-tables may reference their sourcedata using the 'path' string.
+		// If raw data is not referenced, we're referencing the resource
+		return (
+			typeof source.path === 'string' &&
+			!(
+				source.path.endsWith('.csv') ||
+				source.path.endsWith('.tsv') ||
+				source.path.endsWith('.arrow') ||
+				source.path.endsWith('.parquet')
+			)
+		)
+	}
+	// may be remote (https://... or local resource name)
+	return typeof source.path === 'string'
 }
 
 async function parseFileContent(item: string, files: Map<string, Blob>) {

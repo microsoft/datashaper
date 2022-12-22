@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Profile,Rel } from '../enums/index.js'
+import type { Profile, Rel } from '../enums/index.js'
 import type { Named } from '../Named.js'
 /**
  * Parent class for any resource type understood by the system.
