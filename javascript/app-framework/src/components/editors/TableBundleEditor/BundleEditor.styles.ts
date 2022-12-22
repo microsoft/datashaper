@@ -55,14 +55,13 @@ export function useTableHeaderColors(): Partial<CommandBarColors> {
 }
 
 export function useCommandBarStyles(): ICommandBarStyles {
-	const colors = useTableHeaderColors()
 	return useMemo(
 		() => ({
 			root: {
 				height: HEADER_HEIGHT - 1,
 			},
 		}),
-		[colors],
+		[],
 	)
 }
 
