@@ -8,7 +8,7 @@ import type {
 	TableCommandsProps,
 } from '@datashaper/react'
 import type { ToolPanelStyles } from '@essex/components'
-import type { ICommandBarStyles,ITheme } from '@fluentui/react'
+import type { ICommandBarStyles, ITheme } from '@fluentui/react'
 import { useTheme } from '@fluentui/react'
 import { useMemo } from 'react'
 import styled from 'styled-components'
@@ -59,8 +59,7 @@ export function useCommandBarStyles(): ICommandBarStyles {
 	return useMemo(
 		() => ({
 			root: {
-				height: HEADER_HEIGHT,
-				borderBottom: `1px solid ${colors.border}`,
+				height: HEADER_HEIGHT - 1,
 			},
 		}),
 		[colors],
