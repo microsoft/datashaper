@@ -5,6 +5,8 @@
 
 import type {
 	IButtonStyles,
+	ILabelStyleProps,
+	ILabelStyles,
 	ITextFieldStyleProps,
 	ITextFieldStyles,
 } from '@fluentui/react'
@@ -20,6 +22,7 @@ export interface CodebookMappingStyles {
 	columnPairs?: React.CSSProperties
 	root?: React.CSSProperties
 	addButton?: IButtonStyles
+	label?: IStyleFunctionOrObject<ILabelStyleProps, ILabelStyles>
 }
 
 export interface CodebookMappingFieldProps extends CodebookPropsBase {

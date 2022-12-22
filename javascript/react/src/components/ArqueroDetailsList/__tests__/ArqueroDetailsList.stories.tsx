@@ -22,6 +22,11 @@ const meta = {
 			border: '1px solid orange',
 		},
 	},
+	argTypes: {
+		compact: { control: 'boolean' },
+		showColumnBorders: { control: 'boolean' },
+		sortable: { control: 'boolean' },
+	},
 }
 
 export default meta

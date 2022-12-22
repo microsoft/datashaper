@@ -15,7 +15,12 @@ export function useContainerStyle(column: IColumn): React.CSSProperties {
 		() => ({
 			display: 'flex',
 			justifyContent: 'space-between',
+			alignItems: 'center',
 			width: dimensions.width,
+			// If there is no min-height, the label drifts to the top of the cell.
+			// This isn't quite controllable by us based on the ms-DetailsHeader styling mix of css and imperative.
+			// Only applies in compact mode - regular sets a fixed height of 42px, negating this issue.
+			minHeight: 32,
 		}),
 		[dimensions],
 	)

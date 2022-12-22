@@ -24,7 +24,7 @@ export interface BasicInput {
 
 // Warning: (ae-missing-release-tag) "Bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export interface Bin {
     // (undocumented)
     count: number;
@@ -114,7 +114,7 @@ export interface BundleSchema {
 
 // Warning: (ae-missing-release-tag) "Category" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export interface Category {
     // (undocumented)
     count: number;

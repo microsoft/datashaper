@@ -18,7 +18,7 @@ import { CodebookUnitField } from '../CodebookUnitField/index.js'
 import { useFieldHeights } from '../hooks.js'
 import { MappingFields } from '../MappingFields/index.js'
 import { getRootStyle } from '../styles.js'
-import { useTableDefaultStyles } from './Codebook.styles.js'
+import { useTableStyles } from './Codebook.styles.js'
 import type { CodebookProps } from './Codebook.types.js'
 
 export const Codebook: React.FC<CodebookProps> = memo(function Codebook({
@@ -28,7 +28,7 @@ export const Codebook: React.FC<CodebookProps> = memo(function Codebook({
 }) {
 	const heights = useFieldHeights()
 	const theme = useTheme()
-	const _styles = useTableDefaultStyles(styles, heights)
+	const _styles = useTableStyles(styles, heights)
 
 	const onChangeField = useCallback(
 		(field: Field, index: number) => {
@@ -71,14 +71,19 @@ export const Codebook: React.FC<CodebookProps> = memo(function Codebook({
 				>
 					Units
 				</Label>
-				<Label>Mapping</Label>
+				<Label styles={_styles?.mapping?.label}>Mapping</Label>
 			</div>
 			<Container>
 				{fields.map((field: Field, index: number) => {
 					return (
 						<div
 							key={index}
-							style={getRootStyle(theme, field.exclude, _styles.root)}
+							style={getRootStyle(
+								theme,
+								field.exclude,
+								_styles.root,
+								index === fields.length - 1,
+							)}
 						>
 							<CodebookStatsField
 								styles={_styles.statsWrapper}
@@ -94,8 +99,8 @@ export const Codebook: React.FC<CodebookProps> = memo(function Codebook({
 							/>
 
 							<CodebookDescriptionField
-								field={field}
 								borderless
+								field={field}
 								styles={_styles.description}
 								onChangeField={(field: Field) => onChangeField(field, index)}
 							/>
@@ -108,7 +113,7 @@ export const Codebook: React.FC<CodebookProps> = memo(function Codebook({
 							<CodebookDataNatureField
 								enumeration={VariableNature}
 								field={field}
-								styles={_styles.dataType}
+								styles={_styles.dataNature}
 								onChangeField={(field: Field) => onChangeField(field, index)}
 							/>
 							<CodebookUnitField

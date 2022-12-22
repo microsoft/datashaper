@@ -36,8 +36,8 @@ describe('table utilities', () => {
 			expect(num!.distinct).toBe(5)
 			expect(num!.invalid).toBe(0)
 			expect(num!.mode).toBe(3)
-			expect(num!.min).toBe(1)
-			expect(num!.max).toBe(5)
+			expect(num!.minimum).toBe(1)
+			expect(num!.maximum).toBe(5)
 			expect(num!.mean).toBe(3)
 			// for our default stats we specify 10 bins
 			// if there are less than 10 rows in the table it can be smaller
@@ -52,7 +52,7 @@ describe('table utilities', () => {
 			expect(str!.invalid).toBe(0)
 			expect(str!.mode).toBe('B')
 			// should be no numeric stats
-			expect(str!.min).toBeUndefined()
+			expect(str!.minimum).toBeUndefined()
 		})
 
 		test('missing numeric values', () => {
@@ -75,7 +75,7 @@ describe('table utilities', () => {
 			expect(bool!.invalid).toBe(1)
 			expect(bool!.mode).toBe(true)
 			// should be no numeric stats
-			expect(bool!.min).toBeUndefined()
+			expect(bool!.minimum).toBeUndefined()
 		})
 
 		test('date stats', () => {
@@ -86,7 +86,7 @@ describe('table utilities', () => {
 			expect(date!.invalid).toBe(4)
 			expect(date!.mode).toBe(d1)
 			// should be no numeric stats
-			expect(date!.min).toBeUndefined()
+			expect(date!.minimum).toBeUndefined()
 		})
 
 		test('array stats', () => {
@@ -97,7 +97,7 @@ describe('table utilities', () => {
 			expect(arr!.invalid).toBe(3)
 			expect(arr!.mode).toStrictEqual([1, 2, 3])
 			// should be no numeric stats
-			expect(arr!.min).toBeUndefined()
+			expect(arr!.minimum).toBeUndefined()
 		})
 
 		test('column subsets are honored', () => {

@@ -20,11 +20,10 @@ import type { CodebookMappingFieldProps } from './MappingFields.types.js'
 export const MappingFields: React.FC<CodebookMappingFieldProps> = memo(
 	function MappingFields(props) {
 		const { field, onChangeField, styles, label } = props
-		const _styles = useMappingStyles(field.exclude, styles)
+		const _styles = useMappingStyles(styles)
 		const [values, setValues] = useState<Record<Value, Value>>(
 			field.mapping || {},
 		)
-
 		useEffect(() => {
 			setValues(field.mapping || {})
 		}, [field.mapping])
@@ -61,7 +60,7 @@ export const MappingFields: React.FC<CodebookMappingFieldProps> = memo(
 
 		return (
 			<div style={_styles.root}>
-				{label && <Label>{label}</Label>}
+				{label && <Label styles={_styles.label}>{label}</Label>}
 				<div style={_styles?.columnPairs}>{columnPairs}</div>
 				<ActionButton
 					styles={_styles?.addButton}

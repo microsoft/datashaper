@@ -9,7 +9,7 @@ import { useState } from 'react'
 import { CodebookFieldEditor } from './CodebookFieldEditor.js'
 
 const storyMetadata = {
-	title: 'Components/CodebookFieldEditor',
+	title: 'Components/Codebook',
 	component: CodebookFieldEditor,
 	argTypes: {},
 }
@@ -22,6 +22,8 @@ const codebookResult = {
 	fields: [
 		{
 			name: 'ID',
+			title: 'Identity',
+			description: 'Identifier for the record',
 			type: 'number',
 			nature: 'ordinal',
 			metadata: {

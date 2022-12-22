@@ -13,15 +13,23 @@ import { ResourceGroupType } from '../../../types.js'
  * @param groups
  * @returns
  */
-export function useTreeGroups(groups: ResourceRouteGroup[]): TreeGroup[] {
+export function useTreeGroups(
+	groups: ResourceRouteGroup[],
+	expanded = false,
+): TreeGroup[] {
 	return useMemo(
-		() => groups.map(g => ({ key: g.type, text: groupName(g) })),
-		[groups],
+		() => groups.map(g => ({ key: g.type, text: groupName(g, expanded) })),
+		[groups, expanded],
 	)
 }
 
-function groupName(group: ResourceRouteGroup) {
-	return group.type === ResourceGroupType.Data ? 'Data files' : 'Analysis apps'
+function groupName(group: ResourceRouteGroup, expanded = false): string {
+	switch (group.type) {
+		case ResourceGroupType.Data:
+			return expanded ? 'Data files' : 'Data'
+		default:
+			return expanded ? 'Analysis apps' : 'Apps'
+	}
 }
 
 /**

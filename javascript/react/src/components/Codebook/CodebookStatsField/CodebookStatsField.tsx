@@ -16,7 +16,7 @@ import {
 import { StatsColumnType } from '../../ArqueroDetailsList/ArqueroDetailsList.types.js'
 import { HistogramColumnHeader } from '../../ArqueroDetailsList/renderers/HistogramColumnHeader.js'
 import { StatsColumnHeader } from '../../ArqueroDetailsList/renderers/StatsColumnHeader.js'
-import { FieldName, Flex } from './CodebookStatsField.styles.js'
+import { DataDisplay, FieldName, Flex } from './CodebookStatsField.styles.js'
 import type { CodebookStatsFieldProps } from './CodebookStatsField.types.js'
 
 const DEFAULT_STATS = [
@@ -64,16 +64,18 @@ export const CodebookStatsField: React.FC<CodebookStatsFieldProps> = memo(
 					/>
 					<FieldName disabled={field.exclude}>{field.name}</FieldName>
 				</Flex>
-				<StatsColumnHeader
-					stats={DEFAULT_STATS}
-					field={field}
-					disabled={field.exclude}
-				></StatsColumnHeader>
-				<HistogramColumnHeader
-					column={column}
-					field={field}
-					disabled={field.exclude}
-				></HistogramColumnHeader>
+				<DataDisplay>
+					<StatsColumnHeader
+						stats={DEFAULT_STATS}
+						field={field}
+						disabled={field.exclude}
+					/>
+					<HistogramColumnHeader
+						column={column}
+						field={field}
+						disabled={field.exclude}
+					/>
+				</DataDisplay>
 			</div>
 		)
 	},

@@ -98,7 +98,6 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 						metadata={selectedTable.metadata}
 						table={selectedTable?.table}
 						onColumnSelect={onColumnClick}
-						onColumnHeaderClick={onColumnClick}
 					/>
 				</DetailsListContainer>
 				<ToolPanel
