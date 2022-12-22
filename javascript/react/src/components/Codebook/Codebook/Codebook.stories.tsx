@@ -23,6 +23,8 @@ const codebookResult = {
 	fields: [
 		{
 			name: 'ID',
+			title: 'Identity',
+			description: 'Identifier for the record',
 			type: 'number',
 			nature: 'ordinal',
 			metadata: {
@@ -81,8 +83,11 @@ const codebookResult = {
 		},
 		{
 			name: 'diagnosis',
-			type: 'number',
-			nature: 'discrete',
+			title: 'Diagnosis',
+			description: 'Diagnosis of the condition',
+			type: 'string',
+			nature: 'nominal',
+			unit: 'jargons',
 		},
 		{
 			name: 'test',
@@ -116,11 +121,4 @@ const Template: ComponentStory<typeof Codebook> = ({
 }
 
 export const CodebookStory = Template.bind({})
-CodebookStory.storyName = 'Codebook Raw Editor'
-CodebookStory.args = {
-	styles: {
-		input: {
-			borderless: true,
-		},
-	},
-}
+CodebookStory.storyName = 'Codebook Table Editor'

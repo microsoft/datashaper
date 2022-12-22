@@ -55,7 +55,10 @@ export const GroupHeader: React.FC<React.PropsWithChildren<GroupHeaderProps>> =
 				}
 				groupLevel={group?.level as number}
 			>
-				<LevelButton onClick={onManualLevelToggle} {...levelButtonProps} />
+				<LevelButton
+					{...(levelButtonProps as any)}
+					onClick={onManualLevelToggle}
+				/>
 				<If condition={!!children}>
 					<Then>{children}</Then>
 					<Else>

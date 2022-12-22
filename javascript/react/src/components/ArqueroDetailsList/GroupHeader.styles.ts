@@ -15,7 +15,7 @@ export const HeaderContainer = styled.div<{ groupLevel: number }>`
 		${({ theme }: { theme: ITheme }) => theme.palette.neutralLight};
 `
 
-export const LevelButton = styled(IconButton as any)`
+export const LevelButton = styled(IconButton)`
 	width: 32px;
 `
 

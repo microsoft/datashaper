@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { IGroup } from '@fluentui/react'
+import type { IButtonProps, IGroup } from '@fluentui/react'
 import { useTheme } from '@fluentui/react'
-import { useCallback, useEffect, useMemo,useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 export function useIntersection(
 	element: HTMLDivElement | undefined,
@@ -40,7 +40,7 @@ export function useCountChildren(): (children: IGroup[]) => number {
 	return countChildren
 }
 
-export function useLevelButtonProps(collapsed = false) {
+export function useLevelButtonProps(collapsed = false): Partial<IButtonProps> {
 	const theme = useTheme()
 	return useMemo(
 		() => ({

@@ -9,14 +9,13 @@ Generates the default codebook styles
 <b>Signature:</b>
 
 ```typescript
-export declare function useDefaultCodebookStyles(styles?: CodebookStyles, heights?: FieldHeights): CodebookStyles;
+export declare function useDefaultCodebookStyles(heights?: FieldHeights): CodebookStyles;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  styles | CodebookStyles | <i>(Optional)</i> The styles input object |
 |  heights | FieldHeights | <i>(Optional)</i> The field heights to use |
 
 <b>Returns:</b>
