@@ -4,7 +4,7 @@
  */
 import type { DataFormat } from '../data.js'
 import type { ResourceSchema } from '../datapackage/ResourceSchema.js'
-import type { KnownProfile } from '../Profile.js'
+import type { KnownProfile } from '../enums/index.js'
 import type { DataShape } from './DataShape.js'
 import type { ParserOptions } from './ParserOptions.js'
 import type { TypeHints } from './TypeHints.js'
@@ -21,8 +21,11 @@ export interface DataTableSchema extends ResourceSchema {
 
 	/**
 	 * Option to embed the data directly in the JSON descriptor.
+	 * Valid data formats are:
+	 * - string: raw CSV data, parsed according to the `parser` options
+	 * - array: raw JSON data, parsed according to the `shape` options
 	 */
-	data?: any
+	data?: string | unknown[]
 	/**
 	 * File format of the resource to inform load/parse.
 	 * Note that if the data property is present, this is assumed to be "JSON".

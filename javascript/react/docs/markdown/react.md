@@ -15,7 +15,7 @@
 
 |  Function | Description |
 |  --- | --- |
-|  [useDefaultCodebookStyles(styles, heights)](./react.usedefaultcodebookstyles.md) | Generates the default codebook styles |
+|  [useDefaultCodebookStyles(heights)](./react.usedefaultcodebookstyles.md) | Generates the default codebook styles |
 |  [useHeaderCommandBarDefaults(props, far, colors)](./react.useheadercommandbardefaults.md) | Helper to create the props necessary for the default inverted management bar. Basic colors can be customized, but note that if you do not want an always-inverted bar like that used in the DataShaper webapp, you may want to just tweak the Fluent styles as normal. |
 
 ## Interfaces

@@ -7,9 +7,15 @@ import Editor from '@monaco-editor/react'
 import { useThematic } from '@thematic/react'
 import { useDebounceFn } from 'ahooks'
 import { memo } from 'react'
+import styled from 'styled-components'
 
 import type { JsonEditorProps } from './JsonEditor.types.js'
 
+const options = {
+	minimap: {
+		enabled: false,
+	},
+}
 export const JsonEditor: React.FC<JsonEditorProps> = memo(function JsonEditor({
 	content,
 	onChange,
@@ -19,13 +25,20 @@ export const JsonEditor: React.FC<JsonEditorProps> = memo(function JsonEditor({
 	const themeName = theme.variant === 'dark' ? 'vs-dark' : 'light'
 
 	return (
-		<Editor
-			height="90vh"
-			defaultLanguage="json"
-			defaultValue={content}
-			value={content}
-			onChange={handleEditorChange}
-			theme={themeName}
-		/>
+		<Container>
+			<Editor
+				height="90vh"
+				defaultLanguage="json"
+				defaultValue={content}
+				value={content}
+				onChange={handleEditorChange}
+				theme={themeName}
+				options={options}
+			/>
+		</Container>
 	)
 })
+
+const Container = styled.div`
+	padding-top: 10px;
+`

@@ -14,8 +14,3 @@ export const Container = styled.div`
 export const TableContainer = styled.div`
 	height: 100%;
 `
-export const ViewOptionsContainer = styled.div`
-	display: flex;
-	justify-content: end;
-	padding: 13px;
-`

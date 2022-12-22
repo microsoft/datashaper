@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { KnownProfile } from '../enums/index.js'
 import type { Named } from '../Named.js'
-import type { KnownProfile } from '../Profile.js'
 import type { ResourceSchema } from './ResourceSchema.js'
 
 /**

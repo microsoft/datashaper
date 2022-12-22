@@ -10,6 +10,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { CSSProperties } from 'react';
 import type { Field } from '@datashaper/schema';
 import type { IButtonStyles } from '@fluentui/react';
+import type { ICheckboxStyleProps } from '@fluentui/react';
 import type { ICheckboxStyles } from '@fluentui/react';
 import type { IColumn } from '@fluentui/react';
 import type { ICommandBarProps } from '@fluentui/react';
@@ -18,6 +19,8 @@ import type { IDetailsGroupDividerProps } from '@fluentui/react';
 import type { IDetailsListProps } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
 import type { IDropdownStyles } from '@fluentui/react';
+import type { ILabelStyleProps } from '@fluentui/react';
+import type { ILabelStyles } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import type { IStyleFunctionOrObject } from '@fluentui/utilities';
 import type { ITextFieldStyleProps } from '@fluentui/react';
@@ -314,7 +317,7 @@ export interface TableCommandsProps {
 // Warning: (ae-missing-release-tag) "useDefaultCodebookStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useDefaultCodebookStyles(styles?: CodebookStyles, heights?: FieldHeights): CodebookStyles;
+export function useDefaultCodebookStyles(heights?: FieldHeights): CodebookStyles;
 
 // Warning: (ae-missing-release-tag) "useHeaderCommandBarDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

@@ -7,21 +7,30 @@ import { CommandBar, CommandBarButton, useTheme } from '@fluentui/react'
 import { useMemo } from 'react'
 import styled from 'styled-components'
 
-export const CollapsedButton = styled(CommandBarButton)`
-	width: inherit;
-	height: calc(
-		(var(--base-height-multiplier) + var(--density)) * var(--design-unit) * 1px
-	);
-`
 export const Commands = styled(CommandBar)`
 	.ms-CommandBar {
 		padding-left: unset;
 	}
 `
 
+export const CollapsedCommands = styled.div`
+	background: ${({ theme }) => theme.palette.neutralLighter};
+`
+
+export const CollapsedButton = styled(CommandBarButton)`
+	width: inherit;
+`
+
 export const collapsedButtonStyles = {
+	root: {
+		background: 'transparent',
+		minWidth: 'unset',
+	},
 	menuIcon: { display: 'none' },
-	flexContainer: { marginRight: 10, marginTop: 15 },
+	flexContainer: {
+		// standard fluent button height
+		height: 32,
+	},
 }
 
 export const icons = {
@@ -42,7 +51,6 @@ export function useCommandbarStyles(): ICommandBarStyles {
 		() => ({
 			root: {
 				background: theme.palette.neutralLighter,
-				borderBottom: `1px solid ${theme.palette.neutralTertiaryAlt}`,
 			},
 		}),
 		[theme],

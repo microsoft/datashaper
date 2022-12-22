@@ -15,8 +15,8 @@ export const HeaderContainer = styled.div<{ groupLevel: number }>`
 		${({ theme }: { theme: ITheme }) => theme.palette.neutralLight};
 `
 
-export const LevelButton = styled(IconButton as any)`
-	width: 48px;
+export const LevelButton = styled(IconButton)`
+	width: 32px;
 `
 
 export const HeaderDetailsText = styled.span`

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ResourceSchema } from '../datapackage/ResourceSchema.js'
-import type { KnownProfile } from '../Profile.js'
+import type { KnownProfile } from '../enums/index.js'
 import type { Field } from './Field.js'
 
 /**

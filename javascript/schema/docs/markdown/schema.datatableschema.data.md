@@ -4,10 +4,10 @@
 
 ## DataTableSchema.data property
 
-Option to embed the data directly in the JSON descriptor.
+Option to embed the data directly in the JSON descriptor. Valid data formats are: - string: raw CSV data, parsed according to the `parser` options - array: raw JSON data, parsed according to the `shape` options
 
 <b>Signature:</b>
 
 ```typescript
-data?: any;
+data?: string | unknown[];
 ```

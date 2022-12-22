@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ITooltipHostStyles } from '@fluentui/react/lib/Tooltip'
+
 import { TooltipHost } from '@fluentui/react/lib/Tooltip'
 import { useBoolean, useId } from '@fluentui/react-hooks'
 import { memo } from 'react'
@@ -18,6 +18,7 @@ import {
 	useTextStyle,
 } from './DefaultColumnHeader.hooks.js'
 import {
+	hostStyles,
 	HoverContainer,
 	LeftIcon,
 	RightIcon,
@@ -26,9 +27,6 @@ import type { DefaultColumnHeaderProps } from './DefaultColumnHeader.types.js'
 export type { DefaultColumnHeaderProps } from './DefaultColumnHeader.types.js'
 
 const calloutProps = { gapSpace: 0 }
-const hostStyles: Partial<ITooltipHostStyles> = {
-	root: { display: 'inline-block' },
-}
 
 export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 	function DefaultColumnHeader({

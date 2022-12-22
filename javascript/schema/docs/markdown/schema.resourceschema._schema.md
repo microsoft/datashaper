@@ -4,8 +4,10 @@
 
 ## ResourceSchema.$schema property
 
+The JSON schema for this resource.
+
 <b>Signature:</b>
 
 ```typescript
-$schema: string;
+$schema?: string;
 ```

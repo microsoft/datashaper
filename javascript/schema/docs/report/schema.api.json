@@ -286,7 +286,7 @@
         {
           "kind": "Interface",
           "canonicalReference": "@datashaper/schema!Bin:interface",
-          "docComment": "",
+          "docComment": "/**\n * Describes a data bin in terms of inclusive lower bound and count of values in the bin.\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1298,7 +1298,7 @@
         {
           "kind": "Interface",
           "canonicalReference": "@datashaper/schema!Category:interface",
-          "docComment": "",
+          "docComment": "/**\n * Describes a nomincal category in terms of category name and count of values in the category.\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -2885,7 +2885,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!DataTableSchema#data:member",
-              "docComment": "/**\n * Option to embed the data directly in the JSON descriptor.\n */\n",
+              "docComment": "/**\n * Option to embed the data directly in the JSON descriptor. Valid data formats are: - string: raw CSV data, parsed according to the `parser` options - array: raw JSON data, parsed according to the `shape` options\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -2893,7 +2893,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "any"
+                  "text": "string | unknown[]"
                 },
                 {
                   "kind": "Content",
@@ -6445,6 +6445,85 @@
           ]
         },
         {
+          "kind": "Enum",
+          "canonicalReference": "@datashaper/schema!KnownRel:enum",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare enum KnownRel "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "KnownRel",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!KnownRel.Codebook:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Codebook = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"codebook\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Codebook"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!KnownRel.Input:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Input = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"input\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Input"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!KnownRel.Workflow:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Workflow = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"workflow\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Workflow"
+            }
+          ]
+        },
+        {
           "kind": "Variable",
           "canonicalReference": "@datashaper/schema!LATEST_CODEBOOK_SCHEMA:var",
           "docComment": "",
@@ -7013,33 +7092,6 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "description",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!Named#id:member",
-              "docComment": "/**\n * Generated guid, immutable. This can be used for stable referencing.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "id: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "id",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -8223,6 +8275,36 @@
           ]
         },
         {
+          "kind": "TypeAlias",
+          "canonicalReference": "@datashaper/schema!Rel:type",
+          "docComment": "/**\n * A rel is a string that describes the relationship between a resource and its child.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type Rel = "
+            },
+            {
+              "kind": "Reference",
+              "text": "KnownRel",
+              "canonicalReference": "@datashaper/schema!KnownRel:enum"
+            },
+            {
+              "kind": "Content",
+              "text": "\n/**\n * Any other custom Rel type can be specified by bundles\n */\n | string"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Rel",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 3
+          }
+        },
+        {
           "kind": "Interface",
           "canonicalReference": "@datashaper/schema!RelationshipConstraint:interface",
           "docComment": "",
@@ -8407,82 +8489,6 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@datashaper/schema!ResourceRelationship:interface",
-          "docComment": "/**\n * An explicit resource relationship\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface ResourceRelationship "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "ResourceRelationship",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!ResourceRelationship#rel:member",
-              "docComment": "/**\n * The relationship type\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "rel: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "rel",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!ResourceRelationship#source:member",
-              "docComment": "/**\n * The linked or embedded resource\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "source: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string | "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ResourceSchema",
-                  "canonicalReference": "@datashaper/schema!ResourceSchema:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "source",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Interface",
           "canonicalReference": "@datashaper/schema!ResourceSchema:interface",
           "docComment": "/**\n * Parent class for any resource type understood by the system. Any object type that extends from Resouce is expected to have a standalone schema published. For project state, this can be left as generic as possible for now.\n */\n",
           "excerptTokens": [
@@ -8507,11 +8513,11 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!ResourceSchema#$schema:member",
-              "docComment": "",
+              "docComment": "/**\n * The JSON schema for this resource.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "$schema: "
+                  "text": "$schema?: "
                 },
                 {
                   "kind": "Content",
@@ -8523,7 +8529,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "$schema",
               "propertyTypeTokenRange": {
@@ -8588,7 +8594,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!ResourceSchema#path:member",
-              "docComment": "/**\n * URI-compliant path to the resource (local or remote). If array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).\n */\n",
+              "docComment": "/**\n * URI-compliant path to the resource (local or remote). If array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables). URI-compliant path to the referenced resource (local or remote).\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -8642,6 +8648,38 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!ResourceSchema#rel:member",
+              "docComment": "/**\n * The relationship of this resource to the parent resource.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "rel?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Rel",
+                  "canonicalReference": "@datashaper/schema!Rel:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "rel",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!ResourceSchema#sources:member",
               "docComment": "/**\n * List of resources that underly this resource. This gives us the ability to create hierarchical or linked structures to represent complex combinations. For example, a parent resource can have source tables, a workflow, and a table schema that all combine to create a fully-realized, strongly typed, and transformed output table. Entire Resource objects may be embedded here, or a string path to the Resource definition JSON.\n */\n",
               "excerptTokens": [
@@ -8660,15 +8698,6 @@
                 },
                 {
                   "kind": "Content",
-                  "text": " | "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ResourceRelationship",
-                  "canonicalReference": "@datashaper/schema!ResourceRelationship:interface"
-                },
-                {
-                  "kind": "Content",
                   "text": ")[]"
                 },
                 {
@@ -8682,7 +8711,7 @@
               "name": "sources",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 6
+                "endIndex": 4
               }
             }
           ],
@@ -10363,88 +10392,9 @@
           ]
         },
         {
-          "kind": "Enum",
-          "canonicalReference": "@datashaper/schema!TableBundleRel:enum",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare enum TableBundleRel "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "TableBundleRel",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "EnumMember",
-              "canonicalReference": "@datashaper/schema!TableBundleRel.Codebook:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "Codebook = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "\"codebook\""
-                }
-              ],
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "name": "Codebook"
-            },
-            {
-              "kind": "EnumMember",
-              "canonicalReference": "@datashaper/schema!TableBundleRel.Input:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "Input = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "\"input\""
-                }
-              ],
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "name": "Input"
-            },
-            {
-              "kind": "EnumMember",
-              "canonicalReference": "@datashaper/schema!TableBundleRel.Workflow:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "Workflow = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "\"workflow\""
-                }
-              ],
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "name": "Workflow"
-            }
-          ]
-        },
-        {
           "kind": "Interface",
           "canonicalReference": "@datashaper/schema!TableBundleSchema:interface",
-          "docComment": "",
+          "docComment": "/**\n * A table bundle encapsulates table-specific resources into a single resource with a prescribed workflow.\n *\n * A tablebundle requires a `source` entry with rel=\"input\" for the source table. A tablebundle may also include `source` entries with rel=\"codebook\" and rel=\"workflow\" for interpretation and processing of the source data table.\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -10490,92 +10440,6 @@
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!TableBundleSchema#sources:member",
-              "docComment": "/**\n * The sources that compose a table bundle.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "sources?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Array",
-                  "canonicalReference": "!Array:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<{\n        rel: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "TableBundleRel.Input",
-                  "canonicalReference": "@datashaper/schema!TableBundleRel.Input:member"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";\n        source: string | "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "DataTableSchema",
-                  "canonicalReference": "@datashaper/schema!DataTableSchema:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";\n    } | {\n        rel: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "TableBundleRel.Codebook",
-                  "canonicalReference": "@datashaper/schema!TableBundleRel.Codebook:member"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";\n        source: string | "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "CodebookSchema",
-                  "canonicalReference": "@datashaper/schema!CodebookSchema:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";\n    } | {\n        rel: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "TableBundleRel.Workflow",
-                  "canonicalReference": "@datashaper/schema!TableBundleRel.Workflow:member"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";\n        source: string | "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "WorkflowSchema",
-                  "canonicalReference": "@datashaper/schema!WorkflowSchema:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";\n    }>"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "sources",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 15
               }
             }
           ],

@@ -8,10 +8,12 @@ import type {
 	TableCommandsProps,
 } from '@datashaper/react'
 import type { ToolPanelStyles } from '@essex/components'
-import type { ITheme } from '@fluentui/react'
+import type { ICommandBarStyles, ITheme } from '@fluentui/react'
 import { useTheme } from '@fluentui/react'
 import { useMemo } from 'react'
 import styled from 'styled-components'
+
+const HEADER_HEIGHT = 36
 
 export const icons = {
 	history: { iconName: 'History' },
@@ -45,10 +47,21 @@ export function useTableHeaderColors(): Partial<CommandBarColors> {
 	const theme = useTheme()
 	return useMemo(
 		() => ({
-			background: theme.palette.neutralLighter,
+			background: theme.palette.white,
 			border: theme.palette.neutralTertiaryAlt,
 		}),
 		[theme],
+	)
+}
+
+export function useCommandBarStyles(): ICommandBarStyles {
+	return useMemo(
+		() => ({
+			root: {
+				height: HEADER_HEIGHT - 1,
+			},
+		}),
+		[],
 	)
 }
 
@@ -57,7 +70,7 @@ export function useTableHeaderStyles(): ArqueroTableHeaderStyles {
 	return useMemo(
 		() => ({
 			root: {
-				height: 44,
+				height: HEADER_HEIGHT,
 				borderBottom: `1px solid ${colors.border}`,
 			},
 		}),
@@ -67,18 +80,15 @@ export function useTableHeaderStyles(): ArqueroTableHeaderStyles {
 
 export function useTableCommandProps(): Partial<TableCommandsProps> {
 	const colors = useTableHeaderColors()
+	const styles = useCommandBarStyles()
 	return useMemo(
 		() => ({
 			background: colors.background,
 			commandBarProps: {
-				styles: {
-					root: {
-						height: 43,
-					},
-				},
+				styles,
 			},
 		}),
-		[colors],
+		[colors, styles],
 	)
 }
 
@@ -90,7 +100,7 @@ export function useToolPanelStyles(): ToolPanelStyles {
 				borderLeft: `1px solid ${colors.border}`,
 			},
 			header: {
-				height: 46,
+				height: HEADER_HEIGHT,
 				background: colors.background,
 				borderBottom: `1px solid ${colors.border}`,
 			},

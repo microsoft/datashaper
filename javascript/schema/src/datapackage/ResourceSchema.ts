@@ -2,15 +2,22 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { Profile, Rel } from '../enums/index.js'
 import type { Named } from '../Named.js'
-import type { Profile } from '../Profile.js'
 /**
  * Parent class for any resource type understood by the system.
  * Any object type that extends from Resouce is expected to have a standalone schema published.
  * For project state, this can be left as generic as possible for now.
  */
 export interface ResourceSchema extends Named {
-	$schema: string
+	/**
+	 * The JSON schema for this resource.
+	 */
+	$schema?: string
+	/**
+	 * The relationship of this resource to the parent resource.
+	 */
+	rel?: Rel | string
 	/**
 	 * Defines the resource type.
 	 * Known resource types should have accommpanying processors and rendering components.
@@ -21,6 +28,7 @@ export interface ResourceSchema extends Named {
 	/**
 	 * URI-compliant path to the resource (local or remote).
 	 * If array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).
+	 * URI-compliant path to the referenced resource (local or remote).
 	 */
 	path?: string | string[]
 	/**
@@ -40,19 +48,5 @@ export interface ResourceSchema extends Named {
 	 * to create a fully-realized, strongly typed, and transformed output table.
 	 * Entire Resource objects may be embedded here, or a string path to the Resource definition JSON.
 	 */
-	sources?: (string | ResourceSchema | ResourceRelationship)[]
-}
-
-/**
- * An explicit resource relationship
- */
-export interface ResourceRelationship {
-	/**
-	 * The relationship type
-	 */
-	rel: string
-	/**
-	 * The linked or embedded resource
-	 */
-	source: string | ResourceSchema
+	sources?: (string | ResourceSchema)[]
 }

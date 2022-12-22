@@ -4,7 +4,7 @@
  */
 import type { CodebookSchema } from '../codebook/CodebookSchema.js'
 import type { DataType, Value } from '../data.js'
-import type { SortDirection } from '../enums.js'
+import type { SortDirection } from '../enums/index.js'
 
 export enum Verb {
 	Aggregate = 'aggregate',

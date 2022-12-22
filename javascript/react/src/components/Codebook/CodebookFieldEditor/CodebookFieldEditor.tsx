@@ -12,13 +12,12 @@ import { CodebookDisplayNameField } from '../CodebookDisplayNameField/index.js'
 import { CodebookStatsField } from '../CodebookStatsField/index.js'
 import { CodebookUnitField } from '../CodebookUnitField/index.js'
 import { MappingFields } from '../MappingFields/MappingFields.js'
-import { useDefaultCodebookStyles } from '../styles.js'
+import { useFieldEditorStyles } from './CodebookFieldEditor.styles.js'
 import type { CodebookFieldEditorProps } from './CodebookFieldEditor.types.js'
 
 export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 	function CodebookFieldEditor({ styles, field, onChangeField }) {
-		const _styles = useDefaultCodebookStyles(styles)
-
+		const _styles = useFieldEditorStyles(styles)
 		return (
 			<div style={_styles.root}>
 				<CodebookStatsField
