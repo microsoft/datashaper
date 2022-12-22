@@ -2,36 +2,17 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { CodebookSchema } from '../codebook/CodebookSchema.js'
 import type { ResourceSchema } from '../datapackage/ResourceSchema.js'
-import type { DataTableSchema } from '../datatable/DataTableSchema.js'
-import type { KnownProfile } from '../Profile.js'
-import type { WorkflowSchema } from '../workflow/WorkflowSchema.js'
+import type { KnownProfile } from '../enums/index.js'
 
+/**
+ * A table bundle encapsulates table-specific resources into a single resource with a
+ * prescribed workflow.
+ *
+ * A tablebundle requires a `source` entry with rel="input" for the source table.
+ * A tablebundle may also include `source` entries with rel="codebook" and rel="workflow"
+ * for interpretation and processing of the source data table.
+ */
 export interface TableBundleSchema extends ResourceSchema {
 	profile: KnownProfile.TableBundle
-
-	/**
-	 * The sources that compose a table bundle.
-	 */
-	sources?: Array<
-		| {
-				rel: TableBundleRel.Input
-				source: string | DataTableSchema
-		  }
-		| {
-				rel: TableBundleRel.Codebook
-				source: string | CodebookSchema
-		  }
-		| {
-				rel: TableBundleRel.Workflow
-				source: string | WorkflowSchema
-		  }
-	>
-}
-
-export enum TableBundleRel {
-	Input = 'input',
-	Codebook = 'codebook',
-	Workflow = 'workflow',
 }

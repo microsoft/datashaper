@@ -4,2741 +4,2736 @@
 		{
 			"name": "nhefs",
 			"profile": "tablebundle",
-			"metadata": {
-				"source": "https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/",
-				"citation": "Hernán MA, Robins JM (2020). Causal Inference: What If. Boca Raton: Chapman & Hall/CRC"
-			},
 			"sources": [
 				{
 					"rel": "input",
-					"source": {
-						"profile": "datatable",
-						"path": "https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/1268/20/nhefs.csv"
+					"profile": "datatable",
+					"path": "https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/1268/20/nhefs.csv",
+					"metadata": {
+						"source": "https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/",
+						"citation": "Hernán MA, Robins JM (2020). Causal Inference: What If. Boca Raton: Chapman & Hall/CRC"
 					}
 				},
 				{
-					"rel": "codebook",
-					"source": {
-						"$schema": "https://microsoft.github.io/datashaper/schema/codebook/v1.0.0.json",
-						"id": "50b231b5-00ad-4084-9e4d-9209e3575f77",
-						"name": "codebook.json",
-						"profile": "codebook",
-						"sources": [],
-						"fields": [
-							{
-								"name": "seqn",
+					"$schema": "https://microsoft.github.io/datashaper/schema/codebook/v1.0.0.json",
+					"id": "50b231b5-00ad-4084-9e4d-9209e3575f77",
+					"name": "codebook.json",
+					"profile": "codebook",
+					"sources": [],
+					"fields": [
+						{
+							"name": "seqn",
+							"type": "number",
+							"metadata": {
 								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 1629,
-									"invalid": 0,
-									"mode": 233,
-									"min": 233,
-									"max": 25061,
-									"mean": 16552.364640883978,
-									"median": 20333,
-									"stdev": 7498.918195337949,
-									"bins": [
-										{
-											"min": 233,
-											"count": 115
-										},
-										{
-											"min": 2715.8,
-											"count": 85
-										},
-										{
-											"min": 5198.6,
-											"count": 94
-										},
-										{
-											"min": 7681.400000000001,
-											"count": 100
-										},
-										{
-											"min": 10164.2,
-											"count": 95
-										},
-										{
-											"min": 12647,
-											"count": 119
-										},
-										{
-											"min": 15129.800000000001,
-											"count": 106
-										},
-										{
-											"min": 17612.600000000002,
-											"count": 90
-										},
-										{
-											"min": 20095.4,
-											"count": 381
-										},
-										{
-											"min": 22578.2,
-											"count": 444
-										}
-									]
-								},
-								"nature": "discrete"
+								"count": 1629,
+								"distinct": 1629,
+								"invalid": 0,
+								"mode": 233,
+								"min": 233,
+								"max": 25061,
+								"mean": 16552.364640883978,
+								"median": 20333,
+								"stdev": 7498.918195337949,
+								"bins": [
+									{
+										"min": 233,
+										"count": 115
+									},
+									{
+										"min": 2715.8,
+										"count": 85
+									},
+									{
+										"min": 5198.6,
+										"count": 94
+									},
+									{
+										"min": 7681.400000000001,
+										"count": 100
+									},
+									{
+										"min": 10164.2,
+										"count": 95
+									},
+									{
+										"min": 12647,
+										"count": 119
+									},
+									{
+										"min": 15129.800000000001,
+										"count": 106
+									},
+									{
+										"min": 17612.600000000002,
+										"count": 90
+									},
+									{
+										"min": 20095.4,
+										"count": 381
+									},
+									{
+										"min": 22578.2,
+										"count": 444
+									}
+								]
 							},
-							{
-								"name": "qsmk",
+							"nature": "discrete"
+						},
+						{
+							"name": "qsmk",
+							"type": "number",
+							"metadata": {
 								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.26273787599754495,
-									"median": 0,
-									"stdev": 0.4402563673177144,
-									"bins": [
-										{
-											"min": 0,
-											"count": 1201
-										},
-										{
-											"min": 1,
-											"count": 428
-										}
-									]
-								},
-								"nature": "binary"
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.26273787599754495,
+								"median": 0,
+								"stdev": 0.4402563673177144,
+								"bins": [
+									{
+										"min": 0,
+										"count": 1201
+									},
+									{
+										"min": 1,
+										"count": 428
+									}
+								]
 							},
-							{
-								"name": "death",
+							"nature": "binary"
+						},
+						{
+							"name": "death",
+							"type": "number",
+							"metadata": {
 								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.19521178637200762,
-									"median": 0,
-									"stdev": 0.3964853668812033,
-									"bins": [
-										{
-											"min": 0,
-											"count": 1311
-										},
-										{
-											"min": 1,
-											"count": 318
-										}
-									]
-								},
-								"nature": "binary"
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.19521178637200762,
+								"median": 0,
+								"stdev": 0.3964853668812033,
+								"bins": [
+									{
+										"min": 0,
+										"count": 1311
+									},
+									{
+										"min": 1,
+										"count": 318
+									}
+								]
 							},
-							{
-								"name": "yrdth",
+							"nature": "binary"
+						},
+						{
+							"name": "yrdth",
+							"type": "number",
+							"metadata": {
 								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 11,
-									"invalid": 1311,
-									"mode": 85,
-									"min": 83,
-									"max": 92,
-									"mean": 87.56918238993717,
-									"median": 88,
-									"stdev": 2.65941455300527,
-									"bins": [
-										{
-											"min": "(empty)",
-											"count": 1311
-										},
-										{
-											"min": 83,
-											"count": 15
-										},
-										{
-											"min": 83.9,
-											"count": 31
-										},
-										{
-											"min": 84.8,
-											"count": 42
-										},
-										{
-											"min": 85.7,
-											"count": 42
-										},
-										{
-											"min": 86.6,
-											"count": 27
-										},
-										{
-											"min": 87.5,
-											"count": 35
-										},
-										{
-											"min": 88.4,
-											"count": 36
-										},
-										{
-											"min": 89.3,
-											"count": 30
-										},
-										{
-											"min": 90.2,
-											"count": 37
-										},
-										{
-											"min": 91.1,
-											"count": 23
-										}
-									]
-								},
-								"nature": "discrete"
+								"count": 1629,
+								"distinct": 11,
+								"invalid": 1311,
+								"mode": 85,
+								"min": 83,
+								"max": 92,
+								"mean": 87.56918238993717,
+								"median": 88,
+								"stdev": 2.65941455300527,
+								"bins": [
+									{
+										"min": "(empty)",
+										"count": 1311
+									},
+									{
+										"min": 83,
+										"count": 15
+									},
+									{
+										"min": 83.9,
+										"count": 31
+									},
+									{
+										"min": 84.8,
+										"count": 42
+									},
+									{
+										"min": 85.7,
+										"count": 42
+									},
+									{
+										"min": 86.6,
+										"count": 27
+									},
+									{
+										"min": 87.5,
+										"count": 35
+									},
+									{
+										"min": 88.4,
+										"count": 36
+									},
+									{
+										"min": 89.3,
+										"count": 30
+									},
+									{
+										"min": 90.2,
+										"count": 37
+									},
+									{
+										"min": 91.1,
+										"count": 23
+									}
+								]
 							},
-							{
-								"name": "modth",
+							"nature": "discrete"
+						},
+						{
+							"name": "modth",
+							"type": "number",
+							"metadata": {
 								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 13,
-									"invalid": 1307,
-									"mode": 1,
-									"min": 1,
-									"max": 12,
-									"mean": 6.25776397515528,
-									"median": 6,
-									"stdev": 3.6153039151567046,
-									"bins": [
-										{
-											"min": "(empty)",
-											"count": 1307
-										},
-										{
-											"min": 1,
-											"count": 64
-										},
-										{
-											"min": 2.1,
-											"count": 30
-										},
-										{
-											"min": 3.2,
-											"count": 26
-										},
-										{
-											"min": 4.300000000000001,
-											"count": 26
-										},
-										{
-											"min": 5.4,
-											"count": 30
-										},
-										{
-											"min": 6.5,
-											"count": 23
-										},
-										{
-											"min": 7.6000000000000005,
-											"count": 20
-										},
-										{
-											"min": 8.700000000000001,
-											"count": 20
-										},
-										{
-											"min": 9.8,
-											"count": 28
-										},
-										{
-											"min": 10.9,
-											"count": 55
-										}
-									]
-								},
-								"nature": "discrete"
+								"count": 1629,
+								"distinct": 13,
+								"invalid": 1307,
+								"mode": 1,
+								"min": 1,
+								"max": 12,
+								"mean": 6.25776397515528,
+								"median": 6,
+								"stdev": 3.6153039151567046,
+								"bins": [
+									{
+										"min": "(empty)",
+										"count": 1307
+									},
+									{
+										"min": 1,
+										"count": 64
+									},
+									{
+										"min": 2.1,
+										"count": 30
+									},
+									{
+										"min": 3.2,
+										"count": 26
+									},
+									{
+										"min": 4.300000000000001,
+										"count": 26
+									},
+									{
+										"min": 5.4,
+										"count": 30
+									},
+									{
+										"min": 6.5,
+										"count": 23
+									},
+									{
+										"min": 7.6000000000000005,
+										"count": 20
+									},
+									{
+										"min": 8.700000000000001,
+										"count": 20
+									},
+									{
+										"min": 9.8,
+										"count": 28
+									},
+									{
+										"min": 10.9,
+										"count": 55
+									}
+								]
 							},
-							{
-								"name": "dadth",
+							"nature": "discrete"
+						},
+						{
+							"name": "dadth",
+							"type": "number",
+							"metadata": {
 								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 32,
-									"invalid": 1307,
-									"mode": 28,
-									"min": 1,
-									"max": 31,
-									"mean": 15.872670807453405,
-									"median": 15.5,
-									"stdev": 8.905488437404218,
-									"bins": [
-										{
-											"min": "(empty)",
-											"count": 1307
-										},
-										{
-											"min": 1,
-											"count": 27
-										},
-										{
-											"min": 4,
-											"count": 35
-										},
-										{
-											"min": 7,
-											"count": 33
-										},
-										{
-											"min": 10,
-											"count": 34
-										},
-										{
-											"min": 13,
-											"count": 32
-										},
-										{
-											"min": 16,
-											"count": 34
-										},
-										{
-											"min": 19,
-											"count": 21
-										},
-										{
-											"min": 22,
-											"count": 29
-										},
-										{
-											"min": 25,
-											"count": 33
-										},
-										{
-											"min": 28,
-											"count": 44
-										}
-									]
-								},
-								"nature": "discrete"
+								"count": 1629,
+								"distinct": 32,
+								"invalid": 1307,
+								"mode": 28,
+								"min": 1,
+								"max": 31,
+								"mean": 15.872670807453405,
+								"median": 15.5,
+								"stdev": 8.905488437404218,
+								"bins": [
+									{
+										"min": "(empty)",
+										"count": 1307
+									},
+									{
+										"min": 1,
+										"count": 27
+									},
+									{
+										"min": 4,
+										"count": 35
+									},
+									{
+										"min": 7,
+										"count": 33
+									},
+									{
+										"min": 10,
+										"count": 34
+									},
+									{
+										"min": 13,
+										"count": 32
+									},
+									{
+										"min": 16,
+										"count": 34
+									},
+									{
+										"min": 19,
+										"count": 21
+									},
+									{
+										"min": 22,
+										"count": 29
+									},
+									{
+										"min": 25,
+										"count": 33
+									},
+									{
+										"min": 28,
+										"count": 44
+									}
+								]
 							},
-							{
-								"name": "sbp",
+							"nature": "discrete"
+						},
+						{
+							"name": "sbp",
+							"type": "number",
+							"metadata": {
 								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 108,
-									"invalid": 77,
-									"mode": 127,
-									"min": 87,
-									"max": 229,
-									"mean": 128.70940721649492,
-									"median": 126,
-									"stdev": 19.051559596333227,
-									"bins": [
-										{
-											"min": "(empty)",
-											"count": 77
-										},
-										{
-											"min": 87,
-											"count": 80
-										},
-										{
-											"min": 101.2,
-											"count": 307
-										},
-										{
-											"min": 115.4,
-											"count": 510
-										},
-										{
-											"min": 129.6,
-											"count": 363
-										},
-										{
-											"min": 143.8,
-											"count": 169
-										},
-										{
-											"min": 158,
-											"count": 78
-										},
-										{
-											"min": 172.2,
-											"count": 35
-										},
-										{
-											"min": 186.39999999999998,
-											"count": 4
-										},
-										{
-											"min": 200.6,
-											"count": 4
-										},
-										{
-											"min": 214.8,
-											"count": 2
-										}
-									]
-								},
-								"nature": "discrete"
+								"count": 1629,
+								"distinct": 108,
+								"invalid": 77,
+								"mode": 127,
+								"min": 87,
+								"max": 229,
+								"mean": 128.70940721649492,
+								"median": 126,
+								"stdev": 19.051559596333227,
+								"bins": [
+									{
+										"min": "(empty)",
+										"count": 77
+									},
+									{
+										"min": 87,
+										"count": 80
+									},
+									{
+										"min": 101.2,
+										"count": 307
+									},
+									{
+										"min": 115.4,
+										"count": 510
+									},
+									{
+										"min": 129.6,
+										"count": 363
+									},
+									{
+										"min": 143.8,
+										"count": 169
+									},
+									{
+										"min": 158,
+										"count": 78
+									},
+									{
+										"min": 172.2,
+										"count": 35
+									},
+									{
+										"min": 186.39999999999998,
+										"count": 4
+									},
+									{
+										"min": 200.6,
+										"count": 4
+									},
+									{
+										"min": 214.8,
+										"count": 2
+									}
+								]
 							},
-							{
-								"name": "dbp",
+							"nature": "discrete"
+						},
+						{
+							"name": "dbp",
+							"type": "number",
+							"metadata": {
 								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 70,
-									"invalid": 81,
-									"mode": 80,
-									"min": 47,
-									"max": 130,
-									"mean": 77.74483204134376,
-									"median": 77,
-									"stdev": 10.63486383560059,
-									"bins": [
-										{
-											"min": "(empty)",
-											"count": 81
-										},
-										{
-											"min": 47,
-											"count": 18
-										},
-										{
-											"min": 55.3,
-											"count": 95
-										},
-										{
-											"min": 63.6,
-											"count": 352
-										},
-										{
-											"min": 71.9,
-											"count": 519
-										},
-										{
-											"min": 80.2,
-											"count": 322
-										},
-										{
-											"min": 88.5,
-											"count": 173
-										},
-										{
-											"min": 96.80000000000001,
-											"count": 50
-										},
-										{
-											"min": 105.10000000000001,
-											"count": 16
-										},
-										{
-											"min": 113.4,
-											"count": 2
-										},
-										{
-											"min": 121.7,
-											"count": 1
-										}
-									]
-								},
-								"nature": "discrete"
+								"count": 1629,
+								"distinct": 70,
+								"invalid": 81,
+								"mode": 80,
+								"min": 47,
+								"max": 130,
+								"mean": 77.74483204134376,
+								"median": 77,
+								"stdev": 10.63486383560059,
+								"bins": [
+									{
+										"min": "(empty)",
+										"count": 81
+									},
+									{
+										"min": 47,
+										"count": 18
+									},
+									{
+										"min": 55.3,
+										"count": 95
+									},
+									{
+										"min": 63.6,
+										"count": 352
+									},
+									{
+										"min": 71.9,
+										"count": 519
+									},
+									{
+										"min": 80.2,
+										"count": 322
+									},
+									{
+										"min": 88.5,
+										"count": 173
+									},
+									{
+										"min": 96.80000000000001,
+										"count": 50
+									},
+									{
+										"min": 105.10000000000001,
+										"count": 16
+									},
+									{
+										"min": 113.4,
+										"count": 2
+									},
+									{
+										"min": 121.7,
+										"count": 1
+									}
+								]
 							},
-							{
-								"name": "sex",
+							"nature": "discrete"
+						},
+						{
+							"name": "sex",
+							"type": "string",
+							"metadata": {
 								"type": "string",
-								"metadata": {
-									"type": "string",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0
-								},
-								"nature": "binary",
-								"mapping": {
-									"0": "Male",
-									"1": "Female"
-								}
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0
 							},
-							{
-								"name": "age",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 49,
-									"invalid": 0,
-									"mode": 25,
-									"min": 25,
-									"max": 74,
-									"mean": 43.91528545119704,
-									"median": 44,
-									"stdev": 12.17042951844977,
-									"bins": [
-										{
-											"min": 25,
-											"count": 245
-										},
-										{
-											"min": 29.9,
-											"count": 221
-										},
-										{
-											"min": 34.8,
-											"count": 181
-										},
-										{
-											"min": 39.7,
-											"count": 190
-										},
-										{
-											"min": 44.6,
-											"count": 227
-										},
-										{
-											"min": 49.5,
-											"count": 218
-										},
-										{
-											"min": 54.400000000000006,
-											"count": 159
-										},
-										{
-											"min": 59.300000000000004,
-											"count": 96
-										},
-										{
-											"min": 64.2,
-											"count": 68
-										},
-										{
-											"min": 69.1,
-											"count": 24
-										}
-									]
-								},
-								"nature": "discrete"
-							},
-							{
-								"name": "race",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.13198281154082256,
-									"median": 0,
-									"stdev": 0.3385760174703687,
-									"bins": [
-										{
-											"min": 0,
-											"count": 1414
-										},
-										{
-											"min": 1,
-											"count": 215
-										}
-									]
-								},
-								"nature": "binary"
-							},
-							{
-								"name": "income",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 13,
-									"invalid": 62,
-									"mode": 19,
-									"min": 11,
-									"max": 22,
-									"mean": 17.947670708359887,
-									"median": 19,
-									"stdev": 2.6632771799456743,
-									"bins": [
-										{
-											"min": "(empty)",
-											"count": 62
-										},
-										{
-											"min": 11,
-											"count": 89
-										},
-										{
-											"min": 12.1,
-											"count": 68
-										},
-										{
-											"min": 13.2,
-											"count": 63
-										},
-										{
-											"min": 14.3,
-											"count": 83
-										},
-										{
-											"min": 15.4,
-											"count": 78
-										},
-										{
-											"min": 16.5,
-											"count": 65
-										},
-										{
-											"min": 17.6,
-											"count": 284
-										},
-										{
-											"min": 18.700000000000003,
-											"count": 417
-										},
-										{
-											"min": 19.8,
-											"count": 220
-										},
-										{
-											"min": 20.9,
-											"count": 200
-										}
-									]
-								},
-								"nature": "discrete"
-							},
-							{
-								"name": "marital",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 6,
-									"invalid": 0,
-									"mode": 2,
-									"min": 2,
-									"max": 8,
-									"mean": 2.5033763044812747,
-									"median": 2,
-									"stdev": 1.0823668867788887,
-									"bins": [
-										{
-											"min": 2,
-											"count": 1279
-										},
-										{
-											"min": 3,
-											"count": 97
-										},
-										{
-											"min": 4,
-											"count": 96
-										},
-										{
-											"min": 5,
-											"count": 99
-										},
-										{
-											"min": 6,
-											"count": 57
-										},
-										{
-											"min": 8,
-											"count": 1
-										}
-									]
-								},
-								"nature": "discrete"
-							},
-							{
-								"name": "school",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 17,
-									"invalid": 0,
-									"mode": 12,
-									"min": 0,
-									"max": 17,
-									"mean": 11.135052179251096,
-									"median": 12,
-									"stdev": 3.089600584119033,
-									"bins": [
-										{
-											"min": 0,
-											"count": 18
-										},
-										{
-											"min": 1.7,
-											"count": 22
-										},
-										{
-											"min": 3.4,
-											"count": 31
-										},
-										{
-											"min": 5.1,
-											"count": 37
-										},
-										{
-											"min": 6.8,
-											"count": 203
-										},
-										{
-											"min": 8.5,
-											"count": 243
-										},
-										{
-											"min": 10.2,
-											"count": 108
-										},
-										{
-											"min": 11.9,
-											"count": 750
-										},
-										{
-											"min": 13.6,
-											"count": 35
-										},
-										{
-											"min": 15.299999999999999,
-											"count": 182
-										}
-									]
-								},
-								"nature": "discrete"
-							},
-							{
-								"name": "education",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 5,
-									"invalid": 0,
-									"mode": 3,
-									"min": 1,
-									"max": 5,
-									"mean": 2.70349907918969,
-									"median": 3,
-									"stdev": 1.1900978773905186,
-									"bins": [
-										{
-											"min": 1,
-											"count": 311
-										},
-										{
-											"min": 2,
-											"count": 351
-										},
-										{
-											"min": 3,
-											"count": 659
-										},
-										{
-											"min": 4,
-											"count": 126
-										},
-										{
-											"min": 5,
-											"count": 182
-										}
-									]
-								},
-								"nature": "discrete"
-							},
-							{
-								"name": "ht",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 384,
-									"invalid": 0,
-									"mode": 160.6875,
-									"min": 142.875,
-									"max": 198.09375,
-									"mean": 168.74096454880282,
-									"median": 168.28125,
-									"stdev": 9.053131039460231,
-									"bins": [
-										{
-											"min": 142.875,
-											"count": 7
-										},
-										{
-											"min": 148.396875,
-											"count": 46
-										},
-										{
-											"min": 153.91875,
-											"count": 215
-										},
-										{
-											"min": 159.440625,
-											"count": 357
-										},
-										{
-											"min": 164.9625,
-											"count": 320
-										},
-										{
-											"min": 170.484375,
-											"count": 323
-										},
-										{
-											"min": 176.00625,
-											"count": 220
-										},
-										{
-											"min": 181.528125,
-											"count": 108
-										},
-										{
-											"min": 187.05,
-											"count": 25
-										},
-										{
-											"min": 192.571875,
-											"count": 8
-										}
-									]
-								},
-								"nature": "continuous"
-							},
-							{
-								"name": "wt71",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 527,
-									"invalid": 0,
-									"mode": 67.13,
-									"min": 36.17,
-									"max": 169.19,
-									"mean": 71.0521301411909,
-									"median": 69.4,
-									"stdev": 15.729589870264844,
-									"bins": [
-										{
-											"min": 36.17,
-											"count": 86
-										},
-										{
-											"min": 49.472,
-											"count": 462
-										},
-										{
-											"min": 62.774,
-											"count": 532
-										},
-										{
-											"min": 76.076,
-											"count": 364
-										},
-										{
-											"min": 89.37799999999999,
-											"count": 124
-										},
-										{
-											"min": 102.67999999999999,
-											"count": 42
-										},
-										{
-											"min": 115.98199999999999,
-											"count": 12
-										},
-										{
-											"min": 129.284,
-											"count": 5
-										},
-										{
-											"min": 142.58599999999998,
-											"count": 1
-										},
-										{
-											"min": 155.88799999999998,
-											"count": 1
-										}
-									]
-								},
-								"nature": "continuous"
-							},
-							{
-								"name": "wt82",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 176,
-									"invalid": 63,
-									"mode": 72.5747792,
-									"min": 35.38020486,
-									"max": 136.53130337,
-									"mean": 73.46921932679436,
-									"median": 72.12118683,
-									"stdev": 16.15804717832783,
-									"bins": [
-										{
-											"min": "(empty)",
-											"count": 63
-										},
-										{
-											"min": 35.38020486,
-											"count": 23
-										},
-										{
-											"min": 45.495314711,
-											"count": 153
-										},
-										{
-											"min": 55.610424562,
-											"count": 361
-										},
-										{
-											"min": 65.72553441299999,
-											"count": 407
-										},
-										{
-											"min": 75.84064426399999,
-											"count": 305
-										},
-										{
-											"min": 85.95575411499999,
-											"count": 177
-										},
-										{
-											"min": 96.07086396599999,
-											"count": 82
-										},
-										{
-											"min": 106.18597381699999,
-											"count": 30
-										},
-										{
-											"min": 116.30108366799999,
-											"count": 18
-										},
-										{
-											"min": 126.41619351899999,
-											"count": 10
-										}
-									]
-								},
-								"nature": "continuous"
-							},
-							{
-								"name": "wt82_71",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 1511,
-									"invalid": 63,
-									"mode": 3.05711053,
-									"min": -41.28046982,
-									"max": 48.53838568,
-									"mean": 2.638299786564496,
-									"median": 2.60381134,
-									"stdev": 7.87991285435954,
-									"bins": [
-										{
-											"min": "(empty)",
-											"count": 63
-										},
-										{
-											"min": -41.28046982,
-											"count": 1
-										},
-										{
-											"min": -32.29858427,
-											"count": 6
-										},
-										{
-											"min": -23.31669872,
-											"count": 25
-										},
-										{
-											"min": -14.334813170000004,
-											"count": 154
-										},
-										{
-											"min": -5.352927620000003,
-											"count": 711
-										},
-										{
-											"min": 3.6289579299999986,
-											"count": 546
-										},
-										{
-											"min": 12.610843479999993,
-											"count": 97
-										},
-										{
-											"min": 21.592729029999994,
-											"count": 17
-										},
-										{
-											"min": 30.574614579999995,
-											"count": 7
-										},
-										{
-											"min": 39.556500129999996,
-											"count": 2
-										}
-									]
-								},
-								"nature": "continuous"
-							},
-							{
-								"name": "birthplace",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 50,
-									"invalid": 92,
-									"mode": 42,
-									"min": 1,
-									"max": 56,
-									"mean": 31.595315549772284,
-									"median": 34,
-									"stdev": 14.500500311769917,
-									"bins": [
-										{
-											"min": "(empty)",
-											"count": 92
-										},
-										{
-											"min": 1,
-											"count": 124
-										},
-										{
-											"min": 6.5,
-											"count": 45
-										},
-										{
-											"min": 12,
-											"count": 108
-										},
-										{
-											"min": 17.5,
-											"count": 173
-										},
-										{
-											"min": 23,
-											"count": 192
-										},
-										{
-											"min": 28.5,
-											"count": 103
-										},
-										{
-											"min": 34,
-											"count": 275
-										},
-										{
-											"min": 39.5,
-											"count": 171
-										},
-										{
-											"min": 45,
-											"count": 193
-										},
-										{
-											"min": 50.5,
-											"count": 153
-										}
-									]
-								},
-								"nature": "discrete"
-							},
-							{
-								"name": "smokeintensity",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 37,
-									"invalid": 0,
-									"mode": 20,
-									"min": 1,
-									"max": 80,
-									"mean": 20.551258440761245,
-									"median": 20,
-									"stdev": 11.80375387756311,
-									"bins": [
-										{
-											"min": 1,
-											"count": 223
-										},
-										{
-											"min": 8.9,
-											"count": 348
-										},
-										{
-											"min": 16.8,
-											"count": 601
-										},
-										{
-											"min": 24.700000000000003,
-											"count": 222
-										},
-										{
-											"min": 32.6,
-											"count": 189
-										},
-										{
-											"min": 40.5,
-											"count": 8
-										},
-										{
-											"min": 48.400000000000006,
-											"count": 22
-										},
-										{
-											"min": 56.300000000000004,
-											"count": 15
-										},
-										{
-											"min": 64.2,
-											"count": 0
-										},
-										{
-											"min": 72.10000000000001,
-											"count": 1
-										}
-									]
-								},
-								"nature": "discrete"
-							},
-							{
-								"name": "smkintensity82_71",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 63,
-									"invalid": 0,
-									"mode": 0,
-									"min": -80,
-									"max": 50,
-									"mean": -4.737875997544503,
-									"median": -1,
-									"stdev": 13.7413603200895,
-									"bins": [
-										{
-											"min": -80,
-											"count": 1
-										},
-										{
-											"min": -67,
-											"count": 3
-										},
-										{
-											"min": -54,
-											"count": 6
-										},
-										{
-											"min": -41,
-											"count": 102
-										},
-										{
-											"min": -28,
-											"count": 199
-										},
-										{
-											"min": -15,
-											"count": 442
-										},
-										{
-											"min": -2,
-											"count": 779
-										},
-										{
-											"min": 11,
-											"count": 74
-										},
-										{
-											"min": 24,
-											"count": 13
-										},
-										{
-											"min": 37,
-											"count": 10
-										}
-									]
-								},
-								"nature": "discrete"
-							},
-							{
-								"name": "smokeyrs",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 60,
-									"invalid": 0,
-									"mode": 15,
-									"min": 1,
-									"max": 64,
-									"mean": 24.8710865561694,
-									"median": 24,
-									"stdev": 12.198071709313327,
-									"bins": [
-										{
-											"min": 1,
-											"count": 89
-										},
-										{
-											"min": 7.3,
-											"count": 252
-										},
-										{
-											"min": 13.6,
-											"count": 276
-										},
-										{
-											"min": 19.9,
-											"count": 298
-										},
-										{
-											"min": 26.2,
-											"count": 274
-										},
-										{
-											"min": 32.5,
-											"count": 199
-										},
-										{
-											"min": 38.8,
-											"count": 151
-										},
-										{
-											"min": 45.1,
-											"count": 57
-										},
-										{
-											"min": 51.4,
-											"count": 28
-										},
-										{
-											"min": 57.699999999999996,
-											"count": 5
-										}
-									]
-								},
-								"nature": "discrete"
-							},
-							{
-								"name": "asthma",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.048496009821976674,
-									"median": 0,
-									"stdev": 0.21487785117101327,
-									"bins": [
-										{
-											"min": 0,
-											"count": 1550
-										},
-										{
-											"min": 1,
-											"count": 79
-										}
-									]
-								},
-								"nature": "binary"
-							},
-							{
-								"name": "bronch",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.08532842234499687,
-									"median": 0,
-									"stdev": 0.2794555839472363,
-									"bins": [
-										{
-											"min": 0,
-											"count": 1490
-										},
-										{
-											"min": 1,
-											"count": 139
-										}
-									]
-								},
-								"nature": "binary"
-							},
-							{
-								"name": "tb",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.014119091467157762,
-									"median": 0,
-									"stdev": 0.11801818899567053,
-									"bins": [
-										{
-											"min": 0,
-											"count": 1606
-										},
-										{
-											"min": 1,
-											"count": 23
-										}
-									]
-								},
-								"nature": "binary"
-							},
-							{
-								"name": "hf",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.0049109883364027145,
-									"median": 0,
-									"stdev": 0.0699276218184718,
-									"bins": [
-										{
-											"min": 0,
-											"count": 1621
-										},
-										{
-											"min": 1,
-											"count": 8
-										}
-									]
-								},
-								"nature": "binary"
-							},
-							{
-								"name": "hbp",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 3,
-									"invalid": 0,
-									"mode": 2,
-									"min": 0,
-									"max": 2,
-									"mean": 1.0509515039901791,
-									"median": 1,
-									"stdev": 0.9582087561559665,
-									"bins": [
-										{
-											"min": 0,
-											"count": 708
-										},
-										{
-											"min": 1,
-											"count": 130
-										},
-										{
-											"min": 2,
-											"count": 791
-										}
-									]
-								},
-								"nature": "discrete"
-							},
-							{
-								"name": "pepticulcer",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.10374462860650709,
-									"median": 0,
-									"stdev": 0.3050226134178471,
-									"bins": [
-										{
-											"min": 0,
-											"count": 1460
-										},
-										{
-											"min": 1,
-											"count": 169
-										}
-									]
-								},
-								"nature": "binary"
-							},
-							{
-								"name": "colitis",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.033763044812768546,
-									"median": 0,
-									"stdev": 0.18067412758319043,
-									"bins": [
-										{
-											"min": 0,
-											"count": 1574
-										},
-										{
-											"min": 1,
-											"count": 55
-										}
-									]
-								},
-								"nature": "binary"
-							},
-							{
-								"name": "hepatitis",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.017188459177409465,
-									"median": 0,
-									"stdev": 0.13001304778367576,
-									"bins": [
-										{
-											"min": 0,
-											"count": 1601
-										},
-										{
-											"min": 1,
-											"count": 28
-										}
-									]
-								},
-								"nature": "binary"
-							},
-							{
-								"name": "chroniccough",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.05402087170042972,
-									"median": 0,
-									"stdev": 0.22612829751075358,
-									"bins": [
-										{
-											"min": 0,
-											"count": 1541
-										},
-										{
-											"min": 1,
-											"count": 88
-										}
-									]
-								},
-								"nature": "binary"
-							},
-							{
-								"name": "hayfever",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.08962553713934923,
-									"median": 0,
-									"stdev": 0.28573224994650687,
-									"bins": [
-										{
-											"min": 0,
-											"count": 1483
-										},
-										{
-											"min": 1,
-											"count": 146
-										}
-									]
-								},
-								"nature": "binary"
-							},
-							{
-								"name": "diabetes",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 3,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 2,
-									"mean": 0.9797421731123387,
-									"median": 0,
-									"stdev": 0.9957932066391293,
-									"bins": [
-										{
-											"min": 0,
-											"count": 824
-										},
-										{
-											"min": 1,
-											"count": 14
-										},
-										{
-											"min": 2,
-											"count": 791
-										}
-									]
-								},
-								"nature": "discrete"
-							},
-							{
-								"name": "polio",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.014119091467157788,
-									"median": 0,
-									"stdev": 0.11801818899567049,
-									"bins": [
-										{
-											"min": 0,
-											"count": 1606
-										},
-										{
-											"min": 1,
-											"count": 23
-										}
-									]
-								},
-								"nature": "binary"
-							},
-							{
-								"name": "tumor",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.02332719459791285,
-									"median": 0,
-									"stdev": 0.1509868573231586,
-									"bins": [
-										{
-											"min": 0,
-											"count": 1591
-										},
-										{
-											"min": 1,
-											"count": 38
-										}
-									]
-								},
-								"nature": "binary"
-							},
-							{
-								"name": "nervousbreak",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.028852056476365892,
-									"median": 0,
-									"stdev": 0.16744200900421558,
-									"bins": [
-										{
-											"min": 0,
-											"count": 1582
-										},
-										{
-											"min": 1,
-											"count": 47
-										}
-									]
-								},
-								"nature": "binary"
-							},
-							{
-								"name": "alcoholpy",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 3,
-									"invalid": 0,
-									"mode": 1,
-									"min": 0,
-									"max": 2,
-									"mean": 0.8759975445058323,
-									"median": 1,
-									"stdev": 0.3388732449767065,
-									"bins": [
-										{
-											"min": 0,
-											"count": 207
-										},
-										{
-											"min": 1,
-											"count": 1417
-										},
-										{
-											"min": 2,
-											"count": 5
-										}
-									]
-								},
-								"nature": "discrete"
-							},
-							{
-								"name": "alcoholfreq",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 6,
-									"invalid": 0,
-									"mode": 2,
-									"min": 0,
-									"max": 5,
-									"mean": 1.9201964395334552,
-									"median": 2,
-									"stdev": 1.3071400823182824,
-									"bins": [
-										{
-											"min": 0,
-											"count": 336
-										},
-										{
-											"min": 1,
-											"count": 231
-										},
-										{
-											"min": 2,
-											"count": 506
-										},
-										{
-											"min": 3,
-											"count": 344
-										},
-										{
-											"min": 4,
-											"count": 207
-										},
-										{
-											"min": 5,
-											"count": 5
-										}
-									]
-								},
-								"nature": "discrete"
-							},
-							{
-								"name": "alcoholtype",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 4,
-									"invalid": 0,
-									"mode": 1,
-									"min": 1,
-									"max": 4,
-									"mean": 2.4757519950890092,
-									"median": 3,
-									"stdev": 1.2081551828415056,
-									"bins": [
-										{
-											"min": 1,
-											"count": 569
-										},
-										{
-											"min": 2,
-											"count": 132
-										},
-										{
-											"min": 3,
-											"count": 512
-										},
-										{
-											"min": 4,
-											"count": 416
-										}
-									]
-								},
-								"nature": "discrete"
-							},
-							{
-								"name": "alcoholhowmuch",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 19,
-									"invalid": 417,
-									"mode": 2,
-									"min": 1,
-									"max": 48,
-									"mean": 3.2871287128712843,
-									"median": 2,
-									"stdev": 2.9846952309632466,
-									"bins": [
-										{
-											"min": "(empty)",
-											"count": 417
-										},
-										{
-											"min": 1,
-											"count": 1023
-										},
-										{
-											"min": 5.7,
-											"count": 153
-										},
-										{
-											"min": 10.4,
-											"count": 29
-										},
-										{
-											"min": 15.100000000000001,
-											"count": 4
-										},
-										{
-											"min": 19.8,
-											"count": 1
-										},
-										{
-											"min": 24.5,
-											"count": 0
-										},
-										{
-											"min": 29.200000000000003,
-											"count": 1
-										},
-										{
-											"min": 33.9,
-											"count": 0
-										},
-										{
-											"min": 38.6,
-											"count": 0
-										},
-										{
-											"min": 43.300000000000004,
-											"count": 1
-										}
-									]
-								},
-								"nature": "discrete"
-							},
-							{
-								"name": "pica",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 3,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 2,
-									"mean": 0.975445058317986,
-									"median": 0,
-									"stdev": 0.9978532862069724,
-									"bins": [
-										{
-											"min": 0,
-											"count": 831
-										},
-										{
-											"min": 1,
-											"count": 7
-										},
-										{
-											"min": 2,
-											"count": 791
-										}
-									]
-								},
-								"nature": "ordinal"
-							},
-							{
-								"name": "headache",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 1,
-									"min": 0,
-									"max": 1,
-									"mean": 0.6298342541436469,
-									"median": 1,
-									"stdev": 0.4829971787937676,
-									"bins": [
-										{
-											"min": 0,
-											"count": 603
-										},
-										{
-											"min": 1,
-											"count": 1026
-										}
-									]
-								},
-								"nature": "binary"
-							},
-							{
-								"name": "otherpain",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.24616329036218518,
-									"median": 0,
-									"stdev": 0.4309070774979398,
-									"bins": [
-										{
-											"min": 0,
-											"count": 1228
-										},
-										{
-											"min": 1,
-											"count": 401
-										}
-									]
-								},
-								"nature": "binary"
-							},
-							{
-								"name": "weakheart",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.02209944751381216,
-									"median": 0,
-									"stdev": 0.1470521558545255,
-									"bins": [
-										{
-											"min": 0,
-											"count": 1593
-										},
-										{
-											"min": 1,
-											"count": 36
-										}
-									]
-								},
-								"nature": "binary"
-							},
-							{
-								"name": "allergies",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.062001227747084095,
-									"median": 0,
-									"stdev": 0.24123183563595074,
-									"bins": [
-										{
-											"min": 0,
-											"count": 1528
-										},
-										{
-											"min": 1,
-											"count": 101
-										}
-									]
-								},
-								"nature": "binary"
-							},
-							{
-								"name": "nerves",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.14426028238182925,
-									"median": 0,
-									"stdev": 0.3514613521976747,
-									"bins": [
-										{
-											"min": 0,
-											"count": 1394
-										},
-										{
-											"min": 1,
-											"count": 235
-										}
-									]
-								},
-								"nature": "binary"
-							},
-							{
-								"name": "lackpep",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.05095150399017809,
-									"median": 0,
-									"stdev": 0.21996624876352136,
-									"bins": [
-										{
-											"min": 0,
-											"count": 1546
-										},
-										{
-											"min": 1,
-											"count": 83
-										}
-									]
-								},
-								"nature": "binary"
-							},
-							{
-								"name": "hbpmed",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 3,
-									"invalid": 0,
-									"mode": 2,
-									"min": 0,
-									"max": 2,
-									"mean": 1.005524861878453,
-									"median": 1,
-									"stdev": 0.982947441813647,
-									"bins": [
-										{
-											"min": 0,
-											"count": 782
-										},
-										{
-											"min": 1,
-											"count": 56
-										},
-										{
-											"min": 2,
-											"count": 791
-										}
-									]
-								},
-								"nature": "discrete"
-							},
-							{
-								"name": "boweltrouble",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 3,
-									"invalid": 0,
-									"mode": 2,
-									"min": 0,
-									"max": 2,
-									"mean": 1.0349907918968697,
-									"median": 1,
-									"stdev": 0.9672161491380759,
-									"bins": [
-										{
-											"min": 0,
-											"count": 734
-										},
-										{
-											"min": 1,
-											"count": 104
-										},
-										{
-											"min": 2,
-											"count": 791
-										}
-									]
-								},
-								"nature": "ordinal"
-							},
-							{
-								"name": "wtloss",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.025782688766114184,
-									"median": 0,
-									"stdev": 0.15853507636241837,
-									"bins": [
-										{
-											"min": 0,
-											"count": 1587
-										},
-										{
-											"min": 1,
-											"count": 42
-										}
-									]
-								},
-								"nature": "binary"
-							},
-							{
-								"name": "infection",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 2,
-									"invalid": 0,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.14794352363413135,
-									"median": 0,
-									"stdev": 0.35515301993666276,
-									"bins": [
-										{
-											"min": 0,
-											"count": 1388
-										},
-										{
-											"min": 1,
-											"count": 241
-										}
-									]
-								},
-								"nature": "binary"
-							},
-							{
-								"name": "active",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 3,
-									"invalid": 0,
-									"mode": 1,
-									"min": 0,
-									"max": 2,
-									"mean": 0.6519337016574593,
-									"median": 1,
-									"stdev": 0.652742470429622,
-									"bins": [
-										{
-											"min": 0,
-											"count": 729
-										},
-										{
-											"min": 1,
-											"count": 738
-										},
-										{
-											"min": 2,
-											"count": 162
-										}
-									]
-								},
-								"nature": "ordinal"
-							},
-							{
-								"name": "exercise",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 3,
-									"invalid": 0,
-									"mode": 1,
-									"min": 0,
-									"max": 2,
-									"mean": 1.1952117863720086,
-									"median": 1,
-									"stdev": 0.7393480476648412,
-									"bins": [
-										{
-											"min": 0,
-											"count": 317
-										},
-										{
-											"min": 1,
-											"count": 677
-										},
-										{
-											"min": 2,
-											"count": 635
-										}
-									]
-								},
-								"nature": "discrete"
-							},
-							{
-								"name": "birthcontrol",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 3,
-									"invalid": 0,
-									"mode": 2,
-									"min": 0,
-									"max": 2,
-									"mean": 1.084714548802947,
-									"median": 1,
-									"stdev": 0.9477470350380098,
-									"bins": [
-										{
-											"min": 0,
-											"count": 668
-										},
-										{
-											"min": 1,
-											"count": 155
-										},
-										{
-											"min": 2,
-											"count": 806
-										}
-									]
-								},
-								"nature": "discrete"
-							},
-							{
-								"name": "pregnancies",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 15,
-									"invalid": 903,
-									"mode": 2,
-									"min": 1,
-									"max": 15,
-									"mean": 3.691460055096413,
-									"median": 3,
-									"stdev": 2.2056000989148603,
-									"bins": [
-										{
-											"min": "(empty)",
-											"count": 903
-										},
-										{
-											"min": 1,
-											"count": 257
-										},
-										{
-											"min": 2.4,
-											"count": 136
-										},
-										{
-											"min": 3.8,
-											"count": 203
-										},
-										{
-											"min": 5.199999999999999,
-											"count": 49
-										},
-										{
-											"min": 6.6,
-											"count": 41
-										},
-										{
-											"min": 8,
-											"count": 25
-										},
-										{
-											"min": 9.399999999999999,
-											"count": 6
-										},
-										{
-											"min": 10.799999999999999,
-											"count": 7
-										},
-										{
-											"min": 12.2,
-											"count": 1
-										},
-										{
-											"min": 13.6,
-											"count": 1
-										}
-									]
-								},
-								"nature": "discrete"
-							},
-							{
-								"name": "cholesterol",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 229,
-									"invalid": 16,
-									"mode": 216,
-									"min": 78,
-									"max": 416,
-									"mean": 219.97396156230644,
-									"median": 216,
-									"stdev": 45.444202053058646,
-									"bins": [
-										{
-											"min": "(empty)",
-											"count": 16
-										},
-										{
-											"min": 78,
-											"count": 4
-										},
-										{
-											"min": 111.8,
-											"count": 44
-										},
-										{
-											"min": 145.6,
-											"count": 245
-										},
-										{
-											"min": 179.39999999999998,
-											"count": 465
-										},
-										{
-											"min": 213.2,
-											"count": 459
-										},
-										{
-											"min": 247,
-											"count": 241
-										},
-										{
-											"min": 280.79999999999995,
-											"count": 102
-										},
-										{
-											"min": 314.59999999999997,
-											"count": 39
-										},
-										{
-											"min": 348.4,
-											"count": 10
-										},
-										{
-											"min": 382.2,
-											"count": 4
-										}
-									]
-								},
-								"nature": "discrete"
-							},
-							{
-								"name": "hightax82",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 3,
-									"invalid": 92,
-									"mode": 0,
-									"min": 0,
-									"max": 1,
-									"mean": 0.16590761223162,
-									"median": 0,
-									"stdev": 0.372118756666618,
-									"bins": [
-										{
-											"min": "(empty)",
-											"count": 92
-										},
-										{
-											"min": 0,
-											"count": 1282
-										},
-										{
-											"min": 1,
-											"count": 255
-										}
-									]
-								},
-								"nature": "binary"
-							},
-							{
-								"name": "price71",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 43,
-									"invalid": 92,
-									"mode": 2.3466796875,
-									"min": 1.5065917969,
-									"max": 2.6928710938,
-									"mean": 2.1387500254307725,
-									"median": 2.16796875,
-									"stdev": 0.22901568577499437,
-									"bins": [
-										{
-											"min": "(empty)",
-											"count": 92
-										},
-										{
-											"min": 1.5065917969,
-											"count": 82
-										},
-										{
-											"min": 1.62521972659,
-											"count": 43
-										},
-										{
-											"min": 1.74384765628,
-											"count": 69
-										},
-										{
-											"min": 1.86247558597,
-											"count": 80
-										},
-										{
-											"min": 1.98110351566,
-											"count": 357
-										},
-										{
-											"min": 2.09973144535,
-											"count": 366
-										},
-										{
-											"min": 2.21835937504,
-											"count": 175
-										},
-										{
-											"min": 2.33698730473,
-											"count": 265
-										},
-										{
-											"min": 2.4556152344199997,
-											"count": 80
-										},
-										{
-											"min": 2.57424316411,
-											"count": 20
-										}
-									]
-								},
-								"nature": "continuous"
-							},
-							{
-								"name": "price82",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 44,
-									"invalid": 92,
-									"mode": 1.7973632813,
-									"min": 1.4519042969,
-									"max": 2.1030273438,
-									"mean": 1.8060954782245922,
-									"median": 1.8149414063,
-									"stdev": 0.13064116827487027,
-									"bins": [
-										{
-											"min": "(empty)",
-											"count": 92
-										},
-										{
-											"min": 1.4519042969,
-											"count": 77
-										},
-										{
-											"min": 1.51701660159,
-											"count": 2
-										},
-										{
-											"min": 1.58212890628,
-											"count": 117
-										},
-										{
-											"min": 1.6472412109699999,
-											"count": 80
-										},
-										{
-											"min": 1.71235351566,
-											"count": 239
-										},
-										{
-											"min": 1.77746582035,
-											"count": 452
-										},
-										{
-											"min": 1.84257812504,
-											"count": 224
-										},
-										{
-											"min": 1.90769042973,
-											"count": 214
-										},
-										{
-											"min": 1.97280273442,
-											"count": 77
-										},
-										{
-											"min": 2.03791503911,
-											"count": 55
-										}
-									]
-								},
-								"nature": "continuous"
-							},
-							{
-								"name": "tax71",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 22,
-									"invalid": 92,
-									"mode": 1.0498046875,
-									"min": 0.5249023438,
-									"max": 1.5224609375,
-									"mean": 1.0585808837867934,
-									"median": 1.0498046875,
-									"stdev": 0.21622908324526693,
-									"bins": [
-										{
-											"min": "(empty)",
-											"count": 92
-										},
-										{
-											"min": 0.5249023438,
-											"count": 77
-										},
-										{
-											"min": 0.62465820317,
-											"count": 18
-										},
-										{
-											"min": 0.72441406254,
-											"count": 97
-										},
-										{
-											"min": 0.82416992191,
-											"count": 81
-										},
-										{
-											"min": 0.92392578128,
-											"count": 330
-										},
-										{
-											"min": 1.02368164065,
-											"count": 496
-										},
-										{
-											"min": 1.12343750002,
-											"count": 71
-										},
-										{
-											"min": 1.2231933593900002,
-											"count": 98
-										},
-										{
-											"min": 1.32294921876,
-											"count": 249
-										},
-										{
-											"min": 1.42270507813,
-											"count": 20
-										}
-									]
-								},
-								"nature": "continuous"
-							},
-							{
-								"name": "tax82",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 25,
-									"invalid": 92,
-									"mode": 0.5718994141,
-									"min": 0.2199707031,
-									"max": 0.7479248047,
-									"mean": 0.5059827756301889,
-									"median": 0.5059814453,
-									"stdev": 0.11189374289015983,
-									"bins": [
-										{
-											"min": "(empty)",
-											"count": 92
-										},
-										{
-											"min": 0.2199707031,
-											"count": 77
-										},
-										{
-											"min": 0.27276611326,
-											"count": 0
-										},
-										{
-											"min": 0.32556152342,
-											"count": 58
-										},
-										{
-											"min": 0.37835693358,
-											"count": 219
-										},
-										{
-											"min": 0.43115234374,
-											"count": 252
-										},
-										{
-											"min": 0.4839477539,
-											"count": 272
-										},
-										{
-											"min": 0.53674316406,
-											"count": 399
-										},
-										{
-											"min": 0.58953857422,
-											"count": 158
-										},
-										{
-											"min": 0.64233398438,
-											"count": 49
-										},
-										{
-											"min": 0.69512939454,
-											"count": 53
-										}
-									]
-								},
-								"nature": "continuous"
-							},
-							{
-								"name": "price71_82",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 50,
-									"invalid": 92,
-									"mode": 0.5493164063,
-									"min": -0.202697754,
-									"max": 0.6120605469,
-									"mean": 0.33274116094385126,
-									"median": 0.3359985352,
-									"stdev": 0.15504492503562864,
-									"bins": [
-										{
-											"min": "(empty)",
-											"count": 92
-										},
-										{
-											"min": -0.202697754,
-											"count": 7
-										},
-										{
-											"min": -0.12122192391,
-											"count": 3
-										},
-										{
-											"min": -0.039746093819999995,
-											"count": 43
-										},
-										{
-											"min": 0.04172973627000001,
-											"count": 80
-										},
-										{
-											"min": 0.12320556636000002,
-											"count": 272
-										},
-										{
-											"min": 0.20468139645000005,
-											"count": 172
-										},
-										{
-											"min": 0.28615722654000003,
-											"count": 293
-										},
-										{
-											"min": 0.36763305663,
-											"count": 319
-										},
-										{
-											"min": 0.44910888672000004,
-											"count": 126
-										},
-										{
-											"min": 0.5305847168100001,
-											"count": 163
-										}
-									]
-								},
-								"nature": "continuous"
-							},
-							{
-								"name": "tax71_82",
-								"type": "number",
-								"metadata": {
-									"type": "number",
-									"count": 1629,
-									"distinct": 41,
-									"invalid": 92,
-									"mode": 0.79296875,
-									"min": 0.0359954834,
-									"max": 0.8843994141,
-									"mean": 0.552614280293233,
-									"median": 0.5439453125,
-									"stdev": 0.15032053984550792,
-									"bins": [
-										{
-											"min": "(empty)",
-											"count": 92
-										},
-										{
-											"min": 0.0359954834,
-											"count": 5
-										},
-										{
-											"min": 0.12083587646999999,
-											"count": 2
-										},
-										{
-											"min": 0.20567626953999998,
-											"count": 23
-										},
-										{
-											"min": 0.29051666261,
-											"count": 176
-										},
-										{
-											"min": 0.37535705568,
-											"count": 176
-										},
-										{
-											"min": 0.46019744875,
-											"count": 437
-										},
-										{
-											"min": 0.5450378418199999,
-											"count": 345
-										},
-										{
-											"min": 0.6298782348899999,
-											"count": 104
-										},
-										{
-											"min": 0.71471862796,
-											"count": 190
-										},
-										{
-											"min": 0.79955902103,
-											"count": 79
-										}
-									]
-								},
-								"nature": "continuous"
+							"nature": "binary",
+							"mapping": {
+								"0": "Male",
+								"1": "Female"
 							}
-						]
-					}
+						},
+						{
+							"name": "age",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 49,
+								"invalid": 0,
+								"mode": 25,
+								"min": 25,
+								"max": 74,
+								"mean": 43.91528545119704,
+								"median": 44,
+								"stdev": 12.17042951844977,
+								"bins": [
+									{
+										"min": 25,
+										"count": 245
+									},
+									{
+										"min": 29.9,
+										"count": 221
+									},
+									{
+										"min": 34.8,
+										"count": 181
+									},
+									{
+										"min": 39.7,
+										"count": 190
+									},
+									{
+										"min": 44.6,
+										"count": 227
+									},
+									{
+										"min": 49.5,
+										"count": 218
+									},
+									{
+										"min": 54.400000000000006,
+										"count": 159
+									},
+									{
+										"min": 59.300000000000004,
+										"count": 96
+									},
+									{
+										"min": 64.2,
+										"count": 68
+									},
+									{
+										"min": 69.1,
+										"count": 24
+									}
+								]
+							},
+							"nature": "discrete"
+						},
+						{
+							"name": "race",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.13198281154082256,
+								"median": 0,
+								"stdev": 0.3385760174703687,
+								"bins": [
+									{
+										"min": 0,
+										"count": 1414
+									},
+									{
+										"min": 1,
+										"count": 215
+									}
+								]
+							},
+							"nature": "binary"
+						},
+						{
+							"name": "income",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 13,
+								"invalid": 62,
+								"mode": 19,
+								"min": 11,
+								"max": 22,
+								"mean": 17.947670708359887,
+								"median": 19,
+								"stdev": 2.6632771799456743,
+								"bins": [
+									{
+										"min": "(empty)",
+										"count": 62
+									},
+									{
+										"min": 11,
+										"count": 89
+									},
+									{
+										"min": 12.1,
+										"count": 68
+									},
+									{
+										"min": 13.2,
+										"count": 63
+									},
+									{
+										"min": 14.3,
+										"count": 83
+									},
+									{
+										"min": 15.4,
+										"count": 78
+									},
+									{
+										"min": 16.5,
+										"count": 65
+									},
+									{
+										"min": 17.6,
+										"count": 284
+									},
+									{
+										"min": 18.700000000000003,
+										"count": 417
+									},
+									{
+										"min": 19.8,
+										"count": 220
+									},
+									{
+										"min": 20.9,
+										"count": 200
+									}
+								]
+							},
+							"nature": "discrete"
+						},
+						{
+							"name": "marital",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 6,
+								"invalid": 0,
+								"mode": 2,
+								"min": 2,
+								"max": 8,
+								"mean": 2.5033763044812747,
+								"median": 2,
+								"stdev": 1.0823668867788887,
+								"bins": [
+									{
+										"min": 2,
+										"count": 1279
+									},
+									{
+										"min": 3,
+										"count": 97
+									},
+									{
+										"min": 4,
+										"count": 96
+									},
+									{
+										"min": 5,
+										"count": 99
+									},
+									{
+										"min": 6,
+										"count": 57
+									},
+									{
+										"min": 8,
+										"count": 1
+									}
+								]
+							},
+							"nature": "discrete"
+						},
+						{
+							"name": "school",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 17,
+								"invalid": 0,
+								"mode": 12,
+								"min": 0,
+								"max": 17,
+								"mean": 11.135052179251096,
+								"median": 12,
+								"stdev": 3.089600584119033,
+								"bins": [
+									{
+										"min": 0,
+										"count": 18
+									},
+									{
+										"min": 1.7,
+										"count": 22
+									},
+									{
+										"min": 3.4,
+										"count": 31
+									},
+									{
+										"min": 5.1,
+										"count": 37
+									},
+									{
+										"min": 6.8,
+										"count": 203
+									},
+									{
+										"min": 8.5,
+										"count": 243
+									},
+									{
+										"min": 10.2,
+										"count": 108
+									},
+									{
+										"min": 11.9,
+										"count": 750
+									},
+									{
+										"min": 13.6,
+										"count": 35
+									},
+									{
+										"min": 15.299999999999999,
+										"count": 182
+									}
+								]
+							},
+							"nature": "discrete"
+						},
+						{
+							"name": "education",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 5,
+								"invalid": 0,
+								"mode": 3,
+								"min": 1,
+								"max": 5,
+								"mean": 2.70349907918969,
+								"median": 3,
+								"stdev": 1.1900978773905186,
+								"bins": [
+									{
+										"min": 1,
+										"count": 311
+									},
+									{
+										"min": 2,
+										"count": 351
+									},
+									{
+										"min": 3,
+										"count": 659
+									},
+									{
+										"min": 4,
+										"count": 126
+									},
+									{
+										"min": 5,
+										"count": 182
+									}
+								]
+							},
+							"nature": "discrete"
+						},
+						{
+							"name": "ht",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 384,
+								"invalid": 0,
+								"mode": 160.6875,
+								"min": 142.875,
+								"max": 198.09375,
+								"mean": 168.74096454880282,
+								"median": 168.28125,
+								"stdev": 9.053131039460231,
+								"bins": [
+									{
+										"min": 142.875,
+										"count": 7
+									},
+									{
+										"min": 148.396875,
+										"count": 46
+									},
+									{
+										"min": 153.91875,
+										"count": 215
+									},
+									{
+										"min": 159.440625,
+										"count": 357
+									},
+									{
+										"min": 164.9625,
+										"count": 320
+									},
+									{
+										"min": 170.484375,
+										"count": 323
+									},
+									{
+										"min": 176.00625,
+										"count": 220
+									},
+									{
+										"min": 181.528125,
+										"count": 108
+									},
+									{
+										"min": 187.05,
+										"count": 25
+									},
+									{
+										"min": 192.571875,
+										"count": 8
+									}
+								]
+							},
+							"nature": "continuous"
+						},
+						{
+							"name": "wt71",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 527,
+								"invalid": 0,
+								"mode": 67.13,
+								"min": 36.17,
+								"max": 169.19,
+								"mean": 71.0521301411909,
+								"median": 69.4,
+								"stdev": 15.729589870264844,
+								"bins": [
+									{
+										"min": 36.17,
+										"count": 86
+									},
+									{
+										"min": 49.472,
+										"count": 462
+									},
+									{
+										"min": 62.774,
+										"count": 532
+									},
+									{
+										"min": 76.076,
+										"count": 364
+									},
+									{
+										"min": 89.37799999999999,
+										"count": 124
+									},
+									{
+										"min": 102.67999999999999,
+										"count": 42
+									},
+									{
+										"min": 115.98199999999999,
+										"count": 12
+									},
+									{
+										"min": 129.284,
+										"count": 5
+									},
+									{
+										"min": 142.58599999999998,
+										"count": 1
+									},
+									{
+										"min": 155.88799999999998,
+										"count": 1
+									}
+								]
+							},
+							"nature": "continuous"
+						},
+						{
+							"name": "wt82",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 176,
+								"invalid": 63,
+								"mode": 72.5747792,
+								"min": 35.38020486,
+								"max": 136.53130337,
+								"mean": 73.46921932679436,
+								"median": 72.12118683,
+								"stdev": 16.15804717832783,
+								"bins": [
+									{
+										"min": "(empty)",
+										"count": 63
+									},
+									{
+										"min": 35.38020486,
+										"count": 23
+									},
+									{
+										"min": 45.495314711,
+										"count": 153
+									},
+									{
+										"min": 55.610424562,
+										"count": 361
+									},
+									{
+										"min": 65.72553441299999,
+										"count": 407
+									},
+									{
+										"min": 75.84064426399999,
+										"count": 305
+									},
+									{
+										"min": 85.95575411499999,
+										"count": 177
+									},
+									{
+										"min": 96.07086396599999,
+										"count": 82
+									},
+									{
+										"min": 106.18597381699999,
+										"count": 30
+									},
+									{
+										"min": 116.30108366799999,
+										"count": 18
+									},
+									{
+										"min": 126.41619351899999,
+										"count": 10
+									}
+								]
+							},
+							"nature": "continuous"
+						},
+						{
+							"name": "wt82_71",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 1511,
+								"invalid": 63,
+								"mode": 3.05711053,
+								"min": -41.28046982,
+								"max": 48.53838568,
+								"mean": 2.638299786564496,
+								"median": 2.60381134,
+								"stdev": 7.87991285435954,
+								"bins": [
+									{
+										"min": "(empty)",
+										"count": 63
+									},
+									{
+										"min": -41.28046982,
+										"count": 1
+									},
+									{
+										"min": -32.29858427,
+										"count": 6
+									},
+									{
+										"min": -23.31669872,
+										"count": 25
+									},
+									{
+										"min": -14.334813170000004,
+										"count": 154
+									},
+									{
+										"min": -5.352927620000003,
+										"count": 711
+									},
+									{
+										"min": 3.6289579299999986,
+										"count": 546
+									},
+									{
+										"min": 12.610843479999993,
+										"count": 97
+									},
+									{
+										"min": 21.592729029999994,
+										"count": 17
+									},
+									{
+										"min": 30.574614579999995,
+										"count": 7
+									},
+									{
+										"min": 39.556500129999996,
+										"count": 2
+									}
+								]
+							},
+							"nature": "continuous"
+						},
+						{
+							"name": "birthplace",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 50,
+								"invalid": 92,
+								"mode": 42,
+								"min": 1,
+								"max": 56,
+								"mean": 31.595315549772284,
+								"median": 34,
+								"stdev": 14.500500311769917,
+								"bins": [
+									{
+										"min": "(empty)",
+										"count": 92
+									},
+									{
+										"min": 1,
+										"count": 124
+									},
+									{
+										"min": 6.5,
+										"count": 45
+									},
+									{
+										"min": 12,
+										"count": 108
+									},
+									{
+										"min": 17.5,
+										"count": 173
+									},
+									{
+										"min": 23,
+										"count": 192
+									},
+									{
+										"min": 28.5,
+										"count": 103
+									},
+									{
+										"min": 34,
+										"count": 275
+									},
+									{
+										"min": 39.5,
+										"count": 171
+									},
+									{
+										"min": 45,
+										"count": 193
+									},
+									{
+										"min": 50.5,
+										"count": 153
+									}
+								]
+							},
+							"nature": "discrete"
+						},
+						{
+							"name": "smokeintensity",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 37,
+								"invalid": 0,
+								"mode": 20,
+								"min": 1,
+								"max": 80,
+								"mean": 20.551258440761245,
+								"median": 20,
+								"stdev": 11.80375387756311,
+								"bins": [
+									{
+										"min": 1,
+										"count": 223
+									},
+									{
+										"min": 8.9,
+										"count": 348
+									},
+									{
+										"min": 16.8,
+										"count": 601
+									},
+									{
+										"min": 24.700000000000003,
+										"count": 222
+									},
+									{
+										"min": 32.6,
+										"count": 189
+									},
+									{
+										"min": 40.5,
+										"count": 8
+									},
+									{
+										"min": 48.400000000000006,
+										"count": 22
+									},
+									{
+										"min": 56.300000000000004,
+										"count": 15
+									},
+									{
+										"min": 64.2,
+										"count": 0
+									},
+									{
+										"min": 72.10000000000001,
+										"count": 1
+									}
+								]
+							},
+							"nature": "discrete"
+						},
+						{
+							"name": "smkintensity82_71",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 63,
+								"invalid": 0,
+								"mode": 0,
+								"min": -80,
+								"max": 50,
+								"mean": -4.737875997544503,
+								"median": -1,
+								"stdev": 13.7413603200895,
+								"bins": [
+									{
+										"min": -80,
+										"count": 1
+									},
+									{
+										"min": -67,
+										"count": 3
+									},
+									{
+										"min": -54,
+										"count": 6
+									},
+									{
+										"min": -41,
+										"count": 102
+									},
+									{
+										"min": -28,
+										"count": 199
+									},
+									{
+										"min": -15,
+										"count": 442
+									},
+									{
+										"min": -2,
+										"count": 779
+									},
+									{
+										"min": 11,
+										"count": 74
+									},
+									{
+										"min": 24,
+										"count": 13
+									},
+									{
+										"min": 37,
+										"count": 10
+									}
+								]
+							},
+							"nature": "discrete"
+						},
+						{
+							"name": "smokeyrs",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 60,
+								"invalid": 0,
+								"mode": 15,
+								"min": 1,
+								"max": 64,
+								"mean": 24.8710865561694,
+								"median": 24,
+								"stdev": 12.198071709313327,
+								"bins": [
+									{
+										"min": 1,
+										"count": 89
+									},
+									{
+										"min": 7.3,
+										"count": 252
+									},
+									{
+										"min": 13.6,
+										"count": 276
+									},
+									{
+										"min": 19.9,
+										"count": 298
+									},
+									{
+										"min": 26.2,
+										"count": 274
+									},
+									{
+										"min": 32.5,
+										"count": 199
+									},
+									{
+										"min": 38.8,
+										"count": 151
+									},
+									{
+										"min": 45.1,
+										"count": 57
+									},
+									{
+										"min": 51.4,
+										"count": 28
+									},
+									{
+										"min": 57.699999999999996,
+										"count": 5
+									}
+								]
+							},
+							"nature": "discrete"
+						},
+						{
+							"name": "asthma",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.048496009821976674,
+								"median": 0,
+								"stdev": 0.21487785117101327,
+								"bins": [
+									{
+										"min": 0,
+										"count": 1550
+									},
+									{
+										"min": 1,
+										"count": 79
+									}
+								]
+							},
+							"nature": "binary"
+						},
+						{
+							"name": "bronch",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.08532842234499687,
+								"median": 0,
+								"stdev": 0.2794555839472363,
+								"bins": [
+									{
+										"min": 0,
+										"count": 1490
+									},
+									{
+										"min": 1,
+										"count": 139
+									}
+								]
+							},
+							"nature": "binary"
+						},
+						{
+							"name": "tb",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.014119091467157762,
+								"median": 0,
+								"stdev": 0.11801818899567053,
+								"bins": [
+									{
+										"min": 0,
+										"count": 1606
+									},
+									{
+										"min": 1,
+										"count": 23
+									}
+								]
+							},
+							"nature": "binary"
+						},
+						{
+							"name": "hf",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.0049109883364027145,
+								"median": 0,
+								"stdev": 0.0699276218184718,
+								"bins": [
+									{
+										"min": 0,
+										"count": 1621
+									},
+									{
+										"min": 1,
+										"count": 8
+									}
+								]
+							},
+							"nature": "binary"
+						},
+						{
+							"name": "hbp",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 3,
+								"invalid": 0,
+								"mode": 2,
+								"min": 0,
+								"max": 2,
+								"mean": 1.0509515039901791,
+								"median": 1,
+								"stdev": 0.9582087561559665,
+								"bins": [
+									{
+										"min": 0,
+										"count": 708
+									},
+									{
+										"min": 1,
+										"count": 130
+									},
+									{
+										"min": 2,
+										"count": 791
+									}
+								]
+							},
+							"nature": "discrete"
+						},
+						{
+							"name": "pepticulcer",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.10374462860650709,
+								"median": 0,
+								"stdev": 0.3050226134178471,
+								"bins": [
+									{
+										"min": 0,
+										"count": 1460
+									},
+									{
+										"min": 1,
+										"count": 169
+									}
+								]
+							},
+							"nature": "binary"
+						},
+						{
+							"name": "colitis",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.033763044812768546,
+								"median": 0,
+								"stdev": 0.18067412758319043,
+								"bins": [
+									{
+										"min": 0,
+										"count": 1574
+									},
+									{
+										"min": 1,
+										"count": 55
+									}
+								]
+							},
+							"nature": "binary"
+						},
+						{
+							"name": "hepatitis",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.017188459177409465,
+								"median": 0,
+								"stdev": 0.13001304778367576,
+								"bins": [
+									{
+										"min": 0,
+										"count": 1601
+									},
+									{
+										"min": 1,
+										"count": 28
+									}
+								]
+							},
+							"nature": "binary"
+						},
+						{
+							"name": "chroniccough",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.05402087170042972,
+								"median": 0,
+								"stdev": 0.22612829751075358,
+								"bins": [
+									{
+										"min": 0,
+										"count": 1541
+									},
+									{
+										"min": 1,
+										"count": 88
+									}
+								]
+							},
+							"nature": "binary"
+						},
+						{
+							"name": "hayfever",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.08962553713934923,
+								"median": 0,
+								"stdev": 0.28573224994650687,
+								"bins": [
+									{
+										"min": 0,
+										"count": 1483
+									},
+									{
+										"min": 1,
+										"count": 146
+									}
+								]
+							},
+							"nature": "binary"
+						},
+						{
+							"name": "diabetes",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 3,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 2,
+								"mean": 0.9797421731123387,
+								"median": 0,
+								"stdev": 0.9957932066391293,
+								"bins": [
+									{
+										"min": 0,
+										"count": 824
+									},
+									{
+										"min": 1,
+										"count": 14
+									},
+									{
+										"min": 2,
+										"count": 791
+									}
+								]
+							},
+							"nature": "discrete"
+						},
+						{
+							"name": "polio",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.014119091467157788,
+								"median": 0,
+								"stdev": 0.11801818899567049,
+								"bins": [
+									{
+										"min": 0,
+										"count": 1606
+									},
+									{
+										"min": 1,
+										"count": 23
+									}
+								]
+							},
+							"nature": "binary"
+						},
+						{
+							"name": "tumor",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.02332719459791285,
+								"median": 0,
+								"stdev": 0.1509868573231586,
+								"bins": [
+									{
+										"min": 0,
+										"count": 1591
+									},
+									{
+										"min": 1,
+										"count": 38
+									}
+								]
+							},
+							"nature": "binary"
+						},
+						{
+							"name": "nervousbreak",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.028852056476365892,
+								"median": 0,
+								"stdev": 0.16744200900421558,
+								"bins": [
+									{
+										"min": 0,
+										"count": 1582
+									},
+									{
+										"min": 1,
+										"count": 47
+									}
+								]
+							},
+							"nature": "binary"
+						},
+						{
+							"name": "alcoholpy",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 3,
+								"invalid": 0,
+								"mode": 1,
+								"min": 0,
+								"max": 2,
+								"mean": 0.8759975445058323,
+								"median": 1,
+								"stdev": 0.3388732449767065,
+								"bins": [
+									{
+										"min": 0,
+										"count": 207
+									},
+									{
+										"min": 1,
+										"count": 1417
+									},
+									{
+										"min": 2,
+										"count": 5
+									}
+								]
+							},
+							"nature": "discrete"
+						},
+						{
+							"name": "alcoholfreq",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 6,
+								"invalid": 0,
+								"mode": 2,
+								"min": 0,
+								"max": 5,
+								"mean": 1.9201964395334552,
+								"median": 2,
+								"stdev": 1.3071400823182824,
+								"bins": [
+									{
+										"min": 0,
+										"count": 336
+									},
+									{
+										"min": 1,
+										"count": 231
+									},
+									{
+										"min": 2,
+										"count": 506
+									},
+									{
+										"min": 3,
+										"count": 344
+									},
+									{
+										"min": 4,
+										"count": 207
+									},
+									{
+										"min": 5,
+										"count": 5
+									}
+								]
+							},
+							"nature": "discrete"
+						},
+						{
+							"name": "alcoholtype",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 4,
+								"invalid": 0,
+								"mode": 1,
+								"min": 1,
+								"max": 4,
+								"mean": 2.4757519950890092,
+								"median": 3,
+								"stdev": 1.2081551828415056,
+								"bins": [
+									{
+										"min": 1,
+										"count": 569
+									},
+									{
+										"min": 2,
+										"count": 132
+									},
+									{
+										"min": 3,
+										"count": 512
+									},
+									{
+										"min": 4,
+										"count": 416
+									}
+								]
+							},
+							"nature": "discrete"
+						},
+						{
+							"name": "alcoholhowmuch",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 19,
+								"invalid": 417,
+								"mode": 2,
+								"min": 1,
+								"max": 48,
+								"mean": 3.2871287128712843,
+								"median": 2,
+								"stdev": 2.9846952309632466,
+								"bins": [
+									{
+										"min": "(empty)",
+										"count": 417
+									},
+									{
+										"min": 1,
+										"count": 1023
+									},
+									{
+										"min": 5.7,
+										"count": 153
+									},
+									{
+										"min": 10.4,
+										"count": 29
+									},
+									{
+										"min": 15.100000000000001,
+										"count": 4
+									},
+									{
+										"min": 19.8,
+										"count": 1
+									},
+									{
+										"min": 24.5,
+										"count": 0
+									},
+									{
+										"min": 29.200000000000003,
+										"count": 1
+									},
+									{
+										"min": 33.9,
+										"count": 0
+									},
+									{
+										"min": 38.6,
+										"count": 0
+									},
+									{
+										"min": 43.300000000000004,
+										"count": 1
+									}
+								]
+							},
+							"nature": "discrete"
+						},
+						{
+							"name": "pica",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 3,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 2,
+								"mean": 0.975445058317986,
+								"median": 0,
+								"stdev": 0.9978532862069724,
+								"bins": [
+									{
+										"min": 0,
+										"count": 831
+									},
+									{
+										"min": 1,
+										"count": 7
+									},
+									{
+										"min": 2,
+										"count": 791
+									}
+								]
+							},
+							"nature": "ordinal"
+						},
+						{
+							"name": "headache",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 1,
+								"min": 0,
+								"max": 1,
+								"mean": 0.6298342541436469,
+								"median": 1,
+								"stdev": 0.4829971787937676,
+								"bins": [
+									{
+										"min": 0,
+										"count": 603
+									},
+									{
+										"min": 1,
+										"count": 1026
+									}
+								]
+							},
+							"nature": "binary"
+						},
+						{
+							"name": "otherpain",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.24616329036218518,
+								"median": 0,
+								"stdev": 0.4309070774979398,
+								"bins": [
+									{
+										"min": 0,
+										"count": 1228
+									},
+									{
+										"min": 1,
+										"count": 401
+									}
+								]
+							},
+							"nature": "binary"
+						},
+						{
+							"name": "weakheart",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.02209944751381216,
+								"median": 0,
+								"stdev": 0.1470521558545255,
+								"bins": [
+									{
+										"min": 0,
+										"count": 1593
+									},
+									{
+										"min": 1,
+										"count": 36
+									}
+								]
+							},
+							"nature": "binary"
+						},
+						{
+							"name": "allergies",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.062001227747084095,
+								"median": 0,
+								"stdev": 0.24123183563595074,
+								"bins": [
+									{
+										"min": 0,
+										"count": 1528
+									},
+									{
+										"min": 1,
+										"count": 101
+									}
+								]
+							},
+							"nature": "binary"
+						},
+						{
+							"name": "nerves",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.14426028238182925,
+								"median": 0,
+								"stdev": 0.3514613521976747,
+								"bins": [
+									{
+										"min": 0,
+										"count": 1394
+									},
+									{
+										"min": 1,
+										"count": 235
+									}
+								]
+							},
+							"nature": "binary"
+						},
+						{
+							"name": "lackpep",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.05095150399017809,
+								"median": 0,
+								"stdev": 0.21996624876352136,
+								"bins": [
+									{
+										"min": 0,
+										"count": 1546
+									},
+									{
+										"min": 1,
+										"count": 83
+									}
+								]
+							},
+							"nature": "binary"
+						},
+						{
+							"name": "hbpmed",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 3,
+								"invalid": 0,
+								"mode": 2,
+								"min": 0,
+								"max": 2,
+								"mean": 1.005524861878453,
+								"median": 1,
+								"stdev": 0.982947441813647,
+								"bins": [
+									{
+										"min": 0,
+										"count": 782
+									},
+									{
+										"min": 1,
+										"count": 56
+									},
+									{
+										"min": 2,
+										"count": 791
+									}
+								]
+							},
+							"nature": "discrete"
+						},
+						{
+							"name": "boweltrouble",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 3,
+								"invalid": 0,
+								"mode": 2,
+								"min": 0,
+								"max": 2,
+								"mean": 1.0349907918968697,
+								"median": 1,
+								"stdev": 0.9672161491380759,
+								"bins": [
+									{
+										"min": 0,
+										"count": 734
+									},
+									{
+										"min": 1,
+										"count": 104
+									},
+									{
+										"min": 2,
+										"count": 791
+									}
+								]
+							},
+							"nature": "ordinal"
+						},
+						{
+							"name": "wtloss",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.025782688766114184,
+								"median": 0,
+								"stdev": 0.15853507636241837,
+								"bins": [
+									{
+										"min": 0,
+										"count": 1587
+									},
+									{
+										"min": 1,
+										"count": 42
+									}
+								]
+							},
+							"nature": "binary"
+						},
+						{
+							"name": "infection",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 2,
+								"invalid": 0,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.14794352363413135,
+								"median": 0,
+								"stdev": 0.35515301993666276,
+								"bins": [
+									{
+										"min": 0,
+										"count": 1388
+									},
+									{
+										"min": 1,
+										"count": 241
+									}
+								]
+							},
+							"nature": "binary"
+						},
+						{
+							"name": "active",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 3,
+								"invalid": 0,
+								"mode": 1,
+								"min": 0,
+								"max": 2,
+								"mean": 0.6519337016574593,
+								"median": 1,
+								"stdev": 0.652742470429622,
+								"bins": [
+									{
+										"min": 0,
+										"count": 729
+									},
+									{
+										"min": 1,
+										"count": 738
+									},
+									{
+										"min": 2,
+										"count": 162
+									}
+								]
+							},
+							"nature": "ordinal"
+						},
+						{
+							"name": "exercise",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 3,
+								"invalid": 0,
+								"mode": 1,
+								"min": 0,
+								"max": 2,
+								"mean": 1.1952117863720086,
+								"median": 1,
+								"stdev": 0.7393480476648412,
+								"bins": [
+									{
+										"min": 0,
+										"count": 317
+									},
+									{
+										"min": 1,
+										"count": 677
+									},
+									{
+										"min": 2,
+										"count": 635
+									}
+								]
+							},
+							"nature": "discrete"
+						},
+						{
+							"name": "birthcontrol",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 3,
+								"invalid": 0,
+								"mode": 2,
+								"min": 0,
+								"max": 2,
+								"mean": 1.084714548802947,
+								"median": 1,
+								"stdev": 0.9477470350380098,
+								"bins": [
+									{
+										"min": 0,
+										"count": 668
+									},
+									{
+										"min": 1,
+										"count": 155
+									},
+									{
+										"min": 2,
+										"count": 806
+									}
+								]
+							},
+							"nature": "discrete"
+						},
+						{
+							"name": "pregnancies",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 15,
+								"invalid": 903,
+								"mode": 2,
+								"min": 1,
+								"max": 15,
+								"mean": 3.691460055096413,
+								"median": 3,
+								"stdev": 2.2056000989148603,
+								"bins": [
+									{
+										"min": "(empty)",
+										"count": 903
+									},
+									{
+										"min": 1,
+										"count": 257
+									},
+									{
+										"min": 2.4,
+										"count": 136
+									},
+									{
+										"min": 3.8,
+										"count": 203
+									},
+									{
+										"min": 5.199999999999999,
+										"count": 49
+									},
+									{
+										"min": 6.6,
+										"count": 41
+									},
+									{
+										"min": 8,
+										"count": 25
+									},
+									{
+										"min": 9.399999999999999,
+										"count": 6
+									},
+									{
+										"min": 10.799999999999999,
+										"count": 7
+									},
+									{
+										"min": 12.2,
+										"count": 1
+									},
+									{
+										"min": 13.6,
+										"count": 1
+									}
+								]
+							},
+							"nature": "discrete"
+						},
+						{
+							"name": "cholesterol",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 229,
+								"invalid": 16,
+								"mode": 216,
+								"min": 78,
+								"max": 416,
+								"mean": 219.97396156230644,
+								"median": 216,
+								"stdev": 45.444202053058646,
+								"bins": [
+									{
+										"min": "(empty)",
+										"count": 16
+									},
+									{
+										"min": 78,
+										"count": 4
+									},
+									{
+										"min": 111.8,
+										"count": 44
+									},
+									{
+										"min": 145.6,
+										"count": 245
+									},
+									{
+										"min": 179.39999999999998,
+										"count": 465
+									},
+									{
+										"min": 213.2,
+										"count": 459
+									},
+									{
+										"min": 247,
+										"count": 241
+									},
+									{
+										"min": 280.79999999999995,
+										"count": 102
+									},
+									{
+										"min": 314.59999999999997,
+										"count": 39
+									},
+									{
+										"min": 348.4,
+										"count": 10
+									},
+									{
+										"min": 382.2,
+										"count": 4
+									}
+								]
+							},
+							"nature": "discrete"
+						},
+						{
+							"name": "hightax82",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 3,
+								"invalid": 92,
+								"mode": 0,
+								"min": 0,
+								"max": 1,
+								"mean": 0.16590761223162,
+								"median": 0,
+								"stdev": 0.372118756666618,
+								"bins": [
+									{
+										"min": "(empty)",
+										"count": 92
+									},
+									{
+										"min": 0,
+										"count": 1282
+									},
+									{
+										"min": 1,
+										"count": 255
+									}
+								]
+							},
+							"nature": "binary"
+						},
+						{
+							"name": "price71",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 43,
+								"invalid": 92,
+								"mode": 2.3466796875,
+								"min": 1.5065917969,
+								"max": 2.6928710938,
+								"mean": 2.1387500254307725,
+								"median": 2.16796875,
+								"stdev": 0.22901568577499437,
+								"bins": [
+									{
+										"min": "(empty)",
+										"count": 92
+									},
+									{
+										"min": 1.5065917969,
+										"count": 82
+									},
+									{
+										"min": 1.62521972659,
+										"count": 43
+									},
+									{
+										"min": 1.74384765628,
+										"count": 69
+									},
+									{
+										"min": 1.86247558597,
+										"count": 80
+									},
+									{
+										"min": 1.98110351566,
+										"count": 357
+									},
+									{
+										"min": 2.09973144535,
+										"count": 366
+									},
+									{
+										"min": 2.21835937504,
+										"count": 175
+									},
+									{
+										"min": 2.33698730473,
+										"count": 265
+									},
+									{
+										"min": 2.4556152344199997,
+										"count": 80
+									},
+									{
+										"min": 2.57424316411,
+										"count": 20
+									}
+								]
+							},
+							"nature": "continuous"
+						},
+						{
+							"name": "price82",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 44,
+								"invalid": 92,
+								"mode": 1.7973632813,
+								"min": 1.4519042969,
+								"max": 2.1030273438,
+								"mean": 1.8060954782245922,
+								"median": 1.8149414063,
+								"stdev": 0.13064116827487027,
+								"bins": [
+									{
+										"min": "(empty)",
+										"count": 92
+									},
+									{
+										"min": 1.4519042969,
+										"count": 77
+									},
+									{
+										"min": 1.51701660159,
+										"count": 2
+									},
+									{
+										"min": 1.58212890628,
+										"count": 117
+									},
+									{
+										"min": 1.6472412109699999,
+										"count": 80
+									},
+									{
+										"min": 1.71235351566,
+										"count": 239
+									},
+									{
+										"min": 1.77746582035,
+										"count": 452
+									},
+									{
+										"min": 1.84257812504,
+										"count": 224
+									},
+									{
+										"min": 1.90769042973,
+										"count": 214
+									},
+									{
+										"min": 1.97280273442,
+										"count": 77
+									},
+									{
+										"min": 2.03791503911,
+										"count": 55
+									}
+								]
+							},
+							"nature": "continuous"
+						},
+						{
+							"name": "tax71",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 22,
+								"invalid": 92,
+								"mode": 1.0498046875,
+								"min": 0.5249023438,
+								"max": 1.5224609375,
+								"mean": 1.0585808837867934,
+								"median": 1.0498046875,
+								"stdev": 0.21622908324526693,
+								"bins": [
+									{
+										"min": "(empty)",
+										"count": 92
+									},
+									{
+										"min": 0.5249023438,
+										"count": 77
+									},
+									{
+										"min": 0.62465820317,
+										"count": 18
+									},
+									{
+										"min": 0.72441406254,
+										"count": 97
+									},
+									{
+										"min": 0.82416992191,
+										"count": 81
+									},
+									{
+										"min": 0.92392578128,
+										"count": 330
+									},
+									{
+										"min": 1.02368164065,
+										"count": 496
+									},
+									{
+										"min": 1.12343750002,
+										"count": 71
+									},
+									{
+										"min": 1.2231933593900002,
+										"count": 98
+									},
+									{
+										"min": 1.32294921876,
+										"count": 249
+									},
+									{
+										"min": 1.42270507813,
+										"count": 20
+									}
+								]
+							},
+							"nature": "continuous"
+						},
+						{
+							"name": "tax82",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 25,
+								"invalid": 92,
+								"mode": 0.5718994141,
+								"min": 0.2199707031,
+								"max": 0.7479248047,
+								"mean": 0.5059827756301889,
+								"median": 0.5059814453,
+								"stdev": 0.11189374289015983,
+								"bins": [
+									{
+										"min": "(empty)",
+										"count": 92
+									},
+									{
+										"min": 0.2199707031,
+										"count": 77
+									},
+									{
+										"min": 0.27276611326,
+										"count": 0
+									},
+									{
+										"min": 0.32556152342,
+										"count": 58
+									},
+									{
+										"min": 0.37835693358,
+										"count": 219
+									},
+									{
+										"min": 0.43115234374,
+										"count": 252
+									},
+									{
+										"min": 0.4839477539,
+										"count": 272
+									},
+									{
+										"min": 0.53674316406,
+										"count": 399
+									},
+									{
+										"min": 0.58953857422,
+										"count": 158
+									},
+									{
+										"min": 0.64233398438,
+										"count": 49
+									},
+									{
+										"min": 0.69512939454,
+										"count": 53
+									}
+								]
+							},
+							"nature": "continuous"
+						},
+						{
+							"name": "price71_82",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 50,
+								"invalid": 92,
+								"mode": 0.5493164063,
+								"min": -0.202697754,
+								"max": 0.6120605469,
+								"mean": 0.33274116094385126,
+								"median": 0.3359985352,
+								"stdev": 0.15504492503562864,
+								"bins": [
+									{
+										"min": "(empty)",
+										"count": 92
+									},
+									{
+										"min": -0.202697754,
+										"count": 7
+									},
+									{
+										"min": -0.12122192391,
+										"count": 3
+									},
+									{
+										"min": -0.039746093819999995,
+										"count": 43
+									},
+									{
+										"min": 0.04172973627000001,
+										"count": 80
+									},
+									{
+										"min": 0.12320556636000002,
+										"count": 272
+									},
+									{
+										"min": 0.20468139645000005,
+										"count": 172
+									},
+									{
+										"min": 0.28615722654000003,
+										"count": 293
+									},
+									{
+										"min": 0.36763305663,
+										"count": 319
+									},
+									{
+										"min": 0.44910888672000004,
+										"count": 126
+									},
+									{
+										"min": 0.5305847168100001,
+										"count": 163
+									}
+								]
+							},
+							"nature": "continuous"
+						},
+						{
+							"name": "tax71_82",
+							"type": "number",
+							"metadata": {
+								"type": "number",
+								"count": 1629,
+								"distinct": 41,
+								"invalid": 92,
+								"mode": 0.79296875,
+								"min": 0.0359954834,
+								"max": 0.8843994141,
+								"mean": 0.552614280293233,
+								"median": 0.5439453125,
+								"stdev": 0.15032053984550792,
+								"bins": [
+									{
+										"min": "(empty)",
+										"count": 92
+									},
+									{
+										"min": 0.0359954834,
+										"count": 5
+									},
+									{
+										"min": 0.12083587646999999,
+										"count": 2
+									},
+									{
+										"min": 0.20567626953999998,
+										"count": 23
+									},
+									{
+										"min": 0.29051666261,
+										"count": 176
+									},
+									{
+										"min": 0.37535705568,
+										"count": 176
+									},
+									{
+										"min": 0.46019744875,
+										"count": 437
+									},
+									{
+										"min": 0.5450378418199999,
+										"count": 345
+									},
+									{
+										"min": 0.6298782348899999,
+										"count": 104
+									},
+									{
+										"min": 0.71471862796,
+										"count": 190
+									},
+									{
+										"min": 0.79955902103,
+										"count": 79
+									}
+								]
+							},
+							"nature": "continuous"
+						}
+					]
 				}
 			]
 		},
@@ -2747,143 +2742,140 @@
 			"profile": "tablebundle",
 			"sources": [
 				{
-					"rel": "workflow",
-					"source": {
-						"profile": "workflow",
-						"input": [
-							"nhefs"
-						],
-						"steps": [
-							{
-								"verb": "window",
-								"args": {
-									"operation": "row_number",
-									"to": "index"
-								},
-								"input": {
-									"source": "nhefs"
-								}
+					"profile": "workflow",
+					"input": [
+						"nhefs"
+					],
+					"steps": [
+						{
+							"verb": "window",
+							"args": {
+								"operation": "row_number",
+								"to": "index"
 							},
-							{
-								"args": {
-									"columns": [
-										"index",
-										"sex",
-										"age",
-										"race",
-										"education",
-										"wt71",
-										"wt82_71",
-										"smokeintensity",
-										"smkintensity82_71",
-										"active",
-										"exercise",
-										"smokeyrs"
-									]
-								},
-								"verb": "select"
+							"input": {
+								"source": "nhefs"
+							}
+						},
+						{
+							"args": {
+								"columns": [
+									"index",
+									"sex",
+									"age",
+									"race",
+									"education",
+									"wt71",
+									"wt82_71",
+									"smokeintensity",
+									"smkintensity82_71",
+									"active",
+									"exercise",
+									"smokeyrs"
+								]
 							},
-							{
-								"verb": "rename",
-								"args": {
-									"columns": {
-										"wt71": "weight_1971",
-										"wt82_71": "weight_change",
-										"smokeintensity": "smoke_intensity_1971",
-										"smkintensity82_71": "smoke_intensity_change",
-										"smokeyrs": "smoke_years"
-									}
-								}
-							},
-							{
-								"verb": "derive",
-								"args": {
-									"to": "smoke_intensity_change_pct",
-									"column1": "smoke_intensity_change",
-									"operator": "/",
-									"column2": "smoke_intensity_1971"
-								}
-							},
-							{
-								"verb": "binarize",
-								"args": {
-									"to": "smoke_reduction_25pct",
-									"column": "smoke_intensity_change_pct",
-									"criteria": [
-										{
-											"operator": "<=",
-											"type": "value",
-											"value": "-0.25"
-										}
-									]
-								}
-							},
-							{
-								"verb": "binarize",
-								"args": {
-									"to": "smoke_reduction_50pct",
-									"column": "smoke_intensity_change_pct",
-									"criteria": [
-										{
-											"operator": "<=",
-											"type": "value",
-											"value": "-0.5"
-										}
-									]
-								}
-							},
-							{
-								"verb": "binarize",
-								"args": {
-									"to": "smoke_reduction_75pct",
-									"column": "smoke_intensity_change_pct",
-									"criteria": [
-										{
-											"operator": "<=",
-											"type": "value",
-											"value": "-0.75"
-										}
-									]
-								}
-							},
-							{
-								"verb": "binarize",
-								"args": {
-									"to": "quit_smoking",
-									"column": "smoke_intensity_change_pct",
-									"criteria": [
-										{
-											"operator": "=",
-											"type": "value",
-											"value": "-1"
-										}
-									]
-								}
-							},
-							{
-								"verb": "binarize",
-								"args": {
-									"to": "subject_inclusion",
-									"column": "weight_change",
-									"criteria": [
-										{
-											"operator": "is not empty"
-										}
-									]
-								}
-							},
-							{
-								"verb": "convert",
-								"args": {
-									"type": "float",
-									"formatPattern": "%Y-%m-%d",
-									"columns": [
-										"weight_change"
-									]
+							"verb": "select"
+						},
+						{
+							"verb": "rename",
+							"args": {
+								"columns": {
+									"wt71": "weight_1971",
+									"wt82_71": "weight_change",
+									"smokeintensity": "smoke_intensity_1971",
+									"smkintensity82_71": "smoke_intensity_change",
+									"smokeyrs": "smoke_years"
 								}
 							}
-						]
-					}
+						},
+						{
+							"verb": "derive",
+							"args": {
+								"to": "smoke_intensity_change_pct",
+								"column1": "smoke_intensity_change",
+								"operator": "/",
+								"column2": "smoke_intensity_1971"
+							}
+						},
+						{
+							"verb": "binarize",
+							"args": {
+								"to": "smoke_reduction_25pct",
+								"column": "smoke_intensity_change_pct",
+								"criteria": [
+									{
+										"operator": "<=",
+										"type": "value",
+										"value": "-0.25"
+									}
+								]
+							}
+						},
+						{
+							"verb": "binarize",
+							"args": {
+								"to": "smoke_reduction_50pct",
+								"column": "smoke_intensity_change_pct",
+								"criteria": [
+									{
+										"operator": "<=",
+										"type": "value",
+										"value": "-0.5"
+									}
+								]
+							}
+						},
+						{
+							"verb": "binarize",
+							"args": {
+								"to": "smoke_reduction_75pct",
+								"column": "smoke_intensity_change_pct",
+								"criteria": [
+									{
+										"operator": "<=",
+										"type": "value",
+										"value": "-0.75"
+									}
+								]
+							}
+						},
+						{
+							"verb": "binarize",
+							"args": {
+								"to": "quit_smoking",
+								"column": "smoke_intensity_change_pct",
+								"criteria": [
+									{
+										"operator": "=",
+										"type": "value",
+										"value": "-1"
+									}
+								]
+							}
+						},
+						{
+							"verb": "binarize",
+							"args": {
+								"to": "subject_inclusion",
+								"column": "weight_change",
+								"criteria": [
+									{
+										"operator": "is not empty"
+									}
+								]
+							}
+						},
+						{
+							"verb": "convert",
+							"args": {
+								"type": "float",
+								"formatPattern": "%Y-%m-%d",
+								"columns": [
+									"weight_change"
+								]
+							}
+						}
+					]
 				}
 			]
 		},
@@ -2892,115 +2884,110 @@
 			"profile": "tablebundle",
 			"sources": [
 				{
-					"rel": "workflow",
-					"source": {
-						"profile": "workflow",
-						"input": [
-							"nhefs"
-						],
-						"steps": [
-							{
-								"verb": "erase",
-								"description": "Maps several columns' null code of 2 to actual nulls",
-								"args": {
-									"columns": [
-										"birthcontrol",
-										"boweltrouble",
-										"diabetes",
-										"hbp",
-										"hbpmed"
-									],
-									"value": 2
-								},
-								"input": {
-									"source": "nhefs"
-								}
+					"profile": "workflow",
+					"input": [
+						"nhefs"
+					],
+					"steps": [
+						{
+							"verb": "erase",
+							"description": "Maps several columns' null code of 2 to actual nulls",
+							"args": {
+								"columns": [
+									"birthcontrol",
+									"boweltrouble",
+									"diabetes",
+									"hbp",
+									"hbpmed"
+								],
+								"value": 2
 							},
-							{
-								"verb": "select",
-								"args": {
-									"columns": [
-										"active",
-										"age",
-										"alcoholfreq",
-										"alcoholhowmuch",
-										"alcoholtype",
-										"allergies",
-										"asthma",
-										"birthcontrol",
-										"boweltrouble",
-										"bronch",
-										"cholesterol",
-										"chroniccough",
-										"colitis",
-										"dbp",
-										"death",
-										"diabetes",
-										"education",
-										"exercise",
-										"hayfever",
-										"hbp",
-										"hbpmed",
-										"headache",
-										"hepatitis",
-										"hf",
-										"hightax82",
-										"ht",
-										"income",
-										"infection",
-										"lackpep",
-										"marital",
-										"nerves",
-										"nervousbreak",
-										"otherpain",
-										"pepticulcer",
-										"pica",
-										"polio",
-										"pregnancies",
-										"price71",
-										"price71_82",
-										"price82",
-										"qsmk",
-										"sbp",
-										"school",
-										"sex",
-										"smkintensity82_71",
-										"smokeintensity",
-										"smokeyrs",
-										"tax71",
-										"tax71_82",
-										"tax82",
-										"tb",
-										"tumor",
-										"weakheart",
-										"wt71",
-										"wt82",
-										"wt82_71",
-										"wtloss"
-									]
-								}
+							"input": {
+								"source": "nhefs"
 							}
-						]
-					}
+						},
+						{
+							"verb": "select",
+							"args": {
+								"columns": [
+									"active",
+									"age",
+									"alcoholfreq",
+									"alcoholhowmuch",
+									"alcoholtype",
+									"allergies",
+									"asthma",
+									"birthcontrol",
+									"boweltrouble",
+									"bronch",
+									"cholesterol",
+									"chroniccough",
+									"colitis",
+									"dbp",
+									"death",
+									"diabetes",
+									"education",
+									"exercise",
+									"hayfever",
+									"hbp",
+									"hbpmed",
+									"headache",
+									"hepatitis",
+									"hf",
+									"hightax82",
+									"ht",
+									"income",
+									"infection",
+									"lackpep",
+									"marital",
+									"nerves",
+									"nervousbreak",
+									"otherpain",
+									"pepticulcer",
+									"pica",
+									"polio",
+									"pregnancies",
+									"price71",
+									"price71_82",
+									"price82",
+									"qsmk",
+									"sbp",
+									"school",
+									"sex",
+									"smkintensity82_71",
+									"smokeintensity",
+									"smokeyrs",
+									"tax71",
+									"tax71_82",
+									"tax82",
+									"tb",
+									"tumor",
+									"weakheart",
+									"wt71",
+									"wt82",
+									"wt82_71",
+									"wtloss"
+								]
+							}
+						}
+					]
 				}
 			]
 		},
 		{
 			"name": "california-prop99",
 			"profile": "tablebundle",
-			"metadata": {
-				"source": "https://www.openicpsr.org/openicpsr/project/146381/version/V1/view?path=/openicpsr/146381/fcr:versions/V1/synthdid-sdid-paper/data/california_prop99.csv",
-				"citation": " Dmitry Arkhangelsky, CEMFI; Susan Athey, Stanford University; David A. Hirshberg, Emory University; Guido W. Imbens, Stanford University; Stefan Wager, Stanford University"
-			},
 			"sources": [
 				{
 					"rel": "input",
-					"source": {
-						"profile": "datatable",
-						"path": "https://cdn.jsdelivr.net/gh/synth-inference/synthdid@master/data/california_prop99.csv",
-						"parser": {
-							"delimiter": ";"
-						}
+					"profile": "datatable",
+					"path": "https://cdn.jsdelivr.net/gh/synth-inference/synthdid@master/data/california_prop99.csv",
+					"metadata": {
+						"source": "https://www.openicpsr.org/openicpsr/project/146381/version/V1/view?path=/openicpsr/146381/fcr:versions/V1/synthdid-sdid-paper/data/california_prop99.csv",
+						"citation": " Dmitry Arkhangelsky, CEMFI; Susan Athey, Stanford University; David A. Hirshberg, Emory University; Guido W. Imbens, Stanford University; Stefan Wager, Stanford University"
+					},
+					"parser": {
+						"delimiter": ";"
 					}
 				}
 			]

@@ -42,7 +42,6 @@ import type { PivotArgs } from '@datashaper/schema';
 import type { PortBinding } from '@datashaper/schema';
 import type { Profile } from '@datashaper/schema';
 import type { RecodeArgs } from '@datashaper/schema';
-import type { ResourceRelationship } from '@datashaper/schema';
 import type { ResourceSchema } from '@datashaper/schema';
 import type { RollupArgs } from '@datashaper/schema';
 import type { SampleArgs } from '@datashaper/schema';
@@ -480,11 +479,6 @@ export function isNumericInputStep(step: Step): boolean;
 // @public
 export function isOutputColumnStep(step: Step): boolean;
 
-// Warning: (ae-missing-release-tag) "isResourceRelationship" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const isResourceRelationship: (item: string | ResourceSchema | ResourceRelationship) => item is ResourceRelationship;
-
 // Warning: (ae-missing-release-tag) "isTableBundle" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -549,9 +543,6 @@ export abstract class Named extends Observed implements Named_2 {
     // (undocumented)
     get description(): string | undefined;
     set description(value: string | undefined);
-    // (undocumented)
-    get id(): string;
-    set id(value: string);
     // (undocumented)
     loadSchema(schema: Maybe<Named_2>, quiet?: boolean): void;
     // (undocumented)
@@ -728,6 +719,9 @@ export abstract class Resource extends Named implements ResourceSchema, Resource
     get path(): ResourceSchema['path'];
     set path(value: ResourceSchema['path']);
     abstract get profile(): Profile;
+    // (undocumented)
+    get rel(): ResourceSchema['rel'];
+    set rel(value: ResourceSchema['rel']);
     // (undocumented)
     get sources(): Resource[];
     set sources(value: Resource[]);

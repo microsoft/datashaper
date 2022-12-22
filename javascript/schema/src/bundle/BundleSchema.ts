@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Profile } from '../Profile.js'
+import type { Profile } from '../enums/index.js'
 
 /**
  * A schema for defining custom bundle types.

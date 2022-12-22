@@ -262,7 +262,7 @@ export interface DataShape {
 // @public
 export interface DataTableSchema extends ResourceSchema {
     columns?: number;
-    data?: any;
+    data?: string | unknown[];
     encoding?: string;
     format?: DataFormat;
     parser?: ParserOptions;
@@ -623,6 +623,18 @@ export enum KnownProfile {
     Workflow = "workflow"
 }
 
+// Warning: (ae-missing-release-tag) "KnownRel" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum KnownRel {
+    // (undocumented)
+    Codebook = "codebook",
+    // (undocumented)
+    Input = "input",
+    // (undocumented)
+    Workflow = "workflow"
+}
+
 // Warning: (ae-missing-release-tag) "LATEST_CODEBOOK_SCHEMA" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -702,7 +714,6 @@ export enum MergeStrategy {
 // @public
 export interface Named {
     description?: string;
-    id: string;
     name: string;
     title?: string;
 }
@@ -831,6 +842,15 @@ export interface RecodeArgs extends InputColumnArgs, OutputColumnArgs {
     mapping: Record<Value, Value>;
 }
 
+// Warning: (ae-missing-release-tag) "Rel" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export type Rel = KnownRel
+/**
+* Any other custom Rel type can be specified by bundles
+*/
+| string;
+
 // Warning: (ae-missing-release-tag) "RelationshipConstraint" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -847,25 +867,17 @@ export interface RelationshipConstraint {
 // @public (undocumented)
 export type RenameArgs = InputColumnRecordArgs;
 
-// Warning: (ae-missing-release-tag) "ResourceRelationship" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface ResourceRelationship {
-    rel: string;
-    source: string | ResourceSchema;
-}
-
 // Warning: (ae-missing-release-tag) "ResourceSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export interface ResourceSchema extends Named {
-    // (undocumented)
-    $schema: string;
+    $schema?: string;
     homepage?: string;
     license?: string;
     path?: string | string[];
     profile?: Profile;
-    sources?: (string | ResourceSchema | ResourceRelationship)[];
+    rel?: Rel | string;
+    sources?: (string | ResourceSchema)[];
 }
 
 // Warning: (ae-missing-release-tag) "RollupArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1063,34 +1075,12 @@ export enum StringComparisonOperator {
     StartsWith = "starts with"
 }
 
-// Warning: (ae-missing-release-tag) "TableBundleRel" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export enum TableBundleRel {
-    // (undocumented)
-    Codebook = "codebook",
-    // (undocumented)
-    Input = "input",
-    // (undocumented)
-    Workflow = "workflow"
-}
-
 // Warning: (ae-missing-release-tag) "TableBundleSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export interface TableBundleSchema extends ResourceSchema {
     // (undocumented)
     profile: KnownProfile.TableBundle;
-    sources?: Array<{
-        rel: TableBundleRel.Input;
-        source: string | DataTableSchema;
-    } | {
-        rel: TableBundleRel.Codebook;
-        source: string | CodebookSchema;
-    } | {
-        rel: TableBundleRel.Workflow;
-        source: string | WorkflowSchema;
-    }>;
 }
 
 // Warning: (ae-missing-release-tag) "TypeHints" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

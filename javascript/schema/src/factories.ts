@@ -8,7 +8,7 @@ import { versions } from '../versions.js'
 import type { CodebookSchema } from './codebook/CodebookSchema.js'
 import type { DataPackageSchema } from './datapackage/DataPackageSchema.js'
 import type { DataTableSchema } from './datatable/DataTableSchema.js'
-import { KnownProfile } from './Profile.js'
+import { KnownProfile } from './enums/index.js'
 import type { TableBundleSchema } from './tablebundle/TableBundleSchema.js'
 import type { WorkflowSchema } from './workflow/WorkflowSchema.js'
 

@@ -1,5 +1,6 @@
 {
 	"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v2.json",
+	"profile": "workflow",
 	"name": "nhefs-transformed/workflow.json",
 	"title": "NHEFS Workflow",
 	"steps": [

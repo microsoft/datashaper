@@ -22,6 +22,7 @@ export abstract class Resource
 	public abstract get profile(): Profile
 
 	private _path: ResourceSchema['path']
+	private _rel: ResourceSchema['rel']
 	private _homepage: string | undefined
 	private _license: string | undefined
 	private _sources: Resource[] = []
@@ -32,6 +33,15 @@ export abstract class Resource
 
 	public set path(value: ResourceSchema['path']) {
 		this._path = value
+		this._onChange.next()
+	}
+
+	public get rel(): ResourceSchema['rel'] {
+		return this._rel
+	}
+
+	public set rel(value: ResourceSchema['rel']) {
+		this._rel = value
 		this._onChange.next()
 	}
 
@@ -68,6 +78,7 @@ export abstract class Resource
 			$schema: this.$schema,
 			profile: this.profile,
 			path: this.path,
+			rel: this.rel,
 			homepage: this.homepage,
 			license: this.license,
 			sources: this.sourcesToSchema() ?? [],
@@ -93,6 +104,8 @@ export abstract class Resource
 		this._path = value?.path
 		this._homepage = value?.homepage
 		this._license = value?.license
+		this._rel = value?.rel
+
 		if (!quiet) {
 			this._onChange.next()
 		}
