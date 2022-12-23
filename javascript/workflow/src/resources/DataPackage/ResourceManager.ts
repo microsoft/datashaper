@@ -1,10 +1,17 @@
-import {
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+import type {
 	DataPackageSchema,
-	KnownProfile,
 	Profile,
-	ResourceSchema,
+	ResourceSchema} from '@datashaper/schema';
+import {
+	KnownProfile
 } from '@datashaper/schema'
-import { BehaviorSubject, Observable } from 'rxjs'
+import type { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs'
+
 import { Codebook } from '../Codebook.js'
 import { DataTable } from '../DataTable.js'
 import type { Resource } from '../Resource.js'
@@ -80,7 +87,7 @@ export class ResourceManager {
 	/**
 	 * Clear out the resource manager. The resources and filesystem will be cleared.
 	 */
-	public clear() {
+	public clear(): void {
 		this._files.clear()
 		this._topLevelResources$.next([])
 		this._resourceByName.clear()
@@ -115,7 +122,7 @@ export class ResourceManager {
 			/**
 			 * Step 3: Track resources by name and path
 			 */
-			for (let { resource, path } of resources) {
+			for (const { resource, path } of resources) {
 				if (this._resourceByName.has(resource.name)) {
 					throw new Error(`duplicate resource name: ${resource.name}`)
 				}
@@ -126,7 +133,7 @@ export class ResourceManager {
 			/**
 			 * Step 4: Link Resources and Resolve References
 			 */
-			for (let { resource, schema } of resources) {
+			for (const { resource, schema } of resources) {
 				const sources = (schema.sources
 					?.map(this.resolveResource)
 					.filter(t => !!t) ?? []) as Resource[]
@@ -141,7 +148,7 @@ export class ResourceManager {
 			this._topLevelResources$.next(topLevelResources)
 			return dataPackage
 		} catch (e) {
-			// console.error('error loading resources', e)
+			console.error('error loading resources', e)
 			throw e
 		}
 	}
@@ -150,6 +157,8 @@ export class ResourceManager {
 		dataPackage: DataPackageSchema,
 	): Promise<{ schema: ResourceSchema; path: string }[]> {
 		const resourceNames = new Set<string>()
+
+		// Determine the name of a resource, try to not collide if possible
 		const resourceName = (res: ResourceSchema) => {
 			if (res.name) {
 				return res.name
@@ -164,25 +173,49 @@ export class ResourceManager {
 			}
 		}
 
+		// Resolve a schema entry to a schema object
+		const resolveSchema = async (
+			entry: string | ResourceSchema,
+		): Promise<ResourceSchema> => {
+			if (this.isReference(entry)) {
+				entry = entry.path
+			}
+			return typeof entry === 'string' ? this.readResource(entry) : entry
+		}
+
+		const resolvePath = (
+			entry: string | ResourceSchema,
+			schema: ResourceSchema,
+			parentPath: string,
+		) => {
+			if (this.isReference(entry)) {
+				return entry.path
+			}
+			return typeof entry === 'string'
+				? entry
+				: `${parentPath}${resourceName(schema)}`
+		}
+
 		const readEntry = async (
 			entry: string | ResourceSchema,
 			parentPath: string,
 		) => {
-			const schema = await this.resolveSchema(entry)
+			const schema = await resolveSchema(entry)
 			schema.name = schema.name || resourceName(schema)
 			resourceNames.add(schema.name)
-			const path =
-				typeof entry === 'string'
-					? entry
-					: `${parentPath}${resourceName(schema)}`
+			const path = resolvePath(entry, schema, parentPath)
 			return { schema, path }
 		}
+
 		const readEntries = (
 			entries: (ResourceSchema | string)[],
-			parentPath: string = '',
+			parentPath = '',
 		) => Promise.all(entries.map(e => readEntry(e, parentPath)))
 
+		// Read the top-level schemas
 		const schemas = await readEntries(dataPackage.resources)
+
+		// Read all children scemas
 		for (let i = 0; i < schemas.length; i++) {
 			const { schema, path } = schemas[i]!
 			const sources = schema.sources ?? []
@@ -200,7 +233,7 @@ export class ResourceManager {
 			schema: ResourceSchema
 			path: string
 		}> = []
-		for (let { schema, path } of schemas) {
+		for (const { schema, path } of schemas) {
 			// override sources so that we can link them together in a second pass
 			const resource = this.constructResource({ ...schema, sources: [] })
 			result.push({ resource, schema, path })
@@ -219,14 +252,11 @@ export class ResourceManager {
 		entry: string | ResourceSchema,
 	): Resource | undefined => {
 		// if entry is a string, it's likely a path, otherwise check for a name
-		const key = typeof entry === 'string' ? entry : entry.name
+		let key = typeof entry === 'string' ? entry : entry.name
+		if (this.isReference(entry)) {
+			key = entry.path
+		}
 		return this.getResourceByName(key) || this.getResourceByPath(key)
-	}
-
-	private resolveSchema = async (
-		entry: string | ResourceSchema,
-	): Promise<ResourceSchema> => {
-		return typeof entry === 'string' ? this.readResource(entry) : entry
 	}
 
 	private async readResource(entry: string): Promise<ResourceSchema> {
@@ -273,7 +303,14 @@ export class ResourceManager {
 		return JSON.parse(await dataPackageBlob.text()) as DataPackageSchema
 	}
 
-	private isReference(schema: ResourceSchema): boolean {
-		return schema.profile == null && schema.path != null
+	private isReference(
+		entry: ResourceSchema | string,
+	): entry is ResourceSchema & { path: string } {
+		return (
+			typeof entry !== 'string' &&
+			entry.profile == null &&
+			entry.path != null &&
+			typeof entry.path === 'string'
+		)
 	}
 }
