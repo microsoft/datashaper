@@ -105,7 +105,7 @@ export class DataPackage extends Resource {
 		})
 	}
 
-	public async save(): Promise<Map<string, Blob>> {
+	public save(): Promise<Map<string, Blob>> {
 		// const resources: string[] = []
 		// const files = new Map<string, Blob>()
 		// for (const resource of this.resources) {
@@ -120,7 +120,7 @@ export class DataPackage extends Resource {
 		// }
 		// files.set('datapackage.json', write(this, { resources }))
 		// return files
-		return new Map()
+		return Promise.resolve(new Map())
 	}
 
 	/**

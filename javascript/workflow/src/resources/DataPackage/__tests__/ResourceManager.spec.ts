@@ -1,4 +1,5 @@
 import { KnownProfile } from '@datashaper/schema'
+
 import type { Resource } from '../../Resource.js'
 import { toBlob } from '../io.js'
 import { ResourceManager } from '../ResourceManager.js'
@@ -21,18 +22,20 @@ describe('The ResourceManager class', () => {
 		expect(mgr.getResource(name)).toBe(resource)
 	}
 
-	it('throws if loading an archive without a datapackage.json entry', () => {
+	it('throws if loading an archive without a datapackage.json entry', async () => {
 		// an archive without a datapackage.json
 		const empty = new Map()
-		expect(mgr.load(empty)).rejects.toThrow(/must contain datapackage.json/)
+		await expect(mgr.load(empty)).rejects.toThrow(
+			/must contain datapackage.json/,
+		)
 	})
 
-	it('throws if loading an archive with an invalid reference', () => {
+	it('throws if loading an archive with an invalid reference', async () => {
 		// an archive referencing a resource that doesn't exist
 		const invalidReference = fileSet({
 			'datapackage.json': { resources: ['derp.json'] },
 		})
-		expect(mgr.load(invalidReference)).rejects.toThrow(
+		await expect(mgr.load(invalidReference)).rejects.toThrow(
 			/could not resolve resource "derp.json"/,
 		)
 	})
@@ -43,7 +46,9 @@ describe('The ResourceManager class', () => {
 			'datapackage.json': { resources: ['empty'] },
 			empty: {},
 		})
-		expect(mgr.load(invalidProfile)).rejects.toThrow(/schema has no profile/)
+		await expect(mgr.load(invalidProfile)).rejects.toThrow(
+			/schema has no profile/,
+		)
 	})
 
 	it('throws if loading an archive with a non-reference resource with an unknown profile', async () => {
@@ -52,8 +57,8 @@ describe('The ResourceManager class', () => {
 			'datapackage.json': { resources: ['empty'] },
 			empty: { profile: 'derp' },
 		})
-		expect(mgr.load(invalidProfile)).rejects.toThrow(
-			/could not construct resource with profile \"derp\", are you missing a resource handler\?/,
+		await expect(mgr.load(invalidProfile)).rejects.toThrow(
+			/could not construct resource with profile "derp", are you missing a resource handler\?/,
 		)
 	})
 
@@ -225,7 +230,7 @@ describe('The ResourceManager class', () => {
 
 		const bundle = mgr.topResources[0]!
 		inspectResource(bundle, KnownProfile.TableBundle, 'tablebundle.json')
-		expect(bundle.sources.length).toBe(1)
+		expect(bundle.sources).toHaveLength(1)
 		const workflow = bundle.sources[0]!
 		inspectResource(workflow, KnownProfile.Workflow, 'workflow.json')
 	})
@@ -249,7 +254,7 @@ describe('The ResourceManager class', () => {
 		})
 		await mgr.load(files)
 		expect(mgr.topSize).toBe(1)
-		expect(mgr.topResources.length).toBe(1)
+		expect(mgr.topResources).toHaveLength(1)
 
 		const tableBundle = mgr.topResources[0]!
 		inspectResource(tableBundle, KnownProfile.TableBundle, 'mutant-disease')

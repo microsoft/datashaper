@@ -8,14 +8,14 @@ import type {
 	ResourceSchema,
 } from '@datashaper/schema'
 import { KnownProfile } from '@datashaper/schema'
-import { map, Observable } from 'rxjs'
-import { BehaviorSubject } from 'rxjs'
+import type { Observable } from 'rxjs'
+import { BehaviorSubject, map } from 'rxjs'
 
 import type { Resource } from '../Resource.js'
 import type { ProfileHandler } from '../types.js'
-import { TableBundleProfile } from './profiles/TableBundleProfile.js'
-import { DataTableProfile } from './profiles/DataTableProfile.js'
 import { CodebookProfile } from './profiles/CodebookProfile.js'
+import { DataTableProfile } from './profiles/DataTableProfile.js'
+import { TableBundleProfile } from './profiles/TableBundleProfile.js'
 import { WorkflowProfile } from './profiles/WorkflowProfile.js'
 
 export class ResourceManager {
@@ -64,7 +64,7 @@ export class ResourceManager {
 	/**
 	 * The top-level resource names
 	 */
-	public get topNames() {
+	public get topNames(): string[] {
 		return this.topResources.map(r => r.name)
 	}
 
@@ -78,7 +78,7 @@ export class ResourceManager {
 	/**
 	 * The top-level resource count
 	 */
-	public get topSize() {
+	public get topSize(): number {
 		return this.topResources.length
 	}
 
@@ -113,7 +113,7 @@ export class ResourceManager {
 	/**
 	 * All resource names observable
 	 */
-	public get names$() {
+	public get names$(): Observable<string[]> {
 		return this._names$
 	}
 

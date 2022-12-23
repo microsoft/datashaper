@@ -4,4 +4,3 @@
  */
 export * from './DataPackage.js'
 export * from './profiles/index.js'
-export * from './types.js'

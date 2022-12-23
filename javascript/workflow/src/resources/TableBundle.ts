@@ -2,10 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { KnownRel, ResourceSchema, TableBundleSchema } from '@datashaper/schema'
+import type { ResourceSchema, TableBundleSchema } from '@datashaper/schema'
 import {
 	CodebookStrategy,
 	KnownProfile,
+	KnownRel,
 	LATEST_TABLEBUNDLE_SCHEMA,
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
