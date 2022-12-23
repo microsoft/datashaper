@@ -14,7 +14,6 @@
 |  [DataShape](./workflow.datashape.md) |  |
 |  [DataTable](./workflow.datatable.md) |  |
 |  [DefaultGraph](./workflow.defaultgraph.md) |  |
-|  [JsonDataHandler](./workflow.jsondatahandler.md) |  |
 |  [Named](./workflow.named.md) |  |
 |  [ObservableNode](./workflow.observablenode.md) |  |
 |  [Observed](./workflow.observed.md) |  |
@@ -22,7 +21,7 @@
 |  [Resource](./workflow.resource.md) |  |
 |  [StepNode](./workflow.stepnode.md) |  |
 |  [TableBundle](./workflow.tablebundle.md) |  |
-|  [TableBundleHandler](./workflow.tablebundlehandler.md) |  |
+|  [TableBundleProfile](./workflow.tablebundleprofile.md) |  |
 |  [Workflow](./workflow.workflow.md) |  |
 
 ## Enumerations
@@ -68,7 +67,8 @@
 |  [Graph](./workflow.graph.md) |  |
 |  [Node\_2](./workflow.node_2.md) | A graph processing node |
 |  [NodeBinding](./workflow.nodebinding.md) | A binding for a value being emitted from a node |
-|  [ResourceHandler](./workflow.resourcehandler.md) |  |
+|  [ProfileHandler](./workflow.profilehandler.md) | A custom profile handler |
+|  [ResourceConstructor](./workflow.resourceconstructor.md) | A constructor for a resource |
 |  [Step](./workflow.step.md) | Resolved step data, used in living workflows |
 |  [StepInput](./workflow.stepinput.md) | Step input data for parsing workflow schemas |
 |  [TableExportOptions](./workflow.tableexportoptions.md) | Options for exporting data-tables within Workflow instances.w |

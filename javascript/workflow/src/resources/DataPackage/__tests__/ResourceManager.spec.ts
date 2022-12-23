@@ -14,13 +14,11 @@ describe('The ResourceManager class', () => {
 		resource: Resource | undefined,
 		profile: string,
 		name: string,
-		path: string,
 	) => {
 		expect(resource).toBeDefined()
 		expect(resource!.profile).toBe(profile)
 		expect(resource!.name).toBe(name)
-		expect(mgr.getResourceByName(name)).toBe(resource)
-		expect(mgr.getResourceByPath(path)).toBe(resource)
+		expect(mgr.getResource(name)).toBe(resource)
 	}
 
 	it('throws if loading an archive without a datapackage.json entry', () => {
@@ -78,9 +76,8 @@ describe('The ResourceManager class', () => {
 		expect(result.resources).toHaveLength(1)
 
 		inspectResource(
-			mgr.topLevelResources[0]!,
+			mgr.topResources[0]!,
 			KnownProfile.TableBundle,
-			'tablebundle.json',
 			'tablebundle.json',
 		)
 	})
@@ -95,9 +92,8 @@ describe('The ResourceManager class', () => {
 		expect(result.resources).toHaveLength(1)
 
 		inspectResource(
-			mgr.topLevelResources[0]!,
+			mgr.topResources[0]!,
 			KnownProfile.TableBundle,
-			'tablebundle.json',
 			'tablebundle.json',
 		)
 	})
@@ -115,15 +111,13 @@ describe('The ResourceManager class', () => {
 		expect(result.resources).toHaveLength(2)
 
 		inspectResource(
-			mgr.topLevelResources[0]!,
+			mgr.topResources[0]!,
 			KnownProfile.TableBundle,
-			'tablebundle.json',
 			'tablebundle.json',
 		)
 		inspectResource(
-			mgr.topLevelResources[1]!,
+			mgr.topResources[1]!,
 			KnownProfile.TableBundle,
-			'tablebundle-1.json',
 			'tablebundle-1.json',
 		)
 	})
@@ -142,21 +136,18 @@ describe('The ResourceManager class', () => {
 		expect(result.resources).toHaveLength(3)
 
 		inspectResource(
-			mgr.topLevelResources[0]!,
+			mgr.topResources[0]!,
 			KnownProfile.TableBundle,
-			'tablebundle-1.json',
 			'tablebundle-1.json',
 		)
 		inspectResource(
-			mgr.topLevelResources[1]!,
+			mgr.topResources[1]!,
 			KnownProfile.TableBundle,
-			'tablebundle.json',
 			'tablebundle.json',
 		)
 		inspectResource(
-			mgr.topLevelResources[2]!,
+			mgr.topResources[2]!,
 			KnownProfile.TableBundle,
-			'tablebundle-2.json',
 			'tablebundle-2.json',
 		)
 	})
@@ -182,21 +173,11 @@ describe('The ResourceManager class', () => {
 		const result = await mgr.load(archive)
 		expect(result.resources).toHaveLength(1)
 
-		const bundle = mgr.topLevelResources[0]!
-		inspectResource(
-			bundle,
-			KnownProfile.TableBundle,
-			'tablebundle.json',
-			'tablebundle.json',
-		)
+		const bundle = mgr.topResources[0]!
+		inspectResource(bundle, KnownProfile.TableBundle, 'tablebundle.json')
 
-		const datatable = mgr.getResourceByName('table.csv')
-		inspectResource(
-			datatable,
-			KnownProfile.DataTable,
-			'table.csv',
-			'tablebundle.json/table.csv',
-		)
+		const datatable = mgr.getResource('table.csv')
+		inspectResource(datatable, KnownProfile.DataTable, 'table.csv')
 
 		const children = bundle.sources
 		expect(children).toHaveLength(1)
@@ -215,29 +196,14 @@ describe('The ResourceManager class', () => {
 		const result = await mgr.load(archive)
 		expect(result.resources).toHaveLength(3)
 
-		expect(mgr.topLevelResources).toHaveLength(3)
+		expect(mgr.topResources).toHaveLength(3)
 
-		const bundle = mgr.topLevelResources[0]!
-		inspectResource(
-			bundle,
-			KnownProfile.TableBundle,
-			'tablebundle.json',
-			'data/derp/table',
-		)
-		const workflow = mgr.topLevelResources[1]!
-		inspectResource(
-			workflow,
-			KnownProfile.Workflow,
-			'workflow.json',
-			'workflow',
-		)
-		const codebook = mgr.topLevelResources[2]!
-		inspectResource(
-			codebook,
-			KnownProfile.Codebook,
-			'codebook.json',
-			'codebook',
-		)
+		const bundle = mgr.topResources[0]!
+		inspectResource(bundle, KnownProfile.TableBundle, 'tablebundle.json')
+		const workflow = mgr.topResources[1]!
+		inspectResource(workflow, KnownProfile.Workflow, 'workflow.json')
+		const codebook = mgr.topResources[2]!
+		inspectResource(codebook, KnownProfile.Codebook, 'codebook.json')
 	})
 
 	it('can load an archive with linked nested resources', async () => {
@@ -255,23 +221,13 @@ describe('The ResourceManager class', () => {
 		})
 		const result = await mgr.load(archive)
 		expect(result.resources).toHaveLength(1)
-		expect(mgr.topLevelResources).toHaveLength(1)
+		expect(mgr.topResources).toHaveLength(1)
 
-		const bundle = mgr.topLevelResources[0]!
-		inspectResource(
-			bundle,
-			KnownProfile.TableBundle,
-			'tablebundle.json',
-			'tablebundle.json',
-		)
+		const bundle = mgr.topResources[0]!
+		inspectResource(bundle, KnownProfile.TableBundle, 'tablebundle.json')
 		expect(bundle.sources.length).toBe(1)
 		const workflow = bundle.sources[0]!
-		inspectResource(
-			workflow,
-			KnownProfile.Workflow,
-			'workflow.json',
-			'data/workflow',
-		)
+		inspectResource(workflow, KnownProfile.Workflow, 'workflow.json')
 	})
 
 	it('can load populated archive with resource ref resources', async () => {
@@ -292,15 +248,11 @@ describe('The ResourceManager class', () => {
 			'a/datatable.json': { profile: KnownProfile.DataTable },
 		})
 		await mgr.load(files)
-		expect(mgr.topLevelResources).toHaveLength(1)
+		expect(mgr.topSize).toBe(1)
+		expect(mgr.topResources.length).toBe(1)
 
-		const tableBundle = mgr.topLevelResources[0]!
-		inspectResource(
-			tableBundle,
-			KnownProfile.TableBundle,
-			'mutant-disease',
-			'mutant-disease',
-		)
+		const tableBundle = mgr.topResources[0]!
+		inspectResource(tableBundle, KnownProfile.TableBundle, 'mutant-disease')
 
 		expect(tableBundle.sources).toHaveLength(2)
 	})

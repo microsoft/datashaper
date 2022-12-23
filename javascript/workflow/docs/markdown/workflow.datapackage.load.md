@@ -4,6 +4,14 @@
 
 ## DataPackage.load() method
 
+Load the data-package from an archive of files, usually hydrated from a zip.
+
+The load process occurs in stages.
+
+In the first stage, the datapackage.json file is loaded and recursed to create a hierarchy of objects that represent the resource tree.
+
+In the second stage, we walk the resource tree and link together resources that have cross-references.
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,8 +22,8 @@ load(files: Map<string, Blob>, quiet?: boolean): Promise<void>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  files | Map&lt;string, Blob&gt; |  |
-|  quiet | boolean | <i>(Optional)</i> |
+|  files | Map&lt;string, Blob&gt; | The files in the archive |
+|  quiet | boolean | <i>(Optional)</i> If true, will not emit an onChange event |
 
 <b>Returns:</b>
 

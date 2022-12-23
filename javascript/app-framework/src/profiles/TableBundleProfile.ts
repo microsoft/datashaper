@@ -9,7 +9,6 @@ import {
 	type DataTable,
 	type Workflow,
 	TableBundle,
-	TableBundleHandler,
 } from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
 
@@ -23,7 +22,6 @@ export class TableBundleProfile implements ProfilePlugin<TableBundle> {
 	public readonly renderer = TableBundleEditor
 	public readonly iconName = 'ViewAll'
 	public readonly group = ResourceGroupType.Data
-	public readonly dataHandler = new TableBundleHandler()
 
 	private _dataPackage: DataPackage | undefined
 

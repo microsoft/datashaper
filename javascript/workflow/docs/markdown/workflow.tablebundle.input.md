@@ -9,5 +9,5 @@
 ```typescript
 get input(): TableEmitter | undefined;
 
-set input(input: TableEmitter | undefined);
+set input(value: TableEmitter | undefined);
 ```

@@ -40,16 +40,16 @@ import type { OrderbyArgs } from '@datashaper/schema';
 import type { ParserOptions as ParserOptions_2 } from '@datashaper/schema';
 import type { PivotArgs } from '@datashaper/schema';
 import type { PortBinding } from '@datashaper/schema';
-import type { Profile } from '@datashaper/schema';
+import { Profile } from '@datashaper/schema';
 import type { RecodeArgs } from '@datashaper/schema';
-import type { ResourceSchema } from '@datashaper/schema';
+import { ResourceSchema } from '@datashaper/schema';
 import type { RollupArgs } from '@datashaper/schema';
 import type { SampleArgs } from '@datashaper/schema';
 import type { SetOp } from '@datashaper/schema';
 import type { SpreadArgs } from '@datashaper/schema';
 import { Subject } from 'rxjs';
 import type { Subscription } from 'rxjs';
-import type { TableBundleSchema } from '@datashaper/schema';
+import { TableBundleSchema } from '@datashaper/schema';
 import { TableContainer } from '@datashaper/tables';
 import type { UnhotArgs } from '@datashaper/schema';
 import type { Verb } from '@datashaper/schema';
@@ -142,7 +142,7 @@ export class Codebook extends Resource {
     readonly $schema: string;
     constructor(codebook?: CodebookSchema);
     // (undocumented)
-    defaultName(): string;
+    defaultTitle(): string;
     // (undocumented)
     dispose(): void;
     // (undocumented)
@@ -193,20 +193,19 @@ export class DataPackage extends Resource {
     constructor(dataPackage?: DataPackageSchema | undefined);
     // (undocumented)
     addResource(resource: Resource): void;
-    addResourceHandler(handler: ResourceHandler): void;
+    addResourceHandler(handler: ProfileHandler): void;
     // (undocumented)
     clear(): void;
     // (undocumented)
     dataPackage?: DataPackageSchema | undefined;
     // (undocumented)
-    defaultName(): string;
+    defaultTitle(): string;
     // (undocumented)
     getResource(name: string): Resource | undefined;
     // (undocumented)
     get isEmpty$(): Observable<boolean>;
     // (undocumented)
     get isEmpty(): boolean;
-    // (undocumented)
     load(files: Map<string, Blob>, quiet?: boolean): Promise<void>;
     // (undocumented)
     get names$(): Observable<string[]>;
@@ -263,7 +262,7 @@ export class DataTable extends Resource implements TableEmitter {
     get data(): Blob | undefined;
     set data(value: Blob | undefined);
     // (undocumented)
-    defaultName(): string;
+    defaultTitle(): string;
     // (undocumented)
     dispose(): void;
     // (undocumented)
@@ -505,19 +504,6 @@ export const isWorkflowSchema: (r: ResourceSchema | undefined) => r is WorkflowS
 // @public (undocumented)
 export function join(id: string): JoinNode;
 
-// Warning: (ae-missing-release-tag) "JsonDataHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export class JsonDataHandler<T extends Resource> implements ResourceHandler {
-    constructor(profile: string, createResource: () => T);
-    // (undocumented)
-    load(data: ResourceSchema): Promise<Resource[]>;
-    // (undocumented)
-    readonly profile: string;
-    // (undocumented)
-    save(resource: T, files: Map<string, Blob>): Promise<string[]>;
-}
-
 // Warning: (ae-forgotten-export) The symbol "LookupNode" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "lookup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -539,7 +525,7 @@ export const merge: (id: string) => StepNode<TableContainer<unknown>, MergeArgs>
 // @public (undocumented)
 export abstract class Named extends Observed implements Named_2 {
     // (undocumented)
-    abstract defaultName(): string;
+    abstract defaultTitle(): string;
     // (undocumented)
     get description(): string | undefined;
     set description(value: string | undefined);
@@ -687,6 +673,15 @@ export class ParserOptions extends Observed implements ParserOptions_2 {
 // @public (undocumented)
 export const pivot: (id: string) => StepNode<TableContainer<unknown>, PivotArgs>;
 
+// Warning: (ae-missing-release-tag) "ProfileHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface ProfileHandler {
+    // Warning: (ae-forgotten-export) The symbol "ResourceManager" needs to be exported by the entry point index.d.ts
+    createInstance(schema: ResourceSchema | undefined, manager: ResourceManager): Promise<Resource>;
+    profile: Profile;
+}
+
 // Warning: (ae-missing-release-tag) "readStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -726,20 +721,15 @@ export abstract class Resource extends Named implements ResourceSchema, Resource
     get sources(): Resource[];
     set sources(value: Resource[]);
     // (undocumented)
-    protected sourcesToSchema(): Maybe<ResourceSchema[]>;
-    // (undocumented)
     toSchema(): ResourceSchema;
 }
 
-// Warning: (ae-missing-release-tag) "ResourceHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ResourceConstructor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
-export interface ResourceHandler {
+// @public
+export interface ResourceConstructor<Sch = any, Res extends Resource = Resource> {
     // (undocumented)
-    connect?: (dp: DataPackage) => void;
-    load(data: ResourceSchema, files: Map<string, Blob>): Promise<Resource[]>;
-    profile: Profile;
-    save(data: Resource, files: Map<string, Blob>): Promise<string[]>;
+    new (schema?: Sch | undefined): Res;
 }
 
 // Warning: (ae-missing-release-tag) "rollup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -823,16 +813,16 @@ export class TableBundle extends Resource implements TableEmitter {
     constructor(data?: TableBundleSchema);
     // (undocumented)
     get codebook(): Codebook | undefined;
-    set codebook(codebook: Codebook | undefined);
+    set codebook(value: Codebook | undefined);
     // (undocumented)
     connect(dp: DataPackage): void;
     // (undocumented)
-    defaultName(): string;
+    defaultTitle(): string;
     // (undocumented)
     dispose(): void;
     // (undocumented)
     get input(): TableEmitter | undefined;
-    set input(input: TableEmitter | undefined);
+    set input(value: TableEmitter | undefined);
     // (undocumented)
     loadSchema(schema: Maybe_2<TableBundleSchema>, quiet?: boolean): void;
     // (undocumented)
@@ -846,26 +836,22 @@ export class TableBundle extends Resource implements TableEmitter {
     readonly profile = KnownProfile.TableBundle;
     // (undocumented)
     get sources(): Resource[];
-    set sources(_value: Resource[]);
+    set sources(value: Resource[]);
     // (undocumented)
     toSchema(): ResourceSchema;
     // (undocumented)
     get workflow(): Workflow | undefined;
-    set workflow(workflow: Workflow | undefined);
+    set workflow(value: Workflow | undefined);
 }
 
-// Warning: (ae-missing-release-tag) "TableBundleHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "TableBundleProfile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export class TableBundleHandler implements ResourceHandler {
+export class TableBundleProfile implements ProfileHandler {
     // (undocumented)
-    connect(dp: DataPackage): void;
+    createInstance(schema?: TableBundleSchema): Promise<Resource>;
     // (undocumented)
-    load(data: TableBundleSchema, files: Map<string, Blob>): Promise<Resource[]>;
-    // (undocumented)
-    readonly profile = KnownProfile.TableBundle;
-    // (undocumented)
-    save(resource: TableBundle, files: Map<string, Blob>): Promise<string[]>;
+    readonly profile: Profile;
 }
 
 // Warning: (ae-missing-release-tag) "TableEmitter" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -963,7 +949,7 @@ export class Workflow extends Resource {
     get defaultInput(): Maybe<TableContainer>;
     set defaultInput(source: Maybe<TableContainer>);
     // (undocumented)
-    defaultName(): string;
+    defaultTitle(): string;
     // (undocumented)
     dispose(): void;
     // (undocumented)

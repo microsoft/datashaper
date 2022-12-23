@@ -47,7 +47,7 @@ export declare class Workflow extends Resource
 |  [addInputTables(inputs)](./workflow.workflow.addinputtables.md) |  |  |
 |  [addOutput(name)](./workflow.workflow.addoutput.md) |  | Add an output binding |
 |  [addStep(input)](./workflow.workflow.addstep.md) |  | Adds a step to the pipeline |
-|  [defaultName()](./workflow.workflow.defaultname.md) |  |  |
+|  [defaultTitle()](./workflow.workflow.defaulttitle.md) |  |  |
 |  [dispose()](./workflow.workflow.dispose.md) |  |  |
 |  [hasInputName(input)](./workflow.workflow.hasinputname.md) |  |  |
 |  [hasOutputName(name)](./workflow.workflow.hasoutputname.md) |  |  |

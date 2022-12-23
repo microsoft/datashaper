@@ -5,69 +5,208 @@
 import type {
 	DataPackageSchema,
 	Profile,
-	ResourceSchema} from '@datashaper/schema';
-import {
-	KnownProfile
+	ResourceSchema,
 } from '@datashaper/schema'
-import type { Observable } from 'rxjs';
+import { KnownProfile } from '@datashaper/schema'
+import { map, Observable } from 'rxjs'
 import { BehaviorSubject } from 'rxjs'
 
-import { Codebook } from '../Codebook.js'
-import { DataTable } from '../DataTable.js'
 import type { Resource } from '../Resource.js'
-import { TableBundle } from '../TableBundle.js'
-import { Workflow } from '../Workflow/Workflow.js'
-import type { ProfileHandler } from './types.js'
+import type { ProfileHandler } from '../types.js'
+import { TableBundleProfile } from './profiles/TableBundleProfile.js'
+import { DataTableProfile } from './profiles/DataTableProfile.js'
+import { CodebookProfile } from './profiles/CodebookProfile.js'
+import { WorkflowProfile } from './profiles/WorkflowProfile.js'
 
 export class ResourceManager {
 	private _resourceByName: Map<string, Resource> = new Map()
-	private _resourceByPath: Map<string, Resource> = new Map()
 	private _files: Map<string, Blob> = new Map()
-
 	private _resourceDisposables: Map<string, () => void> = new Map()
-	private _topLevelResources$ = new BehaviorSubject<Resource[]>([])
 
-	private _resourceHandlers: Map<Profile, ProfileHandler> = new Map([
-		[
-			KnownProfile.TableBundle,
-			{ profile: KnownProfile.TableBundle, constructor: TableBundle },
-		],
-		[
-			KnownProfile.DataTable,
-			{ profile: KnownProfile.DataTable, constructor: DataTable },
-		],
-		[
-			KnownProfile.Codebook,
-			{ profile: KnownProfile.Codebook, constructor: Codebook },
-		],
-		[
-			KnownProfile.Workflow,
-			{ profile: KnownProfile.Workflow, constructor: Workflow },
-		],
+	private _topResources$ = new BehaviorSubject<Resource[]>([])
+	private _topNames$ = this._topResources$.pipe(map(r => r.map(r => r.name)))
+	private _topSize$ = this._topResources$.pipe(map(r => r.length))
+	private _topIsEmpty$ = this._topResources$.pipe(map(r => r.length === 0))
+
+	private _resources$ = new BehaviorSubject<Resource[]>([])
+	private _names$ = this._resources$.pipe(map(r => r.map(r => r.name)))
+	private _size$ = this._resources$.pipe(map(r => r.length))
+	private _isEmpty$ = this._resources$.pipe(map(r => r.length === 0))
+
+	private _profileHandlers: Map<Profile, ProfileHandler> = new Map([
+		[KnownProfile.TableBundle, new TableBundleProfile()],
+		[KnownProfile.DataTable, new DataTableProfile()],
+		[KnownProfile.Codebook, new CodebookProfile()],
+		[KnownProfile.Workflow, new WorkflowProfile()],
 	] as [Profile, ProfileHandler][])
 
-	public get topLevelResources(): Resource[] {
-		return this._topLevelResources$.value
+	/**
+	 * The top-level resources observable
+	 */
+	public get topResources$(): Observable<Resource[]> {
+		return this._topResources$
 	}
 
-	public get topLevelResources$(): Observable<Resource[]> {
-		return this._topLevelResources$
+	/**
+	 * The top level resources
+	 */
+	public get topResources(): Resource[] {
+		return this._topResources$.value
 	}
 
-	public get totalResourceCount(): number {
-		return this._resourceByName.size
+	/**
+	 * The top-level resource names observable
+	 */
+	public get topNames$(): Observable<string[]> {
+		return this._topNames$
 	}
 
-	public get resourceNames(): string[] {
-		return Array.from(this._resourceByName.keys())
+	/**
+	 * The top-level resource names
+	 */
+	public get topNames() {
+		return this.topResources.map(r => r.name)
 	}
 
-	public getResourceByName(name: string): Resource | undefined {
+	/**
+	 * The top-level resource count
+	 */
+	public get topSize$(): Observable<number> {
+		return this._topSize$
+	}
+
+	/**
+	 * The top-level resource count
+	 */
+	public get topSize() {
+		return this.topResources.length
+	}
+
+	/**
+	 * Is the resource manager empty of resources - observable
+	 */
+	public get topIsEmpty$(): Observable<boolean> {
+		return this._topIsEmpty$
+	}
+
+	/**
+	 * Is the resource manager empty of resources
+	 */
+	public get topIsEmpty(): boolean {
+		return this.size === 0
+	}
+
+	/**
+	 * All resources observable
+	 */
+	public get resources$(): Observable<Resource[]> {
+		return this._resources$
+	}
+
+	/**
+	 * All resources
+	 */
+	public get resources(): Resource[] {
+		return this._resources$.value
+	}
+
+	/**
+	 * All resource names observable
+	 */
+	public get names$() {
+		return this._names$
+	}
+
+	/**
+	 * The count of all resources observable
+	 */
+	public get size$(): Observable<number> {
+		return this._size$
+	}
+
+	/**
+	 * The count of all resources
+	 */
+	public get size(): number {
+		return this.resources.length
+	}
+
+	/**
+	 * Is the resource manager empty of resources - observable
+	 */
+	public get isEmpty$(): Observable<boolean> {
+		return this._isEmpty$
+	}
+
+	/**
+	 * Is the resource manager empty of resources
+	 */
+	public get isEmpty(): boolean {
+		return this.size === 0
+	}
+
+	/**
+	 * Reads a raw resource blob from the loaded archive
+	 * @param path - The path to the resource
+	 * @returns The raw blob of the read resource
+	 */
+	public readFile(path: string): Blob | undefined {
+		return this._files.get(path)
+	}
+
+	/**
+	 * Adds a new resource to track
+	 * @param resource - The resource to add
+	 */
+	public addResource(resource: Resource, top: boolean): void {
+		let name = resource.name
+		this.registerResource(resource)
+		this._resourceByName.set(name, resource)
+		this._resources$.next([...this.resources, resource])
+		if (top) {
+			this._topResources$.next([...this.topResources, resource])
+		}
+
+		// re-file the resource by name when the resource changes
+		this._resourceDisposables.set(
+			resource.name,
+			resource.onChange(() => {
+				this._resourceByName.delete(name)
+				this.registerResource(resource)
+				name = resource.name
+				this._resources$.next(this.resources)
+			}),
+		)
+		resource.onDispose(() => this.removeResource(resource.name))
+	}
+
+	/**
+	 * Removes a resource from the resource management system
+	 * @param name - The name of the resource to remove
+	 */
+	public removeResource(name: string): void {
+		this._resourceDisposables.get(name)?.()
+		this._resourceDisposables.delete(name)
+		this._resources$.next(this.resources.filter(t => name !== t.name))
+		this._topResources$.next(this.topResources.filter(t => name !== t.name))
+	}
+
+	/**
+	 * Determines if a resource exists by name
+	 * @param name - the name of the resource to check
+	 * @returns Whether the resource exists
+	 */
+	public hasResource(name: string): boolean {
+		return this._resourceByName.has(name)
+	}
+
+	/**
+	 * Gets a resource by name
+	 * @param name - the name of the resource to get
+	 * @returns The resource or undefined if not found
+	 */
+	public getResource(name: string): Resource | undefined {
 		return this._resourceByName.get(name)
-	}
-
-	public getResourceByPath(path: string): Resource | undefined {
-		return this._resourceByPath.get(path)
 	}
 
 	/**
@@ -76,12 +215,12 @@ export class ResourceManager {
 	 * @param handler - The profile handler to register
 	 */
 	public registerProfile(handler: ProfileHandler): void {
-		if (this._resourceHandlers.has(handler.profile)) {
+		if (this._profileHandlers.has(handler.profile)) {
 			console.warn(
 				`A resource handler for profile '${handler.profile}' is already registered. Overriding existing entry.`,
 			)
 		}
-		this._resourceHandlers.set(handler.profile, handler)
+		this._profileHandlers.set(handler.profile, handler)
 	}
 
 	/**
@@ -89,7 +228,7 @@ export class ResourceManager {
 	 */
 	public clear(): void {
 		this._files.clear()
-		this._topLevelResources$.next([])
+		this._resources$.next([])
 		this._resourceByName.clear()
 	}
 
@@ -100,57 +239,59 @@ export class ResourceManager {
 	 * @returns The loaded datapackage schema
 	 */
 	public async load(files: Map<string, Blob>): Promise<DataPackageSchema> {
-		try {
-			this.clear()
-			this._files = files
-
-			const dataPackage = await this.getDataPackageSchema()
-			/**
-			 * Step 1: Read all Schemas
-			 */
-			const schemas: { schema: ResourceSchema; path: string }[] =
-				await this.readSchemas(dataPackage)
-
-			/**
-			 * Step 2: Reify Instances
-			 */
-			const nonReferenceSchemas = schemas.filter(
-				s => !this.isReference(s.schema),
-			)
-			const resources = this.reifySchemas(nonReferenceSchemas)
-
-			/**
-			 * Step 3: Track resources by name and path
-			 */
-			for (const { resource, path } of resources) {
-				if (this._resourceByName.has(resource.name)) {
-					throw new Error(`duplicate resource name: ${resource.name}`)
-				}
-				this._resourceByName.set(resource.name, resource)
-				this._resourceByPath.set(path, resource)
+		const resourcesByPath = new Map<string, Resource>()
+		const resolveResource = (
+			entry: string | ResourceSchema,
+		): Resource | undefined => {
+			// if entry is a string, it's likely a path, otherwise check for a name
+			let key = typeof entry === 'string' ? entry : entry.name
+			if (this.isReference(entry)) {
+				key = entry.path
 			}
-
-			/**
-			 * Step 4: Link Resources and Resolve References
-			 */
-			for (const { resource, schema } of resources) {
-				const sources = (schema.sources
-					?.map(this.resolveResource)
-					.filter(t => !!t) ?? []) as Resource[]
-
-				resource.sources = sources
-			}
-
-			const topLevelResources = dataPackage.resources
-				.map(this.resolveResource)
-				.filter(t => !!t) as Resource[]
-
-			this._topLevelResources$.next(topLevelResources)
-			return dataPackage
-		} catch (e) {
-			console.error('error loading resources', e)
-			throw e
+			return this.getResource(key) || resourcesByPath.get(key)
 		}
+
+		this.clear()
+		this._files = files
+
+		const dataPackage = await this.getDataPackageSchema()
+		/**
+		 * Step 1: Read all Schemas
+		 */
+		const schemas: { schema: ResourceSchema; path: string }[] =
+			await this.readSchemas(dataPackage)
+
+		/**
+		 * Step 2: Reify Instances
+		 */
+		const nonReferenceSchemas = schemas.filter(s => !this.isReference(s.schema))
+		const resources = await this.reifySchemas(nonReferenceSchemas)
+
+		/**
+		 * Step 3: Track resources by name and path
+		 */
+		for (const { resource, path } of resources) {
+			this.registerResource(resource)
+			resourcesByPath.set(path, resource)
+		}
+
+		/**
+		 * Step 4: Link Resources and Resolve References
+		 */
+		for (const { resource, schema } of resources) {
+			const sources = (schema.sources?.map(resolveResource).filter(t => !!t) ??
+				[]) as Resource[]
+
+			resource.sources = sources
+		}
+
+		const topLevelResources = dataPackage.resources
+			.map(resolveResource)
+			.filter(t => !!t) as Resource[]
+
+		this._resources$.next(resources.map(r => r.resource))
+		this._topResources$.next(topLevelResources)
+		return dataPackage
 	}
 
 	private async readSchemas(
@@ -227,36 +368,21 @@ export class ResourceManager {
 
 	private reifySchemas(
 		schemas: Array<{ schema: ResourceSchema; path: string }>,
-	): Array<{ path: string; resource: Resource; schema: ResourceSchema }> {
-		const result: Array<{
-			resource: Resource
-			schema: ResourceSchema
-			path: string
-		}> = []
-		for (const { schema, path } of schemas) {
-			// override sources so that we can link them together in a second pass
-			const resource = this.constructResource({ ...schema, sources: [] })
-			result.push({ resource, schema, path })
-		}
-		return result
-	}
-
-	/**
-	 * Resolves a source/resource entry into a ResourceSchema instance.
-	 *
-	 * @param entry - The item to parse or interpret - either a reference or a ResourceSchema
-	 * @param files - The datapackage files archive
-	 * @returns The resolved ResourceSchema instance
-	 */
-	public resolveResource = (
-		entry: string | ResourceSchema,
-	): Resource | undefined => {
-		// if entry is a string, it's likely a path, otherwise check for a name
-		let key = typeof entry === 'string' ? entry : entry.name
-		if (this.isReference(entry)) {
-			key = entry.path
-		}
-		return this.getResourceByName(key) || this.getResourceByPath(key)
+	): Promise<
+		Array<{ path: string; resource: Resource; schema: ResourceSchema }>
+	> {
+		return Promise.all(
+			schemas.map(({ schema, path }) => {
+				// override sources so that we can link them together in a second pass
+				return this.constructResource({ ...schema, sources: [] }).then(
+					resource => ({
+						resource,
+						schema,
+						path,
+					}),
+				)
+			}),
+		)
 	}
 
 	private async readResource(entry: string): Promise<ResourceSchema> {
@@ -278,14 +404,14 @@ export class ResourceManager {
 		return result
 	}
 
-	private constructResource(schema: ResourceSchema): Resource {
+	private async constructResource(schema: ResourceSchema): Promise<Resource> {
 		let result: Resource | undefined
 		if (schema.profile == null) {
 			throw new Error('schema has no profile')
 		}
-		const handler = this._resourceHandlers.get(schema.profile)
+		const handler = this._profileHandlers.get(schema.profile)
 		if (handler != null) {
-			result = new handler.constructor(schema)
+			result = await handler.createInstance(schema, this)
 		}
 		if (result == null) {
 			throw new Error(
@@ -293,6 +419,13 @@ export class ResourceManager {
 			)
 		}
 		return result
+	}
+
+	private registerResource(resource: Resource) {
+		if (this._resourceByName.has(resource.name)) {
+			throw new Error(`duplicate resource name: ${resource.name}`)
+		}
+		this._resourceByName.set(resource.name, resource)
 	}
 
 	private async getDataPackageSchema(): Promise<DataPackageSchema> {

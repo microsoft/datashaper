@@ -10,93 +10,73 @@ import {
 	LATEST_DATAPACKAGE_SCHEMA,
 } from '@datashaper/schema'
 import type { Observable } from 'rxjs'
-import { BehaviorSubject, map } from 'rxjs'
 
 import { Resource } from '../Resource.js'
-import type { ResourceHandler } from '../types.js'
-import { TableBundleHandler } from './handlers/TableBundleHandler.js'
-import { write } from './io.js'
+import type { ProfileHandler } from '../types.js'
 import { ResourceManager } from './ResourceManager.js'
 
 export class DataPackage extends Resource {
 	public readonly $schema = LATEST_DATAPACKAGE_SCHEMA
 	public readonly profile = KnownProfile.DataPackage
+	private _resourceMgr: ResourceManager = new ResourceManager()
 
 	public override defaultTitle(): string {
 		return 'datapackage.json'
 	}
 
-	/**
-	 * A map of profile-name to resource hnadler
-	 */
-	private _resourceDisposables: Map<string, () => void> = new Map()
-	private _resources$ = new BehaviorSubject<Resource[]>([])
-	private _names$ = this._resources$.pipe(map(r => r.map(t => t.name)))
-	private _size$ = this._resources$.pipe(map(r => r.length))
-	private _isEmpty$ = this._size$.pipe(map(n => n === 0))
-	private _resourceManager: ResourceManager = new ResourceManager()
-
 	public constructor(public dataPackage?: DataPackageSchema) {
 		super()
-		const tableBundleHandler = new TableBundleHandler()
-		this.addResourceHandler(tableBundleHandler)
 		this.loadSchema(dataPackage)
 	}
 
 	public get resources(): Resource[] {
-		return this._resources$.value
+		return this._resourceMgr.topResources
 	}
 
 	public get resources$(): Observable<Resource[]> {
-		return this._resources$
+		return this._resourceMgr.topResources$
 	}
 
 	public get size(): number {
-		return this.resources.length
+		return this._resourceMgr.topSize
 	}
 
 	public get size$(): Observable<number> {
-		return this._size$
+		return this._resourceMgr.topSize$
 	}
 
 	public get names(): string[] {
-		return this.resources.map(r => r.name).filter(t => !!t) as string[]
+		return this._resourceMgr.topNames
 	}
 
 	public get names$(): Observable<string[]> {
-		return this._names$
+		return this._resourceMgr.topNames$
 	}
 
 	public get isEmpty(): boolean {
-		return this.size === 0
+		return this._resourceMgr.topIsEmpty
 	}
 
 	public get isEmpty$(): Observable<boolean> {
-		return this._isEmpty$
+		return this._resourceMgr.topIsEmpty$
 	}
 
 	public addResource(resource: Resource): void {
-		this._resources$.next([...this.resources, resource])
-		this._resourceDisposables.set(
-			resource.name,
-			resource.onChange(() => this._resources$.next(this.resources)),
-		)
-		resource.onDispose(() => this.removeResource(resource.name))
+		this._resourceMgr.addResource(resource, true)
 		this._onChange.next()
 	}
 
 	public suggestResourceName(name: string): string {
 		const baseName = name
 		let nameIdx = 1
-		while (this.names.includes(name)) {
+		while (this._resourceMgr.hasResource(name)) {
 			name = `${baseName} (${nameIdx++})`
 		}
 		return name
 	}
 
 	public removeResource(name: string): void {
-		this._resourceDisposables.get(name)?.()
-		this._resources$.next(this.resources.filter(t => name !== t.name))
+		this._resourceMgr.removeResource(name)
 		this._onChange.next()
 	}
 
@@ -105,10 +85,7 @@ export class DataPackage extends Resource {
 	}
 
 	public clear(): void {
-		this._resourceDisposables.forEach(d => d())
-		this._resourceDisposables.clear()
-		this._resources$.next([])
-		this._resourceManager.clear()
+		this._resourceMgr.clear()
 		this._onChange.next()
 	}
 
@@ -117,9 +94,8 @@ export class DataPackage extends Resource {
 	 *
 	 * @param handler - the resource handler
 	 */
-	public addResourceHandler(handler: ResourceHandler): void {
-		handler.connect?.(this)
-		this._resourceHandlers.set(handler.profile, handler)
+	public addResourceHandler(handler: ProfileHandler): void {
+		this._resourceMgr.registerProfile(handler)
 	}
 
 	public override toSchema(): DataPackageSchema {
@@ -130,22 +106,21 @@ export class DataPackage extends Resource {
 	}
 
 	public async save(): Promise<Map<string, Blob>> {
-		const resources: string[] = []
-		const files = new Map<string, Blob>()
-
-		for (const resource of this.resources) {
-			const handler = this._resourceHandlers.get(resource.profile)
-			if (handler) {
-				resources.push(...(await handler.save(resource, files)))
-			} else {
-				throw new Error(
-					`no handler defined for resource profile: ${resource.profile}`,
-				)
-			}
-		}
-
-		files.set('datapackage.json', write(this, { resources }))
-		return files
+		// const resources: string[] = []
+		// const files = new Map<string, Blob>()
+		// for (const resource of this.resources) {
+		// 	const handler = this._resourceHandlers.get(resource.profile)
+		// 	if (handler) {
+		// 		resources.push(...(await handler.save(resource, files)))
+		// 	} else {
+		// 		throw new Error(
+		// 			`no handler defined for resource profile: ${resource.profile}`,
+		// 		)
+		// 	}
+		// }
+		// files.set('datapackage.json', write(this, { resources }))
+		// return files
+		return new Map()
 	}
 
 	/**
@@ -163,7 +138,7 @@ export class DataPackage extends Resource {
 	 * @param quiet - If true, will not emit an onChange event
 	 */
 	public async load(files: Map<string, Blob>, quiet?: boolean): Promise<void> {
-		const schema = await this._resourceManager.load(files)
+		const schema = await this._resourceMgr.load(files)
 		this.loadSchema(schema)
 		if (!quiet) {
 			this._onChange.next()

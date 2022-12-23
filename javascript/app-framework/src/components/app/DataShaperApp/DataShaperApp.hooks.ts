@@ -114,8 +114,9 @@ export function useRegisteredProfiles(
 			if (p.dataHandler) {
 				dp.addResourceHandler(p.dataHandler)
 			} else if (p.dataHandler !== null) {
+				// TODO: re-handle custom JSON
 				// We use null to signal that not handler should be auto-defined
-				dp.addResourceHandler(new JsonDataHandler(p.profile, p.createResource))
+				// dp.addResourceHandler(new JsonDataHandler(p.profile, p.createResource))
 			}
 		}
 		return result

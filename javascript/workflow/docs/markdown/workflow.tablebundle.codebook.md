@@ -9,5 +9,5 @@
 ```typescript
 get codebook(): Codebook | undefined;
 
-set codebook(codebook: Codebook | undefined);
+set codebook(value: Codebook | undefined);
 ```

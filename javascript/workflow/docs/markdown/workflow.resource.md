@@ -30,6 +30,5 @@ export declare abstract class Resource extends Named implements ResourceSchema, 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
 |  [loadSchema(value, quiet)](./workflow.resource.loadschema.md) |  |  |
-|  [sourcesToSchema()](./workflow.resource.sourcestoschema.md) | <code>protected</code> |  |
 |  [toSchema()](./workflow.resource.toschema.md) |  |  |
 

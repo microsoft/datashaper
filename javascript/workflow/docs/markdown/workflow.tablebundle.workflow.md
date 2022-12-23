@@ -9,5 +9,5 @@
 ```typescript
 get workflow(): Workflow | undefined;
 
-set workflow(workflow: Workflow | undefined);
+set workflow(value: Workflow | undefined);
 ```
