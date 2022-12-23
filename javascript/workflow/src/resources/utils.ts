@@ -17,7 +17,7 @@ export const isRawData = (
 		}
 		if (r.endsWith('.json')) {
 			// parse and check type
-			const item = parseFileContent(r, files)
+			const item = readResource(r, files)
 			return Array.isArray(item)
 		}
 	} else {
@@ -26,18 +26,13 @@ export const isRawData = (
 	}
 	return false
 }
-export async function toResourceSchema(
-	item: string | ResourceSchema,
-	files: Map<string, Blob>,
-): Promise<ResourceSchema | undefined> {
-	// if the item is a string, look up the resource in the files map
-	return typeof item === 'string' ? parseFileContent(item, files) : item
-}
+
 
 export async function findRel<T extends ResourceSchema = ResourceSchema>(
 	rel: string,
 	resource: ResourceSchema,
 	files: Map<string, Blob>,
+	cache: Map<string, ResourceSchema>,
 ): Promise<T | undefined> {
 	if (resource.sources) {
 		for (const source of resource.sources) {
@@ -49,7 +44,7 @@ export async function findRel<T extends ResourceSchema = ResourceSchema>(
 					const resourceTarget = isReferencedResource(source)
 						? (source.path as string)
 						: source
-					const result = await toResourceSchema(resourceTarget, files)
+					const result = await resolveResource(resourceTarget, files, cache)
 					return result as T
 				}
 			}
@@ -75,20 +70,6 @@ function isReferencedResource(source: ResourceSchema): boolean {
 	// may be remote (https://... or local resource name)
 	return typeof source.path === 'string'
 }
-
-async function parseFileContent(item: string, files: Map<string, Blob>) {
-	// if the item is a string, look up the resource in the files map
-	const blob = resolveRawContent(item, files)
-	const resourceText = await blob?.text()
-	if (resourceText == null) return undefined
-	try {
-		return JSON.parse(resourceText)
-	} catch (e) {
-		console.error(`error parsing resource ${item}`, e)
-		return undefined
-	}
-}
-
 /**
  * Resolves a data resource string. If it can be found in the files array,
  * then we use that. If not, we assume it's a URL and try to fetch it.
@@ -106,14 +87,5 @@ export function resolveRawData(
 		return Promise.resolve(locallyResolved)
 	} else {
 		return fetchFile(resource)
-	}
-}
-
-function resolveRawContent(
-	resource: string,
-	files: Map<string, Blob>,
-): Blob | undefined {
-	if (files.has(resource)) {
-		return files.get(resource)
 	}
 }

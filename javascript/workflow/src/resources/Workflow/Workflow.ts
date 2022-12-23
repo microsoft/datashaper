@@ -27,7 +27,7 @@ import { WorkflowSchemaValidator } from './WorkflowSchemaValidator.js'
 export type TableObservable = Observable<Maybe<TableContainer>>
 
 export class Workflow extends Resource {
-	public override defaultName(): string {
+	public override defaultTitle(): string {
 		return 'workflow.json'
 	}
 	public readonly $schema = LATEST_WORKFLOW_SCHEMA

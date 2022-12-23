@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ResourceSchema, TableBundleSchema } from '@datashaper/schema'
+import { KnownRel, ResourceSchema, TableBundleSchema } from '@datashaper/schema'
 import {
 	CodebookStrategy,
 	KnownProfile,
@@ -25,7 +25,7 @@ export class TableBundle extends Resource implements TableEmitter {
 	public readonly $schema = LATEST_TABLEBUNDLE_SCHEMA
 	public readonly profile = KnownProfile.TableBundle
 
-	public override defaultName(): string {
+	public override defaultTitle(): string {
 		return 'tablebundle.json'
 	}
 
@@ -59,83 +59,103 @@ export class TableBundle extends Resource implements TableEmitter {
 	}
 
 	public override get sources(): Resource[] {
-		const result: Resource[] = []
-		if (this.input != null && this.input.profile === KnownProfile.DataTable) {
-			result.push(this.input)
-		}
-		if (this.codebook != null) {
-			result.push(this.codebook)
-		}
-		if (this.workflow != null) {
-			result.push(this.workflow)
-		}
-		return result
+		return super.sources
 	}
 
-	public override set sources(_value: Resource[]) {
-		throw new Error('tablebundle sources are read-only')
+	public override set sources(value: Resource[]) {
+		super.sources = value
+
+		const input = value.find(r => r.rel === KnownRel.Input) as TableEmitter
+		const workflow = value.find(
+			r => r.rel === KnownRel.Workflow || r.profile === KnownProfile.Workflow,
+		) as Workflow
+		const codebook = value.find(
+			r => r.rel === KnownRel.Codebook || r.profile === KnownProfile.Codebook,
+		) as Codebook
+
+		this.input = input
+		this.workflow = workflow
+		this.codebook = codebook
 	}
 
 	public get input(): TableEmitter | undefined {
 		return this._input
 	}
 
-	public set input(input: TableEmitter | undefined) {
-		this.disposeInputConnections()
-		this._input = input
+	public set input(value: TableEmitter | undefined) {
+		if (value !== this.input) {
+			this.disposeInputConnections()
+			this._input = value
 
-		if (input != null) {
-			this.populateCodebook()
-			const d = new Disposable()
-			d.onDispose(
-				input.output$.pipe(map(this.encodeTable)).subscribe(this._input$),
-			)
-			d.onDispose(input.onDispose(() => (this.input = undefined)))
-			this._disposeInputConnections = d
+			if (value != null) {
+				this.populateCodebook()
+				const d = new Disposable()
+				d.onDispose(
+					value.output$.pipe(map(this.encodeTable)).subscribe(this._input$),
+				)
+				d.onDispose(value.onDispose(() => (this.input = undefined)))
+				this._disposeInputConnections = d
+
+				if (this.sources.indexOf(value) === -1) {
+					this.sources = [...this.sources, value]
+				}
+			}
+
+			this.bindDataflow()
+			this._onChange.next()
 		}
-
-		this.bindDataflow()
-		this._onChange.next()
 	}
 
 	public get codebook(): Codebook | undefined {
 		return this._codebook
 	}
 
-	public set codebook(codebook: Codebook | undefined) {
-		this.disposeCodebookConnections()
+	public set codebook(value: Codebook | undefined) {
+		if (value !== this.codebook) {
+			this.disposeCodebookConnections()
 
-		this._codebook = codebook
+			this._codebook = value
 
-		if (codebook != null) {
-			this.populateCodebook()
-			const d = new Disposable()
-			d.onDispose(codebook.onChange(this.bindDataflow))
-			d.onDispose(codebook.onDispose(() => (this.codebook = undefined)))
-			this._disposeCodebookConnections = d
+			if (value != null) {
+				this.populateCodebook()
+				const d = new Disposable()
+				d.onDispose(value.onChange(this.bindDataflow))
+				d.onDispose(value.onDispose(() => (this.codebook = undefined)))
+				this._disposeCodebookConnections = d
+
+				if (this.sources.indexOf(value) === -1) {
+					this.sources = [...this.sources, value]
+				}
+			}
+
+			this.bindDataflow()
+			this._onChange.next()
 		}
-
-		this.bindDataflow()
-		this._onChange.next()
 	}
 
 	public get workflow(): Workflow | undefined {
 		return this._workflow
 	}
 
-	public set workflow(workflow: Workflow | undefined) {
-		this.disposeWorkflowConnections()
-		this._workflow = workflow
+	public set workflow(value: Workflow | undefined) {
+		if (this.workflow !== value) {
+			this.disposeWorkflowConnections()
+			this._workflow = value
 
-		if (workflow != null) {
-			const d = new Disposable()
-			d.onDispose(workflow.onChange(() => this._onChange.next()))
-			d.onDispose(workflow.onDispose(() => (this.workflow = undefined)))
-			this._disposeWorkflowConnections = d
+			if (value != null) {
+				const d = new Disposable()
+				d.onDispose(value.onChange(() => this._onChange.next()))
+				d.onDispose(value.onDispose(() => (this.workflow = undefined)))
+				this._disposeWorkflowConnections = d
+
+				if (this.sources.indexOf(value) === -1) {
+					this.sources = [...this.sources, value]
+				}
+			}
+
+			this.bindDataflow()
+			this._onChange.next()
 		}
-
-		this.bindDataflow()
-		this._onChange.next()
 	}
 
 	public override dispose(): void {

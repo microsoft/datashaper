@@ -81,19 +81,8 @@ export abstract class Resource
 			rel: this.rel,
 			homepage: this.homepage,
 			license: this.license,
-			sources: this.sourcesToSchema() ?? [],
+			sources: this.sources.map(s => s.toSchema()),
 		}
-	}
-
-	/**
-	 *
-	 * @returns The serialized resources array
-	 */
-	protected sourcesToSchema(): Maybe<ResourceSchema[]> {
-		// the default behavior is to not serialize sources.
-		// this is because data bundles usually write these into the blob archive, which is not available here.
-		// if you want to serialize sources, override this method.
-		return undefined
 	}
 
 	public override loadSchema(
@@ -105,6 +94,7 @@ export abstract class Resource
 		this._homepage = value?.homepage
 		this._license = value?.license
 		this._rel = value?.rel
+		this._sources = []
 
 		if (!quiet) {
 			this._onChange.next()

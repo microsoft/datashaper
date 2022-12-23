@@ -14,27 +14,27 @@ import { BehaviorSubject, map } from 'rxjs'
 
 import { Resource } from '../Resource.js'
 import type { ResourceHandler } from '../types.js'
-import { toResourceSchema } from '../utils.js'
 import { TableBundleHandler } from './handlers/TableBundleHandler.js'
 import { write } from './io.js'
+import { ResourceManager } from './ResourceManager.js'
 
 export class DataPackage extends Resource {
 	public readonly $schema = LATEST_DATAPACKAGE_SCHEMA
 	public readonly profile = KnownProfile.DataPackage
 
-	public override defaultName(): string {
+	public override defaultTitle(): string {
 		return 'datapackage.json'
 	}
 
 	/**
 	 * A map of profile-name to resource hnadler
 	 */
-	private _resourceHandlers: Map<string, ResourceHandler> = new Map()
 	private _resourceDisposables: Map<string, () => void> = new Map()
 	private _resources$ = new BehaviorSubject<Resource[]>([])
 	private _names$ = this._resources$.pipe(map(r => r.map(t => t.name)))
 	private _size$ = this._resources$.pipe(map(r => r.length))
 	private _isEmpty$ = this._size$.pipe(map(n => n === 0))
+	private _resourceManager: ResourceManager = new ResourceManager()
 
 	public constructor(public dataPackage?: DataPackageSchema) {
 		super()
@@ -105,7 +105,10 @@ export class DataPackage extends Resource {
 	}
 
 	public clear(): void {
+		this._resourceDisposables.forEach(d => d())
+		this._resourceDisposables.clear()
 		this._resources$.next([])
+		this._resourceManager.clear()
 		this._onChange.next()
 	}
 
@@ -136,7 +139,7 @@ export class DataPackage extends Resource {
 				resources.push(...(await handler.save(resource, files)))
 			} else {
 				throw new Error(
-					'no handler defined for resource profile: ' + resource.profile,
+					`no handler defined for resource profile: ${resource.profile}`,
 				)
 			}
 		}
@@ -145,34 +148,23 @@ export class DataPackage extends Resource {
 		return files
 	}
 
+	/**
+	 * Load the data-package from an archive of files, usually hydrated from a zip.
+	 *
+	 * The load process occurs in stages.
+	 *
+	 * In the first stage, the datapackage.json file is loaded and recursed to
+	 * create a hierarchy of objects that represent the resource tree.
+	 *
+	 * In the second stage, we walk the resource tree and link together resources that
+	 * have cross-references.
+	 *
+	 * @param files - The files in the archive
+	 * @param quiet - If true, will not emit an onChange event
+	 */
 	public async load(files: Map<string, Blob>, quiet?: boolean): Promise<void> {
-		this.clear()
-		const dataPackageBlob = files.get('datapackage.json')
-		if (dataPackageBlob == null) {
-			throw new Error('file list must contain datapackage.json')
-		}
-		const schema = JSON.parse(await dataPackageBlob.text()) as DataPackageSchema
-		this.loadSchema(schema, true)
-
-		const resources = schema?.resources
-		if (resources && files) {
-			for (const r of resources) {
-				const resource = await toResourceSchema(r, files)
-				if (!resource || !resource.profile) {
-					throw new Error('resource invalid')
-				}
-				const handler = this._resourceHandlers.get(resource.profile)
-				if (!handler) {
-					throw new Error(
-						'no handler defined for resource profile: ' + resource.profile,
-					)
-				}
-
-				const resources = await handler.load(resource, files)
-				resources.forEach(r => this.addResource(r))
-			}
-		}
-
+		const schema = await this._resourceManager.load(files)
+		this.loadSchema(schema)
 		if (!quiet) {
 			this._onChange.next()
 		}

@@ -17,7 +17,7 @@ export class Codebook extends Resource {
 	public readonly $schema = LATEST_CODEBOOK_SCHEMA
 	public readonly profile = KnownProfile.Codebook
 
-	public override defaultName(): string {
+	public override defaultTitle(): string {
 		return 'codebook.json'
 	}
 

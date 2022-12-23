@@ -32,7 +32,7 @@ export class DataTable extends Resource implements TableEmitter {
 	public readonly parser = new ParserOptions()
 	public readonly shape = new DataShape()
 
-	public override defaultName(): string {
+	public override defaultTitle(): string {
 		return 'datatable.json'
 	}
 
