@@ -11,7 +11,8 @@ import {
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import { applyCodebook, generateCodebook } from '@datashaper/tables'
-import type { Maybe } from '@datashaper/workflow'
+import type { Maybe } from '@datashaper/workflow';
+import { isReference } from '@datashaper/workflow'
 import type { Observable } from 'rxjs'
 import { BehaviorSubject, EMPTY, map } from 'rxjs'
 
@@ -19,6 +20,7 @@ import type { Codebook } from './Codebook.js'
 import type { DataPackage } from './DataPackage/DataPackage.js'
 import { Disposable } from './Disposable.js'
 import { Resource } from './Resource.js'
+import type { ResourceReference } from './ResourceReference.js'
 import type { TableEmitter } from './types.js'
 import type { Workflow } from './Workflow/Workflow.js'
 
@@ -64,19 +66,22 @@ export class TableBundle extends Resource implements TableEmitter {
 	}
 
 	public override set sources(value: Resource[]) {
+		const dereference = (r: Resource | ResourceReference) =>
+			isReference(r) ? r.target : r
+		value = value.map(dereference).filter(t => !!t) as Resource[]
 		super.sources = value
 
-		const input = value.find(r => r.rel === KnownRel.Input) as TableEmitter
+		const input = value.find(r => r.rel === KnownRel.Input)
 		const workflow = value.find(
 			r => r.rel === KnownRel.Workflow || r.profile === KnownProfile.Workflow,
-		) as Workflow
+		)
 		const codebook = value.find(
 			r => r.rel === KnownRel.Codebook || r.profile === KnownProfile.Codebook,
-		) as Codebook
+		)
 
-		this.input = input
-		this.workflow = workflow
-		this.codebook = codebook
+		this.input = input as TableEmitter
+		this.workflow = workflow as Workflow
+		this.codebook = codebook as Codebook
 	}
 
 	public get input(): TableEmitter | undefined {

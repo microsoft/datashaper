@@ -4,6 +4,10 @@
 	"profile": "tablebundle",
 	"sources": [
 		{
+			"rel": "input",
+			"path": "nhefs/bundle.json"
+		},
+		{
 			"rel": "workflow",
 			"path": "nhefs-transformed/workflow.json"
 		}

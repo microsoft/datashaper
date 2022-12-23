@@ -15,11 +15,13 @@ describe('The ResourceManager class', () => {
 		resource: Resource | undefined,
 		profile: string,
 		name: string,
+		path = name,
 	) => {
 		expect(resource).toBeDefined()
 		expect(resource!.profile).toBe(profile)
 		expect(resource!.name).toBe(name)
 		expect(mgr.getResource(name)).toBe(resource)
+		expect(mgr.getResourceByPath(path)).toBe(resource)
 	}
 
 	it('throws if loading an archive without a datapackage.json entry', async () => {
@@ -182,7 +184,12 @@ describe('The ResourceManager class', () => {
 		inspectResource(bundle, KnownProfile.TableBundle, 'tablebundle.json')
 
 		const datatable = mgr.getResource('table.csv')
-		inspectResource(datatable, KnownProfile.DataTable, 'table.csv')
+		inspectResource(
+			datatable,
+			KnownProfile.DataTable,
+			'table.csv',
+			'tablebundle.json/table.csv',
+		)
 
 		const children = bundle.sources
 		expect(children).toHaveLength(1)
@@ -204,11 +211,26 @@ describe('The ResourceManager class', () => {
 		expect(mgr.topResources).toHaveLength(3)
 
 		const bundle = mgr.topResources[0]!
-		inspectResource(bundle, KnownProfile.TableBundle, 'tablebundle.json')
+		inspectResource(
+			bundle,
+			KnownProfile.TableBundle,
+			'tablebundle.json',
+			'data/derp/table',
+		)
 		const workflow = mgr.topResources[1]!
-		inspectResource(workflow, KnownProfile.Workflow, 'workflow.json')
+		inspectResource(
+			workflow,
+			KnownProfile.Workflow,
+			'workflow.json',
+			'workflow',
+		)
 		const codebook = mgr.topResources[2]!
-		inspectResource(codebook, KnownProfile.Codebook, 'codebook.json')
+		inspectResource(
+			codebook,
+			KnownProfile.Codebook,
+			'codebook.json',
+			'codebook',
+		)
 	})
 
 	it('can load an archive with linked nested resources', async () => {
@@ -231,8 +253,14 @@ describe('The ResourceManager class', () => {
 		const bundle = mgr.topResources[0]!
 		inspectResource(bundle, KnownProfile.TableBundle, 'tablebundle.json')
 		expect(bundle.sources).toHaveLength(1)
+
 		const workflow = bundle.sources[0]!
-		inspectResource(workflow, KnownProfile.Workflow, 'workflow.json')
+		inspectResource(
+			workflow,
+			KnownProfile.Workflow,
+			'workflow.json',
+			'data/workflow',
+		)
 	})
 
 	it('can load populated archive with resource ref resources', async () => {
@@ -260,6 +288,60 @@ describe('The ResourceManager class', () => {
 		inspectResource(tableBundle, KnownProfile.TableBundle, 'mutant-disease')
 
 		expect(tableBundle.sources).toHaveLength(2)
+	})
+
+	it('can load an archive with sibling refs', async () => {
+		const files = fileSet({
+			'datapackage.json': {
+				resources: ['data/table-1', 'data/table-2'],
+			},
+			'data/table-1': { name: 'a', profile: KnownProfile.TableBundle },
+			'data/table-2': {
+				profile: KnownProfile.TableBundle,
+				sources: [{ rel: 'input', path: 'data/table-1' }],
+			},
+		})
+
+		await mgr.load(files)
+		expect(mgr.topSize).toBe(2)
+		expect(mgr.topResources).toHaveLength(2)
+
+		const first = mgr.topResources[0]!
+		inspectResource(first, KnownProfile.TableBundle, 'a', 'data/table-1')
+
+		const second = mgr.topResources[1]!
+		inspectResource(
+			second,
+			KnownProfile.TableBundle,
+			'tablebundle.json',
+			'data/table-2',
+		)
+		expect(second.sources).toHaveLength(1)
+	})
+
+	it('can load an archive with embedded sibling refs', async () => {
+		const files = fileSet({
+			'datapackage.json': {
+				resources: [
+					{ name: 'a', profile: KnownProfile.TableBundle },
+					{
+						profile: KnownProfile.TableBundle,
+						sources: [{ rel: 'input', path: 'a' }],
+					},
+				],
+			},
+		})
+
+		await mgr.load(files)
+		expect(mgr.topSize).toBe(2)
+		expect(mgr.topResources).toHaveLength(2)
+
+		const first = mgr.topResources[0]!
+		inspectResource(first, KnownProfile.TableBundle, 'a')
+
+		const second = mgr.topResources[1]!
+		inspectResource(second, KnownProfile.TableBundle, 'tablebundle.json')
+		expect(second.sources).toHaveLength(1)
 	})
 })
 

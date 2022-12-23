@@ -12,6 +12,7 @@ import { KnownProfile } from '@datashaper/schema'
 
 import type { DataTable } from './DataTable.js'
 import type { Resource } from './Resource.js'
+import type { ResourceReference } from './ResourceReference.js'
 import type { TableBundle } from './TableBundle.js'
 
 export const isWorkflowSchema = (
@@ -54,3 +55,6 @@ export const isDataTableSchema = (
 
 export const isDataTable = (r: Resource | undefined): r is DataTable =>
 	r == null ? false : r.profile === KnownProfile.DataTable
+
+export const isReference = (r: Resource | undefined): r is ResourceReference =>
+	(r as ResourceReference)?.isReference?.() ?? false

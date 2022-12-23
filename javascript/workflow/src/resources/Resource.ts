@@ -6,6 +6,7 @@ import type { Profile, ResourceSchema } from '@datashaper/schema'
 
 import type { Maybe } from '../primitives.js'
 import { Named } from './Named.js'
+import type { ResourceReference } from './ResourceReference.js'
 
 export abstract class Resource
 	extends Named
@@ -14,18 +15,18 @@ export abstract class Resource
 	/**
 	 * Gets the resource schema
 	 */
-	public abstract get $schema(): string
+	public abstract get $schema(): string | undefined
 
 	/**
 	 * Gets the resource profile
 	 */
-	public abstract get profile(): Profile
+	public abstract get profile(): Profile | undefined
 
 	private _path: ResourceSchema['path']
 	private _rel: ResourceSchema['rel']
 	private _homepage: string | undefined
 	private _license: string | undefined
-	private _sources: Resource[] = []
+	private _sources: (Resource | ResourceReference)[] = []
 
 	public get path(): ResourceSchema['path'] {
 		return this._path
@@ -63,11 +64,11 @@ export abstract class Resource
 		this._onChange.next()
 	}
 
-	public get sources(): Resource[] {
+	public get sources(): (Resource | ResourceReference)[] {
 		return this._sources
 	}
 
-	public set sources(value: Resource[]) {
+	public set sources(value: (Resource | ResourceReference)[]) {
 		this._sources = value
 		this._onChange.next()
 	}
@@ -81,7 +82,8 @@ export abstract class Resource
 			rel: this.rel,
 			homepage: this.homepage,
 			license: this.license,
-			sources: this.sources.map(s => s.toSchema()),
+			sources: [],
+			// sources: this.sources.map(s => s.toSchema()),
 		}
 	}
 

@@ -12,6 +12,7 @@ import type { Observable } from 'rxjs'
 import { BehaviorSubject, map } from 'rxjs'
 
 import type { Resource } from '../Resource.js'
+import { ResourceReference } from '../ResourceReference.js'
 import type { ProfileHandler } from '../types.js'
 import { CodebookProfile } from './profiles/CodebookProfile.js'
 import { DataTableProfile } from './profiles/DataTableProfile.js'
@@ -20,6 +21,9 @@ import { WorkflowProfile } from './profiles/WorkflowProfile.js'
 
 export class ResourceManager {
 	private _resourceByName: Map<string, Resource> = new Map()
+	// TODO: this is really only a load-time concern.
+	// we should probably move it to a new loader class
+	private _resourceByPath = new Map<string, Resource>()
 	private _files: Map<string, Blob> = new Map()
 	private _resourceDisposables: Map<string, () => void> = new Map()
 
@@ -210,6 +214,15 @@ export class ResourceManager {
 	}
 
 	/**
+	 * Gets a resource by path
+	 * @param path - the path of the resource to get
+	 * @returns The resource or undefined if not found
+	 */
+	public getResourceByPath(path: string): Resource | undefined {
+		return this._resourceByPath.get(path)
+	}
+
+	/**
 	 * Register a new profile handle with the resource management system
 	 *
 	 * @param handler - The profile handler to register
@@ -239,16 +252,25 @@ export class ResourceManager {
 	 * @returns The loaded datapackage schema
 	 */
 	public async load(files: Map<string, Blob>): Promise<DataPackageSchema> {
-		const resourcesByPath = new Map<string, Resource>()
 		const resolveResource = (
 			entry: string | ResourceSchema,
 		): Resource | undefined => {
+			const isRef = this.isReference(entry)
 			// if entry is a string, it's likely a path, otherwise check for a name
 			let key = typeof entry === 'string' ? entry : entry.name
-			if (this.isReference(entry)) {
+			if (isRef) {
 				key = entry.path
 			}
-			return this.getResource(key) || resourcesByPath.get(key)
+			const resource = this.getResource(key) || this.getResourceByPath(key)
+
+			if (isRef) {
+				const reference = new ResourceReference()
+				reference.target = resource
+				reference.rel = entry.rel
+				return reference
+			} else {
+				return resource
+			}
 		}
 
 		this.clear()
@@ -272,7 +294,7 @@ export class ResourceManager {
 		 */
 		for (const { resource, path } of resources) {
 			this.registerResource(resource)
-			resourcesByPath.set(path, resource)
+			this._resourceByPath.set(path, resource)
 		}
 
 		/**
@@ -297,7 +319,7 @@ export class ResourceManager {
 	private async readSchemas(
 		dataPackage: DataPackageSchema,
 	): Promise<{ schema: ResourceSchema; path: string }[]> {
-		const resourceNames = new Set<string>()
+		const nameToPath = new Map<string, string>()
 
 		// Determine the name of a resource, try to not collide if possible
 		const resourceName = (res: ResourceSchema) => {
@@ -307,7 +329,7 @@ export class ResourceManager {
 				const profile = res.profile || 'resource'
 				let candidate = `${profile}.json`
 				let index = 0
-				while (resourceNames.has(candidate)) {
+				while (nameToPath.has(candidate)) {
 					candidate = `${profile}-${++index}.json`
 				}
 				return candidate
@@ -317,11 +339,18 @@ export class ResourceManager {
 		// Resolve a schema entry to a schema object
 		const resolveSchema = async (
 			entry: string | ResourceSchema,
-		): Promise<ResourceSchema> => {
+		): Promise<ResourceSchema | undefined> => {
 			if (this.isReference(entry)) {
 				entry = entry.path
+			} else if (typeof entry !== 'string') {
+				return entry
 			}
-			return typeof entry === 'string' ? this.readResource(entry) : entry
+
+			if (nameToPath.has(entry)) {
+				// this is a duplicate, return undefined
+				return undefined
+			}
+			return this.readResource(entry)
 		}
 
 		const resolvePath = (
@@ -340,18 +369,39 @@ export class ResourceManager {
 		const readEntry = async (
 			entry: string | ResourceSchema,
 			parentPath: string,
-		) => {
+		): Promise<{ schema: ResourceSchema; path: string } | undefined> => {
 			const schema = await resolveSchema(entry)
+			if (!schema) {
+				return undefined
+			}
 			schema.name = schema.name || resourceName(schema)
-			resourceNames.add(schema.name)
 			const path = resolvePath(entry, schema, parentPath)
+
+			if (nameToPath.has(schema.name)) {
+				const existingPath = nameToPath.get(schema.name)
+				if (existingPath !== path) {
+					throw new Error(
+						`duplicate resource name ${schema.name} found in two different paths: ${existingPath} and ${path}`,
+					)
+				}
+				return undefined
+			}
+			nameToPath.set(schema.name, path)
 			return { schema, path }
 		}
 
-		const readEntries = (
+		const readEntries = async (
 			entries: (ResourceSchema | string)[],
 			parentPath = '',
-		) => Promise.all(entries.map(e => readEntry(e, parentPath)))
+		): Promise<Array<{ schema: ResourceSchema; path: string }>> => {
+			const result = await Promise.all(
+				entries.map(e => readEntry(e, parentPath)),
+			)
+			return result.filter(t => !!t) as Array<{
+				schema: ResourceSchema
+				path: string
+			}>
+		}
 
 		// Read the top-level schemas
 		const schemas = await readEntries(dataPackage.resources)

@@ -2742,19 +2742,17 @@
 			"profile": "tablebundle",
 			"sources": [
 				{
+					"path": "nhefs",
+					"rel": "input"
+				},
+				{
 					"profile": "workflow",
-					"input": [
-						"nhefs"
-					],
 					"steps": [
 						{
 							"verb": "window",
 							"args": {
 								"operation": "row_number",
 								"to": "index"
-							},
-							"input": {
-								"source": "nhefs"
 							}
 						},
 						{
@@ -2884,10 +2882,11 @@
 			"profile": "tablebundle",
 			"sources": [
 				{
+					"path": "nhefs",
+					"rel": "input"
+				},
+				{
 					"profile": "workflow",
-					"input": [
-						"nhefs"
-					],
 					"steps": [
 						{
 							"verb": "erase",
@@ -2901,9 +2900,6 @@
 									"hbpmed"
 								],
 								"value": 2
-							},
-							"input": {
-								"source": "nhefs"
 							}
 						},
 						{
