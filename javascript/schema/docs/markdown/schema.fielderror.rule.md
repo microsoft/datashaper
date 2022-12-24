@@ -4,6 +4,8 @@
 
 ## FieldError.rule property
 
+Rule that failed
+
 <b>Signature:</b>
 
 ```typescript

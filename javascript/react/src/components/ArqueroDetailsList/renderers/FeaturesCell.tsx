@@ -27,7 +27,7 @@ import {
 	SparkbarCell,
 	SparklineCell,
 	TextCell,
-	ValidationCell,
+	ValidationCellWrapper,
 } from './index.js'
 export type { FeatureCellProps } from './FeaturesCell.types.js'
 
@@ -51,7 +51,7 @@ export const FeaturesCell: React.FC<FeatureCellProps> = memo(
 							validationResult.errors.length > 0
 						}
 					>
-						<ValidationCell {...props} />
+						<ValidationCellWrapper {...props} />
 					</Case>
 					<Case condition={isBlank(value)}>
 						<BlankCell />

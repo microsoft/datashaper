@@ -14,7 +14,7 @@ import orderBy from 'lodash-es/orderBy.js'
 import uniqWith from 'lodash-es/uniqWith.js'
 
 export function getValue(item: any, column?: IColumn): any {
-	return column?.fieldName && item[column.fieldName]
+	return column?.fieldName && item && item[column.fieldName]
 }
 
 export function getDropdownValue(
