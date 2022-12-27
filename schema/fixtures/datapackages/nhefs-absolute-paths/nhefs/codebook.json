@@ -12,8 +12,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.26273787599754495,
 				"magnitude": 1
 			},
@@ -27,8 +27,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.19521178637200762,
 				"magnitude": 1
 			},
@@ -42,8 +42,8 @@
 			"metadata": {
 				"count": 1552,
 				"mode": 127,
-				"min": 87,
-				"max": 229,
+				"minimum": 87,
+				"maximum": 229,
 				"mean": 128.70940721649492,
 				"magnitude": 229
 			},
@@ -57,8 +57,8 @@
 			"metadata": {
 				"count": 1548,
 				"mode": 80,
-				"min": 47,
-				"max": 130,
+				"minimum": 47,
+				"maximum": 130,
 				"mean": 77.74483204134376,
 				"magnitude": 130
 			},
@@ -72,8 +72,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 1,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.5095150399017799,
 				"magnitude": 1
 			},
@@ -87,8 +87,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 25,
-				"min": 25,
-				"max": 74,
+				"minimum": 25,
+				"maximum": 74,
 				"mean": 43.91528545119704,
 				"magnitude": 74
 			},
@@ -102,8 +102,8 @@
 			"metadata": {
 				"count": 1567,
 				"mode": 19,
-				"min": 11,
-				"max": 22,
+				"minimum": 11,
+				"maximum": 22,
 				"mean": 17.947670708359887,
 				"magnitude": 22
 			},
@@ -131,8 +131,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 2,
-				"min": 2,
-				"max": 8,
+				"minimum": 2,
+				"maximum": 8,
 				"mean": 2.5033763044812747,
 				"magnitude": 8
 			},
@@ -155,8 +155,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 12,
-				"min": 0,
-				"max": 17,
+				"minimum": 0,
+				"maximum": 17,
 				"mean": 11.135052179251096,
 				"magnitude": 17
 			},
@@ -170,8 +170,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 3,
-				"min": 1,
-				"max": 5,
+				"minimum": 1,
+				"maximum": 5,
 				"mean": 2.70349907918969,
 				"magnitude": 5
 			},
@@ -192,8 +192,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 160.6875,
-				"min": 142.875,
-				"max": 198.09375,
+				"minimum": 142.875,
+				"maximum": 198.09375,
 				"mean": 168.74096454880282,
 				"magnitude": 198.09375
 			},
@@ -207,8 +207,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 67.13,
-				"min": 36.17,
-				"max": 169.19,
+				"minimum": 36.17,
+				"maximum": 169.19,
 				"mean": 71.0521301411909,
 				"magnitude": 169.19
 			},
@@ -222,8 +222,8 @@
 			"metadata": {
 				"count": 1566,
 				"mode": 72.5747792,
-				"min": 35.38020486,
-				"max": 136.53130337,
+				"minimum": 35.38020486,
+				"maximum": 136.53130337,
 				"mean": 73.46921932679436,
 				"magnitude": 136.53130337
 			},
@@ -237,8 +237,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 20,
-				"min": 1,
-				"max": 80,
+				"minimum": 1,
+				"maximum": 80,
 				"mean": 20.551258440761245,
 				"magnitude": 80
 			},
@@ -252,8 +252,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 15,
-				"min": 1,
-				"max": 64,
+				"minimum": 1,
+				"maximum": 64,
 				"mean": 24.8710865561694,
 				"magnitude": 64
 			},
@@ -267,8 +267,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.048496009821976674,
 				"magnitude": 1
 			},
@@ -282,8 +282,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.08532842234499687,
 				"magnitude": 1
 			},
@@ -297,8 +297,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.014119091467157762,
 				"magnitude": 1
 			},
@@ -312,8 +312,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.0049109883364027145,
 				"magnitude": 1
 			},
@@ -327,8 +327,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 2,
-				"min": 0,
-				"max": 2,
+				"minimum": 0,
+				"maximum": 2,
 				"mean": 1.0509515039901791,
 				"magnitude": 2
 			},
@@ -345,8 +345,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.10374462860650709,
 				"magnitude": 1
 			},
@@ -360,8 +360,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.033763044812768546,
 				"magnitude": 1
 			},
@@ -375,8 +375,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.017188459177409465,
 				"magnitude": 1
 			},
@@ -390,8 +390,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.05402087170042972,
 				"magnitude": 1
 			},
@@ -405,8 +405,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.08962553713934923,
 				"magnitude": 1
 			},
@@ -420,8 +420,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"magnitude": 1
 			},
 			"nature": "binary",
@@ -437,8 +437,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.014119091467157788,
 				"magnitude": 1
 			},
@@ -452,8 +452,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.02332719459791285,
 				"magnitude": 1
 			},
@@ -467,8 +467,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.028852056476365892,
 				"magnitude": 1
 			},
@@ -482,8 +482,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 2,
-				"min": 0,
-				"max": 5,
+				"minimum": 0,
+				"maximum": 5,
 				"mean": 1.9201964395334552,
 				"magnitude": 5
 			},
@@ -506,8 +506,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 1,
-				"min": 1,
-				"max": 4,
+				"minimum": 1,
+				"maximum": 4,
 				"mean": 2.4757519950890092,
 				"magnitude": 4
 			},
@@ -527,8 +527,8 @@
 			"metadata": {
 				"count": 1212,
 				"mode": 2,
-				"min": 1,
-				"max": 48,
+				"minimum": 1,
+				"maximum": 48,
 				"mean": 3.2871287128712843,
 				"magnitude": 48
 			},
@@ -542,8 +542,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"magnitude": 1
 			},
 			"nature": "binary"
@@ -556,8 +556,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 1,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.6298342541436469,
 				"magnitude": 1
 			},
@@ -571,8 +571,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.24616329036218518,
 				"magnitude": 1
 			},
@@ -586,8 +586,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.02209944751381216,
 				"magnitude": 1
 			},
@@ -601,8 +601,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.062001227747084095,
 				"magnitude": 1
 			},
@@ -616,8 +616,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.14426028238182925,
 				"magnitude": 1
 			},
@@ -631,8 +631,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.05095150399017809,
 				"magnitude": 1
 			},
@@ -644,8 +644,8 @@
 			"description": "USE HIGH BLOOD PRESSURE MEDICATION IN 1971,  1:EVER, 0:NEVER, ; 2:MISSING",
 			"type": "integer",
 			"metadata": {
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"magnitude": 1
 			},
 			"nature": "binary",
@@ -672,8 +672,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.025782688766114184,
 				"magnitude": 1
 			},
@@ -687,8 +687,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 0,
-				"min": 0,
-				"max": 1,
+				"minimum": 0,
+				"maximum": 1,
 				"mean": 0.14794352363413135,
 				"magnitude": 1
 			},
@@ -702,8 +702,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 1,
-				"min": 0,
-				"max": 2,
+				"minimum": 0,
+				"maximum": 2,
 				"mean": 0.6519337016574593,
 				"magnitude": 2
 			},
@@ -723,8 +723,8 @@
 			"metadata": {
 				"count": 1629,
 				"mode": 1,
-				"min": 0,
-				"max": 2,
+				"minimum": 0,
+				"maximum": 2,
 				"mean": 1.1952117863720086,
 				"magnitude": 2
 			},
@@ -755,8 +755,8 @@
 			"metadata": {
 				"count": 726,
 				"mode": 2,
-				"min": 1,
-				"max": 15,
+				"minimum": 1,
+				"maximum": 15,
 				"mean": 3.691460055096413,
 				"magnitude": 15
 			},
@@ -770,8 +770,8 @@
 			"metadata": {
 				"count": 1613,
 				"mode": 216,
-				"min": 78,
-				"max": 416,
+				"minimum": 78,
+				"maximum": 416,
 				"mean": 219.97396156230644,
 				"magnitude": 416
 			},
@@ -785,8 +785,8 @@
 			"metadata": {
 				"count": 1537,
 				"mode": 2.3466796875,
-				"min": 1.5065917969,
-				"max": 2.6928710938,
+				"minimum": 1.5065917969,
+				"maximum": 2.6928710938,
 				"mean": 2.1387500254307725,
 				"magnitude": 2.6928710938
 			},
@@ -800,8 +800,8 @@
 			"metadata": {
 				"count": 1537,
 				"mode": 1.7973632813,
-				"min": 1.4519042969,
-				"max": 2.1030273438,
+				"minimum": 1.4519042969,
+				"maximum": 2.1030273438,
 				"mean": 1.8060954782245922,
 				"magnitude": 2.1030273438
 			},
@@ -815,8 +815,8 @@
 			"metadata": {
 				"count": 1537,
 				"mode": 1.0498046875,
-				"min": 0.5249023438,
-				"max": 1.5224609375,
+				"minimum": 0.5249023438,
+				"maximum": 1.5224609375,
 				"mean": 1.0585808837867934,
 				"magnitude": 1.5224609375
 			},
@@ -830,8 +830,8 @@
 			"metadata": {
 				"count": 1537,
 				"mode": 0.5718994141,
-				"min": 0.2199707031,
-				"max": 0.7479248047,
+				"minimum": 0.2199707031,
+				"maximum": 0.7479248047,
 				"mean": 0.5059827756301889,
 				"magnitude": 0.7479248047
 			},

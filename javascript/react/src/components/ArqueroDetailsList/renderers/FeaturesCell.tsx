@@ -27,7 +27,6 @@ import {
 	SparkbarCell,
 	SparklineCell,
 	TextCell,
-	ValidationCell,
 } from './index.js'
 export type { FeatureCellProps } from './FeaturesCell.types.js'
 
@@ -36,23 +35,14 @@ export type { FeatureCellProps } from './FeaturesCell.types.js'
  */
 export const FeaturesCell: React.FC<FeatureCellProps> = memo(
 	function FeaturesCell(props) {
-		const { features, field, item, column, index, onSelect, validationResult } =
-			props
+		const { features, field, item, column, index, onSelect } = props
 		const type = field?.type
 		const value = getValue(item, column)
 		const magnitude = useNumberMagnitude(value, field, type)
 		const histo = categories(value)
 		return (
-			<CellContainer onClick={onSelect} column={column}>
+			<CellContainer onClick={onSelect} {...props}>
 				<Switch>
-					<Case
-						condition={
-							validationResult !== undefined &&
-							validationResult.errors.length > 0
-						}
-					>
-						<ValidationCell {...props} />
-					</Case>
 					<Case condition={isBlank(value)}>
 						<BlankCell />
 					</Case>

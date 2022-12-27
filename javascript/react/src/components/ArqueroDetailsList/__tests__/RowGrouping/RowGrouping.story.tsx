@@ -12,3 +12,4 @@ export const RowGroupingStory: ComponentStory<typeof ArqueroDetailsList> = (
 	args: ArqueroDetailsListProps,
 	{ loaded: { stocks } }: any,
 ): JSX.Element => <RowGrouping {...args} table={stocks} />
+RowGroupingStory.storyName = 'Row grouping'

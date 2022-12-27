@@ -13,9 +13,9 @@
 	"dependencies": {
 		"@datashaper/react": "workspace:^",
 		"@datashaper/webapp": "workspace:^",
-		"@essex/components": "^3.4.1",
-		"@fluentui/font-icons-mdl2": "^8.5.4",
-		"@fluentui/react": "^8.103.9",
+		"@essex/components": "^3.5.1",
+		"@fluentui/font-icons-mdl2": "^8.5.5",
+		"@fluentui/react": "^8.103.10",
 		"@fluentui/react-hooks": "^8.6.14",
 		"@fluentui/utilities": "^8.13.4",
 		"@thematic/core": "^4.0.2",

@@ -21,9 +21,10 @@ import type {
 	ResourceRoute,
 	ResourceRouteGroup,
 } from '../../../types.js'
-
-const BREAK_WIDTH = 150
-const COLLAPSED_WIDTH = 60
+import {
+	PANE_BREAK_WIDTH,
+	PANE_COLLAPSED_SIZE,
+} from './DataShaperApp.styles.js'
 
 export function useKnownProfilePlugins(): ProfilePlugin[] {
 	return useConst(() => {
@@ -59,7 +60,7 @@ function useOnToggle(
 ): () => void {
 	return useCallback(() => {
 		if (expanded) {
-			ref?.current?.resize([COLLAPSED_WIDTH])
+			ref?.current?.resize([PANE_COLLAPSED_SIZE])
 		} else {
 			ref?.current?.reset()
 		}
@@ -76,9 +77,9 @@ function useOnChangeWidth(
 		(sizes: number[]) => {
 			if (sizes.length > 0) {
 				const menuSize = sizes[0] as number
-				if (menuSize < BREAK_WIDTH && expanded) {
+				if (menuSize < PANE_BREAK_WIDTH && expanded) {
 					collapse()
-				} else if (menuSize >= BREAK_WIDTH && !expanded) {
+				} else if (menuSize >= PANE_BREAK_WIDTH && !expanded) {
 					expand()
 				}
 			}

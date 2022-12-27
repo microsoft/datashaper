@@ -12,11 +12,9 @@ import { guessDataTypeFromValues } from './guessDataTypeFromValues.js'
 import { inferNatureFromValues } from './inferNatureFromValues.js'
 import { introspect } from './introspect.js'
 
-export function generateCodebook(
-	table: ColumnTable,
-): Omit<CodebookSchema, 'name'> {
+export function generateCodebook(table: ColumnTable): CodebookSchema {
 	const codebookResult: CodebookSchema = createCodebookSchemaObject({
-		name: 'Generator',
+		name: 'Generated Codebook',
 		fields: [],
 	})
 

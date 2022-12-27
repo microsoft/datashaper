@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ITooltipHostStyles } from '@fluentui/react/lib/Tooltip'
+
+import { DirectionalHint } from '@fluentui/react'
 import { TooltipHost } from '@fluentui/react/lib/Tooltip'
 import { useBoolean, useId } from '@fluentui/react-hooks'
 import { memo } from 'react'
@@ -18,6 +19,7 @@ import {
 	useTextStyle,
 } from './DefaultColumnHeader.hooks.js'
 import {
+	hostStyles,
 	HoverContainer,
 	LeftIcon,
 	RightIcon,
@@ -26,9 +28,6 @@ import type { DefaultColumnHeaderProps } from './DefaultColumnHeader.types.js'
 export type { DefaultColumnHeaderProps } from './DefaultColumnHeader.types.js'
 
 const calloutProps = { gapSpace: 0 }
-const hostStyles: Partial<ITooltipHostStyles> = {
-	root: { display: 'inline-block' },
-}
 
 export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 	function DefaultColumnHeader({
@@ -61,7 +60,10 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 			iconProps,
 			validationResult,
 		)
-		const errorColumnMessages = useGetColumnValidationErrors(validationResult)
+		const errorColumnMessages = useGetColumnValidationErrors(
+			'Values in this column violate the following constraints:',
+			validationResult?.errors,
+		)
 
 		return (
 			/* eslint-disable jsx-a11y/mouse-events-have-key-events */
@@ -75,7 +77,6 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 				>
 					<LeftIcon className={iconClassName} iconName={iconName} />
 				</When>
-
 				<When
 					condition={
 						validationResult !== undefined && validationResult.errors.length > 0
@@ -86,6 +87,7 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 						id={tooltipId}
 						calloutProps={calloutProps}
 						styles={hostStyles}
+						directionalHint={DirectionalHint.bottomCenter}
 					>
 						<LeftIcon
 							className={iconClassName}

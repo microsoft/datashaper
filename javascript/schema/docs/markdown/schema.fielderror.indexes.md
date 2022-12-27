@@ -4,6 +4,8 @@
 
 ## FieldError.indexes property
 
+Optional row indexes that failed the validation (if `includeIndexes` was true during validation)
+
 <b>Signature:</b>
 
 ```typescript

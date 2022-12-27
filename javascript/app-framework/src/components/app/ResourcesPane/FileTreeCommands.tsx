@@ -11,11 +11,12 @@ import { useFileManagementCommands } from './FileTreeCommands.hooks.js'
 import {
 	CollapsedButton,
 	collapsedButtonStyles,
+	CollapsedCommands,
 	Commands,
 	icons,
 	useCommandbarStyles,
 } from './FileTreeCommands.styles.js'
-import { FileTreeTooltip as Tooltip } from './FileTreeTooltip.js'
+import { FileTreeTooltip } from './FileTreeTooltip.js'
 import type { FileDefinition } from './ResourcesPane.types.js'
 
 export interface FileTreeCommandsProps {
@@ -36,8 +37,8 @@ export const FileTreeCommands: React.FC<FileTreeCommandsProps> = memo(
 				{expanded ? (
 					<Commands items={commands} styles={commandBarStyles} />
 				) : (
-					<>
-						<Tooltip content="New">
+					<CollapsedCommands>
+						<FileTreeTooltip content="New">
 							<CollapsedButton
 								styles={collapsedButtonStyles}
 								iconProps={icons.newFile}
@@ -45,8 +46,8 @@ export const FileTreeCommands: React.FC<FileTreeCommandsProps> = memo(
 									items: newCommands,
 								}}
 							/>
-						</Tooltip>
-						<Tooltip content="Open">
+						</FileTreeTooltip>
+						<FileTreeTooltip content="Open">
 							<CollapsedButton
 								styles={collapsedButtonStyles}
 								iconProps={icons.openFile}
@@ -54,8 +55,8 @@ export const FileTreeCommands: React.FC<FileTreeCommandsProps> = memo(
 									items: openCommands,
 								}}
 							/>
-						</Tooltip>
-						<Tooltip content="Save">
+						</FileTreeTooltip>
+						<FileTreeTooltip content="Save">
 							<CollapsedButton
 								styles={collapsedButtonStyles}
 								iconProps={icons.save}
@@ -63,8 +64,8 @@ export const FileTreeCommands: React.FC<FileTreeCommandsProps> = memo(
 									items: saveCommands,
 								}}
 							/>
-						</Tooltip>
-					</>
+						</FileTreeTooltip>
+					</CollapsedCommands>
 				)}
 			</>
 		)

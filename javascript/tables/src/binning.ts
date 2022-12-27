@@ -50,9 +50,9 @@ export function fixedBinCount(
  */
 export function fixedBinStep(
 	column: string,
-	min: number,
-	max: number,
-	step: number,
+	min = 0,
+	max = 0,
+	step = 0,
 	clamped = false,
 	format = false,
 ): string | object {
@@ -86,7 +86,7 @@ export function fixedBinStep(
  * https://numpy.org/doc/stable/reference/generated/numpy.histogram.html
  */
 function bin(min: number, max: number, step: number, clamped: boolean) {
-	const count = Math.ceil((max - min) / step)
+	const count = Math.floor((max - min) / step)
 	const ultimate = min + step * count
 	const penultimate = min + step * (count - 1)
 	const rebinmax = ultimate >= max
@@ -95,6 +95,7 @@ function bin(min: number, max: number, step: number, clamped: boolean) {
 		// this is due to arquero's exclusive max bound, which will just bin those exact
 		// matches into the final bin, disrupting the expected bin count by adding one
 		const candidate = op.bin(value, min, max, step)
+
 		if (clamped) {
 			if (candidate === -Infinity) {
 				return min
@@ -102,6 +103,15 @@ function bin(min: number, max: number, step: number, clamped: boolean) {
 				return rebinmax ? penultimate : ultimate
 			}
 		}
-		return candidate === max && rebinmax ? penultimate : candidate
+
+		if (candidate === -Infinity || candidate === Infinity) {
+			return candidate
+		}
+
+		if (candidate >= max) {
+			return penultimate
+		}
+
+		return candidate
 	}
 }

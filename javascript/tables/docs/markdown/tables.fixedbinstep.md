@@ -9,7 +9,7 @@ Bins column values using a fixed bin width. The number of resulting bins is ther
 <b>Signature:</b>
 
 ```typescript
-export declare function fixedBinStep(column: string, min: number, max: number, step: number, clamped?: boolean, format?: boolean): string | object;
+export declare function fixedBinStep(column: string, min?: number, max?: number, step?: number, clamped?: boolean, format?: boolean): string | object;
 ```
 
 ## Parameters
@@ -17,9 +17,9 @@ export declare function fixedBinStep(column: string, min: number, max: number, s
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  column | string | name of the column to bin |
-|  min | number | inclusive minimum of the bin range |
-|  max | number | inclusive maximum of the bin range |
-|  step | number | the width each bin should be |
+|  min | number | <i>(Optional)</i> inclusive minimum of the bin range |
+|  max | number | <i>(Optional)</i> inclusive maximum of the bin range |
+|  step | number | <i>(Optional)</i> the width each bin should be |
 |  clamped | boolean | <i>(Optional)</i> whether values outside of the bin range should be clamped to the bounds. If this is false, out-of-bounds values will be +/-Infinity. |
 |  format | boolean | <i>(Optional)</i> whether to return a formatted string that prints the bin range. |
 

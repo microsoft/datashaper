@@ -14,8 +14,9 @@ export interface FieldError
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [callbackFunction?](./schema.fielderror.callbackfunction.md) |  | (values: unknown, includeInstances: boolean) =&gt; [ValidationTestResult](./schema.validationtestresult.md) | <i>(Optional)</i> |
-|  [indexes?](./schema.fielderror.indexes.md) |  | number\[\] | <i>(Optional)</i> |
-|  [name](./schema.fielderror.name.md) |  | string |  |
-|  [rule](./schema.fielderror.rule.md) |  | [ErrorCode](./schema.errorcode.md) |  |
+|  [constraints](./schema.fielderror.constraints.md) |  | [Constraints](./schema.constraints.md) | Constraints for the field so parameters can be retrieved. Note that there must be an entry in the constraints object for the rule that failed. |
+|  [indexes?](./schema.fielderror.indexes.md) |  | number\[\] | <i>(Optional)</i> Optional row indexes that failed the validation (if <code>includeIndexes</code> was true during validation) |
+|  [name](./schema.fielderror.name.md) |  | string | Name of the field this error is associated with |
+|  [rule](./schema.fielderror.rule.md) |  | [ErrorCode](./schema.errorcode.md) | Rule that failed |
+|  [validate?](./schema.fielderror.validate.md) |  | [ValidationFunction](./schema.validationfunction.md) | <i>(Optional)</i> Validation function that produced the error, useful for re-applying at runtime. |
 

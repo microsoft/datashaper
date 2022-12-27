@@ -14,8 +14,8 @@ import type { Field } from '@datashaper/schema';
 import type { FieldMetadata } from '@datashaper/schema';
 import type { ParserOptions } from '@datashaper/schema';
 import type { TypeHints } from '@datashaper/schema';
+import type { ValidationFunction } from '@datashaper/schema';
 import type { ValidationResult } from '@datashaper/schema';
-import type { ValidationTestResult } from '@datashaper/schema';
 import type { Value } from '@datashaper/schema';
 
 // Warning: (ae-missing-release-tag) "applyCodebook" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -58,6 +58,11 @@ export function container(id: string, table?: ColumnTable, metadata?: TableMetad
 // @public
 export function determineType(value: Value): DataType;
 
+// Warning: (ae-missing-release-tag) "enumValidator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function enumValidator(field: Field, includeIndexes: boolean): ValidationFunction | undefined;
+
 // Warning: (ae-missing-release-tag) "fixedBinCount" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -66,7 +71,7 @@ export function fixedBinCount(column: string, min: number, max: number, count: n
 // Warning: (ae-missing-release-tag) "fixedBinStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function fixedBinStep(column: string, min: number, max: number, step: number, clamped?: boolean, format?: boolean): string | object;
+export function fixedBinStep(column: string, min?: number, max?: number, step?: number, clamped?: boolean, format?: boolean): string | object;
 
 // Warning: (ae-missing-release-tag) "format" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -89,7 +94,7 @@ export function formatNumberStr(value: string | number, decimal?: string, thousa
 // Warning: (ae-missing-release-tag) "generateCodebook" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function generateCodebook(table: ColumnTable): Omit<CodebookSchema, 'name'>;
+export function generateCodebook(table: ColumnTable): CodebookSchema;
 
 // Warning: (ae-missing-release-tag) "getDate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -152,6 +157,26 @@ export function isObject(value: string): boolean;
 // @public (undocumented)
 export function isValidNumber(value: string): boolean;
 
+// Warning: (ae-missing-release-tag) "maximumValidator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function maximumValidator(field: Field, includeIndexes: boolean): ValidationFunction | undefined;
+
+// Warning: (ae-missing-release-tag) "maxLengthValidator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function maxLengthValidator(field: Field, includeIndexes: boolean): ValidationFunction | undefined;
+
+// Warning: (ae-missing-release-tag) "minimumValidator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function minimumValidator(field: Field, includeIndexes: boolean): ValidationFunction | undefined;
+
+// Warning: (ae-missing-release-tag) "minLengthValidator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function minLengthValidator(field: Field, includeIndexes: boolean): ValidationFunction | undefined;
+
 // Warning: (ae-missing-release-tag) "parseArray" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -207,6 +232,11 @@ export function parseString(naValues?: string[]): (value: string) => string | nu
 // @public (undocumented)
 export function parseUndefined(naValues?: string[]): (value: string) => undefined | null;
 
+// Warning: (ae-missing-release-tag) "patternValidator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function patternValidator(field: Field, includeIndexes: boolean): ValidationFunction | undefined;
+
 // Warning: (ae-missing-release-tag) "readCsvTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -216,6 +246,11 @@ export function readCsvTable(text: string, options?: ParserOptions): ColumnTable
 //
 // @public
 export function readTable(input: Blob | undefined, schema: DataTableSchema): Promise<ColumnTable | undefined>;
+
+// Warning: (ae-missing-release-tag) "requiredValidator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function requiredValidator(field: Field, includeIndexes: boolean): ValidationFunction | undefined;
 
 // Warning: (ae-missing-release-tag) "rows" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -272,85 +307,20 @@ export function typeGuesserFactory(options?: TypeHints): any;
 // @public (undocumented)
 export function unapplyCodebook(table: ColumnTable, codebook: CodebookSchema, strategy: CodebookStrategy, dataTableSchema?: DataTableSchema): ColumnTable;
 
-// Warning: (ae-missing-release-tag) "validateEnum" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "uniqueValidator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
-export function validateEnum(enumList: string[]): (value: string) => boolean;
+// @public
+export function uniqueValidator(field: Field, includeIndexes: boolean): ValidationFunction | undefined;
 
-// Warning: (ae-missing-release-tag) "validateEnumConstraint" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "validateColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
-export function validateEnumConstraint(enumList: string[]): (values: unknown, includeInstances: boolean) => ValidationTestResult;
-
-// Warning: (ae-missing-release-tag) "validateMaximum" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function validateMaximum(maximum: number, dataType: DataType): (value: Date | number) => boolean;
-
-// Warning: (ae-missing-release-tag) "validateMaximumConstraint" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function validateMaximumConstraint(maximum: number, dataType: DataType): (values: unknown, includeInstances: boolean) => ValidationTestResult;
-
-// Warning: (ae-missing-release-tag) "validateMaxLength" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function validateMaxLength(maxLength: number): (value: Array<any> | string) => boolean;
-
-// Warning: (ae-missing-release-tag) "validateMaxLengthConstraint" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function validateMaxLengthConstraint(maxLength: number, dataType: DataType): (values: unknown, includeInstances: boolean) => ValidationTestResult;
-
-// Warning: (ae-missing-release-tag) "validateMinimum" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function validateMinimum(minimum: number, dataType: DataType): (value: Date | number) => boolean;
-
-// Warning: (ae-missing-release-tag) "validateMinimumConstraint" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function validateMinimumConstraint(minimum: number, dataType: DataType): (values: unknown, includeInstances: boolean) => ValidationTestResult;
-
-// Warning: (ae-missing-release-tag) "validateMinLength" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function validateMinLength(minLength: number): (value: Array<any> | string) => boolean;
-
-// Warning: (ae-missing-release-tag) "validateMinLengthConstraint" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function validateMinLengthConstraint(minLength: number, dataType: DataType): (values: unknown, includeInstances: boolean) => ValidationTestResult;
-
-// Warning: (ae-missing-release-tag) "validatePattern" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function validatePattern(pattern: string): (value: string) => boolean;
-
-// Warning: (ae-missing-release-tag) "validatePatternConstraint" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function validatePatternConstraint(pattern: string): (values: unknown, includeInstances: boolean) => ValidationTestResult;
-
-// Warning: (ae-missing-release-tag) "validateRequired" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function validateRequired(element: unknown): boolean;
-
-// Warning: (ae-missing-release-tag) "validateRequiredConstraint" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function validateRequiredConstraint(): (values: unknown, includeInstances: boolean) => ValidationTestResult;
+// @public
+export function validateColumn(table: ColumnTable, field: Field, includeIndexes: boolean): ValidationResult;
 
 // Warning: (ae-missing-release-tag) "validateTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
-export function validateTable(table: ColumnTable, codebook: CodebookSchema, includeInstances: boolean): ValidationResult;
-
-// Warning: (ae-missing-release-tag) "validateUniqueConstraint" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function validateUniqueConstraint(): (values: unknown, includeInstances: boolean) => ValidationTestResult;
+// @public
+export function validateTable(table: ColumnTable, codebook: CodebookSchema, includeIndexes?: boolean): ValidationResult;
 
 // (No @packageDocumentation comment for this package)
 

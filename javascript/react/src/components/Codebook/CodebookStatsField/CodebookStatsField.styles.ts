@@ -7,7 +7,14 @@ import { Label } from '@fluentui/react'
 
 export const Flex = styled.div`
 	display: flex;
+	align-items: center;
 `
 export const FieldName = styled(Label)`
 	margin: auto;
+`
+
+export const DataDisplay = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
 `

@@ -58,11 +58,17 @@ export interface FieldMetadata {
 	categories?: Category[]
 }
 
+/**
+ * Describes a data bin in terms of inclusive lower bound and count of values in the bin.
+ */
 export interface Bin {
 	min: number | string
 	count: number
 }
 
+/**
+ * Describes a nomincal category in terms of category name and count of values in the category.
+ */
 export interface Category {
 	name: string
 	count: number

@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function generateCodebook(table: ColumnTable): Omit<CodebookSchema, 'name'>;
+export declare function generateCodebook(table: ColumnTable): CodebookSchema;
 ```
 
 ## Parameters
@@ -18,5 +18,5 @@ export declare function generateCodebook(table: ColumnTable): Omit<CodebookSchem
 
 <b>Returns:</b>
 
-Omit&lt;CodebookSchema, 'name'&gt;
+CodebookSchema
 

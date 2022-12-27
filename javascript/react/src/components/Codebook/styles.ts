@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { useCheckboxProps } from '@essex/components'
 import type { IDropdownStyles, ITextFieldStyles, Theme } from '@fluentui/react'
 import { useTheme } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
@@ -15,12 +16,17 @@ export function getRootStyle(
 	theme: Theme,
 	disabled?: boolean,
 	style?: CSSProperties,
+	last = false,
 ): CSSProperties {
 	return merge(
 		{
 			backgroundColor: disabled
 				? theme.palette.neutralLighter
 				: theme.palette.white,
+			border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
+			borderRight: last
+				? `1px solid ${theme.palette.neutralTertiaryAlt}`
+				: 'none',
 		},
 		style,
 	)
@@ -33,76 +39,75 @@ export function getRootStyle(
  * @returns - A set of codebook styles to use
  */
 export function useDefaultCodebookStyles(
-	styles?: CodebookStyles,
 	heights?: FieldHeights,
 ): CodebookStyles {
 	const theme = useTheme()
-	const border = `1px solid ${theme.palette.neutralTertiaryAlt}`
-	return useMemo(
-		() =>
-			merge(
-				{
-					mapping: {
-						root: {
-							height: heights?.get('mappingWrapper'),
-						},
-					},
-					root: {
-						width: 240,
-						flex: 'none',
-						border,
-						borderBottom: 'unset',
-					},
-					displayName: {
-						root: {
-							padding: FIELD_PADDING,
-							height: heights?.get('displayName'),
-							borderBottom: border,
-						},
-					} as ITextFieldStyles,
-					description: {
-						root: {
-							padding: FIELD_PADDING,
-							height: heights?.get('description'),
-							borderBottom: border,
-						},
-					} as ITextFieldStyles,
-					units: {
-						root: {
-							padding: FIELD_PADDING,
-							height: heights?.get('units'),
-							borderBottom: border,
-						},
-					} as ITextFieldStyles,
-					dataType: {
-						root: {
-							padding: FIELD_PADDING,
-							height: heights?.get('dataType'),
-							borderBottom: border,
-						},
-					} as IDropdownStyles,
-					dataNature: {
-						root: {
-							padding: FIELD_PADDING,
-							height: heights?.get('dataNature'),
-							borderBottom: border,
-						},
-					} as IDropdownStyles,
-					statsWrapper: {
-						root: {
-							height: heights?.get('statsWrapper'),
-							padding: FIELD_PADDING,
-							borderBottom: border,
-						},
-						checkbox: {
-							root: {
-								visibility: 'hidden',
-							},
-						},
-					},
+	const checkbox = useCheckboxProps(
+		{
+			styles: {
+				root: {
+					visibility: 'hidden',
 				},
-				styles,
-			),
-		[border, styles, heights],
+			},
+		},
+		'small',
 	)
+	return useMemo(() => {
+		const cellBase = {
+			padding: FIELD_PADDING,
+			paddingTop: 0,
+		}
+		return {
+			root: {
+				width: 240,
+				flex: 'none',
+				background: theme.palette.white,
+			},
+			statsWrapper: {
+				root: {
+					height: heights?.get('statsWrapper'),
+					padding: FIELD_PADDING,
+					paddingBottom: 0,
+					paddingTop: 2,
+				},
+				checkbox: checkbox.styles,
+			},
+			displayName: {
+				root: {
+					height: heights?.get('displayName'),
+					...cellBase,
+				},
+			} as ITextFieldStyles,
+			description: {
+				root: {
+					height: heights?.get('description'),
+					...cellBase,
+				},
+			} as ITextFieldStyles,
+			dataType: {
+				root: {
+					height: heights?.get('dataType'),
+					...cellBase,
+				},
+			} as IDropdownStyles,
+			dataNature: {
+				root: {
+					height: heights?.get('dataNature'),
+					...cellBase,
+				},
+			} as IDropdownStyles,
+			units: {
+				root: {
+					height: heights?.get('units'),
+					...cellBase,
+				},
+			} as ITextFieldStyles,
+			mapping: {
+				root: {
+					height: heights?.get('mappingWrapper'),
+					...cellBase,
+				},
+			},
+		}
+	}, [theme, heights, checkbox])
 }

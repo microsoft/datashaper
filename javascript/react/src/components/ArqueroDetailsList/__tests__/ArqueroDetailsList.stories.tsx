@@ -22,6 +22,11 @@ const meta = {
 			border: '1px solid orange',
 		},
 	},
+	argTypes: {
+		compact: { control: 'boolean' },
+		showColumnBorders: { control: 'boolean' },
+		sortable: { control: 'boolean' },
+	},
 }
 
 export default meta
@@ -35,5 +40,5 @@ export const Columns = ColumnsStory
 export const Selection = SelectionStory
 Selection.storyName = 'Selection & sorting'
 export const RowGrouping = RowGroupingStory
-export const Performance = PerformanceStory
 export const ColumnValidation = ColumnValidationStory
+export const Performance = PerformanceStory

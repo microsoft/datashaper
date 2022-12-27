@@ -142,6 +142,12 @@ class BinStrategy(Enum):
     """Binning strategy to use for the binning operation."""
 
     Auto = "auto"
+    Fd = "fd"
+    Doane = "doane"
+    Scott = "scott"
+    Rice = "rice"
+    Sturges = "sturges"
+    Sqrt = "sqrt"
     FixedCount = "fixed count"
     FixedWidth = "fixed width"
 
