@@ -383,13 +383,13 @@ export enum ErrorCode {
     // (undocumented)
     Enum = "enum",
     // (undocumented)
-    Maximum = "maximum length",
+    Maximum = "maximum",
     // (undocumented)
-    MaxLength = "max length",
+    MaxLength = "maximum length",
     // (undocumented)
-    Minimum = "minimum length",
+    Minimum = "minimum",
     // (undocumented)
-    MinLength = "min length",
+    MinLength = "minimum length",
     // (undocumented)
     Pattern = "pattern",
     // (undocumented)
@@ -478,14 +478,11 @@ export enum FieldAggregateOperation {
 //
 // @public (undocumented)
 export interface FieldError {
-    // (undocumented)
-    callbackFunction?: (values: unknown, includeInstances: boolean) => ValidationTestResult;
-    // (undocumented)
+    constraints: Constraints;
     indexes?: number[];
-    // (undocumented)
     name: string;
-    // (undocumented)
     rule: ErrorCode;
+    validate?: ValidationFunction;
 }
 
 // Warning: (ae-missing-release-tag) "FieldMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1128,24 +1125,17 @@ export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
 // @public (undocumented)
 export type UnrollArgs = InputColumnListArgs;
 
+// Warning: (ae-missing-release-tag) "ValidationFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type ValidationFunction = (values: unknown[]) => FieldError | undefined;
+
 // Warning: (ae-missing-release-tag) "ValidationResult" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export interface ValidationResult {
     // (undocumented)
     errors: FieldError[];
-}
-
-// Warning: (ae-missing-release-tag) "ValidationTestResult" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ValidationTestResult {
-    // (undocumented)
-    fail: boolean;
-    // (undocumented)
-    indexes: number[];
-    // (undocumented)
-    rule: ErrorCode;
 }
 
 // Warning: (ae-missing-release-tag) "Value" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

@@ -4,6 +4,8 @@
 
 ## FieldError.name property
 
+Name of the field this error is associated with
+
 <b>Signature:</b>
 
 ```typescript

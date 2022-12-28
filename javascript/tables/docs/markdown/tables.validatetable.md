@@ -4,10 +4,12 @@
 
 ## validateTable() function
 
+Validates an entire table against a codebook's Field constraints.
+
 <b>Signature:</b>
 
 ```typescript
-export declare function validateTable(table: ColumnTable, codebook: CodebookSchema, includeInstances: boolean): ValidationResult;
+export declare function validateTable(table: ColumnTable, codebook: CodebookSchema, includeIndexes?: boolean): ValidationResult;
 ```
 
 ## Parameters
@@ -16,9 +18,10 @@ export declare function validateTable(table: ColumnTable, codebook: CodebookSche
 |  --- | --- | --- |
 |  table | ColumnTable |  |
 |  codebook | CodebookSchema |  |
-|  includeInstances | boolean |  |
+|  includeIndexes | boolean | <i>(Optional)</i> indicate whether to include the indexes of the rows that failed validation for each field |
 
 <b>Returns:</b>
 
 ValidationResult
+
 

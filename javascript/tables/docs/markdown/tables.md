@@ -16,6 +16,7 @@
 |  [columnTypes(table, columns)](./tables.columntypes.md) | Generates column typings info for a table. |
 |  [container(id, table, metadata)](./tables.container.md) |  |
 |  [determineType(value)](./tables.determinetype.md) | Guess the type of a table value with more discernment than typeof https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof |
+|  [enumValidator(field, includeIndexes)](./tables.enumvalidator.md) | Constructs a function that validates a column against the <code>enum</code> constraint. |
 |  [fixedBinCount(column, min, max, count, clamped, format)](./tables.fixedbincount.md) | Bins column values using a fixed number of bins. The standard behavior here is to truncate a numeric value to the lower bound of its bin range. This keeps the output numerical but loses information about specific bin boundaries. Because binning is a conversion from continuous to categorical, many use cases prefer an output value that displays the range. The format parameter here will produce a printed string as output. |
 |  [fixedBinStep(column, min, max, step, clamped, format)](./tables.fixedbinstep.md) | Bins column values using a fixed bin width. The number of resulting bins is therefore variable. The standard behavior here is to truncate a numeric value to the lower bound of its bin range. This keeps the output numerical but loses information about specific bin boundaries. Because binning is a conversion from continuous to categorical, many use cases prefer an output value that displays the range. The format parameter here will produce a printed string as output. |
 |  [format(value, options)](./tables.format.md) | Returns a nice formatted string for a number |
@@ -34,6 +35,10 @@
 |  [isNumber(decimal, thousands)](./tables.isnumber.md) |  |
 |  [isObject(value)](./tables.isobject.md) |  |
 |  [isValidNumber(value)](./tables.isvalidnumber.md) |  |
+|  [maximumValidator(field, includeIndexes)](./tables.maximumvalidator.md) | Constructs a function that validates a column against the <code>maximum</code> constraint. |
+|  [maxLengthValidator(field, includeIndexes)](./tables.maxlengthvalidator.md) | Constructs a function that validates a column against the <code>maxLength</code> constraint. |
+|  [minimumValidator(field, includeIndexes)](./tables.minimumvalidator.md) | Constructs a function that validates a column against the <code>minimum</code> constraint. |
+|  [minLengthValidator(field, includeIndexes)](./tables.minlengthvalidator.md) | Constructs a function that validates a column against the <code>minLength</code> constraint. |
 |  [parseArray(options)](./tables.parsearray.md) |  |
 |  [parseAs(type, hints)](./tables.parseas.md) | Factory function to create a value parser based on defined data type and type hints |
 |  [parseBoolean(naValues, trueValues, falseValues)](./tables.parseboolean.md) |  |
@@ -43,29 +48,18 @@
 |  [parseObject(options)](./tables.parseobject.md) |  |
 |  [parseString(naValues)](./tables.parsestring.md) |  |
 |  [parseUndefined(naValues)](./tables.parseundefined.md) |  |
+|  [patternValidator(field, includeIndexes)](./tables.patternvalidator.md) | Constructs a function that validates a column against the <code>pattern</code> constraint. |
 |  [readCsvTable(text, options)](./tables.readcsvtable.md) |  |
 |  [readTable(input, schema)](./tables.readtable.md) | Read an input table |
+|  [requiredValidator(field, includeIndexes)](./tables.requiredvalidator.md) | Constructs a function that validates a column against the <code>required</code> constraint. |
 |  [rows(table, options)](./tables.rows.md) | Returns a table's rows as a two-dimensional array. |
 |  [sliceTable(table, offset, limit)](./tables.slicetable.md) | Safely applies slicing args to a table |
 |  [stats(table, columns)](./tables.stats.md) | Generates detailed column stats for a table. |
 |  [typeGuesserFactory(options)](./tables.typeguesserfactory.md) |  |
 |  [unapplyCodebook(table, codebook, strategy, dataTableSchema)](./tables.unapplycodebook.md) |  |
-|  [validateEnum(enumList)](./tables.validateenum.md) |  |
-|  [validateEnumConstraint(enumList)](./tables.validateenumconstraint.md) |  |
-|  [validateMaximum(maximum, dataType)](./tables.validatemaximum.md) |  |
-|  [validateMaximumConstraint(maximum, dataType)](./tables.validatemaximumconstraint.md) |  |
-|  [validateMaxLength(maxLength)](./tables.validatemaxlength.md) |  |
-|  [validateMaxLengthConstraint(maxLength, dataType)](./tables.validatemaxlengthconstraint.md) |  |
-|  [validateMinimum(minimum, dataType)](./tables.validateminimum.md) |  |
-|  [validateMinimumConstraint(minimum, dataType)](./tables.validateminimumconstraint.md) |  |
-|  [validateMinLength(minLength)](./tables.validateminlength.md) |  |
-|  [validateMinLengthConstraint(minLength, dataType)](./tables.validateminlengthconstraint.md) |  |
-|  [validatePattern(pattern)](./tables.validatepattern.md) |  |
-|  [validatePatternConstraint(pattern)](./tables.validatepatternconstraint.md) |  |
-|  [validateRequired(element)](./tables.validaterequired.md) |  |
-|  [validateRequiredConstraint()](./tables.validaterequiredconstraint.md) |  |
-|  [validateTable(table, codebook, includeInstances)](./tables.validatetable.md) |  |
-|  [validateUniqueConstraint()](./tables.validateuniqueconstraint.md) |  |
+|  [uniqueValidator(field, includeIndexes)](./tables.uniquevalidator.md) | Constructs a function that validates a column against the <code>unique</code> constraint. |
+|  [validateColumn(table, field, includeIndexes)](./tables.validatecolumn.md) | Validates a column against a Field definition's constraints. |
+|  [validateTable(table, codebook, includeIndexes)](./tables.validatetable.md) | Validates an entire table against a codebook's Field constraints. |
 
 ## Interfaces
 

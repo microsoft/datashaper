@@ -9,6 +9,7 @@ import styled from 'styled-components'
 
 export const HoverContainer = styled.div`
 	width: 14px;
+	min-height: 14px;
 	text-align: right;
 	display: flex;
 	align-items: center;

@@ -11,7 +11,7 @@ export const Container = styled.div`
 	width: inherit;
 	> * {
 		&:first-child {
-			padding: 0px 8px 0px 10px;
+			padding: 0px 8px 0px 0;
 		}
 	}
 `

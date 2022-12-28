@@ -18,7 +18,6 @@ import {
 	ObjectCell,
 	SmartArrayCell,
 	TextCell,
-	ValidationCell,
 } from './index.js'
 import type { RichCellProps } from './types.js'
 
@@ -28,21 +27,14 @@ import type { RichCellProps } from './types.js'
 export const SmartCell: React.FC<RichCellProps> = memo(function SmartCell(
 	props,
 ) {
-	const { field, item, column, onSelect, validationResult } = props
+	const { field, item, column, onSelect } = props
 	const type = field?.type
 	const value = getValue(item, column)
 	const magnitude = useNumberMagnitude(value, field, type)
 
 	return (
-		<CellContainer onClick={onSelect} column={column}>
+		<CellContainer onClick={onSelect} {...props}>
 			<Switch>
-				<Case
-					condition={
-						validationResult !== undefined && validationResult.errors.length > 0
-					}
-				>
-					<ValidationCell {...props} />
-				</Case>
 				<Case condition={isBlank(value)}>
 					<BlankCell />
 				</Case>

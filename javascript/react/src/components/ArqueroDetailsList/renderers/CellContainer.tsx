@@ -7,16 +7,18 @@ import { memo } from 'react'
 import { useCellStyle, useHandleColumnClick } from './CellContainer.hooks.js'
 import { Container } from './CellContainer.styles.js'
 import type { CellContainerProps } from './CellContainer.types.js'
+import { ValidationCellWrapper } from './ValidationCellWrapper.js'
 export type { CellContainerProps } from './CellContainer.types.js'
 
 export const CellContainer: React.FC<CellContainerProps> = memo(
-	function CellContainer({ onClick, column, children }) {
+	function CellContainer(props) {
+		const { onClick, column, children } = props
 		const handleColumnClick = useHandleColumnClick(column, onClick)
 		const cellStyle = useCellStyle(column, onClick)
 
 		return (
 			<Container onClick={handleColumnClick} style={cellStyle}>
-				{children}
+				<ValidationCellWrapper {...props}>{children}</ValidationCellWrapper>
 			</Container>
 		)
 	},

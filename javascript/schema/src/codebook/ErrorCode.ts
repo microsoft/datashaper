@@ -5,10 +5,10 @@
 export enum ErrorCode {
 	Required = 'required',
 	Unique = 'unique',
-	MinLength = 'min length',
-	MaxLength = 'max length',
-	Minimum = 'minimum length',
-	Maximum = 'maximum length',
+	MinLength = 'minimum length',
+	MaxLength = 'maximum length',
+	Minimum = 'minimum',
+	Maximum = 'maximum',
 	Pattern = 'pattern',
 	Enum = 'enum',
 }

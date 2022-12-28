@@ -686,6 +686,72 @@
         },
         {
           "kind": "Function",
+          "canonicalReference": "@datashaper/tables!enumValidator:function(1)",
+          "docComment": "/**\n * Constructs a function that validates a column against the `enum` constraint.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function enumValidator(field: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Field",
+              "canonicalReference": "@datashaper/schema!Field:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", includeIndexes: "
+            },
+            {
+              "kind": "Content",
+              "text": "boolean"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "ValidationFunction",
+              "canonicalReference": "@datashaper/schema!ValidationFunction:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "field",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "includeIndexes",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "enumValidator"
+        },
+        {
+          "kind": "Function",
           "canonicalReference": "@datashaper/tables!fixedBinCount:function(1)",
           "docComment": "/**\n * Bins column values using a fixed number of bins. The standard behavior here is to truncate a numeric value to the lower bound of its bin range. This keeps the output numerical but loses information about specific bin boundaries. Because binning is a conversion from continuous to categorical, many use cases prefer an output value that displays the range. The format parameter here will produce a printed string as output.\n *\n * @param column - name of the column to bin\n *\n * @param min - inclusive minimum of the bin range\n *\n * @param max - inclusive maximum of the bin range\n *\n * @param count - number of bins to create, they will be equal width\n *\n * @param clamped - whether values outside of the bin range should be clamped to the bounds. If this is false, out-of-bounds values will be +/-Infinity.\n *\n * @param format - whether to return a formatted string that prints the bin range.\n *\n * @returns \n */\n",
           "excerptTokens": [
@@ -1138,21 +1204,8 @@
             },
             {
               "kind": "Reference",
-              "text": "Omit",
-              "canonicalReference": "!Omit:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
               "text": "CodebookSchema",
               "canonicalReference": "@datashaper/schema!CodebookSchema:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ", 'name'>"
             },
             {
               "kind": "Content",
@@ -1161,7 +1214,7 @@
           ],
           "returnTypeTokenRange": {
             "startIndex": 3,
-            "endIndex": 7
+            "endIndex": 4
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -1803,6 +1856,270 @@
         },
         {
           "kind": "Function",
+          "canonicalReference": "@datashaper/tables!maximumValidator:function(1)",
+          "docComment": "/**\n * Constructs a function that validates a column against the `maximum` constraint.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function maximumValidator(field: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Field",
+              "canonicalReference": "@datashaper/schema!Field:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", includeIndexes: "
+            },
+            {
+              "kind": "Content",
+              "text": "boolean"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "ValidationFunction",
+              "canonicalReference": "@datashaper/schema!ValidationFunction:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "field",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "includeIndexes",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "maximumValidator"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/tables!maxLengthValidator:function(1)",
+          "docComment": "/**\n * Constructs a function that validates a column against the `maxLength` constraint.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function maxLengthValidator(field: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Field",
+              "canonicalReference": "@datashaper/schema!Field:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", includeIndexes: "
+            },
+            {
+              "kind": "Content",
+              "text": "boolean"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "ValidationFunction",
+              "canonicalReference": "@datashaper/schema!ValidationFunction:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "field",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "includeIndexes",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "maxLengthValidator"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/tables!minimumValidator:function(1)",
+          "docComment": "/**\n * Constructs a function that validates a column against the `minimum` constraint.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function minimumValidator(field: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Field",
+              "canonicalReference": "@datashaper/schema!Field:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", includeIndexes: "
+            },
+            {
+              "kind": "Content",
+              "text": "boolean"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "ValidationFunction",
+              "canonicalReference": "@datashaper/schema!ValidationFunction:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "field",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "includeIndexes",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "minimumValidator"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/tables!minLengthValidator:function(1)",
+          "docComment": "/**\n * Constructs a function that validates a column against the `minLength` constraint.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function minLengthValidator(field: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Field",
+              "canonicalReference": "@datashaper/schema!Field:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", includeIndexes: "
+            },
+            {
+              "kind": "Content",
+              "text": "boolean"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "ValidationFunction",
+              "canonicalReference": "@datashaper/schema!ValidationFunction:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "field",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "includeIndexes",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "minLengthValidator"
+        },
+        {
+          "kind": "Function",
           "canonicalReference": "@datashaper/tables!parseArray:function(1)",
           "docComment": "",
           "excerptTokens": [
@@ -2391,6 +2708,72 @@
         },
         {
           "kind": "Function",
+          "canonicalReference": "@datashaper/tables!patternValidator:function(1)",
+          "docComment": "/**\n * Constructs a function that validates a column against the `pattern` constraint.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function patternValidator(field: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Field",
+              "canonicalReference": "@datashaper/schema!Field:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", includeIndexes: "
+            },
+            {
+              "kind": "Content",
+              "text": "boolean"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "ValidationFunction",
+              "canonicalReference": "@datashaper/schema!ValidationFunction:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "field",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "includeIndexes",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "patternValidator"
+        },
+        {
+          "kind": "Function",
           "canonicalReference": "@datashaper/tables!readCsvTable:function(1)",
           "docComment": "",
           "excerptTokens": [
@@ -2530,6 +2913,72 @@
             }
           ],
           "name": "readTable"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/tables!requiredValidator:function(1)",
+          "docComment": "/**\n * Constructs a function that validates a column against the `required` constraint.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function requiredValidator(field: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Field",
+              "canonicalReference": "@datashaper/schema!Field:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", includeIndexes: "
+            },
+            {
+              "kind": "Content",
+              "text": "boolean"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "ValidationFunction",
+              "canonicalReference": "@datashaper/schema!ValidationFunction:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "field",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "includeIndexes",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "requiredValidator"
         },
         {
           "kind": "Function",
@@ -3253,716 +3702,21 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@datashaper/tables!validateEnum:function(1)",
-          "docComment": "",
+          "canonicalReference": "@datashaper/tables!uniqueValidator:function(1)",
+          "docComment": "/**\n * Constructs a function that validates a column against the `unique` constraint.\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare function validateEnum(enumList: "
-            },
-            {
-              "kind": "Content",
-              "text": "string[]"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Content",
-              "text": "(value: string) => boolean"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 3,
-            "endIndex": 4
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "enumList",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            }
-          ],
-          "name": "validateEnum"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/tables!validateEnumConstraint:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function validateEnumConstraint(enumList: "
-            },
-            {
-              "kind": "Content",
-              "text": "string[]"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Content",
-              "text": "(values: unknown, includeInstances: boolean) => "
+              "text": "export declare function uniqueValidator(field: "
             },
             {
               "kind": "Reference",
-              "text": "ValidationTestResult",
-              "canonicalReference": "@datashaper/schema!ValidationTestResult:interface"
+              "text": "Field",
+              "canonicalReference": "@datashaper/schema!Field:interface"
             },
             {
               "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 3,
-            "endIndex": 5
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "enumList",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            }
-          ],
-          "name": "validateEnumConstraint"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/tables!validateMaximum:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function validateMaximum(maximum: "
-            },
-            {
-              "kind": "Content",
-              "text": "number"
-            },
-            {
-              "kind": "Content",
-              "text": ", dataType: "
-            },
-            {
-              "kind": "Reference",
-              "text": "DataType",
-              "canonicalReference": "@datashaper/schema!DataType:enum"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Content",
-              "text": "(value: "
-            },
-            {
-              "kind": "Reference",
-              "text": "Date",
-              "canonicalReference": "!Date:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " | number) => boolean"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 5,
-            "endIndex": 8
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "maximum",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            },
-            {
-              "parameterName": "dataType",
-              "parameterTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
-              },
-              "isOptional": false
-            }
-          ],
-          "name": "validateMaximum"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/tables!validateMaximumConstraint:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function validateMaximumConstraint(maximum: "
-            },
-            {
-              "kind": "Content",
-              "text": "number"
-            },
-            {
-              "kind": "Content",
-              "text": ", dataType: "
-            },
-            {
-              "kind": "Reference",
-              "text": "DataType",
-              "canonicalReference": "@datashaper/schema!DataType:enum"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Content",
-              "text": "(values: unknown, includeInstances: boolean) => "
-            },
-            {
-              "kind": "Reference",
-              "text": "ValidationTestResult",
-              "canonicalReference": "@datashaper/schema!ValidationTestResult:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 5,
-            "endIndex": 7
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "maximum",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            },
-            {
-              "parameterName": "dataType",
-              "parameterTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
-              },
-              "isOptional": false
-            }
-          ],
-          "name": "validateMaximumConstraint"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/tables!validateMaxLength:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function validateMaxLength(maxLength: "
-            },
-            {
-              "kind": "Content",
-              "text": "number"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Content",
-              "text": "(value: "
-            },
-            {
-              "kind": "Reference",
-              "text": "Array",
-              "canonicalReference": "!Array:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "<any> | string) => boolean"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 3,
-            "endIndex": 6
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "maxLength",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            }
-          ],
-          "name": "validateMaxLength"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/tables!validateMaxLengthConstraint:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function validateMaxLengthConstraint(maxLength: "
-            },
-            {
-              "kind": "Content",
-              "text": "number"
-            },
-            {
-              "kind": "Content",
-              "text": ", dataType: "
-            },
-            {
-              "kind": "Reference",
-              "text": "DataType",
-              "canonicalReference": "@datashaper/schema!DataType:enum"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Content",
-              "text": "(values: unknown, includeInstances: boolean) => "
-            },
-            {
-              "kind": "Reference",
-              "text": "ValidationTestResult",
-              "canonicalReference": "@datashaper/schema!ValidationTestResult:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 5,
-            "endIndex": 7
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "maxLength",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            },
-            {
-              "parameterName": "dataType",
-              "parameterTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
-              },
-              "isOptional": false
-            }
-          ],
-          "name": "validateMaxLengthConstraint"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/tables!validateMinimum:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function validateMinimum(minimum: "
-            },
-            {
-              "kind": "Content",
-              "text": "number"
-            },
-            {
-              "kind": "Content",
-              "text": ", dataType: "
-            },
-            {
-              "kind": "Reference",
-              "text": "DataType",
-              "canonicalReference": "@datashaper/schema!DataType:enum"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Content",
-              "text": "(value: "
-            },
-            {
-              "kind": "Reference",
-              "text": "Date",
-              "canonicalReference": "!Date:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " | number) => boolean"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 5,
-            "endIndex": 8
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "minimum",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            },
-            {
-              "parameterName": "dataType",
-              "parameterTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
-              },
-              "isOptional": false
-            }
-          ],
-          "name": "validateMinimum"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/tables!validateMinimumConstraint:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function validateMinimumConstraint(minimum: "
-            },
-            {
-              "kind": "Content",
-              "text": "number"
-            },
-            {
-              "kind": "Content",
-              "text": ", dataType: "
-            },
-            {
-              "kind": "Reference",
-              "text": "DataType",
-              "canonicalReference": "@datashaper/schema!DataType:enum"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Content",
-              "text": "(values: unknown, includeInstances: boolean) => "
-            },
-            {
-              "kind": "Reference",
-              "text": "ValidationTestResult",
-              "canonicalReference": "@datashaper/schema!ValidationTestResult:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 5,
-            "endIndex": 7
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "minimum",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            },
-            {
-              "parameterName": "dataType",
-              "parameterTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
-              },
-              "isOptional": false
-            }
-          ],
-          "name": "validateMinimumConstraint"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/tables!validateMinLength:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function validateMinLength(minLength: "
-            },
-            {
-              "kind": "Content",
-              "text": "number"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Content",
-              "text": "(value: "
-            },
-            {
-              "kind": "Reference",
-              "text": "Array",
-              "canonicalReference": "!Array:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "<any> | string) => boolean"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 3,
-            "endIndex": 6
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "minLength",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            }
-          ],
-          "name": "validateMinLength"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/tables!validateMinLengthConstraint:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function validateMinLengthConstraint(minLength: "
-            },
-            {
-              "kind": "Content",
-              "text": "number"
-            },
-            {
-              "kind": "Content",
-              "text": ", dataType: "
-            },
-            {
-              "kind": "Reference",
-              "text": "DataType",
-              "canonicalReference": "@datashaper/schema!DataType:enum"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Content",
-              "text": "(values: unknown, includeInstances: boolean) => "
-            },
-            {
-              "kind": "Reference",
-              "text": "ValidationTestResult",
-              "canonicalReference": "@datashaper/schema!ValidationTestResult:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 5,
-            "endIndex": 7
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "minLength",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            },
-            {
-              "parameterName": "dataType",
-              "parameterTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
-              },
-              "isOptional": false
-            }
-          ],
-          "name": "validateMinLengthConstraint"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/tables!validatePattern:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function validatePattern(pattern: "
-            },
-            {
-              "kind": "Content",
-              "text": "string"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Content",
-              "text": "(value: string) => boolean"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 3,
-            "endIndex": 4
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "pattern",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            }
-          ],
-          "name": "validatePattern"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/tables!validatePatternConstraint:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function validatePatternConstraint(pattern: "
-            },
-            {
-              "kind": "Content",
-              "text": "string"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Content",
-              "text": "(values: unknown, includeInstances: boolean) => "
-            },
-            {
-              "kind": "Reference",
-              "text": "ValidationTestResult",
-              "canonicalReference": "@datashaper/schema!ValidationTestResult:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 3,
-            "endIndex": 5
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "pattern",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            }
-          ],
-          "name": "validatePatternConstraint"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/tables!validateRequired:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function validateRequired(element: "
-            },
-            {
-              "kind": "Content",
-              "text": "unknown"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
+              "text": ", includeIndexes: "
             },
             {
               "kind": "Content",
@@ -3970,44 +3724,87 @@
             },
             {
               "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "ValidationFunction",
+              "canonicalReference": "@datashaper/schema!ValidationFunction:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined"
+            },
+            {
+              "kind": "Content",
               "text": ";"
             }
           ],
           "returnTypeTokenRange": {
-            "startIndex": 3,
-            "endIndex": 4
+            "startIndex": 5,
+            "endIndex": 7
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
           "parameters": [
             {
-              "parameterName": "element",
+              "parameterName": "field",
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
               },
               "isOptional": false
+            },
+            {
+              "parameterName": "includeIndexes",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": false
             }
           ],
-          "name": "validateRequired"
+          "name": "uniqueValidator"
         },
         {
           "kind": "Function",
-          "canonicalReference": "@datashaper/tables!validateRequiredConstraint:function(1)",
-          "docComment": "",
+          "canonicalReference": "@datashaper/tables!validateColumn:function(1)",
+          "docComment": "/**\n * Validates a column against a Field definition's constraints.\n *\n * @param table - \n *\n * @param name - \n *\n * @param dataType - \n *\n * @param constraints - \n *\n * @param includeIndexes - indicate whether to include the indexes of the row instances that failed validation\n *\n * @returns \n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare function validateRequiredConstraint(): "
-            },
-            {
-              "kind": "Content",
-              "text": "(values: unknown, includeInstances: boolean) => "
+              "text": "export declare function validateColumn(table: "
             },
             {
               "kind": "Reference",
-              "text": "ValidationTestResult",
-              "canonicalReference": "@datashaper/schema!ValidationTestResult:interface"
+              "text": "ColumnTable",
+              "canonicalReference": "arquero!default:class"
+            },
+            {
+              "kind": "Content",
+              "text": ", field: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Field",
+              "canonicalReference": "@datashaper/schema!Field:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", includeIndexes: "
+            },
+            {
+              "kind": "Content",
+              "text": "boolean"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "ValidationResult",
+              "canonicalReference": "@datashaper/schema!ValidationResult:interface"
             },
             {
               "kind": "Content",
@@ -4015,18 +3812,43 @@
             }
           ],
           "returnTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 3
+            "startIndex": 7,
+            "endIndex": 8
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
-          "parameters": [],
-          "name": "validateRequiredConstraint"
+          "parameters": [
+            {
+              "parameterName": "table",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "field",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "includeIndexes",
+              "parameterTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "validateColumn"
         },
         {
           "kind": "Function",
           "canonicalReference": "@datashaper/tables!validateTable:function(1)",
-          "docComment": "",
+          "docComment": "/**\n * Validates an entire table against a codebook's Field constraints.\n *\n * @param table - \n *\n * @param codebook - \n *\n * @param includeIndexes - indicate whether to include the indexes of the rows that failed validation for each field\n *\n * @returns \n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -4048,7 +3870,7 @@
             },
             {
               "kind": "Content",
-              "text": ", includeInstances: "
+              "text": ", includeIndexes?: "
             },
             {
               "kind": "Content",
@@ -4092,47 +3914,15 @@
               "isOptional": false
             },
             {
-              "parameterName": "includeInstances",
+              "parameterName": "includeIndexes",
               "parameterTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 6
               },
-              "isOptional": false
+              "isOptional": true
             }
           ],
           "name": "validateTable"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/tables!validateUniqueConstraint:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function validateUniqueConstraint(): "
-            },
-            {
-              "kind": "Content",
-              "text": "(values: unknown, includeInstances: boolean) => "
-            },
-            {
-              "kind": "Reference",
-              "text": "ValidationTestResult",
-              "canonicalReference": "@datashaper/schema!ValidationTestResult:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 3
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [],
-          "name": "validateUniqueConstraint"
         }
       ]
     }

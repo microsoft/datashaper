@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Constraints, ValidationResult } from '@datashaper/schema'
+import type { Field, ValidationResult } from '@datashaper/schema'
 import { generateCodebook, validateTable } from '@datashaper/tables'
 import type { ComponentStory } from '@storybook/react'
 
@@ -16,25 +16,31 @@ export const ColumnValidationStory: ComponentStory<
 	{ loaded: { companiesRaw } }: any,
 ): JSX.Element => {
 	const codebookResult = generateCodebook(companiesRaw)
-	const element = codebookResult.fields.find(element => element.name === 'ID')
-
-	const idConstraints: Constraints = {
+	// get the metadata so we can test this with full smart features to make sure everything lines up nicely
+	const metadata = {
+		rows: companiesRaw.numRows(),
+		cols: companiesRaw.numCols(),
+		columns: codebookResult.fields.reduce((acc, field) => {
+			acc[field.name] = field
+			return acc
+		}, {} as Record<string, Field>),
+	}
+	// inject a few constraints to test & render
+	codebookResult.fields.find(element => element.name === 'ID')!.constraints = {
 		required: true,
 		unique: true,
 		minimum: 2,
 		maximum: 3,
 	}
-
-	element.constraints = idConstraints
-
-	const element2 = codebookResult.fields.find(
-		element => element.name === 'Name',
-	)
-	const nameConstraints: Constraints = {
-		enum: ['Microsoft', 'Apple', 'Google'],
+	codebookResult.fields.find(element => element.name === 'Name')!.constraints =
+		{
+			enum: ['Microsoft', 'Apple', 'Google'],
+		}
+	codebookResult.fields.find(
+		element => element.name === 'Employees',
+	)!.constraints = {
+		minimum: 160000,
 	}
-
-	element2.constraints = nameConstraints
 
 	const validationResult: ValidationResult = validateTable(
 		companiesRaw,
@@ -44,9 +50,14 @@ export const ColumnValidationStory: ComponentStory<
 
 	return (
 		<ArqueroDetailsList
+			features={{
+				smartCells: true,
+			}}
 			{...args}
 			table={companiesRaw}
+			metadata={metadata}
 			validationResult={validationResult}
 		/>
 	)
 }
+ColumnValidationStory.storyName = 'Column validation'
