@@ -71,8 +71,8 @@ export class TableBundle extends Resource implements TableEmitter {
 		}
 
 		// Create a pipeline of transformers
-		const inputNode = this.input
-		const transformers = value.map(dereference).filter(isTableTransformer)
+		const inputNode = dereferenced.find(isTableEmitter)
+		const transformers = dereferenced.filter(isTableTransformer)
 
 		// Wire the transformers together
 		for (let i = 0; i < transformers.length; i++) {

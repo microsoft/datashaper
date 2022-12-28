@@ -9,8 +9,8 @@ import {
 	LATEST_WORKFLOW_SCHEMA,
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import type { BehaviorSubject, Observable } from 'rxjs';
-import { EMPTY , map, of } from 'rxjs'
+import type { BehaviorSubject, Observable } from 'rxjs'
+import { EMPTY, map, of } from 'rxjs'
 
 import { RemoveMode, TableManager } from '../../dataflow/TableManager.js'
 import type { Maybe, Unsubscribe } from '../../primitives.js'
@@ -54,7 +54,6 @@ export class Workflow extends Resource implements TableTransformer {
 			this._dataPackage = dp
 			const inputs = new Map<string, Observable<Maybe<TableContainer>>>()
 			const rebindInputs = () => {
-				console.log('rebind inputs in workflow', this.name)
 				inputs.clear()
 				const tableNames = dp.resources
 					.filter(
