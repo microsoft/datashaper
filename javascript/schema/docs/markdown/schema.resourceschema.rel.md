@@ -6,6 +6,10 @@
 
 The relationship of this resource to the parent resource.
 
+Note: If the resource is a profile-free reference object (e.g. { "rel": "input", "path": "path/to/datatable.json" }<!-- -->,
+
+Then the relationship is \_external\_ the target resource and should not be persisted in the object )
+
 <b>Signature:</b>
 
 ```typescript

@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-get sources(): Resource[];
+get sources(): (Resource | ResourceReference)[];
 
-set sources(value: Resource[]);
+set sources(value: (Resource | ResourceReference)[]);
 ```

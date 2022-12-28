@@ -70,6 +70,17 @@ export interface Emitter<T> extends Resource {
 }
 
 /**
+ * A transformer for a type of I/O
+ */
+export interface Transformer<I, O = I> extends Emitter<O> {
+	/**
+	 * A transformer can set input
+	 */
+	input$: Observable<Maybe<I>> | undefined
+}
+
+/**
  * An emitter for TableContainers
  */
 export type TableEmitter = Emitter<TableContainer>
+export type TableTransformer = Transformer<TableContainer, TableContainer>

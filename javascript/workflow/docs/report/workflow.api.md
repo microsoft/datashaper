@@ -5,11 +5,11 @@
 ```ts
 
 import type { AggregateArgs } from '@datashaper/schema';
-import type { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import type { BinArgs } from '@datashaper/schema';
 import type { BinarizeArgs } from '@datashaper/schema';
 import type { BooleanArgs } from '@datashaper/schema';
-import type { CodebookSchema } from '@datashaper/schema';
+import { CodebookSchema } from '@datashaper/schema';
 import type { ConvertArgs } from '@datashaper/schema';
 import { DataFormat } from '@datashaper/schema';
 import type { DataNature } from '@datashaper/schema';
@@ -20,7 +20,7 @@ import type { DataTableSchema } from '@datashaper/schema';
 import type { DeriveArgs } from '@datashaper/schema';
 import type { EncodeDecodeArgs } from '@datashaper/schema';
 import type { EraseArgs } from '@datashaper/schema';
-import type { Field } from '@datashaper/schema';
+import { Field } from '@datashaper/schema';
 import type { FillArgs } from '@datashaper/schema';
 import type { FilterArgs } from '@datashaper/schema';
 import type { FoldArgs } from '@datashaper/schema';
@@ -40,16 +40,16 @@ import type { OrderbyArgs } from '@datashaper/schema';
 import type { ParserOptions as ParserOptions_2 } from '@datashaper/schema';
 import type { PivotArgs } from '@datashaper/schema';
 import type { PortBinding } from '@datashaper/schema';
-import { Profile } from '@datashaper/schema';
+import type { Profile } from '@datashaper/schema';
 import type { RecodeArgs } from '@datashaper/schema';
-import { ResourceSchema } from '@datashaper/schema';
+import type { ResourceSchema } from '@datashaper/schema';
 import type { RollupArgs } from '@datashaper/schema';
 import type { SampleArgs } from '@datashaper/schema';
 import type { SetOp } from '@datashaper/schema';
 import type { SpreadArgs } from '@datashaper/schema';
 import { Subject } from 'rxjs';
 import type { Subscription } from 'rxjs';
-import { TableBundleSchema } from '@datashaper/schema';
+import type { TableBundleSchema } from '@datashaper/schema';
 import { TableContainer } from '@datashaper/tables';
 import type { UnhotArgs } from '@datashaper/schema';
 import type { Verb } from '@datashaper/schema';
@@ -137,7 +137,7 @@ export function cloneStep(step: Step<unknown>, columnNames?: string[]): Step<unk
 // Warning: (ae-missing-release-tag) "Codebook" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export class Codebook extends Resource {
+export class Codebook extends Resource implements TableTransformer {
     // (undocumented)
     readonly $schema: string;
     constructor(codebook?: CodebookSchema);
@@ -151,7 +151,13 @@ export class Codebook extends Resource {
     get fields(): Field[];
     set fields(value: Field[]);
     // (undocumented)
+    set input$(value: Observable<Maybe<TableContainer>>);
+    // (undocumented)
     loadSchema(value: Maybe<CodebookSchema>, quiet?: boolean): void;
+    // (undocumented)
+    get output$(): Observable<Maybe<TableContainer>>;
+    // (undocumented)
+    get output(): Maybe<TableContainer>;
     // (undocumented)
     readonly profile = KnownProfile.Codebook;
     // (undocumented)
@@ -478,6 +484,12 @@ export function isNumericInputStep(step: Step): boolean;
 // @public
 export function isOutputColumnStep(step: Step): boolean;
 
+// Warning: (ae-forgotten-export) The symbol "ResourceReference" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "isReference" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const isReference: (r: Resource | undefined) => r is ResourceReference;
+
 // Warning: (ae-missing-release-tag) "isTableBundle" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -701,7 +713,7 @@ export const rename: (id: string) => StepNode<TableContainer<unknown>, InputColu
 //
 // @public (undocumented)
 export abstract class Resource extends Named implements ResourceSchema, Resource {
-    abstract get $schema(): string;
+    abstract get $schema(): string | undefined;
     // (undocumented)
     get homepage(): string | undefined;
     set homepage(value: string | undefined);
@@ -713,13 +725,13 @@ export abstract class Resource extends Named implements ResourceSchema, Resource
     // (undocumented)
     get path(): ResourceSchema['path'];
     set path(value: ResourceSchema['path']);
-    abstract get profile(): Profile;
+    abstract get profile(): Profile | undefined;
     // (undocumented)
     get rel(): ResourceSchema['rel'];
     set rel(value: ResourceSchema['rel']);
     // (undocumented)
-    get sources(): Resource[];
-    set sources(value: Resource[]);
+    get sources(): (Resource | ResourceReference)[];
+    set sources(value: (Resource | ResourceReference)[]);
     // (undocumented)
     toSchema(): ResourceSchema;
 }
@@ -812,9 +824,6 @@ export class TableBundle extends Resource implements TableEmitter {
     readonly $schema: string;
     constructor(data?: TableBundleSchema);
     // (undocumented)
-    get codebook(): Codebook | undefined;
-    set codebook(value: Codebook | undefined);
-    // (undocumented)
     connect(dp: DataPackage): void;
     // (undocumented)
     defaultTitle(): string;
@@ -822,7 +831,6 @@ export class TableBundle extends Resource implements TableEmitter {
     dispose(): void;
     // (undocumented)
     get input(): TableEmitter | undefined;
-    set input(value: TableEmitter | undefined);
     // (undocumented)
     loadSchema(schema: Maybe_2<TableBundleSchema>, quiet?: boolean): void;
     // (undocumented)
@@ -839,9 +847,6 @@ export class TableBundle extends Resource implements TableEmitter {
     set sources(value: Resource[]);
     // (undocumented)
     toSchema(): ResourceSchema;
-    // (undocumented)
-    get workflow(): Workflow | undefined;
-    set workflow(value: Workflow | undefined);
 }
 
 // Warning: (ae-missing-release-tag) "TableBundleProfile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -872,6 +877,19 @@ export interface TableExportOptions {
 //
 // @public
 export type TableObservable = Observable<Maybe<TableContainer>>;
+
+// Warning: (ae-missing-release-tag) "TableTransformer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type TableTransformer = Transformer_2<TableContainer, TableContainer>;
+
+// Warning: (ae-missing-release-tag) "Transformer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+interface Transformer_2<I, O = I> extends Emitter<O> {
+    input$: Observable<Maybe<I>> | undefined;
+}
+export { Transformer_2 as Transformer }
 
 // Warning: (ae-missing-release-tag) "unfold" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -927,7 +945,7 @@ export { window_2 as window }
 // Warning: (ae-missing-release-tag) "Workflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export class Workflow extends Resource {
+export class Workflow extends Resource implements TableTransformer {
     // (undocumented)
     readonly $schema: string;
     constructor(input?: WorkflowSchema, _strictInputs?: boolean);
@@ -943,11 +961,7 @@ export class Workflow extends Resource {
     get allTableNames$(): Observable<string[]>;
     get allTableNames(): string[];
     // (undocumented)
-    get defaultInput$(): TableObservable;
-    set defaultInput$(source: TableObservable);
-    // (undocumented)
-    get defaultInput(): Maybe<TableContainer>;
-    set defaultInput(source: Maybe<TableContainer>);
+    connect(dp: DataPackage): void;
     // (undocumented)
     defaultTitle(): string;
     // (undocumented)
@@ -956,6 +970,12 @@ export class Workflow extends Resource {
     hasInputName(input: string): boolean;
     // (undocumented)
     hasOutputName(name: string): boolean;
+    // (undocumented)
+    get input$(): TableObservable;
+    set input$(source: TableObservable);
+    // (undocumented)
+    get input(): Maybe<TableContainer>;
+    set input(source: Maybe<TableContainer>);
     // (undocumented)
     get inputNames$(): Observable<string[]>;
     // (undocumented)
@@ -966,6 +986,8 @@ export class Workflow extends Resource {
     get length(): number;
     // (undocumented)
     loadSchema(schema: Maybe<WorkflowSchema>, quiet?: boolean): void;
+    get output$(): Observable<Maybe<TableContainer<unknown>>>;
+    get output(): Maybe<TableContainer<unknown>>;
     // (undocumented)
     get outputNames$(): Observable<string[]>;
     // (undocumented)

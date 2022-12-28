@@ -7,9 +7,11 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class Workflow extends Resource 
+export declare class Workflow extends Resource implements TableTransformer 
 ```
 <b>Extends:</b> [Resource](./workflow.resource.md)
+
+<b>Implements:</b> [TableTransformer](./workflow.tabletransformer.md)
 
 ## Constructors
 
@@ -24,12 +26,14 @@ export declare class Workflow extends Resource
 |  [$schema](./workflow.workflow._schema.md) | <code>readonly</code> | string |  |
 |  [allTableNames](./workflow.workflow.alltablenames.md) | <code>readonly</code> | string\[\] | Get the names of all declared inputs and outputs. This does not include the default input or default output tables. |
 |  [allTableNames$](./workflow.workflow.alltablenames_.md) | <code>readonly</code> | Observable&lt;string\[\]&gt; | Get an observable of the names of all declared inputs and outputs. This does not include the default input or default output tables. |
-|  [defaultInput](./workflow.workflow.defaultinput.md) |  | [Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt; |  |
-|  [defaultInput$](./workflow.workflow.defaultinput_.md) |  | [TableObservable](./workflow.tableobservable.md) |  |
+|  [input](./workflow.workflow.input.md) |  | [Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt; |  |
+|  [input$](./workflow.workflow.input_.md) |  | [TableObservable](./workflow.tableobservable.md) |  |
 |  [inputNames](./workflow.workflow.inputnames.md) | <code>readonly</code> | string\[\] |  |
 |  [inputNames$](./workflow.workflow.inputnames_.md) | <code>readonly</code> | Observable&lt;string\[\]&gt; |  |
 |  [length](./workflow.workflow.length.md) | <code>readonly</code> | number |  |
 |  [length$](./workflow.workflow.length_.md) | <code>readonly</code> | Observable&lt;number&gt; |  |
+|  [output](./workflow.workflow.output.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&lt;unknown&gt;&gt; | Get the current default output |
+|  [output$](./workflow.workflow.output_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&lt;unknown&gt;&gt;&gt; | Get the default output observable |
 |  [outputNames](./workflow.workflow.outputnames.md) | <code>readonly</code> | string\[\] |  |
 |  [outputNames$](./workflow.workflow.outputnames_.md) | <code>readonly</code> | Observable&lt;string\[\]&gt; |  |
 |  [profile](./workflow.workflow.profile.md) | <code>readonly</code> | (not declared) |  |
@@ -47,6 +51,7 @@ export declare class Workflow extends Resource
 |  [addInputTables(inputs)](./workflow.workflow.addinputtables.md) |  |  |
 |  [addOutput(name)](./workflow.workflow.addoutput.md) |  | Add an output binding |
 |  [addStep(input)](./workflow.workflow.addstep.md) |  | Adds a step to the pipeline |
+|  [connect(dp)](./workflow.workflow.connect.md) |  |  |
 |  [defaultTitle()](./workflow.workflow.defaulttitle.md) |  |  |
 |  [dispose()](./workflow.workflow.dispose.md) |  |  |
 |  [hasInputName(input)](./workflow.workflow.hasinputname.md) |  |  |

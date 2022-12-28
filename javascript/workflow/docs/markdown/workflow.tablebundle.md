@@ -24,14 +24,12 @@ export declare class TableBundle extends Resource implements TableEmitter
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [$schema](./workflow.tablebundle._schema.md) | <code>readonly</code> | string |  |
-|  [codebook](./workflow.tablebundle.codebook.md) |  | [Codebook](./workflow.codebook.md) \| undefined |  |
-|  [input](./workflow.tablebundle.input.md) |  | [TableEmitter](./workflow.tableemitter.md) \| undefined |  |
+|  [input](./workflow.tablebundle.input.md) | <code>readonly</code> | [TableEmitter](./workflow.tableemitter.md) \| undefined |  |
 |  [name](./workflow.tablebundle.name.md) |  | string |  |
 |  [output](./workflow.tablebundle.output.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt; |  |
 |  [output$](./workflow.tablebundle.output_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt;&gt; |  |
 |  [profile](./workflow.tablebundle.profile.md) | <code>readonly</code> | (not declared) |  |
 |  [sources](./workflow.tablebundle.sources.md) |  | [Resource](./workflow.resource.md)<!-- -->\[\] |  |
-|  [workflow](./workflow.tablebundle.workflow.md) |  | [Workflow](./workflow.workflow.md) \| undefined |  |
 
 ## Methods
 

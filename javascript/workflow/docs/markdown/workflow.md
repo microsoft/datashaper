@@ -72,6 +72,7 @@
 |  [Step](./workflow.step.md) | Resolved step data, used in living workflows |
 |  [StepInput](./workflow.stepinput.md) | Step input data for parsing workflow schemas |
 |  [TableExportOptions](./workflow.tableexportoptions.md) | Options for exporting data-tables within Workflow instances.w |
+|  [Transformer\_2](./workflow.transformer_2.md) | A transformer for a type of I/O |
 
 ## Variables
 
@@ -100,6 +101,7 @@
 |  [isDataTable](./workflow.isdatatable.md) |  |
 |  [isDataTableSchema](./workflow.isdatatableschema.md) |  |
 |  [isDefaultInput](./workflow.isdefaultinput.md) |  |
+|  [isReference](./workflow.isreference.md) |  |
 |  [isTableBundle](./workflow.istablebundle.md) |  |
 |  [isTableBundleSchema](./workflow.istablebundleschema.md) |  |
 |  [isWorkflow](./workflow.isworkflow.md) |  |
@@ -135,6 +137,7 @@
 |  [StepFunction](./workflow.stepfunction.md) |  |
 |  [TableEmitter](./workflow.tableemitter.md) | An emitter for TableContainers |
 |  [TableObservable](./workflow.tableobservable.md) | The workflow object manages mutable data for a workflow specification |
+|  [TableTransformer](./workflow.tabletransformer.md) |  |
 |  [Unsubscribe](./workflow.unsubscribe.md) |  |
 |  [VariadicNodeBinding](./workflow.variadicnodebinding.md) |  |
 
