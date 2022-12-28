@@ -181,6 +181,8 @@ export class ResourceManager {
 				this._resources$.next(this.resources)
 			}),
 		)
+
+		resource.onChange(() => this._topResources$.next(this.topResources))
 		resource.onDispose(() => this.removeResource(resource.name))
 	}
 
@@ -313,6 +315,9 @@ export class ResourceManager {
 
 		this._resources$.next(resources.map(r => r.resource))
 		this._topResources$.next(topLevelResources)
+		resources.forEach(r =>
+			r.resource.onChange(() => this._topResources$.next(topLevelResources)),
+		)
 		return dataPackage
 	}
 

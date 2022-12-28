@@ -141,7 +141,9 @@ export class DataPackage extends Resource {
 	public async load(files: Map<string, Blob>, quiet?: boolean): Promise<void> {
 		const schema = await this._resourceMgr.load(files)
 		this.loadSchema(schema)
-		this._resourceMgr.topResources.forEach(t => (t as any).connect?.(this))
+		this._resourceMgr.topResources.forEach(t => {
+			;(t as any).connect?.(this)
+		})
 		if (!quiet) {
 			this._onChange.next()
 		}
