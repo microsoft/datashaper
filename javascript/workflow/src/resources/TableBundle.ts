@@ -9,12 +9,12 @@ import type { Maybe } from '@datashaper/workflow'
 import { isReference } from '@datashaper/workflow'
 import type { Observable, Subscription } from 'rxjs'
 import { BehaviorSubject } from 'rxjs'
-import type { Workflow } from './Workflow/index.js'
 
 import type { DataPackage } from './DataPackage/DataPackage.js'
 import { Resource } from './Resource.js'
 import type { ResourceReference } from './ResourceReference.js'
 import type { TableEmitter, TableTransformer } from './types.js'
+import type { Workflow } from './Workflow/index.js'
 
 const dereference = (r: Resource | ResourceReference) =>
 	isReference(r) ? r.target : r
@@ -36,10 +36,6 @@ export class TableBundle extends Resource implements TableEmitter {
 	public readonly $schema = LATEST_TABLEBUNDLE_SCHEMA
 	public readonly profile = KnownProfile.TableBundle
 
-	public override defaultTitle(): string {
-		return 'tablebundle.json'
-	}
-
 	private readonly _input$ = new BehaviorSubject<Maybe<TableContainer>>(
 		undefined,
 	)
@@ -47,6 +43,7 @@ export class TableBundle extends Resource implements TableEmitter {
 		undefined,
 	)
 	private _pipelineSub?: Subscription | undefined
+	private _dataPackage: DataPackage | undefined
 
 	public constructor(data?: TableBundleSchema) {
 		super()
@@ -68,6 +65,10 @@ export class TableBundle extends Resource implements TableEmitter {
 
 		this._pipelineSub?.unsubscribe()
 		super.sources = value
+		if (this._dataPackage != null) {
+			// pass the data-package to children
+			this.connect(this._dataPackage)
+		}
 
 		// Create a pipeline of transformers
 		const inputNode = this.input
@@ -89,9 +90,12 @@ export class TableBundle extends Resource implements TableEmitter {
 			transformers.length > 0
 				? transformers[transformers.length - 1]
 				: inputNode
-		this._pipelineSub = lastNode?.output$.subscribe(out =>
-			this._output$.next(this.renameTable(out)),
-		)
+
+		this._pipelineSub = lastNode?.output$.subscribe(out => {
+			this._output$.next(this.renameTable(out))
+		})
+
+		this._onChange.next()
 	}
 
 	public get input(): TableEmitter | undefined {
@@ -149,6 +153,7 @@ export class TableBundle extends Resource implements TableEmitter {
 	}
 
 	public connect(dp: DataPackage): void {
+		this._dataPackage = dp
 		this.sources.forEach(s => (s as Workflow).connect?.(dp))
 	}
 

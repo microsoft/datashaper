@@ -63,6 +63,7 @@ export class DataPackage extends Resource {
 
 	public addResource(resource: Resource): void {
 		this._resourceMgr.addResource(resource, true)
+		;(resource as any).connect?.(this)
 		this._onChange.next()
 	}
 
@@ -140,6 +141,7 @@ export class DataPackage extends Resource {
 	public async load(files: Map<string, Blob>, quiet?: boolean): Promise<void> {
 		const schema = await this._resourceMgr.load(files)
 		this.loadSchema(schema)
+		this._resourceMgr.topResources.forEach(t => (t as any).connect?.(this))
 		if (!quiet) {
 			this._onChange.next()
 		}

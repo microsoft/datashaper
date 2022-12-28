@@ -32,10 +32,6 @@ export class DataTable extends Resource implements TableEmitter {
 	public readonly parser = new ParserOptions()
 	public readonly shape = new DataShape()
 
-	public override defaultTitle(): string {
-		return 'datatable.json'
-	}
-
 	private _format: DataFormat = DataFormat.CSV
 	private _rawData: Blob | undefined
 

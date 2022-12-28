@@ -8,10 +8,12 @@ import type { Maybe } from '../primitives.js'
 import { Observed } from './Observed.js'
 
 export abstract class Named extends Observed implements NamedSchema {
-	public abstract defaultTitle(): string
+	public defaultTitle(): string | undefined {
+		return undefined
+	}
 
-	private _name = this.defaultTitle()
-	private _title: string | undefined
+	private _name = ''
+	private _title: string | undefined = this.defaultTitle()
 	private _description: string | undefined
 
 	public get name(): string {

@@ -9,15 +9,14 @@ import {
 	LATEST_WORKFLOW_SCHEMA,
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import { BehaviorSubject, EMPTY, Observable } from 'rxjs'
-import { map, of } from 'rxjs'
+import type { BehaviorSubject, Observable } from 'rxjs';
+import { EMPTY , map, of } from 'rxjs'
 
 import { RemoveMode, TableManager } from '../../dataflow/TableManager.js'
 import type { Maybe, Unsubscribe } from '../../primitives.js'
 import type { DataPackage } from '../DataPackage/DataPackage.js'
 import { Resource } from '../Resource.js'
-import type { TableBundle } from '../TableBundle.js'
-import type { TableTransformer } from '../types.js'
+import type { TableEmitter, TableTransformer } from '../types.js'
 import { GraphManager } from './GraphManager.js'
 import { NameManager } from './NameManager.js'
 import type { Step, StepInput, TableExportOptions } from './types.js'
@@ -55,21 +54,23 @@ export class Workflow extends Resource implements TableTransformer {
 			this._dataPackage = dp
 			const inputs = new Map<string, Observable<Maybe<TableContainer>>>()
 			const rebindInputs = () => {
+				console.log('rebind inputs in workflow', this.name)
 				inputs.clear()
 				const tableNames = dp.resources
-					.filter(r => r.profile === KnownProfile.TableBundle)
+					.filter(
+						r =>
+							r.profile === KnownProfile.TableBundle ||
+							r.profile === KnownProfile.DataTable,
+					)
 					.map(r => r.name)
 
 				// Set the sibling table inputs
-				tableNames.forEach(name =>
-					inputs.set(
-						name,
-						(dp.getResource(name) as TableBundle)?.output$ ??
-							(EMPTY as Observable<unknown>),
-					),
-				)
-
-				this.addInputs(inputs)
+				tableNames.forEach(name => {
+					const input =
+						(dp.getResource(name) as TableEmitter)?.output$ ??
+						(EMPTY as Observable<unknown>)
+					this.addInput(input, name)
+				})
 			}
 
 			this._dataPackageSub = dp.onChange(rebindInputs)
@@ -208,6 +209,7 @@ export class Workflow extends Resource implements TableTransformer {
 	 */
 	public addInput(source: TableObservable, id: string): void {
 		this._assertInputName(id)
+		this._graphMgr.ensureInput(id)
 		this._bindInputObservable(id, source)
 
 		this._graphMgr.configureAllSteps()

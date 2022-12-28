@@ -82,27 +82,34 @@ export class TableBundleProfile implements ProfilePlugin<TableBundle> {
 				text: 'Add Datatable',
 				iconProps: { iconName: this.datatablePlugin.iconName },
 				onClick: () => {
-					resource.input = this.datatablePlugin.createResource?.()
+					resource.sources = [
+						this.datatablePlugin.createResource?.(),
+						...resource.sources,
+					]
 				},
 			})
 		}
-		if (resource.workflow == null) {
+		if (!resource.sources.some(r => r.profile === KnownProfile.Workflow)) {
 			result.push({
 				key: 'add-workflow',
 				text: 'Add Workflow',
 				iconProps: { iconName: this.workflowPlugin.iconName },
 				onClick: () => {
-					resource.workflow = this.workflowPlugin.createResource?.()
+					resource.sources = [
+						...resource.sources,
+						this.workflowPlugin.createResource?.(),
+					]
 				},
 			})
 		}
-		if (resource.codebook == null) {
+		if (!resource.sources.some(r => r.profile === KnownProfile.Codebook)) {
 			result.push({
 				key: 'add-codebook',
 				text: 'Add Codebook',
 				iconProps: { iconName: this.codebookPlugin.iconName },
 				onClick: () => {
-					resource.codebook = this.codebookPlugin.createResource?.()
+					const codebook = this.codebookPlugin.createResource?.()
+					resource.sources = [...resource.sources, codebook]
 				},
 			})
 		}
