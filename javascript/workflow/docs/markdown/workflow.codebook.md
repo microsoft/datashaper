@@ -35,6 +35,7 @@ export declare class Codebook extends Resource implements TableTransformer
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
+|  [defaultName()](./workflow.codebook.defaultname.md) |  |  |
 |  [defaultTitle()](./workflow.codebook.defaulttitle.md) |  |  |
 |  [dispose()](./workflow.codebook.dispose.md) |  |  |
 |  [loadSchema(value, quiet)](./workflow.codebook.loadschema.md) |  |  |

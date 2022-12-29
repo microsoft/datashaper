@@ -9,12 +9,12 @@ Constructs a new instance of the `DataPackage` class
 <b>Signature:</b>
 
 ```typescript
-constructor(dataPackage?: DataPackageSchema | undefined);
+constructor(dataPackage?: DataPackageSchema);
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  dataPackage | DataPackageSchema \| undefined | <i>(Optional)</i> |
+|  dataPackage | DataPackageSchema | <i>(Optional)</i> |
 

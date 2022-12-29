@@ -24,7 +24,7 @@ export class DataPackage extends Resource {
 		return 'datapackage.json'
 	}
 
-	public constructor(public dataPackage?: DataPackageSchema) {
+	public constructor(dataPackage?: DataPackageSchema) {
 		super()
 		this.loadSchema(dataPackage)
 	}

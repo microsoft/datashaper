@@ -183,7 +183,7 @@ export function useOnSaveStep(
 			const stepResult = updateStep(step, index)
 			updateStepOutput(stepResult)
 		},
-		[updateStepOutput, updateStep],
+		[updateStepOutput, updateStep, bundle, isAttached, workflow],
 	)
 }
 function useOnStepSave(
