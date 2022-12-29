@@ -9,5 +9,5 @@
 ```typescript
 get input$(): TableObservable;
 
-set input$(source: TableObservable);
+set input$(source: Maybe<TableObservable>);
 ```

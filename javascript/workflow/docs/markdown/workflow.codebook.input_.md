@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-set input$(value: Observable<Maybe<TableContainer>>);
+set input$(value: Maybe<Observable<Maybe<TableContainer>>>);
 ```

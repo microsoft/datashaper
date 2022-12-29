@@ -40,7 +40,7 @@ export class TestAppProfile implements ProfilePlugin<TestAppResource> {
 					key: this.profile,
 					text: `New ${this.title}`,
 					onClick: () => {
-						const resource = this.createResource?.()
+						const resource = this.createResource()
 						resource.name = dp.suggestResourceName(resource.name)
 						dp.addResource(resource)
 					},

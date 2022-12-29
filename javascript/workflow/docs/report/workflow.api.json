@@ -1816,6 +1816,15 @@
                 },
                 {
                   "kind": "Reference",
+                  "text": "Maybe",
+                  "canonicalReference": "@datashaper/workflow!Maybe:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
                   "text": "Observable",
                   "canonicalReference": "rxjs!Observable:class"
                 },
@@ -1839,7 +1848,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": ">>"
+                  "text": ">>>"
                 },
                 {
                   "kind": "Content",
@@ -1852,7 +1861,7 @@
               "name": "input$",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 7
+                "endIndex": 9
               },
               "isStatic": false,
               "isProtected": false
@@ -13281,12 +13290,21 @@
                 },
                 {
                   "kind": "Reference",
+                  "text": "Maybe",
+                  "canonicalReference": "@datashaper/workflow!Maybe:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
                   "text": "TableObservable",
                   "canonicalReference": "@datashaper/workflow!TableObservable:type"
                 },
                 {
                   "kind": "Content",
-                  "text": ");"
+                  "text": ">);"
                 }
               ],
               "isReadonly": false,

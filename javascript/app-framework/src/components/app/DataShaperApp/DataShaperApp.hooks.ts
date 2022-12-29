@@ -148,6 +148,7 @@ export function useAppServices(): {
 		onAccept: (name: string | undefined) => void
 	}
 } {
+	const dp = useDataPackage()
 	const [isRenameOpen, { setTrue: showRename, setFalse: hideRename }] =
 		useBoolean(false)
 	const [renameResource, setRenameResource] = useState<Resource | undefined>()
@@ -172,7 +173,11 @@ export function useAppServices(): {
 					setAcceptRename({
 						handle: (name: string | undefined) => {
 							if (name != null) {
-								resource.name = name
+								const suggestedName = dp.suggestResourceName(name)
+								resource.name = suggestedName
+								if (name !== suggestedName) {
+									resource.title = name
+								}
 								resolve(name)
 							}
 							hideRename()
@@ -187,7 +192,7 @@ export function useAppServices(): {
 				})
 			},
 		}
-	}, [showRename, setRenameResource, hideRename])
+	}, [dp, showRename, setRenameResource, hideRename])
 
 	return useMemo(
 		() => ({
