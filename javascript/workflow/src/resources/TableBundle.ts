@@ -14,7 +14,6 @@ import type { DataPackage } from './DataPackage/DataPackage.js'
 import { Resource } from './Resource.js'
 import type { ResourceReference } from './ResourceReference.js'
 import type { TableEmitter, TableTransformer } from './types.js'
-import type { Workflow } from './Workflow/index.js'
 
 const dereference = (r: Resource | ResourceReference) =>
 	isReference(r) ? r.target : r
@@ -152,9 +151,9 @@ export class TableBundle extends Resource implements TableEmitter {
 		}
 	}
 
-	public connect(dp: DataPackage): void {
+	public override connect(dp: DataPackage): void {
 		this._dataPackage = dp
-		this.sources.forEach(s => (s as Workflow).connect?.(dp))
+		this.sources.forEach(s => s.connect(dp))
 	}
 
 	private renameTable = (

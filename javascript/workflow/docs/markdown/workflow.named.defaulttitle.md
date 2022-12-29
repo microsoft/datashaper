@@ -7,9 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-abstract defaultTitle(): string;
+defaultTitle(): string | undefined;
 ```
 <b>Returns:</b>
 
-string
+string \| undefined
 

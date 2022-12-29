@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { type Resource, JsonDataHandler } from '@datashaper/workflow'
+import type { Resource } from '@datashaper/workflow'
 import { useBoolean, useConst } from '@fluentui/react-hooks'
 import { useDebounceFn } from 'ahooks'
 import type { AllotmentHandle } from 'allotment'

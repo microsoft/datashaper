@@ -37,7 +37,6 @@ export declare class DataTable extends Resource implements TableEmitter
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [defaultTitle()](./workflow.datatable.defaulttitle.md) |  |  |
 |  [dispose()](./workflow.datatable.dispose.md) |  |  |
 |  [loadSchema(schema, quiet)](./workflow.datatable.loadschema.md) |  |  |
 |  [toSchema()](./workflow.datatable.toschema.md) |  |  |

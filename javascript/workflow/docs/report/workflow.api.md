@@ -5,7 +5,7 @@
 ```ts
 
 import type { AggregateArgs } from '@datashaper/schema';
-import { BehaviorSubject } from 'rxjs';
+import type { BehaviorSubject } from 'rxjs';
 import type { BinArgs } from '@datashaper/schema';
 import type { BinarizeArgs } from '@datashaper/schema';
 import type { BooleanArgs } from '@datashaper/schema';
@@ -267,8 +267,6 @@ export class DataTable extends Resource implements TableEmitter {
     // (undocumented)
     get data(): Blob | undefined;
     set data(value: Blob | undefined);
-    // (undocumented)
-    defaultTitle(): string;
     // (undocumented)
     dispose(): void;
     // (undocumented)
@@ -537,7 +535,7 @@ export const merge: (id: string) => StepNode<TableContainer<unknown>, MergeArgs>
 // @public (undocumented)
 export abstract class Named extends Observed implements Named_2 {
     // (undocumented)
-    abstract defaultTitle(): string;
+    defaultTitle(): string | undefined;
     // (undocumented)
     get description(): string | undefined;
     set description(value: string | undefined);
@@ -714,6 +712,8 @@ export const rename: (id: string) => StepNode<TableContainer<unknown>, InputColu
 // @public (undocumented)
 export abstract class Resource extends Named implements ResourceSchema, Resource {
     abstract get $schema(): string | undefined;
+    connect(_dp: DataPackage): void;
+    getSourcesWithProfile(type: Profile): Resource[];
     // (undocumented)
     get homepage(): string | undefined;
     set homepage(value: string | undefined);
@@ -825,8 +825,6 @@ export class TableBundle extends Resource implements TableEmitter {
     constructor(data?: TableBundleSchema);
     // (undocumented)
     connect(dp: DataPackage): void;
-    // (undocumented)
-    defaultTitle(): string;
     // (undocumented)
     dispose(): void;
     // (undocumented)

@@ -5,6 +5,7 @@
 import type { Profile, ResourceSchema } from '@datashaper/schema'
 
 import type { Maybe } from '../primitives.js'
+import type { DataPackage } from './DataPackage/DataPackage.js'
 import { Named } from './Named.js'
 import type { ResourceReference } from './ResourceReference.js'
 
@@ -71,6 +72,23 @@ export abstract class Resource
 	public set sources(value: (Resource | ResourceReference)[]) {
 		this._sources = value
 		this._onChange.next()
+	}
+
+	/**
+	 * Connects this resource to the given data package
+	 * @param dp - The data package to connect to
+	 */
+	public connect(_dp: DataPackage): void {
+		/* do nothing, overridable */
+	}
+
+	/**
+	 * Gets the sources of this resource that match the given profile type
+	 * @param type - The profile type to filter by
+	 * @returns The sources of this resource that match the given profile type
+	 */
+	public getSourcesWithProfile(type: Profile): Resource[] {
+		return this.sources.filter(s => s.profile === type)
 	}
 
 	public override toSchema(): ResourceSchema {

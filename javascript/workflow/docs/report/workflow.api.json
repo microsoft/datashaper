@@ -3698,36 +3698,6 @@
             },
             {
               "kind": "Method",
-              "canonicalReference": "@datashaper/workflow!DataTable#defaultTitle:member(1)",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "defaultTitle(): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [],
-              "isOptional": false,
-              "name": "defaultTitle"
-            },
-            {
-              "kind": "Method",
               "canonicalReference": "@datashaper/workflow!DataTable#dispose:member(1)",
               "docComment": "",
               "excerptTokens": [
@@ -6694,11 +6664,11 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "abstract defaultTitle(): "
+                  "text": "defaultTitle(): "
                 },
                 {
                   "kind": "Content",
-                  "text": "string"
+                  "text": "string | undefined"
                 },
                 {
                   "kind": "Content",
@@ -9052,6 +9022,107 @@
               "isProtected": false
             },
             {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!Resource#connect:member(1)",
+              "docComment": "/**\n * Connects this resource to the given data package\n *\n * @param dp - The data package to connect to\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "connect(_dp: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataPackage",
+                  "canonicalReference": "@datashaper/workflow!DataPackage:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "_dp",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "name": "connect"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!Resource#getSourcesWithProfile:member(1)",
+              "docComment": "/**\n * Gets the sources of this resource that match the given profile type\n *\n * @param type - The profile type to filter by\n *\n * @returns The sources of this resource that match the given profile type\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getSourcesWithProfile(type: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Profile",
+                  "canonicalReference": "@datashaper/schema!Profile:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Resource",
+                  "canonicalReference": "@datashaper/workflow!Resource:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "type",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "name": "getSourcesWithProfile"
+            },
+            {
               "kind": "Property",
               "canonicalReference": "@datashaper/workflow!Resource#homepage:member",
               "docComment": "",
@@ -10564,36 +10635,6 @@
               ],
               "isOptional": false,
               "name": "connect"
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "@datashaper/workflow!TableBundle#defaultTitle:member(1)",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "defaultTitle(): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [],
-              "isOptional": false,
-              "name": "defaultTitle"
             },
             {
               "kind": "Method",

@@ -26,7 +26,7 @@ export class ResourceReference extends Resource {
 		this._onChange.next()
 	}
 
-	public defaultTitle(): string {
+	public override defaultTitle(): string {
 		return this._target?.defaultTitle() ?? 'reference'
 	}
 }
