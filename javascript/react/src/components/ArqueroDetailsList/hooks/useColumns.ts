@@ -7,9 +7,9 @@ import type {
 	SortDirection,
 	ValidationResult,
 } from '@datashaper/schema'
-import { DataType } from '@datashaper/schema'
 import type { TableMetadata } from '@datashaper/tables'
 import type { IColumn } from '@fluentui/react'
+import { useThematic } from '@thematic/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 
@@ -28,11 +28,7 @@ import {
 	createRenderSmartCell,
 	createRenderStatsColumnHeader,
 } from '../renderers/index.js'
-import {
-	useColumnNamesList,
-	useColumnStyles,
-	useIncrementingColumnColorScale,
-} from './index.js'
+import { useColumnNamesList, useColumnStyles } from './index.js'
 import { useCountMinWidth } from './useCountMinWidth.js'
 
 export interface ColumnOptions {
@@ -77,7 +73,7 @@ export function useColumns(
 		resizable = true,
 	} = options
 
-	const colorScale = useIncrementingColumnColorScale(metadata)
+	const theme = useThematic()
 	const styles = useColumnStyles(!!onColumnSelect, showColumnBorders)
 	const names = useColumnNamesList(table, columns)
 	//get column width based on min value or on commandBar item passed
@@ -110,7 +106,7 @@ export function useColumns(
 			const { iconName, ...defaults } = column
 
 			const meta = metadata?.columns[name] || { name }
-			const color = meta?.type === DataType.Number ? colorScale() : undefined
+			const color = theme.rect().fill().hex()
 			const onRender =
 				features.smartCells && meta
 					? createRenderSmartCell(
@@ -176,6 +172,7 @@ export function useColumns(
 			}
 		})
 	}, [
+		theme,
 		columns,
 		names,
 		features,
@@ -186,7 +183,6 @@ export function useColumns(
 		compact,
 		resizable,
 		metadata,
-		colorScale,
 		onSort,
 		onColumnSelect,
 		onCellDropdownSelect,
