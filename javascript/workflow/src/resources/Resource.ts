@@ -9,6 +9,7 @@ import type { Maybe } from '../primitives.js'
 import type { DataPackage } from './DataPackage/DataPackage.js'
 import { Named } from './Named.js'
 import type { ResourceReference } from './ResourceReference.js'
+import type { Readable } from './types.js'
 
 export abstract class Resource
 	extends Named
@@ -109,7 +110,7 @@ export abstract class Resource
 	}
 
 	public override loadSchema(
-		value: Maybe<ResourceSchema>,
+		value: Maybe<Readable<ResourceSchema>>,
 		quiet = false,
 	): void {
 		super.loadSchema(value, true)

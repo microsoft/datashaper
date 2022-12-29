@@ -16,7 +16,7 @@ import {
 import type { Maybe } from '../primitives.js'
 import type { DataPackage } from './DataPackage/DataPackage.js'
 import { Resource } from './Resource.js'
-import type { TableEmitter } from './types.js'
+import type { Readable, TableEmitter } from './types.js'
 
 export class TableBundle extends Resource implements TableEmitter {
 	public readonly $schema = LATEST_TABLEBUNDLE_SCHEMA
@@ -31,7 +31,7 @@ export class TableBundle extends Resource implements TableEmitter {
 	private _pipelineSub?: Subscription | undefined
 	private _dataPackage: DataPackage | undefined
 
-	public constructor(data?: TableBundleSchema) {
+	public constructor(data?: Readable<TableBundleSchema>) {
 		super()
 		this.loadSchema(data)
 	}
@@ -129,7 +129,7 @@ export class TableBundle extends Resource implements TableEmitter {
 	}
 
 	public override loadSchema(
-		schema: Maybe<TableBundleSchema>,
+		schema: Maybe<Readable<TableBundleSchema>>,
 		quiet?: boolean,
 	): void {
 		super.loadSchema(schema, true)

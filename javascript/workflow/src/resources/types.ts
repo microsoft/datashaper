@@ -11,6 +11,11 @@ import type { Maybe } from '../primitives.js'
 import type { ResourceManager } from './DataPackage/ResourceManager.js'
 import type { Resource } from './Resource.js'
 
+export type Readable<T extends ResourceSchema> = {
+	profile?: T['profile'] | undefined
+	name?: T['name'] | undefined
+} & Omit<T, 'profile' | 'name'>
+
 /**
  * A constructor for a resource
  */

@@ -15,7 +15,7 @@ import { type Observable, BehaviorSubject } from 'rxjs'
 
 import type { Maybe } from '../primitives.js'
 import { Resource } from './Resource.js'
-import type { TableTransformer } from './types.js'
+import type { Readable, TableTransformer } from './types.js'
 
 export class Codebook extends Resource implements TableTransformer {
 	public readonly $schema = LATEST_CODEBOOK_SCHEMA
@@ -31,7 +31,7 @@ export class Codebook extends Resource implements TableTransformer {
 
 	private _fields$ = new BehaviorSubject<Field[]>([])
 
-	public constructor(codebook?: CodebookSchema) {
+	public constructor(codebook?: Readable<CodebookSchema>) {
 		super()
 		this.loadSchema(codebook)
 	}
@@ -72,7 +72,7 @@ export class Codebook extends Resource implements TableTransformer {
 	}
 
 	public override loadSchema(
-		value: Maybe<CodebookSchema>,
+		value: Maybe<Readable<CodebookSchema>>,
 		quiet?: boolean,
 	): void {
 		super.loadSchema(value, true)

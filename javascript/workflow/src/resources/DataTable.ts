@@ -18,7 +18,7 @@ import { type Observable, BehaviorSubject } from 'rxjs'
 import { DataShape } from './DataShape.js'
 import { ParserOptions } from './ParserOptions.js'
 import { Resource } from './Resource.js'
-import type { TableEmitter } from './types.js'
+import type { Readable, TableEmitter } from './types.js'
 
 const log = debug('datashaper')
 
@@ -35,7 +35,7 @@ export class DataTable extends Resource implements TableEmitter {
 	private _format: DataFormat = DataFormat.CSV
 	private _rawData: Blob | undefined
 
-	public constructor(datatable?: DataTableSchema) {
+	public constructor(datatable?: Readable<DataTableSchema>) {
 		super()
 		this.onDispose(this.parser.onChange(this.refreshData))
 		this.onDispose(this.shape.onChange(this.refreshData))
@@ -103,7 +103,7 @@ export class DataTable extends Resource implements TableEmitter {
 	}
 
 	public override loadSchema(
-		schema: Maybe<DataTableSchema>,
+		schema: Maybe<Readable<DataTableSchema>>,
 		quiet?: boolean,
 	): void {
 		super.loadSchema(schema, true)

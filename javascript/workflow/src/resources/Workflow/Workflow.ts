@@ -16,7 +16,7 @@ import { RemoveMode, TableManager } from '../../dataflow/TableManager.js'
 import type { Maybe, Unsubscribe } from '../../primitives.js'
 import type { DataPackage } from '../DataPackage/DataPackage.js'
 import { Resource } from '../Resource.js'
-import type { TableEmitter, TableTransformer } from '../types.js'
+import type { Readable, TableEmitter, TableTransformer } from '../types.js'
 import { GraphManager } from './GraphManager.js'
 import { NameManager } from './NameManager.js'
 import type { Step, StepInput, TableExportOptions } from './types.js'
@@ -42,7 +42,10 @@ export class Workflow extends Resource implements TableTransformer {
 	private _dataPackage: DataPackage | undefined
 	private _dataPackageSub?: Unsubscribe
 
-	public constructor(input?: WorkflowSchema, private _strictInputs = false) {
+	public constructor(
+		input?: Readable<WorkflowSchema>,
+		private _strictInputs = false,
+	) {
 		super()
 		this.loadSchema(input, true)
 		this.rebindDefaultOutput()
@@ -402,7 +405,7 @@ export class Workflow extends Resource implements TableTransformer {
 	}
 
 	public override loadSchema(
-		schema: Maybe<WorkflowSchema>,
+		schema: Maybe<Readable<WorkflowSchema>>,
 		quiet?: boolean,
 	): void {
 		super.loadSchema(schema, true)
