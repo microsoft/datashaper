@@ -136,6 +136,7 @@
 |  [HandlerOf](./workflow.handlerof.md) |  |
 |  [Maybe](./workflow.maybe.md) |  |
 |  [NodeId](./workflow.nodeid.md) |  |
+|  [Readable](./workflow.readable.md) |  |
 |  [SocketName](./workflow.socketname.md) |  |
 |  [StepFunction](./workflow.stepfunction.md) |  |
 |  [TableEmitter](./workflow.tableemitter.md) | An emitter for TableContainers |

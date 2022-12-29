@@ -1595,8 +1595,21 @@
                 },
                 {
                   "kind": "Reference",
+                  "text": "Readable",
+                  "canonicalReference": "@datashaper/workflow!Readable:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
                   "text": "CodebookSchema",
                   "canonicalReference": "@datashaper/schema!CodebookSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
                 },
                 {
                   "kind": "Content",
@@ -1611,7 +1624,7 @@
                   "parameterName": "codebook",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 2
+                    "endIndex": 5
                   },
                   "isOptional": true
                 }
@@ -1864,12 +1877,21 @@
                 },
                 {
                   "kind": "Reference",
+                  "text": "Readable",
+                  "canonicalReference": "@datashaper/workflow!Readable:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
                   "text": "CodebookSchema",
                   "canonicalReference": "@datashaper/schema!CodebookSchema:interface"
                 },
                 {
                   "kind": "Content",
-                  "text": ">"
+                  "text": ">>"
                 },
                 {
                   "kind": "Content",
@@ -1894,8 +1916,8 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 9
+                "startIndex": 10,
+                "endIndex": 11
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -1905,15 +1927,15 @@
                   "parameterName": "value",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 5
+                    "endIndex": 7
                   },
                   "isOptional": false
                 },
                 {
                   "parameterName": "quiet",
                   "parameterTypeTokenRange": {
-                    "startIndex": 6,
-                    "endIndex": 7
+                    "startIndex": 8,
+                    "endIndex": 9
                   },
                   "isOptional": true
                 }
@@ -3602,8 +3624,21 @@
                 },
                 {
                   "kind": "Reference",
+                  "text": "Readable",
+                  "canonicalReference": "@datashaper/workflow!Readable:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
                   "text": "DataTableSchema",
                   "canonicalReference": "@datashaper/schema!DataTableSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
                 },
                 {
                   "kind": "Content",
@@ -3618,7 +3653,7 @@
                   "parameterName": "datatable",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 2
+                    "endIndex": 5
                   },
                   "isOptional": true
                 }
@@ -3785,12 +3820,21 @@
                 },
                 {
                   "kind": "Reference",
+                  "text": "Readable",
+                  "canonicalReference": "@datashaper/workflow!Readable:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
                   "text": "DataTableSchema",
                   "canonicalReference": "@datashaper/schema!DataTableSchema:interface"
                 },
                 {
                   "kind": "Content",
-                  "text": ">"
+                  "text": ">>"
                 },
                 {
                   "kind": "Content",
@@ -3815,8 +3859,8 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 9
+                "startIndex": 10,
+                "endIndex": 11
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -3826,15 +3870,15 @@
                   "parameterName": "schema",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 5
+                    "endIndex": 7
                   },
                   "isOptional": false
                 },
                 {
                   "parameterName": "quiet",
                   "parameterTypeTokenRange": {
-                    "startIndex": 6,
-                    "endIndex": 7
+                    "startIndex": 8,
+                    "endIndex": 9
                   },
                   "isOptional": true
                 }
@@ -6875,12 +6919,21 @@
                 },
                 {
                   "kind": "Reference",
+                  "text": "Readable",
+                  "canonicalReference": "@datashaper/workflow!Readable:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
                   "text": "NamedSchema",
                   "canonicalReference": "@datashaper/schema!Named:interface"
                 },
                 {
                   "kind": "Content",
-                  "text": ">"
+                  "text": ">>"
                 },
                 {
                   "kind": "Content",
@@ -6905,8 +6958,8 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 9
+                "startIndex": 10,
+                "endIndex": 11
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -6916,15 +6969,15 @@
                   "parameterName": "schema",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 5
+                    "endIndex": 7
                   },
                   "isOptional": false
                 },
                 {
                   "parameterName": "quiet",
                   "parameterTypeTokenRange": {
-                    "startIndex": 6,
-                    "endIndex": 7
+                    "startIndex": 8,
+                    "endIndex": 9
                   },
                   "isOptional": true
                 }
@@ -8889,6 +8942,62 @@
           "extendsTokenRanges": []
         },
         {
+          "kind": "TypeAlias",
+          "canonicalReference": "@datashaper/workflow!Readable:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type Readable<T extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "ResourceSchema",
+              "canonicalReference": "@datashaper/schema!ResourceSchema:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "> = "
+            },
+            {
+              "kind": "Content",
+              "text": "{\n    profile?: T['profile'] | undefined;\n    name?: T['name'] | undefined;\n} & "
+            },
+            {
+              "kind": "Reference",
+              "text": "Omit",
+              "canonicalReference": "!Omit:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T, 'profile' | 'name'>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Readable",
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "typeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 6
+          }
+        },
+        {
           "kind": "Function",
           "canonicalReference": "@datashaper/workflow!readStep:function(1)",
           "docComment": "/**\n * Factory function to create new verb configs with as many reasonable defaults as possible.\n *\n * @param verb - \n */\n",
@@ -9339,12 +9448,21 @@
                 },
                 {
                   "kind": "Reference",
+                  "text": "Readable",
+                  "canonicalReference": "@datashaper/workflow!Readable:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
                   "text": "ResourceSchema",
                   "canonicalReference": "@datashaper/schema!ResourceSchema:interface"
                 },
                 {
                   "kind": "Content",
-                  "text": ">"
+                  "text": ">>"
                 },
                 {
                   "kind": "Content",
@@ -9369,8 +9487,8 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 9
+                "startIndex": 10,
+                "endIndex": 11
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -9380,15 +9498,15 @@
                   "parameterName": "value",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 5
+                    "endIndex": 7
                   },
                   "isOptional": false
                 },
                 {
                   "parameterName": "quiet",
                   "parameterTypeTokenRange": {
-                    "startIndex": 6,
-                    "endIndex": 7
+                    "startIndex": 8,
+                    "endIndex": 9
                   },
                   "isOptional": true
                 }
@@ -10676,8 +10794,21 @@
                 },
                 {
                   "kind": "Reference",
+                  "text": "Readable",
+                  "canonicalReference": "@datashaper/workflow!Readable:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
                   "text": "TableBundleSchema",
                   "canonicalReference": "@datashaper/schema!TableBundleSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
                 },
                 {
                   "kind": "Content",
@@ -10692,7 +10823,7 @@
                   "parameterName": "data",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 2
+                    "endIndex": 5
                   },
                   "isOptional": true
                 }
@@ -10859,12 +10990,21 @@
                 },
                 {
                   "kind": "Reference",
+                  "text": "Readable",
+                  "canonicalReference": "@datashaper/workflow!Readable:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
                   "text": "TableBundleSchema",
                   "canonicalReference": "@datashaper/schema!TableBundleSchema:interface"
                 },
                 {
                   "kind": "Content",
-                  "text": ">"
+                  "text": ">>"
                 },
                 {
                   "kind": "Content",
@@ -10889,8 +11029,8 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 9
+                "startIndex": 10,
+                "endIndex": 11
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -10900,15 +11040,15 @@
                   "parameterName": "schema",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 5
+                    "endIndex": 7
                   },
                   "isOptional": false
                 },
                 {
                   "parameterName": "quiet",
                   "parameterTypeTokenRange": {
-                    "startIndex": 6,
-                    "endIndex": 7
+                    "startIndex": 8,
+                    "endIndex": 9
                   },
                   "isOptional": true
                 }
@@ -12110,8 +12250,21 @@
                 },
                 {
                   "kind": "Reference",
+                  "text": "Readable",
+                  "canonicalReference": "@datashaper/workflow!Readable:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
                   "text": "WorkflowSchema",
                   "canonicalReference": "@datashaper/schema!WorkflowSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
                 },
                 {
                   "kind": "Content",
@@ -12134,15 +12287,15 @@
                   "parameterName": "input",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 2
+                    "endIndex": 5
                   },
                   "isOptional": true
                 },
                 {
                   "parameterName": "_strictInputs",
                   "parameterTypeTokenRange": {
-                    "startIndex": 3,
-                    "endIndex": 4
+                    "startIndex": 6,
+                    "endIndex": 7
                   },
                   "isOptional": true
                 }
@@ -13072,12 +13225,21 @@
                 },
                 {
                   "kind": "Reference",
+                  "text": "Readable",
+                  "canonicalReference": "@datashaper/workflow!Readable:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
                   "text": "WorkflowSchema",
                   "canonicalReference": "@datashaper/schema!WorkflowSchema:interface"
                 },
                 {
                   "kind": "Content",
-                  "text": ">"
+                  "text": ">>"
                 },
                 {
                   "kind": "Content",
@@ -13102,8 +13264,8 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 9
+                "startIndex": 10,
+                "endIndex": 11
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -13113,15 +13275,15 @@
                   "parameterName": "schema",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 5
+                    "endIndex": 7
                   },
                   "isOptional": false
                 },
                 {
                   "parameterName": "quiet",
                   "parameterTypeTokenRange": {
-                    "startIndex": 6,
-                    "endIndex": 7
+                    "startIndex": 8,
+                    "endIndex": 9
                   },
                   "isOptional": true
                 }

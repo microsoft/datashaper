@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-loadSchema(value: Maybe<CodebookSchema>, quiet?: boolean): void;
+loadSchema(value: Maybe<Readable<CodebookSchema>>, quiet?: boolean): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  value | [Maybe](./workflow.maybe.md)<!-- -->&lt;CodebookSchema&gt; |  |
+|  value | [Maybe](./workflow.maybe.md)<!-- -->&lt;[Readable](./workflow.readable.md)<!-- -->&lt;CodebookSchema&gt;&gt; |  |
 |  quiet | boolean | <i>(Optional)</i> |
 
 <b>Returns:</b>

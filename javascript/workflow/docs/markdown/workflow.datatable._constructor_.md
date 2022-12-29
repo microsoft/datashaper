@@ -9,12 +9,12 @@ Constructs a new instance of the `DataTable` class
 <b>Signature:</b>
 
 ```typescript
-constructor(datatable?: DataTableSchema);
+constructor(datatable?: Readable<DataTableSchema>);
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  datatable | DataTableSchema | <i>(Optional)</i> |
+|  datatable | [Readable](./workflow.readable.md)<!-- -->&lt;DataTableSchema&gt; | <i>(Optional)</i> |
 

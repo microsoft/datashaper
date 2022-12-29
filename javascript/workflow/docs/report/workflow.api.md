@@ -140,7 +140,7 @@ export function cloneStep(step: Step<unknown>, columnNames?: string[]): Step<unk
 export class Codebook extends Resource implements TableTransformer {
     // (undocumented)
     readonly $schema: string;
-    constructor(codebook?: CodebookSchema);
+    constructor(codebook?: Readable<CodebookSchema>);
     // (undocumented)
     defaultTitle(): string;
     // (undocumented)
@@ -153,7 +153,7 @@ export class Codebook extends Resource implements TableTransformer {
     // (undocumented)
     set input$(value: Observable<Maybe<TableContainer>>);
     // (undocumented)
-    loadSchema(value: Maybe<CodebookSchema>, quiet?: boolean): void;
+    loadSchema(value: Maybe<Readable<CodebookSchema>>, quiet?: boolean): void;
     // (undocumented)
     get output$(): Observable<Maybe<TableContainer>>;
     // (undocumented)
@@ -263,7 +263,7 @@ export class DataShape extends Observed implements DataShape_2 {
 export class DataTable extends Resource implements TableEmitter {
     // (undocumented)
     readonly $schema: string;
-    constructor(datatable?: DataTableSchema);
+    constructor(datatable?: Readable<DataTableSchema>);
     // (undocumented)
     get data(): Blob | undefined;
     set data(value: Blob | undefined);
@@ -273,7 +273,7 @@ export class DataTable extends Resource implements TableEmitter {
     get format(): DataFormat;
     set format(value: DataFormat);
     // (undocumented)
-    loadSchema(schema: Maybe_2<DataTableSchema>, quiet?: boolean): void;
+    loadSchema(schema: Maybe_2<Readable<DataTableSchema>>, quiet?: boolean): void;
     // (undocumented)
     get name(): string;
     set name(value: string);
@@ -555,7 +555,7 @@ export abstract class Named extends Observed implements Named_2 {
     get description(): string | undefined;
     set description(value: string | undefined);
     // (undocumented)
-    loadSchema(schema: Maybe<Named_2>, quiet?: boolean): void;
+    loadSchema(schema: Maybe<Readable<Named_2>>, quiet?: boolean): void;
     // (undocumented)
     get name(): string;
     set name(value: string);
@@ -707,6 +707,14 @@ export interface ProfileHandler {
     profile: Profile;
 }
 
+// Warning: (ae-missing-release-tag) "Readable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type Readable<T extends ResourceSchema> = {
+    profile?: T['profile'] | undefined;
+    name?: T['name'] | undefined;
+} & Omit<T, 'profile' | 'name'>;
+
 // Warning: (ae-missing-release-tag) "readStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -736,7 +744,7 @@ export abstract class Resource extends Named implements ResourceSchema, Resource
     get license(): string | undefined;
     set license(value: string | undefined);
     // (undocumented)
-    loadSchema(value: Maybe<ResourceSchema>, quiet?: boolean): void;
+    loadSchema(value: Maybe<Readable<ResourceSchema>>, quiet?: boolean): void;
     // (undocumented)
     get path(): ResourceSchema['path'];
     set path(value: ResourceSchema['path']);
@@ -837,7 +845,7 @@ export function stepNodeFactory<T, Args>(stepFunction: StepFunction<T, Args>): (
 export class TableBundle extends Resource implements TableEmitter {
     // (undocumented)
     readonly $schema: string;
-    constructor(data?: TableBundleSchema);
+    constructor(data?: Readable<TableBundleSchema>);
     // (undocumented)
     connect(dp: DataPackage): void;
     // (undocumented)
@@ -845,7 +853,7 @@ export class TableBundle extends Resource implements TableEmitter {
     // (undocumented)
     get input(): TableEmitter | undefined;
     // (undocumented)
-    loadSchema(schema: Maybe<TableBundleSchema>, quiet?: boolean): void;
+    loadSchema(schema: Maybe<Readable<TableBundleSchema>>, quiet?: boolean): void;
     // (undocumented)
     get name(): string;
     set name(value: string);
@@ -961,7 +969,7 @@ export { window_2 as window }
 export class Workflow extends Resource implements TableTransformer {
     // (undocumented)
     readonly $schema: string;
-    constructor(input?: WorkflowSchema, _strictInputs?: boolean);
+    constructor(input?: Readable<WorkflowSchema>, _strictInputs?: boolean);
     addInput(source: TableObservable, id: string): void;
     // (undocumented)
     addInputName(input: string): void;
@@ -998,7 +1006,7 @@ export class Workflow extends Resource implements TableTransformer {
     // (undocumented)
     get length(): number;
     // (undocumented)
-    loadSchema(schema: Maybe<WorkflowSchema>, quiet?: boolean): void;
+    loadSchema(schema: Maybe<Readable<WorkflowSchema>>, quiet?: boolean): void;
     get output$(): Observable<Maybe<TableContainer>>;
     get output(): Maybe<TableContainer>;
     // (undocumented)
