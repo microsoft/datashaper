@@ -14,6 +14,7 @@ export function useCellStyle(
 	return useMemo(() => {
 		const style: React.CSSProperties = {
 			width: '100%',
+			paddingRight: 10,
 		}
 		if (onSelect) {
 			style.cursor = 'pointer'
