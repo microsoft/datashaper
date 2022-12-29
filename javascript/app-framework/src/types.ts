@@ -16,7 +16,7 @@ export interface ResourceRoute {
 	/**
 	 * The resource render route
 	 */
-	href: string
+	href?: string
 
 	/**
 	 * The node text to use. Default=id
@@ -41,12 +41,12 @@ export interface ResourceRoute {
 	/**
 	 * The renderer to use for this node
 	 */
-	renderer: React.ComponentType<any>
+	renderer?: React.ComponentType<any>
 
 	/**
 	 * The render props to use for this node
 	 */
-	props: any
+	props?: any
 }
 
 export interface AppServices {

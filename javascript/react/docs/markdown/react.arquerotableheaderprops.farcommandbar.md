@@ -9,5 +9,5 @@ The optional far-command bar
 <b>Signature:</b>
 
 ```typescript
-farCommandBar?: ReactElement<any, any>;
+farCommandBar?: ReactNode;
 ```

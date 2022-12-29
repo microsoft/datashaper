@@ -18,8 +18,8 @@ export interface ArqueroTableHeaderProps
 |  --- | --- | --- | --- |
 |  [background?](./react.arquerotableheaderprops.background.md) |  | string | <i>(Optional)</i> The table background color |
 |  [color?](./react.arquerotableheaderprops.color.md) |  | string | <i>(Optional)</i> The table color |
-|  [commandBar?](./react.arquerotableheaderprops.commandbar.md) |  | ReactElement&lt;any, any&gt; | <i>(Optional)</i> The optional command bar |
-|  [farCommandBar?](./react.arquerotableheaderprops.farcommandbar.md) |  | ReactElement&lt;any, any&gt; | <i>(Optional)</i> The optional far-command bar |
+|  [commandBar?](./react.arquerotableheaderprops.commandbar.md) |  | ReactNode | <i>(Optional)</i> The optional command bar |
+|  [farCommandBar?](./react.arquerotableheaderprops.farcommandbar.md) |  | ReactNode | <i>(Optional)</i> The optional far-command bar |
 |  [name?](./react.arquerotableheaderprops.name.md) |  | string | <i>(Optional)</i> The table name |
 |  [showColumnCount?](./react.arquerotableheaderprops.showcolumncount.md) |  | boolean | <i>(Optional)</i> Whether to show the column count |
 |  [showRowCount?](./react.arquerotableheaderprops.showrowcount.md) |  | boolean | <i>(Optional)</i> Whether to show the row count |

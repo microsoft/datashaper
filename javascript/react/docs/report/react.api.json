@@ -1330,12 +1330,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "ReactElement",
-                  "canonicalReference": "@types/react!~React.ReactElement:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<any, any>"
+                  "text": "ReactNode",
+                  "canonicalReference": "@types/react!~React.ReactNode:type"
                 },
                 {
                   "kind": "Content",
@@ -1348,7 +1344,7 @@
               "name": "commandBar",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               }
             },
             {
@@ -1362,12 +1358,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "ReactElement",
-                  "canonicalReference": "@types/react!~React.ReactElement:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<any, any>"
+                  "text": "ReactNode",
+                  "canonicalReference": "@types/react!~React.ReactNode:type"
                 },
                 {
                   "kind": "Content",
@@ -1380,7 +1372,7 @@
               "name": "farCommandBar",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               }
             },
             {

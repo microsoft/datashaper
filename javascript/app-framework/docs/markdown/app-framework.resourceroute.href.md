@@ -9,5 +9,5 @@ The resource render route
 <b>Signature:</b>
 
 ```typescript
-href: string;
+href?: string;
 ```

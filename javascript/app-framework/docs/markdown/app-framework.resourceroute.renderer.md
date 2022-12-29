@@ -9,5 +9,5 @@ The renderer to use for this node
 <b>Signature:</b>
 
 ```typescript
-renderer: React.ComponentType<any>;
+renderer?: React.ComponentType<any>;
 ```
