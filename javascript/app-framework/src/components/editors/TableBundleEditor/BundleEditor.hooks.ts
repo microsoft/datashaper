@@ -2,25 +2,16 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useHeaderCommandBarDefaults } from '@datashaper/react'
+import type { TableCommandsProps } from '@datashaper/react'
 import { KnownProfile } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import type { Maybe, Step, TableBundle, Workflow } from '@datashaper/workflow'
-import type {
-	IColumn,
-	ICommandBarItemProps,
-	ICommandBarProps,
-} from '@fluentui/react'
+import type { IColumn } from '@fluentui/react'
 import { useObservableState } from 'observable-hooks'
 import { useCallback, useMemo, useState } from 'react'
 import type { Observable } from 'rxjs'
 
-import {
-	buttonStyles,
-	icons,
-	useCommandBarStyles,
-	useTableHeaderColors,
-} from './BundleEditor.styles.js'
+import { useCommandBarStyles, useTableHeaderColors } from '../styles.js'
 
 export function useSelectedTable(
 	bundle: TableBundle,
@@ -89,34 +80,6 @@ function useTableBundleWorkflow(table: TableBundle): Workflow | undefined {
 		/* eslint-disable-next-line react-hooks/exhaustive-deps */
 		[table, table.sources],
 	)
-}
-
-export function useHistoryButtonCommandBar(
-	isCollapsed: boolean,
-	numSteps: number | undefined,
-	toggleCollapsed: () => void,
-): ICommandBarProps {
-	const styles = useCommandBarStyles()
-	const colors = useTableHeaderColors()
-	const base = useMemo(
-		() => ({
-			items: [
-				{
-					key: 'historyButton',
-					id: 'historyButton',
-					disabled: !isCollapsed,
-					text: `(${numSteps ?? '0'})`,
-					iconProps: icons.history,
-					onClick: toggleCollapsed,
-					buttonStyles,
-				} as ICommandBarItemProps,
-			],
-			id: 'historyButton',
-			styles,
-		}),
-		[isCollapsed, numSteps, toggleCollapsed, styles],
-	)
-	return useHeaderCommandBarDefaults(base, true, colors)
 }
 
 /**
@@ -204,5 +167,19 @@ function useOnStepOutputChanged(workflow: Workflow): (step: Step) => void {
 			workflow.addOutput(step.id)
 		},
 		[workflow],
+	)
+}
+
+export function useTableCommandProps(): Partial<TableCommandsProps> {
+	const colors = useTableHeaderColors()
+	const styles = useCommandBarStyles()
+	return useMemo(
+		() => ({
+			background: colors.background,
+			commandBarProps: {
+				styles,
+			},
+		}),
+		[colors, styles],
 	)
 }

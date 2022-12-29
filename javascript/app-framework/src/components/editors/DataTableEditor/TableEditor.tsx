@@ -10,45 +10,39 @@ import {
 import type { ParserOptions } from '@datashaper/schema'
 import { ToolPanel } from '@essex/components'
 import { CommandBar } from '@fluentui/react'
-import { useBoolean } from '@fluentui/react-hooks'
 import { memo, useCallback } from 'react'
 
-import { useDataTableSource } from '../../../../hooks/index.js'
-import { useOptionsButtonCommandBar } from './ParserOptionsEditor.hooks.js'
+import { useDataTableSource } from '../../../hooks/index.js'
+import { useToolPanelExpandCollapse } from '../hooks.js'
 import {
-	Container,
-	DetailsListContainer,
-	icons,
 	useTableHeaderColors,
 	useTableHeaderStyles,
 	useToolPanelStyles,
-} from './ParserOptionsEditor.styles.js'
-import type { ParserOptionsEditorProps } from './ParserOptionsEditor.types.js'
+} from '../styles.js'
+import { Container, DetailsListContainer } from './TableEditor.styles.js'
+import type { TableEditorProps } from './TableEditor.types.js'
 
-export const ParserOptionsEditor: React.FC<ParserOptionsEditorProps> = memo(
-	function ParserOptionsEditor({ dataTable }) {
-		const table = useDataTableSource(dataTable)
-		const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
+export const TableEditor: React.FC<TableEditorProps> = memo(
+	function TableEditor({ resource }) {
+		const table = useDataTableSource(resource)
 		const tableHeaderColors = useTableHeaderColors()
 		const tableHeaderStyles = useTableHeaderStyles()
 		const toolPanelStyles = useToolPanelStyles()
-		const optionsButtonCommandBar = useOptionsButtonCommandBar(
-			isCollapsed,
-			toggleCollapsed,
-		)
+		const { collapsed, onToggleCollapsed, commandBar, iconProps } =
+			useToolPanelExpandCollapse('options-button', 'DataManagementSettings')
 		const onChangeParser = useCallback(
 			(update: ParserOptions) => {
-				dataTable?.parser?.loadSchema(update)
+				resource?.parser?.loadSchema(update)
 			},
-			[dataTable],
+			[resource],
 		)
 		return table?.table == null ? null : (
-			<Container collapsed={isCollapsed}>
+			<Container collapsed={collapsed}>
 				<DetailsListContainer>
 					<ArqueroTableHeader
 						background={tableHeaderColors.background}
 						styles={tableHeaderStyles}
-						farCommandBar={<CommandBar {...optionsButtonCommandBar} />}
+						farCommandBar={<CommandBar {...commandBar} />}
 						table={table.table}
 					/>
 					<ArqueroDetailsList
@@ -63,12 +57,12 @@ export const ParserOptionsEditor: React.FC<ParserOptionsEditorProps> = memo(
 				</DetailsListContainer>
 				<ToolPanel
 					headerText={'Parser options'}
-					onDismiss={toggleCollapsed}
-					headerIconProps={icons.settings}
+					onDismiss={onToggleCollapsed}
+					headerIconProps={iconProps}
 					styles={toolPanelStyles}
 				>
 					<Parser
-						parser={dataTable?.parser?.toSchema()}
+						parser={resource?.parser?.toSchema()}
 						onChange={onChangeParser}
 					/>
 				</ToolPanel>
