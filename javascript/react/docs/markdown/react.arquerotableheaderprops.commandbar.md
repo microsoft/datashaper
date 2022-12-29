@@ -9,5 +9,5 @@ The optional command bar
 <b>Signature:</b>
 
 ```typescript
-commandBar?: ReactElement<any, any>;
+commandBar?: ReactNode;
 ```

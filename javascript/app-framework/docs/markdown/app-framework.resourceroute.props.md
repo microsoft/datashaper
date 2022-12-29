@@ -9,5 +9,5 @@ The render props to use for this node
 <b>Signature:</b>
 
 ```typescript
-props: any;
+props?: any;
 ```

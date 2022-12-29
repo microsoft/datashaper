@@ -60,7 +60,7 @@ function makeTreeItem(
 ): TreeItem {
 	const numChildren = resource.children?.length ?? 0
 	return {
-		key: resource.href,
+		key: resource.href ?? 'no-href',
 		text: resource.title,
 		iconName: resource.icon,
 		group,
