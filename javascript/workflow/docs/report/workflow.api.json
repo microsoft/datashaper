@@ -4555,6 +4555,55 @@
         },
         {
           "kind": "Variable",
+          "canonicalReference": "@datashaper/workflow!dereference:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "dereference: "
+            },
+            {
+              "kind": "Content",
+              "text": "(r: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Resource",
+              "canonicalReference": "@datashaper/workflow!Resource:class"
+            },
+            {
+              "kind": "Content",
+              "text": " | "
+            },
+            {
+              "kind": "Reference",
+              "text": "ResourceReference",
+              "canonicalReference": "@datashaper/workflow!ResourceReference:class"
+            },
+            {
+              "kind": "Content",
+              "text": ") => "
+            },
+            {
+              "kind": "Reference",
+              "text": "Resource",
+              "canonicalReference": "@datashaper/workflow!Resource:class"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "dereference",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 8
+          }
+        },
+        {
+          "kind": "Variable",
           "canonicalReference": "@datashaper/workflow!derive:var",
           "docComment": "",
           "excerptTokens": [
@@ -6367,6 +6416,96 @@
           "isReadonly": true,
           "releaseTag": "Public",
           "name": "isTableBundleSchema",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 7
+          }
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@datashaper/workflow!isTableEmitter:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "isTableEmitter: "
+            },
+            {
+              "kind": "Content",
+              "text": "(r: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Resource",
+              "canonicalReference": "@datashaper/workflow!Resource:class"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined) => "
+            },
+            {
+              "kind": "Reference",
+              "text": "r",
+              "canonicalReference": "@datashaper/workflow!~r"
+            },
+            {
+              "kind": "Content",
+              "text": " is "
+            },
+            {
+              "kind": "Reference",
+              "text": "TableEmitter",
+              "canonicalReference": "@datashaper/workflow!TableEmitter:type"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "isTableEmitter",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 7
+          }
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@datashaper/workflow!isTableTransformer:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "isTableTransformer: "
+            },
+            {
+              "kind": "Content",
+              "text": "(r: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Resource",
+              "canonicalReference": "@datashaper/workflow!Resource:class"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined) => "
+            },
+            {
+              "kind": "Reference",
+              "text": "r",
+              "canonicalReference": "@datashaper/workflow!~r"
+            },
+            {
+              "kind": "Content",
+              "text": " is "
+            },
+            {
+              "kind": "Reference",
+              "text": "TableTransformer",
+              "canonicalReference": "@datashaper/workflow!TableTransformer:type"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "isTableTransformer",
           "variableTypeTokenRange": {
             "startIndex": 1,
             "endIndex": 7
@@ -13015,7 +13154,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<unknown>>"
+                  "text": ">"
                 },
                 {
                   "kind": "Content",
@@ -13067,7 +13206,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<unknown>>>"
+                  "text": ">>"
                 },
                 {
                   "kind": "Content",

@@ -9,5 +9,5 @@ Get the default output observable
 <b>Signature:</b>
 
 ```typescript
-get output$(): Observable<Maybe<TableContainer<unknown>>>;
+get output$(): Observable<Maybe<TableContainer>>;
 ```

@@ -32,8 +32,8 @@ export declare class Workflow extends Resource implements TableTransformer
 |  [inputNames$](./workflow.workflow.inputnames_.md) | <code>readonly</code> | Observable&lt;string\[\]&gt; |  |
 |  [length](./workflow.workflow.length.md) | <code>readonly</code> | number |  |
 |  [length$](./workflow.workflow.length_.md) | <code>readonly</code> | Observable&lt;number&gt; |  |
-|  [output](./workflow.workflow.output.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&lt;unknown&gt;&gt; | Get the current default output |
-|  [output$](./workflow.workflow.output_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&lt;unknown&gt;&gt;&gt; | Get the default output observable |
+|  [output](./workflow.workflow.output.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt; | Get the current default output |
+|  [output$](./workflow.workflow.output_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt;&gt; | Get the default output observable |
 |  [outputNames](./workflow.workflow.outputnames.md) | <code>readonly</code> | string\[\] |  |
 |  [outputNames$](./workflow.workflow.outputnames_.md) | <code>readonly</code> | Observable&lt;string\[\]&gt; |  |
 |  [profile](./workflow.workflow.profile.md) | <code>readonly</code> | (not declared) |  |

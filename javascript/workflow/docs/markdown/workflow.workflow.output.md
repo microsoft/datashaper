@@ -9,5 +9,5 @@ Get the current default output
 <b>Signature:</b>
 
 ```typescript
-get output(): Maybe<TableContainer<unknown>>;
+get output(): Maybe<TableContainer>;
 ```

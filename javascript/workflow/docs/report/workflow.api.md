@@ -9,7 +9,7 @@ import type { BehaviorSubject } from 'rxjs';
 import type { BinArgs } from '@datashaper/schema';
 import type { BinarizeArgs } from '@datashaper/schema';
 import type { BooleanArgs } from '@datashaper/schema';
-import { CodebookSchema } from '@datashaper/schema';
+import type { CodebookSchema } from '@datashaper/schema';
 import type { ConvertArgs } from '@datashaper/schema';
 import { DataFormat } from '@datashaper/schema';
 import type { DataNature } from '@datashaper/schema';
@@ -20,7 +20,7 @@ import type { DataTableSchema } from '@datashaper/schema';
 import type { DeriveArgs } from '@datashaper/schema';
 import type { EncodeDecodeArgs } from '@datashaper/schema';
 import type { EraseArgs } from '@datashaper/schema';
-import { Field } from '@datashaper/schema';
+import type { Field } from '@datashaper/schema';
 import type { FillArgs } from '@datashaper/schema';
 import type { FilterArgs } from '@datashaper/schema';
 import type { FoldArgs } from '@datashaper/schema';
@@ -320,6 +320,12 @@ export class DefaultGraph<T> implements Graph<T> {
     validate(): void;
 }
 
+// Warning: (ae-forgotten-export) The symbol "ResourceReference" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "dereference" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const dereference: (r: Resource | ResourceReference) => Resource | undefined;
+
 // Warning: (ae-missing-release-tag) "derive" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -482,7 +488,6 @@ export function isNumericInputStep(step: Step): boolean;
 // @public
 export function isOutputColumnStep(step: Step): boolean;
 
-// Warning: (ae-forgotten-export) The symbol "ResourceReference" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "isReference" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -497,6 +502,16 @@ export const isTableBundle: (r: Resource | undefined) => r is TableBundle;
 //
 // @public (undocumented)
 export const isTableBundleSchema: (r: ResourceSchema | undefined) => r is ResourceSchema;
+
+// Warning: (ae-missing-release-tag) "isTableEmitter" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const isTableEmitter: (r: Resource | undefined) => r is TableEmitter;
+
+// Warning: (ae-missing-release-tag) "isTableTransformer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const isTableTransformer: (r: Resource | undefined) => r is TableTransformer;
 
 // Warning: (ae-missing-release-tag) "isWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -830,14 +845,14 @@ export class TableBundle extends Resource implements TableEmitter {
     // (undocumented)
     get input(): TableEmitter | undefined;
     // (undocumented)
-    loadSchema(schema: Maybe_2<TableBundleSchema>, quiet?: boolean): void;
+    loadSchema(schema: Maybe<TableBundleSchema>, quiet?: boolean): void;
     // (undocumented)
     get name(): string;
     set name(value: string);
     // (undocumented)
-    get output$(): Observable<Maybe_2<TableContainer>>;
+    get output$(): Observable<Maybe<TableContainer>>;
     // (undocumented)
-    get output(): Maybe_2<TableContainer>;
+    get output(): Maybe<TableContainer>;
     // (undocumented)
     readonly profile = KnownProfile.TableBundle;
     // (undocumented)
@@ -984,8 +999,8 @@ export class Workflow extends Resource implements TableTransformer {
     get length(): number;
     // (undocumented)
     loadSchema(schema: Maybe<WorkflowSchema>, quiet?: boolean): void;
-    get output$(): Observable<Maybe<TableContainer<unknown>>>;
-    get output(): Maybe<TableContainer<unknown>>;
+    get output$(): Observable<Maybe<TableContainer>>;
+    get output(): Maybe<TableContainer>;
     // (undocumented)
     get outputNames$(): Observable<string[]>;
     // (undocumented)
