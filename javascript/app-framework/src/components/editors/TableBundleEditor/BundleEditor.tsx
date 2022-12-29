@@ -70,8 +70,8 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 		const toolPanelStyles = useToolPanelStyles()
 
 		// Event Handlers
-		const onSaveStep = useOnSaveStep(workflow, resource, isWorkflowAttached)
-		const onCreate = useOnCreateStep(onSaveStep, setSelectedId)
+		const onSave = useOnSaveStep(workflow, resource, isWorkflowAttached)
+		const onCreate = useOnCreateStep(onSave, setSelectedId)
 		const onDelete = useOnDeleteStep(workflow, resource)
 
 		return selectedTable?.table == null ? null : (
@@ -116,7 +116,7 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 							order={DisplayOrder.LastOnTop}
 							selectedKey={selectedId}
 							workflow={workflow}
-							onSave={onSaveStep}
+							onSave={onSave}
 							onDelete={onDelete}
 							onSelect={setSelectedId}
 						/>
