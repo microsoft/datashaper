@@ -8,7 +8,7 @@ import { memo, useCallback, useMemo, useRef } from 'react'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 
 import { DataPackageProvider } from '../../../context/index.js'
-import { EMPTY_ARRAY } from '../../../empty.js'
+import { EMPTY_ARRAY, EMPTY_OBJECT } from '../../../empty.js'
 import type { ResourceRoute } from '../../../types.js'
 import { RenameModal } from '../../modals/index.js'
 import { ResourcesPane } from '../ResourcesPane/index.js'
@@ -58,7 +58,11 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 	const pathname = useLocation().pathname
 	const selectedKey = useMemo(() => decodeURI(pathname), [pathname])
 	const onSelect = useCallback(
-		(v: ResourceRoute) => navigate(v.href),
+		(v: ResourceRoute) => {
+			if (v.href) {
+				navigate(v.href)
+			}
+		},
 		[navigate],
 	)
 	const {
@@ -102,13 +106,16 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 			<Allotment.Pane>
 				<Routes>
 					<Route path="/" element={children} />
-					{flattenedRoutes.map(r => (
-						<Route
-							key={r.href}
-							path={(r.children?.length ?? 0) > 0 ? r.href : `${r.href}/*`}
-							element={<MatchedRoute key={r.href} data={r} />}
-						/>
-					))}
+					{flattenedRoutes.map(
+						r =>
+							r.renderer && (
+								<Route
+									key={r.href}
+									path={(r.children?.length ?? 0) > 0 ? r.href : `${r.href}/*`}
+									element={<MatchedRoute key={r.href} data={r} />}
+								/>
+							),
+					)}
 					<Route path="*" element={fallback} />
 				</Routes>
 				<>
@@ -126,6 +133,6 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 
 const MatchedRoute: React.FC<{ data: ResourceRoute }> = memo(
 	function MatchedRoute({ data: { props, renderer: R, href } }) {
-		return <R href={href} {...props} />
+		return R ? <R href={href} {...(props ?? EMPTY_OBJECT)} /> : null
 	},
 )

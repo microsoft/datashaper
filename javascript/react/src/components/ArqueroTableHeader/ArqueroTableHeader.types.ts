@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import type { CSSProperties, ReactElement } from 'react'
+import type { CSSProperties, ReactElement, ReactNode } from 'react'
 
 export interface ArqueroTableHeaderStyles {
 	root?: CSSProperties
@@ -36,12 +36,12 @@ export interface ArqueroTableHeaderProps {
 	/**
 	 * The optional command bar
 	 */
-	commandBar?: ReactElement<any, any>
+	commandBar?: ReactNode
 
 	/**
 	 * The optional far-command bar
 	 */
-	farCommandBar?: ReactElement<any, any>
+	farCommandBar?: ReactNode
 
 	/**
 	 * Column-names that are visible

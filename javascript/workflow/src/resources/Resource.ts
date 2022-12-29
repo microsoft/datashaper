@@ -31,6 +31,10 @@ export abstract class Resource
 	private _license: string | undefined
 	private _sources: (Resource | ResourceReference)[] = []
 
+	public isReference(): boolean {
+		return false
+	}
+
 	public get path(): ResourceSchema['path'] {
 		return this._path
 	}
