@@ -49,11 +49,15 @@ function makeResourceRoute(
 	plugins: Map<string, ProfilePlugin>,
 	parentRoute = '/resource',
 ): ResourceRoute[] {
+	if (!resource.profile) {
+		console.warn('no profile for resource', resource)
+		return []
+	}
 	const plugin = plugins.get(resource.profile)!
 	const href = `${parentRoute}/${resource.name}`
 	const root: ResourceRoute = {
 		href,
-		title: resource.name,
+		title: resource.title ?? resource.name,
 		icon: plugin.iconName,
 		renderer: plugin.renderer,
 		menuItems: [
@@ -99,11 +103,13 @@ function groupResources(
 		[ResourceGroupType.Apps, []],
 	])
 	for (const r of resources) {
-		const plugin = plugins.get(r.profile)
-		if (plugin?.group === ResourceGroupType.Data) {
-			map.get(ResourceGroupType.Data)!.push(r)
-		} else {
-			map.get(ResourceGroupType.Apps)!.push(r)
+		if (r.profile != null) {
+			const plugin = plugins.get(r.profile)
+			if (plugin?.group === ResourceGroupType.Data) {
+				map.get(ResourceGroupType.Data)!.push(r)
+			} else {
+				map.get(ResourceGroupType.Apps)!.push(r)
+			}
 		}
 	}
 	return map

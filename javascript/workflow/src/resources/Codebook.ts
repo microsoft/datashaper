@@ -4,28 +4,51 @@
  */
 import type { CodebookSchema, Field } from '@datashaper/schema'
 import {
+	CodebookStrategy,
 	createCodebookSchemaObject,
 	KnownProfile,
 	LATEST_CODEBOOK_SCHEMA,
 } from '@datashaper/schema'
+import { type TableContainer, applyCodebook } from '@datashaper/tables'
+import type { Subscription } from 'rxjs'
 import { type Observable, BehaviorSubject } from 'rxjs'
 
 import type { Maybe } from '../primitives.js'
 import { Resource } from './Resource.js'
+import type { Readable, TableTransformer } from './types.js'
 
-export class Codebook extends Resource {
+export class Codebook extends Resource implements TableTransformer {
 	public readonly $schema = LATEST_CODEBOOK_SCHEMA
 	public readonly profile = KnownProfile.Codebook
+	private readonly _output$ = new BehaviorSubject<Maybe<TableContainer>>(
+		undefined,
+	)
+	private _inputSub: Subscription | undefined
 
-	public override defaultName(): string {
+	public override defaultTitle(): string {
 		return 'codebook.json'
 	}
 
 	private _fields$ = new BehaviorSubject<Field[]>([])
 
-	public constructor(codebook?: CodebookSchema) {
+	public constructor(codebook?: Readable<CodebookSchema>) {
 		super()
 		this.loadSchema(codebook)
+	}
+
+	public set input$(value: Observable<Maybe<TableContainer>>) {
+		this._inputSub?.unsubscribe()
+		this._inputSub = value.subscribe(table =>
+			this._output$.next(this.encodeTable(table)),
+		)
+	}
+
+	public get output$(): Observable<Maybe<TableContainer>> {
+		return this._output$
+	}
+
+	public get output(): Maybe<TableContainer> {
+		return this._output$.value
 	}
 
 	public get fields$(): Observable<Field[]> {
@@ -49,7 +72,7 @@ export class Codebook extends Resource {
 	}
 
 	public override loadSchema(
-		value: Maybe<CodebookSchema>,
+		value: Maybe<Readable<CodebookSchema>>,
 		quiet?: boolean,
 	): void {
 		super.loadSchema(value, true)
@@ -62,5 +85,18 @@ export class Codebook extends Resource {
 	public override dispose(): void {
 		this._fields$.complete()
 		super.dispose()
+	}
+
+	private encodeTable = (t: Maybe<TableContainer>): Maybe<TableContainer> => {
+		if (t?.table == null || this.fields.length === 0) {
+			return t
+		}
+
+		const encodedTable = applyCodebook(
+			t.table,
+			this,
+			CodebookStrategy.DataTypeAndMapping,
+		)
+		return { ...t, table: encodedTable }
 	}
 }

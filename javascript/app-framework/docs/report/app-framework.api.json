@@ -714,8 +714,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "ResourceHandler",
-                  "canonicalReference": "@datashaper/workflow!ResourceHandler:interface"
+                  "text": "ProfileHandler",
+                  "canonicalReference": "@datashaper/workflow!ProfileHandler:interface"
                 },
                 {
                   "kind": "Content",

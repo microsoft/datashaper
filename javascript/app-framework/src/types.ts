@@ -4,8 +4,8 @@
  */
 import type {
 	DataPackage,
+	ProfileHandler,
 	Resource,
-	ResourceHandler,
 } from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
 
@@ -94,7 +94,7 @@ export interface ProfilePlugin<T extends Resource = any> {
 	 * The persistence handler to use for this profile
 	 * null: no persistence
 	 */
-	dataHandler?: ResourceHandler | null
+	dataHandler?: ProfileHandler | null
 
 	/**
 	 * Creates a new resource of this type

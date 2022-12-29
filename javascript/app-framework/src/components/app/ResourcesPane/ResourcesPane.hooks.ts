@@ -56,7 +56,7 @@ function useAddTable(): AddTableHandler {
 			table.path = id
 
 			const tableBundle = new TableBundle()
-			tableBundle.input = table
+			tableBundle.sources = [...tableBundle.sources, table]
 			tableBundle.name = name
 
 			store.addResource(tableBundle)

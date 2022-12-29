@@ -8,6 +8,4 @@
 
 ```typescript
 get input(): TableEmitter | undefined;
-
-set input(input: TableEmitter | undefined);
 ```

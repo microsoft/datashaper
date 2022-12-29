@@ -9,5 +9,5 @@ The persistence handler to use for this profile null: no persistence
 <b>Signature:</b>
 
 ```typescript
-dataHandler?: ResourceHandler | null;
+dataHandler?: ProfileHandler | null;
 ```

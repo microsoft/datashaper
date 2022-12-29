@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-loadSchema(value: Maybe<ResourceSchema>, quiet?: boolean): void;
+loadSchema(value: Maybe<Readable<ResourceSchema>>, quiet?: boolean): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  value | [Maybe](./workflow.maybe.md)<!-- -->&lt;ResourceSchema&gt; |  |
+|  value | [Maybe](./workflow.maybe.md)<!-- -->&lt;[Readable](./workflow.readable.md)<!-- -->&lt;ResourceSchema&gt;&gt; |  |
 |  quiet | boolean | <i>(Optional)</i> |
 
 <b>Returns:</b>

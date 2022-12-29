@@ -9,6 +9,7 @@ import {
 	StepList,
 	TableCommands,
 } from '@datashaper/react'
+import { KnownProfile } from '@datashaper/schema'
 import { Workflow } from '@datashaper/workflow'
 import { ToolPanel } from '@essex/components'
 import { CommandBar } from '@fluentui/react'
@@ -40,10 +41,19 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 	function BundleEditor({ resource }) {
 		// Primary State
 		const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
-		if (resource.workflow == null) {
-			resource.workflow = new Workflow()
-		}
-		const workflow = resource.workflow
+
+		const workflow = useMemo<Workflow>(() => {
+			let wf: Workflow | undefined = resource
+				.getSourcesWithProfile(KnownProfile.Workflow)
+				.find(t => !!t) as Workflow | undefined
+
+			if (wf == null) {
+				wf = new Workflow()
+				resource.sources = [...resource.sources, wf]
+			}
+			return wf
+		}, [resource])
+
 		const [selectedId, setSelectedId] = useState<string | undefined>(undefined)
 		const [selectedColumn, onColumnClick] = useColumnState()
 

@@ -9,12 +9,12 @@ Constructs a new instance of the `Codebook` class
 <b>Signature:</b>
 
 ```typescript
-constructor(codebook?: CodebookSchema);
+constructor(codebook?: Readable<CodebookSchema>);
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  codebook | CodebookSchema | <i>(Optional)</i> |
+|  codebook | [Readable](./workflow.readable.md)<!-- -->&lt;CodebookSchema&gt; | <i>(Optional)</i> |
 

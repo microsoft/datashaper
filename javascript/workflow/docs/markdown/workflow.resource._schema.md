@@ -9,5 +9,5 @@ Gets the resource schema
 <b>Signature:</b>
 
 ```typescript
-abstract get $schema(): string;
+abstract get $schema(): string | undefined;
 ```
