@@ -13,7 +13,7 @@ export class ResourceReference extends Resource {
 		super()
 	}
 
-	public isReference() {
+	public isReference(): boolean {
 		return true
 	}
 

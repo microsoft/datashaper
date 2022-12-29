@@ -10,10 +10,11 @@ import type {
 } from '@datashaper/schema'
 import { KnownProfile } from '@datashaper/schema'
 
-import type { DataTable } from './DataTable.js'
-import type { Resource } from './Resource.js'
-import type { ResourceReference } from './ResourceReference.js'
-import type { TableBundle } from './TableBundle.js'
+import type { DataTable } from './resources/DataTable.js'
+import type { Resource } from './resources/Resource.js'
+import type { ResourceReference } from './resources/ResourceReference.js'
+import type { TableBundle } from './resources/TableBundle.js'
+import type { TableEmitter, TableTransformer } from './resources/types.js'
 
 export const isWorkflowSchema = (
 	r: ResourceSchema | undefined,
@@ -58,3 +59,22 @@ export const isDataTable = (r: Resource | undefined): r is DataTable =>
 
 export const isReference = (r: Resource | undefined): r is ResourceReference =>
 	(r as ResourceReference)?.isReference?.() ?? false
+
+export const dereference = (
+	r: Resource | ResourceReference,
+): Resource | undefined => (isReference(r) ? r.target : r)
+
+export const isTableEmitter = (r: Resource | undefined): r is TableEmitter => {
+	return (
+		r?.profile === KnownProfile.TableBundle ||
+		r?.profile === KnownProfile.DataTable
+	)
+}
+
+export const isTableTransformer = (
+	r: Resource | undefined,
+): r is TableTransformer => {
+	return (
+		r?.profile === KnownProfile.Workflow || r?.profile === KnownProfile.Codebook
+	)
+}

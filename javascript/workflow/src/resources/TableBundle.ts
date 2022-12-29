@@ -5,31 +5,18 @@
 import type { ResourceSchema, TableBundleSchema } from '@datashaper/schema'
 import { KnownProfile, LATEST_TABLEBUNDLE_SCHEMA } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import type { Maybe } from '@datashaper/workflow'
-import { isReference } from '@datashaper/workflow'
 import type { Observable, Subscription } from 'rxjs'
 import { BehaviorSubject } from 'rxjs'
 
+import {
+	dereference,
+	isTableEmitter,
+	isTableTransformer,
+} from '../predicates.js'
+import type { Maybe } from '../primitives.js'
 import type { DataPackage } from './DataPackage/DataPackage.js'
 import { Resource } from './Resource.js'
-import type { ResourceReference } from './ResourceReference.js'
-import type { TableEmitter, TableTransformer } from './types.js'
-
-const dereference = (r: Resource | ResourceReference) =>
-	isReference(r) ? r.target : r
-
-const isTableEmitter = (r: Resource | undefined): r is TableEmitter => {
-	return (
-		r?.profile === KnownProfile.TableBundle ||
-		r?.profile === KnownProfile.DataTable
-	)
-}
-
-const isTableTransformer = (r: Resource | undefined): r is TableTransformer => {
-	return (
-		r?.profile === KnownProfile.Workflow || r?.profile === KnownProfile.Codebook
-	)
-}
+import type { TableEmitter } from './types.js'
 
 export class TableBundle extends Resource implements TableEmitter {
 	public readonly $schema = LATEST_TABLEBUNDLE_SCHEMA

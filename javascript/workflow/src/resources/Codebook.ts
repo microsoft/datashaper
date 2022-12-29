@@ -2,14 +2,16 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { CodebookSchema, CodebookStrategy, Field } from '@datashaper/schema'
+import type { CodebookSchema, Field } from '@datashaper/schema'
 import {
+	CodebookStrategy,
 	createCodebookSchemaObject,
 	KnownProfile,
 	LATEST_CODEBOOK_SCHEMA,
 } from '@datashaper/schema'
 import { type TableContainer, applyCodebook } from '@datashaper/tables'
-import { type Observable, BehaviorSubject, Subscription } from 'rxjs'
+import type { Subscription } from 'rxjs'
+import { type Observable, BehaviorSubject } from 'rxjs'
 
 import type { Maybe } from '../primitives.js'
 import { Resource } from './Resource.js'

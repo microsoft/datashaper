@@ -4,6 +4,7 @@
  */
 import type { Profile, ResourceSchema } from '@datashaper/schema'
 
+import { dereference } from '../predicates.js'
 import type { Maybe } from '../primitives.js'
 import type { DataPackage } from './DataPackage/DataPackage.js'
 import { Named } from './Named.js'
@@ -88,7 +89,9 @@ export abstract class Resource
 	 * @returns The sources of this resource that match the given profile type
 	 */
 	public getSourcesWithProfile(type: Profile): Resource[] {
-		return this.sources.filter(s => s.profile === type)
+		return this.sources
+			.map(dereference)
+			.filter(s => s?.profile === type) as Resource[]
 	}
 
 	public override toSchema(): ResourceSchema {

@@ -128,14 +128,14 @@ export class Workflow extends Resource implements TableTransformer {
 	/**
 	 * Get the default output observable
 	 */
-	public get output$() {
+	public get output$(): Observable<Maybe<TableContainer>> {
 		return this.read$()
 	}
 
 	/**
 	 * Get the current default output
 	 */
-	public get output() {
+	public get output(): Maybe<TableContainer> {
 		return this.read()
 	}
 

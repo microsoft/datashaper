@@ -1,5 +1,6 @@
 /* eslint-disable jest/expect-expect, jest/valid-title, jest/no-conditional-expect */
-import type { ResourceSchema } from '@datashaper/schema'
+// import type { ResourceSchema } from '@datashaper/schema'
+import { KnownProfile } from '@datashaper/schema'
 import Blob from 'cross-blob'
 import fs from 'fs'
 import fsp from 'fs/promises'
@@ -7,6 +8,7 @@ import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
 import { DataPackage } from '../resources/DataPackage/DataPackage.js'
+import type { Workflow } from '../resources/index.js'
 import type { TableBundle } from '../resources/TableBundle.js'
 
 // Set the root cwd to the package root.
@@ -59,9 +61,13 @@ function defineTestCase(parentPath: string, test: string) {
 			for (const table of expected.tables) {
 				const found = datapackage.getResource(table.name) as TableBundle
 				expect(found).toBeDefined()
+
+				const workflow = found
+					.getSourcesWithProfile(KnownProfile.Workflow)
+					.find(t => !!t) as Workflow | undefined
 				if (table.workflowLength) {
-					expect(found.workflow).toBeDefined()
-					expect(found.workflow?.length ?? 0).toEqual(table.workflowLength ?? 0)
+					expect(workflow).toBeDefined()
+					expect(workflow?.length ?? 0).toEqual(table.workflowLength ?? 0)
 				}
 				expect(found?.output?.table?.numRows()).toBeGreaterThan(0)
 				expect(found?.output?.table?.numCols()).toBeGreaterThan(0)
@@ -96,28 +102,28 @@ async function readDataPackageFiles(
 	return results
 }
 
-async function checkPersisted(files: Map<string, Blob>, expected: any) {
-	expect(files).toBeDefined()
+// async function checkPersisted(files: Map<string, Blob>, expected: any) {
+// 	expect(files).toBeDefined()
 
-	const dpBlob = files.get('datapackage.json')
-	expect(dpBlob).toBeDefined()
-	const dataPackage = JSON.parse(await dpBlob!.text())
-	expect(dataPackage.resources).toHaveLength(expected.tables.length)
+// 	const dpBlob = files.get('datapackage.json')
+// 	expect(dpBlob).toBeDefined()
+// 	const dataPackage = JSON.parse(await dpBlob!.text())
+// 	expect(dataPackage.resources).toHaveLength(expected.tables.length)
 
-	for (const table of expected.tables) {
-		const tableBlob = files.get(`data/${table.name}/databundle.json`)
-		expect(tableBlob).toBeDefined()
-		const tableJson = JSON.parse(await tableBlob!.text())
+// 	for (const table of expected.tables) {
+// 		const tableBlob = files.get(`data/${table.name}/databundle.json`)
+// 		expect(tableBlob).toBeDefined()
+// 		const tableJson = JSON.parse(await tableBlob!.text())
 
-		if (table.workflowLength != null) {
-			const wfFile = `data/${table.name}/workflow.json`
-			const workflowBlob = files.get(wfFile)
-			expect(tableJson.sources.map((s: ResourceSchema) => s.path)).toContain(
-				wfFile,
-			)
-			expect(workflowBlob).toBeDefined()
-			const workflowJson = JSON.parse(await workflowBlob!.text())
-			expect(workflowJson.steps).toHaveLength(table.workflowLength)
-		}
-	}
-}
+// 		if (table.workflowLength != null) {
+// 			const wfFile = `data/${table.name}/workflow.json`
+// 			const workflowBlob = files.get(wfFile)
+// 			expect(tableJson.sources.map((s: ResourceSchema) => s.path)).toContain(
+// 				wfFile,
+// 			)
+// 			expect(workflowBlob).toBeDefined()
+// 			const workflowJson = JSON.parse(await workflowBlob!.text())
+// 			expect(workflowJson.steps).toHaveLength(table.workflowLength)
+// 		}
+// 	}
+// }

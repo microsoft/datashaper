@@ -40,7 +40,7 @@ export function useSelectedTable(
 			const defaultOutput = bundle.output$
 			return table ?? defaultOutput
 		}
-	}, [bundle, selectedTableId])
+	}, [bundle, selectedTableId, workflow])
 	return useObservableState(observed$, () => undefined)
 }
 
@@ -85,6 +85,8 @@ function useTableBundleWorkflow(table: TableBundle): Workflow | undefined {
 			table
 				.getSourcesWithProfile(KnownProfile.Workflow)
 				.find(t => !!t) as Workflow,
+
+		/* eslint-disable-next-line react-hooks/exhaustive-deps */
 		[table, table.sources],
 	)
 }
