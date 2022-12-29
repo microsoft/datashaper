@@ -192,7 +192,7 @@ export function useAppServices(): {
 				})
 			},
 		}
-	}, [showRename, setRenameResource, hideRename])
+	}, [dp, showRename, setRenameResource, hideRename])
 
 	return useMemo(
 		() => ({
