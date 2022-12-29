@@ -28,6 +28,7 @@ import {
 import {
 	Container,
 	DetailsListContainer,
+	icons,
 	useTableCommandProps,
 	useTableHeaderColors,
 	useTableHeaderStyles,
@@ -103,7 +104,7 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 				<ToolPanel
 					headerText={toolPanelHeader}
 					onDismiss={toggleCollapsed}
-					headerIconProps={HISTORY_ICON_PROPS}
+					headerIconProps={icons.history}
 					styles={toolPanelStyles}
 				>
 					<StepList
@@ -119,7 +120,3 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 		)
 	},
 )
-
-const HISTORY_ICON_PROPS = {
-	iconName: 'History',
-}

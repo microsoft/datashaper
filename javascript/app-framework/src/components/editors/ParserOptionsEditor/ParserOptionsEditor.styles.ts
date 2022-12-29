@@ -2,56 +2,113 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
-import type { ITheme } from '@fluentui/react'
-import { Label } from '@fluentui/react'
+import type {
+	ArqueroTableHeaderStyles,
+	CommandBarColors,
+	TableCommandsProps,
+} from '@datashaper/react'
+import type { ToolPanelStyles } from '@essex/components'
+import type { ICommandBarStyles, ITheme } from '@fluentui/react'
+import { useTheme } from '@fluentui/react'
+import { useMemo } from 'react'
 import styled from 'styled-components'
 
-export const Container = styled.div``
+const HEADER_HEIGHT = 36
 
-export const ParserOptionsContainer = styled.div`
-	padding: 10px;
-`
-export const TableFormatContainer = styled.div`
+export const icons = {
+	settings: { iconName: 'DataManagementSettings' },
+}
+
+export const DetailsListContainer = styled.div`
+	overflow: auto;
 	display: flex;
-	column-gap: 30px;
+	flex-direction: column;
+	height: 100%;
+	border-right: 1px solid
+		${({ theme }: { theme: ITheme }) => theme.palette.neutralLighter};
 `
 
-export const RadioBoxLabel = styled(Label)`
-	padding: unset;
+export const Container = styled.div<{ collapsed: boolean }>`
+	height: 100%;
+	display: grid;
+	grid-template-columns: ${({ collapsed }) =>
+		collapsed ? '100% 0' : 'calc(100% - 280px) 280px '};
 `
 
-export const tabeLayoutOptionsStyle = {
-	flexContainer: {
-		display: 'flex',
-		columnGap: '10px',
+export const buttonStyles = {
+	wrapper: {
+		padding: '10px 0px',
+		height: '50%',
+		backgroundColor: 'inherit',
 	},
 }
 
-export const textFieldStyles = { fieldGroup: { width: 70 } }
-export const checkboxContainerStyle = { alignItems: 'center' }
-export const spinButtonStyles = {
-	label: { lineHeight: 'inherit' },
-	root: { width: 50 },
+export function useTableHeaderColors(): Partial<CommandBarColors> {
+	const theme = useTheme()
+	return useMemo(
+		() => ({
+			background: theme.palette.white,
+			border: theme.palette.neutralTertiaryAlt,
+		}),
+		[theme],
+	)
 }
 
-export const Grid = styled.div`
-	display: grid;
-	width: 100%;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 1fr 1fr;
-	gap: 0px 30px;
-`
+export function useCommandBarStyles(): ICommandBarStyles {
+	return useMemo(
+		() => ({
+			root: {
+				height: HEADER_HEIGHT - 1,
+			},
+		}),
+		[],
+	)
+}
 
-export const FieldContainer = styled.div`
-	display: flex;
-	column-gap: 10px;
-`
+export function useTableHeaderStyles(): ArqueroTableHeaderStyles {
+	const colors = useTableHeaderColors()
+	return useMemo(
+		() => ({
+			root: {
+				height: HEADER_HEIGHT,
+				borderBottom: `1px solid ${colors.border}`,
+			},
+		}),
+		[colors],
+	)
+}
 
-export const PreviewContainer = styled.div``
+export function useTableCommandProps(): Partial<TableCommandsProps> {
+	const colors = useTableHeaderColors()
+	const styles = useCommandBarStyles()
+	return useMemo(
+		() => ({
+			background: colors.background,
+			commandBarProps: {
+				styles,
+			},
+		}),
+		[colors, styles],
+	)
+}
 
-export const PreviewLabel = styled(Label)`
-	margin-top: 10px;
-	padding-left: 10px;
-	color: ${({ theme }: { theme: ITheme }) => theme.palette.neutralSecondary};
-`
+export function useToolPanelStyles(): ToolPanelStyles {
+	const colors = useTableHeaderColors()
+	return useMemo(
+		() => ({
+			root: {
+				borderLeft: `1px solid ${colors.border}`,
+			},
+			header: {
+				height: HEADER_HEIGHT,
+				background: colors.background,
+				borderBottom: `1px solid ${colors.border}`,
+			},
+			content: {
+				paddingLeft: 10,
+				paddingRight: 10,
+			},
+		}),
+		[colors],
+	)
+}
