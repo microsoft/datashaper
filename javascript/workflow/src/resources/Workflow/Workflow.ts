@@ -189,8 +189,8 @@ export class Workflow extends Resource implements TableTransformer {
 		return this._tableMgr.in$
 	}
 
-	public set input$(source: TableObservable) {
-		this._tableMgr.setDefaultInputSource(source)
+	public set input$(source: Maybe<TableObservable>) {
+		this._tableMgr.setDefaultInputSource(source ?? EMPTY)
 		this._graphMgr.configureAllSteps()
 		this._onChange.next()
 	}

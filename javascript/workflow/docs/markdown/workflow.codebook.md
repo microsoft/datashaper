@@ -26,7 +26,7 @@ export declare class Codebook extends Resource implements TableTransformer
 |  [$schema](./workflow.codebook._schema.md) | <code>readonly</code> | string |  |
 |  [fields](./workflow.codebook.fields.md) |  | Field\[\] |  |
 |  [fields$](./workflow.codebook.fields_.md) | <code>readonly</code> | Observable&lt;Field\[\]&gt; |  |
-|  [input$](./workflow.codebook.input_.md) |  | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt;&gt; |  |
+|  [input$](./workflow.codebook.input_.md) |  | [Maybe](./workflow.maybe.md)<!-- -->&lt;Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt;&gt;&gt; |  |
 |  [output](./workflow.codebook.output.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt; |  |
 |  [output$](./workflow.codebook.output_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt;&gt; |  |
 |  [profile](./workflow.codebook.profile.md) | <code>readonly</code> | (not declared) |  |

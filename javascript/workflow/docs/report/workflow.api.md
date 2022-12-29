@@ -151,7 +151,7 @@ export class Codebook extends Resource implements TableTransformer {
     get fields(): Field[];
     set fields(value: Field[]);
     // (undocumented)
-    set input$(value: Observable<Maybe<TableContainer>>);
+    set input$(value: Maybe<Observable<Maybe<TableContainer>>>);
     // (undocumented)
     loadSchema(value: Maybe<Readable<CodebookSchema>>, quiet?: boolean): void;
     // (undocumented)
@@ -1011,7 +1011,7 @@ export class Workflow extends Resource implements TableTransformer {
     hasOutputName(name: string): boolean;
     // (undocumented)
     get input$(): TableObservable;
-    set input$(source: TableObservable);
+    set input$(source: Maybe<TableObservable>);
     // (undocumented)
     get input(): Maybe<TableContainer>;
     set input(source: Maybe<TableContainer>);
