@@ -13,7 +13,7 @@ import { CommandBar } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import { memo, useCallback } from 'react'
 
-import { useDataTableSource } from '../../../hooks/index.js'
+import { useDataTableSource } from '../../../../hooks/index.js'
 import { useOptionsButtonCommandBar } from './ParserOptionsEditor.hooks.js'
 import {
 	Container,
