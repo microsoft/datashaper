@@ -320,7 +320,6 @@ export class DefaultGraph<T> implements Graph<T> {
     validate(): void;
 }
 
-// Warning: (ae-forgotten-export) The symbol "ResourceReference" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "dereference" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -741,6 +740,8 @@ export abstract class Resource extends Named implements ResourceSchema, Resource
     get homepage(): string | undefined;
     set homepage(value: string | undefined);
     // (undocumented)
+    isReference(): boolean;
+    // (undocumented)
     get license(): string | undefined;
     set license(value: string | undefined);
     // (undocumented)
@@ -765,6 +766,23 @@ export abstract class Resource extends Named implements ResourceSchema, Resource
 export interface ResourceConstructor<Sch = any, Res extends Resource = Resource> {
     // (undocumented)
     new (schema?: Sch | undefined): Res;
+}
+
+// Warning: (ae-missing-release-tag) "ResourceReference" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class ResourceReference extends Resource {
+    // (undocumented)
+    $schema: undefined;
+    // (undocumented)
+    defaultTitle(): string;
+    // (undocumented)
+    isReference(): boolean;
+    // (undocumented)
+    profile: undefined;
+    // (undocumented)
+    get target(): Resource | undefined;
+    set target(value: Resource | undefined);
 }
 
 // Warning: (ae-missing-release-tag) "rollup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

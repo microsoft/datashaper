@@ -23,7 +23,7 @@ export declare abstract class Resource extends Named implements ResourceSchema, 
 |  [path](./workflow.resource.path.md) |  | ResourceSchema\['path'\] |  |
 |  [profile](./workflow.resource.profile.md) | <code>readonly</code> | Profile \| undefined | Gets the resource profile |
 |  [rel](./workflow.resource.rel.md) |  | ResourceSchema\['rel'\] |  |
-|  [sources](./workflow.resource.sources.md) |  | ([Resource](./workflow.resource.md) \| ResourceReference)\[\] |  |
+|  [sources](./workflow.resource.sources.md) |  | ([Resource](./workflow.resource.md) \| [ResourceReference](./workflow.resourcereference.md)<!-- -->)\[\] |  |
 
 ## Methods
 
@@ -31,6 +31,7 @@ export declare abstract class Resource extends Named implements ResourceSchema, 
 |  --- | --- | --- |
 |  [connect(\_dp)](./workflow.resource.connect.md) |  | Connects this resource to the given data package |
 |  [getSourcesWithProfile(type)](./workflow.resource.getsourceswithprofile.md) |  | Gets the sources of this resource that match the given profile type |
+|  [isReference()](./workflow.resource.isreference.md) |  |  |
 |  [loadSchema(value, quiet)](./workflow.resource.loadschema.md) |  |  |
 |  [toSchema()](./workflow.resource.toschema.md) |  |  |
 

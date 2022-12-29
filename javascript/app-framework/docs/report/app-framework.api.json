@@ -1354,7 +1354,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "href: "
+                  "text": "href?: "
                 },
                 {
                   "kind": "Content",
@@ -1366,7 +1366,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "href",
               "propertyTypeTokenRange": {
@@ -1440,7 +1440,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "props: "
+                  "text": "props?: "
                 },
                 {
                   "kind": "Content",
@@ -1452,7 +1452,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "props",
               "propertyTypeTokenRange": {
@@ -1467,7 +1467,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "renderer: "
+                  "text": "renderer?: "
                 },
                 {
                   "kind": "Reference",
@@ -1484,7 +1484,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "renderer",
               "propertyTypeTokenRange": {

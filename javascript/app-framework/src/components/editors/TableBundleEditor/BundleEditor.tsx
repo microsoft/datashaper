@@ -46,6 +46,7 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 			return resource
 				.getSourcesWithProfile(KnownProfile.Workflow)
 				.find(t => !!t) as Workflow | undefined
+			/* eslint-disable-next-line react-hooks/exhaustive-deps */
 		}, [resource, resource.sources])
 
 		const [selectedId, setSelectedId] = useState<string | undefined>(undefined)

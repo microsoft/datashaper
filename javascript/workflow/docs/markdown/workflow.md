@@ -19,6 +19,7 @@
 |  [Observed](./workflow.observed.md) |  |
 |  [ParserOptions](./workflow.parseroptions.md) |  |
 |  [Resource](./workflow.resource.md) |  |
+|  [ResourceReference](./workflow.resourcereference.md) |  |
 |  [StepNode](./workflow.stepnode.md) |  |
 |  [TableBundle](./workflow.tablebundle.md) |  |
 |  [TableBundleProfile](./workflow.tablebundleprofile.md) |  |
