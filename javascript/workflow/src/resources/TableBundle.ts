@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ResourceSchema, TableBundleSchema } from '@datashaper/schema'
+import type { TableBundleSchema } from '@datashaper/schema'
 import { KnownProfile, LATEST_TABLEBUNDLE_SCHEMA } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import type { Observable, Subscription } from 'rxjs'
@@ -14,7 +14,6 @@ import {
 	isTableTransformer,
 } from '../predicates.js'
 import type { Maybe } from '../primitives.js'
-import type { DataPackage } from './DataPackage/DataPackage.js'
 import { Resource } from './Resource.js'
 import type { Readable, TableEmitter } from './types.js'
 
@@ -29,7 +28,6 @@ export class TableBundle extends Resource implements TableEmitter {
 		undefined,
 	)
 	private _pipelineSub?: Subscription | undefined
-	private _dataPackage: DataPackage | undefined
 
 	public constructor(data?: Readable<TableBundleSchema>) {
 		super()
@@ -51,10 +49,6 @@ export class TableBundle extends Resource implements TableEmitter {
 
 		this._pipelineSub?.unsubscribe()
 		super.sources = value
-		if (this._dataPackage != null) {
-			// pass the data-package to children
-			this.connect(this._dataPackage)
-		}
 
 		// Create a pipeline of transformers
 		const inputNode = dereferenced.find(isTableEmitter)
@@ -95,7 +89,6 @@ export class TableBundle extends Resource implements TableEmitter {
 	}
 
 	public override dispose(): void {
-		this.sources.forEach(s => s.dispose())
 		this._input$.complete()
 		this._output$.complete()
 		super.dispose()
@@ -119,28 +112,6 @@ export class TableBundle extends Resource implements TableEmitter {
 
 	public get output(): Maybe<TableContainer> {
 		return this._output$.value
-	}
-
-	public override toSchema(): ResourceSchema {
-		return {
-			...super.toSchema(),
-			profile: this.profile,
-		}
-	}
-
-	public override loadSchema(
-		schema: Maybe<Readable<TableBundleSchema>>,
-		quiet?: boolean,
-	): void {
-		super.loadSchema(schema, true)
-		if (!quiet) {
-			this._onChange.next()
-		}
-	}
-
-	public override connect(dp: DataPackage): void {
-		this._dataPackage = dp
-		this.sources.forEach(s => s.connect(dp))
 	}
 
 	private renameTable = (

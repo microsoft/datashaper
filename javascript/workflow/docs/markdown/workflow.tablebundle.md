@@ -35,8 +35,5 @@ export declare class TableBundle extends Resource implements TableEmitter
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [connect(dp)](./workflow.tablebundle.connect.md) |  |  |
 |  [dispose()](./workflow.tablebundle.dispose.md) |  |  |
-|  [loadSchema(schema, quiet)](./workflow.tablebundle.loadschema.md) |  |  |
-|  [toSchema()](./workflow.tablebundle.toschema.md) |  |  |
 

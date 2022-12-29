@@ -9,14 +9,14 @@ Connects this resource to the given data package
 <b>Signature:</b>
 
 ```typescript
-connect(_dp: DataPackage): void;
+connect(dp: DataPackage): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  \_dp | [DataPackage](./workflow.datapackage.md) |  |
+|  dp | [DataPackage](./workflow.datapackage.md) | The data package to connect to |
 
 <b>Returns:</b>
 

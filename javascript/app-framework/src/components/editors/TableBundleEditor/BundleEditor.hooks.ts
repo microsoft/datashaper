@@ -124,8 +124,20 @@ export function useHistoryButtonCommandBar(
  * @param workflow - The dat workflow
  * @returns A callback that may be used to delete steps by index
  */
-export function useOnDeleteStep(workflow: Workflow): (index: number) => void {
-	return useCallback((index: number) => workflow.removeStep(index), [workflow])
+export function useOnDeleteStep(
+	workflow: Workflow,
+	bundle: TableBundle,
+): (index: number) => void {
+	return useCallback(
+		(index: number) => {
+			workflow.removeStep(index)
+			if (!workflow.steps.length) {
+				bundle.sources = bundle.sources.filter(s => s !== workflow)
+				workflow.dispose()
+			}
+		},
+		[workflow, bundle],
+	)
 }
 
 /**
@@ -157,16 +169,21 @@ export function useOnCreateStep(
  */
 export function useOnSaveStep(
 	workflow: Workflow,
+	bundle: TableBundle,
+	isAttached: boolean,
 ): (step: Step, index: number | undefined) => void {
 	const updateStep = useOnStepSave(workflow)
 	const updateStepOutput = useOnStepOutputChanged(workflow)
 
 	return useCallback(
 		(step: Step, index: number | undefined) => {
+			if (!isAttached) {
+				bundle.sources = [...bundle.sources, workflow]
+			}
 			const stepResult = updateStep(step, index)
 			updateStepOutput(stepResult)
 		},
-		[updateStepOutput, updateStep],
+		[updateStepOutput, updateStep, bundle, isAttached, workflow],
 	)
 }
 function useOnStepSave(

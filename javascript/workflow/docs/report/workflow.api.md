@@ -142,6 +142,8 @@ export class Codebook extends Resource implements TableTransformer {
     readonly $schema: string;
     constructor(codebook?: Readable<CodebookSchema>);
     // (undocumented)
+    defaultName(): string;
+    // (undocumented)
     defaultTitle(): string;
     // (undocumented)
     dispose(): void;
@@ -196,14 +198,12 @@ export function createNode(step: Step): Node_2<TableContainer>;
 export class DataPackage extends Resource {
     // (undocumented)
     readonly $schema: string;
-    constructor(dataPackage?: DataPackageSchema | undefined);
+    constructor(dataPackage?: DataPackageSchema);
     // (undocumented)
     addResource(resource: Resource): void;
     addResourceHandler(handler: ProfileHandler): void;
     // (undocumented)
     clear(): void;
-    // (undocumented)
-    dataPackage?: DataPackageSchema | undefined;
     // (undocumented)
     defaultTitle(): string;
     // (undocumented)
@@ -267,6 +267,8 @@ export class DataTable extends Resource implements TableEmitter {
     // (undocumented)
     get data(): Blob | undefined;
     set data(value: Blob | undefined);
+    // (undocumented)
+    defaultName(): string;
     // (undocumented)
     dispose(): void;
     // (undocumented)
@@ -549,6 +551,8 @@ export const merge: (id: string) => StepNode<TableContainer<unknown>, MergeArgs>
 // @public (undocumented)
 export abstract class Named extends Observed implements Named_2 {
     // (undocumented)
+    defaultName(): string;
+    // (undocumented)
     defaultTitle(): string | undefined;
     // (undocumented)
     get description(): string | undefined;
@@ -734,7 +738,12 @@ export const rename: (id: string) => StepNode<TableContainer<unknown>, InputColu
 // @public (undocumented)
 export abstract class Resource extends Named implements ResourceSchema, Resource {
     abstract get $schema(): string | undefined;
-    connect(_dp: DataPackage): void;
+    connect(dp: DataPackage): void;
+    // (undocumented)
+    protected get dataPackage(): DataPackage | undefined;
+    protected set dataPackage(value: DataPackage | undefined);
+    // (undocumented)
+    dispose(): void;
     getSourcesWithProfile(type: Profile): Resource[];
     // (undocumented)
     get homepage(): string | undefined;
@@ -865,13 +874,9 @@ export class TableBundle extends Resource implements TableEmitter {
     readonly $schema: string;
     constructor(data?: Readable<TableBundleSchema>);
     // (undocumented)
-    connect(dp: DataPackage): void;
-    // (undocumented)
     dispose(): void;
     // (undocumented)
     get input(): TableEmitter | undefined;
-    // (undocumented)
-    loadSchema(schema: Maybe<Readable<TableBundleSchema>>, quiet?: boolean): void;
     // (undocumented)
     get name(): string;
     set name(value: string);
@@ -884,8 +889,6 @@ export class TableBundle extends Resource implements TableEmitter {
     // (undocumented)
     get sources(): Resource[];
     set sources(value: Resource[]);
-    // (undocumented)
-    toSchema(): ResourceSchema;
 }
 
 // Warning: (ae-missing-release-tag) "TableBundleProfile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1001,6 +1004,8 @@ export class Workflow extends Resource implements TableTransformer {
     get allTableNames(): string[];
     // (undocumented)
     connect(dp: DataPackage): void;
+    // (undocumented)
+    defaultName(): string;
     // (undocumented)
     defaultTitle(): string;
     // (undocumented)
