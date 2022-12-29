@@ -6,12 +6,15 @@ import type { Named as NamedSchema } from '@datashaper/schema'
 
 import type { Maybe } from '../primitives.js'
 import { Observed } from './Observed.js'
+import type { Readable } from './types.js'
 
 export abstract class Named extends Observed implements NamedSchema {
-	public abstract defaultName(): string
+	public defaultTitle(): string | undefined {
+		return undefined
+	}
 
-	private _name = this.defaultName()
-	private _title: string | undefined
+	private _name = ''
+	private _title: string | undefined = this.defaultTitle()
 	private _description: string | undefined
 
 	public get name(): string {
@@ -49,9 +52,9 @@ export abstract class Named extends Observed implements NamedSchema {
 		}
 	}
 
-	public loadSchema(schema: Maybe<NamedSchema>, quiet = false): void {
-		this._name = schema?.name ?? this.defaultName()
-		this._title = schema?.title
+	public loadSchema(schema: Maybe<Readable<NamedSchema>>, quiet = false): void {
+		this._name = schema?.name ?? ''
+		this._title = schema?.title ?? this.defaultTitle()
 		this._description = schema?.description
 		if (!quiet) {
 			this._onChange.next()

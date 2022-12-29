@@ -11,7 +11,7 @@ export class TestAppResource extends Resource {
 	public readonly profile = TEST_APP_PROFILE
 	private _count = 0
 
-	public override defaultName(): string {
+	public override defaultTitle(): string {
 		return 'Test App'
 	}
 

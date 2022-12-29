@@ -10,11 +10,13 @@ import {
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import type { BehaviorSubject, Observable } from 'rxjs'
-import { map, of } from 'rxjs'
+import { EMPTY, map, of } from 'rxjs'
 
 import { RemoveMode, TableManager } from '../../dataflow/TableManager.js'
-import type { Maybe } from '../../primitives.js'
+import type { Maybe, Unsubscribe } from '../../primitives.js'
+import type { DataPackage } from '../DataPackage/DataPackage.js'
 import { Resource } from '../Resource.js'
+import type { Readable, TableEmitter, TableTransformer } from '../types.js'
 import { GraphManager } from './GraphManager.js'
 import { NameManager } from './NameManager.js'
 import type { Step, StepInput, TableExportOptions } from './types.js'
@@ -26,8 +28,8 @@ import { WorkflowSchemaValidator } from './WorkflowSchemaValidator.js'
  */
 export type TableObservable = Observable<Maybe<TableContainer>>
 
-export class Workflow extends Resource {
-	public override defaultName(): string {
+export class Workflow extends Resource implements TableTransformer {
+	public override defaultTitle(): string {
 		return 'workflow.json'
 	}
 	public readonly $schema = LATEST_WORKFLOW_SCHEMA
@@ -37,14 +39,50 @@ export class Workflow extends Resource {
 	private readonly _nameMgr = new NameManager()
 	private readonly _tableMgr = new TableManager()
 	private readonly _graphMgr = new GraphManager(this._tableMgr.in$)
+	private _dataPackage: DataPackage | undefined
+	private _dataPackageSub?: Unsubscribe
 
-	public constructor(input?: WorkflowSchema, private _strictInputs = false) {
+	public constructor(
+		input?: Readable<WorkflowSchema>,
+		private _strictInputs = false,
+	) {
 		super()
 		this.loadSchema(input, true)
 		this.rebindDefaultOutput()
 	}
 
+	public override connect(dp: DataPackage): void {
+		if (this._dataPackage !== dp) {
+			this._dataPackageSub?.()
+			this._dataPackage = dp
+			const inputs = new Map<string, Observable<Maybe<TableContainer>>>()
+			const rebindInputs = () => {
+				inputs.clear()
+				const tableNames = dp.resources
+					.filter(
+						r =>
+							r.profile === KnownProfile.TableBundle ||
+							r.profile === KnownProfile.DataTable,
+					)
+					.map(r => r.name)
+
+				// Set the sibling table inputs
+				tableNames.forEach(name => {
+					const input =
+						(dp.getResource(name) as TableEmitter)?.output$ ??
+						(EMPTY as Observable<unknown>)
+					this.addInput(input, name)
+				})
+			}
+
+			this._dataPackageSub = dp.onChange(rebindInputs)
+			rebindInputs()
+		}
+	}
+
 	public override dispose(): void {
+		this._dataPackageSub?.()
+		this._dataPackage = undefined
 		this._graphMgr.dispose()
 		this._tableMgr.dispose()
 		this._nameMgr.dispose()
@@ -91,6 +129,20 @@ export class Workflow extends Resource {
 	// #region Inputs
 
 	/**
+	 * Get the default output observable
+	 */
+	public get output$(): Observable<Maybe<TableContainer>> {
+		return this.read$()
+	}
+
+	/**
+	 * Get the current default output
+	 */
+	public get output(): Maybe<TableContainer> {
+		return this.read()
+	}
+
+	/**
 	 * Get an observable of the names of all declared inputs and outputs.
 	 * This does not include the default input or default output tables.
 	 */
@@ -133,21 +185,21 @@ export class Workflow extends Resource {
 		return this._nameMgr.hasInput(input)
 	}
 
-	public get defaultInput$(): TableObservable {
+	public get input$(): TableObservable {
 		return this._tableMgr.in$
 	}
 
-	public set defaultInput$(source: TableObservable) {
+	public set input$(source: TableObservable) {
 		this._tableMgr.setDefaultInputSource(source)
 		this._graphMgr.configureAllSteps()
 		this._onChange.next()
 	}
 
-	public get defaultInput(): Maybe<TableContainer> {
+	public get input(): Maybe<TableContainer> {
 		return this._tableMgr.in$.value
 	}
 
-	public set defaultInput(source: Maybe<TableContainer>) {
+	public set input(source: Maybe<TableContainer>) {
 		this._tableMgr.setDefaultInput(source)
 		this._graphMgr.configureAllSteps()
 		this._onChange.next()
@@ -159,6 +211,7 @@ export class Workflow extends Resource {
 	 */
 	public addInput(source: TableObservable, id: string): void {
 		this._assertInputName(id)
+		this._graphMgr.ensureInput(id)
 		this._bindInputObservable(id, source)
 
 		this._graphMgr.configureAllSteps()
@@ -352,7 +405,7 @@ export class Workflow extends Resource {
 	}
 
 	public override loadSchema(
-		schema: Maybe<WorkflowSchema>,
+		schema: Maybe<Readable<WorkflowSchema>>,
 		quiet?: boolean,
 	): void {
 		super.loadSchema(schema, true)

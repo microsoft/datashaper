@@ -18,11 +18,6 @@ describe('The Workflow Resource', () => {
 
 	test('runs a single step with normal input/output', () => {
 		const g = new Workflow({
-			id: 'test workflow',
-			profile: 'workflow',
-			$schema:
-				'https://microsoft.github.io/datashaper/schema/workflow/workflow.json',
-			name: 'test',
 			input: ['input'],
 			steps: [
 				{
@@ -48,10 +43,6 @@ describe('The Workflow Resource', () => {
 
 	test('runs a single step with named output', () => {
 		const g = new Workflow({
-			id: 'test workflow',
-			profile: 'workflow',
-			$schema:
-				'https://microsoft.github.io/datashaper/schema/workflow/workflow.json',
 			name: 'test',
 			input: ['input'],
 			steps: [
@@ -89,11 +80,6 @@ describe('The Workflow Resource', () => {
 
 	test('runs multiple steps with normal input/output and all intermediates', () => {
 		const g = new Workflow({
-			id: 'test workflow',
-			profile: 'workflow',
-			$schema:
-				'https://microsoft.github.io/datashaper/schema/workflow/workflow.json',
-			name: 'test',
 			input: ['input'],
 			steps: [
 				{
@@ -129,7 +115,7 @@ describe('The Workflow Resource', () => {
 
 	it('will pipe through default input of no steps are defined', () => {
 		const wf = new Workflow()
-		wf.defaultInput = tInput
+		wf.input = tInput
 		const output = wf.read()
 		expect(output).toBeDefined()
 		expect(output?.table).toBeDefined()
@@ -157,7 +143,7 @@ describe('The Workflow Resource', () => {
 				value: 'x',
 			},
 		})
-		wf.defaultInput = tInput
+		wf.input = tInput
 		const output = wf.read()
 		expect(output).toBeDefined()
 		expect(output?.table).toBeDefined()
@@ -185,7 +171,7 @@ describe('The Workflow Resource', () => {
 			},
 		})
 		wf.addOutput('intermediate')
-		wf.defaultInput = tInput
+		wf.input = tInput
 		let val: TableContainer | undefined
 		binRead.subscribe(v => (val = v))
 		expect(val).toBeDefined()
@@ -215,7 +201,7 @@ describe('The Workflow Resource', () => {
 				value: 'x',
 			},
 		})
-		wf.defaultInput = tInput
+		wf.input = tInput
 
 		wf.addOutput('intermediate')
 		const intermediateRead = wf.read$('intermediate')
@@ -253,7 +239,7 @@ describe('The Workflow Resource', () => {
 	it('emits a default tablecontainer with id = name', () => {
 		const wf = new Workflow()
 		wf.name = 'wf_output'
-		wf.defaultInput = tInput
+		wf.input = tInput
 
 		const table = wf.read()
 		expect(table?.id).toBe('wf_output')

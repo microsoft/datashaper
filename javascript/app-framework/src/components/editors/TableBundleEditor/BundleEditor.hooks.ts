@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useHeaderCommandBarDefaults } from '@datashaper/react'
+import { KnownProfile } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import type { Maybe, Step, TableBundle, Workflow } from '@datashaper/workflow'
 import type {
@@ -25,6 +26,7 @@ export function useSelectedTable(
 	bundle: TableBundle,
 	selectedTableId: string | undefined,
 ): TableContainer | undefined {
+	const workflow = useTableBundleWorkflow(bundle)
 	const observed$ = useMemo<Observable<Maybe<TableContainer>>>(() => {
 		if (bundle.name === selectedTableId && bundle?.input != null) {
 			// if we select the original table name, use the workflow default input
@@ -34,11 +36,11 @@ export function useSelectedTable(
 			return bundle.output$
 		} else {
 			// try to use the given table name to read step output, otherwise use the default output
-			const table = bundle.workflow?.read$(selectedTableId)
+			const table = workflow?.read$(selectedTableId)
 			const defaultOutput = bundle.output$
 			return table ?? defaultOutput
 		}
-	}, [bundle, selectedTableId])
+	}, [bundle, selectedTableId, workflow])
 	return useObservableState(observed$, () => undefined)
 }
 
@@ -59,10 +61,10 @@ export function useColumnState(): [
 }
 
 export function useTableName(
-	dataTable: TableBundle,
+	table: TableBundle,
 	selectedTableId: string | undefined,
 ): string {
-	const { workflow } = dataTable
+	const workflow = useTableBundleWorkflow(table)
 	return useMemo(() => {
 		let name: string | undefined
 		if (workflow != null) {
@@ -73,8 +75,20 @@ export function useTableName(
 				name = (step?.id || step?.verb)?.toLocaleUpperCase()
 			}
 		}
-		return name || dataTable.name
-	}, [workflow, selectedTableId, dataTable.name])
+		return name || table.name
+	}, [workflow, selectedTableId, table.name])
+}
+
+function useTableBundleWorkflow(table: TableBundle): Workflow | undefined {
+	return useMemo(
+		() =>
+			table
+				.getSourcesWithProfile(KnownProfile.Workflow)
+				.find(t => !!t) as Workflow,
+
+		/* eslint-disable-next-line react-hooks/exhaustive-deps */
+		[table, table.sources],
+	)
 }
 
 export function useHistoryButtonCommandBar(

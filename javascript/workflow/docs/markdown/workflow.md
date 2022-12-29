@@ -14,7 +14,6 @@
 |  [DataShape](./workflow.datashape.md) |  |
 |  [DataTable](./workflow.datatable.md) |  |
 |  [DefaultGraph](./workflow.defaultgraph.md) |  |
-|  [JsonDataHandler](./workflow.jsondatahandler.md) |  |
 |  [Named](./workflow.named.md) |  |
 |  [ObservableNode](./workflow.observablenode.md) |  |
 |  [Observed](./workflow.observed.md) |  |
@@ -22,7 +21,7 @@
 |  [Resource](./workflow.resource.md) |  |
 |  [StepNode](./workflow.stepnode.md) |  |
 |  [TableBundle](./workflow.tablebundle.md) |  |
-|  [TableBundleHandler](./workflow.tablebundlehandler.md) |  |
+|  [TableBundleProfile](./workflow.tablebundleprofile.md) |  |
 |  [Workflow](./workflow.workflow.md) |  |
 
 ## Enumerations
@@ -68,10 +67,12 @@
 |  [Graph](./workflow.graph.md) |  |
 |  [Node\_2](./workflow.node_2.md) | A graph processing node |
 |  [NodeBinding](./workflow.nodebinding.md) | A binding for a value being emitted from a node |
-|  [ResourceHandler](./workflow.resourcehandler.md) |  |
+|  [ProfileHandler](./workflow.profilehandler.md) | A custom profile handler |
+|  [ResourceConstructor](./workflow.resourceconstructor.md) | A constructor for a resource |
 |  [Step](./workflow.step.md) | Resolved step data, used in living workflows |
 |  [StepInput](./workflow.stepinput.md) | Step input data for parsing workflow schemas |
 |  [TableExportOptions](./workflow.tableexportoptions.md) | Options for exporting data-tables within Workflow instances.w |
+|  [Transformer\_2](./workflow.transformer_2.md) | A transformer for a type of I/O |
 
 ## Variables
 
@@ -85,6 +86,7 @@
 |  [convert](./workflow.convert.md) |  |
 |  [decode](./workflow.decode.md) |  |
 |  [dedupe](./workflow.dedupe.md) |  |
+|  [dereference](./workflow.dereference.md) |  |
 |  [derive](./workflow.derive.md) |  |
 |  [difference](./workflow.difference.md) |  |
 |  [encode](./workflow.encode.md) |  |
@@ -100,8 +102,11 @@
 |  [isDataTable](./workflow.isdatatable.md) |  |
 |  [isDataTableSchema](./workflow.isdatatableschema.md) |  |
 |  [isDefaultInput](./workflow.isdefaultinput.md) |  |
+|  [isReference](./workflow.isreference.md) |  |
 |  [isTableBundle](./workflow.istablebundle.md) |  |
 |  [isTableBundleSchema](./workflow.istablebundleschema.md) |  |
+|  [isTableEmitter](./workflow.istableemitter.md) |  |
+|  [isTableTransformer](./workflow.istabletransformer.md) |  |
 |  [isWorkflow](./workflow.isworkflow.md) |  |
 |  [isWorkflowSchema](./workflow.isworkflowschema.md) |  |
 |  [merge](./workflow.merge.md) |  |
@@ -131,10 +136,12 @@
 |  [HandlerOf](./workflow.handlerof.md) |  |
 |  [Maybe](./workflow.maybe.md) |  |
 |  [NodeId](./workflow.nodeid.md) |  |
+|  [Readable](./workflow.readable.md) |  |
 |  [SocketName](./workflow.socketname.md) |  |
 |  [StepFunction](./workflow.stepfunction.md) |  |
 |  [TableEmitter](./workflow.tableemitter.md) | An emitter for TableContainers |
 |  [TableObservable](./workflow.tableobservable.md) | The workflow object manages mutable data for a workflow specification |
+|  [TableTransformer](./workflow.tabletransformer.md) |  |
 |  [Unsubscribe](./workflow.unsubscribe.md) |  |
 |  [VariadicNodeBinding](./workflow.variadicnodebinding.md) |  |
 

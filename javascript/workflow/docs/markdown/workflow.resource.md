@@ -17,19 +17,20 @@ export declare abstract class Resource extends Named implements ResourceSchema, 
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [$schema](./workflow.resource._schema.md) | <code>readonly</code> | string | Gets the resource schema |
+|  [$schema](./workflow.resource._schema.md) | <code>readonly</code> | string \| undefined | Gets the resource schema |
 |  [homepage](./workflow.resource.homepage.md) |  | string \| undefined |  |
 |  [license](./workflow.resource.license.md) |  | string \| undefined |  |
 |  [path](./workflow.resource.path.md) |  | ResourceSchema\['path'\] |  |
-|  [profile](./workflow.resource.profile.md) | <code>readonly</code> | Profile | Gets the resource profile |
+|  [profile](./workflow.resource.profile.md) | <code>readonly</code> | Profile \| undefined | Gets the resource profile |
 |  [rel](./workflow.resource.rel.md) |  | ResourceSchema\['rel'\] |  |
-|  [sources](./workflow.resource.sources.md) |  | [Resource](./workflow.resource.md)<!-- -->\[\] |  |
+|  [sources](./workflow.resource.sources.md) |  | ([Resource](./workflow.resource.md) \| ResourceReference)\[\] |  |
 
 ## Methods
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
+|  [connect(\_dp)](./workflow.resource.connect.md) |  | Connects this resource to the given data package |
+|  [getSourcesWithProfile(type)](./workflow.resource.getsourceswithprofile.md) |  | Gets the sources of this resource that match the given profile type |
 |  [loadSchema(value, quiet)](./workflow.resource.loadschema.md) |  |  |
-|  [sourcesToSchema()](./workflow.resource.sourcestoschema.md) | <code>protected</code> |  |
 |  [toSchema()](./workflow.resource.toschema.md) |  |  |
 

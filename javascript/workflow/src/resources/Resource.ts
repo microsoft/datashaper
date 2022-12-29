@@ -4,8 +4,12 @@
  */
 import type { Profile, ResourceSchema } from '@datashaper/schema'
 
+import { dereference } from '../predicates.js'
 import type { Maybe } from '../primitives.js'
+import type { DataPackage } from './DataPackage/DataPackage.js'
 import { Named } from './Named.js'
+import type { ResourceReference } from './ResourceReference.js'
+import type { Readable } from './types.js'
 
 export abstract class Resource
 	extends Named
@@ -14,18 +18,18 @@ export abstract class Resource
 	/**
 	 * Gets the resource schema
 	 */
-	public abstract get $schema(): string
+	public abstract get $schema(): string | undefined
 
 	/**
 	 * Gets the resource profile
 	 */
-	public abstract get profile(): Profile
+	public abstract get profile(): Profile | undefined
 
 	private _path: ResourceSchema['path']
 	private _rel: ResourceSchema['rel']
 	private _homepage: string | undefined
 	private _license: string | undefined
-	private _sources: Resource[] = []
+	private _sources: (Resource | ResourceReference)[] = []
 
 	public get path(): ResourceSchema['path'] {
 		return this._path
@@ -63,13 +67,32 @@ export abstract class Resource
 		this._onChange.next()
 	}
 
-	public get sources(): Resource[] {
+	public get sources(): (Resource | ResourceReference)[] {
 		return this._sources
 	}
 
-	public set sources(value: Resource[]) {
+	public set sources(value: (Resource | ResourceReference)[]) {
 		this._sources = value
 		this._onChange.next()
+	}
+
+	/**
+	 * Connects this resource to the given data package
+	 * @param dp - The data package to connect to
+	 */
+	public connect(_dp: DataPackage): void {
+		/* do nothing, overridable */
+	}
+
+	/**
+	 * Gets the sources of this resource that match the given profile type
+	 * @param type - The profile type to filter by
+	 * @returns The sources of this resource that match the given profile type
+	 */
+	public getSourcesWithProfile(type: Profile): Resource[] {
+		return this.sources
+			.map(dereference)
+			.filter(s => s?.profile === type) as Resource[]
 	}
 
 	public override toSchema(): ResourceSchema {
@@ -81,23 +104,13 @@ export abstract class Resource
 			rel: this.rel,
 			homepage: this.homepage,
 			license: this.license,
-			sources: this.sourcesToSchema() ?? [],
+			sources: [],
+			// sources: this.sources.map(s => s.toSchema()),
 		}
 	}
 
-	/**
-	 *
-	 * @returns The serialized resources array
-	 */
-	protected sourcesToSchema(): Maybe<ResourceSchema[]> {
-		// the default behavior is to not serialize sources.
-		// this is because data bundles usually write these into the blob archive, which is not available here.
-		// if you want to serialize sources, override this method.
-		return undefined
-	}
-
 	public override loadSchema(
-		value: Maybe<ResourceSchema>,
+		value: Maybe<Readable<ResourceSchema>>,
 		quiet = false,
 	): void {
 		super.loadSchema(value, true)
@@ -105,6 +118,7 @@ export abstract class Resource
 		this._homepage = value?.homepage
 		this._license = value?.license
 		this._rel = value?.rel
+		this._sources = []
 
 		if (!quiet) {
 			this._onChange.next()

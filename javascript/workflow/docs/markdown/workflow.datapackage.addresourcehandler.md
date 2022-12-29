@@ -9,14 +9,14 @@ Registers a new handler for processing resources.
 <b>Signature:</b>
 
 ```typescript
-addResourceHandler(handler: ResourceHandler): void;
+addResourceHandler(handler: ProfileHandler): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  handler | [ResourceHandler](./workflow.resourcehandler.md) | the resource handler |
+|  handler | [ProfileHandler](./workflow.profilehandler.md) | the resource handler |
 
 <b>Returns:</b>
 

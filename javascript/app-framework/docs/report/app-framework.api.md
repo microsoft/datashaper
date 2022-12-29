@@ -15,9 +15,9 @@ import type { IContextualMenuItem } from '@fluentui/react';
 import type { Maybe } from '@datashaper/workflow';
 import type { MutableRefObject } from 'react';
 import type { MutableSnapshot } from 'recoil';
+import type { ProfileHandler } from '@datashaper/workflow';
 import type { default as React_2 } from 'react';
 import type { Resource } from '@datashaper/workflow';
-import type { ResourceHandler } from '@datashaper/workflow';
 import type { Snapshot } from 'recoil';
 import type { TableBundle } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
@@ -75,7 +75,7 @@ export interface GeneratedExtraRoutes {
 // @public (undocumented)
 export interface ProfilePlugin<T extends Resource = any> {
     createResource: () => T;
-    dataHandler?: ResourceHandler | null;
+    dataHandler?: ProfileHandler | null;
     getCommandBarCommands?: (section: CommandBarSection) => IContextualMenuItem[] | undefined;
     getMenuItems?: (resource: T) => IContextualMenuItem[];
     getRoutes?: (resource: T, parentPath: string, resourcePath: string) => GeneratedExtraRoutes | undefined;

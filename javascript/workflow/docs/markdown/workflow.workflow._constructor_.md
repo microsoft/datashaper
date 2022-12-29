@@ -9,13 +9,13 @@ Constructs a new instance of the `Workflow` class
 <b>Signature:</b>
 
 ```typescript
-constructor(input?: WorkflowSchema, _strictInputs?: boolean);
+constructor(input?: Readable<WorkflowSchema>, _strictInputs?: boolean);
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  input | WorkflowSchema | <i>(Optional)</i> |
+|  input | [Readable](./workflow.readable.md)<!-- -->&lt;WorkflowSchema&gt; | <i>(Optional)</i> |
 |  \_strictInputs | boolean | <i>(Optional)</i> |
 

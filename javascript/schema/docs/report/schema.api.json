@@ -8673,7 +8673,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!ResourceSchema#rel:member",
-              "docComment": "/**\n * The relationship of this resource to the parent resource.\n */\n",
+              "docComment": "/**\n * The relationship of this resource to the parent resource.\n *\n * Note: If the resource is a profile-free reference object (e.g. { \"rel\": \"input\", \"path\": \"path/to/datatable.json\" },\n *\n * Then the relationship is _external_ the target resource and should not be persisted in the object )\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

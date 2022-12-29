@@ -12,10 +12,7 @@
 				"column": "ht",
 				"printRange": true
 			},
-			"verb": "bin",
-			"input": {
-				"source": "nhefs"
-			}
+			"verb": "bin"
 		},
 		{
 			"args": {

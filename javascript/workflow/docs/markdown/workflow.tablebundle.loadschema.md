@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-loadSchema(schema: Maybe<TableBundleSchema>, quiet?: boolean): void;
+loadSchema(schema: Maybe<Readable<TableBundleSchema>>, quiet?: boolean): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  schema | [Maybe](./workflow.maybe.md)<!-- -->&lt;TableBundleSchema&gt; |  |
+|  schema | [Maybe](./workflow.maybe.md)<!-- -->&lt;[Readable](./workflow.readable.md)<!-- -->&lt;TableBundleSchema&gt;&gt; |  |
 |  quiet | boolean | <i>(Optional)</i> |
 
 <b>Returns:</b>
