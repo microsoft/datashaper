@@ -16,6 +16,14 @@ import type {
 	ResourceRouteGroup,
 } from '../../../types.js'
 import { ResourceGroupType } from '../../../types.js'
+
+/**
+ * Get groups of resource routes for the application
+ *
+ * @param services - The application services
+ * @param plugins - Profile plugins
+ * @returns A list of resource route groups
+ */
 export function useResourceRoutes(
 	services: AppServices,
 	plugins: Map<string, ProfilePlugin>,
