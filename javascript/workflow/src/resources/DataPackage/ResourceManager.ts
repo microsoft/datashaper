@@ -14,6 +14,7 @@ import { CodebookProfile } from './profiles/CodebookProfile.js'
 import { DataTableProfile } from './profiles/DataTableProfile.js'
 import { TableBundleProfile } from './profiles/TableBundleProfile.js'
 import { WorkflowProfile } from './profiles/WorkflowProfile.js'
+import { SaveResourcesOperation } from './SaveResourcesOperation.js'
 
 export class ResourceManager {
 	private _resourceByName: Map<string, Resource> = new Map()
@@ -268,6 +269,10 @@ export class ResourceManager {
 			r.onChange(() => this._topResources$.next(this.topResources)),
 		)
 		return dataPackage
+	}
+
+	public save(files: Map<string, Blob>): Promise<string[]> {
+		return new SaveResourcesOperation(this, files).execute()
 	}
 
 	public registerResource(resource: Resource, path?: string | undefined) {
