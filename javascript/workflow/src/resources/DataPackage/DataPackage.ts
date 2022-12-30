@@ -13,6 +13,7 @@ import type { Observable } from 'rxjs'
 
 import { Resource } from '../Resource.js'
 import type { ProfileHandler } from '../types.js'
+import { write } from './io.js'
 import { ResourceManager } from './ResourceManager.js'
 
 export class DataPackage extends Resource {
@@ -106,22 +107,11 @@ export class DataPackage extends Resource {
 		})
 	}
 
-	public save(): Promise<Map<string, Blob>> {
-		// const resources: string[] = []
-		// const files = new Map<string, Blob>()
-		// for (const resource of this.resources) {
-		// 	const handler = this._resourceHandlers.get(resource.profile)
-		// 	if (handler) {
-		// 		resources.push(...(await handler.save(resource, files)))
-		// 	} else {
-		// 		throw new Error(
-		// 			`no handler defined for resource profile: ${resource.profile}`,
-		// 		)
-		// 	}
-		// }
-		// files.set('datapackage.json', write(this, { resources }))
-		// return files
-		return Promise.resolve(new Map())
+	public async save(): Promise<Map<string, Blob>> {
+		const files = new Map<string, Blob>()
+		const resources = await this._resourceMgr.save(files)
+		files.set('datapackage.json', write(this, { resources }))
+		return files
 	}
 
 	/**

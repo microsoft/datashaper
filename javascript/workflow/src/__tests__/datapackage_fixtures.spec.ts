@@ -1,5 +1,4 @@
 /* eslint-disable jest/expect-expect, jest/valid-title, jest/no-conditional-expect */
-// import type { ResourceSchema } from '@datashaper/schema'
 import { KnownProfile } from '@datashaper/schema'
 import Blob from 'cross-blob'
 import fs from 'fs'
@@ -72,7 +71,7 @@ function defineTestCase(parentPath: string, test: string) {
 				expect(found?.output?.table?.numRows()).toBeGreaterThan(0)
 				expect(found?.output?.table?.numCols()).toBeGreaterThan(0)
 			}
-			// await checkPersisted(await datapackage.save(), expected)
+			await checkPersisted(await datapackage.save(), expected)
 		} finally {
 			datapackage?.dispose()
 		}
@@ -102,28 +101,15 @@ async function readDataPackageFiles(
 	return results
 }
 
-// async function checkPersisted(files: Map<string, Blob>, expected: any) {
-// 	expect(files).toBeDefined()
+async function checkPersisted(files: Map<string, Blob>, expected: any) {
+	expect(files).toBeDefined()
 
-// 	const dpBlob = files.get('datapackage.json')
-// 	expect(dpBlob).toBeDefined()
-// 	const dataPackage = JSON.parse(await dpBlob!.text())
-// 	expect(dataPackage.resources).toHaveLength(expected.tables.length)
+	const dpBlob = files.get('datapackage.json')
+	expect(dpBlob).toBeDefined()
 
-// 	for (const table of expected.tables) {
-// 		const tableBlob = files.get(`data/${table.name}/databundle.json`)
-// 		expect(tableBlob).toBeDefined()
-// 		const tableJson = JSON.parse(await tableBlob!.text())
+	const dpJson = JSON.parse(await dpBlob!.text())
+	expect(dpJson.resources).toHaveLength(expected.tables.length)
 
-// 		if (table.workflowLength != null) {
-// 			const wfFile = `data/${table.name}/workflow.json`
-// 			const workflowBlob = files.get(wfFile)
-// 			expect(tableJson.sources.map((s: ResourceSchema) => s.path)).toContain(
-// 				wfFile,
-// 			)
-// 			expect(workflowBlob).toBeDefined()
-// 			const workflowJson = JSON.parse(await workflowBlob!.text())
-// 			expect(workflowJson.steps).toHaveLength(table.workflowLength)
-// 		}
-// 	}
-// }
+	// const dpLoaded = new DataPackage()
+	// expect(() => dpLoaded.load(files)).not.toThrow()
+}

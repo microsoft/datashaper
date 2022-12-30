@@ -41,7 +41,7 @@ export abstract class Resource
 		this._dataPackage = value
 	}
 
-	public isReference(): boolean {
+	public isReference(): this is ResourceReference {
 		return false
 	}
 
