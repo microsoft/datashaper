@@ -17,6 +17,7 @@ export interface ProfileHandler
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [profile](./workflow.profilehandler.profile.md) |  | Profile | The profile name of the resource |
+|  [save?](./workflow.profilehandler.save.md) |  | (data: [Resource](./workflow.resource.md)<!-- -->, path: string, files: Map&lt;string, Blob&gt;) =&gt; Promise&lt;string\[\]&gt; | <i>(Optional)</i> Save custom resources into the files map. |
 
 ## Methods
 

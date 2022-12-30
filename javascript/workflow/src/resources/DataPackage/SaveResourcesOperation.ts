@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+/* eslint-disable @essex/adjacent-await */
 import type { Resource } from '../Resource.js'
 import { write } from './io.js'
 import type { ResourceManager } from './ResourceManager.js'
@@ -56,7 +57,11 @@ export class SaveResourcesOperation {
 		if (resource.profile != null) {
 			const handler = this.mgr.profileHandlers.get(resource.profile)
 			if (handler?.save) {
-				const extraSources = await handler.save(resource, this.files)
+				const extraSources = await handler.save(
+					resource,
+					top ? `${fileName}/` : prefix,
+					this.files,
+				)
 				sources.push(...extraSources)
 			}
 		}

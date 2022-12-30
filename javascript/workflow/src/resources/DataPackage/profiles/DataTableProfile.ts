@@ -31,4 +31,30 @@ export class DataTableProfile implements ProfileHandler {
 		}
 		return resource
 	}
+
+	public save(
+		data: Resource,
+		dataPath: string,
+		files: Map<string, Blob>,
+	): Promise<string[]> {
+		const table = data as DataTable
+
+		const result: string[] = []
+		function resolveTablePath(path: string | undefined): void {
+			if (path?.startsWith('http')) {
+				return
+			} else if (table.data != null) {
+				const fileName = path ?? `${dataPath}/data.csv`
+				table.path = fileName
+				files.set(fileName, table.data)
+			}
+		}
+
+		if (Array.isArray(table.path)) {
+			table.path.forEach(t => resolveTablePath(t))
+		} else {
+			resolveTablePath(table.path as string)
+		}
+		return Promise.resolve(result)
+	}
 }

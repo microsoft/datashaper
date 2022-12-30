@@ -494,6 +494,13 @@ export function isOutputColumnStep(step: Step): boolean;
 // @public (undocumented)
 export const isReference: (r: Resource | undefined) => r is ResourceReference;
 
+// Warning: (ae-missing-release-tag) "isReferenceSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function isReferenceSchema(entry: ResourceSchema | string): entry is ResourceSchema & {
+    path: string;
+};
+
 // Warning: (ae-missing-release-tag) "isTableBundle" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -708,6 +715,7 @@ export interface ProfileHandler {
     // Warning: (ae-forgotten-export) The symbol "ResourceManager" needs to be exported by the entry point index.d.ts
     createInstance(schema: ResourceSchema | undefined, manager: ResourceManager): Promise<Resource>;
     profile: Profile;
+    save?: (data: Resource, path: string, files: Map<string, Blob>) => Promise<string[]>;
 }
 
 // Warning: (ae-missing-release-tag) "Readable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -749,7 +757,7 @@ export abstract class Resource extends Named implements ResourceSchema, Resource
     get homepage(): string | undefined;
     set homepage(value: string | undefined);
     // (undocumented)
-    isReference(): boolean;
+    isReference(): this is ResourceReference;
     // (undocumented)
     get license(): string | undefined;
     set license(value: string | undefined);

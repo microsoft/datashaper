@@ -7,9 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-isReference(): boolean;
+isReference(): this is ResourceReference;
 ```
 <b>Returns:</b>
 
-boolean
+this is [ResourceReference](./workflow.resourcereference.md)
 
