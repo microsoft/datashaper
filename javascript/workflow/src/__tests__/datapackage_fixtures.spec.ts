@@ -107,23 +107,10 @@ async function checkPersisted(files: Map<string, Blob>, expected: any) {
 
 	const dpBlob = files.get('datapackage.json')
 	expect(dpBlob).toBeDefined()
-	const dataPackage = JSON.parse(await dpBlob!.text())
-	expect(dataPackage.resources).toHaveLength(expected.tables.length)
 
-	for (const table of expected.tables) {
-		const tableBlob = files.get(`data/${table.name}/databundle.json`)
-		expect(tableBlob).toBeDefined()
-		const tableJson = JSON.parse(await tableBlob!.text())
+	const dpJson = JSON.parse(await dpBlob!.text())
+	expect(dpJson.resources).toHaveLength(expected.tables.length)
 
-		if (table.workflowLength != null) {
-			const wfFile = `data/${table.name}/workflow.json`
-			const workflowBlob = files.get(wfFile)
-			expect(tableJson.sources.map((s: ResourceSchema) => s.path)).toContain(
-				wfFile,
-			)
-			expect(workflowBlob).toBeDefined()
-			const workflowJson = JSON.parse(await workflowBlob!.text())
-			expect(workflowJson.steps).toHaveLength(table.workflowLength)
-		}
-	}
+	// const dpLoaded = new DataPackage()
+	// expect(() => dpLoaded.load(files)).not.toThrow()
 }
