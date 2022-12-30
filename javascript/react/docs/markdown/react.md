@@ -30,6 +30,7 @@
 |  [CodebookTableStyles](./react.codebooktablestyles.md) |  |
 |  [CommandBarColors](./react.commandbarcolors.md) |  |
 |  [GuidanceProps](./react.guidanceprops.md) | Props for the Guidance component |
+|  [ParserProps](./react.parserprops.md) |  |
 |  [StepListProps](./react.steplistprops.md) |  |
 |  [StepListStyles](./react.stepliststyles.md) |  |
 |  [TableCommandsProps](./react.tablecommandsprops.md) |  |
@@ -42,6 +43,7 @@
 |  [ArqueroTableHeader](./react.arquerotableheader.md) | Renders a header for an Arquero table |
 |  [Codebook](./react.codebook.md) |  |
 |  [Guidance](./react.guidance.md) | A component for rendering guidance information on verb usage. |
+|  [Parser](./react.parser.md) |  |
 |  [StepList](./react.steplist.md) |  |
 |  [TableCommands](./react.tablecommands.md) |  |
 

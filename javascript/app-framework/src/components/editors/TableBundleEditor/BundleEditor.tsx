@@ -13,33 +13,29 @@ import { KnownProfile } from '@datashaper/schema'
 import { Workflow } from '@datashaper/workflow'
 import { ToolPanel } from '@essex/components'
 import { CommandBar } from '@fluentui/react'
-import { useBoolean } from '@fluentui/react-hooks'
 import { useObservableState } from 'observable-hooks'
 import { memo, useMemo, useState } from 'react'
 
+import { useToolPanelExpandCollapse } from '../hooks.js'
+import {
+	useTableHeaderColors,
+	useTableHeaderStyles,
+	useToolPanelStyles,
+} from '../styles.js'
 import {
 	useColumnState,
-	useHistoryButtonCommandBar,
 	useOnCreateStep,
 	useOnDeleteStep,
 	useOnSaveStep,
 	useSelectedTable,
+	useTableCommandProps,
 	useTableName,
 } from './BundleEditor.hooks.js'
-import {
-	Container,
-	DetailsListContainer,
-	useTableCommandProps,
-	useTableHeaderColors,
-	useTableHeaderStyles,
-	useToolPanelStyles,
-} from './BundleEditor.styles.js'
+import { Container, DetailsListContainer } from './BundleEditor.styles.js'
 import type { BundleEditorProps } from './BundleEditor.types.js'
 
 export const BundleEditor: React.FC<BundleEditorProps> = memo(
 	function BundleEditor({ resource }) {
-		// Primary State
-		const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
 		const [workflow, isWorkflowAttached] = useMemo<[Workflow, boolean]>(() => {
 			const result = resource
 				.getSourcesWithProfile(KnownProfile.Workflow)
@@ -59,15 +55,17 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 		)
 		const tableName = useTableName(resource, selectedId)
 		const selectedTable = useSelectedTable(resource, selectedId)
-		const historyButtonCommandBar = useHistoryButtonCommandBar(
-			isCollapsed,
-			numSteps,
-			toggleCollapsed,
-		)
+		const { collapsed, onToggleCollapsed, commandBar, iconProps } =
+			useToolPanelExpandCollapse(
+				'history-button',
+				'History',
+				`(${numSteps ?? '0'})`,
+			)
+
+		const toolPanelStyles = useToolPanelStyles()
 		const tableHeaderColors = useTableHeaderColors()
 		const tableHeaderStyles = useTableHeaderStyles()
 		const tableCommandProps = useTableCommandProps()
-		const toolPanelStyles = useToolPanelStyles()
 
 		// Event Handlers
 		const onSave = useOnSaveStep(workflow, resource, isWorkflowAttached)
@@ -75,7 +73,7 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 		const onDelete = useOnDeleteStep(workflow, resource)
 
 		return selectedTable?.table == null ? null : (
-			<Container collapsed={isCollapsed}>
+			<Container collapsed={collapsed}>
 				<DetailsListContainer>
 					<ArqueroTableHeader
 						background={tableHeaderColors.background}
@@ -89,7 +87,7 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 								onRemoveStep={onDelete}
 							/>
 						}
-						farCommandBar={<CommandBar {...historyButtonCommandBar} />}
+						farCommandBar={workflow ? <CommandBar {...commandBar} /> : null}
 						name={tableName}
 						table={selectedTable.table}
 					/>
@@ -108,8 +106,8 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 				{
 					<ToolPanel
 						headerText={toolPanelHeader}
-						onDismiss={toggleCollapsed}
-						headerIconProps={HISTORY_ICON_PROPS}
+						onDismiss={onToggleCollapsed}
+						headerIconProps={iconProps}
 						styles={toolPanelStyles}
 					>
 						<StepList
@@ -126,7 +124,3 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 		)
 	},
 )
-
-const HISTORY_ICON_PROPS = {
-	iconName: 'History',
-}

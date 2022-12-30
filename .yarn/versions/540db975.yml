@@ -1,8 +1,6 @@
 releases:
   "@datashaper/app-framework": minor
-  "@datashaper/react": patch
+  "@datashaper/stories": patch
+  "@datashaper/webapp": patch
+  "@datashaper/react": minor
   "@datashaper/workflow": minor
-
-declined:
-  - "@datashaper/stories"
-  - "@datashaper/webapp"
