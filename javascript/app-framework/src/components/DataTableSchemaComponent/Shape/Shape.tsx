@@ -4,7 +4,7 @@
  */
 
 import { DataOrientation } from '@datashaper/schema'
-import { memo } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { Case, Switch } from 'react-if'
 
 import {
@@ -17,40 +17,43 @@ import {
 import type { ShapeProps } from './Shape.types.js'
 import { TableLayoutOptions } from './TableLayoutOptions.js'
 
-export const Shape: React.FC<ShapeProps> = memo(function Shape({
-	shape,
-	onChange,
-}) {
+export const Shape: React.FC<ShapeProps> = memo(function Shape({ shape }) {
+	const [orientation, setOrientation] = useState<DataOrientation | undefined>(
+		shape.orientation,
+	)
+	useEffect(() => {
+		shape.onChange(() => setOrientation(shape.orientation))
+	}, [shape])
 	return (
 		<Container>
 			<TableLayoutOptions
-				selected={shape?.orientation}
-				onChange={orientation => onChange?.({ orientation })}
+				selected={orientation}
+				onChange={orientation => (shape.orientation = orientation)}
 			/>
 			<ExampleContainer>
 				<ExampleLabel>Example</ExampleLabel>
 				<Switch>
-					<Case condition={shape?.orientation === DataOrientation.Array}>
+					<Case condition={orientation === DataOrientation.Array}>
 						<ExampleArray />
 						<ExampleDescription>
 							A flat array of data values.
 						</ExampleDescription>
 					</Case>
-					<Case condition={shape?.orientation === DataOrientation.Values}>
+					<Case condition={orientation === DataOrientation.Values}>
 						<ExampleValues />
 						<ExampleDescription>
 							Each row is an array of values. The first row is usually the
 							column names.
 						</ExampleDescription>
 					</Case>
-					<Case condition={shape?.orientation === DataOrientation.Columnar}>
+					<Case condition={orientation === DataOrientation.Columnar}>
 						<ExampleColumnar />
 						<ExampleDescription>
 							Single object where each key is a column name, and the cell values
 							are arrays.
 						</ExampleDescription>
 					</Case>
-					<Case condition={shape?.orientation === DataOrientation.Records}>
+					<Case condition={orientation === DataOrientation.Records}>
 						<ExampleRecords />
 						<ExampleDescription>
 							An array of data objects, each object is a row.

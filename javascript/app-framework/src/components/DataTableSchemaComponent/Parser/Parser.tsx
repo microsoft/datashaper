@@ -11,7 +11,7 @@ import {
 	TextField,
 } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
-import { memo, useCallback, useEffect } from 'react'
+import { memo, useEffect } from 'react'
 
 import { Delimiter } from './Delimiter.js'
 import { Headers } from './Headers.js'
@@ -29,10 +29,7 @@ const lineTerminatorOptions = [
 	{ key: '\r\n', text: '\\r\\n' },
 ]
 
-export const Parser: React.FC<ParserProps> = memo(function Parser({
-	parser = {},
-	onChange,
-}) {
+export const Parser: React.FC<ParserProps> = memo(function Parser({ parser }) {
 	const [headers, { toggle: toggleHeaders }] = useBoolean(!parser.names?.length)
 
 	useEffect(() => {
@@ -41,26 +38,12 @@ export const Parser: React.FC<ParserProps> = memo(function Parser({
 		}
 	}, [headers, parser])
 
-	const onChangeParser = useCallback(
-		(
-			option: string | boolean | number | string[] | undefined,
-			optName: string,
-		) => {
-			const update = {
-				...parser,
-				[optName]: option,
-			}
-			onChange?.(update)
-		},
-		[parser, onChange],
-	)
-
 	return (
 		<Container>
 			<FlexContainer>
 				<Delimiter
 					selected={parser.delimiter}
-					onChange={(delim: string) => onChangeParser(delim, 'delimiter')}
+					onChange={(delim: string) => (parser.delimiter = delim)}
 				/>
 			</FlexContainer>
 			<Expando label="Advanced" styles={expandoStyles}>
@@ -69,32 +52,26 @@ export const Parser: React.FC<ParserProps> = memo(function Parser({
 						headers={parser.names}
 						headersChecked={headers}
 						toggleHeaders={toggleHeaders}
-						onChange={(value: string[] | undefined) => {
-							onChangeParser(value, 'names')
-						}}
+						onChange={(value: string[] | undefined) => (parser.names = value)}
 					/>
 					<FieldContainer>
 						<SpinButton
 							labelPosition={Position.top}
 							label="Skip rows"
-							value={parser.skipRows?.toString()}
+							value={parser.skipRows.toString()}
 							min={0}
 							step={1}
-							onChange={(_, value) =>
-								onChangeParser(+(value as string), 'skipRows')
-							}
+							onChange={(_, value) => (parser.skipRows = +(value as string))}
 							incrementButtonAriaLabel="Increase value by 1"
 							decrementButtonAriaLabel="Decrease value by 1"
 						/>
 						<SpinButton
 							labelPosition={Position.top}
 							label="Read rows"
-							value={parser.readRows?.toString()}
+							value={parser.readRows.toString()}
 							min={0}
 							step={1}
-							onChange={(_, value) =>
-								onChangeParser(+(value as string), 'readRows')
-							}
+							onChange={(_, value) => (parser.readRows = +(value as string))}
 							incrementButtonAriaLabel="Increase value by 1"
 							decrementButtonAriaLabel="Decrease value by 1"
 						/>
@@ -102,7 +79,7 @@ export const Parser: React.FC<ParserProps> = memo(function Parser({
 					<TextField
 						label="Comment character"
 						onChange={(_, value) => {
-							onChangeParser(value, 'comment')
+							parser.comment = value
 						}}
 						value={parser.comment}
 					/>
@@ -112,22 +89,20 @@ export const Parser: React.FC<ParserProps> = memo(function Parser({
 						title="Option temporarily disabled"
 						selectedKey={parser.lineTerminator}
 						options={lineTerminatorOptions}
-						onChange={(_, option) =>
-							onChangeParser(option?.key, 'lineTerminator')
-						}
+						onChange={(_, option) => (parser.lineTerminator = option?.key)}
 					/>
 					<TextField
 						label="Quote character"
 						disabled
 						title="Option temporarily disabled"
-						onChange={(_, value) => onChangeParser(value, 'quoteChar')}
+						onChange={(_, value) => (parser.quoteChar = value)}
 						value={parser.quoteChar}
 					/>
 					<TextField
 						label="Escape character"
 						disabled
 						title="Option temporarily disabled"
-						onChange={(_, value) => onChangeParser(value, 'escapeChar')}
+						onChange={(_, value) => (parser.escapeChar = value)}
 						value={parser.escapeChar}
 					/>
 
@@ -136,7 +111,7 @@ export const Parser: React.FC<ParserProps> = memo(function Parser({
 						disabled
 						title="Option temporarily disabled"
 						checked={parser.skipBlankLines}
-						onChange={(_, value) => onChangeParser(value, 'skipBlankLines')}
+						onChange={(_, value) => (parser.skipBlankLines = value)}
 					/>
 				</FlexContainer>
 			</Expando>

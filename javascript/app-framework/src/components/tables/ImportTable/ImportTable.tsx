@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DataFormat, DataTableSchema } from '@datashaper/schema'
+import type { DataFormat } from '@datashaper/schema'
 import { DataOrientation } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import { readTable } from '@datashaper/tables'
@@ -11,6 +11,7 @@ import {
 	guessDelimiter,
 	removeExtension,
 } from '@datashaper/utilities'
+import { DataTable } from '@datashaper/workflow'
 import { IconButton, Modal, PrimaryButton, TextField } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
@@ -44,35 +45,42 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 
 		const [name, setName] = useState<string>(removeExtension(file.name ?? ''))
 
-		const [draftSchema, setDraftSchema] = useState<Partial<DataTableSchema>>({})
-
 		const [table, setTable] = useState<ColumnTable | undefined>()
 		const [previewError, setPreviewError] = useState<string | undefined>()
 
-		useEffect(() => {
-			setDraftSchema({
+		const loadPreview = useCallback(
+			(schema: DataTable) => {
+				const f = async () => {
+					try {
+						const loadedTable = await readTable(file, schema.toSchema())
+						setPreviewError(undefined)
+						setTable(loadedTable)
+					} catch (_) {
+						setPreviewError(
+							'The selected configuration is not valid for this table.',
+						)
+					}
+				}
+				void f()
+			},
+			[setTable, setPreviewError, file],
+		)
+
+		const draftSchema = useMemo(() => {
+			const schema = new DataTable({
 				format,
 				parser: {
-					delimiter: delimiter?.length ? delimiter : undefined,
+					delimiter,
 				},
-				shape: { orientation: DataOrientation.Records },
+				shape: {
+					orientation: DataOrientation.Values,
+				},
 			})
-		}, [format, delimiter])
+			schema.onChange(() => loadPreview(schema))
+			return schema
+		}, [format, delimiter, loadPreview])
 
-		useEffect(() => {
-			const f = async () => {
-				try {
-					const loadedTable = await readTable(file, draftSchema)
-					setPreviewError(undefined)
-					setTable(loadedTable)
-				} catch (_) {
-					setPreviewError(
-						'The selected configuration is not valid for this table.',
-					)
-				}
-			}
-			void f()
-		}, [setTable, file, draftSchema])
+		useEffect(() => loadPreview(draftSchema), [draftSchema, loadPreview])
 
 		const onClickImport = useCallback(() => {
 			if (table) {
@@ -101,10 +109,7 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 							title="Table name"
 							autoComplete="off"
 						/>
-						<DataTableSchemaComponent
-							schema={draftSchema}
-							onChange={setDraftSchema}
-						/>
+						<DataTableSchemaComponent resource={draftSchema} />
 					</Sidebar>
 					<PreviewContent>
 						<Preview error={previewError} table={table} />

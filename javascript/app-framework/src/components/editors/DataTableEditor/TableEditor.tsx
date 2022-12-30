@@ -3,10 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ArqueroDetailsList, ArqueroTableHeader } from '@datashaper/react'
-import type { DataTableSchema } from '@datashaper/schema'
 import { ToolPanel } from '@essex/components'
 import { CommandBar } from '@fluentui/react'
-import { memo, useCallback } from 'react'
+import { memo } from 'react'
 
 import { useDataTableSource } from '../../../hooks/index.js'
 import { DataTableSchemaComponent } from '../../DataTableSchemaComponent/DataTableSchemaComponent.js'
@@ -27,12 +26,6 @@ export const TableEditor: React.FC<TableEditorProps> = memo(
 		const toolPanelStyles = useToolPanelStyles()
 		const { collapsed, onToggleCollapsed, commandBar, iconProps } =
 			useToolPanelExpandCollapse('options-button', 'DataManagementSettings')
-		const onChangeSchema = useCallback(
-			(update: Partial<DataTableSchema>) => {
-				resource?.loadSchema(update)
-			},
-			[resource],
-		)
 		return table?.table == null ? null : (
 			<Container collapsed={collapsed}>
 				<DetailsListContainer>
@@ -58,10 +51,7 @@ export const TableEditor: React.FC<TableEditorProps> = memo(
 					headerIconProps={iconProps}
 					styles={toolPanelStyles}
 				>
-					<DataTableSchemaComponent
-						schema={resource.toSchema()}
-						onChange={onChangeSchema}
-					/>
+					<DataTableSchemaComponent resource={resource} />
 				</ToolPanel>
 			</Container>
 		)
