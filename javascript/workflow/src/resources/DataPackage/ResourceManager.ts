@@ -41,7 +41,7 @@ export class ResourceManager {
 		[KnownProfile.Workflow, new WorkflowProfile()],
 	] as [Profile, ProfileHandler][])
 
-	public get profileHandlers() {
+	public get profileHandlers(): Map<Profile, ProfileHandler> {
 		return this._profileHandlers
 	}
 
@@ -275,7 +275,7 @@ export class ResourceManager {
 		return new SaveResourcesOperation(this, files).execute()
 	}
 
-	public registerResource(resource: Resource, path?: string | undefined) {
+	public registerResource(resource: Resource, path?: string | undefined): void {
 		if (this._resourceByName.has(resource.name)) {
 			throw new Error(`duplicate resource name: ${resource.name}`)
 		}
