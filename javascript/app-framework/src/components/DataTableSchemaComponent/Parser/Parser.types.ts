@@ -5,6 +5,6 @@
 import type { ParserOptions } from '@datashaper/schema'
 
 export interface ParserProps {
-	parser: ParserOptions
+	parser?: ParserOptions
 	onChange?: (parser: ParserOptions) => void
 }

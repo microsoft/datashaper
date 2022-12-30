@@ -30,7 +30,7 @@ export const TableLayoutOptions: React.FC<{
 			) => {
 				val && onChange(val.key as DataOrientation)
 			}}
-			label="Data format"
+			label="Data layout"
 		/>
 	)
 })

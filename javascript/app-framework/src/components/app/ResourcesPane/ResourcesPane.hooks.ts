@@ -6,11 +6,11 @@ import type { DataFormat, DataShape, ParserOptions } from '@datashaper/schema'
 import { createDataTableSchemaObject } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import type { BaseFile } from '@datashaper/utilities'
+import { removeExtension } from '@datashaper/utilities'
 import { DataTable, TableBundle } from '@datashaper/workflow'
 import { useCallback, useContext } from 'react'
 
 import { DataPackageContext } from '../../../context/index.js'
-import { removeExtension } from '../../../util/index.js'
 import type { OpenTableHandler } from '../../tables/ImportTable/ImportTable.types.js'
 import type { AddTableHandler } from './ResourcesPane.types.js'
 

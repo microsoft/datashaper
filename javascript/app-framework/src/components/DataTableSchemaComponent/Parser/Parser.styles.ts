@@ -28,3 +28,9 @@ export const DelimiterContainer = styled.div`
 	flex-direction: row;
 	align-items: flex-end;
 `
+
+export const expandoStyles = {
+	content: {
+		paddingTop: 20,
+	},
+}

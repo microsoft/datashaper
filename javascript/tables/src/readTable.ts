@@ -26,7 +26,7 @@ import { getParser, validOptions } from './readTable.utils.js'
  */
 export async function readTable(
 	input: Blob | undefined,
-	schema: DataTableSchema,
+	schema: Partial<DataTableSchema>,
 ): Promise<ColumnTable | undefined> {
 	if (input == null) {
 		return Promise.resolve(undefined)
@@ -61,7 +61,7 @@ export function readCsvTable(
 	})
 }
 
-function readJSONTable(
+export function readJSONTable(
 	text: string,
 	shapeOptions: DataShape = DEFAULT_DATA_SHAPE_JSON_OPTIONS,
 ): ColumnTable {

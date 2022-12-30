@@ -2,17 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	ArqueroDetailsList,
-	ArqueroTableHeader,
-	Parser,
-} from '@datashaper/react'
-import type { ParserOptions } from '@datashaper/schema'
+import { ArqueroDetailsList, ArqueroTableHeader } from '@datashaper/react'
+import type { DataTableSchema } from '@datashaper/schema'
 import { ToolPanel } from '@essex/components'
 import { CommandBar } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
 import { useDataTableSource } from '../../../hooks/index.js'
+import { DataTableSchemaComponent } from '../../DataTableSchemaComponent/DataTableSchemaComponent.js'
 import { useToolPanelExpandCollapse } from '../hooks.js'
 import {
 	useTableHeaderColors,
@@ -30,9 +27,9 @@ export const TableEditor: React.FC<TableEditorProps> = memo(
 		const toolPanelStyles = useToolPanelStyles()
 		const { collapsed, onToggleCollapsed, commandBar, iconProps } =
 			useToolPanelExpandCollapse('options-button', 'DataManagementSettings')
-		const onChangeParser = useCallback(
-			(update: ParserOptions) => {
-				resource?.parser?.loadSchema(update)
+		const onChangeSchema = useCallback(
+			(update: Partial<DataTableSchema>) => {
+				resource?.loadSchema(update)
 			},
 			[resource],
 		)
@@ -61,9 +58,9 @@ export const TableEditor: React.FC<TableEditorProps> = memo(
 					headerIconProps={iconProps}
 					styles={toolPanelStyles}
 				>
-					<Parser
-						parser={resource?.parser?.toSchema()}
-						onChange={onChangeParser}
+					<DataTableSchemaComponent
+						schema={resource.toSchema()}
+						onChange={onChangeSchema}
 					/>
 				</ToolPanel>
 			</Container>

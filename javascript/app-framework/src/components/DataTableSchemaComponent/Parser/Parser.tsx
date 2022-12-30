@@ -15,7 +15,12 @@ import { memo, useCallback, useEffect } from 'react'
 
 import { Delimiter } from './Delimiter.js'
 import { Headers } from './Headers.js'
-import { Container, FieldContainer, FlexContainer } from './Parser.styles.js'
+import {
+	Container,
+	expandoStyles,
+	FieldContainer,
+	FlexContainer,
+} from './Parser.styles.js'
 import type { ParserProps } from './Parser.types.js'
 
 const lineTerminatorOptions = [
@@ -25,7 +30,7 @@ const lineTerminatorOptions = [
 ]
 
 export const Parser: React.FC<ParserProps> = memo(function Parser({
-	parser,
+	parser = {},
 	onChange,
 }) {
 	const [headers, { toggle: toggleHeaders }] = useBoolean(!parser.names?.length)
@@ -57,50 +62,50 @@ export const Parser: React.FC<ParserProps> = memo(function Parser({
 					selected={parser.delimiter}
 					onChange={(delim: string) => onChangeParser(delim, 'delimiter')}
 				/>
-				<Headers
-					headers={parser.names}
-					headersChecked={headers}
-					toggleHeaders={toggleHeaders}
-					onChange={(value: string[] | undefined) => {
-						onChangeParser(value, 'names')
-					}}
-				/>
-				<FieldContainer>
-					<SpinButton
-						labelPosition={Position.top}
-						label="Skip rows"
-						value={parser.skipRows?.toString()}
-						min={0}
-						step={1}
-						onChange={(_, value) =>
-							onChangeParser(+(value as string), 'skipRows')
-						}
-						incrementButtonAriaLabel="Increase value by 1"
-						decrementButtonAriaLabel="Decrease value by 1"
-					/>
-					<SpinButton
-						labelPosition={Position.top}
-						label="Read rows"
-						value={parser.readRows?.toString()}
-						min={0}
-						step={1}
-						onChange={(_, value) =>
-							onChangeParser(+(value as string), 'readRows')
-						}
-						incrementButtonAriaLabel="Increase value by 1"
-						decrementButtonAriaLabel="Decrease value by 1"
-					/>
-				</FieldContainer>
-				<TextField
-					label="Comment character"
-					onChange={(_, value) => {
-						onChangeParser(value, 'comment')
-					}}
-					value={parser.comment}
-				/>
 			</FlexContainer>
-			<Expando label="Advanced">
+			<Expando label="Advanced" styles={expandoStyles}>
 				<FlexContainer>
+					<Headers
+						headers={parser.names}
+						headersChecked={headers}
+						toggleHeaders={toggleHeaders}
+						onChange={(value: string[] | undefined) => {
+							onChangeParser(value, 'names')
+						}}
+					/>
+					<FieldContainer>
+						<SpinButton
+							labelPosition={Position.top}
+							label="Skip rows"
+							value={parser.skipRows?.toString()}
+							min={0}
+							step={1}
+							onChange={(_, value) =>
+								onChangeParser(+(value as string), 'skipRows')
+							}
+							incrementButtonAriaLabel="Increase value by 1"
+							decrementButtonAriaLabel="Decrease value by 1"
+						/>
+						<SpinButton
+							labelPosition={Position.top}
+							label="Read rows"
+							value={parser.readRows?.toString()}
+							min={0}
+							step={1}
+							onChange={(_, value) =>
+								onChangeParser(+(value as string), 'readRows')
+							}
+							incrementButtonAriaLabel="Increase value by 1"
+							decrementButtonAriaLabel="Decrease value by 1"
+						/>
+					</FieldContainer>
+					<TextField
+						label="Comment character"
+						onChange={(_, value) => {
+							onChangeParser(value, 'comment')
+						}}
+						value={parser.comment}
+					/>
 					<ChoiceGroup
 						disabled
 						label={'Line terminator'}

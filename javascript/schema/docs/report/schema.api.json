@@ -2513,7 +2513,7 @@
         {
           "kind": "Enum",
           "canonicalReference": "@datashaper/schema!DataOrientation:enum",
-          "docComment": "/**\n * Indicates the orientation of the data within the file.\n *\n * Most CSV data files are 'values' (row-oriented).\n *\n * JSON files can commonly be either. Records are probably more common, though require more space due to replication of keys. Apache Arrow or Parquet are columnar. This nearly aligns with pandas: https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#json\n *\n * A key difference (which probably needs resolved) is that we don't yet support the notion of an index. See their example for \"columns\" or \"index\" orientation, which is a nested structure.\n *\n * Example JSON formats: values: [ [\"colA\", \"colB\"], [\"valueA1\", \"valueA2\"], [\"valueA2\", \"valueB2\"] ] records: [\\{ colA: valueA1, colB: valueB1 \\}, \\{ colA: valueA2, colB: valueB2 \\}] columnar: \\{ colA: [valueA1, valueA2], colB: [valueB1, valueB2] \\}\n */\n",
+          "docComment": "/**\n * Indicates the orientation of the data within the file.\n *\n * Most CSV data files are 'values' (row-oriented).\n *\n * JSON files can commonly be either. Records are probably more common, though require more space due to replication of keys. Apache Arrow or Parquet are columnar. This nearly aligns with pandas: https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#json\n *\n * A key difference (which probably needs resolved) is that we don't yet support the notion of an index. See their example for \"columns\" or \"index\" orientation, which is a nested structure.\n *\n * Example JSON formats: records: [\\{ colA: valueA1, colB: valueB1 \\}, \\{ colA: valueA2, colB: valueB2 \\}]\n *\n * columnar: \\{ colA: [valueA1, valueA2], colB: [valueB1, valueB2] \\}\n *\n * array: [\"value1\", \"value2\"]\n *\n * values: [ [\"colA\", \"colB\"], [\"valueA1\", \"valueA2\"], [\"valueA2\", \"valueB2\"] ]\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -2590,7 +2590,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!DataOrientation.Values:member",
-              "docComment": "/**\n * Data is stored as raw rows. This is the default for CSVs. If specified for JSON files, it is exspected that file contents are a nested array - the outer array is the rows, and each row has an array of column values. The first row is assumed to be the column headers.\n */\n",
+              "docComment": "/**\n * Data is stored as raw rows. This is the default for CSVs. If specified for JSON files, it is expected that file contents are a nested array - the outer array is the rows, and each row has an array of column values. The first row is assumed to be the column headers.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

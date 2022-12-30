@@ -324,6 +324,11 @@ export function loadTable(file: BaseFile, options?: CSVParseOptions): Promise<Co
 // @public
 export const num: (value?: string | number) => number | undefined;
 
+// Warning: (ae-missing-release-tag) "removeExtension" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function removeExtension(fileName: string): string;
+
 // Warning: (ae-missing-release-tag) "renameDuplicatedFileName" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)

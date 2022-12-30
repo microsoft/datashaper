@@ -113,12 +113,7 @@ export enum DataFormat {
  * See their example for "columns" or "index" orientation, which is a nested structure.
  * 
  * Example JSON formats:
-    values: [
-        ["colA", "colB"],
-        ["valueA1", "valueA2"],
-        ["valueA2", "valueB2"]
-    ]
-    records:
+	records:
         [\{
             colA: valueA1,
             colB: valueB1
@@ -126,27 +121,24 @@ export enum DataFormat {
             colA: valueA2,
             colB: valueB2
         \}]
-    columnar: 
+    
+	columnar: 
         \{
             colA: [valueA1, valueA2],
             colB: [valueB1, valueB2]
         \}
+	
+	array:
+		["value1", "value2"]    
+	
+	values:
+		[
+			["colA", "colB"],
+			["valueA1", "valueA2"],
+			["valueA2", "valueB2"]
+		]
  */
 export enum DataOrientation {
-	/**
-	 * Data is stored in a flat array.
-	 * If a matrix definition is provided,
-	 * this can be transposed into columns/rows,
-	 * otherwise it is assumed to be a single column of data.length rows.
-	 */
-	Array = 'array',
-	/**
-	 * Data is stored as raw rows. This is the default for CSVs.
-	 * If specified for JSON files, it is exspected that file contents
-	 * are a nested array - the outer array is the rows, and each row has an array of
-	 * column values. The first row is assumed to be the column headers.
-	 */
-	Values = 'values',
 	/**
 	 * Data is oriented as an array of object records, akin to most databases.
 	 * Column headers run along the horizontal axis, and cell values run down the vertical.
@@ -157,6 +149,20 @@ export enum DataOrientation {
 	 * Column headers run down the vertical axis, and cell values run across the horizontal.
 	 */
 	Columnar = 'columnar',
+	/**
+	 * Data is stored in a flat array.
+	 * If a matrix definition is provided,
+	 * this can be transposed into columns/rows,
+	 * otherwise it is assumed to be a single column of data.length rows.
+	 */
+	Array = 'array',
+	/**
+	 * Data is stored as raw rows. This is the default for CSVs.
+	 * If specified for JSON files, it is expected that file contents
+	 * are a nested array - the outer array is the rows, and each row has an array of
+	 * column values. The first row is assumed to be the column headers.
+	 */
+	Values = 'values',
 }
 
 /**
