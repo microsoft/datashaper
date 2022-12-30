@@ -22,7 +22,6 @@ export declare class DataPackage extends Resource
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [$schema](./workflow.datapackage._schema.md) | <code>readonly</code> | string |  |
-|  [dataPackage?](./workflow.datapackage.datapackage.md) |  | DataPackageSchema \| undefined | <i>(Optional)</i> |
 |  [isEmpty](./workflow.datapackage.isempty.md) | <code>readonly</code> | boolean |  |
 |  [isEmpty$](./workflow.datapackage.isempty_.md) | <code>readonly</code> | Observable&lt;boolean&gt; |  |
 |  [names](./workflow.datapackage.names.md) | <code>readonly</code> | string\[\] |  |

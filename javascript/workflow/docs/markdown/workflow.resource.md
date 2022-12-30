@@ -18,6 +18,7 @@ export declare abstract class Resource extends Named implements ResourceSchema, 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [$schema](./workflow.resource._schema.md) | <code>readonly</code> | string \| undefined | Gets the resource schema |
+|  [dataPackage](./workflow.resource.datapackage.md) | <code>protected</code> | [DataPackage](./workflow.datapackage.md) \| undefined |  |
 |  [homepage](./workflow.resource.homepage.md) |  | string \| undefined |  |
 |  [license](./workflow.resource.license.md) |  | string \| undefined |  |
 |  [path](./workflow.resource.path.md) |  | ResourceSchema\['path'\] |  |
@@ -29,7 +30,8 @@ export declare abstract class Resource extends Named implements ResourceSchema, 
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [connect(\_dp)](./workflow.resource.connect.md) |  | Connects this resource to the given data package |
+|  [connect(dp)](./workflow.resource.connect.md) |  | Connects this resource to the given data package |
+|  [dispose()](./workflow.resource.dispose.md) |  |  |
 |  [getSourcesWithProfile(type)](./workflow.resource.getsourceswithprofile.md) |  | Gets the sources of this resource that match the given profile type |
 |  [isReference()](./workflow.resource.isreference.md) |  |  |
 |  [loadSchema(value, quiet)](./workflow.resource.loadschema.md) |  |  |

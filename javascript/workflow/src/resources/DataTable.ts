@@ -23,6 +23,9 @@ import type { Readable, TableEmitter } from './types.js'
 const log = debug('datashaper')
 
 export class DataTable extends Resource implements TableEmitter {
+	public override defaultName(): string {
+		return 'datatable.json'
+	}
 	public readonly $schema = LATEST_DATATABLE_SCHEMA
 	public readonly profile = KnownProfile.DataTable
 	private readonly _output$ = new BehaviorSubject<Maybe<TableContainer>>(

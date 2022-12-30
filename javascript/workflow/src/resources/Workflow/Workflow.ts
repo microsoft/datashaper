@@ -32,6 +32,9 @@ export class Workflow extends Resource implements TableTransformer {
 	public override defaultTitle(): string {
 		return 'workflow.json'
 	}
+	public override defaultName(): string {
+		return 'workflow.json'
+	}
 	public readonly $schema = LATEST_WORKFLOW_SCHEMA
 	public readonly profile = KnownProfile.Workflow
 
@@ -39,7 +42,6 @@ export class Workflow extends Resource implements TableTransformer {
 	private readonly _nameMgr = new NameManager()
 	private readonly _tableMgr = new TableManager()
 	private readonly _graphMgr = new GraphManager(this._tableMgr.in$)
-	private _dataPackage: DataPackage | undefined
 	private _dataPackageSub?: Unsubscribe
 
 	public constructor(
@@ -52,9 +54,10 @@ export class Workflow extends Resource implements TableTransformer {
 	}
 
 	public override connect(dp: DataPackage): void {
-		if (this._dataPackage !== dp) {
+		super.connect(dp)
+		if (this.dataPackage !== dp) {
 			this._dataPackageSub?.()
-			this._dataPackage = dp
+			this.dataPackage = dp
 			const inputs = new Map<string, Observable<Maybe<TableContainer>>>()
 			const rebindInputs = () => {
 				inputs.clear()
@@ -82,7 +85,6 @@ export class Workflow extends Resource implements TableTransformer {
 
 	public override dispose(): void {
 		this._dataPackageSub?.()
-		this._dataPackage = undefined
 		this._graphMgr.dispose()
 		this._tableMgr.dispose()
 		this._nameMgr.dispose()

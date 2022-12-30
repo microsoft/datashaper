@@ -10,12 +10,11 @@ import {
 	TableCommands,
 } from '@datashaper/react'
 import { KnownProfile } from '@datashaper/schema'
-import type { Workflow } from '@datashaper/workflow'
+import { Workflow } from '@datashaper/workflow'
 import { ToolPanel } from '@essex/components'
 import { CommandBar } from '@fluentui/react'
 import { useObservableState } from 'observable-hooks'
 import { memo, useMemo, useState } from 'react'
-import { EMPTY } from 'rxjs'
 
 import { useToolPanelExpandCollapse } from '../hooks.js'
 import {
@@ -37,10 +36,11 @@ import type { BundleEditorProps } from './BundleEditor.types.js'
 
 export const BundleEditor: React.FC<BundleEditorProps> = memo(
 	function BundleEditor({ resource }) {
-		const workflow = useMemo<Workflow | undefined>(() => {
-			return resource
+		const [workflow, isWorkflowAttached] = useMemo<[Workflow, boolean]>(() => {
+			const result = resource
 				.getSourcesWithProfile(KnownProfile.Workflow)
 				.find(t => !!t) as Workflow | undefined
+			return [result ?? new Workflow(), !!result]
 			/* eslint-disable-next-line react-hooks/exhaustive-deps */
 		}, [resource, resource.sources])
 
@@ -48,10 +48,7 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 		const [selectedColumn, onColumnClick] = useColumnState()
 
 		// Derived State
-		const numSteps = useObservableState(
-			workflow?.length$ ?? EMPTY,
-			workflow?.length ?? 0,
-		)
+		const numSteps = useObservableState(workflow.length$, workflow.length)
 		const toolPanelHeader = useMemo(
 			() => `Workflow steps (${numSteps})`,
 			[numSteps],
@@ -71,9 +68,9 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 		const tableCommandProps = useTableCommandProps()
 
 		// Event Handlers
-		const onSave = useOnSaveStep(workflow!)
+		const onSave = useOnSaveStep(workflow, resource, isWorkflowAttached)
 		const onCreate = useOnCreateStep(onSave, setSelectedId)
-		const onDelete = useOnDeleteStep(workflow!)
+		const onDelete = useOnDeleteStep(workflow, resource)
 
 		return selectedTable?.table == null ? null : (
 			<Container collapsed={collapsed}>
@@ -82,15 +79,13 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 						background={tableHeaderColors.background}
 						styles={tableHeaderStyles}
 						commandBar={
-							workflow ? (
-								<TableCommands
-									{...tableCommandProps}
-									workflow={workflow}
-									selectedColumn={selectedColumn}
-									onAddStep={onCreate}
-									onRemoveStep={onDelete}
-								/>
-							) : null
+							<TableCommands
+								{...tableCommandProps}
+								workflow={workflow}
+								selectedColumn={selectedColumn}
+								onAddStep={onCreate}
+								onRemoveStep={onDelete}
+							/>
 						}
 						farCommandBar={workflow ? <CommandBar {...commandBar} /> : null}
 						name={tableName}
@@ -108,7 +103,7 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 						onColumnSelect={onColumnClick}
 					/>
 				</DetailsListContainer>
-				{workflow ? (
+				{
 					<ToolPanel
 						headerText={toolPanelHeader}
 						onDismiss={onToggleCollapsed}
@@ -124,7 +119,7 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 							onSelect={setSelectedId}
 						/>
 					</ToolPanel>
-				) : null}
+				}
 			</Container>
 		)
 	},
