@@ -8,7 +8,7 @@ import { CommandBar } from '@fluentui/react'
 import { memo } from 'react'
 
 import { useDataTableSource } from '../../../hooks/index.js'
-import { DataTableSchemaComponent } from '../../DataTableSchemaComponent/DataTableSchemaComponent.js'
+import { DataTableConfig } from '../../DataTableConfig/DataTableConfig.js'
 import { useToolPanelExpandCollapse } from '../hooks.js'
 import {
 	useTableHeaderColors,
@@ -51,7 +51,7 @@ export const TableEditor: React.FC<TableEditorProps> = memo(
 					headerIconProps={iconProps}
 					styles={toolPanelStyles}
 				>
-					<DataTableSchemaComponent resource={resource} />
+					<DataTableConfig resource={resource} />
 				</ToolPanel>
 			</Container>
 		)

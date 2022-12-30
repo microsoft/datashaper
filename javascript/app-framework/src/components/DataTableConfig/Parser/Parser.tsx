@@ -78,9 +78,7 @@ export const Parser: React.FC<ParserProps> = memo(function Parser({ parser }) {
 					</FieldContainer>
 					<TextField
 						label="Comment character"
-						onChange={(_, value) => {
-							parser.comment = value
-						}}
+						onChange={(_, value) => (parser.comment = value)}
 						value={parser.comment}
 					/>
 					<ChoiceGroup

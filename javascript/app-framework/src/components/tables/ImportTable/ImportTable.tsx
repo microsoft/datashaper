@@ -16,7 +16,7 @@ import { IconButton, Modal, PrimaryButton, TextField } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 
-import { DataTableSchemaComponent } from '../../DataTableSchemaComponent/DataTableSchemaComponent.js'
+import { DataTableConfig } from '../../DataTableConfig/DataTableConfig.js'
 import { RawTable } from '../RawTable/RawTable.js'
 import {
 	Footer,
@@ -109,7 +109,7 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 							title="Table name"
 							autoComplete="off"
 						/>
-						<DataTableSchemaComponent resource={draftSchema} />
+						<DataTableConfig resource={draftSchema} />
 					</Sidebar>
 					<PreviewContent>
 						<Preview error={previewError} table={table} />

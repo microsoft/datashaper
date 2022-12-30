@@ -8,15 +8,15 @@ import { ButtonChoiceGroup } from '@essex/components'
 import { memo } from 'react'
 import { Case, Switch } from 'react-if'
 
-import { useChangeHandlers } from './DataTableSchemaComponent.hooks.js'
+import { useChangeHandlers } from './DataTableConfig.hooks.js'
 import {
 	buttonChoiceGroupStyles,
 	Container,
 	FormatContainer,
 	ParserContainer,
 	ShapeContainer,
-} from './DataTableSchemaComponent.styles.js'
-import { DATA_FORMAT_OPTIONS } from './DataTableSchemaComponent.utils.js'
+} from './DataTableConfig.styles.js'
+import { DATA_FORMAT_OPTIONS } from './DataTableConfig.utils.js'
 import { Parser } from './Parser/index.js'
 import { Shape } from './Shape/Shape.js'
 
@@ -24,8 +24,8 @@ export interface DataTableSchemaComponentProps {
 	resource: DataTable
 }
 
-export const DataTableSchemaComponent: React.FC<DataTableSchemaComponentProps> =
-	memo(function DataTableSchemaComponent({ resource }) {
+export const DataTableConfig: React.FC<DataTableSchemaComponentProps> = memo(
+	function DataTableConfig({ resource }) {
 		const { format, onChangeFormat } = useChangeHandlers(resource)
 		return (
 			<Container>
@@ -51,4 +51,5 @@ export const DataTableSchemaComponent: React.FC<DataTableSchemaComponentProps> =
 				</Switch>
 			</Container>
 		)
-	})
+	},
+)
