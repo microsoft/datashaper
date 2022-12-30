@@ -1,5 +1,4 @@
 /* eslint-disable jest/expect-expect, jest/valid-title, jest/no-conditional-expect */
-import type { ResourceSchema } from '@datashaper/schema'
 import { KnownProfile } from '@datashaper/schema'
 import Blob from 'cross-blob'
 import fs from 'fs'
