@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DataFormat, DataShape, ParserOptions } from '@datashaper/schema'
+import type { DataTableSchema } from '@datashaper/schema'
 import { createDataTableSchemaObject } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import type { BaseFile } from '@datashaper/utilities'
@@ -20,13 +20,8 @@ export function useOnOpenTable(
 ): OpenTableHandler {
 	const onAddTable = useAddTable()
 	return useCallback(
-		(
-			table: TableContainer,
-			format: DataFormat,
-			parser: ParserOptions,
-			shape: DataShape,
-		) => {
-			onAddTable(parser, file, table, format, shape)
+		(table: TableContainer, schema: DataTableSchema) => {
+			onAddTable(file, table, schema)
 			setFile(undefined)
 		},
 		[onAddTable, file, setFile],
@@ -36,21 +31,9 @@ export function useOnOpenTable(
 function useAddTable(): AddTableHandler {
 	const store = useContext(DataPackageContext)
 	return useCallback(
-		(
-			parser: ParserOptions,
-			file: BaseFile,
-			{ id }: TableContainer,
-			format: DataFormat,
-			shape: DataShape,
-		) => {
+		(file: BaseFile, { id }: TableContainer, schema: DataTableSchema) => {
 			const name = removeExtension(id)
-			const table = new DataTable(
-				createDataTableSchemaObject({
-					shape,
-					parser,
-					format,
-				}),
-			)
+			const table = new DataTable(createDataTableSchemaObject(schema))
 			table.data = file
 			table.name = 'datatable.json'
 			table.path = id

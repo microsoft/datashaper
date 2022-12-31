@@ -86,12 +86,7 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 			if (table) {
 				const id = `${name}.${fileExtension}`
 				const tableContainer = { id, table } as TableContainer
-				onOpenTable(
-					tableContainer,
-					draftSchema.format!,
-					draftSchema.parser || {},
-					draftSchema.shape || {},
-				)
+				onOpenTable(tableContainer, draftSchema.toSchema())
 			}
 		}, [onOpenTable, table, name, fileExtension, draftSchema])
 
