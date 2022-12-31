@@ -16,7 +16,11 @@ import {
 	DEFAULT_DATA_SHAPE_JSON_OPTIONS,
 	DEFAULT_PARSER_OPTIONS,
 } from './readTable.constants.js'
-import { getParser, validOptions } from './readTable.utils.js'
+import {
+	getParser,
+	mapToArqueroOptions,
+	validOptions,
+} from './readTable.utils.js'
 
 /**
  * Read an input table
@@ -32,14 +36,14 @@ export async function readTable(
 		return Promise.resolve(undefined)
 	}
 	const { format, shape, parser } = schema
+	const options = mapToArqueroOptions(parser)
 	switch (format) {
 		case DataFormat.JSON:
 			return readJSONTable(await input.text(), shape)
 		case DataFormat.ARROW:
 			return fromArrow(await input.arrayBuffer())
 		case DataFormat.CSV:
-			console.log('importing csv', parser)
-			return fromCSV(await input.text(), parser)
+			return fromCSV(await input.text(), options)
 		// TODO: use our internal parser when
 		// return readCsvTable(await input.text(), parser)
 		default:
