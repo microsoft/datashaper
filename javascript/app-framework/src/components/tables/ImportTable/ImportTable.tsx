@@ -152,5 +152,5 @@ export const Preview: React.FC<{
 	error?: string
 	showType?: boolean
 }> = memo(function TablePreview({ table, error }) {
-	return <>{table && <RawTable error={error} table={table} />}</>
+	return <>{table && <RawTable error={error} table={table} fill />}</>
 })
