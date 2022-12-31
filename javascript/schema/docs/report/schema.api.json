@@ -416,7 +416,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!BinArgs#fixedcount:member",
-              "docComment": "/**\n * Fixed number of bins. Note that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary - this means there is always one extra bin for the max value when using fixed count.\n */\n",
+              "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -516,6 +516,33 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "min",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!BinArgs#nice:member",
+              "docComment": "/**\n * Fixed number of bins. Note that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary - this means there is always one extra bin for the max value when using fixed count.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "nice?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "nice",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

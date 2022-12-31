@@ -90,6 +90,19 @@ export const BinFormBase: React.FC<StepFormBaseProps<BinArgs>> = memo(
 						},
 					},
 				),
+				checkbox(
+					'Nice rounding',
+					step.args.nice,
+					(s, val) => (s.args.nice = val as boolean),
+					{
+						styles: {
+							root: {
+								marginTop: 8,
+							},
+						},
+						advanced: true,
+					},
+				),
 			],
 			[step],
 		)

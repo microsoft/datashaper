@@ -43,9 +43,9 @@ function binExpr(input: ColumnTable, args: BinArgs) {
 }
 
 function computeBins(input: ColumnTable, args: BinArgs) {
-	const { strategy, column, fixedwidth, fixedcount } = args
+	const { strategy, column, fixedwidth, fixedcount, nice } = args
 	const stats = getStats(input, column, args.min, args.max)
-	const [min, max] = stats
+	let [min, max] = stats
 	switch (strategy) {
 		case BinStrategy.FixedWidth:
 			if (!fixedwidth) {
@@ -58,13 +58,40 @@ function computeBins(input: ColumnTable, args: BinArgs) {
 			}
 			return [min, max, (max - min) / fixedcount]
 		default: {
-			const width = estimateWidth(strategy, input.array(column), min, max)
+			let width = estimateWidth(strategy, input.array(column), min, max)
+
+			if (nice) {
+				const adjustedValues = adjustParameters(min, max, width)
+				const [minValue, maxValue, widthValue] = adjustedValues
+				min = minValue
+				max = maxValue
+				width = widthValue
+			}
+
 			const numBins = calculateBinCount(min, max, width)
 			const binEdges = linspace(min, max, numBins + 1)
 
 			return [min, max, binEdges[1]! - binEdges[0]!]
 		}
 	}
+}
+
+function adjustParameters(
+	min: number,
+	max: number,
+	step: number,
+): [number, number, number] {
+	const base = 10
+	const logb = Math.LN10
+
+	let v = Math.log(step)
+	const precision = v >= 0 ? 0 : ~~(-v / logb) + 1
+	const eps = Math.pow(base, -precision - 1)
+	v = Math.floor(min / step + eps) * step
+	min = min < v ? v - step : v
+	max = Math.ceil(max / step) * step
+
+	return [min, max, v]
 }
 
 function estimateWidth(

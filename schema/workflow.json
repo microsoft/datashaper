@@ -76,7 +76,6 @@
                     "$ref": "#/definitions/DataType"
                 },
                 "fixedcount": {
-                    "description": "Fixed number of bins.\nNote that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary -\nthis means there is always one extra bin for the max value when using fixed count.",
                     "type": "number"
                 },
                 "fixedwidth": {
@@ -90,6 +89,10 @@
                 "min": {
                     "description": "Min boundary to categorize values into.\nIf cell values are below this, they will default to -Infinity unless clamped.",
                     "type": "number"
+                },
+                "nice": {
+                    "description": "Fixed number of bins.\nNote that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary -\nthis means there is always one extra bin for the max value when using fixed count.",
+                    "type": "boolean"
                 },
                 "printRange": {
                     "description": "If true, the range for each bin will be printed as the cell value instead of the truncated numeric value.\nThis is useful for treating the",
