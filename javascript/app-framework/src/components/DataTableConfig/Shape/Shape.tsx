@@ -4,9 +4,11 @@
  */
 
 import { DataOrientation } from '@datashaper/schema'
-import { memo, useEffect, useState } from 'react'
+import type { DataShape } from '@datashaper/workflow'
+import { memo } from 'react'
 import { Case, Switch } from 'react-if'
 
+import { useUnobservedProperty } from '../../../hooks/index.js'
 import {
 	Code,
 	Container,
@@ -18,12 +20,10 @@ import type { ShapeProps } from './Shape.types.js'
 import { TableLayoutOptions } from './TableLayoutOptions.js'
 
 export const Shape: React.FC<ShapeProps> = memo(function Shape({ shape }) {
-	const [orientation, setOrientation] = useState<DataOrientation | undefined>(
-		shape.orientation,
+	const orientation = useUnobservedProperty<DataShape, DataOrientation>(
+		shape,
+		'orientation',
 	)
-	useEffect(() => {
-		shape.onChange(() => setOrientation(shape.orientation))
-	}, [shape])
 	return (
 		<Container>
 			<TableLayoutOptions
