@@ -24,6 +24,7 @@
 |  [useTableBundle(name)](./app-framework.usetablebundle.md) |  |
 |  [useTableBundleOutput(pkg)](./app-framework.usetablebundleoutput.md) | Uses the latest table from a data package. This is updatde as the package changes |
 |  [useTableBundles()](./app-framework.usetablebundles.md) |  |
+|  [useUnobservedProperty(observable, property)](./app-framework.useunobservedproperty.md) | Convenient wrapper to get properties off of Observables that aren't fully observable, using onChange to update an intermediate value. |
 
 ## Interfaces
 

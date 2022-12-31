@@ -240,7 +240,7 @@ export function patternValidator(field: Field, includeIndexes: boolean): Validat
 // Warning: (ae-missing-release-tag) "readTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function readTable(input: Blob | undefined, schema: Partial<DataTableSchema>): Promise<ColumnTable | undefined>;
+export function readTable(input: Blob | undefined, schema: DataTableSchema): Promise<ColumnTable | undefined>;
 
 // Warning: (ae-missing-release-tag) "requiredValidator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

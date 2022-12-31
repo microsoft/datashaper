@@ -8535,6 +8535,35 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!ParserOptions#header:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get header(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n\nset header(value: boolean | undefined);"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "header",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
               "canonicalReference": "@datashaper/workflow!ParserOptions#lineTerminator:member",
               "docComment": "",
               "excerptTokens": [

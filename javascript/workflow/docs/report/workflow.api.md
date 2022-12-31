@@ -673,6 +673,9 @@ export class ParserOptions extends Observed implements ParserOptions_2 {
     get escapeChar(): string | undefined;
     set escapeChar(value: string | undefined);
     // (undocumented)
+    get header(): boolean | undefined;
+    set header(value: boolean | undefined);
+    // (undocumented)
     get lineTerminator(): string;
     set lineTerminator(value: string | undefined);
     // (undocumented)

@@ -36,13 +36,14 @@ export const Shape: React.FC<ShapeProps> = memo(function Shape({ shape }) {
 					<Case condition={orientation === DataOrientation.Array}>
 						<ExampleArray />
 						<ExampleDescription>
-							A flat array of data values.
+							A flat array of data values. They will be assigned a default
+							column name (col1).
 						</ExampleDescription>
 					</Case>
 					<Case condition={orientation === DataOrientation.Values}>
 						<ExampleValues />
 						<ExampleDescription>
-							Each row is an array of values. The first row is usually the
+							Each row is an array of values. The first row is used for the
 							column names.
 						</ExampleDescription>
 					</Case>
@@ -50,7 +51,7 @@ export const Shape: React.FC<ShapeProps> = memo(function Shape({ shape }) {
 						<ExampleColumnar />
 						<ExampleDescription>
 							Single object where each key is a column name, and the cell values
-							are arrays.
+							are arrays attached to the key.
 						</ExampleDescription>
 					</Case>
 					<Case condition={orientation === DataOrientation.Records}>

@@ -26,6 +26,7 @@ export declare class ParserOptions extends Observed implements ParserOptionsSche
 |  [comment](./workflow.parseroptions.comment.md) |  | string \| undefined |  |
 |  [delimiter](./workflow.parseroptions.delimiter.md) |  | string |  |
 |  [escapeChar](./workflow.parseroptions.escapechar.md) |  | string \| undefined |  |
+|  [header](./workflow.parseroptions.header.md) |  | boolean \| undefined |  |
 |  [lineTerminator](./workflow.parseroptions.lineterminator.md) |  | string |  |
 |  [names](./workflow.parseroptions.names.md) |  | string\[\] \| undefined |  |
 |  [quoteChar](./workflow.parseroptions.quotechar.md) |  | string |  |

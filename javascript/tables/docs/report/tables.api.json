@@ -2796,21 +2796,8 @@
             },
             {
               "kind": "Reference",
-              "text": "Partial",
-              "canonicalReference": "!Partial:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
               "text": "DataTableSchema",
               "canonicalReference": "@datashaper/schema!DataTableSchema:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
             },
             {
               "kind": "Content",
@@ -2840,8 +2827,8 @@
             }
           ],
           "returnTypeTokenRange": {
-            "startIndex": 9,
-            "endIndex": 13
+            "startIndex": 6,
+            "endIndex": 10
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -2858,7 +2845,7 @@
               "parameterName": "schema",
               "parameterTypeTokenRange": {
                 "startIndex": 4,
-                "endIndex": 8
+                "endIndex": 5
               },
               "isOptional": false
             }

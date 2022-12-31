@@ -68,9 +68,43 @@ export function readCsvTable(
 
 export function readJSONTable(
 	text: string,
-	shapeOptions: DataShape = DEFAULT_DATA_SHAPE_JSON_OPTIONS,
+	shape: DataShape = DEFAULT_DATA_SHAPE_JSON_OPTIONS,
 ): ColumnTable {
-	return shapeOptions.orientation === DataOrientation.Columnar
-		? fromJSON(text)
-		: from(JSON.parse(text))
+	const obj = JSON.parse(text)
+	switch (shape.orientation) {
+		case DataOrientation.Records:
+			return from(obj)
+		case DataOrientation.Columnar:
+			return fromJSON(text)
+		case DataOrientation.Array:
+			return fromArray(obj)
+		case DataOrientation.Values:
+			return fromValues(obj)
+		default:
+			throw new Error(`unknown data orientation: ${shape.orientation}`)
+	}
+}
+
+function fromArray(obj: any): ColumnTable {
+	// all the data is a single column
+	// TODO: we should support the csv parser option to specify the headers
+	// TODO: the shape has an XxY matrix, but we don't use it yet
+	return fromJSON({
+		col1: obj,
+	})
+}
+
+function fromValues(obj: any): ColumnTable {
+	// first row is assumed to be headers
+	// TODO: we should support the csv parser option to specify the headers
+	const headers = obj[0]
+	const data = obj.slice(1)
+	const map = headers.reduce(
+		(acc: Record<string, unknown[]>, cur: unknown, idx: number) => {
+			acc[`${cur}`] = data.map((row: unknown[]) => row[idx])
+			return acc
+		},
+		{},
+	)
+	return fromJSON(map)
 }
