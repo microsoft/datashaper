@@ -10,6 +10,7 @@ import { Observed } from './Observed.js'
 const DEFAULT_DELIMITER = ','
 const DEFAULT_QUOTE = '"'
 const DEFAULT_LINE_TERMINATOR = '\n'
+const DEFAULT_HEADER = true
 const DEFAULT_SKIP_BLANK_LINES = true
 const DEFAULT_SKIP_ROWS = 0
 const DEFAULT_READ_ROWS = Infinity
@@ -17,6 +18,7 @@ const DEFAULT_READ_ROWS = Infinity
 export class ParserOptions extends Observed implements ParserOptionsSchema {
 	private _delimiter: string
 	private _names: string[] | undefined
+	private _header: boolean | undefined
 	private _lineTerminator: string
 	private _quoteChar: string
 	private _skipBlankLines: boolean
@@ -36,6 +38,7 @@ export class ParserOptions extends Observed implements ParserOptionsSchema {
 		this._skipRows = parserOptions?.skipRows ?? DEFAULT_SKIP_ROWS
 		this._readRows = parserOptions?.readRows ?? DEFAULT_READ_ROWS
 		this._names = parserOptions?.names
+		this._header = parserOptions?.header ?? DEFAULT_HEADER
 		this._escapeChar = parserOptions?.escapeChar
 		this._commentStart = parserOptions?.comment
 	}
@@ -55,6 +58,15 @@ export class ParserOptions extends Observed implements ParserOptionsSchema {
 
 	public set names(value: string[] | undefined) {
 		this._names = value
+		this._onChange.next()
+	}
+
+	public get header(): boolean | undefined {
+		return this._header
+	}
+
+	public set header(value: boolean | undefined) {
+		this._header = value
 		this._onChange.next()
 	}
 
@@ -128,6 +140,7 @@ export class ParserOptions extends Observed implements ParserOptionsSchema {
 			comment: this._commentStart,
 			escapeChar: this._escapeChar,
 			names: this._names,
+			header: this._header,
 			quoteChar: this._quoteChar,
 			readRows: this._readRows,
 			skipBlankLines: this._skipBlankLines,

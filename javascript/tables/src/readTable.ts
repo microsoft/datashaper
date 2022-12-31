@@ -26,7 +26,7 @@ import { getParser, validOptions } from './readTable.utils.js'
  */
 export async function readTable(
 	input: Blob | undefined,
-	schema: Partial<DataTableSchema>,
+	schema: DataTableSchema,
 ): Promise<ColumnTable | undefined> {
 	if (input == null) {
 		return Promise.resolve(undefined)
@@ -38,6 +38,7 @@ export async function readTable(
 		case DataFormat.ARROW:
 			return fromArrow(await input.arrayBuffer())
 		case DataFormat.CSV:
+			console.log('importing csv', parser)
 			return fromCSV(await input.text(), parser)
 		// TODO: use our internal parser when
 		// return readCsvTable(await input.text(), parser)

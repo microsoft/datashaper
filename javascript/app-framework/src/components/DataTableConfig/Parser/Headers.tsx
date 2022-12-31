@@ -2,28 +2,22 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { ParserOptions } from '@datashaper/workflow'
 import { Checkbox, TextField } from '@fluentui/react'
 import { useDebounceFn } from 'ahooks'
 import { memo, useCallback, useState } from 'react'
 
+import { useUnobservedProperty } from '../../../hooks/index.js'
 import { Container } from './Parser.styles.js'
 
 export const Headers: React.FC<{
-	headers: string[] | undefined
-	onChange: (val: string[] | undefined) => void
-	headersChecked: boolean
-	toggleHeaders: () => void
-}> = memo(function HeadersOption({
-	headersChecked,
-	toggleHeaders,
-	headers,
-	onChange,
-}) {
-	const [value, setValue] = useState(headers?.join(','))
+	parser: ParserOptions
+}> = memo(function HeadersOption({ parser }) {
+	const [value, setValue] = useState(parser.names?.join(','))
 
 	const handleValueChange = useDebounceFn(
 		() => {
-			onChange(value?.trim().split(','))
+			parser.names = value?.trim().split(',')
 		},
 		{ wait: 1000 },
 	)
@@ -39,14 +33,15 @@ export const Headers: React.FC<{
 		[setValue, handleValueChange],
 	)
 
+	const header = useUnobservedProperty<ParserOptions, boolean>(parser, 'header')
 	return (
 		<Container>
 			<Checkbox
 				label="Headers in first row"
-				checked={headersChecked}
-				onChange={toggleHeaders}
+				checked={header}
+				onChange={(_, value) => (parser.header = value)}
 			/>
-			{!headersChecked && (
+			{!header && (
 				<TextField
 					multiline
 					label={'Header names (comma-separated)'}

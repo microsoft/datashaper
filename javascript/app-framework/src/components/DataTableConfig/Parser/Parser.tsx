@@ -10,8 +10,7 @@ import {
 	SpinButton,
 	TextField,
 } from '@fluentui/react'
-import { useBoolean } from '@fluentui/react-hooks'
-import { memo, useEffect } from 'react'
+import { memo } from 'react'
 
 import { Delimiter } from './Delimiter.js'
 import { Headers } from './Headers.js'
@@ -30,14 +29,6 @@ const lineTerminatorOptions = [
 ]
 
 export const Parser: React.FC<ParserProps> = memo(function Parser({ parser }) {
-	const [headers, { toggle: toggleHeaders }] = useBoolean(!parser.names?.length)
-
-	useEffect(() => {
-		if (headers && !!parser.names?.length) {
-			parser.names = undefined
-		}
-	}, [headers, parser])
-
 	return (
 		<Container>
 			<FlexContainer>
@@ -48,12 +39,7 @@ export const Parser: React.FC<ParserProps> = memo(function Parser({ parser }) {
 			</FlexContainer>
 			<Expando label="Advanced" styles={expandoStyles}>
 				<FlexContainer>
-					<Headers
-						headers={parser.names}
-						headersChecked={headers}
-						toggleHeaders={toggleHeaders}
-						onChange={(value: string[] | undefined) => (parser.names = value)}
-					/>
+					<Headers parser={parser} />
 					<FieldContainer>
 						<SpinButton
 							labelPosition={Position.top}
