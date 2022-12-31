@@ -5,7 +5,7 @@
 import type { Profile, ResourceSchema } from '@datashaper/schema'
 
 import { dereference } from '../predicates.js'
-import type { Maybe } from '../primitives.js'
+import type { Maybe, Unsubscribe } from '../primitives.js'
 import type { DataPackage } from './DataPackage/DataPackage.js'
 import { Named } from './Named.js'
 import type { ResourceReference } from './ResourceReference.js'
@@ -30,6 +30,20 @@ export abstract class Resource
 	private _homepage: string | undefined
 	private _license: string | undefined
 	private _sources: (Resource | ResourceReference)[] = []
+	private _dataPackage: DataPackage | undefined
+	private _unlistenToSources: Unsubscribe | undefined
+
+	protected get dataPackage(): DataPackage | undefined {
+		return this._dataPackage
+	}
+
+	protected set dataPackage(value: DataPackage | undefined) {
+		this._dataPackage = value
+	}
+
+	public isReference(): this is ResourceReference {
+		return false
+	}
 
 	public get path(): ResourceSchema['path'] {
 		return this._path
@@ -72,7 +86,30 @@ export abstract class Resource
 	}
 
 	public set sources(value: (Resource | ResourceReference)[]) {
+		this._unlistenToSources?.()
+		const dp = this._dataPackage
+		if (dp != null) {
+			this._sources.forEach(s => {
+				// Rename incoming resources if necessary
+				const oldName = s.name
+				s.name = dp.suggestResourceName(oldName)
+				if (oldName !== s.name && s.title == null) {
+					s.title = oldName
+				}
+
+				// Connect the resource to the data package
+				s.connect(dp)
+			})
+		}
+
 		this._sources = value
+
+		// Listen to source changes and bubble up onchange events
+		const handlers = this._sources.map(v =>
+			v.onChange(() => this._onChange.next()),
+		)
+		this._unlistenToSources = () => handlers.forEach(h => h())
+
 		this._onChange.next()
 	}
 
@@ -80,8 +117,9 @@ export abstract class Resource
 	 * Connects this resource to the given data package
 	 * @param dp - The data package to connect to
 	 */
-	public connect(_dp: DataPackage): void {
-		/* do nothing, overridable */
+	public connect(dp: DataPackage): void {
+		this._dataPackage = dp
+		this._sources.forEach(s => s.connect(dp))
 	}
 
 	/**
@@ -93,6 +131,12 @@ export abstract class Resource
 		return this.sources
 			.map(dereference)
 			.filter(s => s?.profile === type) as Resource[]
+	}
+
+	public override dispose(): void {
+		super.dispose()
+		this._sources.forEach(s => s.dispose())
+		this._dataPackage = undefined
 	}
 
 	public override toSchema(): ResourceSchema {

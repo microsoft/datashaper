@@ -28,6 +28,9 @@ export class Codebook extends Resource implements TableTransformer {
 	public override defaultTitle(): string {
 		return 'codebook.json'
 	}
+	public override defaultName(): string {
+		return 'codebook.json'
+	}
 
 	private _fields$ = new BehaviorSubject<Field[]>([])
 
@@ -36,9 +39,9 @@ export class Codebook extends Resource implements TableTransformer {
 		this.loadSchema(codebook)
 	}
 
-	public set input$(value: Observable<Maybe<TableContainer>>) {
+	public set input$(value: Maybe<Observable<Maybe<TableContainer>>>) {
 		this._inputSub?.unsubscribe()
-		this._inputSub = value.subscribe(table =>
+		this._inputSub = value?.subscribe(table =>
 			this._output$.next(this.encodeTable(table)),
 		)
 	}

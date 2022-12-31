@@ -9,11 +9,7 @@ export class ResourceReference extends Resource {
 	public profile = undefined
 	public $schema = undefined
 
-	public constructor() {
-		super()
-	}
-
-	public isReference(): boolean {
+	public override isReference(): boolean {
 		return true
 	}
 

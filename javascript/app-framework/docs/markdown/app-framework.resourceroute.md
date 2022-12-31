@@ -17,10 +17,10 @@ export interface ResourceRoute
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [children?](./app-framework.resourceroute.children.md) |  | [ResourceRoute](./app-framework.resourceroute.md)<!-- -->\[\] | <i>(Optional)</i> Child node Data |
-|  [href](./app-framework.resourceroute.href.md) |  | string | The resource render route |
+|  [href?](./app-framework.resourceroute.href.md) |  | string | <i>(Optional)</i> The resource render route |
 |  [icon?](./app-framework.resourceroute.icon.md) |  | string | <i>(Optional)</i> The icon to use in the file tree |
 |  [menuItems?](./app-framework.resourceroute.menuitems.md) |  | IContextualMenuItem\[\] | <i>(Optional)</i> Contextual Menu items for this resource |
-|  [props](./app-framework.resourceroute.props.md) |  | any | The render props to use for this node |
-|  [renderer](./app-framework.resourceroute.renderer.md) |  | React.ComponentType&lt;any&gt; | The renderer to use for this node |
+|  [props?](./app-framework.resourceroute.props.md) |  | any | <i>(Optional)</i> The render props to use for this node |
+|  [renderer?](./app-framework.resourceroute.renderer.md) |  | React.ComponentType&lt;any&gt; | <i>(Optional)</i> The renderer to use for this node |
 |  [title](./app-framework.resourceroute.title.md) |  | string | The node text to use. Default=id |
 

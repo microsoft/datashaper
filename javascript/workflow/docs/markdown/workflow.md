@@ -19,6 +19,7 @@
 |  [Observed](./workflow.observed.md) |  |
 |  [ParserOptions](./workflow.parseroptions.md) |  |
 |  [Resource](./workflow.resource.md) |  |
+|  [ResourceReference](./workflow.resourcereference.md) |  |
 |  [StepNode](./workflow.stepnode.md) |  |
 |  [TableBundle](./workflow.tablebundle.md) |  |
 |  [TableBundleProfile](./workflow.tablebundleprofile.md) |  |
@@ -51,6 +52,7 @@
 |  [isNoArgsStep(step)](./workflow.isnoargsstep.md) | Indicates whether this step accepts arguments |
 |  [isNumericInputStep(step)](./workflow.isnumericinputstep.md) | Indicates whether this step can only operate on numeric values. |
 |  [isOutputColumnStep(step)](./workflow.isoutputcolumnstep.md) | Indicates whether the supplied step requires a single output column. |
+|  [isReferenceSchema(entry)](./workflow.isreferenceschema.md) |  |
 |  [join(id)](./workflow.join.md) |  |
 |  [lookup(id)](./workflow.lookup.md) |  |
 |  [nextColumnName(name, columnNames)](./workflow.nextcolumnname.md) | Suggests a new column name given the list passed. If the name is used, this will append numbers to the end. e.g. "column" may result in "column 1" or "column 2" if there are collisions |

@@ -140,7 +140,7 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 						setOrientation={setOrientation}
 						fileType={fileType}
 					/>
-					<TablePreview error={previewError} table={table} showType />
+					<TablePreview error={previewError} table={table} />
 				</ModalBody>
 				<ModalFooter
 					importDisabled={!!previewError}

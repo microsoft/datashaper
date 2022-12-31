@@ -39,7 +39,7 @@ export class DataTableProfile implements ProfilePlugin<DataTable> {
 							href: `${pathContext}/${lastPathItem}`,
 							icon: 'Database',
 							renderer: RawTableViewer,
-							props: { dataTable: resource },
+							props: { resource },
 						},
 					],
 				}

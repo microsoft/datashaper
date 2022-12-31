@@ -25,6 +25,7 @@ export declare abstract class Named extends Observed implements NamedSchema
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
+|  [defaultName()](./workflow.named.defaultname.md) |  |  |
 |  [defaultTitle()](./workflow.named.defaulttitle.md) |  |  |
 |  [loadSchema(schema, quiet)](./workflow.named.loadschema.md) |  |  |
 |  [toSchema()](./workflow.named.toschema.md) |  |  |

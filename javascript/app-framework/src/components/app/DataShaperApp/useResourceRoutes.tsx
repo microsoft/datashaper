@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Resource } from '@datashaper/workflow'
+import type { Resource, ResourceReference } from '@datashaper/workflow'
 import { useObservableState } from 'observable-hooks'
 import { useMemo } from 'react'
 import { map } from 'rxjs'
@@ -16,6 +16,14 @@ import type {
 	ResourceRouteGroup,
 } from '../../../types.js'
 import { ResourceGroupType } from '../../../types.js'
+
+/**
+ * Get groups of resource routes for the application
+ *
+ * @param services - The application services
+ * @param plugins - Profile plugins
+ * @returns A list of resource route groups
+ */
 export function useResourceRoutes(
 	services: AppServices,
 	plugins: Map<string, ProfilePlugin>,
@@ -49,6 +57,17 @@ function makeResourceRoute(
 	plugins: Map<string, ProfilePlugin>,
 	parentRoute = '/resource',
 ): ResourceRoute[] {
+	if (resource.isReference()) {
+		const ref = resource as ResourceReference
+		const target = ref.target
+		if (target) {
+			const route: ResourceRoute = {
+				title: target.title ?? target.name,
+				icon: 'Link',
+			}
+			return [route]
+		}
+	}
 	if (!resource.profile) {
 		console.warn('no profile for resource', resource)
 		return []
@@ -66,9 +85,7 @@ function makeResourceRoute(
 				key: 'rename',
 				text: 'Rename',
 				iconProps: { iconName: 'Rename' },
-				onClick: () => {
-					services.renameResource(resource)
-				},
+				onClick: () => services.renameResource(resource),
 			},
 			{
 				key: 'delete',

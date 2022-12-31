@@ -5,14 +5,14 @@
 import { memo } from 'react'
 
 import { JsonModeEditor } from '../JsonModeEditor/index.js'
-import { ParserOptionsEditor } from '../ParserOptionsEditor/index.js'
 import type { DataTableEditorProps } from './DataTableEditor.types.js'
+import { TableEditor } from './TableEditor.js'
 
 export const DataTableEditor: React.FC<DataTableEditorProps> = memo(
 	function DataTableEditor({ resource }) {
 		return (
 			<JsonModeEditor resource={resource}>
-				<ParserOptionsEditor dataTable={resource} />
+				<TableEditor resource={resource} />
 			</JsonModeEditor>
 		)
 	},

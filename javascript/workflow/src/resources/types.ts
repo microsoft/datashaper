@@ -45,12 +45,18 @@ export interface ProfileHandler {
 		manager: ResourceManager,
 	): Promise<Resource>
 
-	// /**
-	//  * Save custom resources into the files map.
-	//  * @param files - the data files in the package
-	//  * @returns the list of top-level resources to write into datapackage.json::resources
-	//  */
-	// save?: (data: Resource, files: Map<string, Blob>) => Promise<string[]>
+	/**
+	 * Save custom resources into the files map.
+	 * @param data - the resource being saved
+	 * @param path - the path the resource was saved into
+	 * @param files - the data files in the package
+	 * @returns the list of top-level resources to write into datapackage.json::resources
+	 */
+	save?: (
+		data: Resource,
+		path: string,
+		files: Map<string, Blob>,
+	) => Promise<string[]>
 
 	// /**
 	//  * Load a specific resource

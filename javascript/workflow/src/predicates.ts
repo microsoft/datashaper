@@ -78,3 +78,14 @@ export const isTableTransformer = (
 		r?.profile === KnownProfile.Workflow || r?.profile === KnownProfile.Codebook
 	)
 }
+
+export function isReferenceSchema(
+	entry: ResourceSchema | string,
+): entry is ResourceSchema & { path: string } {
+	return (
+		typeof entry !== 'string' &&
+		entry.profile == null &&
+		entry.path != null &&
+		typeof entry.path === 'string'
+	)
+}

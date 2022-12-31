@@ -124,11 +124,11 @@ export enum ResourceGroupType {
 // @public
 export interface ResourceRoute {
     children?: ResourceRoute[];
-    href: string;
+    href?: string;
     icon?: string;
     menuItems?: IContextualMenuItem[];
-    props: any;
-    renderer: React.ComponentType<any>;
+    props?: any;
+    renderer?: React.ComponentType<any>;
     title: string;
 }
 

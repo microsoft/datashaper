@@ -4,6 +4,6 @@
  */
 import type { DataTable } from '@datashaper/workflow'
 
-export interface ParserOptionsEditorProps {
-	dataTable: DataTable
+export interface TableEditorProps {
+	resource: DataTable
 }

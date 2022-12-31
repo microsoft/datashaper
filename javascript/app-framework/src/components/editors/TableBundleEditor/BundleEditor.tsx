@@ -13,45 +13,36 @@ import { KnownProfile } from '@datashaper/schema'
 import { Workflow } from '@datashaper/workflow'
 import { ToolPanel } from '@essex/components'
 import { CommandBar } from '@fluentui/react'
-import { useBoolean } from '@fluentui/react-hooks'
 import { useObservableState } from 'observable-hooks'
 import { memo, useMemo, useState } from 'react'
 
+import { useToolPanelExpandCollapse } from '../hooks.js'
+import {
+	useTableHeaderColors,
+	useTableHeaderStyles,
+	useToolPanelStyles,
+} from '../styles.js'
 import {
 	useColumnState,
-	useHistoryButtonCommandBar,
 	useOnCreateStep,
 	useOnDeleteStep,
 	useOnSaveStep,
 	useSelectedTable,
+	useTableCommandProps,
 	useTableName,
 } from './BundleEditor.hooks.js'
-import {
-	Container,
-	DetailsListContainer,
-	useTableCommandProps,
-	useTableHeaderColors,
-	useTableHeaderStyles,
-	useToolPanelStyles,
-} from './BundleEditor.styles.js'
+import { Container, DetailsListContainer } from './BundleEditor.styles.js'
 import type { BundleEditorProps } from './BundleEditor.types.js'
 
 export const BundleEditor: React.FC<BundleEditorProps> = memo(
 	function BundleEditor({ resource }) {
-		// Primary State
-		const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
-
-		const workflow = useMemo<Workflow>(() => {
-			let wf: Workflow | undefined = resource
+		const [workflow, isWorkflowAttached] = useMemo<[Workflow, boolean]>(() => {
+			const result = resource
 				.getSourcesWithProfile(KnownProfile.Workflow)
 				.find(t => !!t) as Workflow | undefined
-
-			if (wf == null) {
-				wf = new Workflow()
-				resource.sources = [...resource.sources, wf]
-			}
-			return wf
-		}, [resource])
+			return [result ?? new Workflow(), !!result]
+			/* eslint-disable-next-line react-hooks/exhaustive-deps */
+		}, [resource, resource.sources])
 
 		const [selectedId, setSelectedId] = useState<string | undefined>(undefined)
 		const [selectedColumn, onColumnClick] = useColumnState()
@@ -64,23 +55,25 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 		)
 		const tableName = useTableName(resource, selectedId)
 		const selectedTable = useSelectedTable(resource, selectedId)
-		const historyButtonCommandBar = useHistoryButtonCommandBar(
-			isCollapsed,
-			numSteps,
-			toggleCollapsed,
-		)
+		const { collapsed, onToggleCollapsed, commandBar, iconProps } =
+			useToolPanelExpandCollapse(
+				'history-button',
+				'History',
+				`(${numSteps ?? '0'})`,
+			)
+
+		const toolPanelStyles = useToolPanelStyles()
 		const tableHeaderColors = useTableHeaderColors()
 		const tableHeaderStyles = useTableHeaderStyles()
 		const tableCommandProps = useTableCommandProps()
-		const toolPanelStyles = useToolPanelStyles()
 
 		// Event Handlers
-		const onSave = useOnSaveStep(workflow)
+		const onSave = useOnSaveStep(workflow, resource, isWorkflowAttached)
 		const onCreate = useOnCreateStep(onSave, setSelectedId)
-		const onDelete = useOnDeleteStep(workflow)
+		const onDelete = useOnDeleteStep(workflow, resource)
 
 		return selectedTable?.table == null ? null : (
-			<Container collapsed={isCollapsed}>
+			<Container collapsed={collapsed}>
 				<DetailsListContainer>
 					<ArqueroTableHeader
 						background={tableHeaderColors.background}
@@ -94,7 +87,7 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 								onRemoveStep={onDelete}
 							/>
 						}
-						farCommandBar={<CommandBar {...historyButtonCommandBar} />}
+						farCommandBar={workflow ? <CommandBar {...commandBar} /> : null}
 						name={tableName}
 						table={selectedTable.table}
 					/>
@@ -110,26 +103,24 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 						onColumnSelect={onColumnClick}
 					/>
 				</DetailsListContainer>
-				<ToolPanel
-					headerText={toolPanelHeader}
-					onDismiss={toggleCollapsed}
-					headerIconProps={HISTORY_ICON_PROPS}
-					styles={toolPanelStyles}
-				>
-					<StepList
-						order={DisplayOrder.LastOnTop}
-						selectedKey={selectedId}
-						workflow={workflow}
-						onSave={onSave}
-						onDelete={onDelete}
-						onSelect={setSelectedId}
-					/>
-				</ToolPanel>
+				{
+					<ToolPanel
+						headerText={toolPanelHeader}
+						onDismiss={onToggleCollapsed}
+						headerIconProps={iconProps}
+						styles={toolPanelStyles}
+					>
+						<StepList
+							order={DisplayOrder.LastOnTop}
+							selectedKey={selectedId}
+							workflow={workflow}
+							onSave={onSave}
+							onDelete={onDelete}
+							onSelect={setSelectedId}
+						/>
+					</ToolPanel>
+				}
 			</Container>
 		)
 	},
 )
-
-const HISTORY_ICON_PROPS = {
-	iconName: 'History',
-}

@@ -13,7 +13,11 @@ export abstract class Named extends Observed implements NamedSchema {
 		return undefined
 	}
 
-	private _name = ''
+	public defaultName(): string {
+		return 'resource'
+	}
+
+	private _name = this.defaultName()
 	private _title: string | undefined = this.defaultTitle()
 	private _description: string | undefined
 
@@ -53,7 +57,7 @@ export abstract class Named extends Observed implements NamedSchema {
 	}
 
 	public loadSchema(schema: Maybe<Readable<NamedSchema>>, quiet = false): void {
-		this._name = schema?.name ?? ''
+		this._name = schema?.name ?? this.defaultName()
 		this._title = schema?.title ?? this.defaultTitle()
 		this._description = schema?.description
 		if (!quiet) {
