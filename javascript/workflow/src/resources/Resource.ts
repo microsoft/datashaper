@@ -148,7 +148,6 @@ export abstract class Resource
 			rel: this.rel,
 			homepage: this.homepage,
 			license: this.license,
-			sources: [],
 			// sources: this.sources.map(s => s.toSchema()),
 		}
 	}
@@ -162,7 +161,7 @@ export abstract class Resource
 		this._homepage = value?.homepage
 		this._license = value?.license
 		this._rel = value?.rel
-		this._sources = []
+		// this._sources = []
 
 		if (!quiet) {
 			this._onChange.next()

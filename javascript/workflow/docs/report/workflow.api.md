@@ -800,6 +800,8 @@ export class ResourceReference extends Resource {
     // (undocumented)
     get target(): Resource | undefined;
     set target(value: Resource | undefined);
+    // (undocumented)
+    toSchema(): ResourceSchema;
 }
 
 // Warning: (ae-missing-release-tag) "rollup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

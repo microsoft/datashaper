@@ -2,12 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { KnownProfile } from '@datashaper/schema'
-import type { DataPackage } from '@datashaper/workflow'
+import { KnownProfile, KnownRel } from '@datashaper/schema'
 import {
 	type Codebook,
+	type DataPackage,
 	type DataTable,
 	type Workflow,
+	ResourceReference,
 	TableBundle,
 } from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
@@ -64,17 +65,29 @@ export class TableBundleProfile implements ProfilePlugin<TableBundle> {
 	}
 
 	public getMenuItems(resource: TableBundle): IContextualMenuItem[] {
+		const dp = this._dataPackage
+		if (!dp) {
+			throw new Error('Data package not initialized')
+		}
 		const result: IContextualMenuItem[] = [
-			// {
-			// 	key: 'new-derived-table',
-			// 	text: 'New Derived Table',
-			// 	onClick: () => {},
-			// },
-			// {
-			// 	key: 'add-symlink',
-			// 	text: 'Add Table Link',
-			// 	onClick: () => {},
-			// },
+			{
+				key: 'new-derived-table',
+				text: 'New Derived Table',
+				iconProps: { iconName: this.iconName },
+				onClick: () => {
+					const derived = this.createResource()
+					derived.name = dp.suggestResourceName(resource.name)
+					derived.title = resource.title
+
+					// Create a reference to the source resource
+					const reference = new ResourceReference()
+					reference.target = resource
+					reference.rel = KnownRel.Input
+
+					derived.sources = [reference]
+					dp.addResource(derived)
+				},
+			},
 		]
 		if (resource.input == null) {
 			result.push({
