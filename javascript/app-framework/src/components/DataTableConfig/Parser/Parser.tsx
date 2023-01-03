@@ -30,13 +30,14 @@ const lineTerminatorOptions = [
 ]
 
 export const Parser: React.FC<ParserProps> = memo(function Parser({ parser }) {
-	const skipRows = useObservableState(parser.skipRows$)
-	const readRows = useObservableState(parser.readRows$)
+	const skipRows = useObservableState(parser.skipRows$, parser.skipRows)
+	const readRows = useObservableState(parser.readRows$, parser.readRows)
+	const delimiter = useObservableState(parser.delimiter$, parser.delimiter)
 	return (
 		<Container>
 			<FlexContainer>
 				<Delimiter
-					selected={parser.delimiter}
+					selected={delimiter}
 					onChange={(delim: string) => (parser.delimiter = delim)}
 				/>
 			</FlexContainer>

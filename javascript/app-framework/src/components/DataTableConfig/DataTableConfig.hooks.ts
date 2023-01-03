@@ -15,7 +15,7 @@ export function useChangeHandlers(resource: DataTable): {
 		option?: IChoiceGroupOption,
 	) => void
 } {
-	const format = useObservableState(resource.format$)
+	const format = useObservableState(resource.format$, resource.format)
 	const onChangeFormat = useCallback(
 		(
 			_e?: React.FormEvent<HTMLElement | HTMLInputElement>,

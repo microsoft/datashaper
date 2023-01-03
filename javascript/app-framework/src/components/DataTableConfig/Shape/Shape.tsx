@@ -19,7 +19,7 @@ import type { ShapeProps } from './Shape.types.js'
 import { TableLayoutOptions } from './TableLayoutOptions.js'
 
 export const Shape: React.FC<ShapeProps> = memo(function Shape({ shape }) {
-	const orientation = useObservableState(shape.orientation$)
+	const orientation = useObservableState(shape.orientation$, shape.orientation)
 	return (
 		<Container>
 			<TableLayoutOptions
