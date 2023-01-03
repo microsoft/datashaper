@@ -22,7 +22,7 @@ export function readJSONTable(
 		case DataOrientation.Columnar:
 			return fromJSON(text)
 		case DataOrientation.Array:
-			return fromArray(obj)
+			return fromArray(obj, shape)
 		case DataOrientation.Values:
 			return fromValues(obj)
 		default:
@@ -30,18 +30,26 @@ export function readJSONTable(
 	}
 }
 
-function fromArray(obj: any): ColumnTable {
-	// all the data is a single column
-	// TODO: we should support the csv parser option to specify the headers
-	// TODO: the shape has an XxY matrix, but we don't use it yet
+function fromArray(obj: any, shape: DataShape): ColumnTable {
+	// all the data is a single column unless a matrix row x col layout is specified
+	if (shape.matrix) {
+		const [rows, cols] = shape.matrix
+		// transpose into an array of arrays and then just use the fromValues function
+		// note that we're completely assuming the matrix definition is correct
+		const result = []
+		for (let i = 0; i < rows * cols; i += cols) {
+			const row = obj.slice(i, i + cols)
+			result.push(row)
+		}
+		return fromValues(result)
+	}
 	return fromJSON({
 		col1: obj,
 	})
 }
 
 function fromValues(obj: any): ColumnTable {
-	// first row is assumed to be headers
-	// TODO: we should support the csv parser option to specify the headers
+	// first row is assumed to be headers (as stated in schema)
 	const headers = obj[0]
 	const data = obj.slice(1)
 	const map = headers.reduce(
