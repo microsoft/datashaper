@@ -5,9 +5,9 @@
 import type { ParserOptions } from '@datashaper/workflow'
 import { Checkbox, TextField } from '@fluentui/react'
 import { useDebounceFn } from 'ahooks'
+import { useObservableState } from 'observable-hooks'
 import { memo, useCallback, useState } from 'react'
 
-import { useUnobservedProperty } from '../../../hooks/index.js'
 import { Container } from './Parser.styles.js'
 
 export const Headers: React.FC<{
@@ -33,7 +33,7 @@ export const Headers: React.FC<{
 		[setValue, handleValueChange],
 	)
 
-	const header = useUnobservedProperty<ParserOptions, boolean>(parser, 'header')
+	const header = useObservableState(parser.header$)
 	return (
 		<Container>
 			<Checkbox

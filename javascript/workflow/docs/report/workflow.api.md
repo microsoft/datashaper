@@ -5,7 +5,7 @@
 ```ts
 
 import type { AggregateArgs } from '@datashaper/schema';
-import type { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import type { BinArgs } from '@datashaper/schema';
 import type { BinarizeArgs } from '@datashaper/schema';
 import type { BooleanArgs } from '@datashaper/schema';
@@ -245,11 +245,20 @@ export class DataShape extends Observed implements DataShape_2 {
     // (undocumented)
     loadSchema(schema: Maybe<DataShape_2>, quiet?: boolean): void;
     // (undocumented)
+    get matrix$(): Observable<[
+    width: number,
+    height: number
+    ] | undefined>;
+    // (undocumented)
     get matrix(): [width: number, height: number] | undefined;
     set matrix(value: [width: number, height: number] | undefined);
     // (undocumented)
+    get nature$(): Observable<DataNature | undefined>;
+    // (undocumented)
     get nature(): DataNature | undefined;
     set nature(value: DataNature | undefined);
+    // (undocumented)
+    get orientation$(): Observable<DataOrientation | undefined>;
     // (undocumented)
     get orientation(): DataOrientation | undefined;
     set orientation(value: DataOrientation | undefined);
@@ -271,6 +280,8 @@ export class DataTable extends Resource implements TableEmitter {
     defaultName(): string;
     // (undocumented)
     dispose(): void;
+    // (undocumented)
+    get format$(): BehaviorSubject<DataFormat>;
     // (undocumented)
     get format(): DataFormat;
     set format(value: DataFormat);
@@ -662,36 +673,56 @@ export const orderby: (id: string) => StepNode<TableContainer<unknown>, OrderbyA
 //
 // @public (undocumented)
 export class ParserOptions extends Observed implements ParserOptions_2 {
-    constructor(parserOptions?: ParserOptions_2);
+    constructor(schema?: ParserOptions_2);
+    // (undocumented)
+    get comment$(): Observable<string | undefined>;
     // (undocumented)
     get comment(): string | undefined;
     set comment(value: string | undefined);
     // (undocumented)
+    get delimiter$(): Observable<string>;
+    // (undocumented)
     get delimiter(): string;
     set delimiter(delimiter: string | undefined);
+    // (undocumented)
+    get escapeChar$(): Observable<string | undefined>;
     // (undocumented)
     get escapeChar(): string | undefined;
     set escapeChar(value: string | undefined);
     // (undocumented)
+    get header$(): Observable<boolean | undefined>;
+    // (undocumented)
     get header(): boolean | undefined;
     set header(value: boolean | undefined);
+    // (undocumented)
+    get lineTerminator$(): Observable<string>;
     // (undocumented)
     get lineTerminator(): string;
     set lineTerminator(value: string | undefined);
     // (undocumented)
     loadSchema(schema: Maybe<ParserOptions_2>, quiet?: boolean): void;
     // (undocumented)
+    get names$(): Observable<string[] | undefined>;
+    // (undocumented)
     get names(): string[] | undefined;
     set names(value: string[] | undefined);
+    // (undocumented)
+    get quoteChar$(): Observable<string>;
     // (undocumented)
     get quoteChar(): string;
     set quoteChar(value: string | undefined);
     // (undocumented)
+    get readRows$(): Observable<number>;
+    // (undocumented)
     get readRows(): number;
     set readRows(value: number | undefined);
     // (undocumented)
+    get skipBlankLines$(): Observable<boolean>;
+    // (undocumented)
     get skipBlankLines(): boolean;
     set skipBlankLines(value: boolean | undefined);
+    // (undocumented)
+    get skipRows$(): Observable<number>;
     // (undocumented)
     get skipRows(): number;
     set skipRows(value: number | undefined);

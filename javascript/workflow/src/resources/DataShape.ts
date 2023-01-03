@@ -4,44 +4,64 @@
  */
 import type { DataNature, DataOrientation } from '@datashaper/schema'
 import type { DataShape as DataShapeSchema } from '@datashaper/schema/dist/datatable/DataShape.js'
+import type { Observable } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
 
 import type { Maybe } from '../primitives.js'
 import { Observed } from './Observed.js'
 
 export class DataShape extends Observed implements DataShapeSchema {
-	private _orientation: DataOrientation | undefined
-	private _nature: DataNature | undefined
-	private _matrix: [width: number, height: number] | undefined
+	private _orientation$ = new BehaviorSubject<DataOrientation | undefined>(
+		undefined,
+	)
+	private _nature$ = new BehaviorSubject<DataNature | undefined>(undefined)
+	private _matrix$ = new BehaviorSubject<
+		[width: number, height: number] | undefined
+	>(undefined)
 
 	public constructor(shape?: DataShapeSchema) {
 		super()
 		this.loadSchema(shape)
 	}
 
+	public get orientation$(): Observable<DataOrientation | undefined> {
+		return this._orientation$
+	}
+
 	public get orientation(): DataOrientation | undefined {
-		return this._orientation
+		return this._orientation$.value
 	}
 
 	public set orientation(value: DataOrientation | undefined) {
-		this._orientation = value
+		this._orientation$.next(value)
 		this._onChange.next()
+	}
+
+	public get nature$(): Observable<DataNature | undefined> {
+		return this._nature$
 	}
 
 	public get nature(): DataNature | undefined {
-		return this._nature
+		return this._nature$.value
 	}
 
 	public set nature(value: DataNature | undefined) {
-		this._nature = value
+		this._nature$.next(value)
 		this._onChange.next()
 	}
 
+	public get matrix$(): Observable<
+		[width: number, height: number] | undefined
+	> {
+		return this._matrix$
+	}
+
 	public get matrix(): [width: number, height: number] | undefined {
-		return this._matrix
+		return this._matrix$.value
 	}
 
 	public set matrix(value: [width: number, height: number] | undefined) {
-		this._matrix = value
+		this._matrix$.next(value)
 		this._onChange.next()
 	}
 
@@ -54,9 +74,9 @@ export class DataShape extends Observed implements DataShapeSchema {
 	}
 
 	public loadSchema(schema: Maybe<DataShapeSchema>, quiet?: boolean): void {
-		this._matrix = schema?.matrix
-		this._nature = schema?.nature
-		this._orientation = schema?.orientation
+		this._matrix$.next(schema?.matrix)
+		this._nature$.next(schema?.nature)
+		this._orientation$.next(schema?.orientation)
 		if (!quiet) {
 			this._onChange.next()
 		}

@@ -24,8 +24,11 @@ export declare class DataShape extends Observed implements DataShapeSchema
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [matrix](./workflow.datashape.matrix.md) |  | \[width: number, height: number\] \| undefined |  |
+|  [matrix$](./workflow.datashape.matrix_.md) | <code>readonly</code> | Observable&lt;\[ width: number, height: number \] \| undefined&gt; |  |
 |  [nature](./workflow.datashape.nature.md) |  | DataNature \| undefined |  |
+|  [nature$](./workflow.datashape.nature_.md) | <code>readonly</code> | Observable&lt;DataNature \| undefined&gt; |  |
 |  [orientation](./workflow.datashape.orientation.md) |  | DataOrientation \| undefined |  |
+|  [orientation$](./workflow.datashape.orientation_.md) | <code>readonly</code> | Observable&lt;DataOrientation \| undefined&gt; |  |
 
 ## Methods
 

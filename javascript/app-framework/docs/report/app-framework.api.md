@@ -15,7 +15,6 @@ import type { IContextualMenuItem } from '@fluentui/react';
 import type { Maybe } from '@datashaper/workflow';
 import type { MutableRefObject } from 'react';
 import type { MutableSnapshot } from 'recoil';
-import type { Observed } from '@datashaper/workflow';
 import type { ProfileHandler } from '@datashaper/workflow';
 import type { default as React_2 } from 'react';
 import type { Resource } from '@datashaper/workflow';
@@ -188,11 +187,6 @@ export function useTableBundleOutput(pkg: TableBundle | undefined): Maybe<TableC
 //
 // @public (undocumented)
 export function useTableBundles(): TableBundle[];
-
-// Warning: (ae-missing-release-tag) "useUnobservedProperty" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useUnobservedProperty<O extends Observed, P>(observable: O, property: string): P;
 
 // (No @packageDocumentation comment for this package)
 

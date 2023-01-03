@@ -26,6 +26,7 @@ export declare class DataTable extends Resource implements TableEmitter
 |  [$schema](./workflow.datatable._schema.md) | <code>readonly</code> | string |  |
 |  [data](./workflow.datatable.data.md) |  | Blob \| undefined |  |
 |  [format](./workflow.datatable.format.md) |  | DataFormat |  |
+|  [format$](./workflow.datatable.format_.md) | <code>readonly</code> | BehaviorSubject&lt;DataFormat&gt; |  |
 |  [name](./workflow.datatable.name.md) |  | string |  |
 |  [output](./workflow.datatable.output.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt; |  |
 |  [output$](./workflow.datatable.output_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt;&gt; |  |

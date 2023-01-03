@@ -5,9 +5,8 @@
 import { DataFormat, DataOrientation } from '@datashaper/schema'
 import type { DataTable } from '@datashaper/workflow'
 import type { IChoiceGroupOption } from '@fluentui/react'
+import { useObservableState } from 'observable-hooks'
 import { useCallback } from 'react'
-
-import { useUnobservedProperty } from '../../hooks/index.js'
 
 export function useChangeHandlers(resource: DataTable): {
 	format: DataFormat
@@ -16,10 +15,7 @@ export function useChangeHandlers(resource: DataTable): {
 		option?: IChoiceGroupOption,
 	) => void
 } {
-	const format = useUnobservedProperty<DataTable, DataFormat>(
-		resource,
-		'format',
-	)
+	const format = useObservableState(resource.format$)
 	const onChangeFormat = useCallback(
 		(
 			_e?: React.FormEvent<HTMLElement | HTMLInputElement>,

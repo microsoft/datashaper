@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ParserOptions } from '@datashaper/workflow'
 import { Expando } from '@essex/components'
 import {
 	Checkbox,
@@ -11,9 +10,9 @@ import {
 	SpinButton,
 	TextField,
 } from '@fluentui/react'
+import { useObservableState } from 'observable-hooks'
 import { memo } from 'react'
 
-import { useUnobservedProperty } from '../../../hooks/index.js'
 import { Delimiter } from './Delimiter.js'
 import { Headers } from './Headers.js'
 import {
@@ -31,14 +30,8 @@ const lineTerminatorOptions = [
 ]
 
 export const Parser: React.FC<ParserProps> = memo(function Parser({ parser }) {
-	const skipRows = useUnobservedProperty<ParserOptions, number>(
-		parser,
-		'skipRows',
-	)
-	const readRows = useUnobservedProperty<ParserOptions, number>(
-		parser,
-		'readRows',
-	)
+	const skipRows = useObservableState(parser.skipRows$)
+	const readRows = useObservableState(parser.readRows$)
 	return (
 		<Container>
 			<FlexContainer>
@@ -54,7 +47,7 @@ export const Parser: React.FC<ParserProps> = memo(function Parser({ parser }) {
 						<SpinButton
 							labelPosition={Position.top}
 							label="Skip rows"
-							value={skipRows.toString()}
+							value={skipRows?.toString()}
 							min={0}
 							step={1}
 							onChange={(_, value) => (parser.skipRows = +(value as string))}
@@ -66,7 +59,7 @@ export const Parser: React.FC<ParserProps> = memo(function Parser({ parser }) {
 							title="Option temporarily disabled"
 							labelPosition={Position.top}
 							label="Read rows"
-							value={readRows.toString()}
+							value={readRows?.toString()}
 							min={0}
 							step={1}
 							onChange={(_, value) => (parser.readRows = +(value as string))}
