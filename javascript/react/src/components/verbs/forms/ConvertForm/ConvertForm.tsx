@@ -7,7 +7,7 @@ import { memo } from 'react'
 
 import {
 	useColumnsMetadata,
-	useStepDataTable,
+	useStepInputTable,
 } from '../../../../hooks/index.js'
 import type { StepFormProps } from '../types.js'
 import { ConvertFormBase } from './ConvertForm.base.js'
@@ -17,7 +17,7 @@ import { ConvertFormBase } from './ConvertForm.base.js'
  */
 export const ConvertForm: React.FC<StepFormProps<ConvertArgs>> = memo(
 	function ConvertForm({ step, workflow, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, workflow, input, table)
+		const dataTable = useStepInputTable(step, workflow, input, table)
 		// TODO: replace this with introspect
 		const fields = useColumnsMetadata(dataTable)
 		return <ConvertFormBase step={step} onChange={onChange} fields={fields} />
