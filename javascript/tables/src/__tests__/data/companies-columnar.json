@@ -1,0 +1,6 @@
+{
+	"ID": [1, 2, 3, 4, 5],
+	"Name": ["Microsoft", "Apple", "Google", "Amazon", "Samsung"],
+	"Employees": [160000, 150000, 135000, 1250000, 270000],
+	"US": [true, true, true, true, false]
+}

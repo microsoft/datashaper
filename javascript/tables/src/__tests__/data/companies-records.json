@@ -1,0 +1,32 @@
+[
+	{
+		"ID": 1,
+		"Name": "Microsoft",
+		"Employees": 160000,
+		"US": true
+	},
+	{
+		"ID": 2,
+		"Name": "Apple",
+		"Employees": 150000,
+		"US": true
+	},
+	{
+		"ID": 3,
+		"Name": "Google",
+		"Employees": 135000,
+		"US": true
+	},
+	{
+		"ID": 4,
+		"Name": "Amazon",
+		"Employees": 1250000,
+		"US": true
+	},
+	{
+		"ID": 5,
+		"Name": "Samsung",
+		"Employees": 270000,
+		"US": false
+	}
+]

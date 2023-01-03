@@ -33,10 +33,13 @@ describe('validate table', () => {
 	})
 	const companies = fromCSV(csv, { autoType: false })
 
-	const csv2 = fs.readFileSync('./src/__tests__/data/companies-2.csv', {
-		encoding: 'utf8',
-		flag: 'r',
-	})
+	const csv2 = fs.readFileSync(
+		'./src/__tests__/data/companies-missing-values.csv',
+		{
+			encoding: 'utf8',
+			flag: 'r',
+		},
+	)
 	const companies2 = fromCSV(csv2, { autoType: false })
 
 	describe('required constraint', () => {
