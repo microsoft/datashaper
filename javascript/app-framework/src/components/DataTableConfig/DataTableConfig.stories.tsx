@@ -26,7 +26,10 @@ const Template: ComponentStory<typeof DataTableConfig> = ({
 			}),
 		[],
 	)
-	useEffect(() => resource.onChange(() => console.log(resource)), [resource])
+	useEffect(
+		() => resource.onChange(() => console.log('resource changed', resource)),
+		[resource],
+	)
 	return (
 		<div
 			style={{
