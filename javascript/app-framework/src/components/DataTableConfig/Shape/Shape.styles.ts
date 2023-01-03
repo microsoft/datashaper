@@ -11,6 +11,10 @@ export const Container = styled.div`
 	flex-direction: column;
 	gap: 12px;
 `
+export const FieldContainer = styled.div`
+	display: flex;
+	column-gap: 10px;
+`
 
 export const Code = styled.pre`
 	margin: 0;

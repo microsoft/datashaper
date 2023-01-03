@@ -4,9 +4,10 @@
  */
 
 import { DataOrientation } from '@datashaper/schema'
+import { Position, SpinButton } from '@fluentui/react'
 import { useObservableState } from 'observable-hooks'
-import { memo } from 'react'
-import { Case, Switch } from 'react-if'
+import { memo, useCallback } from 'react'
+import { Case, Switch, When } from 'react-if'
 
 import {
 	Code,
@@ -14,18 +15,52 @@ import {
 	ExampleContainer,
 	ExampleDescription,
 	ExampleLabel,
+	FieldContainer,
 } from './Shape.styles.js'
 import type { ShapeProps } from './Shape.types.js'
 import { TableLayoutOptions } from './TableLayoutOptions.js'
 
 export const Shape: React.FC<ShapeProps> = memo(function Shape({ shape }) {
 	const orientation = useObservableState(shape.orientation$, shape.orientation)
+	const matrix = useObservableState(shape.matrix$, shape.matrix)
+	const onMatrixChange = useCallback(
+		(rows: number, columns: number) => (shape.matrix = [rows, columns]),
+		[shape],
+	)
 	return (
 		<Container>
 			<TableLayoutOptions
 				selected={orientation}
 				onChange={orientation => (shape.orientation = orientation)}
 			/>
+			<When condition={orientation === DataOrientation.Array}>
+				<FieldContainer>
+					<SpinButton
+						labelPosition={Position.top}
+						label="Rows"
+						value={matrix?.[0].toString() || ''}
+						min={0}
+						step={1}
+						onChange={(_, value) =>
+							onMatrixChange(+(value as string), matrix?.[1] || 0)
+						}
+						incrementButtonAriaLabel="Increase value by 1"
+						decrementButtonAriaLabel="Decrease value by 1"
+					/>
+					<SpinButton
+						labelPosition={Position.top}
+						label="Columns"
+						value={matrix?.[1].toString() || ''}
+						min={0}
+						step={1}
+						onChange={(_, value) =>
+							onMatrixChange(matrix?.[0] || 0, +(value as string))
+						}
+						incrementButtonAriaLabel="Increase value by 1"
+						decrementButtonAriaLabel="Decrease value by 1"
+					/>
+				</FieldContainer>
+			</When>
 			<ExampleContainer>
 				<ExampleLabel>Example</ExampleLabel>
 				<Switch>
