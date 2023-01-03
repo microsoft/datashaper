@@ -15,8 +15,8 @@ import {
 	ARQUERO_SUPPORTED_OPTS,
 	LINE_TERMINATORS,
 	PAPAPARSE_PROPS_MAP,
-} from './readTable.constants.js'
-import { ParserType } from './readTable.types.js'
+} from './readCsvTable.constants.js'
+import { ParserType } from './readCsvTable.types.js'
 
 export function determineParserType(options?: ParserOptions) {
 	if (!options || hasArqueroOptions(options)) {
@@ -39,8 +39,7 @@ export function getParser(options?: ParserOptions) {
 
 function arqueroParser(text: string, options: ParserOptions = {}): ColumnTable {
 	const mappedOptions = mapProps(ParserType.Arquero, options) as CSVParseOptions
-	const table = fromCSV(text, mappedOptions)
-	return options.readRows ? table.slice(0, options.readRows) : table
+	return fromCSV(text, mappedOptions)
 }
 
 function papaParser(text: string, options: ParserOptions = {}): ColumnTable {

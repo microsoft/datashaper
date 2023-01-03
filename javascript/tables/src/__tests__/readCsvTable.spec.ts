@@ -5,7 +5,7 @@
 
 import fetch from 'node-fetch'
 
-import { readCsvTable } from '../readTable.js'
+import { readCsvTable } from '../readCsvTable.js'
 
 const text = `first,second,third
 1,100,one
@@ -32,35 +32,54 @@ const delimiter = `1:100:one
 4:400:four
 5:500:five`
 
-describe('readTable Tests', () => {
-	let remoteDataset = ''
-	let largeDataset = ''
+describe('readCsvTable', () => {
+	describe('Large tables', () => {
+		let remoteDataset = ''
+		let largeDataset = ''
 
-	beforeAll(async () => {
-		remoteDataset = await fetch(
-			'https://covid19.who.int/WHO-COVID-19-global-data.csv',
-		).then(r => r.text())
-		largeDataset = remoteDataset + remoteDataset
+		beforeAll(async () => {
+			remoteDataset = await fetch(
+				'https://covid19.who.int/WHO-COVID-19-global-data.csv',
+			).then(r => r.text())
+			largeDataset = remoteDataset + remoteDataset
+		})
+
+		describe('arquero reader', () => {
+			it('should load a large dataset', () => {
+				const table = readCsvTable(largeDataset, {
+					comment: '#',
+				})
+				expect(table.numRows()).toBe(466890)
+			})
+		})
+
+		describe('papaparse reader', () => {
+			it('should load a large dataset', () => {
+				const table = readCsvTable(largeDataset, {
+					escapeChar: '$',
+					skipBlankLines: true,
+					comment: '#',
+					readRows: 466890,
+				})
+				expect(table.numRows()).toBe(466890)
+			})
+
+			it('should load a large dataset with readRows prop', () => {
+				const table = readCsvTable(largeDataset, {
+					skipRows: 2,
+					escapeChar: '$',
+					readRows: 3,
+				})
+				expect(table.numRows()).toBe(3)
+			})
+		})
 	})
 
-	describe('Arquero readCSV tests', () => {
+	describe('arquero reader', () => {
 		it('should load a default data without params', () => {
 			const table = readCsvTable(text)
 			expect(table.numRows()).toBe(9)
 			expect(table.numCols()).toBe(3)
-		})
-
-		it('should load a large dataset', () => {
-			const table = readCsvTable(largeDataset, {
-				comment: '#',
-				readRows: 466890,
-			})
-			expect(table.numRows()).toBe(466890)
-		})
-
-		it('should load a large dataset with readRows prop', () => {
-			const table = readCsvTable(largeDataset, { readRows: 2 })
-			expect(table.numRows()).toBe(2)
 		})
 
 		it('should load a table with custom delimiter and names list', () => {
@@ -83,7 +102,7 @@ describe('readTable Tests', () => {
 		})
 	})
 
-	describe('Papa Parse readCSV tests', () => {
+	describe('papaparse reader', () => {
 		it('should load a table', () => {
 			const table = readCsvTable(text, {
 				escapeChar: '$',
@@ -91,25 +110,6 @@ describe('readTable Tests', () => {
 			})
 
 			expect(table.numRows()).toBe(9)
-		})
-
-		it('should load a large dataset', () => {
-			const table = readCsvTable(largeDataset, {
-				escapeChar: '$',
-				skipBlankLines: true,
-				comment: '#',
-				readRows: 466890,
-			})
-			expect(table.numRows()).toBe(466890)
-		})
-
-		it('should load a large dataset with readRows prop', () => {
-			const table = readCsvTable(largeDataset, {
-				skipRows: 2,
-				escapeChar: '$',
-				readRows: 3,
-			})
-			expect(table.numRows()).toBe(3)
 		})
 
 		it('should load a table with custom delimiter', () => {
