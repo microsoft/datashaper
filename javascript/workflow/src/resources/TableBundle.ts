@@ -119,9 +119,4 @@ export class TableBundle extends Resource implements TableEmitter {
 	): Maybe<TableContainer> => {
 		return table == null ? table : { ...table, id: this.name }
 	}
-
-	public override loadSchema(data: Readable<TableBundleSchema>): void {
-		super.loadSchema(data)
-		this._onChange.next()
-	}
 }
