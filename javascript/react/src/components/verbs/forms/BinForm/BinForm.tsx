@@ -6,7 +6,7 @@ import type { BinArgs } from '@datashaper/schema'
 import { op } from 'arquero'
 import { memo, useEffect } from 'react'
 
-import { useStepDataTable } from '../../../../hooks/index.js'
+import { useStepInputTable } from '../../../../hooks/index.js'
 import type { StepFormProps } from '../types.js'
 import { BinFormBase } from './BinForm.base.js'
 
@@ -20,7 +20,7 @@ export const BinForm: React.FC<StepFormProps<BinArgs>> = memo(function Bin({
 	table,
 	onChange,
 }) {
-	const dataTable = useStepDataTable(step, workflow, input, table)
+	const dataTable = useStepInputTable(step, workflow, input, table)
 
 	useEffect(() => {
 		if (dataTable != null && onChange != null) {

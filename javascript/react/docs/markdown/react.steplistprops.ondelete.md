@@ -4,6 +4,8 @@
 
 ## StepListProps.onDelete property
 
+Deletes a workflow step at the specified index
+
 <b>Signature:</b>
 
 ```typescript

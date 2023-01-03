@@ -14,7 +14,7 @@ import {
 	useHandleDelete,
 	useHandleKeyChange,
 	useHandleValueChange,
-	useStepDataTable,
+	useStepInputTable,
 } from '../../../../hooks/index.js'
 import type { StepFormProps } from '../types.js'
 import {
@@ -28,7 +28,7 @@ import {
  */
 export const RecodeForm: React.FC<StepFormProps<RecodeArgs>> = memo(
 	function RecodeForm({ step, workflow, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, workflow, input, table)
+		const dataTable = useStepInputTable(step, workflow, input, table)
 		const dataType = useColumnType(dataTable, step.args.column)
 		const initialValues = useColumnValues(step, dataTable)
 		const values =

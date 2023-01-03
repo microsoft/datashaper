@@ -5,7 +5,7 @@
 import type { UnfoldArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
-import { useColumnNames, useStepDataTable } from '../../../../hooks/index.js'
+import { useColumnNames, useStepInputTable } from '../../../../hooks/index.js'
 import type { StepFormProps } from '../types.js'
 import { UnfoldFormBase } from './UnfoldForm.base.js'
 
@@ -15,7 +15,7 @@ import { UnfoldFormBase } from './UnfoldForm.base.js'
  */
 export const UnfoldForm: React.FC<StepFormProps<UnfoldArgs>> = memo(
 	function UnfoldForm({ step, workflow, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, workflow, input, table)
+		const dataTable = useStepInputTable(step, workflow, input, table)
 		const columns = useColumnNames(dataTable)
 		return <UnfoldFormBase step={step} onChange={onChange} columns={columns} />
 	},

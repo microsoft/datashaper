@@ -9,7 +9,7 @@ import { memo } from 'react'
 import {
 	useColumnNames,
 	useSimpleDropdownOptions,
-	useStepDataTable,
+	useStepInputTable,
 } from '../../../../hooks/index.js'
 import type { StepFormProps } from '../types.js'
 import { useAddButtonClickedHandler, useSorts } from './OrderbyForm.hooks.js'
@@ -20,7 +20,7 @@ import { Container, icons, Sorts } from './OrderbyForm.styles.js'
  */
 export const OrderbyForm: React.FC<StepFormProps<OrderbyArgs>> = memo(
 	function OrderbyForm({ step, workflow, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, workflow, input, table)
+		const dataTable = useStepInputTable(step, workflow, input, table)
 		const columns = useColumnNames(dataTable)
 		const columnOptions = useSimpleDropdownOptions(columns)
 		const sorts = useSorts(step, columnOptions, onChange)

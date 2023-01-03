@@ -4,6 +4,8 @@
 
 ## StepListProps.order property
 
+The order to render the steps in. Default = latest on top
+
 <b>Signature:</b>
 
 ```typescript

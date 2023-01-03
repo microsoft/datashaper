@@ -268,19 +268,15 @@ export const StepList: React.FC<StepListProps>;
 //
 // @public (undocumented)
 export interface StepListProps {
-    // (undocumented)
     onDelete?: (index: number) => void;
-    // (undocumented)
     onSave?: (step: Step, index?: number) => void;
-    // (undocumented)
     onSelect?: (name: string) => void;
-    // (undocumented)
+    onSelectInputTable: () => void;
+    onSelectLatestTable: () => void;
     order?: DisplayOrder;
     selectedKey?: string;
     showSelectButtons?: boolean;
-    // (undocumented)
     styles?: StepListStyles;
-    // (undocumented)
     workflow: Workflow;
 }
 

@@ -12,7 +12,7 @@ import { memo, useCallback } from 'react'
 import { EMPTY_ARRAY } from '../../../../empty.js'
 import {
 	useDropdownChangeHandler,
-	useStepDataTable,
+	useStepInputTable,
 } from '../../../../hooks/index.js'
 import { FilterFunction } from '../shared/index.js'
 import { LeftAlignedRow } from '../styles.js'
@@ -24,7 +24,7 @@ import { Container, Vertical } from './FilterForm.styles.js'
  */
 export const FilterForm: React.FC<StepFormProps<FilterArgs>> = memo(
 	function FilterForm({ step, workflow, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, workflow, input, table)
+		const dataTable = useStepInputTable(step, workflow, input, table)
 		const handleButtonClick = useCallback(() => {
 			onChange?.({
 				...step,

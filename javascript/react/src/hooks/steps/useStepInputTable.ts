@@ -9,15 +9,21 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { useWorkflowDataTable } from '../index.js'
 
-export function useStepDataTable(
+/**
+ * Use an input table for a step
+ * @param step - The step to read input for
+ * @param workflow - The workflow
+ * @param input - The optional input name
+ * @param table - The optional initial value
+ * @returns
+ */
+export function useStepInputTable(
 	step: Step,
 	workflow: Workflow | undefined,
 	input?: string | undefined,
 	table?: ColumnTable | undefined,
 ): ColumnTable | undefined {
-	return useWorkflowDataTable(
-		input || step.input[NodeInput.Source]?.node,
-		workflow,
-		table,
-	)
+	const id = input || step.input[NodeInput.Source]?.node
+	const result = useWorkflowDataTable(id, workflow, table)
+	return result
 }

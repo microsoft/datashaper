@@ -4,6 +4,8 @@
 
 ## StepListProps.styles property
 
+Styling for the step list
+
 <b>Signature:</b>
 
 ```typescript

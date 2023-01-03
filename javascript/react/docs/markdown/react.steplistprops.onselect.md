@@ -4,6 +4,8 @@
 
 ## StepListProps.onSelect property
 
+Event handler for when a step is selected.
+
 <b>Signature:</b>
 
 ```typescript
