@@ -3962,8 +3962,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "BehaviorSubject",
-                  "canonicalReference": "rxjs!BehaviorSubject:class"
+                  "text": "Observable",
+                  "canonicalReference": "rxjs!Observable:class"
                 },
                 {
                   "kind": "Content",

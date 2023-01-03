@@ -5,7 +5,7 @@
 ```ts
 
 import type { AggregateArgs } from '@datashaper/schema';
-import { BehaviorSubject } from 'rxjs';
+import type { BehaviorSubject } from 'rxjs';
 import type { BinArgs } from '@datashaper/schema';
 import type { BinarizeArgs } from '@datashaper/schema';
 import type { BooleanArgs } from '@datashaper/schema';
@@ -281,7 +281,7 @@ export class DataTable extends Resource implements TableEmitter {
     // (undocumented)
     dispose(): void;
     // (undocumented)
-    get format$(): BehaviorSubject<DataFormat>;
+    get format$(): Observable<DataFormat>;
     // (undocumented)
     get format(): DataFormat;
     set format(value: DataFormat);

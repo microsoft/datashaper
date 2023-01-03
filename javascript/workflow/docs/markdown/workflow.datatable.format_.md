@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-get format$(): BehaviorSubject<DataFormat>;
+get format$(): Observable<DataFormat>;
 ```
