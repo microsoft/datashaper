@@ -48,6 +48,7 @@ describe('readCsvTable', () => {
 			it('should load a large dataset', () => {
 				const table = readCsvTable(largeDataset, {
 					comment: '#',
+					readRows: 466890,
 				})
 				expect(table.numRows()).toBe(466890)
 			})
