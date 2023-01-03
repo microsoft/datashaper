@@ -25,4 +25,5 @@ export declare class ResourceReference extends Resource
 |  --- | --- | --- |
 |  [defaultTitle()](./workflow.resourcereference.defaulttitle.md) |  |  |
 |  [isReference()](./workflow.resourcereference.isreference.md) |  |  |
+|  [toSchema()](./workflow.resourcereference.toschema.md) |  |  |
 
