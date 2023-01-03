@@ -56,8 +56,6 @@ export const Parser: React.FC<ParserProps> = memo(function Parser({ parser }) {
 							decrementButtonAriaLabel="Decrease value by 1"
 						/>
 						<SpinButton
-							disabled
-							title="Option temporarily disabled"
 							labelPosition={Position.top}
 							label="Read rows"
 							value={readRows?.toString()}
