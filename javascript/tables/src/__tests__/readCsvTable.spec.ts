@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import fs from 'fs'
 import fetch from 'node-fetch'
 
 import { readCsvTable } from '../readCsvTable.js'
@@ -33,6 +34,86 @@ const delimiter = `1:100:one
 5:500:five`
 
 describe('readCsvTable', () => {
+	describe('arquero reader', () => {
+		it('should load a default data without params', () => {
+			const table = readCsvTable(text)
+			expect(table.numRows()).toBe(9)
+			expect(table.numCols()).toBe(3)
+		})
+
+		it('should load a table with custom delimiter and names list', () => {
+			const table = readCsvTable(delimiter, {
+				header: false,
+				names: ['first', 'second', 'third'],
+				delimiter: ':',
+			})
+			expect(table.numRows()).toBe(5)
+		})
+
+		it('should load a table with custom delimiter expecting it to guess it', () => {
+			const table = readCsvTable(delimiter, { comment: '$' })
+			expect(table.numRows()).toBe(4)
+		})
+
+		it('should load a table skipping commented line 4 with $ as comment char', () => {
+			const table = readCsvTable(altComment, { comment: '$' })
+			expect(table.column('first')?.get(3)).toBe('5')
+		})
+
+		describe('headerless csv', () => {
+			const csv = fs.readFileSync(
+				'./src/__tests__/data/companies-headerless.csv',
+				{
+					encoding: 'utf8',
+					flag: 'r',
+				},
+			)
+
+			it('default arquero columns', () => {
+				const table = readCsvTable(csv, { header: false })
+				expect(table.columnNames()).toEqual(['col1', 'col2', 'col3', 'col4'])
+			})
+
+			it('specified column names', () => {
+				const table = readCsvTable(csv, {
+					header: false,
+					names: ['A', 'B', 'C', 'D'],
+				})
+				expect(table.columnNames()).toEqual(['A', 'B', 'C', 'D'])
+			})
+		})
+	})
+
+	describe('papaparse reader', () => {
+		it('should load a table', () => {
+			const table = readCsvTable(text, {
+				escapeChar: '$',
+				comment: '#',
+			})
+
+			expect(table.numRows()).toBe(9)
+		})
+
+		it('should load a table with custom delimiter', () => {
+			const table = readCsvTable(delimiter, {
+				header: false,
+				delimiter: ':',
+				escapeChar: '$',
+			})
+			expect(table.numRows()).toBe(5)
+		})
+
+		it('should load a table with custom delimiter expecting it to guess it', () => {
+			const table = readCsvTable(delimiter, { comment: '$', escapeChar: '$' })
+			expect(table.numRows()).toBe(4)
+		})
+
+		it('should load a table skipping commented line 4 with $ as comment char', () => {
+			const table = readCsvTable(altComment, { comment: '$', escapeChar: '$' })
+			expect(table.column('first')?.get(3)).toBe('5')
+		})
+	})
+
 	describe('Large tables', () => {
 		let remoteDataset = ''
 		let largeDataset = ''
@@ -73,63 +154,6 @@ describe('readCsvTable', () => {
 				})
 				expect(table.numRows()).toBe(3)
 			})
-		})
-	})
-
-	describe('arquero reader', () => {
-		it('should load a default data without params', () => {
-			const table = readCsvTable(text)
-			expect(table.numRows()).toBe(9)
-			expect(table.numCols()).toBe(3)
-		})
-
-		it('should load a table with custom delimiter and names list', () => {
-			const table = readCsvTable(delimiter, {
-				header: false,
-				names: ['first', 'second', 'third'],
-				delimiter: ':',
-			})
-			expect(table.numRows()).toBe(5)
-		})
-
-		it('should load a table with custom delimiter expecting it to guess it', () => {
-			const table = readCsvTable(delimiter, { comment: '$' })
-			expect(table.numRows()).toBe(4)
-		})
-
-		it('should load a table skipping commented line 4 with $ as comment char', () => {
-			const table = readCsvTable(altComment, { comment: '$' })
-			expect(table.column('first')?.get(3)).toBe('5')
-		})
-	})
-
-	describe('papaparse reader', () => {
-		it('should load a table', () => {
-			const table = readCsvTable(text, {
-				escapeChar: '$',
-				comment: '#',
-			})
-
-			expect(table.numRows()).toBe(9)
-		})
-
-		it('should load a table with custom delimiter', () => {
-			const table = readCsvTable(delimiter, {
-				header: false,
-				delimiter: ':',
-				escapeChar: '$',
-			})
-			expect(table.numRows()).toBe(5)
-		})
-
-		it('should load a table with custom delimiter expecting it to guess it', () => {
-			const table = readCsvTable(delimiter, { comment: '$', escapeChar: '$' })
-			expect(table.numRows()).toBe(4)
-		})
-
-		it('should load a table skipping commented line 4 with $ as comment char', () => {
-			const table = readCsvTable(altComment, { comment: '$', escapeChar: '$' })
-			expect(table.column('first')?.get(3)).toBe('5')
 		})
 	})
 })
