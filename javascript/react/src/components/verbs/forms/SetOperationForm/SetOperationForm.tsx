@@ -6,7 +6,7 @@ import { ActionButton, Label } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
 import { EMPTY_ARRAY } from '../../../../empty.js'
-import { useStepDataTable } from '../../../../hooks/steps/useStepDataTable.js'
+import { useStepInputTable } from '../../../../hooks/steps/useStepInputTable.js'
 import type { StepFormProps } from '../types.js'
 import { useOthers } from './SetOperationForm.hooks.js'
 import { Container, icons, Tables } from './SetOperationForm.styles.js'
@@ -17,7 +17,7 @@ import { Container, icons, Tables } from './SetOperationForm.styles.js'
  */
 export const SetOperationForm: React.FC<StepFormProps> = memo(
 	function SetOperationForm({ step, workflow, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, workflow, input, table)
+		const dataTable = useStepInputTable(step, workflow, input, table)
 		const others = useOthers(step, onChange, workflow)
 
 		const handleButtonClick = useCallback(() => {

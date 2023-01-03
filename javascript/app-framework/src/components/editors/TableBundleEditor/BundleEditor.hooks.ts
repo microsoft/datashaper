@@ -10,28 +10,32 @@ import type { IColumn } from '@fluentui/react'
 import { useObservableState } from 'observable-hooks'
 import { useCallback, useMemo, useState } from 'react'
 import type { Observable } from 'rxjs'
+import { from } from 'rxjs'
 
 import { useCommandBarStyles, useTableHeaderColors } from '../styles.js'
 
 export function useSelectedTable(
 	bundle: TableBundle,
 	selectedTableId: string | undefined,
+	isInputSelected: boolean,
+	isLatestSelected: boolean,
 ): TableContainer | undefined {
 	const workflow = useTableBundleWorkflow(bundle)
 	const observed$ = useMemo<Observable<Maybe<TableContainer>>>(() => {
-		if (bundle.name === selectedTableId && bundle?.input != null) {
-			// if we select the original table name, use the workflow default input
-			return bundle.input.output$
-		} else if (selectedTableId == null) {
-			// If the selected table id is not defined, use the default tablebundle output
-			return bundle.output$
+		if (isInputSelected) {
+			return workflow?.input$ ?? from([undefined])
+		} else if (isLatestSelected) {
+			return bundle.output$ ?? from([undefined])
+		} else if (selectedTableId != null) {
+			const result = workflow?.read$(selectedTableId)
+			if (!result) {
+				throw new Error(`could not read step output ${selectedTableId}`)
+			}
+			return result
 		} else {
-			// try to use the given table name to read step output, otherwise use the default output
-			const table = workflow?.read$(selectedTableId)
-			const defaultOutput = bundle.output$
-			return table ?? defaultOutput
+			throw new Error(`illegal state, no table selected`)
 		}
-	}, [bundle, selectedTableId, workflow])
+	}, [bundle, selectedTableId, workflow, isInputSelected, isLatestSelected])
 	return useObservableState(observed$, () => undefined)
 }
 
@@ -49,25 +53,6 @@ export function useColumnState(): [
 		[setSelectedColumn],
 	)
 	return [selectedColumn, onColumnClick]
-}
-
-export function useTableName(
-	table: TableBundle,
-	selectedTableId: string | undefined,
-): string {
-	const workflow = useTableBundleWorkflow(table)
-	return useMemo(() => {
-		let name: string | undefined
-		if (workflow != null) {
-			const stepIndex = workflow.steps.findIndex(x => x.id === selectedTableId)
-			// if the step index is the final step, use the default datatable name
-			if (stepIndex < workflow.steps.length - 1) {
-				const step = workflow.steps[stepIndex]
-				name = (step?.id || step?.verb)?.toLocaleUpperCase()
-			}
-		}
-		return name || table.name
-	}, [workflow, selectedTableId, table.name])
 }
 
 function useTableBundleWorkflow(table: TableBundle): Workflow | undefined {

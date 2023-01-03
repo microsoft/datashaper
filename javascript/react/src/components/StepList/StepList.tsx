@@ -15,7 +15,7 @@ import { Action } from '../controls/index.js'
 import { StepEditor } from '../StepEditor/index.js'
 import { StepHeader } from './StepHeader.js'
 import type { StepHeaderStyles } from './StepHeader.types.js'
-import { useDeleteConfirm, useTableHandlers } from './StepList.hooks.js'
+import { useDeleteConfirm } from './StepList.hooks.js'
 import {
 	ButtonContainer,
 	buttonStyles,
@@ -34,6 +34,8 @@ export const StepList: React.FC<StepListProps> = memo(function StepStack({
 	onDelete,
 	onSelect,
 	onSave,
+	onSelectInputTable,
+	onSelectLatestTable,
 	selectedKey,
 	styles,
 }) {
@@ -47,11 +49,6 @@ export const StepList: React.FC<StepListProps> = memo(function StepStack({
 		toggle: toggleDeleteModal,
 		isOpen: isDeleteModalOpen,
 	} = useDeleteConfirm(onDelete)
-
-	const { onSelectOriginalTable, onSelectLatest } = useTableHandlers(
-		workflow,
-		onSelect,
-	)
 
 	return (
 		<Container style={styles?.root}>
@@ -71,7 +68,7 @@ export const StepList: React.FC<StepListProps> = memo(function StepStack({
 						disabled={!steps.length}
 						iconProps={icons.preview}
 						style={buttonStyles}
-						onClick={onSelectOriginalTable}
+						onClick={onSelectInputTable}
 					>
 						Original
 					</Action>
@@ -81,7 +78,7 @@ export const StepList: React.FC<StepListProps> = memo(function StepStack({
 						disabled={!steps.length}
 						iconProps={icons.preview}
 						style={buttonStyles}
-						onClick={onSelectLatest}
+						onClick={onSelectLatestTable}
 					>
 						Latest
 					</Action>
