@@ -35,7 +35,7 @@ const delimiter = `1:100:one
 
 describe('readCsvTable', () => {
 	describe('arquero reader', () => {
-		it('should load a default data without params', () => {
+		it('should load default data without params', () => {
 			const table = readCsvTable(text)
 			expect(table.numRows()).toBe(10)
 			expect(table.numCols()).toBe(3)

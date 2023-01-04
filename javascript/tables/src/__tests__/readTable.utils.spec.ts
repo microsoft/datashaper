@@ -24,8 +24,17 @@ describe('readTable.utils', () => {
 			const type = determineParserType({ delimiter: ';' })
 			expect(type).toBe(ParserType.Arquero)
 		})
+		it('should return Arquero with non-configurable defaults match', () => {
+			const type = determineParserType({
+				delimiter: '\t',
+				lineTerminator: '\n',
+				quoteChar: '"',
+				skipBlankLines: true,
+			})
+			expect(type).toBe(ParserType.Arquero)
+		})
 		it('should return Papa parse', () => {
-			const type = determineParserType({ delimiter: ';', skipBlankLines: true })
+			const type = determineParserType({ delimiter: ';', escapeChar: '\\' })
 			expect(type).toBe(ParserType.PapaParse)
 		})
 	})

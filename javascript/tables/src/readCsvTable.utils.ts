@@ -11,6 +11,7 @@ import { uniq } from 'lodash-es'
 import { type ParseConfig, default as papa } from 'papaparse'
 
 import {
+	ARQUERO_INTERNAL_DEFAULTS,
 	ARQUERO_PROPS_MAP,
 	ARQUERO_SUPPORTED_OPTS,
 	LINE_TERMINATORS,
@@ -88,8 +89,21 @@ function papaParser(
 }
 
 export function hasArqueroOptions(options: ParserOptions): boolean {
+	// use a two-step process to check for arquero validity.
+	// we want to use arquero as much as possible because it is very fast.
+	// 1 - check if any options match values that arquero supports internally but are not configurable
+	// (e.g., lineTerminator in arquero defaults to \n)
+	// 2 - of the remaining options, confirm that they are all configurable in arquero
 	const props = Object.keys(options)
-	return props.every(p => ARQUERO_SUPPORTED_OPTS.has(p))
+	const internalDefaults = props.filter(
+		p =>
+			ARQUERO_INTERNAL_DEFAULTS.has(p) &&
+			options[p as keyof ParserOptions] === ARQUERO_INTERNAL_DEFAULTS.get(p),
+	)
+	const configurable = props.filter(p => ARQUERO_SUPPORTED_OPTS.has(p))
+	const supportedSet = new Set([...internalDefaults, ...configurable])
+	const remaining = props.filter(p => !supportedSet.has(p))
+	return remaining.length === 0
 }
 
 function mapOptions(
