@@ -23,8 +23,9 @@ export class DataTableProfile implements ProfilePlugin<DataTable> {
 
 	public getRoutes(
 		resource: DataTable,
-		pathContext: string,
+		routes: Map<string, string>,
 	): GeneratedExtraRoutes | undefined {
+		const pathContext = routes.get(resource.name)
 		const dataPath = Array.isArray(resource.path)
 			? resource.path[0]
 			: resource.path

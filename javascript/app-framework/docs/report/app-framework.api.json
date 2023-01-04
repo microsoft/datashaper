@@ -819,7 +819,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!ProfilePlugin#getRoutes:member",
-              "docComment": "/**\n * Event handler for when the resource is undergoing route generation. A route is always generated for the resource; any related routes may be retured here.\n *\n * @param resource - The resource that routes are being generated for.\n *\n * @param parentPath - The current path context being used for generation. This is the parent path of the resource.\n *\n * @param resourcePath - The resource path that was used for the resource.\n */\n",
+              "docComment": "/**\n * Event handler for when the resource is undergoing route generation. A route is always generated for the resource; any related routes may be retured here.\n *\n * @param resource - The resource that routes are being generated for.\n *\n * @param routes - A map of the resource-routes keyed by resource name.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -827,7 +827,16 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "(resource: T, parentPath: string, resourcePath: string) => "
+                  "text": "(resource: T, routes: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Map",
+                  "canonicalReference": "!Map:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string, string>) => "
                 },
                 {
                   "kind": "Reference",
@@ -849,7 +858,7 @@
               "name": "getRoutes",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 4
+                "endIndex": 6
               }
             },
             {
