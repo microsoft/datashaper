@@ -68,6 +68,28 @@ describe('readCsvTable', () => {
 			expect(table.column('first')?.get(3)).toBe(5)
 		})
 
+		describe('autoType', () => {
+			const csv = fs.readFileSync('./src/__tests__/data/companies.csv', {
+				encoding: 'utf8',
+				flag: 'r',
+			})
+
+			it('true (default)', () => {
+				const table = readCsvTable(csv)
+				expect(typeof table.column('ID')?.get(0)).toBe('number')
+				expect(typeof table.column('Name')?.get(0)).toBe('string')
+				expect(typeof table.column('Employees')?.get(0)).toBe('number')
+				expect(typeof table.column('US')?.get(0)).toBe('boolean')
+			})
+
+			it('false', () => {
+				const table = readCsvTable(csv, {}, false)
+				expect(typeof table.column('ID')?.get(0)).toBe('string')
+				expect(typeof table.column('Name')?.get(0)).toBe('string')
+				expect(typeof table.column('Employees')?.get(0)).toBe('string')
+				expect(typeof table.column('US')?.get(0)).toBe('string')
+			})
+		})
 		describe('headerless csv', () => {
 			const csv = fs.readFileSync(
 				'./src/__tests__/data/companies-headerless.csv',
@@ -77,7 +99,7 @@ describe('readCsvTable', () => {
 				},
 			)
 
-			it('default arquero columns', () => {
+			it('default column names', () => {
 				const table = readCsvTable(csv, { header: false })
 				expect(table.columnNames()).toEqual(['col1', 'col2', 'col3', 'col4'])
 			})
@@ -119,6 +141,62 @@ describe('readCsvTable', () => {
 		it('should load a table skipping commented line 4 with $ as comment char', () => {
 			const table = readCsvTable(altComment, { comment: '$', escapeChar: '$' })
 			expect(table.column('first')?.get(3)).toBe(5)
+		})
+
+		describe('autoType', () => {
+			const csv = fs.readFileSync('./src/__tests__/data/companies.csv', {
+				encoding: 'utf8',
+				flag: 'r',
+			})
+
+			it('true (default)', () => {
+				const table = readCsvTable(csv, {
+					// force papa with a non-arquero param
+					escapeChar: '$',
+				})
+				expect(typeof table.column('ID')?.get(0)).toBe('number')
+				expect(typeof table.column('Name')?.get(0)).toBe('string')
+				expect(typeof table.column('Employees')?.get(0)).toBe('number')
+				expect(typeof table.column('US')?.get(0)).toBe('boolean')
+			})
+
+			it('false', () => {
+				const table = readCsvTable(
+					csv,
+					{
+						// force papa with a non-arquero param
+						escapeChar: '$',
+					},
+					false,
+				)
+				expect(typeof table.column('ID')?.get(0)).toBe('string')
+				expect(typeof table.column('Name')?.get(0)).toBe('string')
+				expect(typeof table.column('Employees')?.get(0)).toBe('string')
+				expect(typeof table.column('US')?.get(0)).toBe('string')
+			})
+		})
+		describe('headerless csv', () => {
+			const csv = fs.readFileSync(
+				'./src/__tests__/data/companies-headerless.csv',
+				{
+					encoding: 'utf8',
+					flag: 'r',
+				},
+			)
+
+			it('default column names', () => {
+				const table = readCsvTable(csv, { header: false, escapeChar: '$' })
+				expect(table.columnNames()).toEqual(['col1', 'col2', 'col3', 'col4'])
+			})
+
+			it('specified column names', () => {
+				const table = readCsvTable(csv, {
+					header: false,
+					names: ['A', 'B', 'C', 'D'],
+					escapeChar: '$',
+				})
+				expect(table.columnNames()).toEqual(['A', 'B', 'C', 'D'])
+			})
 		})
 	})
 

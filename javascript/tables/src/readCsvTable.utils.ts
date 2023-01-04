@@ -17,6 +17,7 @@ import {
 	PAPAPARSE_PROPS_MAP,
 } from './readCsvTable.constants.js'
 import { ParserType } from './readCsvTable.types.js'
+import { fromJSONValues } from './readJSONTable.js'
 
 export function determineParserType(options?: ParserOptions) {
 	if (!options || hasArqueroOptions(options)) {
@@ -62,6 +63,19 @@ function papaParser(
 		const subset = skipRows(table.data, opts.skipRows)
 		table.data = subset
 	}
+	// if there are no table headers, papaparse returns array of arrays
+	// we'll add some headers and then use our default values parser
+	if (!options.header) {
+		let names = options.names
+		if (!names) {
+			// generate names in the style of arquero
+			// TODO: how does this align with pandas default names?
+			names = table.data[0].map((_: any, i: number) => `col${i + 1}`)
+		}
+		table.data.unshift(names)
+		return fromJSONValues(table.data)
+	}
+
 	return from(table.data)
 }
 

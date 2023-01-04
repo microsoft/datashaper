@@ -18,13 +18,17 @@ import { getParser, validOptions } from './readCsvTable.utils.js'
  */
 export function readCsvTable(
 	text: string,
-	options: ParserOptions = ParserOptionsDefaults,
+	options?: ParserOptions,
 	autoType = true,
 ): ColumnTable {
 	const valid = validOptions(options)
 	if (!valid) {
-		throw new Error('Some options are not valid')
+		throw new Error('Some opts are not valid')
 	}
-	const parser = getParser(options)
-	return parser(text, options, autoType)
+	const opts = {
+		...ParserOptionsDefaults,
+		...options,
+	}
+	const parser = getParser(opts)
+	return parser(text, opts, autoType)
 }

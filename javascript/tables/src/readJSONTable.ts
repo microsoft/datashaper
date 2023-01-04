@@ -11,6 +11,7 @@ const DEFAULT_DATA_SHAPE_JSON_OPTIONS: DataShape = {
 	orientation: DataOrientation.Records,
 }
 
+// TODO: arquero actually does perform some autoTyping on json values
 export function readJSONTable(
 	text: string,
 	shape: DataShape = DEFAULT_DATA_SHAPE_JSON_OPTIONS,
@@ -18,19 +19,27 @@ export function readJSONTable(
 	const obj = JSON.parse(text)
 	switch (shape.orientation) {
 		case DataOrientation.Records:
-			return from(obj)
+			return fromJSONRecords(obj)
 		case DataOrientation.Columnar:
-			return fromJSON(text)
+			return fromJSONColumnar(obj)
 		case DataOrientation.Array:
-			return fromArray(obj, shape)
+			return fromJSONArray(obj, shape)
 		case DataOrientation.Values:
-			return fromValues(obj)
+			return fromJSONValues(obj)
 		default:
 			throw new Error(`unknown data orientation: ${shape.orientation}`)
 	}
 }
 
-function fromArray(obj: any, shape: DataShape): ColumnTable {
+export function fromJSONRecords(obj: any) {
+	return from(obj)
+}
+
+export function fromJSONColumnar(obj: any) {
+	return fromJSON(obj)
+}
+
+export function fromJSONArray(obj: any, shape: DataShape): ColumnTable {
 	// all the data is a single column unless a matrix row x col layout is specified
 	if (shape.matrix) {
 		const [rows, cols] = shape.matrix
@@ -41,14 +50,14 @@ function fromArray(obj: any, shape: DataShape): ColumnTable {
 			const row = obj.slice(i, i + cols)
 			result.push(row)
 		}
-		return fromValues(result)
+		return fromJSONValues(result)
 	}
 	return fromJSON({
 		col1: obj,
 	})
 }
 
-function fromValues(obj: any): ColumnTable {
+export function fromJSONValues(obj: any): ColumnTable {
 	// first row is assumed to be headers (as stated in schema)
 	const headers = obj[0]
 	const data = obj.slice(1)

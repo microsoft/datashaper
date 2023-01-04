@@ -7,6 +7,7 @@ import { DataFormat } from '@datashaper/schema'
 import { fromArrow, fromCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
+// import { readCsvTable } from './readCsvTable.js'
 import { mapToArqueroOptions } from './readCsvTable.utils.js'
 import { readJSONTable } from './readJSONTable.js'
 
