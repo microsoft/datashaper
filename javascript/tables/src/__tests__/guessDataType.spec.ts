@@ -4,7 +4,6 @@
  */
 
 import { typeGuesserFactory } from '../guessDataType.js'
-import { DECIMAL_DEFAULT, THOUSANDS_DEFAULT } from '../typeHints.defaults'
 
 describe('Validators tests', () => {
 	describe('isBoolean', () => {
@@ -41,10 +40,7 @@ describe('Validators tests', () => {
 	})
 
 	describe('isNumber', () => {
-		let { isNumber } = typeGuesserFactory({
-			decimal: DECIMAL_DEFAULT,
-			thousands: THOUSANDS_DEFAULT,
-		})
+		let { isNumber } = typeGuesserFactory()
 		it('should return true', () => {
 			expect(isNumber('1.00003')).toBe(true)
 			expect(isNumber('5000')).toBe(true)

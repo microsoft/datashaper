@@ -9,13 +9,11 @@ import { useMemo } from 'react'
 import styled from 'styled-components'
 
 export const DatasetContainer = styled.div`
-	max-height: calc(100% - 82px);
+	max-height: calc(100% - 36px);
 	height: 100%;
 `
 
-export const Message = styled(MessageBar)`
-	margin-top: 10px;
-`
+export const Message = styled(MessageBar)``
 
 export const DetailsListContainer = styled.div`
 	height: 100%;

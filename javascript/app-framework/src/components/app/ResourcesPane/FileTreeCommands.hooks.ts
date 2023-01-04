@@ -191,7 +191,7 @@ function useOpenMenuItems(
 		const result: IContextualMenuItem[] = [
 			{
 				key: 'csv',
-				text: 'CSV File',
+				text: 'Data file',
 				iconProps: icons.table,
 				onClick: onClickUploadTable,
 			},

@@ -38,7 +38,7 @@ export class TableBundleProfile implements ProfilePlugin<TableBundle> {
 
 	public createResource(): TableBundle {
 		const result = new TableBundle()
-		result.name = 'New Table'
+		result.name = 'Data table'
 		return result
 	}
 

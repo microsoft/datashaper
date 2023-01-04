@@ -25,7 +25,6 @@ import type { IRenderFunction } from '@fluentui/react';
 import type { IStyleFunctionOrObject } from '@fluentui/utilities';
 import type { ITextFieldStyleProps } from '@fluentui/react';
 import type { ITextFieldStyles } from '@fluentui/react';
-import type { ParserOptions } from '@datashaper/schema';
 import type { ReactNode } from 'react';
 import type { SortDirection } from '@datashaper/schema';
 import type { Step } from '@datashaper/workflow';
@@ -209,21 +208,6 @@ export interface GuidanceProps {
     index: Record<string, string>;
     // (undocumented)
     name: string;
-}
-
-// Warning: (ae-missing-release-tag) "Parser" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const Parser: React.FC<ParserProps>;
-
-// Warning: (ae-missing-release-tag) "ParserProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ParserProps {
-    // (undocumented)
-    onChange?: (parser: ParserOptions) => void;
-    // (undocumented)
-    parser: ParserOptions;
 }
 
 // Warning: (ae-missing-release-tag) "SaveMetadataFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

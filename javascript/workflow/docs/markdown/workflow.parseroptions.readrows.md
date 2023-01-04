@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-get readRows(): number;
+get readRows(): number | undefined;
 
 set readRows(value: number | undefined);
 ```

@@ -3,20 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { TypeHints, Value } from '@datashaper/schema'
-import { DataType } from '@datashaper/schema'
+import type { TypeHints, Value } from '@datashaper/schema';
+import { DataType,TypeHintsDefaults  } from '@datashaper/schema'
 import toNumber from 'lodash-es/toNumber.js'
 import moment from 'moment'
 
 import { guessDataType, typeGuesserFactory } from './guessDataType.js'
-import {
-	DATE_FORMAT_DEFAULT,
-	DECIMAL_DEFAULT,
-	FALSE_DEFAULTS,
-	NA_DEFAULTS,
-	THOUSANDS_DEFAULT,
-	TRUE_DEFAULTS,
-} from './typeHints.defaults.js'
 import { formatNumberStr, getDate } from './util.js'
 
 /**
@@ -50,9 +42,9 @@ export function parseAs(type?: DataType, hints?: TypeHints): Value {
 }
 
 export function parseNumber(
-	naValues = NA_DEFAULTS,
-	decimal = DECIMAL_DEFAULT,
-	thousands = THOUSANDS_DEFAULT,
+	naValues = TypeHintsDefaults.naValues,
+	decimal = TypeHintsDefaults.decimal,
+	thousands = TypeHintsDefaults.thousands,
 ): (values: string) => number | null {
 	const { isNull } = typeGuesserFactory({ naValues })
 	return function parseNumber(value: string) {
@@ -64,9 +56,9 @@ export function parseNumber(
 }
 
 export function parseBoolean(
-	naValues = NA_DEFAULTS,
-	trueValues = TRUE_DEFAULTS,
-	falseValues = FALSE_DEFAULTS,
+	naValues = TypeHintsDefaults.naValues,
+	trueValues = TypeHintsDefaults.trueValues,
+	falseValues = TypeHintsDefaults.falseValues,
 ): (value: string) => boolean | null {
 	const { isNull } = typeGuesserFactory({ naValues })
 	const trueSet = new Set(trueValues.map(v => v.toLowerCase()))
@@ -87,7 +79,7 @@ export function parseBoolean(
 }
 
 export function parseString(
-	naValues = NA_DEFAULTS,
+	naValues = TypeHintsDefaults.naValues,
 ): (value: string) => string | null {
 	const { isNull } = typeGuesserFactory({ naValues })
 	return function parseString(value: string) {
@@ -151,8 +143,8 @@ export function parseObject(
 }
 
 export function parseDate(
-	naValues = NA_DEFAULTS,
-	dateFormat = DATE_FORMAT_DEFAULT,
+	naValues = TypeHintsDefaults.naValues,
+	dateFormat = TypeHintsDefaults.dateFormat,
 ): (value: string) => string | null {
 	const { isNull } = typeGuesserFactory({ naValues })
 	return function parseDate(value: string) {
@@ -164,7 +156,7 @@ export function parseDate(
 }
 
 export function parseUndefined(
-	naValues = NA_DEFAULTS,
+	naValues = TypeHintsDefaults.naValues,
 ): (value: string) => undefined | null {
 	const { isNull } = typeGuesserFactory({ naValues })
 	return function parseUndefined(value: string) {

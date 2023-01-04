@@ -3,14 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import { TypeHintsDefaults } from '@datashaper/schema'
 import toNumber from 'lodash-es/toNumber.js'
-
-import { DECIMAL_DEFAULT, THOUSANDS_DEFAULT } from './typeHints.defaults.js'
 
 export function formatNumberStr(
 	value: string | number,
-	decimal = DECIMAL_DEFAULT,
-	thousands = THOUSANDS_DEFAULT,
+	decimal = TypeHintsDefaults.decimal,
+	thousands = TypeHintsDefaults.thousands,
 ): string {
 	if (typeof value === 'number') {
 		value = value.toString()

@@ -4,7 +4,8 @@
  */
 import type { ParserOptions } from '@datashaper/schema'
 import { default as papa } from 'papaparse'
-import { mapToPapaParseOptions } from './readTable.utils.js'
+
+import { mapToPapaParseOptions } from './readCsvTable.utils.js'
 
 export function guessDelimiter(text: string, config?: ParserOptions): string {
 	const options = mapToPapaParseOptions(config)

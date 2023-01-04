@@ -4,5 +4,4 @@
  */
 export * from './RawTable/index.js'
 export * from './TableDelimiterOptions/index.js'
-export * from './TableLayoutOptions/index.js'
 export * from './TablePreview/index.js'

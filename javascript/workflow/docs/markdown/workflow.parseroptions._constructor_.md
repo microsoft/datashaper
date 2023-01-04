@@ -9,12 +9,12 @@ Constructs a new instance of the `ParserOptions` class
 <b>Signature:</b>
 
 ```typescript
-constructor(parserOptions?: ParserOptionsSchema);
+constructor(schema?: ParserOptionsSchema);
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parserOptions | ParserOptionsSchema | <i>(Optional)</i> |
+|  schema | ParserOptionsSchema | <i>(Optional)</i> |
 

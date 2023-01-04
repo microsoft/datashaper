@@ -69,8 +69,7 @@ export function useToolPanelStyles(): ToolPanelStyles {
 				borderBottom: `1px solid ${colors.border}`,
 			},
 			content: {
-				paddingLeft: 10,
-				paddingRight: 10,
+				padding: 10,
 			},
 		}),
 		[colors],
