@@ -10704,6 +10704,42 @@
           "extendsTokenRanges": []
         },
         {
+          "kind": "Variable",
+          "canonicalReference": "@datashaper/schema!TypeHintsDefaults:var",
+          "docComment": "/**\n * This is a collection of default string values for inferring strict types from strings. They replicate the defaults from pandas. https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#csv-text-files\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "TypeHintsDefaults: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Required",
+              "canonicalReference": "!Required:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "TypeHints",
+              "canonicalReference": "@datashaper/schema!TypeHints:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "TypeHintsDefaults",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 5
+          }
+        },
+        {
           "kind": "TypeAlias",
           "canonicalReference": "@datashaper/schema!UnfoldArgs:type",
           "docComment": "",

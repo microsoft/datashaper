@@ -37,7 +37,7 @@ import type { NamedPortBinding } from '@datashaper/schema';
 import { Observable } from 'rxjs';
 import type { OnehotArgs } from '@datashaper/schema';
 import type { OrderbyArgs } from '@datashaper/schema';
-import { ParserOptions as ParserOptions_2 } from '@datashaper/schema';
+import type { ParserOptions as ParserOptions_2 } from '@datashaper/schema';
 import type { PivotArgs } from '@datashaper/schema';
 import type { PortBinding } from '@datashaper/schema';
 import type { Profile } from '@datashaper/schema';

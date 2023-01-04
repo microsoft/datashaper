@@ -13,10 +13,10 @@ import { DataType } from '@datashaper/schema';
 import type { Field } from '@datashaper/schema';
 import type { FieldMetadata } from '@datashaper/schema';
 import type { ParserOptions } from '@datashaper/schema';
-import type { TypeHints } from '@datashaper/schema';
+import { TypeHints } from '@datashaper/schema';
 import type { ValidationFunction } from '@datashaper/schema';
 import type { ValidationResult } from '@datashaper/schema';
-import type { Value } from '@datashaper/schema';
+import { Value } from '@datashaper/schema';
 
 // Warning: (ae-missing-release-tag) "applyCodebook" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

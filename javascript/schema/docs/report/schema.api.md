@@ -1110,6 +1110,11 @@ export interface TypeHints {
     trueValues?: string[];
 }
 
+// Warning: (ae-missing-release-tag) "TypeHintsDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const TypeHintsDefaults: Required<TypeHints>;
+
 // Warning: (ae-missing-release-tag) "UnfoldArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)

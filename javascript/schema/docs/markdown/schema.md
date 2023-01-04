@@ -117,6 +117,7 @@
 |  [LATEST\_TABLEBUNDLE\_SCHEMA](./schema.latest_tablebundle_schema.md) |  |
 |  [LATEST\_WORKFLOW\_SCHEMA](./schema.latest_workflow_schema.md) |  |
 |  [ParserOptionsDefaults](./schema.parseroptionsdefaults.md) |  |
+|  [TypeHintsDefaults](./schema.typehintsdefaults.md) | This is a collection of default string values for inferring strict types from strings. They replicate the defaults from pandas. https://pandas.pydata.org/pandas-docs/stable/user\_guide/io.html\#csv-text-files |
 
 ## Type Aliases
 
