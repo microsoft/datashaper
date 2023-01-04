@@ -78,7 +78,7 @@ export interface ProfilePlugin<T extends Resource = any> {
     dataHandler?: ProfileHandler | null;
     getCommandBarCommands?: (section: CommandBarSection) => IContextualMenuItem[] | undefined;
     getMenuItems?: (resource: T) => IContextualMenuItem[];
-    getRoutes?: (resource: T, parentPath: string, resourcePath: string) => GeneratedExtraRoutes | undefined;
+    getRoutes?: (resource: T, routes: Map<string, string>) => GeneratedExtraRoutes | undefined;
     group?: ResourceGroupType;
     iconName: string;
     initialize?: (api: AppServices, dp: DataPackage) => void;

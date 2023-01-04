@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { ParserType } from '../readTable.types.js'
+import { ParserType } from '../readCsvTable.types.js'
 import {
 	allUnique,
 	determineParserType,
@@ -11,7 +11,7 @@ import {
 	hasOneChar,
 	mapProps,
 	validOptions,
-} from '../readTable.utils.js'
+} from '../readCsvTable.utils.js'
 
 describe('readTable Utils Tests', () => {
 	describe('determineParserType', () => {

@@ -5,7 +5,7 @@
 import type { PivotArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
-import { useColumnNames, useStepDataTable } from '../../../../hooks/index.js'
+import { useColumnNames, useStepInputTable } from '../../../../hooks/index.js'
 import type { StepFormProps } from '../types.js'
 import { PivotFormBase } from './PivotForm.base.js'
 
@@ -15,7 +15,7 @@ import { PivotFormBase } from './PivotForm.base.js'
  */
 export const PivotForm: React.FC<StepFormProps<PivotArgs>> = memo(
 	function PivotForm({ step, workflow, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, workflow, input, table)
+		const dataTable = useStepInputTable(step, workflow, input, table)
 		const columns = useColumnNames(dataTable)
 
 		return <PivotFormBase step={step} onChange={onChange} columns={columns} />

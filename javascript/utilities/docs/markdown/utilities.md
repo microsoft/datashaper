@@ -43,6 +43,7 @@
 |  [isTableFile(fileName)](./utilities.istablefile.md) |  |
 |  [isZipFile(fileName)](./utilities.iszipfile.md) |  |
 |  [loadTable(file, options)](./utilities.loadtable.md) |  |
+|  [removeExtension(fileName)](./utilities.removeextension.md) |  |
 |  [renameDuplicatedFileName(map, name)](./utilities.renameduplicatedfilename.md) |  |
 |  [renameDuplicatedFiles(files)](./utilities.renameduplicatedfiles.md) |  |
 |  [tableToHTML(file, htmlOptions, tableOptions)](./utilities.tabletohtml.md) |  |

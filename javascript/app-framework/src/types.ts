@@ -118,13 +118,11 @@ export interface ProfilePlugin<T extends Resource = any> {
 	 * A route is always generated for the resource; any related routes may be retured here.
 	 *
 	 * @param resource - The resource that routes are being generated for.
-	 * @param parentPath - The current path context being used for generation. This is the parent path of the resource.
-	 * @param resourcePath - The resource path that was used for the resource.
+	 * @param routes - A map of the resource-routes keyed by resource name.
 	 */
 	getRoutes?: (
 		resource: T,
-		parentPath: string,
-		resourcePath: string,
+		routes: Map<string, string>,
 	) => GeneratedExtraRoutes | undefined
 }
 

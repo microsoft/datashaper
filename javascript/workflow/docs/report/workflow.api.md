@@ -245,11 +245,20 @@ export class DataShape extends Observed implements DataShape_2 {
     // (undocumented)
     loadSchema(schema: Maybe<DataShape_2>, quiet?: boolean): void;
     // (undocumented)
+    get matrix$(): Observable<[
+    width: number,
+    height: number
+    ] | undefined>;
+    // (undocumented)
     get matrix(): [width: number, height: number] | undefined;
     set matrix(value: [width: number, height: number] | undefined);
     // (undocumented)
+    get nature$(): Observable<DataNature | undefined>;
+    // (undocumented)
     get nature(): DataNature | undefined;
     set nature(value: DataNature | undefined);
+    // (undocumented)
+    get orientation$(): Observable<DataOrientation | undefined>;
     // (undocumented)
     get orientation(): DataOrientation | undefined;
     set orientation(value: DataOrientation | undefined);
@@ -271,6 +280,8 @@ export class DataTable extends Resource implements TableEmitter {
     defaultName(): string;
     // (undocumented)
     dispose(): void;
+    // (undocumented)
+    get format$(): Observable<DataFormat>;
     // (undocumented)
     get format(): DataFormat;
     set format(value: DataFormat);
@@ -669,35 +680,58 @@ export const orderby: (id: string) => StepNode<TableContainer<unknown>, OrderbyA
 //
 // @public (undocumented)
 export class ParserOptions extends Observed implements ParserOptions_2 {
-    constructor(parserOptions?: ParserOptions_2);
+    constructor(schema?: ParserOptions_2);
+    // (undocumented)
+    get comment$(): Observable<string | undefined>;
     // (undocumented)
     get comment(): string | undefined;
     set comment(value: string | undefined);
     // (undocumented)
-    get delimiter(): string;
+    get delimiter$(): Observable<string | undefined>;
+    // (undocumented)
+    get delimiter(): string | undefined;
     set delimiter(delimiter: string | undefined);
+    // (undocumented)
+    get escapeChar$(): Observable<string | undefined>;
     // (undocumented)
     get escapeChar(): string | undefined;
     set escapeChar(value: string | undefined);
     // (undocumented)
-    get lineTerminator(): string;
+    get header$(): Observable<boolean | undefined>;
+    // (undocumented)
+    get header(): boolean | undefined;
+    set header(value: boolean | undefined);
+    // (undocumented)
+    get lineTerminator$(): Observable<string | undefined>;
+    // (undocumented)
+    get lineTerminator(): string | undefined;
     set lineTerminator(value: string | undefined);
     // (undocumented)
     loadSchema(schema: Maybe<ParserOptions_2>, quiet?: boolean): void;
     // (undocumented)
+    get names$(): Observable<string[] | undefined>;
+    // (undocumented)
     get names(): string[] | undefined;
     set names(value: string[] | undefined);
     // (undocumented)
-    get quoteChar(): string;
+    get quoteChar$(): Observable<string | undefined>;
+    // (undocumented)
+    get quoteChar(): string | undefined;
     set quoteChar(value: string | undefined);
     // (undocumented)
-    get readRows(): number;
+    get readRows$(): Observable<number | undefined>;
+    // (undocumented)
+    get readRows(): number | undefined;
     set readRows(value: number | undefined);
     // (undocumented)
-    get skipBlankLines(): boolean;
+    get skipBlankLines$(): Observable<boolean | undefined>;
+    // (undocumented)
+    get skipBlankLines(): boolean | undefined;
     set skipBlankLines(value: boolean | undefined);
     // (undocumented)
-    get skipRows(): number;
+    get skipRows$(): Observable<number | undefined>;
+    // (undocumented)
+    get skipRows(): number | undefined;
     set skipRows(value: number | undefined);
     // (undocumented)
     toSchema(): ParserOptions_2;
@@ -800,6 +834,8 @@ export class ResourceReference extends Resource {
     // (undocumented)
     get target(): Resource | undefined;
     set target(value: Resource | undefined);
+    // (undocumented)
+    toSchema(): ResourceSchema;
 }
 
 // Warning: (ae-missing-release-tag) "rollup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

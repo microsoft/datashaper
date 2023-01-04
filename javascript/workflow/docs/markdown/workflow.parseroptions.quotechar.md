@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-get quoteChar(): string;
+get quoteChar(): string | undefined;
 
 set quoteChar(value: string | undefined);
 ```

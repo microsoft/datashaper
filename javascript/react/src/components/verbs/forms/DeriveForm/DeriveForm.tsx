@@ -5,7 +5,7 @@
 import type { DeriveArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
-import { useColumnNames, useStepDataTable } from '../../../../hooks/index.js'
+import { useColumnNames, useStepInputTable } from '../../../../hooks/index.js'
 import type { StepFormProps } from '../types.js'
 import { DeriveFormBase } from './DeriveForm.base.js'
 
@@ -14,7 +14,7 @@ import { DeriveFormBase } from './DeriveForm.base.js'
  */
 export const DeriveForm: React.FC<StepFormProps<DeriveArgs>> = memo(
 	function DeriveForm({ step, workflow, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, workflow, input, table)
+		const dataTable = useStepInputTable(step, workflow, input, table)
 		const columns = useColumnNames(dataTable)
 		return <DeriveFormBase columns={columns} step={step} onChange={onChange} />
 	},

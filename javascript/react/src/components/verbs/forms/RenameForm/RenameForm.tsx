@@ -21,7 +21,7 @@ import {
 	useColumnNames,
 	useOnDeleteStepColumn,
 	useSimpleDropdownOptions,
-	useStepDataTable,
+	useStepInputTable,
 } from '../../../../hooks/index.js'
 import { TableColumnDropdown } from '../../../controls/index.js'
 import { narrowerDropdownStyles } from '../styles.js'
@@ -37,7 +37,7 @@ import {
  */
 export const RenameForm: React.FC<StepFormProps<RenameArgs>> = memo(
 	function RenameForm({ step, workflow, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, workflow, input, table)
+		const dataTable = useStepInputTable(step, workflow, input, table)
 		const handleColumnChange = useHandleColumnChange(step, onChange)
 		const handleColumnDelete = useOnDeleteStepColumn(step, onChange)
 		const handleButtonClick = useHandleAddButtonClick(step, dataTable, onChange)

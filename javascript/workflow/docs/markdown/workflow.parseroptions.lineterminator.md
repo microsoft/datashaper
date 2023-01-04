@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-get lineTerminator(): string;
+get lineTerminator(): string | undefined;
 
 set lineTerminator(value: string | undefined);
 ```

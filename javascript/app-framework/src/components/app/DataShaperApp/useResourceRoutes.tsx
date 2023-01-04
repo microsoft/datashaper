@@ -33,13 +33,14 @@ export function useResourceRoutes(
 		() =>
 			pkg.resources$.pipe(
 				map(resources => {
+					const hrefs = getResourceHrefs(resources)
 					const grouped = groupResources(resources, plugins)
 					const groups: ResourceRouteGroup[] = []
 					grouped.forEach((resources, type) => {
 						groups.push({
 							type,
 							resources: resources
-								.map(r => makeResourceRoute(r, services, plugins))
+								.map(r => makeResourceRoute(r, services, plugins, hrefs))
 								.flatMap(x => x),
 						})
 					})
@@ -51,18 +52,37 @@ export function useResourceRoutes(
 	return useObservableState(observable, () => [])
 }
 
+function getResourceHrefs(
+	resources: Resource[],
+	current?: Map<string, string>,
+	parentRoute = '/resource',
+): Map<string, string> {
+	const result = current ?? new Map<string, string>()
+
+	resources.forEach(r => {
+		if (!r.isReference()) {
+			const href = `${parentRoute}/${r.name}`
+			result.set(r.name, href)
+			getResourceHrefs(r.sources, result, href)
+		}
+	})
+	return result
+}
+
 function makeResourceRoute(
 	resource: Resource,
 	services: AppServices,
 	plugins: Map<string, ProfilePlugin>,
-	parentRoute = '/resource',
+	hrefs: Map<string, string>,
 ): ResourceRoute[] {
 	if (resource.isReference()) {
 		const ref = resource as ResourceReference
 		const target = ref.target
+		const href = target && hrefs.get(target.name)
 		if (target) {
 			const route: ResourceRoute = {
 				title: target.title ?? target.name,
+				href,
 				icon: 'Link',
 			}
 			return [route]
@@ -73,7 +93,7 @@ function makeResourceRoute(
 		return []
 	}
 	const plugin = plugins.get(resource.profile)!
-	const href = `${parentRoute}/${resource.name}`
+	const href = hrefs.get(resource.name)
 	const root: ResourceRoute = {
 		href,
 		title: resource.title ?? resource.name,
@@ -96,11 +116,11 @@ function makeResourceRoute(
 		],
 		props: { resource },
 	}
-	const extraRoutes = plugin?.getRoutes?.(resource, parentRoute, href)
+	const extraRoutes = plugin?.getRoutes?.(resource, hrefs)
 
 	const children: ResourceRoute[] = extraRoutes?.children ?? []
 	for (const r of resource.sources ?? EMPTY_ARRAY) {
-		children.push(...makeResourceRoute(r, services, plugins, href))
+		children.push(...makeResourceRoute(r, services, plugins, hrefs))
 	}
 
 	root.children = children

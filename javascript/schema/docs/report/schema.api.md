@@ -807,6 +807,11 @@ export interface ParserOptions {
     skipRows?: number;
 }
 
+// Warning: (ae-missing-release-tag) "ParserOptionsDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const ParserOptionsDefaults: ParserOptions;
+
 // Warning: (ae-missing-release-tag) "ParseType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -1106,6 +1111,11 @@ export interface TypeHints {
     thousands?: string;
     trueValues?: string[];
 }
+
+// Warning: (ae-missing-release-tag) "TypeHintsDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const TypeHintsDefaults: Required<TypeHints>;
 
 // Warning: (ae-missing-release-tag) "UnfoldArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

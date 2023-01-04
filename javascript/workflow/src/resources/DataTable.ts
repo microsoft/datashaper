@@ -35,7 +35,8 @@ export class DataTable extends Resource implements TableEmitter {
 	public readonly parser = new ParserOptions()
 	public readonly shape = new DataShape()
 
-	private _format: DataFormat = DataFormat.CSV
+	private _format = new BehaviorSubject<DataFormat>(DataFormat.CSV)
+
 	private _rawData: Blob | undefined
 
 	public constructor(datatable?: Readable<DataTableSchema>) {
@@ -78,12 +79,16 @@ export class DataTable extends Resource implements TableEmitter {
 		this.refreshData()
 	}
 
-	public get format(): DataFormat {
+	public get format$(): Observable<DataFormat> {
 		return this._format
 	}
 
+	public get format(): DataFormat {
+		return this._format.value
+	}
+
 	public set format(value: DataFormat) {
-		this._format = value
+		this._format.next(value)
 		this.refreshData()
 	}
 	// #endregion
@@ -110,7 +115,7 @@ export class DataTable extends Resource implements TableEmitter {
 		quiet?: boolean,
 	): void {
 		super.loadSchema(schema, true)
-		this._format = schema?.format ?? DataFormat.CSV
+		this._format.next(schema?.format ?? DataFormat.CSV)
 		// these loads will fire onChange events
 		// which will trigger refreshSource
 		this.parser.loadSchema(schema?.parser, true)

@@ -4,5 +4,7 @@
  */
 export * from './DataShape.js'
 export * from './DataTableSchema.js'
+export * from './ParserOptions.defaults.js'
 export * from './ParserOptions.js'
+export * from './TypeHints.defaults.js'
 export * from './TypeHints.js'

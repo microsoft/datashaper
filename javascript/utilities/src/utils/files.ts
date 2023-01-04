@@ -34,6 +34,11 @@ export function extension(filename = ''): string {
 	return ext
 }
 
+export function removeExtension(fileName: string): string {
+	const props = fileName.split('.')
+	return props.shift() ?? fileName
+}
+
 export function guessDelimiter(filename = ''): string {
 	const ext = extension(filename)
 	switch (ext) {

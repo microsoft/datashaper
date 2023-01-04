@@ -12,7 +12,7 @@ export class TestAppResource extends Resource {
 	private _count = 0
 
 	public override defaultTitle(): string {
-		return 'Test App'
+		return 'Test analysis app'
 	}
 
 	public get count(): number {

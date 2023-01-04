@@ -2,42 +2,32 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ParserOptions } from '@datashaper/schema'
-import { DataFormat, DataOrientation } from '@datashaper/schema'
+import type { DataFormat } from '@datashaper/schema'
+import { DataOrientation } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import { extension, guessDelimiter } from '@datashaper/utilities'
-import { ButtonChoiceGroup } from '@essex/components'
-import type { IChoiceGroupOption } from '@fluentui/react'
-import { IconButton, Modal, PrimaryButton } from '@fluentui/react'
+import { readTable } from '@datashaper/tables'
+import {
+	extension,
+	guessDelimiter,
+	removeExtension,
+} from '@datashaper/utilities'
+import { DataTable } from '@datashaper/workflow'
+import { IconButton, Modal, PrimaryButton, TextField } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 
+import { DataTableConfig } from '../../DataTableConfig/DataTableConfig.js'
+import { RawTable } from '../RawTable/RawTable.js'
 import {
-	loadCsvTable,
-	loadJsonTable,
-	removeExtension,
-} from '../../../util/index.js'
-import { FileName } from '../../app/FileName/index.js'
-import { TableDelimiterOptions } from '../TableDelimiterOptions/TableDelimiterOptions.js'
-import { TableLayoutOptions } from '../TableLayoutOptions/TableLayoutOptions.js'
-import { TablePreview } from '../TablePreview/TablePreview.js'
-import {
-	buttonChoiceGroupStyles,
-	Code,
-	Container,
-	ExampleContainer,
-	ExampleLabel,
 	Footer,
-	FormatContainer,
 	Header,
 	HeaderTitle,
 	ModalBody,
-	ModalLabel,
 	modalStyles,
-	PropsContainer,
+	PreviewContent,
+	Sidebar,
 } from './ImportTable.styles.js'
 import type { ImportTableProps } from './ImportTable.types.js'
-import { DATA_FORMAT_OPTIONS } from './ImportTable.utils.js'
 
 const icons = {
 	cancel: { iconName: 'Cancel' },
@@ -45,121 +35,96 @@ const icons = {
 
 export const ImportTable: React.FC<ImportTableProps> = memo(
 	function ImportTable({ file, onCancel, onOpenTable }) {
-		const [delimiter, setDelimiter] = useState<string | undefined>(
-			guessDelimiter(file.name),
+		// discover attributes of the content to craft a draft schema
+		const delimiter = useMemo(() => guessDelimiter(file.name), [file])
+		const fileExtension = useMemo(() => extension(file.path), [file])
+		const format = useMemo(
+			() => fileExtension.toLocaleLowerCase() as DataFormat,
+			[fileExtension],
 		)
-		const [table, setTable] = useState<ColumnTable | undefined>()
+
 		const [name, setName] = useState<string>(removeExtension(file.name ?? ''))
+
+		const [table, setTable] = useState<ColumnTable | undefined>()
 		const [previewError, setPreviewError] = useState<string | undefined>()
-		const [orientation, setOrientation] = useState<DataOrientation>(
-			DataOrientation.Records,
-		)
-		const fileExtension = useMemo((): string => {
-			return extension(file.path)
-		}, [file])
 
-		const [fileType, setFileType] = useState<string>(
-			fileExtension.toLocaleLowerCase(),
-		)
-
-		const parserOptions = useMemo((): ParserOptions => {
-			return {
-				delimiter: delimiter?.length ? delimiter : undefined,
-			} as ParserOptions
-		}, [delimiter])
-
-		useEffect(() => {
-			const f = async () => {
-				try {
-					const loadedTable =
-						fileType === DataFormat.CSV
-							? await loadCsvTable(file, parserOptions)
-							: await loadJsonTable(file, orientation)
-					setPreviewError(undefined)
-					setTable(loadedTable)
-				} catch (_) {
-					setPreviewError(
-						'The selected configuration is not valid for this table.',
-					)
+		const loadPreview = useCallback(
+			(schema: DataTable) => {
+				const f = async () => {
+					try {
+						const loadedTable = await readTable(file, schema.toSchema())
+						setPreviewError(undefined)
+						setTable(loadedTable)
+					} catch (_) {
+						setPreviewError(
+							'The selected configuration is not valid for this table.',
+						)
+					}
 				}
-			}
-			void f()
-		}, [parserOptions, setTable, file, fileType, orientation])
+				void f()
+			},
+			[setTable, setPreviewError, file],
+		)
+
+		const draftSchema = useMemo(() => {
+			const schema = new DataTable({
+				format,
+				parser: {
+					delimiter,
+				},
+				shape: {
+					orientation: DataOrientation.Values,
+				},
+			})
+			schema.onChange(() => loadPreview(schema))
+			return schema
+		}, [format, delimiter, loadPreview])
+
+		useEffect(() => loadPreview(draftSchema), [draftSchema, loadPreview])
 
 		const onClickImport = useCallback(() => {
 			if (table) {
 				const id = `${name}.${fileExtension}`
 				const tableContainer = { id, table } as TableContainer
-				// if (autoType) {
-				// 	const metadata = introspect(table, true)
-				// 	tableContainer.metadata = metadata
-				// }
-				onOpenTable(tableContainer, fileType as DataFormat, parserOptions, {
-					orientation,
-				})
+				onOpenTable(tableContainer, draftSchema.toSchema())
 			}
-		}, [
-			onOpenTable,
-			table,
-			name,
-			fileExtension,
-			parserOptions,
-			orientation,
-			fileType,
-		])
+		}, [onOpenTable, table, name, fileExtension, draftSchema])
 
-		const onChangeFileType = useCallback(
-			(
-				_?: React.FormEvent<HTMLElement | HTMLInputElement>,
-				option?: IChoiceGroupOption,
-			) => {
-				if (option?.key === DataFormat.CSV) {
-					setOrientation(DataOrientation.Records)
-				}
-				setFileType(option?.key as string)
-			},
-			[setFileType, setOrientation],
-		)
 		return (
 			<Modal styles={modalStyles} isOpen={true} onDismiss={onCancel} isBlocking>
-				<ModalHeader hideModal={onCancel} />
+				<ModalHeader onHideModal={onCancel} />
 				<ModalBody>
-					<PropsContainer>
-						<FileName path={file.path} name={name} setName={setName} />
-						<ButtonChoiceGroup
-							style={buttonChoiceGroupStyles}
-							options={DATA_FORMAT_OPTIONS}
-							selectedKey={fileType}
-							onChange={onChangeFileType}
+					<Sidebar>
+						<TextField
+							label="Table name"
+							onChange={(_, value) => setName(value ?? '')}
+							description={file.path ?? ''}
+							value={name}
+							name="fileName"
+							title="Table name"
+							autoComplete="off"
 						/>
-					</PropsContainer>
-					<ModalFileTypeProps
-						delimiter={delimiter}
-						setDelimiter={setDelimiter}
-						orientation={orientation}
-						setOrientation={setOrientation}
-						fileType={fileType}
-					/>
-					<TablePreview error={previewError} table={table} />
+						<DataTableConfig resource={draftSchema} />
+					</Sidebar>
+					<PreviewContent>
+						<Preview error={previewError} table={table} />
+					</PreviewContent>
 				</ModalBody>
-				<ModalFooter
-					importDisabled={!!previewError}
-					onClickImport={onClickImport}
-				/>
+				<ModalFooter disabled={!!previewError} onClick={onClickImport} />
 			</Modal>
 		)
 	},
 )
 
-const ModalHeader: React.FC<{ hideModal: () => void }> = memo(
-	function ModalHeader({ hideModal }) {
+const ModalHeader: React.FC<{ onHideModal: () => void }> = memo(
+	function ModalHeader({ onHideModal }) {
 		return (
 			<Header>
 				<HeaderTitle>Open table</HeaderTitle>
 				<IconButton
 					iconProps={icons.cancel}
 					ariaLabel="Close popup modal"
-					onClick={hideModal}
+					onClick={onHideModal}
 				/>
 			</Header>
 		)
@@ -167,77 +132,20 @@ const ModalHeader: React.FC<{ hideModal: () => void }> = memo(
 )
 
 const ModalFooter: React.FC<{
-	importDisabled: boolean
-	onClickImport: () => void
-}> = memo(function ModalFooter({ importDisabled, onClickImport }) {
+	disabled: boolean
+	onClick: () => void
+}> = memo(function ModalFooter({ disabled, onClick }) {
 	return (
 		<Footer>
-			<PrimaryButton
-				disabled={importDisabled}
-				text="OK"
-				onClick={onClickImport}
-			/>
+			<PrimaryButton disabled={disabled} text="OK" onClick={onClick} />
 		</Footer>
 	)
 })
 
-const ModalFileTypeProps: React.FC<{
-	delimiter?: string
-	setDelimiter: (delimeter: string) => void
-	orientation: DataOrientation
-	setOrientation: (delimeter: DataOrientation) => void
-	fileType: string
-}> = memo(function ModalFileTypeProps({
-	delimiter,
-	setDelimiter,
-	orientation,
-	setOrientation,
-	fileType,
-}) {
-	return (
-		<Container>
-			{fileType === DataFormat.CSV ? (
-				<>
-					<ModalLabel>Delimiter</ModalLabel>
-					<TableDelimiterOptions selected={delimiter} onChange={setDelimiter} />
-				</>
-			) : (
-				<FormatContainer>
-					<TableLayoutOptions
-						selected={orientation}
-						onChange={setOrientation}
-					/>
-					<ExampleContainer>
-						<ExampleLabel>Example</ExampleLabel>
-						{orientation === DataOrientation.Columnar ? (
-							<ExampleColumn />
-						) : (
-							<ExampleRow />
-						)}
-					</ExampleContainer>
-				</FormatContainer>
-			)}
-		</Container>
-	)
-})
-
-export const ExampleColumn: React.FC = memo(function ExampleColumn() {
-	return (
-		<Code>
-			{`{
-  "colA": [val1, val2...],
-  "colB": [val1, val2...],
-}`}
-		</Code>
-	)
-})
-export const ExampleRow: React.FC = memo(function ExampleColumn() {
-	return (
-		<Code>
-			{`[
-  {"colA": val1, "colB: val1},
-  {"colA": val2, "colB: val2},
-]`}
-		</Code>
-	)
+export const Preview: React.FC<{
+	table?: ColumnTable
+	error?: string
+	showType?: boolean
+}> = memo(function TablePreview({ table, error }) {
+	return <>{table && <RawTable error={error} table={table} fill />}</>
 })

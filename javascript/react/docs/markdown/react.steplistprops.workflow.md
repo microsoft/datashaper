@@ -4,6 +4,8 @@
 
 ## StepListProps.workflow property
 
+The input workflow containing the step list
+
 <b>Signature:</b>
 
 ```typescript

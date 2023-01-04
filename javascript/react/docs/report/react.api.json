@@ -2381,123 +2381,6 @@
           "extendsTokenRanges": []
         },
         {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/react!Parser:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "Parser: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "ParserProps",
-              "canonicalReference": "@datashaper/react!ParserProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "Parser",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/react!ParserProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface ParserProps "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "ParserProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!ParserProps#onChange:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onChange?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(parser: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ParserOptions",
-                  "canonicalReference": "@datashaper/schema!ParserOptions:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ") => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "onChange",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 4
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!ParserProps#parser:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "parser: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ParserOptions",
-                  "canonicalReference": "@datashaper/schema!ParserOptions:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "parser",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
           "kind": "TypeAlias",
           "canonicalReference": "@datashaper/react!SaveMetadataFunction:type",
           "docComment": "",
@@ -2840,7 +2723,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/react!StepListProps#onDelete:member",
-              "docComment": "",
+              "docComment": "/**\n * Deletes a workflow step at the specified index\n *\n * @param index - The index of the step to delete\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -2867,7 +2750,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/react!StepListProps#onSave:member",
-              "docComment": "",
+              "docComment": "/**\n * Event handler for when a step needs to be savend\n *\n * @param step - The step to save\n *\n * @param index - The step index\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -2903,7 +2786,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/react!StepListProps#onSelect:member",
-              "docComment": "",
+              "docComment": "/**\n * Event handler for when a step is selected.\n *\n * @param name - The step name that was selected\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -2929,8 +2812,62 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!StepListProps#onSelectInputTable:member",
+              "docComment": "/**\n * Event handler for when the input table is selected\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "onSelectInputTable: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "() => void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "onSelectInputTable",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!StepListProps#onSelectLatestTable:member",
+              "docComment": "/**\n * Event handler for when the latest output table is selected\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "onSelectLatestTable: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "() => void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "onSelectLatestTable",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/react!StepListProps#order:member",
-              "docComment": "",
+              "docComment": "/**\n * The order to render the steps in. Default = latest on top\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3012,7 +2949,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/react!StepListProps#styles:member",
-              "docComment": "",
+              "docComment": "/**\n * Styling for the step list\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3040,7 +2977,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/react!StepListProps#workflow:member",
-              "docComment": "",
+              "docComment": "/**\n * The input workflow containing the step list\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

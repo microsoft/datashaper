@@ -14,12 +14,14 @@ export interface StepListProps
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [onDelete?](./react.steplistprops.ondelete.md) |  | (index: number) =&gt; void | <i>(Optional)</i> |
-|  [onSave?](./react.steplistprops.onsave.md) |  | (step: Step, index?: number) =&gt; void | <i>(Optional)</i> |
-|  [onSelect?](./react.steplistprops.onselect.md) |  | (name: string) =&gt; void | <i>(Optional)</i> |
-|  [order?](./react.steplistprops.order.md) |  | [DisplayOrder](./react.displayorder.md) | <i>(Optional)</i> |
+|  [onDelete?](./react.steplistprops.ondelete.md) |  | (index: number) =&gt; void | <i>(Optional)</i> Deletes a workflow step at the specified index |
+|  [onSave?](./react.steplistprops.onsave.md) |  | (step: Step, index?: number) =&gt; void | <i>(Optional)</i> Event handler for when a step needs to be savend |
+|  [onSelect?](./react.steplistprops.onselect.md) |  | (name: string) =&gt; void | <i>(Optional)</i> Event handler for when a step is selected. |
+|  [onSelectInputTable](./react.steplistprops.onselectinputtable.md) |  | () =&gt; void | Event handler for when the input table is selected |
+|  [onSelectLatestTable](./react.steplistprops.onselectlatesttable.md) |  | () =&gt; void | Event handler for when the latest output table is selected |
+|  [order?](./react.steplistprops.order.md) |  | [DisplayOrder](./react.displayorder.md) | <i>(Optional)</i> The order to render the steps in. Default = latest on top |
 |  [selectedKey?](./react.steplistprops.selectedkey.md) |  | string | <i>(Optional)</i> Id of the selected step |
 |  [showSelectButtons?](./react.steplistprops.showselectbuttons.md) |  | boolean | <i>(Optional)</i> Indicates whether the original/latest buttons will be shown. Note that they will have no effect if you do not supply an onSelect handler too. |
-|  [styles?](./react.steplistprops.styles.md) |  | [StepListStyles](./react.stepliststyles.md) | <i>(Optional)</i> |
-|  [workflow](./react.steplistprops.workflow.md) |  | Workflow |  |
+|  [styles?](./react.steplistprops.styles.md) |  | [StepListStyles](./react.stepliststyles.md) | <i>(Optional)</i> Styling for the step list |
+|  [workflow](./react.steplistprops.workflow.md) |  | Workflow | The input workflow containing the step list |
 

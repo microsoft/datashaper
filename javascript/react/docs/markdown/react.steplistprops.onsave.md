@@ -4,6 +4,8 @@
 
 ## StepListProps.onSave property
 
+Event handler for when a step needs to be savend
+
 <b>Signature:</b>
 
 ```typescript

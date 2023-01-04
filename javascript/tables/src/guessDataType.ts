@@ -3,21 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { TypeHints } from '@datashaper/schema'
-import { DataType } from '@datashaper/schema'
+import type { TypeHints} from '@datashaper/schema';
+import { DataType,TypeHintsDefaults  } from '@datashaper/schema'
 import isArrayLd from 'lodash-es/isArray.js'
 import isFinite from 'lodash-es/isFinite.js'
 import isPlainObject from 'lodash-es/isPlainObject.js'
 import toNumber from 'lodash-es/toNumber.js'
 import moment from 'moment'
 
-import {
-	DECIMAL_DEFAULT,
-	FALSE_DEFAULTS,
-	NA_DEFAULTS,
-	THOUSANDS_DEFAULT,
-	TRUE_DEFAULTS,
-} from './typeHints.defaults.js'
 import { formatNumberStr, getDate } from './util.js'
 
 /**
@@ -68,7 +61,9 @@ export function typeGuesserFactory(options?: TypeHints): any {
 	}
 }
 
-export function isNull(naValues = NA_DEFAULTS): (value: string) => boolean {
+export function isNull(
+	naValues = TypeHintsDefaults.naValues,
+): (value: string) => boolean {
 	const naValuesSet = new Set(naValues)
 	return function (value: string) {
 		if (value === null) return true
@@ -78,8 +73,8 @@ export function isNull(naValues = NA_DEFAULTS): (value: string) => boolean {
 }
 
 export function isBoolean(
-	falseValues = FALSE_DEFAULTS,
-	trueValues = TRUE_DEFAULTS,
+	falseValues = TypeHintsDefaults.falseValues,
+	trueValues = TypeHintsDefaults.trueValues,
 ): (value: string) => boolean {
 	const booleanSet = new Set(
 		[...falseValues, ...trueValues].map(v => v.toLowerCase()),
@@ -93,8 +88,8 @@ export function isBoolean(
 }
 
 export function isNumber(
-	decimal = DECIMAL_DEFAULT,
-	thousands = THOUSANDS_DEFAULT,
+	decimal = TypeHintsDefaults.decimal,
+	thousands = TypeHintsDefaults.thousands,
 ): (value: string) => boolean {
 	return function (value: string) {
 		if (value === null) return false

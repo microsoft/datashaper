@@ -14,7 +14,7 @@
 |  [CodebookStrategy](./schema.codebookstrategy.md) |  |
 |  [DataFormat](./schema.dataformat.md) | Base format the data is stored within. This will expand to include additional formats such as Arrow and Parquet over time. TODO: we've seen a number of examples in the wild using JSON Lines https://jsonlines.org/ |
 |  [DataNature](./schema.datanature.md) | Indicates the expected general layout of the data. This could be used to provide validation hints. For example, microdata must have one row per subject. TODO: "timeseries" as distinct from "panel"? others? |
-|  [DataOrientation](./schema.dataorientation.md) | <p>Indicates the orientation of the data within the file.</p><p>Most CSV data files are 'values' (row-oriented).</p><p>JSON files can commonly be either. Records are probably more common, though require more space due to replication of keys. Apache Arrow or Parquet are columnar. This nearly aligns with pandas: https://pandas.pydata.org/pandas-docs/stable/user\_guide/io.html\#json</p><p>A key difference (which probably needs resolved) is that we don't yet support the notion of an index. See their example for "columns" or "index" orientation, which is a nested structure.</p><p>Example JSON formats: values: \[ \["colA", "colB"\], \["valueA1", "valueA2"\], \["valueA2", "valueB2"\] \] records: \[{ colA: valueA1, colB: valueB1 }<!-- -->, { colA: valueA2, colB: valueB2 }<!-- -->\] columnar: { colA: \[valueA1, valueA2\], colB: \[valueB1, valueB2\] }</p> |
+|  [DataOrientation](./schema.dataorientation.md) | <p>Indicates the orientation of the data within the file.</p><p>Most CSV data files are 'values' (row-oriented).</p><p>JSON files can commonly be either. Records are probably more common, though require more space due to replication of keys. Apache Arrow or Parquet are columnar. This nearly aligns with pandas: https://pandas.pydata.org/pandas-docs/stable/user\_guide/io.html\#json</p><p>A key difference (which probably needs resolved) is that we don't yet support the notion of an index. See their example for "columns" or "index" orientation, which is a nested structure.</p><p>Example JSON formats: records: \[{ colA: valueA1, colB: valueB1 }<!-- -->, { colA: valueA2, colB: valueB2 }<!-- -->\]</p><p>columnar: { colA: \[valueA1, valueA2\], colB: \[valueB1, valueB2\] }</p><p>array: \["value1", "value2"\]</p><p>values: \[ \["colA", "colB"\], \["valueA1", "valueA2"\], \["valueA2", "valueB2"\] \]</p> |
 |  [DataType](./schema.datatype.md) | Explicit data type of the value (i.e., for a column or property). TODO: clarify/update null/undefined |
 |  [DateComparisonOperator](./schema.datecomparisonoperator.md) |  |
 |  [ErrorCode](./schema.errorcode.md) |  |
@@ -116,6 +116,8 @@
 |  [LATEST\_DATATABLE\_SCHEMA](./schema.latest_datatable_schema.md) |  |
 |  [LATEST\_TABLEBUNDLE\_SCHEMA](./schema.latest_tablebundle_schema.md) |  |
 |  [LATEST\_WORKFLOW\_SCHEMA](./schema.latest_workflow_schema.md) |  |
+|  [ParserOptionsDefaults](./schema.parseroptionsdefaults.md) |  |
+|  [TypeHintsDefaults](./schema.typehintsdefaults.md) | This is a collection of default string values for inferring strict types from strings. They replicate the defaults from pandas. https://pandas.pydata.org/pandas-docs/stable/user\_guide/io.html\#csv-text-files |
 
 ## Type Aliases
 

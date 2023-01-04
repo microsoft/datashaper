@@ -14,7 +14,7 @@ import { Workflow } from '@datashaper/workflow'
 import { ToolPanel } from '@essex/components'
 import { CommandBar } from '@fluentui/react'
 import { useObservableState } from 'observable-hooks'
-import { memo, useMemo, useState } from 'react'
+import { memo, useCallback, useMemo, useState } from 'react'
 
 import { useToolPanelExpandCollapse } from '../hooks.js'
 import {
@@ -29,7 +29,6 @@ import {
 	useOnSaveStep,
 	useSelectedTable,
 	useTableCommandProps,
-	useTableName,
 } from './BundleEditor.hooks.js'
 import { Container, DetailsListContainer } from './BundleEditor.styles.js'
 import type { BundleEditorProps } from './BundleEditor.types.js'
@@ -40,11 +39,18 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 			const result = resource
 				.getSourcesWithProfile(KnownProfile.Workflow)
 				.find(t => !!t) as Workflow | undefined
-			return [result ?? new Workflow(), !!result]
+			const defaultWorkflow = () => {
+				const result = new Workflow()
+				result.input$ = resource.output$
+				return result
+			}
+			return [result ?? defaultWorkflow(), !!result]
 			/* eslint-disable-next-line react-hooks/exhaustive-deps */
 		}, [resource, resource.sources])
 
 		const [selectedId, setSelectedId] = useState<string | undefined>(undefined)
+		const [isLatestSelected, setIsLatestSelected] = useState(true)
+		const [isInputSelected, setIsInputSelected] = useState(false)
 		const [selectedColumn, onColumnClick] = useColumnState()
 
 		// Derived State
@@ -53,8 +59,12 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 			() => `Workflow steps (${numSteps})`,
 			[numSteps],
 		)
-		const tableName = useTableName(resource, selectedId)
-		const selectedTable = useSelectedTable(resource, selectedId)
+		const selectedTable = useSelectedTable(
+			resource,
+			selectedId,
+			isInputSelected,
+			isLatestSelected,
+		)
 		const { collapsed, onToggleCollapsed, commandBar, iconProps } =
 			useToolPanelExpandCollapse(
 				'history-button',
@@ -72,6 +82,25 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 		const onCreate = useOnCreateStep(onSave, setSelectedId)
 		const onDelete = useOnDeleteStep(workflow, resource)
 
+		const onSelectTable = useCallback(
+			(id: string) => {
+				setSelectedId(id)
+				setIsLatestSelected(false)
+				setIsInputSelected(false)
+			},
+			[setSelectedId],
+		)
+		const onSelectInputTable = useCallback(() => {
+			setSelectedId(undefined)
+			setIsLatestSelected(false)
+			setIsInputSelected(true)
+		}, [setSelectedId])
+		const onSelectLatestTable = useCallback(() => {
+			setSelectedId(undefined)
+			setIsLatestSelected(true)
+			setIsInputSelected(false)
+		}, [setSelectedId])
+
 		return selectedTable?.table == null ? null : (
 			<Container collapsed={collapsed}>
 				<DetailsListContainer>
@@ -88,7 +117,9 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 							/>
 						}
 						farCommandBar={workflow ? <CommandBar {...commandBar} /> : null}
-						name={tableName}
+						name={`${resource.name}${selectedId ? `@${selectedId}` : ''}${
+							isInputSelected ? '@input' : ''
+						}`}
 						table={selectedTable.table}
 					/>
 					<ArqueroDetailsList
@@ -116,7 +147,9 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 							workflow={workflow}
 							onSave={onSave}
 							onDelete={onDelete}
-							onSelect={setSelectedId}
+							onSelect={onSelectTable}
+							onSelectInputTable={onSelectInputTable}
+							onSelectLatestTable={onSelectLatestTable}
 						/>
 					</ToolPanel>
 				}

@@ -237,11 +237,6 @@ export function parseUndefined(naValues?: string[]): (value: string) => undefine
 // @public
 export function patternValidator(field: Field, includeIndexes: boolean): ValidationFunction | undefined;
 
-// Warning: (ae-missing-release-tag) "readCsvTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function readCsvTable(text: string, options?: ParserOptions): ColumnTable;
-
 // Warning: (ae-missing-release-tag) "readTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
