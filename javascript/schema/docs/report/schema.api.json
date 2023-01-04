@@ -3112,6 +3112,42 @@
           ]
         },
         {
+          "kind": "Variable",
+          "canonicalReference": "@datashaper/schema!DataTableSchemaDefaults:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "DataTableSchemaDefaults: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Partial",
+              "canonicalReference": "!Partial:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "DataTableSchema",
+              "canonicalReference": "@datashaper/schema!DataTableSchema:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "DataTableSchemaDefaults",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 5
+          }
+        },
+        {
           "kind": "Enum",
           "canonicalReference": "@datashaper/schema!DataType:enum",
           "docComment": "/**\n * Explicit data type of the value (i.e., for a column or property). TODO: clarify/update null/undefined\n */\n",

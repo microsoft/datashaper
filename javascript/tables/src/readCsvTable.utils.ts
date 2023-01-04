@@ -19,7 +19,7 @@ import {
 import { ParserType } from './readCsvTable.types.js'
 import { fromJSONValues } from './readJSONTable.js'
 
-export function determineParserType(options?: ParserOptions) {
+export function determineParserType(options?: ParserOptions): ParserType {
 	if (!options || hasArqueroOptions(options)) {
 		return ParserType.Arquero
 	} else {
@@ -27,7 +27,7 @@ export function determineParserType(options?: ParserOptions) {
 	}
 }
 
-export function getParser(options?: ParserOptions) {
+export function getParser(options?: ParserOptions): (text: string, options?: ParserOptions, autoType?: boolean) => ColumnTable {
 	const type = determineParserType(options)
 	switch (type) {
 		case ParserType.PapaParse:
@@ -107,11 +107,13 @@ function mapOptions(
 export function mapToArqueroOptions(
 	options?: ParserOptions,
 	autoType = true,
+	autoMax = 1000,
 ): CSVParseOptions {
 	const mapper = mapOptions(ARQUERO_PROPS_MAP)
 	return {
 		...mapper(options),
 		autoType,
+		autoMax,
 	}
 }
 
@@ -147,7 +149,7 @@ export function validOptions(options?: ParserOptions): boolean {
 	const props = Object.keys(options)
 	return props.every((prop: string) =>
 		(validators as any)[prop]
-			? (options as any)[prop] != undefined
+			? (options as any)[prop] !== undefined
 				? (validators as any)[prop]((options as any)[prop])
 				: true
 			: true,

@@ -285,6 +285,11 @@ export interface DataTableSchema extends ResourceSchema {
     typeHints?: TypeHints;
 }
 
+// Warning: (ae-missing-release-tag) "DataTableSchemaDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const DataTableSchemaDefaults: Partial<DataTableSchema>;
+
 // Warning: (ae-missing-release-tag) "DataType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public

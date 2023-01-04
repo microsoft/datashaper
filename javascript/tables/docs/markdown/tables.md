@@ -49,7 +49,7 @@
 |  [parseString(naValues)](./tables.parsestring.md) |  |
 |  [parseUndefined(naValues)](./tables.parseundefined.md) |  |
 |  [patternValidator(field, includeIndexes)](./tables.patternvalidator.md) | Constructs a function that validates a column against the <code>pattern</code> constraint. |
-|  [readTable(input, schema)](./tables.readtable.md) | Read an input table |
+|  [readTable(input, schema, options)](./tables.readtable.md) | Read an input table |
 |  [requiredValidator(field, includeIndexes)](./tables.requiredvalidator.md) | Constructs a function that validates a column against the <code>required</code> constraint. |
 |  [rows(table, options)](./tables.rows.md) | Returns a table's rows as a two-dimensional array. |
 |  [sliceTable(table, offset, limit)](./tables.slicetable.md) | Safely applies slicing args to a table |

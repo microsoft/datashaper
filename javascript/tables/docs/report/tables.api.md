@@ -8,7 +8,7 @@ import { CodebookSchema } from '@datashaper/schema';
 import { CodebookStrategy } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { default as ColumnTable_2 } from 'arquero/dist/types/table/column-table.js';
-import type { DataTableSchema } from '@datashaper/schema';
+import { DataTableSchema } from '@datashaper/schema';
 import { DataType } from '@datashaper/schema';
 import type { Field } from '@datashaper/schema';
 import type { FieldMetadata } from '@datashaper/schema';
@@ -240,7 +240,11 @@ export function patternValidator(field: Field, includeIndexes: boolean): Validat
 // Warning: (ae-missing-release-tag) "readTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function readTable(input: Blob | undefined, schema: DataTableSchema): Promise<ColumnTable | undefined>;
+export function readTable(input: Blob | undefined, schema: DataTableSchema, options?: {
+    codebook?: CodebookSchema;
+    autoType?: boolean;
+    autoMax?: number;
+}): Promise<ColumnTable | undefined>;
 
 // Warning: (ae-missing-release-tag) "requiredValidator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

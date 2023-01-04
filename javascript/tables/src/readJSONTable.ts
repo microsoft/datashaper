@@ -2,22 +2,27 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DataShape } from '@datashaper/schema'
+import {
+	DataFormat,
+	DataShape,
+	DataTableSchema,
+	DataTableSchemaDefaults,
+} from '@datashaper/schema'
 import { DataOrientation } from '@datashaper/schema'
 import { from, fromJSON } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-
-const DEFAULT_DATA_SHAPE_JSON_OPTIONS: DataShape = {
-	orientation: DataOrientation.Records,
-}
+import merge from 'lodash-es/merge.js'
 
 // TODO: arquero actually does perform some autoTyping on json values
 export function readJSONTable(
 	text: string,
-	shape: DataShape = DEFAULT_DATA_SHAPE_JSON_OPTIONS,
+	schema?: Partial<DataTableSchema>,
 ): ColumnTable {
 	const obj = JSON.parse(text)
-	switch (shape.orientation) {
+	const _schema = defaultSchema(schema)
+	const { shape } = _schema
+	const { orientation } = shape!
+	switch (orientation) {
 		case DataOrientation.Records:
 			return fromJSONRecords(obj)
 		case DataOrientation.Columnar:
@@ -27,22 +32,39 @@ export function readJSONTable(
 		case DataOrientation.Values:
 			return fromJSONValues(obj)
 		default:
-			throw new Error(`unknown data orientation: ${shape.orientation}`)
+			throw new Error(`unknown data orientation: ${orientation}`)
 	}
 }
 
-export function fromJSONRecords(obj: any) {
+function defaultSchema(
+	schema?: Partial<DataTableSchema>,
+): Partial<DataTableSchema> {
+	return merge(
+		{},
+		DataTableSchemaDefaults,
+		{
+			format: DataFormat.JSON,
+			shape: {
+				// default for JSON
+				orientation: DataOrientation.Records,
+			},
+		},
+		schema,
+	)
+}
+
+export function fromJSONRecords(obj: any): ColumnTable {
 	return from(obj)
 }
 
-export function fromJSONColumnar(obj: any) {
+export function fromJSONColumnar(obj: any): ColumnTable {
 	return fromJSON(obj)
 }
 
-export function fromJSONArray(obj: any, shape: DataShape): ColumnTable {
+export function fromJSONArray(obj: any, shape?: DataShape): ColumnTable {
 	// all the data is a single column unless a matrix row x col layout is specified
-	if (shape.matrix) {
-		const [rows, cols] = shape.matrix
+	if (shape?.matrix && shape?.matrix.length === 2) {
+		const [rows, cols] = shape?.matrix
 		// transpose into an array of arrays and then just use the fromValues function
 		// note that we're completely assuming the matrix definition is correct
 		const result = []

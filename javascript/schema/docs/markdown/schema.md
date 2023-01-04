@@ -111,6 +111,7 @@
 
 |  Variable | Description |
 |  --- | --- |
+|  [DataTableSchemaDefaults](./schema.datatableschemadefaults.md) |  |
 |  [LATEST\_CODEBOOK\_SCHEMA](./schema.latest_codebook_schema.md) |  |
 |  [LATEST\_DATAPACKAGE\_SCHEMA](./schema.latest_datapackage_schema.md) |  |
 |  [LATEST\_DATATABLE\_SCHEMA](./schema.latest_datatable_schema.md) |  |

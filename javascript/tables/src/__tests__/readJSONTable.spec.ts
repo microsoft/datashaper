@@ -9,7 +9,7 @@ import fs from 'fs'
 import { readJSONTable } from '../readJSONTable.js'
 
 describe('readJSONTable', () => {
-	it('DataOrientation.Records', () => {
+	describe('DataOrientation.Records', () => {
 		const json = fs.readFileSync(
 			'./src/__tests__/data/companies-records.json',
 			{
@@ -17,11 +17,22 @@ describe('readJSONTable', () => {
 				flag: 'r',
 			},
 		)
-		const table = readJSONTable(json, {
-			orientation: DataOrientation.Records,
+
+		it('default orientation', () => {
+			const table = readJSONTable(json)
+			expect(table.numCols()).toBe(4)
+			expect(table.numRows()).toBe(5)
 		})
-		expect(table.numCols()).toBe(4)
-		expect(table.numRows()).toBe(5)
+
+		it('explicit orientation', () => {
+			const table = readJSONTable(json, {
+				shape: {
+					orientation: DataOrientation.Records,
+				},
+			})
+			expect(table.numCols()).toBe(4)
+			expect(table.numRows()).toBe(5)
+		})
 	})
 
 	it('DataOrientation.Columnar', () => {
@@ -33,7 +44,9 @@ describe('readJSONTable', () => {
 			},
 		)
 		const table = readJSONTable(json, {
-			orientation: DataOrientation.Columnar,
+			shape: {
+				orientation: DataOrientation.Columnar,
+			},
 		})
 		expect(table.numCols()).toBe(4)
 		expect(table.numRows()).toBe(5)
@@ -47,7 +60,9 @@ describe('readJSONTable', () => {
 
 		it('no matrix results in single flat column', () => {
 			const table = readJSONTable(json, {
-				orientation: DataOrientation.Array,
+				shape: {
+					orientation: DataOrientation.Array,
+				},
 			})
 			expect(table.numCols()).toBe(1)
 			expect(table.numRows()).toBe(24)
@@ -56,8 +71,10 @@ describe('readJSONTable', () => {
 
 		it('matrix defined', () => {
 			const table = readJSONTable(json, {
-				orientation: DataOrientation.Array,
-				matrix: [6, 4],
+				shape: {
+					orientation: DataOrientation.Array,
+					matrix: [6, 4],
+				},
 			})
 			expect(table.numCols()).toBe(4)
 			expect(table.numRows()).toBe(5)
@@ -71,7 +88,9 @@ describe('readJSONTable', () => {
 			flag: 'r',
 		})
 		const table = readJSONTable(json, {
-			orientation: DataOrientation.Values,
+			shape: {
+				orientation: DataOrientation.Values,
+			},
 		})
 		expect(table.numCols()).toBe(4)
 		expect(table.numRows()).toBe(5)

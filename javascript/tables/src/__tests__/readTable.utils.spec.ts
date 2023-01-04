@@ -34,7 +34,12 @@ describe('readTable.utils', () => {
 		it('mapToArqueroOptions', () => {
 			const options = { delimiter: ';', skipRows: 2 }
 			const mapped = mapToArqueroOptions(options)
-			const expected = { delimiter: ';', skip: 2, autoType: true }
+			const expected = {
+				delimiter: ';',
+				skip: 2,
+				autoType: true,
+				autoMax: 1000,
+			}
 			expect(mapped).toEqual(expected)
 		})
 		it('mapToPapaParseOptions', () => {

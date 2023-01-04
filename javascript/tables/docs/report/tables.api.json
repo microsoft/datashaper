@@ -2814,6 +2814,23 @@
             },
             {
               "kind": "Content",
+              "text": ", options?: "
+            },
+            {
+              "kind": "Content",
+              "text": "{\n    codebook?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "CodebookSchema",
+              "canonicalReference": "@datashaper/schema!CodebookSchema:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n    autoType?: boolean;\n    autoMax?: number;\n}"
+            },
+            {
+              "kind": "Content",
               "text": "): "
             },
             {
@@ -2840,8 +2857,8 @@
             }
           ],
           "returnTypeTokenRange": {
-            "startIndex": 6,
-            "endIndex": 10
+            "startIndex": 10,
+            "endIndex": 14
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -2861,6 +2878,14 @@
                 "endIndex": 5
               },
               "isOptional": false
+            },
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 9
+              },
+              "isOptional": true
             }
           ],
           "name": "readTable"
