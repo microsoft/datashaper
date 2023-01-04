@@ -8683,7 +8683,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "string"
+                  "text": "string | undefined"
                 },
                 {
                   "kind": "Content",
@@ -8717,7 +8717,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<string>"
+                  "text": "<string | undefined>"
                 },
                 {
                   "kind": "Content",
@@ -8872,7 +8872,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "string"
+                  "text": "string | undefined"
                 },
                 {
                   "kind": "Content",
@@ -8906,7 +8906,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<string>"
+                  "text": "<string | undefined>"
                 },
                 {
                   "kind": "Content",
@@ -9075,7 +9075,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "string"
+                  "text": "string | undefined"
                 },
                 {
                   "kind": "Content",
@@ -9109,7 +9109,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<string>"
+                  "text": "<string | undefined>"
                 },
                 {
                   "kind": "Content",
@@ -9138,7 +9138,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "number"
+                  "text": "number | undefined"
                 },
                 {
                   "kind": "Content",
@@ -9172,7 +9172,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<number>"
+                  "text": "<number | undefined>"
                 },
                 {
                   "kind": "Content",
@@ -9201,7 +9201,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "boolean"
+                  "text": "boolean | undefined"
                 },
                 {
                   "kind": "Content",
@@ -9235,7 +9235,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<boolean>"
+                  "text": "<boolean | undefined>"
                 },
                 {
                   "kind": "Content",
@@ -9264,7 +9264,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "number"
+                  "text": "number | undefined"
                 },
                 {
                   "kind": "Content",
@@ -9298,7 +9298,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<number>"
+                  "text": "<number | undefined>"
                 },
                 {
                   "kind": "Content",

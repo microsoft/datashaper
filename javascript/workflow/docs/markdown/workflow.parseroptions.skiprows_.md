@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-get skipRows$(): Observable<number>;
+get skipRows$(): Observable<number | undefined>;
 ```

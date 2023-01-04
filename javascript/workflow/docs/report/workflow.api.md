@@ -37,7 +37,7 @@ import type { NamedPortBinding } from '@datashaper/schema';
 import { Observable } from 'rxjs';
 import type { OnehotArgs } from '@datashaper/schema';
 import type { OrderbyArgs } from '@datashaper/schema';
-import type { ParserOptions as ParserOptions_2 } from '@datashaper/schema';
+import { ParserOptions as ParserOptions_2 } from '@datashaper/schema';
 import type { PivotArgs } from '@datashaper/schema';
 import type { PortBinding } from '@datashaper/schema';
 import type { Profile } from '@datashaper/schema';
@@ -680,9 +680,9 @@ export class ParserOptions extends Observed implements ParserOptions_2 {
     get comment(): string | undefined;
     set comment(value: string | undefined);
     // (undocumented)
-    get delimiter$(): Observable<string>;
+    get delimiter$(): Observable<string | undefined>;
     // (undocumented)
-    get delimiter(): string;
+    get delimiter(): string | undefined;
     set delimiter(delimiter: string | undefined);
     // (undocumented)
     get escapeChar$(): Observable<string | undefined>;
@@ -695,9 +695,9 @@ export class ParserOptions extends Observed implements ParserOptions_2 {
     get header(): boolean | undefined;
     set header(value: boolean | undefined);
     // (undocumented)
-    get lineTerminator$(): Observable<string>;
+    get lineTerminator$(): Observable<string | undefined>;
     // (undocumented)
-    get lineTerminator(): string;
+    get lineTerminator(): string | undefined;
     set lineTerminator(value: string | undefined);
     // (undocumented)
     loadSchema(schema: Maybe<ParserOptions_2>, quiet?: boolean): void;
@@ -707,24 +707,24 @@ export class ParserOptions extends Observed implements ParserOptions_2 {
     get names(): string[] | undefined;
     set names(value: string[] | undefined);
     // (undocumented)
-    get quoteChar$(): Observable<string>;
+    get quoteChar$(): Observable<string | undefined>;
     // (undocumented)
-    get quoteChar(): string;
+    get quoteChar(): string | undefined;
     set quoteChar(value: string | undefined);
     // (undocumented)
-    get readRows$(): Observable<number>;
+    get readRows$(): Observable<number | undefined>;
     // (undocumented)
-    get readRows(): number;
+    get readRows(): number | undefined;
     set readRows(value: number | undefined);
     // (undocumented)
-    get skipBlankLines$(): Observable<boolean>;
+    get skipBlankLines$(): Observable<boolean | undefined>;
     // (undocumented)
-    get skipBlankLines(): boolean;
+    get skipBlankLines(): boolean | undefined;
     set skipBlankLines(value: boolean | undefined);
     // (undocumented)
-    get skipRows$(): Observable<number>;
+    get skipRows$(): Observable<number | undefined>;
     // (undocumented)
-    get skipRows(): number;
+    get skipRows(): number | undefined;
     set skipRows(value: number | undefined);
     // (undocumented)
     toSchema(): ParserOptions_2;

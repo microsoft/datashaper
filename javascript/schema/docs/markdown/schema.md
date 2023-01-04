@@ -116,6 +116,7 @@
 |  [LATEST\_DATATABLE\_SCHEMA](./schema.latest_datatable_schema.md) |  |
 |  [LATEST\_TABLEBUNDLE\_SCHEMA](./schema.latest_tablebundle_schema.md) |  |
 |  [LATEST\_WORKFLOW\_SCHEMA](./schema.latest_workflow_schema.md) |  |
+|  [ParserOptionsDefaults](./schema.parseroptionsdefaults.md) |  |
 
 ## Type Aliases
 

@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-get delimiter$(): Observable<string>;
+get delimiter$(): Observable<string | undefined>;
 ```

@@ -805,6 +805,11 @@ export interface ParserOptions {
     skipRows?: number;
 }
 
+// Warning: (ae-missing-release-tag) "ParserOptionsDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const ParserOptionsDefaults: ParserOptions;
+
 // Warning: (ae-missing-release-tag) "ParseType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public

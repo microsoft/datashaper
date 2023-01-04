@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-get quoteChar$(): Observable<string>;
+get quoteChar$(): Observable<string | undefined>;
 ```

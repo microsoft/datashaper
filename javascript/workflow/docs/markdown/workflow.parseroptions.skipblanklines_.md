@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-get skipBlankLines$(): Observable<boolean>;
+get skipBlankLines$(): Observable<boolean | undefined>;
 ```

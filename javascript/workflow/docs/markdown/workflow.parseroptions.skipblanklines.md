@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-get skipBlankLines(): boolean;
+get skipBlankLines(): boolean | undefined;
 
 set skipBlankLines(value: boolean | undefined);
 ```

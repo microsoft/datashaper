@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-get delimiter(): string;
+get delimiter(): string | undefined;
 
 set delimiter(delimiter: string | undefined);
 ```

@@ -7944,6 +7944,29 @@
           "extendsTokenRanges": []
         },
         {
+          "kind": "Variable",
+          "canonicalReference": "@datashaper/schema!ParserOptionsDefaults:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "ParserOptionsDefaults: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ParserOptions",
+              "canonicalReference": "@datashaper/schema!ParserOptions:interface"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "ParserOptionsDefaults",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
+        },
+        {
           "kind": "Enum",
           "canonicalReference": "@datashaper/schema!ParseType:enum",
           "docComment": "/**\n * This is a subset of data types available for parsing operations\n */\n",

@@ -37,8 +37,4 @@ export const DECIMAL_DEFAULT = '.'
 
 export const THOUSANDS_DEFAULT = ','
 
-export const COMMENT_DEFAULT = '#'
-
-export const DELIMITER_DEFAULT = ','
-
 export const DATE_FORMAT_DEFAULT = 'YYYY-MM-DD'

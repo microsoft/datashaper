@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-get lineTerminator$(): Observable<string>;
+get lineTerminator$(): Observable<string | undefined>;
 ```

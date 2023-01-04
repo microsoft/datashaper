@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-get readRows$(): Observable<number>;
+get readRows$(): Observable<number | undefined>;
 ```

@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-get skipRows(): number;
+get skipRows(): number | undefined;
 
 set skipRows(value: number | undefined);
 ```

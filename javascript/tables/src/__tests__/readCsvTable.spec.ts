@@ -37,6 +37,14 @@ describe('readCsvTable', () => {
 	describe('arquero reader', () => {
 		it('should load a default data without params', () => {
 			const table = readCsvTable(text)
+			expect(table.numRows()).toBe(10)
+			expect(table.numCols()).toBe(3)
+		})
+
+		it('skips commented lines', () => {
+			const table = readCsvTable(text, {
+				comment: '#',
+			})
 			expect(table.numRows()).toBe(9)
 			expect(table.numCols()).toBe(3)
 		})
