@@ -27,7 +27,14 @@ export function determineParserType(options?: ParserOptions): ParserType {
 	}
 }
 
-export function getParser(options?: ParserOptions): (text: string, options?: ParserOptions, autoType?: boolean) => ColumnTable {
+export function getParser(
+	options?: ParserOptions,
+): (
+	text: string,
+	options?: ParserOptions,
+	autoType?: boolean,
+	autoMax?: number,
+) => ColumnTable {
 	const type = determineParserType(options)
 	switch (type) {
 		case ParserType.PapaParse:
@@ -42,8 +49,9 @@ function arqueroParser(
 	text: string,
 	options: ParserOptions = {},
 	autoType = true,
+	autoMax = 1000,
 ): ColumnTable {
-	const mappedOptions = mapToArqueroOptions(options, autoType)
+	const mappedOptions = mapToArqueroOptions(options, autoType, autoMax)
 	const table = fromCSV(text, mappedOptions)
 	return options.readRows ? table.slice(0, options.readRows) : table
 }

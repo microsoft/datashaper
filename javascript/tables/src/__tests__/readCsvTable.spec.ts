@@ -43,7 +43,9 @@ describe('readCsvTable', () => {
 
 		it('skips commented lines', () => {
 			const table = readCsvTable(text, {
-				comment: '#',
+				parser: {
+					comment: '#',
+				},
 			})
 			expect(table.numRows()).toBe(9)
 			expect(table.numCols()).toBe(3)
@@ -51,20 +53,26 @@ describe('readCsvTable', () => {
 
 		it('should load a table with custom delimiter and names list', () => {
 			const table = readCsvTable(delimiter, {
-				header: false,
-				names: ['first', 'second', 'third'],
-				delimiter: ':',
+				parser: {
+					header: false,
+					names: ['first', 'second', 'third'],
+					delimiter: ':',
+				},
 			})
 			expect(table.numRows()).toBe(5)
 		})
 
 		it('should load a table with custom delimiter expecting it to guess it', () => {
-			const table = readCsvTable(delimiter, { comment: '$' })
+			const table = readCsvTable(delimiter, {
+				parser: { comment: '$' },
+			})
 			expect(table.numRows()).toBe(4)
 		})
 
 		it('should load a table skipping commented line 4 with $ as comment char', () => {
-			const table = readCsvTable(altComment, { comment: '$' })
+			const table = readCsvTable(altComment, {
+				parser: { comment: '$' },
+			})
 			expect(table.column('first')?.get(3)).toBe(5)
 		})
 
@@ -100,14 +108,18 @@ describe('readCsvTable', () => {
 			)
 
 			it('default column names', () => {
-				const table = readCsvTable(csv, { header: false })
+				const table = readCsvTable(csv, {
+					parser: { header: false },
+				})
 				expect(table.columnNames()).toEqual(['col1', 'col2', 'col3', 'col4'])
 			})
 
 			it('specified column names', () => {
 				const table = readCsvTable(csv, {
-					header: false,
-					names: ['A', 'B', 'C', 'D'],
+					parser: {
+						header: false,
+						names: ['A', 'B', 'C', 'D'],
+					},
 				})
 				expect(table.columnNames()).toEqual(['A', 'B', 'C', 'D'])
 			})
@@ -117,8 +129,10 @@ describe('readCsvTable', () => {
 	describe('papaparse reader', () => {
 		it('should load a table', () => {
 			const table = readCsvTable(text, {
-				escapeChar: '$',
-				comment: '#',
+				parser: {
+					escapeChar: '$',
+					comment: '#',
+				},
 			})
 
 			expect(table.numRows()).toBe(9)
@@ -126,20 +140,26 @@ describe('readCsvTable', () => {
 
 		it('should load a table with custom delimiter', () => {
 			const table = readCsvTable(delimiter, {
-				header: false,
-				delimiter: ':',
-				escapeChar: '$',
+				parser: {
+					header: false,
+					delimiter: ':',
+					escapeChar: '$',
+				},
 			})
 			expect(table.numRows()).toBe(5)
 		})
 
 		it('should load a table with custom delimiter expecting it to guess it', () => {
-			const table = readCsvTable(delimiter, { comment: '$', escapeChar: '$' })
+			const table = readCsvTable(delimiter, {
+				parser: { comment: '$', escapeChar: '$' },
+			})
 			expect(table.numRows()).toBe(4)
 		})
 
 		it('should load a table skipping commented line 4 with $ as comment char', () => {
-			const table = readCsvTable(altComment, { comment: '$', escapeChar: '$' })
+			const table = readCsvTable(altComment, {
+				parser: { comment: '$', escapeChar: '$' },
+			})
 			expect(table.column('first')?.get(3)).toBe(5)
 		})
 
@@ -151,8 +171,10 @@ describe('readCsvTable', () => {
 
 			it('true (default)', () => {
 				const table = readCsvTable(csv, {
-					// force papa with a non-arquero param
-					escapeChar: '$',
+					parser: {
+						// force papa with a non-arquero param
+						escapeChar: '$',
+					},
 				})
 				expect(typeof table.column('ID')?.get(0)).toBe('number')
 				expect(typeof table.column('Name')?.get(0)).toBe('string')
@@ -164,8 +186,10 @@ describe('readCsvTable', () => {
 				const table = readCsvTable(
 					csv,
 					{
-						// force papa with a non-arquero param
-						escapeChar: '$',
+						parser: {
+							// force papa with a non-arquero param
+							escapeChar: '$',
+						},
 					},
 					false,
 				)
@@ -185,15 +209,19 @@ describe('readCsvTable', () => {
 			)
 
 			it('default column names', () => {
-				const table = readCsvTable(csv, { header: false, escapeChar: '$' })
+				const table = readCsvTable(csv, {
+					parser: { header: false, escapeChar: '$' },
+				})
 				expect(table.columnNames()).toEqual(['col1', 'col2', 'col3', 'col4'])
 			})
 
 			it('specified column names', () => {
 				const table = readCsvTable(csv, {
-					header: false,
-					names: ['A', 'B', 'C', 'D'],
-					escapeChar: '$',
+					parser: {
+						header: false,
+						names: ['A', 'B', 'C', 'D'],
+						escapeChar: '$',
+					},
 				})
 				expect(table.columnNames()).toEqual(['A', 'B', 'C', 'D'])
 			})
@@ -214,8 +242,10 @@ describe('readCsvTable', () => {
 		describe('arquero reader', () => {
 			it('should load a large dataset', () => {
 				const table = readCsvTable(largeDataset, {
-					comment: '#',
-					readRows: 466890,
+					parser: {
+						comment: '#',
+						readRows: 466890,
+					},
 				})
 				expect(table.numRows()).toBe(466890)
 			})
@@ -224,19 +254,23 @@ describe('readCsvTable', () => {
 		describe('papaparse reader', () => {
 			it('should load a large dataset', () => {
 				const table = readCsvTable(largeDataset, {
-					escapeChar: '$',
-					skipBlankLines: true,
-					comment: '#',
-					readRows: 466890,
+					parser: {
+						escapeChar: '$',
+						skipBlankLines: true,
+						comment: '#',
+						readRows: 466890,
+					},
 				})
 				expect(table.numRows()).toBe(466890)
 			})
 
 			it('should load a large dataset with readRows prop', () => {
 				const table = readCsvTable(largeDataset, {
-					skipRows: 2,
-					escapeChar: '$',
-					readRows: 3,
+					parser: {
+						skipRows: 2,
+						escapeChar: '$',
+						readRows: 3,
+					},
 				})
 				expect(table.numRows()).toBe(3)
 			})
