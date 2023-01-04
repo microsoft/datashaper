@@ -14,6 +14,6 @@ export interface ParseConfig
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [codebook?](./tables.parseconfig.codebook.md) |  | CodebookSchema | <i>(Optional)</i> |
+|  [codebook?](./tables.parseconfig.codebook.md) |  | Partial&lt;CodebookSchema&gt; | <i>(Optional)</i> |
 |  [typeHints?](./tables.parseconfig.typehints.md) |  | TypeHints | <i>(Optional)</i> |
 

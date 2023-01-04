@@ -197,7 +197,7 @@ export function parseBoolean(naValues?: string[], trueValues?: string[], falseVa
 // @public (undocumented)
 export interface ParseConfig {
     // (undocumented)
-    codebook?: CodebookSchema;
+    codebook?: Partial<CodebookSchema>;
     // (undocumented)
     typeHints?: TypeHints;
 }

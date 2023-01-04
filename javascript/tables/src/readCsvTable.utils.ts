@@ -37,18 +37,26 @@ export function getParser(options?: ParserOptions) {
 	}
 }
 
-function arqueroParser(text: string, options: ParserOptions = {}): ColumnTable {
-	const mappedOptions = mapProps(ParserType.Arquero, options) as CSVParseOptions
+function arqueroParser(
+	text: string,
+	options: ParserOptions = {},
+	autoType = true,
+): ColumnTable {
+	const mappedOptions = mapToArqueroOptions(options, autoType)
 	const table = fromCSV(text, mappedOptions)
 	return options.readRows ? table.slice(0, options.readRows) : table
 }
 
-function papaParser(text: string, options: ParserOptions = {}): ColumnTable {
+function papaParser(
+	text: string,
+	options: ParserOptions = {},
+	autoType = true,
+): ColumnTable {
 	const opts = { ...options }
 	if (opts.skipRows && opts.readRows) {
 		opts.readRows += opts.skipRows
 	}
-	const mappedOptions = mapProps(ParserType.PapaParse, opts) as ParseConfig
+	const mappedOptions = mapToPapaParseOptions(opts, autoType) as ParseConfig
 	const table = papa.parse(text, mappedOptions)
 	if (opts.skipRows) {
 		const subset = skipRows(table.data, opts.skipRows)
@@ -60,25 +68,6 @@ function papaParser(text: string, options: ParserOptions = {}): ColumnTable {
 export function hasArqueroOptions(options: ParserOptions): boolean {
 	const props = Object.keys(options)
 	return props.every(p => ARQUERO_SUPPORTED_OPTS.has(p))
-}
-
-export function mapProps(
-	type: ParserType,
-	options?: ParserOptions,
-): CSVParseOptions | ParseConfig {
-	switch (type) {
-		case ParserType.PapaParse:
-			return {
-				header: true,
-				...mapToPapaParseOptions(options),
-			}
-		case ParserType.Arquero:
-		default:
-			return {
-				autoType: false,
-				...mapToArqueroOptions(options),
-			}
-	}
 }
 
 function mapOptions(
@@ -101,14 +90,27 @@ function mapOptions(
 	}
 }
 
-export function mapToArqueroOptions(options?: ParserOptions): CSVParseOptions {
+export function mapToArqueroOptions(
+	options?: ParserOptions,
+	autoType = true,
+): CSVParseOptions {
 	const mapper = mapOptions(ARQUERO_PROPS_MAP)
-	return mapper(options)
+	return {
+		...mapper(options),
+		autoType,
+	}
 }
 
-export function mapToPapaParseOptions(options?: ParserOptions): ParseConfig {
+export function mapToPapaParseOptions(
+	options?: ParserOptions,
+	autoType = true,
+): ParseConfig {
 	const mapper = mapOptions(PAPAPARSE_PROPS_MAP)
-	return mapper(options)
+	return {
+		header: true,
+		dynamicTyping: autoType,
+		...mapper(options),
+	}
 }
 
 export function hasOneChar(value: string): boolean {

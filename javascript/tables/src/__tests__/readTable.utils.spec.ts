@@ -9,11 +9,12 @@ import {
 	determineParserType,
 	hasArqueroOptions,
 	hasOneChar,
-	mapProps,
+	mapToArqueroOptions,
+	mapToPapaParseOptions,
 	validOptions,
 } from '../readCsvTable.utils.js'
 
-describe('readTable Utils Tests', () => {
+describe('readTable.utils', () => {
 	describe('determineParserType', () => {
 		it('should return Arquero', () => {
 			const type = determineParserType()
@@ -29,23 +30,22 @@ describe('readTable Utils Tests', () => {
 		})
 	})
 
-	describe('mapProps', () => {
-		it('should return Arquero props', () => {
+	describe('map props', () => {
+		it('mapToArqueroOptions', () => {
 			const options = { delimiter: ';', skipRows: 2 }
-			const type = determineParserType(options)
-			const mapped = mapProps(type, options)
-			const expected = { delimiter: ';', skip: 2, autoType: false }
+			const mapped = mapToArqueroOptions(options)
+			const expected = { delimiter: ';', skip: 2, autoType: true }
 			expect(mapped).toEqual(expected)
 		})
-		it('should return Papa parse props', () => {
+		it('mapToPapaParseOptions', () => {
 			const options = { delimiter: ';', comment: '$', skipBlankLines: true }
-			const type = determineParserType(options)
-			const mapped = mapProps(type, options)
+			const mapped = mapToPapaParseOptions(options)
 			const expected = {
 				delimiter: ';',
 				comments: '$',
 				skipEmptyLines: true,
 				header: true,
+				dynamicTyping: true,
 			}
 			expect(mapped).toEqual(expected)
 		})

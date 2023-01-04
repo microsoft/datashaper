@@ -65,7 +65,7 @@ describe('readCsvTable', () => {
 
 		it('should load a table skipping commented line 4 with $ as comment char', () => {
 			const table = readCsvTable(altComment, { comment: '$' })
-			expect(table.column('first')?.get(3)).toBe('5')
+			expect(table.column('first')?.get(3)).toBe(5)
 		})
 
 		describe('headerless csv', () => {
@@ -118,7 +118,7 @@ describe('readCsvTable', () => {
 
 		it('should load a table skipping commented line 4 with $ as comment char', () => {
 			const table = readCsvTable(altComment, { comment: '$', escapeChar: '$' })
-			expect(table.column('first')?.get(3)).toBe('5')
+			expect(table.column('first')?.get(3)).toBe(5)
 		})
 	})
 

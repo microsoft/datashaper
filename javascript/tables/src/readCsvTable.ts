@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ParserOptions} from '@datashaper/schema';
+import type { ParserOptions } from '@datashaper/schema'
 import { ParserOptionsDefaults } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
@@ -19,11 +19,12 @@ import { getParser, validOptions } from './readCsvTable.utils.js'
 export function readCsvTable(
 	text: string,
 	options: ParserOptions = ParserOptionsDefaults,
+	autoType = true,
 ): ColumnTable {
 	const valid = validOptions(options)
 	if (!valid) {
 		throw new Error('Some options are not valid')
 	}
 	const parser = getParser(options)
-	return parser(text, options)
+	return parser(text, options, autoType)
 }

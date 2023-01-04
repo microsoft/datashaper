@@ -8,7 +8,7 @@ import fs from 'fs'
 
 import { parseCSV } from '../parseCSV'
 
-describe('parse CSV', () => {
+describe('parseCSV', () => {
 	it('should parse the csv', () => {
 		const codebook = {
 			$schema: '??',
