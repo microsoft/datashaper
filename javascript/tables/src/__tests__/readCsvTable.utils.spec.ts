@@ -14,7 +14,7 @@ import {
 	validOptions,
 } from '../readCsvTable.utils.js'
 
-describe('readTable.utils', () => {
+describe('readCsvTable.utils', () => {
 	describe('determineParserType', () => {
 		it('should return Arquero', () => {
 			const type = determineParserType()

@@ -187,6 +187,6 @@ const validators = {
 	lineTerminator: lineTerminatorIsValid,
 }
 
-export function skipRows(data: any[], skipRows: number): any[] {
+function skipRows(data: any[], skipRows: number): any[] {
 	return data.slice(skipRows)
 }
