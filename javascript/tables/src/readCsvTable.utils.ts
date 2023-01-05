@@ -94,7 +94,10 @@ export function hasArqueroOptions(options: ParserOptions): boolean {
 	// 1 - check if any options match values that arquero supports internally but are not configurable
 	// (e.g., lineTerminator in arquero defaults to \n)
 	// 2 - of the remaining options, confirm that they are all configurable in arquero
-	const props = Object.keys(options)
+	// filter out any props with no actual value
+	const props = Object.entries(options)
+		.filter(([_, v]) => v !== undefined)
+		.map(([k]) => k)
 	const internalDefaults = props.filter(
 		p =>
 			ARQUERO_INTERNAL_DEFAULTS.has(p) &&

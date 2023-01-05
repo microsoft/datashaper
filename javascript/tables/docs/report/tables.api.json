@@ -2814,7 +2814,7 @@
             },
             {
               "kind": "Content",
-              "text": ", options?: "
+              "text": ", _options?: "
             },
             {
               "kind": "Content",
@@ -2880,7 +2880,7 @@
               "isOptional": false
             },
             {
-              "parameterName": "options",
+              "parameterName": "_options",
               "parameterTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 9
