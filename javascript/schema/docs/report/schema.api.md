@@ -411,15 +411,6 @@ export type FactoryInput<T> = Omit<T, '$schema' | 'id' | 'name' | 'profile'> & {
     name?: string;
 };
 
-// Warning: (ae-missing-release-tag) "FetchArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface FetchArgs {
-    autoMax?: number;
-    delimiter?: string;
-    url: string;
-}
-
 // Warning: (ae-missing-release-tag) "Field" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -1207,8 +1198,6 @@ export enum Verb {
     Encode = "encode",
     // (undocumented)
     Erase = "erase",
-    // (undocumented)
-    Fetch = "fetch",
     // (undocumented)
     Fill = "fill",
     // (undocumented)

@@ -35,7 +35,6 @@ export const window = outputColumn
 
 export const decode = empty
 export const encode = empty
-export const fetch = empty
 export const concat = empty
 export const difference = empty
 export const intersect = empty
