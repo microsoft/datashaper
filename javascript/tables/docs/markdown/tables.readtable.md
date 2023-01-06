@@ -9,15 +9,16 @@ Read an input table
 <b>Signature:</b>
 
 ```typescript
-export declare function readTable(input: Blob | undefined, schema: DataTableSchema): Promise<ColumnTable | undefined>;
+export declare function readTable(input: Blob | string | undefined, schema: Partial<DataTableSchema>, options?: ReadTableOptions): Promise<ColumnTable | undefined>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  input | Blob \| undefined | The input blob |
-|  schema | DataTableSchema | The dataTableSchema with format, shape and parser of the table |
+|  input | Blob \| string \| undefined | The input blob |
+|  schema | Partial&lt;DataTableSchema&gt; | The dataTableSchema with format, shape and parser of the table |
+|  options | [ReadTableOptions](./tables.readtableoptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

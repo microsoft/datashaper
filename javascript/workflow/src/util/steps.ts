@@ -74,7 +74,6 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	decode: [Tags.InputTable],
 	encode: [Tags.InputTable],
 	erase: [Tags.InputTable, Tags.RowModifying, Tags.InputColumn],
-	fetch: [],
 	fill: [Tags.InputTable, Tags.OutputColumn],
 	filter: [Tags.InputTable, Tags.InputColumn, Tags.RowModifying],
 	fold: [Tags.InputTable, Tags.RowModifying, Tags.InputColumnList],

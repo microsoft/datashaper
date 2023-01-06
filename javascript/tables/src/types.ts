@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Field } from '@datashaper/schema'
+import type { CodebookSchema, Field } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 export interface TableContainer<T = unknown> {
@@ -36,4 +36,21 @@ export interface TableMetadata {
 	 * Metadata for each column
 	 */
 	columns: Record<string, Field>
+}
+
+export interface ReadTableOptions {
+	/**
+	 * If a codebook is supplied, we'll use this for type casting.
+	 */
+	codebook?: CodebookSchema
+	/**
+	 * If true, we'll try to auto-detect the type of each column.
+	 * This is ignored if a codebook is supplied.
+	 */
+	autoType?: boolean
+	/**
+	 * If autoType is true, we'll limit the rows we check to this number to avoid scanning the entire table.
+	 * This is ignored if a codebook is supplied.
+	 */
+	autoMax?: number
 }

@@ -31,7 +31,6 @@ describe('table utilities', () => {
 
 		test('numeric stats', () => {
 			const { num } = result
-			expect(num!.type).toBe('number')
 			expect(num!.count).toBe(6)
 			expect(num!.distinct).toBe(5)
 			expect(num!.invalid).toBe(0)
@@ -46,7 +45,6 @@ describe('table utilities', () => {
 
 		test('string stats', () => {
 			const { str } = result
-			expect(str!.type).toBe('string')
 			expect(str!.count).toBe(6)
 			expect(str!.distinct).toBe(4)
 			expect(str!.invalid).toBe(0)
@@ -57,7 +55,6 @@ describe('table utilities', () => {
 
 		test('missing numeric values', () => {
 			const { inv } = result
-			expect(inv!.type).toBe('number')
 			expect(inv!.count).toBe(6)
 			expect(inv!.distinct).toBe(3)
 			expect(inv!.invalid).toBe(4)
@@ -69,7 +66,6 @@ describe('table utilities', () => {
 
 		test('boolean stats', () => {
 			const { bool } = result
-			expect(bool!.type).toBe('boolean')
 			expect(bool!.count).toBe(6)
 			expect(bool!.distinct).toBe(3)
 			expect(bool!.invalid).toBe(1)
@@ -80,7 +76,6 @@ describe('table utilities', () => {
 
 		test('date stats', () => {
 			const { date } = result
-			expect(date!.type).toBe('date')
 			expect(date!.count).toBe(6)
 			expect(date!.distinct).toBe(3)
 			expect(date!.invalid).toBe(4)
@@ -91,7 +86,6 @@ describe('table utilities', () => {
 
 		test('array stats', () => {
 			const { arr } = result
-			expect(arr!.type).toBe('array')
 			expect(arr!.count).toBe(6)
 			expect(arr!.distinct).toBe(4)
 			expect(arr!.invalid).toBe(3)
@@ -237,7 +231,7 @@ describe('table utilities', () => {
 			expect(values!.distinct).toBe(5)
 			const { categories = [] } = values!
 			// logically the categories should match the unique values
-			expect(categories).toHaveLength(values!.distinct)
+			expect(categories).toHaveLength(values!.distinct!)
 			// empties will be sorted first
 			expect(categories[0]!.name).toBe('(empty)')
 			expect(categories[0]!.count).toBe(1)

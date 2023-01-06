@@ -68,7 +68,6 @@
 |  [DualInput](./schema.dualinput.md) | Dual-input, single-output step I/O |
 |  [EncodeDecodeArgs](./schema.encodedecodeargs.md) |  |
 |  [EraseArgs](./schema.eraseargs.md) |  |
-|  [FetchArgs](./schema.fetchargs.md) |  |
 |  [Field](./schema.field.md) | Contains the full schema definition and metadata for a data field (usually a table column). This includes the required data type, various data nature and rendering properties, potential validation rules, and mappings from a data dictionary. |
 |  [FieldError](./schema.fielderror.md) |  |
 |  [FieldMetadata](./schema.fieldmetadata.md) | Holds core metadata/stats for a data field. |
@@ -111,6 +110,7 @@
 
 |  Variable | Description |
 |  --- | --- |
+|  [DataTableSchemaDefaults](./schema.datatableschemadefaults.md) |  |
 |  [LATEST\_CODEBOOK\_SCHEMA](./schema.latest_codebook_schema.md) |  |
 |  [LATEST\_DATAPACKAGE\_SCHEMA](./schema.latest_datapackage_schema.md) |  |
 |  [LATEST\_DATATABLE\_SCHEMA](./schema.latest_datatable_schema.md) |  |

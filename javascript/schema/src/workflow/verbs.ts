@@ -19,7 +19,6 @@ export enum Verb {
 	Decode = 'decode',
 	Encode = 'encode',
 	Erase = 'erase',
-	Fetch = 'fetch',
 	Fill = 'fill',
 	Filter = 'filter',
 	Fold = 'fold',
@@ -342,21 +341,6 @@ export interface EncodeDecodeArgs {
 	strategy: CodebookStrategy
 
 	codebook: CodebookSchema
-}
-
-export interface FetchArgs {
-	/**
-	 * URL where the csv file is located
-	 */
-	url: string
-	/**
-	 * Optional delimiter for csv
-	 */
-	delimiter?: string
-	/**
-	 * Optional autoMax for tables
-	 */
-	autoMax?: number
 }
 
 export interface FillArgs extends OutputColumnArgs {

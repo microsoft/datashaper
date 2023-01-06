@@ -2,8 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DataFormat } from '@datashaper/schema'
-import { DataOrientation } from '@datashaper/schema'
+import { DataFormat, DataOrientation } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import { readTable } from '@datashaper/tables'
 import {
@@ -12,7 +11,14 @@ import {
 	removeExtension,
 } from '@datashaper/utilities'
 import { DataTable } from '@datashaper/workflow'
-import { IconButton, Modal, PrimaryButton, TextField } from '@fluentui/react'
+import { ReadOnlyTextField } from '@essex/components'
+import {
+	IconButton,
+	Label,
+	Modal,
+	PrimaryButton,
+	TextField,
+} from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 
@@ -22,10 +28,12 @@ import {
 	Footer,
 	Header,
 	HeaderTitle,
+	MainContent,
 	ModalBody,
 	modalStyles,
 	PreviewContent,
 	Sidebar,
+	textFieldStyles,
 } from './ImportTable.styles.js'
 import type { ImportTableProps } from './ImportTable.types.js'
 
@@ -45,6 +53,10 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 
 		const [name, setName] = useState<string>(removeExtension(file.name ?? ''))
 
+		const [rawContent, setRawContent] = useState<string | undefined>()
+		useEffect(() => {
+			file.toText().then(setRawContent)
+		}, [file])
 		const [table, setTable] = useState<ColumnTable | undefined>()
 		const [previewError, setPreviewError] = useState<string | undefined>()
 
@@ -73,7 +85,10 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 					delimiter,
 				},
 				shape: {
-					orientation: DataOrientation.Values,
+					orientation:
+						format === DataFormat.CSV
+							? DataOrientation.Values
+							: DataOrientation.Records,
 				},
 			})
 			schema.onChange(() => loadPreview(schema))
@@ -106,9 +121,18 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 						/>
 						<DataTableConfig resource={draftSchema} />
 					</Sidebar>
-					<PreviewContent>
-						<Preview error={previewError} table={table} />
-					</PreviewContent>
+					<MainContent>
+						<Label>Input text</Label>
+						<ReadOnlyTextField
+							multiline
+							value={rawContent}
+							styles={textFieldStyles}
+						/>
+						<Label>Final table</Label>
+						<PreviewContent>
+							<Preview error={previewError} table={table} />
+						</PreviewContent>
+					</MainContent>
 				</ModalBody>
 				<ModalFooter disabled={!!previewError} onClick={onClickImport} />
 			</Modal>

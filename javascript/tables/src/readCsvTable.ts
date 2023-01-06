@@ -2,9 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ParserOptions} from '@datashaper/schema';
-import { ParserOptionsDefaults } from '@datashaper/schema'
+import type { DataTableSchema } from '@datashaper/schema'
+import { DataTableSchemaDefaults } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
+import merge from 'lodash-es/merge.js'
 
 import { getParser, validOptions } from './readCsvTable.utils.js'
 
@@ -18,12 +19,19 @@ import { getParser, validOptions } from './readCsvTable.utils.js'
  */
 export function readCsvTable(
 	text: string,
-	options: ParserOptions = ParserOptionsDefaults,
+	schema?: Partial<DataTableSchema>,
 ): ColumnTable {
-	const valid = validOptions(options)
+	const valid = validOptions(schema?.parser)
+	const _schema = defaultSchema(schema)
 	if (!valid) {
-		throw new Error('Some options are not valid')
+		throw new Error('Some opts are not valid')
 	}
-	const parser = getParser(options)
-	return parser(text, options)
+	const parser = getParser(_schema.parser)
+	return parser(text, _schema.parser)
+}
+
+function defaultSchema(
+	schema?: Partial<DataTableSchema>,
+): Partial<DataTableSchema> {
+	return merge({}, DataTableSchemaDefaults, schema)
 }

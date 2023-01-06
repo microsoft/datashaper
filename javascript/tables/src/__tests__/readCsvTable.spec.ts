@@ -35,7 +35,7 @@ const delimiter = `1:100:one
 
 describe('readCsvTable', () => {
 	describe('arquero reader', () => {
-		it('should load a default data without params', () => {
+		it('default without params', () => {
 			const table = readCsvTable(text)
 			expect(table.numRows()).toBe(10)
 			expect(table.numCols()).toBe(3)
@@ -43,29 +43,129 @@ describe('readCsvTable', () => {
 
 		it('skips commented lines', () => {
 			const table = readCsvTable(text, {
-				comment: '#',
+				parser: {
+					comment: '#',
+				},
 			})
 			expect(table.numRows()).toBe(9)
 			expect(table.numCols()).toBe(3)
 		})
 
-		it('should load a table with custom delimiter and names list', () => {
+		it('custom delimiter and names list', () => {
 			const table = readCsvTable(delimiter, {
-				header: false,
-				names: ['first', 'second', 'third'],
-				delimiter: ':',
+				parser: {
+					header: false,
+					names: ['first', 'second', 'third'],
+					delimiter: ':',
+				},
 			})
 			expect(table.numRows()).toBe(5)
 		})
 
-		it('should load a table with custom delimiter expecting it to guess it', () => {
-			const table = readCsvTable(delimiter, { comment: '$' })
+		// TODO: I think we want to remove this or use the papa guess
+		it('custom delimiter expecting it to guess it', () => {
+			const table = readCsvTable(delimiter)
 			expect(table.numRows()).toBe(4)
 		})
 
-		it('should load a table skipping commented line 4 with $ as comment char', () => {
-			const table = readCsvTable(altComment, { comment: '$' })
+		it('skipping commented line 4 with $ as comment char', () => {
+			const table = readCsvTable(altComment, {
+				parser: { comment: '$' },
+			})
 			expect(table.column('first')?.get(3)).toBe('5')
+		})
+
+		it('no autotyping', () => {
+			const csv = fs.readFileSync('./src/__tests__/data/companies.csv', {
+				encoding: 'utf8',
+				flag: 'r',
+			})
+			const table = readCsvTable(csv)
+			expect(typeof table.column('ID')?.get(0)).toBe('string')
+			expect(typeof table.column('Name')?.get(0)).toBe('string')
+			expect(typeof table.column('Employees')?.get(0)).toBe('string')
+			expect(typeof table.column('US')?.get(0)).toBe('string')
+		})
+		describe('headerless csv', () => {
+			const csv = fs.readFileSync(
+				'./src/__tests__/data/companies-headerless.csv',
+				{
+					encoding: 'utf8',
+					flag: 'r',
+				},
+			)
+
+			it('default column names', () => {
+				const table = readCsvTable(csv, {
+					parser: { header: false },
+				})
+				expect(table.columnNames()).toEqual(['col1', 'col2', 'col3', 'col4'])
+			})
+
+			it('specified column names', () => {
+				const table = readCsvTable(csv, {
+					parser: {
+						header: false,
+						names: ['A', 'B', 'C', 'D'],
+					},
+				})
+				expect(table.columnNames()).toEqual(['A', 'B', 'C', 'D'])
+			})
+		})
+	})
+
+	describe('papaparse reader', () => {
+		it('should load a table', () => {
+			const table = readCsvTable(text, {
+				parser: {
+					escapeChar: '$',
+					comment: '#',
+				},
+			})
+
+			expect(table.numRows()).toBe(9)
+		})
+
+		it('custom delimiter', () => {
+			const table = readCsvTable(delimiter, {
+				parser: {
+					header: false,
+					delimiter: ':',
+					escapeChar: '$',
+				},
+			})
+			expect(table.numRows()).toBe(5)
+		})
+
+		it('custom delimiter expecting it to guess it', () => {
+			const table = readCsvTable(delimiter, {
+				parser: { comment: '$', escapeChar: '$' },
+			})
+			expect(table.numRows()).toBe(4)
+		})
+
+		it('skipping commented line 4 with $ as comment char', () => {
+			const table = readCsvTable(altComment, {
+				parser: { comment: '$', escapeChar: '$' },
+			})
+			expect(table.column('first')?.get(3)).toBe('5')
+		})
+
+		it('no autotyping', () => {
+			const csv = fs.readFileSync('./src/__tests__/data/companies.csv', {
+				encoding: 'utf8',
+				flag: 'r',
+			})
+			const table = readCsvTable(csv, {
+				parser: {
+					// force papa with a non-arquero param
+					escapeChar: '$',
+				},
+			})
+			expect(typeof table.column('ID')?.get(0)).toBe('string')
+			expect(typeof table.column('Name')?.get(0)).toBe('string')
+			expect(typeof table.column('Employees')?.get(0)).toBe('string')
+			expect(typeof table.column('US')?.get(0)).toBe('string')
 		})
 
 		describe('headerless csv', () => {
@@ -77,48 +177,23 @@ describe('readCsvTable', () => {
 				},
 			)
 
-			it('default arquero columns', () => {
-				const table = readCsvTable(csv, { header: false })
+			it('default column names', () => {
+				const table = readCsvTable(csv, {
+					parser: { header: false, escapeChar: '$' },
+				})
 				expect(table.columnNames()).toEqual(['col1', 'col2', 'col3', 'col4'])
 			})
 
 			it('specified column names', () => {
 				const table = readCsvTable(csv, {
-					header: false,
-					names: ['A', 'B', 'C', 'D'],
+					parser: {
+						header: false,
+						names: ['A', 'B', 'C', 'D'],
+						escapeChar: '$',
+					},
 				})
 				expect(table.columnNames()).toEqual(['A', 'B', 'C', 'D'])
 			})
-		})
-	})
-
-	describe('papaparse reader', () => {
-		it('should load a table', () => {
-			const table = readCsvTable(text, {
-				escapeChar: '$',
-				comment: '#',
-			})
-
-			expect(table.numRows()).toBe(9)
-		})
-
-		it('should load a table with custom delimiter', () => {
-			const table = readCsvTable(delimiter, {
-				header: false,
-				delimiter: ':',
-				escapeChar: '$',
-			})
-			expect(table.numRows()).toBe(5)
-		})
-
-		it('should load a table with custom delimiter expecting it to guess it', () => {
-			const table = readCsvTable(delimiter, { comment: '$', escapeChar: '$' })
-			expect(table.numRows()).toBe(4)
-		})
-
-		it('should load a table skipping commented line 4 with $ as comment char', () => {
-			const table = readCsvTable(altComment, { comment: '$', escapeChar: '$' })
-			expect(table.column('first')?.get(3)).toBe('5')
 		})
 	})
 
@@ -136,29 +211,32 @@ describe('readCsvTable', () => {
 		describe('arquero reader', () => {
 			it('should load a large dataset', () => {
 				const table = readCsvTable(largeDataset, {
-					comment: '#',
-					readRows: 466890,
+					parser: {
+						readRows: 466890,
+					},
 				})
 				expect(table.numRows()).toBe(466890)
 			})
 		})
 
 		describe('papaparse reader', () => {
-			it('should load a large dataset', () => {
+			it('large dataset', () => {
 				const table = readCsvTable(largeDataset, {
-					escapeChar: '$',
-					skipBlankLines: true,
-					comment: '#',
-					readRows: 466890,
+					parser: {
+						escapeChar: '$',
+						readRows: 466890,
+					},
 				})
 				expect(table.numRows()).toBe(466890)
 			})
 
-			it('should load a large dataset with readRows prop', () => {
+			it('large dataset with readRows prop', () => {
 				const table = readCsvTable(largeDataset, {
-					skipRows: 2,
-					escapeChar: '$',
-					readRows: 3,
+					parser: {
+						skipRows: 2,
+						escapeChar: '$',
+						readRows: 3,
+					},
 				})
 				expect(table.numRows()).toBe(3)
 			})

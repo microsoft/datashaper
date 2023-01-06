@@ -5,5 +5,5 @@
 
 export enum ParserType {
 	Arquero = 'arquero',
-	PapaParse = 'papaParse',
+	PapaParse = 'papaparse',
 }

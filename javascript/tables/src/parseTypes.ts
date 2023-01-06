@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { TypeHints, Value } from '@datashaper/schema';
-import { DataType,TypeHintsDefaults  } from '@datashaper/schema'
+import type { TypeHints, Value } from '@datashaper/schema'
+import { DataType, TypeHintsDefaults } from '@datashaper/schema'
 import toNumber from 'lodash-es/toNumber.js'
 import moment from 'moment'
 
@@ -51,6 +51,9 @@ export function parseNumber(
 		if (isNull(value)) {
 			return null
 		}
+		if (typeof value === 'number') {
+			return value as number
+		}
 		return toNumber(formatNumberStr(value, decimal, thousands))
 	}
 }
@@ -66,6 +69,9 @@ export function parseBoolean(
 	return function parseBoolean(value: string) {
 		if (isNull(value)) {
 			return null
+		}
+		if (typeof value === 'boolean') {
+			return value as boolean
 		}
 		const str = value.toLowerCase()
 		if (trueSet.has(str)) {
