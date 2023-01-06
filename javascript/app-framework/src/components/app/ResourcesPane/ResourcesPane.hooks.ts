@@ -2,12 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DataTableSchema } from '@datashaper/schema'
+import type { CodebookSchema, DataTableSchema } from '@datashaper/schema'
 import { createDataTableSchemaObject } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import type { BaseFile } from '@datashaper/utilities'
 import { removeExtension } from '@datashaper/utilities'
-import { DataTable, TableBundle } from '@datashaper/workflow'
+import { Codebook,DataTable, TableBundle } from '@datashaper/workflow'
 import { useCallback, useContext } from 'react'
 
 import { DataPackageContext } from '../../../context/index.js'
@@ -20,8 +20,12 @@ export function useOnOpenTable(
 ): OpenTableHandler {
 	const onAddTable = useAddTable()
 	return useCallback(
-		(table: TableContainer, schema: DataTableSchema) => {
-			onAddTable(file, table, schema)
+		(
+			table: TableContainer,
+			schema: DataTableSchema,
+			codebook?: CodebookSchema,
+		) => {
+			onAddTable(file, table, schema, codebook)
 			setFile(undefined)
 		},
 		[onAddTable, file, setFile],
@@ -31,15 +35,21 @@ export function useOnOpenTable(
 function useAddTable(): AddTableHandler {
 	const store = useContext(DataPackageContext)
 	return useCallback(
-		(file: BaseFile, { id }: TableContainer, schema: DataTableSchema) => {
+		(
+			file: BaseFile,
+			{ id }: TableContainer,
+			schema: DataTableSchema,
+			codebook?: CodebookSchema,
+		) => {
 			const name = removeExtension(id)
 			const table = new DataTable(createDataTableSchemaObject(schema))
 			table.data = file
 			table.name = 'datatable.json'
 			table.path = id
 
+			const cb = codebook ? [new Codebook(codebook)] : []
 			const tableBundle = new TableBundle()
-			tableBundle.sources = [...tableBundle.sources, table]
+			tableBundle.sources = [...tableBundle.sources, table, ...cb]
 			tableBundle.name = name
 
 			store.addResource(tableBundle)

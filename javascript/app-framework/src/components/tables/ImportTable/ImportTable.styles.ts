@@ -67,7 +67,9 @@ export const Footer = styled.div`
 	width: 100%;
 	display: flex;
 	justify-content: flex-end;
-	padding: 0 10px ${PADDING}px 0;
+	align-items: center;
+	gap: ${PADDING * 2}px;
+	padding: 0 ${PADDING}px ${PADDING}px 0;
 `
 
 export const textFieldStyles = {
