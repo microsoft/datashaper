@@ -12,7 +12,6 @@ import { type ParseConfig, default as papa } from 'papaparse'
 
 import {
 	ARQUERO_INTERNAL_DEFAULTS,
-	ARQUERO_PROPS_MAP,
 	ARQUERO_SUPPORTED_OPTS,
 	LINE_TERMINATORS,
 	PAPAPARSE_PROPS_MAP,
@@ -44,7 +43,9 @@ export function getParser(
 function arqueroParser(text: string, options: ParserOptions = {}): ColumnTable {
 	const mappedOptions = mapToArqueroOptions(options)
 	const table = fromCSV(text, mappedOptions)
-	return options.readRows ? table.slice(0, options.readRows) : table
+	const skip = options.skipRows || 0
+	const read = options.readRows || Infinity
+	return table.slice(skip, read)
 }
 
 function papaParser(text: string, options: ParserOptions = {}): ColumnTable {
@@ -116,10 +117,9 @@ function mapOptions(
 }
 
 export function mapToArqueroOptions(options?: ParserOptions): CSVParseOptions {
-	const mapper = mapOptions(ARQUERO_PROPS_MAP)
 	return {
 		autoType: false,
-		...mapper(options),
+		...options,
 	}
 }
 

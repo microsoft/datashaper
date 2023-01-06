@@ -27,10 +27,6 @@ export const ARQUERO_INTERNAL_DEFAULTS = new Map<string, any>([
 	['skipBlankLines', ParserOptionsDefaults.skipBlankLines],
 ])
 
-export const ARQUERO_PROPS_MAP = {
-	skipRows: 'skip',
-}
-
 export const PAPAPARSE_SUPPORTED_OPTS = new Set([
 	'delimiter',
 	'header',

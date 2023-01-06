@@ -41,11 +41,10 @@ describe('readCsvTable.utils', () => {
 
 	describe('map props', () => {
 		it('mapToArqueroOptions', () => {
-			const options = { delimiter: ';', skipRows: 2 }
+			const options = { delimiter: ';' }
 			const mapped = mapToArqueroOptions(options)
 			const expected = {
 				delimiter: ';',
-				skip: 2,
 				autoType: false,
 			}
 			expect(mapped).toEqual(expected)
@@ -66,7 +65,7 @@ describe('readCsvTable.utils', () => {
 
 	describe('hasArqueroOptions', () => {
 		it('should return true', () => {
-			expect(hasArqueroOptions({ delimiter: ';', skipRows: 2 })).toBe(true)
+			expect(hasArqueroOptions({ delimiter: ';' })).toBe(true)
 		})
 		it('should return false', () => {
 			expect(hasArqueroOptions({ delimiter: ';', escapeChar: '\\' })).toBe(
