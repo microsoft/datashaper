@@ -55,11 +55,7 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 
 		const [rawContent, setRawContent] = useState<string | undefined>()
 		useEffect(() => {
-			const f = async () => {
-				const text = await file.toText()
-				setRawContent(text)
-			}
-			void f()
+			file.toText().then(setRawContent)
 		}, [file])
 		const [table, setTable] = useState<ColumnTable | undefined>()
 		const [previewError, setPreviewError] = useState<string | undefined>()
