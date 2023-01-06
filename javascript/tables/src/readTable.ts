@@ -2,12 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	CodebookSchema,
-	DataTableSchema} from '@datashaper/schema';
+import type { CodebookSchema, DataTableSchema } from '@datashaper/schema'
 import {
-	CodebookStrategy
-, DataFormat, DataTableSchemaDefaults } from '@datashaper/schema'
+	CodebookStrategy,
+	DataFormat,
+	DataTableSchemaDefaults,
+} from '@datashaper/schema'
 import { fromArrow } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
@@ -66,22 +66,18 @@ async function textTable(
 ): Promise<ColumnTable> {
 	const _schema = defaultSchema(schema)
 	const { format } = _schema
+	const getTableText = async () =>
+		typeof input === 'string' ? input : await input.text()
 	switch (format) {
 		case DataFormat.JSON:
-			return readJSONTable(
-				typeof input === 'string' ? input : await input.text(),
-				_schema,
-			)
+			return readJSONTable(await getTableText(), _schema)
 		case DataFormat.ARROW:
 			if (typeof input === 'string') {
 				throw new Error('Arrow format requires a binary Blob input')
 			}
 			return fromArrow(await input.arrayBuffer())
 		case DataFormat.CSV:
-			return readCsvTable(
-				typeof input === 'string' ? input : await input.text(),
-				_schema,
-			)
+			return readCsvTable(await getTableText(), _schema)
 		default:
 			throw new Error(`unknown data format: ${format}`)
 	}
