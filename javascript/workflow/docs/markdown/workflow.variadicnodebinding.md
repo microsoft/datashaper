@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type VariadicNodeBinding<T> = Omit<NodeBinding<T>, 'input'>[];
+export type VariadicNodeBinding<T> = Omit<NodeBinding<T>, 'input'>[];
 ```
 <b>References:</b> [NodeBinding](./workflow.nodebinding.md)
 

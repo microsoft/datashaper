@@ -9,5 +9,5 @@ Function callback for general activity listener.
 <b>Signature:</b>
 
 ```typescript
-export declare type Handler = () => void;
+export type Handler = () => void;
 ```

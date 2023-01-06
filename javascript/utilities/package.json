@@ -41,13 +41,13 @@
 		"tslib": "^2.4.1"
 	},
 	"devDependencies": {
-		"@essex/jest-config": "^21.0.17",
-		"@essex/scripts": "^22.2.0",
+		"@essex/jest-config": "^21.0.18",
+		"@essex/scripts": "^22.2.1",
 		"@essex/tsconfig-base": "^1.0.2",
-		"@essex/vite-config": "^19.0.15",
+		"@essex/vite-config": "^19.0.16",
 		"@types/debug": "^4.1.7",
-		"@types/jest": "^29.2.4",
-		"@types/node": "^18.11.15",
+		"@types/jest": "^29.2.5",
+		"@types/node": "^18.11.18",
 		"arquero": "^5.1.0",
 		"jest": "^29.3.1",
 		"jest-environment-jsdom": "^29.3.1",

@@ -9,7 +9,7 @@ A rel is a string that describes the relationship between a resource and its chi
 <b>Signature:</b>
 
 ```typescript
-export declare type Rel = KnownRel
+export type Rel = KnownRel
 /**
  * Any other custom Rel type can be specified by bundles
  */

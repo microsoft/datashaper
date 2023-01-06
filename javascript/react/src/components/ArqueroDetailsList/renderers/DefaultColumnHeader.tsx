@@ -66,7 +66,6 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 		)
 
 		return (
-			/* eslint-disable jsx-a11y/mouse-events-have-key-events */
 			<div style={containerStyle}>
 				<When
 					condition={

@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type Json = Record<string, any>;
+export type Json = Record<string, any>;
 ```

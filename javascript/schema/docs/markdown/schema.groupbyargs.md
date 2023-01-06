@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type GroupbyArgs = InputColumnListArgs;
+export type GroupbyArgs = InputColumnListArgs;
 ```
 <b>References:</b> [InputColumnListArgs](./schema.inputcolumnlistargs.md)
 

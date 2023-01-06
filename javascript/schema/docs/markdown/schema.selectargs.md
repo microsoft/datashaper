@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type SelectArgs = InputColumnListArgs;
+export type SelectArgs = InputColumnListArgs;
 ```
 <b>References:</b> [InputColumnListArgs](./schema.inputcolumnlistargs.md)
 

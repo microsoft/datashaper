@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type NodeId = string;
+export type NodeId = string;
 ```

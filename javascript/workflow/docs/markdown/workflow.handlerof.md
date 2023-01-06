@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type HandlerOf<T> = (input: T) => void;
+export type HandlerOf<T> = (input: T) => void;
 ```
