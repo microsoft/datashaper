@@ -9,7 +9,7 @@ The workflow object manages mutable data for a workflow specification
 <b>Signature:</b>
 
 ```typescript
-export declare type TableObservable = Observable<Maybe<TableContainer>>;
+export type TableObservable = Observable<Maybe<TableContainer>>;
 ```
 <b>References:</b> [Maybe](./workflow.maybe.md)
 

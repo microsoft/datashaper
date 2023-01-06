@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type UnfoldArgs = InputKeyValueArgs;
+export type UnfoldArgs = InputKeyValueArgs;
 ```
 <b>References:</b> [InputKeyValueArgs](./schema.inputkeyvalueargs.md)
 

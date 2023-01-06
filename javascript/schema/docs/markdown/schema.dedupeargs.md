@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type DedupeArgs = Partial<InputColumnListArgs>;
+export type DedupeArgs = Partial<InputColumnListArgs>;
 ```
 <b>References:</b> [InputColumnListArgs](./schema.inputcolumnlistargs.md)
 

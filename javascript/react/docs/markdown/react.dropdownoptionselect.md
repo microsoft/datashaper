@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type DropdownOptionSelect = ((event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption<any> | undefined, index?: number | undefined) => void) | undefined;
+export type DropdownOptionSelect = ((event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption<any> | undefined, index?: number | undefined) => void) | undefined;
 ```

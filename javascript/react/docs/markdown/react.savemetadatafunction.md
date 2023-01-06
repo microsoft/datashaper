@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type SaveMetadataFunction = (meta: TableMetadata, table: ColumnTable) => void;
+export type SaveMetadataFunction = (meta: TableMetadata, table: ColumnTable) => void;
 ```

@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
+export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 ```

@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type StepFunction<T, Args> = (source: T, args: Args) => T;
+export type StepFunction<T, Args> = (source: T, args: Args) => T;
 ```

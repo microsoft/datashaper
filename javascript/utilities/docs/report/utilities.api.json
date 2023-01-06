@@ -3600,7 +3600,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type Json = "
+              "text": "export type Json = "
             },
             {
               "kind": "Reference",

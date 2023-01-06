@@ -9,7 +9,7 @@ Resources must have a profile, which is a key defining how it should be interpre
 <b>Signature:</b>
 
 ```typescript
-export declare type Profile = KnownProfile
+export type Profile = KnownProfile
 /**
  * Any other custom profile string can be specified by applications.
  */

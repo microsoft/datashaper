@@ -1830,7 +1830,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type ColumnRenderFunction = "
+              "text": "export type ColumnRenderFunction = "
             },
             {
               "kind": "Content",
@@ -1864,7 +1864,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type ColumnSelectFunction = "
+              "text": "export type ColumnSelectFunction = "
             },
             {
               "kind": "Content",
@@ -2180,7 +2180,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type DropdownOptionSelect = "
+              "text": "export type DropdownOptionSelect = "
             },
             {
               "kind": "Content",
@@ -2232,7 +2232,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type GroupHeaderFunction = "
+              "text": "export type GroupHeaderFunction = "
             },
             {
               "kind": "Content",
@@ -2387,7 +2387,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type SaveMetadataFunction = "
+              "text": "export type SaveMetadataFunction = "
             },
             {
               "kind": "Content",

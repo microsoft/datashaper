@@ -2299,7 +2299,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type CopyWithPartial<T, K extends "
+              "text": "export type CopyWithPartial<T, K extends "
             },
             {
               "kind": "Content",
@@ -5777,7 +5777,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type Handler = "
+              "text": "export type Handler = "
             },
             {
               "kind": "Content",
@@ -5802,7 +5802,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type HandlerOf<T> = "
+              "text": "export type HandlerOf<T> = "
             },
             {
               "kind": "Content",
@@ -6985,7 +6985,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type Maybe<T> = "
+              "text": "export type Maybe<T> = "
             },
             {
               "kind": "Content",
@@ -8023,7 +8023,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type NodeId = "
+              "text": "export type NodeId = "
             },
             {
               "kind": "Content",
@@ -9667,7 +9667,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type Readable<T extends "
+              "text": "export type Readable<T extends "
             },
             {
               "kind": "Reference",
@@ -11059,7 +11059,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type SocketName = "
+              "text": "export type SocketName = "
             },
             {
               "kind": "Content",
@@ -11342,7 +11342,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type StepFunction<T, Args> = "
+              "text": "export type StepFunction<T, Args> = "
             },
             {
               "kind": "Content",
@@ -12314,7 +12314,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type TableEmitter = "
+              "text": "export type TableEmitter = "
             },
             {
               "kind": "Reference",
@@ -12451,7 +12451,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type TableObservable = "
+              "text": "export type TableObservable = "
             },
             {
               "kind": "Reference",
@@ -12499,7 +12499,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type TableTransformer = "
+              "text": "export type TableTransformer = "
             },
             {
               "kind": "Reference",
@@ -12913,7 +12913,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type Unsubscribe = "
+              "text": "export type Unsubscribe = "
             },
             {
               "kind": "Reference",
@@ -12939,7 +12939,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type VariadicNodeBinding<T> = "
+              "text": "export type VariadicNodeBinding<T> = "
             },
             {
               "kind": "Reference",

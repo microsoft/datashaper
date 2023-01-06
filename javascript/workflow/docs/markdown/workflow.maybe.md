@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type Maybe<T> = T | undefined;
+export type Maybe<T> = T | undefined;
 ```

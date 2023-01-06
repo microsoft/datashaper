@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type PortBinding = string | NamedPortBinding;
+export type PortBinding = string | NamedPortBinding;
 ```
 <b>References:</b> [NamedPortBinding](./schema.namedportbinding.md)
 

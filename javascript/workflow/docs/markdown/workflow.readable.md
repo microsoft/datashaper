@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type Readable<T extends ResourceSchema> = {
+export type Readable<T extends ResourceSchema> = {
     profile?: T['profile'] | undefined;
     name?: T['name'] | undefined;
 } & Omit<T, 'profile' | 'name'>;
