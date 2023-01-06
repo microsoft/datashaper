@@ -43,7 +43,6 @@ export function generateCodebook(
 			const values: string[] = table.array(column) as string[]
 			const columnType = guessDataTypeFromValues(values, opts.autoMax)
 			const nature = inferNatureFromValues(values)
-
 			field.type = columnType
 			field.nature = nature
 		}

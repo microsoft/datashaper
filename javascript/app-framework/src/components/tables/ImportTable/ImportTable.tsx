@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DataFormat } from '@datashaper/schema'
+import { DataFormat } from '@datashaper/schema'
 import { DataOrientation } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import { readTable } from '@datashaper/tables'
@@ -90,7 +90,10 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 					delimiter,
 				},
 				shape: {
-					orientation: DataOrientation.Values,
+					orientation:
+						format === DataFormat.CSV
+							? DataOrientation.Values
+							: DataOrientation.Records,
 				},
 			})
 			schema.onChange(() => loadPreview(schema))
