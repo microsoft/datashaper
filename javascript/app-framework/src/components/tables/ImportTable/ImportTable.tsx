@@ -2,8 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { DataFormat } from '@datashaper/schema'
-import { DataOrientation } from '@datashaper/schema'
+import { DataFormat, DataOrientation } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import { readTable } from '@datashaper/tables'
 import {
