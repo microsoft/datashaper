@@ -12,7 +12,13 @@ import {
 	removeExtension,
 } from '@datashaper/utilities'
 import { DataTable } from '@datashaper/workflow'
-import { IconButton, Modal, PrimaryButton, TextField } from '@fluentui/react'
+import {
+	IconButton,
+	Label,
+	Modal,
+	PrimaryButton,
+	TextField,
+} from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 
@@ -22,10 +28,12 @@ import {
 	Footer,
 	Header,
 	HeaderTitle,
+	MainContent,
 	ModalBody,
 	modalStyles,
 	PreviewContent,
 	Sidebar,
+	textFieldStyles,
 } from './ImportTable.styles.js'
 import type { ImportTableProps } from './ImportTable.types.js'
 
@@ -45,6 +53,14 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 
 		const [name, setName] = useState<string>(removeExtension(file.name ?? ''))
 
+		const [rawContent, setRawContent] = useState<string | undefined>()
+		useEffect(() => {
+			const f = async () => {
+				const text = await file.toText()
+				setRawContent(text)
+			}
+			void f()
+		}, [file])
 		const [table, setTable] = useState<ColumnTable | undefined>()
 		const [previewError, setPreviewError] = useState<string | undefined>()
 
@@ -106,9 +122,20 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 						/>
 						<DataTableConfig resource={draftSchema} />
 					</Sidebar>
-					<PreviewContent>
-						<Preview error={previewError} table={table} />
-					</PreviewContent>
+					<MainContent>
+						<Label>Input text</Label>
+						<TextField
+							readOnly
+							multiline
+							disabled
+							value={rawContent}
+							styles={textFieldStyles}
+						/>
+						<Label>Final table</Label>
+						<PreviewContent>
+							<Preview error={previewError} table={table} />
+						</PreviewContent>
+					</MainContent>
 				</ModalBody>
 				<ModalFooter disabled={!!previewError} onClick={onClickImport} />
 			</Modal>

@@ -27,6 +27,7 @@ export interface DataTableSchemaComponentProps {
 export const DataTableConfig: React.FC<DataTableSchemaComponentProps> = memo(
 	function DataTableConfig({ resource }) {
 		const { format, onChangeFormat } = useChangeHandlers(resource)
+		console.log(resource)
 		return (
 			<Container>
 				<FormatContainer>

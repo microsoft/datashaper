@@ -10,8 +10,10 @@ const MODAL_WIDTH = 800
 const MODAL_HEIGHT = 600
 const HEADER_HEIGHT = 42
 const FOOTER_HEIGHT = 52
-const CONTENT_HEIGHT = MODAL_HEIGHT - HEADER_HEIGHT - FOOTER_HEIGHT - 10
+const PADDING = 12
+const CONTENT_HEIGHT = MODAL_HEIGHT - HEADER_HEIGHT - FOOTER_HEIGHT - 12
 const SIDEBAR_WIDTH = 240
+const TABLE_HEIGHT = 280
 
 export const Header = styled.div`
 	display: flex;
@@ -33,8 +35,8 @@ export const ModalBody = styled.div`
 	display: flex;
 	height: ${CONTENT_HEIGHT}
 	width: ${MODAL_WIDTH}px;
-	gap: 10px;
-	padding: 10px;
+	gap: ${PADDING * 2}px;
+	padding: ${PADDING}px;
 `
 
 export const Sidebar = styled.div`
@@ -49,9 +51,14 @@ export const Sidebar = styled.div`
 	overflow-y: auto;
 `
 
+export const MainContent = styled.div`
+	display: flex;
+	flex-direction: column;
+	width: ${MODAL_WIDTH - SIDEBAR_WIDTH - PADDING * 4}px;
+`
+
 export const PreviewContent = styled.div`
-	width: ${MODAL_WIDTH - SIDEBAR_WIDTH - 30}px;
-	height: ${MODAL_HEIGHT - HEADER_HEIGHT - FOOTER_HEIGHT - 10}px;
+	height: ${TABLE_HEIGHT}px;
 	border: 1px solid
 		${({ theme }: { theme: Theme }) => theme.palette.neutralLighter};
 `
@@ -60,8 +67,15 @@ export const Footer = styled.div`
 	width: 100%;
 	display: flex;
 	justify-content: flex-end;
-	padding: 0 10px 10px 0;
+	padding: 0 10px ${PADDING}px 0;
 `
+
+export const textFieldStyles = {
+	field: {
+		height: TABLE_HEIGHT / 2,
+		maxHeight: TABLE_HEIGHT / 2,
+	},
+}
 
 export const modalStyles = {
 	main: { width: MODAL_WIDTH, maxHeight: MODAL_HEIGHT, height: MODAL_HEIGHT },
