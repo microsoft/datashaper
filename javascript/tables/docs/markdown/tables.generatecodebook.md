@@ -7,7 +7,10 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function generateCodebook(table: ColumnTable): CodebookSchema;
+export declare function generateCodebook(table: ColumnTable, options?: {
+    autoType?: boolean;
+    autoMax?: number;
+}): CodebookSchema;
 ```
 
 ## Parameters
@@ -15,6 +18,7 @@ export declare function generateCodebook(table: ColumnTable): CodebookSchema;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  table | ColumnTable |  |
+|  options | { autoType?: boolean; autoMax?: number; } | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DataTableSchema} from '@datashaper/schema';
+import type { DataTableSchema } from '@datashaper/schema'
 import { DataTableSchemaDefaults } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import merge from 'lodash-es/merge.js'
@@ -20,8 +20,6 @@ import { getParser, validOptions } from './readCsvTable.utils.js'
 export function readCsvTable(
 	text: string,
 	schema?: Partial<DataTableSchema>,
-	autoType = true,
-	autoMax = 1000,
 ): ColumnTable {
 	const valid = validOptions(schema?.parser)
 	const _schema = defaultSchema(schema)
@@ -29,7 +27,7 @@ export function readCsvTable(
 		throw new Error('Some opts are not valid')
 	}
 	const parser = getParser(_schema.parser)
-	return parser(text, _schema.parser, autoType, autoMax)
+	return parser(text, _schema.parser)
 }
 
 function defaultSchema(

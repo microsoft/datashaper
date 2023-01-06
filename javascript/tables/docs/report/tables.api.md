@@ -21,7 +21,7 @@ import type { Value } from '@datashaper/schema';
 // Warning: (ae-missing-release-tag) "applyCodebook" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function applyCodebook(table: ColumnTable, codebook: CodebookSchema, strategy: CodebookStrategy, dataTableSchema?: DataTableSchema): ColumnTable;
+export function applyCodebook(table: ColumnTable, codebook: CodebookSchema, strategy: CodebookStrategy, dataTableSchema?: Partial<DataTableSchema>): ColumnTable;
 
 // Warning: (ae-missing-release-tag) "coerce" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -94,7 +94,10 @@ export function formatNumberStr(value: string | number, decimal?: string, thousa
 // Warning: (ae-missing-release-tag) "generateCodebook" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function generateCodebook(table: ColumnTable): CodebookSchema;
+export function generateCodebook(table: ColumnTable, options?: {
+    autoType?: boolean;
+    autoMax?: number;
+}): CodebookSchema;
 
 // Warning: (ae-missing-release-tag) "getDate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -240,7 +243,7 @@ export function patternValidator(field: Field, includeIndexes: boolean): Validat
 // Warning: (ae-missing-release-tag) "readTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function readTable(input: Blob | undefined, schema: DataTableSchema, _options?: {
+export function readTable(input: Blob | string | undefined, schema: Partial<DataTableSchema>, options?: {
     codebook?: CodebookSchema;
     autoType?: boolean;
     autoMax?: number;

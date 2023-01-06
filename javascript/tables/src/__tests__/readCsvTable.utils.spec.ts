@@ -46,8 +46,7 @@ describe('readCsvTable.utils', () => {
 			const expected = {
 				delimiter: ';',
 				skip: 2,
-				autoType: true,
-				autoMax: 1000,
+				autoType: false,
 			}
 			expect(mapped).toEqual(expected)
 		})
@@ -59,7 +58,7 @@ describe('readCsvTable.utils', () => {
 				comments: '$',
 				skipEmptyLines: true,
 				header: true,
-				dynamicTyping: true,
+				dynamicTyping: false,
 			}
 			expect(mapped).toEqual(expected)
 		})

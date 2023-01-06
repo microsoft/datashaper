@@ -30,12 +30,7 @@ export function determineParserType(options?: ParserOptions): ParserType {
 
 export function getParser(
 	options?: ParserOptions,
-): (
-	text: string,
-	options?: ParserOptions,
-	autoType?: boolean,
-	autoMax?: number,
-) => ColumnTable {
+): (text: string, options?: ParserOptions) => ColumnTable {
 	const type = determineParserType(options)
 	switch (type) {
 		case ParserType.PapaParse:
@@ -46,27 +41,18 @@ export function getParser(
 	}
 }
 
-function arqueroParser(
-	text: string,
-	options: ParserOptions = {},
-	autoType = true,
-	autoMax = 1000,
-): ColumnTable {
-	const mappedOptions = mapToArqueroOptions(options, autoType, autoMax)
+function arqueroParser(text: string, options: ParserOptions = {}): ColumnTable {
+	const mappedOptions = mapToArqueroOptions(options)
 	const table = fromCSV(text, mappedOptions)
 	return options.readRows ? table.slice(0, options.readRows) : table
 }
 
-function papaParser(
-	text: string,
-	options: ParserOptions = {},
-	autoType = true,
-): ColumnTable {
+function papaParser(text: string, options: ParserOptions = {}): ColumnTable {
 	const opts = { ...options }
 	if (opts.skipRows && opts.readRows) {
 		opts.readRows += opts.skipRows
 	}
-	const mappedOptions = mapToPapaParseOptions(opts, autoType) as ParseConfig
+	const mappedOptions = mapToPapaParseOptions(opts) as ParseConfig
 	const table = papa.parse(text, mappedOptions)
 	if (opts.skipRows) {
 		const subset = skipRows(table.data, opts.skipRows)
@@ -129,27 +115,19 @@ function mapOptions(
 	}
 }
 
-export function mapToArqueroOptions(
-	options?: ParserOptions,
-	autoType = true,
-	autoMax = 1000,
-): CSVParseOptions {
+export function mapToArqueroOptions(options?: ParserOptions): CSVParseOptions {
 	const mapper = mapOptions(ARQUERO_PROPS_MAP)
 	return {
+		autoType: false,
 		...mapper(options),
-		autoType,
-		autoMax,
 	}
 }
 
-export function mapToPapaParseOptions(
-	options?: ParserOptions,
-	autoType = true,
-): ParseConfig {
+export function mapToPapaParseOptions(options?: ParserOptions): ParseConfig {
 	const mapper = mapOptions(PAPAPARSE_PROPS_MAP)
 	return {
 		header: true,
-		dynamicTyping: autoType,
+		dynamicTyping: false,
 		...mapper(options),
 	}
 }

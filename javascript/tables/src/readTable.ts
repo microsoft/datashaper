@@ -6,10 +6,13 @@ import type {
 	CodebookSchema,
 	DataTableSchema} from '@datashaper/schema';
 import {
- DataFormat,	DataTableSchemaDefaults } from '@datashaper/schema'
+	CodebookStrategy
+, DataFormat, DataTableSchemaDefaults } from '@datashaper/schema'
 import { fromArrow } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
+import { applyCodebook } from './applyCodebook.js'
+import { generateCodebook } from './generateCodebook.js'
 import { readCsvTable } from './readCsvTable.js'
 import { readJSONTable } from './readJSONTable.js'
 
@@ -20,9 +23,9 @@ import { readJSONTable } from './readJSONTable.js'
  * @returns
  */
 export async function readTable(
-	input: Blob | undefined,
-	schema: DataTableSchema,
-	_options?: {
+	input: Blob | string | undefined,
+	schema: Partial<DataTableSchema>,
+	options?: {
 		/**
 		 * If a codebook is supplied, we'll use this for type casting.
 		 */
@@ -42,23 +45,83 @@ export async function readTable(
 	if (input == null) {
 		return Promise.resolve(undefined)
 	}
+	const table = await textTable(input, schema)
+	const opts = defaultOptions(options)
+	if (opts?.codebook || opts?.autoType) {
+		return applyTyping(table, schema, opts)
+	}
+	return table
+}
+
+/**
+ * The the core table parsing. Note that this should return a table of text,
+ * with no typing applied (subject to default behaviors within JSON and Arrow of course).
+ * @param input
+ * @param schema
+ * @returns
+ */
+async function textTable(
+	input: Blob | string,
+	schema: Partial<DataTableSchema>,
+): Promise<ColumnTable> {
 	const _schema = defaultSchema(schema)
 	const { format } = _schema
 	switch (format) {
 		case DataFormat.JSON:
-			return readJSONTable(await input.text(), _schema)
+			return readJSONTable(
+				typeof input === 'string' ? input : await input.text(),
+				_schema,
+			)
 		case DataFormat.ARROW:
+			if (typeof input === 'string') {
+				throw new Error('Arrow format requires a binary Blob input')
+			}
 			return fromArrow(await input.arrayBuffer())
 		case DataFormat.CSV:
-			return readCsvTable(await input.text(), _schema)
+			return readCsvTable(
+				typeof input === 'string' ? input : await input.text(),
+				_schema,
+			)
 		default:
 			throw new Error(`unknown data format: ${format}`)
 	}
 }
 
-function defaultSchema(schema: DataTableSchema): DataTableSchema {
+function applyTyping(
+	table: ColumnTable,
+	schema: Partial<DataTableSchema>,
+	options: {
+		codebook?: CodebookSchema
+		autoType?: boolean
+		autoMax?: number
+	},
+): ColumnTable {
+	const codebook =
+		options.codebook ||
+		generateCodebook(table, {
+			autoType: options.autoType,
+			autoMax: options.autoMax,
+		})
+	return applyCodebook(table, codebook, CodebookStrategy.DataTypeOnly, schema)
+}
+
+function defaultSchema(
+	schema: Partial<DataTableSchema>,
+): Partial<DataTableSchema> {
 	return {
 		...DataTableSchemaDefaults,
 		...schema,
+	}
+}
+
+function defaultOptions(options?: {
+	codebook?: CodebookSchema
+	autoType?: boolean
+	autoMax?: number
+}) {
+	return {
+		autoType: true,
+		autoMax: 1000,
+		...options,
 	}
 }

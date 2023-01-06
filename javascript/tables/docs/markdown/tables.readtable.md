@@ -9,7 +9,7 @@ Read an input table
 <b>Signature:</b>
 
 ```typescript
-export declare function readTable(input: Blob | undefined, schema: DataTableSchema, _options?: {
+export declare function readTable(input: Blob | string | undefined, schema: Partial<DataTableSchema>, options?: {
     codebook?: CodebookSchema;
     autoType?: boolean;
     autoMax?: number;
@@ -20,9 +20,9 @@ export declare function readTable(input: Blob | undefined, schema: DataTableSche
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  input | Blob \| undefined | The input blob |
-|  schema | DataTableSchema | The dataTableSchema with format, shape and parser of the table |
-|  \_options | { codebook?: CodebookSchema; autoType?: boolean; autoMax?: number; } | <i>(Optional)</i> |
+|  input | Blob \| string \| undefined | The input blob |
+|  schema | Partial&lt;DataTableSchema&gt; | The dataTableSchema with format, shape and parser of the table |
+|  options | { codebook?: CodebookSchema; autoType?: boolean; autoMax?: number; } | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

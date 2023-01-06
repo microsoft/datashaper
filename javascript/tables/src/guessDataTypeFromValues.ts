@@ -6,15 +6,18 @@ import { DataType } from '@datashaper/schema'
 
 import { guessDataType } from './guessDataType.js'
 
-export function guessDataTypeFromValues(values: string[]): DataType {
+export function guessDataTypeFromValues(
+	values: string[],
+	limit = Infinity,
+): DataType {
 	const guesser = guessDataType()
 
 	const mapTypes = new Map()
 
-	values.forEach(value => {
-		const dataTypeResult = guesser(value)
+	for (let i = 0; i < limit && i < values.length; i++) {
+		const dataTypeResult = guesser(values[i]!)
 		mapTypes.set(dataTypeResult, true)
-	})
+	}
 
 	mapTypes.delete(DataType.Null)
 

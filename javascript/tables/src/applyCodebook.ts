@@ -13,7 +13,7 @@ export function applyCodebook(
 	table: ColumnTable,
 	codebook: CodebookSchema,
 	strategy: CodebookStrategy,
-	dataTableSchema?: DataTableSchema,
+	dataTableSchema?: Partial<DataTableSchema>,
 ): ColumnTable {
 	let applied = table
 
