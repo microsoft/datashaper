@@ -1871,7 +1871,7 @@ __metadata:
     "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/workflow": "workspace:^"
-    "@essex/components": ^3.5.1
+    "@essex/components": ^3.5.3
     "@essex/scripts": ^22.2.0
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/react": ^8.103.10
@@ -1959,7 +1959,7 @@ __metadata:
     "@datashaper/verb-guidance": "workspace:^"
     "@datashaper/workflow": "workspace:^"
     "@essex/charts-react": ^1.1.3
-    "@essex/components": ^3.5.1
+    "@essex/components": ^3.5.3
     "@essex/scripts": ^22.2.0
     "@essex/styled-components": ^0.0.5
     "@essex/tsconfig-base": ^1.0.2
@@ -2041,7 +2041,7 @@ __metadata:
     "@babel/preset-typescript": ^7.18.6
     "@datashaper/react": "workspace:^"
     "@datashaper/webapp": "workspace:^"
-    "@essex/components": ^3.5.1
+    "@essex/components": ^3.5.3
     "@essex/scripts": ^22.2.0
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/font-icons-mdl2": ^8.5.5
@@ -2149,7 +2149,7 @@ __metadata:
     "@datashaper/utilities": "workspace:^"
     "@datashaper/verb-guidance": "workspace:^"
     "@datashaper/workflow": "workspace:^"
-    "@essex/components": ^3.5.1
+    "@essex/components": ^3.5.3
     "@essex/hooks": ^4.0.14
     "@essex/scripts": ^22.2.0
     "@essex/webpack-config": ^21.0.9
@@ -2423,13 +2423,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/components@npm:^3.5.1":
-  version: 3.5.1
-  resolution: "@essex/components@npm:3.5.1"
+"@essex/components@npm:^3.5.3":
+  version: 3.5.3
+  resolution: "@essex/components@npm:3.5.3"
   dependencies:
-    "@essex/hooks": ^4.0.14
+    "@essex/hooks": ^4.0.15
     "@essex/react-animate-height": ^2.1.4
-    "@essex/toolbox": ^3.0.10
+    "@essex/toolbox": ^3.0.11
     "@fluentui/utilities": ^8.13.4
     "@types/d3-array": ^3.0.3
     "@types/d3-axis": ^3.0.1
@@ -2456,7 +2456,7 @@ __metadata:
     "@types/react": ">= 18"
     react: ">= 18"
     react-dom: ">= 18"
-  checksum: 1c72b0f0544ea7c65c4134b275dbc8f79de499e02ecee62eca5ce7eb037217c48e7b6a615da140e3fa9c3861b6add9382e1e525c511e76e58cd532a5a3a0c22b
+  checksum: 0a16bbb4508fda283d91d886f2d01748a17d81a60380c66d8b596bc2d702d8d3e10df3a75a70892f0dded11bfbc9175414b6b6860e59eb532688ba701b687aef
   languageName: node
   linkType: hard
 
@@ -2534,6 +2534,21 @@ __metadata:
     "@types/react-dom": "*"
     react: ">= 18"
   checksum: cd0e010ff982c0fc048150c0eb85d16c54a22ec9e4d658fbd72cb8b9fa5beca8f05e94f6adb614ba5ca7af7b86a72974958c5029d4b792d1e7c3610fdee8e9ad
+  languageName: node
+  linkType: hard
+
+"@essex/hooks@npm:^4.0.15":
+  version: 4.0.15
+  resolution: "@essex/hooks@npm:4.0.15"
+  dependencies:
+    "@essex/toolbox": ^3.0.11
+    lodash-es: ^4.17.21
+  peerDependencies:
+    "@types/node": "*"
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ">= 18"
+  checksum: 75801a64a982e7287d3f2a9e7133c82a1584da31ea8bdc21d1f848f092dc37d757f93f81cf85cd4db2b44b7de937338378068d4a785cb5a9a32e30646fa46121
   languageName: node
   linkType: hard
 
@@ -2692,6 +2707,13 @@ __metadata:
   version: 3.0.10
   resolution: "@essex/toolbox@npm:3.0.10"
   checksum: db640a059d04ffc5e8ea9a1e96fce6a4eb7f17271a27f03669de49db293a34c1eae8378b8f88b133e1f84d31829385f9385a91268b1c176b06daef0ceb7410f6
+  languageName: node
+  linkType: hard
+
+"@essex/toolbox@npm:^3.0.11":
+  version: 3.0.11
+  resolution: "@essex/toolbox@npm:3.0.11"
+  checksum: 929e09849f34d5e65c19044879c509c01c46ca6935f36efc57cfa542080425b5ef275bd4e9eec5b3846b34d2958060627b7ee824e7f2c69db0fc2bcb58823b58
   languageName: node
   linkType: hard
 
