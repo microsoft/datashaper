@@ -12,6 +12,7 @@ import {
 	removeExtension,
 } from '@datashaper/utilities'
 import { DataTable } from '@datashaper/workflow'
+import { ReadOnlyTextField } from '@essex/components'
 import {
 	IconButton,
 	Label,
@@ -124,10 +125,8 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 					</Sidebar>
 					<MainContent>
 						<Label>Input text</Label>
-						<TextField
-							readOnly
+						<ReadOnlyTextField
 							multiline
-							disabled
 							value={rawContent}
 							styles={textFieldStyles}
 						/>
