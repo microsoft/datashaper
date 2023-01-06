@@ -46,6 +46,7 @@ export const Sidebar = styled.div`
 	min-width: ${SIDEBAR_WIDTH}px;
 	height: ${CONTENT_HEIGHT}px;
 	max-height: ${CONTENT_HEIGHT}px;
+	overflow-y: auto;
 `
 
 export const PreviewContent = styled.div`

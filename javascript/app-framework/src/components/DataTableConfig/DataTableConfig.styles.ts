@@ -9,6 +9,7 @@ export const Container = styled.div`
 	flex-direction: column;
 	align-items: flex-start;
 	gap: 10px;
+	height: 100%;
 `
 export const FormatContainer = styled.div`
 	width: 100%;
