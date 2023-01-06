@@ -15,6 +15,7 @@ import { applyCodebook } from './applyCodebook.js'
 import { generateCodebook } from './generateCodebook.js'
 import { readCsvTable } from './readCsvTable.js'
 import { readJSONTable } from './readJSONTable.js'
+import type { ReadTableOptions } from './types.js'
 
 /**
  * Read an input table
@@ -25,22 +26,7 @@ import { readJSONTable } from './readJSONTable.js'
 export async function readTable(
 	input: Blob | string | undefined,
 	schema: Partial<DataTableSchema>,
-	options?: {
-		/**
-		 * If a codebook is supplied, we'll use this for type casting.
-		 */
-		codebook?: CodebookSchema
-		/**
-		 * If true, we'll try to auto-detect the type of each column.
-		 * This is ignored if a codebook is supplied.
-		 */
-		autoType?: boolean
-		/**
-		 * If autoType is true, we'll limit the rows we check to this number to avoid scanning the entire table.
-		 * This is ignored if a codebook is supplied.
-		 */
-		autoMax?: number
-	},
+	options?: ReadTableOptions,
 ): Promise<ColumnTable | undefined> {
 	if (input == null) {
 		return Promise.resolve(undefined)

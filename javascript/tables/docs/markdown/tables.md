@@ -65,6 +65,7 @@
 |  Interface | Description |
 |  --- | --- |
 |  [ParseConfig](./tables.parseconfig.md) |  |
+|  [ReadTableOptions](./tables.readtableoptions.md) |  |
 |  [RowsOptions](./tables.rowsoptions.md) |  |
 |  [TableContainer](./tables.tablecontainer.md) |  |
 |  [TableMetadata](./tables.tablemetadata.md) |  |

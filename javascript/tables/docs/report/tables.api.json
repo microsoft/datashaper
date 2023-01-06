@@ -2859,17 +2859,9 @@
               "text": ", options?: "
             },
             {
-              "kind": "Content",
-              "text": "{\n    codebook?: "
-            },
-            {
               "kind": "Reference",
-              "text": "CodebookSchema",
-              "canonicalReference": "@datashaper/schema!CodebookSchema:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ";\n    autoType?: boolean;\n    autoMax?: number;\n}"
+              "text": "ReadTableOptions",
+              "canonicalReference": "@datashaper/tables!ReadTableOptions:interface"
             },
             {
               "kind": "Content",
@@ -2899,8 +2891,8 @@
             }
           ],
           "returnTypeTokenRange": {
-            "startIndex": 13,
-            "endIndex": 17
+            "startIndex": 11,
+            "endIndex": 15
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -2925,12 +2917,111 @@
               "parameterName": "options",
               "parameterTypeTokenRange": {
                 "startIndex": 9,
-                "endIndex": 12
+                "endIndex": 10
               },
               "isOptional": true
             }
           ],
           "name": "readTable"
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/tables!ReadTableOptions:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface ReadTableOptions "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ReadTableOptions",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/tables!ReadTableOptions#autoMax:member",
+              "docComment": "/**\n * If autoType is true, we'll limit the rows we check to this number to avoid scanning the entire table. This is ignored if a codebook is supplied.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "autoMax?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "autoMax",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/tables!ReadTableOptions#autoType:member",
+              "docComment": "/**\n * If true, we'll try to auto-detect the type of each column. This is ignored if a codebook is supplied.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "autoType?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "autoType",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/tables!ReadTableOptions#codebook:member",
+              "docComment": "/**\n * If a codebook is supplied, we'll use this for type casting.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "codebook?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CodebookSchema",
+                  "canonicalReference": "@datashaper/schema!CodebookSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "codebook",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
         },
         {
           "kind": "Function",

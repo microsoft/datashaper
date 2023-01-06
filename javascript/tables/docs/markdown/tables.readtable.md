@@ -9,11 +9,7 @@ Read an input table
 <b>Signature:</b>
 
 ```typescript
-export declare function readTable(input: Blob | string | undefined, schema: Partial<DataTableSchema>, options?: {
-    codebook?: CodebookSchema;
-    autoType?: boolean;
-    autoMax?: number;
-}): Promise<ColumnTable | undefined>;
+export declare function readTable(input: Blob | string | undefined, schema: Partial<DataTableSchema>, options?: ReadTableOptions): Promise<ColumnTable | undefined>;
 ```
 
 ## Parameters
@@ -22,7 +18,7 @@ export declare function readTable(input: Blob | string | undefined, schema: Part
 |  --- | --- | --- |
 |  input | Blob \| string \| undefined | The input blob |
 |  schema | Partial&lt;DataTableSchema&gt; | The dataTableSchema with format, shape and parser of the table |
-|  options | { codebook?: CodebookSchema; autoType?: boolean; autoMax?: number; } | <i>(Optional)</i> |
+|  options | [ReadTableOptions](./tables.readtableoptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 
