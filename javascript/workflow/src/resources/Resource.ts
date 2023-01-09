@@ -33,6 +33,10 @@ export abstract class Resource
 	private _dataPackage: DataPackage | undefined
 	private _unlistenToSources: Unsubscribe | undefined
 
+	public override defaultName(): string {
+		return this.profile ?? 'resource'
+	}
+
 	protected get dataPackage(): DataPackage | undefined {
 		return this._dataPackage
 	}
