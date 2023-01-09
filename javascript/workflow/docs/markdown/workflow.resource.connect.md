@@ -9,7 +9,7 @@ Connects this resource to the given data package
 <b>Signature:</b>
 
 ```typescript
-connect(dp: DataPackage): void;
+connect(dp: DataPackage, top?: boolean): void;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ connect(dp: DataPackage): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  dp | [DataPackage](./workflow.datapackage.md) | The data package to connect to |
+|  top | boolean | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

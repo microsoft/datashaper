@@ -60,7 +60,7 @@ export class DataPackage extends Resource {
 		return this._resourceMgr.topIsEmpty$
 	}
 
-	public addResource(resource: Resource, top: boolean): void {
+	public addResource(resource: Resource, top: boolean = true): void {
 		this.checkResourceName(resource)
 		this._resourceMgr.addResource(resource, top)
 		this._onChange.next()
@@ -81,6 +81,7 @@ export class DataPackage extends Resource {
 			resource.name,
 		)
 		if (existingResourceWithName && existingResourceWithName !== resource) {
+			resource.title = resource.name
 			resource.name = this.suggestResourceName(resource.name)
 		}
 	}

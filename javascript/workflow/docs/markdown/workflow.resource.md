@@ -30,7 +30,7 @@ export declare abstract class Resource extends Named implements ResourceSchema, 
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [connect(dp)](./workflow.resource.connect.md) |  | Connects this resource to the given data package |
+|  [connect(dp, top)](./workflow.resource.connect.md) |  | Connects this resource to the given data package |
 |  [dispose()](./workflow.resource.dispose.md) |  |  |
 |  [getSourcesWithProfile(type)](./workflow.resource.getsourceswithprofile.md) |  | Gets the sources of this resource that match the given profile type |
 |  [isReference()](./workflow.resource.isreference.md) |  |  |

@@ -11,12 +11,6 @@ export declare class DataPackage extends Resource
 ```
 <b>Extends:</b> [Resource](./workflow.resource.md)
 
-## Constructors
-
-|  Constructor | Modifiers | Description |
-|  --- | --- | --- |
-|  [(constructor)(dataPackage)](./workflow.datapackage._constructor_.md) |  | Constructs a new instance of the <code>DataPackage</code> class |
-
 ## Properties
 
 |  Property | Modifiers | Type | Description |
@@ -27,6 +21,7 @@ export declare class DataPackage extends Resource
 |  [names](./workflow.datapackage.names.md) | <code>readonly</code> | string\[\] |  |
 |  [names$](./workflow.datapackage.names_.md) | <code>readonly</code> | Observable&lt;string\[\]&gt; |  |
 |  [profile](./workflow.datapackage.profile.md) | <code>readonly</code> | (not declared) |  |
+|  [resourceManager](./workflow.datapackage.resourcemanager.md) | <code>readonly</code> | ResourceManager |  |
 |  [resources](./workflow.datapackage.resources.md) | <code>readonly</code> | [Resource](./workflow.resource.md)<!-- -->\[\] |  |
 |  [resources$](./workflow.datapackage.resources_.md) | <code>readonly</code> | Observable&lt;[Resource](./workflow.resource.md)<!-- -->\[\]&gt; |  |
 |  [size](./workflow.datapackage.size.md) | <code>readonly</code> | number |  |
@@ -36,12 +31,13 @@ export declare class DataPackage extends Resource
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [addResource(resource)](./workflow.datapackage.addresource.md) |  |  |
+|  [addResource(resource, top)](./workflow.datapackage.addresource.md) |  |  |
 |  [addResourceHandler(handler)](./workflow.datapackage.addresourcehandler.md) |  | Registers a new handler for processing resources. |
 |  [clear()](./workflow.datapackage.clear.md) |  |  |
 |  [defaultTitle()](./workflow.datapackage.defaulttitle.md) |  |  |
 |  [getResource(name)](./workflow.datapackage.getresource.md) |  |  |
 |  [load(files, quiet)](./workflow.datapackage.load.md) |  | <p>Load the data-package from an archive of files, usually hydrated from a zip.</p><p>The load process occurs in stages.</p><p>In the first stage, the datapackage.json file is loaded and recursed to create a hierarchy of objects that represent the resource tree.</p><p>In the second stage, we walk the resource tree and link together resources that have cross-references.</p> |
+|  [loadSchema()](./workflow.datapackage.loadschema.md) |  |  |
 |  [removeResource(name)](./workflow.datapackage.removeresource.md) |  |  |
 |  [save()](./workflow.datapackage.save.md) |  |  |
 |  [suggestResourceName(name)](./workflow.datapackage.suggestresourcename.md) |  |  |
