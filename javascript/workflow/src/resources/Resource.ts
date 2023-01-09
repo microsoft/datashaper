@@ -88,21 +88,11 @@ export abstract class Resource
 	public set sources(value: (Resource | ResourceReference)[]) {
 		this._unlistenToSources?.()
 		const dp = this._dataPackage
-		if (dp != null) {
-			this._sources.forEach(s => {
-				// Rename incoming resources if necessary
-				const oldName = s.name
-				s.name = dp.suggestResourceName(oldName)
-				if (oldName !== s.name && s.title == null) {
-					s.title = oldName
-				}
-
-				// Connect the resource to the data package
-				s.connect(dp)
-			})
-		}
 
 		this._sources = value
+		if (dp != null) {
+			this._sources.forEach(this.connectSource)
+		}
 
 		// Listen to source changes and bubble up onchange events
 		const handlers = this._sources.map(v =>
@@ -117,9 +107,18 @@ export abstract class Resource
 	 * Connects this resource to the given data package
 	 * @param dp - The data package to connect to
 	 */
-	public connect(dp: DataPackage): void {
+	public connect(dp: DataPackage, top = true): void {
 		this._dataPackage = dp
-		this._sources.forEach(s => s.connect(dp))
+		dp.addResource(this, top)
+		this._sources.forEach(this.connectSource)
+	}
+
+	private connectSource = (s: Resource | ResourceReference): void => {
+		const dp = this._dataPackage!
+		if (dp != null && !s.isReference()) {
+			s.connect(dp, false)
+			s.sources.forEach(this.connectSource)
+		}
 	}
 
 	/**

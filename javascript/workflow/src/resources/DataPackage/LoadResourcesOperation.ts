@@ -91,7 +91,7 @@ export class LoadResourcesOperation {
 				let candidate = `${profile}.json`
 				let index = 0
 				while (nameToPath.has(candidate)) {
-					candidate = `${profile}-${++index}.json`
+					candidate = `${profile} (${++index}).json`
 				}
 				return candidate
 			}

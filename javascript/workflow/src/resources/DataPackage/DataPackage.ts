@@ -3,12 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-assignment */
-import type { DataPackageSchema } from '@datashaper/schema'
 import {
 	createDataPackageSchemaObject,
-	KnownProfile,
-	LATEST_DATAPACKAGE_SCHEMA,
+	DataPackageSchema,
 } from '@datashaper/schema'
+import { KnownProfile, LATEST_DATAPACKAGE_SCHEMA } from '@datashaper/schema'
 import type { Observable } from 'rxjs'
 
 import { Resource } from '../Resource.js'
@@ -25,9 +24,8 @@ export class DataPackage extends Resource {
 		return 'datapackage.json'
 	}
 
-	public constructor(dataPackage?: DataPackageSchema) {
-		super()
-		this.loadSchema(dataPackage)
+	public get resourceManager(): ResourceManager {
+		return this._resourceMgr
 	}
 
 	public get resources(): Resource[] {
@@ -62,19 +60,29 @@ export class DataPackage extends Resource {
 		return this._resourceMgr.topIsEmpty$
 	}
 
-	public addResource(resource: Resource): void {
-		this._resourceMgr.addResource(resource, true)
-		resource.connect(this)
+	public addResource(resource: Resource, top: boolean): void {
+		this.checkResourceName(resource)
+		this._resourceMgr.addResource(resource, top)
 		this._onChange.next()
 	}
 
 	public suggestResourceName(name: string): string {
-		const baseName = name
+		const isJson = name.endsWith('.json')
+		const baseName = isJson ? name.replace('.json', '') : name
 		let nameIdx = 1
 		while (this._resourceMgr.hasResource(name)) {
-			name = `${baseName} (${nameIdx++})`
+			name = `${baseName} (${nameIdx++})${isJson ? '.json' : ''}`
 		}
 		return name
+	}
+
+	private checkResourceName(resource: Resource): void {
+		const existingResourceWithName = this._resourceMgr.getResource(
+			resource.name,
+		)
+		if (existingResourceWithName && existingResourceWithName !== resource) {
+			resource.name = this.suggestResourceName(resource.name)
+		}
 	}
 
 	public removeResource(name: string): void {
@@ -98,6 +106,10 @@ export class DataPackage extends Resource {
 	 */
 	public addResourceHandler(handler: ProfileHandler): void {
 		this._resourceMgr.registerProfile(handler)
+	}
+
+	public override loadSchema(): void {
+		throw new Error('not implemented')
 	}
 
 	public override toSchema(): DataPackageSchema {
@@ -130,7 +142,7 @@ export class DataPackage extends Resource {
 	 */
 	public async load(files: Map<string, Blob>, quiet?: boolean): Promise<void> {
 		const schema = await this._resourceMgr.load(files)
-		this.loadSchema(schema)
+		super.loadSchema(schema)
 		this._resourceMgr.topResources.forEach(t => t.connect(this))
 		if (!quiet) {
 			this._onChange.next()
