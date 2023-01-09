@@ -40,6 +40,6 @@ export declare class DataPackage extends Resource
 |  [loadSchema()](./workflow.datapackage.loadschema.md) |  |  |
 |  [removeResource(name)](./workflow.datapackage.removeresource.md) |  |  |
 |  [save()](./workflow.datapackage.save.md) |  |  |
-|  [suggestResourceName(name)](./workflow.datapackage.suggestresourcename.md) |  |  |
+|  [suggestResourceName(name)](./workflow.datapackage.suggestresourcename.md) |  | Suggests a new, unique resource name for a resource to adopt |
 |  [toSchema()](./workflow.datapackage.toschema.md) |  |  |
 

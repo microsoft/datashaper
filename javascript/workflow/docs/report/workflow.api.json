@@ -3243,7 +3243,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!DataPackage#suggestResourceName:member(1)",
-              "docComment": "",
+              "docComment": "/**\n * Suggests a new, unique resource name for a resource to adopt\n *\n * @param name - The seed name\n *\n * @returns A unique name based on the seed name for the resource to adopt\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -10140,6 +10140,36 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!Resource#defaultName:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "defaultName(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "name": "defaultName"
+            },
+            {
+              "kind": "Method",
               "canonicalReference": "@datashaper/workflow!Resource#dispose:member(1)",
               "docComment": "",
               "excerptTokens": [
@@ -10243,6 +10273,35 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "homepage",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!Resource#isConnected:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get isConnected(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "isConnected",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

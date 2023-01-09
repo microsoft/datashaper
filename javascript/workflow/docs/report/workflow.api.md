@@ -236,7 +236,6 @@ export class DataPackage extends Resource {
     get size$(): Observable<number>;
     // (undocumented)
     get size(): number;
-    // (undocumented)
     suggestResourceName(name: string): string;
     // (undocumented)
     toSchema(): DataPackageSchema;
@@ -789,11 +788,15 @@ export abstract class Resource extends Named implements ResourceSchema, Resource
     protected get dataPackage(): DataPackage | undefined;
     protected set dataPackage(value: DataPackage | undefined);
     // (undocumented)
+    defaultName(): string;
+    // (undocumented)
     dispose(): void;
     getSourcesWithProfile(type: Profile): Resource[];
     // (undocumented)
     get homepage(): string | undefined;
     set homepage(value: string | undefined);
+    // (undocumented)
+    get isConnected(): boolean;
     // (undocumented)
     isReference(): this is ResourceReference;
     // (undocumented)
