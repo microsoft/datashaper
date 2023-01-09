@@ -62,10 +62,18 @@ export class DataPackage extends Resource {
 
 	public addResource(resource: Resource, top: boolean = true): void {
 		this.checkResourceName(resource)
+		if (!resource.isConnected) {
+			resource.connect(this)
+		}
 		this._resourceMgr.addResource(resource, top)
 		this._onChange.next()
 	}
 
+	/**
+	 * Suggests a new, unique resource name for a resource to adopt
+	 * @param name - The seed name
+	 * @returns A unique name based on the seed name for the resource to adopt
+	 */
 	public suggestResourceName(name: string): string {
 		const isJson = name.endsWith('.json')
 		const baseName = isJson ? name.replace('.json', '') : name

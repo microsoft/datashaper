@@ -83,7 +83,7 @@ export class TableBundleProfile implements ProfilePlugin<TableBundle> {
 					reference.rel = KnownRel.Input
 
 					derived.sources = [reference]
-					dp.addResource(derived, true)
+					dp.addResource(derived)
 				},
 			},
 		]

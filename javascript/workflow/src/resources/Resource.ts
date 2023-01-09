@@ -86,12 +86,12 @@ export abstract class Resource
 	}
 
 	public set sources(value: (Resource | ResourceReference)[]) {
-		this._unlistenToSources?.()
 		const dp = this._dataPackage
+		this._unlistenToSources?.()
 
 		this._sources = value
 		if (dp != null) {
-			this._sources.forEach(this.connectSource)
+			this._sources.forEach(s => s.connect(dp, false))
 		}
 
 		// Listen to source changes and bubble up onchange events
@@ -99,8 +99,11 @@ export abstract class Resource
 			v.onChange(() => this._onChange.next()),
 		)
 		this._unlistenToSources = () => handlers.forEach(h => h())
-
 		this._onChange.next()
+	}
+
+	public get isConnected(): boolean {
+		return this._dataPackage != null
 	}
 
 	/**
@@ -110,15 +113,9 @@ export abstract class Resource
 	public connect(dp: DataPackage, top = true): void {
 		this._dataPackage = dp
 		dp.addResource(this, top)
-		this._sources.forEach(this.connectSource)
-	}
-
-	private connectSource = (s: Resource | ResourceReference): void => {
-		const dp = this._dataPackage!
-		if (dp != null && !s.isReference()) {
-			s.connect(dp, false)
-			s.sources.forEach(this.connectSource)
-		}
+		this._sources
+			.filter(s => !s.isReference())
+			.forEach(s => s.connect(dp, false))
 	}
 
 	/**
