@@ -85,7 +85,7 @@ export class DataPackage extends Resource {
 
 		let nameIdx = 1
 		while (this._resourceMgr.hasResource(name)) {
-			name = `${baseName} (${nameIdx++})${hasExtension ? extension : ''}`
+			name = `${baseName} (${nameIdx++})${hasExtension ? `.${extension}` : ''}`
 		}
 		return name
 	}

@@ -82,7 +82,11 @@ export class LoadResourcesOperation {
 	): Promise<{ schema: ResourceSchema; path: string }[]> {
 		const nameToPath = new Map<string, string>()
 
-		// Determine the name of a resource, try to not collide if possible
+		/**
+		 * Determines a unique resource name and title name
+		 * @param res - the resource schema input
+		 * @return [name, title] - title may be undefined
+		 */
 		const resourceName = (
 			res: ResourceSchema,
 		): [string, string | undefined] => {
@@ -126,7 +130,7 @@ export class LoadResourcesOperation {
 			}
 			return typeof entry === 'string'
 				? entry
-				: `${parentPath}${resourceName(schema)}`
+				: `${parentPath}${resourceName(schema)[0]}`
 		}
 
 		const readEntry = async (
