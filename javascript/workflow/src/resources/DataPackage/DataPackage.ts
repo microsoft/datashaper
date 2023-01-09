@@ -8,6 +8,10 @@ import {
 	DataPackageSchema,
 } from '@datashaper/schema'
 import { KnownProfile, LATEST_DATAPACKAGE_SCHEMA } from '@datashaper/schema'
+import {
+	extension as ext,
+	removeExtension as rmExt,
+} from '@datashaper/utilities'
 import type { Observable } from 'rxjs'
 
 import { Resource } from '../Resource.js'
@@ -75,11 +79,13 @@ export class DataPackage extends Resource {
 	 * @returns A unique name based on the seed name for the resource to adopt
 	 */
 	public suggestResourceName(name: string): string {
-		const isJson = name.endsWith('.json')
-		const baseName = isJson ? name.replace('.json', '') : name
+		const hasExtension = name.indexOf('.') >= 0
+		const extension = hasExtension ? ext(name) : undefined
+		const baseName = hasExtension ? rmExt(name) : name
+
 		let nameIdx = 1
 		while (this._resourceMgr.hasResource(name)) {
-			name = `${baseName} (${nameIdx++})${isJson ? '.json' : ''}`
+			name = `${baseName} (${nameIdx++})${hasExtension ? extension : ''}`
 		}
 		return name
 	}
