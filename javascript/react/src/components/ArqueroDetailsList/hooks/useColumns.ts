@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type {
+	Field,
 	FieldError,
 	SortDirection,
 	ValidationResult,
@@ -53,11 +54,12 @@ export interface ColumnOptions {
  */
 export function useColumns(
 	table: ColumnTable,
-	validationResult?: ValidationResult,
+	fields: Field[],
 	metadata?: TableMetadata,
 	columns?: IColumn[],
 	onColumnSelect?: ColumnSelectFunction,
 	onSort?: ColumnSelectFunction,
+	validationResult?: ValidationResult,
 	options: ColumnOptions = {},
 	virtualColumns?: IColumn[],
 ): IColumn[] {
@@ -105,11 +107,13 @@ export function useColumns(
 			// without completely recreating the details header render
 			const { iconName, ...defaults } = column
 
-			const meta = metadata?.columns[name] || { name }
+			const field = fields.find(f => f.name === name)!
+			const meta = metadata?.columns[name]
 			const color = theme.rect().fill().hex()
 			const onRender =
 				features.smartCells && meta
 					? createRenderSmartCell(
+							field,
 							meta,
 							color,
 							onColumnSelect,
@@ -118,6 +122,7 @@ export function useColumns(
 					  )
 					: createRenderFeaturesCell(
 							features,
+							field,
 							meta,
 							color,
 							onColumnSelect,
@@ -143,6 +148,7 @@ export function useColumns(
 			if ((features.smartHeaders || features.statsColumnHeaders) && meta) {
 				headerRenderers.push(
 					createRenderStatsColumnHeader(
+						field,
 						meta,
 						onColumnSelect,
 						features.statsColumnTypes,
@@ -151,7 +157,7 @@ export function useColumns(
 			}
 			if ((features.smartHeaders || features.histogramColumnHeaders) && meta) {
 				headerRenderers.push(
-					createRenderHistogramColumnHeader(meta, color, onColumnSelect),
+					createRenderHistogramColumnHeader(field, meta, color, onColumnSelect),
 				)
 			}
 
@@ -182,6 +188,7 @@ export function useColumns(
 		styles,
 		compact,
 		resizable,
+		fields,
 		metadata,
 		onSort,
 		onColumnSelect,

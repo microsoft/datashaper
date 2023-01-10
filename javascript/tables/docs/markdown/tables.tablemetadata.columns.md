@@ -9,5 +9,5 @@ Metadata for each column
 <b>Signature:</b>
 
 ```typescript
-columns: Record<string, Field>;
+columns: Record<string, FieldMetadata>;
 ```

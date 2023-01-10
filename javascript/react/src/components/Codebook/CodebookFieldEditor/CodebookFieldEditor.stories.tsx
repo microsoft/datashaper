@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { CodebookSchema, Field } from '@datashaper/schema'
+import type { TableMetadata } from '@datashaper/tables'
 import type { ComponentStory } from '@storybook/react'
 import { useState } from 'react'
 
@@ -19,6 +20,7 @@ const codebookResult = {
 	$schema: 'http://json-schema.org/draft-07/schema#',
 	id: 'http://json-schema.org/draft-07/schema#',
 	name: 'Generator',
+	profile: 'codebook',
 	fields: [
 		{
 			name: 'ID',
@@ -26,59 +28,7 @@ const codebookResult = {
 			description: 'Identifier for the record',
 			type: 'number',
 			nature: 'ordinal',
-			metadata: {
-				bins: [
-					{
-						min: 5.87,
-						count: 759,
-					},
-					{
-						min: 358.428,
-						count: 0,
-					},
-					{
-						min: 710.986,
-						count: 1,
-					},
-					{
-						min: 1063.5439999999999,
-						count: 74,
-					},
-					{
-						min: 1416.1019999999999,
-						count: 164,
-					},
-					{
-						min: 1768.6599999999999,
-						count: 75,
-					},
-					{
-						min: 2121.218,
-						count: 43,
-					},
-					{
-						min: 2473.776,
-						count: 21,
-					},
-					{
-						min: 2826.334,
-						count: 72,
-					},
-					{
-						min: 3178.892,
-						count: 56,
-					},
-				],
-				count: 1265,
-				distinct: 1182,
-				maximum: 3531.45,
-				mean: 891.7830434782592,
-				median: 201.91,
-				minimum: 5.87,
-				mode: 9.15,
-				stdev: 1075.6086847575084,
-				example: 5,
-			},
+			example: 5,
 		},
 		{
 			name: 'diagnosis',
@@ -108,13 +58,77 @@ const codebookResult = {
 	],
 } as CodebookSchema
 
+const metadata: TableMetadata = {
+	rows: 1000,
+	cols: 6,
+	columns: {
+		ID: {
+			bins: [
+				{
+					min: 5.87,
+					count: 759,
+				},
+				{
+					min: 358.428,
+					count: 0,
+				},
+				{
+					min: 710.986,
+					count: 1,
+				},
+				{
+					min: 1063.5439999999999,
+					count: 74,
+				},
+				{
+					min: 1416.1019999999999,
+					count: 164,
+				},
+				{
+					min: 1768.6599999999999,
+					count: 75,
+				},
+				{
+					min: 2121.218,
+					count: 43,
+				},
+				{
+					min: 2473.776,
+					count: 21,
+				},
+				{
+					min: 2826.334,
+					count: 72,
+				},
+				{
+					min: 3178.892,
+					count: 56,
+				},
+			],
+			count: 1265,
+			distinct: 1182,
+			maximum: 3531.45,
+			mean: 891.7830434782592,
+			median: 201.91,
+			minimum: 5.87,
+			mode: 9.15,
+			stdev: 1075.6086847575084,
+		},
+	},
+}
+
 const Template: ComponentStory<typeof CodebookFieldEditor> = ({
 	...args
 }): JSX.Element => {
 	const [field, setField] = useState(codebookResult.fields[0] as Field)
 
 	return (
-		<CodebookFieldEditor field={field} onChangeField={setField} {...args} />
+		<CodebookFieldEditor
+			field={field}
+			metadata={metadata}
+			onChangeField={setField}
+			{...args}
+		/>
 	)
 }
 

@@ -35,10 +35,10 @@ export type { FeatureCellProps } from './FeaturesCell.types.js'
  */
 export const FeaturesCell: React.FC<FeatureCellProps> = memo(
 	function FeaturesCell(props) {
-		const { features, field, item, column, index, onSelect } = props
+		const { features, field, metadata, item, column, index, onSelect } = props
 		const type = field?.type
 		const value = getValue(item, column)
-		const magnitude = useNumberMagnitude(value, field, type)
+		const magnitude = useNumberMagnitude(value, metadata, type)
 		const histo = categories(value)
 		return (
 			<CellContainer onClick={onSelect} {...props}>

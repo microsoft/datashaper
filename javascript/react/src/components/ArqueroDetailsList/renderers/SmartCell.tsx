@@ -27,10 +27,10 @@ import type { RichCellProps } from './types.js'
 export const SmartCell: React.FC<RichCellProps> = memo(function SmartCell(
 	props,
 ) {
-	const { field, item, column, onSelect } = props
+	const { field, metadata, item, column, onSelect } = props
 	const type = field?.type
 	const value = getValue(item, column)
-	const magnitude = useNumberMagnitude(value, field, type)
+	const magnitude = useNumberMagnitude(value, metadata, type)
 
 	return (
 		<CellContainer onClick={onSelect} {...props}>

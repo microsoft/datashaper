@@ -2,10 +2,18 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+
+import type { DataType } from '../data.js'
+
 /**
  * Holds core metadata/stats for a data field.
  */
 export interface FieldMetadata {
+	/**
+	 * TEMP: this is determined via stats introspection, but our much more
+	 * robust type discovery for the codebooks should be used, and the type on Field.
+	 */
+	type?: DataType
 	/**
 	 * Count of valid values in the column (excluding invalid, null, etc.)
 	 */

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Field, ValidationResult } from '@datashaper/schema'
+import type { Field, FieldMetadata, ValidationResult } from '@datashaper/schema'
 import type {
 	IColumn,
 	IDetailsColumnProps,
@@ -23,6 +23,7 @@ import { SmartCell, StatsColumnHeader } from './index.js'
 
 export const createRenderSmartCell = (
 	field: Field,
+	metadata?: FieldMetadata,
 	color?: string,
 	onSelect?: ColumnSelectFunction,
 	onCellDropdownSelect?: DropdownOptionSelect,
@@ -35,6 +36,7 @@ export const createRenderSmartCell = (
 				index={index}
 				column={column}
 				field={field}
+				metadata={metadata}
 				color={color}
 				onSelect={onSelect}
 				onCellDropdownSelect={onCellDropdownSelect}
@@ -46,12 +48,13 @@ export const createRenderSmartCell = (
 export const createRenderFeaturesCell = (
 	features: ArqueroDetailsListFeatures,
 	field?: Field,
+	metadata?: FieldMetadata,
 	color?: string,
 	onSelect?: ColumnSelectFunction,
 	onCellDropdownSelect?: DropdownOptionSelect,
 	validationResult?: ValidationResult,
 ): ColumnRenderFunction =>
-	function renderDropdownCell(item?: any, index?: number, column?: IColumn) {
+	function renderFeaturesCell(item?: any, index?: number, column?: IColumn) {
 		return (
 			<FeaturesCell
 				index={index || 0}
@@ -60,6 +63,7 @@ export const createRenderFeaturesCell = (
 				onCellDropdownSelect={onCellDropdownSelect}
 				onSelect={onSelect}
 				field={field}
+				metadata={metadata}
 				color={color}
 				features={features}
 				validationResult={validationResult}
@@ -120,6 +124,7 @@ export const createRenderDefaultColumnHeader = (
 
 export const createRenderStatsColumnHeader = (
 	field: Field,
+	metadata?: FieldMetadata,
 	onSelect?: ColumnSelectFunction,
 	stats?: StatsColumnType[],
 ): IRenderFunction<IDetailsColumnProps> => {
@@ -131,6 +136,7 @@ export const createRenderStatsColumnHeader = (
 			<StatsColumnHeader
 				onSelect={onSelect}
 				field={field}
+				metadata={metadata}
 				stats={stats}
 				{...props}
 			/>
@@ -158,6 +164,7 @@ export const createRenderCommandBarColumnHeader = (
 
 export const createRenderHistogramColumnHeader = (
 	field: Field,
+	metadata?: FieldMetadata,
 	color?: string,
 	onSelect?: ColumnSelectFunction,
 ): IRenderFunction<IDetailsColumnProps> => {
@@ -169,6 +176,7 @@ export const createRenderHistogramColumnHeader = (
 			<HistogramColumnHeader
 				onSelect={onSelect}
 				field={field}
+				metadata={metadata}
 				color={color}
 				{...props}
 			/>

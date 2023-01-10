@@ -21,6 +21,7 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
 |  [defaultSortColumn?](./react.arquerodetailslistprops.defaultsortcolumn.md) |  | string | <i>(Optional)</i> Default sort column |
 |  [defaultSortDirection?](./react.arquerodetailslistprops.defaultsortdirection.md) |  | SortDirection | <i>(Optional)</i> Resizable sort direction |
 |  [features?](./react.arquerodetailslistprops.features.md) |  | [ArqueroDetailsListFeatures](./react.arquerodetailslistfeatures.md) | <i>(Optional)</i> |
+|  [fields?](./react.arquerodetailslistprops.fields.md) |  | Field\[\] | <i>(Optional)</i> |
 |  [fill?](./react.arquerodetailslistprops.fill.md) |  | boolean | <i>(Optional)</i> Indicates that the table should fill its container space, including the use of pseudo columns and rows to present a "spreadsheet-like" view. |
 |  [isHeaderFixed?](./react.arquerodetailslistprops.isheaderfixed.md) |  | boolean | <i>(Optional)</i> Fixed headers on top when scrolling |
 |  [limit?](./react.arquerodetailslistprops.limit.md) |  | number | <i>(Optional)</i> |

@@ -422,7 +422,6 @@ export interface Field extends Omit<Named, 'id'> {
     format?: string;
     inverse?: boolean;
     mapping?: Record<any, any>;
-    metadata?: FieldMetadata;
     nature?: VariableNature;
     tags?: string[];
     type?: DataType;
@@ -497,6 +496,7 @@ export interface FieldMetadata {
     minimum?: number;
     mode?: string | number | boolean | Date;
     stdev?: number;
+    type?: DataType;
 }
 
 // Warning: (ae-missing-release-tag) "FillArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

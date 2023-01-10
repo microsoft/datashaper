@@ -70,6 +70,6 @@ export const ConvertFormBase: React.FC<
 })
 
 function isInputColumnArray(fields: Field[], column: string) {
-	const meta = fields.find(field => field.name === column)
-	return meta?.type === DataType.Array
+	const field = fields.find(f => f.name === column)
+	return field?.type === DataType.Array
 }

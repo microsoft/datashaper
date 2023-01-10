@@ -13,6 +13,7 @@ import { memo } from 'react'
 
 import { COMPACT_ROW_HEIGHT } from './ArqueroDetailsList.constants.js'
 import {
+	useFields,
 	useGetKey,
 	useGroupProps,
 	useGroups,
@@ -43,6 +44,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		validationResult,
 		features = {},
 		metadata,
+		fields,
 		offset = 0,
 		limit = Infinity,
 		sortable = false,
@@ -75,6 +77,8 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			defaultSortDirection,
 		)
 
+		const _fields = useFields(table, fields)
+
 		// first subset the table using the visible columns
 		// this will prevent any further operations on columns we aren't going to show
 		const subset = useSubsetTable(table, columns)
@@ -99,11 +103,12 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 
 		const displayColumns = useColumns(
 			table,
-			validationResult,
+			_fields,
 			metadata,
 			columns,
 			onColumnSelect,
 			onSort,
+			validationResult,
 			{
 				features,
 				sortColumn,
@@ -142,7 +147,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		)
 		const groupProps = useGroupProps(
 			table,
-			metadata,
+			_fields,
 			onRenderGroupHeader,
 			features,
 		)

@@ -15,6 +15,6 @@ export interface TableMetadata
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [cols](./tables.tablemetadata.cols.md) |  | number |  |
-|  [columns](./tables.tablemetadata.columns.md) |  | Record&lt;string, Field&gt; | Metadata for each column |
+|  [columns](./tables.tablemetadata.columns.md) |  | Record&lt;string, FieldMetadata&gt; | Metadata for each column |
 |  [rows](./tables.tablemetadata.rows.md) |  | number |  |
 

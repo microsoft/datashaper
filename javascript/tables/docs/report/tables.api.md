@@ -299,7 +299,7 @@ export interface TableContainer<T = unknown> {
 export interface TableMetadata {
     // (undocumented)
     cols: number;
-    columns: Record<string, Field>;
+    columns: Record<string, FieldMetadata>;
     // (undocumented)
     rows: number;
 }

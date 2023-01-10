@@ -5,7 +5,6 @@
 import type { DataType, VariableNature } from '../data.js'
 import type { Named } from '../Named.js'
 import type { Constraints } from './Constraints.js'
-import type { FieldMetadata } from './FieldMetadata.js'
 
 /**
  * Contains the full schema definition and metadata for a data field (usually a table column).
@@ -72,11 +71,6 @@ export interface Field extends Omit<Named, 'id'> {
 	 * String keys are often commonly used (for example, medical data often use short alphanumeric codes to represent diagnostic strings).
 	 */
 	mapping?: Record<any, any>
-	/**
-	 * Detailed statistical metadata for the field.
-	 * Also convenient way to persist so expensive recomputing can be avoided.
-	 */
-	metadata?: FieldMetadata
 	/**
 	 * Validation constraints for the values in the field to adhere to.
 	 */

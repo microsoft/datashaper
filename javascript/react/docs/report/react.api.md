@@ -67,6 +67,8 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     defaultSortDirection?: SortDirection;
     // (undocumented)
     features?: ArqueroDetailsListFeatures;
+    // (undocumented)
+    fields?: Field[];
     fill?: boolean;
     isHeaderFixed?: boolean;
     // (undocumented)
@@ -131,6 +133,8 @@ export interface CodebookProps {
     // (undocumented)
     fields: Field[];
     // (undocumented)
+    metadata?: TableMetadata;
+    // (undocumented)
     onChangeFields: (fields: Field[]) => void;
     // (undocumented)
     styles?: CodebookTableStyles;
@@ -193,7 +197,7 @@ export type DropdownOptionSelect = ((event: React.FormEvent<HTMLDivElement>, opt
 // Warning: (ae-missing-release-tag) "GroupHeaderFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type GroupHeaderFunction = (meta?: Field, columnName?: string, props?: IDetailsGroupDividerProps | undefined) => any;
+export type GroupHeaderFunction = (field?: Field, columnName?: string, props?: IDetailsGroupDividerProps | undefined) => any;
 
 // Warning: (ae-missing-release-tag) "Guidance" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -213,7 +217,7 @@ export interface GuidanceProps {
 // Warning: (ae-missing-release-tag) "SaveMetadataFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type SaveMetadataFunction = (meta: TableMetadata, table: ColumnTable) => void;
+export type SaveMetadataFunction = (metadata: TableMetadata, table: ColumnTable) => void;
 
 // Warning: (ae-missing-release-tag) "StatsColumnType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

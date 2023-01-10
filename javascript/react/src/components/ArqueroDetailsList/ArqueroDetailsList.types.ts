@@ -30,13 +30,13 @@ export type DropdownOptionSelect =
 	| undefined
 
 export type GroupHeaderFunction = (
-	meta?: Field,
+	field?: Field,
 	columnName?: string,
 	props?: IDetailsGroupDividerProps | undefined,
 ) => any
 
 export type SaveMetadataFunction = (
-	meta: TableMetadata,
+	metadata: TableMetadata,
 	table: ColumnTable,
 ) => void
 
@@ -139,6 +139,7 @@ export interface ArqueroDetailsListProps
 	 * to prevent recompute on remounting.
 	 */
 	metadata?: TableMetadata
+	fields?: Field[]
 	offset?: number
 	limit?: number
 	sortable?: boolean

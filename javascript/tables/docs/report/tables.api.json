@@ -3616,8 +3616,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "Field",
-                  "canonicalReference": "@datashaper/schema!Field:interface"
+                  "text": "FieldMetadata",
+                  "canonicalReference": "@datashaper/schema!FieldMetadata:interface"
                 },
                 {
                   "kind": "Content",
