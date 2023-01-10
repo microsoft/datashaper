@@ -122,6 +122,10 @@ export class ResourceManager {
 		return this._names$
 	}
 
+	public get names(): string[] {
+		return this.resources.map(r => r.name)
+	}
+
 	/**
 	 * The count of all resources observable
 	 */
@@ -165,26 +169,46 @@ export class ResourceManager {
 	 */
 	public addResource(resource: Resource, top: boolean): void {
 		let name = resource.name
-		this.registerResource(resource)
-		this._resourceByName.set(name, resource)
-		this._resources$.next([...this.resources, resource])
-		if (top) {
-			this._topResources$.next([...this.topResources, resource])
+		if (
+			this._resourceByName.has(name) &&
+			this._resourceByName.get(name) !== resource
+		) {
+			throw new Error(`registering resource with duplicate name ${name}`)
 		}
+
+		const emitResource = () => {
+			this._resources$.next([
+				...this.resources.filter(t => t !== resource),
+				resource,
+			])
+			if (top) {
+				this._topResources$.next([
+					...this.topResources.filter(t => t !== resource),
+					resource,
+				])
+			}
+		}
+
+		this.registerResource(resource)
+		emitResource()
 
 		// re-file the resource by name when the resource changes
 		this._resourceDisposables.set(
 			resource.name,
 			resource.onChange(() => {
-				this._resourceByName.delete(name)
-				this.registerResource(resource)
-				name = resource.name
-				this._resources$.next(this.resources)
+				// handle name changes
+				if (resource.name !== name) {
+					this._resourceByName.delete(name)
+					this.registerResource(resource)
+					name = resource.name
+					emitResource()
+				}
 			}),
 		)
 
 		resource.onChange(() => {
 			this._topResources$.next(this.topResources)
+			this._resources$.next(this.resources)
 		})
 		resource.onDispose(() => this.removeResource(resource.name))
 	}
@@ -276,7 +300,8 @@ export class ResourceManager {
 	}
 
 	public registerResource(resource: Resource, path?: string | undefined): void {
-		if (this._resourceByName.has(resource.name)) {
+		const registeredResource = this._resourceByName.get(resource.name)
+		if (registeredResource && registeredResource !== resource) {
 			throw new Error(`duplicate resource name: ${resource.name}`)
 		}
 		this._resourceByName.set(resource.name, resource)

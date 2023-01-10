@@ -4,6 +4,8 @@
 
 ## DataPackage.suggestResourceName() method
 
+Suggests a new, unique resource name for a resource to adopt
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,9 +16,11 @@ suggestResourceName(name: string): string;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  name | string |  |
+|  name | string | The seed name |
 
 <b>Returns:</b>
 
 string
+
+A unique name based on the seed name for the resource to adopt
 

@@ -151,7 +151,7 @@ export function useAppServices(): {
 	const dp = useDataPackage()
 	const [isRenameOpen, { setTrue: showRename, setFalse: hideRename }] =
 		useBoolean(false)
-	const [renameResource, setRenameResource] = useState<Resource | undefined>()
+	const [renameTarget, setRenameTarget] = useState<Resource | undefined>()
 	const [acceptRename, setAcceptRename] = useState<{
 		handle: (value: string | undefined) => void
 	}>({ handle: () => null })
@@ -167,7 +167,7 @@ export function useAppServices(): {
 			 * @returns A promise that resolves to the new name of the resource
 			 */
 			renameResource: (resource: Resource) => {
-				setRenameResource(resource)
+				setRenameTarget(resource)
 				showRename()
 				return new Promise((resolve, reject) => {
 					setAcceptRename({
@@ -192,13 +192,13 @@ export function useAppServices(): {
 				})
 			},
 		}
-	}, [dp, showRename, setRenameResource, hideRename])
+	}, [dp, showRename, setRenameTarget, hideRename])
 
 	return useMemo(
 		() => ({
 			api,
 			rename: {
-				resource: renameResource,
+				resource: renameTarget,
 				isOpen: isRenameOpen,
 				onDismiss: dismissRename.handle,
 				onAccept: acceptRename.handle,
@@ -206,7 +206,7 @@ export function useAppServices(): {
 		}),
 		[
 			api,
-			renameResource,
+			renameTarget,
 			dismissRename.handle,
 			acceptRename.handle,
 			isRenameOpen,

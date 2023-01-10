@@ -53,8 +53,8 @@ export class Workflow extends Resource implements TableTransformer {
 		this.rebindDefaultOutput()
 	}
 
-	public override connect(dp: DataPackage): void {
-		super.connect(dp)
+	public override connect(dp: DataPackage, top: boolean): void {
+		super.connect(dp, top)
 		if (this.dataPackage !== dp) {
 			this._dataPackageSub?.()
 			this.dataPackage = dp

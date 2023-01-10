@@ -1,6 +1,5 @@
 /* eslint-disable jest/expect-expect, jest/valid-title, jest/no-conditional-expect */
 import { KnownProfile } from '@datashaper/schema'
-import Blob from 'cross-blob'
 import fs from 'fs'
 import fsp from 'fs/promises'
 import path, { dirname } from 'path'

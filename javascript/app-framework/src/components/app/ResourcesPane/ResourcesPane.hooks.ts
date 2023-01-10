@@ -7,7 +7,7 @@ import { createDataTableSchemaObject } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import type { BaseFile } from '@datashaper/utilities'
 import { removeExtension } from '@datashaper/utilities'
-import { Codebook,DataTable, TableBundle } from '@datashaper/workflow'
+import { Codebook, DataTable, TableBundle } from '@datashaper/workflow'
 import { useCallback, useContext } from 'react'
 
 import { DataPackageContext } from '../../../context/index.js'
