@@ -4,7 +4,6 @@
 
 ```ts
 
-import { default as Blob_2 } from 'cross-blob';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { CSVFormatOptions } from 'arquero/dist/types/format/to-csv';
 import type { CSVParseOptions } from 'arquero/dist/types/format/from-csv';
@@ -70,7 +69,7 @@ export function createReader(): FileReader;
 // Warning: (ae-missing-release-tag) "download" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function download(filename: string, type: string, data: Blob_2): void;
+export function download(filename: string, type: string, data: Blob): void;
 
 // Warning: (ae-missing-release-tag) "downloadTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -232,7 +231,7 @@ export class FileWithPath extends File {
 // Warning: (ae-missing-release-tag) "getBlobFromEntry" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function getBlobFromEntry(entry: Entry): Promise<Blob_2>;
+export function getBlobFromEntry(entry: Entry): Promise<Blob>;
 
 // Warning: (ae-missing-release-tag) "getDataURL" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -252,7 +251,7 @@ export function getFileFromEntry(entry: Entry): Promise<FileWithPath>;
 // Warning: (ae-missing-release-tag) "getFilesFromZip" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function getFilesFromZip(zipFile: Blob_2): Promise<FileWithPath[]>;
+export function getFilesFromZip(zipFile: Blob): Promise<FileWithPath[]>;
 
 // Warning: (ae-missing-release-tag) "getJsonFileContentFromFile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

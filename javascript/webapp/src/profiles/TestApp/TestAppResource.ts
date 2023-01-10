@@ -11,8 +11,8 @@ export class TestAppResource extends Resource {
 	public readonly profile = TEST_APP_PROFILE
 	private _count = 0
 
-	public override defaultTitle(): string {
-		return 'Test analysis app'
+	public override defaultName(): string {
+		return 'Test App'
 	}
 
 	public get count(): number {

@@ -56,7 +56,6 @@ export class TableBundleProfile implements ProfilePlugin<TableBundle> {
 					text: `New ${this.title}`,
 					onClick: () => {
 						const resource = this.createResource?.()
-						resource.name = dp.suggestResourceName(resource.name)
 						dp.addResource(resource)
 					},
 				},
@@ -76,7 +75,6 @@ export class TableBundleProfile implements ProfilePlugin<TableBundle> {
 				iconProps: { iconName: this.iconName },
 				onClick: () => {
 					const derived = this.createResource()
-					derived.name = dp.suggestResourceName(resource.name)
 					derived.title = resource.title
 
 					// Create a reference to the source resource

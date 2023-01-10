@@ -9,6 +9,10 @@ import {
 	KnownProfile,
 	LATEST_DATAPACKAGE_SCHEMA,
 } from '@datashaper/schema'
+import {
+	extension as ext,
+	removeExtension as rmExt,
+} from '@datashaper/utilities'
 import type { Observable } from 'rxjs'
 
 import { Resource } from '../Resource.js'
@@ -25,9 +29,8 @@ export class DataPackage extends Resource {
 		return 'datapackage.json'
 	}
 
-	public constructor(dataPackage?: DataPackageSchema) {
-		super()
-		this.loadSchema(dataPackage)
+	public get resourceManager(): ResourceManager {
+		return this._resourceMgr
 	}
 
 	public get resources(): Resource[] {
@@ -62,19 +65,40 @@ export class DataPackage extends Resource {
 		return this._resourceMgr.topIsEmpty$
 	}
 
-	public addResource(resource: Resource): void {
-		this._resourceMgr.addResource(resource, true)
-		resource.connect(this)
+	public addResource(resource: Resource, top = true): void {
+		this.checkResourceName(resource)
+		if (!resource.isConnected) {
+			resource.connect(this)
+		}
+		this._resourceMgr.addResource(resource, top)
 		this._onChange.next()
 	}
 
+	/**
+	 * Suggests a new, unique resource name for a resource to adopt
+	 * @param name - The seed name
+	 * @returns A unique name based on the seed name for the resource to adopt
+	 */
 	public suggestResourceName(name: string): string {
-		const baseName = name
+		const hasExtension = name.indexOf('.') >= 0
+		const extension = hasExtension ? ext(name) : undefined
+		const baseName = hasExtension ? rmExt(name) : name
+
 		let nameIdx = 1
 		while (this._resourceMgr.hasResource(name)) {
-			name = `${baseName} (${nameIdx++})`
+			name = `${baseName} (${nameIdx++})${hasExtension ? `.${extension}` : ''}`
 		}
 		return name
+	}
+
+	private checkResourceName(resource: Resource): void {
+		const existingResourceWithName = this._resourceMgr.getResource(
+			resource.name,
+		)
+		if (existingResourceWithName && existingResourceWithName !== resource) {
+			resource.title = resource.name
+			resource.name = this.suggestResourceName(resource.name)
+		}
 	}
 
 	public removeResource(name: string): void {
@@ -98,6 +122,10 @@ export class DataPackage extends Resource {
 	 */
 	public addResourceHandler(handler: ProfileHandler): void {
 		this._resourceMgr.registerProfile(handler)
+	}
+
+	public override loadSchema(): void {
+		throw new Error('not implemented')
 	}
 
 	public override toSchema(): DataPackageSchema {
@@ -130,7 +158,7 @@ export class DataPackage extends Resource {
 	 */
 	public async load(files: Map<string, Blob>, quiet?: boolean): Promise<void> {
 		const schema = await this._resourceMgr.load(files)
-		this.loadSchema(schema)
+		super.loadSchema(schema)
 		this._resourceMgr.topResources.forEach(t => t.connect(this))
 		if (!quiet) {
 			this._onChange.next()

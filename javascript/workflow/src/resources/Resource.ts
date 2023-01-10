@@ -33,6 +33,10 @@ export abstract class Resource
 	private _dataPackage: DataPackage | undefined
 	private _unlistenToSources: Unsubscribe | undefined
 
+	public override defaultName(): string {
+		return this.profile ?? 'resource'
+	}
+
 	protected get dataPackage(): DataPackage | undefined {
 		return this._dataPackage
 	}
@@ -86,40 +90,36 @@ export abstract class Resource
 	}
 
 	public set sources(value: (Resource | ResourceReference)[]) {
-		this._unlistenToSources?.()
 		const dp = this._dataPackage
-		if (dp != null) {
-			this._sources.forEach(s => {
-				// Rename incoming resources if necessary
-				const oldName = s.name
-				s.name = dp.suggestResourceName(oldName)
-				if (oldName !== s.name && s.title == null) {
-					s.title = oldName
-				}
-
-				// Connect the resource to the data package
-				s.connect(dp)
-			})
-		}
+		this._unlistenToSources?.()
 
 		this._sources = value
+		if (dp != null) {
+			this._sources.forEach(s => s.connect(dp, false))
+		}
 
 		// Listen to source changes and bubble up onchange events
 		const handlers = this._sources.map(v =>
 			v.onChange(() => this._onChange.next()),
 		)
 		this._unlistenToSources = () => handlers.forEach(h => h())
-
 		this._onChange.next()
+	}
+
+	public get isConnected(): boolean {
+		return this._dataPackage != null
 	}
 
 	/**
 	 * Connects this resource to the given data package
 	 * @param dp - The data package to connect to
 	 */
-	public connect(dp: DataPackage): void {
+	public connect(dp: DataPackage, top = true): void {
 		this._dataPackage = dp
-		this._sources.forEach(s => s.connect(dp))
+		dp.addResource(this, top)
+		this._sources
+			.filter(s => !s.isReference())
+			.forEach(s => s.connect(dp, false))
 	}
 
 	/**

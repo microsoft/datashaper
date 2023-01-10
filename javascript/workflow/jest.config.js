@@ -4,7 +4,7 @@
  */
 import { configure } from '@essex/jest-config'
 const config = {
-	...configure(),
+	...configure({ setupFiles: ['./jest.setup.mjs'] }),
 	displayName: 'core',
 	testEnvironment: 'node',
 	testMatch: ['**/__tests__/**/*.spec.ts'],

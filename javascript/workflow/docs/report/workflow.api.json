@@ -2446,39 +2446,6 @@
           "preserveMemberOrder": false,
           "members": [
             {
-              "kind": "Constructor",
-              "canonicalReference": "@datashaper/workflow!DataPackage:constructor(1)",
-              "docComment": "/**\n * Constructs a new instance of the `DataPackage` class\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "constructor(dataPackage?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "DataPackageSchema",
-                  "canonicalReference": "@datashaper/schema!DataPackageSchema:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ");"
-                }
-              ],
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "dataPackage",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": true
-                }
-              ]
-            },
-            {
               "kind": "Property",
               "canonicalReference": "@datashaper/workflow!DataPackage#$schema:member",
               "docComment": "",
@@ -2523,6 +2490,14 @@
                 },
                 {
                   "kind": "Content",
+                  "text": ", top?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
                   "text": "): "
                 },
                 {
@@ -2536,8 +2511,8 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
+                "startIndex": 5,
+                "endIndex": 6
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -2550,6 +2525,14 @@
                     "endIndex": 2
                   },
                   "isOptional": false
+                },
+                {
+                  "parameterName": "top",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": true
                 }
               ],
               "isOptional": false,
@@ -2861,6 +2844,36 @@
               "name": "load"
             },
             {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!DataPackage#loadSchema:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "loadSchema(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "name": "loadSchema"
+            },
+            {
               "kind": "Property",
               "canonicalReference": "@datashaper/workflow!DataPackage#names:member",
               "docComment": "",
@@ -3003,6 +3016,36 @@
               ],
               "isOptional": false,
               "name": "removeResource"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!DataPackage#resourceManager:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get resourceManager(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceManager",
+                  "canonicalReference": "@datashaper/workflow!ResourceManager:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "resourceManager",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -3200,7 +3243,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!DataPackage#suggestResourceName:member(1)",
-              "docComment": "",
+              "docComment": "/**\n * Suggests a new, unique resource name for a resource to adopt\n *\n * @param name - The seed name\n *\n * @returns A unique name based on the seed name for the resource to adopt\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -9689,7 +9732,7 @@
             },
             {
               "kind": "Content",
-              "text": "<T, 'profile' | 'name'>"
+              "text": "<T, 'profile' | 'name' | '$schema'>"
             },
             {
               "kind": "Content",
@@ -10004,6 +10047,14 @@
                 },
                 {
                   "kind": "Content",
+                  "text": ", top?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
                   "text": "): "
                 },
                 {
@@ -10017,8 +10068,8 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
+                "startIndex": 5,
+                "endIndex": 6
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -10031,6 +10082,14 @@
                     "endIndex": 2
                   },
                   "isOptional": false
+                },
+                {
+                  "parameterName": "top",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": true
                 }
               ],
               "isOptional": false,
@@ -10078,6 +10137,36 @@
               },
               "isStatic": false,
               "isProtected": true
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!Resource#defaultName:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "defaultName(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "name": "defaultName"
             },
             {
               "kind": "Method",
@@ -10184,6 +10273,35 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "homepage",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!Resource#isConnected:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get isConnected(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "isConnected",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -13677,6 +13795,14 @@
                 },
                 {
                   "kind": "Content",
+                  "text": ", top: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
                   "text": "): "
                 },
                 {
@@ -13690,8 +13816,8 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
+                "startIndex": 5,
+                "endIndex": 6
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -13702,6 +13828,14 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "top",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
                   },
                   "isOptional": false
                 }

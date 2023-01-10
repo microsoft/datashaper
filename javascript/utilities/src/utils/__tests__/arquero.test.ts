@@ -3,8 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import Blob from 'cross-blob'
-
 import { BaseFile, FileWithPath } from '../../common/index.js'
 import { loadTable, tableToHTML } from '../arquero.js'
 

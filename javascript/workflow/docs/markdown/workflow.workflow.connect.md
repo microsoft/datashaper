@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-connect(dp: DataPackage): void;
+connect(dp: DataPackage, top: boolean): void;
 ```
 
 ## Parameters
@@ -15,6 +15,7 @@ connect(dp: DataPackage): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  dp | [DataPackage](./workflow.datapackage.md) |  |
+|  top | boolean |  |
 
 <b>Returns:</b>
 

@@ -10,7 +10,6 @@ import {
 	ZipReader,
 	ZipWriter,
 } from '@zip.js/zip.js'
-import Blob from 'cross-blob'
 
 import { FileWithPath } from '../common/index.js'
 
