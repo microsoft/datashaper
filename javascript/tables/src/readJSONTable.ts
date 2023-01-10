@@ -2,38 +2,69 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DataShape } from '@datashaper/schema'
+import {
+	DataFormat,
+	DataShape,
+	DataTableSchema,
+	DataTableSchemaDefaults,
+} from '@datashaper/schema'
 import { DataOrientation } from '@datashaper/schema'
 import { from, fromJSON } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
+import merge from 'lodash-es/merge.js'
 
-const DEFAULT_DATA_SHAPE_JSON_OPTIONS: DataShape = {
-	orientation: DataOrientation.Records,
-}
-
+// TODO: arquero actually does perform some autoTyping on json values
 export function readJSONTable(
 	text: string,
-	shape: DataShape = DEFAULT_DATA_SHAPE_JSON_OPTIONS,
+	schema?: Partial<DataTableSchema>,
 ): ColumnTable {
 	const obj = JSON.parse(text)
-	switch (shape.orientation) {
+	const _schema = defaultSchema(schema)
+	const { shape } = _schema
+	const { orientation } = shape!
+	switch (orientation) {
 		case DataOrientation.Records:
-			return from(obj)
+			return fromJSONRecords(obj)
 		case DataOrientation.Columnar:
-			return fromJSON(text)
+			return fromJSONColumnar(obj)
 		case DataOrientation.Array:
-			return fromArray(obj, shape)
+			return fromJSONArray(obj, shape)
 		case DataOrientation.Values:
-			return fromValues(obj)
+			return fromJSONValues(obj)
 		default:
-			throw new Error(`unknown data orientation: ${shape.orientation}`)
+			throw new Error(`unknown data orientation: ${orientation}`)
 	}
 }
 
-function fromArray(obj: any, shape: DataShape): ColumnTable {
+function defaultSchema(
+	schema?: Partial<DataTableSchema>,
+): Partial<DataTableSchema> {
+	return merge(
+		{},
+		DataTableSchemaDefaults,
+		{
+			format: DataFormat.JSON,
+			shape: {
+				// default for JSON
+				orientation: DataOrientation.Records,
+			},
+		},
+		schema,
+	)
+}
+
+export function fromJSONRecords(obj: any): ColumnTable {
+	return from(obj)
+}
+
+export function fromJSONColumnar(obj: any): ColumnTable {
+	return fromJSON(obj)
+}
+
+export function fromJSONArray(obj: any, shape?: DataShape): ColumnTable {
 	// all the data is a single column unless a matrix row x col layout is specified
-	if (shape.matrix) {
-		const [rows, cols] = shape.matrix
+	if (shape?.matrix && shape?.matrix.length === 2) {
+		const [rows, cols] = shape?.matrix
 		// transpose into an array of arrays and then just use the fromValues function
 		// note that we're completely assuming the matrix definition is correct
 		const result = []
@@ -41,14 +72,14 @@ function fromArray(obj: any, shape: DataShape): ColumnTable {
 			const row = obj.slice(i, i + cols)
 			result.push(row)
 		}
-		return fromValues(result)
+		return fromJSONValues(result)
 	}
 	return fromJSON({
 		col1: obj,
 	})
 }
 
-function fromValues(obj: any): ColumnTable {
+export function fromJSONValues(obj: any): ColumnTable {
 	// first row is assumed to be headers (as stated in schema)
 	const headers = obj[0]
 	const data = obj.slice(1)

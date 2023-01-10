@@ -26,7 +26,6 @@ export declare enum Verb
 |  Difference | <code>&quot;difference&quot;</code> |  |
 |  Encode | <code>&quot;encode&quot;</code> |  |
 |  Erase | <code>&quot;erase&quot;</code> |  |
-|  Fetch | <code>&quot;fetch&quot;</code> |  |
 |  Fill | <code>&quot;fill&quot;</code> |  |
 |  Filter | <code>&quot;filter&quot;</code> |  |
 |  Fold | <code>&quot;fold&quot;</code> |  |

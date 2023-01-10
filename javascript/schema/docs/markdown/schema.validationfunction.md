@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type ValidationFunction = (values: unknown[]) => FieldError | undefined;
+export type ValidationFunction = (values: unknown[]) => FieldError | undefined;
 ```
 <b>References:</b> [FieldError](./schema.fielderror.md)
 

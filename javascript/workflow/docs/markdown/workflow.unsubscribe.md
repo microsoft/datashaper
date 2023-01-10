@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type Unsubscribe = Handler;
+export type Unsubscribe = Handler;
 ```
 <b>References:</b> [Handler](./workflow.handler.md)
 

@@ -30,9 +30,20 @@ const lineTerminatorOptions = [
 ]
 
 export const Parser: React.FC<ParserProps> = memo(function Parser({ parser }) {
+	const delimiter = useObservableState(parser.delimiter$, parser.delimiter)
 	const skipRows = useObservableState(parser.skipRows$, parser.skipRows)
 	const readRows = useObservableState(parser.readRows$, parser.readRows)
-	const delimiter = useObservableState(parser.delimiter$, parser.delimiter)
+	const comment = useObservableState(parser.comment$, parser.comment)
+	const lineTerminator = useObservableState(
+		parser.lineTerminator$,
+		parser.lineTerminator,
+	)
+	const quoteChar = useObservableState(parser.quoteChar$, parser.quoteChar)
+	const escapeChar = useObservableState(parser.escapeChar$, parser.escapeChar)
+	const skipBlankLines = useObservableState(
+		parser.skipBlankLines$,
+		parser.skipBlankLines,
+	)
 	return (
 		<Container>
 			<FlexContainer>
@@ -69,36 +80,28 @@ export const Parser: React.FC<ParserProps> = memo(function Parser({ parser }) {
 					<TextField
 						label="Comment character"
 						onChange={(_, value) => (parser.comment = value)}
-						value={parser.comment}
+						value={comment}
 					/>
 					<ChoiceGroup
-						disabled
 						label={'Line terminator'}
-						title="Option temporarily disabled"
-						selectedKey={parser.lineTerminator}
+						selectedKey={lineTerminator}
 						options={lineTerminatorOptions}
 						onChange={(_, option) => (parser.lineTerminator = option?.key)}
 					/>
 					<TextField
 						label="Quote character"
-						disabled
-						title="Option temporarily disabled"
 						onChange={(_, value) => (parser.quoteChar = value)}
-						value={parser.quoteChar}
+						value={quoteChar}
 					/>
 					<TextField
 						label="Escape character"
-						disabled
-						title="Option temporarily disabled"
 						onChange={(_, value) => (parser.escapeChar = value)}
-						value={parser.escapeChar}
+						value={escapeChar}
 					/>
 
 					<Checkbox
 						label="Skip blank lines"
-						disabled
-						title="Option temporarily disabled"
-						checked={parser.skipBlankLines}
+						checked={skipBlankLines}
 						onChange={(_, value) => (parser.skipBlankLines = value)}
 					/>
 				</FlexContainer>

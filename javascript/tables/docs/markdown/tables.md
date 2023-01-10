@@ -22,7 +22,7 @@
 |  [format(value, options)](./tables.format.md) | Returns a nice formatted string for a number |
 |  [formatIfNumber(value)](./tables.formatifnumber.md) | Returns a formatted string for a number, otherwise returns the original value |
 |  [formatNumberStr(value, decimal, thousands)](./tables.formatnumberstr.md) |  |
-|  [generateCodebook(table)](./tables.generatecodebook.md) |  |
+|  [generateCodebook(table, options)](./tables.generatecodebook.md) |  |
 |  [getDate(value)](./tables.getdate.md) |  |
 |  [getters(table)](./tables.getters.md) | Returns a map of all of the column getters for a table. |
 |  [guessDataType(options)](./tables.guessdatatype.md) | Factory function to provide a type guessing function for any string value. This uses optional type hints to account for string values such as boolean and null formats. |
@@ -49,7 +49,7 @@
 |  [parseString(naValues)](./tables.parsestring.md) |  |
 |  [parseUndefined(naValues)](./tables.parseundefined.md) |  |
 |  [patternValidator(field, includeIndexes)](./tables.patternvalidator.md) | Constructs a function that validates a column against the <code>pattern</code> constraint. |
-|  [readTable(input, schema)](./tables.readtable.md) | Read an input table |
+|  [readTable(input, schema, options)](./tables.readtable.md) | Read an input table |
 |  [requiredValidator(field, includeIndexes)](./tables.requiredvalidator.md) | Constructs a function that validates a column against the <code>required</code> constraint. |
 |  [rows(table, options)](./tables.rows.md) | Returns a table's rows as a two-dimensional array. |
 |  [sliceTable(table, offset, limit)](./tables.slicetable.md) | Safely applies slicing args to a table |
@@ -65,6 +65,7 @@
 |  Interface | Description |
 |  --- | --- |
 |  [ParseConfig](./tables.parseconfig.md) |  |
+|  [ReadTableOptions](./tables.readtableoptions.md) |  |
 |  [RowsOptions](./tables.rowsoptions.md) |  |
 |  [TableContainer](./tables.tablecontainer.md) |  |
 |  [TableMetadata](./tables.tablemetadata.md) |  |

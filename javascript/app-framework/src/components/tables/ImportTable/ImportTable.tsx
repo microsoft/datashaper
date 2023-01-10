@@ -2,17 +2,24 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DataFormat } from '@datashaper/schema'
-import { DataOrientation } from '@datashaper/schema'
+import { DataFormat, DataOrientation } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import { readTable } from '@datashaper/tables'
+import { generateCodebook,readTable } from '@datashaper/tables'
 import {
 	extension,
 	guessDelimiter,
 	removeExtension,
 } from '@datashaper/utilities'
 import { DataTable } from '@datashaper/workflow'
-import { IconButton, Modal, PrimaryButton, TextField } from '@fluentui/react'
+import { ReadOnlyTextField } from '@essex/components'
+import {
+	Checkbox,
+	IconButton,
+	Label,
+	Modal,
+	PrimaryButton,
+	TextField,
+} from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 
@@ -22,10 +29,12 @@ import {
 	Footer,
 	Header,
 	HeaderTitle,
+	MainContent,
 	ModalBody,
 	modalStyles,
 	PreviewContent,
 	Sidebar,
+	textFieldStyles,
 } from './ImportTable.styles.js'
 import type { ImportTableProps } from './ImportTable.types.js'
 
@@ -45,6 +54,12 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 
 		const [name, setName] = useState<string>(removeExtension(file.name ?? ''))
 
+		const [rawContent, setRawContent] = useState<string | undefined>()
+		useEffect(() => {
+			file.toText().then(setRawContent)
+		}, [file])
+
+		const [autoType, setAutoType] = useState<boolean>(true)
 		const [table, setTable] = useState<ColumnTable | undefined>()
 		const [previewError, setPreviewError] = useState<string | undefined>()
 
@@ -52,7 +67,9 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 			(schema: DataTable) => {
 				const f = async () => {
 					try {
-						const loadedTable = await readTable(file, schema.toSchema())
+						const loadedTable = await readTable(file, schema.toSchema(), {
+							autoType,
+						})
 						setPreviewError(undefined)
 						setTable(loadedTable)
 					} catch (_) {
@@ -63,7 +80,7 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 				}
 				void f()
 			},
-			[setTable, setPreviewError, file],
+			[setTable, setPreviewError, file, autoType],
 		)
 
 		const draftSchema = useMemo(() => {
@@ -73,7 +90,10 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 					delimiter,
 				},
 				shape: {
-					orientation: DataOrientation.Values,
+					orientation:
+						format === DataFormat.CSV
+							? DataOrientation.Values
+							: DataOrientation.Records,
 				},
 			})
 			schema.onChange(() => loadPreview(schema))
@@ -86,9 +106,12 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 			if (table) {
 				const id = `${name}.${fileExtension}`
 				const tableContainer = { id, table } as TableContainer
-				onOpenTable(tableContainer, draftSchema.toSchema())
+				// TODO: this is a bit inefficient, because a codebook is generated transitiviely in the readTable method when autoType is true
+				// we should separate those two functions. if a table is typed, generating the codebook can be much quicker.
+				const codebook = autoType ? generateCodebook(table) : undefined
+				onOpenTable(tableContainer, draftSchema.toSchema(), codebook)
 			}
-		}, [onOpenTable, table, name, fileExtension, draftSchema])
+		}, [onOpenTable, table, name, fileExtension, draftSchema, autoType])
 
 		return (
 			<Modal styles={modalStyles} isOpen={true} onDismiss={onCancel} isBlocking>
@@ -106,11 +129,25 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 						/>
 						<DataTableConfig resource={draftSchema} />
 					</Sidebar>
-					<PreviewContent>
-						<Preview error={previewError} table={table} />
-					</PreviewContent>
+					<MainContent>
+						<Label>Input text</Label>
+						<ReadOnlyTextField
+							multiline
+							value={rawContent}
+							styles={textFieldStyles}
+						/>
+						<Label>Final table</Label>
+						<PreviewContent>
+							<Preview error={previewError} table={table} />
+						</PreviewContent>
+					</MainContent>
 				</ModalBody>
-				<ModalFooter disabled={!!previewError} onClick={onClickImport} />
+				<ModalFooter
+					disabled={!!previewError}
+					autoType={autoType}
+					onAutoTypeChange={setAutoType}
+					onClick={onClickImport}
+				/>
 			</Modal>
 		)
 	},
@@ -133,10 +170,24 @@ const ModalHeader: React.FC<{ onHideModal: () => void }> = memo(
 
 const ModalFooter: React.FC<{
 	disabled: boolean
+	autoType: boolean
+	onAutoTypeChange: (checked: boolean) => void
 	onClick: () => void
-}> = memo(function ModalFooter({ disabled, onClick }) {
+}> = memo(function ModalFooter({
+	disabled,
+	autoType,
+	onAutoTypeChange,
+	onClick,
+}) {
 	return (
 		<Footer>
+			<Checkbox
+				label={'Discover data types'}
+				checked={autoType}
+				onChange={(_: any, checked?: boolean) =>
+					onAutoTypeChange(checked ?? false)
+				}
+			/>
 			<PrimaryButton disabled={disabled} text="OK" onClick={onClick} />
 		</Footer>
 	)

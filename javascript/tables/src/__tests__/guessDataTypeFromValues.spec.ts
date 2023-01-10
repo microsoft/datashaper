@@ -7,7 +7,7 @@ import { DataType } from '@datashaper/schema'
 
 import { guessDataTypeFromValues } from '../guessDataTypeFromValues.js'
 
-describe('guess datatype by column tests', () => {
+describe('guessDataTypeFromValues', () => {
 	describe('boolean', () => {
 		const columnType = guessDataTypeFromValues([
 			'true',
@@ -87,18 +87,16 @@ describe('guess datatype by column tests', () => {
 	})
 
 	describe('string (different types)', () => {
-		const columnType = guessDataTypeFromValues([
-			'null',
-			'test',
-			'1',
-			'<NA>',
-			'n/a',
-			'1.23568',
-			'TRUE',
-		])
+		const values = ['1', '1.23568', 'null', 'test', '<NA>', 'n/a', 'TRUE']
 
-		it('should return string', () => {
+		it('mixed types defaults to string', () => {
+			const columnType = guessDataTypeFromValues(values)
 			expect(columnType).toBe(DataType.String)
+		})
+
+		it('limit misses mixed types', () => {
+			const columnType = guessDataTypeFromValues(values, 3)
+			expect(columnType).toBe(DataType.Number)
 		})
 	})
 })

@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type ColumnRenderFunction = (item?: any, index?: number, column?: IColumn) => any;
+export type ColumnRenderFunction = (item?: any, index?: number, column?: IColumn) => any;
 ```

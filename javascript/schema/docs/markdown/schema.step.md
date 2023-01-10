@@ -9,7 +9,7 @@ Specification for step items
 <b>Signature:</b>
 
 ```typescript
-export declare type Step = StepJsonCommon & (({
+export type Step = StepJsonCommon & (({
     verb: Verb.Aggregate;
     args?: AggregateArgs;
 } & BasicInput) | ({

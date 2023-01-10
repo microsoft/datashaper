@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-addResource(resource: Resource): void;
+addResource(resource: Resource, top?: boolean): void;
 ```
 
 ## Parameters
@@ -15,6 +15,7 @@ addResource(resource: Resource): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  resource | [Resource](./workflow.resource.md) |  |
+|  top | boolean | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

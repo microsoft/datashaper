@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type RenameArgs = InputColumnRecordArgs;
+export type RenameArgs = InputColumnRecordArgs;
 ```
 <b>References:</b> [InputColumnRecordArgs](./schema.inputcolumnrecordargs.md)
 

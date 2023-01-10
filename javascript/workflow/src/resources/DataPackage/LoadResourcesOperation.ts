@@ -82,18 +82,24 @@ export class LoadResourcesOperation {
 	): Promise<{ schema: ResourceSchema; path: string }[]> {
 		const nameToPath = new Map<string, string>()
 
-		// Determine the name of a resource, try to not collide if possible
-		const resourceName = (res: ResourceSchema) => {
+		/**
+		 * Determines a unique resource name and title name
+		 * @param res - the resource schema input
+		 * @return [name, title] - title may be undefined
+		 */
+		const resourceName = (
+			res: ResourceSchema,
+		): [string, string | undefined] => {
 			if (res.name) {
-				return res.name
+				return [res.name, undefined]
 			} else {
 				const profile = res.profile || 'resource'
 				let candidate = `${profile}.json`
 				let index = 0
 				while (nameToPath.has(candidate)) {
-					candidate = `${profile}-${++index}.json`
+					candidate = `${profile} (${++index}).json`
 				}
-				return candidate
+				return [candidate, `${profile}.json`]
 			}
 		}
 
@@ -124,7 +130,7 @@ export class LoadResourcesOperation {
 			}
 			return typeof entry === 'string'
 				? entry
-				: `${parentPath}${resourceName(schema)}`
+				: `${parentPath}${resourceName(schema)[0]}`
 		}
 
 		const readEntry = async (
@@ -135,7 +141,9 @@ export class LoadResourcesOperation {
 			if (!schema) {
 				return undefined
 			}
-			schema.name = schema.name || resourceName(schema)
+			const [name, title] = resourceName(schema)
+			schema.name = name
+			schema.title = title
 			const path = resolvePath(entry, schema, parentPath)
 
 			if (nameToPath.has(schema.name)) {

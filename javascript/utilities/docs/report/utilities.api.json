@@ -2870,7 +2870,7 @@
             {
               "kind": "Reference",
               "text": "Entry",
-              "canonicalReference": "!\"\\\"@zip.js/zip.js\\\"\".Entry:interface"
+              "canonicalReference": "@zip.js/zip.js!Entry:interface"
             },
             {
               "kind": "Content",
@@ -3019,7 +3019,7 @@
             {
               "kind": "Reference",
               "text": "Entry",
-              "canonicalReference": "!\"\\\"@zip.js/zip.js\\\"\".Entry:interface"
+              "canonicalReference": "@zip.js/zip.js!Entry:interface"
             },
             {
               "kind": "Content",
@@ -3600,7 +3600,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type Json = "
+              "text": "export type Json = "
             },
             {
               "kind": "Reference",

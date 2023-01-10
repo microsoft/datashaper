@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type TableTransformer = Transformer<TableContainer, TableContainer>;
+export type TableTransformer = Transformer<TableContainer, TableContainer>;
 ```

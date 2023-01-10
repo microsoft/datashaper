@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function applyCodebook(table: ColumnTable, codebook: CodebookSchema, strategy: CodebookStrategy, dataTableSchema?: DataTableSchema): ColumnTable;
+export declare function applyCodebook(table: ColumnTable, codebook: CodebookSchema, strategy: CodebookStrategy, dataTableSchema?: Partial<DataTableSchema>): ColumnTable;
 ```
 
 ## Parameters
@@ -17,7 +17,7 @@ export declare function applyCodebook(table: ColumnTable, codebook: CodebookSche
 |  table | ColumnTable |  |
 |  codebook | CodebookSchema |  |
 |  strategy | CodebookStrategy |  |
-|  dataTableSchema | DataTableSchema | <i>(Optional)</i> |
+|  dataTableSchema | Partial&lt;DataTableSchema&gt; | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

@@ -3139,6 +3139,42 @@
           ]
         },
         {
+          "kind": "Variable",
+          "canonicalReference": "@datashaper/schema!DataTableSchemaDefaults:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "DataTableSchemaDefaults: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Partial",
+              "canonicalReference": "!Partial:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "DataTableSchema",
+              "canonicalReference": "@datashaper/schema!DataTableSchema:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "DataTableSchemaDefaults",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 5
+          }
+        },
+        {
           "kind": "Enum",
           "canonicalReference": "@datashaper/schema!DataType:enum",
           "docComment": "/**\n * Explicit data type of the value (i.e., for a column or property). TODO: clarify/update null/undefined\n */\n",
@@ -3555,7 +3591,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type DedupeArgs = "
+              "text": "export type DedupeArgs = "
             },
             {
               "kind": "Reference",
@@ -4099,7 +4135,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type FactoryInput<T> = "
+              "text": "export type FactoryInput<T> = "
             },
             {
               "kind": "Reference",
@@ -4134,104 +4170,6 @@
             "startIndex": 1,
             "endIndex": 3
           }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/schema!FetchArgs:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface FetchArgs "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "FetchArgs",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!FetchArgs#autoMax:member",
-              "docComment": "/**\n * Optional autoMax for tables\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "autoMax?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "number"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "autoMax",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!FetchArgs#delimiter:member",
-              "docComment": "/**\n * Optional delimiter for csv\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "delimiter?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "delimiter",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!FetchArgs#url:member",
-              "docComment": "/**\n * URL where the csv file is located\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "url: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "url",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
         },
         {
           "kind": "Interface",
@@ -5794,7 +5732,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type GroupbyArgs = "
+              "text": "export type GroupbyArgs = "
             },
             {
               "kind": "Reference",
@@ -8201,7 +8139,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type PortBinding = "
+              "text": "export type PortBinding = "
             },
             {
               "kind": "Content",
@@ -8231,7 +8169,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type Profile = "
+              "text": "export type Profile = "
             },
             {
               "kind": "Reference",
@@ -8355,7 +8293,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type Rel = "
+              "text": "export type Rel = "
             },
             {
               "kind": "Reference",
@@ -8542,7 +8480,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type RenameArgs = "
+              "text": "export type RenameArgs = "
             },
             {
               "kind": "Reference",
@@ -8946,7 +8884,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type SelectArgs = "
+              "text": "export type SelectArgs = "
             },
             {
               "kind": "Reference",
@@ -9269,7 +9207,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type Step = "
+              "text": "export type Step = "
             },
             {
               "kind": "Reference",
@@ -10773,7 +10711,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type UnfoldArgs = "
+              "text": "export type UnfoldArgs = "
             },
             {
               "kind": "Reference",
@@ -10897,7 +10835,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type UnrollArgs = "
+              "text": "export type UnrollArgs = "
             },
             {
               "kind": "Reference",
@@ -10923,7 +10861,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type ValidationFunction = "
+              "text": "export type ValidationFunction = "
             },
             {
               "kind": "Content",
@@ -11006,7 +10944,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare type Value = "
+              "text": "export type Value = "
             },
             {
               "kind": "Content",
@@ -11486,27 +11424,6 @@
               },
               "releaseTag": "Public",
               "name": "Erase"
-            },
-            {
-              "kind": "EnumMember",
-              "canonicalReference": "@datashaper/schema!Verb.Fetch:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "Fetch = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "\"fetch\""
-                }
-              ],
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "name": "Fetch"
             },
             {
               "kind": "EnumMember",

@@ -9,5 +9,5 @@ A cell/property value of any type.
 <b>Signature:</b>
 
 ```typescript
-export declare type Value = any;
+export type Value = any;
 ```

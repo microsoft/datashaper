@@ -9,11 +9,12 @@ import {
 	determineParserType,
 	hasArqueroOptions,
 	hasOneChar,
-	mapProps,
+	mapToArqueroOptions,
+	mapToPapaParseOptions,
 	validOptions,
 } from '../readCsvTable.utils.js'
 
-describe('readTable Utils Tests', () => {
+describe('readCsvTable.utils', () => {
 	describe('determineParserType', () => {
 		it('should return Arquero', () => {
 			const type = determineParserType()
@@ -23,29 +24,40 @@ describe('readTable Utils Tests', () => {
 			const type = determineParserType({ delimiter: ';' })
 			expect(type).toBe(ParserType.Arquero)
 		})
+		it('should return Arquero with non-configurable defaults match', () => {
+			const type = determineParserType({
+				delimiter: '\t',
+				lineTerminator: '\n',
+				quoteChar: '"',
+				skipBlankLines: true,
+			})
+			expect(type).toBe(ParserType.Arquero)
+		})
 		it('should return Papa parse', () => {
-			const type = determineParserType({ delimiter: ';', skipBlankLines: true })
+			const type = determineParserType({ delimiter: ';', escapeChar: '\\' })
 			expect(type).toBe(ParserType.PapaParse)
 		})
 	})
 
-	describe('mapProps', () => {
-		it('should return Arquero props', () => {
-			const options = { delimiter: ';', skipRows: 2 }
-			const type = determineParserType(options)
-			const mapped = mapProps(type, options)
-			const expected = { delimiter: ';', skip: 2, autoType: false }
+	describe('map props', () => {
+		it('mapToArqueroOptions', () => {
+			const options = { delimiter: ';' }
+			const mapped = mapToArqueroOptions(options)
+			const expected = {
+				delimiter: ';',
+				autoType: false,
+			}
 			expect(mapped).toEqual(expected)
 		})
-		it('should return Papa parse props', () => {
+		it('mapToPapaParseOptions', () => {
 			const options = { delimiter: ';', comment: '$', skipBlankLines: true }
-			const type = determineParserType(options)
-			const mapped = mapProps(type, options)
+			const mapped = mapToPapaParseOptions(options)
 			const expected = {
 				delimiter: ';',
 				comments: '$',
 				skipEmptyLines: true,
 				header: true,
+				dynamicTyping: false,
 			}
 			expect(mapped).toEqual(expected)
 		})
@@ -53,7 +65,7 @@ describe('readTable Utils Tests', () => {
 
 	describe('hasArqueroOptions', () => {
 		it('should return true', () => {
-			expect(hasArqueroOptions({ delimiter: ';', skipRows: 2 })).toBe(true)
+			expect(hasArqueroOptions({ delimiter: ';' })).toBe(true)
 		})
 		it('should return false', () => {
 			expect(hasArqueroOptions({ delimiter: ';', escapeChar: '\\' })).toBe(

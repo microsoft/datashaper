@@ -9,7 +9,7 @@ An emitter for TableContainers
 <b>Signature:</b>
 
 ```typescript
-export declare type TableEmitter = Emitter<TableContainer>;
+export type TableEmitter = Emitter<TableContainer>;
 ```
 <b>References:</b> [Emitter](./workflow.emitter.md)
 

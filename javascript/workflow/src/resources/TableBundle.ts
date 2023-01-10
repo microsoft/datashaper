@@ -47,8 +47,8 @@ export class TableBundle extends Resource implements TableEmitter {
 			)
 		}
 
-		this._pipelineSub?.unsubscribe()
 		super.sources = value
+		this._pipelineSub?.unsubscribe()
 
 		// Create a pipeline of transformers
 		const inputNode = dereferenced.find(isTableEmitter)

@@ -48,7 +48,7 @@ export class DataTable extends Resource implements TableEmitter {
 
 	private refreshData = (): void => {
 		if (this._rawData != null) {
-			readTable(this._rawData, this.toSchema())
+			readTable(this._rawData, this.toSchema(), { autoType: false })
 				.then(t => this._output$.next({ table: t, id: this.name }))
 				.catch(err => {
 					log('error reading blob', err)

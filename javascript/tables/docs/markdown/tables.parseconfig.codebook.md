@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-codebook?: CodebookSchema;
+codebook?: Partial<CodebookSchema>;
 ```

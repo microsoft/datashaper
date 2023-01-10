@@ -14,7 +14,7 @@ import type { Resource } from './Resource.js'
 export type Readable<T extends ResourceSchema> = {
 	profile?: T['profile'] | undefined
 	name?: T['name'] | undefined
-} & Omit<T, 'profile' | 'name'>
+} & Omit<T, 'profile' | 'name' | '$schema'>
 
 /**
  * A constructor for a resource

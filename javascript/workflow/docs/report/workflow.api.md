@@ -198,9 +198,8 @@ export function createNode(step: Step): Node_2<TableContainer>;
 export class DataPackage extends Resource {
     // (undocumented)
     readonly $schema: string;
-    constructor(dataPackage?: DataPackageSchema);
     // (undocumented)
-    addResource(resource: Resource): void;
+    addResource(resource: Resource, top?: boolean): void;
     addResourceHandler(handler: ProfileHandler): void;
     // (undocumented)
     clear(): void;
@@ -214,6 +213,8 @@ export class DataPackage extends Resource {
     get isEmpty(): boolean;
     load(files: Map<string, Blob>, quiet?: boolean): Promise<void>;
     // (undocumented)
+    loadSchema(): void;
+    // (undocumented)
     get names$(): Observable<string[]>;
     // (undocumented)
     get names(): string[];
@@ -221,6 +222,10 @@ export class DataPackage extends Resource {
     readonly profile = KnownProfile.DataPackage;
     // (undocumented)
     removeResource(name: string): void;
+    // Warning: (ae-forgotten-export) The symbol "ResourceManager" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    get resourceManager(): ResourceManager;
     // (undocumented)
     get resources$(): Observable<Resource[]>;
     // (undocumented)
@@ -231,7 +236,6 @@ export class DataPackage extends Resource {
     get size$(): Observable<number>;
     // (undocumented)
     get size(): number;
-    // (undocumented)
     suggestResourceName(name: string): string;
     // (undocumented)
     toSchema(): DataPackageSchema;
@@ -746,7 +750,6 @@ export const pivot: (id: string) => StepNode<TableContainer<unknown>, PivotArgs>
 //
 // @public
 export interface ProfileHandler {
-    // Warning: (ae-forgotten-export) The symbol "ResourceManager" needs to be exported by the entry point index.d.ts
     createInstance(schema: ResourceSchema | undefined, manager: ResourceManager): Promise<Resource>;
     profile: Profile;
     save?: (data: Resource, path: string, files: Map<string, Blob>) => Promise<string[]>;
@@ -758,7 +761,7 @@ export interface ProfileHandler {
 export type Readable<T extends ResourceSchema> = {
     profile?: T['profile'] | undefined;
     name?: T['name'] | undefined;
-} & Omit<T, 'profile' | 'name'>;
+} & Omit<T, 'profile' | 'name' | '$schema'>;
 
 // Warning: (ae-missing-release-tag) "readStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -780,16 +783,20 @@ export const rename: (id: string) => StepNode<TableContainer<unknown>, InputColu
 // @public (undocumented)
 export abstract class Resource extends Named implements ResourceSchema, Resource {
     abstract get $schema(): string | undefined;
-    connect(dp: DataPackage): void;
+    connect(dp: DataPackage, top?: boolean): void;
     // (undocumented)
     protected get dataPackage(): DataPackage | undefined;
     protected set dataPackage(value: DataPackage | undefined);
+    // (undocumented)
+    defaultName(): string;
     // (undocumented)
     dispose(): void;
     getSourcesWithProfile(type: Profile): Resource[];
     // (undocumented)
     get homepage(): string | undefined;
     set homepage(value: string | undefined);
+    // (undocumented)
+    get isConnected(): boolean;
     // (undocumented)
     isReference(): this is ResourceReference;
     // (undocumented)
@@ -1047,7 +1054,7 @@ export class Workflow extends Resource implements TableTransformer {
     get allTableNames$(): Observable<string[]>;
     get allTableNames(): string[];
     // (undocumented)
-    connect(dp: DataPackage): void;
+    connect(dp: DataPackage, top: boolean): void;
     // (undocumented)
     defaultName(): string;
     // (undocumented)

@@ -14,6 +14,162 @@
 					"layout": "micro"
 				},
 				{
+					"$schema": "https://microsoft.github.io/datashaper/schema/codebook/v1.0.0.json",
+					"profile": "codebook",
+					"fields": [
+						{
+							"name": "ID",
+							"type": "number",
+							"nature": "discrete"
+						},
+						{
+							"name": "age",
+							"type": "string",
+							"nature": "nominal"
+						},
+						{
+							"name": "DateOfOnsetSymptoms",
+							"type": "date",
+							"nature": "nominal"
+						},
+						{
+							"name": "ChronicDiseaseQ",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "gender_binary",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "death_binary",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "respiratory",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "weakness/pain",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "fever",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "gastrointestinal",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "other",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "nausea",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "cardiac",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "high fever",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "kidney",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "asymptomatic",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "diabetes",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "neuro",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "NA",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "hypertension",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "cancer",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "ortho",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "respiratory_CD",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "cardiacs_cd",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "kidney_CD",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "blood",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "prostate",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "thyroid",
+							"type": "number",
+							"nature": "binary"
+						},
+						{
+							"name": "Latitude",
+							"type": "number",
+							"nature": "continuous"
+						},
+						{
+							"name": "Longitiude",
+							"type": "number",
+							"nature": "continuous"
+						}
+					]
+				},
+				{
 					"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v2.json",
 					"profile": "workflow",
 					"steps": [
@@ -23,20 +179,6 @@
 								"operation": "row_number",
 								"to": "index"
 							}
-						},
-						{
-							"args": {
-								"columns": [
-									"index",
-									"age",
-									"ChronicDiseaseQ",
-									"gender_binary",
-									"death_binary",
-									"hypertension",
-									"diabetes"
-								]
-							},
-							"verb": "select"
 						},
 						{
 							"args": {
@@ -323,63 +465,63 @@
 						{
 							"args": {
 								"to": "age_group_1",
-								"value": "1"
+								"value": 1
 							},
 							"verb": "fill"
 						},
 						{
 							"args": {
 								"to": "age_group_2",
-								"value": "2"
+								"value": 2
 							},
 							"verb": "fill"
 						},
 						{
 							"args": {
 								"to": "age_group_3",
-								"value": "3"
+								"value": 3
 							},
 							"verb": "fill"
 						},
 						{
 							"args": {
 								"to": "age_group_4",
-								"value": "4"
+								"value": 4
 							},
 							"verb": "fill"
 						},
 						{
 							"args": {
 								"to": "age_group_5",
-								"value": "5"
+								"value": 5
 							},
 							"verb": "fill"
 						},
 						{
 							"args": {
 								"to": "age_group_6",
-								"value": "6"
+								"value": 6
 							},
 							"verb": "fill"
 						},
 						{
 							"args": {
 								"to": "age_group_7",
-								"value": "7"
+								"value": 7
 							},
 							"verb": "fill"
 						},
 						{
 							"args": {
 								"to": "age_group_8",
-								"value": "8"
+								"value": 8
 							},
 							"verb": "fill"
 						},
 						{
 							"args": {
 								"to": "age_group_9",
-								"value": "9"
+								"value": 9
 							},
 							"verb": "fill"
 						},
@@ -547,13 +689,6 @@
 						},
 						{
 							"args": {
-								"columns": ["Combined"],
-								"type": "float"
-							},
-							"verb": "convert"
-						},
-						{
-							"args": {
 								"column": "Combined",
 								"to": "diabetes_hypertension",
 								"criteria": [
@@ -568,22 +703,8 @@
 						},
 						{
 							"args": {
-								"columns": [
-									"index",
-									"age",
-									"chronic_disease",
-									"gender",
-									"death",
-									"age_group",
-									"diabetes_hypertension"
-								]
-							},
-							"verb": "select"
-						},
-						{
-							"args": {
 								"to": "subject_inclusion",
-								"value": "1"
+								"value": 1
 							},
 							"verb": "fill"
 						},

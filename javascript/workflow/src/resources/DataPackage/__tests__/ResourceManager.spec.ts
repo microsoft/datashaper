@@ -125,7 +125,7 @@ describe('The ResourceManager class', () => {
 		inspectResource(
 			mgr.topResources[1]!,
 			KnownProfile.TableBundle,
-			'tablebundle-1.json',
+			'tablebundle (1).json',
 		)
 	})
 
@@ -133,7 +133,7 @@ describe('The ResourceManager class', () => {
 		const archive = fileSet({
 			'datapackage.json': {
 				resources: [
-					{ profile: KnownProfile.TableBundle, name: 'tablebundle-1.json' },
+					{ profile: KnownProfile.TableBundle, name: 'tablebundle (1).json' },
 					{ profile: KnownProfile.TableBundle },
 					{ profile: KnownProfile.TableBundle },
 				],
@@ -145,7 +145,7 @@ describe('The ResourceManager class', () => {
 		inspectResource(
 			mgr.topResources[0]!,
 			KnownProfile.TableBundle,
-			'tablebundle-1.json',
+			'tablebundle (1).json',
 		)
 		inspectResource(
 			mgr.topResources[1]!,
@@ -155,7 +155,7 @@ describe('The ResourceManager class', () => {
 		inspectResource(
 			mgr.topResources[2]!,
 			KnownProfile.TableBundle,
-			'tablebundle-2.json',
+			'tablebundle (2).json',
 		)
 	})
 
