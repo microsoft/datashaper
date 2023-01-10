@@ -2870,7 +2870,7 @@
             {
               "kind": "Reference",
               "text": "Entry",
-              "canonicalReference": "!\"\\\"@zip.js/zip.js\\\"\".Entry:interface"
+              "canonicalReference": "@zip.js/zip.js!Entry:interface"
             },
             {
               "kind": "Content",
@@ -3019,7 +3019,7 @@
             {
               "kind": "Reference",
               "text": "Entry",
-              "canonicalReference": "!\"\\\"@zip.js/zip.js\\\"\".Entry:interface"
+              "canonicalReference": "@zip.js/zip.js!Entry:interface"
             },
             {
               "kind": "Content",

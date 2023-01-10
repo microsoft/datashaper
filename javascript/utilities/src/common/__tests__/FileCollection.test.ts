@@ -2,9 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
-import Blob from 'cross-blob'
-
 import { FileType } from '../../index.js'
 import { createBaseFile, renameDuplicatedFiles } from '../../utils/index.js'
 import { FileCollection } from '../FileCollection.js'

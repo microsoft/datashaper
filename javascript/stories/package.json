@@ -15,7 +15,7 @@
 		"@datashaper/webapp": "workspace:^",
 		"@essex/components": "^3.5.3",
 		"@fluentui/font-icons-mdl2": "^8.5.5",
-		"@fluentui/react": "^8.104.2",
+		"@fluentui/react": "^8.104.3",
 		"@fluentui/react-hooks": "^8.6.14",
 		"@fluentui/utilities": "^8.13.4",
 		"@thematic/core": "^4.0.3",
