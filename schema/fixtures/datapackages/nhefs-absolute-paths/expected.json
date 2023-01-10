@@ -1,11 +1,15 @@
 {
 	"tables": [
 		{
-			"name": "nhefs"
+			"name": "nhefs",
+			"columnCount": 61,
+			"rowCount": 1746
 		},
 		{
 			"name": "nhefs-transformed",
-			"workflowLength": 2
+			"workflowLength": 2,
+			"columnCount": 63,
+			"rowCount": 1746
 		}
 	]
 }
