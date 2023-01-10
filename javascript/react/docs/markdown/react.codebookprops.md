@@ -17,6 +17,7 @@ export interface CodebookProps
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [fields](./react.codebookprops.fields.md) |  | Field\[\] |  |
+|  [metadata?](./react.codebookprops.metadata.md) |  | TableMetadata | <i>(Optional)</i> |
 |  [onChangeFields](./react.codebookprops.onchangefields.md) |  | (fields: Field\[\]) =&gt; void |  |
 |  [styles?](./react.codebookprops.styles.md) |  | [CodebookTableStyles](./react.codebooktablestyles.md) | <i>(Optional)</i> |
 

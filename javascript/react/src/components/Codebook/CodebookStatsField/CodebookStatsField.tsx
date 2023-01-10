@@ -28,7 +28,14 @@ const DEFAULT_STATS = [
 
 export const CodebookStatsField: React.FC<CodebookStatsFieldProps> = memo(
 	function CodebookStatsField(props) {
-		const { field, onChangeField, styles, checkbox, histogramColumn } = props
+		const {
+			field,
+			metadata,
+			onChangeField,
+			styles,
+			checkbox,
+			histogramColumn,
+		} = props
 		const [column, setColumn] = useState(histogramColumn)
 		const wrapperRef = useRef<HTMLDivElement | null>(null)
 
@@ -53,6 +60,7 @@ export const CodebookStatsField: React.FC<CodebookStatsFieldProps> = memo(
 			[onChangeField, checkbox, field],
 		)
 
+		const meta = metadata?.columns?.[field.name]
 		return (
 			<div ref={wrapperRef} style={styles?.root}>
 				<Flex>
@@ -68,11 +76,13 @@ export const CodebookStatsField: React.FC<CodebookStatsFieldProps> = memo(
 					<StatsColumnHeader
 						stats={DEFAULT_STATS}
 						field={field}
+						metadata={meta}
 						disabled={field.exclude}
 					/>
 					<HistogramColumnHeader
 						column={column}
 						field={field}
+						metadata={meta}
 						disabled={field.exclude}
 					/>
 				</DataDisplay>

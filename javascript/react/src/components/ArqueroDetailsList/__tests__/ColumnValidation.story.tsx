@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Field, ValidationResult } from '@datashaper/schema'
-import { generateCodebook, validateTable } from '@datashaper/tables'
+import type { ValidationResult } from '@datashaper/schema'
+import { generateCodebook, introspect, validateTable } from '@datashaper/tables'
 import type { ComponentStory } from '@storybook/react'
 
 import { ArqueroDetailsList } from '../ArqueroDetailsList.js'
@@ -16,15 +16,7 @@ export const ColumnValidationStory: ComponentStory<
 	{ loaded: { companiesRaw } }: any,
 ): JSX.Element => {
 	const codebookResult = generateCodebook(companiesRaw)
-	// get the metadata so we can test this with full smart features to make sure everything lines up nicely
-	const metadata = {
-		rows: companiesRaw.numRows(),
-		cols: companiesRaw.numCols(),
-		columns: codebookResult.fields.reduce((acc, field) => {
-			acc[field.name] = field
-			return acc
-		}, {} as Record<string, Field>),
-	}
+	const metadata = introspect(companiesRaw, true)
 	// inject a few constraints to test & render
 	codebookResult.fields.find(element => element.name === 'ID')!.constraints = {
 		required: true,

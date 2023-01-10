@@ -21,6 +21,7 @@ import type { RichHeaderProps } from './types.js'
 export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 	function StatsColumnHeader({
 		field,
+		metadata,
 		stats = DEFAULT_STATS,
 		column,
 		onSelect,
@@ -28,9 +29,8 @@ export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 	}) {
 		const theme = useTheme()
 		const cells = useMemo(() => {
-			const st = (field.metadata || EMPTY_OBJECT) as any
+			const st = (metadata || EMPTY_OBJECT) as any
 			return stats.map(stat => {
-				// data type is on the field, not the meta...
 				const value: any = stat === StatsColumnType.Type ? field.type : st[stat]
 				return (
 					<StatCell
@@ -40,9 +40,9 @@ export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 					/>
 				)
 			})
-		}, [field, column, stats])
+		}, [field, metadata, column, stats])
 
-		const title = useTooltip(field.metadata)
+		const title = useTooltip(metadata)
 
 		const styles = useMemo<React.CSSProperties>(() => {
 			return {

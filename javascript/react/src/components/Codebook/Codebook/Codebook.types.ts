@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Field } from '@datashaper/schema'
+import type { TableMetadata } from '@datashaper/tables'
 
 import type { CodebookStyles } from '../types.js'
 
@@ -11,6 +12,7 @@ import type { CodebookStyles } from '../types.js'
  */
 export interface CodebookProps {
 	fields: Field[]
+	metadata?: TableMetadata
 	onChangeFields: (fields: Field[]) => void
 	styles?: CodebookTableStyles
 }

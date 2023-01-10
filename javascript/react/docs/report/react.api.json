@@ -770,6 +770,38 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!ArqueroDetailsListProps#fields:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fields?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Field",
+                  "canonicalReference": "@datashaper/schema!Field:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "fields",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/react!ArqueroDetailsListProps#fill:member",
               "docComment": "/**\n * Indicates that the table should fill its container space, including the use of pseudo columns and rows to present a \"spreadsheet-like\" view.\n */\n",
               "excerptTokens": [
@@ -1671,6 +1703,34 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!CodebookProps#metadata:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "metadata?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TableMetadata",
+                  "canonicalReference": "@datashaper/tables!TableMetadata:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "metadata",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/react!CodebookProps#onChangeFields:member",
               "docComment": "",
               "excerptTokens": [
@@ -2236,7 +2296,7 @@
             },
             {
               "kind": "Content",
-              "text": "(meta?: "
+              "text": "(field?: "
             },
             {
               "kind": "Reference",
@@ -2391,7 +2451,7 @@
             },
             {
               "kind": "Content",
-              "text": "(meta: "
+              "text": "(metadata: "
             },
             {
               "kind": "Reference",

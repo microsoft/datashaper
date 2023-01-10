@@ -23,6 +23,7 @@ import type { CodebookProps } from './Codebook.types.js'
 
 export const Codebook: React.FC<CodebookProps> = memo(function Codebook({
 	fields,
+	metadata,
 	onChangeFields,
 	styles,
 }) {
@@ -89,6 +90,7 @@ export const Codebook: React.FC<CodebookProps> = memo(function Codebook({
 								styles={_styles.statsWrapper}
 								onChangeField={(field: Field) => onChangeField(field, index)}
 								field={field}
+								metadata={metadata}
 							/>
 
 							<CodebookDisplayNameField

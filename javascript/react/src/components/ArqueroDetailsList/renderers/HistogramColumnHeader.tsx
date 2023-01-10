@@ -24,7 +24,7 @@ import type { RichHeaderProps } from './types.js'
  * For strings it will be the unique counts (if categories exist).
  */
 export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
-	function HistogramColumnHeader({ field, color, ...props }) {
+	function HistogramColumnHeader({ field, metadata, color, ...props }) {
 		const { column, onSelect, disabled } = props
 		const dimensions = useCellDimensions(column, false)
 		const theme = useTheme()
@@ -34,19 +34,19 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 
 		const categorical = field.type === 'string'
 
-		const bins = categorical ? field.metadata?.categories : field.metadata?.bins
+		const bins = categorical ? metadata?.categories : metadata?.bins
 		const values = useMemo(
 			() => (bins ?? EMPTY_ARRAY).map(b => b.count),
 			[bins],
 		)
-		const categories = useCategories(field.metadata, categorical)
+		const categories = useCategories(metadata, categorical)
 		const title = useTooltip(categories)
 		const legend = useLegend(categories)
 		const [hover, setHover] = useState<string>()
 		const [id, setId] = useState<string>()
 		const handleBarHover = useHandleBarHoverHandler(legend, setId, setHover)
 		const styles = useStyles(dimensions, Boolean(onSelect))
-		const enough = field.metadata?.distinct || 0
+		const enough = metadata?.distinct || 0
 		const calloutProps = useCalloutProps(id)
 		const handleOnClick = useCallback(
 			(e: React.MouseEvent<HTMLElement, MouseEvent>) =>

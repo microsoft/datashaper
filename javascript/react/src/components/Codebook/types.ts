@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Field } from '@datashaper/schema'
+import type { TableMetadata } from '@datashaper/tables'
 import type { EnumDropdownProps } from '@essex/components'
 import type {
 	IDropdownStyles,
@@ -26,6 +27,7 @@ export interface CodebookStyles {
 
 export interface CodebookPropsBase {
 	field: Field
+	metadata?: TableMetadata
 	onChangeField?: (field: Field) => void
 }
 

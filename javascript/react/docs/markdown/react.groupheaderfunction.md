@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-export type GroupHeaderFunction = (meta?: Field, columnName?: string, props?: IDetailsGroupDividerProps | undefined) => any;
+export type GroupHeaderFunction = (field?: Field, columnName?: string, props?: IDetailsGroupDividerProps | undefined) => any;
 ```

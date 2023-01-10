@@ -16,7 +16,7 @@ import { useFieldEditorStyles } from './CodebookFieldEditor.styles.js'
 import type { CodebookFieldEditorProps } from './CodebookFieldEditor.types.js'
 
 export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
-	function CodebookFieldEditor({ styles, field, onChangeField }) {
+	function CodebookFieldEditor({ styles, field, metadata, onChangeField }) {
 		const _styles = useFieldEditorStyles(styles)
 		return (
 			<div style={_styles.root}>
@@ -24,6 +24,7 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 					styles={_styles.statsWrapper}
 					onChangeField={onChangeField}
 					field={field}
+					metadata={metadata}
 				/>
 				<CodebookDisplayNameField
 					label="Display name"
