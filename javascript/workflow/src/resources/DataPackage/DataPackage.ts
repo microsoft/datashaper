@@ -3,11 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-assignment */
+import type { DataPackageSchema } from '@datashaper/schema'
 import {
 	createDataPackageSchemaObject,
-	DataPackageSchema,
+	KnownProfile,
+	LATEST_DATAPACKAGE_SCHEMA,
 } from '@datashaper/schema'
-import { KnownProfile, LATEST_DATAPACKAGE_SCHEMA } from '@datashaper/schema'
 import {
 	extension as ext,
 	removeExtension as rmExt,
@@ -64,7 +65,7 @@ export class DataPackage extends Resource {
 		return this._resourceMgr.topIsEmpty$
 	}
 
-	public addResource(resource: Resource, top: boolean = true): void {
+	public addResource(resource: Resource, top = true): void {
 		this.checkResourceName(resource)
 		if (!resource.isConnected) {
 			resource.connect(this)
