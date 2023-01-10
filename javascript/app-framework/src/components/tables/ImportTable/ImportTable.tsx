@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableContainer } from '@datashaper/tables'
+import { StatsColumnType } from '@datashaper/react'
+import type { TableContainer, TableMetadata } from '@datashaper/tables'
 import { generateCodebook } from '@datashaper/tables'
 import { removeExtension } from '@datashaper/utilities'
 import { ReadOnlyTextField } from '@essex/components'
@@ -48,7 +49,7 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 		const [name, setName] = useState<string>(removeExtension(file.name ?? ''))
 		const [autoType, setAutoType] = useState<boolean>(true)
 
-		const { table, previewError, onLoadPreview } = usePreview(file, autoType)
+		const { table, metadata, previewError, onLoadPreview } = usePreview(file, autoType)
 
 		const draftSchema = useDraftSchema(delimiter, format, onLoadPreview)
 
@@ -88,7 +89,7 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 						/>
 						<Label>Final table</Label>
 						<PreviewContent>
-							<Preview error={previewError} table={table} />
+							<Preview error={previewError} table={table} metadata={metadata}/>
 						</PreviewContent>
 					</MainContent>
 				</ModalBody>
@@ -145,8 +146,11 @@ const ModalFooter: React.FC<{
 
 export const Preview: React.FC<{
 	table?: ColumnTable
+	metadata?: TableMetadata
 	error?: string
-	showType?: boolean
-}> = memo(function TablePreview({ table, error }) {
-	return <>{table && <RawTable error={error} table={table} fill />}</>
+}> = memo(function TablePreview({ table, metadata, error }) {
+	return <>{table && <RawTable error={error} table={table} metadata={metadata} fill features={{
+		statsColumnHeaders: true,
+		statsColumnTypes: [StatsColumnType.Type]
+	}}/>}</>
 })

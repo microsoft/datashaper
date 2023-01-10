@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { DataFormat, DataOrientation } from '@datashaper/schema'
-import { readTable } from '@datashaper/tables'
+import type { TableMetadata } from '@datashaper/tables'
+import { introspect,readTable } from '@datashaper/tables'
 import type { BaseFile } from '@datashaper/utilities'
 import { extension, guessDelimiter } from '@datashaper/utilities'
 import { DataTable } from '@datashaper/workflow'
@@ -39,10 +40,12 @@ export function usePreview(
 	autoType: boolean,
 ): {
 	table: ColumnTable | undefined
+    metadata: TableMetadata | undefined
 	previewError: string | undefined
 	onLoadPreview: (schema: DataTable) => void
 } {
 	const [table, setTable] = useState<ColumnTable | undefined>()
+    const [metadata, setMetadata] = useState<TableMetadata | undefined>()
 	const [previewError, setPreviewError] = useState<string | undefined>()
 
 	const onLoadPreview = useCallback(
@@ -54,20 +57,25 @@ export function usePreview(
 					})
 					setPreviewError(undefined)
 					setTable(loadedTable)
+                    if (loadedTable) {
+                        setMetadata(introspect(loadedTable, false))
+                    }
 				} catch (_) {
 					setPreviewError(
 						'The selected configuration is not valid for this table.',
 					)
 					setTable(atable({}))
+                    setMetadata(undefined)
 				}
 			}
 			void f()
 		},
-		[setTable, setPreviewError, file, autoType],
+		[setTable, setMetadata, setPreviewError, file, autoType],
 	)
 
 	return {
 		table,
+        metadata,
 		previewError,
 		onLoadPreview,
 	}
