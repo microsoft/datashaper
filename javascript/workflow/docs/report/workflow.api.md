@@ -14,7 +14,7 @@ import type { ConvertArgs } from '@datashaper/schema';
 import { DataFormat } from '@datashaper/schema';
 import type { DataNature } from '@datashaper/schema';
 import type { DataOrientation } from '@datashaper/schema';
-import { DataPackageSchema } from '@datashaper/schema';
+import type { DataPackageSchema } from '@datashaper/schema';
 import type { DataShape as DataShape_2 } from '@datashaper/schema/dist/datatable/DataShape.js';
 import type { DataTableSchema } from '@datashaper/schema';
 import type { DeriveArgs } from '@datashaper/schema';
