@@ -5,9 +5,9 @@
 
 import type { CodebookSchema, Constraints } from '@datashaper/schema'
 import { ErrorCode } from '@datashaper/schema'
-import { fromCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import fs from 'fs'
+import { fromCSV } from '../fromCSV.js'
 
 import { generateCodebook } from '../generateCodebook.js'
 import { validateTable } from '../validateTable.js'
@@ -31,7 +31,7 @@ describe('validate table', () => {
 		encoding: 'utf8',
 		flag: 'r',
 	})
-	const companies = fromCSV(csv, { autoType: false })
+	const companies = fromCSV(csv)
 
 	const csv2 = fs.readFileSync(
 		'./src/__tests__/data/companies-missing-values.csv',
@@ -40,7 +40,7 @@ describe('validate table', () => {
 			flag: 'r',
 		},
 	)
-	const companies2 = fromCSV(csv2, { autoType: false })
+	const companies2 = fromCSV(csv2)
 
 	describe('required constraint', () => {
 		const codebook = createCodebook(companies2, { US: { required: true } })

@@ -22,6 +22,7 @@
 |  [format(value, options)](./tables.format.md) | Returns a nice formatted string for a number |
 |  [formatIfNumber(value)](./tables.formatifnumber.md) | Returns a formatted string for a number, otherwise returns the original value |
 |  [formatNumberStr(value, decimal, thousands)](./tables.formatnumberstr.md) |  |
+|  [fromCSV(text, options)](./tables.fromcsv.md) | Drop-in replacement for arquero fromCSV, using our internal parsing with auto-typing turned on. Meant for quick-and-dirty reads, with the advantage that our default parsing aligns with pandas. Use readTable for more control over schema options and formats. |
 |  [generateCodebook(table, options)](./tables.generatecodebook.md) |  |
 |  [getDate(value)](./tables.getdate.md) |  |
 |  [getters(table)](./tables.getters.md) | Returns a map of all of the column getters for a table. |
@@ -42,7 +43,6 @@
 |  [parseArray(options)](./tables.parsearray.md) |  |
 |  [parseAs(type, hints)](./tables.parseas.md) | Factory function to create a value parser based on defined data type and type hints |
 |  [parseBoolean(naValues, trueValues, falseValues)](./tables.parseboolean.md) |  |
-|  [parseCSV(csv, options)](./tables.parsecsv.md) |  |
 |  [parseDate(naValues, dateFormat)](./tables.parsedate.md) |  |
 |  [parseNumber(naValues, decimal, thousands)](./tables.parsenumber.md) |  |
 |  [parseObject(options)](./tables.parseobject.md) |  |
@@ -64,7 +64,6 @@
 
 |  Interface | Description |
 |  --- | --- |
-|  [ParseConfig](./tables.parseconfig.md) |  |
 |  [ReadTableOptions](./tables.readtableoptions.md) |  |
 |  [RowsOptions](./tables.rowsoptions.md) |  |
 |  [TableContainer](./tables.tablecontainer.md) |  |

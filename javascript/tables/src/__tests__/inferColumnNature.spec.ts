@@ -3,9 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { VariableNature } from '@datashaper/schema'
-import { fromCSV } from 'arquero'
 import fs from 'fs'
-
+import { fromCSV } from '../fromCSV.js'
 import { inferColumnNature } from '../inferColumnNature.js'
 
 describe('Infer column nature tests', () => {
@@ -15,7 +14,7 @@ describe('Infer column nature tests', () => {
 			flag: 'r',
 		})
 
-		const parsed = fromCSV(csv, { autoType: true })
+		const parsed = fromCSV(csv)
 
 		const nature = inferColumnNature(parsed, 'index')
 
@@ -30,7 +29,7 @@ describe('Infer column nature tests', () => {
 			flag: 'r',
 		})
 
-		const parsed = fromCSV(csv, { autoType: true })
+		const parsed = fromCSV(csv)
 
 		const nature = inferColumnNature(parsed, 'index', 11)
 
@@ -40,14 +39,14 @@ describe('Infer column nature tests', () => {
 	})
 
 	describe('nominal', () => {
-		const csv = fs.readFileSync('./src/__tests__/data/simple-example.csv', {
+		const csv = fs.readFileSync('./src/__tests__/data/stocks.csv', {
 			encoding: 'utf8',
 			flag: 'r',
 		})
 
-		const parsed = fromCSV(csv, { autoType: true })
+		const parsed = fromCSV(csv)
 
-		const nature = inferColumnNature(parsed, 'float')
+		const nature = inferColumnNature(parsed, 'Symbol')
 
 		it('should return true', () => {
 			expect(nature).toBe(VariableNature.Nominal)
@@ -60,10 +59,10 @@ describe('Infer column nature tests', () => {
 			flag: 'r',
 		})
 
-		const parsed = fromCSV(csv, { autoType: true })
+		const parsed = fromCSV(csv)
 
 		const nature = inferColumnNature(parsed, 'US')
-
+		
 		it('should return true', () => {
 			expect(nature).toBe(VariableNature.Binary)
 		})
@@ -75,7 +74,7 @@ describe('Infer column nature tests', () => {
 			flag: 'r',
 		})
 
-		const parsed = fromCSV(csv, { autoType: true })
+		const parsed = fromCSV(csv)
 
 		const nature = inferColumnNature(parsed, 'Close')
 

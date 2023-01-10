@@ -8,6 +8,7 @@ import { CodebookSchema } from '@datashaper/schema';
 import { CodebookStrategy } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { default as ColumnTable_2 } from 'arquero/dist/types/table/column-table.js';
+import type { CSVParseOptions } from 'arquero/dist/types/format/from-csv.js';
 import type { DataTableSchema } from '@datashaper/schema';
 import { DataType } from '@datashaper/schema';
 import type { Field } from '@datashaper/schema';
@@ -90,6 +91,11 @@ export function formatIfNumber(value: Value): string | Value;
 //
 // @public (undocumented)
 export function formatNumberStr(value: string | number, decimal?: string, thousands?: string): string;
+
+// Warning: (ae-missing-release-tag) "fromCSV" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function fromCSV(text: string, options?: CSVParseOptions): ColumnTable_2;
 
 // Warning: (ae-missing-release-tag) "generateCodebook" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -194,21 +200,6 @@ export function parseAs(type?: DataType, hints?: TypeHints): Value;
 //
 // @public (undocumented)
 export function parseBoolean(naValues?: string[], trueValues?: string[], falseValues?: string[]): (value: string) => boolean | null;
-
-// Warning: (ae-missing-release-tag) "ParseConfig" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ParseConfig {
-    // (undocumented)
-    codebook?: Partial<CodebookSchema>;
-    // (undocumented)
-    typeHints?: TypeHints;
-}
-
-// Warning: (ae-missing-release-tag) "parseCSV" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function parseCSV(csv: string, options?: ParseConfig): ColumnTable;
 
 // Warning: (ae-missing-release-tag) "parseDate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

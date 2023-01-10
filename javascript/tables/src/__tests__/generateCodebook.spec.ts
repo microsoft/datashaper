@@ -4,8 +4,8 @@
  */
 
 import { DataType } from '@datashaper/schema'
-import { fromCSV } from 'arquero'
 import fs from 'fs'
+import { fromCSV } from '../fromCSV.js'
 
 import { generateCodebook } from '../generateCodebook.js'
 
