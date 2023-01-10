@@ -77,7 +77,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			defaultSortDirection,
 		)
 
-		const _fields = useFields(table, fields)
+		const fieldsInternal = useFields(table, fields)
 
 		// first subset the table using the visible columns
 		// this will prevent any further operations on columns we aren't going to show
@@ -103,7 +103,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 
 		const displayColumns = useColumns(
 			table,
-			_fields,
+			fieldsInternal,
 			metadata,
 			columns,
 			onColumnSelect,
@@ -147,7 +147,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		)
 		const groupProps = useGroupProps(
 			table,
-			_fields,
+			fieldsInternal,
 			onRenderGroupHeader,
 			features,
 		)
