@@ -11,8 +11,8 @@ export const pretty: Record<string, string> = {
 
 export const DEFAULT_STATS: StatsColumnType[] = [
 	StatsColumnType.Type,
-	StatsColumnType.Min,
-	StatsColumnType.Max,
 	StatsColumnType.Distinct,
 	StatsColumnType.Invalid,
+	StatsColumnType.Min,
+	StatsColumnType.Max,
 ]

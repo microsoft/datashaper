@@ -2,7 +2,9 @@
 	"tables": [
 		{
 			"name": "covid19_small_data",
-			"workflowLength": 52
+			"workflowLength": 52,
+			"columnCount": 7,
+			"rowCount": 1418
 		}
 	]
 }

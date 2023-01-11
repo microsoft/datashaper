@@ -163,28 +163,6 @@
 			"nature": "ordinal"
 		},
 		{
-			"name": "education",
-			"title": "Education",
-			"description": "AMOUNT OF EDUCATION BY 1971: 1: 8TH GRADE OR LESS, 2: HS DROPOUT, 3: HS, 4:COLLEGE DROPOUT, 5: COLLEGE OR MORE",
-			"type": "number",
-			"metadata": {
-				"count": 1629,
-				"mode": 3,
-				"minimum": 1,
-				"maximum": 5,
-				"mean": 2.70349907918969,
-				"magnitude": 5
-			},
-			"nature": "ordinal",
-			"mapping": {
-				"1": "8th grade or less",
-				"2": "Highschool dropout",
-				"3": "Highschool",
-				"4": "College Dropout",
-				"5": "College or more"
-			}
-		},
-		{
 			"name": "ht",
 			"title": "Height (cm)",
 			"description": "HEIGHT IN CENTIMETERS IN 1971",

@@ -2,7 +2,9 @@
 	"tables": [
 		{
 			"name": "nhefs",
-			"workflowLength": 10
+			"workflowLength": 10,
+			"columnCount": 19,
+			"rowCount": 1629
 		}
 	]
 }
