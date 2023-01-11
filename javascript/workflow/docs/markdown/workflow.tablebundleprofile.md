@@ -7,9 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class TableBundleProfile implements ProfileHandler 
+export declare class TableBundleProfile implements ProfileHandler<TableBundle, TableBundleSchema> 
 ```
-<b>Implements:</b> [ProfileHandler](./workflow.profilehandler.md)
+<b>Implements:</b> [ProfileHandler](./workflow.profilehandler.md)<!-- -->&lt;[TableBundle](./workflow.tablebundle.md)<!-- -->, TableBundleSchema&gt;
 
 ## Properties
 

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Resource } from '@datashaper/workflow'
+import type { ProfileHandler, Resource } from '@datashaper/workflow'
 import { useBoolean, useConst } from '@fluentui/react-hooks'
 import { useDebounceFn } from 'ahooks'
 import type { AllotmentHandle } from 'allotment'
@@ -26,7 +26,7 @@ import {
 	PANE_COLLAPSED_SIZE,
 } from './DataShaperApp.styles.js'
 
-export function useKnownProfilePlugins(): ProfilePlugin[] {
+function useKnownProfilePlugins(): ProfilePlugin[] {
 	return useConst(() => {
 		const datatablePlugin = new DataTableProfile()
 		const codebookPlugin = new CodebookProfile()
@@ -37,7 +37,12 @@ export function useKnownProfilePlugins(): ProfilePlugin[] {
 			workflowPlugin,
 		)
 
-		return [datatablePlugin, codebookPlugin, tableBundlePlugin, workflowPlugin]
+		return [
+			datatablePlugin,
+			codebookPlugin,
+			tableBundlePlugin,
+			workflowPlugin,
+		] as ProfilePlugin<any, any>[]
 	})
 }
 
@@ -109,16 +114,9 @@ export function useRegisteredProfiles(
 		]
 		const result = new Map<string, ProfilePlugin>()
 		for (const p of allPlugins) {
-			p.initialize?.(api, dp)
+			p.initialize?.({ api, dataPackage: dp })
 			result.set(p.profile, p)
-			// add data-handlers to the workflow package
-			if (p.dataHandler) {
-				dp.addResourceHandler(p.dataHandler)
-			} else if (p.dataHandler !== null) {
-				// TODO: re-handle custom JSON
-				// We use null to signal that not handler should be auto-defined
-				// dp.addResourceHandler(new JsonDataHandler(p.profile, p.createResource))
-			}
+			dp.addResourceHandler(p as ProfileHandler<Resource>)
 		}
 		return result
 	}, [dp, api, profiles, knownProfiles])

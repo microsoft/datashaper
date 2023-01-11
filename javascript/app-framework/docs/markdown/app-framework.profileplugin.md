@@ -7,22 +7,19 @@
 <b>Signature:</b>
 
 ```typescript
-export interface ProfilePlugin<T extends Resource = any> 
+export interface ProfilePlugin<Res extends Resource = Resource, Schema extends ResourceSchema = ResourceSchema> extends ProfileHandler<Res, Schema, AppProfileInitializationContext> 
 ```
+<b>Extends:</b> ProfileHandler&lt;Res, Schema, [AppProfileInitializationContext](./app-framework.appprofileinitializationcontext.md)<!-- -->&gt;
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [createResource](./app-framework.profileplugin.createresource.md) |  | () =&gt; T | Creates a new resource of this type |
-|  [dataHandler?](./app-framework.profileplugin.datahandler.md) |  | ProfileHandler \| null | <i>(Optional)</i> The persistence handler to use for this profile null: no persistence |
 |  [getCommandBarCommands?](./app-framework.profileplugin.getcommandbarcommands.md) |  | (section: [CommandBarSection](./app-framework.commandbarsection.md)<!-- -->) =&gt; IContextualMenuItem\[\] \| undefined | <i>(Optional)</i> Gets commands for the plugin |
-|  [getMenuItems?](./app-framework.profileplugin.getmenuitems.md) |  | (resource: T) =&gt; IContextualMenuItem\[\] | <i>(Optional)</i> Create contextual menu items for a resource |
-|  [getRoutes?](./app-framework.profileplugin.getroutes.md) |  | (resource: T, routes: Map&lt;string, string&gt;) =&gt; [GeneratedExtraRoutes](./app-framework.generatedextraroutes.md) \| undefined | <i>(Optional)</i> Event handler for when the resource is undergoing route generation. A route is always generated for the resource; any related routes may be retured here. |
+|  [getMenuItems?](./app-framework.profileplugin.getmenuitems.md) |  | (resource: Res) =&gt; IContextualMenuItem\[\] | <i>(Optional)</i> Create contextual menu items for a resource |
+|  [getRoutes?](./app-framework.profileplugin.getroutes.md) |  | (resource: Res, routes: Map&lt;string, string&gt;) =&gt; [GeneratedExtraRoutes](./app-framework.generatedextraroutes.md) \| undefined | <i>(Optional)</i> Event handler for when the resource is undergoing route generation. A route is always generated for the resource; any related routes may be retured here. |
 |  [group?](./app-framework.profileplugin.group.md) |  | [ResourceGroupType](./app-framework.resourcegrouptype.md) | <i>(Optional)</i> The grouping for this resource type. The default is 'app'. This grouping determines what resources this is rendered with in the tree-view. |
 |  [iconName](./app-framework.profileplugin.iconname.md) |  | string | The icon name to use in the file-tree |
-|  [initialize?](./app-framework.profileplugin.initialize.md) |  | (api: [AppServices](./app-framework.appservices.md)<!-- -->, dp: DataPackage) =&gt; void | <i>(Optional)</i> Initialize the plugin with application-level services |
-|  [profile](./app-framework.profileplugin.profile.md) |  | string | The profile name to register within the app framework. This is used to identify the plugin and should be unique. |
-|  [renderer](./app-framework.profileplugin.renderer.md) |  | React.ComponentType&lt;{ href: string; resource: T; }&gt; | Render the plugin |
+|  [renderer](./app-framework.profileplugin.renderer.md) |  | React.ComponentType&lt;{ href: string; resource: Res; }&gt; | Render the plugin |
 |  [title](./app-framework.profileplugin.title.md) |  | string | A friendly title for the profile, used for resource creation. (e.g. "New <title>") |
 

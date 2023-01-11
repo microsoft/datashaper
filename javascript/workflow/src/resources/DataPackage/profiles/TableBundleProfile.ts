@@ -5,14 +5,19 @@
 import type { Profile, TableBundleSchema } from '@datashaper/schema'
 import { KnownProfile } from '@datashaper/schema'
 
-import type { Resource } from '../../Resource.js'
 import { TableBundle } from '../../TableBundle.js'
 import type { ProfileHandler } from '../../types.js'
 
-export class TableBundleProfile implements ProfileHandler {
+export class TableBundleProfile
+	implements ProfileHandler<TableBundle, TableBundleSchema>
+{
 	public readonly profile: Profile = KnownProfile.TableBundle
 
-	public createInstance(schema?: TableBundleSchema): Promise<Resource> {
-		return Promise.resolve(new TableBundle(schema))
+	public createInstance(schema?: TableBundleSchema): Promise<TableBundle> {
+		const result = new TableBundle(schema)
+		if (schema?.name == null) {
+			result.name = 'Table Bundle'
+		}
+		return Promise.resolve(result)
 	}
 }

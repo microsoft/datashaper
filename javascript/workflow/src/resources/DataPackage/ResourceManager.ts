@@ -257,6 +257,7 @@ export class ResourceManager {
 	 * @param handler - The profile handler to register
 	 */
 	public registerProfile(handler: ProfileHandler): void {
+		console.log('register profile', handler.profile)
 		if (this._profileHandlers.has(handler.profile)) {
 			console.warn(
 				`A resource handler for profile '${handler.profile}' is already registered. Overriding existing entry.`,

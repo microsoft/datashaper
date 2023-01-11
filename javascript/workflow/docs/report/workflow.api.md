@@ -166,6 +166,16 @@ export class Codebook extends Resource implements TableTransformer {
     toSchema(): CodebookSchema;
 }
 
+// Warning: (ae-missing-release-tag) "CodebookProfile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class CodebookProfile implements ProfileHandler<Codebook, CodebookSchema> {
+    // (undocumented)
+    createInstance(schema: CodebookSchema | undefined): Promise<Codebook>;
+    // (undocumented)
+    readonly profile: Profile;
+}
+
 // Warning: (ae-missing-release-tag) "columnTransformVerbs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -306,6 +316,20 @@ export class DataTable extends Resource implements TableEmitter {
     readonly shape: DataShape;
     // (undocumented)
     toSchema(): DataTableSchema;
+}
+
+// Warning: (ae-missing-release-tag) "DataTableProfile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class DataTableProfile implements ProfileHandler {
+    // (undocumented)
+    createInstance(schema: DataTableSchema | undefined): Promise<DataTable>;
+    // (undocumented)
+    initialize({ dataPackage }: ProfileInitializationContext): void;
+    // (undocumented)
+    readonly profile: Profile;
+    // (undocumented)
+    save(data: Resource, dataPath: string, files: Map<string, Blob>): Promise<string[]>;
 }
 
 // Warning: (ae-missing-release-tag) "decode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -749,10 +773,19 @@ export const pivot: (id: string) => StepNode<TableContainer<unknown>, PivotArgs>
 // Warning: (ae-missing-release-tag) "ProfileHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface ProfileHandler {
-    createInstance(schema: ResourceSchema | undefined, manager: ResourceManager): Promise<Resource>;
+export interface ProfileHandler<Res extends Resource = Resource, Schema extends ResourceSchema = ResourceSchema, InitializationContext extends ProfileInitializationContext = ProfileInitializationContext> {
+    createInstance(schema?: Schema | undefined): Promise<Res>;
+    initialize?: (ctx: InitializationContext) => void;
     profile: Profile;
-    save?: (data: Resource, path: string, files: Map<string, Blob>) => Promise<string[]>;
+    save?: (data: Res, path: string, files: Map<string, Blob>) => Promise<string[]>;
+}
+
+// Warning: (ae-missing-release-tag) "ProfileInitializationContext" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ProfileInitializationContext {
+    // (undocumented)
+    dataPackage: DataPackage;
 }
 
 // Warning: (ae-missing-release-tag) "Readable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -945,9 +978,9 @@ export class TableBundle extends Resource implements TableEmitter {
 // Warning: (ae-missing-release-tag) "TableBundleProfile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export class TableBundleProfile implements ProfileHandler {
+export class TableBundleProfile implements ProfileHandler<TableBundle, TableBundleSchema> {
     // (undocumented)
-    createInstance(schema?: TableBundleSchema): Promise<Resource>;
+    createInstance(schema?: TableBundleSchema): Promise<TableBundle>;
     // (undocumented)
     readonly profile: Profile;
 }
@@ -1113,6 +1146,16 @@ export class Workflow extends Resource implements TableTransformer {
     updateStep(stepInput: StepInput, index: number): Step;
     // (undocumented)
     static validate(workflowJson: WorkflowSchema): Promise<boolean>;
+}
+
+// Warning: (ae-missing-release-tag) "WorkflowProfile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class WorkflowProfile implements ProfileHandler<Workflow, WorkflowSchema> {
+    // (undocumented)
+    createInstance(schema: WorkflowSchema | undefined): Promise<Workflow>;
+    // (undocumented)
+    readonly profile: Profile;
 }
 
 // (No @packageDocumentation comment for this package)

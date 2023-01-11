@@ -2,23 +2,30 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { TableBundleSchema } from '@datashaper/schema'
 import { KnownProfile, KnownRel } from '@datashaper/schema'
+import type { TableBundle } from '@datashaper/workflow'
 import {
 	type Codebook,
 	type DataPackage,
 	type DataTable,
 	type Workflow,
 	ResourceReference,
-	TableBundle,
+	TableBundleProfile as TableBundleDataProfileBase,
 } from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
 
 import { TableBundleEditor } from '../components/editors/index.js'
-import type { AppServices, ProfilePlugin } from '../types.js'
+import type {
+	AppProfileInitializationContext,
+	ProfilePlugin,
+} from '../types.js'
 import { CommandBarSection, ResourceGroupType } from '../types.js'
 
-export class TableBundleProfile implements ProfilePlugin<TableBundle> {
-	public readonly profile = KnownProfile.TableBundle
+export class TableBundleProfile
+	extends TableBundleDataProfileBase
+	implements ProfilePlugin<TableBundle, TableBundleSchema>
+{
 	public readonly title = 'Table'
 	public readonly renderer = TableBundleEditor
 	public readonly iconName = 'ViewAll'
@@ -30,16 +37,14 @@ export class TableBundleProfile implements ProfilePlugin<TableBundle> {
 		private readonly datatablePlugin: ProfilePlugin<DataTable>,
 		private readonly codebookPlugin: ProfilePlugin<Codebook>,
 		private readonly workflowPlugin: ProfilePlugin<Workflow>,
-	) {}
-
-	public initialize(_api: AppServices, dp: DataPackage): void {
-		this._dataPackage = dp
+	) {
+		super()
 	}
 
-	public createResource(): TableBundle {
-		const result = new TableBundle()
-		result.name = 'Data table'
-		return result
+	public initialize({
+		dataPackage: dp,
+	}: AppProfileInitializationContext): void {
+		this._dataPackage = dp
 	}
 
 	public getCommandBarCommands(
@@ -54,10 +59,8 @@ export class TableBundleProfile implements ProfilePlugin<TableBundle> {
 				{
 					key: this.profile,
 					text: `New ${this.title}`,
-					onClick: () => {
-						const resource = this.createResource?.()
-						dp.addResource(resource)
-					},
+					onClick: () =>
+						void this.createInstance().then(res => dp.addResource(res)),
 				},
 			]
 		}
@@ -74,16 +77,17 @@ export class TableBundleProfile implements ProfilePlugin<TableBundle> {
 				text: 'New Derived Table',
 				iconProps: { iconName: this.iconName },
 				onClick: () => {
-					const derived = this.createResource()
-					derived.title = resource.title
+					void this.createInstance().then(derived => {
+						derived.title = resource.title
 
-					// Create a reference to the source resource
-					const reference = new ResourceReference()
-					reference.target = resource
-					reference.rel = KnownRel.Input
+						// Create a reference to the source resource
+						const reference = new ResourceReference()
+						reference.target = resource
+						reference.rel = KnownRel.Input
 
-					derived.sources = [reference]
-					dp.addResource(derived)
+						derived.sources = [reference]
+						dp.addResource(derived)
+					})
 				},
 			},
 		]
@@ -93,10 +97,9 @@ export class TableBundleProfile implements ProfilePlugin<TableBundle> {
 				text: 'Add Datatable',
 				iconProps: { iconName: this.datatablePlugin.iconName },
 				onClick: () => {
-					resource.sources = [
-						this.datatablePlugin.createResource?.(),
-						...resource.sources,
-					]
+					this.datatablePlugin.createInstance?.().then(instance => {
+						resource.sources = [instance, ...resource.sources]
+					})
 				},
 			})
 		}
@@ -106,10 +109,9 @@ export class TableBundleProfile implements ProfilePlugin<TableBundle> {
 				text: 'Add Workflow',
 				iconProps: { iconName: this.workflowPlugin.iconName },
 				onClick: () => {
-					resource.sources = [
-						...resource.sources,
-						this.workflowPlugin.createResource?.(),
-					]
+					this.workflowPlugin.createInstance?.().then(instance => {
+						resource.sources = [...resource.sources, instance]
+					})
 				},
 			})
 		}
@@ -119,8 +121,9 @@ export class TableBundleProfile implements ProfilePlugin<TableBundle> {
 				text: 'Add Codebook',
 				iconProps: { iconName: this.codebookPlugin.iconName },
 				onClick: () => {
-					const codebook = this.codebookPlugin.createResource?.()
-					resource.sources = [...resource.sources, codebook]
+					this.codebookPlugin.createInstance?.().then(codebook => {
+						resource.sources = [...resource.sources, codebook]
+					})
 				},
 			})
 		}

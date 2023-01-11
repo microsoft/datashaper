@@ -9,5 +9,5 @@ Event handler for when the resource is undergoing route generation. A route is a
 <b>Signature:</b>
 
 ```typescript
-getRoutes?: (resource: T, routes: Map<string, string>) => GeneratedExtraRoutes | undefined;
+getRoutes?: (resource: Res, routes: Map<string, string>) => GeneratedExtraRoutes | undefined;
 ```

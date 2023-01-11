@@ -2,24 +2,22 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { KnownProfile } from '@datashaper/schema'
-import { DataTable } from '@datashaper/workflow'
+import type { DataTable } from '@datashaper/workflow'
+import { DataTableProfile as DataTableProfileBase } from '@datashaper/workflow'
 
 import { DataTableEditor, RawTableViewer } from '../components/editors/index.js'
 import type { GeneratedExtraRoutes, ProfilePlugin } from '../types.js'
 import { ResourceGroupType } from '../types.js'
 
-export class DataTableProfile implements ProfilePlugin<DataTable> {
-	public readonly profile = KnownProfile.DataTable
+export class DataTableProfile
+	extends DataTableProfileBase
+	implements ProfilePlugin<DataTable>
+{
 	public readonly title = 'Datatable'
 	public readonly renderer = DataTableEditor
 	public readonly iconName = 'PageData'
 	public readonly group = ResourceGroupType.Data
 	public readonly dataHandler = null
-
-	public createResource(): DataTable {
-		return new DataTable()
-	}
 
 	public getRoutes(
 		resource: DataTable,

@@ -18,9 +18,20 @@ import type { MutableSnapshot } from 'recoil';
 import type { ProfileHandler } from '@datashaper/workflow';
 import type { default as React_2 } from 'react';
 import type { Resource } from '@datashaper/workflow';
+import type { ResourceSchema } from '@datashaper/schema';
 import type { Snapshot } from 'recoil';
 import type { TableBundle } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
+
+// Warning: (ae-missing-release-tag) "AppProfileInitializationContext" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface AppProfileInitializationContext {
+    // (undocumented)
+    api: AppServices;
+    // (undocumented)
+    dataPackage: DataPackage;
+}
 
 // Warning: (ae-missing-release-tag) "AppServices" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -73,19 +84,15 @@ export interface GeneratedExtraRoutes {
 // Warning: (ae-missing-release-tag) "ProfilePlugin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ProfilePlugin<T extends Resource = any> {
-    createResource: () => T;
-    dataHandler?: ProfileHandler | null;
+export interface ProfilePlugin<Res extends Resource = Resource, Schema extends ResourceSchema = ResourceSchema> extends ProfileHandler<Res, Schema, AppProfileInitializationContext> {
     getCommandBarCommands?: (section: CommandBarSection) => IContextualMenuItem[] | undefined;
-    getMenuItems?: (resource: T) => IContextualMenuItem[];
-    getRoutes?: (resource: T, routes: Map<string, string>) => GeneratedExtraRoutes | undefined;
+    getMenuItems?: (resource: Res) => IContextualMenuItem[];
+    getRoutes?: (resource: Res, routes: Map<string, string>) => GeneratedExtraRoutes | undefined;
     group?: ResourceGroupType;
     iconName: string;
-    initialize?: (api: AppServices, dp: DataPackage) => void;
-    profile: string;
     renderer: React.ComponentType<{
         href: string;
-        resource: T;
+        resource: Res;
     }>;
     title: string;
 }
