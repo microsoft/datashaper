@@ -29,7 +29,7 @@
 |  [guessDataType(options)](./tables.guessdatatype.md) | Factory function to provide a type guessing function for any string value. This uses optional type hints to account for string values such as boolean and null formats. |
 |  [guessDelimiter(text, config)](./tables.guessdelimiter.md) |  |
 |  [introspect(table, detailed, columns)](./tables.introspect.md) | Performs type inference and stats on a table/columns. |
-|  [isArray(value)](./tables.isarray.md) |  |
+|  [isArray(delimiter)](./tables.isarray.md) | Detect if a string is an array by looking for the delimiter. It's expected that in a CSV any array cells will be quoted. Also note that if the default delimiter, comma, is used, these may be detected as valid numbers if checked first. |
 |  [isBoolean(falseValues, trueValues)](./tables.isboolean.md) |  |
 |  [isDate(value)](./tables.isdate.md) |  |
 |  [isNull(naValues)](./tables.isnull.md) |  |
@@ -40,7 +40,7 @@
 |  [maxLengthValidator(field, includeIndexes)](./tables.maxlengthvalidator.md) | Constructs a function that validates a column against the <code>maxLength</code> constraint. |
 |  [minimumValidator(field, includeIndexes)](./tables.minimumvalidator.md) | Constructs a function that validates a column against the <code>minimum</code> constraint. |
 |  [minLengthValidator(field, includeIndexes)](./tables.minlengthvalidator.md) | Constructs a function that validates a column against the <code>minLength</code> constraint. |
-|  [parseArray(options)](./tables.parsearray.md) |  |
+|  [parseArray(options, delimiter)](./tables.parsearray.md) |  |
 |  [parseAs(type, hints)](./tables.parseas.md) | Factory function to create a value parser based on defined data type and type hints |
 |  [parseBoolean(naValues, trueValues, falseValues)](./tables.parseboolean.md) |  |
 |  [parseDate(naValues)](./tables.parsedate.md) |  |

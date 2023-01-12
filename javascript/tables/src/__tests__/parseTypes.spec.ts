@@ -98,7 +98,7 @@ describe('parser tests', () => {
 
 	describe('parse array', () => {
 		it('should parse an array', () => {
-			const arr = '[1,2,3]'
+			const arr = '1,2,3'
 			expect(parseArray()(arr)).toEqual([1, 2, 3])
 		})
 		it('should return null', () => {

@@ -101,6 +101,7 @@ export function parseString(
 
 export function parseArray(
 	options?: TypeHints,
+	delimiter: string = ',',
 ): (value: string) => any[] | null {
 	const { isNull } = typeGuesserFactory(options)
 	const subTypeChecker = guessDataType(options)
@@ -108,7 +109,7 @@ export function parseArray(
 		if (isNull(value)) {
 			return null
 		}
-		const array = JSON.parse(value) as any[]
+		const array = value.split(delimiter) as any[]
 		try {
 			const parsed = array.map(i => {
 				const item = `${i}`

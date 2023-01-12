@@ -70,13 +70,14 @@ describe('Validators tests', () => {
 	describe('isArray', () => {
 		const { isArray } = typeGuesserFactory()
 		it('should return true', () => {
-			expect(isArray('[1, 2, 3]')).toBe(true)
-			expect(isArray('["a", "b", "c"]')).toBe(true)
-			expect(isArray('[true, false, true]')).toBe(true)
-			expect(isArray('["null", "NaN", 1]')).toBe(true)
+			expect(isArray('1, 2, 3')).toBe(true)
+			expect(isArray('"a", "b", "c"')).toBe(true)
+			expect(isArray('true, false, true')).toBe(true)
+			expect(isArray('"null", "NaN", 1')).toBe(true)
+			// we should always check for object type first, because the array check is just looking for the delimiter
+			expect(isArray('{"a": 1, "b": 2}')).toBe(true)
 		})
 		it('should return false', () => {
-			expect(isArray('{"a": 1, "b": 2}')).toBe(false)
 			expect(isArray('2022-02-14')).toBe(false)
 			expect(isArray('NaN')).toBe(false)
 			expect(isArray('null')).toBe(false)

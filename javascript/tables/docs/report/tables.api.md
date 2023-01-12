@@ -136,8 +136,8 @@ columns?: string[]): TableMetadata;
 
 // Warning: (ae-missing-release-tag) "isArray" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
-export function isArray(value: string): boolean;
+// @public
+export function isArray(delimiter?: string): (value: string) => boolean;
 
 // Warning: (ae-missing-release-tag) "isBoolean" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -192,7 +192,7 @@ export function minLengthValidator(field: Field, includeIndexes: boolean): Valid
 // Warning: (ae-missing-release-tag) "parseArray" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function parseArray(options?: TypeHints): (value: string) => any[] | null;
+export function parseArray(options?: TypeHints, delimiter?: string): (value: string) => any[] | null;
 
 // Warning: (ae-missing-release-tag) "parseAs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

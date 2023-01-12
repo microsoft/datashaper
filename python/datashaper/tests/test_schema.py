@@ -26,7 +26,7 @@ thread.start()
 
 
 def read_csv(path: str) -> pd.DataFrame:
-    df = pd.read_csv(path, na_values=["undefined"])
+    df = pd.read_csv(path)
 
     if "date" in df.columns:
         df["date"] = pd.to_datetime(df["date"], errors="coerce")
