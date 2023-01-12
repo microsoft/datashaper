@@ -1,4 +1,5 @@
 releases:
+  "@datashaper/schema": patch
   "@datashaper/tables": minor
   "@datashaper/workflow": patch
 
