@@ -230,7 +230,7 @@ export class LoadResourcesOperation {
 		}
 		const handler = this.mgr.profileHandlers.get(schema.profile)
 		if (handler != null) {
-			result = await handler.createInstance(schema, this.mgr)
+			result = await handler.createInstance(schema)
 		}
 		if (result == null) {
 			throw new Error(

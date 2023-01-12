@@ -18,7 +18,9 @@ import { ErrorBoundary } from './ErrorBoundary.js'
 import { StyleContext } from './StyleContext.js'
 
 export const App: React.FC = memo(function App() {
-	const customProfiles = useConst<ProfilePlugin[]>(() => [new TestAppProfile()])
+	const customProfiles = useConst<ProfilePlugin[]>(
+		() => [new TestAppProfile()] as ProfilePlugin<any, any>[],
+	)
 	return (
 		<ErrorBoundary>
 			<RecoilRoot>

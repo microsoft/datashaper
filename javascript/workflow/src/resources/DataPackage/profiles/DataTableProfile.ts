@@ -8,24 +8,41 @@ import { KnownProfile } from '@datashaper/schema'
 import { fetchFile } from '../../../util/network.js'
 import { DataTable } from '../../DataTable.js'
 import type { Resource } from '../../Resource.js'
-import type { ProfileHandler } from '../../types.js'
+import type {
+	ProfileHandler,
+	ProfileInitializationContext,
+} from '../../types.js'
+import type { DataPackage } from '../DataPackage.js'
 import type { ResourceManager } from '../ResourceManager.js'
 
 export class DataTableProfile implements ProfileHandler {
 	public readonly profile: Profile = KnownProfile.DataTable
+	private _dataPackage: DataPackage | undefined
+
+	public initialize({ dataPackage }: ProfileInitializationContext): void {
+		this._dataPackage = dataPackage
+	}
+
+	private get resourceManager(): ResourceManager {
+		if (this._dataPackage == null) {
+			throw new Error('not initialized')
+		}
+		return this._dataPackage.resourceManager
+	}
 
 	public async createInstance(
 		schema: DataTableSchema | undefined,
-		manager: ResourceManager,
-	): Promise<Resource> {
+	): Promise<DataTable> {
 		const resource = new DataTable(schema)
 		if (resource.path != null) {
 			if (Array.isArray(resource.path)) {
 				throw new Error('not implemented - multipart data')
+			} else if (typeof schema?.data === 'string') {
+				resource.data = new Blob([schema.data])
 			} else {
 				const data = resource.path.startsWith('http')
 					? await fetchFile(resource.path)
-					: manager.readFile(resource.path)
+					: this.resourceManager.readFile(resource.path)
 				resource.data = data
 			}
 		}

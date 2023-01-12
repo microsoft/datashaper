@@ -124,7 +124,7 @@ export class TableBundle extends Resource implements TableEmitter {
 	private computeMeta = (
 		table: Maybe<TableContainer>,
 	): Maybe<TableContainer> => {
-		if (!table || !table.table) {
+		if (!table?.table) {
 			return table
 		}
 		return { ...table, metadata: introspect(table.table, true) }

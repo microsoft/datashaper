@@ -8,7 +8,7 @@ import type { TableContainer } from '@datashaper/tables'
 import type { Observable } from 'rxjs'
 
 import type { Maybe } from '../primitives.js'
-import type { ResourceManager } from './DataPackage/ResourceManager.js'
+import type { DataPackage } from './DataPackage/DataPackage.js'
 import type { Resource } from './Resource.js'
 
 export type Readable<T extends ResourceSchema> = {
@@ -26,24 +26,35 @@ export interface ResourceConstructor<
 	new (schema?: Sch | undefined): Res
 }
 
+export interface ProfileInitializationContext {
+	dataPackage: DataPackage
+}
+
 /**
  * A custom profile handler
  */
-export interface ProfileHandler {
+export interface ProfileHandler<
+	Res extends Resource = Resource,
+	Schema extends ResourceSchema = ResourceSchema,
+	InitializationContext extends ProfileInitializationContext = ProfileInitializationContext,
+> {
 	/**
 	 * The profile name of the resource
 	 */
 	profile: Profile
 
 	/**
+	 * Initialize the profile handler
+	 * @param dp - The data package being initialized
+	 */
+	initialize?: (ctx: InitializationContext) => void
+
+	/**
 	 * Creates a new instance of a schema resource
 	 * @param schema - The schema instance to create
 	 * @param manager - The resource manager
 	 */
-	createInstance(
-		schema: ResourceSchema | undefined,
-		manager: ResourceManager,
-	): Promise<Resource>
+	createInstance(schema?: Schema | undefined): Promise<Res>
 
 	/**
 	 * Save custom resources into the files map.
@@ -53,7 +64,7 @@ export interface ProfileHandler {
 	 * @returns the list of top-level resources to write into datapackage.json::resources
 	 */
 	save?: (
-		data: Resource,
+		data: Res,
 		path: string,
 		files: Map<string, Blob>,
 	) => Promise<string[]>
@@ -63,7 +74,7 @@ export interface ProfileHandler {
 	//  * @param data - a data resource being loaded
 	//  * @param files - the data files in the package
 	//  */
-	// load?: (data: ResourceSchema, files: Map<string, Blob>) => Promise<Resource[]>
+	// load?: (data: Schema, files: Map<string, Blob>) => Promise<Res[]>
 }
 
 /**

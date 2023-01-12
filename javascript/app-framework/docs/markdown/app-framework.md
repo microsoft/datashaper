@@ -29,6 +29,7 @@
 
 |  Interface | Description |
 |  --- | --- |
+|  [AppProfileInitializationContext](./app-framework.appprofileinitializationcontext.md) |  |
 |  [AppServices](./app-framework.appservices.md) |  |
 |  [DataShaperAppProps](./app-framework.datashaperappprops.md) |  |
 |  [GeneratedExtraRoutes](./app-framework.generatedextraroutes.md) |  |
