@@ -46,11 +46,17 @@ describe('Validators tests', () => {
 			expect(isNumber('5000')).toBe(true)
 			expect(isNumber('-98575')).toBe(true)
 			expect(isNumber('-0.333648')).toBe(true)
-			expect(isNumber('1,550,878.05')).toBe(true)
-			isNumber = typeGuesserFactory({ decimal: ',', thousands: '.' }).isNumber
-			expect(isNumber('1.550.878,05')).toBe(true)
+			const isNumber1 = typeGuesserFactory({ thousands: ',' }).isNumber
+			expect(isNumber1('1,550,878.05')).toBe(true)
+			const isNumber2 = typeGuesserFactory({
+				decimal: ',',
+				thousands: '.',
+			}).isNumber
+			expect(isNumber2('1.550.878,05')).toBe(true)
 		})
 		it('should return false', () => {
+			// thousands were not specified, so this should be false
+			expect(isNumber('1,550,878.05')).toBe(false)
 			expect(isNumber('{"a": 1, "b": 2}')).toBe(false)
 			expect(isNumber('["a", "b", "c"]')).toBe(false)
 			expect(isNumber('2022-02-14')).toBe(false)

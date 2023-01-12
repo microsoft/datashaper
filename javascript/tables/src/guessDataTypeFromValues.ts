@@ -11,7 +11,6 @@ export function guessDataTypeFromValues(
 	limit = Infinity,
 ): DataType {
 	const guesser = guessDataType()
-
 	const mapTypes = new Map()
 
 	for (let i = 0; i < limit && i < values.length; i++) {

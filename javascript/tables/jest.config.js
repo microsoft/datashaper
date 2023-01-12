@@ -4,4 +4,7 @@
  */
 import { configure } from '@essex/jest-config'
 const config = configure({})
-export default config
+export default {
+	...config,
+	testMatch: ['**/*.spec.ts'],
+}

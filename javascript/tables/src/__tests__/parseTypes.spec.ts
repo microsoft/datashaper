@@ -37,7 +37,7 @@ describe('parser tests', () => {
 			expect(parseNumber()('1.1')).toBe(1.1)
 		})
 		it('should parse an int with custom thousand divider', () => {
-			expect(parseNumber(undefined, undefined, '/')('-1/234/5678')).toBe(
+			expect(parseNumber(undefined, undefined, '/')('-12/345/678')).toBe(
 				-12345678,
 			)
 		})

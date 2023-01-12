@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { TypeHints} from '@datashaper/schema';
-import { DataType,TypeHintsDefaults  } from '@datashaper/schema'
+import type { TypeHints } from '@datashaper/schema'
+import { DataType, TypeHintsDefaults } from '@datashaper/schema'
 import isArrayLd from 'lodash-es/isArray.js'
 import isFinite from 'lodash-es/isFinite.js'
 import isPlainObject from 'lodash-es/isPlainObject.js'
@@ -94,8 +94,8 @@ export function isNumber(
 	return function (value: string) {
 		if (value === null) return false
 
-		const n = formatNumberStr(value, decimal, thousands)
-		return isFinite(toNumber(n))
+		const n = formatNumberStr(value, { decimal, thousands })
+		return n === '' ? false : isFinite(toNumber(n))
 	}
 }
 

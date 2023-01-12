@@ -54,7 +54,10 @@ export function parseNumber(
 		if (typeof value === 'number') {
 			return value as number
 		}
-		return toNumber(formatNumberStr(value, decimal, thousands))
+
+		const formatted = formatNumberStr(value, { decimal, thousands })
+		const num = toNumber(formatted)
+		return num
 	}
 }
 
