@@ -7,12 +7,10 @@ from typing import Callable, Dict
 
 import numpy as np
 import pandas as pd
-
-from pandas.api.types import is_numeric_dtype
-
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.table_store import TableContainer
 from datashaper.types import MathOperator
+from pandas.api.types import is_numeric_dtype
 
 
 def __multiply(col1: pd.Series, col2: pd.Series):
@@ -44,5 +42,5 @@ def derive(input: VerbInput, to: str, column1: str, column2: str, operator: str)
     try:
         output[to] = __op_mapping[math_operator](output[column1], output[column2])
     except Exception:
-        output[to] = np.nan
+        output[to] = np.null
     return TableContainer(table=output)

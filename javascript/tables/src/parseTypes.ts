@@ -32,7 +32,7 @@ export function parseAs(type?: DataType, hints?: TypeHints): Value {
 		case DataType.Object:
 			return parseObject(hints)
 		case DataType.Date:
-			return parseDate(hints?.naValues, hints?.dateFormat)
+			return parseDate(hints?.naValues)
 		case DataType.Undefined:
 			return parseUndefined(hints?.naValues)
 		case DataType.Null:
@@ -150,14 +150,13 @@ export function parseObject(
 
 export function parseDate(
 	naValues = TypeHintsDefaults.naValues,
-	dateFormat = TypeHintsDefaults.dateFormat,
-): (value: string) => string | null {
+): (value: string) => Date | null {
 	const { isNull } = typeGuesserFactory({ naValues })
 	return function parseDate(value: string) {
 		if (isNull(value)) {
 			return null
 		}
-		return moment(getDate(value)).format(dateFormat)
+		return moment(getDate(value)).toDate()
 	}
 }
 

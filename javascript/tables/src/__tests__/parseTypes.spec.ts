@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import moment from 'moment'
 import { typeGuesserFactory } from '../guessDataType.js'
 import {
 	parseArray,
@@ -81,16 +82,14 @@ describe('parser tests', () => {
 
 	describe('parse date', () => {
 		it('should parse a date', () => {
-			const date = '2022-05-30T04:20:00'
-			expect(parseDate()(date)).toBe('2022-05-30')
+			const actual = parseDate()('2022-05-30T04:20:00')
+			const expected = moment([2022, 4, 30, 4, 20, 0, 0])
+			expect(actual).toEqual(expected.toDate())
 		})
 		it('should parse a numeric date', () => {
-			const date = '1659737701263'
-			expect(parseDate()(date)).toBe('2022-08-05')
-		})
-		it('should parse a date and format it', () => {
-			const date = '2022-05-30T04:20:00'
-			expect(parseDate(undefined, 'DD/MM/YYYY')(date)).toBe('30/05/2022')
+			const actual = parseDate()('1659737701263')
+			const expected = moment([2022, 7, 5, 22, 15, 1, 263])
+			expect(actual).toEqual(expected.toDate())
 		})
 		it('should return null', () => {
 			expect(parseDate()('<NA>')).toBeNull()

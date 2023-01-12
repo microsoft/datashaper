@@ -62,7 +62,7 @@ describe('Infer column nature tests', () => {
 		const parsed = fromCSV(csv)
 
 		const nature = inferColumnNature(parsed, 'US')
-		
+
 		it('should return true', () => {
 			expect(nature).toBe(VariableNature.Binary)
 		})
