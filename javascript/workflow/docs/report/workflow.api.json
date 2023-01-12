@@ -2595,6 +2595,21 @@
           "preserveMemberOrder": false,
           "members": [
             {
+              "kind": "Constructor",
+              "canonicalReference": "@datashaper/workflow!DataPackage:constructor(1)",
+              "docComment": "/**\n * Constructs a new instance of the `DataPackage` class\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor();"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": []
+            },
+            {
               "kind": "Property",
               "canonicalReference": "@datashaper/workflow!DataPackage#$schema:member",
               "docComment": "",

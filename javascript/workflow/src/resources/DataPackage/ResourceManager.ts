@@ -3,17 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { DataPackageSchema, Profile } from '@datashaper/schema'
-import { KnownProfile } from '@datashaper/schema'
 import type { Observable } from 'rxjs'
 import { BehaviorSubject, map } from 'rxjs'
 
 import type { Resource } from '../Resource.js'
 import type { ProfileHandler } from '../types.js'
 import { LoadResourcesOperation } from './LoadResourcesOperation.js'
-import { CodebookProfile } from './profiles/CodebookProfile.js'
-import { DataTableProfile } from './profiles/DataTableProfile.js'
-import { TableBundleProfile } from './profiles/TableBundleProfile.js'
-import { WorkflowProfile } from './profiles/WorkflowProfile.js'
 import { SaveResourcesOperation } from './SaveResourcesOperation.js'
 
 export class ResourceManager {
@@ -34,12 +29,7 @@ export class ResourceManager {
 	private _size$ = this._resources$.pipe(map(r => r.length))
 	private _isEmpty$ = this._resources$.pipe(map(r => r.length === 0))
 
-	private _profileHandlers: Map<Profile, ProfileHandler> = new Map([
-		[KnownProfile.TableBundle, new TableBundleProfile()],
-		[KnownProfile.DataTable, new DataTableProfile()],
-		[KnownProfile.Codebook, new CodebookProfile()],
-		[KnownProfile.Workflow, new WorkflowProfile()],
-	] as [Profile, ProfileHandler][])
+	private _profileHandlers = new Map<Profile, ProfileHandler>()
 
 	public get profileHandlers(): Map<Profile, ProfileHandler> {
 		return this._profileHandlers
@@ -257,7 +247,6 @@ export class ResourceManager {
 	 * @param handler - The profile handler to register
 	 */
 	public registerProfile(handler: ProfileHandler): void {
-		console.log('register profile', handler.profile)
 		if (this._profileHandlers.has(handler.profile)) {
 			console.warn(
 				`A resource handler for profile '${handler.profile}' is already registered. Overriding existing entry.`,

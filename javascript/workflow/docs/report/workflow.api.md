@@ -208,6 +208,7 @@ export function createNode(step: Step): Node_2<TableContainer>;
 export class DataPackage extends Resource {
     // (undocumented)
     readonly $schema: string;
+    constructor();
     // (undocumented)
     addResource(resource: Resource, top?: boolean): void;
     addResourceHandler(handler: ProfileHandler): void;
