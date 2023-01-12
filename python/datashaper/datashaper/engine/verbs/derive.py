@@ -7,10 +7,12 @@ from typing import Callable, Dict
 
 import numpy as np
 import pandas as pd
+
+from pandas.api.types import is_numeric_dtype
+
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.table_store import TableContainer
 from datashaper.types import MathOperator
-from pandas.api.types import is_numeric_dtype
 
 
 def __multiply(col1: pd.Series, col2: pd.Series):
