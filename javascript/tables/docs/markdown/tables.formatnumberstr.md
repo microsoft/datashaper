@@ -4,10 +4,15 @@
 
 ## formatNumberStr() function
 
+Formats a string using specified numeric parser options, so that it is ready for standard numeric parsing. (i.e., default js impl is to consider '.' a decimal). If the string has invalid construction to be a number, an empty string will be returned, which will be parsed as NaN. We do this because parseInt does not recognize the thousands separator, but if we remove them all even in invalid cases (e.g., '1,00'), invalid numbers could be parsed downstream as valid. The same occurs with decimal separators: parseFloat will ignore anything after the first.
+
 <b>Signature:</b>
 
 ```typescript
-export declare function formatNumberStr(value: string | number, decimal?: string, thousands?: string): string;
+export declare function formatNumberStr(value: string | number, options?: {
+    decimal?: string;
+    thousands?: string;
+}): string;
 ```
 
 ## Parameters
@@ -15,10 +20,10 @@ export declare function formatNumberStr(value: string | number, decimal?: string
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  value | string \| number |  |
-|  decimal | string | <i>(Optional)</i> |
-|  thousands | string | <i>(Optional)</i> |
+|  options | { decimal?: string; thousands?: string; } | <i>(Optional)</i> |
 
 <b>Returns:</b>
 
 string
+
 

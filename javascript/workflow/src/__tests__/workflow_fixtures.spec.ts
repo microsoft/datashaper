@@ -1,8 +1,7 @@
 /* eslint-disable jest/expect-expect, jest/valid-title */
 import { createSchemaValidator } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import { container } from '@datashaper/tables'
-import arquero from 'arquero'
+import { container, fromCSV } from '@datashaper/tables'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import fs from 'fs'
 import fsp from 'fs/promises'
@@ -14,7 +13,7 @@ import { Workflow } from '../resources/index.js'
 // Static data paths.
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const SCHEMA_PATH = path.join(__dirname, '../../../../schema')
-const CASES_PATH = path.join(SCHEMA_PATH, 'fixtures', 'workflow')
+const CASES_PATH = path.join(SCHEMA_PATH, 'fixtures', 'workflow/verbs/merge')
 
 // Json-schema validator
 const schema = await readJson(path.join(SCHEMA_PATH, 'workflow.json'))
@@ -108,7 +107,7 @@ function readText(dataPath: string): Promise<string> {
 }
 
 function readCsv(dataPath: string): Promise<ColumnTable> {
-	return readText(dataPath).then(txt => arquero.fromCSV(txt))
+	return readText(dataPath).then(txt => fromCSV(txt))
 }
 
 function compareTables(

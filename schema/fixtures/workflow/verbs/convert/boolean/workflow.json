@@ -1,0 +1,17 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "convert",
+			"input": "table19",
+			"id": "expected",
+			"args": {
+				"column": "boolean",
+				"type": "boolean",
+				"to": "newColumn"
+			}
+		}
+	],
+	"output": ["expected"],
+	"input": ["table19"]
+}

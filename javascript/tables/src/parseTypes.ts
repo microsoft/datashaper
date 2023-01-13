@@ -32,7 +32,7 @@ export function parseAs(type?: DataType, hints?: TypeHints): Value {
 		case DataType.Object:
 			return parseObject(hints)
 		case DataType.Date:
-			return parseDate(hints?.naValues, hints?.dateFormat)
+			return parseDate(hints?.naValues)
 		case DataType.Undefined:
 			return parseUndefined(hints?.naValues)
 		case DataType.Null:
@@ -54,7 +54,10 @@ export function parseNumber(
 		if (typeof value === 'number') {
 			return value as number
 		}
-		return toNumber(formatNumberStr(value, decimal, thousands))
+
+		const formatted = formatNumberStr(value, { decimal, thousands })
+		const num = toNumber(formatted)
+		return num
 	}
 }
 
@@ -98,6 +101,7 @@ export function parseString(
 
 export function parseArray(
 	options?: TypeHints,
+	delimiter: string = ',',
 ): (value: string) => any[] | null {
 	const { isNull } = typeGuesserFactory(options)
 	const subTypeChecker = guessDataType(options)
@@ -105,7 +109,7 @@ export function parseArray(
 		if (isNull(value)) {
 			return null
 		}
-		const array = JSON.parse(value) as any[]
+		const array = value.split(delimiter) as any[]
 		try {
 			const parsed = array.map(i => {
 				const item = `${i}`
@@ -150,14 +154,13 @@ export function parseObject(
 
 export function parseDate(
 	naValues = TypeHintsDefaults.naValues,
-	dateFormat = TypeHintsDefaults.dateFormat,
-): (value: string) => string | null {
+): (value: string) => Date | null {
 	const { isNull } = typeGuesserFactory({ naValues })
 	return function parseDate(value: string) {
 		if (isNull(value)) {
 			return null
 		}
-		return moment(getDate(value)).format(dateFormat)
+		return moment(getDate(value)).toDate()
 	}
 }
 

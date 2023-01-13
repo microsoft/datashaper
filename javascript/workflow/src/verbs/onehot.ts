@@ -30,9 +30,9 @@ export const onehotStep: ColumnTableStep<OnehotArgs> = (
 		) as ExprObject
 		return acc
 	}, {} as Record<string, ExprObject>)
-
-	const onehotted = input.derive(args)
-
+	const onehotted = input.derive(args, {
+		after: input.columnNames()[input.numCols() - 1],
+	})
 	return preserveSource ? onehotted : onehotted.select(not(column))
 }
 

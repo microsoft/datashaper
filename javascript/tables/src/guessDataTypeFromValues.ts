@@ -11,7 +11,6 @@ export function guessDataTypeFromValues(
 	limit = Infinity,
 ): DataType {
 	const guesser = guessDataType()
-
 	const mapTypes = new Map()
 
 	for (let i = 0; i < limit && i < values.length; i++) {
@@ -30,5 +29,10 @@ export function guessDataTypeFromValues(
 		}
 	}
 
+	// arrays will be detected even if some cells have other types (which would parse as single-length arrays)
+	// so we'll call it an array type if even one exists
+	if (mapTypes.has(DataType.Array)) {
+		return DataType.Array
+	}
 	return DataType.String
 }

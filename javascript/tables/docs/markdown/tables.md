@@ -21,14 +21,15 @@
 |  [fixedBinStep(column, min, max, step, clamped, format)](./tables.fixedbinstep.md) | Bins column values using a fixed bin width. The number of resulting bins is therefore variable. The standard behavior here is to truncate a numeric value to the lower bound of its bin range. This keeps the output numerical but loses information about specific bin boundaries. Because binning is a conversion from continuous to categorical, many use cases prefer an output value that displays the range. The format parameter here will produce a printed string as output. |
 |  [format(value, options)](./tables.format.md) | Returns a nice formatted string for a number |
 |  [formatIfNumber(value)](./tables.formatifnumber.md) | Returns a formatted string for a number, otherwise returns the original value |
-|  [formatNumberStr(value, decimal, thousands)](./tables.formatnumberstr.md) |  |
+|  [formatNumberStr(value, options)](./tables.formatnumberstr.md) | Formats a string using specified numeric parser options, so that it is ready for standard numeric parsing. (i.e., default js impl is to consider '.' a decimal). If the string has invalid construction to be a number, an empty string will be returned, which will be parsed as NaN. We do this because parseInt does not recognize the thousands separator, but if we remove them all even in invalid cases (e.g., '1,00'), invalid numbers could be parsed downstream as valid. The same occurs with decimal separators: parseFloat will ignore anything after the first. |
+|  [fromCSV(text, options)](./tables.fromcsv.md) | Drop-in replacement for arquero fromCSV, using our internal parsing with auto-typing turned on. Meant for quick-and-dirty reads, with the advantage that our default parsing aligns with pandas. Use readTable for more control over schema options and formats. |
 |  [generateCodebook(table, options)](./tables.generatecodebook.md) |  |
 |  [getDate(value)](./tables.getdate.md) |  |
 |  [getters(table)](./tables.getters.md) | Returns a map of all of the column getters for a table. |
 |  [guessDataType(options)](./tables.guessdatatype.md) | Factory function to provide a type guessing function for any string value. This uses optional type hints to account for string values such as boolean and null formats. |
 |  [guessDelimiter(text, config)](./tables.guessdelimiter.md) |  |
 |  [introspect(table, detailed, columns)](./tables.introspect.md) | Performs type inference and stats on a table/columns. |
-|  [isArray(value)](./tables.isarray.md) |  |
+|  [isArray(delimiter)](./tables.isarray.md) | Detect if a string is an array by looking for the delimiter. It's expected that in a CSV any array cells will be quoted. Also note that if the default delimiter, comma, is used, these may be detected as valid numbers if checked first. |
 |  [isBoolean(falseValues, trueValues)](./tables.isboolean.md) |  |
 |  [isDate(value)](./tables.isdate.md) |  |
 |  [isNull(naValues)](./tables.isnull.md) |  |
@@ -39,11 +40,10 @@
 |  [maxLengthValidator(field, includeIndexes)](./tables.maxlengthvalidator.md) | Constructs a function that validates a column against the <code>maxLength</code> constraint. |
 |  [minimumValidator(field, includeIndexes)](./tables.minimumvalidator.md) | Constructs a function that validates a column against the <code>minimum</code> constraint. |
 |  [minLengthValidator(field, includeIndexes)](./tables.minlengthvalidator.md) | Constructs a function that validates a column against the <code>minLength</code> constraint. |
-|  [parseArray(options)](./tables.parsearray.md) |  |
+|  [parseArray(options, delimiter)](./tables.parsearray.md) |  |
 |  [parseAs(type, hints)](./tables.parseas.md) | Factory function to create a value parser based on defined data type and type hints |
 |  [parseBoolean(naValues, trueValues, falseValues)](./tables.parseboolean.md) |  |
-|  [parseCSV(csv, options)](./tables.parsecsv.md) |  |
-|  [parseDate(naValues, dateFormat)](./tables.parsedate.md) |  |
+|  [parseDate(naValues)](./tables.parsedate.md) |  |
 |  [parseNumber(naValues, decimal, thousands)](./tables.parsenumber.md) |  |
 |  [parseObject(options)](./tables.parseobject.md) |  |
 |  [parseString(naValues)](./tables.parsestring.md) |  |
@@ -64,7 +64,6 @@
 
 |  Interface | Description |
 |  --- | --- |
-|  [ParseConfig](./tables.parseconfig.md) |  |
 |  [ReadTableOptions](./tables.readtableoptions.md) |  |
 |  [RowsOptions](./tables.rowsoptions.md) |  |
 |  [TableContainer](./tables.tablecontainer.md) |  |

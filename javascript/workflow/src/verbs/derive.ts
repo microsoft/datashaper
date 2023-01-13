@@ -21,18 +21,30 @@ export const deriveStep: ColumnTableStep<DeriveArgs> = (
 	const func = escape((d: any) => {
 		const l = d[column1]
 		const r = d[column2]
+		let result
 		switch (operator) {
 			case MathOperator.Add:
-				return l + r
+				// anything besides numbers should be reasonably concatenated with +
+				// so skip the NaN check at the end
+				if (typeof l === 'number' && typeof r === 'number') {
+					result = l + r
+				} else {
+					return `${l}${r}`
+				}
+				break
 			case MathOperator.Subtract:
-				return l - r
+				result = l - r
+				break
 			case MathOperator.Multiply:
-				return l * r
+				result = l * r
+				break
 			case MathOperator.Divide:
-				return l / r
+				result = l / r
+				break
 			default:
 				throw new Error(`Unsupported operator: [${operator}]`)
 		}
+		return isNaN(result) ? null : result
 	})
 
 	return input.derive({ [to]: func })

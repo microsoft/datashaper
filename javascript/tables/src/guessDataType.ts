@@ -5,7 +5,6 @@
 
 import type { TypeHints} from '@datashaper/schema';
 import { DataType,TypeHintsDefaults  } from '@datashaper/schema'
-import isArrayLd from 'lodash-es/isArray.js'
 import isFinite from 'lodash-es/isFinite.js'
 import isPlainObject from 'lodash-es/isPlainObject.js'
 import toNumber from 'lodash-es/toNumber.js'
@@ -37,11 +36,11 @@ export function guessDataType(
 		if (isDate(value)) {
 			return DataType.Date
 		}
-		if (isArray(value)) {
-			return DataType.Array
-		}
 		if (isObject(value)) {
 			return DataType.Object
+		}
+		if (isArray(value)) {
+			return DataType.Array
 		}
 		if (value === DataType.Undefined) {
 			return DataType.Undefined
@@ -55,7 +54,7 @@ export function typeGuesserFactory(options?: TypeHints): any {
 		isNull: isNull(options?.naValues),
 		isBoolean: isBoolean(options?.trueValues, options?.falseValues),
 		isNumber: isNumber(options?.decimal, options?.thousands),
-		isArray,
+		isArray: isArray(),
 		isObject,
 		isDate,
 	}
@@ -94,18 +93,26 @@ export function isNumber(
 	return function (value: string) {
 		if (value === null) return false
 
-		const n = formatNumberStr(value, decimal, thousands)
-		return isFinite(toNumber(n))
+		const n = formatNumberStr(value, { decimal, thousands })
+		return n === '' ? false : isFinite(toNumber(n))
 	}
 }
 
-export function isArray(value: string): boolean {
-	try {
-		const array = JSON.parse(value)
-		return isArrayLd(array)
-	} catch {
-		return false
+/**
+ * Detect if a string is an array by looking for the delimiter.
+ * It's expected that in a CSV any array cells will be quoted.
+ * Also note that if the default delimiter, comma, is used, these may be detected as valid numbers if checked first.
+ */
+export function isArray(delimiter: string = ','): (value: string) => boolean {
+	const reg = new RegExp(`${delimiter}`)
+	return (value: string) => {
+		try {
+			return reg.test(value)
+		} catch {
+			return false
+		}
 	}
+	
 }
 
 export function isObject(value: string): boolean {
