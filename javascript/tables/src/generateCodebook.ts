@@ -12,6 +12,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { guessDataTypeFromValues } from './guessDataTypeFromValues.js'
 import { inferNatureFromValues } from './inferNatureFromValues.js'
+import { parseAs } from './parseTypes.js'
 
 export function generateCodebook(
 	table: ColumnTable,
@@ -20,7 +21,7 @@ export function generateCodebook(
 		autoMax?: number
 	},
 ): CodebookSchema {
-	const codebookResult: CodebookSchema = createCodebookSchemaObject({
+	const codecook: CodebookSchema = createCodebookSchemaObject({
 		fields: [],
 	})
 
@@ -39,13 +40,17 @@ export function generateCodebook(
 		if (opts.autoType) {
 			const values: string[] = table.array(column) as string[]
 			const columnType = guessDataTypeFromValues(values, opts.autoMax)
-			const nature = inferNatureFromValues(values)
+			const parse = parseAs(columnType)
+			const parsed = values.map(parse)
+			const nature = inferNatureFromValues(parsed, {
+				limit: opts.autoMax,
+			})
 			field.type = columnType
 			field.nature = nature
 		}
 
-		codebookResult.fields.push(field)
+		codecook.fields.push(field)
 	})
 
-	return codebookResult
+	return codecook
 }

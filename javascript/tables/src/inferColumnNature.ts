@@ -19,5 +19,5 @@ export function inferColumnNature(
 		)
 	}
 
-	return inferNatureFromValues(column as any[], categoricalCountLimit)
+	return inferNatureFromValues(column as any[], { categoricalCountLimit })
 }

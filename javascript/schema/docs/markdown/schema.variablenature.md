@@ -16,9 +16,9 @@ export declare enum VariableNature
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  Binary | <code>&quot;binary&quot;</code> | Only two valid values are allowed, commonly 1 = true, 0 = false. |
+|  Binary | <code>&quot;binary&quot;</code> | Only two valid values are allowed, commonly 1 = true, 0 = false. If the data type for a column is boolean, this will be the nature. If only two unique strings are present, this will be the nature (e.g., 'Y' and 'N') |
 |  Continuous | <code>&quot;continuous&quot;</code> | Continuously variable, i.e., decimal. |
 |  Discrete | <code>&quot;discrete&quot;</code> | Discrete intervals, i.e., whole numbers. |
-|  Nominal | <code>&quot;nominal&quot;</code> | <p>Integers mapped to arbitrary categories wher order does not matter. For example:</p><p>Eye color 0: Unknown/missing 1: Green 2: Blue 3: Brown 4: Hazel ...</p> |
+|  Nominal | <code>&quot;nominal&quot;</code> | <p>Integers mapped to arbitrary categories where order does not matter. String columns are also normally nominal. For example:</p><p>Eye color 0: Unknown/missing 1: Green 2: Blue 3: Brown 4: Hazel ...</p> |
 |  Ordinal | <code>&quot;ordinal&quot;</code> | <p>Integers map to ordered categories. The order matters here because it can be used to indicate progression. For example:</p><p>Income 0: Unknown/missing 1: No income 2: 1-9999 3: 10000-19999 4: 20000-29999 ...</p><p>In this case the integer category carries an indication of escalating income range.</p> |
 
