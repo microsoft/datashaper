@@ -44,5 +44,5 @@ def derive(input: VerbInput, to: str, column1: str, column2: str, operator: str)
     try:
         output[to] = __op_mapping[math_operator](output[column1], output[column2])
     except Exception:
-        output[to] = np.null
+        output[to] = np.nan
     return TableContainer(table=output)

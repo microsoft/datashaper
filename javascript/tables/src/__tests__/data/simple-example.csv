@@ -1,5 +1,5 @@
 index,int,float,boolean,string,date,array,obj
-0,100,1.01,TRUE,aaa,8/15/2022,"[1,2,3]","{""a"":123,""b"":""BBBB"",""c"":""FALSE"",""d"":"""",""e"":""undefined""}"
+0,100,1.01,TRUE,aaa,8/15/2022,"[1,2,3]","{""a"":123,""b"":""BBBB"",""c"":""FALSE"",""d"":"""",""e"":""null""}"
 1,1000,1.55,FALSE,bbb,2022-08-06T03:01:23,"[""a"", ""b""]",
 2,3456,0.58,true,ccc,Fri Aug 12 2022 17:14:07 GMT-0500 (Colombia Standard Time),"[""false"",""TRUE""]",
 3,NA,12258.569,false,ddd,Fri Aug 07 2022,"[""1"",""2""]",
@@ -7,5 +7,5 @@ index,int,float,boolean,string,date,array,obj
 5,33,458.258,FALSE,fff,2022-08-08T22:15:01.263Z,"[1.22, 0.45]",
 6,30,4548.56,n/a,ggg,1659737701263,"[""false"", 1]",
 7,20,8989,-nan,hhh,"Fri, 19 Aug 2022 22:16:16 GMT","[""2022-05-30"",""Fri Aug 26 2022""]",
-8,NaN,-448.99,null,iii,3/25/2022,"[23, ""undefined"",""a""]",
-9,0,NULL,<NA>,jjj,12/1/2019,"[""undefined"", ""null"", 1]",
+8,NaN,-448.99,null,iii,3/25/2022,"[23, ""null"",""a""]",
+9,0,NULL,<NA>,jjj,12/1/2019,"[""null"", ""null"", 1]",
