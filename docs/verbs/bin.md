@@ -6,7 +6,13 @@ _The input column for a binning operation must be a numeric data type._
 
 Multiple binning strategies are supported:
 
-- Auto: uses automatic bin boundary guessing to create nice default bins (uses [Arquero's default bin strategy](https://uwdata.github.io/arquero/api/op#bins))
+- Auto: uses automatic bin boundary guessing using the implementation of numpy algorithm (uses [Numpy implementation](https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html))
+- Fd (Freedman Diaconis Estimator): (uses [Numpy implementation](https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html))
+- Doane: (uses [Numpy implementation](https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html))
+- Scott: (uses [Numpy implementation](https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html))
+- Rice: (uses [Numpy implementation](https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html))
+- Sturges: (uses [Numpy implementation](https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html))
+- Sqrt: (uses [Numpy implementation](https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html))
 - Fixed width: creates bins at an exact width specified
 - Fixed count: divides the data range into a fixed number of bins of equal width
 
