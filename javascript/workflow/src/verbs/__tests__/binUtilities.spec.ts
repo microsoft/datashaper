@@ -4,7 +4,6 @@
  */
 
 import {
-	calculateNiceRounding,
 	calculateWidthAuto,
 	calculateWidthDoane,
 	calculateWidthFd,
@@ -13,7 +12,9 @@ import {
 	calculateWidthSqrt,
 	calculateWidthSturges,
 	iqr,
-	standardDeviation} from '../util/binUtilities.js'
+	standardDeviation,
+	calculateNiceRounding
+} from '../util/binUtilities.js'
 
 describe('bin utilities tests', () => {
 	describe('standard deviation test', () => {
@@ -125,7 +126,7 @@ describe('bin utilities tests', () => {
 		})
 	})
 
-	describe('huge numbers nice rounding test', () => {
+	describe('huge numbers nice rounding test 1', () => {
 		const result = calculateNiceRounding(12000000, 78500000, 12389720.271622058)
 		const [min, max, width] = result
 
@@ -136,7 +137,7 @@ describe('bin utilities tests', () => {
 		})
 	})
 
-	describe('huge numbers nice rounding test', () => {
+	describe('huge numbers nice rounding test 2', () => {
 		const result = calculateNiceRounding(12000000, 78500000, 12671668.926380431)
 		const [min, max, width] = result
 
@@ -147,7 +148,7 @@ describe('bin utilities tests', () => {
 		})
 	})
 
-	describe('huge numbers nice rounding test', () => {
+	describe('huge numbers nice rounding test 3', () => {
 		const result = calculateNiceRounding(12000000, 78500000, 12460642.878078489)
 		const [min, max, width] = result
 
@@ -158,7 +159,7 @@ describe('bin utilities tests', () => {
 		})
 	})
 
-	describe('regular numbers nice rounding test', () => {
+	describe('regular numbers nice rounding test 1', () => {
 		const result = calculateNiceRounding(18, 67, 15.739759424941251)
 		const [min, max, width] = result
 
@@ -169,7 +170,7 @@ describe('bin utilities tests', () => {
 		})
 	})
 
-	describe('regular numbers nice rounding test', () => {
+	describe('regular numbers nice rounding test 2', () => {
 		const result = calculateNiceRounding(18, 67, 11.241370959657525)
 		const [min, max, width] = result
 
@@ -180,7 +181,7 @@ describe('bin utilities tests', () => {
 		})
 	})
 
-	describe('regular numbers nice rounding test', () => {
+	describe('regular numbers nice rounding test 3', () => {
 		const result = calculateNiceRounding(18, 67, 9.181526331215728)
 		const [min, max, width] = result
 
@@ -191,7 +192,7 @@ describe('bin utilities tests', () => {
 		})
 	})
 
-	describe('small numbers nice rounding test', () => {
+	describe('small numbers nice rounding test 1', () => {
 		const result = calculateNiceRounding(0.1457, 0.9988, 0.43906433672050404)
 		const [min, max, width] = result
 
@@ -202,7 +203,7 @@ describe('bin utilities tests', () => {
 		})
 	})
 
-	describe('small numbers nice rounding test', () => {
+	describe('small numbers nice rounding test 2', () => {
 		const result = calculateNiceRounding(0.1457, 0.9988, 0.1957145625649762)
 		const [min, max, width] = result
 
@@ -213,7 +214,7 @@ describe('bin utilities tests', () => {
 		})
 	})
 
-	describe('small numbers nice rounding test', () => {
+	describe('small numbers nice rounding test 3', () => {
 		const result = calculateNiceRounding(0.1457, 0.9988, 0.15985224720734975)
 		const [min, max, width] = result
 
@@ -224,7 +225,7 @@ describe('bin utilities tests', () => {
 		})
 	})
 
-	describe('small numbers nice rounding test', () => {
+	describe('small numbers nice rounding test 4', () => {
 		const result = calculateNiceRounding(0.00000123, 0.9988, 0.15985224720734975)
 		const [min, max, width] = result
 
