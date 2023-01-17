@@ -11,6 +11,7 @@ import { default as linspace } from 'exact-linspace'
 
 import {
 	calculateBinCount,
+	calculateNiceRounding,
 	calculateWidthAuto,
 	calculateWidthDoane,
 	calculateWidthFd,
@@ -18,7 +19,6 @@ import {
 	calculateWidthScott,
 	calculateWidthSqrt,
 	calculateWidthSturges,
-	calculateNiceRounding,
 	roundNumber
 } from './util/binUtilities.js'
 import type { ColumnTableStep } from './util/factories.js'

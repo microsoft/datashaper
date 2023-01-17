@@ -4,6 +4,7 @@
  */
 
 import {
+	calculateNiceRounding,
 	calculateWidthAuto,
 	calculateWidthDoane,
 	calculateWidthFd,
@@ -12,9 +13,7 @@ import {
 	calculateWidthSqrt,
 	calculateWidthSturges,
 	iqr,
-	standardDeviation,
-	calculateNiceRounding
-} from '../util/binUtilities.js'
+	standardDeviation} from '../util/binUtilities.js'
 
 describe('bin utilities tests', () => {
 	describe('standard deviation test', () => {
