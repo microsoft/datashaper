@@ -4,6 +4,8 @@
  */
 import { default as percentile } from 'percentile'
 
+const ROUND_PRECISION = 3
+
 export function calculateWidthAuto(
 	min: number,
 	max: number,
@@ -124,4 +126,30 @@ export function iqr(values: number[]): number {
 	const q1: number = percentile(25, values) as number
 	const q3: number = percentile(75, values) as number
 	return q3 - q1
+}
+
+export function calculateNiceRounding(
+	min: number,
+	max: number,
+	step: number,
+): [number, number, number] {
+	return [roundNumber(min), roundNumber(max), roundNumber(step)]
+}
+
+export function roundNumber(value: number): number{
+	if(value < 1 && getNumberOfDecimals(value) > 10){
+		return Number(value.toFixed(ROUND_PRECISION))
+	}
+	else if(value < 1 && getNumberOfDecimals(value) <= 10){
+		const numberOfDecimals = getNumberOfDecimals(value)
+		return Number(value.toFixed(numberOfDecimals / ROUND_PRECISION))
+	}
+	else {
+		return Math.round(value)
+	}
+}
+
+function getNumberOfDecimals(value: number): number{
+	const decimals = value.toString().split(".")
+	return decimals[1] !== undefined ? decimals[1].length : 0
 }

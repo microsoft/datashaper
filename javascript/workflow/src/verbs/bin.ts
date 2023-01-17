@@ -18,6 +18,8 @@ import {
 	calculateWidthScott,
 	calculateWidthSqrt,
 	calculateWidthSturges,
+	calculateNiceRounding,
+	roundNumber
 } from './util/binUtilities.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
@@ -61,7 +63,7 @@ function computeBins(input: ColumnTable, args: BinArgs) {
 			let width = estimateWidth(strategy, input.array(column), min, max)
 
 			if (nice) {
-				const adjustedValues = adjustParameters(min, max, width)
+				const adjustedValues = calculateNiceRounding(min, max, width)
 				const [minValue, maxValue, widthValue] = adjustedValues
 				min = minValue
 				max = maxValue
@@ -69,29 +71,12 @@ function computeBins(input: ColumnTable, args: BinArgs) {
 			}
 
 			const numBins = calculateBinCount(min, max, width)
+			
 			const binEdges = linspace(min, max, numBins + 1)
 
-			return [min, max, binEdges[1]! - binEdges[0]!]
+			return [min, max, roundNumber(binEdges[1]! - binEdges[0]!)]
 		}
 	}
-}
-
-function adjustParameters(
-	min: number,
-	max: number,
-	step: number,
-): [number, number, number] {
-	const base = 10
-	const logb = Math.LN10
-
-	let v = Math.log(step)
-	const precision = v >= 0 ? 0 : ~~(-v / logb) + 1
-	const eps = Math.pow(base, -precision - 1)
-	v = Math.floor(min / step + eps) * step
-	min = min < v ? v - step : v
-	max = Math.ceil(max / step) * step
-
-	return [min, max, v]
 }
 
 function estimateWidth(
