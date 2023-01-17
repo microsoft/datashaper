@@ -4404,34 +4404,6 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!Field#metadata:member",
-              "docComment": "/**\n * Detailed statistical metadata for the field. Also convenient way to persist so expensive recomputing can be avoided.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "metadata?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "FieldMetadata",
-                  "canonicalReference": "@datashaper/schema!FieldMetadata:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "metadata",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!Field#nature:member",
               "docComment": "/**\n * Data nature. This is primarily applicable to numbers, which have different characters that define how we should display them in charts. default: continuous TODO: there is a large block of nature-related content in CauseDis. is some of this transient application state? how much do we need to carry in a schema?\n */\n",
               "excerptTokens": [
@@ -5451,6 +5423,34 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "stdev",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!FieldMetadata#type:member",
+              "docComment": "/**\n * TEMP: this is determined via stats introspection, but our much more robust type discovery for the codebooks should be used, and the type on Field.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataType",
+                  "canonicalReference": "@datashaper/schema!DataType:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "type",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

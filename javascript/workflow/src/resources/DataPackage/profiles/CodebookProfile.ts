@@ -6,13 +6,14 @@ import type { CodebookSchema, Profile } from '@datashaper/schema'
 import { KnownProfile } from '@datashaper/schema'
 
 import { Codebook } from '../../Codebook.js'
-import type { Resource } from '../../Resource.js'
 import type { ProfileHandler } from '../../types.js'
 
-export class CodebookProfile implements ProfileHandler {
+export class CodebookProfile
+	implements ProfileHandler<Codebook, CodebookSchema>
+{
 	public readonly profile: Profile = KnownProfile.Codebook
 
-	public createInstance(schema: CodebookSchema | undefined): Promise<Resource> {
+	public createInstance(schema: CodebookSchema | undefined): Promise<Codebook> {
 		return Promise.resolve(new Codebook(schema))
 	}
 }

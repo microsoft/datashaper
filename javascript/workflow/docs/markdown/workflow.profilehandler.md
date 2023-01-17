@@ -9,19 +9,20 @@ A custom profile handler
 <b>Signature:</b>
 
 ```typescript
-export interface ProfileHandler 
+export interface ProfileHandler<Res extends Resource = Resource, Schema extends ResourceSchema = ResourceSchema, InitializationContext extends ProfileInitializationContext = ProfileInitializationContext> 
 ```
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [initialize?](./workflow.profilehandler.initialize.md) |  | (ctx: InitializationContext) =&gt; void | <i>(Optional)</i> Initialize the profile handler |
 |  [profile](./workflow.profilehandler.profile.md) |  | Profile | The profile name of the resource |
-|  [save?](./workflow.profilehandler.save.md) |  | (data: [Resource](./workflow.resource.md)<!-- -->, path: string, files: Map&lt;string, Blob&gt;) =&gt; Promise&lt;string\[\]&gt; | <i>(Optional)</i> Save custom resources into the files map. |
+|  [save?](./workflow.profilehandler.save.md) |  | (data: Res, path: string, files: Map&lt;string, Blob&gt;) =&gt; Promise&lt;string\[\]&gt; | <i>(Optional)</i> Save custom resources into the files map. |
 
 ## Methods
 
 |  Method | Description |
 |  --- | --- |
-|  [createInstance(schema, manager)](./workflow.profilehandler.createinstance.md) | Creates a new instance of a schema resource |
+|  [createInstance(schema)](./workflow.profilehandler.createinstance.md) | Creates a new instance of a schema resource |
 

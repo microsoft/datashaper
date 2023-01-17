@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableMetadata } from '@datashaper/tables'
+import type { Field } from '@datashaper/schema'
 import type {
 	IDetailsGroupDividerProps,
 	IRenderFunction,
@@ -19,7 +19,7 @@ import type { GroupHeaderFunction } from '../index.js'
  */
 export function useGroupHeaderRenderer(
 	table: ColumnTable,
-	computedMetadata?: TableMetadata,
+	fields: Field[],
 	groupHeaderFunction?: GroupHeaderFunction,
 	lazyLoadGroups = true,
 ): IRenderFunction<IDetailsGroupDividerProps> {
@@ -30,8 +30,8 @@ export function useGroupHeaderRenderer(
 			}
 
 			const columnName = table.groups().names[props.groupLevel as number]
-			const meta = columnName
-				? computedMetadata?.columns[columnName]
+			const field = columnName
+				? fields.find(f => f.name === columnName)
 				: undefined
 
 			if (!groupHeaderFunction) {
@@ -44,8 +44,8 @@ export function useGroupHeaderRenderer(
 				)
 			}
 
-			return groupHeaderFunction(meta, columnName, props)
+			return groupHeaderFunction(field, columnName, props)
 		},
-		[groupHeaderFunction, table, lazyLoadGroups, computedMetadata?.columns],
+		[groupHeaderFunction, table, fields, lazyLoadGroups],
 	)
 }

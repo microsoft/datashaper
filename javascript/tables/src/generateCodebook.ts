@@ -6,12 +6,12 @@ import {
 	type CodebookSchema,
 	createCodebookSchemaObject,
 	DataType,
+	Field,
 } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { guessDataTypeFromValues } from './guessDataTypeFromValues.js'
 import { inferNatureFromValues } from './inferNatureFromValues.js'
-import { introspect } from './introspect.js'
 
 export function generateCodebook(
 	table: ColumnTable,
@@ -21,7 +21,6 @@ export function generateCodebook(
 	},
 ): CodebookSchema {
 	const codebookResult: CodebookSchema = createCodebookSchemaObject({
-		name: 'Generated Codebook',
 		fields: [],
 	})
 
@@ -30,11 +29,9 @@ export function generateCodebook(
 		autoMax: Infinity,
 		...options,
 	}
-	const metadata = introspect(table, true)
 
 	table.columnNames().forEach(column => {
-		const field = {
-			...metadata.columns[column],
+		const field: Field = {
 			name: column,
 			type: DataType.String,
 		}

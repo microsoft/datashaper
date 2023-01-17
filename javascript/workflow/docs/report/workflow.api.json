@@ -2155,6 +2155,155 @@
           ]
         },
         {
+          "kind": "Class",
+          "canonicalReference": "@datashaper/workflow!CodebookProfile:class",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class CodebookProfile implements "
+            },
+            {
+              "kind": "Reference",
+              "text": "ProfileHandler",
+              "canonicalReference": "@datashaper/workflow!ProfileHandler:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "Codebook",
+              "canonicalReference": "@datashaper/workflow!Codebook:class"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "CodebookSchema",
+              "canonicalReference": "@datashaper/schema!CodebookSchema:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "CodebookProfile",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!CodebookProfile#createInstance:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "createInstance(schema: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CodebookSchema",
+                  "canonicalReference": "@datashaper/schema!CodebookSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Codebook",
+                  "canonicalReference": "@datashaper/workflow!Codebook:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 8
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "schema",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "name": "createInstance"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!CodebookProfile#profile:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly profile: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Profile",
+                  "canonicalReference": "@datashaper/schema!Profile:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "profile",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            }
+          ],
+          "implementsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 7
+            }
+          ]
+        },
+        {
           "kind": "Function",
           "canonicalReference": "@datashaper/workflow!columnTransformVerbs:function(1)",
           "docComment": "/**\n * These are steps that specifically operate on an input/output column only. In other words, they do not cause a change in the number of rows in a table, such as an aggregate or filter would, and only replace or add one column.\n *\n * @param filter - \n *\n * @returns \n */\n",
@@ -2445,6 +2594,21 @@
           "name": "DataPackage",
           "preserveMemberOrder": false,
           "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@datashaper/workflow!DataPackage:constructor(1)",
+              "docComment": "/**\n * Constructs a new instance of the `DataPackage` class\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor();"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": []
+            },
             {
               "kind": "Property",
               "canonicalReference": "@datashaper/workflow!DataPackage#$schema:member",
@@ -4381,6 +4545,280 @@
             {
               "startIndex": 3,
               "endIndex": 4
+            }
+          ]
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@datashaper/workflow!DataTableProfile:class",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class DataTableProfile implements "
+            },
+            {
+              "kind": "Reference",
+              "text": "ProfileHandler",
+              "canonicalReference": "@datashaper/workflow!ProfileHandler:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "DataTableProfile",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!DataTableProfile#createInstance:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "createInstance(schema: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataTableSchema",
+                  "canonicalReference": "@datashaper/schema!DataTableSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataTable",
+                  "canonicalReference": "@datashaper/workflow!DataTable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 8
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "schema",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "name": "createInstance"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!DataTableProfile#initialize:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "initialize({ dataPackage }: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ProfileInitializationContext",
+                  "canonicalReference": "@datashaper/workflow!ProfileInitializationContext:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "{ dataPackage }",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "name": "initialize"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!DataTableProfile#profile:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly profile: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Profile",
+                  "canonicalReference": "@datashaper/schema!Profile:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "profile",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!DataTableProfile#save:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "save(data: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Resource",
+                  "canonicalReference": "@datashaper/workflow!Resource:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", dataPath: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", files: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Map",
+                  "canonicalReference": "!Map:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Blob",
+                  "canonicalReference": "!Blob:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string[]>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 10,
+                "endIndex": 12
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "data",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "dataPath",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "files",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 5,
+                    "endIndex": 9
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "name": "save"
+            }
+          ],
+          "implementsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
             }
           ]
         },
@@ -9521,10 +9959,99 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface ProfileHandler "
+              "text": "export interface ProfileHandler<Res extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Resource",
+              "canonicalReference": "@datashaper/workflow!Resource:class"
+            },
+            {
+              "kind": "Content",
+              "text": " = "
+            },
+            {
+              "kind": "Reference",
+              "text": "Resource",
+              "canonicalReference": "@datashaper/workflow!Resource:class"
+            },
+            {
+              "kind": "Content",
+              "text": ", Schema extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "ResourceSchema",
+              "canonicalReference": "@datashaper/schema!ResourceSchema:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " = "
+            },
+            {
+              "kind": "Reference",
+              "text": "ResourceSchema",
+              "canonicalReference": "@datashaper/schema!ResourceSchema:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", InitializationContext extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "ProfileInitializationContext",
+              "canonicalReference": "@datashaper/workflow!ProfileInitializationContext:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " = "
+            },
+            {
+              "kind": "Reference",
+              "text": "ProfileInitializationContext",
+              "canonicalReference": "@datashaper/workflow!ProfileInitializationContext:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "> "
             }
           ],
           "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "Res",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            },
+            {
+              "typeParameterName": "Schema",
+              "constraintTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 7,
+                "endIndex": 8
+              }
+            },
+            {
+              "typeParameterName": "InitializationContext",
+              "constraintTokenRange": {
+                "startIndex": 9,
+                "endIndex": 10
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 11,
+                "endIndex": 12
+              }
+            }
+          ],
           "name": "ProfileHandler",
           "preserveMemberOrder": false,
           "members": [
@@ -9535,25 +10062,11 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "createInstance(schema: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ResourceSchema",
-                  "canonicalReference": "@datashaper/schema!ResourceSchema:interface"
+                  "text": "createInstance(schema?: "
                 },
                 {
                   "kind": "Content",
-                  "text": " | undefined"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", manager: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ResourceManager",
-                  "canonicalReference": "@datashaper/workflow!ResourceManager:class"
+                  "text": "Schema | undefined"
                 },
                 {
                   "kind": "Content",
@@ -9566,16 +10079,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<"
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Resource",
-                  "canonicalReference": "@datashaper/workflow!Resource:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">"
+                  "text": "<Res>"
                 },
                 {
                   "kind": "Content",
@@ -9584,8 +10088,8 @@
               ],
               "isOptional": false,
               "returnTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 10
+                "startIndex": 3,
+                "endIndex": 5
               },
               "releaseTag": "Public",
               "overloadIndex": 1,
@@ -9594,20 +10098,39 @@
                   "parameterName": "schema",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 3
+                    "endIndex": 2
                   },
-                  "isOptional": false
-                },
-                {
-                  "parameterName": "manager",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 4,
-                    "endIndex": 5
-                  },
-                  "isOptional": false
+                  "isOptional": true
                 }
               ],
               "name": "createInstance"
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/workflow!ProfileHandler#initialize:member",
+              "docComment": "/**\n * Initialize the profile handler\n *\n * @param dp - The data package being initialized\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "initialize?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(ctx: InitializationContext) => void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "initialize",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
             },
             {
               "kind": "PropertySignature",
@@ -9648,16 +10171,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "(data: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Resource",
-                  "canonicalReference": "@datashaper/workflow!Resource:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", path: string, files: "
+                  "text": "(data: Res, path: string, files: "
                 },
                 {
                   "kind": "Reference",
@@ -9697,7 +10211,52 @@
               "name": "save",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 10
+                "endIndex": 8
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/workflow!ProfileInitializationContext:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface ProfileInitializationContext "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ProfileInitializationContext",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/workflow!ProfileInitializationContext#dataPackage:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "dataPackage: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataPackage",
+                  "canonicalReference": "@datashaper/workflow!DataPackage:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "dataPackage",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
               }
             }
           ],
@@ -12318,6 +12877,28 @@
             },
             {
               "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "TableBundle",
+              "canonicalReference": "@datashaper/workflow!TableBundle:class"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "TableBundleSchema",
+              "canonicalReference": "@datashaper/schema!TableBundleSchema:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
               "text": " "
             }
           ],
@@ -12354,8 +12935,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "Resource",
-                  "canonicalReference": "@datashaper/workflow!Resource:class"
+                  "text": "TableBundle",
+                  "canonicalReference": "@datashaper/workflow!TableBundle:class"
                 },
                 {
                   "kind": "Content",
@@ -12421,7 +13002,7 @@
           "implementsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 2
+              "endIndex": 7
             }
           ]
         },
@@ -15274,6 +15855,155 @@
             {
               "startIndex": 3,
               "endIndex": 4
+            }
+          ]
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@datashaper/workflow!WorkflowProfile:class",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class WorkflowProfile implements "
+            },
+            {
+              "kind": "Reference",
+              "text": "ProfileHandler",
+              "canonicalReference": "@datashaper/workflow!ProfileHandler:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "Workflow",
+              "canonicalReference": "@datashaper/workflow!Workflow:class"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "WorkflowSchema",
+              "canonicalReference": "@datashaper/schema!WorkflowSchema:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "WorkflowProfile",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!WorkflowProfile#createInstance:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "createInstance(schema: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorkflowSchema",
+                  "canonicalReference": "@datashaper/schema!WorkflowSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Workflow",
+                  "canonicalReference": "@datashaper/workflow!Workflow:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 8
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "schema",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "name": "createInstance"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!WorkflowProfile#profile:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly profile: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Profile",
+                  "canonicalReference": "@datashaper/schema!Profile:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "profile",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            }
+          ],
+          "implementsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 7
             }
           ]
         }

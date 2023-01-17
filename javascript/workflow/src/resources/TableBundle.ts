@@ -5,8 +5,9 @@
 import type { TableBundleSchema } from '@datashaper/schema'
 import { KnownProfile, LATEST_TABLEBUNDLE_SCHEMA } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
+import { introspect } from '@datashaper/tables'
 import type { Observable, Subscription } from 'rxjs'
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, map } from 'rxjs'
 
 import {
 	dereference,
@@ -71,9 +72,9 @@ export class TableBundle extends Resource implements TableEmitter {
 				? transformers[transformers.length - 1]
 				: inputNode
 
-		this._pipelineSub = lastNode?.output$.subscribe(out => {
-			this._output$.next(this.renameTable(out))
-		})
+		this._pipelineSub = lastNode?.output$
+			.pipe(map(this.renameTable), map(this.computeMeta))
+			.subscribe(out => this._output$.next(out))
 
 		this._onChange.next()
 	}
@@ -118,5 +119,14 @@ export class TableBundle extends Resource implements TableEmitter {
 		table: Maybe<TableContainer>,
 	): Maybe<TableContainer> => {
 		return table == null ? table : { ...table, id: this.name }
+	}
+
+	private computeMeta = (
+		table: Maybe<TableContainer>,
+	): Maybe<TableContainer> => {
+		if (!table?.table) {
+			return table
+		}
+		return { ...table, metadata: introspect(table.table, true) }
 	}
 }

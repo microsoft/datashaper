@@ -132,6 +132,10 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 						metadata={selectedTable.metadata}
 						table={selectedTable?.table}
 						onColumnSelect={onColumnClick}
+						features={{
+							statsColumnHeaders: true,
+							histogramColumnHeaders: true,
+						}}
 					/>
 				</DetailsListContainer>
 				{

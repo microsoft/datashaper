@@ -8,7 +8,7 @@
 				"columns": ["name", "description"],
 				"strategy": "concat",
 				"to": "resultColumn",
-				"delimiter": ",",
+				"delimiter": "|",
 				"preserveSource": true
 			},
 			"id": "expected"

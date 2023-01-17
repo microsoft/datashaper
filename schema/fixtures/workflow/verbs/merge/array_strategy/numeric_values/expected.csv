@@ -1,6 +1,6 @@
 ID,item,quantity,totalSale,resultColumn
 1,bed,45,54000,"45,54000"
-2,pillow,,7800,7800
+2,pillow,,7800,"7800"
 3,,100,230000,"100,230000"
 4,chair,89,20470,"89,20470"
 5,stool,50,5000,"50,5000"

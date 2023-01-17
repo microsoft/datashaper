@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-createInstance(schema?: TableBundleSchema): Promise<Resource>;
+createInstance(schema?: TableBundleSchema): Promise<TableBundle>;
 ```
 
 ## Parameters
@@ -18,5 +18,5 @@ createInstance(schema?: TableBundleSchema): Promise<Resource>;
 
 <b>Returns:</b>
 
-Promise&lt;[Resource](./workflow.resource.md)<!-- -->&gt;
+Promise&lt;[TableBundle](./workflow.tablebundle.md)<!-- -->&gt;
 

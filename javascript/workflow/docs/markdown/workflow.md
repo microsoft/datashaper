@@ -10,9 +10,11 @@
 |  --- | --- |
 |  [BaseNode](./workflow.basenode.md) |  |
 |  [Codebook](./workflow.codebook.md) |  |
+|  [CodebookProfile](./workflow.codebookprofile.md) |  |
 |  [DataPackage](./workflow.datapackage.md) |  |
 |  [DataShape](./workflow.datashape.md) |  |
 |  [DataTable](./workflow.datatable.md) |  |
+|  [DataTableProfile](./workflow.datatableprofile.md) |  |
 |  [DefaultGraph](./workflow.defaultgraph.md) |  |
 |  [Named](./workflow.named.md) |  |
 |  [ObservableNode](./workflow.observablenode.md) |  |
@@ -24,6 +26,7 @@
 |  [TableBundle](./workflow.tablebundle.md) |  |
 |  [TableBundleProfile](./workflow.tablebundleprofile.md) |  |
 |  [Workflow](./workflow.workflow.md) |  |
+|  [WorkflowProfile](./workflow.workflowprofile.md) |  |
 
 ## Enumerations
 
@@ -70,6 +73,7 @@
 |  [Node\_2](./workflow.node_2.md) | A graph processing node |
 |  [NodeBinding](./workflow.nodebinding.md) | A binding for a value being emitted from a node |
 |  [ProfileHandler](./workflow.profilehandler.md) | A custom profile handler |
+|  [ProfileInitializationContext](./workflow.profileinitializationcontext.md) |  |
 |  [ResourceConstructor](./workflow.resourceconstructor.md) | A constructor for a resource |
 |  [Step](./workflow.step.md) | Resolved step data, used in living workflows |
 |  [StepInput](./workflow.stepinput.md) | Step input data for parsing workflow schemas |

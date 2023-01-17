@@ -28,4 +28,5 @@ export interface FieldMetadata
 |  [minimum?](./schema.fieldmetadata.minimum.md) |  | number | <i>(Optional)</i> Min value. Note that this can be specified rather than computed, in which case it defines valid boundaries for the data values. |
 |  [mode?](./schema.fieldmetadata.mode.md) |  | string \| number \| boolean \| Date | <i>(Optional)</i> Mode |
 |  [stdev?](./schema.fieldmetadata.stdev.md) |  | number | <i>(Optional)</i> Standard deviation. |
+|  [type?](./schema.fieldmetadata.type.md) |  | [DataType](./schema.datatype.md) | <i>(Optional)</i> TEMP: this is determined via stats introspection, but our much more robust type discovery for the codebooks should be used, and the type on Field. |
 

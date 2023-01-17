@@ -33,14 +33,7 @@
                         {
                             "properties": {
                                 "source": {
-                                    "anyOf": [
-                                        {
-                                            "$ref": "#/definitions/NamedPortBinding"
-                                        },
-                                        {
-                                            "type": "string"
-                                        }
-                                    ]
+                                    "$ref": "#/definitions/PortBinding"
                                 }
                             },
                             "type": "object"
@@ -50,20 +43,6 @@
                         }
                     ],
                     "description": "Standard step input; single source with default name \"source\".\n\nIf undefined, the default output of the previous step will be used (if available).\nIf no previous step is available, this will remain undefined"
-                }
-            },
-            "type": "object"
-        },
-        "Bin": {
-            "properties": {
-                "count": {
-                    "type": "number"
-                },
-                "min": {
-                    "type": [
-                        "string",
-                        "number"
-                    ]
                 }
             },
             "type": "object"
@@ -114,8 +93,14 @@
         "BinStrategy": {
             "enum": [
                 "auto",
+                "doane",
+                "fd",
                 "fixed count",
-                "fixed width"
+                "fixed width",
+                "rice",
+                "scott",
+                "sqrt",
+                "sturges"
             ],
             "type": "string"
         },
@@ -173,21 +158,11 @@
             ],
             "type": "string"
         },
-        "Category": {
-            "properties": {
-                "count": {
-                    "type": "number"
-                },
-                "name": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
         "CodebookSchema": {
             "description": "This contains all of the field-level details for interpreting a dataset,\nincluding data types, mapping, and metadata.\nNote that with persisted metadata and field examples, a dataset can often be visualized\nand described to the user without actually loading the source file.\nresource profile: 'codebook'",
             "properties": {
                 "$schema": {
+                    "description": "The JSON schema for this resource.",
                     "type": "string"
                 },
                 "description": {
@@ -195,6 +170,7 @@
                     "type": "string"
                 },
                 "fields": {
+                    "description": "The per-field encodings. These contain interpretive information about the data.",
                     "items": {
                         "$ref": "#/definitions/Field"
                     },
@@ -202,10 +178,6 @@
                 },
                 "homepage": {
                     "description": "URL to a public webpage that describes this resource.",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "Generated guid, immutable.\nThis can be used for stable referencing.",
                     "type": "string"
                 },
                 "license": {
@@ -228,7 +200,7 @@
                             "type": "string"
                         }
                     ],
-                    "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables)."
+                    "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).\nURI-compliant path to the referenced resource (local or remote)."
                 },
                 "profile": {
                     "description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
@@ -237,15 +209,16 @@
                     ],
                     "type": "string"
                 },
+                "rel": {
+                    "description": "The relationship of this resource to the parent resource.\n\nNote: If the resource is a profile-free reference object (e.g.\n{ \"rel\": \"input\", \"path\": \"path/to/datatable.json\" },\n\nThen the relationship is _external_ the target resource and should not be persisted\nin the object\n)",
+                    "type": "string"
+                },
                 "sources": {
                     "description": "List of resources that underly this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
                     "items": {
                         "anyOf": [
                             {
                                 "$ref": "#/definitions/ResourceSchema"
-                            },
-                            {
-                                "$ref": "#/definitions/ResourceRelationship"
                             },
                             {
                                 "type": "string"
@@ -419,25 +392,11 @@
                     "description": "The inputs that must be bound; \"source\" & \"other\".",
                     "properties": {
                         "other": {
-                            "anyOf": [
-                                {
-                                    "$ref": "#/definitions/NamedPortBinding"
-                                },
-                                {
-                                    "type": "string"
-                                }
-                            ],
+                            "$ref": "#/definitions/PortBinding",
                             "description": "The secondary input, which must be specified"
                         },
                         "source": {
-                            "anyOf": [
-                                {
-                                    "$ref": "#/definitions/NamedPortBinding"
-                                },
-                                {
-                                    "type": "string"
-                                }
-                            ],
+                            "$ref": "#/definitions/PortBinding",
                             "description": "The primary input, which must be specified"
                         }
                     },
@@ -509,10 +468,6 @@
                     "$ref": "#/definitions/Record<any,any>",
                     "description": "This provides a mapping between cell values and some other value.\nMost commonly this is the core \"data dictionary\", whereby cell values are stored as numeric categories,\nand the dictionary defines textual descriptions of the actual meaning.\nIf numeric, the keys are usually categorical ordinal or nominal.\nString keys are often commonly used (for example, medical data often use short alphanumeric codes to represent diagnostic strings)."
                 },
-                "metadata": {
-                    "$ref": "#/definitions/FieldMetadata",
-                    "description": "Detailed statistical metadata for the field.\nAlso convenient way to persist so expensive recomputing can be avoided."
-                },
                 "name": {
                     "description": "User-specified name. This will serve as the local id (i.e., like a filename.) and should be URI-compatible.\nThis should be editable, just like any other filename on a file system.",
                     "type": "string"
@@ -569,78 +524,6 @@
                 "variance"
             ],
             "type": "string"
-        },
-        "FieldMetadata": {
-            "description": "Holds core metadata/stats for a data field.",
-            "properties": {
-                "bins": {
-                    "description": "Computed histogram bins for numeric fields.",
-                    "items": {
-                        "$ref": "#/definitions/Bin"
-                    },
-                    "type": "array"
-                },
-                "categories": {
-                    "description": "List of unique categories for string fields.",
-                    "items": {
-                        "$ref": "#/definitions/Category"
-                    },
-                    "type": "array"
-                },
-                "count": {
-                    "description": "Count of valid values in the column (excluding invalid, null, etc.)",
-                    "type": "number"
-                },
-                "distinct": {
-                    "description": "Count of unique values in the column",
-                    "type": "number"
-                },
-                "invalid": {
-                    "description": "Count of invalid/null values in the column",
-                    "type": "number"
-                },
-                "magnitude": {
-                    "description": "Magnitude of the data, i.e., the absolute difference between the min and max values.",
-                    "type": "number"
-                },
-                "maximum": {
-                    "description": "Max value.\nNote that this can be specified rather than computed, in which case it defines valid boundaries for the data values.",
-                    "type": "number"
-                },
-                "mean": {
-                    "description": "Mean.",
-                    "type": "number"
-                },
-                "median": {
-                    "description": "Median.",
-                    "type": "number"
-                },
-                "minimum": {
-                    "description": "Min value.\nNote that this can be specified rather than computed, in which case it defines valid boundaries for the data values.",
-                    "type": "number"
-                },
-                "mode": {
-                    "anyOf": [
-                        {
-                            "format": "date-time",
-                            "type": "string"
-                        },
-                        {
-                            "type": [
-                                "string",
-                                "number",
-                                "boolean"
-                            ]
-                        }
-                    ],
-                    "description": "Mode"
-                },
-                "stdev": {
-                    "description": "Standard deviation.",
-                    "type": "number"
-                }
-            },
-            "type": "object"
         },
         "FillArgs": {
             "properties": {
@@ -941,6 +824,16 @@
             },
             "type": "object"
         },
+        "PortBinding": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/NamedPortBinding"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
         "RecodeArgs": {
             "properties": {
                 "column": {
@@ -967,31 +860,11 @@
         "Record<string,string>": {
             "type": "object"
         },
-        "ResourceRelationship": {
-            "description": "An explicit resource relationship",
-            "properties": {
-                "rel": {
-                    "description": "The relationship type",
-                    "type": "string"
-                },
-                "source": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/ResourceSchema"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ],
-                    "description": "The linked or embedded resource"
-                }
-            },
-            "type": "object"
-        },
         "ResourceSchema": {
             "description": "Parent class for any resource type understood by the system.\nAny object type that extends from Resouce is expected to have a standalone schema published.\nFor project state, this can be left as generic as possible for now.",
             "properties": {
                 "$schema": {
+                    "description": "The JSON schema for this resource.",
                     "type": "string"
                 },
                 "description": {
@@ -1000,10 +873,6 @@
                 },
                 "homepage": {
                     "description": "URL to a public webpage that describes this resource.",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "Generated guid, immutable.\nThis can be used for stable referencing.",
                     "type": "string"
                 },
                 "license": {
@@ -1026,10 +895,14 @@
                             "type": "string"
                         }
                     ],
-                    "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables)."
+                    "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).\nURI-compliant path to the referenced resource (local or remote)."
                 },
                 "profile": {
                     "description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
+                    "type": "string"
+                },
+                "rel": {
+                    "description": "The relationship of this resource to the parent resource.\n\nNote: If the resource is a profile-free reference object (e.g.\n{ \"rel\": \"input\", \"path\": \"path/to/datatable.json\" },\n\nThen the relationship is _external_ the target resource and should not be persisted\nin the object\n)",
                     "type": "string"
                 },
                 "sources": {
@@ -1038,9 +911,6 @@
                         "anyOf": [
                             {
                                 "$ref": "#/definitions/ResourceSchema"
-                            },
-                            {
-                                "$ref": "#/definitions/ResourceRelationship"
                             },
                             {
                                 "type": "string"
@@ -1125,6 +995,881 @@
             },
             "type": "object"
         },
+        "Step": {
+            "anyOf": [
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/AggregateArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "aggregate"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/BinArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "bin"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/BinarizeArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "binarize"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/BooleanArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "boolean"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "verb": {
+                                    "enum": [
+                                        "concat"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/VariadicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/ConvertArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "convert"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/Partial<InputColumnListArgs>"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "dedupe"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/DeriveArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "derive"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "verb": {
+                                    "enum": [
+                                        "difference"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/VariadicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/EncodeDecodeArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "decode"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/EncodeDecodeArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "encode"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/EraseArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "erase"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/FillArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "fill"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/FilterArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "filter"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/FoldArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "fold"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/InputColumnListArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "groupby"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/ImputeArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "impute"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "verb": {
+                                    "enum": [
+                                        "intersect"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/VariadicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/JoinArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "join"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/DualInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/LookupArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "lookup"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/DualInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/MergeArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "merge"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/OnehotArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "onehot"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/OrderbyArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "orderby"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/PivotArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "pivot"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/RecodeArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "recode"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/InputColumnRecordArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "rename"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/RollupArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "rollup"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/SampleArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "sample"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/InputColumnListArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "select"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/SpreadArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "spread"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/InputKeyValueArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "unfold"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "verb": {
+                                    "enum": [
+                                        "ungroup"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/UnhotArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "unhot"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "verb": {
+                                    "enum": [
+                                        "union"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/VariadicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "verb": {
+                                    "enum": [
+                                        "unorder"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/InputColumnListArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "unroll"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/WindowArgs"
+                                },
+                                "verb": {
+                                    "enum": [
+                                        "window"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                }
+            ],
+            "description": "Specification for step items"
+        },
         "StepJsonCommon": {
             "description": "Common step properties",
             "properties": {
@@ -1176,26 +1921,12 @@
                         "others": {
                             "description": "The variadic secondary inputs",
                             "items": {
-                                "anyOf": [
-                                    {
-                                        "$ref": "#/definitions/NamedPortBinding"
-                                    },
-                                    {
-                                        "type": "string"
-                                    }
-                                ]
+                                "$ref": "#/definitions/PortBinding"
                             },
                             "type": "array"
                         },
                         "source": {
-                            "anyOf": [
-                                {
-                                    "$ref": "#/definitions/NamedPortBinding"
-                                },
-                                {
-                                    "type": "string"
-                                }
-                            ],
+                            "$ref": "#/definitions/PortBinding",
                             "description": "The primary input"
                         }
                     },
@@ -1241,6 +1972,7 @@
     "description": "The root wrangling workflow specification.\nresource profile: 'workflow'",
     "properties": {
         "$schema": {
+            "description": "The JSON schema for this resource.",
             "type": "string"
         },
         "description": {
@@ -1249,10 +1981,6 @@
         },
         "homepage": {
             "description": "URL to a public webpage that describes this resource.",
-            "type": "string"
-        },
-        "id": {
-            "description": "Generated guid, immutable.\nThis can be used for stable referencing.",
             "type": "string"
         },
         "input": {
@@ -1289,7 +2017,7 @@
                     "type": "string"
                 }
             ],
-            "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables)."
+            "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).\nURI-compliant path to the referenced resource (local or remote)."
         },
         "profile": {
             "description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
@@ -1298,15 +2026,16 @@
             ],
             "type": "string"
         },
+        "rel": {
+            "description": "The relationship of this resource to the parent resource.\n\nNote: If the resource is a profile-free reference object (e.g.\n{ \"rel\": \"input\", \"path\": \"path/to/datatable.json\" },\n\nThen the relationship is _external_ the target resource and should not be persisted\nin the object\n)",
+            "type": "string"
+        },
         "sources": {
             "description": "List of resources that underly this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
             "items": {
                 "anyOf": [
                     {
                         "$ref": "#/definitions/ResourceSchema"
-                    },
-                    {
-                        "$ref": "#/definitions/ResourceRelationship"
                     },
                     {
                         "type": "string"
@@ -1318,879 +2047,7 @@
         "steps": {
             "description": "The workflow steps",
             "items": {
-                "anyOf": [
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/AggregateArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "aggregate"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/BinArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "bin"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/BinarizeArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "binarize"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/BooleanArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "boolean"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "verb": {
-                                        "enum": [
-                                            "concat"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/VariadicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/ConvertArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "convert"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/Partial<InputColumnListArgs>"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "dedupe"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/DeriveArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "derive"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "verb": {
-                                        "enum": [
-                                            "difference"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/VariadicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/EncodeDecodeArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "decode"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/EncodeDecodeArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "encode"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/EraseArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "erase"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/FillArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "fill"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/FilterArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "filter"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/FoldArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "fold"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/InputColumnListArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "groupby"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/ImputeArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "impute"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "verb": {
-                                        "enum": [
-                                            "intersect"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/VariadicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/JoinArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "join"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/DualInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/LookupArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "lookup"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/DualInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/MergeArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "merge"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/OnehotArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "onehot"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/OrderbyArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "orderby"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/PivotArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "pivot"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/RecodeArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "recode"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/InputColumnRecordArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "rename"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/RollupArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "rollup"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/SampleArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "sample"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/InputColumnListArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "select"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/SpreadArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "spread"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/InputKeyValueArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "unfold"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "verb": {
-                                        "enum": [
-                                            "ungroup"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/UnhotArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "unhot"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "verb": {
-                                        "enum": [
-                                            "union"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/VariadicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "verb": {
-                                        "enum": [
-                                            "unorder"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/InputColumnListArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "unroll"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
-                                        "$ref": "#/definitions/WindowArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "window"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    }
-                ],
-                "description": "Specification for step items"
+                "$ref": "#/definitions/Step"
             },
             "type": "array"
         },

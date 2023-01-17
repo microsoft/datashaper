@@ -47,21 +47,6 @@
             },
             "type": "object"
         },
-        "Bin": {
-            "description": "Describes a data bin in terms of inclusive lower bound and count of values in the bin.",
-            "properties": {
-                "count": {
-                    "type": "number"
-                },
-                "min": {
-                    "type": [
-                        "string",
-                        "number"
-                    ]
-                }
-            },
-            "type": "object"
-        },
         "BinArgs": {
             "properties": {
                 "clamped": {
@@ -175,18 +160,6 @@
                 "xor"
             ],
             "type": "string"
-        },
-        "Category": {
-            "description": "Describes a nomincal category in terms of category name and count of values in the category.",
-            "properties": {
-                "count": {
-                    "type": "number"
-                },
-                "name": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
         },
         "CodebookSchema": {
             "description": "This contains all of the field-level details for interpreting a dataset,\nincluding data types, mapping, and metadata.\nNote that with persisted metadata and field examples, a dataset can often be visualized\nand described to the user without actually loading the source file.\nresource profile: 'codebook'",
@@ -498,10 +471,6 @@
                     "$ref": "#/definitions/Record<any,any>",
                     "description": "This provides a mapping between cell values and some other value.\nMost commonly this is the core \"data dictionary\", whereby cell values are stored as numeric categories,\nand the dictionary defines textual descriptions of the actual meaning.\nIf numeric, the keys are usually categorical ordinal or nominal.\nString keys are often commonly used (for example, medical data often use short alphanumeric codes to represent diagnostic strings)."
                 },
-                "metadata": {
-                    "$ref": "#/definitions/FieldMetadata",
-                    "description": "Detailed statistical metadata for the field.\nAlso convenient way to persist so expensive recomputing can be avoided."
-                },
                 "name": {
                     "description": "User-specified name. This will serve as the local id (i.e., like a filename.) and should be URI-compatible.\nThis should be editable, just like any other filename on a file system.",
                     "type": "string"
@@ -558,78 +527,6 @@
                 "variance"
             ],
             "type": "string"
-        },
-        "FieldMetadata": {
-            "description": "Holds core metadata/stats for a data field.",
-            "properties": {
-                "bins": {
-                    "description": "Computed histogram bins for numeric fields.",
-                    "items": {
-                        "$ref": "#/definitions/Bin"
-                    },
-                    "type": "array"
-                },
-                "categories": {
-                    "description": "List of unique categories for string fields.",
-                    "items": {
-                        "$ref": "#/definitions/Category"
-                    },
-                    "type": "array"
-                },
-                "count": {
-                    "description": "Count of valid values in the column (excluding invalid, null, etc.)",
-                    "type": "number"
-                },
-                "distinct": {
-                    "description": "Count of unique values in the column",
-                    "type": "number"
-                },
-                "invalid": {
-                    "description": "Count of invalid/null values in the column",
-                    "type": "number"
-                },
-                "magnitude": {
-                    "description": "Magnitude of the data, i.e., the absolute difference between the min and max values.",
-                    "type": "number"
-                },
-                "maximum": {
-                    "description": "Max value.\nNote that this can be specified rather than computed, in which case it defines valid boundaries for the data values.",
-                    "type": "number"
-                },
-                "mean": {
-                    "description": "Mean.",
-                    "type": "number"
-                },
-                "median": {
-                    "description": "Median.",
-                    "type": "number"
-                },
-                "minimum": {
-                    "description": "Min value.\nNote that this can be specified rather than computed, in which case it defines valid boundaries for the data values.",
-                    "type": "number"
-                },
-                "mode": {
-                    "anyOf": [
-                        {
-                            "format": "date-time",
-                            "type": "string"
-                        },
-                        {
-                            "type": [
-                                "string",
-                                "number",
-                                "boolean"
-                            ]
-                        }
-                    ],
-                    "description": "Mode"
-                },
-                "stdev": {
-                    "description": "Standard deviation.",
-                    "type": "number"
-                }
-            },
-            "type": "object"
         },
         "FillArgs": {
             "properties": {

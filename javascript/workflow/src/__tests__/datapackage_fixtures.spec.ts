@@ -67,8 +67,10 @@ function defineTestCase(parentPath: string, test: string) {
 					expect(workflow).toBeDefined()
 					expect(workflow?.length ?? 0).toEqual(table.workflowLength ?? 0)
 				}
-				expect(found?.output?.table?.numRows()).toBeGreaterThan(0)
-				expect(found?.output?.table?.numCols()).toBeGreaterThan(0)
+				expect(found?.output?.table?.numRows()).toEqual(table.rowCount)
+				expect(found?.output?.table?.numCols()).toEqual(table.columnCount)
+				expect(found?.output?.metadata?.cols).toEqual(found?.output?.table?.numCols())
+				expect(found?.output?.metadata?.rows).toEqual(found?.output?.table?.numRows())
 			}
 			await checkPersisted(await datapackage.save(), expected)
 		} finally {

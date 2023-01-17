@@ -11,6 +11,12 @@ export declare class DataPackage extends Resource
 ```
 <b>Extends:</b> [Resource](./workflow.resource.md)
 
+## Constructors
+
+|  Constructor | Modifiers | Description |
+|  --- | --- | --- |
+|  [(constructor)()](./workflow.datapackage._constructor_.md) |  | Constructs a new instance of the <code>DataPackage</code> class |
+
 ## Properties
 
 |  Property | Modifiers | Type | Description |

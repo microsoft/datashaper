@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { ResourceSchema } from '@datashaper/schema'
 import type {
 	DataPackage,
 	ProfileHandler,
@@ -57,13 +58,15 @@ export interface AppServices {
 	renameResource(resource: Resource): Promise<string>
 }
 
-export interface ProfilePlugin<T extends Resource = any> {
-	/**
-	 * The profile name to register within the app framework.
-	 * This is used to identify the plugin and should be unique.
-	 */
-	profile: string
+export interface AppProfileInitializationContext {
+	dataPackage: DataPackage
+	api: AppServices
+}
 
+export interface ProfilePlugin<
+	Res extends Resource = Resource,
+	Schema extends ResourceSchema = ResourceSchema,
+> extends ProfileHandler<Res, Schema, AppProfileInitializationContext> {
 	/**
 	 * A friendly title for the profile, used for resource creation. (e.g. "New <title>")
 	 */
@@ -81,25 +84,9 @@ export interface ProfilePlugin<T extends Resource = any> {
 	iconName: string
 
 	/**
-	 * Initialize the plugin with application-level services
-	 */
-	initialize?: (api: AppServices, dp: DataPackage) => void
-
-	/**
 	 * Render the plugin
 	 */
-	renderer: React.ComponentType<{ href: string; resource: T }>
-
-	/**
-	 * The persistence handler to use for this profile
-	 * null: no persistence
-	 */
-	dataHandler?: ProfileHandler | null
-
-	/**
-	 * Creates a new resource of this type
-	 */
-	createResource: () => T
+	renderer: React.ComponentType<{ href: string; resource: Res }>
 
 	/**
 	 * Gets commands for the plugin
@@ -111,7 +98,7 @@ export interface ProfilePlugin<T extends Resource = any> {
 	/**
 	 * Create contextual menu items for a resource
 	 */
-	getMenuItems?: (resource: T) => IContextualMenuItem[]
+	getMenuItems?: (resource: Res) => IContextualMenuItem[]
 
 	/**
 	 * Event handler for when the resource is undergoing route generation.
@@ -121,7 +108,7 @@ export interface ProfilePlugin<T extends Resource = any> {
 	 * @param routes - A map of the resource-routes keyed by resource name.
 	 */
 	getRoutes?: (
-		resource: T,
+		resource: Res,
 		routes: Map<string, string>,
 	) => GeneratedExtraRoutes | undefined
 }

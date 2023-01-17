@@ -9,5 +9,5 @@ Save custom resources into the files map.
 <b>Signature:</b>
 
 ```typescript
-save?: (data: Resource, path: string, files: Map<string, Blob>) => Promise<string[]>;
+save?: (data: Res, path: string, files: Map<string, Blob>) => Promise<string[]>;
 ```

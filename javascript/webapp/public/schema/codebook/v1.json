@@ -1,31 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
-        "Bin": {
-            "properties": {
-                "count": {
-                    "type": "number"
-                },
-                "min": {
-                    "type": [
-                        "string",
-                        "number"
-                    ]
-                }
-            },
-            "type": "object"
-        },
-        "Category": {
-            "properties": {
-                "count": {
-                    "type": "number"
-                },
-                "name": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
         "Constraints": {
             "description": "Validation constraints for a field.",
             "properties": {
@@ -122,10 +97,6 @@
                     "$ref": "#/definitions/Record<any,any>",
                     "description": "This provides a mapping between cell values and some other value.\nMost commonly this is the core \"data dictionary\", whereby cell values are stored as numeric categories,\nand the dictionary defines textual descriptions of the actual meaning.\nIf numeric, the keys are usually categorical ordinal or nominal.\nString keys are often commonly used (for example, medical data often use short alphanumeric codes to represent diagnostic strings)."
                 },
-                "metadata": {
-                    "$ref": "#/definitions/FieldMetadata",
-                    "description": "Detailed statistical metadata for the field.\nAlso convenient way to persist so expensive recomputing can be avoided."
-                },
                 "name": {
                     "description": "User-specified name. This will serve as the local id (i.e., like a filename.) and should be URI-compatible.\nThis should be editable, just like any other filename on a file system.",
                     "type": "string"
@@ -160,106 +131,14 @@
             },
             "type": "object"
         },
-        "FieldMetadata": {
-            "description": "Holds core metadata/stats for a data field.",
-            "properties": {
-                "bins": {
-                    "description": "Computed histogram bins for numeric fields.",
-                    "items": {
-                        "$ref": "#/definitions/Bin"
-                    },
-                    "type": "array"
-                },
-                "categories": {
-                    "description": "List of unique categories for string fields.",
-                    "items": {
-                        "$ref": "#/definitions/Category"
-                    },
-                    "type": "array"
-                },
-                "count": {
-                    "description": "Count of valid values in the column (excluding invalid, null, etc.)",
-                    "type": "number"
-                },
-                "distinct": {
-                    "description": "Count of unique values in the column",
-                    "type": "number"
-                },
-                "invalid": {
-                    "description": "Count of invalid/null values in the column",
-                    "type": "number"
-                },
-                "magnitude": {
-                    "description": "Magnitude of the data, i.e., the absolute difference between the min and max values.",
-                    "type": "number"
-                },
-                "maximum": {
-                    "description": "Max value.\nNote that this can be specified rather than computed, in which case it defines valid boundaries for the data values.",
-                    "type": "number"
-                },
-                "mean": {
-                    "description": "Mean.",
-                    "type": "number"
-                },
-                "median": {
-                    "description": "Median.",
-                    "type": "number"
-                },
-                "minimum": {
-                    "description": "Min value.\nNote that this can be specified rather than computed, in which case it defines valid boundaries for the data values.",
-                    "type": "number"
-                },
-                "mode": {
-                    "anyOf": [
-                        {
-                            "format": "date-time",
-                            "type": "string"
-                        },
-                        {
-                            "type": [
-                                "string",
-                                "number",
-                                "boolean"
-                            ]
-                        }
-                    ],
-                    "description": "Mode"
-                },
-                "stdev": {
-                    "description": "Standard deviation.",
-                    "type": "number"
-                }
-            },
-            "type": "object"
-        },
         "Record<any,any>": {
-            "type": "object"
-        },
-        "ResourceRelationship": {
-            "description": "An explicit resource relationship",
-            "properties": {
-                "rel": {
-                    "description": "The relationship type",
-                    "type": "string"
-                },
-                "source": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/ResourceSchema"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ],
-                    "description": "The linked or embedded resource"
-                }
-            },
             "type": "object"
         },
         "ResourceSchema": {
             "description": "Parent class for any resource type understood by the system.\nAny object type that extends from Resouce is expected to have a standalone schema published.\nFor project state, this can be left as generic as possible for now.",
             "properties": {
                 "$schema": {
+                    "description": "The JSON schema for this resource.",
                     "type": "string"
                 },
                 "description": {
@@ -268,10 +147,6 @@
                 },
                 "homepage": {
                     "description": "URL to a public webpage that describes this resource.",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "Generated guid, immutable.\nThis can be used for stable referencing.",
                     "type": "string"
                 },
                 "license": {
@@ -294,10 +169,14 @@
                             "type": "string"
                         }
                     ],
-                    "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables)."
+                    "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).\nURI-compliant path to the referenced resource (local or remote)."
                 },
                 "profile": {
                     "description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
+                    "type": "string"
+                },
+                "rel": {
+                    "description": "The relationship of this resource to the parent resource.\n\nNote: If the resource is a profile-free reference object (e.g.\n{ \"rel\": \"input\", \"path\": \"path/to/datatable.json\" },\n\nThen the relationship is _external_ the target resource and should not be persisted\nin the object\n)",
                     "type": "string"
                 },
                 "sources": {
@@ -306,9 +185,6 @@
                         "anyOf": [
                             {
                                 "$ref": "#/definitions/ResourceSchema"
-                            },
-                            {
-                                "$ref": "#/definitions/ResourceRelationship"
                             },
                             {
                                 "type": "string"
@@ -339,6 +215,7 @@
     "description": "This contains all of the field-level details for interpreting a dataset,\nincluding data types, mapping, and metadata.\nNote that with persisted metadata and field examples, a dataset can often be visualized\nand described to the user without actually loading the source file.\nresource profile: 'codebook'",
     "properties": {
         "$schema": {
+            "description": "The JSON schema for this resource.",
             "type": "string"
         },
         "description": {
@@ -346,6 +223,7 @@
             "type": "string"
         },
         "fields": {
+            "description": "The per-field encodings. These contain interpretive information about the data.",
             "items": {
                 "$ref": "#/definitions/Field"
             },
@@ -353,10 +231,6 @@
         },
         "homepage": {
             "description": "URL to a public webpage that describes this resource.",
-            "type": "string"
-        },
-        "id": {
-            "description": "Generated guid, immutable.\nThis can be used for stable referencing.",
             "type": "string"
         },
         "license": {
@@ -379,7 +253,7 @@
                     "type": "string"
                 }
             ],
-            "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables)."
+            "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).\nURI-compliant path to the referenced resource (local or remote)."
         },
         "profile": {
             "description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
@@ -388,15 +262,16 @@
             ],
             "type": "string"
         },
+        "rel": {
+            "description": "The relationship of this resource to the parent resource.\n\nNote: If the resource is a profile-free reference object (e.g.\n{ \"rel\": \"input\", \"path\": \"path/to/datatable.json\" },\n\nThen the relationship is _external_ the target resource and should not be persisted\nin the object\n)",
+            "type": "string"
+        },
         "sources": {
             "description": "List of resources that underly this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
             "items": {
                 "anyOf": [
                     {
                         "$ref": "#/definitions/ResourceSchema"
-                    },
-                    {
-                        "$ref": "#/definitions/ResourceRelationship"
                     },
                     {
                         "type": "string"

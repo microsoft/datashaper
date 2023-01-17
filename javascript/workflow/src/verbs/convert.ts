@@ -52,9 +52,9 @@ function parseType(
 					: parseTime(value)
 			}
 			case ParseType.Integer:
-				return op.parse_int(value, radix)
+				return parseInteger(value, radix)
 			case ParseType.Decimal:
-				return op.parse_float(value)
+				return parseDecimal(value)
 			case ParseType.Array:
 				return op.split(value, delimiter, 10000000)
 			case ParseType.String: {
@@ -78,6 +78,16 @@ function parseType(
 			}
 		}
 	})
+}
+
+function parseInteger(value: any, radix?: number): number | null {
+	const val = op.parse_int(value, radix)
+	return isNaN(val) ? null : val
+}
+
+function parseDecimal(value: any): number | null {
+	const val = op.parse_float(value)
+	return isNaN(val) ? null : val
 }
 
 export const convert = stepVerbFactory(convertStep)

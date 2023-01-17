@@ -9,17 +9,16 @@ Creates a new instance of a schema resource
 <b>Signature:</b>
 
 ```typescript
-createInstance(schema: ResourceSchema | undefined, manager: ResourceManager): Promise<Resource>;
+createInstance(schema?: Schema | undefined): Promise<Res>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  schema | ResourceSchema \| undefined | The schema instance to create |
-|  manager | ResourceManager | The resource manager |
+|  schema | Schema \| undefined | <i>(Optional)</i> The schema instance to create |
 
 <b>Returns:</b>
 
-Promise&lt;[Resource](./workflow.resource.md)<!-- -->&gt;
+Promise&lt;Res&gt;
 

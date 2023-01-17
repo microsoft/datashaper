@@ -1,6 +1,7 @@
 import { KnownProfile } from '@datashaper/schema'
 
 import type { Resource } from '../../Resource.js'
+import { DataPackage } from '../DataPackage.js'
 import { toBlob } from '../io.js'
 import { ResourceManager } from '../ResourceManager.js'
 
@@ -8,7 +9,8 @@ describe('The ResourceManager class', () => {
 	let mgr: ResourceManager
 
 	beforeEach(() => {
-		mgr = new ResourceManager()
+		const dp = new DataPackage()
+		mgr = dp.resourceManager
 	})
 
 	const inspectResource = (

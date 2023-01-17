@@ -2,8 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { AppServices, ProfilePlugin } from '@datashaper/app-framework'
+import type {
+	AppProfileInitializationContext,
+	ProfilePlugin,
+} from '@datashaper/app-framework'
 import { CommandBarSection, ResourceGroupType } from '@datashaper/app-framework'
+import type { ResourceSchema } from '@datashaper/schema'
 import type { DataPackage } from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
 
@@ -19,12 +23,18 @@ export class TestAppProfile implements ProfilePlugin<TestAppResource> {
 	public readonly group = ResourceGroupType.Apps
 	private _dataPackage: DataPackage | undefined
 
-	public initialize(_api: AppServices, dataPackage: DataPackage): void {
+	public initialize({ dataPackage }: AppProfileInitializationContext): void {
 		this._dataPackage = dataPackage
 	}
 
-	public createResource(): TestAppResource {
-		return new TestAppResource()
+	public createInstance(
+		schema?: ResourceSchema | undefined,
+	): Promise<TestAppResource> {
+		const result = new TestAppResource()
+		if (schema != null) {
+			result.loadSchema(schema)
+		}
+		return Promise.resolve(result)
 	}
 
 	public getCommandBarCommands(
@@ -40,9 +50,10 @@ export class TestAppProfile implements ProfilePlugin<TestAppResource> {
 					key: this.profile,
 					text: `New ${this.title}`,
 					onClick: () => {
-						const resource = this.createResource()
-						resource.name = dp.suggestResourceName(resource.name)
-						dp.addResource(resource)
+						this.createInstance().then(resource => {
+							resource.name = dp.suggestResourceName(resource.name)
+							dp.addResource(resource)
+						})
 					},
 				},
 			]

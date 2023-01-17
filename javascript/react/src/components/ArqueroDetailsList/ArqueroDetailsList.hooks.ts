@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { SortDirection } from '@datashaper/schema'
-import type { TableMetadata } from '@datashaper/tables'
+import type { Field, SortDirection } from '@datashaper/schema'
+import { columnTypes } from '@datashaper/tables'
 import type {
 	IColumn,
 	IDetailsGroupRenderProps,
@@ -21,7 +21,6 @@ import { debounceFn, groupBuilder } from './ArqueroDetailsList.utils.js'
 import { useGroupHeaderRenderer, useSortedGroups } from './hooks/index.js'
 import { useFill } from './hooks/useFill.js'
 import { useItems } from './hooks/useItems.js'
-
 export function useVirtualizedItems(
 	table: ColumnTable,
 	columns: IColumn[] | undefined,
@@ -147,13 +146,13 @@ export function useGetKey(): (_: any, index?: number) => string {
 
 export function useGroupProps(
 	table: ColumnTable,
-	metadata: TableMetadata | undefined,
+	fields: Field[],
 	onRenderGroupHeader: GroupHeaderFunction | undefined,
 	features: ArqueroDetailsListFeatures,
 ): IDetailsGroupRenderProps {
 	const onRenderHeader = useGroupHeaderRenderer(
 		table,
-		metadata,
+		fields,
 		onRenderGroupHeader,
 		features.lazyLoadGroups,
 	)
@@ -162,4 +161,19 @@ export function useGroupProps(
 
 export function useListProps(version: number): IListProps<any> {
 	return useMemo(() => ({ version }), [version])
+}
+
+export function useFields(table: ColumnTable, fields?: Field[]): Field[] {
+	// TODO: this uses the older type determination, which is not as sophisticated as our new codebook.
+	// however, dates are well detected in the new codebooks, but not well parsed.
+	return useMemo(() => {
+		if (fields) {
+			return fields
+		}
+		const types = columnTypes(table)
+		return Object.entries(types).map(([name, type]) => ({
+			name,
+			type,
+		}))
+	}, [table, fields])
 }

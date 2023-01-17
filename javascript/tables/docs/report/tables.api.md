@@ -8,6 +8,7 @@ import { CodebookSchema } from '@datashaper/schema';
 import { CodebookStrategy } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { default as ColumnTable_2 } from 'arquero/dist/types/table/column-table.js';
+import type { CSVParseOptions } from 'arquero/dist/types/format/from-csv.js';
 import type { DataTableSchema } from '@datashaper/schema';
 import { DataType } from '@datashaper/schema';
 import type { Field } from '@datashaper/schema';
@@ -88,8 +89,16 @@ export function formatIfNumber(value: Value): string | Value;
 
 // Warning: (ae-missing-release-tag) "formatNumberStr" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
-export function formatNumberStr(value: string | number, decimal?: string, thousands?: string): string;
+// @public
+export function formatNumberStr(value: string | number, options?: {
+    decimal?: string;
+    thousands?: string;
+}): string;
+
+// Warning: (ae-missing-release-tag) "fromCSV" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function fromCSV(text: string, options?: CSVParseOptions): ColumnTable_2;
 
 // Warning: (ae-missing-release-tag) "generateCodebook" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -127,8 +136,8 @@ columns?: string[]): TableMetadata;
 
 // Warning: (ae-missing-release-tag) "isArray" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
-export function isArray(value: string): boolean;
+// @public
+export function isArray(delimiter?: string): (value: string) => boolean;
 
 // Warning: (ae-missing-release-tag) "isBoolean" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -183,7 +192,7 @@ export function minLengthValidator(field: Field, includeIndexes: boolean): Valid
 // Warning: (ae-missing-release-tag) "parseArray" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function parseArray(options?: TypeHints): (value: string) => any[] | null;
+export function parseArray(options?: TypeHints, delimiter?: string): (value: string) => any[] | null;
 
 // Warning: (ae-missing-release-tag) "parseAs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -195,25 +204,10 @@ export function parseAs(type?: DataType, hints?: TypeHints): Value;
 // @public (undocumented)
 export function parseBoolean(naValues?: string[], trueValues?: string[], falseValues?: string[]): (value: string) => boolean | null;
 
-// Warning: (ae-missing-release-tag) "ParseConfig" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ParseConfig {
-    // (undocumented)
-    codebook?: Partial<CodebookSchema>;
-    // (undocumented)
-    typeHints?: TypeHints;
-}
-
-// Warning: (ae-missing-release-tag) "parseCSV" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function parseCSV(csv: string, options?: ParseConfig): ColumnTable;
-
 // Warning: (ae-missing-release-tag) "parseDate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function parseDate(naValues?: string[], dateFormat?: string): (value: string) => string | null;
+export function parseDate(naValues?: string[]): (value: string) => Date | null;
 
 // Warning: (ae-missing-release-tag) "parseNumber" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -299,7 +293,7 @@ export interface TableContainer<T = unknown> {
 export interface TableMetadata {
     // (undocumented)
     cols: number;
-    columns: Record<string, Field>;
+    columns: Record<string, FieldMetadata>;
     // (undocumented)
     rows: number;
 }

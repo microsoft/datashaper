@@ -114,7 +114,9 @@ def convert(
     radix: Optional[int] = None,
     formatPattern: str = "%Y-%m-%d",
 ):
-
+    print(input)
+    print(column)
+    print(to)
     parse_type = ParseType(type)
 
     input_table = input.get_input()

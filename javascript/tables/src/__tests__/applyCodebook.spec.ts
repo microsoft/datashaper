@@ -4,10 +4,10 @@
  */
 
 import { CodebookStrategy } from '@datashaper/schema'
-import { fromCSV } from 'arquero'
 import fs from 'fs'
 
 import { applyCodebook } from '../applyCodebook.js'
+import { fromCSV } from '../fromCSV.js'
 import { generateCodebook } from '../generateCodebook.js'
 
 describe('Apply codebook tests', () => {
@@ -45,7 +45,8 @@ describe('Apply codebook tests', () => {
 
 		const element = codebookResult.fields.find(
 			element => element.name === 'diagnosis',
-		)
+		)!
+		
 		const mappingElements: Record<number, string> = {
 			0: 'heart disease',
 			1: 'diabetes type I',
@@ -57,7 +58,7 @@ describe('Apply codebook tests', () => {
 
 		const element2 = codebookResult.fields.find(
 			element => element.name === 'test',
-		)
+		)!
 		const mappingElements2: Record<number, string> = {
 			0: 'Test1',
 			1: 'Test2',

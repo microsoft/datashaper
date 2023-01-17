@@ -9,5 +9,5 @@ Create contextual menu items for a resource
 <b>Signature:</b>
 
 ```typescript
-getMenuItems?: (resource: T) => IContextualMenuItem[];
+getMenuItems?: (resource: Res) => IContextualMenuItem[];
 ```

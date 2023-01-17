@@ -33,7 +33,7 @@ export const TypeHintsDefaults: Required<TypeHints> = {
 		'-nan',
 		'',
 	],
-	thousands: ',',
+	thousands: '',
 	decimal: '.',
 	infinity: ['-inf', 'inf'],
 	// TODO: this is using moment.js. We need to make sure we're using a pandas-compatible parser notation.

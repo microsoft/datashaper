@@ -4,19 +4,21 @@
 
 ## isArray() function
 
+Detect if a string is an array by looking for the delimiter. It's expected that in a CSV any array cells will be quoted. Also note that if the default delimiter, comma, is used, these may be detected as valid numbers if checked first.
+
 <b>Signature:</b>
 
 ```typescript
-export declare function isArray(value: string): boolean;
+export declare function isArray(delimiter?: string): (value: string) => boolean;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  value | string |  |
+|  delimiter | string | <i>(Optional)</i> |
 
 <b>Returns:</b>
 
-boolean
+(value: string) =&gt; boolean
 

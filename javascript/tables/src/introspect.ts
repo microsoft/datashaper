@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Field } from '@datashaper/schema'
+import type { FieldMetadata } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { columnTypes } from './columnTypes.js'
@@ -36,33 +36,31 @@ export function introspect(
 function detailedMeta(
 	table: ColumnTable,
 	columns?: string[],
-): Record<string, Field> {
+): Record<string, FieldMetadata> {
 	// Force to get stats from ungrouped table, otherwise will get stats with grouped information and graph will not show
 	const sts = stats(table.ungroup(), columns)
 	return Object.entries(sts).reduce((acc, cur) => {
 		const [name, stat] = cur
 		const type = determineType(stat.mode)
 		acc[name] = {
-			name,
 			type,
-			metadata: stat,
+			...stat,
 		}
 		return acc
-	}, {} as Record<string, Field>)
+	}, {} as Record<string, FieldMetadata>)
 }
 
 function basicMeta(
 	table: ColumnTable,
 	columns?: string[],
-): Record<string, Field> {
+): Record<string, FieldMetadata> {
 	// Force to get stats from ungrouped table, otherwise will get stats with grouped information and graph will not show
 	const t = columnTypes(table.ungroup(), columns)
 	return Object.entries(t).reduce((acc, cur) => {
 		const [name, type] = cur
 		acc[name] = {
-			name,
 			type,
 		}
 		return acc
-	}, {} as Record<string, Field>)
+	}, {} as Record<string, FieldMetadata>)
 }

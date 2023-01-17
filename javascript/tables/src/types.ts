@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { CodebookSchema, Field } from '@datashaper/schema'
+import type { CodebookSchema, FieldMetadata } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 export interface TableContainer<T = unknown> {
@@ -35,7 +35,7 @@ export interface TableMetadata {
 	/**
 	 * Metadata for each column
 	 */
-	columns: Record<string, Field>
+	columns: Record<string, FieldMetadata>
 }
 
 export interface ReadTableOptions {
