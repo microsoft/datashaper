@@ -16,6 +16,8 @@ Multiple binning strategies are supported:
 - Fixed width: creates bins at an exact width specified
 - Fixed count: divides the data range into a fixed number of bins of equal width
 
+Note: The numpy documentation have formula errors, so please check the code implementation instead.
+
 You may supply a fixed min/max to set the outer bin boundaries. By default, if data values fall outside these boundaries they are set to +/- Infinity. If clamping is enabled, values outside the boundary are assigned to the first and last bins as appropriate (i.e., values over the max fall into the last bin). Establishing min/max bounds and clamping allows data values to be binned without revealing the true extent of the data, or whether any individual rows exceed those bounds.
 
 ## Examples
