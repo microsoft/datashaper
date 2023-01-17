@@ -35,6 +35,8 @@ export const Footer: FC = memo(function Footer() {
 			<Link href={constants.trademarksUrl}>Trademarks</Link>
 			{' | '}
 			<Link href={constants.microsoft}>{constants.copyright}</Link>
+			{' | '}
+			<Link href={constants.github}>GitHub</Link>
 		</Container>
 	)
 })
