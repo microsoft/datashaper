@@ -52,6 +52,7 @@
 				"build",
 				"check",
 				"test",
+				"check-deps",
 				"bundle"
 			],
 			"outputs": [
