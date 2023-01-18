@@ -2239,7 +2239,6 @@ __metadata:
     "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/workflow": "workspace:^"
-    "@essex/components": ^3.6.5
     "@essex/hooks": ^4.0.16
     "@essex/scripts": ^23.1.4
     "@fluentui/font-icons-mdl2": ^8.5.6
