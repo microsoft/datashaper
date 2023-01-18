@@ -11,7 +11,13 @@ import {
 	parseObject,
 	parseString,
 } from '../parseTypes.js'
-process.env.TZ = 'America/Los_Angeles'
+
+describe('Timezones', () => {
+	// verify jest is stable across TZs
+	it('should always be UTC', () => {
+		expect(new Date().getTimezoneOffset()).toBe(0)
+	})
+})
 
 describe('parser tests', () => {
 	describe('validate if value is null', () => {
@@ -82,7 +88,7 @@ describe('parser tests', () => {
 	describe('parse date', () => {
 		it('should parse a date', () => {
 			const actual = parseDate()('2022-05-30T04:20:00')
-			expect(actual?.toUTCString()).toBe('Mon, 30 May 2022 11:20:00 GMT')
+			expect(actual?.toUTCString()).toBe('Mon, 30 May 2022 04:20:00 GMT')
 		})
 		it('should parse a numeric date', () => {
 			const actual = parseDate()('1659737701263')
