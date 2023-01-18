@@ -4,6 +4,7 @@
  */
 
 import {
+	calculateNiceRounding,
 	calculateWidthAuto,
 	calculateWidthDoane,
 	calculateWidthFd,
@@ -13,7 +14,6 @@ import {
 	calculateWidthSturges,
 	iqr,
 	standardDeviation,
-	calculateNiceRounding
 } from '../util/binUtilities.js'
 
 describe('bin utilities tests', () => {
@@ -221,18 +221,22 @@ describe('bin utilities tests', () => {
 		it('algorithm result', () => {
 			expect(min).toBe(0.1)
 			expect(max).toBe(1)
-			expect(width).toBe(0.160)
+			expect(width).toBe(0.16)
 		})
 	})
 
 	describe('small numbers nice rounding test 4', () => {
-		const result = calculateNiceRounding(0.00000123, 0.9988, 0.15985224720734975)
+		const result = calculateNiceRounding(
+			0.00000123,
+			0.9988,
+			0.15985224720734975,
+		)
 		const [min, max, width] = result
 
 		it('algorithm result', () => {
 			expect(min).toBe(0)
 			expect(max).toBe(1)
-			expect(width).toBe(0.160)
+			expect(width).toBe(0.16)
 		})
 	})
 })
