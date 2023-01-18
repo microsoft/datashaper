@@ -29,7 +29,9 @@
 	"scripts": {
 		"clean": "essex clean dist docs",
 		"build": "essex build --docs --skipExportCheck",
-		"lint": "essex lint --fix --strict",
+		"fix": "essex fix --strict",
+		"check": "essex check --strict",
+		"check-deps": "essex check-deps",
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"dependencies": {
