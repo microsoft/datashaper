@@ -32,7 +32,7 @@
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^22.2.1",
+		"@essex/scripts": "^23.1.4",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@types/express": "^4.17.15",
 		"@types/node": "^18.11.18",

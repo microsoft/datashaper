@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ErrorBoundary as ErrorBoundaryLib } from 'react-error-boundary'
-import Redbox from 'redbox-react'
 
 export const ErrorBoundary: React.FC<
 	React.PropsWithChildren<{
@@ -26,5 +25,12 @@ function ErrorFallback({
 	error: Error
 	resetErrorBoundary: () => void
 }) {
-	return <Redbox error={error} />
+	return (
+		<div style={redboxStyle}>
+			<h1>{error?.message ?? 'Application Error'}</h1>
+			<pre>{error?.stack}</pre>
+		</div>
+	)
 }
+
+const redboxStyle = { backgroundColor: 'red' }

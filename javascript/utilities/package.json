@@ -34,15 +34,14 @@
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"dependencies": {
-		"@zip.js/zip.js": "2.6.61",
+		"@zip.js/zip.js": "2.6.62",
 		"debug": "^4.3.4",
 		"tslib": "^2.4.1"
 	},
 	"devDependencies": {
-		"@essex/jest-config": "^21.0.18",
-		"@essex/scripts": "^22.2.1",
+		"@essex/jest-config": "^21.0.19",
+		"@essex/scripts": "^23.1.4",
 		"@essex/tsconfig-base": "^1.0.2",
-		"@essex/vite-config": "^19.0.16",
 		"@types/debug": "^4.1.7",
 		"@types/jest": "^29.2.5",
 		"@types/node": "^18.11.18",
