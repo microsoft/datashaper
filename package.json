@@ -34,7 +34,7 @@
 		"@essex/jest-config": "^21.0.19",
 		"@essex/prettier-config": "^18.0.7",
 		"@essex/scripts": "^23.1.4",
-		"@types/jest": "^29.2.5",
+		"@types/jest": "^29.2.6",
 		"@types/node": "^18.11.18",
 		"@types/semver": "^7.3.13",
 		"arquero": "^5.1.0",
