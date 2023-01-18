@@ -41,7 +41,7 @@
 		"@datashaper/verb-guidance": "workspace:^",
 		"@datashaper/workflow": "workspace:^",
 		"@essex/charts-react": "^1.1.6",
-		"@essex/components": "^3.6.4",
+		"@essex/components": "^3.6.5",
 		"@essex/styled-components": "^0.0.7",
 		"ahooks": "^3.7.4",
 		"d3-format": "^3.1.0",

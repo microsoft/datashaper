@@ -1941,7 +1941,7 @@ __metadata:
     "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/workflow": "workspace:^"
-    "@essex/components": ^3.6.4
+    "@essex/components": ^3.6.5
     "@essex/scripts": ^23.1.4
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/react": ^8.104.6
@@ -1969,6 +1969,8 @@ __metadata:
   peerDependencies:
     "@fluentui/react": ">= 8"
     "@fluentui/react-hooks": ">= 8"
+    "@thematic/core": ">= 4"
+    "@thematic/d3": ">= 2"
     "@thematic/react": ">= 2"
     arquero: ">= 5"
     react: ">= 18"
@@ -1979,6 +1981,10 @@ __metadata:
     "@fluentui/react":
       optional: false
     "@fluentui/react-hooks":
+      optional: false
+    "@thematic/core":
+      optional: false
+    "@thematic/d3":
       optional: false
     "@thematic/react":
       optional: false
@@ -2027,7 +2033,7 @@ __metadata:
     "@datashaper/verb-guidance": "workspace:^"
     "@datashaper/workflow": "workspace:^"
     "@essex/charts-react": ^1.1.6
-    "@essex/components": ^3.6.4
+    "@essex/components": ^3.6.5
     "@essex/scripts": ^23.1.4
     "@essex/styled-components": ^0.0.7
     "@essex/tsconfig-base": ^1.0.2
@@ -2120,7 +2126,7 @@ __metadata:
     "@babel/preset-typescript": ^7.18.6
     "@datashaper/react": "workspace:^"
     "@datashaper/webapp": "workspace:^"
-    "@essex/components": ^3.6.4
+    "@essex/components": ^3.6.5
     "@essex/scripts": ^23.1.4
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/font-icons-mdl2": ^8.5.6
@@ -2231,7 +2237,7 @@ __metadata:
     "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/workflow": "workspace:^"
-    "@essex/components": ^3.6.4
+    "@essex/components": ^3.6.5
     "@essex/hooks": ^4.0.16
     "@essex/scripts": ^23.1.4
     "@fluentui/font-icons-mdl2": ^8.5.6
@@ -2528,9 +2534,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/components@npm:^3.6.4":
-  version: 3.6.4
-  resolution: "@essex/components@npm:3.6.4"
+"@essex/components@npm:^3.6.5":
+  version: 3.6.5
+  resolution: "@essex/components@npm:3.6.5"
   dependencies:
     "@essex/toolbox": ^3.0.12
     "@fluentui/utilities": ^8.13.5
@@ -2552,24 +2558,30 @@ __metadata:
     "@thematic/core": ">= 4"
     "@thematic/d3": ">= 2"
     "@thematic/react": ">= 2"
-    "@types/d3": "*"
+    "@types/d3-array": ">= 3"
     "@types/d3-axis": ">= 3"
+    "@types/d3-scale": ">= 4"
+    "@types/d3-selection": ">= 3"
     "@types/node": "*"
     "@types/react": ">= 18"
     react: ">= 18"
     react-dom: ">= 18"
   peerDependenciesMeta:
     "@fluentui/react":
-      optional: true
+      optional: false
     "@thematic/core":
-      optional: true
+      optional: false
     "@thematic/d3":
-      optional: true
+      optional: false
     "@thematic/react":
-      optional: true
-    "@types/d3":
+      optional: false
+    "@types/d3-array":
       optional: true
     "@types/d3-axis":
+      optional: true
+    "@types/d3-scale":
+      optional: true
+    "@types/d3-selection":
       optional: true
     "@types/node":
       optional: true
@@ -2579,7 +2591,7 @@ __metadata:
       optional: false
     react-dom:
       optional: true
-  checksum: 40471a48ec34b9e6815a4eeb11c6b92b8fe62caded7d346a1efda16703bb1ebcde734a0ce5189db1a83e84972526e9938f371f9aebf13ea11a25e57e33b67cf3
+  checksum: 17412382dc5e5a56d9d86f04cc0467d2175bb226cb77a6ba1746e1f4c197964cdf30c506129f046f27bcb417d4b425664bdc8a7eec7bab7ee25f7f59894e0a58
   languageName: node
   linkType: hard
 

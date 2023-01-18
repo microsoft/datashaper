@@ -32,7 +32,7 @@
 		"@datashaper/tables": "workspace:^",
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/workflow": "workspace:^",
-		"@essex/components": "^3.6.4",
+		"@essex/components": "^3.6.5",
 		"@monaco-editor/react": "^4.4.6",
 		"ahooks": "^3.7.4",
 		"allotment": "1.17.0",
@@ -63,6 +63,8 @@
 	"peerDependencies": {
 		"@fluentui/react": ">= 8",
 		"@fluentui/react-hooks": ">= 8",
+		"@thematic/core": ">= 4",
+		"@thematic/d3": ">= 2",
 		"@thematic/react": ">= 2",
 		"arquero": ">= 5",
 		"react": ">= 18",
@@ -75,6 +77,12 @@
 			"optional": false
 		},
 		"@fluentui/react-hooks": {
+			"optional": false
+		},
+		"@thematic/core": {
+			"optional": false
+		},
+		"@thematic/d3": {
 			"optional": false
 		},
 		"@thematic/react": {
