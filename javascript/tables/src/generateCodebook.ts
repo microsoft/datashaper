@@ -4,9 +4,9 @@
  */
 import {
 	type CodebookSchema,
+	type Field,
 	createCodebookSchemaObject,
 	DataType,
-	Field,
 } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 

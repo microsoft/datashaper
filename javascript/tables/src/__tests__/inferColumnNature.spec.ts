@@ -4,6 +4,7 @@
  */
 import { VariableNature } from '@datashaper/schema'
 import fs from 'fs'
+
 import { fromCSV } from '../fromCSV.js'
 import { inferColumnNature } from '../inferColumnNature.js'
 

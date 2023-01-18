@@ -2,13 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { DataShape, DataTableSchema } from '@datashaper/schema'
 import {
 	DataFormat,
-	DataShape,
-	DataTableSchema,
+	DataOrientation,
 	DataTableSchemaDefaults,
 } from '@datashaper/schema'
-import { DataOrientation } from '@datashaper/schema'
 import { from, fromJSON } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import merge from 'lodash-es/merge.js'

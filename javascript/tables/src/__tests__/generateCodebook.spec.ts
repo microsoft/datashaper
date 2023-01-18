@@ -5,8 +5,8 @@
 
 import { DataType, VariableNature } from '@datashaper/schema'
 import fs from 'fs'
-import { fromCSV } from '../fromCSV.js'
 
+import { fromCSV } from '../fromCSV.js'
 import { generateCodebook } from '../generateCodebook.js'
 
 describe('generateCodebook', () => {

@@ -40,7 +40,7 @@ describe('Validators tests', () => {
 	})
 
 	describe('isNumber', () => {
-		let { isNumber } = typeGuesserFactory()
+		const { isNumber } = typeGuesserFactory()
 		it('should return true', () => {
 			expect(isNumber('1.00003')).toBe(true)
 			expect(isNumber('5000')).toBe(true)
