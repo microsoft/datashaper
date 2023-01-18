@@ -4,6 +4,7 @@
  */
 
 import moment from 'moment'
+
 import { typeGuesserFactory } from '../guessDataType.js'
 import {
 	parseArray,

@@ -4,12 +4,14 @@
  */
 import type { TableBundleSchema } from '@datashaper/schema'
 import { KnownProfile, KnownRel } from '@datashaper/schema'
-import type { TableBundle } from '@datashaper/workflow'
-import {
+import type {
 	type Codebook,
 	type DataPackage,
 	type DataTable,
 	type Workflow,
+	TableBundle,
+} from '@datashaper/workflow'
+import {
 	ResourceReference,
 	TableBundleProfile as TableBundleDataProfileBase,
 } from '@datashaper/workflow'
