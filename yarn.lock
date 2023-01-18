@@ -1947,6 +1947,8 @@ __metadata:
     "@fluentui/react": ^8.104.6
     "@fluentui/react-hooks": ^8.6.15
     "@monaco-editor/react": ^4.4.6
+    "@thematic/core": ^4.0.4
+    "@thematic/d3": ^2.0.19
     "@thematic/react": ^2.1.6
     "@types/node": ^18.11.18
     "@types/react": ^18.0.27
