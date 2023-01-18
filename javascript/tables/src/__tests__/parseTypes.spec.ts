@@ -11,6 +11,7 @@ import {
 	parseObject,
 	parseString,
 } from '../parseTypes.js'
+process.env.TZ = 'America/Los_Angeles'
 
 describe('parser tests', () => {
 	describe('validate if value is null', () => {
