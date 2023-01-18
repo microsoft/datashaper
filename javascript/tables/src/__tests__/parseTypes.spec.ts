@@ -81,11 +81,11 @@ describe('parser tests', () => {
 	describe('parse date', () => {
 		it('should parse a date', () => {
 			const actual = parseDate()('2022-05-30T04:20:00')
-			expect(actual?.toUTCString()).toEqual('Mon, 30 May 2022 11:20:00 GMT')
+			expect(actual?.toUTCString()).toBe('Mon, 30 May 2022 11:20:00 GMT')
 		})
 		it('should parse a numeric date', () => {
 			const actual = parseDate()('1659737701263')
-			expect(actual?.toUTCString()).toEqual('Fri, 05 Aug 2022 22:15:01 GMT')
+			expect(actual?.toUTCString()).toBe('Fri, 05 Aug 2022 22:15:01 GMT')
 		})
 		it('should return null', () => {
 			expect(parseDate()('<NA>')).toBeNull()
