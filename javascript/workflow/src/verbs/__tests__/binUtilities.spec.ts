@@ -131,9 +131,9 @@ describe('bin utilities tests', () => {
 		const [min, max, width] = result
 
 		it('algorithm result', () => {
-			expect(min).toBe(12000000)
-			expect(max).toBe(78500000)
-			expect(width).toBe(12389720)
+			expect(min).toBe(10000000)
+			expect(max).toBe(80000000)
+			expect(width).toBe(10000000)
 		})
 	})
 
@@ -142,9 +142,9 @@ describe('bin utilities tests', () => {
 		const [min, max, width] = result
 
 		it('algorithm result', () => {
-			expect(min).toBe(12000000)
-			expect(max).toBe(78500000)
-			expect(width).toBe(12671669)
+			expect(min).toBe(10000000)
+			expect(max).toBe(80000000)
+			expect(width).toBe(10000000)
 		})
 	})
 
@@ -153,9 +153,9 @@ describe('bin utilities tests', () => {
 		const [min, max, width] = result
 
 		it('algorithm result', () => {
-			expect(min).toBe(12000000)
-			expect(max).toBe(78500000)
-			expect(width).toBe(12460643)
+			expect(min).toBe(10000000)
+			expect(max).toBe(80000000)
+			expect(width).toBe(10000000)
 		})
 	})
 
@@ -164,9 +164,9 @@ describe('bin utilities tests', () => {
 		const [min, max, width] = result
 
 		it('algorithm result', () => {
-			expect(min).toBe(18)
-			expect(max).toBe(67)
-			expect(width).toBe(16)
+			expect(min).toBe(20)
+			expect(max).toBe(70)
+			expect(width).toBe(20)
 		})
 	})
 
@@ -175,9 +175,9 @@ describe('bin utilities tests', () => {
 		const [min, max, width] = result
 
 		it('algorithm result', () => {
-			expect(min).toBe(18)
-			expect(max).toBe(67)
-			expect(width).toBe(11)
+			expect(min).toBe(20)
+			expect(max).toBe(70)
+			expect(width).toBe(10)
 		})
 	})
 
@@ -186,8 +186,8 @@ describe('bin utilities tests', () => {
 		const [min, max, width] = result
 
 		it('algorithm result', () => {
-			expect(min).toBe(18)
-			expect(max).toBe(67)
+			expect(min).toBe(20)
+			expect(max).toBe(70)
 			expect(width).toBe(9)
 		})
 	})

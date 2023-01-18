@@ -145,7 +145,7 @@ export function roundNumber(value: number): number{
 		return Number(value.toFixed(numberOfDecimals / ROUND_PRECISION))
 	}
 	else {
-		return Math.round(value)
+		return Number(value.toPrecision(1))
 	}
 }
 
