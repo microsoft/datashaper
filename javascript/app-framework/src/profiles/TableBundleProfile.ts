@@ -2,16 +2,17 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableBundleSchema } from '@datashaper/schema'
-import { KnownProfile, KnownRel } from '@datashaper/schema'
-import type {
+import {
+	type TableBundleSchema,
+	KnownProfile,
+	KnownRel,
+} from '@datashaper/schema'
+import {
 	type Codebook,
 	type DataPackage,
 	type DataTable,
+	type TableBundle,
 	type Workflow,
-	TableBundle,
-} from '@datashaper/workflow'
-import {
 	ResourceReference,
 	TableBundleProfile as TableBundleDataProfileBase,
 } from '@datashaper/workflow'
