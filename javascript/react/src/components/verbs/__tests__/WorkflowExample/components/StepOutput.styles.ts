@@ -10,10 +10,12 @@ export const StepBlock = styled.div`
 
 export const StepColumn = styled.div`
 	display: flex;
+	gap: 8px;
 `
 
 export const StepConfig = styled.div`
-	width: 280px;
+	padding-left: 32px;
+	width: 284px;
 `
 
 export const StepDisplay = styled.div`

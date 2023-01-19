@@ -4,6 +4,6 @@
  */
 import type { Verb } from '@datashaper/schema'
 
-export interface GuidanceButtonProps {
+export interface GuidanceExpansionProps {
 	verb?: Verb
 }

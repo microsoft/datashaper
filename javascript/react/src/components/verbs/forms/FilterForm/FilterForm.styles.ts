@@ -10,9 +10,13 @@ export const Container = styled.div`
 	align-items: flex-start;
 `
 
-export const Vertical = styled.div<{ index: number }>`
+export const Criteria = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+`
+export const Vertical = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 8px;
-	margin-top: ${({ index }) => (index > 0 ? 6 : 0)}px;
 `

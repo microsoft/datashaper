@@ -18,5 +18,5 @@ export const Container = styled.div<{ collapsed: boolean }>`
 	height: 100%;
 	display: grid;
 	grid-template-columns: ${({ collapsed }) =>
-		collapsed ? '100% 0' : 'calc(100% - 280px) 280px '};
+		collapsed ? '100% 0' : 'calc(100% - 284px) 284px '};
 `

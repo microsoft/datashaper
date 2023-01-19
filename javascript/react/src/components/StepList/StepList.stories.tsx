@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import type { Step } from '@datashaper/workflow'
 import { Workflow } from '@datashaper/workflow'
 import type { ComponentStory } from '@storybook/react'
 import { useCallback, useState } from 'react'
@@ -58,10 +59,17 @@ const Template: ComponentStory<typeof StepList> = (
 export const Primary = Template.bind({})
 
 export const SaveDelete = Template.bind({})
-SaveDelete.storyName = 'Save & delete buttons'
+SaveDelete.storyName = 'Save & delete step buttons'
 SaveDelete.args = {
-	onSave: s => console.log('save', s),
-	onDelete: s => console.log('delete', s),
+	onSave: (s: Step) => console.log('save', s),
+	onDelete: (s: string) => console.log('delete', s),
+}
+
+export const TableButtons = Template.bind({})
+TableButtons.storyName = 'Original/latest buttons'
+TableButtons.args = {
+	onSelectInputTable: () => console.log('select input table'),
+	onSelectLatestTable: () => console.log('select latest table'),
 }
 
 export const Customized = Template.bind({})

@@ -23,6 +23,7 @@ import {
 	CalendarPicker,
 	ColumnCriteriaComboBox,
 } from '../../../controls/index.js'
+import { dropdownStyles, narrowDropdownStyles } from '../../../styles.js'
 import { InputExplainer, LeftAlignedRow } from '../styles.js'
 import { useColumnTyping, useIsEmpty } from './FilterFunction.hooks.js'
 import {
@@ -31,9 +32,7 @@ import {
 	FilterContainer,
 	Input,
 	InputLabel,
-	leftStyles,
 	OrLabel,
-	spinStyles,
 	TextValue,
 } from './FilterFunction.styles.js'
 import type { FilterFunctionProps } from './FilterFunction.types.js'
@@ -159,7 +158,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 				placeholder: 'Choose',
 				selectedKey: criterion.operator,
 				onChange: handleOpChange,
-				styles: leftStyles,
+				styles: dropdownStyles,
 			}
 			if (column) {
 				if (type === DataType.String) {
@@ -235,7 +234,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 								min={0}
 								step={1}
 								value={criterion.value}
-								styles={spinStyles}
+								styles={narrowDropdownStyles}
 								disabled={isEmpty}
 								onChange={spinButtonOnChange}
 							/>

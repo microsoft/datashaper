@@ -6,11 +6,11 @@ import { default as guidanceIndex } from '@datashaper/verb-guidance'
 import { memo } from 'react'
 
 import { Guidance } from '../Guidance/Guidance.js'
-import { Container } from './GuidanceButton.styles.js'
-import type { GuidanceButtonProps } from './GuidanceButton.types.js'
+import { Container } from './GuidanceExpansion.styles.js'
+import type { GuidanceExpansionProps } from './GuidanceExpansion.types.js'
 
-export const GuidanceButton: React.FC<GuidanceButtonProps> = memo(
-	function GuidanceButton({ verb }) {
+export const GuidanceExpansion: React.FC<GuidanceExpansionProps> = memo(
+	function GuidanceExpansion({ verb }) {
 		return verb ? (
 			<Container>
 				<Guidance name={verb} index={guidanceIndex} />

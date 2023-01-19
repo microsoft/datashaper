@@ -6,7 +6,6 @@
 import type { Step } from '@datashaper/workflow'
 import { isNoArgsStep } from '@datashaper/workflow'
 import { CollapsiblePanel, DialogConfirm } from '@essex/components'
-import { useTheme } from '@fluentui/react'
 import { memo } from 'react'
 
 import { DisplayOrder } from '../../enums.js'
@@ -22,14 +21,12 @@ import {
 	Container,
 	icons,
 	StepsContainer,
-	tableTransformStyle,
+	useCollapsiblePanelStyles,
 } from './StepList.styles.js'
 import type { StepListProps } from './StepList.types.js'
-import { getCollapsiblePanelStyles } from './StepList.utils.js'
 
 export const StepList: React.FC<StepListProps> = memo(function StepStack({
 	workflow,
-	showSelectButtons = true,
 	order = DisplayOrder.FirstOnTop,
 	onDelete,
 	onSelect,
@@ -39,10 +36,9 @@ export const StepList: React.FC<StepListProps> = memo(function StepStack({
 	selectedKey,
 	styles,
 }) {
-	const theme = useTheme()
 	const steps = useWorkflowSteps(workflow, order)
 
-	const collapsiblePanelStyles = getCollapsiblePanelStyles(theme)
+	const collapsiblePanelStyles = useCollapsiblePanelStyles()
 	const {
 		onClick: onDeleteClicked,
 		onConfirm: onConfirmDelete,
@@ -61,7 +57,7 @@ export const StepList: React.FC<StepListProps> = memo(function StepStack({
 				show={isDeleteModalOpen}
 				onConfirm={onConfirmDelete}
 			/>
-			{showSelectButtons && (
+			{(onSelectInputTable || onSelectLatestTable) && (
 				<ButtonContainer style={styles?.buttonContainer}>
 					<Action
 						type="default"
@@ -111,7 +107,6 @@ export const StepList: React.FC<StepListProps> = memo(function StepStack({
 								step={step}
 								index={stepIndex}
 								workflow={workflow}
-								style={tableTransformStyle}
 								onDelete={handleDelete}
 								onSave={handleSave}
 							/>
