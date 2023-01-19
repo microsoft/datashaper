@@ -244,7 +244,7 @@ export function maximumValidator(
 	const { maximum } = constraints
 	if (maximum !== undefined) {
 		const validate = (value: Date | number) =>
-			type == DataType.Date ? value.valueOf() <= maximum : value <= maximum
+			type === DataType.Date ? value.valueOf() <= maximum : value <= maximum
 		return values => {
 			const result = {
 				name,

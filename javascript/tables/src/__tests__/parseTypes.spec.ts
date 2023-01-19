@@ -2,8 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
-import moment from 'moment'
 import { typeGuesserFactory } from '../guessDataType.js'
 import {
 	parseArray,
@@ -13,6 +11,13 @@ import {
 	parseObject,
 	parseString,
 } from '../parseTypes.js'
+
+describe('Timezones', () => {
+	// verify jest is stable across TZs
+	it('should always be UTC', () => {
+		expect(new Date().getTimezoneOffset()).toBe(0)
+	})
+})
 
 describe('parser tests', () => {
 	describe('validate if value is null', () => {
@@ -83,13 +88,11 @@ describe('parser tests', () => {
 	describe('parse date', () => {
 		it('should parse a date', () => {
 			const actual = parseDate()('2022-05-30T04:20:00')
-			const expected = moment([2022, 4, 30, 4, 20, 0, 0])
-			expect(actual).toEqual(expected.toDate())
+			expect(actual?.toUTCString()).toBe('Mon, 30 May 2022 04:20:00 GMT')
 		})
 		it('should parse a numeric date', () => {
 			const actual = parseDate()('1659737701263')
-			const expected = moment([2022, 7, 5, 22, 15, 1, 263])
-			expect(actual).toEqual(expected.toDate())
+			expect(actual?.toUTCString()).toBe('Fri, 05 Aug 2022 22:15:01 GMT')
 		})
 		it('should return null', () => {
 			expect(parseDate()('<NA>')).toBeNull()

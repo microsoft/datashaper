@@ -15,4 +15,5 @@ yarn.lock
 .*rc
 create_versions_file.js
 versions.js
+versions.d.ts
 src/__tests__/schemas.spec.ts

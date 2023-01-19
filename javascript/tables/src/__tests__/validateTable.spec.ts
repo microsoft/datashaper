@@ -7,8 +7,8 @@ import type { CodebookSchema, Constraints } from '@datashaper/schema'
 import { ErrorCode } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import fs from 'fs'
-import { fromCSV } from '../fromCSV.js'
 
+import { fromCSV } from '../fromCSV.js'
 import { generateCodebook } from '../generateCodebook.js'
 import { validateTable } from '../validateTable.js'
 

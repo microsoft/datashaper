@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { TypeHints} from '@datashaper/schema';
-import { DataType,TypeHintsDefaults  } from '@datashaper/schema'
+import type { TypeHints } from '@datashaper/schema'
+import { DataType, TypeHintsDefaults } from '@datashaper/schema'
 import isFinite from 'lodash-es/isFinite.js'
 import isPlainObject from 'lodash-es/isPlainObject.js'
 import toNumber from 'lodash-es/toNumber.js'
@@ -103,7 +103,7 @@ export function isNumber(
  * It's expected that in a CSV any array cells will be quoted.
  * Also note that if the default delimiter, comma, is used, these may be detected as valid numbers if checked first.
  */
-export function isArray(delimiter: string = ','): (value: string) => boolean {
+export function isArray(delimiter = ','): (value: string) => boolean {
 	const reg = new RegExp(`${delimiter}`)
 	return (value: string) => {
 		try {
@@ -112,7 +112,6 @@ export function isArray(delimiter: string = ','): (value: string) => boolean {
 			return false
 		}
 	}
-	
 }
 
 export function isObject(value: string): boolean {

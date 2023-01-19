@@ -101,7 +101,7 @@ export function parseString(
 
 export function parseArray(
 	options?: TypeHints,
-	delimiter: string = ',',
+	delimiter = ',',
 ): (value: string) => any[] | null {
 	const { isNull } = typeGuesserFactory(options)
 	const subTypeChecker = guessDataType(options)
