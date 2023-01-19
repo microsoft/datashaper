@@ -32,7 +32,7 @@ function getTextFieldChangeHandler<T extends object | void | unknown>(
 ): TextFieldChangeHandler {
 	return (_event, newValue) => {
 		onChange?.(
-			produce(step, draft => {
+			produce(step, (draft) => {
 				updateFn(draft as Step<T>, newValue)
 			}),
 		)

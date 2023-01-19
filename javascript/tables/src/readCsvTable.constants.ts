@@ -14,7 +14,7 @@ export const ARQUERO_SUPPORTED_OPTS = new Set([
 	'header',
 	'comment',
 	'skipRows',
-	'readRows'
+	'readRows',
 ])
 
 /**

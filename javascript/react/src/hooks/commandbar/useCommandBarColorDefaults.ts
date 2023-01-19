@@ -21,7 +21,7 @@ export function useCommandBarColorDefaults(
 				checked: theme.palette.neutralTertiaryAlt,
 				hovered: theme.palette.neutralTertiary,
 				pressed: theme.palette.neutralQuaternaryAlt,
-			} as CommandBarColors),
+			}) as CommandBarColors,
 		[theme],
 	)
 	return useMemo(

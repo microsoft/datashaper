@@ -68,7 +68,7 @@ export class DataTableProfile implements ProfileHandler {
 		}
 
 		if (Array.isArray(table.path)) {
-			table.path.forEach(t => resolveTablePath(t))
+			table.path.forEach((t) => resolveTablePath(t))
 		} else {
 			resolveTablePath(table.path as string)
 		}

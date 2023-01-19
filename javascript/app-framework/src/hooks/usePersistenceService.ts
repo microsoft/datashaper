@@ -4,11 +4,10 @@
  */
 import { useContext, useMemo } from 'react'
 
-import type {
-	PersistenceService} from '../context/index.js';
+import type { PersistenceService } from '../context/index.js'
 import {
 	DataPackageContext,
-	DefaultPersistenceService
+	DefaultPersistenceService,
 } from '../context/index.js'
 
 export function usePersistenceService(): PersistenceService {

@@ -30,11 +30,11 @@ export class SetOperationNode<Args = unknown> extends BaseNode<
 	protected doRecalculate(): void {
 		const source = this.inputValue()
 
-		if (source != null && source.table != null) {
+		if (source?.table != null) {
 			const others = this.getVariadicInputValues()
-				.filter(t => !!t)
-				.map(o => o?.table)
-				.filter(t => !!t) as ColumnTable[]
+				.filter((t) => !!t)
+				.map((o) => o?.table)
+				.filter((t) => !!t) as ColumnTable[]
 			this.emit(container(this.id, set(source.table, this.op, others)))
 		} else {
 			this.emit(undefined)

@@ -183,13 +183,13 @@ export async function getDataURL(file: BaseFile): Promise<string> {
 }
 
 export function renameDuplicatedFiles(files: BaseFile[]): BaseFile[] {
-	const names = files.map(file => file.name)
+	const names = files.map((file) => file.name)
 	if (!hasDuplicatedNames(names)) {
 		return files
 	}
 
 	const map = new Map<string, number>()
-	return files.map(file => {
+	return files.map((file) => {
 		const name = renameDuplicatedFileName(map, file.name)
 		return createBaseFile(file, { name })
 	})
@@ -214,9 +214,6 @@ function hasDuplicatedNames(names: string[]): boolean {
 
 function cleanFileName(name: string): string {
 	const ext = extension(name)
-	const clean = name
-		.replace(`.${ext}`, '')
-		.replace(/\([0-9]\)/g, '')
-		.trimEnd()
+	const clean = name.replace(`.${ext}`, '').replace(/\([0-9]\)/g, '').trimEnd()
 	return `${clean}.${ext}`
 }

@@ -57,7 +57,7 @@ export function categories(values: any[]): Record<string, number> | undefined {
  * @returns
  */
 export function isDistinctCategories(cats: Record<string, number>): boolean {
-	return Object.values(cats).every(value => value === 1)
+	return Object.values(cats).every((value) => value === 1)
 }
 
 export function isEmpty(value: any): boolean {

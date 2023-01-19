@@ -14,7 +14,7 @@ export const Performance: React.FC<ArqueroDetailsListProps> = memo(
 	function Performance({ table, ...args }) {
 		const { local, metadata } = useBigTable(table)
 
-		if (!local || !metadata) {
+		if (!(local && metadata)) {
 			return <div>Loading...</div>
 		}
 

@@ -19,7 +19,7 @@ export const RenameDescription: React.FC<StepDescriptionProps<RenameArgs>> =
 			const entries = Object.entries(args.columns || EMPTY_OBJECT)
 			const sub = createRowEntries(
 				entries,
-				c => ({
+				(c) => ({
 					value: `${c[0]} -> ${c[1]}`,
 				}),
 				1,

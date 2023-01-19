@@ -5,5 +5,5 @@
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 
-export const ungroupStep: ColumnTableStep<void> = input => input.ungroup()
+export const ungroupStep: ColumnTableStep<void> = (input) => input.ungroup()
 export const ungroup = stepVerbFactory(ungroupStep)

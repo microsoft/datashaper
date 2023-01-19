@@ -16,7 +16,7 @@ export const RowGrouping: React.FC<ArqueroDetailsListProps> = memo(
 	function RowGrouping({ table, ...args }) {
 		const { grouped, metadata, onGroupChange } = useGrouping(table)
 
-		if (!grouped || !metadata) {
+		if (!(grouped && metadata)) {
 			return <div>Loading...</div>
 		}
 

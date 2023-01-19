@@ -18,7 +18,11 @@ export function useSortedTable(
 		if (!sort) {
 			return table
 		}
-		if (((!column || !sort) && !table.isGrouped()) || !isColumnOnTable) {
+
+		const isNotSortable =
+			(column == null && !table.isGrouped) || !isColumnOnTable
+
+		if (isNotSortable) {
 			return table.unorder()
 		} else if (column) {
 			columns.push(column)
@@ -29,7 +33,7 @@ export function useSortedTable(
 		}
 		return table.orderby(
 			sort === SortDirection.Descending
-				? columns.map(col => desc(col))
+				? columns.map((col) => desc(col))
 				: columns,
 		)
 	}, [table, column, sort])

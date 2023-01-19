@@ -68,7 +68,7 @@ function useVirtualRows(
 				? options.compactRowHeight
 				: DEFAULT_ROW_HEIGHT
 			const count = Math.ceil(remainder / per)
-			const keys = columns ? columns.map(c => c.key) : table.columnNames()
+			const keys = columns ? columns.map((c) => c.key) : table.columnNames()
 			const template = keys.reduce((acc, cur) => {
 				// empty prop value for normal columns will result in a BlankCell render
 				acc[cur] = ' '

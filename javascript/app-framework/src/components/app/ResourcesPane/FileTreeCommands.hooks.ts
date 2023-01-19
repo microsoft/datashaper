@@ -138,7 +138,7 @@ function useDownloadZip(): () => void {
 		() =>
 			void persistence
 				.save()
-				.catch(err => console.error('error loading project', err)),
+				.catch((err) => console.error('error loading project', err)),
 		[persistence],
 	)
 }
@@ -160,13 +160,13 @@ function useOpenMenuItems(
 	const onClickExample = useCallback(
 		(ex: FileDefinition) => {
 			void fetch(ex.url)
-				.then(res => res.blob())
-				.then(data => {
+				.then((res) => res.blob())
+				.then((data) => {
 					const files = new Map<string, Blob>()
 					files.set('datapackage.json', data)
 					return dataPackage.load(files)
 				})
-				.catch(err => console.error('error loading example file', err))
+				.catch((err) => console.error('error loading example file', err))
 		},
 		[dataPackage],
 	)
@@ -175,15 +175,15 @@ function useOpenMenuItems(
 		() =>
 			void onOpenFileRequested(TABLE_TYPES)
 				.then(setFile)
-				.catch(err => console.error('error loading table file', err)),
+				.catch((err) => console.error('error loading table file', err)),
 		[setFile, onOpenFileRequested],
 	)
 
 	const onClickUploadZip = useCallback(
 		() =>
 			void onOpenFileRequested(ZIP_TYPES)
-				.then(file => uploadZip(file))
-				.catch(err => console.error('error loading project file', err)),
+				.then((file) => uploadZip(file))
+				.catch((err) => console.error('error loading project file', err)),
 		[uploadZip, onOpenFileRequested],
 	)
 
@@ -207,7 +207,7 @@ function useOpenMenuItems(
 				key: 'examples',
 				text: 'Example',
 				subMenuProps: {
-					items: examples.map(example => ({
+					items: examples.map((example) => ({
 						key: example.name,
 						text: example.name,
 						onClick: () => onClickExample(example),
@@ -226,7 +226,7 @@ function useUploadZip(): (file: BaseFile) => void {
 		(file: BaseFile) =>
 			void persistence
 				.load(file)
-				.catch(err => console.error('error loading project', err)),
+				.catch((err) => console.error('error loading project', err)),
 		[persistence],
 	)
 }

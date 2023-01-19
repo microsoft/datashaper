@@ -27,8 +27,8 @@ export function useGrouping(table: ColumnTable | undefined): {
 
 	const onGroupChange = useCallback(
 		(key: string, checked?: boolean) => {
-			setGroupByList(prev =>
-				checked ? [...prev, key] : prev.filter(d => d !== key),
+			setGroupByList((prev) =>
+				checked ? [...prev, key] : prev.filter((d) => d !== key),
 			)
 		},
 		[setGroupByList],

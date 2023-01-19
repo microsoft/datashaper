@@ -21,7 +21,7 @@ export const BinarizeDescription: React.FC<StepDescriptionProps<BinarizeArgs>> =
 					before: 'where',
 					value: args?.column,
 					after: 'row value',
-					sub: (args.criteria || EMPTY_ARRAY).map(criterion => ({
+					sub: (args.criteria || EMPTY_ARRAY).map((criterion) => ({
 						value: `${criterion.operator || ''} ${criterion.value || ''}`,
 						after:
 							criterion.type === FilterCompareType.Column ? 'row value' : '',

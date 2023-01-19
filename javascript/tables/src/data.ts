@@ -72,7 +72,7 @@ export function format(
 	if (Number.isInteger(value)) {
 		exp = getExp(value)
 		if (!Number.isInteger(exp) || exp === 0 || exp <= minExp) {
-			return value + ''
+			return `${value}`
 		}
 	} else {
 		exp = Math.floor(Math.log10(value))
@@ -80,7 +80,7 @@ export function format(
 		if (Math.abs(exp) <= minExp || !Number.isInteger(mantissa)) {
 			const fixed = value.toFixed(precision)
 			const parsed = Number.parseFloat(fixed)
-			return parsed + ''
+			return `${parsed}`
 		}
 	}
 

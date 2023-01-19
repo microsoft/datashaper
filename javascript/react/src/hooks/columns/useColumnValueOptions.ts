@@ -18,13 +18,13 @@ export function useColumnValueOptions(
 	filter?: (value: Value) => boolean,
 ): IDropdownOption[] {
 	const vals = useMemo(() => {
-		if (!column || !table || !column || column.trim().length === 0) {
+		if (!(column && table && column) || column.trim().length === 0) {
 			return EMPTY_ARRAY
 		}
 		const getFallback = () => {
 			const columnNamesArray: string[] = table
 				.columnNames()
-				.filter(e => e === column)
+				.filter((e) => e === column)
 
 			if (columnNamesArray.length !== 0) {
 				const result: any[] = table

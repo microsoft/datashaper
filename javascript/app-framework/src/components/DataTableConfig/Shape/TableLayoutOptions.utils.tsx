@@ -4,7 +4,7 @@
  */
 import { DataOrientation } from '@datashaper/schema'
 
-export const DATA_LAYOUT_OPTIONS = Object.keys(DataOrientation).map(d => {
+export const DATA_LAYOUT_OPTIONS = Object.keys(DataOrientation).map((d) => {
 	return {
 		key: d.toLowerCase(),
 		text: d,

@@ -33,7 +33,7 @@ export function toggleListItem<T>(list: T[], item: T): T[] {
 	if (list.indexOf(item) === -1) {
 		return [...list, item]
 	} else {
-		return list.filter(c => c !== item)
+		return list.filter((c) => c !== item)
 	}
 }
 

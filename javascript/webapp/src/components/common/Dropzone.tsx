@@ -82,7 +82,7 @@ export const Dropzone: React.FC<React.PropsWithChildren<DropzoneProps>> = memo(
 				<div style={dragZone} {...getRootProps()}>
 					<input {...getInputProps()} />
 					{acceptedFileTypes.some(
-						t => t.includes('application') || t.includes('text'),
+						(t) => t.includes('application') || t.includes('text'),
 					) && isDragReject ? (
 						<div style={dragReject}>
 							<p style={{ margin: 0 }}>Some files will be rejected.</p>

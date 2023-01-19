@@ -18,7 +18,7 @@ export const LookupDescription: React.FC<StepDescriptionProps<LookupArgs>> =
 			} = props
 			const sub = createRowEntries(
 				args.columns,
-				c => ({
+				(c) => ({
 					value: c,
 				}),
 				3,

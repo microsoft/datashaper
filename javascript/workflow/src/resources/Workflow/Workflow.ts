@@ -63,14 +63,14 @@ export class Workflow extends Resource implements TableTransformer {
 				inputs.clear()
 				const tableNames = dp.resources
 					.filter(
-						r =>
+						(r) =>
 							r.profile === KnownProfile.TableBundle ||
 							r.profile === KnownProfile.DataTable,
 					)
-					.map(r => r.name)
+					.map((r) => r.name)
 
 				// Set the sibling table inputs
-				tableNames.forEach(name => {
+				tableNames.forEach((name) => {
 					const input =
 						(dp.getResource(name) as TableEmitter)?.output$ ??
 						(EMPTY as Observable<unknown>)
@@ -259,7 +259,7 @@ export class Workflow extends Resource implements TableTransformer {
 
 	public addInputTables(inputs: TableContainer[]): void {
 		const map = new Map<string, Observable<Maybe<TableContainer>>>()
-		inputs.forEach(i => map.set(i.id, of(i)))
+		inputs.forEach((i) => map.set(i.id, of(i)))
 		this.addInputs(map)
 	}
 
@@ -350,8 +350,8 @@ export class Workflow extends Resource implements TableTransformer {
 		const node = this._graphMgr.removeStep(index)
 
 		// Remove step outputs from the configuration
-		const stepOutputs = this.outputNames.filter(o => o === node.id)
-		stepOutputs.forEach(o => this.removeOutput(o))
+		const stepOutputs = this.outputNames.filter((o) => o === node.id)
+		stepOutputs.forEach((o) => this.removeOutput(o))
 
 		this.rebindDefaultOutput()
 		this._onChange.next()
@@ -415,9 +415,9 @@ export class Workflow extends Resource implements TableTransformer {
 		const output = unique(schema?.output ?? [])
 
 		this._nameMgr.setNames(input, output)
-		input.forEach(i => this._graphMgr.ensureInput(i))
+		input.forEach((i) => this._graphMgr.ensureInput(i))
 
-		this._graphMgr.setSteps(schema?.steps?.map(i => i as StepInput) ?? [])
+		this._graphMgr.setSteps(schema?.steps?.map((i) => i as StepInput) ?? [])
 		this.rebindDefaultOutput()
 		if (!quiet) {
 			this._onChange.next()
@@ -435,8 +435,7 @@ export class Workflow extends Resource implements TableTransformer {
 	}
 
 	private renameTo =
-		(name: string) =>
-		(table: Maybe<TableContainer>): TableContainer => ({
+		(name: string) => (table: Maybe<TableContainer>): TableContainer => ({
 			...(table ?? {}),
 			id: name,
 		})

@@ -16,9 +16,10 @@ export function useColumnsMetadata(
 ): Field[] {
 	return useMemo(() => {
 		const columns = table?.columnNames(filter) || EMPTY_ARRAY
-		const result: Field[] = columns.map(col => {
-			const type: DataType =
-				!table || !col ? DataType.Unknown : columnType(table, col)
+		const result: Field[] = columns.map((col) => {
+			const type: DataType = !(table && col)
+				? DataType.Unknown
+				: columnType(table, col)
 			return { name: col, type: type }
 		})
 		return result

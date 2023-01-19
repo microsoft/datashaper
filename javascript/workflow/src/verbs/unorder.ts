@@ -5,5 +5,5 @@
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 
-export const unorderStep: ColumnTableStep<void> = input => input.unorder()
+export const unorderStep: ColumnTableStep<void> = (input) => input.unorder()
 export const unorder = stepVerbFactory(unorderStep)

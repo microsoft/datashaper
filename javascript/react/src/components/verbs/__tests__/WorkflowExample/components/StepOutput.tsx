@@ -41,7 +41,7 @@ export const StepOutput: React.FC<StepOutputProps> = memo(function StepOutput({
 							index={index}
 							output={output}
 							onChange={onStepChange}
-							onChangeOutput={o => onStepOutputChange(step, o)}
+							onChangeOutput={(o) => onStepOutputChange(step, o)}
 						/>
 					</StepConfig>
 					<StepDisplay>

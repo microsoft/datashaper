@@ -33,7 +33,7 @@ export interface RowsOptions {
 export function rows(table: ColumnTable, options?: RowsOptions): any[][] {
 	const { skipHeader = false, stringify = false, format = {} } = options || {}
 	const output = skipHeader ? [] : [table.columnNames()]
-	table.scan(idx => {
+	table.scan((idx) => {
 		const row: any[] = []
 		for (let i = 0; i < table.numCols(); i++) {
 			const name = table.columnName(i)

@@ -20,7 +20,7 @@ export const FilterDescription: React.FC<StepDescriptionProps<FilterArgs>> =
 				{
 					before: 'where',
 					value: args.column,
-					sub: (args.criteria || EMPTY_ARRAY).map(criterion => ({
+					sub: (args.criteria || EMPTY_ARRAY).map((criterion) => ({
 						value: `${criterion.operator || ''} ${criterion.value || ''}`,
 						after:
 							criterion.type === FilterCompareType.Column ? 'row value' : '',

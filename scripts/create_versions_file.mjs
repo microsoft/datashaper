@@ -17,7 +17,7 @@ writeFileSync(
 	path.join(base, 'versions.d.ts'),
 	`export declare const versions: {
 		${Object.keys(versions)
-			.map(v => `${v}: string`)
+			.map((v) => `${v}: string`)
 			.join('\n\t\t')}
 	}`,
 )

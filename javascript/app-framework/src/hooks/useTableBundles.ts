@@ -15,9 +15,9 @@ export function useTableBundles(): TableBundle[] {
 	const observable = useMemo(
 		() =>
 			dp.resources$.pipe(
-				map(resources => {
+				map((resources) => {
 					return resources.filter(
-						r => r.profile === KnownProfile.TableBundle,
+						(r) => r.profile === KnownProfile.TableBundle,
 					) as TableBundle[]
 				}),
 			),

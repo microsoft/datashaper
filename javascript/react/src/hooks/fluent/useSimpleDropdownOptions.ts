@@ -14,7 +14,7 @@ export function useSimpleDropdownOptions(list: string[]): IDropdownOption[] {
 }
 
 export function getSimpleDropdownOptions(list: string[]): IDropdownOption[] {
-	return list.map(name => ({
+	return list.map((name) => ({
 		key: name,
 		text: name.toString(),
 	}))

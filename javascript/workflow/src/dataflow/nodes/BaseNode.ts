@@ -59,7 +59,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 
 	public binding(name: SocketName = DEFAULT_INPUT_NAME): Maybe<NodeBinding<T>> {
 		name = this.verifyInputSocketName(name)
-		return this.bindings.find(i => i.input === name)
+		return this.bindings.find((i) => i.input === name)
 	}
 
 	public get bindings$(): Observable<NodeBinding<T>[]> {
@@ -124,21 +124,21 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 			// empty array of initial inputs
 			const values: Maybe<T>[] = binding.map(() => undefined)
 			const subs = binding.map((i, index) =>
-				i.node.output$.subscribe(v => {
+				i.node.output$.subscribe((v) => {
 					values[index] = v
 					this.recalculate()
 				}),
 			)
 
 			// provide class-level access to the current values
-			this._disposeVariadicInputs = () => subs.forEach(s => s.unsubscribe())
+			this._disposeVariadicInputs = () => subs.forEach((s) => s.unsubscribe())
 			this._getVariadicInputs = () => values
 		}
 
 		const bindSingleInput = (binding: NodeBinding<T>) => {
 			const addBinding = () => {
 				this._bindings$.next([
-					...this.bindings.filter(i => i.input !== input),
+					...this.bindings.filter((i) => i.input !== input),
 					binding,
 				])
 			}
@@ -152,7 +152,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 				this._inputSubscriptions.set(
 					input,
 					binding.node.output$.subscribe({
-						next: value => {
+						next: (value) => {
 							this._inputValues.get(input)?.next(value)
 							this._inputErrors.get(input)?.next(undefined)
 							this.recalculate()
@@ -184,7 +184,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 
 	protected hasBoundInput(name: SocketName): boolean {
 		const existing = this.bindings.find(
-			i =>
+			(i) =>
 				i.input === name || (isDefaultInput(i.input) && isDefaultInput(name)),
 		)
 		return existing != null
@@ -201,8 +201,10 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	}
 
 	private unbindSilent(name: SocketName): void {
-		if (this._bindings$.value.some(i => i.input === name)) {
-			this._bindings$.next(this._bindings$.value.filter(i => i.input !== name))
+		if (this._bindings$.value.some((i) => i.input === name)) {
+			this._bindings$.next(
+				this._bindings$.value.filter((i) => i.input !== name),
+			)
 		}
 		this._inputSubscriptions.get(name)?.unsubscribe()
 		this._inputSubscriptions.delete(name)
@@ -219,7 +221,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	protected verifyInputSocketName(name?: SocketName): SocketName {
 		if (isDefaultInput(name)) {
 			return DEFAULT_INPUT_NAME
-		} else if (!this.inputs.some(s => s === name)) {
+		} else if (!this.inputs.some((s) => s === name)) {
 			throw new Error(`unknown input socket name "${String(name)}"`)
 		}
 		return name
@@ -237,7 +239,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		try {
 			this.doRecalculate()
 		} catch (err) {
-			log('recalculation error in node ' + this.id, err)
+			log(`recalculation error in node ${this.id}`, err)
 			this.emitError(err)
 		}
 	}

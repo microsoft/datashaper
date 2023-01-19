@@ -19,7 +19,7 @@ export const SelectionStory: ComponentStory<typeof ArqueroDetailsList> = (
 	const metadata = useMemo(() => introspect(stocks, true), [stocks])
 	const handleSelect = useCallback(
 		(_e?: any, c?: IColumn) =>
-			setSelected(prev => (c?.key === prev ? undefined : c?.key)),
+			setSelected((prev) => (c?.key === prev ? undefined : c?.key)),
 		[setSelected],
 	)
 	return (

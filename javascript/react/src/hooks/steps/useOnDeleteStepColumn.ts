@@ -13,7 +13,7 @@ export function useOnDeleteStepColumn(
 	onChange?: StepChangeFunction<InputColumnRecordArgs>,
 ): (column: string) => void {
 	return useCallback(
-		column => {
+		(column) => {
 			const args = { ...step.args }
 			delete args.columns[column]
 

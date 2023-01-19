@@ -36,8 +36,8 @@ function saveState(resource: TestAppResource, snapshot: Snapshot): void {
 
 const TestAppInner: React.FC = memo(function TestAppInner() {
 	const [count, setCount] = useRecoilState(countState)
-	const increment = useCallback(() => setCount(c => c + 1), [setCount])
-	const decrement = useCallback(() => setCount(c => c - 1), [setCount])
+	const increment = useCallback(() => setCount((c) => c + 1), [setCount])
+	const decrement = useCallback(() => setCount((c) => c - 1), [setCount])
 
 	return (
 		<div style={{ margin: 20 }}>

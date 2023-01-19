@@ -16,11 +16,11 @@ export const OneHotDescription: React.FC<StepDescriptionProps<OnehotArgs>> =
 			} = props
 			return [
 				{
-					before: `onehot column`,
+					before: 'onehot column',
 					value: args.column,
 				},
 				{
-					before: `with prefix`,
+					before: 'with prefix',
 					value: args.prefix,
 				},
 			]

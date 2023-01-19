@@ -48,8 +48,8 @@ export const Guidance: React.FC<GuidanceProps> = memo(function Guidance({
 	useEffect(() => {
 		if (markdownContainer?.current) {
 			const links = markdownContainer.current.querySelectorAll('a')
-			links.forEach(link => {
-				link.addEventListener('click', e => {
+			links.forEach((link) => {
+				link.addEventListener('click', (e) => {
 					e.preventDefault()
 					handleClick((e.target as HTMLAnchorElement).href)
 				})

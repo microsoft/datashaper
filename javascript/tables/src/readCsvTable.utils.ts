@@ -86,13 +86,13 @@ export function hasArqueroOptions(options: ParserOptions): boolean {
 		.filter(([_, v]) => v !== undefined)
 		.map(([k]) => k)
 	const internalDefaults = props.filter(
-		p =>
+		(p) =>
 			ARQUERO_INTERNAL_DEFAULTS.has(p) &&
 			options[p as keyof ParserOptions] === ARQUERO_INTERNAL_DEFAULTS.get(p),
 	)
-	const configurable = props.filter(p => ARQUERO_SUPPORTED_OPTS.has(p))
+	const configurable = props.filter((p) => ARQUERO_SUPPORTED_OPTS.has(p))
 	const supportedSet = new Set([...internalDefaults, ...configurable])
-	const remaining = props.filter(p => !supportedSet.has(p))
+	const remaining = props.filter((p) => !supportedSet.has(p))
 	return remaining.length === 0
 }
 

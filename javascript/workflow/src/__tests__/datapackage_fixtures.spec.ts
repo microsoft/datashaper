@@ -62,15 +62,19 @@ function defineTestCase(parentPath: string, test: string) {
 
 				const workflow = found
 					.getSourcesWithProfile(KnownProfile.Workflow)
-					.find(t => !!t) as Workflow | undefined
+					.find((t) => !!t) as Workflow | undefined
 				if (table.workflowLength) {
 					expect(workflow).toBeDefined()
 					expect(workflow?.length ?? 0).toEqual(table.workflowLength ?? 0)
 				}
 				expect(found?.output?.table?.numRows()).toEqual(table.rowCount)
 				expect(found?.output?.table?.numCols()).toEqual(table.columnCount)
-				expect(found?.output?.metadata?.cols).toEqual(found?.output?.table?.numCols())
-				expect(found?.output?.metadata?.rows).toEqual(found?.output?.table?.numRows())
+				expect(found?.output?.metadata?.cols).toEqual(
+					found?.output?.table?.numCols(),
+				)
+				expect(found?.output?.metadata?.rows).toEqual(
+					found?.output?.table?.numRows(),
+				)
 			}
 			await checkPersisted(await datapackage.save(), expected)
 		} finally {

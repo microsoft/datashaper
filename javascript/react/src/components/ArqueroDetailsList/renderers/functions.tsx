@@ -75,7 +75,7 @@ export const createRenderColumnHeader = (
 	renderers: IRenderFunction<IDetailsColumnProps>[],
 ): IRenderFunction<IDetailsColumnProps> =>
 	function renderColumnHeader(props?, defaultRender?) {
-		if (!props || !defaultRender) {
+		if (!(props && defaultRender)) {
 			return null
 		}
 		return (
@@ -107,7 +107,7 @@ export const createRenderDefaultColumnHeader = (
 	onSort?: ColumnSelectFunction,
 ): IRenderFunction<IDetailsColumnProps> =>
 	function renderDefaultColumnHeader(props?, defaultRender?) {
-		if (!props || !defaultRender) {
+		if (!(props && defaultRender)) {
 			return null
 		}
 		const p = fixProps(originalProps, props)
@@ -129,7 +129,7 @@ export const createRenderStatsColumnHeader = (
 	stats?: StatsColumnType[],
 ): IRenderFunction<IDetailsColumnProps> => {
 	return function renderStatsColumnHeader(props?, defaultRender?) {
-		if (!props || !defaultRender) {
+		if (!(props && defaultRender)) {
 			return null
 		}
 		return (
@@ -148,7 +148,7 @@ export const createRenderCommandBarColumnHeader = (
 	renderers: IRenderFunction<IDetailsColumnProps>[],
 ): IRenderFunction<IDetailsColumnProps> => {
 	return function renderCommandBarColumnHeader(props?, defaultRender?) {
-		if (!props || !defaultRender) {
+		if (!(props && defaultRender)) {
 			return null
 		}
 
@@ -169,7 +169,7 @@ export const createRenderHistogramColumnHeader = (
 	onSelect?: ColumnSelectFunction,
 ): IRenderFunction<IDetailsColumnProps> => {
 	return function renderHistogramColumnHeader(props?, defaultRender?) {
-		if (!props || !defaultRender) {
+		if (!(props && defaultRender)) {
 			return null
 		}
 		return (

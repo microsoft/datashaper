@@ -45,7 +45,7 @@ export function joinInputs(
 	const selectedRightColumn = getRightColumn(step)
 	return [
 		dropdown(
-			`Join key column`,
+			'Join key column',
 			leftColumns,
 			selectedLeftColumn,
 			(s, opt) => {
@@ -57,7 +57,7 @@ export function joinInputs(
 			{ required: true, placeholder: 'Choose column' },
 		),
 		dropdown(
-			`Second table key column`,
+			'Second table key column',
 			rightColumns,
 			selectedRightColumn,
 			(s, opt) => {

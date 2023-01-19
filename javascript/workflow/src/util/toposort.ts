@@ -35,7 +35,7 @@ export function array<T = string>(
 
 	// check for unknown nodes
 	edges.forEach(function (edge) {
-		if (!nodesHash.has(edge[0]!) || !nodesHash.has(edge[1]!)) {
+		if (!(nodesHash.has(edge[0]!) && nodesHash.has(edge[1]!))) {
 			throw new Error(
 				'Unknown node. There is an unknown node in the supplied edges.',
 			)
@@ -52,17 +52,18 @@ export function array<T = string>(
 		if (predecessors.has(node)) {
 			let nodeRep
 			try {
-				nodeRep = ', node was:' + JSON.stringify(node)
+				nodeRep = `, node was:${JSON.stringify(node)}`
 			} catch (e) {
 				nodeRep = ''
 			}
-			throw new Error('Cyclic dependency' + nodeRep)
+			throw new Error(`Cyclic dependency${nodeRep}`)
 		}
 
 		if (!nodesHash.has(node)) {
 			throw new Error(
-				'Found unknown node. Make sure to provided all involved nodes. Unknown node: ' +
-					JSON.stringify(node),
+				`Found unknown node. Make sure to provided all involved nodes. Unknown node: ${JSON.stringify(
+					node,
+				)}`,
 			)
 		}
 
