@@ -56,10 +56,12 @@ export function useDownloadZip(
 		}
 
 		if (tables.length) {
-			const files = tables.map(table => tableFile(table)).filter(f => f != null)
+			const files = tables
+				.map((table) => tableFile(table))
+				.filter((f) => f != null)
 			if (files.length) {
 				await fileCollection.add(files as FileWithPath[])
-				tables.forEach(table => {
+				tables.forEach((table) => {
 					input.push(table.id)
 				})
 			}

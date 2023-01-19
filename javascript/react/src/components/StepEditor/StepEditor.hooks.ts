@@ -39,7 +39,7 @@ export function useStepOutputHandling(
 	useEffect(
 		function useOutputNameHasChanged() {
 			if (output) {
-				setInitialOutput(prev => (!prev ? output : prev))
+				setInitialOutput((prev) => (!prev ? output : prev))
 			}
 		},
 		[output, setInitialOutput],

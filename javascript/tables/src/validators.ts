@@ -26,7 +26,7 @@ export function requiredValidator(
 	if (constraints?.required) {
 		const validate = (element: unknown) =>
 			element !== null && element !== undefined
-		return values => {
+		return (values) => {
 			const result = {
 				name,
 				rule: ErrorCode.Required,
@@ -61,7 +61,7 @@ export function uniqueValidator(
 ): ValidationFunction | undefined {
 	const { name, constraints } = field
 	if (constraints?.unique) {
-		return values => {
+		return (values) => {
 			const result = {
 				name,
 				rule: ErrorCode.Unique,
@@ -83,7 +83,7 @@ export function uniqueValidator(
 					}
 				}
 			} else {
-				const fail = !values.every(value => {
+				const fail = !values.every((value) => {
 					if (uniqueValues.has(value)) {
 						return false
 					}
@@ -112,7 +112,7 @@ export function minLengthValidator(
 		(type === DataType.String || type === DataType.Array)
 	) {
 		const validate = (value: unknown[] | string) => value.length >= minLength
-		return values => {
+		return (values) => {
 			const result = {
 				name,
 				rule: ErrorCode.MinLength,
@@ -155,7 +155,7 @@ export function maxLengthValidator(
 	const { maxLength } = constraints
 	if (maxLength && (type === DataType.String || type === DataType.Array)) {
 		const validate = (value: unknown[] | string) => value.length <= maxLength
-		return values => {
+		return (values) => {
 			const result = {
 				name,
 				rule: ErrorCode.MaxLength,
@@ -202,7 +202,7 @@ export function minimumValidator(
 	) {
 		const validate = (value: Date | number) =>
 			type === DataType.Date ? value.valueOf() >= minimum : value >= minimum
-		return values => {
+		return (values) => {
 			const result = {
 				name,
 				rule: ErrorCode.Minimum,
@@ -245,7 +245,7 @@ export function maximumValidator(
 	if (maximum !== undefined) {
 		const validate = (value: Date | number) =>
 			type === DataType.Date ? value.valueOf() <= maximum : value <= maximum
-		return values => {
+		return (values) => {
 			const result = {
 				name,
 				rule: ErrorCode.Maximum,
@@ -288,7 +288,7 @@ export function patternValidator(
 	if (pattern && type === DataType.String) {
 		const re = new RegExp(pattern)
 		const validate = (value: string) => re.test(value)
-		return values => {
+		return (values) => {
 			const result = {
 				name,
 				rule: ErrorCode.Pattern,
@@ -329,7 +329,7 @@ export function enumValidator(
 	if (enumList && type === DataType.String) {
 		const uniqueSet = new Set(enumList)
 		const validate = (value: string) => uniqueSet.has(value)
-		return values => {
+		return (values) => {
 			const result = {
 				name,
 				rule: ErrorCode.Enum,

@@ -40,14 +40,14 @@ export function inferNatureFromValues(
 
 	const vals = opts.limit < Infinity ? values.slice(0, opts.limit) : values
 	const uniques = [...new Set(vals)].filter(
-		val => val !== undefined && val !== null && val !== opts.nullValue,
+		(val) => val !== undefined && val !== null && val !== opts.nullValue,
 	)
 
 	if (uniques.length === 2) {
 		return VariableNature.Binary
 	}
 
-	const isNumber = uniques.every(val => typeof val === 'number')
+	const isNumber = uniques.every((val) => typeof val === 'number')
 
 	if (isNumber) {
 		// if anything has a decimal, short circuit and call it continuous
@@ -74,7 +74,7 @@ export function inferNatureFromValues(
 	}
 
 	// this should capture most short lists of strings
-	const isString = uniques.every(val => typeof val === 'string')
+	const isString = uniques.every((val) => typeof val === 'string')
 	if (isString && uniques.length <= opts.categoricalCountLimit) {
 		return VariableNature.Nominal
 	}

@@ -12,7 +12,7 @@ import { useCallback } from 'react'
  */
 export function useDetailsHeaderRenderer(): IRenderFunction<IDetailsHeaderProps> {
 	return useCallback((props?, defaultRender?) => {
-		if (!props || !defaultRender) {
+		if (!(props && defaultRender)) {
 			return null
 		}
 		const updated = {

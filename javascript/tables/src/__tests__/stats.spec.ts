@@ -174,7 +174,7 @@ describe('table utilities', () => {
 				expect(values!.distinct).toBe(8)
 				const { bins = [] } = values!
 				expect(bins).toHaveLength(8)
-				const mins = bins.map(b => b.min)
+				const mins = bins.map((b) => b.min)
 				expect(mins).toEqual([1, 2, 3, 4, 5, 6, 8, 9])
 			})
 
@@ -224,7 +224,7 @@ describe('table utilities', () => {
 		test('categories', () => {
 			const categorical: ColumnTable = table({
 				/* eslint-disable no-sparse-arrays */
-				values: ['one', 'two', 'one', 'one', 'three', , 'four'],
+				values: ['one', 'two', 'one', 'one', 'three', undefined, 'four'],
 			})
 			const { values } = stats(categorical)
 			expect(values!.count).toBe(7)

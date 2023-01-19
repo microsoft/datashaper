@@ -32,7 +32,7 @@ export function useResourceRoutes(
 	const observable = useMemo(
 		() =>
 			pkg.resources$.pipe(
-				map(resources => {
+				map((resources) => {
 					const hrefs = getResourceHrefs(resources)
 					const grouped = groupResources(resources, plugins)
 					const groups: ResourceRouteGroup[] = []
@@ -40,8 +40,8 @@ export function useResourceRoutes(
 						groups.push({
 							type,
 							resources: resources
-								.map(r => makeResourceRoute(r, services, plugins, hrefs))
-								.flatMap(x => x),
+								.map((r) => makeResourceRoute(r, services, plugins, hrefs))
+								.flatMap((x) => x),
 						})
 					})
 					return groups
@@ -59,7 +59,7 @@ function getResourceHrefs(
 ): Map<string, string> {
 	const result = current ?? new Map<string, string>()
 
-	resources.forEach(r => {
+	resources.forEach((r) => {
 		if (!r.isReference()) {
 			const href = `${parentRoute}/${r.name}`
 			result.set(r.name, href)

@@ -81,8 +81,8 @@ export const StepList: React.FC<StepListProps> = memo(function StepStack({
 				</ButtonContainer>
 			)}
 			<StepsContainer style={styles?.stepsContainer}>
-				{steps.map(step => {
-					const stepIndex = workflow.steps.findIndex(s => s.id === step.id)
+				{steps.map((step) => {
+					const stepIndex = workflow.steps.findIndex((s) => s.id === step.id)
 					const handleSave =
 						isNoArgsStep(step) || !onSave
 							? undefined

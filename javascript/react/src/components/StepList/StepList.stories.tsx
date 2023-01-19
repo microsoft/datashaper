@@ -34,7 +34,7 @@ const Template: ComponentStory<typeof StepList> = (
 	])
 	const [selected, setSelected] = useState<string | undefined>()
 	const handleSelect = useCallback(
-		(id: string) => setSelected(prev => (prev === id ? undefined : id)),
+		(id: string) => setSelected((prev) => (prev === id ? undefined : id)),
 		[setSelected],
 	)
 	return (

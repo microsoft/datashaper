@@ -20,7 +20,7 @@ export function useWorkflowDataTable(
 		} else {
 			result = workflow?.read$(id)
 		}
-		return result ? result.pipe(map(t => t?.table)) : from([existingTable])
+		return result ? result.pipe(map((t) => t?.table)) : from([existingTable])
 	}, [workflow, id, existingTable])
 	return useObservableState(observable, () => existingTable)
 }

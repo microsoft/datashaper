@@ -16,8 +16,7 @@ import uniqueId from 'lodash-es/uniqueId.js'
 import upperFirst from 'lodash-es/upperFirst.js'
 import { useCallback, useMemo } from 'react'
 
-import type {
-	ModalState} from '../../hooks/index.js';
+import type { ModalState } from '../../hooks/index.js'
 import {
 	useHeaderCommandBarDefaults,
 	useModalState,
@@ -40,14 +39,14 @@ function getOverflowVerbItems(
 	verbList: GroupedVerbs[],
 	id: string,
 ): ICommandBarItemProps[] {
-	return verbList.map(group => ({
+	return verbList.map((group) => ({
 		key: `__section-${group.label}__`,
 		itemType: ContextualMenuItemType.Section,
 		sectionProps: {
 			topDivider: true,
 			title: group.label,
-			items: group.verbs.map(verb => {
-				const found = Object.entries(Verb).find(v => v[1] === verb)!
+			items: group.verbs.map((verb) => {
+				const found = Object.entries(Verb).find((v) => v[1] === verb)!
 				return {
 					key: found[1],
 					text: found[0],
@@ -70,14 +69,14 @@ function getMainVerbItems(
 ): ICommandBarItemProps[] {
 	const items = [
 		{
-			key: 'divider' + uniqueId(),
-			id: 'divider' + uniqueId(),
+			key: `divider${uniqueId()}`,
+			id: `divider${uniqueId()}`,
 			commandBarButtonAs: VerticalDivider,
 			buttonStyles: { wrapper: { padding: '8px 2px', height: '100%' } },
 			itemType: ContextualMenuItemType.Divider,
 		} as ICommandBarItemProps,
 	]
-	verbList.forEach(verb => {
+	verbList.forEach((verb) => {
 		items.push({
 			key: verb,
 			text: upperFirst(verb),

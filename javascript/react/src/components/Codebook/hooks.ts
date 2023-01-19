@@ -31,13 +31,13 @@ export function useFieldHeights(): FieldHeights {
 	return useMemo(() => {
 		const get = (key: string) => heights[key]
 		const set = (key: string, value: number) =>
-			setHeights(prev => ({
+			setHeights((prev) => ({
 				...prev,
 				[key]: value,
 			}))
 		const updateAllMapping = (newFields: Field[]) => {
 			const max = Math.max(
-				...newFields.map(x => Object.keys(x?.mapping || {}).length),
+				...newFields.map((x) => Object.keys(x?.mapping || {}).length),
 			)
 			const actual = get('mappingWrapper') || 0
 			const newHeight = MAPPING_WRAPPER + max * MAPPING_FIELD

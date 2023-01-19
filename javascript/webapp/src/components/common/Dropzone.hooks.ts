@@ -27,7 +27,7 @@ export function useDropzone({
 }: DropzoneProps): DropzoneState {
 	const handleOnDrop = useHandleOnDrop(onDrop)
 	const handleOnDropAccepted = useHandleOnDropAccepted(onDropAccepted)
-	const acceptedFileTypesExt = acceptedFileTypes.map(x =>
+	const acceptedFileTypesExt = acceptedFileTypes.map((x) =>
 		x.toLowerCase().includes('application') || x.toLowerCase().includes('text')
 			? FileMimeType[x as keyof typeof FileMimeType]
 			: x,

@@ -39,11 +39,11 @@ export class NameManager {
 	}
 
 	public hasInput(name: string): boolean {
-		return this.inputs.some(i => i === name)
+		return this.inputs.some((i) => i === name)
 	}
 
 	public hasOutput(name: string): boolean {
-		return this.outputs.some(o => o === name)
+		return this.outputs.some((o) => o === name)
 	}
 
 	public setNames(inputs: string[], outputs: string[]): void {
@@ -69,7 +69,7 @@ export class NameManager {
 
 	public removeInput(name: string): boolean {
 		if (this.hasInput(name)) {
-			this._inputNames$.next(this.inputs.filter(i => i !== name))
+			this._inputNames$.next(this.inputs.filter((i) => i !== name))
 			return true
 		}
 		return false
@@ -77,7 +77,7 @@ export class NameManager {
 
 	public removeOutput(name: string): boolean {
 		if (this.hasOutput(name)) {
-			this._outputNames$.next(this.outputs.filter(o => o !== name))
+			this._outputNames$.next(this.outputs.filter((o) => o !== name))
 			return true
 		}
 		return false

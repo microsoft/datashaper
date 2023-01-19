@@ -35,9 +35,9 @@ function getComboBoxInputValueChangeHandler<T extends object | void | unknown>(
 	updateFn: (step: Step<T>, value: string | undefined) => void,
 	onChange?: StepChangeFunction<T>,
 ): ComboBoxInputValueChangeHandler {
-	return value => {
+	return (value) => {
 		onChange?.(
-			produce(step, draft => {
+			produce(step, (draft) => {
 				updateFn(draft as Step<T>, value)
 			}),
 		)

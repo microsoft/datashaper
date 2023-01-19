@@ -19,7 +19,7 @@ export function useWorkflowSteps(
 	order = DisplayOrder.LastOnTop,
 ): Step[] {
 	const observable = useObservable(
-		() => workflow.steps$.pipe(map(s => orderSteps(s, order))),
+		() => workflow.steps$.pipe(map((s) => orderSteps(s, order))),
 		[workflow, order],
 	)
 	return useObservableState(observable) ?? EMPTY_ARRAY

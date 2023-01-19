@@ -2,11 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	ParserOptions as ParserOptionsSchema} from '@datashaper/schema';
-import {
-	ParserOptionsDefaults,
-} from '@datashaper/schema'
+import type { ParserOptions as ParserOptionsSchema } from '@datashaper/schema'
+import { ParserOptionsDefaults } from '@datashaper/schema'
 import type { Observable } from 'rxjs'
 import { BehaviorSubject } from 'rxjs'
 

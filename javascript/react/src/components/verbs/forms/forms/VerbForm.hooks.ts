@@ -18,20 +18,20 @@ export function useSortedInputs(inputs: FormInput<any>[]): {
 	expanded: boolean
 	onToggleAdvanced: () => void
 } {
-	const regular = useMemo(() => inputs.filter(i => !i.advanced), [inputs])
-	const advanced = useMemo(() => inputs.filter(i => i.advanced), [inputs])
+	const regular = useMemo(() => inputs.filter((i) => !i.advanced), [inputs])
+	const advanced = useMemo(() => inputs.filter((i) => i.advanced), [inputs])
 
 	const [expanded, setExpanded] = useState<boolean>(false)
 
 	const onToggleAdvanced = useCallback(
-		() => setExpanded(prev => !prev),
+		() => setExpanded((prev) => !prev),
 		[setExpanded],
 	)
 
 	return {
 		regular,
 		advanced,
-		showAdvanced: advanced.some(input => input.if ?? true),
+		showAdvanced: advanced.some((input) => input.if ?? true),
 		expanded,
 		onToggleAdvanced,
 	}

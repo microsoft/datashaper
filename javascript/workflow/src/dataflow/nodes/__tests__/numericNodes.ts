@@ -47,7 +47,7 @@ abstract class VariadicComputeNode extends BaseNode<number, void> {
 	}
 	protected doRecalculate(): void {
 		const inputs = this.getVariadicInputValues().filter(
-			i => i != null,
+			(i) => i != null,
 		) as number[]
 		this.emit(this.compute(inputs))
 	}

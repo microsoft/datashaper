@@ -41,7 +41,7 @@ export function deriveDetails(step: Step): string | undefined {
 				(args as DeriveArgs).column2
 			}`
 		case Verb.Orderby:
-			return (args as OrderbyArgs).orders.map(o => o.column).join(',')
+			return (args as OrderbyArgs).orders.map((o) => o.column).join(',')
 		case Verb.Sample:
 			return sample(step)
 	}
@@ -59,8 +59,8 @@ export function deriveDetails(step: Step): string | undefined {
 	} else if (isInputTableListStep(step)) {
 		const others = step.input['other']
 			? step.input['other'].node
-			: step.input.others?.map(o => o.node).join(',')
-		return 'with ' + others
+			: step.input.others?.map((o) => o.node).join(',')
+		return `with ${others}`
 	}
 }
 

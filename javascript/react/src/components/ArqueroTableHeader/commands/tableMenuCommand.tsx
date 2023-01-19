@@ -37,11 +37,11 @@ const TableMenu: React.FC<{
 	tables: TableContainer[]
 	label: string
 	onChange?: (id: string) => void
-}> = props => {
+}> = (props) => {
 	const { tables, label, onChange } = props
 	const menuProps = useMemo(() => {
 		return {
-			items: tables.map(table => ({
+			items: tables.map((table) => ({
 				key: table.id,
 				text: table.id,
 				onClick: () => onChange?.(table.id),
@@ -75,7 +75,7 @@ function useStyles() {
 }
 
 function chooseLabel(tables: TableContainer[], selectedKey?: string): string {
-	const match = tables.find(t => t.id === selectedKey)
+	const match = tables.find((t) => t.id === selectedKey)
 	if (match) {
 		return match.id
 	}

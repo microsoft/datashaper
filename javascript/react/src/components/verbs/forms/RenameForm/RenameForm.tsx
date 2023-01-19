@@ -101,7 +101,7 @@ const ColumnPair: React.FC<{
 		if (name === oldname) {
 			return true
 		}
-		if (step.args.columns && step.args.columns[name]) {
+		if (step.args.columns?.[name]) {
 			return false
 		}
 		return true

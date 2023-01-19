@@ -19,7 +19,7 @@ export function useCategories(
 		if (categorical) {
 			return stats?.categories || EMPTY_ARRAY
 		}
-		return (stats?.bins || EMPTY_ARRAY).map(b => ({
+		return (stats?.bins || EMPTY_ARRAY).map((b) => ({
 			name: `${b.min}`,
 			count: b.count,
 		}))
@@ -30,14 +30,14 @@ export function useTooltip(categories: Category[]): string {
 	return useMemo(() => {
 		return categories.reduce((acc, cur, idx) => {
 			const { name, count } = cur
-			return acc + (idx > 0 ? '\n' : '') + `${formatIfNumber(name)}: ${count}`
+			return `${acc}${idx > 0 ? '\n' : ''}${formatIfNumber(name)}: ${count}`
 		}, '')
 	}, [categories])
 }
 
 export function useLegend(categories: Category[]): string[] {
 	return useMemo(() => {
-		return categories.map(cat => `${formatIfNumber(cat.name)}: ${cat.count}`)
+		return categories.map((cat) => `${formatIfNumber(cat.name)}: ${cat.count}`)
 	}, [categories])
 }
 

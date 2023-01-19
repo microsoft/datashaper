@@ -31,6 +31,6 @@ Primary.args = {
 		},
 	},
 	output: 'output-table',
-	onChange: step => console.log('change step', step),
-	onChangeOutput: value => console.log('change output to ', value),
+	onChange: (step) => console.log('change step', step),
+	onChangeOutput: (value) => console.log('change output to ', value),
 } as StepFormProps<EncodeDecodeArgs>

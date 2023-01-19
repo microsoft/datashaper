@@ -49,7 +49,10 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 		const [name, setName] = useState<string>(removeExtension(file.name ?? ''))
 		const [autoType, setAutoType] = useState<boolean>(true)
 
-		const { table, metadata, previewError, onLoadPreview } = usePreview(file, autoType)
+		const { table, metadata, previewError, onLoadPreview } = usePreview(
+			file,
+			autoType,
+		)
 
 		const draftSchema = useDraftSchema(delimiter, format, onLoadPreview)
 
@@ -89,7 +92,7 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 						/>
 						<Label>Final table</Label>
 						<PreviewContent>
-							<Preview error={previewError} table={table} metadata={metadata}/>
+							<Preview error={previewError} table={table} metadata={metadata} />
 						</PreviewContent>
 					</MainContent>
 				</ModalBody>
@@ -149,8 +152,20 @@ export const Preview: React.FC<{
 	metadata?: TableMetadata
 	error?: string
 }> = memo(function TablePreview({ table, metadata, error }) {
-	return <>{table && <RawTable error={error} table={table} metadata={metadata} fill features={{
-		statsColumnHeaders: true,
-		statsColumnTypes: [StatsColumnType.Type]
-	}}/>}</>
+	return (
+		<>
+			{table && (
+				<RawTable
+					error={error}
+					table={table}
+					metadata={metadata}
+					fill
+					features={{
+						statsColumnHeaders: true,
+						statsColumnTypes: [StatsColumnType.Type],
+					}}
+				/>
+			)}
+		</>
+	)
 })

@@ -17,12 +17,12 @@ export class SaveResourcesOperation {
 
 	public async execute(): Promise<string[]> {
 		const topResources = this.mgr.topResources
-		await Promise.all(topResources.map(r => this.writeResource(r, '', true)))
+		await Promise.all(topResources.map((r) => this.writeResource(r, '', true)))
 		const topResourcePaths = (
 			await Promise.all(
-				topResources.map(r => this.writeResource(r, '', true, true)),
+				topResources.map((r) => this.writeResource(r, '', true, true)),
 			)
-		).filter(t => !!t) as string[]
+		).filter((t) => !!t) as string[]
 
 		return topResourcePaths
 	}
@@ -49,7 +49,7 @@ export class SaveResourcesOperation {
 		const filePath = top ? `${fileName}/${fileName}` : `${prefix}${fileName}`
 
 		const sources = await Promise.all(
-			resource.sources.map(r =>
+			resource.sources.map((r) =>
 				this.writeResource(r, `${fileName}/`, false, resolve),
 			),
 		)

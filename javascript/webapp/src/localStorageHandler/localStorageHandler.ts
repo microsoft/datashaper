@@ -7,7 +7,7 @@ import { default as localforage } from 'localforage'
 import type { Settings } from '../models/Settings.js'
 
 export async function setDarkMode(isDarkMode: boolean): Promise<void> {
-	await localforage.setItem('isDarkMode', isDarkMode).catch(error => {
+	await localforage.setItem('isDarkMode', isDarkMode).catch((error) => {
 		console.log('error saving into indexDB')
 	})
 }

@@ -18,7 +18,7 @@ export const UnhotDescription: React.FC<StepDescriptionProps<UnhotArgs>> = memo(
 			} = props
 			const sub = createRowEntries(
 				args.columns || EMPTY_ARRAY,
-				c => ({
+				(c) => ({
 					value: c,
 				}),
 				1,
@@ -36,7 +36,7 @@ export const UnhotDescription: React.FC<StepDescriptionProps<UnhotArgs>> = memo(
 				},
 				{
 					before: 'keep source columns',
-					value: args.preserveSource ? `yes` : 'no',
+					value: args.preserveSource ? 'yes' : 'no',
 				},
 			]
 		}, [props])

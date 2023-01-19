@@ -9,9 +9,9 @@ export function getEnumDropdownOptions<E = Record<string, string>>(
 	labels?: Record<string, string>,
 ): IDropdownOption[] {
 	const options = Object.entries(enumeration as Record<string, string>).map(
-		entry => {
+		(entry) => {
 			const [name, key] = entry
-			const text = (labels && labels[key]) || formatEnumName(name)
+			const text = labels?.[key] || formatEnumName(name)
 			return {
 				key,
 				text,
@@ -28,11 +28,8 @@ export function getEnumDropdownOptions<E = Record<string, string>>(
  * @returns
  */
 function formatEnumName(name: string): string {
-	const parts = name
-		.replace(/([A-Z])/g, ' $1')
-		.trim()
-		.split(/\s/)
+	const parts = name.replace(/([A-Z])/g, ' $1').trim().split(/\s/)
 	const first = parts[0]
-	const rest = parts.slice(1).map(p => p.toLocaleLowerCase())
+	const rest = parts.slice(1).map((p) => p.toLocaleLowerCase())
 	return [first, ...rest].join(' ')
 }

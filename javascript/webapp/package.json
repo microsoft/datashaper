@@ -26,8 +26,8 @@
 		"bundle": "essex bundle && shx cp -r public/* build/",
 		"start": "essex serve",
 		"start:webapp": "yarn start",
-		"fix": "essex fix --strict",
-		"check": "essex check --strict",
+		"fix": "essex fix --strict --formatter none",
+		"check": "essex check --strict --formatter none",
 		"check-deps": "essex check-deps"
 	},
 	"dependencies": {

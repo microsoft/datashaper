@@ -88,7 +88,7 @@ function resolveInputs(
 
 		// Handle the variadic case (e.g. "others" array is defined)
 		if (result.others != null) {
-			result.others = result.others.map(o =>
+			result.others = result.others.map((o) =>
 				typeof o === 'string' ? { node: o } : (o as any as NamedPortBinding),
 			)
 		}

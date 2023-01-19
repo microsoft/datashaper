@@ -49,8 +49,8 @@ function defineTestCase(parentPath: string, test: string) {
 	const testName = test.split('_').join(' ')
 	const expectedOutputTables = fs
 		.readdirSync(casePath)
-		.filter(f => f.endsWith('.csv'))
-		.map(f => f.replace('.csv', ''))
+		.filter((f) => f.endsWith('.csv'))
+		.map((f) => f.replace('.csv', ''))
 
 	it(testName, async () => {
 		// execute the dataflow
@@ -65,15 +65,15 @@ function defineTestCase(parentPath: string, test: string) {
 
 		// check the output tables
 		await Promise.all(
-			expectedOutputTables.map(async o => {
+			expectedOutputTables.map(async (o) => {
 				const expected = await readCsv(path.join(casePath, `${o}.csv`))
-				await new Promise<void>(resolve => {
+				await new Promise<void>((resolve) => {
 					const result = workflow.read(o)
 					if (result?.table) {
 						compareTables(expected, result.table, o)
 						resolve()
 					} else {
-						workflow.read$(o)!.subscribe(actual => {
+						workflow.read$(o)!.subscribe((actual) => {
 							if (actual?.table) {
 								compareTables(expected, actual?.table, o)
 								resolve()
@@ -90,7 +90,7 @@ async function readInputTables(): Promise<TableContainer[]> {
 	const inputsPaths = path.join(SCHEMA_PATH, 'fixtures', 'workflow_inputs')
 	const entries = fs.readdirSync(inputsPaths)
 	return Promise.all(
-		entries.map(async entry => {
+		entries.map(async (entry) => {
 			const tableName = entry.replace('.csv', '')
 			const dataPath = path.join(inputsPaths, entry)
 			return container(tableName, await readCsv(dataPath))
@@ -99,7 +99,7 @@ async function readInputTables(): Promise<TableContainer[]> {
 }
 
 function readJson(dataPath: string): Promise<any> {
-	return import(dataPath).then(res => res.default)
+	return import(dataPath).then((res) => res.default)
 }
 
 function readText(dataPath: string): Promise<string> {
@@ -107,7 +107,7 @@ function readText(dataPath: string): Promise<string> {
 }
 
 function readCsv(dataPath: string): Promise<ColumnTable> {
-	return readText(dataPath).then(txt => fromCSV(txt))
+	return readText(dataPath).then((txt) => fromCSV(txt))
 }
 
 function compareTables(
@@ -152,7 +152,7 @@ function compareValue(expected: any, actual: any): void {
 		(typeof actual === 'string' && castable[typeof expected])
 	) {
 		// string-cast values to account for mixed-type column data (e.g. fold)
-		expect('' + actual).toEqual('' + expected)
+		expect(`${actual}`).toEqual(`${expected}`)
 	} else if (typeof expected === 'string' && Array.isArray(actual)) {
 		// Handle array output in actual table
 		const parsedArray = expected.split(',')

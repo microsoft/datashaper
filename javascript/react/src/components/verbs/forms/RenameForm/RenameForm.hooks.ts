@@ -44,7 +44,7 @@ export function useHandleColumnChange(
 
 // find the next column from the table to suggest
 function next(step: Step<RenameArgs>, table?: ColumnTable): string | undefined {
-	return table?.columnNames().find(name => {
+	return table?.columnNames().find((name) => {
 		if (!step.args.columns) {
 			return true
 		}

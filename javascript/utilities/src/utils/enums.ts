@@ -6,6 +6,6 @@ export function enumName(
 	en: object,
 	key?: string | number,
 ): string | undefined {
-	const found = Object.entries(en).find(e => e[1] === key)
-	return found && found[0]
+	const found = Object.entries(en).find((e) => e[1] === key)
+	return found?.[0]
 }

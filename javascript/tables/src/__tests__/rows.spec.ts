@@ -45,7 +45,7 @@ describe('row utilities', () => {
 		test('format', () => {
 			const output = rows(tbl, {
 				format: {
-					id: d => d * 2,
+					id: (d) => d * 2,
 				},
 			})
 			expect(output).toEqual([

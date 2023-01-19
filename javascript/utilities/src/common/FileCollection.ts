@@ -52,7 +52,7 @@ export class FileCollection {
 			this.name = file.name
 		}
 		const filesFromZip = await getFilesFromZip(file)
-		this._files = [...this._files, ...filesFromZip.map(f => new BaseFile(f))]
+		this._files = [...this._files, ...filesFromZip.map((f) => new BaseFile(f))]
 		this._files = [...renameDuplicatedFiles(this._files)]
 	}
 
@@ -77,7 +77,7 @@ export class FileCollection {
 	}
 
 	private async _addFromArray(files: (FileWithPath | File)[]): Promise<void> {
-		if ((files as File[]).every(file => file instanceof File)) {
+		if ((files as File[]).every((file) => file instanceof File)) {
 			for await (const file of files as FileWithPath[]) {
 				await this._addFile(file)
 			}
@@ -89,7 +89,7 @@ export class FileCollection {
 	}
 
 	find(name: string): BaseFile {
-		const file = this._files.find(file => file.name === name)
+		const file = this._files.find((file) => file.name === name)
 		if (!file) {
 			throw new Error(`File ${name} not found`)
 		}
@@ -98,7 +98,7 @@ export class FileCollection {
 
 	private filtered(files = this._files): BaseFile[] {
 		if (this._config.supportedFilesOnly) {
-			return files.filter(file => file.isSupported())
+			return files.filter((file) => file.isSupported())
 		}
 		return files
 	}
@@ -106,9 +106,9 @@ export class FileCollection {
 	list(type?: FileType): BaseFile[] {
 		let files: BaseFile[] = this._files
 		if (type === FileType.table) {
-			files = this._files.filter(file => file.isTable())
+			files = this._files.filter((file) => file.isTable())
 		} else if (type) {
-			files = this._files.filter(file => file.name.endsWith(type))
+			files = this._files.filter((file) => file.name.endsWith(type))
 		}
 		return this.filtered(files)
 	}
@@ -145,10 +145,10 @@ export class FileCollection {
 	remove(options: { type?: FileType; name?: string }): void {
 		const { type, name } = options
 		if (name) {
-			this._files = this._files.filter(file => file.name !== name)
+			this._files = this._files.filter((file) => file.name !== name)
 		} else if (type) {
-			const files = this.list(type).map(file => file.name)
-			this._files = this._files.filter(file => !files.includes(file.name))
+			const files = this.list(type).map((file) => file.name)
+			this._files = this._files.filter((file) => !files.includes(file.name))
 		}
 	}
 

@@ -107,7 +107,7 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 				<Routes>
 					<Route path="/" element={children} />
 					{flattenedRoutes.map(
-						r =>
+						(r) =>
 							r.renderer && (
 								<Route
 									key={r.href}

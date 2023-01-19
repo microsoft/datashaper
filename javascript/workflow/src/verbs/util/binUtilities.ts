@@ -104,7 +104,7 @@ export function standardDeviation(values: number[], precision = 3): number {
 	let sum = 0
 	let squareNumbersSum = 0
 
-	values.forEach(val => {
+	values.forEach((val) => {
 		sum = sum + val
 		squareNumbersSum = squareNumbersSum + val * val
 	})

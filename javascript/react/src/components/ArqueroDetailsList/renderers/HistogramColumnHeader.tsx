@@ -36,7 +36,7 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 
 		const bins = categorical ? metadata?.categories : metadata?.bins
 		const values = useMemo(
-			() => (bins ?? EMPTY_ARRAY).map(b => b.count),
+			() => (bins ?? EMPTY_ARRAY).map((b) => b.count),
 			[bins],
 		)
 		const categories = useCategories(metadata, categorical)

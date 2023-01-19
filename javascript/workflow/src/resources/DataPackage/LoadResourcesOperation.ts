@@ -49,7 +49,7 @@ export class LoadResourcesOperation {
 		 * Step 2: Reify Instances
 		 */
 		const nonReferenceSchemas = schemas.filter(
-			s => !isReferenceSchema(s.schema),
+			(s) => !isReferenceSchema(s.schema),
 		)
 		const resources = await this.reifySchemas(nonReferenceSchemas)
 
@@ -64,17 +64,18 @@ export class LoadResourcesOperation {
 		 * Step 4: Link Resources and Resolve References
 		 */
 		for (const { resource, schema } of resources) {
-			const sources = (schema.sources?.map(resolveResource).filter(t => !!t) ??
-				[]) as Resource[]
+			const sources = (schema.sources
+				?.map(resolveResource)
+				.filter((t) => !!t) ?? []) as Resource[]
 
 			resource.sources = sources
 		}
 
 		const topLevelResources = dataPackage.resources
 			.map(resolveResource)
-			.filter(t => !!t) as Resource[]
+			.filter((t) => !!t) as Resource[]
 
-		return [dataPackage, resources.map(r => r.resource), topLevelResources]
+		return [dataPackage, resources.map((r) => r.resource), topLevelResources]
 	}
 
 	private async readSchemas(
@@ -164,9 +165,9 @@ export class LoadResourcesOperation {
 			parentPath = '',
 		): Promise<Array<{ schema: ResourceSchema; path: string }>> => {
 			const result = await Promise.all(
-				entries.map(e => readEntry(e, parentPath)),
+				entries.map((e) => readEntry(e, parentPath)),
 			)
-			return result.filter(t => !!t) as Array<{
+			return result.filter((t) => !!t) as Array<{
 				schema: ResourceSchema
 				path: string
 			}>
@@ -194,7 +195,7 @@ export class LoadResourcesOperation {
 			schemas.map(({ schema, path }) => {
 				// override sources so that we can link them together in a second pass
 				return this.constructResource({ ...schema, sources: [] }).then(
-					resource => ({
+					(resource) => ({
 						resource,
 						schema,
 						path,

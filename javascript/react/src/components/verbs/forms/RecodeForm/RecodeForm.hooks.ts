@@ -17,7 +17,7 @@ export function useColumnValues(
 ): Value[] {
 	return useMemo(() => {
 		const { column } = step.args
-		if (!table || !column) {
+		if (!(table && column)) {
 			return []
 		}
 		const args = {
@@ -30,7 +30,7 @@ export function useColumnValues(
 
 // find the next value from the table to suggest
 function next(step: Step<RecodeArgs>, values: Value[]): Value | undefined {
-	return values.find(value => {
+	return values.find((value) => {
 		if (!step.args.mapping) {
 			return true
 		}

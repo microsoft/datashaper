@@ -38,7 +38,7 @@ export const BundleEditor: React.FC<BundleEditorProps> = memo(
 		const [workflow, isWorkflowAttached] = useMemo<[Workflow, boolean]>(() => {
 			const result = resource
 				.getSourcesWithProfile(KnownProfile.Workflow)
-				.find(t => !!t) as Workflow | undefined
+				.find((t) => !!t) as Workflow | undefined
 			const defaultWorkflow = () => {
 				const result = new Workflow()
 				result.input$ = resource.output$

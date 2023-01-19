@@ -76,7 +76,7 @@ export function isBoolean(
 	trueValues = TypeHintsDefaults.trueValues,
 ): (value: string) => boolean {
 	const booleanSet = new Set(
-		[...falseValues, ...trueValues].map(v => v.toLowerCase()),
+		[...falseValues, ...trueValues].map((v) => v.toLowerCase()),
 	)
 	return function (value: string) {
 		if (value === null) return false
