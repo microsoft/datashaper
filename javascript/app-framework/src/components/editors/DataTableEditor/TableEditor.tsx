@@ -15,7 +15,11 @@ import {
 	useTableHeaderStyles,
 	useToolPanelStyles,
 } from '../styles.js'
-import { Container, DetailsListContainer } from './TableEditor.styles.js'
+import {
+	ConfigContainer,
+	Container,
+	DetailsListContainer,
+} from './TableEditor.styles.js'
 import type { TableEditorProps } from './TableEditor.types.js'
 
 export const TableEditor: React.FC<TableEditorProps> = memo(
@@ -51,7 +55,9 @@ export const TableEditor: React.FC<TableEditorProps> = memo(
 					headerIconProps={iconProps}
 					styles={toolPanelStyles}
 				>
-					<DataTableConfig resource={resource} />
+					<ConfigContainer>
+						<DataTableConfig resource={resource} />
+					</ConfigContainer>
 				</ToolPanel>
 			</Container>
 		)

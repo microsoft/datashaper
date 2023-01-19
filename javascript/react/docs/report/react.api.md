@@ -263,7 +263,6 @@ export interface StepListProps {
     onSelectLatestTable: () => void;
     order?: DisplayOrder;
     selectedKey?: string;
-    showSelectButtons?: boolean;
     styles?: StepListStyles;
     workflow: Workflow;
 }

@@ -5,18 +5,10 @@
 import styled from '@essex/styled-components'
 import { Label, TextField, Toggle } from '@fluentui/react'
 
-import { dropdownStyles } from '../styles.js'
-
 export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 `
-
-export const leftStyles = {
-	root: {
-		...dropdownStyles.root,
-	},
-}
 
 export const TextValue = styled(TextField)`
 	display: inline;
@@ -43,12 +35,6 @@ export const BooleanToggle = styled(Toggle)`
 export const InputLabel = styled.div`
 	width: 68px;
 `
-
-export const spinStyles = {
-	root: {
-		width: 135,
-	},
-}
 
 export const Input = styled.div`
 	display: flex;

@@ -2,6 +2,11 @@
 
 Unrolls array-valued cells into new columns. Similar to [unroll](./unroll.md), but creating new columns instead of rows. New columns are created using the input column name plus array index. If an output columns list is supplied, any array cells with more values than the supplied output names will be truncated.
 
+Additional options:
+
+- Keep source column: retains the original column instead of replacing it with the new columns.
+- Split delimiter: if supplied, `spread` will create an array in the cell by first splitting string values with this delimiter.
+
 ## Example
 
 | id  | values      |

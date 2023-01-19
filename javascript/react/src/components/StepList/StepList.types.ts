@@ -25,11 +25,6 @@ export interface StepListProps {
 	 * The order to render the steps in. Default = latest on top
 	 */
 	order?: DisplayOrder
-	/**
-	 * Indicates whether the original/latest buttons will be shown.
-	 * Note that they will have no effect if you do not supply an onSelect handler too.
-	 */
-	showSelectButtons?: boolean
 
 	/**
 	 * Id of the selected step
@@ -49,17 +44,19 @@ export interface StepListProps {
 	onSelect?: (name: string) => void
 
 	/**
-	 * Event handler for when the latest output table is selected
+	 * Event handler for when the latest output table is selected.
+	 * 'Latest' button will not be shown if this is not provided.
 	 */
 	onSelectLatestTable: () => void
 
 	/**
-	 * Event handler for when the input table is selected
+	 * Event handler for when the input table is selected.
+	 * 'Original' button will not be shown if this is not provided.
 	 */
 	onSelectInputTable: () => void
 
 	/**
-	 * Event handler for when a step needs to be savend
+	 * Event handler for when a step needs to be saved
 	 * @param step - The step to save
 	 * @param index - The step index
 	 */

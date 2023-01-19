@@ -4,7 +4,7 @@
 
 ## StepListProps.onSelectInputTable property
 
-Event handler for when the input table is selected
+Event handler for when the input table is selected. 'Original' button will not be shown if this is not provided.
 
 <b>Signature:</b>
 
