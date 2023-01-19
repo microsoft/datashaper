@@ -1,4 +1,18 @@
 {
+  "files": {
+    "ignore": [
+      "dist",
+      "lib",
+      "build",
+      "python",
+      "storybook-static",
+      ".turbo",
+      ".pnp.cjs",
+      ".pnp.loader.mjs",
+      "javascript/schema/versions.js",
+      "javascript/schema/versions.d.ts"
+    ]
+  },
   "linter": {
     "enabled": true,
     "rules": {
@@ -13,18 +27,7 @@
       "performance": {
         "noDelete": "off"
       }
-    },
-    "ignore": [
-      "dist",
-      "lib",
-      "build",
-      "storybook-static",
-      ".turbo",
-      ".pnp.cjs",
-      ".pnp.loader.mjs",
-      "javascript/schema/versions.js",
-      "javascript/schema/versions.d.ts"
-    ]
+    }
   },
   "javascript": {
     "formatter": {
@@ -35,17 +38,6 @@
     }
   },
   "formatter": {
-    "indentStyle": "tab",
-    "ignore": [
-      "dist",
-      "lib",
-      "build",
-      "storybook-static",
-      ".turbo",
-      ".pnp.cjs",
-      ".pnp.loader.mjs",
-      "versions.js",
-      "versions.d.ts"
-    ]
+    "indentStyle": "tab"
   }
 }
