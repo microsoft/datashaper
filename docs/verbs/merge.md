@@ -5,9 +5,14 @@ Collapses multiple columns into one. Invalid values (null, undefined, NaN) are i
 Available collapse strategies are:
 
 - first one wins: the first valid column value is used in the output
-- last one winss: the last valid column value is used in the output
-- concat: all valid column values are concatenated together, and a delimiter can be specified
+- last one wins: the last valid column value is used in the output
+- concat: all valid column values are concatenated together into a string, and a delimiter can be specified
 - array: all valid column values are pushed into a cell array
+
+Additional options:
+
+- Keep source columns: retains the original columns instead of replacing.
+- Unhot: reverses a onehot encoding before merging by replacing cell values with the column name if 1 or empty if 0.
 
 ## Examples
 

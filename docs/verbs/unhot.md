@@ -2,6 +2,11 @@
 
 Reverses a onehot encoding by collapsing the encoded columns into a single column and mapping the header values back to cell values. This operation reverses [onehot](./onehot.md).
 
+Additional options:
+
+- Keep source columns: leave the sources instead of replacing with the new collapsed column.
+- Prefix: Strip this prefix from the column headers to derive the value. Useful if a prefix was added during original `onehot`.
+
 ## Example
 
 | ID    | Name_Microsoft | Name_Bing |
