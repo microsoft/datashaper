@@ -1,6 +1,11 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { CodebookStrategy } from '@datashaper/schema'
 import type { CSVParseOptions } from 'arquero/dist/types/format/from-csv.js'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
+
 import { applyCodebook } from './applyCodebook.js'
 import { generateCodebook } from './generateCodebook.js'
 import { readCsvTable } from './readCsvTable.js'

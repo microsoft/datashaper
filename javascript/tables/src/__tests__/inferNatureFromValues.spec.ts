@@ -7,81 +7,125 @@ import { VariableNature } from '@datashaper/schema'
 
 import { inferNatureFromValues } from '../inferNatureFromValues.js'
 
-describe('Infer nature from values tests', () => {
+describe('inferNatureFromValues', () => {
 	describe('binary', () => {
-		const values: boolean[] = [true, false, false, true]
-		const values2: number[] = [1, 1, 1, 0, 1, 0, 0, 0, null, null]
-
-		const nature: VariableNature = inferNatureFromValues(values)
-		const nature2: VariableNature = inferNatureFromValues(values2)
-
-		it('should return true', () => {
+		test('all booleans', () => {
+			const values: boolean[] = [true, false, false, true]
+			const nature: VariableNature = inferNatureFromValues(values)
 			expect(nature).toBe(VariableNature.Binary)
-			expect(nature2).toBe(VariableNature.Binary)
+		})
+
+		test('ones and zeros', () => {
+			const values: (number | null)[] = [1, 1, 1, 0, 1, 0, 0, 0, null, null]
+			const nature: VariableNature = inferNatureFromValues(values)
+			expect(nature).toBe(VariableNature.Binary)
+		})
+
+		test('strings', () => {
+			const values: (string | null)[] = [
+				'Y',
+				'N',
+				null,
+				'Y',
+				'Y',
+				'N',
+				'N',
+				'N',
+			]
+			const nature: VariableNature = inferNatureFromValues(values)
+			expect(nature).toBe(VariableNature.Binary)
 		})
 	})
 
 	describe('discrete', () => {
-		const values: number[] = [12, 67, 89, 90, null, 23, undefined, 10]
-		const values2: number[] = [
-			12,
-			61,
-			89,
-			90,
-			null,
-			23,
-			undefined,
-			10,
-			56,
-			67,
-			100,
-			45,
-		]
-
-		const nature: VariableNature = inferNatureFromValues(values)
-		const nature2: VariableNature = inferNatureFromValues(values2, 11)
-		const nature3: VariableNature = inferNatureFromValues(values2, 9)
-
-		it('should return true', () => {
+		test('whole numbers', () => {
+			const values: (number | null | undefined)[] = [
+				12,
+				67,
+				89,
+				90,
+				null,
+				23,
+				undefined,
+				10,
+			]
+			const nature: VariableNature = inferNatureFromValues(values)
 			expect(nature).toBe(VariableNature.Discrete)
-			expect(nature2).toBe(VariableNature.Discrete)
-			expect(nature3).toBe(VariableNature.Discrete)
 		})
 	})
 
 	describe('continuous', () => {
-		const values: number[] = [1.2, 55.3, 78.99, null, 99.6, -45.23, -98.23]
-		const nature: VariableNature = inferNatureFromValues(values)
+		test('decimal numbers', () => {
+			const values: (number | null)[] = [
+				1.2,
+				55.3,
+				78.99,
+				null,
+				99.6,
+				-45.23,
+				-98.23,
+			]
+			const nature: VariableNature = inferNatureFromValues(values)
+			expect(nature).toBe(VariableNature.Continuous)
+		})
 
-		it('should return true', () => {
+		test('lots of unique strings', () => {
+			const values: string[] = 'ABCDEFGHIJKLMPQRSTUVWXYZ'.split('')
+			const nature: VariableNature = inferNatureFromValues(values)
 			expect(nature).toBe(VariableNature.Continuous)
 		})
 	})
 
 	describe('nominal', () => {
-		const values: string[] = [
-			'category1',
-			'category2',
-			null,
-			'category3',
-			undefined,
-			'category4',
-		]
-
-		const nature: VariableNature = inferNatureFromValues(values)
-
-		it('should return true', () => {
+		test('categorical strings', () => {
+			const values: (string | null | undefined)[] = [
+				'category1',
+				'category2',
+				null,
+				'category3',
+				undefined,
+				'category4',
+			]
+			const nature: VariableNature = inferNatureFromValues(values)
 			expect(nature).toBe(VariableNature.Nominal)
 		})
 	})
 
 	describe('ordinal', () => {
-		const values: number[] = [1, null, null, 2, 3, 4, 5, 6]
-
-		const nature: VariableNature = inferNatureFromValues(values)
-
-		it('should return true', () => {
+		test('sorted numbers', () => {
+			const values: (number | null)[] = [1, null, null, 2, 3, 4, 5, 6]
+			const nature: VariableNature = inferNatureFromValues(values)
 			expect(nature).toBe(VariableNature.Ordinal)
+		})
+
+		test('unsorted numbers', () => {
+			const values: (number | null)[] = [2, 4, 3, 1, 5]
+			const nature: VariableNature = inferNatureFromValues(values)
+			expect(nature).toBe(VariableNature.Ordinal)
+		})
+	})
+
+	describe('non-default options', () => {
+		test('binary ignores higher numbers due to limit', () => {
+			const values: number[] = [1, 1, 1, 0, 1, 0, 0, 0, 3, 4, 5]
+			const nature: VariableNature = inferNatureFromValues(values, {
+				limit: 5,
+			})
+			expect(nature).toBe(VariableNature.Binary)
+		})
+		test('binary ignores specified null value', () => {
+			const values: number[] = [1, 1, 1, 0, 1, 2, 0, 0, 2]
+			const nature: VariableNature = inferNatureFromValues(values, {
+				nullValue: 2,
+			})
+			expect(nature).toBe(VariableNature.Binary)
+		})
+		test('categorical captures more allowed values', () => {
+			const values: string[] = 'ABCDEFGHIJKLMPQRSTUVWXYZ'.split('')
+			const nature: VariableNature = inferNatureFromValues(values, {
+				categoricalCountLimit: 30,
+			})
+			expect(nature).toBe(VariableNature.Nominal)
 		})
 	})
 })

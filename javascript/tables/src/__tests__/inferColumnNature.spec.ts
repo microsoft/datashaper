@@ -4,19 +4,20 @@
  */
 import { VariableNature } from '@datashaper/schema'
 import fs from 'fs'
+
 import { fromCSV } from '../fromCSV.js'
 import { inferColumnNature } from '../inferColumnNature.js'
 
 describe('Infer column nature tests', () => {
 	describe('discrete', () => {
-		const csv = fs.readFileSync('./src/__tests__/data/simple-example.csv', {
+		const csv = fs.readFileSync('./src/__tests__/data/stocks.csv', {
 			encoding: 'utf8',
 			flag: 'r',
 		})
 
 		const parsed = fromCSV(csv)
 
-		const nature = inferColumnNature(parsed, 'index')
+		const nature = inferColumnNature(parsed, 'Volume')
 
 		it('should return true', () => {
 			expect(nature).toBe(VariableNature.Discrete)

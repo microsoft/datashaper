@@ -59,7 +59,8 @@ export enum VariableNature {
      */
 	Ordinal = 'ordinal',
 	/**
-     * Integers mapped to arbitrary categories wher order does not matter.
+     * Integers mapped to arbitrary categories where order does not matter.
+	 * String columns are also normally nominal.
      * For example:
 	
 		Eye color
@@ -74,6 +75,8 @@ export enum VariableNature {
 	Nominal = 'nominal',
 	/**
 	 * Only two valid values are allowed, commonly 1 = true, 0 = false.
+	 * If the data type for a column is boolean, this will be the nature.
+	 * If only two unique strings are present, this will be the nature (e.g., 'Y' and 'N')
 	 */
 	Binary = 'binary',
 }

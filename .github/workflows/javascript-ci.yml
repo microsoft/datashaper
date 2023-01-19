@@ -45,17 +45,8 @@ jobs:
       - run: yarn generate:versions
         name: Versions
 
-      - run: yarn build
-        name: Build
-
-      - run: yarn lint
-        name: Lint
-
-      - run: yarn test
-        name: Test
-
-      - run: yarn bundle
-        name: Bundle
+      - run: yarn ci
+        name: Verify
 
       - run: |
           git add -A 
