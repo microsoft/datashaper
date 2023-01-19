@@ -41,14 +41,14 @@ function useSearchChange(
 	return useCallback(
 		(_ev?: React.ChangeEvent<HTMLInputElement>, newValue?: string) => {
 			const filtered: IContextualMenuItem[] = []
-			items.forEach(item => {
+			items.forEach((item) => {
 				if (item.itemType === ContextualMenuItemType.Normal) {
 					if (match(item, newValue)) {
 						filtered.push(item)
 					}
 				} else if (item.itemType === ContextualMenuItemType.Section) {
 					const subitems =
-						item.sectionProps?.items.filter(subitem =>
+						item.sectionProps?.items.filter((subitem) =>
 							match(subitem, newValue),
 						) || EMPTY_ARRAY
 					filtered.push({

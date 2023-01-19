@@ -33,7 +33,7 @@ const Template: ComponentStory<typeof StepList> = (
 	])
 	const [selected, setSelected] = useState<string | undefined>()
 	const handleSelect = useCallback(
-		(id: string) => setSelected(prev => (prev === id ? undefined : id)),
+		(id: string) => setSelected((prev) => (prev === id ? undefined : id)),
 		[setSelected],
 	)
 	return (
@@ -60,8 +60,8 @@ export const Primary = Template.bind({})
 export const SaveDelete = Template.bind({})
 SaveDelete.storyName = 'Save & delete buttons'
 SaveDelete.args = {
-	onSave: s => console.log('save', s),
-	onDelete: s => console.log('delete', s),
+	onSave: (s) => console.log('save', s),
+	onDelete: (s) => console.log('delete', s),
 }
 
 export const Customized = Template.bind({})

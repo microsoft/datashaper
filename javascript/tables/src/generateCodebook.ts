@@ -31,7 +31,7 @@ export function generateCodebook(
 		...options,
 	}
 
-	table.columnNames().forEach(column => {
+	table.columnNames().forEach((column) => {
 		const field: Field = {
 			name: column,
 			type: DataType.String,

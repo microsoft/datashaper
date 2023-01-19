@@ -74,7 +74,7 @@ export function validateColumn(
 			enumValidator(field, includeIndexes),
 		]
 		const values = table.array(name)
-		validators.forEach(validate => {
+		validators.forEach((validate) => {
 			if (validate) {
 				const result = validate(values)
 				if (result) {

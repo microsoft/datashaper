@@ -32,7 +32,7 @@ export function compareAll(
 		// TODO: the logical evaluate below has shortcuts that could optimize
 		// this check by shortcutting evaluation once it is clear the logical operator
 		// cannot be satisfied
-		const comparisons = criteria.map(filter => {
+		const comparisons = criteria.map((filter) => {
 			const { value, operator, type } = filter
 			const right =
 				type === FilterCompareType.Column ? d[`${value.toString()}`]! : value
@@ -87,7 +87,7 @@ export function deriveBoolean(
 ): CompareWrapper {
 	return escape((d: Record<string, string | number>): 0 | 1 | null => {
 		// gather all of the column values, coerce to booleans (or null)
-		const values = columns.map(c => {
+		const values = columns.map((c) => {
 			const val = bool(d[c])
 			return val === null ? null : val ? 1 : 0
 		})

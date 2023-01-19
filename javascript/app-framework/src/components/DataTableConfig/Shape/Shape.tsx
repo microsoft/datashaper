@@ -31,7 +31,7 @@ export const Shape: React.FC<ShapeProps> = memo(function Shape({ shape }) {
 		<Container>
 			<TableLayoutOptions
 				selected={orientation}
-				onChange={orientation => (shape.orientation = orientation)}
+				onChange={(orientation) => (shape.orientation = orientation)}
 			/>
 			<When condition={orientation === DataOrientation.Array}>
 				<FieldContainer>

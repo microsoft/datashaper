@@ -40,7 +40,7 @@ export function columnIndexesWithZeros(table: ColumnTable): number[] {
  */
 export function columnNamesWithZeros(table: ColumnTable): string[] {
 	const indexes = columnIndexesWithZeros(table)
-	return indexes.map(i => table.columnName(i))
+	return indexes.map((i) => table.columnName(i))
 }
 
 export function columnType(table: ColumnTable, column: string): DataType {

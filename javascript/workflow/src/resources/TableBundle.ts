@@ -74,13 +74,13 @@ export class TableBundle extends Resource implements TableEmitter {
 
 		this._pipelineSub = lastNode?.output$
 			.pipe(map(this.renameTable), map(this.computeMeta))
-			.subscribe(out => this._output$.next(out))
+			.subscribe((out) => this._output$.next(out))
 
 		this._onChange.next()
 	}
 
 	public get input(): TableEmitter | undefined {
-		return this.sources.find(source => {
+		return this.sources.find((source) => {
 			const resource = dereference(source)
 			return (
 				resource?.profile === KnownProfile.TableBundle ||

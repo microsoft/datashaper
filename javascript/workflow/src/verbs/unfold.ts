@@ -13,7 +13,7 @@ export const unfoldStep: ColumnTableStep<UnfoldArgs> = (
 	input,
 	{ key, value },
 ) => {
-	const columnNames: string[] = input.columnNames(name => {
+	const columnNames: string[] = input.columnNames((name) => {
 		return name !== key && name !== value
 	})
 	const selectedArray: RowObject[] = input.select(columnNames).objects()
@@ -41,7 +41,7 @@ export const unfoldStep: ColumnTableStep<UnfoldArgs> = (
 
 		let j: number = i * distinctColumnValues.length
 
-		distinctColumnValues.forEach(e => {
+		distinctColumnValues.forEach((e) => {
 			const obj: RowObject | undefined = originalArray[j]
 			tempObj[e] = obj !== undefined ? obj[value] : null
 			j++

@@ -43,11 +43,11 @@ export class DefaultGraph<T> implements Graph<T> {
 			this._nodes.set(node.id, node)
 
 			// add the bound nodes
-			node.bindings.forEach(b => this.add(b.node))
+			node.bindings.forEach((b) => this.add(b.node))
 
 			// when bindings change, add those nodes
-			const subscription = node.bindings$.subscribe(bindings =>
-				bindings.forEach(b => this.add(b.node)),
+			const subscription = node.bindings$.subscribe((bindings) =>
+				bindings.forEach((b) => this.add(b.node)),
 			)
 			this._nodeSubscriptions.set(node.id, subscription)
 		}
@@ -80,10 +80,10 @@ export class DefaultGraph<T> implements Graph<T> {
 
 	private get edges(): Array<[string, string]> {
 		const edges: [string, string][] = []
-		this.nodes.forEach(id => {
+		this.nodes.forEach((id) => {
 			const node = this._nodes.get(id)
 			if (node) {
-				node.bindings.forEach(binding => {
+				node.bindings.forEach((binding) => {
 					edges.push([binding.node.id, id])
 				})
 			}

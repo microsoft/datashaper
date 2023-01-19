@@ -30,7 +30,7 @@ import type { StepFormProps } from '../verbs/index.js'
 import { selectStepForm } from './selectStepForm.js'
 
 export function getSimpleDropdownOptions(list: string[]): IDropdownOption[] {
-	return list.map(name => ({
+	return list.map((name) => ({
 		key: name,
 		text: name.toString(),
 	}))

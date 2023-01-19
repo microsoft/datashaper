@@ -16,7 +16,7 @@ export const SpreadDescription: React.FC<StepDescriptionProps<SpreadArgs>> =
 			} = props
 			return [
 				{
-					before: `column`,
+					before: 'column',
 					value: args.column,
 				},
 				{
@@ -25,7 +25,7 @@ export const SpreadDescription: React.FC<StepDescriptionProps<SpreadArgs>> =
 				},
 				{
 					before: 'onehot values',
-					value: args.onehot ? `yes` : 'no',
+					value: args.onehot ? 'yes' : 'no',
 				},
 			]
 		}, [props])

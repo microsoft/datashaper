@@ -116,7 +116,7 @@ export function useVersion(
 ): [number, React.Dispatch<React.SetStateAction<number>>] {
 	const [version, setVersion] = useState(0)
 	useEffect(() => {
-		setVersion(prev => prev + 1)
+		setVersion((prev) => prev + 1)
 	}, [columns, table, compact])
 	return [version, setVersion]
 }
@@ -126,7 +126,7 @@ export function useOnColumnResizeHandler(
 ): (column: IColumn | undefined, newWidth: number | undefined) => void {
 	return useCallback(
 		(column: IColumn | undefined, newWidth: number | undefined) => {
-			const set = () => setVersion(prev => prev + 1)
+			const set = () => setVersion((prev) => prev + 1)
 			if (column?.currentWidth !== newWidth) {
 				debounceFn(set)
 			}

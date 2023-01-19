@@ -49,7 +49,7 @@ function getComboBoxChangeHandler<T extends object | void | unknown>(
 ): ComboBoxChangeHandler {
 	return (_event, option, _index, value) => {
 		onChange?.(
-			produce(step, draft => {
+			produce(step, (draft) => {
 				updateFn(draft as Step<T>, option?.key, value)
 			}),
 		)

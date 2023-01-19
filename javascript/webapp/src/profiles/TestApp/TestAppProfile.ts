@@ -50,7 +50,7 @@ export class TestAppProfile implements ProfilePlugin<TestAppResource> {
 					key: this.profile,
 					text: `New ${this.title}`,
 					onClick: () => {
-						this.createInstance().then(resource => {
+						this.createInstance().then((resource) => {
 							resource.name = dp.suggestResourceName(resource.name)
 							dp.addResource(resource)
 						})

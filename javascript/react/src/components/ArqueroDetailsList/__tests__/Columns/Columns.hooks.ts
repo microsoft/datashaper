@@ -37,15 +37,15 @@ export function useCheckboxConfigs(table: ColumnTable | undefined): {
 	)
 	const checkboxes = useMemo(() => {
 		return (
-			table?.columnNames().map(column => ({
+			table?.columnNames().map((column) => ({
 				label: column,
 				checked: checked?.includes(column),
 				onChange: (
 					_ev?: React.FormEvent<HTMLElement | HTMLInputElement>,
 					checked?: boolean,
 				) => {
-					setChecked(prev =>
-						checked ? [...prev, column] : prev.filter(c => c !== column),
+					setChecked((prev) =>
+						checked ? [...prev, column] : prev.filter((c) => c !== column),
 					)
 				},
 			})) || EMPTY_ARRAY
@@ -60,7 +60,7 @@ export function useColumns(checkboxes: ICheckboxProps[]): {
 } {
 	const columns = useMemo(() => {
 		return checkboxes
-			.filter(c => c.checked)
+			.filter((c) => c.checked)
 			.map(({ label }) => ({
 				key: label!,
 				name: label!,

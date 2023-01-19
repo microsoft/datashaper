@@ -25,7 +25,7 @@ export function useHandleClick(setName: NameSetter): (url: string) => void {
 			if (!url.includes(window.location.origin)) {
 				return window.open(url, '_blank')
 			}
-			const name = url.split(`/`).pop()?.replace(/.md/, '')
+			const name = url.split('/').pop()?.replace(/.md/, '')
 			if (name) {
 				setName((prev: string[]) => [...prev, name])
 			}
@@ -36,7 +36,7 @@ export function useHandleClick(setName: NameSetter): (url: string) => void {
 
 export function useGoBack(setName: NameSetter): () => void {
 	return useCallback(() => {
-		setName(prev => prev.slice(0, -1))
+		setName((prev) => prev.slice(0, -1))
 	}, [setName])
 }
 

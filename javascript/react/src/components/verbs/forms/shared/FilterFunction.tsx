@@ -47,15 +47,14 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 	function FilterFunction({ table, column, criterion, onChange }) {
 		const handleOpChange = useCallback(
 			(_e: React.FormEvent<HTMLDivElement>, opt?: IDropdownOption) => {
-				onChange &&
-					onChange({
-						...criterion,
-						operator: opt?.key as
-							| StringComparisonOperator
-							| NumericComparisonOperator
-							| BooleanComparisonOperator
-							| DateComparisonOperator,
-					})
+				onChange?.({
+					...criterion,
+					operator: opt?.key as
+						| StringComparisonOperator
+						| NumericComparisonOperator
+						| BooleanComparisonOperator
+						| DateComparisonOperator,
+				})
 			},
 			[criterion, onChange],
 		)
@@ -227,7 +226,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 								value={criterion.value}
 								onChange={onChangeTextFieldValue}
 								disabled={isEmpty}
-							></TextValue>
+							/>
 						) : null}
 
 						{type === DataType.Number ? (

@@ -54,7 +54,7 @@ export function useInputTables(inputs: TableContainer[]): TableContainer[] {
 
 	useEffect(() => {
 		if (inputs) {
-			const withMeta = inputs.map(table => {
+			const withMeta = inputs.map((table) => {
 				const meta = introspect(table.table!, true)
 				return container(table.id, table.table, meta)
 			})
@@ -76,7 +76,7 @@ export function useAddFilesHandler(
 	// add any dropped files to the inputs
 	return useCallback(
 		(loaded: TableContainer[]) => {
-			loaded.forEach(table => workflow.addInputTable(table))
+			loaded.forEach((table) => workflow.addInputTable(table))
 		},
 		[workflow],
 	)

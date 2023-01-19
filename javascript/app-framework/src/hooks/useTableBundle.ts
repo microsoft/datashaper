@@ -10,5 +10,5 @@ export function useTableBundle(
 	name: string | undefined,
 ): TableBundle | undefined {
 	const bundles = useTableBundles()
-	return bundles.find(t => t.name === name)
+	return bundles.find((t) => t.name === name)
 }

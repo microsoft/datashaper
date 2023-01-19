@@ -67,8 +67,8 @@ export function parseBoolean(
 	falseValues = TypeHintsDefaults.falseValues,
 ): (value: string) => boolean | null {
 	const { isNull } = typeGuesserFactory({ naValues })
-	const trueSet = new Set(trueValues.map(v => v.toLowerCase()))
-	const falseSet = new Set(falseValues.map(v => v.toLowerCase()))
+	const trueSet = new Set(trueValues.map((v) => v.toLowerCase()))
+	const falseSet = new Set(falseValues.map((v) => v.toLowerCase()))
 	return function parseBoolean(value: string) {
 		if (isNull(value)) {
 			return null
@@ -111,7 +111,7 @@ export function parseArray(
 		}
 		const array = value.split(delimiter) as any[]
 		try {
-			const parsed = array.map(i => {
+			const parsed = array.map((i) => {
 				const item = `${i}`
 				const type = subTypeChecker(item)
 				const parser = parseAs(type, options)

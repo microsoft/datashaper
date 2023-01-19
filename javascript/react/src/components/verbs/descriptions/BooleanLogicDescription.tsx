@@ -19,7 +19,7 @@ export const BooleanLogicDescription: React.FC<
 		} = props
 		const sub = createRowEntries(
 			args.columns || EMPTY_ARRAY,
-			c => ({
+			(c) => ({
 				value: c,
 			}),
 			3,

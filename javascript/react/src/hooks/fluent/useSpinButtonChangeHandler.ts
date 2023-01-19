@@ -39,7 +39,7 @@ function getSpinButtonChangeHandler<T extends object | void | unknown>(
 ): SpinButtonChangeHandler {
 	return (_event, newValue) => {
 		onChange?.(
-			produce(step, draft => {
+			produce(step, (draft) => {
 				updateFn(draft as Step<T>, newValue)
 			}),
 		)

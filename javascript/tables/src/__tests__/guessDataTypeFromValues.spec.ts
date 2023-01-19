@@ -38,7 +38,6 @@ describe('guessDataTypeFromValues', () => {
 	})
 
 	describe('array', () => {
-	
 		const columnType = guessDataTypeFromValues(['<NA>', 'a,b', 'd', 'f,g'])
 
 		it('should return array', () => {

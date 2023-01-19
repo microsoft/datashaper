@@ -1,0 +1,44 @@
+{
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "suspicious": {
+        "noExplicitAny": "off",
+        "noShadowRestrictedNames": "off"
+      },
+      "a11y": {
+        "useKeyWithClickEvents": "off"
+      }
+    },
+    "ignore": [
+      "dist",
+      "lib",
+      "build",
+      "storybook-static",
+      ".turbo",
+      ".pnp.cjs",
+      ".pnp.loader.mjs"
+    ]
+  },
+  "javascript": {
+    "formatter": {
+      "semicolons": "asNeeded",
+      "quoteStyle": "single",
+      "trailingComma": "all",
+      "quoteProperties": "asNeeded"
+    }
+  },
+  "formatter": {
+    "indentStyle": "tab",
+    "ignore": [
+      "dist",
+      "lib",
+      "build",
+      "storybook-static",
+      ".turbo",
+      ".pnp.cjs",
+      ".pnp.loader.mjs"
+    ]
+  }
+}

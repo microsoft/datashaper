@@ -118,8 +118,8 @@ const NUMERIC_VERBS = filterByTag(Tags.NumericOnly)
 const NOARGS_VERBS = filterByTag(Tags.NoArgs)
 
 function filterByTag(tag: Tags) {
-	return Object.keys(TaggedVerbs).filter(key => {
-		return TaggedVerbs[key as Verb].findIndex(t => t === tag) >= 0
+	return Object.keys(TaggedVerbs).filter((key) => {
+		return TaggedVerbs[key as Verb].findIndex((t) => t === tag) >= 0
 	}) as Verb[]
 }
 
@@ -205,7 +205,7 @@ export function isNoArgsStep(step: Step): boolean {
 }
 
 function isTagged(step: Step, verbs: Verb[]): boolean {
-	return verbs.findIndex(v => v === step.verb) >= 0
+	return verbs.findIndex((v) => v === step.verb) >= 0
 }
 
 /**

@@ -11,8 +11,8 @@ export class ObservableNode<T> extends BaseNode<T, void> {
 	constructor(source: Observable<Maybe<T>>) {
 		super()
 		source.subscribe({
-			next: value => this.emit(value),
-			error: error => this.emitError(error),
+			next: (value) => this.emit(value),
+			error: (error) => this.emitError(error),
 		})
 	}
 

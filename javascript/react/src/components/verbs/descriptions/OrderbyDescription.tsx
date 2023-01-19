@@ -18,7 +18,7 @@ export const OrderbyDescription: React.FC<StepDescriptionProps<OrderbyArgs>> =
 			} = props
 			const sub = createRowEntries(
 				args.orders || EMPTY_ARRAY,
-				o => ({
+				(o) => ({
 					value: o.column,
 					after: o.direction,
 				}),

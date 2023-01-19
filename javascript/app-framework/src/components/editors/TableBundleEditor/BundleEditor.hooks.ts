@@ -33,7 +33,7 @@ export function useSelectedTable(
 			}
 			return result
 		} else {
-			throw new Error(`illegal state, no table selected`)
+			throw new Error('illegal state, no table selected')
 		}
 	}, [bundle, selectedTableId, workflow, isInputSelected, isLatestSelected])
 	return useObservableState(observed$, () => undefined)
@@ -46,7 +46,7 @@ export function useColumnState(): [
 	const [selectedColumn, setSelectedColumn] = useState<string | undefined>()
 	const onColumnClick = useCallback(
 		(_?: React.MouseEvent<HTMLElement, MouseEvent>, column?: IColumn) => {
-			setSelectedColumn(prev =>
+			setSelectedColumn((prev) =>
 				prev === column?.name ? undefined : column?.name,
 			)
 		},
@@ -60,7 +60,7 @@ function useTableBundleWorkflow(table: TableBundle): Workflow | undefined {
 		() =>
 			table
 				.getSourcesWithProfile(KnownProfile.Workflow)
-				.find(t => !!t) as Workflow,
+				.find((t) => !!t) as Workflow,
 
 		/* eslint-disable-next-line react-hooks/exhaustive-deps */
 		[table, table.sources],
@@ -80,7 +80,7 @@ export function useOnDeleteStep(
 		(index: number) => {
 			workflow.removeStep(index)
 			if (!workflow.steps.length) {
-				bundle.sources = bundle.sources.filter(s => s !== workflow)
+				bundle.sources = bundle.sources.filter((s) => s !== workflow)
 				workflow.dispose()
 			}
 		},

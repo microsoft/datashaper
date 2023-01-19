@@ -99,7 +99,7 @@ function binning(
 	optStats: Record<string, any>,
 	columns?: string[],
 ) {
-	const filter = filterColumns(columns, name => {
+	const filter = filterColumns(columns, (name) => {
 		const mode = reqStats[`${name}.mode`]
 		const type = determineType(mode)
 		return type === DataType.Number
@@ -160,7 +160,7 @@ function fillBins(
 	}, {} as Record<string, Bin>)
 	const mins = new Array(10).fill(step).map((v, i) => v * i + min)
 	const filled = mins.map(
-		v =>
+		(v) =>
 			hash[v] || {
 				min: v,
 				count: 0,
@@ -179,7 +179,7 @@ function categories(
 ) {
 	// note we're going to limit this to columns with a small number of unique values.
 	// it just doesn't make sense to count everything that is distinct if we can't plot/display it
-	const text = table.columnNames(name => {
+	const text = table.columnNames((name) => {
 		const mode = reqStats[`${name}.mode`]
 		const distinct = reqStats[`${name}.distinct`]
 		const type = determineType(mode)

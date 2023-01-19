@@ -39,7 +39,7 @@ export function createRowEntries<T>(
 			value: '',
 			title: all
 				.slice(max - 1)
-				.map(d => [d.before, d.value, d.after].join(' '))
+				.map((d) => [d.before, d.value, d.after].join(' '))
 				.join('\n'),
 		})
 	}

@@ -18,7 +18,7 @@ const { versions } = JSON.parse(
 	}),
 )
 
-Object.keys(versions).forEach(name => {
+Object.keys(versions).forEach((name) => {
 	const latestSchema = `${name}.json`
 
 	const releaseDirectory = path.join(schemaReleases, name)
@@ -39,7 +39,7 @@ Object.keys(versions).forEach(name => {
 	)
 
 	// copy each versioned schema into the appropriate public output folder
-	fs.readdirSync(releaseDirectory).forEach(file => {
+	fs.readdirSync(releaseDirectory).forEach((file) => {
 		fs.copyFileSync(
 			path.join(releaseDirectory, file),
 			path.join(webappVersionDirectory, file),

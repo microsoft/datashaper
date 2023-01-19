@@ -11,10 +11,7 @@ import { Named } from './Named.js'
 import type { ResourceReference } from './ResourceReference.js'
 import type { Readable } from './types.js'
 
-export abstract class Resource
-	extends Named
-	implements ResourceSchema, Resource
-{
+export abstract class Resource extends Named implements ResourceSchema, Resource {
 	/**
 	 * Gets the resource schema
 	 */
@@ -95,14 +92,14 @@ export abstract class Resource
 
 		this._sources = value
 		if (dp != null) {
-			this._sources.forEach(s => s.connect(dp, false))
+			this._sources.forEach((s) => s.connect(dp, false))
 		}
 
 		// Listen to source changes and bubble up onchange events
-		const handlers = this._sources.map(v =>
+		const handlers = this._sources.map((v) =>
 			v.onChange(() => this._onChange.next()),
 		)
-		this._unlistenToSources = () => handlers.forEach(h => h())
+		this._unlistenToSources = () => handlers.forEach((h) => h())
 		this._onChange.next()
 	}
 
@@ -118,8 +115,8 @@ export abstract class Resource
 		this._dataPackage = dp
 		dp.addResource(this, top)
 		this._sources
-			.filter(s => !s.isReference())
-			.forEach(s => s.connect(dp, false))
+			.filter((s) => !s.isReference())
+			.forEach((s) => s.connect(dp, false))
 	}
 
 	/**
@@ -130,12 +127,12 @@ export abstract class Resource
 	public getSourcesWithProfile(type: Profile): Resource[] {
 		return this.sources
 			.map(dereference)
-			.filter(s => s?.profile === type) as Resource[]
+			.filter((s) => s?.profile === type) as Resource[]
 	}
 
 	public override dispose(): void {
 		super.dispose()
-		this._sources.forEach(s => s.dispose())
+		this._sources.forEach((s) => s.dispose())
 		this._dataPackage = undefined
 	}
 

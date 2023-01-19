@@ -18,13 +18,13 @@ export function useSubsetTable(
 			// doing this stops the super error from arquero while the real columns aren't re-rendered
 			const tableColumns = table.columnNames()
 			existingColumnNames = columns
-				.map(col => col.fieldName!)
-				.filter(col => tableColumns.includes(col))
+				.map((col) => col.fieldName!)
+				.filter((col) => tableColumns.includes(col))
 		}
 
 		// choosing wrong delimiters makes data get wrongly parsed and in some cases
 		// it generates some columnsNames as arrays instead of strings with ,
-		existingColumnNames = existingColumnNames.map(column => {
+		existingColumnNames = existingColumnNames.map((column) => {
 			if (isArray(column)) {
 				return column.join(',')
 			}

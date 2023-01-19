@@ -33,7 +33,7 @@ export const RecodeForm: React.FC<StepFormProps<RecodeArgs>> = memo(
 		const initialValues = useColumnValues(step, dataTable)
 		const values =
 			dataType === DataType.Date
-				? initialValues.map(e => e.toISOString())
+				? initialValues.map((e) => e.toISOString())
 				: initialValues
 
 		const onUpdateMapping = useCallback(

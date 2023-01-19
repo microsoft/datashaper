@@ -41,7 +41,7 @@ export class Codebook extends Resource implements TableTransformer {
 
 	public set input$(value: Maybe<Observable<Maybe<TableContainer>>>) {
 		this._inputSub?.unsubscribe()
-		this._inputSub = value?.subscribe(table =>
+		this._inputSub = value?.subscribe((table) =>
 			this._output$.next(this.encodeTable(table)),
 		)
 	}

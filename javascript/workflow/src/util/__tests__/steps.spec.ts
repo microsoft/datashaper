@@ -12,7 +12,7 @@ describe('step utilities', () => {
 		const canonical = new Set<Verb>(Object.values(Verb))
 		const tagged = new Set<Verb>(verbs())
 
-		canonical.forEach(c => expect(tagged.has(c)).toBeTruthy())
-		tagged.forEach(c => expect(canonical.has(c)).toBeTruthy())
+		canonical.forEach((c) => expect(tagged.has(c)).toBeTruthy())
+		tagged.forEach((c) => expect(canonical.has(c)).toBeTruthy())
 	})
 })

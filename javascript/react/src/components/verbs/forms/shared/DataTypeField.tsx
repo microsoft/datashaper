@@ -101,7 +101,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 						value={value}
 						styles={styles}
 						disabled={disabled}
-					></TextValue>
+					/>
 				) : null}
 				{dataType === DataType.Number ? (
 					<SpinButton

@@ -31,7 +31,7 @@ export function useIntersection(
 export function useCountChildren(): (children: IGroup[]) => number {
 	const countChildren = useCallback((children: IGroup[]) => {
 		let total = 0
-		children.forEach(child => {
+		children.forEach((child) => {
 			total += child.count
 			total += child.children ? countChildren(child.children) : 0
 		})

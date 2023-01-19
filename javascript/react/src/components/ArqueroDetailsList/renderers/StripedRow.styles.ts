@@ -41,7 +41,7 @@ export function useStyles({
 				height: compact ? compactRowHeight : DEFAULT_ROW_HEIGHT,
 				borderRight: columnBorders
 					? `1px solid ${theme.palette.neutralLighter}`
-					: `1px solid transparent`,
+					: '1px solid transparent',
 				borderBottom: compact
 					? `1px solid ${theme.palette.neutralLighter}`
 					: 'none',
