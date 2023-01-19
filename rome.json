@@ -9,6 +9,9 @@
       },
       "a11y": {
         "useKeyWithClickEvents": "off"
+      },
+      "performance": {
+        "noDelete": "off"
       }
     },
     "ignore": [
@@ -18,7 +21,9 @@
       "storybook-static",
       ".turbo",
       ".pnp.cjs",
-      ".pnp.loader.mjs"
+      ".pnp.loader.mjs",
+      "javascript/schema/versions.js",
+      "javascript/schema/versions.d.ts"
     ]
   },
   "javascript": {
@@ -38,7 +43,9 @@
       "storybook-static",
       ".turbo",
       ".pnp.cjs",
-      ".pnp.loader.mjs"
+      ".pnp.loader.mjs",
+      "versions.js",
+      "versions.d.ts"
     ]
   }
 }

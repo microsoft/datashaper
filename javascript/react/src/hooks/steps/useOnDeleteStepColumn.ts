@@ -15,7 +15,7 @@ export function useOnDeleteStepColumn(
 	return useCallback(
 		(column) => {
 			const args = { ...step.args }
-			args.columns[column] = undefined
+			delete args.columns[column]
 
 			onChange?.({
 				...step,
