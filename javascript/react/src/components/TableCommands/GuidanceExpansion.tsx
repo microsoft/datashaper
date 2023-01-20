@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { default as guidanceIndex } from '@datashaper/verb-guidance'
+import { default as guidanceContent } from '@datashaper/verb-guidance'
 import { MarkdownBrowser } from '@essex/components'
 import { memo } from 'react'
 
@@ -13,7 +13,7 @@ export const GuidanceExpansion: React.FC<GuidanceExpansionProps> = memo(
 	function GuidanceExpansion({ verb }) {
 		return verb ? (
 			<Container>
-				<MarkdownBrowser home={verb} content={guidanceIndex} />
+				<MarkdownBrowser home={verb} content={guidanceContent} />
 			</Container>
 		) : null
 	},
