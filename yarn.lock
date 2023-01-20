@@ -2003,6 +2003,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@datashaper/guidance@workspace:^, @datashaper/guidance@workspace:javascript/guidance":
+  version: 0.0.0-use.local
+  resolution: "@datashaper/guidance@workspace:javascript/guidance"
+  dependencies:
+    "@essex/scripts": ^23.1.4
+    "@essex/tsconfig-base": ^1.0.2
+    "@types/express": ^4.17.15
+    "@types/node": ^18.11.18
+    express: ^4.18.2
+    typescript: ^4.9.4
+  languageName: unknown
+  linkType: soft
+
 "@datashaper/project@workspace:.":
   version: 0.0.0-use.local
   resolution: "@datashaper/project@workspace:."
@@ -2028,10 +2041,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@datashaper/react@workspace:javascript/react"
   dependencies:
+    "@datashaper/guidance": "workspace:^"
     "@datashaper/schema": "workspace:^"
     "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
-    "@datashaper/verb-guidance": "workspace:^"
     "@datashaper/workflow": "workspace:^"
     "@essex/charts-react": ^1.1.6
     "@essex/components": ^3.6.5
@@ -2212,19 +2225,6 @@ __metadata:
   peerDependenciesMeta:
     arquero:
       optional: false
-  languageName: unknown
-  linkType: soft
-
-"@datashaper/verb-guidance@workspace:^, @datashaper/verb-guidance@workspace:javascript/verb-guidance":
-  version: 0.0.0-use.local
-  resolution: "@datashaper/verb-guidance@workspace:javascript/verb-guidance"
-  dependencies:
-    "@essex/scripts": ^23.1.4
-    "@essex/tsconfig-base": ^1.0.2
-    "@types/express": ^4.17.15
-    "@types/node": ^18.11.18
-    express: ^4.18.2
-    typescript: ^4.9.4
   languageName: unknown
   linkType: soft
 

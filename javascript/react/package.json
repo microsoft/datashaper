@@ -35,10 +35,10 @@
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"dependencies": {
+		"@datashaper/guidance": "workspace:^",
 		"@datashaper/schema": "workspace:^",
 		"@datashaper/tables": "workspace:^",
 		"@datashaper/utilities": "workspace:^",
-		"@datashaper/verb-guidance": "workspace:^",
 		"@datashaper/workflow": "workspace:^",
 		"@essex/charts-react": "^1.1.6",
 		"@essex/components": "^3.6.5",

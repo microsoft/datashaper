@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { default as guidanceIndex } from '@datashaper/verb-guidance'
+import { default as guidanceIndex } from '@datashaper/guidance'
 import { memo } from 'react'
 
 import { Guidance } from '../Guidance/Guidance.js'
