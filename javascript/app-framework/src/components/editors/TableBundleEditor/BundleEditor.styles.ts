@@ -9,7 +9,7 @@ export const DetailsListContainer = styled.div`
 	overflow: auto;
 	display: flex;
 	flex-direction: column;
-	height: 100%;
+	height: calc(100% - 44px);
 	border-right: 1px solid
 		${({ theme }: { theme: ITheme }) => theme.palette.neutralLighter};
 `
