@@ -3,8 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { default as guidanceIndex } from '@datashaper/verb-guidance'
-import { memo } from 'react'
 import { MarkdownBrowser } from '@essex/components'
+import { memo } from 'react'
+
 import { Container } from './GuidanceExpansion.styles.js'
 import type { GuidanceExpansionProps } from './GuidanceExpansion.types.js'
 
