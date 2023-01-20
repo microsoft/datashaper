@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-export function useGuidanceIndex(): {
+export function useGuidanceContent(): {
 	prepareDataPage: string
 } {
 	return {

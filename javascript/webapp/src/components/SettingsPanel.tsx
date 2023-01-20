@@ -3,11 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { Guidance } from '@datashaper/react'
+import { MarkdownBrowser } from '@essex/components'
 import { Panel, Toggle } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
-import { useGuidanceIndex } from '../hooks/index.js'
+import { useGuidanceContent } from '../hooks/index.js'
 import { useSettings } from '../states/settings.js'
 import { useSetDarkMode } from './SettingsPanel.hooks.js'
 import { H3, HelpSection, SettingsSection } from './SettingsPanel.styles.js'
@@ -15,7 +15,7 @@ import type { SettingsPanelProps } from './SettingsPanel.types.js'
 
 export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
 	function SettingsPanel({ isOpen, onDismiss }: SettingsPanelProps) {
-		const index = useGuidanceIndex()
+		const content = useGuidanceContent()
 		const [settings, setSettings] = useSettings()
 		const setDarkMode = useSetDarkMode(settings, setSettings)
 		const handleDarkModeChange = useCallback(
@@ -44,7 +44,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
 
 				<HelpSection>
 					<H3>Help</H3>
-					<Guidance name={'prepareDataPage'} index={index} />
+					<MarkdownBrowser home={'prepareDataPage'} content={content} />
 				</HelpSection>
 			</Panel>
 		)
