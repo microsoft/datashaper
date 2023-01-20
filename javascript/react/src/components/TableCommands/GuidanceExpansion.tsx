@@ -4,8 +4,7 @@
  */
 import { default as guidanceIndex } from '@datashaper/verb-guidance'
 import { memo } from 'react'
-
-import { Guidance } from '../Guidance/Guidance.js'
+import { MarkdownBrowser } from '@essex/components'
 import { Container } from './GuidanceExpansion.styles.js'
 import type { GuidanceExpansionProps } from './GuidanceExpansion.types.js'
 
@@ -13,7 +12,7 @@ export const GuidanceExpansion: React.FC<GuidanceExpansionProps> = memo(
 	function GuidanceExpansion({ verb }) {
 		return verb ? (
 			<Container>
-				<Guidance name={verb} index={guidanceIndex} />
+				<MarkdownBrowser home={verb} content={guidanceIndex} />
 			</Container>
 		) : null
 	},

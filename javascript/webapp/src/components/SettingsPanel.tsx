@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { Guidance } from '@datashaper/react'
+import { MarkdownBrowser } from '@essex/components'
 import { Panel, Toggle } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
@@ -44,7 +44,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
 
 				<HelpSection>
 					<H3>Help</H3>
-					<Guidance name={'prepareDataPage'} index={index} />
+					<MarkdownBrowser home={'prepareDataPage'} content={index} />
 				</HelpSection>
 			</Panel>
 		)
