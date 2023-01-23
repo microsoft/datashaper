@@ -1,8 +1,8 @@
 # Table Bundle
 
-The Table Bundle is a high-level organizing resource that brings together all of the component resources to fully materialize tables for analytic use. This can include a base [data table](./datatable.md) (e.g., CSV or JSON data file), a [Codebook](./codebook.md) that defines the schema, and a [Workflow](./workflow.md) defining transformations to apply.
+Table Bundles bring together all of the component resources to fully materialize your tables for analytic use. This can include a base [data table](./datatable.md) (e.g., CSV or JSON data file), a [codebook](./codebook.md) that defines the schema, and a [workflow](./workflow.md) defining transformations to apply.
 
-DataShaper allows you to contruct table bundles in a variety of ways, including symlinking from one to another to create derived collections that dynamically update as child dependencies are modified.
+You can contruct table bundles in a variety of ways, including symlinking from one to another to create derived collections that dynamically update as child dependencies are modified.
 
 ## Table view
 

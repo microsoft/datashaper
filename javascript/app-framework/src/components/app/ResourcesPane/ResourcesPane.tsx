@@ -41,12 +41,12 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 			: 'Show interactive guidance'
 		return (
 			<Container style={style} className={className}>
+				<FileTreeCommands
+					expanded={expanded}
+					examples={examples}
+					plugins={plugins}
+				/>
 				<MenuContainer>
-					<FileTreeCommands
-						expanded={expanded}
-						examples={examples}
-						plugins={plugins}
-					/>
 					<ResourceTree
 						resources={resources}
 						expanded={expanded}

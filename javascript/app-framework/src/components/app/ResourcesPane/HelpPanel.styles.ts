@@ -9,9 +9,7 @@ export const Header = styled.div`
     display: flex;
     align-items: center;
     padding: 0 4px;
-    border-top: 2px solid;
-    border-bottom: 1px solid;
-    border-color: ${({ theme }) => theme.palette.neutralTertiaryAlt};
+    border-bottom: 1px solid ${({ theme }) => theme.palette.neutralTertiaryAlt};
     background: ${({ theme }) => theme.palette.neutralLighterAlt};
     color: ${({ theme }) => theme.palette.neutralSecondary};
     font-size: 12px;
@@ -19,11 +17,15 @@ export const Header = styled.div`
 `
 
 export const Content = styled.div`
+    overflow-y: auto;
     padding: 10px;
     h1 {
         font-size: 14px;
     }
     h2 {
+        font-size: 13px;
+    }
+    h3 {
         font-size: 12px;
     }
 `

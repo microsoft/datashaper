@@ -8,7 +8,7 @@ Data tables can be stored in a variety of file formats, and we provide options f
 
 ## CSV
 
-"CSV" stands for "comma-separated values", and is the most [common format](https://en.wikipedia.org/wiki/Comma-separated_values) for sharing data files. You can easily export this format from Excel. Despite the name CSV, you may use a different delimiter than a comma, so we provide options to handle that too. In a CSV file each line of text represents a row in the table and columns are separated by the delimiter.
+"CSV" stands for "comma-separated values", and is a very [common format](https://en.wikipedia.org/wiki/Comma-separated_values) for sharing data files. You can easily export this format from Excel. Despite the name CSV, you may use a different delimiter than a comma, so we provide options to handle that too. In a CSV file each line of text represents a row in the table and columns are separated by the delimiter.
 
 Most files will load fine using the default settings, but you can tune things to match your format if needed.
 
@@ -32,4 +32,4 @@ Most files will load fine using the default settings, but you can tune things to
 
 ## Editing
 
-When viewing a data table, you can click the "code" icon at the top right to view the raw input text. This text is editable, and changes will propagate through the system.
+When viewing a data table, you can click the "edit" icon at the top right to view the raw input text. This text is editable, and changes will propagate through the system.

@@ -19,9 +19,10 @@ export const MenuContainer = styled.div`
 `
 
 export const HelpContainer = styled.div`
-width: 100%;
-flex: 1;
-overflow-y: auto;
+	width: 100%;
+	flex: 1;
+	border-top: 2px solid ${({ theme }) => theme.palette.neutralTertiaryAlt};
+	overflow-y: auto;
 `
 
 export const FooterMenu = styled.div`
