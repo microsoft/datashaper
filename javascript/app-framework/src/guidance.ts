@@ -1,4 +1,4 @@
-import { default as content } from '@datashaper/guidance'
+import content from '@datashaper/guidance'
 
 /**
  * Retrieves specific guidance content from the shared guidance package.

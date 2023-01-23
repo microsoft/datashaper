@@ -7,7 +7,7 @@ import { BinStrategy } from '@datashaper/schema'
 import { fixedBinStep } from '@datashaper/tables'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { default as linspace } from 'exact-linspace'
+import linspace from 'exact-linspace'
 
 import {
 	calculateBinCount,
