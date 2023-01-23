@@ -12,17 +12,16 @@ export const Container = styled.div`
 	width: auto;
 `
 
-export const MenuContainer = styled.div`
+export const TreeContainer = styled.div`
 	width: 100%;
-	flex: 1;
+	height: 100%;
 	overflow-y: auto;
 `
 
 export const HelpContainer = styled.div`
 	width: 100%;
-	flex: 1;
+	height: 100%;
 	border-top: 2px solid ${({ theme }) => theme.palette.neutralTertiaryAlt};
-	overflow-y: auto;
 `
 
 export const FooterMenu = styled.div`

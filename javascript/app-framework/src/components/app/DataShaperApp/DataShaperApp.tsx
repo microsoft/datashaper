@@ -22,6 +22,7 @@ import {
 import {
 	PANE_COLLAPSED_SIZE,
 	PANE_EXPANDED_SIZE,
+	PANE_MAX_SIZE,
 	useFileTreeStyle,
 } from './DataShaperApp.styles.js'
 import type { DataShaperAppProps } from './DataShaperApp.types.js'
@@ -92,7 +93,7 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 		>
 			<Allotment.Pane
 				preferredSize={PANE_EXPANDED_SIZE}
-				maxSize={PANE_EXPANDED_SIZE}
+				maxSize={PANE_MAX_SIZE}
 				minSize={PANE_COLLAPSED_SIZE}
 			>
 				<ResourcesPane

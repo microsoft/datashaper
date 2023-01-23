@@ -1,6 +1,6 @@
 # Codebook
 
-A Codebook defines the schema for [data table](./datatable.md) columns. Each column can define such attributes as the core data type, data nature, and units.
+A **codebook** defines the schema for [data table](./datatable.md) columns. Each column can define such attributes as the core data type, data nature, and units.
 
 ## Schema values
 

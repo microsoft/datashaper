@@ -1,6 +1,6 @@
 # Table Bundle
 
-Table Bundles bring together all of the component resources to fully materialize your tables for analytic use. This can include a base [data table](./datatable.md) (e.g., CSV or JSON data file), a [codebook](./codebook.md) that defines the schema, and a [workflow](./workflow.md) defining transformations to apply.
+The **table bundle** brings together all of the component resources to fully materialize a table for analytic use. This can include a base [data table](./datatable.md) (e.g., CSV or JSON data file), a [codebook](./codebook.md) that defines the schema, and a [workflow](./workflow.md) defining transformations to apply.
 
 You can contruct table bundles in a variety of ways, including symlinking from one to another to create derived collections that dynamically update as child dependencies are modified.
 

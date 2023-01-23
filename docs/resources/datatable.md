@@ -1,6 +1,6 @@
 # Data Table
 
-The Data Table resource represents the basic input data content. This resource contains a link or embedded direct data, as well as instructions for loading and parsing the content into a table that is accessible to users. In the data table viewer we always show the raw text cells that were imported so you can confirm that everything looks as expected.
+The **data table** resource represents the basic input data content. This resource contains a link or embedded direct data, as well as instructions for loading and parsing the content into a table that is accessible to users. In the data table viewer we always show the raw text cells that were imported so you can confirm that everything looks as expected.
 
 Most data table content is interpreted as text by default. This helps us avoid accidentally misinterpreting data and causing data loss. When you import tables you can specify that data types should be discovered automatically, in which case we will analyze the text content and decide the most appropriate data type for each column (checking this box also generates a [codebook](./codebook.md) to accompany your table, which stores the data type information for later use).
 

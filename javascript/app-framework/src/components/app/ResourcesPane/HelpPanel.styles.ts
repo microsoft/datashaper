@@ -17,6 +17,7 @@ export const Header = styled.div`
 `
 
 export const Content = styled.div`
+    height: 100%;
     overflow-y: auto;
     padding: 10px;
     h1 {

@@ -4,6 +4,7 @@
  */
 import { IconButton } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
+import { Allotment } from 'allotment'
 import { memo } from 'react'
 
 import { FileTreeCommands } from './FileTreeCommands.js'
@@ -14,7 +15,7 @@ import {
 	FooterMenu,
 	HelpContainer,
 	icons,
-	MenuContainer,
+	TreeContainer,
 } from './ResourcesPane.styles.js'
 import type { ResourcesPaneProps } from './ResourcesPane.types.js'
 import { ResourceTree } from './ResourceTree.js'
@@ -46,24 +47,29 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 					examples={examples}
 					plugins={plugins}
 				/>
-				<MenuContainer>
-					<ResourceTree
-						resources={resources}
-						expanded={expanded}
-						selectedRoute={selectedKey}
-						onSelect={onSelect}
-					/>
-				</MenuContainer>
-
-				{expanded && helpVisible && (
-					<HelpContainer>
-						<HelpPanel
-							currentHelp={currentHelp}
-							helpContent={helpContent}
-							onToggleExpanded={onToggleHelp}
-						/>
-					</HelpContainer>
-				)}
+				<Allotment vertical>
+					<Allotment.Pane>
+						<TreeContainer>
+							<ResourceTree
+								resources={resources}
+								expanded={expanded}
+								selectedRoute={selectedKey}
+								onSelect={onSelect}
+							/>
+						</TreeContainer>
+					</Allotment.Pane>
+					{expanded && helpVisible && (
+						<Allotment.Pane>
+							<HelpContainer>
+								<HelpPanel
+									currentHelp={currentHelp}
+									helpContent={helpContent}
+									onToggleExpanded={onToggleHelp}
+								/>
+							</HelpContainer>
+						</Allotment.Pane>
+					)}
+				</Allotment>
 				<FooterMenu>
 					{expanded && (
 						<Tooltip content={helpTooltip} styles={tooltipStyles}>
