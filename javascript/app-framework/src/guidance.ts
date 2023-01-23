@@ -1,3 +1,7 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import content from '@datashaper/guidance'
 
 /**
@@ -11,7 +15,7 @@ import content from '@datashaper/guidance'
  * This is to ensure that any profile can navigate the relative content. Duplicate registrations will be silently absorbed.
  * @returns
  */
-export function guidance() {
+export function guidance(): Record<string, string> {
 	return Object.entries(content as Record<string, string>).reduce(
 		(acc, [key, value]) => {
 			if (key.startsWith('resources')) {

@@ -236,7 +236,7 @@ export function useAppServices(): {
 export function useRegisterPluginHelp(
 	plugins: Map<string, ProfilePlugin>,
 	onInitializeHelp: any,
-) {
+): void {
 	useEffect(() => {
 		let help: Record<string, string> = {}
 		for (const plugin of plugins.values()) {

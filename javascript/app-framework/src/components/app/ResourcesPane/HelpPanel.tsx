@@ -6,6 +6,7 @@ import { MarkdownBrowser } from '@essex/components'
 import { IconButton } from '@fluentui/react'
 import { memo } from 'react'
 import { Else, If, Then } from 'react-if'
+
 import { Container, Content, Header } from './HelpPanel.styles.js'
 import type { HelpPanelProps } from './HelpPanel.types.js'
 import { icons } from './ResourcesPane.styles.js'

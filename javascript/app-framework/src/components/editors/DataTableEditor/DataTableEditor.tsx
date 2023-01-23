@@ -10,7 +10,7 @@ import { TableEditor } from './TableEditor.js'
 
 export const DataTableEditor: React.FC<DataTableEditorProps> = memo(
 	function DataTableEditor({ resource, api }) {
-		useEffect(() => api.requestHelp('datatable'), [])
+		useEffect(() => api.requestHelp('datatable'), [api])
 		return (
 			<JsonModeEditor resource={resource}>
 				<TableEditor resource={resource} />

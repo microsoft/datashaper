@@ -10,7 +10,7 @@ import type { TableBundleEditorProps } from './TableBundleEditor.types.js'
 
 export const TableBundleEditor: React.FC<TableBundleEditorProps> = memo(
 	function TableBundleEditor({ resource, api }) {
-		useEffect(() => api.requestHelp('tablebundle'), [])
+		useEffect(() => api.requestHelp('tablebundle'), [api])
 		return (
 			<JsonModeEditor resource={resource}>
 				<BundleEditor resource={resource} />
