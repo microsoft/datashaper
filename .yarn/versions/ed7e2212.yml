@@ -6,3 +6,7 @@ releases:
 
 declined:
   - "@datashaper/guidance"
+
+undecided:
+  - "@datashaper/tables"
+  - "@datashaper/workflow"
