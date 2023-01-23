@@ -147,6 +147,7 @@ export function useAppServices(): {
 	}
 	help: {
 		currentHelp: string | undefined
+		helpContent: Record<string, string>
 		onInitializeHelp: any
 	}
 } {
@@ -210,8 +211,9 @@ export function useAppServices(): {
 				onAccept: acceptRename.handle,
 			},
 			help: {
-				currentHelp: helpKey ? helpIndex[helpKey] : undefined,
+				currentHelp: helpKey,
 				onInitializeHelp,
+				helpContent: helpIndex,
 			},
 		}),
 		[
@@ -226,6 +228,11 @@ export function useAppServices(): {
 	)
 }
 
+/**
+ * Populate the help index once the plugins are instantiated.
+ * @param plugins
+ * @param onInitializeHelp
+ */
 export function useRegisterPluginHelp(
 	plugins: Map<string, ProfilePlugin>,
 	onInitializeHelp: any,

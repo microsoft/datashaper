@@ -57,7 +57,7 @@ export interface AppServices {
 	 */
 	renameResource(resource: Resource): Promise<string>
 	/**
-	 * Set the current context-sensitive help content,
+	 * Set the current context-sensitive help key,
 	 * which the user can see if the global help pane is open.
 	 * @param key
 	 */

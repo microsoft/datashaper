@@ -313,7 +313,7 @@
             {
               "kind": "MethodSignature",
               "canonicalReference": "@datashaper/app-framework!AppServices#requestHelp:member(1)",
-              "docComment": "/**\n * Set the current context-sensitive help content, which the user can see if the global help pane is open.\n *\n * @param key - \n */\n",
+              "docComment": "/**\n * Set the current context-sensitive help key, which the user can see if the global help pane is open.\n *\n * @param key - \n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

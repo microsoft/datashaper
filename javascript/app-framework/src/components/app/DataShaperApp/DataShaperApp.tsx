@@ -74,14 +74,14 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 			onDismiss: onCancelRename,
 			onAccept: onAcceptRename,
 		},
-		help: { currentHelp, onInitializeHelp },
+		help: { currentHelp, onInitializeHelp, helpContent },
 	} = useAppServices()
 
 	const plugins = useRegisteredProfiles(api, profiles)
 	const resources = useResourceRoutes(api, plugins)
 	const flattenedRoutes = useFlattened(resources)
 	useRegisterPluginHelp(plugins, onInitializeHelp)
-	console.log('help', currentHelp)
+
 	return (
 		<Allotment
 			className={className}
@@ -104,6 +104,8 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 					examples={examples}
 					onToggleExpanded={onToggle}
 					onSelect={onSelect}
+					currentHelp={currentHelp}
+					helpContent={helpContent}
 				/>
 			</Allotment.Pane>
 			<Allotment.Pane>

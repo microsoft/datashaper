@@ -4,7 +4,7 @@
 
 ## AppServices.requestHelp() method
 
-Set the current context-sensitive help content, which the user can see if the global help pane is open.
+Set the current context-sensitive help key, which the user can see if the global help pane is open.
 
 <b>Signature:</b>
 

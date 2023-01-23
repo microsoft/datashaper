@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IconButton } from '@fluentui/react'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -15,9 +14,20 @@ export const Container = styled.div`
 
 export const MenuContainer = styled.div`
 	width: 100%;
+	flex: 1;
+	overflow-y: auto;
 `
-export const ExpandButton = styled(IconButton)`
-	width: inherit;
+
+export const HelpContainer = styled.div`
+width: 100%;
+flex: 1;
+overflow-y: auto;
+`
+
+export const FooterMenu = styled.div`
+	display: flex;
+	justify-content: space-between;
+	border-top: 1px solid ${({ theme }) => theme.palette.neutralTertiaryAlt};
 `
 
 export const icons = {

@@ -6,6 +6,8 @@ import type { IStyle } from '@fluentui/react'
 
 export const tooltipStyles = {
 	root: {
+		display: 'flex',
+		justifyContent: 'flex-end',
 		overflow: 'hidden',
 		textOverflow: 'ellipsis',
 		width: '100%',
