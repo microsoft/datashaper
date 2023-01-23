@@ -133,7 +133,7 @@ describe('bin utilities tests', () => {
 		it('algorithm result', () => {
 			expect(min).toBe(10000000)
 			expect(max).toBe(80000000)
-			expect(width).toBe(10000000)
+			expect(width).toBe(20000000)
 		})
 	})
 
@@ -144,7 +144,7 @@ describe('bin utilities tests', () => {
 		it('algorithm result', () => {
 			expect(min).toBe(10000000)
 			expect(max).toBe(80000000)
-			expect(width).toBe(10000000)
+			expect(width).toBe(20000000)
 		})
 	})
 
@@ -155,7 +155,7 @@ describe('bin utilities tests', () => {
 		it('algorithm result', () => {
 			expect(min).toBe(10000000)
 			expect(max).toBe(80000000)
-			expect(width).toBe(10000000)
+			expect(width).toBe(20000000)
 		})
 	})
 
@@ -177,7 +177,7 @@ describe('bin utilities tests', () => {
 		it('algorithm result', () => {
 			expect(min).toBe(10)
 			expect(max).toBe(70)
-			expect(width).toBe(10)
+			expect(width).toBe(20)
 		})
 	})
 
@@ -188,7 +188,7 @@ describe('bin utilities tests', () => {
 		it('algorithm result', () => {
 			expect(min).toBe(10)
 			expect(max).toBe(70)
-			expect(width).toBe(9)
+			expect(width).toBe(10)
 		})
 	})
 
@@ -199,7 +199,7 @@ describe('bin utilities tests', () => {
 		it('algorithm result', () => {
 			expect(min).toBe(0.1)
 			expect(max).toBe(1)
-			expect(width).toBe(0.439)
+			expect(width).toBe(0.440)
 		})
 	})
 

@@ -189,27 +189,28 @@ export function calculateNiceRounding(
 
 export function roundNumber(value: number, opt: Opts): number{
 	if(value < 1 && getNumberOfDecimals(value) > 10){
-		if(opt === Opts.Down){
-			const decimals = value.toString().split(".")
-			const finalNumber = Number(decimals[0]! + "." + decimals[1]!.substring(0, ROUND_PRECISION) + "0" + decimals[1]!.substring(ROUND_PRECISION + 1))
-			return Number(finalNumber.toFixed(ROUND_PRECISION))		
-		}
-		return Number(value.toFixed(ROUND_PRECISION))
+		const decimals = value.toString().split(".")
+		const finalNumber = Number(decimals[0]! + "." + decimals[1]!.substring(0, ROUND_PRECISION) + (opt === Opts.Down ? "0" : "9") + decimals[1]!.substring(ROUND_PRECISION + 1))
+		return Number(finalNumber.toFixed(ROUND_PRECISION))		
+
 	}
 	else if(value < 1 && getNumberOfDecimals(value) <= 10){
 		const numberOfDecimals = getNumberOfDecimals(value)
-		if(opt === Opts.Down){
-			const decimals = value.toString().split(".")
-			const finalNumber = Number(decimals[0]! + "." + decimals[1]!.substring(0, numberOfDecimals / ROUND_PRECISION) + "0" + decimals[1]!.substring((numberOfDecimals / ROUND_PRECISION) + 1))
-			return Number(finalNumber.toFixed(numberOfDecimals / ROUND_PRECISION))
-		}
+		const decimals = value.toString().split(".")
+		const finalNumber = Number(decimals[0]! + "." + decimals[1]!.substring(0, numberOfDecimals / ROUND_PRECISION) + (opt === Opts.Down ? "0" : "9") + decimals[1]!.substring((numberOfDecimals / ROUND_PRECISION) + 1))
+		return Number(finalNumber.toFixed(numberOfDecimals / ROUND_PRECISION))
 
-		return Number(value.toFixed(numberOfDecimals / ROUND_PRECISION))
 	}
 	else {
-		if(opt === Opts.Down){
+		const decimals = value.toString().split(".")
+
+		if(decimals[0]!.length > 1){
 			const numberString = value.toString()
-			const finalNumber = Number(numberString.substring(0, INTEGER_PRECISION) + "0" + numberString.substring(INTEGER_PRECISION + 1))
+			const finalNumber = Number(numberString.substring(0, INTEGER_PRECISION) + (opt === Opts.Down ? "0" : "9") + numberString.substring(INTEGER_PRECISION + 1))
+			return Number(finalNumber.toPrecision(INTEGER_PRECISION))
+		}
+		else if(decimals[0]!.length <= 1 && decimals.length > 1){
+			const finalNumber = Number(decimals[0]! + (opt === Opts.Down ? ".0" : ".9"))
 			return Number(finalNumber.toPrecision(INTEGER_PRECISION))
 		}
 
