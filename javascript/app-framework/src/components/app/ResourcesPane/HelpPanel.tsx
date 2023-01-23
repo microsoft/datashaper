@@ -8,6 +8,7 @@ import { memo } from 'react'
 import { Else, If, Then } from 'react-if'
 import { Container, Content, Header } from './HelpPanel.styles.js'
 import type { HelpPanelProps } from './HelpPanel.types.js'
+import { icons } from './ResourcesPane.styles.js'
 
 export const HelpPanel: React.FC<HelpPanelProps> = memo(function HelpPanel({
 	onToggleExpanded,
@@ -17,12 +18,7 @@ export const HelpPanel: React.FC<HelpPanelProps> = memo(function HelpPanel({
 	return (
 		<Container>
 			<Header>
-				<IconButton
-					iconProps={{
-						iconName: 'ReadingMode',
-					}}
-					onClick={onToggleExpanded}
-				/>
+				<IconButton iconProps={icons.help} onClick={onToggleExpanded} />
 				Guidance
 			</Header>
 			<Content>

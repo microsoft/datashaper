@@ -38,4 +38,5 @@ export const icons = {
 	project: { iconName: 'ZipFolder' },
 	openFile: { iconName: 'FabricOpenFolderHorizontal' },
 	newFile: { iconName: 'NewFolder' },
+	help: { iconName: 'ReadingMode' },
 }

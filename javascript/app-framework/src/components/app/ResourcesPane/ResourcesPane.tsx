@@ -67,12 +67,7 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 				<FooterMenu>
 					{expanded && (
 						<Tooltip content={helpTooltip} styles={tooltipStyles}>
-							<IconButton
-								onClick={onToggleHelp}
-								iconProps={{
-									iconName: 'ReadingMode',
-								}}
-							/>
+							<IconButton onClick={onToggleHelp} iconProps={icons.help} />
 						</Tooltip>
 					)}
 					<Tooltip content={expandCollapseTooltip} styles={tooltipStyles}>
