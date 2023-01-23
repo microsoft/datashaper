@@ -164,7 +164,7 @@ describe('bin utilities tests', () => {
 		const [min, max, width] = result
 
 		it('algorithm result', () => {
-			expect(min).toBe(20)
+			expect(min).toBe(10)
 			expect(max).toBe(70)
 			expect(width).toBe(20)
 		})
@@ -175,7 +175,7 @@ describe('bin utilities tests', () => {
 		const [min, max, width] = result
 
 		it('algorithm result', () => {
-			expect(min).toBe(20)
+			expect(min).toBe(10)
 			expect(max).toBe(70)
 			expect(width).toBe(10)
 		})
@@ -186,7 +186,7 @@ describe('bin utilities tests', () => {
 		const [min, max, width] = result
 
 		it('algorithm result', () => {
-			expect(min).toBe(20)
+			expect(min).toBe(10)
 			expect(max).toBe(70)
 			expect(width).toBe(9)
 		})

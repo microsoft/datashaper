@@ -7,6 +7,7 @@ import { BinStrategy } from '@datashaper/schema'
 import { default as linspace } from 'exact-linspace'
 
 const ROUND_PRECISION = 3
+const INTEGER_PRECISION = 1
 
 export function calculateWidthAuto(
 	min: number,
@@ -149,7 +150,7 @@ export function estimateBinValues(
 	
 	const numBins = calculateBinCount(min, max, width)
 	const binEdges = linspace(min, max, numBins + 1)
-	return [min, max, roundNumber(binEdges[1]! - binEdges[0]!)]
+	return [min, max, roundNumber(binEdges[1]! - binEdges[0]!, Opts.Up)]
 }
 
 function estimateWidth(
@@ -183,23 +184,45 @@ export function calculateNiceRounding(
 	max: number,
 	step: number,
 ): [number, number, number] {
-	return [roundNumber(min), roundNumber(max), roundNumber(step)]
+	return [roundNumber(min, Opts.Down), roundNumber(max, Opts.Up), roundNumber(step, Opts.Up)]
 }
 
-export function roundNumber(value: number): number{
+export function roundNumber(value: number, opt: Opts): number{
 	if(value < 1 && getNumberOfDecimals(value) > 10){
+		if(opt === Opts.Down){
+			const decimals = value.toString().split(".")
+			const finalNumber = Number(decimals[0]! + "." + decimals[1]!.substring(0, ROUND_PRECISION) + "0" + decimals[1]!.substring(ROUND_PRECISION + 1))
+			return Number(finalNumber.toFixed(ROUND_PRECISION))		
+		}
 		return Number(value.toFixed(ROUND_PRECISION))
 	}
 	else if(value < 1 && getNumberOfDecimals(value) <= 10){
 		const numberOfDecimals = getNumberOfDecimals(value)
+		if(opt === Opts.Down){
+			const decimals = value.toString().split(".")
+			const finalNumber = Number(decimals[0]! + "." + decimals[1]!.substring(0, numberOfDecimals / ROUND_PRECISION) + "0" + decimals[1]!.substring((numberOfDecimals / ROUND_PRECISION) + 1))
+			return Number(finalNumber.toFixed(numberOfDecimals / ROUND_PRECISION))
+		}
+
 		return Number(value.toFixed(numberOfDecimals / ROUND_PRECISION))
 	}
 	else {
-		return Number(value.toPrecision(1))
+		if(opt === Opts.Down){
+			const numberString = value.toString()
+			const finalNumber = Number(numberString.substring(0, INTEGER_PRECISION) + "0" + numberString.substring(INTEGER_PRECISION + 1))
+			return Number(finalNumber.toPrecision(INTEGER_PRECISION))
+		}
+
+		return Number(value.toPrecision(INTEGER_PRECISION))
 	}
 }
 
 function getNumberOfDecimals(value: number): number{
 	const decimals = value.toString().split(".")
 	return decimals[1] !== undefined ? decimals[1].length : 0
+}
+
+export enum Opts {
+	Down = 0,
+	Up = 1
 }
