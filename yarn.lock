@@ -2128,6 +2128,7 @@ __metadata:
     "@datashaper/webapp": "workspace:^"
     "@essex/components": ^3.6.8
     "@essex/scripts": ^23.1.4
+    "@essex/storybook-config": ^0.0.2
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/font-icons-mdl2": ^8.5.6
     "@fluentui/react": ^8.104.6
@@ -2156,6 +2157,7 @@ __metadata:
     require-from-string: ^2.0.2
     resolve-typescript-plugin: ^2.0.0
     styled-components: ^5.3.6
+    typescript: ^4.9.4
     webpack: ^5.75.0
   languageName: unknown
   linkType: soft
@@ -2776,6 +2778,38 @@ __metadata:
     essex: ./lib/index.mjs
     essex-scripts: ./lib/index.mjs
   checksum: e7347ef9471b17e19fd2d5731b3219045c442cc68c29999f4a14bd55f96e1b2d7dbde488e0173d537defd10c299f019bb336e04338ba6c9440176e8aa7a4fb2e
+  languageName: node
+  linkType: hard
+
+"@essex/storybook-config@npm:^0.0.2":
+  version: 0.0.2
+  resolution: "@essex/storybook-config@npm:0.0.2"
+  dependencies:
+    "@open-wc/webpack-import-meta-loader": ^0.4.7
+    hsluv: ^1.0.0
+    react-docgen-typescript: ^2.2.2
+    react-is: ^18.2.0
+    resolve-typescript-plugin: ^2.0.0
+    tslib: ^2.4.1
+    webpack: ^4.46.0
+  peerDependencies:
+    "@babel/core": ">= 7"
+    "@babel/preset-env": ">= 7"
+    "@babel/preset-react": ">= 7"
+    "@babel/preset-typescript": ">= 7"
+    "@fluentui/react": ">= 8"
+    "@storybook/addon-essentials": ">= 6"
+    "@storybook/addon-interactions": ">= 6"
+    "@storybook/addon-links": ">= 6"
+    "@storybook/react": ">= 6"
+    "@thematic/core": ">= 4"
+    "@thematic/fluent": ">= 5"
+    "@thematic/react": ">= 2"
+    react: ">= 18"
+    react-dom: ">= 18"
+    require-from-string: ">= 2"
+    styled-components: ">= 5"
+  checksum: 1377ca556c625078ca7920c33c47694f6ebc1c09038768199d9644e8eaaf15415a6ceb013df0cc6d0dca96d0de6df87e5b0900c887f4be48dc17e8aec9672a70
   languageName: node
   linkType: hard
 
@@ -18520,7 +18554,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-docgen-typescript@npm:^2.1.1":
+"react-docgen-typescript@npm:^2.1.1, react-docgen-typescript@npm:^2.2.2":
   version: 2.2.2
   resolution: "react-docgen-typescript@npm:2.2.2"
   peerDependencies:
@@ -22430,7 +22464,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:4":
+"webpack@npm:4, webpack@npm:^4.46.0":
   version: 4.46.0
   resolution: "webpack@npm:4.46.0"
   dependencies:

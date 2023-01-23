@@ -4,7 +4,7 @@
  */
 
 import { DirectionalHint } from '@fluentui/react'
-import { TooltipHost } from '@fluentui/react/lib/Tooltip'
+import { TooltipHost } from '@fluentui/react'
 import { useBoolean, useId } from '@fluentui/react-hooks'
 import { memo } from 'react'
 import { Else, If, Then, When } from 'react-if'
