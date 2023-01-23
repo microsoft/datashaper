@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/guidance",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"type": "module",
 	"main": "dist/index.js",
 	"author": "Nathan Evans <naevans@microsoft.com>",
