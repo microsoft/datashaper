@@ -199,21 +199,6 @@ export type DropdownOptionSelect = ((event: React.FormEvent<HTMLDivElement>, opt
 // @public (undocumented)
 export type GroupHeaderFunction = (field?: Field, columnName?: string, props?: IDetailsGroupDividerProps | undefined) => any;
 
-// Warning: (ae-missing-release-tag) "Guidance" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Guidance: React.FC<GuidanceProps>;
-
-// Warning: (ae-missing-release-tag) "GuidanceProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface GuidanceProps {
-    // (undocumented)
-    index: Record<string, string>;
-    // (undocumented)
-    name: string;
-}
-
 // Warning: (ae-missing-release-tag) "SaveMetadataFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
