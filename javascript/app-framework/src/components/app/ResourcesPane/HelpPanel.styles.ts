@@ -9,7 +9,6 @@ export const Header = styled.div`
     display: flex;
     align-items: center;
     padding: 0 4px;
-    gap: 4px;
     border-top: 2px solid;
     border-bottom: 1px solid;
     border-color: ${({ theme }) => theme.palette.neutralTertiaryAlt};
@@ -21,4 +20,10 @@ export const Header = styled.div`
 
 export const Content = styled.div`
     padding: 10px;
+    h1 {
+        font-size: 14px;
+    }
+    h2 {
+        font-size: 12px;
+    }
 `
