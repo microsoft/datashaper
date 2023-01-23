@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { DataTable } from '@datashaper/workflow'
+import type { PluginComponentProps } from '../types.js'
 
-export interface DataTableEditorProps {
+export interface DataTableEditorProps extends PluginComponentProps {
 	resource: DataTable
 }

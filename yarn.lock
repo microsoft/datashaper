@@ -1936,6 +1936,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@datashaper/app-framework@workspace:javascript/app-framework"
   dependencies:
+    "@datashaper/guidance": "workspace:^"
     "@datashaper/react": "workspace:^"
     "@datashaper/schema": "workspace:^"
     "@datashaper/tables": "workspace:^"

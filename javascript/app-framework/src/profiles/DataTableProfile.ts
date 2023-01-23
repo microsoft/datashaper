@@ -6,6 +6,7 @@ import type { DataTable } from '@datashaper/workflow'
 import { DataTableProfile as DataTableProfileBase } from '@datashaper/workflow'
 
 import { DataTableEditor, RawTableViewer } from '../components/editors/index.js'
+import { guidance } from '../guidance.js'
 import type { GeneratedExtraRoutes, ProfilePlugin } from '../types.js'
 import { ResourceGroupType } from '../types.js'
 
@@ -44,5 +45,9 @@ export class DataTableProfile
 				}
 			}
 		}
+	}
+
+	public getHelp(): Record<string, string> {
+		return guidance()
 	}
 }

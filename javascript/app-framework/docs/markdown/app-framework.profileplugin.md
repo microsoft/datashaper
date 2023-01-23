@@ -16,10 +16,11 @@ export interface ProfilePlugin<Res extends Resource = Resource, Schema extends R
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [getCommandBarCommands?](./app-framework.profileplugin.getcommandbarcommands.md) |  | (section: [CommandBarSection](./app-framework.commandbarsection.md)<!-- -->) =&gt; IContextualMenuItem\[\] \| undefined | <i>(Optional)</i> Gets commands for the plugin |
+|  [getHelp?](./app-framework.profileplugin.gethelp.md) |  | () =&gt; Record&lt;string, string&gt; | <i>(Optional)</i> Plugins may supply a map of help content to be displayed in the global panel when open. Each help record should have a unique key, and the value is the markdown content. |
 |  [getMenuItems?](./app-framework.profileplugin.getmenuitems.md) |  | (resource: Res) =&gt; IContextualMenuItem\[\] | <i>(Optional)</i> Create contextual menu items for a resource |
 |  [getRoutes?](./app-framework.profileplugin.getroutes.md) |  | (resource: Res, routes: Map&lt;string, string&gt;) =&gt; [GeneratedExtraRoutes](./app-framework.generatedextraroutes.md) \| undefined | <i>(Optional)</i> Event handler for when the resource is undergoing route generation. A route is always generated for the resource; any related routes may be retured here. |
 |  [group?](./app-framework.profileplugin.group.md) |  | [ResourceGroupType](./app-framework.resourcegrouptype.md) | <i>(Optional)</i> The grouping for this resource type. The default is 'app'. This grouping determines what resources this is rendered with in the tree-view. |
 |  [iconName](./app-framework.profileplugin.iconname.md) |  | string | The icon name to use in the file-tree |
-|  [renderer](./app-framework.profileplugin.renderer.md) |  | React.ComponentType&lt;{ href: string; resource: Res; }&gt; | Render the plugin |
+|  [renderer](./app-framework.profileplugin.renderer.md) |  | React.ComponentType&lt;{ href: string; resource: Res; api: [AppServices](./app-framework.appservices.md)<!-- -->; }&gt; | Render the plugin |
 |  [title](./app-framework.profileplugin.title.md) |  | string | A friendly title for the profile, used for resource creation. (e.g. "New <title>") |
 

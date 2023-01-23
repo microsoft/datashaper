@@ -7,7 +7,7 @@ import { useBoolean, useConst } from '@fluentui/react-hooks'
 import { useDebounceFn } from 'ahooks'
 import type { AllotmentHandle } from 'allotment'
 import type React from 'react'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { EMPTY_ARRAY } from '../../../empty.js'
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
@@ -145,6 +145,10 @@ export function useAppServices(): {
 		onDismiss: () => void
 		onAccept: (name: string | undefined) => void
 	}
+	help: {
+		currentHelp: string | undefined
+		onInitializeHelp: any
+	}
 } {
 	const dp = useDataPackage()
 	const [isRenameOpen, { setTrue: showRename, setFalse: hideRename }] =
@@ -156,6 +160,9 @@ export function useAppServices(): {
 	const [dismissRename, setDismissRename] = useState<{ handle: () => void }>({
 		handle: () => null,
 	})
+
+	const [helpKey, onRequestHelp] = useState<string | undefined>(undefined)
+	const [helpIndex, onInitializeHelp] = useState<Record<string, string>>({})
 
 	const api = useMemo<AppServices>(() => {
 		return {
@@ -189,6 +196,7 @@ export function useAppServices(): {
 					})
 				})
 			},
+			requestHelp: (key: string) => onRequestHelp(key),
 		}
 	}, [dp, showRename, setRenameTarget, hideRename])
 
@@ -201,6 +209,10 @@ export function useAppServices(): {
 				onDismiss: dismissRename.handle,
 				onAccept: acceptRename.handle,
 			},
+			help: {
+				currentHelp: helpKey ? helpIndex[helpKey] : undefined,
+				onInitializeHelp,
+			},
 		}),
 		[
 			api,
@@ -208,6 +220,25 @@ export function useAppServices(): {
 			dismissRename.handle,
 			acceptRename.handle,
 			isRenameOpen,
+			helpKey,
+			helpIndex,
 		],
 	)
+}
+
+export function useRegisterPluginHelp(
+	plugins: Map<string, ProfilePlugin>,
+	onInitializeHelp: any,
+) {
+	useEffect(() => {
+		let help: Record<string, string> = {}
+		for (const plugin of plugins.values()) {
+			const pluginHelp = plugin?.getHelp?.()
+			if (pluginHelp != null) {
+				// note that this will quietly overwrite any duplicate keys
+				help = { ...help, ...pluginHelp }
+			}
+		}
+		onInitializeHelp(help)
+	}, [plugins, onInitializeHelp])
 }

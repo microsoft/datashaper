@@ -9,7 +9,7 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 
 import { DataPackageProvider } from '../../../context/index.js'
 import { EMPTY_ARRAY, EMPTY_OBJECT } from '../../../empty.js'
-import type { ResourceRoute } from '../../../types.js'
+import type { AppServices, ResourceRoute } from '../../../types.js'
 import { RenameModal } from '../../modals/index.js'
 import { ResourcesPane } from '../ResourcesPane/index.js'
 import {
@@ -17,6 +17,7 @@ import {
 	useExpandedState,
 	useFlattened,
 	useRegisteredProfiles,
+	useRegisterPluginHelp,
 } from './DataShaperApp.hooks.js'
 import {
 	PANE_COLLAPSED_SIZE,
@@ -73,12 +74,14 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 			onDismiss: onCancelRename,
 			onAccept: onAcceptRename,
 		},
+		help: { currentHelp, onInitializeHelp },
 	} = useAppServices()
 
 	const plugins = useRegisteredProfiles(api, profiles)
 	const resources = useResourceRoutes(api, plugins)
 	const flattenedRoutes = useFlattened(resources)
-
+	useRegisterPluginHelp(plugins, onInitializeHelp)
+	console.log('help', currentHelp)
 	return (
 		<Allotment
 			className={className}
@@ -112,7 +115,7 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 								<Route
 									key={r.href}
 									path={(r.children?.length ?? 0) > 0 ? r.href : `${r.href}/*`}
-									element={<MatchedRoute key={r.href} data={r} />}
+									element={<MatchedRoute key={r.href} data={r} api={api} />}
 								/>
 							),
 					)}
@@ -131,8 +134,8 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 	)
 })
 
-const MatchedRoute: React.FC<{ data: ResourceRoute }> = memo(
-	function MatchedRoute({ data: { props, renderer: R, href } }) {
-		return R ? <R href={href} {...(props ?? EMPTY_OBJECT)} /> : null
+const MatchedRoute: React.FC<{ data: ResourceRoute; api: AppServices }> = memo(
+	function MatchedRoute({ data: { props, renderer: R, href }, api }) {
+		return R ? <R href={href} api={api} {...(props ?? EMPTY_OBJECT)} /> : null
 	},
 )
