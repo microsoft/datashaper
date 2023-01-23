@@ -32,7 +32,7 @@
 		"@datashaper/tables": "workspace:^",
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/workflow": "workspace:^",
-		"@essex/components": "^3.6.8",
+		"@essex/components": "^3.6.9",
 		"@monaco-editor/react": "^4.4.6",
 		"ahooks": "^3.7.4",
 		"allotment": "1.17.0",
@@ -44,7 +44,7 @@
 		"yarn": "^1.22.19"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^23.1.4",
+		"@essex/scripts": "^24.0.1",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@fluentui/react": "^8.104.6",
 		"@fluentui/react-hooks": "^8.6.15",

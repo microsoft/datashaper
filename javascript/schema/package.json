@@ -52,8 +52,8 @@
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"devDependencies": {
-		"@essex/jest-config": "^21.0.19",
-		"@essex/scripts": "^23.1.4",
+		"@essex/jest-config": "^21.0.20",
+		"@essex/scripts": "^24.0.1",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@types/jest": "^29.2.6",
 		"@types/uuid": "^9.0.0",
