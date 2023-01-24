@@ -6,14 +6,12 @@ import type { IGroup } from '@fluentui/react'
 import { memo, useCallback, useMemo, useRef, useState } from 'react'
 import { Else, If, Then } from 'react-if'
 
-import {
-	useCountChildren, useLevelButtonProps
-} from './GroupHeader.hooks.js'
+import { useCountChildren, useLevelButtonProps } from './GroupHeader.hooks.js'
 import {
 	Bold,
 	HeaderContainer,
 	HeaderDetailsText,
-	LevelButton
+	LevelButton,
 } from './GroupHeader.styles.js'
 import type { GroupHeaderProps } from './GroupHeader.types.js'
 
