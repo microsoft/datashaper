@@ -8,7 +8,7 @@ You can contruct table bundles in a variety of ways, including symlinking from o
 
 The main table view shows a fully materialized data table. This view allows you to see statistics about the table and its columns, and to interact with the table to transform it as needed.
 
-The table view is scrollable vertically and horizontally as needed to view all of the data. Each column shows the a few basic statistics about the contents, as well as a histogram of the data distribution (when appropriate).
+The table view is scrollable vertically and horizontally as needed to see all of the data. Each column shows a few basic statistics about the contents, as well as a histogram of the data distribution (when appropriate).
 
 ### Transformations
 

@@ -12,23 +12,23 @@ Data tables can be stored in a variety of file formats, and we provide options f
 
 Most files will load fine using the default settings, but you can tune things to match your format if needed.
 
-- delimiter ("," by default): the character used to separate columns for each row.
-- headers in first row (on by default) indicates that the first line of your file has column names. If this is not true, you can provide your own list of column names or we'll assign them "col1", "col2", etc.
-- skip rows: ignore this many rows at the start of the file.
-- read rows: only read in this many rows (starting at skip rows).
-- comment character: if this character is seen on a line, everything after it is considered documentation and is ignored when creating the table.
-- line terminator: only use this if your file format has unusual characters to indicate the end of each line.
-- quote character: any text contained between two of these characters will not be parsed further. This allows you to include blocks of text that might contain your column delimiter, and we won't create new columns accidentally.
-- escape character: this character can be used to escape the delimiter and therefore avoid splitting on specific instances.
+- **delimiter** ("," by default): the character used to separate columns for each row.
+- **headers in first row** (on by default) indicates that the first line of your file has column names. If this is not true, you can provide your own list of column names or we'll assign them "col1", "col2", etc.
+- **skip rows**: ignore this many rows at the start of the file.
+- **read rows**: only read in this many rows (starting at skip rows).
+- **comment character**: if this character is seen on a line, everything after it is considered documentation and is ignored when creating the table.
+- **line terminator**: only use this if your file format has unusual characters to indicate the end of each line.
+- **quote character**: any text contained between two of these characters will not be parsed further. This allows you to include blocks of text that might contain your column delimiter, and we won't create new columns accidentally.
+- **escape character**: this character can be used to escape the delimiter and therefore avoid splitting on specific instances.
 
 ## JSON
 
 "JSON" standard for "JavaScript Object Notation", and is frequently used by software applications to share data because it is a [well-defined standard](https://www.json.org/json-en.html). If you have a JSON data file, we can interpret it using a few standard formats for storing table data.
 
-- records: the file contains an array of objects. Each object should have a key and value for each column and row value in the table.
-- columnar: the file contains a single object, where each key is a column name, and the attached values are the row values for that column.
-- array: the file is a single flat array of values. You can provide the row and column count to interpret the flat array as a matrix.
-- values: the file is an array of arrays. Each row is an array of column values. The first row is expected to be column names. This format is the nearest JSON format to a CSV file.
+- **records**: the file contains an array of objects. Each object should have a key and value for each column and row value in the table.
+- **columnar**: the file contains a single object, where each key is a column name, and the attached values are the row values for that column.
+- **array**: the file is a single flat array of values. You can provide the row and column count to interpret the flat array as a matrix.
+- **values**: the file is an array of arrays. Each row is an array of column values. The first row is expected to be column names. This format is the nearest JSON format to a CSV file.
 
 ## Editing
 
