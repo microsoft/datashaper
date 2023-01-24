@@ -11,7 +11,7 @@ import { memo } from 'react'
 import { CodebookEditor } from '../components/editors/index.js'
 import type { PluginComponentProps } from '../components/editors/types.js'
 import { guidance } from '../guidance.js'
-import type { AppServices, ProfilePlugin } from '../index.js'
+import type { ProfilePlugin } from '../index.js'
 import { ResourceGroupType } from '../index.js'
 
 export class CodebookProfile
