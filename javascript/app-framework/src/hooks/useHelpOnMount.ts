@@ -1,3 +1,7 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { useEffect } from 'react'
 import { useAppServices } from '../context/app_services/useAppServices.js'
 
