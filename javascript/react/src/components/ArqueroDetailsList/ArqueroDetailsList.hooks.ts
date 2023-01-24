@@ -4,10 +4,10 @@
  */
 import type { Field, SortDirection } from '@datashaper/schema'
 import { columnTypes } from '@datashaper/tables'
-import type {
-	IColumn,
-	IDetailsGroupRenderProps,
-	IListProps,
+import {
+	GroupedListV2_unstable as GroupedListV2, type IColumn,
+	type IDetailsGroupRenderProps,
+	type IListProps
 } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import type { RowObject } from 'arquero/dist/types/table/table'
@@ -15,7 +15,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import type {
 	ArqueroDetailsListFeatures,
-	GroupHeaderFunction,
+	GroupHeaderFunction
 } from './ArqueroDetailsList.types.js'
 import { debounceFn, groupBuilder } from './ArqueroDetailsList.utils.js'
 import { useGroupHeaderRenderer, useSortedGroups } from './hooks/index.js'
@@ -156,7 +156,8 @@ export function useGroupProps(
 		onRenderGroupHeader,
 		features.lazyLoadGroups,
 	)
-	return useMemo(() => ({ onRenderHeader }), [onRenderHeader])
+						
+	return useMemo(() => ({ onRenderHeader, groupedListAs: GroupedListV2, }), [onRenderHeader])
 }
 
 export function useListProps(version: number): IListProps<any> {
