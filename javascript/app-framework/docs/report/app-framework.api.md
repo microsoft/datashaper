@@ -167,6 +167,11 @@ export function useDatasetMenuItems(selected: string | undefined, onClick: (tabl
 // @public
 export function useDataTableSource(pkg: DataTable | undefined): Maybe<TableContainer>;
 
+// Warning: (ae-missing-release-tag) "useHelpOnMount" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useHelpOnMount(key: string): void;
+
 // Warning: (ae-missing-release-tag) "useMenuButtonStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
