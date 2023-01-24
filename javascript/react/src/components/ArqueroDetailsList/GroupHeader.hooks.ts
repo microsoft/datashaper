@@ -5,28 +5,7 @@
 
 import type { IButtonProps, IGroup } from '@fluentui/react'
 import { useTheme } from '@fluentui/react'
-import { useCallback, useEffect, useMemo, useState } from 'react'
-
-export function useIntersection(
-	element: HTMLDivElement | undefined,
-	rootMargin: string,
-): boolean {
-	const [isVisible, setState] = useState(false)
-
-	useEffect(() => {
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				setState(entry?.isIntersecting ?? false)
-			},
-			{ rootMargin },
-		)
-		element && observer.observe(element)
-
-		return () => element && observer.unobserve(element)
-	}, [element, rootMargin])
-
-	return isVisible
-}
+import { useCallback, useMemo } from 'react'
 
 export function useCountChildren(): (children: IGroup[]) => number {
 	const countChildren = useCallback((children: IGroup[]) => {

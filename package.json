@@ -33,10 +33,10 @@
 		"update_sdks": "yarn dlx @yarnpkg/sdks vscode"
 	},
 	"devDependencies": {
-		"@essex/eslint-config": "^20.5.0",
-		"@essex/eslint-plugin": "^20.5.0",
-		"@essex/jest-config": "^21.0.19",
-		"@essex/scripts": "^23.1.4",
+		"@essex/eslint-config": "^20.5.1",
+		"@essex/eslint-plugin": "^20.5.1",
+		"@essex/jest-config": "^21.0.20",
+		"@essex/scripts": "^24.0.2",
 		"@types/jest": "^29.2.6",
 		"@types/node": "^18.11.18",
 		"@types/semver": "^7.3.13",

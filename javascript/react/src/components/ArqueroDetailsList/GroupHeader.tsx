@@ -3,14 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { IGroup } from '@fluentui/react'
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { memo, useCallback, useMemo, useRef, useState } from 'react'
 import { Else, If, Then } from 'react-if'
 
-import {
-	useCountChildren,
-	useIntersection,
-	useLevelButtonProps,
-} from './GroupHeader.hooks.js'
+import { useCountChildren, useLevelButtonProps } from './GroupHeader.hooks.js'
 import {
 	Bold,
 	HeaderContainer,
@@ -27,14 +23,7 @@ export const GroupHeader: React.FC<React.PropsWithChildren<GroupHeaderProps>> =
 		const [manualToggle, setManualToggle] = useState(false)
 
 		// trigger as soon as the element becomes visible
-		const inViewport = useIntersection(ref.current, '0px')
 		const countChildren = useCountChildren()
-
-		useEffect(() => {
-			if (inViewport && group?.isCollapsed) {
-				onToggleCollapse?.(group)
-			}
-		}, [inViewport, group, onToggleCollapse])
 
 		const onManualLevelToggle = useCallback(() => {
 			setManualToggle(true)

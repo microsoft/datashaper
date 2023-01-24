@@ -3,8 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { DirectionalHint } from '@fluentui/react'
-import { TooltipHost } from '@fluentui/react/lib/Tooltip'
+import { TooltipHost, DirectionalHint } from '@fluentui/react'
 import { useBoolean, useId } from '@fluentui/react-hooks'
 import { memo } from 'react'
 import { Else, If, Then, When } from 'react-if'

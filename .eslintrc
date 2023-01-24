@@ -3,8 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 {
-  "extends": "@essex/eslint-config",
+  "extends": "@essex/eslint-config/rome",
   "rules": {
+    "simple-import-sort/imports": "off",
     "@essex/extensions": [
       "error",
       [
@@ -13,7 +14,6 @@
         }
       ]
     ],
-    "simple-import-sort/imports": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "no-redeclare": "off",
     "@typescript-eslint/no-redeclare": ["warn"],
