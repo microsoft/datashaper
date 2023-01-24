@@ -15,4 +15,5 @@ export interface AppServices
 |  Method | Description |
 |  --- | --- |
 |  [renameResource(resource)](./app-framework.appservices.renameresource.md) | Show the resource rename dialog |
+|  [requestHelp(key)](./app-framework.appservices.requesthelp.md) | Set the current context-sensitive help key, which the user can see if the global help pane is open. |
 

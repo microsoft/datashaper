@@ -38,6 +38,7 @@ export interface AppProfileInitializationContext {
 // @public (undocumented)
 export interface AppServices {
     renameResource(resource: Resource): Promise<string>;
+    requestHelp(key: string): void;
 }
 
 // Warning: (ae-missing-release-tag) "CommandBarSection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -86,6 +87,7 @@ export interface GeneratedExtraRoutes {
 // @public (undocumented)
 export interface ProfilePlugin<Res extends Resource = Resource, Schema extends ResourceSchema = ResourceSchema> extends ProfileHandler<Res, Schema, AppProfileInitializationContext> {
     getCommandBarCommands?: (section: CommandBarSection) => IContextualMenuItem[] | undefined;
+    getHelp?: () => Record<string, string>;
     getMenuItems?: (resource: Res) => IContextualMenuItem[];
     getRoutes?: (resource: Res, routes: Map<string, string>) => GeneratedExtraRoutes | undefined;
     group?: ResourceGroupType;
@@ -93,6 +95,7 @@ export interface ProfilePlugin<Res extends Resource = Resource, Schema extends R
     renderer: React.ComponentType<{
         href: string;
         resource: Res;
+        api: AppServices;
     }>;
     title: string;
 }

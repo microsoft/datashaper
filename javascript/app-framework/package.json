@@ -27,12 +27,13 @@
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"dependencies": {
+		"@datashaper/guidance": "workspace:^",
 		"@datashaper/react": "workspace:^",
 		"@datashaper/schema": "workspace:^",
 		"@datashaper/tables": "workspace:^",
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/workflow": "workspace:^",
-		"@essex/components": "^3.6.8",
+		"@essex/components": "^3.6.9",
 		"@monaco-editor/react": "^4.4.6",
 		"ahooks": "^3.7.4",
 		"allotment": "1.17.0",

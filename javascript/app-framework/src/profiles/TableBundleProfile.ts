@@ -19,6 +19,7 @@ import {
 import type { IContextualMenuItem } from '@fluentui/react'
 
 import { TableBundleEditor } from '../components/editors/index.js'
+import { guidance } from '../guidance.js'
 import type {
 	AppProfileInitializationContext,
 	ProfilePlugin,
@@ -131,5 +132,9 @@ export class TableBundleProfile
 			})
 		}
 		return result
+	}
+
+	public getHelp(): Record<string, string> {
+		return guidance()
 	}
 }

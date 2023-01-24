@@ -4,6 +4,8 @@
  */
 import type { TableBundle } from '@datashaper/workflow'
 
-export interface TableBundleEditorProps {
+import type { PluginComponentProps } from '../types.js'
+
+export interface TableBundleEditorProps extends PluginComponentProps {
 	resource: TableBundle
 }

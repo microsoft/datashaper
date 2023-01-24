@@ -56,6 +56,12 @@ export interface AppServices {
 	 * @param resource - the resource to rename
 	 */
 	renameResource(resource: Resource): Promise<string>
+	/**
+	 * Set the current context-sensitive help key,
+	 * which the user can see if the global help pane is open.
+	 * @param key
+	 */
+	requestHelp(key: string): void
 }
 
 export interface AppProfileInitializationContext {
@@ -86,7 +92,11 @@ export interface ProfilePlugin<
 	/**
 	 * Render the plugin
 	 */
-	renderer: React.ComponentType<{ href: string; resource: Res }>
+	renderer: React.ComponentType<{
+		href: string
+		resource: Res
+		api: AppServices
+	}>
 
 	/**
 	 * Gets commands for the plugin
@@ -111,6 +121,12 @@ export interface ProfilePlugin<
 		resource: Res,
 		routes: Map<string, string>,
 	) => GeneratedExtraRoutes | undefined
+	/**
+	 * Plugins may supply a map of help content to be displayed in the global panel when open.
+	 * Each help record should have a unique key, and the value is the markdown content.
+	 * @returns
+	 */
+	getHelp?: () => Record<string, string>
 }
 
 export enum CommandBarSection {
