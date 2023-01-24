@@ -5,7 +5,6 @@ releases:
   "@datashaper/stories": patch
   "@datashaper/tables": patch
   "@datashaper/utilities": patch
-  "@datashaper/verb-guidance": patch
   "@datashaper/workflow": patch
 
 declined:
