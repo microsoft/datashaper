@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { type Value, DataType } from '@datashaper/schema'
+import type { Value } from '@datashaper/schema'
 import { useCallback } from 'react'
 
 export function useHandleKeyChange(
@@ -29,7 +29,6 @@ export function useHandleKeyChange(
 
 export function useHandleValueChange(
 	mapList: Record<Value, Value>,
-	dataType?: DataType,
 	onChange?: (mapping: Record<Value, Value>) => void,
 ): (key: Value, newValue: Value) => void {
 	return useCallback(
@@ -39,14 +38,13 @@ export function useHandleValueChange(
 			for (const keyElement in mapList) {
 				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				keyElement === key.toString()
-					? (mapping[keyElement] =
-							dataType === DataType.Date ? new Date(newValue) : newValue)
+					? mapping[keyElement] = newValue
 					: (mapping[keyElement] = mapList[keyElement]!)
 			}
 
 			onChange?.(mapping)
 		},
-		[onChange, dataType, mapList],
+		[onChange, mapList],
 	)
 }
 

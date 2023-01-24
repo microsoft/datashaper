@@ -3,15 +3,15 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { type Value, DataType } from '@datashaper/schema'
+import { DataType, type Value } from '@datashaper/schema'
 import { coerce } from '@datashaper/tables'
 import styled from '@essex/styled-components'
 import type {
 	IStyleFunctionOrObject,
 	ITextFieldStyleProps,
-	ITextFieldStyles,
+	ITextFieldStyles
 } from '@fluentui/react'
-import { Icon, IconButton } from '@fluentui/react'
+import { Icon, IconButton, TextField } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 
 import { DataTypeField } from '../../components/verbs/forms/shared/DataTypeField.js'
@@ -76,10 +76,10 @@ const ColumnPair: React.FC<{
 	disabled,
 }) {
 	// the old value will always come off the map as a string key
-	// coerce it to the column type for proper comparison
-	const [o, q] = valuePair
+	// coerce the key to the column type for proper comparison
+	// the newValue will always be a string since it can be of any type
+	const [o, newValue] = valuePair
 	let keyValue = o !== ' ' ? coerce(o, dataType) : o
-	const propertyValue = coerce(q, dataType)
 
 	if (dataType === DataType.Boolean) {
 		o === 'false' ? (keyValue = false) : (keyValue = true)
@@ -107,15 +107,10 @@ const ColumnPair: React.FC<{
 				styles={{ root: { marginLeft: 4, marginRight: 4 } }}
 			/>
 
-			<DataTypeField
+			<TextField
 				placeholder={'New Value'}
-				dataType={dataType}
-				keyValue={keyValue}
-				value={propertyValue}
-				onKeyChange={onValueChange}
-				onValueChange={onValueChange}
-				isKey={false}
-				dropdownStyles={dropdownStyles}
+				value={newValue}
+				onChange={(_: Value, val?: string) => onValueChange(keyValue, val)}
 				disabled={disabled}
 			/>
 

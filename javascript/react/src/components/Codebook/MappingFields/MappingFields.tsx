@@ -11,7 +11,7 @@ import { useMappingPairs } from '../../../hooks/controls/useMappingPairs.js'
 import {
 	useHandleDelete,
 	useHandleKeyChange,
-	useHandleValueChange,
+	useHandleValueChange
 } from '../../../hooks/index.js'
 import { useHandleAddButtonClick } from './MappingFields.hooks.js'
 import { addIconProps, useMappingStyles } from './MappingFields.styles.js'
@@ -38,14 +38,12 @@ export const MappingFields: React.FC<CodebookMappingFieldProps> = memo(
 		const handleKeyChange = useHandleKeyChange(values, onUpdateMapping)
 		const handleValueChange = useHandleValueChange(
 			values,
-			field.type,
 			onUpdateMapping,
 		)
 		const handleDelete = useHandleDelete(values, onUpdateMapping)
 		const handleButtonClick = useHandleAddButtonClick(
 			onUpdateMapping,
 			values,
-			field.type,
 		)
 
 		const columnPairs = useMappingPairs(
