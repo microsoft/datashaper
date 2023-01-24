@@ -4,6 +4,7 @@
  */
 import type { TableContainer } from '@datashaper/tables'
 import type { Emitter } from './Emitter.js'
+import type { Transformer } from './Transformer.js'
 
 /**
  * An emitter for TableContainers
