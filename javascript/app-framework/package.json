@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/app-framework",
-	"version": "0.1.3",
+	"version": "0.2.0",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -27,6 +27,7 @@
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"dependencies": {
+		"@datashaper/guidance": "workspace:^",
 		"@datashaper/react": "workspace:^",
 		"@datashaper/schema": "workspace:^",
 		"@datashaper/tables": "workspace:^",

@@ -4,6 +4,8 @@
  */
 import type { Workflow } from '@datashaper/workflow'
 
-export interface WorkflowEditorProps {
+import type { PluginComponentProps } from '../types.js'
+
+export interface WorkflowEditorProps extends PluginComponentProps {
 	resource: Workflow
 }

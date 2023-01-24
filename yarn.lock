@@ -1907,6 +1907,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@datashaper/app-framework@workspace:javascript/app-framework"
   dependencies:
+    "@datashaper/guidance": "workspace:^"
     "@datashaper/react": "workspace:^"
     "@datashaper/schema": "workspace:^"
     "@datashaper/tables": "workspace:^"
@@ -1974,6 +1975,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@datashaper/guidance@workspace:^, @datashaper/guidance@workspace:javascript/guidance":
+  version: 0.0.0-use.local
+  resolution: "@datashaper/guidance@workspace:javascript/guidance"
+  dependencies:
+    "@essex/scripts": ^24.0.1
+    "@essex/tsconfig-base": ^1.0.2
+    "@types/express": ^4.17.16
+    "@types/node": ^18.11.18
+    express: ^4.18.2
+    typescript: ^4.9.4
+  languageName: unknown
+  linkType: soft
+
 "@datashaper/project@workspace:.":
   version: 0.0.0-use.local
   resolution: "@datashaper/project@workspace:."
@@ -1999,10 +2013,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@datashaper/react@workspace:javascript/react"
   dependencies:
+    "@datashaper/guidance": "workspace:^"
     "@datashaper/schema": "workspace:^"
     "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
-    "@datashaper/verb-guidance": "workspace:^"
     "@datashaper/workflow": "workspace:^"
     "@essex/charts-react": ^1.1.7
     "@essex/components": ^3.6.9
@@ -2184,19 +2198,6 @@ __metadata:
   peerDependenciesMeta:
     arquero:
       optional: false
-  languageName: unknown
-  linkType: soft
-
-"@datashaper/verb-guidance@workspace:^, @datashaper/verb-guidance@workspace:javascript/verb-guidance":
-  version: 0.0.0-use.local
-  resolution: "@datashaper/verb-guidance@workspace:javascript/verb-guidance"
-  dependencies:
-    "@essex/scripts": ^24.0.1
-    "@essex/tsconfig-base": ^1.0.2
-    "@types/express": ^4.17.16
-    "@types/node": ^18.11.18
-    express: ^4.18.2
-    typescript: ^4.9.4
   languageName: unknown
   linkType: soft
 

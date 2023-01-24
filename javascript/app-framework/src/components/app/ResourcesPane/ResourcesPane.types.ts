@@ -54,6 +54,9 @@ export interface ResourcesPaneProps {
 	selectedKey?: string
 
 	plugins: Map<string, ProfilePlugin>
+
+	currentHelp?: string
+	helpContent: Record<string, string>
 }
 
 export interface FileTreeTypes {
