@@ -4,6 +4,7 @@
  */
 
 import type { Value } from '@datashaper/schema'
+import { DataType } from '@datashaper/schema'
 import { useCallback } from 'react'
 
 export function useHandleKeyChange(
@@ -29,6 +30,7 @@ export function useHandleKeyChange(
 
 export function useHandleValueChange(
 	mapList: Record<Value, Value>,
+	dataType?: DataType,
 	onChange?: (mapping: Record<Value, Value>) => void,
 ): (key: Value, newValue: Value) => void {
 	return useCallback(
@@ -38,13 +40,14 @@ export function useHandleValueChange(
 			for (const keyElement in mapList) {
 				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				keyElement === key.toString()
-					? (mapping[keyElement] = newValue)
+					? (mapping[keyElement] =
+							dataType === DataType.Date ? new Date(newValue) : newValue)
 					: (mapping[keyElement] = mapList[keyElement]!)
 			}
 
 			onChange?.(mapping)
 		},
-		[onChange, mapList],
+		[onChange, dataType, mapList],
 	)
 }
 
