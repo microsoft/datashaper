@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { AppServices } from '../../types.js'
+import type { Resource } from '@datashaper/workflow'
 
-export interface PluginComponentProps {
-	api: AppServices
+export interface PluginComponentProps<T extends Resource> {
+	resource: T
 }
