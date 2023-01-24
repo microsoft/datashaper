@@ -7,7 +7,6 @@ import type { Codebook } from '@datashaper/workflow'
 
 import type { PluginComponentProps } from '../types.js'
 
-export interface CodebookEditorProps extends PluginComponentProps {
-	resource: Codebook
+export interface CodebookEditorProps extends PluginComponentProps<Codebook> {
 	styles?: CodebookTableStyles
 }

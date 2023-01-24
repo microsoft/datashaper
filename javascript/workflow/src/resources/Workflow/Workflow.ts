@@ -16,7 +16,11 @@ import { RemoveMode, TableManager } from '../../dataflow/TableManager.js'
 import type { Maybe, Unsubscribe } from '../../primitives.js'
 import type { DataPackage } from '../DataPackage/DataPackage.js'
 import { Resource } from '../Resource.js'
-import type { Readable, TableEmitter, TableTransformer } from '../types.js'
+import type {
+	Readable,
+	TableEmitter,
+	TableTransformer,
+} from '../types/index.js'
 import { GraphManager } from './GraphManager.js'
 import { NameManager } from './NameManager.js'
 import type { Step, StepInput, TableExportOptions } from './types.js'

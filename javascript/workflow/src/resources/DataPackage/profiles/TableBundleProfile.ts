@@ -6,7 +6,7 @@ import type { Profile, TableBundleSchema } from '@datashaper/schema'
 import { KnownProfile } from '@datashaper/schema'
 
 import { TableBundle } from '../../TableBundle.js'
-import type { ProfileHandler } from '../../types.js'
+import type { ProfileHandler } from '../../types/index.js'
 
 export class TableBundleProfile
 	implements ProfileHandler<TableBundle, TableBundleSchema>

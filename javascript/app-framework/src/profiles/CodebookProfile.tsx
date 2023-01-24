@@ -9,8 +9,9 @@ import { CodebookProfile as CodebookDataProfile } from '@datashaper/workflow'
 import { memo } from 'react'
 
 import { CodebookEditor } from '../components/editors/index.js'
+import type { PluginComponentProps } from '../components/editors/types.js'
 import { guidance } from '../guidance.js'
-import type { AppServices, ProfilePlugin } from '../index.js'
+import type { ProfilePlugin } from '../index.js'
 import { ResourceGroupType } from '../index.js'
 
 export class CodebookProfile
@@ -27,10 +28,11 @@ export class CodebookProfile
 	}
 }
 
-const CodebookEditorView: React.FC<{ resource: Codebook; api: AppServices }> =
-	memo(function CodebookEditorView({ resource, api }) {
-		return <CodebookEditor resource={resource} api={api} styles={styles} />
-	})
+const CodebookEditorView: React.FC<PluginComponentProps<Codebook>> = memo(
+	function CodebookEditorView({ resource }) {
+		return <CodebookEditor resource={resource} styles={styles} />
+	},
+)
 
 const styles: CodebookTableStyles = {
 	tableWrapper: {

@@ -2,15 +2,16 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { memo, useEffect } from 'react'
+import { memo } from 'react'
+import { useHelpOnMount } from '../../../hooks/useHelpOnMount.js'
 
 import { JsonModeEditor } from '../JsonModeEditor/JsonModeEditor.js'
 import { BundleEditor } from './BundleEditor.js'
 import type { TableBundleEditorProps } from './TableBundleEditor.types.js'
 
 export const TableBundleEditor: React.FC<TableBundleEditorProps> = memo(
-	function TableBundleEditor({ resource, api }) {
-		useEffect(() => api.requestHelp('tablebundle'), [api])
+	function TableBundleEditor({ resource }) {
+		useHelpOnMount('tablebundle')
 		return (
 			<JsonModeEditor resource={resource}>
 				<BundleEditor resource={resource} />

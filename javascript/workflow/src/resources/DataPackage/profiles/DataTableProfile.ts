@@ -11,7 +11,7 @@ import type { Resource } from '../../Resource.js'
 import type {
 	ProfileHandler,
 	ProfileInitializationContext,
-} from '../../types.js'
+} from '../../types/index.js'
 import type { DataPackage } from '../DataPackage.js'
 import type { ResourceManager } from '../ResourceManager.js'
 

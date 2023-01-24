@@ -16,7 +16,7 @@ import {
 } from '../predicates.js'
 import type { Maybe } from '../primitives.js'
 import { Resource } from './Resource.js'
-import type { Readable, TableEmitter } from './types.js'
+import type { Readable, TableEmitter } from './types/index.js'
 
 export class TableBundle extends Resource implements TableEmitter {
 	public readonly $schema = LATEST_TABLEBUNDLE_SCHEMA

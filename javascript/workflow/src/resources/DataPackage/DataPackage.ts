@@ -16,7 +16,7 @@ import {
 import type { Observable } from 'rxjs'
 
 import { Resource } from '../Resource.js'
-import type { ProfileHandler } from '../types.js'
+import type { ProfileHandler } from '../types/index.js'
 import { write } from './io.js'
 import { CodebookProfile } from './profiles/CodebookProfile.js'
 import { DataTableProfile } from './profiles/DataTableProfile.js'

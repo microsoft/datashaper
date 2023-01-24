@@ -5,7 +5,7 @@
 import type { Profile, WorkflowSchema } from '@datashaper/schema'
 import { KnownProfile } from '@datashaper/schema'
 
-import type { ProfileHandler } from '../../types.js'
+import type { ProfileHandler } from '../../types/index.js'
 import { Workflow } from '../../Workflow/index.js'
 
 export class WorkflowProfile implements ProfileHandler<Workflow, WorkflowSchema> {
