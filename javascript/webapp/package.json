@@ -62,7 +62,7 @@
 		"styled-components": "^5.3.6"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^23.1.4",
+		"@essex/scripts": "^24.0.2",
 		"@types/chroma-js": "^2.1.4",
 		"@types/debug": "^4.1.7",
 		"@types/lodash-es": "^4.17.6",
