@@ -4,8 +4,8 @@
  */
 import type { WorkflowSchema } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import type { Step} from '@datashaper/workflow';
-import {Workflow } from '@datashaper/workflow'
+import type { Step } from '@datashaper/workflow'
+import { Workflow } from '@datashaper/workflow'
 import { memo, useCallback, useMemo } from 'react'
 
 import { DisplayOrder } from '../../../../enums.js'

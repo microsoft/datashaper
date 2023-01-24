@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/schema",
-	"version": "9.0.0",
+	"version": "9.0.1",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -39,8 +39,8 @@
 		"_transpile": "essex build --docs",
 		"_bundle_schemas": "run-p bundle-codebook bundle-datapackage bundle-datatable bundle-bundle bundle-workflow bundle-tablebundle",
 		"build": "run-p _transpile _bundle_schemas",
-		"fix": "essex fix --strict",
-		"check": "essex check --strict",
+		"fix": "essex fix --strict --formatter none",
+		"check": "essex check --strict --formatter none",
 		"check-deps": "essex check-deps",
 		"test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
 		"bundle-codebook": "typescript-json-schema tsconfig.json CodebookSchema > ../../schema/codebook.json",

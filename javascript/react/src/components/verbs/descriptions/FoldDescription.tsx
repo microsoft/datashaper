@@ -18,7 +18,7 @@ export const FoldDescription: React.FC<StepDescriptionProps<FoldArgs>> = memo(
 			} = props
 			const sub = createRowEntries(
 				args.columns || EMPTY_ARRAY,
-				c => ({
+				(c) => ({
 					value: c,
 				}),
 				3,

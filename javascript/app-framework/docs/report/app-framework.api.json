@@ -309,6 +309,51 @@
                 }
               ],
               "name": "renameResource"
+            },
+            {
+              "kind": "MethodSignature",
+              "canonicalReference": "@datashaper/app-framework!AppServices#requestHelp:member(1)",
+              "docComment": "/**\n * Set the current context-sensitive help key, which the user can see if the global help pane is open.\n *\n * @param key - \n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "requestHelp(key: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "key",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "name": "requestHelp"
             }
           ],
           "extendsTokenRanges": []
@@ -848,6 +893,42 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ProfilePlugin#getHelp:member",
+              "docComment": "/**\n * Plugins may supply a map of help content to be displayed in the global panel when open. Each help record should have a unique key, and the value is the markdown content.\n *\n * @returns \n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getHelp?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "() => "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Record",
+                  "canonicalReference": "!Record:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string, string>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "getHelp",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 4
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!ProfilePlugin#getMenuItems:member",
               "docComment": "/**\n * Create contextual menu items for a resource\n */\n",
               "excerptTokens": [
@@ -998,7 +1079,16 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<{\n        href: string;\n        resource: Res;\n    }>"
+                  "text": "<{\n        href: string;\n        resource: Res;\n        api: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AppServices",
+                  "canonicalReference": "@datashaper/app-framework!AppServices:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }>"
                 },
                 {
                   "kind": "Content",
@@ -1011,7 +1101,7 @@
               "name": "renderer",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 5
               }
             },
             {

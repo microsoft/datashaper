@@ -1936,12 +1936,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@datashaper/app-framework@workspace:javascript/app-framework"
   dependencies:
+    "@datashaper/guidance": "workspace:^"
     "@datashaper/react": "workspace:^"
     "@datashaper/schema": "workspace:^"
     "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/workflow": "workspace:^"
-    "@essex/components": ^3.6.5
+    "@essex/components": ^3.6.9
     "@essex/scripts": ^23.1.4
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/react": ^8.104.6
@@ -2003,6 +2004,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@datashaper/guidance@workspace:^, @datashaper/guidance@workspace:javascript/guidance":
+  version: 0.0.0-use.local
+  resolution: "@datashaper/guidance@workspace:javascript/guidance"
+  dependencies:
+    "@essex/scripts": ^23.1.4
+    "@essex/tsconfig-base": ^1.0.2
+    "@types/express": ^4.17.15
+    "@types/node": ^18.11.18
+    express: ^4.18.2
+    typescript: ^4.9.4
+  languageName: unknown
+  linkType: soft
+
 "@datashaper/project@workspace:.":
   version: 0.0.0-use.local
   resolution: "@datashaper/project@workspace:."
@@ -2010,7 +2024,6 @@ __metadata:
     "@essex/eslint-config": ^20.5.0
     "@essex/eslint-plugin": ^20.5.0
     "@essex/jest-config": ^21.0.19
-    "@essex/prettier-config": ^18.0.7
     "@essex/scripts": ^23.1.4
     "@types/jest": ^29.2.6
     "@types/node": ^18.11.18
@@ -2018,7 +2031,7 @@ __metadata:
     arquero: ^5.1.0
     eslint: ^8.32.0
     npm-run-all: ^4.1.5
-    prettier: ^2.8.3
+    rome: ^11.0.0
     semver: ^7.3.8
     turbo: ^1.6.3
     typescript: ^4.9.4
@@ -2029,15 +2042,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@datashaper/react@workspace:javascript/react"
   dependencies:
+    "@datashaper/guidance": "workspace:^"
     "@datashaper/schema": "workspace:^"
     "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
-    "@datashaper/verb-guidance": "workspace:^"
     "@datashaper/workflow": "workspace:^"
-    "@essex/charts-react": ^1.1.6
-    "@essex/components": ^3.6.5
+    "@essex/charts-react": ^1.1.7
+    "@essex/components": ^3.6.9
     "@essex/scripts": ^23.1.4
-    "@essex/styled-components": ^0.0.7
+    "@essex/styled-components": ^0.0.8
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/react": ^8.104.6
     "@fluentui/react-hooks": ^8.6.15
@@ -2057,7 +2070,6 @@ __metadata:
     d3-format: ^3.1.0
     immer: ^9.0.18
     lodash-es: ^4.17.21
-    markdown-to-jsx: ^7.1.8
     observable-hooks: ^4.2.1
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -2128,7 +2140,7 @@ __metadata:
     "@babel/preset-typescript": ^7.18.6
     "@datashaper/react": "workspace:^"
     "@datashaper/webapp": "workspace:^"
-    "@essex/components": ^3.6.5
+    "@essex/components": ^3.6.9
     "@essex/scripts": ^23.1.4
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/font-icons-mdl2": ^8.5.6
@@ -2216,35 +2228,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@datashaper/verb-guidance@workspace:^, @datashaper/verb-guidance@workspace:javascript/verb-guidance":
-  version: 0.0.0-use.local
-  resolution: "@datashaper/verb-guidance@workspace:javascript/verb-guidance"
-  dependencies:
-    "@essex/scripts": ^23.1.4
-    "@essex/tsconfig-base": ^1.0.2
-    "@types/express": ^4.17.15
-    "@types/node": ^18.11.18
-    express: ^4.18.2
-    typescript: ^4.9.4
-  languageName: unknown
-  linkType: soft
-
 "@datashaper/webapp@workspace:^, @datashaper/webapp@workspace:javascript/webapp":
   version: 0.0.0-use.local
   resolution: "@datashaper/webapp@workspace:javascript/webapp"
   dependencies:
     "@datashaper/app-framework": "workspace:^"
-    "@datashaper/react": "workspace:^"
     "@datashaper/schema": "workspace:^"
     "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/workflow": "workspace:^"
-    "@essex/hooks": ^4.0.16
+    "@essex/components": ^3.6.9
+    "@essex/hooks": ^4.0.17
     "@essex/scripts": ^23.1.4
     "@fluentui/font-icons-mdl2": ^8.5.6
     "@fluentui/react": ^8.104.6
     "@fluentui/react-hooks": ^8.6.15
-    "@fluentui/utilities": ^8.13.5
     "@thematic/core": ^4.0.4
     "@thematic/d3": ^2.0.19
     "@thematic/fluent": ^5.0.5
@@ -2451,9 +2449,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/charts-react@npm:^1.1.6":
-  version: 1.1.6
-  resolution: "@essex/charts-react@npm:1.1.6"
+"@essex/charts-react@npm:^1.1.7":
+  version: 1.1.7
+  resolution: "@essex/charts-react@npm:1.1.7"
   dependencies:
     d3-scale: ^4.0.2
     d3-selection: ^3.0.0
@@ -2470,7 +2468,7 @@ __metadata:
       optional: false
     react:
       optional: false
-  checksum: 300311ff31cdf03f7c893e40fcfcc9b0da8745350059f9d46a2a81d765b430c6ea7819e8846e510587b9fc23848bc8a450d35feed0a7eccf8e7fd605c64f0a7d
+  checksum: 2197b2f7063d80f04a69cac534f2077e07d09952889f5fa3a64590b6b0ce0d567a62fdd626e7532698ce5d4d4a001c0afd2f0d411f7b3154095ca52c5f2214f6
   languageName: node
   linkType: hard
 
@@ -2535,11 +2533,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/components@npm:^3.6.5":
-  version: 3.6.5
-  resolution: "@essex/components@npm:3.6.5"
+"@essex/components@npm:^3.6.9":
+  version: 3.6.9
+  resolution: "@essex/components@npm:3.6.9"
   dependencies:
-    "@essex/toolbox": ^3.0.12
+    "@essex/styled-components": ^0.0.8
+    "@essex/toolbox": ^3.0.13
     "@fluentui/utilities": ^8.13.5
     "@types/d3-array": ^3.0.3
     "@types/d3-axis": ^3.0.1
@@ -2552,6 +2551,7 @@ __metadata:
     d3-scale: ^4.0.2
     d3-selection: ^3.0.0
     lodash-es: ^4.17.21
+    markdown-to-jsx: ^7.1.8
     react-animate-height: ^3.1.0
     react-if: ^4.1.4
   peerDependencies:
@@ -2567,6 +2567,7 @@ __metadata:
     "@types/react": ">= 18"
     react: ">= 18"
     react-dom: ">= 18"
+    styled-components: ">= 5"
   peerDependenciesMeta:
     "@fluentui/react":
       optional: false
@@ -2592,7 +2593,9 @@ __metadata:
       optional: false
     react-dom:
       optional: true
-  checksum: 17412382dc5e5a56d9d86f04cc0467d2175bb226cb77a6ba1746e1f4c197964cdf30c506129f046f27bcb417d4b425664bdc8a7eec7bab7ee25f7f59894e0a58
+    styled-components:
+      optional: true
+  checksum: 07c6266cbc05bb7aa81dde5e10fdbb1611ed6fa4700526ac98b1c656e66461d47fb5d761bf7fb00d60405cff80fcbf3a9c2c9fff4b29897cf507e9fe647ae1d6
   languageName: node
   linkType: hard
 
@@ -2648,11 +2651,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/hooks@npm:^4.0.16":
-  version: 4.0.16
-  resolution: "@essex/hooks@npm:4.0.16"
+"@essex/hooks@npm:^4.0.17":
+  version: 4.0.17
+  resolution: "@essex/hooks@npm:4.0.17"
   dependencies:
-    "@essex/toolbox": ^3.0.12
+    "@essex/toolbox": ^3.0.13
     lodash-es: ^4.17.21
   peerDependencies:
     "@types/node": "*"
@@ -2671,7 +2674,7 @@ __metadata:
       optional: false
     react-dom:
       optional: true
-  checksum: 9e32807d7aefeb48b250778b8e0b0be19414a81a35fad2cf7df1cb7459bcdf739e4618d0ab73c9c6458b01846fc30f2ffd407d5471f1b099731cfcfb858f06b9
+  checksum: 2e1fa2bcef35259f9df1c8f2bc961df004eca154f3bd9bbbffbd40732d695f1189c77f1314833119e4e61a674a01b63a238b7dfab078ce5408f58973eafdba60
   languageName: node
   linkType: hard
 
@@ -2691,13 +2694,6 @@ __metadata:
     jest:
       optional: true
   checksum: 03b0a94c9e90e892538b2b856d16cafba48de80dad4b7bb3e0c0485442ac22b1d312ee0f75007ecb2bb76a0caeea02fc19703c44ca1dbeb017f00337572cf372
-  languageName: node
-  linkType: hard
-
-"@essex/prettier-config@npm:^18.0.7":
-  version: 18.0.7
-  resolution: "@essex/prettier-config@npm:18.0.7"
-  checksum: baf41d3d9e31037608c50b102c3411626e8e3318363ff4d0dfafee31255b61684384b8dc103e5183ce317c1421514aae2a4a523620b586c3dfc6ea0f82b98820
   languageName: node
   linkType: hard
 
@@ -2784,15 +2780,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/styled-components@npm:^0.0.7":
-  version: 0.0.7
-  resolution: "@essex/styled-components@npm:0.0.7"
+"@essex/styled-components@npm:^0.0.8":
+  version: 0.0.8
+  resolution: "@essex/styled-components@npm:0.0.8"
   peerDependencies:
     styled-components: ">= 5"
   peerDependenciesMeta:
     styled-components:
       optional: false
-  checksum: 5bd7cad42d43c5c4799e5ff96289bf4ce2a0f37751e7093d1f4947094f012418a0e21108b213cb4a8faa9a40a40d591303e518fd1b579b50bf2476ce35396284
+  checksum: 167bc86605f18fbd53fa8a2c4c6cef78433e688989c4b1bac50676ebad48ab7e80a67500eaf679a81fe914976e95f374c984808f45329b3009bffd880a0654b1
   languageName: node
   linkType: hard
 
@@ -2811,6 +2807,13 @@ __metadata:
   version: 3.0.12
   resolution: "@essex/toolbox@npm:3.0.12"
   checksum: cef6efaebc7ff82679e9d00749b3b369ea5c46faee42748827f15c618322770080c966b72ae5a988283a8de49316ff97bc56f8e4c7679d51aa5f051be961fce7
+  languageName: node
+  linkType: hard
+
+"@essex/toolbox@npm:^3.0.13":
+  version: 3.0.13
+  resolution: "@essex/toolbox@npm:3.0.13"
+  checksum: a9e3c4ca79c98f5f1b3177a37a54504a7e27b22275a17458227bc89debb1768bbc5fb1cca102c1da0496106d826b54e96336481407fcf1009c024a61e052e68c
   languageName: node
   linkType: hard
 
@@ -3864,6 +3867,48 @@ __metadata:
     estree-walker: ^2.0.1
     picomatch: ^2.2.2
   checksum: 6bc41f22b1a0f1efec3043899e4d3b6b1497b3dea4d94292d8f83b4cf07a1073ecbaedd562a22d11913ff7659f459677b01b09e9598a98936e746780ecc93a12
+  languageName: node
+  linkType: hard
+
+"@rometools/cli-darwin-arm64@npm:11.0.0":
+  version: 11.0.0
+  resolution: "@rometools/cli-darwin-arm64@npm:11.0.0"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@rometools/cli-darwin-x64@npm:11.0.0":
+  version: 11.0.0
+  resolution: "@rometools/cli-darwin-x64@npm:11.0.0"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@rometools/cli-linux-arm64@npm:11.0.0":
+  version: 11.0.0
+  resolution: "@rometools/cli-linux-arm64@npm:11.0.0"
+  conditions: os=linux & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@rometools/cli-linux-x64@npm:11.0.0":
+  version: 11.0.0
+  resolution: "@rometools/cli-linux-x64@npm:11.0.0"
+  conditions: os=linux & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@rometools/cli-win32-arm64@npm:11.0.0":
+  version: 11.0.0
+  resolution: "@rometools/cli-win32-arm64@npm:11.0.0"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@rometools/cli-win32-x64@npm:11.0.0":
+  version: 11.0.0
+  resolution: "@rometools/cli-win32-x64@npm:11.0.0"
+  conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
@@ -18055,15 +18100,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.8.3":
-  version: 2.8.3
-  resolution: "prettier@npm:2.8.3"
-  bin:
-    prettier: bin-prettier.js
-  checksum: 92f2ceb522d454370e02082aa74ad27388672f7cee8975028b59517c069fe643bdc73e322675c8faf2ff173d7a626d1a6389f26b474000308e793aa25fff46e5
-  languageName: node
-  linkType: hard
-
 "pretty-error@npm:^2.1.1":
   version: 2.1.2
   resolution: "pretty-error@npm:2.1.2"
@@ -19341,6 +19377,35 @@ __metadata:
   bin:
     rollup: dist/bin/rollup
   checksum: b179c68249584565ddb5664a241e8e48c293b2207718d885b08ee25797d98857a383f06b544bb89819407da5a71557f4713309a278f61c4778bb32b1d3321a1c
+  languageName: node
+  linkType: hard
+
+"rome@npm:^11.0.0":
+  version: 11.0.0
+  resolution: "rome@npm:11.0.0"
+  dependencies:
+    "@rometools/cli-darwin-arm64": 11.0.0
+    "@rometools/cli-darwin-x64": 11.0.0
+    "@rometools/cli-linux-arm64": 11.0.0
+    "@rometools/cli-linux-x64": 11.0.0
+    "@rometools/cli-win32-arm64": 11.0.0
+    "@rometools/cli-win32-x64": 11.0.0
+  dependenciesMeta:
+    "@rometools/cli-darwin-arm64":
+      optional: true
+    "@rometools/cli-darwin-x64":
+      optional: true
+    "@rometools/cli-linux-arm64":
+      optional: true
+    "@rometools/cli-linux-x64":
+      optional: true
+    "@rometools/cli-win32-arm64":
+      optional: true
+    "@rometools/cli-win32-x64":
+      optional: true
+  bin:
+    rome: bin/rome
+  checksum: 3c92a47c78a66c62f94b6a3a72ead92a20c23326d2d73785ce88c03897b60b8114c285a636acc24bd11039381ded48f8c58c6cc5c4cc46ce7eed092c90d9a054
   languageName: node
   linkType: hard
 

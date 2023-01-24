@@ -27,7 +27,7 @@ export class GraphManager extends Disposable {
 	private readonly _graph = new DefaultGraph<TableContainer>()
 	private readonly _defaultInputNode: Node<TableContainer>
 	private readonly _steps$ = new BehaviorSubject<Step[]>([])
-	private readonly _numSteps$ = this._steps$.pipe(map(steps => steps.length))
+	private readonly _numSteps$ = this._steps$.pipe(map((steps) => steps.length))
 	private readonly _inputDelegates = new Map<
 		string,
 		DelegateSubject<TableContainer>
@@ -235,7 +235,7 @@ export class GraphManager extends Disposable {
 			for (const [input, binding] of Object.entries(step.input)) {
 				if (isVariadicSocketName(input, binding)) {
 					// Bind variadic input
-					node.bind(binding.map(b => ({ node: this.getNode(b.node) })))
+					node.bind(binding.map((b) => ({ node: this.getNode(b.node) })))
 				} else if (this.hasNode(binding.node)) {
 					// Bind Non-Variadic Input
 					const inputNode = this.getNode(binding.node)
@@ -247,7 +247,7 @@ export class GraphManager extends Disposable {
 		} else if (prevStep != null) {
 			node.bind({ node: this.getNode(prevStep.id) })
 		} else {
-			throw new Error(`cannot bind step input`)
+			throw new Error('cannot bind step input')
 		}
 	}
 }

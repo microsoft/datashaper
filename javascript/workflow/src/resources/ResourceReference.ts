@@ -30,7 +30,7 @@ export class ResourceReference extends Resource {
 
 	public override toSchema(): ResourceSchema {
 		const result = super.toSchema()
-		delete result.sources
+		result.sources = undefined
 		return result
 	}
 }

@@ -86,8 +86,8 @@ export function useColumns(
 			...(columns || EMPTY_ARRAY),
 			...(virtualColumns || EMPTY_ARRAY),
 		])
-		const virtualNames = virtualColumns?.map(c => c.key) || emptyArray()
-		return [...names, ...virtualNames].map(name => {
+		const virtualNames = virtualColumns?.map((c) => c.key) || emptyArray()
+		return [...names, ...virtualNames].map((name) => {
 			const column = columnMap[name] || {
 				key: name,
 				name,
@@ -107,7 +107,7 @@ export function useColumns(
 			// without completely recreating the details header render
 			const { iconName, ...defaults } = column
 
-			const field = fields.find(f => f.name === name)!
+			const field = fields.find((f) => f.name === name)!
 			const meta = metadata?.columns[name]
 			const color = theme.rect().fill().hex()
 			const onRender =
@@ -212,7 +212,7 @@ function getColumnValidation(
 	name: string,
 ): ValidationResult {
 	const filteredErrors: FieldError[] = validationResult.errors.filter(
-		e => e.name === name,
+		(e) => e.name === name,
 	)
 
 	const validationResultFiltered: ValidationResult = {

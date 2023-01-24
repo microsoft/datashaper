@@ -16,7 +16,7 @@ export function useTooltip(stats?: FieldMetadata): string {
 		return Object.entries(nobins).reduce((acc, cur, idx) => {
 			const [key, value] = cur
 			const nice = upperFirst(pretty[key] || key)
-			return acc + (idx > 0 ? '\n' : '') + `${nice}: ${formatIfNumber(value)}`
+			return `${acc}${idx > 0 ? '\n' : ''}${nice}: ${formatIfNumber(value)}`
 		}, '')
 	}, [stats])
 }

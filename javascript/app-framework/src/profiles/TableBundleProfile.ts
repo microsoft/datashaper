@@ -19,6 +19,7 @@ import {
 import type { IContextualMenuItem } from '@fluentui/react'
 
 import { TableBundleEditor } from '../components/editors/index.js'
+import { guidance } from '../guidance.js'
 import type {
 	AppProfileInitializationContext,
 	ProfilePlugin,
@@ -63,7 +64,7 @@ export class TableBundleProfile
 					key: this.profile,
 					text: `New ${this.title}`,
 					onClick: () =>
-						void this.createInstance().then(res => dp.addResource(res)),
+						void this.createInstance().then((res) => dp.addResource(res)),
 				},
 			]
 		}
@@ -80,7 +81,7 @@ export class TableBundleProfile
 				text: 'New Derived Table',
 				iconProps: { iconName: this.iconName },
 				onClick: () => {
-					void this.createInstance().then(derived => {
+					void this.createInstance().then((derived) => {
 						derived.title = resource.title
 
 						// Create a reference to the source resource
@@ -100,36 +101,40 @@ export class TableBundleProfile
 				text: 'Add Datatable',
 				iconProps: { iconName: this.datatablePlugin.iconName },
 				onClick: () => {
-					this.datatablePlugin.createInstance?.().then(instance => {
+					this.datatablePlugin.createInstance?.().then((instance) => {
 						resource.sources = [instance, ...resource.sources]
 					})
 				},
 			})
 		}
-		if (!resource.sources.some(r => r.profile === KnownProfile.Workflow)) {
+		if (!resource.sources.some((r) => r.profile === KnownProfile.Workflow)) {
 			result.push({
 				key: 'add-workflow',
 				text: 'Add Workflow',
 				iconProps: { iconName: this.workflowPlugin.iconName },
 				onClick: () => {
-					this.workflowPlugin.createInstance?.().then(instance => {
+					this.workflowPlugin.createInstance?.().then((instance) => {
 						resource.sources = [...resource.sources, instance]
 					})
 				},
 			})
 		}
-		if (!resource.sources.some(r => r.profile === KnownProfile.Codebook)) {
+		if (!resource.sources.some((r) => r.profile === KnownProfile.Codebook)) {
 			result.push({
 				key: 'add-codebook',
 				text: 'Add Codebook',
 				iconProps: { iconName: this.codebookPlugin.iconName },
 				onClick: () => {
-					this.codebookPlugin.createInstance?.().then(codebook => {
+					this.codebookPlugin.createInstance?.().then((codebook) => {
 						resource.sources = [...resource.sources, codebook]
 					})
 				},
 			})
 		}
 		return result
+	}
+
+	public getHelp(): Record<string, string> {
+		return guidance()
 	}
 }

@@ -2,5 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-export * from './Guidance.js'
-export * from './Guidance.types.js'
+import type { Verb } from '@datashaper/schema'
+
+export interface GuidanceExpansionProps {
+	verb?: Verb
+}

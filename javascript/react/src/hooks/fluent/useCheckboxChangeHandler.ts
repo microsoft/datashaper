@@ -32,7 +32,7 @@ function getCheckboxChangeHandler<T extends object | void | unknown>(
 ): CheckboxChangeHandler {
 	return (_event, checked) => {
 		onChange?.(
-			produce(step, draft => {
+			produce(step, (draft) => {
 				updateFn(draft as Step<T>, checked)
 			}),
 		)

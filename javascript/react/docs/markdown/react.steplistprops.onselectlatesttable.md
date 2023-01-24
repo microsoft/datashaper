@@ -4,7 +4,7 @@
 
 ## StepListProps.onSelectLatestTable property
 
-Event handler for when the latest output table is selected
+Event handler for when the latest output table is selected. 'Latest' button will not be shown if this is not provided.
 
 <b>Signature:</b>
 

@@ -9,7 +9,7 @@ export const DetailsListContainer = styled.div`
 	overflow: auto;
 	display: flex;
 	flex-direction: column;
-	height: 100%;
+	height: calc(100% - 44px);
 	border-right: 1px solid
 		${({ theme }: { theme: ITheme }) => theme.palette.neutralLighter};
 `
@@ -18,5 +18,5 @@ export const Container = styled.div<{ collapsed: boolean }>`
 	height: 100%;
 	display: grid;
 	grid-template-columns: ${({ collapsed }) =>
-		collapsed ? '100% 0' : 'calc(100% - 280px) 280px '};
+		collapsed ? '100% 0' : 'calc(100% - 284px) 284px '};
 `

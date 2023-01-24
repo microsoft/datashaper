@@ -20,14 +20,16 @@ export class ResourceManager {
 	private _resourceDisposables: Map<string, () => void> = new Map()
 
 	private _topResources$ = new BehaviorSubject<Resource[]>([])
-	private _topNames$ = this._topResources$.pipe(map(r => r.map(r => r.name)))
-	private _topSize$ = this._topResources$.pipe(map(r => r.length))
-	private _topIsEmpty$ = this._topResources$.pipe(map(r => r.length === 0))
+	private _topNames$ = this._topResources$.pipe(
+		map((r) => r.map((r) => r.name)),
+	)
+	private _topSize$ = this._topResources$.pipe(map((r) => r.length))
+	private _topIsEmpty$ = this._topResources$.pipe(map((r) => r.length === 0))
 
 	private _resources$ = new BehaviorSubject<Resource[]>([])
-	private _names$ = this._resources$.pipe(map(r => r.map(r => r.name)))
-	private _size$ = this._resources$.pipe(map(r => r.length))
-	private _isEmpty$ = this._resources$.pipe(map(r => r.length === 0))
+	private _names$ = this._resources$.pipe(map((r) => r.map((r) => r.name)))
+	private _size$ = this._resources$.pipe(map((r) => r.length))
+	private _isEmpty$ = this._resources$.pipe(map((r) => r.length === 0))
 
 	private _profileHandlers = new Map<Profile, ProfileHandler>()
 
@@ -60,7 +62,7 @@ export class ResourceManager {
 	 * The top-level resource names
 	 */
 	public get topNames(): string[] {
-		return this.topResources.map(r => r.name)
+		return this.topResources.map((r) => r.name)
 	}
 
 	/**
@@ -113,7 +115,7 @@ export class ResourceManager {
 	}
 
 	public get names(): string[] {
-		return this.resources.map(r => r.name)
+		return this.resources.map((r) => r.name)
 	}
 
 	/**
@@ -168,12 +170,12 @@ export class ResourceManager {
 
 		const emitResource = () => {
 			this._resources$.next([
-				...this.resources.filter(t => t !== resource),
+				...this.resources.filter((t) => t !== resource),
 				resource,
 			])
 			if (top) {
 				this._topResources$.next([
-					...this.topResources.filter(t => t !== resource),
+					...this.topResources.filter((t) => t !== resource),
 					resource,
 				])
 			}
@@ -210,8 +212,8 @@ export class ResourceManager {
 	public removeResource(name: string): void {
 		this._resourceDisposables.get(name)?.()
 		this._resourceDisposables.delete(name)
-		this._resources$.next(this.resources.filter(t => name !== t.name))
-		this._topResources$.next(this.topResources.filter(t => name !== t.name))
+		this._resources$.next(this.resources.filter((t) => name !== t.name))
+		this._topResources$.next(this.topResources.filter((t) => name !== t.name))
 	}
 
 	/**
@@ -279,7 +281,7 @@ export class ResourceManager {
 
 		this._resources$.next(resources)
 		this._topResources$.next(topLevelResources)
-		topLevelResources.forEach(r =>
+		topLevelResources.forEach((r) =>
 			r.onChange(() => this._topResources$.next(this.topResources)),
 		)
 		return dataPackage

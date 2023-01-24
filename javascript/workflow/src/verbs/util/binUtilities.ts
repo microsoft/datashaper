@@ -5,6 +5,7 @@
 import { default as percentile } from 'percentile'
 import { BinStrategy } from '@datashaper/schema'
 import { default as linspace } from 'exact-linspace'
+import percentile from 'percentile'
 
 const ROUND_PRECISION = 3
 const INTEGER_PRECISION = 1
@@ -109,7 +110,7 @@ export function standardDeviation(values: number[], precision = 3): number {
 	let sum = 0
 	let squareNumbersSum = 0
 
-	values.forEach(val => {
+	values.forEach((val) => {
 		sum = sum + val
 		squareNumbersSum = squareNumbersSum + val * val
 	})

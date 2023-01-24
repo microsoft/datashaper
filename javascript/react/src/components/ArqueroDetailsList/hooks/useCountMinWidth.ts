@@ -15,14 +15,14 @@ export function useCountMinWidth(
 ): number {
 	return useMemo(() => {
 		const elementsWidth = Math.max(
-			...(commandBar?.map(command => +command()?.props.styles.root.width) || [
+			...(commandBar?.map((command) => +command()?.props.styles.root.width) || [
 				0,
 			]),
 		)
 
 		const buttonsWidth =
 			Math.max(
-				...(commandBar?.map(command => command()?.props.items.length) || [0]),
+				...(commandBar?.map((command) => command()?.props.items.length) || [0]),
 			) * DEFAULT_COMMAND_BAR_WIDTH
 
 		const totalWidth = Math.max(buttonsWidth, elementsWidth)

@@ -6,6 +6,7 @@ import type { Workflow } from '@datashaper/workflow'
 import { WorkflowProfile as WorkflowDataProfile } from '@datashaper/workflow'
 
 import { WorkflowEditor } from '../components/editors/index.js'
+import { guidance } from '../guidance.js'
 import type { ProfilePlugin } from '../index.js'
 import { ResourceGroupType } from '../index.js'
 
@@ -18,4 +19,8 @@ export class WorkflowProfile
 	public readonly iconName = 'SetAction'
 	public readonly group = ResourceGroupType.Data
 	public readonly dataHandler = null
+
+	public getHelp(): Record<string, string> {
+		return guidance()
+	}
 }

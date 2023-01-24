@@ -34,7 +34,7 @@ export const H2 = styled.h2`
 
 export const StyledSeparator = styled(Separator)`
 	margin-left: 8px;
-	margin-right: 36px;
+	margin-right: 8px;
 `
 
 export const ChildrenContainer = styled.div`

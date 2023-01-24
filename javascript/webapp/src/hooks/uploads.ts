@@ -20,11 +20,11 @@ function useCsvHandler(onUpdateTables: (tables: TableContainer[]) => void) {
 				return
 			}
 			const regex = /metadata\.json$/i
-			const jsonFile = fc.list(FileType.json).find(f => regex.test(f.name))
+			const jsonFile = fc.list(FileType.json).find((f) => regex.test(f.name))
 			const metadata = jsonFile ? await jsonFile.toJson() : null
 			const { input = [] } = metadata || EMPTY_OBJECT
 			if (input.length) {
-				tableFiles = tableFiles.filter(t => input.includes(t.name))
+				tableFiles = tableFiles.filter((t) => input.includes(t.name))
 			}
 			const tableContainer = []
 
@@ -54,7 +54,7 @@ function useJsonHandler(
 				return
 			}
 			const json =
-				files.length > 1 ? files.find(f => regex.test(f.name)) : files[0]
+				files.length > 1 ? files.find((f) => regex.test(f.name)) : files[0]
 			if (!json) {
 				return
 			}

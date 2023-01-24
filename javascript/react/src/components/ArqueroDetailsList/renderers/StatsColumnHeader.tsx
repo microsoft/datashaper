@@ -30,7 +30,7 @@ export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 		const theme = useTheme()
 		const cells = useMemo(() => {
 			const st = (metadata || EMPTY_OBJECT) as any
-			return stats.map(stat => {
+			return stats.map((stat) => {
 				const value: any = stat === StatsColumnType.Type ? field.type : st[stat]
 				return (
 					<StatCell

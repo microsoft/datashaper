@@ -76,7 +76,7 @@ function useItems(
 ): ICommandBarItemProps[] {
 	const buttonStyles = useDefaultButtonStyles(colors)
 	return useMemo(
-		() => items.map(item => merge({}, { buttonStyles }, item)),
+		() => items.map((item) => merge({}, { buttonStyles }, item)),
 		[items, buttonStyles],
 	)
 }

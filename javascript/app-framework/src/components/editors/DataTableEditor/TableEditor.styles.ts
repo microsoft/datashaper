@@ -20,3 +20,7 @@ export const Container = styled.div<{ collapsed: boolean }>`
 	grid-template-columns: ${({ collapsed }) =>
 		collapsed ? '100% 0' : 'calc(100% - 280px) 280px '};
 `
+
+export const ConfigContainer = styled.div`
+	padding: 10px;
+`

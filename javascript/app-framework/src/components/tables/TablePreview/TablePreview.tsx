@@ -24,7 +24,7 @@ export const TablePreview: React.FC<{
 					}}
 					error={error}
 					table={table}
-				></RawTable>
+				/>
 			)}
 		</Container>
 	)

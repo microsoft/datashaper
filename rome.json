@@ -1,0 +1,43 @@
+{
+  "files": {
+    "ignore": [
+      "dist",
+      "lib",
+      "build",
+      "python",
+      "storybook-static",
+      ".turbo",
+      ".pnp.cjs",
+      ".pnp.loader.mjs",
+      "javascript/schema/versions.js",
+      "javascript/schema/versions.d.ts"
+    ]
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "suspicious": {
+        "noExplicitAny": "off",
+        "noShadowRestrictedNames": "off"
+      },
+      "a11y": {
+        "useKeyWithClickEvents": "off"
+      },
+      "performance": {
+        "noDelete": "off"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "semicolons": "asNeeded",
+      "quoteStyle": "single",
+      "trailingComma": "all",
+      "quoteProperties": "asNeeded"
+    }
+  },
+  "formatter": {
+    "indentStyle": "tab"
+  }
+}

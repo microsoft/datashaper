@@ -16,8 +16,8 @@ export function useWorkflowOutputListener(
 			setOutput &&
 			workflow.onChange(() => {
 				const outputs = (
-					workflow.toArray().filter(t => !!t) as TableContainer[]
-				).map(table => {
+					workflow.toArray().filter((t) => !!t) as TableContainer[]
+				).map((table) => {
 					if (table.table && !table.metadata) {
 						table.metadata = introspect(table.table, true)
 					}

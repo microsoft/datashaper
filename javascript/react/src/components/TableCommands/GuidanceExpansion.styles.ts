@@ -11,4 +11,5 @@ export const Container = styled.div`
 	width: 400px;
 	max-height: ${MAX_HEIGHT - 20}px;
 	overflow: hidden auto;
+	padding: 4px 12px 12px 8px;
 `

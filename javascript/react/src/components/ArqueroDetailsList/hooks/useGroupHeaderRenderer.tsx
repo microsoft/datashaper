@@ -25,13 +25,13 @@ export function useGroupHeaderRenderer(
 ): IRenderFunction<IDetailsGroupDividerProps> {
 	return useCallback(
 		(props?, defaultRender?) => {
-			if (!props || !defaultRender) {
+			if (!(props && defaultRender)) {
 				return null
 			}
 
 			const columnName = table.groups().names[props.groupLevel as number]
 			const field = columnName
-				? fields.find(f => f.name === columnName)
+				? fields.find((f) => f.name === columnName)
 				: undefined
 
 			if (!groupHeaderFunction) {

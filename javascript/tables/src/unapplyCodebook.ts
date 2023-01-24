@@ -23,7 +23,7 @@ export function unapplyCodebook(
 	) {
 		const args = table.columnNames().reduce((acc, cur) => {
 			const parser =
-				dataTableSchema != null && dataTableSchema.typeHints != null
+				dataTableSchema?.typeHints != null
 					? parseAs(DataType.String, dataTableSchema.typeHints)
 					: parseAs(DataType.String)
 			acc[cur] = escape((d: any) => parser(d[cur]))
@@ -37,7 +37,9 @@ export function unapplyCodebook(
 		strategy === CodebookStrategy.MappingOnly ||
 		strategy === CodebookStrategy.DataTypeAndMapping
 	) {
-		const fieldList = codebook.fields.filter(element => element.mapping != null)
+		const fieldList = codebook.fields.filter(
+			(element) => element.mapping != null,
+		)
 
 		const args2 = fieldList.reduce((acc, cur) => {
 			const finalMap: Record<any, any> = {}

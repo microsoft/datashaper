@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Verb } from '@datashaper/schema'
+import type { AppServices } from '../../types.js'
 
-export interface GuidanceButtonProps {
-	verb?: Verb
+export interface PluginComponentProps {
+	api: AppServices
 }

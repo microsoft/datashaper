@@ -9,7 +9,7 @@ import { useMemo } from 'react'
 
 export function useColumnType(table?: ColumnTable, column?: string): DataType {
 	return useMemo(() => {
-		if (!table || !column) {
+		if (!(table && column)) {
 			return DataType.Unknown
 		}
 

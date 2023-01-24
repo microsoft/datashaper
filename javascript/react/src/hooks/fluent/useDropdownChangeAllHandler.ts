@@ -34,10 +34,10 @@ function getDropdownChangeAllHandler<T extends object | void | unknown>(
 ): DropdownChangeAllHandler {
 	return (_event, options) => {
 		onChange?.(
-			produce(step, draft => {
+			produce(step, (draft) => {
 				updateFn(
 					draft as Step<T>,
-					options ? options.map(option => option.key) : [],
+					options ? options.map((option) => option.key) : [],
 				)
 			}),
 		)

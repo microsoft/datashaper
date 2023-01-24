@@ -19,7 +19,7 @@ export function useColumnNamesList(
 	columns?: IColumn[],
 ): string[] {
 	return useMemo(() => {
-		const list = !columns ? table.columnNames() : columns.map(c => c.name)
+		const list = !columns ? table.columnNames() : columns.map((c) => c.name)
 		return list
 	}, [table, columns])
 }

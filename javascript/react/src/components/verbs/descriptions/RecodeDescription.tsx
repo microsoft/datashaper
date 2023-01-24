@@ -19,7 +19,7 @@ export const RecodeDescription: React.FC<StepDescriptionProps<RecodeArgs>> =
 			const entries = Object.entries(args.mapping || EMPTY_OBJECT)
 			const sub = createRowEntries(
 				entries,
-				c => ({
+				(c) => ({
 					value: `${c[0]} -> ${c[1]}`,
 				}),
 				2,

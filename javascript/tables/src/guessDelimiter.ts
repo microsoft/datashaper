@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ParserOptions } from '@datashaper/schema'
-import { default as papa } from 'papaparse'
+import papa from 'papaparse'
 
 import { mapToPapaParseOptions } from './readCsvTable.utils.js'
 

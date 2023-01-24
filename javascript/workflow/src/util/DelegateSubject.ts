@@ -17,7 +17,7 @@ export class DelegateSubject<T> extends BehaviorSubject<Maybe<T>> {
 		this.detach()
 
 		if (value != null) {
-			this._subscription = value.subscribe(v => this.next(v))
+			this._subscription = value.subscribe((v) => this.next(v))
 		} else {
 			this.next(undefined)
 		}

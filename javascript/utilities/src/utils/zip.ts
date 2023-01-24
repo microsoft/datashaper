@@ -19,7 +19,7 @@ export async function getFilesFromZip(zipFile: Blob): Promise<FileWithPath[]> {
 	/* eslint-disable @essex/adjacent-await */
 	const entries = await zipReader.getEntries()
 	await zipReader.close()
-	return Promise.all(entries.map(entry => getFileFromEntry(entry)))
+	return Promise.all(entries.map((entry) => getFileFromEntry(entry)))
 }
 
 export async function getBlobFromEntry(entry: Entry): Promise<Blob> {

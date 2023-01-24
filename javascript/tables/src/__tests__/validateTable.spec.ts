@@ -18,8 +18,8 @@ function createCodebook(
 	constraints: Record<string, Constraints>,
 ): CodebookSchema {
 	const codebook = generateCodebook(table)
-	Object.keys(constraints).forEach(fieldName => {
-		codebook.fields.find(field => field.name === fieldName)!.constraints = {
+	Object.keys(constraints).forEach((fieldName) => {
+		codebook.fields.find((field) => field.name === fieldName)!.constraints = {
 			...constraints[fieldName],
 		}
 	})

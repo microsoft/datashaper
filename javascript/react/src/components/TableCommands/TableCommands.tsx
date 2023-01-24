@@ -85,7 +85,7 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 		)
 
 		const allTablesLengthObservable = useObservable(
-			() => workflow.allTableNames$.pipe(map(tables => tables.length)),
+			() => workflow.allTableNames$.pipe(map((tables) => tables.length)),
 			[workflow],
 		)
 		const allTablesLength = useObservableState(allTablesLengthObservable, 0)

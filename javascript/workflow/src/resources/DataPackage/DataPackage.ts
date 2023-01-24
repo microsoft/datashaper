@@ -37,7 +37,7 @@ export class DataPackage extends Resource {
 			new CodebookProfile(),
 			new WorkflowProfile(),
 		] as ProfileHandler[]
-		profiles.forEach(p => {
+		profiles.forEach((p) => {
 			p.initialize?.({ dataPackage: this })
 			this._resourceMgr.registerProfile(p)
 		})
@@ -125,7 +125,7 @@ export class DataPackage extends Resource {
 	}
 
 	public getResource(name: string): Resource | undefined {
-		return this.resources.find(t => t.name === name)
+		return this.resources.find((t) => t.name === name)
 	}
 
 	public clear(): void {
@@ -149,7 +149,7 @@ export class DataPackage extends Resource {
 	public override toSchema(): DataPackageSchema {
 		return createDataPackageSchemaObject({
 			...super.toSchema(),
-			resources: this.resources.map(t => t.toSchema()),
+			resources: this.resources.map((t) => t.toSchema()),
 		})
 	}
 
@@ -177,7 +177,7 @@ export class DataPackage extends Resource {
 	public async load(files: Map<string, Blob>, quiet?: boolean): Promise<void> {
 		const schema = await this._resourceMgr.load(files)
 		super.loadSchema(schema)
-		this._resourceMgr.topResources.forEach(t => t.connect(this))
+		this._resourceMgr.topResources.forEach((t) => t.connect(this))
 		if (!quiet) {
 			this._onChange.next()
 		}

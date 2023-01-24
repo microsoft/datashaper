@@ -18,7 +18,7 @@ export function useTreeGroups(
 	expanded = false,
 ): TreeGroup[] {
 	return useMemo(
-		() => groups.map(g => ({ key: g.type, text: groupName(g, expanded) })),
+		() => groups.map((g) => ({ key: g.type, text: groupName(g, expanded) })),
 		[groups, expanded],
 	)
 }
@@ -44,8 +44,8 @@ export function useTreeItems(
 ): TreeGroup[] {
 	return useMemo(
 		() =>
-			groups.flatMap(group =>
-				group.resources.map(resource =>
+			groups.flatMap((group) =>
+				group.resources.map((resource) =>
 					makeTreeItem(resource, group.type, onSelect),
 				),
 			),
@@ -66,7 +66,7 @@ function makeTreeItem(
 		group,
 		children:
 			numChildren > 0
-				? resource.children?.map(c => makeTreeItem(c, group, onSelect))
+				? resource.children?.map((c) => makeTreeItem(c, group, onSelect))
 				: undefined,
 		menuItems: resource.menuItems,
 		onClick: () => onSelect?.(resource),

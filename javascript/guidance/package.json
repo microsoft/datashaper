@@ -1,6 +1,6 @@
 {
-	"name": "@datashaper/verb-guidance",
-	"version": "0.1.24",
+	"name": "@datashaper/guidance",
+	"version": "0.2.2",
 	"type": "module",
 	"main": "dist/index.js",
 	"author": "Nathan Evans <naevans@microsoft.com>",
@@ -28,7 +28,7 @@
 	"scripts": {
 		"clean": "essex clean dist",
 		"prestart": "yarn build",
-		"build": "essex build-md-index --include ../../docs/verbs",
+		"build": "essex build-md-index --include ../../docs",
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"devDependencies": {

@@ -24,7 +24,7 @@ export const constants = {
 	trademarksUrl: 'https://www.microsoft.com/trademarks',
 	microsoft: 'https://www.microsoft.com',
 	copyright: `©️ ${new Date().getFullYear()} Microsoft`,
-	github: 'https://github.com/microsoft/datashaper'
+	github: 'https://github.com/microsoft/datashaper',
 }
 
 export const LinkDiv = styled.div`

@@ -3,7 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TextEncoder, TextDecoder } from 'util'
-import { TransformStream, WritableStream, ReadableStream } from "node:stream/web";
+import {
+	TransformStream,
+	WritableStream,
+	ReadableStream,
+} from 'node:stream/web'
 import 'cross-fetch/polyfill'
 import Blob from 'cross-blob'
 

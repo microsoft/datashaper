@@ -31,7 +31,7 @@ describe('BaseNode', () => {
 	it('can define a value node', () => {
 		const two = new ValueNode(2)
 		let value = null
-		two.output$.subscribe(v => {
+		two.output$.subscribe((v) => {
 			value = v
 		})
 		expect(value).toBe(2)
@@ -109,7 +109,7 @@ describe('BaseNode', () => {
 
 		let caught: Error | undefined
 		div.output$.subscribe({
-			next: value => {
+			next: (value) => {
 				console.log("shouldn't get here", value)
 			},
 			error: (e: Error) => {

@@ -13,7 +13,7 @@ export const CommandBarContainer: React.FC<CommandBarContainerProps> = memo(
 		return (
 			<Container className="header-command-bar">
 				{renderers.map((renderer, i) => (
-					<div key={i}>{renderer(props)}</div>
+					<div key={`${renderer.name}@${i}`}>{renderer(props)}</div>
 				))}
 			</Container>
 		)

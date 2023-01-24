@@ -4,7 +4,7 @@
 
 ## StepListProps.onSave property
 
-Event handler for when a step needs to be savend
+Event handler for when a step needs to be saved
 
 <b>Signature:</b>
 

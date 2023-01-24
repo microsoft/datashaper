@@ -27,7 +27,7 @@ export function useOthers(
 					...step,
 					input: {
 						...step.input,
-						others: (step.input.others || EMPTY).filter(o => o !== input),
+						others: (step.input.others || EMPTY).filter((o) => o !== input),
 					} as Step['input'],
 				})
 			}

@@ -4,17 +4,25 @@ Sorts continuous data into defined buckets. Values in the input table cell are r
 
 _The input column for a binning operation must be a numeric data type._
 
-Multiple binning strategies are supported:
+Multiple binning strategies are supported. Please see the [numpy documentation](https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html) for detailed descriptions of the algorithms.
 
-- Auto: uses automatic bin boundary guessing using the implementation of numpy algorithm (uses [Numpy implementation](https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html))
-- Fd (Freedman Diaconis Estimator): (uses [Numpy implementation](https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html))
-- Doane: (uses [Numpy implementation](https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html))
-- Scott: (uses [Numpy implementation](https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html))
-- Rice: (uses [Numpy implementation](https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html))
-- Sturges: (uses [Numpy implementation](https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html))
-- Sqrt: (uses [Numpy implementation](https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html))
-- Fixed width: creates bins at an exact width specified
-- Fixed count: divides the data range into a fixed number of bins of equal width
+- Auto: uses automatic bin boundary guessing to create optimal default bins.
+- Fd: Freedman diaconis estimator, resilient to outliers.
+- Doane: Better for non-normal datasets.
+- Scott: Less robust but takes data variability into account.
+- Stone: Based on leave-one-out cross-validation.
+- Rice: Only accounts for size, not variability.
+- Sturges: Optimal for normally-distributed data.
+- Sqrt: Square root of data size, fast and simple.
+- Fixed width: creates bins at an exact width specified.
+- Fixed count: divides the data range into a fixed number of bins of equal width.
+
+Optional parameters:
+
+- Print bin range: this converts the output to a string representation of the range.
+- Minimum boundary
+- Maximum boundary
+- Clamping
 
 Note: The numpy documentation have formula errors, so please check the code implementation instead.
 

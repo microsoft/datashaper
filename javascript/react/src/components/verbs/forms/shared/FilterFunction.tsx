@@ -23,6 +23,7 @@ import {
 	CalendarPicker,
 	ColumnCriteriaComboBox,
 } from '../../../controls/index.js'
+import { dropdownStyles, narrowDropdownStyles } from '../../../styles.js'
 import { InputExplainer, LeftAlignedRow } from '../styles.js'
 import { useColumnTyping, useIsEmpty } from './FilterFunction.hooks.js'
 import {
@@ -31,9 +32,7 @@ import {
 	FilterContainer,
 	Input,
 	InputLabel,
-	leftStyles,
 	OrLabel,
-	spinStyles,
 	TextValue,
 } from './FilterFunction.styles.js'
 import type { FilterFunctionProps } from './FilterFunction.types.js'
@@ -47,15 +46,14 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 	function FilterFunction({ table, column, criterion, onChange }) {
 		const handleOpChange = useCallback(
 			(_e: React.FormEvent<HTMLDivElement>, opt?: IDropdownOption) => {
-				onChange &&
-					onChange({
-						...criterion,
-						operator: opt?.key as
-							| StringComparisonOperator
-							| NumericComparisonOperator
-							| BooleanComparisonOperator
-							| DateComparisonOperator,
-					})
+				onChange?.({
+					...criterion,
+					operator: opt?.key as
+						| StringComparisonOperator
+						| NumericComparisonOperator
+						| BooleanComparisonOperator
+						| DateComparisonOperator,
+				})
 			},
 			[criterion, onChange],
 		)
@@ -159,7 +157,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 				placeholder: 'Choose',
 				selectedKey: criterion.operator,
 				onChange: handleOpChange,
-				styles: leftStyles,
+				styles: dropdownStyles,
 			}
 			if (column) {
 				if (type === DataType.String) {
@@ -227,7 +225,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 								value={criterion.value}
 								onChange={onChangeTextFieldValue}
 								disabled={isEmpty}
-							></TextValue>
+							/>
 						) : null}
 
 						{type === DataType.Number ? (
@@ -235,7 +233,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 								min={0}
 								step={1}
 								value={criterion.value}
-								styles={spinStyles}
+								styles={narrowDropdownStyles}
 								disabled={isEmpty}
 								onChange={spinButtonOnChange}
 							/>

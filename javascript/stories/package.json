@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/stories",
-	"version": "0.3.1",
+	"version": "0.3.4",
 	"private": true,
 	"author": "Chris Trevino <chtrevin@microsoft.com>",
 	"scripts": {
@@ -13,7 +13,7 @@
 	"dependencies": {
 		"@datashaper/react": "workspace:^",
 		"@datashaper/webapp": "workspace:^",
-		"@essex/components": "^3.6.5",
+		"@essex/components": "^3.6.9",
 		"@fluentui/font-icons-mdl2": "^8.5.6",
 		"@fluentui/react": "^8.104.6",
 		"@fluentui/react-hooks": "^8.6.15",

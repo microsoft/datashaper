@@ -17,7 +17,7 @@ export function useDatasetMenuItems(
 	const subMenuProps = useMemo(
 		() => ({
 			items: tables.length
-				? tables.map(dataPackage => ({
+				? tables.map((dataPackage) => ({
 						key: dataPackage.name,
 						text: dataPackage.name,
 						onClick: () => onClick(dataPackage.name),
