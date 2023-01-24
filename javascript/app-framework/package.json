@@ -45,7 +45,7 @@
 		"yarn": "^1.22.19"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^24.0.1",
+		"@essex/scripts": "^24.0.2",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@fluentui/react": "^8.104.6",
 		"@fluentui/react-hooks": "^8.6.15",
