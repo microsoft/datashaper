@@ -15,7 +15,7 @@ import { type Observable, BehaviorSubject } from 'rxjs'
 
 import type { Maybe } from '../primitives.js'
 import { Resource } from './Resource.js'
-import type { Readable, TableTransformer } from './types.js'
+import type { Readable, TableTransformer } from './types/index.js'
 
 export class Codebook extends Resource implements TableTransformer {
 	public readonly $schema = LATEST_CODEBOOK_SCHEMA

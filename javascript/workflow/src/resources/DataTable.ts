@@ -18,7 +18,7 @@ import { type Observable, BehaviorSubject } from 'rxjs'
 import { DataShape } from './DataShape.js'
 import { ParserOptions } from './ParserOptions.js'
 import { Resource } from './Resource.js'
-import type { Readable, TableEmitter } from './types.js'
+import type { Readable, TableEmitter } from './types/index.js'
 
 const log = debug('datashaper')
 

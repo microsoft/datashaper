@@ -7,7 +7,7 @@ import type { Observable } from 'rxjs'
 import { BehaviorSubject, map } from 'rxjs'
 
 import type { Resource } from '../Resource.js'
-import type { ProfileHandler } from '../types.js'
+import type { ProfileHandler } from '../types/index.js'
 import { LoadResourcesOperation } from './LoadResourcesOperation.js'
 import { SaveResourcesOperation } from './SaveResourcesOperation.js'
 

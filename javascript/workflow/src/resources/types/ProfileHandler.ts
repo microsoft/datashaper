@@ -4,31 +4,8 @@
  */
 
 import type { Profile, ResourceSchema } from '@datashaper/schema'
-import type { TableContainer } from '@datashaper/tables'
-import type { Observable } from 'rxjs'
-
-import type { Maybe } from '../primitives.js'
-import type { DataPackage } from './DataPackage/DataPackage.js'
-import type { Resource } from './Resource.js'
-
-export type Readable<T extends ResourceSchema> = {
-	profile?: T['profile'] | undefined
-	name?: T['name'] | undefined
-} & Omit<T, 'profile' | 'name' | '$schema'>
-
-/**
- * A constructor for a resource
- */
-export interface ResourceConstructor<
-	Sch = any,
-	Res extends Resource = Resource,
-> {
-	new (schema?: Sch | undefined): Res
-}
-
-export interface ProfileInitializationContext {
-	dataPackage: DataPackage
-}
+import type { Resource } from '../Resource.js'
+import type { ProfileInitializationContext } from './ProfileInitializationContext.js'
 
 /**
  * A custom profile handler
@@ -76,33 +53,3 @@ export interface ProfileHandler<
 	//  */
 	// load?: (data: Schema, files: Map<string, Blob>) => Promise<Res[]>
 }
-
-/**
- * A data emitter for a type of output
- */
-export interface Emitter<T> extends Resource {
-	/**
-	 * The output value stream
-	 */
-	readonly output$: Observable<Maybe<T>>
-	/**
-	 * The current output value
-	 */
-	readonly output: Maybe<T>
-}
-
-/**
- * A transformer for a type of I/O
- */
-export interface Transformer<I, O = I> extends Emitter<O> {
-	/**
-	 * A transformer can set input
-	 */
-	input$: Observable<Maybe<I>> | undefined
-}
-
-/**
- * An emitter for TableContainers
- */
-export type TableEmitter = Emitter<TableContainer>
-export type TableTransformer = Transformer<TableContainer, TableContainer>
