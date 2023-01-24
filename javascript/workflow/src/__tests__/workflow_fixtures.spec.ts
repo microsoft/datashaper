@@ -99,7 +99,7 @@ async function readInputTables(): Promise<TableContainer[]> {
 }
 
 function readJson(dataPath: string): Promise<any> {
-	return import(dataPath).then((res) => res.default)
+	return readText(dataPath).then((data) => JSON.parse(data))
 }
 
 function readText(dataPath: string): Promise<string> {
