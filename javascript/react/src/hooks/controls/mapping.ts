@@ -38,7 +38,7 @@ export function useHandleValueChange(
 			for (const keyElement in mapList) {
 				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				keyElement === key.toString()
-					? mapping[keyElement] = newValue
+					? (mapping[keyElement] = newValue)
 					: (mapping[keyElement] = mapList[keyElement]!)
 			}
 

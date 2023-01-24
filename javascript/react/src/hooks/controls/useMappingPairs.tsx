@@ -3,13 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { DataType, type Value } from '@datashaper/schema'
+import { type Value, DataType } from '@datashaper/schema'
 import { coerce } from '@datashaper/tables'
 import styled from '@essex/styled-components'
 import type {
 	IStyleFunctionOrObject,
 	ITextFieldStyleProps,
-	ITextFieldStyles
+	ITextFieldStyles,
 } from '@fluentui/react'
 import { Icon, IconButton, TextField } from '@fluentui/react'
 import { memo, useMemo } from 'react'
