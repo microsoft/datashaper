@@ -1913,7 +1913,7 @@ __metadata:
     "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/workflow": "workspace:^"
-    "@essex/components": ^3.6.9
+    "@essex/components": ^3.6.10
     "@essex/scripts": ^24.0.2
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/react": ^8.104.6
@@ -2018,10 +2018,10 @@ __metadata:
     "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/workflow": "workspace:^"
-    "@essex/charts-react": ^1.1.7
-    "@essex/components": ^3.6.9
+    "@essex/charts-react": ^1.1.8
+    "@essex/components": ^3.6.10
     "@essex/scripts": ^24.0.2
-    "@essex/styled-components": ^0.0.8
+    "@essex/styled-components": ^0.0.9
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/react": ^8.104.6
     "@fluentui/react-hooks": ^8.6.15
@@ -2111,7 +2111,7 @@ __metadata:
     "@babel/preset-typescript": ^7.18.6
     "@datashaper/react": "workspace:^"
     "@datashaper/webapp": "workspace:^"
-    "@essex/components": ^3.6.9
+    "@essex/components": ^3.6.10
     "@essex/scripts": ^24.0.2
     "@essex/storybook-config": ^0.0.3
     "@essex/tsconfig-base": ^1.0.2
@@ -2210,8 +2210,8 @@ __metadata:
     "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/workflow": "workspace:^"
-    "@essex/components": ^3.6.9
-    "@essex/hooks": ^4.0.17
+    "@essex/components": ^3.6.10
+    "@essex/hooks": ^4.0.18
     "@essex/scripts": ^24.0.2
     "@fluentui/font-icons-mdl2": ^8.5.6
     "@fluentui/react": ^8.104.6
@@ -2415,9 +2415,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/charts-react@npm:^1.1.7":
-  version: 1.1.7
-  resolution: "@essex/charts-react@npm:1.1.7"
+"@essex/charts-react@npm:^1.1.8":
+  version: 1.1.8
+  resolution: "@essex/charts-react@npm:1.1.8"
   dependencies:
     d3-scale: ^4.0.2
     d3-selection: ^3.0.0
@@ -2434,7 +2434,73 @@ __metadata:
       optional: false
     react:
       optional: false
-  checksum: 2197b2f7063d80f04a69cac534f2077e07d09952889f5fa3a64590b6b0ce0d567a62fdd626e7532698ce5d4d4a001c0afd2f0d411f7b3154095ca52c5f2214f6
+  checksum: 2aa6528fe100f7f0d250d014d6758863dc597bf06f3d8582ffdcf73f0cb34e32b04e6c42eeb857d2cd45d5fa60728c73e85e362f357d3f2fc5bd6c6ead19b8d9
+  languageName: node
+  linkType: hard
+
+"@essex/components@npm:^3.6.10":
+  version: 3.6.10
+  resolution: "@essex/components@npm:3.6.10"
+  dependencies:
+    "@essex/styled-components": ^0.0.9
+    "@essex/toolbox": ^3.0.14
+    "@fluentui/utilities": ^8.13.5
+    "@types/d3-array": ^3.0.3
+    "@types/d3-axis": ^3.0.1
+    "@types/d3-brush": ^3.0.1
+    "@types/d3-scale": ^4.0.2
+    "@types/d3-selection": ^3.0.3
+    d3-array: ^3.2.1
+    d3-axis: ^3.0.0
+    d3-brush: ^3.0.0
+    d3-scale: ^4.0.2
+    d3-selection: ^3.0.0
+    lodash-es: ^4.17.21
+    markdown-to-jsx: ^7.1.8
+    react-animate-height: ^3.1.0
+    react-if: ^4.1.4
+  peerDependencies:
+    "@fluentui/react": ">= 8"
+    "@thematic/core": ">= 4"
+    "@thematic/d3": ">= 2"
+    "@thematic/react": ">= 2"
+    "@types/d3-array": ">= 3"
+    "@types/d3-axis": ">= 3"
+    "@types/d3-scale": ">= 4"
+    "@types/d3-selection": ">= 3"
+    "@types/node": "*"
+    "@types/react": ">= 18"
+    react: ">= 18"
+    react-dom: ">= 18"
+    styled-components: ">= 5"
+  peerDependenciesMeta:
+    "@fluentui/react":
+      optional: false
+    "@thematic/core":
+      optional: false
+    "@thematic/d3":
+      optional: false
+    "@thematic/react":
+      optional: false
+    "@types/d3-array":
+      optional: true
+    "@types/d3-axis":
+      optional: true
+    "@types/d3-scale":
+      optional: true
+    "@types/d3-selection":
+      optional: true
+    "@types/node":
+      optional: true
+    "@types/react":
+      optional: true
+    react:
+      optional: false
+    react-dom:
+      optional: true
+    styled-components:
+      optional: true
+  checksum: 063dc51e6e7e176c91f835964fa06d2ac26c51c40ca955c9de6c645550c262a33186afca2f4bb93683067a72ea508c4955cc3edf1be898018402158fcb2f3b7f
   languageName: node
   linkType: hard
 
@@ -2499,72 +2565,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/components@npm:^3.6.9":
-  version: 3.6.9
-  resolution: "@essex/components@npm:3.6.9"
-  dependencies:
-    "@essex/styled-components": ^0.0.8
-    "@essex/toolbox": ^3.0.13
-    "@fluentui/utilities": ^8.13.5
-    "@types/d3-array": ^3.0.3
-    "@types/d3-axis": ^3.0.1
-    "@types/d3-brush": ^3.0.1
-    "@types/d3-scale": ^4.0.2
-    "@types/d3-selection": ^3.0.3
-    d3-array: ^3.2.1
-    d3-axis: ^3.0.0
-    d3-brush: ^3.0.0
-    d3-scale: ^4.0.2
-    d3-selection: ^3.0.0
-    lodash-es: ^4.17.21
-    markdown-to-jsx: ^7.1.8
-    react-animate-height: ^3.1.0
-    react-if: ^4.1.4
-  peerDependencies:
-    "@fluentui/react": ">= 8"
-    "@thematic/core": ">= 4"
-    "@thematic/d3": ">= 2"
-    "@thematic/react": ">= 2"
-    "@types/d3-array": ">= 3"
-    "@types/d3-axis": ">= 3"
-    "@types/d3-scale": ">= 4"
-    "@types/d3-selection": ">= 3"
-    "@types/node": "*"
-    "@types/react": ">= 18"
-    react: ">= 18"
-    react-dom: ">= 18"
-    styled-components: ">= 5"
-  peerDependenciesMeta:
-    "@fluentui/react":
-      optional: false
-    "@thematic/core":
-      optional: false
-    "@thematic/d3":
-      optional: false
-    "@thematic/react":
-      optional: false
-    "@types/d3-array":
-      optional: true
-    "@types/d3-axis":
-      optional: true
-    "@types/d3-scale":
-      optional: true
-    "@types/d3-selection":
-      optional: true
-    "@types/node":
-      optional: true
-    "@types/react":
-      optional: true
-    react:
-      optional: false
-    react-dom:
-      optional: true
-    styled-components:
-      optional: true
-  checksum: 07c6266cbc05bb7aa81dde5e10fdbb1611ed6fa4700526ac98b1c656e66461d47fb5d761bf7fb00d60405cff80fcbf3a9c2c9fff4b29897cf507e9fe647ae1d6
-  languageName: node
-  linkType: hard
-
 "@essex/eslint-config@npm:^20.5.1":
   version: 20.5.1
   resolution: "@essex/eslint-config@npm:20.5.1"
@@ -2617,11 +2617,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/hooks@npm:^4.0.17":
-  version: 4.0.17
-  resolution: "@essex/hooks@npm:4.0.17"
+"@essex/hooks@npm:^4.0.18":
+  version: 4.0.18
+  resolution: "@essex/hooks@npm:4.0.18"
   dependencies:
-    "@essex/toolbox": ^3.0.13
+    "@essex/toolbox": ^3.0.14
     lodash-es: ^4.17.21
   peerDependencies:
     "@types/node": "*"
@@ -2640,7 +2640,7 @@ __metadata:
       optional: false
     react-dom:
       optional: true
-  checksum: 2e1fa2bcef35259f9df1c8f2bc961df004eca154f3bd9bbbffbd40732d695f1189c77f1314833119e4e61a674a01b63a238b7dfab078ce5408f58973eafdba60
+  checksum: db7e426e6058589b036e12baa771c170303e87d5b1dcb819358881bb89681592337aac69db6644fa0c7f8257c8597d595e3f59e03390f6fe2c80a3dbfffb31d8
   languageName: node
   linkType: hard
 
@@ -2778,15 +2778,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/styled-components@npm:^0.0.8":
-  version: 0.0.8
-  resolution: "@essex/styled-components@npm:0.0.8"
+"@essex/styled-components@npm:^0.0.9":
+  version: 0.0.9
+  resolution: "@essex/styled-components@npm:0.0.9"
   peerDependencies:
     styled-components: ">= 5"
   peerDependenciesMeta:
     styled-components:
       optional: false
-  checksum: 167bc86605f18fbd53fa8a2c4c6cef78433e688989c4b1bac50676ebad48ab7e80a67500eaf679a81fe914976e95f374c984808f45329b3009bffd880a0654b1
+  checksum: 85c3abaffe0d8caa171e8903a38076eeded63c3b3378ba1d2b446933120615546b1ec9e8049f8c905c60936a76d1f3223af4f330e5153ece8386b2b296e1b920
   languageName: node
   linkType: hard
 
@@ -2808,10 +2808,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/toolbox@npm:^3.0.13":
-  version: 3.0.13
-  resolution: "@essex/toolbox@npm:3.0.13"
-  checksum: a9e3c4ca79c98f5f1b3177a37a54504a7e27b22275a17458227bc89debb1768bbc5fb1cca102c1da0496106d826b54e96336481407fcf1009c024a61e052e68c
+"@essex/toolbox@npm:^3.0.14":
+  version: 3.0.14
+  resolution: "@essex/toolbox@npm:3.0.14"
+  checksum: 4c745bcb4897bfdeb3226efe6826cc737d322f588a2cb9ad603ee253c03afb76b57e9074f5f6efca521efd31fa037d5c618387ff134a19200d9719192391be44
   languageName: node
   linkType: hard
 

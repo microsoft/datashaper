@@ -544,6 +544,33 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!DataShaperAppProps#defaultHelp:member",
+              "docComment": "/**\n * Indicates the help content to show when the application has no resources selected.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "defaultHelp?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "defaultHelp",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!DataShaperAppProps#examples:member",
               "docComment": "/**\n * Examples to provide\n */\n",
               "excerptTokens": [

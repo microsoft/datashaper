@@ -64,6 +64,7 @@ export const DataShaperApp: React.FC<DataShaperAppProps>;
 export interface DataShaperAppProps {
     children: React_2.ReactNode;
     className?: string;
+    defaultHelp?: string;
     // Warning: (ae-forgotten-export) The symbol "FileDefinition" needs to be exported by the entry point index.d.ts
     examples?: FileDefinition[];
     fallback?: React_2.ReactNode;

@@ -1,10 +1,10 @@
 # Codebook
 
-A **codebook** defines the schema for [data table](./datatable.md) columns. Each column can define such attributes as the core data type, data nature, and units.
+A **codebook** defines the schema for [data table](../datatable/index.md) columns. Each column can define such attributes as the core data type, data nature, and units.
 
 ## Schema values
 
-Each column has attributes you can edit that affect how the data is interpreted and displayed. Column schemas can be quite complex, and you can find full details in our [API documentaton](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.field.md). The most important attributes for most uses are shown below.
+Each column has attributes you can edit that affect how the data is interpreted and displayed. Column schemas can be quite complex, read the [schema documentation](./schema.md) for comprehensive details. The most important attributes for most uses are shown below.
 
 - **Display name**: this is a user-friendly name we should show throughout the application, because data column names are often cryptic.
 - **Description**: this provides a place for detailed descriptions of what the column represents.
