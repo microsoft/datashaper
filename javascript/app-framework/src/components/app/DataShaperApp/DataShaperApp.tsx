@@ -52,6 +52,7 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 	profiles,
 	children,
 	fallback = children,
+	defaultHelp = 'resources.index',
 }) {
 	const ref = useRef<AllotmentHandle | null>(null)
 	const [expanded, onToggle, onChangeWidth] = useExpandedState(ref)
@@ -77,7 +78,7 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 			onAccept: onAcceptRename,
 		},
 		help: { currentHelp, onInitializeHelp, helpContent },
-	} = useAppServices()
+	} = useAppServices(defaultHelp)
 
 	const plugins = useRegisteredProfiles(api, profiles)
 	const resources = useResourceRoutes(api, plugins)

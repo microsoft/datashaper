@@ -137,7 +137,7 @@ export function useFlattened(routes: ResourceRouteGroup[]): ResourceRoute[] {
 	}, [routes])
 }
 
-export function useAppServices(): {
+export function useAppServices(defaultHelp: string): {
 	api: AppServices
 	rename: {
 		resource: Resource | undefined
@@ -162,9 +162,7 @@ export function useAppServices(): {
 		handle: () => null,
 	})
 
-	const [helpKey, onRequestHelp] = useState<string | undefined>(
-		'resources.index',
-	)
+	const [helpKey, onRequestHelp] = useState<string | undefined>(defaultHelp)
 	const [helpIndex, onInitializeHelp] = useState<Record<string, string>>({})
 
 	const api = useMemo<AppServices>(() => {
