@@ -11,7 +11,7 @@ import type { WorkflowEditorProps } from './WorkflowEditor.types.js'
 
 export const WorkflowEditor: React.FC<WorkflowEditorProps> = memo(
 	function WorkflowEditor({ resource }) {
-		useHelpOnMount('workflow')
+		useHelpOnMount('resources.workflow.index')
 		const content = useContent(resource)
 		const onChange = useOnChange(resource)
 		// TODO: use JsonModeEditor, add interactive view

@@ -15,7 +15,7 @@ export const CodebookEditor: React.FC<CodebookEditorProps> = memo(
 	function CodebookEditor({ resource, styles }) {
 		const handleFieldsChanged = useOnFieldsChanged(resource)
 		const fields = useObservableState(resource.fields$, resource.fields)
-		useHelpOnMount('codebook')
+		useHelpOnMount('resources.codebook.index')
 		return (
 			<JsonModeEditor resource={resource}>
 				<Codebook

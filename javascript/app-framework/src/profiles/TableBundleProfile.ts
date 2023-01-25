@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import content from '@datashaper/guidance'
 import {
 	type TableBundleSchema,
 	KnownProfile,
@@ -19,7 +20,6 @@ import {
 import type { IContextualMenuItem } from '@fluentui/react'
 
 import { TableBundleEditor } from '../components/editors/index.js'
-import { guidance } from '../guidance.js'
 import type {
 	AppProfileInitializationContext,
 	ProfilePlugin,
@@ -135,6 +135,6 @@ export class TableBundleProfile
 	}
 
 	public getHelp(): Record<string, string> {
-		return guidance()
+		return content
 	}
 }

@@ -162,7 +162,9 @@ export function useAppServices(): {
 		handle: () => null,
 	})
 
-	const [helpKey, onRequestHelp] = useState<string | undefined>('resource')
+	const [helpKey, onRequestHelp] = useState<string | undefined>(
+		'resources.index',
+	)
 	const [helpIndex, onInitializeHelp] = useState<Record<string, string>>({})
 
 	const api = useMemo<AppServices>(() => {

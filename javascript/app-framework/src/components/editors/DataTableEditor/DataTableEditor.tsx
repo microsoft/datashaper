@@ -11,7 +11,7 @@ import { TableEditor } from './TableEditor.js'
 
 export const DataTableEditor: React.FC<DataTableEditorProps> = memo(
 	function DataTableEditor({ resource }) {
-		useHelpOnMount('datatable')
+		useHelpOnMount('resources.datatable.index')
 		return (
 			<JsonModeEditor resource={resource}>
 				<TableEditor resource={resource} />

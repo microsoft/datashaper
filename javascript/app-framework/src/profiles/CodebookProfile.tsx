@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import content from '@datashaper/guidance'
 import type { CodebookTableStyles } from '@datashaper/react'
 import type { CodebookSchema } from '@datashaper/schema'
 import type { Codebook } from '@datashaper/workflow'
@@ -10,7 +11,6 @@ import { memo } from 'react'
 
 import { CodebookEditor } from '../components/editors/index.js'
 import type { PluginComponentProps } from '../components/editors/types.js'
-import { guidance } from '../guidance.js'
 import type { ProfilePlugin } from '../index.js'
 import { ResourceGroupType } from '../index.js'
 
@@ -24,7 +24,7 @@ export class CodebookProfile
 	public readonly group = ResourceGroupType.Data
 
 	public getHelp(): Record<string, string> {
-		return guidance()
+		return content
 	}
 }
 
