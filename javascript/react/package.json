@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/react",
-	"version": "20.0.4",
+	"version": "20.0.5",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
