@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export * from './Readable.js'
-export * from './ResourceConstructor'
+export * from './ResourceConstructor.js'
 export * from './ProfileInitializationContext.js'
 export * from './ProfileHandler.js'
 export * from './Emitter.js'
