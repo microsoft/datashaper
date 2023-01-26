@@ -1913,7 +1913,7 @@ __metadata:
     "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/workflow": "workspace:^"
-    "@essex/components": ^3.6.10
+    "@essex/components": ^3.6.11
     "@essex/scripts": ^24.0.2
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/react": ^8.104.6
@@ -2019,7 +2019,7 @@ __metadata:
     "@datashaper/utilities": "workspace:^"
     "@datashaper/workflow": "workspace:^"
     "@essex/charts-react": ^1.1.8
-    "@essex/components": ^3.6.10
+    "@essex/components": ^3.6.11
     "@essex/scripts": ^24.0.2
     "@essex/styled-components": ^0.0.9
     "@essex/tsconfig-base": ^1.0.2
@@ -2111,7 +2111,7 @@ __metadata:
     "@babel/preset-typescript": ^7.18.6
     "@datashaper/react": "workspace:^"
     "@datashaper/webapp": "workspace:^"
-    "@essex/components": ^3.6.10
+    "@essex/components": ^3.6.11
     "@essex/scripts": ^24.0.2
     "@essex/storybook-config": ^0.0.3
     "@essex/tsconfig-base": ^1.0.2
@@ -2210,7 +2210,7 @@ __metadata:
     "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/workflow": "workspace:^"
-    "@essex/components": ^3.6.10
+    "@essex/components": ^3.6.11
     "@essex/hooks": ^4.0.18
     "@essex/scripts": ^24.0.2
     "@fluentui/font-icons-mdl2": ^8.5.6
@@ -2438,9 +2438,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/components@npm:^3.6.10":
-  version: 3.6.10
-  resolution: "@essex/components@npm:3.6.10"
+"@essex/components@npm:^3.6.11":
+  version: 3.6.11
+  resolution: "@essex/components@npm:3.6.11"
   dependencies:
     "@essex/styled-components": ^0.0.9
     "@essex/toolbox": ^3.0.14
@@ -2500,7 +2500,7 @@ __metadata:
       optional: true
     styled-components:
       optional: true
-  checksum: 063dc51e6e7e176c91f835964fa06d2ac26c51c40ca955c9de6c645550c262a33186afca2f4bb93683067a72ea508c4955cc3edf1be898018402158fcb2f3b7f
+  checksum: f6703db9a82ef6395fd840f8b1aaf60e5553884e27caeb58239865446bc4fec8491dac5e27d28057ed7b921a2f51eed95e73bfe0fb2def59e9f03b883a529598
   languageName: node
   linkType: hard
 
