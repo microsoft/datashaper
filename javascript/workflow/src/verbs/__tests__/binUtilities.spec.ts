@@ -4,6 +4,7 @@
  */
 
 import {
+	calculateNiceRounding,
 	calculateWidthAuto,
 	calculateWidthDoane,
 	calculateWidthFd,
@@ -122,6 +123,120 @@ describe('bin utilities tests', () => {
 
 		it('algorithm result', () => {
 			expect(result).toBe(35.70134669473044)
+		})
+	})
+
+	describe('huge numbers nice rounding test 1', () => {
+		const result = calculateNiceRounding(12000000, 78500000, 12389720.271622058)
+		const [min, max, width] = result
+
+		it('algorithm result', () => {
+			expect(min).toBe(10000000)
+			expect(max).toBe(80000000)
+			expect(width).toBe(20000000)
+		})
+	})
+
+	describe('huge numbers nice rounding test 2', () => {
+		const result = calculateNiceRounding(12000000, 78500000, 12671668.926380431)
+		const [min, max, width] = result
+
+		it('algorithm result', () => {
+			expect(min).toBe(10000000)
+			expect(max).toBe(80000000)
+			expect(width).toBe(20000000)
+		})
+	})
+
+	describe('huge numbers nice rounding test 3', () => {
+		const result = calculateNiceRounding(12000000, 78500000, 12460642.878078489)
+		const [min, max, width] = result
+
+		it('algorithm result', () => {
+			expect(min).toBe(10000000)
+			expect(max).toBe(80000000)
+			expect(width).toBe(20000000)
+		})
+	})
+
+	describe('regular numbers nice rounding test 1', () => {
+		const result = calculateNiceRounding(18, 67, 15.739759424941251)
+		const [min, max, width] = result
+
+		it('algorithm result', () => {
+			expect(min).toBe(10)
+			expect(max).toBe(70)
+			expect(width).toBe(20)
+		})
+	})
+
+	describe('regular numbers nice rounding test 2', () => {
+		const result = calculateNiceRounding(18, 67, 11.241370959657525)
+		const [min, max, width] = result
+
+		it('algorithm result', () => {
+			expect(min).toBe(10)
+			expect(max).toBe(70)
+			expect(width).toBe(20)
+		})
+	})
+
+	describe('regular numbers nice rounding test 3', () => {
+		const result = calculateNiceRounding(18, 67, 9.181526331215728)
+		const [min, max, width] = result
+
+		it('algorithm result', () => {
+			expect(min).toBe(10)
+			expect(max).toBe(70)
+			expect(width).toBe(10)
+		})
+	})
+
+	describe('small numbers nice rounding test 1', () => {
+		const result = calculateNiceRounding(0.1457, 0.9988, 0.43906433672050404)
+		const [min, max, width] = result
+
+		it('algorithm result', () => {
+			expect(min).toBe(0.1)
+			expect(max).toBe(1)
+			expect(width).toBe(0.440)
+		})
+	})
+
+	describe('small numbers nice rounding test 2', () => {
+		const result = calculateNiceRounding(0.1457, 0.9988, 0.1957145625649762)
+		const [min, max, width] = result
+
+		it('algorithm result', () => {
+			expect(min).toBe(0.1)
+			expect(max).toBe(1)
+			expect(width).toBe(0.196)
+		})
+	})
+
+	describe('small numbers nice rounding test 3', () => {
+		const result = calculateNiceRounding(0.1457, 0.9988, 0.15985224720734975)
+		const [min, max, width] = result
+
+		it('algorithm result', () => {
+			expect(min).toBe(0.1)
+			expect(max).toBe(1)
+			expect(width).toBe(0.16)
+		})
+	})
+
+	describe('small numbers nice rounding test 4', () => {
+		const result = calculateNiceRounding(
+			0.00000123,
+			0.9988,
+			0.15985224720734975,
+		)
+		const [min, max, width] = result
+
+		it('algorithm result', () => {
+			expect(min).toBe(0)
+			expect(max).toBe(1)
+			expect(width).toBe(0.16)
 		})
 	})
 })
