@@ -39,9 +39,9 @@ export function useResourceRoutes(
 					grouped.forEach((resources, type) => {
 						groups.push({
 							type,
-							resources: resources
-								.map((r) => makeResourceRoute(r, services, plugins, hrefs))
-								.flatMap((x) => x),
+							resources: resources.map((r) =>
+								makeResourceRoute(r, services, plugins, hrefs),
+							),
 						})
 					})
 					return groups
@@ -74,7 +74,7 @@ function makeResourceRoute(
 	services: AppServices,
 	plugins: Map<string, ProfilePlugin>,
 	hrefs: Map<string, string>,
-): ResourceRoute[] {
+): ResourceRoute {
 	if (resource.isReference()) {
 		const ref = resource as ResourceReference
 		const target = ref.target
@@ -85,12 +85,13 @@ function makeResourceRoute(
 				href,
 				icon: 'Link',
 			}
-			return [route]
+			return route
 		}
 	}
 	if (!resource.profile) {
 		console.warn('no profile for resource', resource)
-		return []
+		// TODO:  this should return a raw text renderer
+		return {} as ResourceRoute
 	}
 	const plugin = plugins.get(resource.profile)!
 	const href = hrefs.get(resource.name)
@@ -115,20 +116,12 @@ function makeResourceRoute(
 			},
 		],
 		props: { resource },
-	}
-	const extraRoutes = plugin?.getRoutes?.(resource, hrefs)
-
-	const children: ResourceRoute[] = extraRoutes?.children ?? []
-	for (const r of resource.sources ?? EMPTY_ARRAY) {
-		children.push(...makeResourceRoute(r, services, plugins, hrefs))
+		children: (resource.sources ?? EMPTY_ARRAY).map((r) =>
+			makeResourceRoute(r, services, plugins, hrefs),
+		),
 	}
 
-	root.children = children
-	return [
-		...(extraRoutes?.preItemSiblings ?? []),
-		root,
-		...(extraRoutes?.postItemSiblings ?? []),
-	]
+	return root
 }
 
 function groupResources(

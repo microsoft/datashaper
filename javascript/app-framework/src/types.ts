@@ -111,17 +111,6 @@ export interface ProfilePlugin<
 	getMenuItems?: (resource: Res) => IContextualMenuItem[]
 
 	/**
-	 * Event handler for when the resource is undergoing route generation.
-	 * A route is always generated for the resource; any related routes may be retured here.
-	 *
-	 * @param resource - The resource that routes are being generated for.
-	 * @param routes - A map of the resource-routes keyed by resource name.
-	 */
-	getRoutes?: (
-		resource: Res,
-		routes: Map<string, string>,
-	) => GeneratedExtraRoutes | undefined
-	/**
 	 * Plugins may supply a map of help content to be displayed in the global panel when open.
 	 * Each help record should have a unique key, and the value is the markdown content.
 	 * @returns
@@ -133,12 +122,6 @@ export enum CommandBarSection {
 	New = 'newMenu',
 	Open = 'openMenu',
 	Save = 'saveMenu',
-}
-
-export interface GeneratedExtraRoutes {
-	preItemSiblings?: ResourceRoute[]
-	postItemSiblings?: ResourceRoute[]
-	children?: ResourceRoute[]
 }
 
 export enum ResourceGroupType {
