@@ -34,6 +34,7 @@
 |  [AppServices](./app-framework.appservices.md) |  |
 |  [DataShaperAppProps](./app-framework.datashaperappprops.md) |  |
 |  [GeneratedExtraRoutes](./app-framework.generatedextraroutes.md) |  |
+|  [PluginComponentProps](./app-framework.plugincomponentprops.md) |  |
 |  [ProfilePlugin](./app-framework.profileplugin.md) |  |
 |  [RecoilBasedProfileHostProps](./app-framework.recoilbasedprofilehostprops.md) |  |
 |  [ResourceRoute](./app-framework.resourceroute.md) | Data attached to resource-tree nodes |

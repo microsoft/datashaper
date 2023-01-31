@@ -83,6 +83,14 @@ export interface GeneratedExtraRoutes {
     preItemSiblings?: ResourceRoute[];
 }
 
+// Warning: (ae-missing-release-tag) "PluginComponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface PluginComponentProps<T extends Resource> {
+    // (undocumented)
+    resource: T;
+}
+
 // Warning: (ae-missing-release-tag) "ProfilePlugin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)

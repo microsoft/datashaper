@@ -150,3 +150,7 @@ export interface ResourceRouteGroup {
 	type: ResourceGroupType
 	resources: ResourceRoute[]
 }
+
+export interface PluginComponentProps<T extends Resource> {
+	resource: T
+}

@@ -4,6 +4,6 @@
  */
 import type { DataTable } from '@datashaper/workflow'
 
-import type { PluginComponentProps } from '../types.js'
-
-export interface DataTableEditorProps extends PluginComponentProps<DataTable> {}
+export interface DataTableEditorProps {
+	resource: DataTable
+}
