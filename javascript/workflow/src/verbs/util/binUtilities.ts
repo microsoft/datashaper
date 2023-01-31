@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { default as percentile } from 'percentile'
 import { BinStrategy } from '@datashaper/schema'
 import { default as linspace } from 'exact-linspace'
 import percentile from 'percentile'
