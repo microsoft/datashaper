@@ -14,7 +14,7 @@ import type { DataTable } from './resources/DataTable.js'
 import type { Resource } from './resources/Resource.js'
 import type { ResourceReference } from './resources/ResourceReference.js'
 import type { TableBundle } from './resources/TableBundle.js'
-import type { TableEmitter, TableTransformer } from './resources/types.js'
+import type { TableEmitter, TableTransformer } from './resources/types/index.js'
 
 export const isWorkflowSchema = (
 	r: ResourceSchema | undefined,

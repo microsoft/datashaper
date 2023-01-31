@@ -9,7 +9,7 @@ import type { Maybe, Unsubscribe } from '../primitives.js'
 import type { DataPackage } from './DataPackage/DataPackage.js'
 import { Named } from './Named.js'
 import type { ResourceReference } from './ResourceReference.js'
-import type { Readable } from './types.js'
+import type { Readable } from './types/index.js'
 
 export abstract class Resource extends Named implements ResourceSchema, Resource {
 	/**

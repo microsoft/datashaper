@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/app-framework",
-	"version": "0.2.0",
+	"version": "0.4.1",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -33,7 +33,7 @@
 		"@datashaper/tables": "workspace:^",
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/workflow": "workspace:^",
-		"@essex/components": "^3.6.9",
+		"@essex/components": "^3.6.11",
 		"@monaco-editor/react": "^4.4.6",
 		"ahooks": "^3.7.4",
 		"allotment": "1.17.0",
@@ -45,7 +45,7 @@
 		"yarn": "^1.22.19"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^23.1.4",
+		"@essex/scripts": "^24.0.2",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@fluentui/react": "^8.104.6",
 		"@fluentui/react-hooks": "^8.6.15",

@@ -6,10 +6,11 @@ import type { AllotmentHandle } from 'allotment'
 import { Allotment } from 'allotment'
 import { memo, useCallback, useMemo, useRef } from 'react'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
+import { AppServicesContext } from '../../../context/app_services/index.js'
 
 import { DataPackageProvider } from '../../../context/index.js'
 import { EMPTY_ARRAY, EMPTY_OBJECT } from '../../../empty.js'
-import type { AppServices, ResourceRoute } from '../../../types.js'
+import type { ResourceRoute } from '../../../types.js'
 import { RenameModal } from '../../modals/index.js'
 import { ResourcesPane } from '../ResourcesPane/index.js'
 import {
@@ -51,6 +52,7 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 	profiles,
 	children,
 	fallback = children,
+	defaultHelp = 'resources.index',
 }) {
 	const ref = useRef<AllotmentHandle | null>(null)
 	const [expanded, onToggle, onChangeWidth] = useExpandedState(ref)
@@ -76,7 +78,7 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 			onAccept: onAcceptRename,
 		},
 		help: { currentHelp, onInitializeHelp, helpContent },
-	} = useAppServices()
+	} = useAppServices(defaultHelp)
 
 	const plugins = useRegisteredProfiles(api, profiles)
 	const resources = useResourceRoutes(api, plugins)
@@ -84,61 +86,65 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 	useRegisterPluginHelp(plugins, onInitializeHelp)
 
 	return (
-		<Allotment
-			className={className}
-			onChange={onChangeWidth}
-			proportionalLayout={false}
-			ref={ref}
-			separator={false}
-		>
-			<Allotment.Pane
-				preferredSize={PANE_EXPANDED_SIZE}
-				maxSize={PANE_MAX_SIZE}
-				minSize={PANE_COLLAPSED_SIZE}
+		<AppServicesContext.Provider value={api}>
+			<Allotment
+				className={className}
+				onChange={onChangeWidth}
+				proportionalLayout={false}
+				ref={ref}
+				separator={false}
 			>
-				<ResourcesPane
-					resources={resources}
-					expanded={expanded}
-					plugins={plugins}
-					style={fileTreeStyle}
-					selectedKey={selectedKey}
-					examples={examples}
-					onToggleExpanded={onToggle}
-					onSelect={onSelect}
-					currentHelp={currentHelp}
-					helpContent={helpContent}
-				/>
-			</Allotment.Pane>
-			<Allotment.Pane>
-				<Routes>
-					<Route path="/" element={children} />
-					{flattenedRoutes.map(
-						(r) =>
-							r.renderer && (
-								<Route
-									key={r.href}
-									path={(r.children?.length ?? 0) > 0 ? r.href : `${r.href}/*`}
-									element={<MatchedRoute key={r.href} data={r} api={api} />}
-								/>
-							),
-					)}
-					<Route path="*" element={fallback} />
-				</Routes>
-				<>
-					<RenameModal
-						resource={renameResource}
-						isOpen={isRenameOpen}
-						onDismiss={onCancelRename}
-						onAccept={onAcceptRename}
+				<Allotment.Pane
+					preferredSize={PANE_EXPANDED_SIZE}
+					maxSize={PANE_MAX_SIZE}
+					minSize={PANE_COLLAPSED_SIZE}
+				>
+					<ResourcesPane
+						resources={resources}
+						expanded={expanded}
+						plugins={plugins}
+						style={fileTreeStyle}
+						selectedKey={selectedKey}
+						examples={examples}
+						onToggleExpanded={onToggle}
+						onSelect={onSelect}
+						currentHelp={currentHelp}
+						helpContent={helpContent}
 					/>
-				</>
-			</Allotment.Pane>
-		</Allotment>
+				</Allotment.Pane>
+				<Allotment.Pane>
+					<Routes>
+						<Route path="/" element={children} />
+						{flattenedRoutes.map(
+							(r) =>
+								r.renderer && (
+									<Route
+										key={r.href}
+										path={
+											(r.children?.length ?? 0) > 0 ? r.href : `${r.href}/*`
+										}
+										element={<MatchedRoute key={r.href} data={r} />}
+									/>
+								),
+						)}
+						<Route path="*" element={fallback} />
+					</Routes>
+					<>
+						<RenameModal
+							resource={renameResource}
+							isOpen={isRenameOpen}
+							onDismiss={onCancelRename}
+							onAccept={onAcceptRename}
+						/>
+					</>
+				</Allotment.Pane>
+			</Allotment>
+		</AppServicesContext.Provider>
 	)
 })
 
-const MatchedRoute: React.FC<{ data: ResourceRoute; api: AppServices }> = memo(
-	function MatchedRoute({ data: { props, renderer: R, href }, api }) {
-		return R ? <R href={href} api={api} {...(props ?? EMPTY_OBJECT)} /> : null
+const MatchedRoute: React.FC<{ data: ResourceRoute }> = memo(
+	function MatchedRoute({ data: { props, renderer: R, href } }) {
+		return R ? <R href={href} {...(props ?? EMPTY_OBJECT)} /> : null
 	},
 )

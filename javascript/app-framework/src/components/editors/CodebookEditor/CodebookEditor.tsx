@@ -4,17 +4,18 @@
  */
 import { Codebook } from '@datashaper/react'
 import { useObservableState } from 'observable-hooks'
-import { memo, useEffect } from 'react'
+import { memo } from 'react'
+import { useHelpOnMount } from '../../../hooks/useHelpOnMount.js'
 
 import { JsonModeEditor } from '../JsonModeEditor/JsonModeEditor.js'
 import { useOnFieldsChanged } from './CodebookEditor.hooks.js'
 import type { CodebookEditorProps } from './CodebookEditor.types.js'
 
 export const CodebookEditor: React.FC<CodebookEditorProps> = memo(
-	function CodebookEditor({ resource, api, styles }) {
+	function CodebookEditor({ resource, styles }) {
 		const handleFieldsChanged = useOnFieldsChanged(resource)
 		const fields = useObservableState(resource.fields$, resource.fields)
-		useEffect(() => api.requestHelp('codebook'), [api])
+		useHelpOnMount('resources.codebook.index')
 		return (
 			<JsonModeEditor resource={resource}>
 				<Codebook

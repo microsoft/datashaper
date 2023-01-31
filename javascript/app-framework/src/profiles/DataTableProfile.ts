@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import content from '@datashaper/guidance'
 import type { DataTable } from '@datashaper/workflow'
 import { DataTableProfile as DataTableProfileBase } from '@datashaper/workflow'
 
 import { DataTableEditor, RawTableViewer } from '../components/editors/index.js'
-import { guidance } from '../guidance.js'
 import type { GeneratedExtraRoutes, ProfilePlugin } from '../types.js'
 import { ResourceGroupType } from '../types.js'
 
@@ -48,6 +48,6 @@ export class DataTableProfile
 	}
 
 	public getHelp(): Record<string, string> {
-		return guidance()
+		return content
 	}
 }

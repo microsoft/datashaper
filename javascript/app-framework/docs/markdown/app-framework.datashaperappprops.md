@@ -16,6 +16,7 @@ export interface DataShaperAppProps
 |  --- | --- | --- | --- |
 |  [children](./app-framework.datashaperappprops.children.md) |  | React.ReactNode | The child node to render as the "Front Page" of the app. This is the default view when no resource is selected |
 |  [className?](./app-framework.datashaperappprops.classname.md) |  | string | <i>(Optional)</i> CSS Classname |
+|  [defaultHelp?](./app-framework.datashaperappprops.defaulthelp.md) |  | string | <i>(Optional)</i> Indicates the help content to show when the application has no resources selected. |
 |  [examples?](./app-framework.datashaperappprops.examples.md) |  | FileDefinition\[\] | <i>(Optional)</i> Examples to provide |
 |  [fallback?](./app-framework.datashaperappprops.fallback.md) |  | React.ReactNode | <i>(Optional)</i> The React node to render when the selected resource cannot be found |
 |  [profiles?](./app-framework.datashaperappprops.profiles.md) |  | [ProfilePlugin](./app-framework.profileplugin.md)<!-- -->\[\] | <i>(Optional)</i> Custom profile renderers |

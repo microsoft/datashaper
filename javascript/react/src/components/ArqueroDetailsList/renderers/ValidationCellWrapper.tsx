@@ -2,9 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { DirectionalHint } from '@fluentui/react'
-import type { ITooltipHostStyles } from '@fluentui/react/lib/Tooltip'
-import { TooltipHost } from '@fluentui/react/lib/Tooltip'
+import {
+	type ITooltipHostStyles,
+	TooltipHost,
+	DirectionalHint,
+} from '@fluentui/react'
 import { useId } from '@fluentui/react-hooks'
 import { memo } from 'react'
 

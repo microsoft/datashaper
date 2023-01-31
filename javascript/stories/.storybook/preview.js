@@ -2,12 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { addDecorator } from '@storybook/react'
+import '@essex/storybook-config/lib/preview.js'
 import { loadCSV } from 'arquero'
-
-import { ThematicFluentDecorator } from './ThematicFluentDecorator.js'
-
-addDecorator(ThematicFluentDecorator)
 
 export const loaders = [
 	async () => ({

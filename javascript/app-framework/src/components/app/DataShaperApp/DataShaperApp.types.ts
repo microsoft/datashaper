@@ -33,4 +33,9 @@ export interface DataShaperAppProps {
 	 * Custom profile renderers
 	 */
 	profiles?: ProfilePlugin[]
+
+	/**
+	 * Indicates the help content to show when the application has no resources selected.
+	 */
+	defaultHelp?: string
 }
