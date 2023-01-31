@@ -6,7 +6,7 @@ import content from '@datashaper/guidance'
 import type { DataTable } from '@datashaper/workflow'
 import { DataTableProfile as DataTableProfileBase } from '@datashaper/workflow'
 
-import { RawTableViewer } from '../components/editors/index.js'
+import { DataTableEditor } from '../components/editors/index.js'
 import type { GeneratedExtraRoutes, ProfilePlugin } from '../types.js'
 import { ResourceGroupType } from '../types.js'
 import { DataTableRenderer } from './renderers/DataTableRenderer.js'
@@ -39,7 +39,7 @@ export class DataTableProfile
 							title: lastPathItem,
 							href: `${pathContext}/${lastPathItem}`,
 							icon: 'Database',
-							renderer: RawTableViewer,
+							renderer: DataTableEditor,
 							props: { resource },
 						},
 					],

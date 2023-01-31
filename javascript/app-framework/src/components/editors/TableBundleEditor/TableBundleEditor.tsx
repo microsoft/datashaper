@@ -11,10 +11,12 @@ import {
 } from '@datashaper/react'
 import { KnownProfile } from '@datashaper/schema'
 import { Workflow } from '@datashaper/workflow'
+import type { TableBundle } from '@datashaper/workflow'
 import { ToolPanel } from '@essex/components'
 import { CommandBar } from '@fluentui/react'
 import { useObservableState } from 'observable-hooks'
 import { memo, useCallback, useMemo, useState } from 'react'
+import type { PluginComponentProps } from '../../../types.js'
 
 import { useToolPanelExpandCollapse } from '../hooks.js'
 import {
@@ -31,10 +33,9 @@ import {
 	useTableCommandProps,
 } from './TableBundleEditor.hooks.js'
 import { Container, DetailsListContainer } from './TableBundleEditor.styles.js'
-import type { TableBundleEditorProps } from './TableBundleEditor.types.js'
 
-export const TableBundleEditor: React.FC<TableBundleEditorProps> = memo(
-	function TableBundleEditor({ resource }) {
+export const TableBundleEditor: React.FC<PluginComponentProps<TableBundle>> =
+	memo(function TableBundleEditor({ resource }) {
 		const [workflow, isWorkflowAttached] = useMemo<[Workflow, boolean]>(() => {
 			const result = resource
 				.getSourcesWithProfile(KnownProfile.Workflow)
@@ -159,5 +160,4 @@ export const TableBundleEditor: React.FC<TableBundleEditorProps> = memo(
 				}
 			</Container>
 		)
-	},
-)
+	})

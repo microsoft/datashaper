@@ -3,11 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ArqueroDetailsList, ArqueroTableHeader } from '@datashaper/react'
+import type { DataTable } from '@datashaper/workflow'
 import { ToolPanel } from '@essex/components'
 import { CommandBar } from '@fluentui/react'
 import { memo } from 'react'
 
 import { useDataTableSource } from '../../../hooks/index.js'
+import type { PluginComponentProps } from '../../../types.js'
 import { DataTableConfig } from '../../DataTableConfig/DataTableConfig.js'
 import { useToolPanelExpandCollapse } from '../hooks.js'
 import {
@@ -20,9 +22,8 @@ import {
 	Container,
 	DetailsListContainer,
 } from './DataTableEditor.styles.js'
-import type { DataTableEditorProps } from './DataTableEditor.types.js'
 
-export const DataTableEditor: React.FC<DataTableEditorProps> = memo(
+export const DataTableEditor: React.FC<PluginComponentProps<DataTable>> = memo(
 	function DataTableEditor({ resource }) {
 		const table = useDataTableSource(resource)
 		const tableHeaderColors = useTableHeaderColors()
