@@ -18,17 +18,18 @@ const options = {
 }
 export const JsonEditor: React.FC<JsonEditorProps> = memo(function JsonEditor({
 	content,
+	language = 'json',
 	onChange,
 }) {
 	const { run: handleEditorChange } = useDebounceFn(onChange, { wait: 1000 })
 	const theme = useThematic()
-	const themeName = theme.variant === 'dark' ? 'vs-dark' : 'light'
+	const themeName = theme.dark ? 'vs-dark' : 'light'
 
 	return (
 		<Container>
 			<Editor
 				height="90vh"
-				defaultLanguage="json"
+				language={language}
 				defaultValue={content}
 				value={content}
 				onChange={handleEditorChange}
