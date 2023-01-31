@@ -19,19 +19,19 @@ import {
 } from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
 
-import { TableBundleEditor } from '../components/editors/index.js'
 import type {
 	AppProfileInitializationContext,
 	ProfilePlugin,
 } from '../types.js'
 import { CommandBarSection, ResourceGroupType } from '../types.js'
+import { TableBundleRenderer } from './renderers/TableBundleRenderer.js'
 
 export class TableBundleProfile
 	extends TableBundleDataProfileBase
 	implements ProfilePlugin<TableBundle, TableBundleSchema>
 {
 	public readonly title = 'Table'
-	public readonly renderer = TableBundleEditor
+	public readonly renderer = TableBundleRenderer
 	public readonly iconName = 'ViewAll'
 	public readonly group = ResourceGroupType.Data
 

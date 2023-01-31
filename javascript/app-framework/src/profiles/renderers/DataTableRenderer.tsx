@@ -19,19 +19,19 @@ export const DataTableRenderer: React.FC<PluginComponentProps<DataTable>> =
 
 const editors = [
 	{
-		key: 'data-table-text',
+		key: 'datatable-text',
 		title: 'View and edit raw table text content',
 		iconName: 'PageData',
 		renderer: DataTableTextEditor,
 	},
 	{
-		key: 'data-table-json',
+		key: 'datatable-json',
 		title: 'View and edit table JSON config',
 		iconName: 'Code',
 		renderer: ResourceSchemaEditor,
 	},
 	{
-		key: 'data-table-ux',
+		key: 'datatable-interactive',
 		title: 'View and edit interactive table options',
 		iconName: 'PreviewLink',
 		renderer: DataTableEditor,
