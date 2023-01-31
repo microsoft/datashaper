@@ -4,7 +4,7 @@
  */
 import { memo, useState } from 'react'
 
-import { JsonEditor } from '../JsonEditor/JsonEditor.js'
+import { LanguageEditor } from '../LanguageEditor/index.js'
 import { useJsonContent, useOnChange } from './JsonModeEditor.hooks.js'
 import type { JsonModeEditorProps } from './JsonModeEditor.types.js'
 import { ViewOptions } from './ViewOptions.js'
@@ -21,7 +21,7 @@ export const JsonModeEditor: React.FC<JsonModeEditorProps> = memo(
 				{viewType === ViewType.Interactive ? (
 					children
 				) : (
-					<JsonEditor content={content} onChange={onChange} />
+					<LanguageEditor content={content} onChange={onChange} />
 				)}
 			</>
 		)

@@ -4,7 +4,7 @@
  */
 import { memo } from 'react'
 import type { DataTable } from '@datashaper/workflow'
-import { JsonEditor } from '../JsonEditor/JsonEditor.js'
+import { LanguageEditor } from '../LanguageEditor/index.js'
 import { useContent, useOnChange } from './DataTableTextEditor.hooks.js'
 import type { DataTableTextEditorProps } from './DataTableTextEditor.types.js'
 
@@ -14,7 +14,7 @@ export const DataTableTextEditor: React.FC<DataTableTextEditorProps> = memo(
 		const content = useContent(dt)
 		const onChange = useOnChange(dt)
 		return (
-			<JsonEditor
+			<LanguageEditor
 				content={content}
 				onChange={onChange}
 				language={'plaintext'}

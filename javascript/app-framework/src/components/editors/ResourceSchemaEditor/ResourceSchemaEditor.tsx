@@ -4,7 +4,7 @@
  */
 import { memo } from 'react'
 
-import { JsonEditor } from '../JsonEditor/JsonEditor.js'
+import { LanguageEditor } from '../LanguageEditor/index.js'
 import { useContent, useOnChange } from './ResourceSchemaEditor.hooks.js'
 import type { ResourceSchemaEditorProps } from './ResourceSchemaEditor.types.js'
 
@@ -13,7 +13,7 @@ export const ResourceSchemaEditor: React.FC<ResourceSchemaEditorProps> = memo(
 		const content = useContent(resource)
 		const onChange = useOnChange(resource)
 		return (
-			<JsonEditor content={content} onChange={onChange} language={'json'} />
+			<LanguageEditor content={content} onChange={onChange} language={'json'} />
 		)
 	},
 )

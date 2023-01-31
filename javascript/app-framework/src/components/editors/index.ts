@@ -4,7 +4,7 @@
  */
 export * from './CodebookEditor/index.js'
 export * from './DataTableEditor/index.js'
-export * from './JsonEditor/index.js'
+export * from './LanguageEditor/index.js'
 export * from './RawTableViewer/index.js'
 export * from './TableBundleEditor/index.js'
 export * from './WorkflowEditor/index.js'
