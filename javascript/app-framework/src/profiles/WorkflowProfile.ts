@@ -6,7 +6,7 @@ import content from '@datashaper/guidance'
 import type { Workflow } from '@datashaper/workflow'
 import { WorkflowProfile as WorkflowDataProfile } from '@datashaper/workflow'
 
-import { WorkflowEditor } from '../components/editors/index.js'
+import { WorkflowRenderer } from './renderers/WorkflowRenderer.js'
 import type { ProfilePlugin } from '../index.js'
 import { ResourceGroupType } from '../index.js'
 
@@ -15,7 +15,7 @@ export class WorkflowProfile
 	implements ProfilePlugin<Workflow>
 {
 	public readonly title = 'Workflow'
-	public readonly renderer = WorkflowEditor
+	public readonly renderer = WorkflowRenderer
 	public readonly iconName = 'SetAction'
 	public readonly group = ResourceGroupType.Data
 	public readonly dataHandler = null

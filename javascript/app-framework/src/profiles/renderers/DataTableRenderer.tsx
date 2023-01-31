@@ -4,10 +4,10 @@
  */
 import { memo } from 'react'
 import type { DataTable } from '@datashaper/workflow'
-import { CompoundEditor } from '../../components/editors/CompoundEditor/CompoundEditor.js'
-import { DataTableEditor } from '../../components/editors/DataTableEditor/DataTableEditor.js'
-import { DataTableTextEditor } from '../../components/editors/DataTableTextEditor/DataTableTextEditor.js'
-import { ResourceSchemaEditor } from '../../components/editors/ResourceSchemaEditor/ResourceSchemaEditor.js'
+import { CompoundEditor } from '../../components/editors/CompoundEditor/index.js'
+import { DataTableEditor } from '../../components/editors/DataTableEditor/index.js'
+import { DataTableTextEditor } from '../../components/editors/DataTableTextEditor/index.js'
+import { ResourceSchemaEditor } from '../../components/editors/ResourceSchemaEditor/index.js'
 import { useHelpOnMount } from '../../hooks/useHelpOnMount.js'
 import type { PluginComponentProps } from '../../types.js'
 
