@@ -1641,6 +1641,7 @@ __metadata:
     monaco-editor: ^0.34.1
     observable-hooks: ^4.2.1
     react: ^18.2.0
+    react-dom: ^18.2.0
     react-if: ^4.1.4
     react-router-dom: ^6.6.2
     recoil: ^0.7.6
