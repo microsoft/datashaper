@@ -48,25 +48,6 @@ export class TableBundleAppProfile
 		this._dataPackage = dp
 	}
 
-	public getCommandBarCommands(
-		section: CommandBarSection,
-	): IContextualMenuItem[] | undefined {
-		const dp = this._dataPackage
-		if (dp == null) {
-			throw new Error('Data package not initialized')
-		}
-		if (section === CommandBarSection.New) {
-			return [
-				{
-					key: this.profile,
-					text: `New ${this.title}`,
-					onClick: () =>
-						void this.createInstance().then((res) => dp.addResource(res)),
-				},
-			]
-		}
-	}
-
 	public getMenuItems(resource: TableBundle): IContextualMenuItem[] {
 		const dp = this._dataPackage
 		if (!dp) {
