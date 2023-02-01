@@ -33,7 +33,6 @@
 |  [AppProfileInitializationContext](./app-framework.appprofileinitializationcontext.md) |  |
 |  [AppServices](./app-framework.appservices.md) |  |
 |  [DataShaperAppProps](./app-framework.datashaperappprops.md) |  |
-|  [GeneratedExtraRoutes](./app-framework.generatedextraroutes.md) |  |
 |  [PluginComponentProps](./app-framework.plugincomponentprops.md) |  |
 |  [ProfilePlugin](./app-framework.profileplugin.md) |  |
 |  [RecoilBasedProfileHostProps](./app-framework.recoilbasedprofilehostprops.md) |  |

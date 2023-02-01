@@ -8,6 +8,7 @@
 				{
 					"rel": "input",
 					"profile": "datatable",
+					"name": "nhefs.csv",
 					"path": "https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/1268/20/nhefs.csv",
 					"metadata": {
 						"source": "https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/",

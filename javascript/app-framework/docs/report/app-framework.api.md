@@ -71,18 +71,6 @@ export interface DataShaperAppProps {
     profiles?: ProfilePlugin[];
 }
 
-// Warning: (ae-missing-release-tag) "GeneratedExtraRoutes" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface GeneratedExtraRoutes {
-    // (undocumented)
-    children?: ResourceRoute[];
-    // (undocumented)
-    postItemSiblings?: ResourceRoute[];
-    // (undocumented)
-    preItemSiblings?: ResourceRoute[];
-}
-
 // Warning: (ae-missing-release-tag) "PluginComponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -98,7 +86,6 @@ export interface ProfilePlugin<Res extends Resource = Resource, Schema extends R
     getCommandBarCommands?: (section: CommandBarSection) => IContextualMenuItem[] | undefined;
     getHelp?: () => Record<string, string>;
     getMenuItems?: (resource: Res) => IContextualMenuItem[];
-    getRoutes?: (resource: Res, routes: Map<string, string>) => GeneratedExtraRoutes | undefined;
     group?: ResourceGroupType;
     iconName: string;
     renderer: React.ComponentType<{
