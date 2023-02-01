@@ -14,11 +14,15 @@ export default storyMetadata
 
 export const Primary: React.FC<ProjectManagementCommandBarProps> = {}
 
-export const InvertedDefaults: React.FC<ProjectManagementCommandBarProps> = {
-	render: (args) => {
-		const props = useManagementBarDefaults(args)
-		return <ProjectManagementCommandBarComponent {...props} />
-	},
+const InvertedDefaultsComponent: React.FC<ProjectManagementCommandBarProps> = (
+	args,
+) => {
+	const props = useManagementBarDefaults(args)
+	return <ProjectManagementCommandBarComponent {...props} />
+}
+
+export const InvertedDefaults = {
+	render: InvertedDefaultsComponent,
 }
 
 const InvertedCustomComponent: React.FC<ProjectManagementCommandBarProps> = (
@@ -33,6 +37,6 @@ const InvertedCustomComponent: React.FC<ProjectManagementCommandBarProps> = (
 	return <ProjectManagementCommandBarComponent {...props} />
 }
 
-export const InvertedCustom: React.FC<ProjectManagementCommandBarProps> = {
+export const InvertedCustom = {
 	render: InvertedCustomComponent,
 }
