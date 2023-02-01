@@ -4,7 +4,7 @@
  */
 import type { CodebookSchema, Field } from '@datashaper/schema'
 import type { TableMetadata } from '@datashaper/tables'
-import type { ComponentStory } from '@storybook/react'
+import type { StoryFn } from '@storybook/react'
 import { useState } from 'react'
 
 import { CodebookFieldEditor } from './CodebookFieldEditor.js'
@@ -117,22 +117,20 @@ const metadata: TableMetadata = {
 	},
 }
 
-const Template: ComponentStory<typeof CodebookFieldEditor> = ({
-	...args
-}): JSX.Element => {
-	const [field, setField] = useState(codebookResult.fields[0] as Field)
+export const CodebookFieldEditorStory = {
+	render: ({ ...args }): JSX.Element => {
+		const [field, setField] = useState(codebookResult.fields[0] as Field)
 
-	return (
-		<CodebookFieldEditor
-			field={field}
-			metadata={metadata}
-			onChangeField={setField}
-			{...args}
-		/>
-	)
+		return (
+			<CodebookFieldEditor
+				field={field}
+				metadata={metadata}
+				onChangeField={setField}
+				{...args}
+			/>
+		)
+	},
+
+	name: 'Codebook Field Editor',
+	args: {},
 }
-
-export const CodebookFieldEditorStory = Template.bind({})
-CodebookFieldEditorStory.storyName = 'Codebook Field Editor'
-
-CodebookFieldEditorStory.args = {}
