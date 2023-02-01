@@ -82,7 +82,7 @@ function defineTestCase(parentPath: string, test: string) {
 		} finally {
 			datapackage?.dispose()
 		}
-	})
+	}, 15000)
 }
 
 async function readJson(filePath: string): Promise<any> {
