@@ -54,8 +54,8 @@ function defineTestCase(parentPath: string, test: string) {
 		try {
 			datapackage = new DataPackage()
 			await datapackage.load(assets)
-
 			expect(datapackage.size).toEqual(expected.tables.length)
+
 			for (const table of expected.tables) {
 				const found = datapackage.getResource(table.name) as TableBundle
 				expect(found).toBeDefined()

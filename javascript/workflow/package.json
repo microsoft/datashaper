@@ -52,7 +52,7 @@
 		"@essex/tsconfig-base": "^1.0.2",
 		"@types/d3-time-format": "^4.0.0",
 		"@types/debug": "^4.1.7",
-		"@types/jest": "^29.2.6",
+		"@types/jest": "^29.4.0",
 		"@types/lodash-es": "^4.17.6",
 		"@types/node": "^18.11.18",
 		"@types/uuid": "^9.0.0",

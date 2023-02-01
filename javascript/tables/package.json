@@ -45,7 +45,7 @@
 		"@essex/jest-config": "^21.0.20",
 		"@essex/scripts": "^24.0.3",
 		"@essex/tsconfig-base": "^1.0.2",
-		"@types/jest": "^29.2.6",
+		"@types/jest": "^29.4.0",
 		"@types/lodash-es": "^4.17.6",
 		"@types/papaparse": "^5.3.7",
 		"arquero": "^5.1.0",

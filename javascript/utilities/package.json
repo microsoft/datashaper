@@ -45,7 +45,7 @@
 		"@essex/scripts": "^24.0.3",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@types/debug": "^4.1.7",
-		"@types/jest": "^29.2.6",
+		"@types/jest": "^29.4.0",
 		"@types/node": "^18.11.18",
 		"arquero": "^5.1.0",
 		"cross-blob": "^3.0.2",

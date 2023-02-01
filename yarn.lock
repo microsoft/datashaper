@@ -1707,7 +1707,7 @@ __metadata:
     "@essex/eslint-plugin": ^20.5.1
     "@essex/jest-config": ^21.0.20
     "@essex/scripts": ^24.0.3
-    "@types/jest": ^29.2.6
+    "@types/jest": ^29.4.0
     "@types/node": ^18.11.18
     "@types/semver": ^7.3.13
     arquero: ^5.1.0
@@ -1715,7 +1715,7 @@ __metadata:
     npm-run-all: ^4.1.5
     rome: ^11.0.0
     semver: ^7.3.8
-    turbo: 1.6.0
+    turbo: 1.7.2
     typescript: ^4.9.5
   languageName: unknown
   linkType: soft
@@ -1750,7 +1750,7 @@ __metadata:
     ahooks: ^3.7.4
     arquero: ^5.1.0
     d3-format: ^3.1.0
-    immer: ^9.0.18
+    immer: ^9.0.19
     lodash-es: ^4.17.21
     observable-hooks: ^4.2.1
     react: ^18.2.0
@@ -1799,7 +1799,7 @@ __metadata:
     "@essex/jest-config": ^21.0.20
     "@essex/scripts": ^24.0.3
     "@essex/tsconfig-base": ^1.0.2
-    "@types/jest": ^29.2.6
+    "@types/jest": ^29.4.0
     "@types/uuid": ^9.0.0
     ajv: ^8.12.0
     ajv-formats: ^2.1.1
@@ -1860,7 +1860,7 @@ __metadata:
     "@essex/jest-config": ^21.0.20
     "@essex/scripts": ^24.0.3
     "@essex/tsconfig-base": ^1.0.2
-    "@types/jest": ^29.2.6
+    "@types/jest": ^29.4.0
     "@types/lodash-es": ^4.17.6
     "@types/papaparse": ^5.3.7
     arquero: ^5.1.0
@@ -1886,7 +1886,7 @@ __metadata:
     "@essex/scripts": ^24.0.3
     "@essex/tsconfig-base": ^1.0.2
     "@types/debug": ^4.1.7
-    "@types/jest": ^29.2.6
+    "@types/jest": ^29.4.0
     "@types/node": ^18.11.18
     "@zip.js/zip.js": 2.6.62
     arquero: ^5.1.0
@@ -1965,7 +1965,7 @@ __metadata:
     "@essex/tsconfig-base": ^1.0.2
     "@types/d3-time-format": ^4.0.0
     "@types/debug": ^4.1.7
-    "@types/jest": ^29.2.6
+    "@types/jest": ^29.4.0
     "@types/lodash-es": ^4.17.6
     "@types/node": ^18.11.18
     "@types/uuid": ^9.0.0
@@ -5710,7 +5710,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:^29.2.6":
+"@types/jest@npm:^29.2.6, @types/jest@npm:^29.4.0":
   version: 29.4.0
   resolution: "@types/jest@npm:29.4.0"
   dependencies:
@@ -11836,7 +11836,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"immer@npm:^9.0.18":
+"immer@npm:^9.0.19":
   version: 9.0.19
   resolution: "immer@npm:9.0.19"
   checksum: f02ee53989989c287cd548a3d817fccf0bfe56db919755ee94a72ea3ae78a00363fba93ee6c010fe54a664380c29c53d44ed4091c6a86cae60957ad2cfabc010
@@ -17967,58 +17967,58 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo-darwin-64@npm:1.6.0":
-  version: 1.6.0
-  resolution: "turbo-darwin-64@npm:1.6.0"
+"turbo-darwin-64@npm:1.7.2":
+  version: 1.7.2
+  resolution: "turbo-darwin-64@npm:1.7.2"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-darwin-arm64@npm:1.6.0":
-  version: 1.6.0
-  resolution: "turbo-darwin-arm64@npm:1.6.0"
+"turbo-darwin-arm64@npm:1.7.2":
+  version: 1.7.2
+  resolution: "turbo-darwin-arm64@npm:1.7.2"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-64@npm:1.6.0":
-  version: 1.6.0
-  resolution: "turbo-linux-64@npm:1.6.0"
+"turbo-linux-64@npm:1.7.2":
+  version: 1.7.2
+  resolution: "turbo-linux-64@npm:1.7.2"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm64@npm:1.6.0":
-  version: 1.6.0
-  resolution: "turbo-linux-arm64@npm:1.6.0"
+"turbo-linux-arm64@npm:1.7.2":
+  version: 1.7.2
+  resolution: "turbo-linux-arm64@npm:1.7.2"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-windows-64@npm:1.6.0":
-  version: 1.6.0
-  resolution: "turbo-windows-64@npm:1.6.0"
+"turbo-windows-64@npm:1.7.2":
+  version: 1.7.2
+  resolution: "turbo-windows-64@npm:1.7.2"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-windows-arm64@npm:1.6.0":
-  version: 1.6.0
-  resolution: "turbo-windows-arm64@npm:1.6.0"
+"turbo-windows-arm64@npm:1.7.2":
+  version: 1.7.2
+  resolution: "turbo-windows-arm64@npm:1.7.2"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo@npm:1.6.0":
-  version: 1.6.0
-  resolution: "turbo@npm:1.6.0"
+"turbo@npm:1.7.2":
+  version: 1.7.2
+  resolution: "turbo@npm:1.7.2"
   dependencies:
-    turbo-darwin-64: 1.6.0
-    turbo-darwin-arm64: 1.6.0
-    turbo-linux-64: 1.6.0
-    turbo-linux-arm64: 1.6.0
-    turbo-windows-64: 1.6.0
-    turbo-windows-arm64: 1.6.0
+    turbo-darwin-64: 1.7.2
+    turbo-darwin-arm64: 1.7.2
+    turbo-linux-64: 1.7.2
+    turbo-linux-arm64: 1.7.2
+    turbo-windows-64: 1.7.2
+    turbo-windows-arm64: 1.7.2
   dependenciesMeta:
     turbo-darwin-64:
       optional: true
@@ -18034,7 +18034,7 @@ __metadata:
       optional: true
   bin:
     turbo: bin/turbo
-  checksum: cd263ffe48a1ecc4a285164f371597a931893754f184a3d3449404ba0dc93ee636213cc9cb652b83442afa086bbf1aaec54760cc024f6a2bb694d7e7cb972a55
+  checksum: 50954fbf5c9d21979620a7e905ca16c99d6f7165c5785e3918f3dfe9b15838961f51ec159f0513287781f9531005cd4d73e26c7999c368443037e893c4fd374b
   languageName: node
   linkType: hard
 
