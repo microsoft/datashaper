@@ -195,22 +195,14 @@ export function roundNumber(value: number, opt: Opts): number {
 	if (value < 1 && getNumberOfDecimals(value) > 10) {
 		const decimals = value.toString().split('.')
 		const finalNumber = Number(
-			decimals[0]! +
-				'.' +
-				decimals[1]!.substring(0, ROUND_PRECISION) +
-				(opt === Opts.Down ? '0' : '9') +
-				decimals[1]!.substring(ROUND_PRECISION + 1),
+			`${decimals[0]!}.${decimals[1]!.substring(0, ROUND_PRECISION)}${(opt === Opts.Down ? '0' : '9')}${decimals[1]!.substring(ROUND_PRECISION + 1)}`,
 		)
 		return Number(finalNumber.toFixed(ROUND_PRECISION))
 	} else if (value < 1 && getNumberOfDecimals(value) <= 10) {
 		const numberOfDecimals = getNumberOfDecimals(value)
 		const decimals = value.toString().split('.')
 		const finalNumber = Number(
-			decimals[0]! +
-				'.' +
-				decimals[1]!.substring(0, numberOfDecimals / ROUND_PRECISION) +
-				(opt === Opts.Down ? '0' : '9') +
-				decimals[1]!.substring(numberOfDecimals / ROUND_PRECISION + 1),
+			`${decimals[0]!}.${decimals[1]!.substring(0, numberOfDecimals / ROUND_PRECISION)}${(opt === Opts.Down ? '0' : '9')}${decimals[1]!.substring(numberOfDecimals / ROUND_PRECISION + 1)}`,
 		)
 		return Number(finalNumber.toFixed(numberOfDecimals / ROUND_PRECISION))
 	} else {

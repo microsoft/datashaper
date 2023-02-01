@@ -2,8 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { StoryFn } from '@storybook/react'
-
 import { ArqueroTableHeader } from '../ArqueroTableHeader.js'
 import type { ArqueroTableHeaderProps } from '../ArqueroTableHeader.types.js'
 import { CommandBarsStory } from './CommandBars/CommandBars.story.js'
@@ -31,9 +29,10 @@ const meta = {
 export default meta
 
 export const Basic = {
-	render: (args: ArqueroTableHeaderProps, { loaded: { stocks } }: any) => (
-		<ArqueroTableHeader {...args} table={stocks} />
-	),
+	render: (
+		args: ArqueroTableHeaderProps,
+		{ loaded: { stocks } }: any,
+	): React.ReactNode => <ArqueroTableHeader {...args} table={stocks} />,
 }
 
 export const Customized = {
