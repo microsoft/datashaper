@@ -2601,13 +2601,35 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "constructor();"
+                  "text": "constructor(profiles?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ProfileHandler",
+                  "canonicalReference": "@datashaper/workflow!ProfileHandler:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
                 }
               ],
               "releaseTag": "Public",
               "isProtected": false,
               "overloadIndex": 1,
-              "parameters": []
+              "parameters": [
+                {
+                  "parameterName": "profiles",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "isOptional": true
+                }
+              ]
             },
             {
               "kind": "Property",

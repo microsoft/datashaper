@@ -30,11 +30,11 @@
 
 |  Interface | Description |
 |  --- | --- |
+|  [AppProfile](./app-framework.appprofile.md) | Classes implementing this interface are used to represent the Profile within the app framework. This largely includes user interface elements that build upon the underlying Profile functionality. |
 |  [AppProfileInitializationContext](./app-framework.appprofileinitializationcontext.md) |  |
 |  [AppServices](./app-framework.appservices.md) |  |
 |  [DataShaperAppProps](./app-framework.datashaperappprops.md) |  |
-|  [PluginComponentProps](./app-framework.plugincomponentprops.md) |  |
-|  [ProfilePlugin](./app-framework.profileplugin.md) |  |
+|  [ProfileComponentProps](./app-framework.profilecomponentprops.md) |  |
 |  [RecoilBasedProfileHostProps](./app-framework.recoilbasedprofilehostprops.md) |  |
 |  [ResourceRoute](./app-framework.resourceroute.md) | Data attached to resource-tree nodes |
 |  [ResourceRouteGroup](./app-framework.resourceroutegroup.md) |  |

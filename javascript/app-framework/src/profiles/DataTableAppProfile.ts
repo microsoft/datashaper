@@ -4,15 +4,15 @@
  */
 import content from '@datashaper/guidance'
 import type { DataTable } from '@datashaper/workflow'
-import { DataTableProfile as DataTableProfileBase } from '@datashaper/workflow'
+import { DataTableProfile } from '@datashaper/workflow'
 
-import type { ProfilePlugin } from '../types.js'
+import type { AppProfile } from '../types.js'
 import { ResourceGroupType } from '../types.js'
 import { DataTableRenderer } from './renderers/DataTableRenderer.js'
 
-export class DataTableProfile
-	extends DataTableProfileBase
-	implements ProfilePlugin<DataTable>
+export class DataTableAppProfile
+	extends DataTableProfile
+	implements AppProfile<DataTable>
 {
 	public readonly title = 'Datatable'
 	public readonly renderer = DataTableRenderer

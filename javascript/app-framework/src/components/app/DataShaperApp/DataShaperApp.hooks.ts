@@ -11,13 +11,10 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { EMPTY_ARRAY } from '../../../empty.js'
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
-import { CodebookProfile } from '../../../profiles/CodebookProfile.js'
-import { DataTableProfile } from '../../../profiles/DataTableProfile.js'
-import { TableBundleProfile } from '../../../profiles/TableBundleProfile.js'
-import { WorkflowProfile } from '../../../profiles/WorkflowProfile.js'
+import { defaultAppProfiles } from '../../../profiles/index.js'
 import type {
 	AppServices,
-	ProfilePlugin,
+	AppProfile,
 	ResourceRoute,
 	ResourceRouteGroup,
 } from '../../../types.js'
@@ -26,24 +23,8 @@ import {
 	PANE_COLLAPSED_SIZE,
 } from './DataShaperApp.styles.js'
 
-function useKnownProfilePlugins(): ProfilePlugin[] {
-	return useConst(() => {
-		const datatablePlugin = new DataTableProfile()
-		const codebookPlugin = new CodebookProfile()
-		const workflowPlugin = new WorkflowProfile()
-		const tableBundlePlugin = new TableBundleProfile(
-			datatablePlugin,
-			codebookPlugin,
-			workflowPlugin,
-		)
-
-		return [
-			datatablePlugin,
-			codebookPlugin,
-			tableBundlePlugin,
-			workflowPlugin,
-		] as ProfilePlugin<any, any>[]
-	})
+function useKnownAppProfiles(): AppProfile[] {
+	return useConst(() => defaultAppProfiles() as AppProfile<any, any>[])
 }
 
 export function useExpandedState(
@@ -102,18 +83,18 @@ function useOnChangeWidth(
 
 export function useRegisteredProfiles(
 	api: AppServices,
-	profiles: ProfilePlugin[] | undefined,
-): Map<string, ProfilePlugin> {
+	profiles: AppProfile[] | undefined,
+): Map<string, AppProfile> {
 	const dp = useDataPackage()
-	const knownProfiles = useKnownProfilePlugins()
+	const knownProfiles = useKnownAppProfiles()
 
-	return useMemo<Map<string, ProfilePlugin>>(() => {
-		const allPlugins: ProfilePlugin[] = [
+	return useMemo<Map<string, AppProfile>>(() => {
+		const allProfiles: AppProfile[] = [
 			...knownProfiles,
 			...(profiles ?? EMPTY_ARRAY),
 		]
-		const result = new Map<string, ProfilePlugin>()
-		for (const p of allPlugins) {
+		const result = new Map<string, AppProfile>()
+		for (const p of allProfiles) {
 			p.initialize?.({ api, dataPackage: dp })
 			result.set(p.profile, p)
 			dp.addResourceHandler(p as ProfileHandler<Resource>)
@@ -229,23 +210,23 @@ export function useAppServices(defaultHelp: string): {
 }
 
 /**
- * Populate the help index once the plugins are instantiated.
- * @param plugins
+ * Populate the help index once the profiles are instantiated.
+ * @param profiles
  * @param onInitializeHelp
  */
-export function useRegisterPluginHelp(
-	plugins: Map<string, ProfilePlugin>,
+export function useRegisterProfileHelp(
+	profiles: Map<string, AppProfile>,
 	onInitializeHelp: any,
 ): void {
 	useEffect(() => {
 		let help: Record<string, string> = {}
-		for (const plugin of plugins.values()) {
-			const pluginHelp = plugin?.getHelp?.()
-			if (pluginHelp != null) {
+		for (const profile of profiles.values()) {
+			const profileHelp = profile?.getHelp?.()
+			if (profileHelp != null) {
 				// note that this will quietly overwrite any duplicate keys
-				help = { ...help, ...pluginHelp }
+				help = { ...help, ...profileHelp }
 			}
 		}
 		onInitializeHelp(help)
-	}, [plugins, onInitializeHelp])
+	}, [profiles, onInitializeHelp])
 }

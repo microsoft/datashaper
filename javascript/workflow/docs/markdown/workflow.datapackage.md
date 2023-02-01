@@ -15,7 +15,7 @@ export declare class DataPackage extends Resource
 
 |  Constructor | Modifiers | Description |
 |  --- | --- | --- |
-|  [(constructor)()](./workflow.datapackage._constructor_.md) |  | Constructs a new instance of the <code>DataPackage</code> class |
+|  [(constructor)(profiles)](./workflow.datapackage._constructor_.md) |  | Constructs a new instance of the <code>DataPackage</code> class |
 
 ## Properties
 

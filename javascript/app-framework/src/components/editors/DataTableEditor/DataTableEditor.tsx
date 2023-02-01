@@ -9,7 +9,7 @@ import { CommandBar } from '@fluentui/react'
 import { memo } from 'react'
 
 import { useDataTableSource } from '../../../hooks/index.js'
-import type { PluginComponentProps } from '../../../types.js'
+import type { ProfileComponentProps } from '../../../types.js'
 import { DataTableConfig } from '../../DataTableConfig/DataTableConfig.js'
 import { useToolPanelExpandCollapse } from '../hooks.js'
 import {
@@ -23,7 +23,7 @@ import {
 	DetailsListContainer,
 } from './DataTableEditor.styles.js'
 
-export const DataTableEditor: React.FC<PluginComponentProps<DataTable>> = memo(
+export const DataTableEditor: React.FC<ProfileComponentProps<DataTable>> = memo(
 	function DataTableEditor({ resource }) {
 		const table = useDataTableSource(resource)
 		const tableHeaderColors = useTableHeaderColors()

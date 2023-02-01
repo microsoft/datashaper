@@ -16,7 +16,7 @@ import { ToolPanel } from '@essex/components'
 import { CommandBar } from '@fluentui/react'
 import { useObservableState } from 'observable-hooks'
 import { memo, useCallback, useMemo, useState } from 'react'
-import type { PluginComponentProps } from '../../../types.js'
+import type { ProfileComponentProps } from '../../../types.js'
 
 import { useToolPanelExpandCollapse } from '../hooks.js'
 import {
@@ -34,7 +34,7 @@ import {
 } from './TableBundleEditor.hooks.js'
 import { Container, DetailsListContainer } from './TableBundleEditor.styles.js'
 
-export const TableBundleEditor: React.FC<PluginComponentProps<TableBundle>> =
+export const TableBundleEditor: React.FC<ProfileComponentProps<TableBundle>> =
 	memo(function TableBundleEditor({ resource }) {
 		const [workflow, isWorkflowAttached] = useMemo<[Workflow, boolean]>(() => {
 			const result = resource

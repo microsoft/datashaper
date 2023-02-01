@@ -15,20 +15,17 @@ import {
 	type TableBundle,
 	type Workflow,
 	ResourceReference,
-	TableBundleProfile as TableBundleDataProfileBase,
+	TableBundleProfile,
 } from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
 
-import type {
-	AppProfileInitializationContext,
-	ProfilePlugin,
-} from '../types.js'
+import type { AppProfileInitializationContext, AppProfile } from '../types.js'
 import { CommandBarSection, ResourceGroupType } from '../types.js'
 import { TableBundleRenderer } from './renderers/TableBundleRenderer.js'
 
-export class TableBundleProfile
-	extends TableBundleDataProfileBase
-	implements ProfilePlugin<TableBundle, TableBundleSchema>
+export class TableBundleAppProfile
+	extends TableBundleProfile
+	implements AppProfile<TableBundle, TableBundleSchema>
 {
 	public readonly title = 'Table'
 	public readonly renderer = TableBundleRenderer
@@ -38,9 +35,9 @@ export class TableBundleProfile
 	private _dataPackage: DataPackage | undefined
 
 	public constructor(
-		private readonly datatablePlugin: ProfilePlugin<DataTable>,
-		private readonly codebookPlugin: ProfilePlugin<Codebook>,
-		private readonly workflowPlugin: ProfilePlugin<Workflow>,
+		private readonly datatableProfile: AppProfile<DataTable>,
+		private readonly codebookProfile: AppProfile<Codebook>,
+		private readonly workflowProfile: AppProfile<Workflow>,
 	) {
 		super()
 	}
@@ -99,9 +96,9 @@ export class TableBundleProfile
 			result.push({
 				key: 'add-datatable',
 				text: 'Add Datatable',
-				iconProps: { iconName: this.datatablePlugin.iconName },
+				iconProps: { iconName: this.datatableProfile.iconName },
 				onClick: () => {
-					this.datatablePlugin.createInstance?.().then((instance) => {
+					this.datatableProfile.createInstance?.().then((instance) => {
 						resource.sources = [instance, ...resource.sources]
 					})
 				},
@@ -111,9 +108,9 @@ export class TableBundleProfile
 			result.push({
 				key: 'add-workflow',
 				text: 'Add Workflow',
-				iconProps: { iconName: this.workflowPlugin.iconName },
+				iconProps: { iconName: this.workflowProfile.iconName },
 				onClick: () => {
-					this.workflowPlugin.createInstance?.().then((instance) => {
+					this.workflowProfile.createInstance?.().then((instance) => {
 						resource.sources = [...resource.sources, instance]
 					})
 				},
@@ -123,9 +120,9 @@ export class TableBundleProfile
 			result.push({
 				key: 'add-codebook',
 				text: 'Add Codebook',
-				iconProps: { iconName: this.codebookPlugin.iconName },
+				iconProps: { iconName: this.codebookProfile.iconName },
 				onClick: () => {
-					this.codebookPlugin.createInstance?.().then((codebook) => {
+					this.codebookProfile.createInstance?.().then((codebook) => {
 						resource.sources = [...resource.sources, codebook]
 					})
 				},

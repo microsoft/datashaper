@@ -5,15 +5,15 @@
 import content from '@datashaper/guidance'
 import type { CodebookSchema } from '@datashaper/schema'
 import type { Codebook } from '@datashaper/workflow'
-import { CodebookProfile as CodebookDataProfile } from '@datashaper/workflow'
+import { CodebookProfile } from '@datashaper/workflow'
 
-import type { ProfilePlugin } from '../index.js'
+import type { AppProfile } from '../index.js'
 import { ResourceGroupType } from '../index.js'
 import { CodebookRenderer } from './renderers/CodebookRenderer.js'
 
-export class CodebookProfile
-	extends CodebookDataProfile
-	implements ProfilePlugin<Codebook, CodebookSchema>
+export class CodebookAppProfile
+	extends CodebookProfile
+	implements AppProfile<Codebook, CodebookSchema>
 {
 	public readonly title = 'Codebook'
 	public readonly renderer = CodebookRenderer

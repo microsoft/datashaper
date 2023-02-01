@@ -69,7 +69,11 @@ export interface AppProfileInitializationContext {
 	api: AppServices
 }
 
-export interface ProfilePlugin<
+/**
+ * Classes implementing this interface are used to represent the Profile within the app framework.
+ * This largely includes user interface elements that build upon the underlying Profile functionality.
+ */
+export interface AppProfile<
 	Res extends Resource = Resource,
 	Schema extends ResourceSchema = ResourceSchema,
 > extends ProfileHandler<Res, Schema, AppProfileInitializationContext> {
@@ -90,7 +94,7 @@ export interface ProfilePlugin<
 	iconName: string
 
 	/**
-	 * Render the plugin
+	 * Render the profile
 	 */
 	renderer: React.ComponentType<{
 		href: string
@@ -99,7 +103,7 @@ export interface ProfilePlugin<
 	}>
 
 	/**
-	 * Gets commands for the plugin
+	 * Gets commands for the profile
 	 */
 	getCommandBarCommands?: (
 		section: CommandBarSection,
@@ -111,7 +115,7 @@ export interface ProfilePlugin<
 	getMenuItems?: (resource: Res) => IContextualMenuItem[]
 
 	/**
-	 * Plugins may supply a map of help content to be displayed in the global panel when open.
+	 * Profiles may supply a map of help content to be displayed in the global panel when open.
 	 * Each help record should have a unique key, and the value is the markdown content.
 	 * @returns
 	 */
@@ -134,6 +138,6 @@ export interface ResourceRouteGroup {
 	resources: ResourceRoute[]
 }
 
-export interface PluginComponentProps<T extends Resource> {
+export interface ProfileComponentProps<T extends Resource> {
 	resource: T
 }

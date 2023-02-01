@@ -3,12 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { memo } from 'react'
-import type { PluginComponentProps } from '../../../types.js'
+import type { ProfileComponentProps } from '../../../types.js'
 import type { Resource } from '@datashaper/workflow'
 import { LanguageEditor } from '../LanguageEditor/index.js'
 import { useContent, useOnChange } from './ResourceSchemaEditor.hooks.js'
 
-export const ResourceSchemaEditor: React.FC<PluginComponentProps<Resource>> =
+export const ResourceSchemaEditor: React.FC<ProfileComponentProps<Resource>> =
 	memo(function ResourceSchemaEditor({ resource }) {
 		const content = useContent(resource)
 		const onChange = useOnChange(resource)

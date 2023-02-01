@@ -19,5 +19,5 @@ export interface DataShaperAppProps
 |  [defaultHelp?](./app-framework.datashaperappprops.defaulthelp.md) |  | string | <i>(Optional)</i> Indicates the help content to show when the application has no resources selected. |
 |  [examples?](./app-framework.datashaperappprops.examples.md) |  | FileDefinition\[\] | <i>(Optional)</i> Examples to provide |
 |  [fallback?](./app-framework.datashaperappprops.fallback.md) |  | React.ReactNode | <i>(Optional)</i> The React node to render when the selected resource cannot be found |
-|  [profiles?](./app-framework.datashaperappprops.profiles.md) |  | [ProfilePlugin](./app-framework.profileplugin.md)<!-- -->\[\] | <i>(Optional)</i> Custom profile renderers |
+|  [profiles?](./app-framework.datashaperappprops.profiles.md) |  | [AppProfile](./app-framework.appprofile.md)<!-- -->\[\] | <i>(Optional)</i> Custom profile renderers |
 

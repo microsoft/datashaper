@@ -4,15 +4,15 @@
  */
 import content from '@datashaper/guidance'
 import type { Workflow } from '@datashaper/workflow'
-import { WorkflowProfile as WorkflowDataProfile } from '@datashaper/workflow'
+import { WorkflowProfile } from '@datashaper/workflow'
 
 import { WorkflowRenderer } from './renderers/WorkflowRenderer.js'
-import type { ProfilePlugin } from '../index.js'
+import type { AppProfile } from '../index.js'
 import { ResourceGroupType } from '../index.js'
 
-export class WorkflowProfile
-	extends WorkflowDataProfile
-	implements ProfilePlugin<Workflow>
+export class WorkflowAppProfile
+	extends WorkflowProfile
+	implements AppProfile<Workflow>
 {
 	public readonly title = 'Workflow'
 	public readonly renderer = WorkflowRenderer

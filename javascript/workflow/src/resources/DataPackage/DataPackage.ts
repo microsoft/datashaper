@@ -18,10 +18,6 @@ import type { Observable } from 'rxjs'
 import { Resource } from '../Resource.js'
 import type { ProfileHandler } from '../types/index.js'
 import { write } from './io.js'
-import { CodebookProfile } from './profiles/CodebookProfile.js'
-import { DataTableProfile } from './profiles/DataTableProfile.js'
-import { TableBundleProfile } from './profiles/TableBundleProfile.js'
-import { WorkflowProfile } from './profiles/WorkflowProfile.js'
 import { ResourceManager } from './ResourceManager.js'
 
 export class DataPackage extends Resource {
@@ -29,15 +25,9 @@ export class DataPackage extends Resource {
 	public readonly profile = KnownProfile.DataPackage
 	private _resourceMgr: ResourceManager = new ResourceManager()
 
-	public constructor() {
+	public constructor(profiles?: ProfileHandler[]) {
 		super()
-		const profiles = [
-			new TableBundleProfile(),
-			new DataTableProfile(),
-			new CodebookProfile(),
-			new WorkflowProfile(),
-		] as ProfileHandler[]
-		profiles.forEach((p) => {
+		profiles?.forEach((p) => {
 			p.initialize?.({ dataPackage: this })
 			this._resourceMgr.registerProfile(p)
 		})

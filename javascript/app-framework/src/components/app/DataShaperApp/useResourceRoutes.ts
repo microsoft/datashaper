@@ -11,7 +11,7 @@ import { EMPTY_ARRAY } from '../../../empty.js'
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
 import type {
 	AppServices,
-	ProfilePlugin,
+	AppProfile,
 	ResourceRoute,
 	ResourceRouteGroup,
 } from '../../../types.js'
@@ -21,12 +21,12 @@ import { ResourceGroupType } from '../../../types.js'
  * Get groups of resource routes for the application
  *
  * @param services - The application services
- * @param plugins - Profile plugins
+ * @param profiles
  * @returns A list of resource route groups
  */
 export function useResourceRoutes(
 	services: AppServices,
-	plugins: Map<string, ProfilePlugin>,
+	profiles: Map<string, AppProfile>,
 ): ResourceRouteGroup[] {
 	const pkg = useDataPackage()
 	const observable = useMemo(
@@ -34,20 +34,20 @@ export function useResourceRoutes(
 			pkg.resources$.pipe(
 				map((resources) => {
 					const hrefs = getResourceHrefs(resources)
-					const grouped = groupResources(resources, plugins)
+					const grouped = groupResources(resources, profiles)
 					const groups: ResourceRouteGroup[] = []
 					grouped.forEach((resources, type) => {
 						groups.push({
 							type,
 							resources: resources.map((r) =>
-								makeResourceRoute(r, services, plugins, hrefs),
+								makeResourceRoute(r, services, profiles, hrefs),
 							),
 						})
 					})
 					return groups
 				}),
 			),
-		[pkg, services, plugins],
+		[pkg, services, profiles],
 	)
 	return useObservableState(observable, () => [])
 }
@@ -72,7 +72,7 @@ function getResourceHrefs(
 function makeResourceRoute(
 	resource: Resource,
 	services: AppServices,
-	plugins: Map<string, ProfilePlugin>,
+	profiles: Map<string, AppProfile>,
 	hrefs: Map<string, string>,
 ): ResourceRoute {
 	if (resource.isReference()) {
@@ -93,15 +93,15 @@ function makeResourceRoute(
 		// TODO:  this should return a raw text renderer
 		return {} as ResourceRoute
 	}
-	const plugin = plugins.get(resource.profile)!
+	const profile = profiles.get(resource.profile)!
 	const href = hrefs.get(resource.name)
 	const root: ResourceRoute = {
 		href,
 		title: resource.title ?? resource.name,
-		icon: plugin.iconName,
-		renderer: plugin.renderer,
+		icon: profile.iconName,
+		renderer: profile.renderer,
 		menuItems: [
-			...(plugin.getMenuItems?.(resource) ?? EMPTY_ARRAY),
+			...(profile.getMenuItems?.(resource) ?? EMPTY_ARRAY),
 			{
 				key: 'rename',
 				text: 'Rename',
@@ -117,7 +117,7 @@ function makeResourceRoute(
 		],
 		props: { resource },
 		children: (resource.sources ?? EMPTY_ARRAY).map((r) =>
-			makeResourceRoute(r, services, plugins, hrefs),
+			makeResourceRoute(r, services, profiles, hrefs),
 		),
 	}
 
@@ -126,7 +126,7 @@ function makeResourceRoute(
 
 function groupResources(
 	resources: Resource[],
-	plugins: Map<string, ProfilePlugin>,
+	profiles: Map<string, AppProfile>,
 ): Map<ResourceGroupType, Resource[]> {
 	const map = new Map<ResourceGroupType, Resource[]>([
 		[ResourceGroupType.Data, []],
@@ -134,8 +134,8 @@ function groupResources(
 	])
 	for (const r of resources) {
 		if (r.profile != null) {
-			const plugin = plugins.get(r.profile)
-			if (plugin?.group === ResourceGroupType.Data) {
+			const profile = profiles.get(r.profile)
+			if (profile?.group === ResourceGroupType.Data) {
 				map.get(ResourceGroupType.Data)!.push(r)
 			} else {
 				map.get(ResourceGroupType.Apps)!.push(r)

@@ -1,4 +1,5 @@
 import { KnownProfile } from '@datashaper/schema'
+import { defaultProfiles } from '../../../__tests__/utils.js'
 
 import type { Resource } from '../../Resource.js'
 import { DataPackage } from '../DataPackage.js'
@@ -9,7 +10,7 @@ describe('The ResourceManager class', () => {
 	let mgr: ResourceManager
 
 	beforeEach(() => {
-		const dp = new DataPackage()
+		const dp = new DataPackage(defaultProfiles())
 		mgr = dp.resourceManager
 	})
 

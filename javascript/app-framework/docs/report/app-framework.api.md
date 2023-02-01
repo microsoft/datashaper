@@ -23,6 +23,23 @@ import type { Snapshot } from 'recoil';
 import type { TableBundle } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
 
+// Warning: (ae-missing-release-tag) "AppProfile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface AppProfile<Res extends Resource = Resource, Schema extends ResourceSchema = ResourceSchema> extends ProfileHandler<Res, Schema, AppProfileInitializationContext> {
+    getCommandBarCommands?: (section: CommandBarSection) => IContextualMenuItem[] | undefined;
+    getHelp?: () => Record<string, string>;
+    getMenuItems?: (resource: Res) => IContextualMenuItem[];
+    group?: ResourceGroupType;
+    iconName: string;
+    renderer: React.ComponentType<{
+        href: string;
+        resource: Res;
+        api: AppServices;
+    }>;
+    title: string;
+}
+
 // Warning: (ae-missing-release-tag) "AppProfileInitializationContext" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -68,32 +85,15 @@ export interface DataShaperAppProps {
     // Warning: (ae-forgotten-export) The symbol "FileDefinition" needs to be exported by the entry point index.d.ts
     examples?: FileDefinition[];
     fallback?: React_2.ReactNode;
-    profiles?: ProfilePlugin[];
+    profiles?: AppProfile[];
 }
 
-// Warning: (ae-missing-release-tag) "PluginComponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ProfileComponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface PluginComponentProps<T extends Resource> {
+export interface ProfileComponentProps<T extends Resource> {
     // (undocumented)
     resource: T;
-}
-
-// Warning: (ae-missing-release-tag) "ProfilePlugin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ProfilePlugin<Res extends Resource = Resource, Schema extends ResourceSchema = ResourceSchema> extends ProfileHandler<Res, Schema, AppProfileInitializationContext> {
-    getCommandBarCommands?: (section: CommandBarSection) => IContextualMenuItem[] | undefined;
-    getHelp?: () => Record<string, string>;
-    getMenuItems?: (resource: Res) => IContextualMenuItem[];
-    group?: ResourceGroupType;
-    iconName: string;
-    renderer: React.ComponentType<{
-        href: string;
-        resource: Res;
-        api: AppServices;
-    }>;
-    title: string;
 }
 
 // Warning: (ae-missing-release-tag) "RecoilBasedProfileHost" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

@@ -9,9 +9,9 @@ import { DataTableEditor } from '../../components/editors/DataTableEditor/index.
 import { DataTableTextEditor } from '../../components/editors/DataTableTextEditor/index.js'
 import { ResourceSchemaEditor } from '../../components/editors/ResourceSchemaEditor/index.js'
 import { useHelpOnMount } from '../../hooks/useHelpOnMount.js'
-import type { PluginComponentProps } from '../../types.js'
+import type { ProfileComponentProps } from '../../types.js'
 
-export const DataTableRenderer: React.FC<PluginComponentProps<DataTable>> =
+export const DataTableRenderer: React.FC<ProfileComponentProps<DataTable>> =
 	memo(function DataTableRenderer({ resource }) {
 		useHelpOnMount('resources.datatable.index')
 		return <CompoundEditor resource={resource} editors={editors} />

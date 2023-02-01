@@ -14,7 +14,7 @@ import { useCallback, useMemo } from 'react'
 
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
 import { usePersistenceService } from '../../../hooks/usePersistenceService.js'
-import type { ProfilePlugin } from '../../../types.js'
+import type { AppProfile } from '../../../types.js'
 import { CommandBarSection } from '../../../types.js'
 import { TABLE_TYPES, ZIP_TYPES } from './ResourcesPane.constants.js'
 import { icons } from './ResourcesPane.styles.js'
@@ -26,14 +26,14 @@ import type { FileDefinition } from './ResourcesPane.types.js'
  * @param examples - The provided examples
  * @param expanded - Whether the pane is expended
  * @param setFile - Set the imported file
- * @param plugins - The profile plugins
+ * @param profiles - The profile profiles
  * @returns A set of commands for the file management
  */
 export function useFileManagementCommands(
 	examples: FileDefinition[],
 	expanded: boolean,
 	setFile: (file: BaseFile) => void,
-	plugins: Map<string, ProfilePlugin>,
+	profiles: Map<string, AppProfile>,
 ): {
 	commands: ICommandBarItemProps[]
 	openCommands: IContextualMenuItem[]
@@ -45,9 +45,9 @@ export function useFileManagementCommands(
 		dataPackage.isEmpty$,
 		dataPackage.isEmpty,
 	)
-	const newCommands = useNewMenuCommands(plugins)
-	const saveCommands = useSaveMenuCommands(plugins)
-	const openCommands = useOpenMenuItems(examples, plugins, setFile)
+	const newCommands = useNewMenuCommands(profiles)
+	const saveCommands = useSaveMenuCommands(profiles)
+	const openCommands = useOpenMenuItems(examples, profiles, setFile)
 	const theme = useTheme()
 	const buttonStyles = useMemo(
 		() => ({
@@ -97,25 +97,25 @@ export function useFileManagementCommands(
 
 /**
  * Gets a list of menu items for the 'New' Menu
- * @param plugins - The profile plugins
+ * @param profiles - The profile profiles
  * @returns
  */
 function useNewMenuCommands(
-	plugins: Map<string, ProfilePlugin>,
+	profiles: Map<string, AppProfile>,
 ): IContextualMenuItem[] {
 	return useMemo<IContextualMenuItem[]>(
-		() => getPluginCommands(CommandBarSection.New, plugins),
-		[plugins],
+		() => getProfileCommands(CommandBarSection.New, profiles),
+		[profiles],
 	)
 }
 
 /**
  * Gets a list of menu items for the 'Save' Menu
- * @param plugins - The profile plugins
+ * @param profiles - The profile profiles
  * @returns
  */
 function useSaveMenuCommands(
-	plugins: Map<string, ProfilePlugin>,
+	profiles: Map<string, AppProfile>,
 ): IContextualMenuItem[] {
 	const onClickDownloadZip = useDownloadZip()
 	return useMemo<IContextualMenuItem[]>(() => {
@@ -127,9 +127,9 @@ function useSaveMenuCommands(
 				onClick: onClickDownloadZip,
 			},
 		]
-		result.push(...getPluginCommands(CommandBarSection.Save, plugins))
+		result.push(...getProfileCommands(CommandBarSection.Save, profiles))
 		return result
-	}, [plugins, onClickDownloadZip])
+	}, [profiles, onClickDownloadZip])
 }
 
 function useDownloadZip(): () => void {
@@ -145,12 +145,12 @@ function useDownloadZip(): () => void {
 
 /**
  * Gets a list of menu items for the 'Open' Menu
- * @param plugins - The profile plugins
+ * @param profiles - The profile profiles
  * @returns
  */
 function useOpenMenuItems(
 	examples: FileDefinition[],
-	plugins: Map<string, ProfilePlugin>,
+	profiles: Map<string, AppProfile>,
 	setFile: (file: BaseFile) => void,
 ): IContextualMenuItem[] {
 	const dataPackage = useDataPackage()
@@ -214,10 +214,10 @@ function useOpenMenuItems(
 					})),
 				},
 			})
-			result.push(...getPluginCommands(CommandBarSection.Open, plugins))
+			result.push(...getProfileCommands(CommandBarSection.Open, profiles))
 		}
 		return result
-	}, [examples, plugins, onClickUploadTable, onClickUploadZip, onClickExample])
+	}, [examples, profiles, onClickUploadTable, onClickUploadZip, onClickExample])
 }
 
 function useUploadZip(): (file: BaseFile) => void {
@@ -269,13 +269,13 @@ function useOnOpenFileRequested(): (
 	}, [])
 }
 
-function getPluginCommands(
+function getProfileCommands(
 	section: CommandBarSection,
-	plugins: Map<string, ProfilePlugin>,
+	profiles: Map<string, AppProfile>,
 ): IContextualMenuItem[] {
 	const result: IContextualMenuItem[] = []
-	for (const plugin of plugins.values()) {
-		const dynamicItems = plugin.getCommandBarCommands?.(section)
+	for (const profile of profiles.values()) {
+		const dynamicItems = profile.getCommandBarCommands?.(section)
 		if (dynamicItems) {
 			result.push(...dynamicItems)
 		}

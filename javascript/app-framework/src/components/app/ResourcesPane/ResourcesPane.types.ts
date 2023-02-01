@@ -7,7 +7,7 @@ import type { TableContainer } from '@datashaper/tables'
 import type { BaseFile } from '@datashaper/utilities'
 
 import type {
-	ProfilePlugin,
+	AppProfile,
 	ResourceRoute,
 	ResourceRouteGroup,
 } from '../../../index.js'
@@ -53,7 +53,7 @@ export interface ResourcesPaneProps {
 	 */
 	selectedKey?: string
 
-	plugins: Map<string, ProfilePlugin>
+	profiles: Map<string, AppProfile>
 
 	currentHelp?: string
 	helpContent: Record<string, string>

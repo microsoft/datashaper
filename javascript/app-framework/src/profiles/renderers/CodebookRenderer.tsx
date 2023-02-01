@@ -9,9 +9,9 @@ import { CompoundEditor } from '../../components/editors/CompoundEditor/index.js
 import { CodebookEditor } from '../../components/editors/CodebookEditor/index.js'
 import { ResourceSchemaEditor } from '../../components/editors/ResourceSchemaEditor/index.js'
 import { useHelpOnMount } from '../../hooks/useHelpOnMount.js'
-import type { PluginComponentProps } from '../../types.js'
+import type { ProfileComponentProps } from '../../types.js'
 
-export const CodebookRenderer: React.FC<PluginComponentProps<Codebook>> = memo(
+export const CodebookRenderer: React.FC<ProfileComponentProps<Codebook>> = memo(
 	function CodebookRenderer({ resource }) {
 		useHelpOnMount('resources.codebook.index')
 		return <CompoundEditor resource={resource} editors={editors} />

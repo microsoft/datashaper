@@ -4,7 +4,7 @@
  */
 import 'allotment/dist/style.css'
 
-import { type ProfilePlugin, DataShaperApp } from '@datashaper/app-framework'
+import { type AppProfile, DataShaperApp } from '@datashaper/app-framework'
 import { Spinner } from '@fluentui/react'
 import { useConst } from '@fluentui/react-hooks'
 import { memo, Suspense } from 'react'
@@ -18,8 +18,8 @@ import { ErrorBoundary } from './ErrorBoundary.js'
 import { StyleContext } from './StyleContext.js'
 
 export const App: React.FC = memo(function App() {
-	const customProfiles = useConst<ProfilePlugin[]>(
-		() => [new TestAppProfile()] as ProfilePlugin<any, any>[],
+	const customProfiles = useConst<AppProfile[]>(
+		() => [new TestAppProfile()] as AppProfile<any, any>[],
 	)
 	return (
 		<ErrorBoundary>

@@ -9,9 +9,9 @@ import { CompoundEditor } from '../../components/editors/CompoundEditor/index.js
 import { ResourceSchemaEditor } from '../../components/editors/ResourceSchemaEditor/index.js'
 import { TableBundleEditor } from '../../components/editors/TableBundleEditor/index.js'
 import { useHelpOnMount } from '../../hooks/useHelpOnMount.js'
-import type { PluginComponentProps } from '../../types.js'
+import type { ProfileComponentProps } from '../../types.js'
 
-export const TableBundleRenderer: React.FC<PluginComponentProps<TableBundle>> =
+export const TableBundleRenderer: React.FC<ProfileComponentProps<TableBundle>> =
 	memo(function TableBundleRenderer({ resource }) {
 		useHelpOnMount('resources.tablebundle.index')
 		return <CompoundEditor resource={resource} editors={editors} />

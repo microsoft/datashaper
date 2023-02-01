@@ -18,7 +18,7 @@ import {
 	useExpandedState,
 	useFlattened,
 	useRegisteredProfiles,
-	useRegisterPluginHelp,
+	useRegisterProfileHelp,
 } from './DataShaperApp.hooks.js'
 import {
 	PANE_COLLAPSED_SIZE,
@@ -80,10 +80,10 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 		help: { currentHelp, onInitializeHelp, helpContent },
 	} = useAppServices(defaultHelp)
 
-	const plugins = useRegisteredProfiles(api, profiles)
-	const resources = useResourceRoutes(api, plugins)
+	const appProfiles = useRegisteredProfiles(api, profiles)
+	const resources = useResourceRoutes(api, appProfiles)
 	const flattenedRoutes = useFlattened(resources)
-	useRegisterPluginHelp(plugins, onInitializeHelp)
+	useRegisterProfileHelp(appProfiles, onInitializeHelp)
 
 	return (
 		<AppServicesContext.Provider value={api}>
@@ -102,7 +102,7 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 					<ResourcesPane
 						resources={resources}
 						expanded={expanded}
-						plugins={plugins}
+						profiles={appProfiles}
 						style={fileTreeStyle}
 						selectedKey={selectedKey}
 						examples={examples}
