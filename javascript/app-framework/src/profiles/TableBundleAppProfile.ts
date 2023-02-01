@@ -20,7 +20,7 @@ import {
 import type { IContextualMenuItem } from '@fluentui/react'
 
 import type { AppProfileInitializationContext, AppProfile } from '../types.js'
-import { CommandBarSection, ResourceGroupType } from '../types.js'
+import { ResourceGroupType } from '../types.js'
 import { TableBundleRenderer } from './renderers/TableBundleRenderer.js'
 
 export class TableBundleAppProfile

@@ -144,8 +144,6 @@ export class Codebook extends Resource implements TableTransformer {
     // (undocumented)
     defaultName(): string;
     // (undocumented)
-    defaultTitle(): string;
-    // (undocumented)
     dispose(): void;
     // (undocumented)
     get fields$(): Observable<Field[]>;
@@ -1091,8 +1089,6 @@ export class Workflow extends Resource implements TableTransformer {
     connect(dp: DataPackage, top: boolean): void;
     // (undocumented)
     defaultName(): string;
-    // (undocumented)
-    defaultTitle(): string;
     // (undocumented)
     dispose(): void;
     // (undocumented)

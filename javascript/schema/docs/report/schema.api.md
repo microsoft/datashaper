@@ -406,8 +406,7 @@ export enum ErrorCode {
 // Warning: (ae-missing-release-tag) "FactoryInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type FactoryInput<T> = Omit<T, '$schema' | 'id' | 'name' | 'profile'> & {
-    id?: string;
+export type FactoryInput<T> = Omit<T, '$schema' | 'name' | 'profile'> & {
     name?: string;
 };
 

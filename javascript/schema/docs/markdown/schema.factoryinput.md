@@ -7,8 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export type FactoryInput<T> = Omit<T, '$schema' | 'id' | 'name' | 'profile'> & {
-    id?: string;
+export type FactoryInput<T> = Omit<T, '$schema' | 'name' | 'profile'> & {
     name?: string;
 };
 ```

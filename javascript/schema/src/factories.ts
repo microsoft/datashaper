@@ -2,8 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { v4 } from 'uuid'
-
 import { versions } from '../versions.js'
 import type { CodebookSchema } from './codebook/CodebookSchema.js'
 import type { DataPackageSchema } from './datapackage/DataPackageSchema.js'
@@ -18,8 +16,7 @@ export const LATEST_TABLEBUNDLE_SCHEMA = `https://microsoft.github.io/datashaper
 export const LATEST_DATATABLE_SCHEMA = `https://microsoft.github.io/datashaper/schema/datatable/v${versions.datatable}.json`
 export const LATEST_CODEBOOK_SCHEMA = `https://microsoft.github.io/datashaper/schema/codebook/v${versions.codebook}.json`
 
-export type FactoryInput<T> = Omit<T, '$schema' | 'id' | 'name' | 'profile'> & {
-	id?: string
+export type FactoryInput<T> = Omit<T, '$schema' | 'name' | 'profile'> & {
 	name?: string
 }
 
@@ -29,8 +26,8 @@ export function createDataPackageSchemaObject(
 	return {
 		$schema: LATEST_DATATABLE_SCHEMA,
 		profile: KnownProfile.DataPackage,
-		id: input.id ?? v4(),
-		name: input.name ?? 'DataPackage',
+		title: 'datapackage',
+		name: input.name ?? 'datapackage.json',
 		...input,
 	}
 }
@@ -41,8 +38,8 @@ export function createTableBundleSchemaObject(
 	return {
 		$schema: LATEST_TABLEBUNDLE_SCHEMA,
 		profile: KnownProfile.TableBundle,
-		id: input.id ?? v4(),
-		name: input.name ?? 'TableBundle',
+		title: 'table',
+		name: input.name ?? 'tablebundle.json',
 		...input,
 	}
 }
@@ -52,8 +49,8 @@ export function createWorkflowSchemaObject(
 ): WorkflowSchema {
 	return {
 		$schema: LATEST_WORKFLOW_SCHEMA,
-		id: input.id ?? v4(),
-		name: input.name ?? 'Workflow',
+		title: 'workflow',
+		name: input.name ?? 'workflow.json',
 		profile: 'workflow',
 		...input,
 	}
@@ -64,8 +61,8 @@ export function createDataTableSchemaObject(
 ): DataTableSchema {
 	return {
 		$schema: LATEST_DATATABLE_SCHEMA,
-		id: input.id ?? v4(),
-		name: input.name ?? 'DataTable',
+		title: 'datatable',
+		name: input.name ?? 'datatable.json',
 		profile: KnownProfile.DataTable,
 		...input,
 	}
@@ -76,8 +73,8 @@ export function createCodebookSchemaObject(
 ): CodebookSchema {
 	return {
 		$schema: LATEST_DATATABLE_SCHEMA,
-		id: input.id ?? v4(),
-		name: input.name ?? 'Codebook',
+		title: 'codebook',
+		name: input.name ?? 'codebook.json',
 		profile: KnownProfile.Codebook,
 		...input,
 	}

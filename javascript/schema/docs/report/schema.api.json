@@ -4117,7 +4117,7 @@
             },
             {
               "kind": "Content",
-              "text": "<T, '$schema' | 'id' | 'name' | 'profile'> & {\n    id?: string;\n    name?: string;\n}"
+              "text": "<T, '$schema' | 'name' | 'profile'> & {\n    name?: string;\n}"
             },
             {
               "kind": "Content",

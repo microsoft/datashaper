@@ -44,7 +44,8 @@ function useAddTable(): AddTableHandler {
 			const name = removeExtension(id)
 			const table = new DataTable(createDataTableSchemaObject(schema))
 			table.data = file
-			table.name = 'datatable.json'
+			table.title = id
+			table.name = id
 			table.path = id
 
 			const cb = codebook ? [new Codebook(codebook)] : []
