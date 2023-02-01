@@ -1715,7 +1715,7 @@ __metadata:
     npm-run-all: ^4.1.5
     rome: ^11.0.0
     semver: ^7.3.8
-    turbo: ^1.7.1
+    turbo: 1.6.0
     typescript: ^4.9.5
   languageName: unknown
   linkType: soft
@@ -17967,58 +17967,58 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo-darwin-64@npm:1.7.1":
-  version: 1.7.1
-  resolution: "turbo-darwin-64@npm:1.7.1"
+"turbo-darwin-64@npm:1.6.0":
+  version: 1.6.0
+  resolution: "turbo-darwin-64@npm:1.6.0"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-darwin-arm64@npm:1.7.1":
-  version: 1.7.1
-  resolution: "turbo-darwin-arm64@npm:1.7.1"
+"turbo-darwin-arm64@npm:1.6.0":
+  version: 1.6.0
+  resolution: "turbo-darwin-arm64@npm:1.6.0"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-64@npm:1.7.1":
-  version: 1.7.1
-  resolution: "turbo-linux-64@npm:1.7.1"
+"turbo-linux-64@npm:1.6.0":
+  version: 1.6.0
+  resolution: "turbo-linux-64@npm:1.6.0"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm64@npm:1.7.1":
-  version: 1.7.1
-  resolution: "turbo-linux-arm64@npm:1.7.1"
+"turbo-linux-arm64@npm:1.6.0":
+  version: 1.6.0
+  resolution: "turbo-linux-arm64@npm:1.6.0"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-windows-64@npm:1.7.1":
-  version: 1.7.1
-  resolution: "turbo-windows-64@npm:1.7.1"
+"turbo-windows-64@npm:1.6.0":
+  version: 1.6.0
+  resolution: "turbo-windows-64@npm:1.6.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-windows-arm64@npm:1.7.1":
-  version: 1.7.1
-  resolution: "turbo-windows-arm64@npm:1.7.1"
+"turbo-windows-arm64@npm:1.6.0":
+  version: 1.6.0
+  resolution: "turbo-windows-arm64@npm:1.6.0"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo@npm:^1.7.1":
-  version: 1.7.1
-  resolution: "turbo@npm:1.7.1"
+"turbo@npm:1.6.0":
+  version: 1.6.0
+  resolution: "turbo@npm:1.6.0"
   dependencies:
-    turbo-darwin-64: 1.7.1
-    turbo-darwin-arm64: 1.7.1
-    turbo-linux-64: 1.7.1
-    turbo-linux-arm64: 1.7.1
-    turbo-windows-64: 1.7.1
-    turbo-windows-arm64: 1.7.1
+    turbo-darwin-64: 1.6.0
+    turbo-darwin-arm64: 1.6.0
+    turbo-linux-64: 1.6.0
+    turbo-linux-arm64: 1.6.0
+    turbo-windows-64: 1.6.0
+    turbo-windows-arm64: 1.6.0
   dependenciesMeta:
     turbo-darwin-64:
       optional: true
@@ -18034,7 +18034,7 @@ __metadata:
       optional: true
   bin:
     turbo: bin/turbo
-  checksum: 0d681db1de3679f010207cb818b57dc4c917a175e9cf15b0985d1e630a38a7c15ee61737f6b2e3cb39465d6261f8a07a9d89b65edb80cf6af79bcfa7886aaf90
+  checksum: cd263ffe48a1ecc4a285164f371597a931893754f184a3d3449404ba0dc93ee636213cc9cb652b83442afa086bbf1aaec54760cc024f6a2bb694d7e7cb972a55
   languageName: node
   linkType: hard
 

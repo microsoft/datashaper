@@ -21,14 +21,18 @@ export const InvertedDefaults: React.FC<ProjectManagementCommandBarProps> = {
 	},
 }
 
+const InvertedCustomComponent: React.FC<ProjectManagementCommandBarProps> = (
+	args,
+) => {
+	const colors = {
+		background: 'coral',
+		border: 'orange',
+		color: 'darkslateblue',
+	}
+	const props = useManagementBarDefaults(args, colors)
+	return <ProjectManagementCommandBarComponent {...props} />
+}
+
 export const InvertedCustom: React.FC<ProjectManagementCommandBarProps> = {
-	render: (args) => {
-		const colors = {
-			background: 'coral',
-			border: 'orange',
-			color: 'darkslateblue',
-		}
-		const props = useManagementBarDefaults(args, colors)
-		return <ProjectManagementCommandBarComponent {...props} />
-	},
+	render: InvertedCustomComponent,
 }
