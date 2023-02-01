@@ -9,11 +9,7 @@ import type { DataTable } from '@datashaper/workflow'
 export function useContent(resource: DataTable): string | undefined {
 	const [content, setContent] = useState<string | undefined>()
 	useEffect(() => {
-		const f = async () => {
-			const _content = await resource.data?.text()
-			setContent(_content)
-		}
-		void f()
+		resource.data?.text().then(setContent)
 	}, [resource, setContent])
 	return content
 }
