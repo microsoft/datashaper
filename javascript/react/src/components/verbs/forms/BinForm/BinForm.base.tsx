@@ -95,7 +95,9 @@ export const BinFormBase: React.FC<StepFormBaseProps<BinArgs>> = memo(
 					step.args.nice,
 					(s, val) => (s.args.nice = val as boolean),
 					{
-						if: (step.args.strategy !== BinStrategy.FixedWidth) && (step.args.strategy !== BinStrategy.FixedCount),
+						if:
+							step.args.strategy !== BinStrategy.FixedWidth &&
+							step.args.strategy !== BinStrategy.FixedCount,
 						styles: {
 							root: {
 								marginTop: 8,

@@ -136,18 +136,18 @@ export function estimateBinValues(
 	max: number,
 	strategy: BinStrategy,
 	values: number[],
-	nice?: boolean
-): [number, number, number]{
+	nice?: boolean,
+): [number, number, number] {
 	let width = estimateWidth(strategy, values, min, max)
 
-	if(nice){
+	if (nice) {
 		const adjustedValues = calculateNiceRounding(min, max, width)
 		const [minValue, maxValue, widthValue] = adjustedValues
 		min = minValue
 		max = maxValue
 		width = widthValue
 	}
-	
+
 	const numBins = calculateBinCount(min, max, width)
 	const binEdges = linspace(min, max, numBins + 1)
 	return [min, max, roundNumber(binEdges[1]! - binEdges[0]!, Opts.Up)]
@@ -184,33 +184,52 @@ export function calculateNiceRounding(
 	max: number,
 	step: number,
 ): [number, number, number] {
-	return [roundNumber(min, Opts.Down), roundNumber(max, Opts.Up), roundNumber(step, Opts.Up)]
+	return [
+		roundNumber(min, Opts.Down),
+		roundNumber(max, Opts.Up),
+		roundNumber(step, Opts.Up),
+	]
 }
 
-export function roundNumber(value: number, opt: Opts): number{
-	if(value < 1 && getNumberOfDecimals(value) > 10){
-		const decimals = value.toString().split(".")
-		const finalNumber = Number(decimals[0]! + "." + decimals[1]!.substring(0, ROUND_PRECISION) + (opt === Opts.Down ? "0" : "9") + decimals[1]!.substring(ROUND_PRECISION + 1))
-		return Number(finalNumber.toFixed(ROUND_PRECISION))		
-
-	}
-	else if(value < 1 && getNumberOfDecimals(value) <= 10){
+export function roundNumber(value: number, opt: Opts): number {
+	if (value < 1 && getNumberOfDecimals(value) > 10) {
+		const decimals = value.toString().split('.')
+		const whole = decimals[0]!
+		const fractional = decimals[1]!
+		const rounding = opt === Opts.Down ? '0' : '9'
+		const fractionalPreRounding = fractional.substring(0, ROUND_PRECISION)
+		const fractionalPostRounding = fractional.substring(0, ROUND_PRECISION + 1)
+		const finalNumber = Number(
+			`${whole}.${fractionalPreRounding}${rounding}${fractionalPostRounding}`,
+		)
+		return Number(finalNumber.toFixed(ROUND_PRECISION))
+	} else if (value < 1 && getNumberOfDecimals(value) <= 10) {
 		const numberOfDecimals = getNumberOfDecimals(value)
-		const decimals = value.toString().split(".")
-		const finalNumber = Number(decimals[0]! + "." + decimals[1]!.substring(0, numberOfDecimals / ROUND_PRECISION) + (opt === Opts.Down ? "0" : "9") + decimals[1]!.substring((numberOfDecimals / ROUND_PRECISION) + 1))
+		const decimals = value.toString().split('.')
+		const finalNumber = Number(
+			`${decimals[0]!}.${decimals[1]!.substring(
+				0,
+				numberOfDecimals / ROUND_PRECISION,
+			)}${opt === Opts.Down ? '0' : '9'}${decimals[1]!.substring(
+				numberOfDecimals / ROUND_PRECISION + 1,
+			)}`,
+		)
 		return Number(finalNumber.toFixed(numberOfDecimals / ROUND_PRECISION))
+	} else {
+		const decimals = value.toString().split('.')
 
-	}
-	else {
-		const decimals = value.toString().split(".")
-
-		if(decimals[0]!.length > 1){
+		if (decimals[0]!.length > 1) {
 			const numberString = value.toString()
-			const finalNumber = Number(numberString.substring(0, INTEGER_PRECISION) + (opt === Opts.Down ? "0" : "9") + numberString.substring(INTEGER_PRECISION + 1))
+			const finalNumber = Number(
+				numberString.substring(0, INTEGER_PRECISION) +
+					(opt === Opts.Down ? '0' : '9') +
+					numberString.substring(INTEGER_PRECISION + 1),
+			)
 			return Number(finalNumber.toPrecision(INTEGER_PRECISION))
-		}
-		else if(decimals[0]!.length <= 1 && decimals.length > 1){
-			const finalNumber = Number(decimals[0]! + (opt === Opts.Down ? ".0" : ".9"))
+		} else if (decimals[0]!.length <= 1 && decimals.length > 1) {
+			const finalNumber = Number(
+				decimals[0]! + (opt === Opts.Down ? '.0' : '.9'),
+			)
 			return Number(finalNumber.toPrecision(INTEGER_PRECISION))
 		}
 
@@ -218,12 +237,12 @@ export function roundNumber(value: number, opt: Opts): number{
 	}
 }
 
-function getNumberOfDecimals(value: number): number{
-	const decimals = value.toString().split(".")
+function getNumberOfDecimals(value: number): number {
+	const decimals = value.toString().split('.')
 	return decimals[1] !== undefined ? decimals[1].length : 0
 }
 
 export enum Opts {
 	Down = 0,
-	Up = 1
+	Up = 1,
 }

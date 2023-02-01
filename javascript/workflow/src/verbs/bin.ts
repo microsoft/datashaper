@@ -8,9 +8,7 @@ import { fixedBinStep } from '@datashaper/tables'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import {
-	estimateBinValues
-} from './util/binUtilities.js'
+import { estimateBinValues } from './util/binUtilities.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 

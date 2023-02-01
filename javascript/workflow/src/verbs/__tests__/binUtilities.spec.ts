@@ -199,7 +199,7 @@ describe('bin utilities tests', () => {
 		it('algorithm result', () => {
 			expect(min).toBe(0.1)
 			expect(max).toBe(1)
-			expect(width).toBe(0.440)
+			expect(width).toBe(0.44)
 		})
 	})
 

@@ -4,7 +4,6 @@
  */
 import { DataFormat } from '@datashaper/schema'
 import { DataTable } from '@datashaper/workflow'
-import type { ComponentStory } from '@storybook/react'
 import { useEffect, useMemo } from 'react'
 
 import { DataTableConfig } from './DataTableConfig.js'
@@ -16,9 +15,7 @@ const storyMetadata = {
 }
 export default storyMetadata
 
-const Template: ComponentStory<typeof DataTableConfig> = ({
-	...args
-}): JSX.Element => {
+export const DataTableConfigComponent: React.FC = (args) => {
 	const resource = useMemo(
 		() =>
 			new DataTable({
@@ -45,5 +42,7 @@ const Template: ComponentStory<typeof DataTableConfig> = ({
 	)
 }
 
-export const DataTableConfigStory = Template.bind({})
-DataTableConfigStory.storyName = 'DataTableConfig'
+export const DataTableConfigStory = {
+	render: DataTableConfigComponent,
+	name: 'DataTableConfig',
+}

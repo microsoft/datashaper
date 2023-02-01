@@ -21,54 +21,86 @@ const storyMetadata = {
 }
 export default storyMetadata
 
-export const EveryOperation = WorkflowExampleStory.bind({})
-EveryOperation.args = {
-	schema: everyOperation as WorkflowSchema,
+export const EveryOperation = {
+	render: WorkflowExampleStory.bind({}),
+
+	args: {
+		schema: everyOperation as WorkflowSchema,
+	},
 }
 
-export const AggregatedLookup = WorkflowExampleStory.bind({})
-AggregatedLookup.args = {
-	schema: aggregatedLookup as WorkflowSchema,
+export const AggregatedLookup = {
+	render: WorkflowExampleStory.bind({}),
+
+	args: {
+		schema: aggregatedLookup as WorkflowSchema,
+	},
 }
 
-export const Binning = WorkflowExampleStory.bind({})
-Binning.args = {
-	schema: binning as WorkflowSchema,
+export const Binning = {
+	render: WorkflowExampleStory.bind({}),
+
+	args: {
+		schema: binning as WorkflowSchema,
+	},
 }
 
-export const DropdownCells = WorkflowExampleStory.bind({})
-DropdownCells.args = {
-	schema: dropdown as WorkflowSchema,
+export const DropdownCells = {
+	render: WorkflowExampleStory.bind({}),
+
+	args: {
+		schema: dropdown as WorkflowSchema,
+	},
 }
 
-export const MultistepBinarize = WorkflowExampleStory.bind({})
-MultistepBinarize.args = {
-	schema: multistepBinarize as WorkflowSchema,
+export const MultistepBinarize = {
+	render: WorkflowExampleStory.bind({}),
+
+	args: {
+		schema: multistepBinarize as WorkflowSchema,
+	},
 }
 
-export const OnehotUnhot = WorkflowExampleStory.bind({})
-OnehotUnhot.args = {
-	schema: onehotunhot as WorkflowSchema,
-}
-OnehotUnhot.storyName = 'Onehot/Unhot'
+export const OnehotUnhot = {
+	render: WorkflowExampleStory.bind({}),
 
-export const Sparkbar = WorkflowExampleStory.bind({})
-Sparkbar.args = {
-	schema: sparkbar as WorkflowSchema,
-}
+	args: {
+		schema: onehotunhot as WorkflowSchema,
+	},
 
-export const SparkbarCategorical = WorkflowExampleStory.bind({})
-SparkbarCategorical.args = {
-	schema: categorical as WorkflowSchema,
-}
-SparkbarCategorical.storyName = 'Sparkbar: Categorical'
-
-export const Sparkline = WorkflowExampleStory.bind({})
-Sparkline.args = {
-	schema: sparkline as WorkflowSchema,
+	name: 'Onehot/Unhot',
 }
 
-export const Spreadhot = WorkflowExampleStory.bind({})
-Spreadhot.args = {
-	schema: spreadhot as WorkflowSchema,
+export const Sparkbar = {
+	render: WorkflowExampleStory.bind({}),
+
+	args: {
+		schema: sparkbar as WorkflowSchema,
+	},
+}
+
+export const SparkbarCategorical = {
+	render: WorkflowExampleStory.bind({}),
+
+	args: {
+		schema: categorical as WorkflowSchema,
+	},
+
+	name: 'Sparkbar: Categorical',
+}
+
+export const Sparkline = {
+	render: WorkflowExampleStory.bind({}),
+
+	args: {
+		schema: sparkline as WorkflowSchema,
+	},
+}
+
+export const Spreadhot = {
+	render: WorkflowExampleStory.bind({}),
+
+	args: {
+		schema: spreadhot as WorkflowSchema,
+	},
 }
