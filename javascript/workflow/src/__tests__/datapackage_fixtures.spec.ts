@@ -54,6 +54,7 @@ function defineTestCase(parentPath: string, test: string) {
 		try {
 			datapackage = new DataPackage()
 			await datapackage.load(assets)
+			await new Promise((resolve) => setTimeout(resolve, 1))
 			expect(datapackage.size).toEqual(expected.tables.length)
 
 			for (const table of expected.tables) {
@@ -63,6 +64,7 @@ function defineTestCase(parentPath: string, test: string) {
 				const workflow = found
 					.getSourcesWithProfile(KnownProfile.Workflow)
 					.find((t) => !!t) as Workflow | undefined
+
 				if (table.workflowLength) {
 					expect(workflow).toBeDefined()
 					expect(workflow?.length ?? 0).toEqual(table.workflowLength ?? 0)
