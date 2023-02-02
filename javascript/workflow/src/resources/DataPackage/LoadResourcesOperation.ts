@@ -91,16 +91,17 @@ export class LoadResourcesOperation {
 		const resourceName = (
 			res: ResourceSchema,
 		): [string, string | undefined] => {
+			const profile = res.profile || 'resource'
+			const title = res.title || res.name || profile
 			if (res.name) {
-				return [res.name, undefined]
+				return [res.name, title]
 			} else {
-				const profile = res.profile || 'resource'
 				let candidate = `${profile}.json`
 				let index = 0
 				while (nameToPath.has(candidate)) {
 					candidate = `${profile} (${++index}).json`
 				}
-				return [candidate, `${profile}.json`]
+				return [candidate, title]
 			}
 		}
 

@@ -9,5 +9,12 @@ Constructs a new instance of the `DataPackage` class
 <b>Signature:</b>
 
 ```typescript
-constructor();
+constructor(profiles?: ProfileHandler[]);
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  profiles | [ProfileHandler](./workflow.profilehandler.md)<!-- -->\[\] | <i>(Optional)</i> |
+

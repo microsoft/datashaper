@@ -8,6 +8,7 @@ import { fileURLToPath } from 'url'
 import { DataPackage } from '../resources/DataPackage/DataPackage.js'
 import type { Workflow } from '../resources/index.js'
 import type { TableBundle } from '../resources/TableBundle.js'
+import { defaultProfiles } from './utils.js'
 
 // Set the root cwd to the package root.
 // this makes loading datafiles by file-url in the project more straightforward
@@ -52,7 +53,7 @@ function defineTestCase(parentPath: string, test: string) {
 		const expected = await readJson(path.join(casePath, 'expected.json'))
 		let datapackage: DataPackage | undefined
 		try {
-			datapackage = new DataPackage()
+			datapackage = new DataPackage(defaultProfiles())
 			await datapackage.load(assets)
 			await new Promise((resolve) => setTimeout(resolve, 1))
 			expect(datapackage.size).toEqual(expected.tables.length)
@@ -116,7 +117,4 @@ async function checkPersisted(files: Map<string, Blob>, expected: any) {
 
 	const dpJson = JSON.parse(await dpBlob!.text())
 	expect(dpJson.resources).toHaveLength(expected.tables.length)
-
-	// const dpLoaded = new DataPackage()
-	// expect(() => dpLoaded.load(files)).not.toThrow()
 }

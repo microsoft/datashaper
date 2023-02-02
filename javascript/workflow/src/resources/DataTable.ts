@@ -23,6 +23,9 @@ import type { Readable, TableEmitter } from './types/index.js'
 const log = debug('datashaper')
 
 export class DataTable extends Resource implements TableEmitter {
+	public override defaultTitle(): string {
+		return 'datatable'
+	}
 	public override defaultName(): string {
 		return 'datatable.json'
 	}

@@ -27,7 +27,7 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 		examples,
 		selectedKey,
 		resources,
-		plugins,
+		profiles,
 		onToggleExpanded,
 		onSelect,
 		currentHelp,
@@ -45,7 +45,7 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 				<FileTreeCommands
 					expanded={expanded}
 					examples={examples}
-					plugins={plugins}
+					profiles={profiles}
 				/>
 				<Allotment vertical>
 					<Allotment.Pane>

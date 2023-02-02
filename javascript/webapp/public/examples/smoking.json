@@ -8,6 +8,8 @@
 				{
 					"rel": "input",
 					"profile": "datatable",
+					"title": "nhefs.csv",
+					"name": "datatable.json",
 					"path": "https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/1268/20/nhefs.csv",
 					"metadata": {
 						"source": "https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/",
@@ -17,9 +19,7 @@
 				{
 					"$schema": "https://microsoft.github.io/datashaper/schema/codebook/v1.0.0.json",
 					"id": "afe1c7d9-0f3e-44cb-9e22-6c3c6ff24427",
-					"name": "Codebook",
 					"profile": "codebook",
-					"title": "codebook.json",
 					"fields": [
 					  {
 						"name": "seqn",
@@ -585,6 +585,7 @@
 				{
 					"rel": "input",
 					"profile": "datatable",
+					"name": "prop99.csv",
 					"path": "https://cdn.jsdelivr.net/gh/synth-inference/synthdid@master/data/california_prop99.csv",
 					"metadata": {
 						"source": "https://www.openicpsr.org/openicpsr/project/146381/version/V1/view?path=/openicpsr/146381/fcr:versions/V1/synthdid-sdid-paper/data/california_prop99.csv",

@@ -208,7 +208,7 @@ export function createNode(step: Step): Node_2<TableContainer>;
 export class DataPackage extends Resource {
     // (undocumented)
     readonly $schema: string;
-    constructor();
+    constructor(profiles?: ProfileHandler[]);
     // (undocumented)
     addResource(resource: Resource, top?: boolean): void;
     addResourceHandler(handler: ProfileHandler): void;
@@ -293,6 +293,8 @@ export class DataTable extends Resource implements TableEmitter {
     set data(value: Blob | undefined);
     // (undocumented)
     defaultName(): string;
+    // (undocumented)
+    defaultTitle(): string;
     // (undocumented)
     dispose(): void;
     // (undocumented)

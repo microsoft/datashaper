@@ -5,7 +5,7 @@
 import type { BaseFile } from '@datashaper/utilities'
 import { memo, useState } from 'react'
 
-import type { ProfilePlugin } from '../../../types.js'
+import type { AppProfile } from '../../../types.js'
 import { FileImport } from './FileImport.js'
 import { useFileManagementCommands } from './FileTreeCommands.hooks.js'
 import {
@@ -22,14 +22,14 @@ import type { FileDefinition } from './ResourcesPane.types.js'
 export interface FileTreeCommandsProps {
 	expanded: boolean
 	examples: FileDefinition[]
-	plugins: Map<string, ProfilePlugin>
+	profiles: Map<string, AppProfile>
 }
 export const FileTreeCommands: React.FC<FileTreeCommandsProps> = memo(
-	function FileTreeCommands({ expanded, examples, plugins }) {
+	function FileTreeCommands({ expanded, examples, profiles }) {
 		const commandBarStyles = useCommandbarStyles()
 		const [file, setFile] = useState<BaseFile | undefined>()
 		const { commands, openCommands, newCommands, saveCommands } =
-			useFileManagementCommands(examples, expanded, setFile, plugins)
+			useFileManagementCommands(examples, expanded, setFile, profiles)
 
 		return (
 			<>

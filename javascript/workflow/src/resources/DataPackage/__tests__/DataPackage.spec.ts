@@ -1,10 +1,11 @@
+import { defaultProfiles } from '../../../__tests__/utils.js'
 import { Codebook } from '../../Codebook.js'
 import { DataPackage } from '../DataPackage.js'
 import { toBlob } from '../io.js'
 
 describe('the data package', () => {
 	it('can load a basic datapackage object', async () => {
-		const dp = new DataPackage()
+		const dp = new DataPackage(defaultProfiles())
 		await dp.load(
 			fileSet({
 				'datapackage.json': {
@@ -30,7 +31,7 @@ describe('the data package', () => {
 	})
 
 	it('can load a datapackage object with conflicting implicit names', async () => {
-		const dp = new DataPackage()
+		const dp = new DataPackage(defaultProfiles())
 		await dp.load(
 			fileSet({
 				'datapackage.json': {

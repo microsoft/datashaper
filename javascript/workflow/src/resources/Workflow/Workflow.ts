@@ -34,7 +34,7 @@ export type TableObservable = Observable<Maybe<TableContainer>>
 
 export class Workflow extends Resource implements TableTransformer {
 	public override defaultTitle(): string {
-		return 'workflow.json'
+		return 'workflow'
 	}
 	public override defaultName(): string {
 		return 'workflow.json'

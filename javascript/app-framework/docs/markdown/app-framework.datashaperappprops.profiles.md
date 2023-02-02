@@ -9,5 +9,5 @@ Custom profile renderers
 <b>Signature:</b>
 
 ```typescript
-profiles?: ProfilePlugin[];
+profiles?: AppProfile[];
 ```

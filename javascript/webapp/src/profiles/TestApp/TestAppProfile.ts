@@ -4,7 +4,7 @@
  */
 import type {
 	AppProfileInitializationContext,
-	ProfilePlugin,
+	AppProfile,
 } from '@datashaper/app-framework'
 import { CommandBarSection, ResourceGroupType } from '@datashaper/app-framework'
 import type { ResourceSchema } from '@datashaper/schema'
@@ -15,7 +15,7 @@ import { TEST_APP_PROFILE } from './constants.js'
 import { TestApp } from './TestApp.js'
 import { TestAppResource } from './TestAppResource.js'
 
-export class TestAppProfile implements ProfilePlugin<TestAppResource> {
+export class TestAppProfile implements AppProfile<TestAppResource> {
 	public readonly profile = TEST_APP_PROFILE
 	public readonly title = 'Test App'
 	public readonly iconName = 'TestBeaker'

@@ -4,7 +4,7 @@
  */
 import type React from 'react'
 
-import type { ProfilePlugin } from '../../../types.js'
+import type { AppProfile } from '../../../types.js'
 import type { FileDefinition } from '../ResourcesPane/index.js'
 
 export interface DataShaperAppProps {
@@ -32,7 +32,7 @@ export interface DataShaperAppProps {
 	/**
 	 * Custom profile renderers
 	 */
-	profiles?: ProfilePlugin[]
+	profiles?: AppProfile[]
 
 	/**
 	 * Indicates the help content to show when the application has no resources selected.

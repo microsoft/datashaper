@@ -26,8 +26,9 @@ export class Codebook extends Resource implements TableTransformer {
 	private _inputSub: Subscription | undefined
 
 	public override defaultTitle(): string {
-		return 'codebook.json'
+		return 'codebook'
 	}
+
 	public override defaultName(): string {
 		return 'codebook.json'
 	}
