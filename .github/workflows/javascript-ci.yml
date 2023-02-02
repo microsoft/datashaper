@@ -55,7 +55,7 @@ jobs:
       - run: yarn ci
         name: Verify
         env:
-          DEBUG: "datashaper:network"
+          DEBUG: "datashaper:network,datashaper:DataTableProfile
           TURBO_API: "http://127.0.0.1:9080"
           TURBO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TURBO_TEAM: "essex"

@@ -4,6 +4,7 @@
  */
 import type { DataTableSchema, Profile } from '@datashaper/schema'
 import { KnownProfile } from '@datashaper/schema'
+import debug from 'debug'
 
 import { fetchFile } from '../../../util/network.js'
 import { DataTable } from '../../DataTable.js'
@@ -14,6 +15,8 @@ import type {
 } from '../../types/index.js'
 import type { DataPackage } from '../DataPackage.js'
 import type { ResourceManager } from '../ResourceManager.js'
+
+const log = debug('datashaper:DataTableProfile')
 
 export class DataTableProfile implements ProfileHandler {
 	public readonly profile: Profile = KnownProfile.DataTable
@@ -33,19 +36,28 @@ export class DataTableProfile implements ProfileHandler {
 	public async createInstance(
 		schema: DataTableSchema | undefined,
 	): Promise<DataTable> {
+		log('creating instance')
 		const resource = new DataTable(schema)
 		if (resource.path != null) {
 			if (Array.isArray(resource.path)) {
 				throw new Error('not implemented - multipart data')
 			} else if (typeof schema?.data === 'string') {
+				log('schema.data is string, assuming embedded content')
 				resource.data = new Blob([schema.data])
 			} else {
-				const data = resource.path.startsWith('http')
-					? await fetchFile(resource.path)
-					: this.resourceManager.readFile(resource.path)
+				let data: Blob | undefined
+				if (resource.path.startsWith('http')) {
+					log('fetching remote resource data')
+					data = await fetchFile(resource.path)
+				} else {
+					log('reading local resource data')
+					data = this.resourceManager.readFile(resource.path)
+				}
 				resource.data = data
 			}
 		}
+
+		log('resource ready')
 		return resource
 	}
 
