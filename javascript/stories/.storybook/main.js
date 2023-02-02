@@ -2,10 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-const { configure } = require('@essex/storybook-config/main')
-const path = require('path')
+import { configure } from '@essex/storybook-config/main'
+import path from 'path'
 
-module.exports = configure({
+const configuration = configure({
 	staticDirs: [path.join(__dirname, '../../react/src/__tests__/public')],
-	transpileMatch: [/@datashaper/, /@essex/, /fetch-blob/],
 })
+
+export default configuration

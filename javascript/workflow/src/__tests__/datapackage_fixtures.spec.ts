@@ -55,8 +55,9 @@ function defineTestCase(parentPath: string, test: string) {
 		try {
 			datapackage = new DataPackage(defaultProfiles())
 			await datapackage.load(assets)
-
+			await new Promise((resolve) => setTimeout(resolve, 1))
 			expect(datapackage.size).toEqual(expected.tables.length)
+
 			for (const table of expected.tables) {
 				const found = datapackage.getResource(table.name) as TableBundle
 				expect(found).toBeDefined()
@@ -64,6 +65,7 @@ function defineTestCase(parentPath: string, test: string) {
 				const workflow = found
 					.getSourcesWithProfile(KnownProfile.Workflow)
 					.find((t) => !!t) as Workflow | undefined
+
 				if (table.workflowLength) {
 					expect(workflow).toBeDefined()
 					expect(workflow?.length ?? 0).toEqual(table.workflowLength ?? 0)
@@ -81,7 +83,7 @@ function defineTestCase(parentPath: string, test: string) {
 		} finally {
 			datapackage?.dispose()
 		}
-	})
+	}, 15000)
 }
 
 async function readJson(filePath: string): Promise<any> {

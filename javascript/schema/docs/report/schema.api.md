@@ -37,10 +37,12 @@ export interface Bin {
 // @public (undocumented)
 export interface BinArgs extends InputColumnArgs, OutputColumnArgs {
     clamped?: boolean;
+    // (undocumented)
     fixedcount?: number;
     fixedwidth?: number;
     max?: number;
     min?: number;
+    nice?: boolean;
     printRange?: boolean;
     // (undocumented)
     strategy: BinStrategy;

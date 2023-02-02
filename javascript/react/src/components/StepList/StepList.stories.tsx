@@ -5,7 +5,6 @@
 
 import type { Step } from '@datashaper/workflow'
 import { Workflow } from '@datashaper/workflow'
-import type { ComponentStory } from '@storybook/react'
 import { useCallback, useState } from 'react'
 
 import { DisplayOrder } from '../../enums.js'
@@ -22,10 +21,20 @@ export default storyMetadata
 
 const workflow = new Workflow(schema)
 
-const Template: ComponentStory<typeof StepList> = (
-	args: StepListProps,
-	{ loaded: { companies, companies2, products, stocks } }: any,
-): JSX.Element => {
+interface AmbientTables {
+	companies: any
+	companies2: any
+	products: any
+	stocks: any
+}
+
+const PrimaryComponent: React.FC<StepListProps & AmbientTables> = ({
+	companies,
+	companies2,
+	products,
+	stocks,
+	...args
+}) => {
 	const wf = useWorkflow(workflow, [
 		{ id: 'companies', table: companies },
 		{ id: 'companies2', table: companies2 },
@@ -56,39 +65,158 @@ const Template: ComponentStory<typeof StepList> = (
 	)
 }
 
-export const Primary = Template.bind({})
-
-export const SaveDelete = Template.bind({})
-SaveDelete.storyName = 'Save & delete step buttons'
-SaveDelete.args = {
-	onSave: (s: Step) => console.log('save', s),
-	onDelete: (s: string) => console.log('delete', s),
+const SaveDeleteComponent: React.FC<StepListProps & AmbientTables> = ({
+	companies,
+	companies2,
+	products,
+	stocks,
+	...args
+}) => {
+	const wf = useWorkflow(workflow, [
+		{ id: 'companies', table: companies },
+		{ id: 'companies2', table: companies2 },
+		{ id: 'products', table: products },
+		{ id: 'stocks', table: stocks },
+	])
+	const [selected, setSelected] = useState<string | undefined>()
+	const handleSelect = useCallback(
+		(id: string) => setSelected((prev) => (prev === id ? undefined : id)),
+		[setSelected],
+	)
+	return (
+		<div
+			style={{
+				width: 300,
+				height: 600,
+				overflowY: 'auto',
+				border: '1px solid orange',
+			}}
+		>
+			<StepList
+				{...args}
+				workflow={wf}
+				selectedKey={selected}
+				onSelect={handleSelect}
+			/>
+		</div>
+	)
 }
 
-export const TableButtons = Template.bind({})
-TableButtons.storyName = 'Original/latest buttons'
-TableButtons.args = {
-	onSelectInputTable: () => console.log('select input table'),
-	onSelectLatestTable: () => console.log('select latest table'),
+const TableButtonsComponent: React.FC<StepListProps & AmbientTables> = ({
+	companies,
+	companies2,
+	products,
+	stocks,
+	...args
+}) => {
+	const wf = useWorkflow(workflow, [
+		{ id: 'companies', table: companies },
+		{ id: 'companies2', table: companies2 },
+		{ id: 'products', table: products },
+		{ id: 'stocks', table: stocks },
+	])
+	const [selected, setSelected] = useState<string | undefined>()
+	const handleSelect = useCallback(
+		(id: string) => setSelected((prev) => (prev === id ? undefined : id)),
+		[setSelected],
+	)
+	return (
+		<div
+			style={{
+				width: 300,
+				height: 600,
+				overflowY: 'auto',
+				border: '1px solid orange',
+			}}
+		>
+			<StepList
+				{...args}
+				workflow={wf}
+				selectedKey={selected}
+				onSelect={handleSelect}
+			/>
+		</div>
+	)
 }
 
-export const Customized = Template.bind({})
-Customized.args = {
-	order: DisplayOrder.LastOnTop,
-	styles: {
-		buttonContainer: {
-			background: 'azure',
-			borderBottom: '2px solid teal',
-		},
-		stepHeaders: {
-			name: {
-				color: 'orange',
+const CustomizedComponent: React.FC<StepListProps & AmbientTables> = ({
+	companies,
+	companies2,
+	products,
+	stocks,
+	...args
+}) => {
+	const wf = useWorkflow(workflow, [
+		{ id: 'companies', table: companies },
+		{ id: 'companies2', table: companies2 },
+		{ id: 'products', table: products },
+		{ id: 'stocks', table: stocks },
+	])
+	const [selected, setSelected] = useState<string | undefined>()
+	const handleSelect = useCallback(
+		(id: string) => setSelected((prev) => (prev === id ? undefined : id)),
+		[setSelected],
+	)
+	return (
+		<div
+			style={{
+				width: 300,
+				height: 600,
+				overflowY: 'auto',
+				border: '1px solid orange',
+			}}
+		>
+			<StepList
+				{...args}
+				workflow={wf}
+				selectedKey={selected}
+				onSelect={handleSelect}
+			/>
+		</div>
+	)
+}
+
+export const Primary = {
+	render: PrimaryComponent,
+}
+
+export const SaveDelete = {
+	render: SaveDeleteComponent,
+	name: 'Save & delete step buttons',
+	args: {
+		onSave: (s: Step): void => console.log('save', s),
+		onDelete: (s: string): void => console.log('delete', s),
+	},
+}
+
+export const TableButtons = {
+	render: TableButtonsComponent,
+	name: 'Original/latest buttons',
+	args: {
+		onSelectInputTable: (): void => console.log('select input table'),
+		onSelectLatestTable: (): void => console.log('select latest table'),
+	},
+}
+
+export const Customized = {
+	render: CustomizedComponent,
+	args: {
+		order: DisplayOrder.LastOnTop,
+		styles: {
+			buttonContainer: {
+				background: 'azure',
+				borderBottom: '2px solid teal',
 			},
-			selected: {
-				color: 'crimson',
-			},
-			details: {
-				color: 'teal',
+			stepHeaders: {
+				name: {
+					color: 'orange',
+				},
+				selected: {
+					color: 'crimson',
+				},
+				details: {
+					color: 'teal',
+				},
 			},
 		},
 	},

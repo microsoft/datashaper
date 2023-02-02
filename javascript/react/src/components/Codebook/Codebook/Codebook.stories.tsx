@@ -4,7 +4,6 @@
  */
 import type { CodebookSchema } from '@datashaper/schema'
 import type { TableMetadata } from '@datashaper/tables'
-import type { ComponentStory } from '@storybook/react'
 import { useState } from 'react'
 
 import { Codebook } from './Codebook.js'
@@ -121,9 +120,7 @@ const metadata: TableMetadata = {
 	},
 }
 
-const Template: ComponentStory<typeof Codebook> = ({
-	...args
-}): JSX.Element => {
+const CodebookComponent: React.FC = (args: any) => {
 	const [fields, setFields] = useState(codebookResult.fields)
 
 	return (
@@ -136,5 +133,7 @@ const Template: ComponentStory<typeof Codebook> = ({
 	)
 }
 
-export const CodebookStory = Template.bind({})
-CodebookStory.storyName = 'Codebook Table Editor'
+export const CodebookStory = {
+	render: CodebookComponent,
+	name: 'Codebook Table Editor',
+}

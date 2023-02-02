@@ -16,10 +16,11 @@ export interface BinArgs extends InputColumnArgs, OutputColumnArgs
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [clamped?](./schema.binargs.clamped.md) |  | boolean | <i>(Optional)</i> If true, values outside of the min/max boundaries will be clamped to those boundaries rather than +/-Infinity. |
-|  [fixedcount?](./schema.binargs.fixedcount.md) |  | number | <i>(Optional)</i> Fixed number of bins. Note that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary - this means there is always one extra bin for the max value when using fixed count. |
+|  [fixedcount?](./schema.binargs.fixedcount.md) |  | number | <i>(Optional)</i> |
 |  [fixedwidth?](./schema.binargs.fixedwidth.md) |  | number | <i>(Optional)</i> Exact step size between bins |
 |  [max?](./schema.binargs.max.md) |  | number | <i>(Optional)</i> Max boundary to categorize values into. If cell values are above this, they will default to +Infinity unless clamped. |
 |  [min?](./schema.binargs.min.md) |  | number | <i>(Optional)</i> Min boundary to categorize values into. If cell values are below this, they will default to -Infinity unless clamped. |
+|  [nice?](./schema.binargs.nice.md) |  | boolean | <i>(Optional)</i> Fixed number of bins. Note that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary - this means there is always one extra bin for the max value when using fixed count. |
 |  [printRange?](./schema.binargs.printrange.md) |  | boolean | <i>(Optional)</i> If true, the range for each bin will be printed as the cell value instead of the truncated numeric value. This is useful for treating the |
 |  [strategy](./schema.binargs.strategy.md) |  | [BinStrategy](./schema.binstrategy.md) |  |
 
