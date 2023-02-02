@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import debug from 'debug'
 import type { WorkflowSchema } from '@datashaper/schema'
 import {
 	createWorkflowSchemaObject,
@@ -26,6 +27,7 @@ import { NameManager } from './NameManager.js'
 import type { Step, StepInput, TableExportOptions } from './types.js'
 import { unique } from './utils.js'
 import { WorkflowSchemaValidator } from './WorkflowSchemaValidator.js'
+const log = debug('datashaper:workflow')
 
 /**
  * The workflow object manages mutable data for a workflow specification
@@ -58,6 +60,7 @@ export class Workflow extends Resource implements TableTransformer {
 	}
 
 	public override connect(dp: DataPackage, top: boolean): void {
+		log('connecting')
 		super.connect(dp, top)
 		if (this.dataPackage !== dp) {
 			this._dataPackageSub?.()
@@ -88,6 +91,7 @@ export class Workflow extends Resource implements TableTransformer {
 	}
 
 	public override dispose(): void {
+		log('disposing')
 		this._dataPackageSub?.()
 		this._graphMgr.dispose()
 		this._tableMgr.dispose()

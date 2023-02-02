@@ -2,12 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import debug from 'debug'
 import type { TableContainer } from '@datashaper/tables'
 import type { BehaviorSubject, Observable } from 'rxjs'
 
 import type { Maybe } from '../primitives.js'
 import type { TableObservable } from '../resources/index.js'
 import { DelegateSubject } from '../util/DelegateSubject.js'
+const log = debug('datashaper:workflow')
 
 export enum RemoveMode {
 	Hard = 'hard',
@@ -65,6 +67,7 @@ export class TableManager {
 	public setDefaultInputSource(
 		source: Observable<Maybe<TableContainer>> | undefined,
 	): void {
+		log(`set default input source, ${source != null}`)
 		this._defaultInput$.input = source
 	}
 

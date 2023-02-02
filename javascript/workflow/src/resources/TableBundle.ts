@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import debug from 'debug'
 import type { TableBundleSchema } from '@datashaper/schema'
 import { KnownProfile, LATEST_TABLEBUNDLE_SCHEMA } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
@@ -17,6 +18,8 @@ import {
 import type { Maybe } from '../primitives.js'
 import { Resource } from './Resource.js'
 import type { Readable, TableEmitter } from './types/index.js'
+
+const log = debug('datashaper:tablebundle')
 
 export class TableBundle extends Resource implements TableEmitter {
 	public readonly $schema = LATEST_TABLEBUNDLE_SCHEMA
@@ -40,6 +43,7 @@ export class TableBundle extends Resource implements TableEmitter {
 	}
 
 	public override set sources(value: Resource[]) {
+		log('set sources')
 		const dereferenced = value.map(dereference)
 		const inputCount = dereferenced.filter(isTableEmitter).length
 		if (inputCount > 1) {

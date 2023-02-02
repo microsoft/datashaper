@@ -17,7 +17,7 @@ import type {
 } from '../types'
 import { NodeInput } from '../types.js'
 
-const log = debug('datashaper')
+const log = debug('datashaper:BaseNode')
 
 const DEFAULT_INPUT_NAME = NodeInput.Source
 
@@ -49,8 +49,11 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	}
 
 	public set config(value: Maybe<Config>) {
-		this._config$.next(value)
-		void this.recalculate()
+		if (value !== this.config) {
+			this._config$.next(value)
+			log(`${this.id} set config`)
+			void this.recalculate()
+		}
 	}
 
 	// #endregion field accessors
@@ -192,6 +195,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 
 	public unbind(name: SocketName): void {
 		name = this.verifyInputSocketName(name)
+		log(`${this.id} unbinding socket ${String(name)}`)
 		if (this.hasBoundInput(name)) {
 			this.unbindSilent(name)
 			this.recalculate()
@@ -260,7 +264,8 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 */
 	protected emit = (value: Maybe<T>): void => {
 		if (value !== this.output) {
-			this._output$.next(value)
+			log(`${this.id} emitting ${value == null ? 'undefined' : 'value'}`)
+			this._output$.next(value ?? undefined)
 		}
 	}
 

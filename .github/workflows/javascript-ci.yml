@@ -16,6 +16,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         node-version: [16.x, 18.x]
 
@@ -42,11 +43,22 @@ jobs:
       - run: yarn install
         name: Install Dependencies
 
+      - name: TurboRepo local server
+        uses: felixmosh/turborepo-gh-artifacts@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          server-token: ${{ secrets.GITHUB_TOKEN }}
+
       - run: yarn generate:versions
         name: Versions
 
       - run: yarn ci
         name: Verify
+        env:
+          DEBUG: "datashaper:network,datashaper:DataTableProfile,datashaper:workflow"
+          TURBO_API: "http://127.0.0.1:9080"
+          TURBO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TURBO_TEAM: "essex"
 
       - run: |
           git add -A 

@@ -4,7 +4,7 @@
  */
 import debug from 'debug'
 
-const log = debug('datashaper')
+const log = debug('datashaper:network')
 
 export async function fetchFile(url: string): Promise<Blob> {
 	log('fetching file', url)
