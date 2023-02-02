@@ -1,9 +1,11 @@
 /* eslint-disable jest/expect-expect, jest/valid-title, jest/no-conditional-expect */
 import { KnownProfile } from '@datashaper/schema'
+import type { TableContainer } from '@datashaper/tables'
 import fs from 'fs'
 import fsp from 'fs/promises'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
+import type { Maybe } from '../primitives.js'
 
 import { DataPackage } from '../resources/DataPackage/DataPackage.js'
 import type { Workflow } from '../resources/index.js'
@@ -72,13 +74,25 @@ function defineTestCase(parentPath: string, test: string) {
 						expect(workflow).toBeDefined()
 						expect(workflow?.length ?? 0).toEqual(table.workflowLength ?? 0)
 					}
-					expect(found?.output?.table?.numRows()).toEqual(table.rowCount)
-					expect(found?.output?.table?.numCols()).toEqual(table.columnCount)
-					expect(found?.output?.metadata?.cols).toEqual(
-						found?.output?.table?.numCols(),
+
+					const processedTable = await new Promise<Maybe<TableContainer>>(
+						(res) => {
+							// Wait for the second table emission
+							let idx = 0
+							found.output$.subscribe((tbl) => {
+								if (idx++ > 0 || tbl?.table != null) {
+									res(tbl)
+								}
+							})
+						},
 					)
-					expect(found?.output?.metadata?.rows).toEqual(
-						found?.output?.table?.numRows(),
+					expect(processedTable?.table?.numRows()).toEqual(table.rowCount)
+					expect(processedTable?.table?.numCols()).toEqual(table.columnCount)
+					expect(processedTable?.metadata?.cols).toEqual(
+						processedTable?.table?.numCols(),
+					)
+					expect(processedTable?.metadata?.rows).toEqual(
+						processedTable?.table?.numRows(),
 					)
 				}
 				await checkPersisted(await datapackage.save(), expected)
@@ -121,4 +135,11 @@ async function checkPersisted(files: Map<string, Blob>, expected: any) {
 
 	const dpJson = JSON.parse(await dpBlob!.text())
 	expect(dpJson.resources).toHaveLength(expected.tables.length)
+}
+
+/**
+ * Wait for the async queue to process
+ */
+function tick(): Promise<void> {
+	return new Promise((r) => setTimeout(r, 0))
 }

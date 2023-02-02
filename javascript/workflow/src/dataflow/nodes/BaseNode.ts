@@ -17,7 +17,7 @@ import type {
 } from '../types'
 import { NodeInput } from '../types.js'
 
-const log = debug('datashaper')
+const log = debug('datashaper:BaseNode')
 
 const DEFAULT_INPUT_NAME = NodeInput.Source
 
@@ -50,6 +50,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 
 	public set config(value: Maybe<Config>) {
 		this._config$.next(value)
+		log(`${this.id} set config, recalculating`)
 		void this.recalculate()
 	}
 
@@ -126,6 +127,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 			const subs = binding.map((i, index) =>
 				i.node.output$.subscribe((v) => {
 					values[index] = v
+					log(`${this.id} binding input ${i.node.id}, recalculating`)
 					this.recalculate()
 				}),
 			)
@@ -155,6 +157,9 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 						next: (value) => {
 							this._inputValues.get(input)?.next(value)
 							this._inputErrors.get(input)?.next(undefined)
+							log(
+								`${this.id} receiving input from ${binding.node.id}, recalculating`,
+							)
 							this.recalculate()
 						},
 						error: (error: unknown) => {
@@ -179,6 +184,8 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		} else {
 			bindSingleInput(binding)
 		}
+
+		log(`${this.id} finished binding, recalculating`)
 		this.recalculate()
 	}
 
@@ -194,6 +201,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		name = this.verifyInputSocketName(name)
 		if (this.hasBoundInput(name)) {
 			this.unbindSilent(name)
+			log(`${this.id} unbinding socket ${String(name)}, recalculating`)
 			this.recalculate()
 		} else {
 			throw new Error(`no socket installed at "${String(name)}"`)
