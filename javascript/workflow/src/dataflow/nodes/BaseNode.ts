@@ -49,9 +49,11 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	}
 
 	public set config(value: Maybe<Config>) {
-		this._config$.next(value)
-		log(`${this.id} set config, recalculating`)
-		void this.recalculate()
+		if (value !== this.config) {
+			this._config$.next(value)
+			log(`${this.id} set config`)
+			void this.recalculate()
+		}
 	}
 
 	// #endregion field accessors
@@ -127,7 +129,6 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 			const subs = binding.map((i, index) =>
 				i.node.output$.subscribe((v) => {
 					values[index] = v
-					log(`${this.id} binding input ${i.node.id}, recalculating`)
 					this.recalculate()
 				}),
 			)
@@ -157,9 +158,6 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 						next: (value) => {
 							this._inputValues.get(input)?.next(value)
 							this._inputErrors.get(input)?.next(undefined)
-							log(
-								`${this.id} receiving input from ${binding.node.id}, recalculating`,
-							)
 							this.recalculate()
 						},
 						error: (error: unknown) => {
@@ -184,8 +182,6 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		} else {
 			bindSingleInput(binding)
 		}
-
-		log(`${this.id} finished binding, recalculating`)
 		this.recalculate()
 	}
 
@@ -199,9 +195,9 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 
 	public unbind(name: SocketName): void {
 		name = this.verifyInputSocketName(name)
+		log(`${this.id} unbinding socket ${String(name)}`)
 		if (this.hasBoundInput(name)) {
 			this.unbindSilent(name)
-			log(`${this.id} unbinding socket ${String(name)}, recalculating`)
 			this.recalculate()
 		} else {
 			throw new Error(`no socket installed at "${String(name)}"`)
@@ -268,7 +264,8 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 */
 	protected emit = (value: Maybe<T>): void => {
 		if (value !== this.output) {
-			this._output$.next(value)
+			log(`${this.id} emitting ${value == null ? 'undefined' : 'value'}`)
+			this._output$.next(value ?? undefined)
 		}
 	}
 
