@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import content from '@datashaper/guidance'
+import { generateCodebook } from '@datashaper/tables'
 import {
 	type TableBundleSchema,
 	KnownProfile,
@@ -85,7 +86,10 @@ export class TableBundleAppProfile
 				},
 			})
 		}
-		if (!resource.sources.some((r) => r.profile === KnownProfile.Workflow)) {
+		if (
+			resource.input &&
+			!resource.sources.some((r) => r.profile === KnownProfile.Workflow)
+		) {
 			result.push({
 				key: 'add-workflow',
 				text: 'Add Workflow',
@@ -97,15 +101,21 @@ export class TableBundleAppProfile
 				},
 			})
 		}
-		if (!resource.sources.some((r) => r.profile === KnownProfile.Codebook)) {
+		if (
+			resource.input &&
+			!resource.sources.some((r) => r.profile === KnownProfile.Codebook)
+		) {
 			result.push({
 				key: 'add-codebook',
 				text: 'Add Codebook',
 				iconProps: { iconName: this.codebookProfile.iconName },
 				onClick: () => {
-					this.codebookProfile.createInstance?.().then((codebook) => {
-						resource.sources = [...resource.sources, codebook]
-					})
+					const table = resource.input?.output?.table
+					this.codebookProfile
+						.createInstance?.(table && generateCodebook(table))
+						.then((codebook) => {
+							resource.sources = [...resource.sources, codebook]
+						})
 				},
 			})
 		}
