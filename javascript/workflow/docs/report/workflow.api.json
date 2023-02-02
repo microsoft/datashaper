@@ -1691,6 +1691,36 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!Codebook#defaultTitle:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "defaultTitle(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "name": "defaultTitle"
+            },
+            {
+              "kind": "Method",
               "canonicalReference": "@datashaper/workflow!Codebook#dispose:member(1)",
               "docComment": "",
               "excerptTokens": [
@@ -4080,6 +4110,36 @@
               "parameters": [],
               "isOptional": false,
               "name": "defaultName"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!DataTable#defaultTitle:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "defaultTitle(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "name": "defaultTitle"
             },
             {
               "kind": "Method",
@@ -14445,6 +14505,36 @@
               "parameters": [],
               "isOptional": false,
               "name": "defaultName"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!Workflow#defaultTitle:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "defaultTitle(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "name": "defaultTitle"
             },
             {
               "kind": "Method",

@@ -10,6 +10,7 @@ import { ResourceSchemaEditor } from '../../components/editors/ResourceSchemaEdi
 import { TableBundleEditor } from '../../components/editors/TableBundleEditor/index.js'
 import { useHelpOnMount } from '../../hooks/useHelpOnMount.js'
 import type { ProfileComponentProps } from '../../types.js'
+import { profileIcons } from '../icons.js'
 
 export const TableBundleRenderer: React.FC<ProfileComponentProps<TableBundle>> =
 	memo(function TableBundleRenderer({ resource }) {
@@ -21,13 +22,13 @@ const editors = [
 	{
 		key: 'tablebundle-json',
 		title: 'View and edit table bundle JSON config',
-		iconName: 'Code',
+		iconName: profileIcons.json,
 		renderer: ResourceSchemaEditor,
 	},
 	{
 		key: 'tablebundle-interactive',
 		title: 'View and edit interactive table',
-		iconName: 'PreviewLink',
+		iconName: profileIcons.interactive,
 		renderer: TableBundleEditor,
 	},
 ]

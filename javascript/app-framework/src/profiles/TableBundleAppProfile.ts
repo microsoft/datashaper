@@ -23,6 +23,7 @@ import type { IContextualMenuItem } from '@fluentui/react'
 import type { AppProfileInitializationContext, AppProfile } from '../types.js'
 import { ResourceGroupType } from '../types.js'
 import { TableBundleRenderer } from './renderers/TableBundleRenderer.js'
+import { profileIcons } from './icons.js'
 
 export class TableBundleAppProfile
 	extends TableBundleProfile
@@ -30,7 +31,7 @@ export class TableBundleAppProfile
 {
 	public readonly title = 'Table'
 	public readonly renderer = TableBundleRenderer
-	public readonly iconName = 'ViewAll'
+	public readonly iconName = profileIcons.tablebundle
 	public readonly group = ResourceGroupType.Data
 
 	private _dataPackage: DataPackage | undefined

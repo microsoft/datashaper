@@ -9,6 +9,7 @@ import { CompoundEditor } from '../../components/editors/CompoundEditor/index.js
 import { ResourceSchemaEditor } from '../../components/editors/ResourceSchemaEditor/index.js'
 import { useHelpOnMount } from '../../hooks/useHelpOnMount.js'
 import type { ProfileComponentProps } from '../../types.js'
+import { profileIcons } from '../icons.js'
 
 export const WorkflowRenderer: React.FC<ProfileComponentProps<Workflow>> = memo(
 	function WorkflowRenderer({ resource }) {
@@ -21,7 +22,7 @@ const editors = [
 	{
 		key: 'workflow-json',
 		title: 'View and edit workflow JSON',
-		iconName: 'Code',
+		iconName: profileIcons.json,
 		renderer: ResourceSchemaEditor,
 	},
 ]

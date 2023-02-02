@@ -9,6 +9,7 @@ import { WorkflowProfile } from '@datashaper/workflow'
 import { WorkflowRenderer } from './renderers/WorkflowRenderer.js'
 import type { AppProfile } from '../index.js'
 import { ResourceGroupType } from '../index.js'
+import { profileIcons } from './icons.js'
 
 export class WorkflowAppProfile
 	extends WorkflowProfile
@@ -16,7 +17,7 @@ export class WorkflowAppProfile
 {
 	public readonly title = 'Workflow'
 	public readonly renderer = WorkflowRenderer
-	public readonly iconName = 'SetAction'
+	public readonly iconName = profileIcons.workflow
 	public readonly group = ResourceGroupType.Data
 	public readonly dataHandler = null
 

@@ -9,6 +9,7 @@ import { CodebookProfile } from '@datashaper/workflow'
 
 import type { AppProfile } from '../index.js'
 import { ResourceGroupType } from '../index.js'
+import { profileIcons } from './icons.js'
 import { CodebookRenderer } from './renderers/CodebookRenderer.js'
 
 export class CodebookAppProfile
@@ -17,7 +18,7 @@ export class CodebookAppProfile
 {
 	public readonly title = 'Codebook'
 	public readonly renderer = CodebookRenderer
-	public readonly iconName = 'FormLibraryMirrored'
+	public readonly iconName = profileIcons.codebook
 	public readonly group = ResourceGroupType.Data
 
 	public getHelp(): Record<string, string> {

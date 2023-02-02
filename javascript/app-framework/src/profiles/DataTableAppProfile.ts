@@ -8,6 +8,7 @@ import { DataTableProfile } from '@datashaper/workflow'
 
 import type { AppProfile } from '../types.js'
 import { ResourceGroupType } from '../types.js'
+import { profileIcons } from './icons.js'
 import { DataTableRenderer } from './renderers/DataTableRenderer.js'
 
 export class DataTableAppProfile
@@ -16,7 +17,7 @@ export class DataTableAppProfile
 {
 	public readonly title = 'Datatable'
 	public readonly renderer = DataTableRenderer
-	public readonly iconName = 'PageData'
+	public readonly iconName = profileIcons.datatable
 	public readonly group = ResourceGroupType.Data
 	public readonly dataHandler = null
 

@@ -10,6 +10,7 @@ import { CodebookEditor } from '../../components/editors/CodebookEditor/index.js
 import { ResourceSchemaEditor } from '../../components/editors/ResourceSchemaEditor/index.js'
 import { useHelpOnMount } from '../../hooks/useHelpOnMount.js'
 import type { ProfileComponentProps } from '../../types.js'
+import { profileIcons } from '../icons.js'
 
 export const CodebookRenderer: React.FC<ProfileComponentProps<Codebook>> = memo(
 	function CodebookRenderer({ resource }) {
@@ -22,13 +23,13 @@ const editors = [
 	{
 		key: 'codebook-json',
 		title: 'View and edit codebook JSON config',
-		iconName: 'Code',
+		iconName: profileIcons.json,
 		renderer: ResourceSchemaEditor,
 	},
 	{
 		key: 'codebook-interactive',
 		title: 'View and edit interactive codebook options',
-		iconName: 'PreviewLink',
+		iconName: profileIcons.interactive,
 		renderer: CodebookEditor,
 	},
 ]

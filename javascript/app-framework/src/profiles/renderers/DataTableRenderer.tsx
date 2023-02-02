@@ -10,6 +10,7 @@ import { DataTableTextEditor } from '../../components/editors/DataTableTextEdito
 import { ResourceSchemaEditor } from '../../components/editors/ResourceSchemaEditor/index.js'
 import { useHelpOnMount } from '../../hooks/useHelpOnMount.js'
 import type { ProfileComponentProps } from '../../types.js'
+import { profileIcons } from '../icons.js'
 
 export const DataTableRenderer: React.FC<ProfileComponentProps<DataTable>> =
 	memo(function DataTableRenderer({ resource }) {
@@ -21,19 +22,19 @@ const editors = [
 	{
 		key: 'datatable-text',
 		title: 'View and edit raw table text content',
-		iconName: 'PageData',
+		iconName: profileIcons.text,
 		renderer: DataTableTextEditor,
 	},
 	{
 		key: 'datatable-json',
 		title: 'View and edit table JSON config',
-		iconName: 'Code',
+		iconName: profileIcons.json,
 		renderer: ResourceSchemaEditor,
 	},
 	{
 		key: 'datatable-interactive',
 		title: 'View and edit interactive table options',
-		iconName: 'PreviewLink',
+		iconName: profileIcons.interactive,
 		renderer: DataTableEditor,
 	},
 ]
