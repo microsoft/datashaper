@@ -19,6 +19,8 @@ import {
 import { FileTreeTooltip } from './FileTreeTooltip.js'
 import type { FileDefinition } from './ResourcesPane.types.js'
 
+const noop = () => undefined
+
 export interface FileTreeCommandsProps {
 	expanded: boolean
 	examples: FileDefinition[]
@@ -35,7 +37,11 @@ export const FileTreeCommands: React.FC<FileTreeCommandsProps> = memo(
 			<>
 				<FileImport file={file} setFile={setFile} />
 				{expanded ? (
-					<Commands items={commands} styles={commandBarStyles} />
+					<Commands
+						items={commands}
+						styles={commandBarStyles}
+						onReduceData={noop}
+					/>
 				) : (
 					<CollapsedCommands>
 						<FileTreeTooltip content="New">
