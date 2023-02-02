@@ -18,8 +18,7 @@ process.chdir('../..')
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const SCHEMA_PATH = path.join(__dirname, '../../../../schema')
 const CASES_PATH = path.join(SCHEMA_PATH, 'fixtures/datapackages')
-const TEST_TIMEOUT = 30_000
-const FETCH_WAIT = 5_000
+const TEST_TIMEOUT = 20_000
 
 /**
  * Create top-level describes for each test category (top-level folders)
@@ -59,10 +58,6 @@ function defineTestCase(parentPath: string, test: string) {
 			try {
 				datapackage = new DataPackage(defaultProfiles())
 				await datapackage.load(assets)
-
-				// HACK: wait for async tables to be fetched and for the workflow to process data
-				await new Promise((resolve) => setTimeout(resolve, FETCH_WAIT))
-
 				expect(datapackage.size).toEqual(expected.tables.length)
 
 				for (const table of expected.tables) {
