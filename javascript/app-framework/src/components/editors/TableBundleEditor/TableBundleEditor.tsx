@@ -41,9 +41,9 @@ export const TableBundleEditor: React.FC<ProfileComponentProps<TableBundle>> =
 				.getSourcesWithProfile(KnownProfile.Workflow)
 				.find((t) => !!t) as Workflow | undefined
 			const defaultWorkflow = () => {
-				const result = new Workflow()
-				result.input$ = resource.output$
-				return result
+				const workflow = new Workflow()
+				workflow.input$ = resource.output$
+				return workflow
 			}
 			return [result ?? defaultWorkflow(), !!result]
 			/* eslint-disable-next-line react-hooks/exhaustive-deps */
@@ -101,7 +101,9 @@ export const TableBundleEditor: React.FC<ProfileComponentProps<TableBundle>> =
 			setIsLatestSelected(true)
 			setIsInputSelected(false)
 		}, [setSelectedId])
-
+		const name = `${resource.name}${selectedId ? `@${selectedId}` : ''}${
+			isInputSelected ? '@input' : ''
+		}`
 		return selectedTable?.table == null ? null : (
 			<Container collapsed={collapsed}>
 				<DetailsListContainer>
@@ -118,9 +120,7 @@ export const TableBundleEditor: React.FC<ProfileComponentProps<TableBundle>> =
 							/>
 						}
 						farCommandBar={workflow ? <CommandBar {...commandBar} /> : null}
-						name={`${resource.name}${selectedId ? `@${selectedId}` : ''}${
-							isInputSelected ? '@input' : ''
-						}`}
+						name={name}
 						table={selectedTable.table}
 					/>
 					<ArqueroDetailsList
