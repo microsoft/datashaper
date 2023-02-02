@@ -48,42 +48,49 @@ function defineTestCase(parentPath: string, test: string) {
 	const casePath = path.join(parentPath, test)
 	const testName = test.split('_').join(' ')
 
-	it(testName, async () => {
-		const assets = await readDataPackageFiles(casePath)
-		const expected = await readJson(path.join(casePath, 'expected.json'))
-		let datapackage: DataPackage | undefined
-		try {
-			datapackage = new DataPackage(defaultProfiles())
-			await datapackage.load(assets)
-			await new Promise((resolve) => setTimeout(resolve, 1))
-			expect(datapackage.size).toEqual(expected.tables.length)
+	it(
+		testName,
+		async () => {
+			const assets = await readDataPackageFiles(casePath)
+			const expected = await readJson(path.join(casePath, 'expected.json'))
+			let datapackage: DataPackage | undefined
+			try {
+				datapackage = new DataPackage(defaultProfiles())
+				await datapackage.load(assets)
 
-			for (const table of expected.tables) {
-				const found = datapackage.getResource(table.name) as TableBundle
-				expect(found).toBeDefined()
+				// HACK: wait for async tables to be fetched and for the workflow to process data
+				await new Promise((resolve) => setTimeout(resolve, 5000))
 
-				const workflow = found
-					.getSourcesWithProfile(KnownProfile.Workflow)
-					.find((t) => !!t) as Workflow | undefined
+				expect(datapackage.size).toEqual(expected.tables.length)
 
-				if (table.workflowLength) {
-					expect(workflow).toBeDefined()
-					expect(workflow?.length ?? 0).toEqual(table.workflowLength ?? 0)
+				for (const table of expected.tables) {
+					const found = datapackage.getResource(table.name) as TableBundle
+					expect(found).toBeDefined()
+
+					const workflow = found
+						.getSourcesWithProfile(KnownProfile.Workflow)
+						.find((t) => !!t) as Workflow | undefined
+
+					if (table.workflowLength) {
+						expect(workflow).toBeDefined()
+						expect(workflow?.length ?? 0).toEqual(table.workflowLength ?? 0)
+					}
+					expect(found?.output?.table?.numRows()).toEqual(table.rowCount)
+					expect(found?.output?.table?.numCols()).toEqual(table.columnCount)
+					expect(found?.output?.metadata?.cols).toEqual(
+						found?.output?.table?.numCols(),
+					)
+					expect(found?.output?.metadata?.rows).toEqual(
+						found?.output?.table?.numRows(),
+					)
 				}
-				expect(found?.output?.table?.numRows()).toEqual(table.rowCount)
-				expect(found?.output?.table?.numCols()).toEqual(table.columnCount)
-				expect(found?.output?.metadata?.cols).toEqual(
-					found?.output?.table?.numCols(),
-				)
-				expect(found?.output?.metadata?.rows).toEqual(
-					found?.output?.table?.numRows(),
-				)
+				await checkPersisted(await datapackage.save(), expected)
+			} finally {
+				datapackage?.dispose()
 			}
-			await checkPersisted(await datapackage.save(), expected)
-		} finally {
-			datapackage?.dispose()
-		}
-	}, 15000)
+		},
+		30000,
+	)
 }
 
 async function readJson(filePath: string): Promise<any> {
