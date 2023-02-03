@@ -1,9 +1,11 @@
 /* eslint-disable jest/expect-expect, jest/valid-title, jest/no-conditional-expect */
 import { KnownProfile } from '@datashaper/schema'
+import type { TableContainer } from '@datashaper/tables'
 import fs from 'fs'
 import fsp from 'fs/promises'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
+import type { Maybe } from '../primitives.js'
 
 import { DataPackage } from '../resources/DataPackage/DataPackage.js'
 import type { Workflow } from '../resources/index.js'
@@ -18,6 +20,7 @@ process.chdir('../..')
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const SCHEMA_PATH = path.join(__dirname, '../../../../schema')
 const CASES_PATH = path.join(SCHEMA_PATH, 'fixtures/datapackages')
+const TEST_TIMEOUT = 20_000
 
 /**
  * Create top-level describes for each test category (top-level folders)
@@ -121,4 +124,11 @@ async function checkPersisted(files: Map<string, Blob>, expected: any) {
 
 	const dpJson = JSON.parse(await dpBlob!.text())
 	expect(dpJson.resources).toHaveLength(expected.tables.length)
+}
+
+/**
+ * Wait for the async queue to process
+ */
+function tick(): Promise<void> {
+	return new Promise((r) => setTimeout(r, 0))
 }
