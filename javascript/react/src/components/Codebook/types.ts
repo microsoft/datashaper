@@ -11,12 +11,14 @@ import type {
 	ITextFieldStyles,
 } from '@fluentui/react'
 
+import type { CodebookNameStyles } from './CodebookNameField/index.js'
 import type { CodebookStatsStyles } from './CodebookStatsField/index.js'
 import type { CodebookMappingStyles } from './MappingFields/index.js'
 
 export interface CodebookStyles {
 	root?: React.CSSProperties
 	mapping?: CodebookMappingStyles
+	name?: CodebookNameStyles
 	statsWrapper?: CodebookStatsStyles
 	displayName?: Partial<ITextFieldStyles>
 	description?: Partial<ITextFieldStyles>

@@ -7,6 +7,7 @@ import type { Field } from '@datashaper/schema'
 import { useMemo, useState } from 'react'
 
 import {
+	NAME,
 	DATA_NATURE,
 	DATA_TYPE,
 	DESCRIPTION,
@@ -26,6 +27,7 @@ export function useFieldHeights(): FieldHeights {
 		dataType: DATA_TYPE,
 		dataNature: DATA_NATURE,
 		statsWrapper: STATS_WRAPPER,
+		name: NAME,
 		mappingWrapper: MAPPING_WRAPPER,
 	})
 	return useMemo(() => {

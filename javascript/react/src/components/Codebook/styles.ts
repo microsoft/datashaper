@@ -63,6 +63,15 @@ export function useDefaultCodebookStyles(
 				flex: 'none',
 				background: theme.palette.white,
 			},
+			name: {
+				root: {
+					height: heights?.get('name'),
+					padding: FIELD_PADDING,
+					paddingBottom: 0,
+					paddingTop: 2,
+				},
+				checkbox: checkbox.styles,
+			},
 			statsWrapper: {
 				root: {
 					height: heights?.get('statsWrapper'),
@@ -70,7 +79,6 @@ export function useDefaultCodebookStyles(
 					paddingBottom: 0,
 					paddingTop: 2,
 				},
-				checkbox: checkbox.styles,
 			},
 			displayName: {
 				root: {

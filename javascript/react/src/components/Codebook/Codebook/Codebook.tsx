@@ -9,11 +9,11 @@ import { Label, useTheme } from '@fluentui/react'
 import type { CSSProperties } from 'react'
 import { memo, useCallback } from 'react'
 
+import { CodebookNameField } from '../CodebookNameField/index.js'
 import { CodebookDataNatureField } from '../CodebookDataNatureField/CodebookDataNatureField.js'
 import { CodebookDataTypeField } from '../CodebookDataTypeField/index.js'
 import { CodebookDescriptionField } from '../CodebookDescriptionField/index.js'
 import { CodebookDisplayNameField } from '../CodebookDisplayNameField/index.js'
-import { CodebookStatsField } from '../CodebookStatsField/CodebookStatsField.js'
 import { CodebookUnitField } from '../CodebookUnitField/index.js'
 import { useFieldHeights } from '../hooks.js'
 import { MappingFields } from '../MappingFields/index.js'
@@ -23,7 +23,6 @@ import type { CodebookProps } from './Codebook.types.js'
 
 export const Codebook: React.FC<CodebookProps> = memo(function Codebook({
 	fields,
-	metadata,
 	onChangeFields,
 	styles,
 }) {
@@ -86,11 +85,10 @@ export const Codebook: React.FC<CodebookProps> = memo(function Codebook({
 								index === fields.length - 1,
 							)}
 						>
-							<CodebookStatsField
-								styles={_styles.statsWrapper}
+							<CodebookNameField
+								styles={_styles.name}
 								onChangeField={(field: Field) => onChangeField(field, index)}
 								field={field}
-								metadata={metadata}
 							/>
 
 							<CodebookDisplayNameField

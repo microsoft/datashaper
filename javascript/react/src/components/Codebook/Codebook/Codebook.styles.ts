@@ -47,17 +47,22 @@ export function useTableStyles(
 					display: 'flex',
 				},
 				labelWrapper: {
-					marginTop: (defaultStyles?.statsWrapper?.root as IRawStyle)?.height,
+					marginTop: (defaultStyles?.name?.root as IRawStyle)?.height,
 					textAlign: 'right',
 					marginRight: 10,
 					whiteSpace: 'pre',
 				},
-				statsWrapper: {
+				name: {
 					checkbox: {
 						root: {
 							visibility: 'visible',
 						},
 					},
+					root: {
+						borderBottom: border,
+					},
+				},
+				statsWrapper: {
 					root: {
 						borderBottom: border,
 					},
