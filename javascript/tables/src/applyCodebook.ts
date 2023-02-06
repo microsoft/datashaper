@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { CodebookSchema, DataTableSchema } from '@datashaper/schema'
-import { CodebookStrategy, DataType } from '@datashaper/schema'
-import { escape, op } from 'arquero'
+import { CodebookStrategy } from '@datashaper/schema'
+import { escape, not, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { parseAs } from './parseTypes.js'
@@ -15,26 +15,25 @@ export function applyCodebook(
 	strategy: CodebookStrategy,
 	dataTableSchema?: Partial<DataTableSchema>,
 ): ColumnTable {
-	let applied = table
+	const exclude = codebook.fields.filter((f) => f.exclude).map((f) => f.name)
+	let applied = table.select(not(exclude))
 
 	if (
 		strategy === CodebookStrategy.DataTypeOnly ||
 		strategy === CodebookStrategy.DataTypeAndMapping
 	) {
-		const args = table.columnNames().reduce((acc, cur) => {
-			const field = codebook.fields.find((element) => element.name === cur)
-			const parser =
-				dataTableSchema?.typeHints != null
-					? parseAs(
-							field != null ? field.type : DataType.String,
-							dataTableSchema.typeHints,
-					  )
-					: parseAs(field != null ? field.type : DataType.String)
-			acc[cur] = escape((d: any) => parser(d[cur]))
+		const args = codebook.fields.reduce((acc, cur) => {
+			if (!cur.exclude) {
+				const parser =
+					dataTableSchema?.typeHints != null
+						? parseAs(cur.type, dataTableSchema.typeHints)
+						: parseAs(cur.type)
+				acc[cur.name] = escape((d: any) => parser(d[cur.name]))
+			}
 			return acc
 		}, {} as Record<string, object>)
 
-		applied = table.derive(args)
+		applied = applied.derive(args)
 	}
 
 	if (

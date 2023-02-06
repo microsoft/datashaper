@@ -4182,21 +4182,8 @@
             },
             {
               "kind": "Reference",
-              "text": "Omit",
-              "canonicalReference": "!Omit:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
               "text": "Named",
               "canonicalReference": "@datashaper/schema!Named:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ", 'id'>"
             },
             {
               "kind": "Content",
@@ -4543,7 +4530,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 5
+              "endIndex": 2
             }
           ]
         },

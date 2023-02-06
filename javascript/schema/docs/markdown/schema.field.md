@@ -9,9 +9,9 @@ Contains the full schema definition and metadata for a data field (usually a tab
 <b>Signature:</b>
 
 ```typescript
-export interface Field extends Omit<Named, 'id'> 
+export interface Field extends Named 
 ```
-<b>Extends:</b> Omit&lt;[Named](./schema.named.md)<!-- -->, 'id'&gt;
+<b>Extends:</b> [Named](./schema.named.md)
 
 ## Properties
 
