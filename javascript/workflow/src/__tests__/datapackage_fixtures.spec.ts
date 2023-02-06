@@ -60,6 +60,7 @@ function defineTestCase(parentPath: string, test: string) {
 			try {
 				datapackage = new DataPackage(defaultProfiles())
 				await datapackage.load(assets)
+				await new Promise((resolve) => setTimeout(resolve, 1))
 				expect(datapackage.size).toEqual(expected.tables.length)
 
 				for (const table of expected.tables) {
@@ -74,25 +75,13 @@ function defineTestCase(parentPath: string, test: string) {
 						expect(workflow).toBeDefined()
 						expect(workflow?.length ?? 0).toEqual(table.workflowLength ?? 0)
 					}
-
-					const processedTable = await new Promise<Maybe<TableContainer>>(
-						(res) => {
-							// Wait for the second table emission
-							let idx = 0
-							found.output$.subscribe((tbl) => {
-								if (idx++ > 0 || tbl?.table != null) {
-									res(tbl)
-								}
-							})
-						},
+					expect(found?.output?.table?.numRows()).toEqual(table.rowCount)
+					expect(found?.output?.table?.numCols()).toEqual(table.columnCount)
+					expect(found?.output?.metadata?.cols).toEqual(
+						found?.output?.table?.numCols(),
 					)
-					expect(processedTable?.table?.numRows()).toEqual(table.rowCount)
-					expect(processedTable?.table?.numCols()).toEqual(table.columnCount)
-					expect(processedTable?.metadata?.cols).toEqual(
-						processedTable?.table?.numCols(),
-					)
-					expect(processedTable?.metadata?.rows).toEqual(
-						processedTable?.table?.numRows(),
+					expect(found?.output?.metadata?.rows).toEqual(
+						found?.output?.table?.numRows(),
 					)
 				}
 				await checkPersisted(await datapackage.save(), expected)
@@ -100,7 +89,7 @@ function defineTestCase(parentPath: string, test: string) {
 				datapackage?.dispose()
 			}
 		},
-		TEST_TIMEOUT,
+		15000,
 	)
 }
 

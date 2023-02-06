@@ -11,7 +11,7 @@ import type { Constraints } from './Constraints.js'
  * This includes the required data type, various data nature and rendering properties, potential
  * validation rules, and mappings from a data dictionary.
  */
-export interface Field extends Omit<Named, 'id'> {
+export interface Field extends Named {
 	/**
 	 * Strict type of the field. Note that columns may not mix types in their rows for most of the data formats we use.
 	 * Default: 'string'

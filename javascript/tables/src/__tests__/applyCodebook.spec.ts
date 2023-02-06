@@ -10,40 +10,38 @@ import { applyCodebook } from '../applyCodebook.js'
 import { fromCSV } from '../fromCSV.js'
 import { generateCodebook } from '../generateCodebook.js'
 
-describe('Apply codebook tests', () => {
-	describe('codebook test without mapping', () => {
-		const csv = fs.readFileSync('./src/__tests__/data/simple-example.csv', {
-			encoding: 'utf8',
-			flag: 'r',
-		})
+describe('applyCodebook', () => {
+	const csv1 = fs.readFileSync('./src/__tests__/data/simple-example.csv', {
+		encoding: 'utf8',
+		flag: 'r',
+	})
+	const csv2 = fs.readFileSync('./src/__tests__/data/mapping-test.csv', {
+		encoding: 'utf8',
+		flag: 'r',
+	})
 
-		const parsed = fromCSV(csv, { autoType: false })
+	const simple = fromCSV(csv1, { autoType: false })
+	const mapping = fromCSV(csv2, { autoType: false })
 
-		const codebookResult = generateCodebook(parsed)
+	describe('CodebookMapping.DataTypeOnly', () => {
+		const codebook = generateCodebook(simple)
 
-		const resultTable = applyCodebook(
-			parsed,
-			codebookResult,
+		const result = applyCodebook(
+			simple,
+			codebook,
 			CodebookStrategy.DataTypeOnly,
 		)
 
 		it('should return a column table', () => {
-			expect(resultTable.numRows()).toBe(10)
-			expect(resultTable.numCols()).toBe(8)
+			expect(result.numRows()).toBe(10)
+			expect(result.numCols()).toBe(8)
 		})
 	})
 
-	describe('codebook test with mapping', () => {
-		const csv = fs.readFileSync('./src/__tests__/data/mapping-test.csv', {
-			encoding: 'utf8',
-			flag: 'r',
-		})
+	describe('CodebookMapping.DataTypeAndMapping', () => {
+		const codebook = generateCodebook(mapping)
 
-		const parsed = fromCSV(csv, { autoType: false })
-
-		const codebookResult = generateCodebook(parsed)
-
-		const element = codebookResult.fields.find(
+		const element = codebook.fields.find(
 			(element) => element.name === 'diagnosis',
 		)!
 
@@ -56,9 +54,7 @@ describe('Apply codebook tests', () => {
 
 		element.mapping = mappingElements
 
-		const element2 = codebookResult.fields.find(
-			(element) => element.name === 'test',
-		)!
+		const element2 = codebook.fields.find((element) => element.name === 'test')!
 		const mappingElements2: Record<number, string> = {
 			0: 'Test1',
 			1: 'Test2',
@@ -68,29 +64,47 @@ describe('Apply codebook tests', () => {
 
 		element2.mapping = mappingElements2
 
-		const resultTable = applyCodebook(
-			parsed,
-			codebookResult,
+		const result = applyCodebook(
+			mapping,
+			codebook,
 			CodebookStrategy.DataTypeAndMapping,
 		)
 
 		it('should return a column table with mapping values', () => {
-			expect(resultTable.numRows()).toBe(7)
-			expect(resultTable.numCols()).toBe(3)
-			expect(resultTable.get('diagnosis', 0)).toBe('heart disease')
-			expect(resultTable.get('diagnosis', 1)).toBe('heart disease')
-			expect(resultTable.get('diagnosis', 2)).toBe('diabetes type I')
-			expect(resultTable.get('diagnosis', 3)).toBe('diabetes type III')
-			expect(resultTable.get('diagnosis', 4)).toBe('diabetes type I')
-			expect(resultTable.get('diagnosis', 5)).toBe('diabetes type II')
-			expect(resultTable.get('diagnosis', 6)).toBe('diabetes type III')
-			expect(resultTable.get('test', 0)).toBe('Test1')
-			expect(resultTable.get('test', 1)).toBe('Test1')
-			expect(resultTable.get('test', 2)).toBe('Test2')
-			expect(resultTable.get('test', 3)).toBe('Test4')
-			expect(resultTable.get('test', 4)).toBe('Test2')
-			expect(resultTable.get('test', 5)).toBe('Test3')
-			expect(resultTable.get('test', 6)).toBe('Test4')
+			expect(result.numRows()).toBe(7)
+			expect(result.numCols()).toBe(3)
+			expect(result.get('diagnosis', 0)).toBe('heart disease')
+			expect(result.get('diagnosis', 1)).toBe('heart disease')
+			expect(result.get('diagnosis', 2)).toBe('diabetes type I')
+			expect(result.get('diagnosis', 3)).toBe('diabetes type III')
+			expect(result.get('diagnosis', 4)).toBe('diabetes type I')
+			expect(result.get('diagnosis', 5)).toBe('diabetes type II')
+			expect(result.get('diagnosis', 6)).toBe('diabetes type III')
+			expect(result.get('test', 0)).toBe('Test1')
+			expect(result.get('test', 1)).toBe('Test1')
+			expect(result.get('test', 2)).toBe('Test2')
+			expect(result.get('test', 3)).toBe('Test4')
+			expect(result.get('test', 4)).toBe('Test2')
+			expect(result.get('test', 5)).toBe('Test3')
+			expect(result.get('test', 6)).toBe('Test4')
+		})
+	})
+
+	describe('ignore fields marked `exclude`', () => {
+		const codebook = generateCodebook(simple)
+		codebook.fields = codebook.fields
+			.slice(0, 3)
+			.map((f) => ({ ...f, exclude: true }))
+
+		const result = applyCodebook(
+			simple,
+			codebook,
+			CodebookStrategy.DataTypeOnly,
+		)
+
+		it('should return a column table', () => {
+			expect(result.numRows()).toBe(10)
+			expect(result.numCols()).toBe(5)
 		})
 	})
 })
