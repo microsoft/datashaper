@@ -61,7 +61,7 @@ export function useDefaultCodebookStyles(
 			root: {
 				width: 240,
 				flex: 'none',
-				background: theme.palette.white,
+				backgroundColor: theme.palette.white,
 			},
 			name: {
 				root: {
