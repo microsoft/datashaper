@@ -22,6 +22,10 @@ export abstract class Resource extends Named implements ResourceSchema, Resource
 	 */
 	public abstract get profile(): Profile | undefined
 
+	public override defaultName(): string {
+		return this.profile ?? 'resource'
+	}
+
 	private _path: ResourceSchema['path']
 	private _rel: ResourceSchema['rel']
 	private _homepage: string | undefined
@@ -29,10 +33,6 @@ export abstract class Resource extends Named implements ResourceSchema, Resource
 	private _sources: (Resource | ResourceReference)[] = []
 	private _dataPackage: DataPackage | undefined
 	private _unlistenToSources: Unsubscribe | undefined
-
-	public override defaultName(): string {
-		return this.profile ?? 'resource'
-	}
 
 	protected get dataPackage(): DataPackage | undefined {
 		return this._dataPackage
@@ -130,12 +130,6 @@ export abstract class Resource extends Named implements ResourceSchema, Resource
 			.filter((s) => s?.profile === type) as Resource[]
 	}
 
-	public override dispose(): void {
-		super.dispose()
-		this._sources.forEach((s) => s.dispose())
-		this._dataPackage = undefined
-	}
-
 	public override toSchema(): ResourceSchema {
 		return {
 			...super.toSchema(),
@@ -163,5 +157,11 @@ export abstract class Resource extends Named implements ResourceSchema, Resource
 		if (!quiet) {
 			this._onChange.next()
 		}
+	}
+
+	public override dispose(): void {
+		super.dispose()
+		this._sources.forEach((s) => s.dispose())
+		this._dataPackage = undefined
 	}
 }

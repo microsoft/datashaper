@@ -23,47 +23,32 @@ import type { Readable, TableEmitter } from './types/index.js'
 const log = debug('datashaper')
 
 export class DataTable extends Resource implements TableEmitter {
+	public readonly $schema = LATEST_DATATABLE_SCHEMA
+	public readonly profile = KnownProfile.DataTable
+
 	public override defaultTitle(): string {
 		return 'datatable'
 	}
 	public override defaultName(): string {
 		return 'datatable.json'
 	}
-	public readonly $schema = LATEST_DATATABLE_SCHEMA
-	public readonly profile = KnownProfile.DataTable
-	private readonly _output$ = new BehaviorSubject<Maybe<TableContainer>>(
-		undefined,
-	)
 
 	public readonly parser = new ParserOptions()
 	public readonly shape = new DataShape()
 
+	private readonly _output$ = new BehaviorSubject<Maybe<TableContainer>>(
+		undefined,
+	)
 	private _format = new BehaviorSubject<DataFormat>(DataFormat.CSV)
-
 	private _rawData: Blob | undefined
 
 	public constructor(datatable?: Readable<DataTableSchema>) {
 		super()
-		this.onDispose(this.parser.onChange(this.refreshData))
-		this.onDispose(this.shape.onChange(this.refreshData))
+		this.onDispose(this.parser.onChange(this.recomputeOutput))
+		this.onDispose(this.shape.onChange(this.recomputeOutput))
 		this.loadSchema(datatable)
 	}
 
-	private refreshData = (): void => {
-		if (this._rawData != null) {
-			readTable(this._rawData, this.toSchema(), { autoType: false })
-				.then((t) => this._output$.next({ table: t, id: this.name }))
-				.catch((err) => {
-					log('error reading blob', err)
-					throw err
-				})
-		} else {
-			this._output$.next(undefined)
-		}
-		this._onChange.next()
-	}
-
-	// #region Class Fields
 	public override get name(): string {
 		return super.name
 	}
@@ -79,7 +64,7 @@ export class DataTable extends Resource implements TableEmitter {
 
 	public set data(value: Blob | undefined) {
 		this._rawData = value
-		this.refreshData()
+		this.recomputeOutput()
 	}
 
 	public get format$(): Observable<DataFormat> {
@@ -92,9 +77,8 @@ export class DataTable extends Resource implements TableEmitter {
 
 	public set format(value: DataFormat) {
 		this._format.next(value)
-		this.refreshData()
+		this.recomputeOutput()
 	}
-	// #endregion
 
 	public get output$(): Observable<Maybe<TableContainer>> {
 		return this._output$
@@ -102,6 +86,20 @@ export class DataTable extends Resource implements TableEmitter {
 
 	public get output(): Maybe<TableContainer> {
 		return this._output$.value
+	}
+
+	private recomputeOutput = (): void => {
+		if (this._rawData != null) {
+			readTable(this._rawData, this.toSchema(), { autoType: false })
+				.then((t) => this._output$.next({ table: t, id: this.name }))
+				.catch((err) => {
+					log('error reading blob', err)
+					throw err
+				})
+		} else {
+			this._output$.next(undefined)
+		}
+		this._onChange.next()
 	}
 
 	public override toSchema(): DataTableSchema {
@@ -120,7 +118,7 @@ export class DataTable extends Resource implements TableEmitter {
 		super.loadSchema(schema, true)
 		this._format.next(schema?.format ?? DataFormat.CSV)
 		// these loads will fire onChange events
-		// which will trigger refreshSource
+		// which will trigger refresh
 		this.parser.loadSchema(schema?.parser, true)
 		this.shape.loadSchema(schema?.shape, true)
 

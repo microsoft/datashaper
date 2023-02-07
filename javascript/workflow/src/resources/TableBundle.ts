@@ -93,13 +93,6 @@ export class TableBundle extends Resource implements TableEmitter {
 		}) as TableEmitter | undefined
 	}
 
-	public override dispose(): void {
-		this._input$.complete()
-		this._output$.complete()
-		super.dispose()
-	}
-
-	// #region Class Fields
 	public override get name(): string {
 		return super.name
 	}
@@ -108,8 +101,6 @@ export class TableBundle extends Resource implements TableEmitter {
 		super.name = value
 		this._onChange.next()
 	}
-
-	// #endregion
 
 	public get output$(): Observable<Maybe<TableContainer>> {
 		return this._output$
@@ -132,5 +123,11 @@ export class TableBundle extends Resource implements TableEmitter {
 			return table
 		}
 		return { ...table, metadata: introspect(table.table, true) }
+	}
+
+	public override dispose(): void {
+		this._input$.complete()
+		this._output$.complete()
+		super.dispose()
 	}
 }

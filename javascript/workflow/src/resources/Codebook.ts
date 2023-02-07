@@ -20,19 +20,19 @@ import type { Readable, TableTransformer } from './types/index.js'
 export class Codebook extends Resource implements TableTransformer {
 	public readonly $schema = LATEST_CODEBOOK_SCHEMA
 	public readonly profile = KnownProfile.Codebook
-	private readonly _output$ = new BehaviorSubject<Maybe<TableContainer>>(
-		undefined,
-	)
-	private _inputSub: Subscription | undefined
 
 	public override defaultTitle(): string {
 		return 'codebook'
 	}
-
 	public override defaultName(): string {
 		return 'codebook.json'
 	}
 
+	private readonly _output$ = new BehaviorSubject<Maybe<TableContainer>>(
+		undefined,
+	)
+	private _inputSub: Subscription | undefined
+	private _input: Maybe<TableContainer>
 	private _fields$ = new BehaviorSubject<Field[]>([])
 
 	public constructor(codebook?: Readable<CodebookSchema>) {
@@ -42,9 +42,10 @@ export class Codebook extends Resource implements TableTransformer {
 
 	public set input$(value: Maybe<Observable<Maybe<TableContainer>>>) {
 		this._inputSub?.unsubscribe()
-		this._inputSub = value?.subscribe((table) =>
-			this._output$.next(this.encodeTable(table)),
-		)
+		this._inputSub = value?.subscribe((table) => {
+			this._input = table
+			this.recomputeOutput()
+		})
 	}
 
 	public get output$(): Observable<Maybe<TableContainer>> {
@@ -65,6 +66,20 @@ export class Codebook extends Resource implements TableTransformer {
 
 	public set fields(value: Field[]) {
 		this._fields$.next(value)
+		this.recomputeOutput()
+	}
+
+	private recomputeOutput = (): void => {
+		if (this._input?.table != null && this.fields.length > 0) {
+			const encodedTable = applyCodebook(
+				this._input?.table!,
+				this,
+				CodebookStrategy.DataTypeAndMapping,
+			)
+			this._output$.next({ ...this._input!, table: encodedTable })
+		} else {
+			this._output$.next(this._input)
+		}
 		this._onChange.next()
 	}
 
@@ -89,18 +104,5 @@ export class Codebook extends Resource implements TableTransformer {
 	public override dispose(): void {
 		this._fields$.complete()
 		super.dispose()
-	}
-
-	private encodeTable = (t: Maybe<TableContainer>): Maybe<TableContainer> => {
-		if (t?.table == null || this.fields.length === 0) {
-			return t
-		}
-
-		const encodedTable = applyCodebook(
-			t.table,
-			this,
-			CodebookStrategy.DataTypeAndMapping,
-		)
-		return { ...t, table: encodedTable }
 	}
 }

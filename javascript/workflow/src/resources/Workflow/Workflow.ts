@@ -35,14 +35,15 @@ const log = debug('datashaper:workflow')
 export type TableObservable = Observable<Maybe<TableContainer>>
 
 export class Workflow extends Resource implements TableTransformer {
+	public readonly $schema = LATEST_WORKFLOW_SCHEMA
+	public readonly profile = KnownProfile.Workflow
+
 	public override defaultTitle(): string {
 		return 'workflow'
 	}
 	public override defaultName(): string {
 		return 'workflow.json'
 	}
-	public readonly $schema = LATEST_WORKFLOW_SCHEMA
-	public readonly profile = KnownProfile.Workflow
 
 	// Delegated Facade Managers
 	private readonly _nameMgr = new NameManager()
@@ -88,15 +89,6 @@ export class Workflow extends Resource implements TableTransformer {
 			this._dataPackageSub = dp.onChange(rebindInputs)
 			rebindInputs()
 		}
-	}
-
-	public override dispose(): void {
-		log('disposing')
-		this._dataPackageSub?.()
-		this._graphMgr.dispose()
-		this._tableMgr.dispose()
-		this._nameMgr.dispose()
-		super.dispose()
 	}
 
 	private rebindDefaultOutput() {
@@ -447,4 +439,13 @@ export class Workflow extends Resource implements TableTransformer {
 			...(table ?? {}),
 			id: name,
 		})
+
+	public override dispose(): void {
+		log('disposing')
+		this._dataPackageSub?.()
+		this._graphMgr.dispose()
+		this._tableMgr.dispose()
+		this._nameMgr.dispose()
+		super.dispose()
+	}
 }
