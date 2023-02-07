@@ -16,7 +16,8 @@ export function calculateWidthAuto(
 ): number {
 	const fdResult = calculateWidthFd(values)
 	const sturgesResult = calculateWidthSturges(min, max, values)
-	return Math.min(fdResult, sturgesResult)
+	// if the min is 0, use the other
+	return Math.min(fdResult, sturgesResult) || Math.max(fdResult, sturgesResult)
 }
 
 export function calculateWidthFd(values: number[]): number {
@@ -101,7 +102,8 @@ export function calculateBinCount(
 	max: number,
 	width: number,
 ): number {
-	return Math.round(Math.ceil((max - min) / width))
+	// if we have no width (possible with some equations), just return 1 to avoid divide by zero
+	return width === 0 ? 1 : Math.round(Math.ceil((max - min) / width))
 }
 
 export function standardDeviation(values: number[], precision = 3): number {
