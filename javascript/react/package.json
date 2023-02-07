@@ -55,9 +55,9 @@
 	"devDependencies": {
 		"@essex/scripts": "^24.0.3",
 		"@essex/tsconfig-base": "^1.0.2",
-		"@fluentui/react": "^8.105.1",
-		"@fluentui/react-hooks": "^8.6.15",
-		"@fluentui/utilities": "^8.13.5",
+		"@fluentui/react": "^8.105.4",
+		"@fluentui/react-hooks": "^8.6.16",
+		"@fluentui/utilities": "^8.13.6",
 		"@thematic/core": "^4.0.4",
 		"@thematic/d3": "^2.0.19",
 		"@thematic/fluent": "^5.0.5",
