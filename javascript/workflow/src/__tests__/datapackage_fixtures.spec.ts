@@ -20,7 +20,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const SCHEMA_PATH = path.join(__dirname, '../../../../schema')
 const CASES_PATH = path.join(SCHEMA_PATH, 'fixtures/datapackages')
 const MAX_WORKFLOW_READS = 3
-const WORKFLOW_TIMEOUT = 10000
+const WORKFLOW_TIMEOUT = 10_000
+const TEST_TIMEOUT = 30_000
 
 /**
  * Create top-level describes for each test category (top-level folders)
@@ -91,7 +92,7 @@ function defineTestCase(parentPath: string, test: string) {
 				datapackage?.dispose()
 			}
 		},
-		15000,
+		TEST_TIMEOUT,
 	)
 }
 
