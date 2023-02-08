@@ -51,7 +51,9 @@ export class DataTableProfile implements ProfileHandler {
 					data = await fetchFile(resource.path)
 				} else {
 					log('reading local resource data')
-					data = this.resourceManager.readFile(resource.path)
+					data =
+						this.resourceManager.readFile(resource.path) ??
+						(await fetchFile(resource.path))
 				}
 				resource.data = data
 			}

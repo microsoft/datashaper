@@ -62,32 +62,31 @@ export class Workflow extends Resource implements TableTransformer {
 	public override connect(dp: DataPackage, top: boolean): void {
 		log('connecting')
 		super.connect(dp, top)
-		if (this.dataPackage !== dp) {
-			this._dataPackageSub?.()
-			this.dataPackage = dp
-			const inputs = new Map<string, Observable<Maybe<TableContainer>>>()
-			const rebindInputs = () => {
-				inputs.clear()
-				const tableNames = dp.resources
-					.filter(
-						(r) =>
-							r.profile === KnownProfile.TableBundle ||
-							r.profile === KnownProfile.DataTable,
-					)
-					.map((r) => r.name)
 
-				// Set the sibling table inputs
-				tableNames.forEach((name) => {
-					const input =
-						(dp.getResource(name) as TableEmitter)?.output$ ??
-						(EMPTY as Observable<unknown>)
-					this.addInput(input, name)
-				})
-			}
+		this._dataPackageSub?.()
+		this.dataPackage = dp
+		const inputs = new Map<string, Observable<Maybe<TableContainer>>>()
+		const rebindInputs = () => {
+			inputs.clear()
+			const tableNames = dp.resources
+				.filter(
+					(r) =>
+						r.profile === KnownProfile.TableBundle ||
+						r.profile === KnownProfile.DataTable,
+				)
+				.map((r) => r.name)
 
-			this._dataPackageSub = dp.onChange(rebindInputs)
-			rebindInputs()
+			// Set the sibling table inputs
+			tableNames.forEach((name) => {
+				const input =
+					(dp.getResource(name) as TableEmitter)?.output$ ??
+					(EMPTY as Observable<unknown>)
+				this.addInput(input, name)
+			})
 		}
+
+		this._dataPackageSub = dp.onChange(rebindInputs)
+		rebindInputs()
 	}
 
 	public override dispose(): void {
