@@ -57,7 +57,7 @@ export const TableBundleEditor: React.FC<ProfileComponentProps<TableBundle>> =
 		const [isLatestSelected, setIsLatestSelected] = useState(true)
 		const [isInputSelected, setIsInputSelected] = useState(false)
 		const [selectedColumn, onColumnClick] = useColumnState()
-		console.log(workflow.toSchema())
+
 		// Derived State
 		const numSteps = useObservableState(workflow.length$, workflow.length)
 		const toolPanelHeader = useMemo(
