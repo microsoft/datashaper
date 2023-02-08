@@ -152,7 +152,7 @@ export function estimateBinValues(
 
 	const numBins = calculateBinCount(min, max, width)
 	const binEdges = linspace(min, max, numBins + 1)
-	return [min, max, roundNumber(binEdges[1]! - binEdges[0]!, Opts.Up)]
+	return [min, max, binEdges[1]! - binEdges[0]!]
 }
 
 function estimateWidth(
