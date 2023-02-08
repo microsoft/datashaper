@@ -3,8 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '@datashaper/workflow'
-import { isEqual } from 'lodash-es'
-import { memo, useMemo, useState } from 'react'
+import { memo, useState } from 'react'
 
 import { EMPTY_OBJECT } from '../../empty.js'
 import { Action } from '../controls/index.js'
