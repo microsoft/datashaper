@@ -20,6 +20,5 @@
 			"id": "expected"
 		}
 	],
-	"input": ["table10"],
-	"output": ["folded", "expected"]
+	"input": ["table10"]
 }

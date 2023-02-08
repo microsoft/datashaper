@@ -12,6 +12,6 @@
 				"operation": "row_number"
 			}
 		}
-	],
-	"output": ["expected"]
+	]
+
 }

@@ -55,11 +55,5 @@
 			}
 		}
 	],
-	"input": ["stocks"],
-	"output": [
-		"output-table-0",
-		"output-table-1",
-		"output-table-2",
-		"output-table-3"
-	]
+	"input": ["stocks"]
 }

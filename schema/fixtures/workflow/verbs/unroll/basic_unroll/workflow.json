@@ -10,6 +10,6 @@
 			}
 		}
 	],
-	"input": ["table1"],
-	"output": ["expected"]
+	"input": ["table1"]
+
 }

@@ -20,6 +20,6 @@
 			"id": "expected"
 		}
 	],
-	"input": ["table14"],
-	"output": ["expected"]
+	"input": ["table14"]
+
 }

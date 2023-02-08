@@ -17,6 +17,5 @@
 			}
 		}
 	],
-	"input": ["stocks"],
-	"output": ["categorical"]
+	"input": ["stocks"]
 }

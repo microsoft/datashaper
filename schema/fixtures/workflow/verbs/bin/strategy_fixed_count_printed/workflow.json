@@ -16,6 +16,5 @@
 			"id": "expected"
 		}
 	],
-	"output": ["expected"],
 	"input": ["table9"]
 }

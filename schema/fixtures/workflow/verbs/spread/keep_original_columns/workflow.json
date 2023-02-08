@@ -12,6 +12,6 @@
 			"id": "expected"
 		}
 	],
-	"input": ["table6"],
-	"output": ["expected"]
+	"input": ["table6"]
+
 }

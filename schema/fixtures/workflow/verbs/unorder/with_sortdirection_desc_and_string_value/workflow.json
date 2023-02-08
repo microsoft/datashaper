@@ -19,6 +19,5 @@
 			"verb": "unorder"
 		}
 	],
-	"input": ["table7"],
-	"output": ["expected", "ordered"]
+	"input": ["table7"]
 }

@@ -28,6 +28,5 @@
 			}
 		}
 	],
-	"input": ["companies"],
-	"output": ["binarize"]
+	"input": ["companies"]
 }
