@@ -70,16 +70,17 @@ export class Workflow extends Resource implements TableTransformer {
 			const inputs = new Map<string, Observable<Maybe<TableContainer>>>()
 			const rebindInputs = () => {
 				inputs.clear()
-				const tableNames = dp.resources
+				const values = dp.resources
 					.filter(isTableEmitter)
 					.map((r) => r.name)
+					.reduce((prev, name: string) => {
+						const emitter = dp.getResource(name) as TableEmitter
+						prev.set(name, emitter?.output$ ?? EMPTY)
+						return prev
+					}, new Map<string, Observable<Maybe<TableContainer>>>())
 
 				// Set the sibling table inputs
-				tableNames.forEach((name) => {
-					const emitter = dp.getResource(name) as TableEmitter
-					const input = emitter?.output$ ?? EMPTY
-					this.addInput(input, name)
-				})
+				this.addInputs(values)
 			}
 
 			this._dataPackageSub = dp.onChange(rebindInputs)
