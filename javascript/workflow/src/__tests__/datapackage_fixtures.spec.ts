@@ -1,12 +1,13 @@
 /* eslint-disable jest/expect-expect, jest/valid-title, jest/no-conditional-expect */
 import { KnownProfile } from '@datashaper/schema'
+import type { TableContainer } from '@datashaper/tables'
 import fs from 'fs'
 import fsp from 'fs/promises'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
 import { DataPackage } from '../resources/DataPackage/DataPackage.js'
-import type { Workflow } from '../resources/index.js'
+import type { TableEmitter, Workflow } from '../resources/index.js'
 import type { TableBundle } from '../resources/TableBundle.js'
 import { defaultProfiles } from './utils.js'
 
@@ -18,6 +19,8 @@ process.chdir('../..')
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const SCHEMA_PATH = path.join(__dirname, '../../../../schema')
 const CASES_PATH = path.join(SCHEMA_PATH, 'fixtures/datapackages')
+const MAX_WORKFLOW_READS = 3
+const WORKFLOW_TIMEOUT = 10000
 
 /**
  * Create top-level describes for each test category (top-level folders)
@@ -72,13 +75,15 @@ function defineTestCase(parentPath: string, test: string) {
 						expect(workflow).toBeDefined()
 						expect(workflow?.length ?? 0).toEqual(table.workflowLength ?? 0)
 					}
-					expect(found?.output?.table?.numRows()).toEqual(table.rowCount)
-					expect(found?.output?.table?.numCols()).toEqual(table.columnCount)
-					expect(found?.output?.metadata?.cols).toEqual(
-						found?.output?.table?.numCols(),
+
+					const processedTable = await readOutputTable(found)
+					expect(processedTable.table?.numRows()).toEqual(table.rowCount)
+					expect(processedTable.table?.numCols()).toEqual(table.columnCount)
+					expect(processedTable.metadata?.cols).toEqual(
+						processedTable.table?.numCols(),
 					)
-					expect(found?.output?.metadata?.rows).toEqual(
-						found?.output?.table?.numRows(),
+					expect(processedTable.metadata?.rows).toEqual(
+						processedTable.table?.numRows(),
 					)
 				}
 				await checkPersisted(await datapackage.save(), expected)
@@ -88,6 +93,30 @@ function defineTestCase(parentPath: string, test: string) {
 		},
 		15000,
 	)
+}
+
+async function readOutputTable(found: TableEmitter): Promise<TableContainer> {
+	const readWorkflowOutput = new Promise<TableContainer>((resolve, reject) => {
+		// Wait for the second table emission
+		let idx = 0
+		found.output$.subscribe({
+			next: (value) => {
+				idx++
+				if (value?.table != null) {
+					resolve(value)
+				} else if (idx > MAX_WORKFLOW_READS) {
+					reject(new Error('too many workflow emissions'))
+				}
+			},
+			error: reject,
+		})
+	})
+
+	const timeout = new Promise((_, reject) =>
+		setTimeout(reject, WORKFLOW_TIMEOUT),
+	)
+	await Promise.race([readWorkflowOutput, timeout])
+	return readWorkflowOutput
 }
 
 async function readJson(filePath: string): Promise<any> {
@@ -121,11 +150,4 @@ async function checkPersisted(files: Map<string, Blob>, expected: any) {
 
 	const dpJson = JSON.parse(await dpBlob!.text())
 	expect(dpJson.resources).toHaveLength(expected.tables.length)
-}
-
-/**
- * Wait for the async queue to process
- */
-function tick(): Promise<void> {
-	return new Promise((r) => setTimeout(r, 0))
 }
