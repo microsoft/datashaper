@@ -16,7 +16,7 @@ export function useWorkflowDataTable(
 	const observable = useObservable(() => {
 		let result: Observable<Maybe<TableContainer>> | undefined
 		if (id == null) {
-			result = workflow?.input$
+			result = workflow?.output$
 		} else {
 			result = workflow?.read$(id)
 		}
