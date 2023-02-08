@@ -80,7 +80,7 @@ export class Workflow extends Resource implements TableTransformer {
 					}, new Map<string, Observable<Maybe<TableContainer>>>())
 
 				// Set the sibling table inputs
-				console.log('bind workflow inputs', values)
+				log('bind workflow inputs', values)
 				this.addInputs(values)
 			}
 
