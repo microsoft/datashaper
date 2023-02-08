@@ -27,6 +27,7 @@ import { NameManager } from './NameManager.js'
 import type { Step, StepInput, TableExportOptions } from './types.js'
 import { unique } from './utils.js'
 import { WorkflowSchemaValidator } from './WorkflowSchemaValidator.js'
+import { isTableEmitter } from '../../predicates.js'
 const log = debug('datashaper:workflow')
 
 /**
@@ -63,30 +64,27 @@ export class Workflow extends Resource implements TableTransformer {
 		log('connecting')
 		super.connect(dp, top)
 
-		this._dataPackageSub?.()
-		this.dataPackage = dp
-		const inputs = new Map<string, Observable<Maybe<TableContainer>>>()
-		const rebindInputs = () => {
-			inputs.clear()
-			const tableNames = dp.resources
-				.filter(
-					(r) =>
-						r.profile === KnownProfile.TableBundle ||
-						r.profile === KnownProfile.DataTable,
-				)
-				.map((r) => r.name)
+		if (dp !== this.dataPackage || this._dataPackageSub == null) {
+			this.dataPackage = dp
+			this._dataPackageSub?.()
+			const inputs = new Map<string, Observable<Maybe<TableContainer>>>()
+			const rebindInputs = () => {
+				inputs.clear()
+				const tableNames = dp.resources
+					.filter(isTableEmitter)
+					.map((r) => r.name)
 
-			// Set the sibling table inputs
-			tableNames.forEach((name) => {
-				const input =
-					(dp.getResource(name) as TableEmitter)?.output$ ??
-					(EMPTY as Observable<unknown>)
-				this.addInput(input, name)
-			})
+				// Set the sibling table inputs
+				tableNames.forEach((name) => {
+					const emitter = dp.getResource(name) as TableEmitter
+					const input = emitter?.output$ ?? EMPTY
+					this.addInput(input, name)
+				})
+			}
+
+			this._dataPackageSub = dp.onChange(rebindInputs)
+			rebindInputs()
 		}
-
-		this._dataPackageSub = dp.onChange(rebindInputs)
-		rebindInputs()
 	}
 
 	public override dispose(): void {
