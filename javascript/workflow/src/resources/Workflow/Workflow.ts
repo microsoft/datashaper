@@ -365,24 +365,6 @@ export class Workflow extends Resource implements TableTransformer {
 
 	// #endregion
 
-	/**
-	 * Gets a map of the current output tables
-	 * @returns The output cache
-	 */
-	public toMap({
-		includeDefaultInput,
-		includeDefaultOutput,
-		includeInputs,
-	}: TableExportOptions = {}): Map<string, Maybe<TableContainer>> {
-		return this._tableMgr.toMap(
-			includeInputs
-				? [...this.inputNames, ...this.outputNames]
-				: this.outputNames,
-			includeDefaultInput,
-			includeDefaultOutput,
-		)
-	}
-
 	public toArray({
 		includeDefaultInput,
 		includeDefaultOutput,
@@ -401,7 +383,6 @@ export class Workflow extends Resource implements TableTransformer {
 		return createWorkflowSchemaObject({
 			...super.toSchema(),
 			input: [...this.inputNames],
-			output: [...this.outputNames],
 			steps: [...this.steps] as any,
 		})
 	}
@@ -412,9 +393,8 @@ export class Workflow extends Resource implements TableTransformer {
 	): void {
 		super.loadSchema(schema, true)
 		const input = unique(schema?.input ?? [])
-		const output = unique(schema?.output ?? [])
 
-		this._nameMgr.setNames(input, output)
+		this._nameMgr.setNames(input)
 		input.forEach((i) => this._graphMgr.ensureInput(i))
 
 		this._graphMgr.setSteps(schema?.steps?.map((i) => i as StepInput) ?? [])

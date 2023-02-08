@@ -28,7 +28,6 @@ import type { ITextFieldStyles } from '@fluentui/react';
 import type { ReactNode } from 'react';
 import type { SortDirection } from '@datashaper/schema';
 import type { Step } from '@datashaper/workflow';
-import type { TableContainer } from '@datashaper/tables';
 import type { TableMetadata } from '@datashaper/tables';
 import type { ValidationResult } from '@datashaper/schema';
 import type { Workflow } from '@datashaper/workflow';
@@ -283,8 +282,6 @@ export interface TableCommandsProps {
     color?: string;
     // (undocumented)
     commandBarProps?: Partial<ICommandBarProps>;
-    // (undocumented)
-    inputTable?: TableContainer | undefined;
     // (undocumented)
     metadata?: TableMetadata;
     // (undocumented)

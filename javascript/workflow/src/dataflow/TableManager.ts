@@ -113,28 +113,6 @@ export class TableManager {
 		return [this._tables.get(id)!, created]
 	}
 
-	/**
-	 * Gets a map of the current output tables
-	 * @returns The output cache
-	 */
-	public toMap(
-		names: string[],
-		includeDefaultInput: boolean | undefined,
-		includeDefaultOutput: boolean | undefined,
-	): Map<string, Maybe<TableContainer>> {
-		const result = new Map<string, Maybe<TableContainer>>()
-		const addTable = (name: string) => result.set(name, this.get(name))
-
-		if (includeDefaultOutput) {
-			result.set('default', this._defaultOutput$.value)
-		}
-		if (includeDefaultInput) {
-			result.set('defaultInput', this._defaultInput$.value)
-		}
-		names.forEach(addTable)
-		return result
-	}
-
 	public toArray(
 		names: string[],
 		includeDefaultInput: boolean | undefined,

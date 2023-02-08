@@ -1286,7 +1286,6 @@ export enum WindowFunction {
 // @public
 export interface WorkflowSchema extends ResourceSchema {
     input?: string[];
-    output: string[];
     // (undocumented)
     profile: 'workflow';
     steps?: Step[];

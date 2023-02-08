@@ -3202,38 +3202,6 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableCommandsProps#inputTable:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "inputTable?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": " | undefined"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "inputTable",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              }
-            },
-            {
-              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/react!TableCommandsProps#metadata:member",
               "docComment": "",
               "excerptTokens": [
