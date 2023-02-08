@@ -80,6 +80,7 @@ export class Workflow extends Resource implements TableTransformer {
 					}, new Map<string, Observable<Maybe<TableContainer>>>())
 
 				// Set the sibling table inputs
+				console.log('bind workflow inputs', values)
 				this.addInputs(values)
 			}
 
@@ -345,6 +346,7 @@ export class Workflow extends Resource implements TableTransformer {
 	 * @param step - the step to add
 	 */
 	public addStep(input: StepInput): Step {
+		log('add step', input)
 		const newStep = this._graphMgr.addStep(input)
 		// Use this new step's output as the default output for the workflow
 		this.rebindDefaultOutput()
@@ -353,6 +355,7 @@ export class Workflow extends Resource implements TableTransformer {
 	}
 
 	public removeStep(index: number): void {
+		log(`remove step@${index}`)
 		const node = this._graphMgr.removeStep(index)
 
 		// Remove step outputs from the configuration
@@ -364,6 +367,7 @@ export class Workflow extends Resource implements TableTransformer {
 	}
 
 	public updateStep(stepInput: StepInput, index: number): Step {
+		log(`update step@${index}`)
 		const step = this._graphMgr.updateStep(stepInput, index)
 		this._onChange.next()
 		return step
