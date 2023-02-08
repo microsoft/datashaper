@@ -46,14 +46,15 @@ export class DataTableProfile implements ProfileHandler {
 				resource.data = new Blob([schema.data])
 			} else {
 				let data: Blob | undefined
-				if (resource.path.startsWith('http')) {
-					log('fetching remote resource data')
-					data = await fetchFile(resource.path)
-				} else {
+				if (!resource.path.startsWith('http')) {
 					log('reading local resource data')
 					data =
 						this.resourceManager.readFile(resource.path) ??
 						(await fetchFile(resource.path))
+				}
+				if (data == null) {
+					log('fetching remote resource data')
+					data = await fetchFile(resource.path)
 				}
 				resource.data = data
 			}
