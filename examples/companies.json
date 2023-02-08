@@ -30,7 +30,6 @@
 				{
 					"rel": "input",
 					"profile": "datatable",
-					"name": "companies",
 					"path": "data/products.csv"
 				}
 			]
