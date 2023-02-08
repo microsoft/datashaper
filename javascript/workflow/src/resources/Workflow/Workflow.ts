@@ -27,6 +27,7 @@ import { NameManager } from './NameManager.js'
 import type { Step, StepInput, TableExportOptions } from './types.js'
 import { unique } from './utils.js'
 import { WorkflowSchemaValidator } from './WorkflowSchemaValidator.js'
+import { isTableEmitter } from '../../predicates.js'
 const log = debug('datashaper:workflow')
 
 /**
@@ -63,27 +64,25 @@ export class Workflow extends Resource implements TableTransformer {
 	public override connect(dp: DataPackage, top: boolean): void {
 		log('connecting')
 		super.connect(dp, top)
-		if (this.dataPackage !== dp) {
-			this._dataPackageSub?.()
+
+		if (dp !== this.dataPackage || this._dataPackageSub == null) {
 			this.dataPackage = dp
+			this._dataPackageSub?.()
 			const inputs = new Map<string, Observable<Maybe<TableContainer>>>()
 			const rebindInputs = () => {
 				inputs.clear()
-				const tableNames = dp.resources
-					.filter(
-						(r) =>
-							r.profile === KnownProfile.TableBundle ||
-							r.profile === KnownProfile.DataTable,
-					)
+				const values = dp.resources
+					.filter(isTableEmitter)
 					.map((r) => r.name)
+					.reduce((prev, name: string) => {
+						const emitter = dp.getResource(name) as TableEmitter
+						prev.set(name, emitter?.output$ ?? EMPTY)
+						return prev
+					}, new Map<string, Observable<Maybe<TableContainer>>>())
 
 				// Set the sibling table inputs
-				tableNames.forEach((name) => {
-					const input =
-						(dp.getResource(name) as TableEmitter)?.output$ ??
-						(EMPTY as Observable<unknown>)
-					this.addInput(input, name)
-				})
+				log('bind workflow inputs', values)
+				this.addInputs(values)
 			}
 
 			this._dataPackageSub = dp.onChange(rebindInputs)
@@ -339,6 +338,7 @@ export class Workflow extends Resource implements TableTransformer {
 	 * @param step - the step to add
 	 */
 	public addStep(input: StepInput): Step {
+		log('add step', input)
 		const newStep = this._graphMgr.addStep(input)
 		// Use this new step's output as the default output for the workflow
 		this.rebindDefaultOutput()
@@ -347,6 +347,7 @@ export class Workflow extends Resource implements TableTransformer {
 	}
 
 	public removeStep(index: number): void {
+		log(`remove step@${index}`)
 		const node = this._graphMgr.removeStep(index)
 
 		// Remove step outputs from the configuration
@@ -358,6 +359,7 @@ export class Workflow extends Resource implements TableTransformer {
 	}
 
 	public updateStep(stepInput: StepInput, index: number): Step {
+		log(`update step@${index}`)
 		const step = this._graphMgr.updateStep(stepInput, index)
 		this._onChange.next()
 		return step
