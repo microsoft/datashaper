@@ -9,7 +9,11 @@ import {
 	KnownProfile,
 	LATEST_CODEBOOK_SCHEMA,
 } from '@datashaper/schema'
-import { type TableContainer, applyCodebook } from '@datashaper/tables'
+import {
+	type TableContainer,
+	applyCodebook,
+	generateCodebook,
+} from '@datashaper/tables'
 import type { Subscription } from 'rxjs'
 import { type Observable, BehaviorSubject } from 'rxjs'
 
@@ -92,10 +96,20 @@ export class Codebook extends Resource implements TableTransformer {
 	}
 
 	private encodeTable = (t: Maybe<TableContainer>): Maybe<TableContainer> => {
-		if (t?.table == null || this.fields.length === 0) {
+		if (t?.table == null) {
+			// empty table? just return it
+			return t
+		} else if (this.fields.length === 0) {
+			// valid table but empty codebook? generate a new codebook
+			this._fields$.next(generateCodebook(t.table).fields)
+		}
+
+		if (this.fields.length === 0) {
+			// no codebook at this point? just return the table
 			return t
 		}
 
+		// apply the codebook to the table
 		const encodedTable = applyCodebook(
 			t.table,
 			this,
