@@ -66,7 +66,6 @@ export declare class Workflow extends Resource implements TableTransformer
 |  [removeStep(index)](./workflow.workflow.removestep.md) |  |  |
 |  [suggestOutputName(name)](./workflow.workflow.suggestoutputname.md) |  |  |
 |  [toArray({ includeDefaultInput, includeDefaultOutput, includeInputs, })](./workflow.workflow.toarray.md) |  |  |
-|  [toMap({ includeDefaultInput, includeDefaultOutput, includeInputs, })](./workflow.workflow.tomap.md) |  | Gets a map of the current output tables |
 |  [toSchema()](./workflow.workflow.toschema.md) |  |  |
 |  [updateStep(stepInput, index)](./workflow.workflow.updatestep.md) |  |  |
 |  [validate(workflowJson)](./workflow.workflow.validate.md) | <code>static</code> |  |

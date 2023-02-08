@@ -1142,7 +1142,6 @@ export class Workflow extends Resource implements TableTransformer {
     suggestOutputName(name: string): string;
     // (undocumented)
     toArray({ includeDefaultInput, includeDefaultOutput, includeInputs, }?: TableExportOptions): Maybe<TableContainer>[];
-    toMap({ includeDefaultInput, includeDefaultOutput, includeInputs, }?: TableExportOptions): Map<string, Maybe<TableContainer>>;
     // (undocumented)
     toSchema(): WorkflowSchema;
     // (undocumented)
