@@ -46,12 +46,13 @@ export class DataTableProfile implements ProfileHandler {
 				resource.data = new Blob([schema.data])
 			} else {
 				let data: Blob | undefined
+
+				// If the path doesn't start with `http`, then try fetching the data from the resource Mgr first
 				if (!resource.path.startsWith('http')) {
 					log('reading local resource data')
-					data =
-						this.resourceManager.readFile(resource.path) ??
-						(await fetchFile(resource.path))
+					data = this.resourceManager.readFile(resource.path)
 				}
+				// Fetch the file remotely, either as backup or because it starts with 'http'
 				if (data == null) {
 					log('fetching remote resource data')
 					data = await fetchFile(resource.path)

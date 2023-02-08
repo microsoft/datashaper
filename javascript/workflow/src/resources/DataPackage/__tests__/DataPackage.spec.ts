@@ -14,7 +14,7 @@ describe('the data package', () => {
 							profile: 'tablebundle',
 							name: 'foo',
 							sources: [
-								{ profile: 'datatable', path: 'foo.csv' },
+								{ profile: 'datatable' },
 								{ profile: 'workflow', steps: [] },
 							],
 						},
@@ -40,7 +40,7 @@ describe('the data package', () => {
 							profile: 'tablebundle',
 							name: 'foo',
 							sources: [
-								{ profile: 'datatable', path: 'foo.csv' },
+								{ profile: 'datatable' },
 								{ profile: 'workflow', steps: [] },
 							],
 						},
@@ -48,7 +48,7 @@ describe('the data package', () => {
 							profile: 'tablebundle',
 							name: 'bar',
 							sources: [
-								{ profile: 'datatable', path: 'bar.csv' },
+								{ profile: 'datatable' },
 								{ profile: 'workflow', steps: [] },
 							],
 						},
