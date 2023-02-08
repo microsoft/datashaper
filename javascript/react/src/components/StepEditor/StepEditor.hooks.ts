@@ -22,7 +22,6 @@ export function useStepOutputHandling(
 	step: Step | undefined,
 ): {
 	output: string | undefined
-	outputHasChanged: boolean
 	onOutputChanged: (name: string | undefined) => void
 } {
 	const [output, setOutput] = useState<string>()
@@ -48,7 +47,6 @@ export function useStepOutputHandling(
 	return useMemo(
 		() => ({
 			output,
-			outputHasChanged: output !== initialOutput,
 			onOutputChanged: setOutput,
 		}),
 		[output, initialOutput, setOutput],
