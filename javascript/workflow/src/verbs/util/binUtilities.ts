@@ -194,10 +194,12 @@ export function calculateNiceRounding(
 }
 
 export function roundNumber(value: number, opt: Opts): number {
-	if (value < 1 && getNumberOfDecimals(value) > 10) {
-		const decimals = value.toString().split('.')
-		const whole = decimals[0]!
-		const fractional = decimals[1]!
+	const str = value.toString()
+	const decimals = str.split('.')
+	const whole = decimals[0]!
+	const fractional = decimals[1] || ''
+	const numberOfDecimals = getNumberOfDecimals(str)
+	if (value < 1 && numberOfDecimals > 10) {
 		const rounding = opt === Opts.Down ? '0' : '9'
 		const fractionalPreRounding = fractional.substring(0, ROUND_PRECISION)
 		const fractionalPostRounding = fractional.substring(0, ROUND_PRECISION + 1)
@@ -205,27 +207,22 @@ export function roundNumber(value: number, opt: Opts): number {
 			`${whole}.${fractionalPreRounding}${rounding}${fractionalPostRounding}`,
 		)
 		return Number(finalNumber.toFixed(ROUND_PRECISION))
-	} else if (value < 1 && getNumberOfDecimals(value) <= 10) {
-		const numberOfDecimals = getNumberOfDecimals(value)
-		const decimals = value.toString().split('.')
+	} else if (value < 1 && numberOfDecimals <= 10) {
 		const finalNumber = Number(
-			`${decimals[0]!}.${decimals[1]!.substring(
+			`${decimals[0]!}.${(decimals[1] || '').substring(
 				0,
 				numberOfDecimals / ROUND_PRECISION,
-			)}${opt === Opts.Down ? '0' : '9'}${decimals[1]!.substring(
+			)}${opt === Opts.Down ? '0' : '9'}${(decimals[1] || '').substring(
 				numberOfDecimals / ROUND_PRECISION + 1,
 			)}`,
 		)
 		return Number(finalNumber.toFixed(numberOfDecimals / ROUND_PRECISION))
 	} else {
-		const decimals = value.toString().split('.')
-
 		if (decimals[0]!.length > 1) {
-			const numberString = value.toString()
 			const finalNumber = Number(
-				numberString.substring(0, INTEGER_PRECISION) +
+				str.substring(0, INTEGER_PRECISION) +
 					(opt === Opts.Down ? '0' : '9') +
-					numberString.substring(INTEGER_PRECISION + 1),
+					str.substring(INTEGER_PRECISION + 1),
 			)
 			return Number(finalNumber.toPrecision(INTEGER_PRECISION))
 		} else if (decimals[0]!.length <= 1 && decimals.length > 1) {
@@ -239,8 +236,8 @@ export function roundNumber(value: number, opt: Opts): number {
 	}
 }
 
-function getNumberOfDecimals(value: number): number {
-	const decimals = value.toString().split('.')
+function getNumberOfDecimals(value: string): number {
+	const decimals = value.split('.')
 	return decimals[1] !== undefined ? decimals[1].length : 0
 }
 

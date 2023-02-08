@@ -79,18 +79,6 @@ export const BinFormBase: React.FC<StepFormBaseProps<BinArgs>> = memo(
 					},
 				),
 				checkbox(
-					'Print range as output',
-					step.args.printRange,
-					(s, opt) => (s.args.printRange = opt as boolean),
-					{
-						styles: {
-							root: {
-								marginTop: 8,
-							},
-						},
-					},
-				),
-				checkbox(
 					'Nice rounding',
 					step.args.nice,
 					(s, val) => (s.args.nice = val as boolean),
@@ -103,7 +91,18 @@ export const BinFormBase: React.FC<StepFormBaseProps<BinArgs>> = memo(
 								marginTop: 8,
 							},
 						},
-						advanced: true,
+					},
+				),
+				checkbox(
+					'Print range as output',
+					step.args.printRange,
+					(s, opt) => (s.args.printRange = opt as boolean),
+					{
+						styles: {
+							root: {
+								marginTop: 8,
+							},
+						},
 					},
 				),
 			],
