@@ -33,9 +33,11 @@ import {
 	useTableCommandProps,
 } from './TableBundleEditor.hooks.js'
 import { Container, DetailsListContainer } from './TableBundleEditor.styles.js'
+import { useDataPackage } from '../../../hooks/useDataPackage.js'
 
 export const TableBundleEditor: React.FC<ProfileComponentProps<TableBundle>> =
 	memo(function TableBundleEditor({ resource }) {
+		const dataPackage = useDataPackage()
 		const [workflow, isWorkflowAttached] = useMemo<[Workflow, boolean]>(() => {
 			const result = resource
 				.getSourcesWithProfile(KnownProfile.Workflow)
@@ -43,6 +45,8 @@ export const TableBundleEditor: React.FC<ProfileComponentProps<TableBundle>> =
 			const defaultWorkflow = () => {
 				const workflow = new Workflow()
 				workflow.input$ = resource.output$
+				// pre-connect the workflow so it has visibility into table names
+				workflow.connect(dataPackage, false)
 				return workflow
 			}
 			return [result ?? defaultWorkflow(), !!result]
