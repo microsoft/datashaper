@@ -8,8 +8,37 @@
 				{
 					"rel": "input",
 					"profile": "datatable",
+					"name": "companies.csv",
 					"path": "data/companies.csv"
-				}
+				},
+				{
+					"$schema": "https://microsoft.github.io/datashaper/schema/codebook/v1.0.0.json",
+					"title": "codebook",
+					"name": "codebook.json",
+					"profile": "codebook",
+					"fields": [
+					  {
+						"name": "ID",
+						"type": "number",
+						"nature": "ordinal"
+					  },
+					  {
+						"name": "Name",
+						"type": "string",
+						"nature": "nominal"
+					  },
+					  {
+						"name": "Employees",
+						"type": "number",
+						"nature": "discrete"
+					  },
+					  {
+						"name": "US",
+						"type": "boolean",
+						"nature": "binary"
+					  }
+					]
+				  }
 			]
 		},
 		{
@@ -19,8 +48,52 @@
 				{
 					"rel": "input",
 					"profile": "datatable",
+					"name": "companies2.csv",
 					"path": "data/companies2.csv"
-				}
+				},
+				{
+					"$schema": "https://microsoft.github.io/datashaper/schema/codebook/v1.0.0.json",
+					"title": "codebook.json",
+					"name": "codebook (1).json",
+					"profile": "codebook",
+					"fields": [
+					  {
+						"name": "ID",
+						"type": "number",
+						"nature": "discrete"
+					  },
+					  {
+						"name": "Name",
+						"type": "string",
+						"nature": "binary"
+					  },
+					  {
+						"name": "Employees",
+						"type": "number",
+						"nature": "discrete"
+					  },
+					  {
+						"name": "US",
+						"type": "boolean",
+						"nature": "binary"
+					  },
+					  {
+						"name": "Headquarters",
+						"type": "string",
+						"nature": "nominal"
+					  },
+					  {
+						"name": "Founded",
+						"type": "date",
+						"nature": "continuous"
+					  },
+					  {
+						"name": "Array",
+						"type": "string",
+						"nature": "nominal"
+					  }
+					]
+				  }
 			]
 		},
 		{
@@ -30,8 +103,37 @@
 				{
 					"rel": "input",
 					"profile": "datatable",
+					"name": "products.csv",
 					"path": "data/products.csv"
-				}
+				},
+				{
+					"$schema": "https://microsoft.github.io/datashaper/schema/codebook/v1.0.0.json",
+					"title": "codebook.json",
+					"name": "codebook (2).json",
+					"profile": "codebook",
+					"fields": [
+					  {
+						"name": "ID",
+						"type": "number",
+						"nature": "ordinal"
+					  },
+					  {
+						"name": "Product",
+						"type": "string",
+						"nature": "continuous"
+					  },
+					  {
+						"name": "FY20 Sales",
+						"type": "number",
+						"nature": "discrete"
+					  },
+					  {
+						"name": "FY21 Sales",
+						"type": "number",
+						"nature": "discrete"
+					  }
+					]
+				  }
 			]
 		},
 		{
@@ -41,8 +143,62 @@
 				{
 					"rel": "input",
 					"profile": "datatable",
+					"name": "stocks.csv",
 					"path": "data/stocks.csv"
-				}
+				},
+				{
+					"$schema": "https://microsoft.github.io/datashaper/schema/codebook/v1.0.0.json",
+					"title": "codebook.json",
+					"name": "codebook (3).json",
+					"profile": "codebook",
+					"fields": [
+					  {
+						"name": "Symbol",
+						"type": "string",
+						"nature": "nominal"
+					  },
+					  {
+						"name": "Date",
+						"type": "date",
+						"nature": "continuous"
+					  },
+					  {
+						"name": "Close",
+						"type": "number",
+						"nature": "continuous"
+					  },
+					  {
+						"name": "Volume",
+						"type": "number",
+						"nature": "discrete"
+					  },
+					  {
+						"name": "Open",
+						"type": "number",
+						"nature": "continuous"
+					  },
+					  {
+						"name": "High",
+						"type": "number",
+						"nature": "continuous"
+					  },
+					  {
+						"name": "Low",
+						"type": "number",
+						"nature": "continuous"
+					  },
+					  {
+						"name": "Week",
+						"type": "number",
+						"nature": "discrete"
+					  },
+					  {
+						"name": "Month",
+						"type": "number",
+						"nature": "discrete"
+					  }
+					]
+				  }
 			]
 		}
 	]
