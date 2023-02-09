@@ -94,7 +94,7 @@ export class DataTable extends Resource implements TableEmitter {
 				.then((t) => this._output$.next({ table: t, id: this.name }))
 				.catch((err) => {
 					log('error reading blob', err)
-					throw err
+					this._output$.next(undefined)
 				})
 		} else {
 			this._output$.next(undefined)
