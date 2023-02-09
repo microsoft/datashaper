@@ -36,14 +36,15 @@ const log = debug('datashaper:workflow')
 export type TableObservable = Observable<Maybe<TableContainer>>
 
 export class Workflow extends Resource implements TableTransformer {
+	public readonly $schema = LATEST_WORKFLOW_SCHEMA
+	public readonly profile = KnownProfile.Workflow
+
 	public override defaultTitle(): string {
 		return 'workflow'
 	}
 	public override defaultName(): string {
 		return 'workflow.json'
 	}
-	public readonly $schema = LATEST_WORKFLOW_SCHEMA
-	public readonly profile = KnownProfile.Workflow
 
 	// Delegated Facade Managers
 	private readonly _nameMgr = new NameManager()
@@ -87,15 +88,6 @@ export class Workflow extends Resource implements TableTransformer {
 			this._dataPackageSub = dp.onChange(rebindInputs)
 			rebindInputs()
 		}
-	}
-
-	public override dispose(): void {
-		log('disposing')
-		this._dataPackageSub?.()
-		this._graphMgr.dispose()
-		this._tableMgr.dispose()
-		this._nameMgr.dispose()
-		super.dispose()
 	}
 
 	private rebindDefaultOutput() {
@@ -375,24 +367,6 @@ export class Workflow extends Resource implements TableTransformer {
 
 	// #endregion
 
-	/**
-	 * Gets a map of the current output tables
-	 * @returns The output cache
-	 */
-	public toMap({
-		includeDefaultInput,
-		includeDefaultOutput,
-		includeInputs,
-	}: TableExportOptions = {}): Map<string, Maybe<TableContainer>> {
-		return this._tableMgr.toMap(
-			includeInputs
-				? [...this.inputNames, ...this.outputNames]
-				: this.outputNames,
-			includeDefaultInput,
-			includeDefaultOutput,
-		)
-	}
-
 	public toArray({
 		includeDefaultInput,
 		includeDefaultOutput,
@@ -411,7 +385,6 @@ export class Workflow extends Resource implements TableTransformer {
 		return createWorkflowSchemaObject({
 			...super.toSchema(),
 			input: [...this.inputNames],
-			output: [...this.outputNames],
 			steps: [...this.steps] as any,
 		})
 	}
@@ -422,9 +395,8 @@ export class Workflow extends Resource implements TableTransformer {
 	): void {
 		super.loadSchema(schema, true)
 		const input = unique(schema?.input ?? [])
-		const output = unique(schema?.output ?? [])
 
-		this._nameMgr.setNames(input, output)
+		this._nameMgr.setNames(input)
 		input.forEach((i) => this._graphMgr.ensureInput(i))
 
 		this._graphMgr.setSteps(schema?.steps?.map((i) => i as StepInput) ?? [])
@@ -449,4 +421,13 @@ export class Workflow extends Resource implements TableTransformer {
 			...(table ?? {}),
 			id: name,
 		})
+
+	public override dispose(): void {
+		log('disposing')
+		this._dataPackageSub?.()
+		this._graphMgr.dispose()
+		this._tableMgr.dispose()
+		this._nameMgr.dispose()
+		super.dispose()
+	}
 }

@@ -17,6 +17,5 @@
 			}
 		}
 	],
-	"input": ["stocks"],
-	"output": ["n1"]
+	"input": ["stocks"]
 }

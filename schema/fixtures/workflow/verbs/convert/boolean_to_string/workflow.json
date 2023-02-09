@@ -13,6 +13,6 @@
 			}
 		}
 	],
-	"output": ["expected"],
+
 	"input": ["table14"]
 }

@@ -24,6 +24,5 @@
 			}
 		}
 	],
-	"input": ["companies2"],
-	"output": ["onehot", "unhot"]
+	"input": ["companies2"]
 }

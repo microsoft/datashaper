@@ -13,7 +13,7 @@ import { Workflow } from '../resources/index.js'
 // Static data paths.
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const SCHEMA_PATH = path.join(__dirname, '../../../../schema')
-const CASES_PATH = path.join(SCHEMA_PATH, 'fixtures', 'workflow/verbs/merge')
+const CASES_PATH = path.join(SCHEMA_PATH, 'fixtures', 'workflow')
 
 // Json-schema validator
 const schema = await readJson(path.join(SCHEMA_PATH, 'workflow.json'))

@@ -11,6 +11,10 @@ export class ResourceReference extends Resource {
 	public profile = undefined
 	public $schema = undefined
 
+	public override defaultTitle(): string {
+		return this._target?.defaultTitle() ?? 'reference'
+	}
+
 	public override isReference(): boolean {
 		return true
 	}
@@ -22,10 +26,6 @@ export class ResourceReference extends Resource {
 	public set target(value: Resource | undefined) {
 		this._target = value
 		this._onChange.next()
-	}
-
-	public override defaultTitle(): string {
-		return this._target?.defaultTitle() ?? 'reference'
 	}
 
 	public override toSchema(): ResourceSchema {

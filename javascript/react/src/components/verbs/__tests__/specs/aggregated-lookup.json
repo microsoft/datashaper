@@ -57,6 +57,5 @@
 			}
 		}
 	],
-	"input": ["companies", "products"],
-	"output": ["join-1", "filter-1", "aggregate-1", "lookup-1"]
+	"input": ["companies", "products"]
 }

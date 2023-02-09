@@ -22,7 +22,6 @@ export const TableCommandsStory: ComponentStory<typeof ArqueroTableHeader> = (
 			table={companies}
 			commandBar={
 				<TableCommands
-					inputTable={companies}
 					workflow={workflow}
 					selectedColumn={'Employees'}
 					color={args.color}

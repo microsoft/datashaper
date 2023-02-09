@@ -40,7 +40,6 @@ class ExecutionGraph:
     """A data processing graph."""
 
     inputs: Dict[str, TableContainer] = {}
-    outputs: List[str] = []
     __graph: Dict[str, ExecutionNode] = OrderedDict()
     __dependency_graph: Dict[str, set] = defaultdict(set)
 
@@ -63,7 +62,6 @@ class ExecutionGraph:
             self.inputs[input] = TableContainer(
                 table=pd.read_csv(os.path.join(input_path, f"{input}.csv"))
             )
-        self.outputs = workflow["output"]
 
         previous_step_id = None
         for step in workflow["steps"]:
@@ -163,7 +161,6 @@ class ExecutionGraph:
         """Export the graph into a workflow JSON object."""
         return {
             "input": [input_name for input_name in self.inputs.keys()],
-            "output": self.outputs,
             "steps": [
                 {
                     "id": step.node_id,

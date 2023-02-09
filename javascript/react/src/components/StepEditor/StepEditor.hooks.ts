@@ -22,11 +22,10 @@ export function useStepOutputHandling(
 	step: Step | undefined,
 ): {
 	output: string | undefined
-	outputHasChanged: boolean
 	onOutputChanged: (name: string | undefined) => void
 } {
 	const [output, setOutput] = useState<string>()
-	const [initialOutput, setInitialOutput] = useState<string>('')
+
 	useEffect(
 		function useExistingOutputName() {
 			if (step?.id && workflow.hasOutputName(step.id)) {
@@ -36,21 +35,11 @@ export function useStepOutputHandling(
 		[workflow, step],
 	)
 
-	useEffect(
-		function useOutputNameHasChanged() {
-			if (output) {
-				setInitialOutput((prev) => (!prev ? output : prev))
-			}
-		},
-		[output, setInitialOutput],
-	)
-
 	return useMemo(
 		() => ({
 			output,
-			outputHasChanged: output !== initialOutput,
 			onOutputChanged: setOutput,
 		}),
-		[output, initialOutput, setOutput],
+		[output, setOutput],
 	)
 }

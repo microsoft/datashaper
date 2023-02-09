@@ -20,6 +20,5 @@
 			"id": "expected"
 		}
 	],
-	"output": ["ordered", "expected"],
 	"input": ["table7"]
 }

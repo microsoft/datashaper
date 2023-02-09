@@ -16,6 +16,5 @@
 			}
 		}
 	],
-	"input": ["companies2"],
-	"output": ["spreadhot"]
+	"input": ["companies2"]
 }

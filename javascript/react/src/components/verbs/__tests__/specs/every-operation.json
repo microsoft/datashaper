@@ -402,7 +402,7 @@
 			"verb": "unroll",
 			"input": "aggregate (1)",
 			"args": {
-				"columns": ["Product List"]
+				"column": "Product List"
 			}
 		},
 		{
@@ -416,44 +416,5 @@
 			}
 		}
 	],
-	"input": ["companies", "companies2", "products", "stocks"],
-	"output": [
-		"aggregate",
-		"aggregate (1)",
-		"bin",
-		"binarize",
-		"boolean",
-		"concat",
-		"convert",
-		"dedupe",
-		"derive (1)",
-		"difference",
-		"erase",
-		"fill",
-		"filter",
-		"fold",
-		"groupby",
-		"intersect",
-		"impute",
-		"join",
-		"lookup",
-		"merge",
-		"onehot",
-		"orderby",
-		"pivot",
-		"recode",
-		"rename",
-		"rollup",
-		"sample",
-		"select",
-		"spread",
-		"window",
-		"unfold",
-		"ungroup",
-		"union",
-		"unorder",
-		"unhot",
-		"unroll",
-		"window"
-	]
+	"input": ["companies", "companies2", "products", "stocks"]
 }

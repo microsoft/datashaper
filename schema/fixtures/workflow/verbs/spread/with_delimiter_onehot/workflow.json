@@ -14,6 +14,6 @@
 			}
 		}
 	],
-	"input": ["table29"],
-	"output": ["expected"]
+	"input": ["table29"]
+
 }

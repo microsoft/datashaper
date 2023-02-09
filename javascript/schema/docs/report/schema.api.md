@@ -1130,7 +1130,7 @@ export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
 // Warning: (ae-missing-release-tag) "UnrollArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type UnrollArgs = InputColumnListArgs;
+export type UnrollArgs = InputColumnArgs;
 
 // Warning: (ae-missing-release-tag) "ValidationFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1286,7 +1286,6 @@ export enum WindowFunction {
 // @public
 export interface WorkflowSchema extends ResourceSchema {
     input?: string[];
-    output: string[];
     // (undocumented)
     profile: 'workflow';
     steps?: Step[];

@@ -36,6 +36,5 @@
 			}
 		}
 	],
-	"input": ["table1", "table2"],
-	"output": ["t1t2-filled", "t1-ids"]
+	"input": ["table1", "table2"]
 }

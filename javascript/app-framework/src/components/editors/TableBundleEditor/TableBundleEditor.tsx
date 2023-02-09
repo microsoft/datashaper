@@ -143,7 +143,7 @@ export const TableBundleEditor: React.FC<ProfileComponentProps<TableBundle>> =
 						}}
 					/>
 				</DetailsListContainer>
-				{
+				{!collapsed && (
 					<ToolPanel
 						headerText={toolPanelHeader}
 						onDismiss={onToggleCollapsed}
@@ -161,7 +161,7 @@ export const TableBundleEditor: React.FC<ProfileComponentProps<TableBundle>> =
 							onSelectLatestTable={onSelectLatestTable}
 						/>
 					</ToolPanel>
-				}
+				)}
 			</Container>
 		)
 	})

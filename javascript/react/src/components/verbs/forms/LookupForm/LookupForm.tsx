@@ -25,7 +25,6 @@ export const LookupForm: React.FC<StepFormProps<LookupArgs>> = memo(
 		)
 		const rightTable = useWorkflowDataTable(
 			step.input[NodeInput.Other]?.node,
-
 			workflow,
 		)
 		const tableOptions = useTableDropdownOptions(workflow)

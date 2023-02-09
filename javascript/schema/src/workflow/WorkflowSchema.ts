@@ -20,9 +20,4 @@ export interface WorkflowSchema extends ResourceSchema {
 	 * A list of input names that are expected to be provided in addition to the workflow steps
 	 */
 	input?: string[]
-
-	/**
-	 * The output bindings
-	 */
-	output: string[]
 }

@@ -46,9 +46,8 @@ export class NameManager {
 		return this.outputs.some((o) => o === name)
 	}
 
-	public setNames(inputs: string[], outputs: string[]): void {
+	public setNames(inputs: string[]): void {
 		this._inputNames$.next(inputs)
-		this._outputNames$.next(outputs)
 	}
 
 	public addInput(name: string): boolean {

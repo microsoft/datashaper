@@ -24,6 +24,5 @@
 				"columns": ["ID", "newColumn", "newColumn2"]
 			}
 		}
-	],
-	"output": ["expected"]
+	]
 }

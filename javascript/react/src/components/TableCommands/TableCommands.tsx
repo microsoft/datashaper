@@ -25,7 +25,6 @@ import type { TableCommandsProps } from './TableCommands.types.js'
 
 export const TableCommands: React.FC<TableCommandsProps> = memo(
 	function TableCommands({
-		inputTable,
 		workflow,
 		onAddStep,
 		metadata,
@@ -68,20 +67,12 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 					id,
 					verb,
 					args: { to: selectedColumn, column: selectedColumn } as any,
-					input: inputTable?.id,
 				})
 				setStep(_step)
 				setModalTarget(target)
 				showModal()
 			},
-			[
-				showModal,
-				setStep,
-				inputTable,
-				selectedColumn,
-				createTableId,
-				setModalTarget,
-			],
+			[showModal, setStep, selectedColumn, createTableId, setModalTarget],
 		)
 
 		const allTablesLengthObservable = useObservable(

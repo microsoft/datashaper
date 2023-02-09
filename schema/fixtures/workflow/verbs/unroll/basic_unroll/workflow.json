@@ -6,10 +6,10 @@
 			"verb": "unroll",
 			"input": "table1",
 			"args": {
-				"columns": ["ID"]
+				"column": "ID"
 			}
 		}
 	],
-	"input": ["table1"],
-	"output": ["expected"]
+	"input": ["table1"]
+
 }

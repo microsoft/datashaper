@@ -7,7 +7,7 @@ import type { UnrollArgs } from '@datashaper/schema'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 
-export const unrollStep: ColumnTableStep<UnrollArgs> = (input, { columns }) =>
-	input.unroll(columns)
+export const unrollStep: ColumnTableStep<UnrollArgs> = (input, { column }) =>
+	input.unroll(column)
 
 export const unroll = stepVerbFactory(unrollStep)

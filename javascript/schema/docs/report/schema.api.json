@@ -10826,8 +10826,8 @@
             },
             {
               "kind": "Reference",
-              "text": "InputColumnListArgs",
-              "canonicalReference": "@datashaper/schema!InputColumnListArgs:interface"
+              "text": "InputColumnArgs",
+              "canonicalReference": "@datashaper/schema!InputColumnArgs:interface"
             },
             {
               "kind": "Content",
@@ -12240,33 +12240,6 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "input",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!WorkflowSchema#output:member",
-              "docComment": "/**\n * The output bindings\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "output: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "output",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

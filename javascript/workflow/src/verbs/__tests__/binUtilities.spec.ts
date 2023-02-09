@@ -16,7 +16,7 @@ import {
 	standardDeviation,
 } from '../util/binUtilities.js'
 
-describe('bin utilities tests', () => {
+describe('binUtilties', () => {
 	describe('standard deviation test', () => {
 		const arrayValues = [12, 15, 17, 20, 30, 31, 43, 44, 54]
 		const result = standardDeviation(arrayValues)

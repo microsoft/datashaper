@@ -230,7 +230,13 @@ export class GraphManager extends Disposable {
 		const node = this.getNode(step.id)
 		node.config = step.args
 
-		// if any inputs nodes are in the graph, bind them
+		// first bind the standrd input to the step, either the previous step or the default input
+		if (prevStep == null) {
+			node.bind({ node: this.getDefaultInput() })
+		} else if (prevStep != null) {
+			node.bind({ node: this.getNode(prevStep.id) })
+		}
+		// if any inputs nodes are in the graph explicitly, bind them
 		if (hasDefinedInputs(step)) {
 			for (const [input, binding] of Object.entries(step.input)) {
 				if (isVariadicSocketName(input, binding)) {
@@ -242,12 +248,6 @@ export class GraphManager extends Disposable {
 					node.bind({ input, node: inputNode })
 				}
 			}
-		} else if (prevStep == null) {
-			node.bind({ node: this.getDefaultInput() })
-		} else if (prevStep != null) {
-			node.bind({ node: this.getNode(prevStep.id) })
-		} else {
-			throw new Error('cannot bind step input')
 		}
 	}
 }
