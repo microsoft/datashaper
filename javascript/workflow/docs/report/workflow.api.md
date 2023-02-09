@@ -25,6 +25,7 @@ import type { FillArgs } from '@datashaper/schema';
 import type { FilterArgs } from '@datashaper/schema';
 import type { FoldArgs } from '@datashaper/schema';
 import type { ImputeArgs } from '@datashaper/schema';
+import { InputColumnArgs } from '@datashaper/schema';
 import { InputColumnListArgs } from '@datashaper/schema';
 import { InputColumnRecordArgs } from '@datashaper/schema';
 import { InputKeyValueArgs } from '@datashaper/schema';
@@ -1048,7 +1049,7 @@ export const unorder: (id: string) => StepNode<TableContainer<unknown>, void>;
 // Warning: (ae-missing-release-tag) "unroll" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const unroll: (id: string) => StepNode<TableContainer<unknown>, InputColumnListArgs>;
+export const unroll: (id: string) => StepNode<TableContainer<unknown>, InputColumnArgs>;
 
 // Warning: (ae-missing-release-tag) "Unsubscribe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

@@ -13641,8 +13641,8 @@
             },
             {
               "kind": "Reference",
-              "text": "InputColumnListArgs",
-              "canonicalReference": "@datashaper/schema!InputColumnListArgs:interface"
+              "text": "InputColumnArgs",
+              "canonicalReference": "@datashaper/schema!InputColumnArgs:interface"
             },
             {
               "kind": "Content",

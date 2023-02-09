@@ -6,7 +6,7 @@
 			"verb": "unroll",
 			"input": "table1",
 			"args": {
-				"columns": ["ID"]
+				"column": "ID"
 			}
 		}
 	],

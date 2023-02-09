@@ -501,7 +501,7 @@ export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
 	preserveSource?: boolean
 }
 
-export type UnrollArgs = InputColumnListArgs
+export type UnrollArgs = InputColumnArgs
 
 export interface WindowArgs extends InputColumnArgs, OutputColumnArgs {
 	operation: WindowFunction

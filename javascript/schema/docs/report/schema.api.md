@@ -1130,7 +1130,7 @@ export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
 // Warning: (ae-missing-release-tag) "UnrollArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type UnrollArgs = InputColumnListArgs;
+export type UnrollArgs = InputColumnArgs;
 
 // Warning: (ae-missing-release-tag) "ValidationFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

@@ -402,7 +402,7 @@
 			"verb": "unroll",
 			"input": "aggregate (1)",
 			"args": {
-				"columns": ["Product List"]
+				"column": "Product List"
 			}
 		},
 		{

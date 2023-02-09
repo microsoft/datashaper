@@ -9,7 +9,7 @@ Unrolls array-valued cells into new rows. Similar to [spread](./spread.md), but 
 | 1   | [10, 15]    |
 | 2   | [1, 11, 18] |
 
-`unroll columns['values']`:
+`unroll column['values']`:
 
 | id  | values |
 | --- | ------ |

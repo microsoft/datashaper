@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export type UnrollArgs = InputColumnListArgs;
+export type UnrollArgs = InputColumnArgs;
 ```
-<b>References:</b> [InputColumnListArgs](./schema.inputcolumnlistargs.md)
+<b>References:</b> [InputColumnArgs](./schema.inputcolumnargs.md)
 

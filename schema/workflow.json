@@ -608,6 +608,18 @@
             },
             "type": "object"
         },
+        "InputColumnArgs": {
+            "properties": {
+                "column": {
+                    "description": "Name of the input column for columnnar operations.",
+                    "type": "string"
+                },
+                "dataType": {
+                    "$ref": "#/definitions/DataType"
+                }
+            },
+            "type": "object"
+        },
         "InputColumnListArgs": {
             "description": "Base interface for a number of operations that work on a column list.",
             "properties": {
@@ -1830,7 +1842,7 @@
                         {
                             "properties": {
                                 "args": {
-                                    "$ref": "#/definitions/InputColumnListArgs"
+                                    "$ref": "#/definitions/InputColumnArgs"
                                 },
                                 "verb": {
                                     "enum": [
