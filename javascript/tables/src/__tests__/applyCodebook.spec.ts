@@ -19,9 +19,14 @@ describe('applyCodebook', () => {
 		encoding: 'utf8',
 		flag: 'r',
 	})
+	const csv3 = fs.readFileSync('./src/__tests__/data/array.csv', {
+		encoding: 'utf8',
+		flag: 'r',
+	})
 
 	const simple = fromCSV(csv1, { autoType: false })
 	const mapping = fromCSV(csv2, { autoType: false })
+	const arrays = fromCSV(csv3, { autoType: false })
 
 	describe('CodebookMapping.DataTypeOnly', () => {
 		const codebook = generateCodebook(simple)
@@ -35,6 +40,31 @@ describe('applyCodebook', () => {
 		it('should return a column table', () => {
 			expect(result.numRows()).toBe(10)
 			expect(result.numCols()).toBe(8)
+		})
+		it('column types are correctly parsed', () => {
+			expect(typeof result.get('index', 0)).toBe('number')
+			expect(typeof result.get('float', 0)).toBe('number')
+			expect(typeof result.get('boolean', 0)).toBe('boolean')
+		})
+	})
+
+	describe('CodebookMapping.DataTypeOnly (arrays)', () => {
+		const codebook = generateCodebook(arrays)
+
+		const result = applyCodebook(
+			arrays,
+			codebook,
+			CodebookStrategy.DataTypeOnly,
+		)
+
+		it('should return a column table', () => {
+			expect(result.numRows()).toBe(5)
+			expect(result.numCols()).toBe(3)
+		})
+		it('column array subtypes are correctly parsed', () => {
+			expect(typeof result.get('id', 0)).toBe('number')
+			expect(result.get('numbers', 0)).toEqual([1, 2, 3, 4])
+			expect(result.get('booleans', 0)).toEqual([true, true, false])
 		})
 	})
 

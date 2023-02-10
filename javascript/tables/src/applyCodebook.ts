@@ -26,8 +26,8 @@ export function applyCodebook(
 			if (!cur.exclude) {
 				const parser =
 					dataTableSchema?.typeHints != null
-						? parseAs(cur.type, dataTableSchema.typeHints)
-						: parseAs(cur.type)
+						? parseAs(cur.type, cur.subtype, dataTableSchema.typeHints)
+						: parseAs(cur.type, cur.subtype)
 				acc[cur.name] = escape((d: any) => parser(d[cur.name]))
 			}
 			return acc

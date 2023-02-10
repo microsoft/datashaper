@@ -40,8 +40,8 @@
 |  [maxLengthValidator(field, includeIndexes)](./tables.maxlengthvalidator.md) | Constructs a function that validates a column against the <code>maxLength</code> constraint. |
 |  [minimumValidator(field, includeIndexes)](./tables.minimumvalidator.md) | Constructs a function that validates a column against the <code>minimum</code> constraint. |
 |  [minLengthValidator(field, includeIndexes)](./tables.minlengthvalidator.md) | Constructs a function that validates a column against the <code>minLength</code> constraint. |
-|  [parseArray(options, delimiter)](./tables.parsearray.md) |  |
-|  [parseAs(type, hints)](./tables.parseas.md) | Factory function to create a value parser based on defined data type and type hints |
+|  [parseArray(subtype, options, delimiter)](./tables.parsearray.md) |  |
+|  [parseAs(type, subtype, hints)](./tables.parseas.md) | Factory function to create a value parser based on defined data type and type hints |
 |  [parseBoolean(naValues, trueValues, falseValues)](./tables.parseboolean.md) |  |
 |  [parseDate(naValues)](./tables.parsedate.md) |  |
 |  [parseNumber(naValues, decimal, thousands)](./tables.parsenumber.md) |  |

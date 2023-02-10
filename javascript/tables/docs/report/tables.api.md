@@ -192,12 +192,12 @@ export function minLengthValidator(field: Field, includeIndexes: boolean): Valid
 // Warning: (ae-missing-release-tag) "parseArray" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function parseArray(options?: TypeHints, delimiter?: string): (value: string) => any[] | null;
+export function parseArray(subtype?: DataType, options?: TypeHints, delimiter?: string): (value: string) => any[] | null;
 
 // Warning: (ae-missing-release-tag) "parseAs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function parseAs(type?: DataType, hints?: TypeHints): Value;
+export function parseAs(type?: DataType, subtype?: DataType, hints?: TypeHints): Value;
 
 // Warning: (ae-missing-release-tag) "parseBoolean" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -301,7 +301,14 @@ export interface TableMetadata {
 // Warning: (ae-missing-release-tag) "typeGuesserFactory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function typeGuesserFactory(options?: TypeHints): any;
+export function typeGuesserFactory(options?: TypeHints): {
+    isNull: (value: string) => boolean;
+    isBoolean: (value: string) => boolean;
+    isNumber: (value: string) => boolean;
+    isArray: (value: string) => boolean;
+    isObject: (value: string) => boolean;
+    isDate: (value: string) => boolean;
+};
 
 // Warning: (ae-missing-release-tag) "unapplyCodebook" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

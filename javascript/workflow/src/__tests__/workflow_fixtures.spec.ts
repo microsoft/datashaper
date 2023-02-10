@@ -120,6 +120,9 @@ function compareTables(
 	}
 
 	try {
+		// TODO: the python tests write the tables to disk and re-read before comparing.
+		// this is all that "really" matters, because we need to reproduce the saved contents identically.
+		// we have any issue with that though due to JS floating point precision.
 		expect(actual.numRows()).toEqual(expected.numRows())
 		expect(actual.numCols()).toEqual(expected.numCols())
 		expect(actual.columnNames()).toEqual(expected.columnNames())
@@ -154,6 +157,7 @@ function compareValue(expected: any, actual: any): void {
 		// string-cast values to account for mixed-type column data (e.g. fold)
 		expect(`${actual}`).toEqual(`${expected}`)
 	} else if (typeof expected === 'string' && Array.isArray(actual)) {
+		console.log('arrays', expected, actual)
 		// Handle array output in actual table
 		const parsedArray = expected.split(',')
 		expect(parsedArray).toHaveLength(actual.length)
@@ -168,7 +172,8 @@ function compareValue(expected: any, actual: any): void {
 		const actualDate = new Date(actual)
 		expect(expected.getTime()).toEqual(actualDate.getTime())
 	} else {
-		expect(actual).toEqual(expected)
+		// comparing unknown types resolves issues with potential auto-typing on the expected csv text versus live types in the workflow output
+		expect(actual.toString()).toEqual(expected.toString())
 	}
 }
 

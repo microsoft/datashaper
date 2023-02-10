@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { DataType } from '@datashaper/schema'
 import { typeGuesserFactory } from '../guessDataType.js'
 import {
 	parseArray,
@@ -19,8 +20,8 @@ describe('Timezones', () => {
 	})
 })
 
-describe('parser tests', () => {
-	describe('validate if value is null', () => {
+describe('parseTypes', () => {
+	describe('null values', () => {
 		let { isNull } = typeGuesserFactory()
 		it('should return false', () => {
 			expect(isNull('No')).toBe(false)
@@ -34,7 +35,7 @@ describe('parser tests', () => {
 		})
 	})
 
-	describe('parse number', () => {
+	describe('numbers', () => {
 		it('should parse an int', () => {
 			expect(parseNumber()('1')).toBe(1)
 		})
@@ -57,7 +58,7 @@ describe('parser tests', () => {
 		})
 	})
 
-	describe('parse boolean', () => {
+	describe('booleans', () => {
 		it('should parse a true', () => {
 			expect(parseBoolean()('TRUE')).toBe(true)
 		})
@@ -75,7 +76,7 @@ describe('parser tests', () => {
 		})
 	})
 
-	describe('parse string', () => {
+	describe('strings', () => {
 		it('should parse a string', () => {
 			const str = 'MS Research'
 			expect(parseString()(str)).toBe(str)
@@ -85,7 +86,7 @@ describe('parser tests', () => {
 		})
 	})
 
-	describe('parse date', () => {
+	describe('dates', () => {
 		it('should parse a date', () => {
 			const actual = parseDate()('2022-05-30T04:20:00')
 			expect(actual?.toUTCString()).toBe('Mon, 30 May 2022 04:20:00 GMT')
@@ -99,17 +100,21 @@ describe('parser tests', () => {
 		})
 	})
 
-	describe('parse array', () => {
+	describe('arrays', () => {
 		it('should parse an array', () => {
 			const arr = '1,2,3'
-			expect(parseArray()(arr)).toEqual([1, 2, 3])
+			expect(parseArray()(arr)).toEqual(['1', '2', '3'])
+		})
+		it('should parse an array with subtype', () => {
+			const arr = '1,2,3'
+			expect(parseArray(DataType.Integer)(arr)).toEqual([1, 2, 3])
 		})
 		it('should return null', () => {
 			expect(parseArray()('n/a')).toBeNull()
 		})
 	})
 
-	describe('parse Object', () => {
+	describe('objects', () => {
 		it('should parse an Object', () => {
 			const obj = '{"a":1,"b":2}'
 			expect(parseObject()(obj)).toEqual({ a: 1, b: 2 })

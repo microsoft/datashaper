@@ -424,6 +424,7 @@ export interface Field extends Named {
     inverse?: boolean;
     mapping?: Record<any, any>;
     nature?: VariableNature;
+    subtype?: DataType;
     tags?: string[];
     type?: DataType;
     unit?: string;

@@ -14,11 +14,18 @@ import { formatNumberStr, getDate } from './util.js'
 /**
  * Factory function to create a value parser based on defined data type and type hints
  * @param type - the datatype to interperet as
+ * @param subtype - the subtype of the datatype (i.e., if the main type is an array)
  * @param hints - type hinting information
  * @returns A parsed value
  */
-export function parseAs(type?: DataType, hints?: TypeHints): Value {
+export function parseAs(
+	type?: DataType,
+	subtype?: DataType,
+	hints?: TypeHints,
+): Value {
 	switch (type) {
+		// TODO: differentiate integer and decimal (if type is integer and it has decimals, it should return null)
+		case DataType.Integer:
 		case DataType.Number:
 			return parseNumber(hints?.naValues, hints?.decimal, hints?.thousands)
 		case DataType.Boolean:
@@ -28,7 +35,7 @@ export function parseAs(type?: DataType, hints?: TypeHints): Value {
 				hints?.falseValues,
 			)
 		case DataType.Array:
-			return parseArray(hints)
+			return parseArray(subtype, hints)
 		case DataType.Object:
 			return parseObject(hints)
 		case DataType.Date:
@@ -100,11 +107,11 @@ export function parseString(
 }
 
 export function parseArray(
+	subtype = DataType.String,
 	options?: TypeHints,
 	delimiter = ',',
 ): (value: string) => any[] | null {
 	const { isNull } = typeGuesserFactory(options)
-	const subTypeChecker = guessDataType(options)
 	return function parseArray(value: string) {
 		if (isNull(value)) {
 			return null
@@ -113,8 +120,7 @@ export function parseArray(
 		try {
 			const parsed = array.map((i) => {
 				const item = `${i}`
-				const type = subTypeChecker(item)
-				const parser = parseAs(type, options)
+				const parser = parseAs(subtype, subtype, options)
 				return parser(item)
 			})
 			return parsed
@@ -138,8 +144,9 @@ export function parseObject(
 			const parsed = Object.keys(obj).reduce(
 				(acc: Record<string, any>, key: string) => {
 					const item = `${obj[key]}`
+					// for objects we'll just do our best with property types - we don't support detailed subobject structures right now
 					const type = subTypeChecker(item)
-					const parser = parseAs(type, options)
+					const parser = parseAs(type, type, options)
 					acc[key] = parser(item)
 					return acc
 				},

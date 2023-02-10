@@ -42,11 +42,18 @@ export function generateCodebook(
 			const columnType = guessDataTypeFromValues(values, opts.autoMax)
 			const parse = parseAs(columnType)
 			const parsed = values.map(parse)
-			const nature = inferNatureFromValues(parsed, {
+			field.nature = inferNatureFromValues(parsed, {
 				limit: opts.autoMax,
 			})
 			field.type = columnType
-			field.nature = nature
+			if (columnType === DataType.Array) {
+				// TODO: is it worth finding the nature _within_ arrays?
+				// right now they will always default to "continuous"
+				const arrayParse = parseAs(DataType.Array)
+				const flat = values.flatMap((v) => arrayParse(v))
+				const subtype = guessDataTypeFromValues(flat, opts.autoMax)
+				field.subtype = subtype
+			}
 		}
 
 		codecook.fields.push(field)
