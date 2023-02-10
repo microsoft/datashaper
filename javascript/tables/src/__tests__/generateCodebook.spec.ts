@@ -52,7 +52,7 @@ describe('generateCodebook', () => {
 			expect(codebook.fields[6]!.name).toBe('array')
 			expect(codebook.fields[6]!.type).toBe(DataType.Array)
 			expect(codebook.fields[6]!.subtype).toBe(DataType.String)
-			expect(codebook.fields[6]!.nature).toBe(VariableNature.Continuous)
+			expect(codebook.fields[6]!.nature).toBeUndefined()
 
 			expect(codebook.fields[7]!.name).toBe('obj')
 			expect(codebook.fields[7]!.type).toBe(DataType.Object)
@@ -131,12 +131,12 @@ describe('generateCodebook', () => {
 			expect(codebook.fields[1]!.name).toBe('numbers')
 			expect(codebook.fields[1]!.type).toBe(DataType.Array)
 			expect(codebook.fields[1]!.subtype).toBe(DataType.Number)
-			expect(codebook.fields[1]!.nature).toBe(VariableNature.Continuous)
+			expect(codebook.fields[1]!.nature).toBeUndefined()
 
 			expect(codebook.fields[2]!.name).toBe('booleans')
 			expect(codebook.fields[2]!.type).toBe(DataType.Array)
 			expect(codebook.fields[2]!.subtype).toBe(DataType.Boolean)
-			expect(codebook.fields[2]!.nature).toBe(VariableNature.Continuous)
+			expect(codebook.fields[2]!.nature).toBeUndefined()
 		})
 	})
 })

@@ -36,23 +36,26 @@ export function generateCodebook(
 			name: column,
 			type: DataType.String,
 		}
-
 		if (opts.autoType) {
 			const values: string[] = table.array(column) as string[]
 			const columnType = guessDataTypeFromValues(values, opts.autoMax)
-			const parse = parseAs(columnType)
-			const parsed = values.map(parse)
-			field.nature = inferNatureFromValues(parsed, {
-				limit: opts.autoMax,
-			})
 			field.type = columnType
 			if (columnType === DataType.Array) {
 				// TODO: is it worth finding the nature _within_ arrays?
-				// right now they will always default to "continuous"
+				// right now they will not be assigned a nature
 				const arrayParse = parseAs(DataType.Array)
-				const flat = values.flatMap((v) => arrayParse(v))
+				// we re-parse arrays as strings in case the table is already typed and the value is a live array
+				const flat = values.flatMap((v) =>
+					v ? arrayParse(v.toString()) : null,
+				)
 				const subtype = guessDataTypeFromValues(flat, opts.autoMax)
 				field.subtype = subtype
+			} else {
+				const parse = parseAs(columnType)
+				const parsed = values.map(parse)
+				field.nature = inferNatureFromValues(parsed, {
+					limit: opts.autoMax,
+				})
 			}
 		}
 
