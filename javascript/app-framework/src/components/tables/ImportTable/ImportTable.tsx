@@ -60,7 +60,7 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 			if (table) {
 				const id = `${name}.${extension}`
 				const tableContainer = { id, table } as TableContainer
-				// TODO: this is a bit inefficient, because a codebook is generated transitiviely in the readTable method when autoType is true
+				// TODO: this is a bit inefficient, because a codebook is generated transitively in the readTable method when autoType is true
 				// we should separate those two functions. if a table is typed, generating the codebook can be much quicker.
 				const codebook = autoType ? generateCodebook(table) : undefined
 				onOpenTable(tableContainer, draftSchema.toSchema(), codebook)

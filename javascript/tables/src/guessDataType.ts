@@ -49,7 +49,14 @@ export function guessDataType(
 	}
 }
 
-export function typeGuesserFactory(options?: TypeHints): any {
+export function typeGuesserFactory(options?: TypeHints): {
+	isNull: (value: string) => boolean
+	isBoolean: (value: string) => boolean
+	isNumber: (value: string) => boolean
+	isArray: (value: string) => boolean
+	isObject: (value: string) => boolean
+	isDate: (value: string) => boolean
+} {
 	return {
 		isNull: isNull(options?.naValues),
 		isBoolean: isBoolean(options?.trueValues, options?.falseValues),

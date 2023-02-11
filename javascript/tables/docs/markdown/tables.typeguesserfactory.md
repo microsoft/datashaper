@@ -7,7 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function typeGuesserFactory(options?: TypeHints): any;
+export declare function typeGuesserFactory(options?: TypeHints): {
+    isNull: (value: string) => boolean;
+    isBoolean: (value: string) => boolean;
+    isNumber: (value: string) => boolean;
+    isArray: (value: string) => boolean;
+    isObject: (value: string) => boolean;
+    isDate: (value: string) => boolean;
+};
 ```
 
 ## Parameters
@@ -18,5 +25,5 @@ export declare function typeGuesserFactory(options?: TypeHints): any;
 
 <b>Returns:</b>
 
-any
+{ isNull: (value: string) =&gt; boolean; isBoolean: (value: string) =&gt; boolean; isNumber: (value: string) =&gt; boolean; isArray: (value: string) =&gt; boolean; isObject: (value: string) =&gt; boolean; isDate: (value: string) =&gt; boolean; }
 

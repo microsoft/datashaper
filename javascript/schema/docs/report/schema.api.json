@@ -4419,6 +4419,34 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!Field#subtype:member",
+              "docComment": "/**\n * If the type is an array, this is the type of the array elements.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "subtype?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataType",
+                  "canonicalReference": "@datashaper/schema!DataType:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "subtype",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!Field#tags:member",
               "docComment": "/**\n * Optional descriptive tags for the field.\n */\n",
               "excerptTokens": [

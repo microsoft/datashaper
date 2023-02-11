@@ -51,7 +51,8 @@ describe('generateCodebook', () => {
 
 			expect(codebook.fields[6]!.name).toBe('array')
 			expect(codebook.fields[6]!.type).toBe(DataType.Array)
-			expect(codebook.fields[6]!.nature).toBe(VariableNature.Continuous)
+			expect(codebook.fields[6]!.subtype).toBe(DataType.String)
+			expect(codebook.fields[6]!.nature).toBeUndefined()
 
 			expect(codebook.fields[7]!.name).toBe('obj')
 			expect(codebook.fields[7]!.type).toBe(DataType.Object)
@@ -106,6 +107,36 @@ describe('generateCodebook', () => {
 				expect(codebook.fields[8]!.type).toBe(DataType.Number)
 				expect(codebook.fields[8]!.nature).toBe(VariableNature.Discrete)
 			})
+		})
+	})
+
+	describe('array subtypes', () => {
+		const csv = fs.readFileSync('./src/__tests__/data/array.csv', {
+			encoding: 'utf8',
+			flag: 'r',
+		})
+
+		// we are not autotyping here to confirm that our codebook generation correctly
+		// infers types from the string values, using the pandas-compatible type hints
+		const parsed = fromCSV(csv, { autoType: false })
+
+		const codebook = generateCodebook(parsed)
+
+		it('should discover array subtypes', () => {
+			expect(codebook.fields).toHaveLength(3)
+			expect(codebook.fields[0]!.name).toBe('id')
+			expect(codebook.fields[0]!.type).toBe(DataType.Number)
+			expect(codebook.fields[0]!.nature).toBe(VariableNature.Ordinal)
+
+			expect(codebook.fields[1]!.name).toBe('numbers')
+			expect(codebook.fields[1]!.type).toBe(DataType.Array)
+			expect(codebook.fields[1]!.subtype).toBe(DataType.Number)
+			expect(codebook.fields[1]!.nature).toBeUndefined()
+
+			expect(codebook.fields[2]!.name).toBe('booleans')
+			expect(codebook.fields[2]!.type).toBe(DataType.Array)
+			expect(codebook.fields[2]!.subtype).toBe(DataType.Boolean)
+			expect(codebook.fields[2]!.nature).toBeUndefined()
 		})
 	})
 })

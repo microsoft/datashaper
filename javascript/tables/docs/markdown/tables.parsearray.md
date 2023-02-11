@@ -7,13 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function parseArray(options?: TypeHints, delimiter?: string): (value: string) => any[] | null;
+export declare function parseArray(subtype?: DataType, options?: TypeHints, delimiter?: string): (value: string) => any[] | null;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
+|  subtype | DataType | <i>(Optional)</i> |
 |  options | TypeHints | <i>(Optional)</i> |
 |  delimiter | string | <i>(Optional)</i> |
 

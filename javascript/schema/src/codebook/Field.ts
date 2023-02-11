@@ -18,6 +18,10 @@ export interface Field extends Named {
 	 */
 	type?: DataType
 	/**
+	 * If the type is an array, this is the type of the array elements.
+	 */
+	subtype?: DataType
+	/**
 	 * Describes the semantic or parsing format for the values.
 	 * This is based on JSONSchema. See https://json-schema.org/draft/2020-12/json-schema-validation.html#name-vocabularies-for-semantic-c
 	 * TODO: JSONSchema is pretty flexible here, and we should align with it. For example, there are standard string (uri, email, ip-address, etc.)

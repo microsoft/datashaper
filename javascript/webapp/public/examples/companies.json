@@ -89,7 +89,7 @@
 					  },
 					  {
 						"name": "Array",
-						"type": "string",
+						"type": "array",
 						"nature": "nominal"
 					  }
 					]

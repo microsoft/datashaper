@@ -2200,7 +2200,16 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare function parseArray(options?: "
+              "text": "export declare function parseArray(subtype?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "DataType",
+              "canonicalReference": "@datashaper/schema!DataType:enum"
+            },
+            {
+              "kind": "Content",
+              "text": ", options?: "
             },
             {
               "kind": "Reference",
@@ -2229,14 +2238,14 @@
             }
           ],
           "returnTypeTokenRange": {
-            "startIndex": 5,
-            "endIndex": 6
+            "startIndex": 7,
+            "endIndex": 8
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
           "parameters": [
             {
-              "parameterName": "options",
+              "parameterName": "subtype",
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -2244,10 +2253,18 @@
               "isOptional": true
             },
             {
-              "parameterName": "delimiter",
+              "parameterName": "options",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
+              },
+              "isOptional": true
+            },
+            {
+              "parameterName": "delimiter",
+              "parameterTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
               },
               "isOptional": true
             }
@@ -2257,11 +2274,20 @@
         {
           "kind": "Function",
           "canonicalReference": "@datashaper/tables!parseAs:function(1)",
-          "docComment": "/**\n * Factory function to create a value parser based on defined data type and type hints\n *\n * @param type - the datatype to interperet as\n *\n * @param hints - type hinting information\n *\n * @returns A parsed value\n */\n",
+          "docComment": "/**\n * Factory function to create a value parser based on defined data type and type hints\n *\n * @param type - the datatype to interperet as\n *\n * @param subtype - the subtype of the datatype (i.e., if the main type is an array)\n *\n * @param hints - type hinting information\n *\n * @returns A parsed value\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
               "text": "export declare function parseAs(type?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "DataType",
+              "canonicalReference": "@datashaper/schema!DataType:enum"
+            },
+            {
+              "kind": "Content",
+              "text": ", subtype?: "
             },
             {
               "kind": "Reference",
@@ -2292,8 +2318,8 @@
             }
           ],
           "returnTypeTokenRange": {
-            "startIndex": 5,
-            "endIndex": 6
+            "startIndex": 7,
+            "endIndex": 8
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -2307,10 +2333,18 @@
               "isOptional": true
             },
             {
-              "parameterName": "hints",
+              "parameterName": "subtype",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
+              },
+              "isOptional": true
+            },
+            {
+              "parameterName": "hints",
+              "parameterTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
               },
               "isOptional": true
             }
@@ -3594,7 +3628,7 @@
             },
             {
               "kind": "Content",
-              "text": "any"
+              "text": "{\n    isNull: (value: string) => boolean;\n    isBoolean: (value: string) => boolean;\n    isNumber: (value: string) => boolean;\n    isArray: (value: string) => boolean;\n    isObject: (value: string) => boolean;\n    isDate: (value: string) => boolean;\n}"
             },
             {
               "kind": "Content",

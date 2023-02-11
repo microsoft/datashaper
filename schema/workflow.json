@@ -479,6 +479,10 @@
                     "$ref": "#/definitions/VariableNature",
                     "description": "Data nature. This is primarily applicable to numbers, which have different characters that define how we should display them in charts.\ndefault: continuous\nTODO: there is a large block of nature-related content in CauseDis. is some of this transient application state? how much do we need to carry in a schema?"
                 },
+                "subtype": {
+                    "$ref": "#/definitions/DataType",
+                    "description": "If the type is an array, this is the type of the array elements."
+                },
                 "tags": {
                     "description": "Optional descriptive tags for the field.",
                     "items": {

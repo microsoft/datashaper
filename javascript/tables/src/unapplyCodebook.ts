@@ -24,8 +24,8 @@ export function unapplyCodebook(
 		const args = table.columnNames().reduce((acc, cur) => {
 			const parser =
 				dataTableSchema?.typeHints != null
-					? parseAs(DataType.String, dataTableSchema.typeHints)
-					: parseAs(DataType.String)
+					? parseAs(DataType.String, DataType.String, dataTableSchema.typeHints)
+					: parseAs(DataType.String, DataType.String)
 			acc[cur] = escape((d: any) => parser(d[cur]))
 			return acc
 		}, {} as Record<string, object>)
