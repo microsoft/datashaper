@@ -13,6 +13,7 @@ export const ResourceTree: React.FC<ResourceTreeProps> = memo(
 	function ResourceTree({ resources, selectedRoute, onSelect, expanded }) {
 		const groups = useTreeGroups(resources, expanded)
 		const items = useTreeItems(resources, onSelect)
+		console.log(resources)
 		return (
 			<Tree
 				groups={groups}

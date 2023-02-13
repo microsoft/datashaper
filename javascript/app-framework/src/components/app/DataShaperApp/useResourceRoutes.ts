@@ -115,6 +115,7 @@ function makeResourceRoute(
 				onClick: () => resource.dispose(),
 			},
 		],
+		slots: profile.getSlots?.(resource),
 		props: { resource },
 		children: (resource.sources ?? EMPTY_ARRAY).map((r) =>
 			makeResourceRoute(r, services, profiles, hrefs),

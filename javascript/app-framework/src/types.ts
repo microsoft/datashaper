@@ -39,6 +39,7 @@ export interface ResourceRoute {
 	 */
 	menuItems?: IContextualMenuItem[]
 
+	slots?: ProfileSlot[]
 	/**
 	 * The renderer to use for this node
 	 */
@@ -115,6 +116,15 @@ export interface AppProfile<
 	getMenuItems?: (resource: Res) => IContextualMenuItem[]
 
 	/**
+	 * Profiles can indicate what child profiles they can support.
+	 * These will be added as "field wells" to be filled in.
+	 * If a slot is not filled, it will render a dropdown that shows the list of all
+	 * matching profile resources in the current package.
+	 * @param resource
+	 * @returns
+	 */
+	getSlots?: (resource: Res) => ProfileSlot[]
+	/**
 	 * Profiles may supply a map of help content to be displayed in the global panel when open.
 	 * Each help record should have a unique key, and the value is the markdown content.
 	 * @returns
@@ -140,4 +150,11 @@ export interface ResourceRouteGroup {
 
 export interface ProfileComponentProps<T extends Resource> {
 	resource: T
+}
+
+export interface ProfileSlot {
+	placeholder: string
+	icon: string
+	profile: string
+	required: boolean
 }

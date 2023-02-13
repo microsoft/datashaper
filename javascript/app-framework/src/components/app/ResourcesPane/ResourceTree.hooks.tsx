@@ -7,6 +7,7 @@ import { useMemo } from 'react'
 
 import type { ResourceRoute, ResourceRouteGroup } from '../../../types.js'
 import { ResourceGroupType } from '../../../types.js'
+import { SlotWells } from './SlotWells.js'
 
 /**
  * Extract the grouping instructions for the Tree component.
@@ -59,8 +60,19 @@ function makeTreeItem(
 	onSelect?: (v: ResourceRoute) => void,
 ): TreeItem {
 	const numChildren = resource.children?.length ?? 0
+	const customRender = resource.slots
+		? (props: any, defaultRenderer: any) => {
+				return (
+					<>
+						<SlotWells item={props} slots={resource.slots} />
+						{defaultRenderer(props)}
+					</>
+				)
+		  }
+		: undefined
 	return {
 		key: resource.href ?? 'no-href',
+		expanded: true,
 		text: resource.title,
 		iconName: resource.icon,
 		group,
@@ -70,5 +82,6 @@ function makeTreeItem(
 				: undefined,
 		menuItems: resource.menuItems,
 		onClick: () => onSelect?.(resource),
+		onRenderContent: customRender,
 	}
 }

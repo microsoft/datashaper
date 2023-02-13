@@ -15,7 +15,7 @@ const storyMetadata = {
 }
 export default storyMetadata
 
-export const DataTableConfigComponent: React.FC = (args) => {
+const DataTableConfigComponent: React.FC = (args) => {
 	const resource = useMemo(
 		() =>
 			new DataTable({
