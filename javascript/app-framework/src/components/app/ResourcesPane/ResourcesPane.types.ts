@@ -24,14 +24,14 @@ export interface ResourcesPaneProps {
 	className?: string
 
 	/**
-	 * Whether the file-tree pane is expanded (full-width)
+	 * Whether the file-tree pane is full-width or compressed into narrow width
 	 */
-	expanded: boolean
+	narrow: boolean
 
 	/**
-	 * Toggle the file-tree expansion
+	 * Toggle the file-tree narrow width expand/collapse
 	 */
-	onToggleExpanded: () => void
+	onToggleNarrow: () => void
 
 	/**
 	 * Examples to present to the user in the command-bar menu

@@ -15,16 +15,16 @@ export const ResourceTree: React.FC<ResourceTreeProps> = memo(
 		selectedRoute,
 		onSelect,
 		onBindingChange,
-		expanded,
+		narrow,
 	}) {
-		const groups = useTreeGroups(resources, expanded)
+		const groups = useTreeGroups(resources, narrow)
 		const items = useTreeItems(resources, onSelect, onBindingChange)
 		return (
 			<Tree
 				groups={groups}
 				items={items}
 				selectedKey={selectedRoute}
-				narrow={!expanded}
+				narrow={narrow}
 				styles={treeStyles}
 			/>
 		)

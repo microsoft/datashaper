@@ -118,7 +118,6 @@ const ResourceTreeComponent: React.FC = (args) => {
 			}}
 		>
 			<ResourceTree
-				expanded
 				{...args}
 				resources={res}
 				selectedRoute={selectedRoute}

@@ -11,7 +11,7 @@ import type {
 export type BindingChangeHandler = (slot: ResourceSlot, key?: string) => void
 
 export interface ResourceTreeProps {
-	expanded: boolean
+	narrow?: boolean
 	selectedRoute?: string
 	resources: ResourceRouteGroup[]
 	onSelect: (resource: ResourceRoute) => void

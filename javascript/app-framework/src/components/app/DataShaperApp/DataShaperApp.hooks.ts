@@ -27,7 +27,7 @@ function useKnownAppProfiles(): AppProfile[] {
 	return useConst(() => defaultAppProfiles() as AppProfile<any, any>[])
 }
 
-export function useExpandedState(
+export function useNarrowExpandCollapseState(
 	ref: React.MutableRefObject<AllotmentHandle | null>,
 ): [boolean, () => void, (sizes: number[]) => void] {
 	const [

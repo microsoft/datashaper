@@ -17,20 +17,20 @@ import type { BindingChangeHandler } from './ResourceTree.types.js'
  */
 export function useTreeGroups(
 	groups: ResourceRouteGroup[],
-	expanded = false,
+	narrow = false,
 ): TreeGroup[] {
 	return useMemo(
-		() => groups.map((g) => ({ key: g.type, text: groupName(g, expanded) })),
-		[groups, expanded],
+		() => groups.map((g) => ({ key: g.type, text: groupName(g, narrow) })),
+		[groups, narrow],
 	)
 }
 
-function groupName(group: ResourceRouteGroup, expanded = false): string {
+function groupName(group: ResourceRouteGroup, narrow = false): string {
 	switch (group.type) {
 		case ResourceGroupType.Data:
-			return expanded ? 'Data files' : 'Data'
+			return narrow ? 'Data' : 'Data files'
 		default:
-			return expanded ? 'Analysis apps' : 'Apps'
+			return narrow ? 'Apps' : 'Analysis apps'
 	}
 }
 
