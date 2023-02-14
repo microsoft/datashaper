@@ -7,7 +7,8 @@ import { useMemo } from 'react'
 
 import type { ResourceRoute, ResourceRouteGroup } from '../../../types.js'
 import { ResourceGroupType } from '../../../types.js'
-import { SlotWells } from './SlotWells.js'
+import { FieldWells } from './FieldWells.js'
+import type { BindingChangeHandler } from './ResourceTree.types.js'
 
 /**
  * Extract the grouping instructions for the Tree component.
@@ -42,12 +43,13 @@ function groupName(group: ResourceRouteGroup, expanded = false): string {
 export function useTreeItems(
 	groups: ResourceRouteGroup[],
 	onSelect: (v: ResourceRoute) => void,
+	onBindingChange?: BindingChangeHandler,
 ): TreeGroup[] {
 	return useMemo(
 		() =>
 			groups.flatMap((group) =>
 				group.resources.map((resource) =>
-					makeTreeItem(resource, group.type, onSelect),
+					makeTreeItem(resource, group.type, onSelect, onBindingChange),
 				),
 			),
 		[groups, onSelect],
@@ -58,27 +60,35 @@ function makeTreeItem(
 	resource: ResourceRoute,
 	group?: ResourceGroupType,
 	onSelect?: (v: ResourceRoute) => void,
+	onBindingChange?: BindingChangeHandler,
 ): TreeItem {
 	const numChildren = resource.children?.length ?? 0
-	const customRender = resource.slots
+	const customRender = resource.fieldWells
 		? (props: any, defaultRenderer: any) => {
 				return (
 					<>
-						<SlotWells item={props} slots={resource.slots} />
+						{resource.fieldWells && (
+							<FieldWells
+								fields={resource.fieldWells}
+								onBindingChange={onBindingChange}
+							/>
+						)}
 						{defaultRenderer(props)}
 					</>
 				)
 		  }
 		: undefined
 	return {
+		// TODO: is this no-href valid?
 		key: resource.href ?? 'no-href',
-		expanded: true,
 		text: resource.title,
 		iconName: resource.icon,
 		group,
 		children:
 			numChildren > 0
-				? resource.children?.map((c) => makeTreeItem(c, group, onSelect))
+				? resource.children?.map((c) =>
+						makeTreeItem(c, group, onSelect, onBindingChange),
+				  )
 				: undefined,
 		menuItems: resource.menuItems,
 		onClick: () => onSelect?.(resource),

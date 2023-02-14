@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { useCallback, useState } from 'react'
 import { ResourceGroupType } from '../../../types.js'
 import { ResourceTree } from './ResourceTree.js'
 
@@ -18,24 +19,58 @@ const resources = [
 		resources: [
 			{
 				title: 'Graph',
-				icon: 'Table',
+				icon: 'Flow',
 				children: [
 					{
-						title: 'Metadata',
-						icon: 'Database',
+						title: 'Nodes',
+						icon: 'Link',
+						href: '/resources/data/graph/nodes',
+					},
+					{
+						title: 'Edges',
+						icon: 'Link',
+						href: '/resources/data/graph/edges',
 					},
 				],
-				slots: [
+				fieldWells: [
 					{
-						placeholder: 'Select node list',
-						icon: 'CircleRing',
-						profile: 'nodes',
-						required: true,
+						slot: {
+							key: 'nodes',
+							title: 'Node bindings',
+							placeholder: 'Select node list',
+							icon: 'CircleRing',
+							profile: 'nodes',
+						},
+						options: [
+							{
+								key: 'nodes',
+								text: 'Nodes',
+							},
+							{
+								key: 'edges',
+								text: 'Edges',
+							},
+						],
 					},
 					{
-						placeholder: 'Select edge list',
-						icon: 'Line',
-						profile: 'edges',
+						slot: {
+							key: 'edges',
+							title: 'Edge bindings',
+							placeholder: 'Select edge list',
+							icon: 'Line',
+							profile: 'edges',
+						},
+						options: [
+							{
+								key: 'nodes',
+								text: 'Nodes',
+							},
+							{
+								key: 'edges',
+								text: 'Edges',
+							},
+						],
+						selectedKey: 'edges',
 					},
 				],
 			},
@@ -43,12 +78,15 @@ const resources = [
 	},
 ]
 const ResourceTreeComponent: React.FC = (args) => {
+	const [selectedRoute, setSelectedRoute] = useState<string | undefined>()
+	const handleBindingChange = useCallback((slot, key) => {
+		console.log('binding change', slot, key)
+	}, [])
 	return (
 		<div
 			style={{
 				width: 240,
 				height: 400,
-				padding: 10,
 				overflowY: 'auto',
 				border: '1px solid orange',
 			}}
@@ -57,7 +95,9 @@ const ResourceTreeComponent: React.FC = (args) => {
 				expanded
 				{...args}
 				resources={resources}
-				onSelect={(res) => console.log('selected', res)}
+				selectedRoute={selectedRoute}
+				onSelect={(res) => setSelectedRoute(res?.href)}
+				onBindingChange={handleBindingChange}
 			/>
 		</div>
 	)

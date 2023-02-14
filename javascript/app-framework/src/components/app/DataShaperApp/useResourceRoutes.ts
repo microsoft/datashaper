@@ -14,6 +14,8 @@ import type {
 	AppProfile,
 	ResourceRoute,
 	ResourceRouteGroup,
+	ResourceSlotFieldWell,
+	ResourceSlot,
 } from '../../../types.js'
 import { ResourceGroupType } from '../../../types.js'
 
@@ -29,10 +31,12 @@ export function useResourceRoutes(
 	profiles: Map<string, AppProfile>,
 ): ResourceRouteGroup[] {
 	const pkg = useDataPackage()
+	console.log('using resource routes', services, profiles)
 	const observable = useMemo(
 		() =>
 			pkg.resources$.pipe(
 				map((resources) => {
+					console.log('pkg resources', resources)
 					const hrefs = getResourceHrefs(resources)
 					const grouped = groupResources(resources, profiles)
 					const groups: ResourceRouteGroup[] = []
@@ -40,7 +44,7 @@ export function useResourceRoutes(
 						groups.push({
 							type,
 							resources: resources.map((r) =>
-								makeResourceRoute(r, services, profiles, hrefs),
+								makeResourceRoute(r, services, profiles, resources, hrefs),
 							),
 						})
 					})
@@ -73,6 +77,7 @@ function makeResourceRoute(
 	resource: Resource,
 	services: AppServices,
 	profiles: Map<string, AppProfile>,
+	resources: Resource[],
 	hrefs: Map<string, string>,
 ): ResourceRoute {
 	if (resource.isReference()) {
@@ -115,14 +120,35 @@ function makeResourceRoute(
 				onClick: () => resource.dispose(),
 			},
 		],
-		slots: profile.getSlots?.(resource),
+		fieldWells: makeFieldWells(resources, profile.getSlots?.(resource)),
 		props: { resource },
 		children: (resource.sources ?? EMPTY_ARRAY).map((r) =>
-			makeResourceRoute(r, services, profiles, hrefs),
+			makeResourceRoute(r, services, profiles, resources, hrefs),
 		),
 	}
 
 	return root
+}
+
+function makeFieldWells(
+	/**
+	 * The list of all resources in the package, which we can filter per slot to get the list of eligible resources
+	 */
+	resources: Resource[],
+	slots?: ResourceSlot[],
+): ResourceSlotFieldWell[] | undefined {
+	return slots?.map((slot) => {
+		const options = resources
+			.filter((resource) => resource.profile === slot.profile)
+			.map((resource) => ({
+				key: resource.name,
+				text: resource.title ?? resource.name,
+			}))
+		return {
+			slot,
+			options,
+		} as ResourceSlotFieldWell
+	})
 }
 
 function groupResources(

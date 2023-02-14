@@ -3,13 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ResourceSchema } from '@datashaper/schema'
+import type { IContextualMenuItem, IDropdownOption } from '@fluentui/react'
 import type {
+	Resource,
 	DataPackage,
 	ProfileHandler,
-	Resource,
 } from '@datashaper/workflow'
-import type { IContextualMenuItem } from '@fluentui/react'
-
 /**
  * Data attached to resource-tree nodes
  */
@@ -39,7 +38,7 @@ export interface ResourceRoute {
 	 */
 	menuItems?: IContextualMenuItem[]
 
-	slots?: ProfileSlot[]
+	fieldWells?: ResourceSlotFieldWell[]
 	/**
 	 * The renderer to use for this node
 	 */
@@ -123,7 +122,7 @@ export interface AppProfile<
 	 * @param resource
 	 * @returns
 	 */
-	getSlots?: (resource: Res) => ProfileSlot[]
+	getSlots?: (resource: Res) => ResourceSlot[]
 	/**
 	 * Profiles may supply a map of help content to be displayed in the global panel when open.
 	 * Each help record should have a unique key, and the value is the markdown content.
@@ -152,9 +151,29 @@ export interface ProfileComponentProps<T extends Resource> {
 	resource: T
 }
 
-export interface ProfileSlot {
-	placeholder: string
+/**
+ * Defines an available resource slot for a profile.
+ * This includes UX properties for how to visually represent it (title, icon, etc).
+ */
+export interface ResourceSlot {
+	key: string
+	title: string
+	placeholder?: string
 	icon: string
 	profile: string
 	required: boolean
+}
+
+/**
+ * Defines the working properties for a field well that is used to populate a resource slot.
+ * Resources define the slots, and then the app populates the allowable dropdown options and selected
+ * value based on the current package contents.
+ */
+export interface ResourceSlotFieldWell {
+	slot: ResourceSlot
+	/**
+	 * List of valid options that this field well can be set to.
+	 */
+	options: IDropdownOption[]
+	selectedKey?: string
 }
