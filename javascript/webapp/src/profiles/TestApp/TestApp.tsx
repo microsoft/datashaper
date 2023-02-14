@@ -43,8 +43,15 @@ const TestAppInner: React.FC = memo(function TestAppInner() {
 		<div style={{ margin: 20 }}>
 			<h1>Test App</h1>
 			<p>Value: {count}</p>
-			<DefaultButton text="Increment" onClick={increment} />
-			<DefaultButton text="Decrement" onClick={decrement} />
+			<div
+				style={{
+					display: 'flex',
+					gap: 10,
+				}}
+			>
+				<DefaultButton text="Increment" onClick={increment} />
+				<DefaultButton text="Decrement" onClick={decrement} />
+			</div>
 		</div>
 	)
 })

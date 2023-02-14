@@ -26,7 +26,7 @@ export const StyledIcon = styled(Icon)`
 `
 
 export const Title = styled.div`
-	font-size: 0.75em;
+	font-size: 0.8em;
 	color: ${({ theme }) => theme.palette.neutralSecondary};
 `
 
@@ -40,7 +40,7 @@ export const Well = styled.div`
 	border: 1px dotted ${({ theme }) => theme.palette.neutralTertiaryAlt};
 	background: ${({ theme }) => theme.palette.neutralLighter};
 	border-radius: 4px;
-	padding: 2px 8px;
+	padding: 3px 8px;
 `
 
 const staticDropdownStyles = {

@@ -5,6 +5,7 @@
 import type {
 	AppProfileInitializationContext,
 	AppProfile,
+	ResourceSlot,
 } from '@datashaper/app-framework'
 import { CommandBarSection, ResourceGroupType } from '@datashaper/app-framework'
 import type { ResourceSchema } from '@datashaper/schema'
@@ -58,5 +59,17 @@ export class TestAppProfile implements AppProfile<TestAppResource> {
 				},
 			]
 		}
+	}
+
+	public getSlots() {
+		return [
+			{
+				key: 'input-table',
+				profile: 'tablebundle',
+				title: 'Input table',
+				icon: 'Table',
+				placeholder: 'Select input table',
+			},
+		] as ResourceSlot[]
 	}
 }

@@ -31,19 +31,17 @@ export function useResourceRoutes(
 	profiles: Map<string, AppProfile>,
 ): ResourceRouteGroup[] {
 	const pkg = useDataPackage()
-	console.log('using resource routes', services, profiles)
 	const observable = useMemo(
 		() =>
 			pkg.resources$.pipe(
 				map((resources) => {
-					console.log('pkg resources', resources)
 					const hrefs = getResourceHrefs(resources)
 					const grouped = groupResources(resources, profiles)
 					const groups: ResourceRouteGroup[] = []
-					grouped.forEach((resources, type) => {
+					grouped.forEach((res, type) => {
 						groups.push({
 							type,
-							resources: resources.map((r) =>
+							resources: res.map((r) =>
 								makeResourceRoute(r, services, profiles, resources, hrefs),
 							),
 						})
@@ -120,7 +118,7 @@ function makeResourceRoute(
 				onClick: () => resource.dispose(),
 			},
 		],
-		fieldWells: makeFieldWells(resources, profile.getSlots?.(resource)),
+		fieldWells: makeFieldWells(resources, profile.getSlots?.()),
 		props: { resource },
 		children: (resource.sources ?? EMPTY_ARRAY).map((r) =>
 			makeResourceRoute(r, services, profiles, resources, hrefs),
