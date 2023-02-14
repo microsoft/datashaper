@@ -40,7 +40,7 @@ const resources: ResourceRouteGroup[] = [
 							title: 'Node bindings',
 							placeholder: 'Select node list',
 							icon: 'CircleRing',
-							profile: 'tablebundle',
+							predicate: () => false,
 						},
 						options: [
 							{
@@ -59,7 +59,7 @@ const resources: ResourceRouteGroup[] = [
 							title: 'Edge bindings',
 							placeholder: 'Select edge list',
 							icon: 'Line',
-							profile: 'tablebundle',
+							predicate: () => false,
 						},
 						options: [
 							{
@@ -79,7 +79,7 @@ const resources: ResourceRouteGroup[] = [
 							title: 'Metadata table',
 							placeholder: 'Select metadata table',
 							icon: 'Table',
-							profile: 'datatable',
+							predicate: () => false,
 						},
 					},
 				],

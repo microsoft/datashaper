@@ -11,7 +11,7 @@ export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 4px;
-    padding-bottom: 4px;
+    padding: 4px;
 `
 
 export const FieldContainer = styled.div`

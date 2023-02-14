@@ -136,12 +136,10 @@ function makeFieldWells(
 	slots?: ResourceSlot[],
 ): ResourceSlotFieldWell[] | undefined {
 	return slots?.map((slot) => {
-		const options = resources
-			.filter((resource) => resource.profile === slot.profile)
-			.map((resource) => ({
-				key: resource.name,
-				text: resource.title ?? resource.name,
-			}))
+		const options = resources.filter(slot.predicate).map((resource) => ({
+			key: resource.name,
+			text: resource.title ?? resource.name,
+		}))
 		return {
 			slot,
 			options,

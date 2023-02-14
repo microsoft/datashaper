@@ -84,6 +84,9 @@ function makeTreeItem(
 		text: resource.title,
 		iconName: resource.icon,
 		group,
+		// TEMP: this is because the tree will not allow expansion if there are no children
+		// but if we have an onRendeContent, we should still allow expansion
+		expanded: true,
 		children:
 			numChildren > 0
 				? resource.children?.map((c) =>

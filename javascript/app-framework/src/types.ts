@@ -157,7 +157,7 @@ export interface ProfileComponentProps<T extends Resource> {
  */
 export interface ResourceSlot {
 	key: string
-	profile: string
+	predicate: (resource: Resource) => boolean
 	title: string
 	placeholder?: string
 	icon?: string

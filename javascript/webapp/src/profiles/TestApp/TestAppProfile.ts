@@ -61,11 +61,11 @@ export class TestAppProfile implements AppProfile<TestAppResource> {
 		}
 	}
 
-	public getSlots() {
+	public getSlots(): ResourceSlot[] {
 		return [
 			{
 				key: 'input-table',
-				profile: 'tablebundle',
+				predicate: (resource) => resource.profile === 'tablebundle',
 				title: 'Input table',
 				icon: 'Table',
 				placeholder: 'Select input table',

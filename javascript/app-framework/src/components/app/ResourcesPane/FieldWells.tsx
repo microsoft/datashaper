@@ -57,16 +57,16 @@ export const FieldWell: React.FC<FieldWellProps> = memo(function FieldWell({
 			onBindingChange?.(slot, option?.key as string),
 		[slot, onBindingChange],
 	)
+	const disabled = !options || options.length === 0
 	return (
 		<FieldContainer>
 			<Title>{title}</Title>
 			<Well>
 				<StyledIcon iconName={icon} />
 				<Dropdown
-					disabled={!options || options.length === 0}
-					// TODO: replace the dropdown entirely with a placeholder if there are no options
+					disabled={disabled}
 					options={options || []}
-					placeholder={placeholder}
+					placeholder={disabled ? '(No valid options)' : placeholder}
 					required={required}
 					onChange={handleChange}
 					selectedKey={selectedKey}
