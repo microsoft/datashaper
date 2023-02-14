@@ -52,7 +52,7 @@ export function useTreeItems(
 					makeTreeItem(resource, group.type, onSelect, onBindingChange),
 				),
 			),
-		[groups, onSelect],
+		[groups, onSelect, onBindingChange],
 	)
 }
 

@@ -12,6 +12,7 @@ import type { DataTable } from '@datashaper/workflow';
 import type { IButtonStyles } from '@fluentui/react';
 import type { ICommandBarItemProps } from '@fluentui/react';
 import type { IContextualMenuItem } from '@fluentui/react';
+import type { IDropdownOption } from '@fluentui/react';
 import type { Maybe } from '@datashaper/workflow';
 import type { MutableRefObject } from 'react';
 import type { MutableSnapshot } from 'recoil';
@@ -30,6 +31,7 @@ export interface AppProfile<Res extends Resource = Resource, Schema extends Reso
     getCommandBarCommands?: (section: CommandBarSection) => IContextualMenuItem[] | undefined;
     getHelp?: () => Record<string, string>;
     getMenuItems?: (resource: Res) => IContextualMenuItem[];
+    getSlots?: (resource: Res) => ResourceSlot[];
     group?: ResourceGroupType;
     iconName: string;
     renderer: React.ComponentType<{
@@ -130,6 +132,8 @@ export enum ResourceGroupType {
 // @public
 export interface ResourceRoute {
     children?: ResourceRoute[];
+    // (undocumented)
+    fieldWells?: ResourceSlotFieldWell[];
     href?: string;
     icon?: string;
     menuItems?: IContextualMenuItem[];
@@ -146,6 +150,35 @@ export interface ResourceRouteGroup {
     resources: ResourceRoute[];
     // (undocumented)
     type: ResourceGroupType;
+}
+
+// Warning: (ae-missing-release-tag) "ResourceSlot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface ResourceSlot {
+    // (undocumented)
+    icon?: string;
+    // (undocumented)
+    key: string;
+    // (undocumented)
+    placeholder?: string;
+    // (undocumented)
+    profile: string;
+    // (undocumented)
+    required?: boolean;
+    // (undocumented)
+    title: string;
+}
+
+// Warning: (ae-missing-release-tag) "ResourceSlotFieldWell" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface ResourceSlotFieldWell {
+    options?: IDropdownOption[];
+    // (undocumented)
+    selectedKey?: string;
+    // (undocumented)
+    slot: ResourceSlot;
 }
 
 // Warning: (ae-missing-release-tag) "useDataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

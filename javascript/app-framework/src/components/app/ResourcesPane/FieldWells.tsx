@@ -53,10 +53,8 @@ export const FieldWell: React.FC<FieldWellProps> = memo(function FieldWell({
 	const { title, placeholder, icon, required } = slot
 
 	const handleChange = useCallback(
-		(_e: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
-			console.log('change dropdown', option?.key)
-			onBindingChange?.(slot, option?.key as string)
-		},
+		(_e: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) =>
+			onBindingChange?.(slot, option?.key as string),
 		[slot, onBindingChange],
 	)
 	return (
@@ -65,7 +63,9 @@ export const FieldWell: React.FC<FieldWellProps> = memo(function FieldWell({
 			<Well>
 				<StyledIcon iconName={icon} />
 				<Dropdown
-					options={options}
+					disabled={!options || options.length === 0}
+					// TODO: replace the dropdown entirely with a placeholder if there are no options
+					options={options || []}
 					placeholder={placeholder}
 					required={required}
 					onChange={handleChange}

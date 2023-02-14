@@ -18,7 +18,7 @@ export const FieldContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 2px;
-	padding: 0 8px 0 24px;
+	padding: 0 8px 0 32px;
 `
 
 export const StyledIcon = styled(Icon)`

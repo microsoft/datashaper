@@ -38,6 +38,8 @@
 |  [RecoilBasedProfileHostProps](./app-framework.recoilbasedprofilehostprops.md) |  |
 |  [ResourceRoute](./app-framework.resourceroute.md) | Data attached to resource-tree nodes |
 |  [ResourceRouteGroup](./app-framework.resourceroutegroup.md) |  |
+|  [ResourceSlot](./app-framework.resourceslot.md) | Defines an available resource slot for a profile. This includes UX properties for how to visually represent it (title, icon, etc). |
+|  [ResourceSlotFieldWell](./app-framework.resourceslotfieldwell.md) | Defines the working properties for a field well that is used to populate a resource slot. Resources define the slots, and then the app populates the allowable dropdown options and selected value based on the current package contents. |
 
 ## Variables
 

@@ -157,11 +157,11 @@ export interface ProfileComponentProps<T extends Resource> {
  */
 export interface ResourceSlot {
 	key: string
+	profile: string
 	title: string
 	placeholder?: string
-	icon: string
-	profile: string
-	required: boolean
+	icon?: string
+	required?: boolean
 }
 
 /**
@@ -174,6 +174,6 @@ export interface ResourceSlotFieldWell {
 	/**
 	 * List of valid options that this field well can be set to.
 	 */
-	options: IDropdownOption[]
+	options?: IDropdownOption[]
 	selectedKey?: string
 }

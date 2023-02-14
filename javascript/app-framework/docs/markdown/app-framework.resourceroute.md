@@ -17,6 +17,7 @@ export interface ResourceRoute
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [children?](./app-framework.resourceroute.children.md) |  | [ResourceRoute](./app-framework.resourceroute.md)<!-- -->\[\] | <i>(Optional)</i> Child node Data |
+|  [fieldWells?](./app-framework.resourceroute.fieldwells.md) |  | [ResourceSlotFieldWell](./app-framework.resourceslotfieldwell.md)<!-- -->\[\] | <i>(Optional)</i> |
 |  [href?](./app-framework.resourceroute.href.md) |  | string | <i>(Optional)</i> The resource render route |
 |  [icon?](./app-framework.resourceroute.icon.md) |  | string | <i>(Optional)</i> The icon to use in the file tree |
 |  [menuItems?](./app-framework.resourceroute.menuitems.md) |  | IContextualMenuItem\[\] | <i>(Optional)</i> Contextual Menu items for this resource |
