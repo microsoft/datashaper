@@ -5,7 +5,7 @@
 import type {
 	AppProfileInitializationContext,
 	AppProfile,
-	ResourceSlotFieldWell,
+	ProfileFieldWell,
 } from '@datashaper/app-framework'
 import { CommandBarSection, ResourceGroupType } from '@datashaper/app-framework'
 import type { ResourceSchema } from '@datashaper/schema'
@@ -63,16 +63,14 @@ export class TestAppProfile implements AppProfile<TestAppResource> {
 		}
 	}
 
-	public getSlots(resource: TestAppResource): ResourceSlotFieldWell[] {
+	public getFieldWells(resource: TestAppResource): ProfileFieldWell[] {
 		const resources = this._dataPackage?.resources
 		return [
 			{
-				slot: {
-					key: 'input-table',
-					title: 'Input table',
-					icon: 'Table',
-					placeholder: 'Select input table',
-				},
+				key: 'input-table',
+				title: 'Input table',
+				icon: 'Table',
+				placeholder: 'Select input table',
 				options: resources
 					?.filter((r) => r.profile === 'tablebundle')
 					.map((r) => ({
@@ -105,6 +103,6 @@ export class TestAppProfile implements AppProfile<TestAppResource> {
 					}
 				},
 			},
-		] as ResourceSlotFieldWell[]
+		]
 	}
 }

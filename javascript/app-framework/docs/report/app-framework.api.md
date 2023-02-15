@@ -29,9 +29,9 @@ import type { TableContainer } from '@datashaper/tables';
 // @public
 export interface AppProfile<Res extends Resource = Resource, Schema extends ResourceSchema = ResourceSchema> extends ProfileHandler<Res, Schema, AppProfileInitializationContext> {
     getCommandBarCommands?: (section: CommandBarSection) => IContextualMenuItem[] | undefined;
+    getFieldWells?: (resource: Res) => ProfileFieldWell[];
     getHelp?: () => Record<string, string>;
     getMenuItems?: (resource: Res) => IContextualMenuItem[];
-    getSlots?: (resource: Res) => ResourceSlotFieldWell[];
     group?: ResourceGroupType;
     iconName: string;
     renderer: React.ComponentType<{
@@ -98,6 +98,27 @@ export interface ProfileComponentProps<T extends Resource> {
     resource: T;
 }
 
+// Warning: (ae-missing-release-tag) "ProfileFieldWell" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface ProfileFieldWell {
+    // (undocumented)
+    icon?: string;
+    // (undocumented)
+    key: string;
+    // (undocumented)
+    onChange?: (key: string) => void;
+    options?: IDropdownOption[];
+    // (undocumented)
+    placeholder?: string;
+    // (undocumented)
+    required?: boolean;
+    // (undocumented)
+    selectedKey?: string;
+    // (undocumented)
+    title: string;
+}
+
 // Warning: (ae-missing-release-tag) "RecoilBasedProfileHost" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -133,7 +154,7 @@ export enum ResourceGroupType {
 export interface ResourceRoute {
     children?: ResourceRoute[];
     // (undocumented)
-    fieldWells?: ResourceSlotFieldWell[];
+    fieldWells?: ProfileFieldWell[];
     href?: string;
     icon?: string;
     menuItems?: IContextualMenuItem[];
@@ -150,35 +171,6 @@ export interface ResourceRouteGroup {
     resources: ResourceRoute[];
     // (undocumented)
     type: ResourceGroupType;
-}
-
-// Warning: (ae-missing-release-tag) "ResourceSlot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface ResourceSlot {
-    // (undocumented)
-    icon?: string;
-    // (undocumented)
-    key: string;
-    // (undocumented)
-    placeholder?: string;
-    // (undocumented)
-    required?: boolean;
-    // (undocumented)
-    title: string;
-}
-
-// Warning: (ae-missing-release-tag) "ResourceSlotFieldWell" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface ResourceSlotFieldWell {
-    // (undocumented)
-    onChange?: (key: string) => void;
-    options?: IDropdownOption[];
-    // (undocumented)
-    selectedKey?: string;
-    // (undocumented)
-    slot: ResourceSlot;
 }
 
 // Warning: (ae-missing-release-tag) "useDataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

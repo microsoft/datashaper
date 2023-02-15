@@ -5,7 +5,7 @@
 import type { IDropdownOption } from '@fluentui/react'
 import { Dropdown } from '@fluentui/react'
 import { memo, useCallback } from 'react'
-import type { ResourceSlotFieldWell } from '../../../types.js'
+import type { ProfileFieldWell } from '../../../types.js'
 
 import {
 	Container,
@@ -25,22 +25,21 @@ export const FieldWells: React.FC<FieldWellsProps> = memo(function FieldWells({
 	return (
 		<Container>
 			{fields.map((field) => {
-				return <FieldWell key={`field-well-${field.slot.key}`} field={field} />
+				return <FieldWell key={`field-well-${field.key}`} field={field} />
 			})}
 		</Container>
 	)
 })
 
 interface FieldWellProps {
-	field: ResourceSlotFieldWell
+	field: ProfileFieldWell
 }
 
 export const FieldWell: React.FC<FieldWellProps> = memo(function FieldWell({
 	field,
 }) {
 	const dropdownProps = useFieldDropdownProps()
-	const { slot, selectedKey, options } = field
-	const { title, placeholder, icon, required } = slot
+	const { title, placeholder, icon, required, selectedKey, options } = field
 
 	const handleChange = useCallback(
 		(_e: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) =>

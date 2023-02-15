@@ -116,7 +116,7 @@ function makeResourceRoute(
 				onClick: () => resource.dispose(),
 			},
 		],
-		fieldWells: profile.getSlots?.(resource),
+		fieldWells: profile.getFieldWells?.(resource),
 		props: { resource },
 		children: (resource.sources ?? EMPTY_ARRAY).map((r) =>
 			makeResourceRoute(r, services, profiles, resources, hrefs),

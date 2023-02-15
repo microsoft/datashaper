@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useCallback, useState } from 'react'
-import type { ResourceRouteGroup, ResourceSlot } from '../../../types.js'
+import { useState } from 'react'
+import type { ResourceRouteGroup, ProfileFieldWell } from '../../../types.js'
 import { ResourceGroupType } from '../../../types.js'
 import { ResourceTree } from './ResourceTree.js'
 
@@ -35,12 +35,10 @@ const resources: ResourceRouteGroup[] = [
 				],
 				fieldWells: [
 					{
-						slot: {
-							key: 'nodes',
-							title: 'Node bindings',
-							placeholder: 'Select node list',
-							icon: 'CircleRing',
-						},
+						key: 'nodes',
+						title: 'Node bindings',
+						placeholder: 'Select node list',
+						icon: 'CircleRing',
 						options: [
 							{
 								key: 'nodes',
@@ -53,12 +51,10 @@ const resources: ResourceRouteGroup[] = [
 						],
 					},
 					{
-						slot: {
-							key: 'edges',
-							title: 'Edge bindings',
-							placeholder: 'Select edge list',
-							icon: 'Line',
-						},
+						key: 'edges',
+						title: 'Edge bindings',
+						placeholder: 'Select edge list',
+						icon: 'Line',
 						options: [
 							{
 								key: 'nodes',
@@ -72,12 +68,10 @@ const resources: ResourceRouteGroup[] = [
 						selectedKey: 'edges',
 					},
 					{
-						slot: {
-							key: 'metadata',
-							title: 'Metadata table',
-							placeholder: 'Select metadata table',
-							icon: 'Table',
-						},
+						key: 'metadata',
+						title: 'Metadata table',
+						placeholder: 'Select metadata table',
+						icon: 'Table',
 					},
 				],
 			},

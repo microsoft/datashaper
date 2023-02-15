@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { ResourceSlotFieldWell } from '../../../types.js'
+import type { ProfileFieldWell } from '../../../types.js'
 
 export interface FieldWellsProps {
-	fields: ResourceSlotFieldWell[]
+	fields: ProfileFieldWell[]
 }

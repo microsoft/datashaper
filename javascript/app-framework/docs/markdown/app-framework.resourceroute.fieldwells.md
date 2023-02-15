@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-fieldWells?: ResourceSlotFieldWell[];
+fieldWells?: ProfileFieldWell[];
 ```
