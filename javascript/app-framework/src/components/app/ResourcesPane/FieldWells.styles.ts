@@ -26,8 +26,16 @@ export const StyledIcon = styled(Icon)`
 `
 
 export const Title = styled.div`
+	display: flex;	
 	font-size: 0.8em;
 	color: ${({ theme }) => theme.palette.neutralSecondary};
+`
+
+export const Required = styled.div<{ required?: boolean }>`
+	color: ${({ theme }) => theme.palette.redDark};
+	&:before {
+		content: '${({ required }) => (required ? '*' : '')}';
+	}
 `
 
 export const Well = styled.div`

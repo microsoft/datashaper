@@ -4,6 +4,8 @@
 
 ## ProfileFieldWell.selectedKey property
 
+Selected key for the dropdown.
+
 <b>Signature:</b>
 
 ```typescript

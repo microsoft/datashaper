@@ -4,6 +4,8 @@
 
 ## ProfileFieldWell.icon property
 
+Name of an icon to render in front of the well dropdown.
+
 <b>Signature:</b>
 
 ```typescript

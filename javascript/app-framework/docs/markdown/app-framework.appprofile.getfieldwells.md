@@ -4,7 +4,7 @@
 
 ## AppProfile.getFieldWells property
 
-Profiles can indicate what child profiles they can support. These will be added as "field wells" to be filled in. If a slot is not filled, it will render a dropdown that shows the list of all matching profile resources in the current package.
+Profiles can indicate interactive field wells to display directly in the resource tree. These field wells can be populated by the resources, and will be rendered as a dropdown. Each field well can also dictate an onChange that updates the resource (e.g., sets an input binding).
 
 <b>Signature:</b>
 

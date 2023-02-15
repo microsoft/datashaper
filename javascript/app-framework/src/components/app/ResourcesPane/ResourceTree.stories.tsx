@@ -55,6 +55,7 @@ const resources: ResourceRouteGroup[] = [
 						title: 'Edge bindings',
 						placeholder: 'Select edge list',
 						icon: 'Line',
+						required: true,
 						options: [
 							{
 								key: 'nodes',
@@ -80,8 +81,6 @@ const resources: ResourceRouteGroup[] = [
 ]
 const ResourceTreeComponent: React.FC = (args) => {
 	const [selectedRoute, setSelectedRoute] = useState<string | undefined>()
-	const [res, setRes] = useState<ResourceRouteGroup[]>(resources)
-
 	return (
 		<div
 			style={{
@@ -93,7 +92,7 @@ const ResourceTreeComponent: React.FC = (args) => {
 		>
 			<ResourceTree
 				{...args}
-				resources={res}
+				resources={resources}
 				selectedRoute={selectedRoute}
 				onSelect={(res) => setSelectedRoute(res?.href)}
 			/>

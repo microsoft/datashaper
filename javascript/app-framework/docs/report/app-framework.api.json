@@ -316,7 +316,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!AppProfile#getFieldWells:member",
-              "docComment": "/**\n * Profiles can indicate what child profiles they can support. These will be added as \"field wells\" to be filled in. If a slot is not filled, it will render a dropdown that shows the list of all matching profile resources in the current package.\n *\n * @param resource - \n *\n * @returns \n */\n",
+              "docComment": "/**\n * Profiles can indicate interactive field wells to display directly in the resource tree. These field wells can be populated by the resources, and will be rendered as a dropdown. Each field well can also dictate an onChange that updates the resource (e.g., sets an input binding).\n *\n * @param resource - \n *\n * @returns \n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1113,7 +1113,7 @@
         {
           "kind": "Interface",
           "canonicalReference": "@datashaper/app-framework!ProfileFieldWell:interface",
-          "docComment": "/**\n * Defines an available resource slot for a profile. This includes UX properties for how to visually represent it (title, icon, etc).\n */\n",
+          "docComment": "/**\n * Defines an available field for a profile. This includes UX properties for how to visually represent it (title, icon, etc). This implementation is rendered as a dropdown.\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1127,7 +1127,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!ProfileFieldWell#icon:member",
-              "docComment": "",
+              "docComment": "/**\n * Name of an icon to render in front of the well dropdown.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1154,7 +1154,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!ProfileFieldWell#key:member",
-              "docComment": "",
+              "docComment": "/**\n * Unique key for the well.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1181,7 +1181,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!ProfileFieldWell#onChange:member",
-              "docComment": "",
+              "docComment": "/**\n * Change handler for the dropdown, presenting the new selected key.\n *\n * @param key - \n *\n * @returns \n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1240,7 +1240,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!ProfileFieldWell#placeholder:member",
-              "docComment": "",
+              "docComment": "/**\n * Placeholder for the dropdown when no value is selected.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1267,7 +1267,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!ProfileFieldWell#required:member",
-              "docComment": "",
+              "docComment": "/**\n * Indicate if the well is required - this will render a red asterisk next to the title.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1294,7 +1294,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!ProfileFieldWell#selectedKey:member",
-              "docComment": "",
+              "docComment": "/**\n * Selected key for the dropdown.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1321,7 +1321,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!ProfileFieldWell#title:member",
-              "docComment": "",
+              "docComment": "/**\n * Title to display above the well.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

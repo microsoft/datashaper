@@ -10,14 +10,13 @@ import type { ProfileFieldWell } from '../../../types.js'
 import {
 	Container,
 	FieldContainer,
+	Required,
 	StyledIcon,
 	Title,
 	useFieldDropdownProps,
 	Well,
 } from './FieldWells.styles.js'
 import type { FieldWellsProps } from './FieldWells.types.js'
-
-// TODO: collapsed width state
 
 export const FieldWells: React.FC<FieldWellsProps> = memo(function FieldWells({
 	fields,
@@ -49,14 +48,16 @@ export const FieldWell: React.FC<FieldWellProps> = memo(function FieldWell({
 	const disabled = !options || options.length === 0
 	return (
 		<FieldContainer>
-			<Title>{title}</Title>
+			<Title>
+				{title}
+				<Required required={required} />
+			</Title>
 			<Well>
 				<StyledIcon iconName={icon} />
 				<Dropdown
 					disabled={disabled}
 					options={options || []}
 					placeholder={disabled ? '(No valid options)' : placeholder}
-					required={required}
 					onChange={handleChange}
 					selectedKey={selectedKey}
 					{...dropdownProps}

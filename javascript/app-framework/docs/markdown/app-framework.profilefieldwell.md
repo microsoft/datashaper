@@ -4,7 +4,7 @@
 
 ## ProfileFieldWell interface
 
-Defines an available resource slot for a profile. This includes UX properties for how to visually represent it (title, icon, etc).
+Defines an available field for a profile. This includes UX properties for how to visually represent it (title, icon, etc). This implementation is rendered as a dropdown.
 
 <b>Signature:</b>
 
@@ -16,12 +16,12 @@ export interface ProfileFieldWell
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [icon?](./app-framework.profilefieldwell.icon.md) |  | string | <i>(Optional)</i> |
-|  [key](./app-framework.profilefieldwell.key.md) |  | string |  |
-|  [onChange?](./app-framework.profilefieldwell.onchange.md) |  | (key: string) =&gt; void | <i>(Optional)</i> |
+|  [icon?](./app-framework.profilefieldwell.icon.md) |  | string | <i>(Optional)</i> Name of an icon to render in front of the well dropdown. |
+|  [key](./app-framework.profilefieldwell.key.md) |  | string | Unique key for the well. |
+|  [onChange?](./app-framework.profilefieldwell.onchange.md) |  | (key: string) =&gt; void | <i>(Optional)</i> Change handler for the dropdown, presenting the new selected key. |
 |  [options?](./app-framework.profilefieldwell.options.md) |  | IDropdownOption\[\] | <i>(Optional)</i> List of valid options that this field well can be set to. |
-|  [placeholder?](./app-framework.profilefieldwell.placeholder.md) |  | string | <i>(Optional)</i> |
-|  [required?](./app-framework.profilefieldwell.required.md) |  | boolean | <i>(Optional)</i> |
-|  [selectedKey?](./app-framework.profilefieldwell.selectedkey.md) |  | string | <i>(Optional)</i> |
-|  [title](./app-framework.profilefieldwell.title.md) |  | string |  |
+|  [placeholder?](./app-framework.profilefieldwell.placeholder.md) |  | string | <i>(Optional)</i> Placeholder for the dropdown when no value is selected. |
+|  [required?](./app-framework.profilefieldwell.required.md) |  | boolean | <i>(Optional)</i> Indicate if the well is required - this will render a red asterisk next to the title. |
+|  [selectedKey?](./app-framework.profilefieldwell.selectedkey.md) |  | string | <i>(Optional)</i> Selected key for the dropdown. |
+|  [title](./app-framework.profilefieldwell.title.md) |  | string | Title to display above the well. |
 

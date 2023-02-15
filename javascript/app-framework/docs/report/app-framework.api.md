@@ -102,20 +102,13 @@ export interface ProfileComponentProps<T extends Resource> {
 //
 // @public
 export interface ProfileFieldWell {
-    // (undocumented)
     icon?: string;
-    // (undocumented)
     key: string;
-    // (undocumented)
     onChange?: (key: string) => void;
     options?: IDropdownOption[];
-    // (undocumented)
     placeholder?: string;
-    // (undocumented)
     required?: boolean;
-    // (undocumented)
     selectedKey?: string;
-    // (undocumented)
     title: string;
 }
 

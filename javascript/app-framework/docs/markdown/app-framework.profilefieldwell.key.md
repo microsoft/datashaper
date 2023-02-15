@@ -4,6 +4,8 @@
 
 ## ProfileFieldWell.key property
 
+Unique key for the well.
+
 <b>Signature:</b>
 
 ```typescript

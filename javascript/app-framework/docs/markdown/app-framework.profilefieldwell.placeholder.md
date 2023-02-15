@@ -4,6 +4,8 @@
 
 ## ProfileFieldWell.placeholder property
 
+Placeholder for the dropdown when no value is selected.
+
 <b>Signature:</b>
 
 ```typescript

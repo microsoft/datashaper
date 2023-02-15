@@ -4,6 +4,8 @@
 
 ## ProfileFieldWell.title property
 
+Title to display above the well.
+
 <b>Signature:</b>
 
 ```typescript

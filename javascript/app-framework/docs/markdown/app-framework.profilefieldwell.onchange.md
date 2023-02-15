@@ -4,6 +4,8 @@
 
 ## ProfileFieldWell.onChange property
 
+Change handler for the dropdown, presenting the new selected key.
+
 <b>Signature:</b>
 
 ```typescript

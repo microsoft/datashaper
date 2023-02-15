@@ -4,6 +4,8 @@
 
 ## ProfileFieldWell.required property
 
+Indicate if the well is required - this will render a red asterisk next to the title.
+
 <b>Signature:</b>
 
 ```typescript
