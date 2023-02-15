@@ -9,5 +9,5 @@ Profiles can indicate what child profiles they can support. These will be added 
 <b>Signature:</b>
 
 ```typescript
-getSlots?: (resource: Res) => ResourceSlot[];
+getSlots?: (resource: Res) => ResourceSlotFieldWell[];
 ```

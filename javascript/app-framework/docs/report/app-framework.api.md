@@ -31,7 +31,7 @@ export interface AppProfile<Res extends Resource = Resource, Schema extends Reso
     getCommandBarCommands?: (section: CommandBarSection) => IContextualMenuItem[] | undefined;
     getHelp?: () => Record<string, string>;
     getMenuItems?: (resource: Res) => IContextualMenuItem[];
-    getSlots?: (resource: Res) => ResourceSlot[];
+    getSlots?: (resource: Res) => ResourceSlotFieldWell[];
     group?: ResourceGroupType;
     iconName: string;
     renderer: React.ComponentType<{
@@ -163,8 +163,6 @@ export interface ResourceSlot {
     // (undocumented)
     placeholder?: string;
     // (undocumented)
-    profile: string;
-    // (undocumented)
     required?: boolean;
     // (undocumented)
     title: string;
@@ -174,6 +172,8 @@ export interface ResourceSlot {
 //
 // @public
 export interface ResourceSlotFieldWell {
+    // (undocumented)
+    onChange?: (key: string) => void;
     options?: IDropdownOption[];
     // (undocumented)
     selectedKey?: string;

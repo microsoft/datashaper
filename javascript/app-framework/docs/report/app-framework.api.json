@@ -400,8 +400,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "ResourceSlot",
-                  "canonicalReference": "@datashaper/app-framework!ResourceSlot:interface"
+                  "text": "ResourceSlotFieldWell",
+                  "canonicalReference": "@datashaper/app-framework!ResourceSlotFieldWell:interface"
                 },
                 {
                   "kind": "Content",
@@ -1797,33 +1797,6 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!ResourceSlot#profile:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "profile: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "profile",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!ResourceSlot#required:member",
               "docComment": "",
               "excerptTokens": [
@@ -1893,6 +1866,33 @@
           "name": "ResourceSlotFieldWell",
           "preserveMemberOrder": false,
           "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ResourceSlotFieldWell#onChange:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "onChange?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(key: string) => void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "onChange",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!ResourceSlotFieldWell#options:member",

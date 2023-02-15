@@ -19,7 +19,6 @@ export interface ResourceSlot
 |  [icon?](./app-framework.resourceslot.icon.md) |  | string | <i>(Optional)</i> |
 |  [key](./app-framework.resourceslot.key.md) |  | string |  |
 |  [placeholder?](./app-framework.resourceslot.placeholder.md) |  | string | <i>(Optional)</i> |
-|  [profile](./app-framework.resourceslot.profile.md) |  | string |  |
 |  [required?](./app-framework.resourceslot.required.md) |  | boolean | <i>(Optional)</i> |
 |  [title](./app-framework.resourceslot.title.md) |  | string |  |
 

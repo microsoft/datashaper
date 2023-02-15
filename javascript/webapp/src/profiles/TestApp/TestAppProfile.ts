@@ -8,7 +8,8 @@ import type {
 	ResourceSlotFieldWell,
 } from '@datashaper/app-framework'
 import { CommandBarSection, ResourceGroupType } from '@datashaper/app-framework'
-import { KnownRel, ResourceSchema } from '@datashaper/schema'
+import type { ResourceSchema } from '@datashaper/schema'
+import { KnownRel } from '@datashaper/schema'
 import type { DataPackage } from '@datashaper/workflow'
 import { ResourceReference, dereference } from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
@@ -79,19 +80,25 @@ export class TestAppProfile implements AppProfile<TestAppResource> {
 						text: r.title || r.name,
 					})),
 				onChange: (key: string) => {
+					// TODO: this is going to be a common pattern, extract a helper
 					// create a new symlink if it doesn't already exist in the local sources
-					// TODO: add an input property to the TestApp resource,
 					// and swap it in/out with this key, and remove the old one if changed
-					const existing = resource.sources.find(
-						(r) => dereference(r)?.name === key,
-					)
+					const dereferenced = resource.sources.map(dereference)
+					const existing = dereferenced.find((r) => r?.name === key)
 					if (!existing) {
 						const sibling = resources?.find((r) => r.name === key)
 						if (sibling) {
+							// remove the previous input
+							const filteredSources = dereferenced
+								.filter((s) => s?.name !== resource.input)
+								.filter((s) => s !== undefined) as ResourceReference[]
+							// create a new symlink to replace it
 							const reference = new ResourceReference()
 							reference.target = sibling
 							reference.rel = KnownRel.Input
-							resource.sources = [...resource.sources, reference]
+							resource.sources = [...filteredSources, reference]
+							// save the input for next time
+							resource.input = key
 						} else {
 							console.warn('no eligible sibling resource found to add', key)
 						}

@@ -14,8 +14,6 @@ import type {
 	AppProfile,
 	ResourceRoute,
 	ResourceRouteGroup,
-	ResourceSlotFieldWell,
-	ResourceSlot,
 } from '../../../types.js'
 import { ResourceGroupType } from '../../../types.js'
 

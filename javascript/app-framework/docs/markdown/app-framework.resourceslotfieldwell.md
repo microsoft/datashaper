@@ -16,6 +16,7 @@ export interface ResourceSlotFieldWell
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [onChange?](./app-framework.resourceslotfieldwell.onchange.md) |  | (key: string) =&gt; void | <i>(Optional)</i> |
 |  [options?](./app-framework.resourceslotfieldwell.options.md) |  | IDropdownOption\[\] | <i>(Optional)</i> List of valid options that this field well can be set to. |
 |  [selectedKey?](./app-framework.resourceslotfieldwell.selectedkey.md) |  | string | <i>(Optional)</i> |
 |  [slot](./app-framework.resourceslotfieldwell.slot.md) |  | [ResourceSlot](./app-framework.resourceslot.md) |  |
