@@ -71,6 +71,7 @@ export class TestAppProfile implements AppProfile<TestAppResource> {
 				title: 'Input table',
 				icon: 'Table',
 				placeholder: 'Select input table',
+				selectedKey: resource.input,
 				options: resources
 					?.filter((r) => r.profile === 'tablebundle')
 					.map((r) => ({
