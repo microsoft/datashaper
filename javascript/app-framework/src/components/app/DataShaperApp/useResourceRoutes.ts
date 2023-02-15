@@ -118,7 +118,7 @@ function makeResourceRoute(
 				onClick: () => resource.dispose(),
 			},
 		],
-		fieldWells: makeFieldWells(resources, profile.getSlots?.()),
+		fieldWells: profile.getSlots?.(resource),
 		props: { resource },
 		children: (resource.sources ?? EMPTY_ARRAY).map((r) =>
 			makeResourceRoute(r, services, profiles, resources, hrefs),
@@ -126,25 +126,6 @@ function makeResourceRoute(
 	}
 
 	return root
-}
-
-function makeFieldWells(
-	/**
-	 * The list of all resources in the package, which we can filter per slot to get the list of eligible resources
-	 */
-	resources: Resource[],
-	slots?: ResourceSlot[],
-): ResourceSlotFieldWell[] | undefined {
-	return slots?.map((slot) => {
-		const options = resources.filter(slot.predicate).map((resource) => ({
-			key: resource.name,
-			text: resource.title ?? resource.name,
-		}))
-		return {
-			slot,
-			options,
-		} as ResourceSlotFieldWell
-	})
 }
 
 function groupResources(

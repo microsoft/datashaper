@@ -40,7 +40,6 @@ const resources: ResourceRouteGroup[] = [
 							title: 'Node bindings',
 							placeholder: 'Select node list',
 							icon: 'CircleRing',
-							predicate: () => false,
 						},
 						options: [
 							{
@@ -59,7 +58,6 @@ const resources: ResourceRouteGroup[] = [
 							title: 'Edge bindings',
 							placeholder: 'Select edge list',
 							icon: 'Line',
-							predicate: () => false,
 						},
 						options: [
 							{
@@ -79,7 +77,6 @@ const resources: ResourceRouteGroup[] = [
 							title: 'Metadata table',
 							placeholder: 'Select metadata table',
 							icon: 'Table',
-							predicate: () => false,
 						},
 					},
 				],
@@ -90,24 +87,7 @@ const resources: ResourceRouteGroup[] = [
 const ResourceTreeComponent: React.FC = (args) => {
 	const [selectedRoute, setSelectedRoute] = useState<string | undefined>()
 	const [res, setRes] = useState<ResourceRouteGroup[]>(resources)
-	const handleBindingChange = useCallback(
-		(slot: ResourceSlot, key?: string) => {
-			console.log('binding change', slot, key)
-			setRes((prev) =>
-				prev.map((rg) => ({
-					...rg,
-					resources: rg.resources.map((r) => ({
-						...r,
-						fieldWells: r.fieldWells?.map((fw) => ({
-							...fw,
-							selectedKey: fw.slot.key === slot.key ? key : fw.selectedKey,
-						})),
-					})),
-				})),
-			)
-		},
-		[],
-	)
+
 	return (
 		<div
 			style={{
@@ -122,7 +102,6 @@ const ResourceTreeComponent: React.FC = (args) => {
 				resources={res}
 				selectedRoute={selectedRoute}
 				onSelect={(res) => setSelectedRoute(res?.href)}
-				onBindingChange={handleBindingChange}
 			/>
 		</div>
 	)

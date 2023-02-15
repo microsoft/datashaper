@@ -4,9 +4,7 @@
  */
 
 import type { ResourceSlotFieldWell } from '../../../types.js'
-import type { BindingChangeHandler } from './ResourceTree.types.js'
 
 export interface FieldWellsProps {
 	fields: ResourceSlotFieldWell[]
-	onBindingChange?: BindingChangeHandler
 }

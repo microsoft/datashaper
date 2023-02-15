@@ -200,6 +200,7 @@
 					]
 				  }
 			]
-		}
+		},
+		{"name":"Test App","$schema":"","profile":"test-app","count":0}
 	]
 }

@@ -122,7 +122,7 @@ export interface AppProfile<
 	 * @param resource
 	 * @returns
 	 */
-	getSlots?: () => ResourceSlot[]
+	getSlots?: (resource: Res) => ResourceSlotFieldWell[]
 	/**
 	 * Profiles may supply a map of help content to be displayed in the global panel when open.
 	 * Each help record should have a unique key, and the value is the markdown content.
@@ -157,7 +157,6 @@ export interface ProfileComponentProps<T extends Resource> {
  */
 export interface ResourceSlot {
 	key: string
-	predicate: (resource: Resource) => boolean
 	title: string
 	placeholder?: string
 	icon?: string
@@ -176,4 +175,5 @@ export interface ResourceSlotFieldWell {
 	 */
 	options?: IDropdownOption[]
 	selectedKey?: string
+	onChange?: (key: string) => void
 }

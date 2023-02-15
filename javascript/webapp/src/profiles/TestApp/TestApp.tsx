@@ -12,6 +12,7 @@ import type { TestAppResource } from './TestAppResource.js'
 
 export const TestApp: React.FC<{ resource: TestAppResource }> = memo(
 	function TestApp({ resource }) {
+		console.log('TestApp', resource.toSchema())
 		return (
 			<RecoilBasedProfileHost
 				resource={resource}

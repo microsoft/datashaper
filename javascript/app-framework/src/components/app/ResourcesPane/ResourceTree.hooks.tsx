@@ -8,7 +8,6 @@ import { useMemo } from 'react'
 import type { ResourceRoute, ResourceRouteGroup } from '../../../types.js'
 import { ResourceGroupType } from '../../../types.js'
 import { FieldWells } from './FieldWells.js'
-import type { BindingChangeHandler } from './ResourceTree.types.js'
 
 /**
  * Extract the grouping instructions for the Tree component.
@@ -43,16 +42,15 @@ function groupName(group: ResourceRouteGroup, narrow = false): string {
 export function useTreeItems(
 	groups: ResourceRouteGroup[],
 	onSelect: (v: ResourceRoute) => void,
-	onBindingChange?: BindingChangeHandler,
 ): TreeGroup[] {
 	return useMemo(
 		() =>
 			groups.flatMap((group) =>
 				group.resources.map((resource) =>
-					makeTreeItem(resource, group.type, onSelect, onBindingChange),
+					makeTreeItem(resource, group.type, onSelect),
 				),
 			),
-		[groups, onSelect, onBindingChange],
+		[groups, onSelect],
 	)
 }
 
@@ -60,19 +58,13 @@ function makeTreeItem(
 	resource: ResourceRoute,
 	group?: ResourceGroupType,
 	onSelect?: (v: ResourceRoute) => void,
-	onBindingChange?: BindingChangeHandler,
 ): TreeItem {
 	const numChildren = resource.children?.length ?? 0
 	const customRender = resource.fieldWells
 		? (props: any, defaultRenderer: any) => {
 				return (
 					<>
-						{resource.fieldWells && (
-							<FieldWells
-								fields={resource.fieldWells}
-								onBindingChange={onBindingChange}
-							/>
-						)}
+						{resource.fieldWells && <FieldWells fields={resource.fieldWells} />}
 						{defaultRenderer(props)}
 					</>
 				)
@@ -84,14 +76,9 @@ function makeTreeItem(
 		text: resource.title,
 		iconName: resource.icon,
 		group,
-		// TEMP: this is because the tree will not allow expansion if there are no children
-		// but if we have an onRendeContent, we should still allow expansion
-		expanded: true,
 		children:
 			numChildren > 0
-				? resource.children?.map((c) =>
-						makeTreeItem(c, group, onSelect, onBindingChange),
-				  )
+				? resource.children?.map((c) => makeTreeItem(c, group, onSelect))
 				: undefined,
 		menuItems: resource.menuItems,
 		onClick: () => onSelect?.(resource),
