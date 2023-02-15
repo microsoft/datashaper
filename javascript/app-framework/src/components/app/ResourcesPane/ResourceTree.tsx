@@ -12,7 +12,7 @@ import type { ResourceTreeProps } from './ResourceTree.types.js'
 export const ResourceTree: React.FC<ResourceTreeProps> = memo(
 	function ResourceTree({ resources, selectedRoute, onSelect, narrow }) {
 		const groups = useTreeGroups(resources, narrow)
-		const items = useTreeItems(resources, onSelect)
+		const items = useTreeItems(resources, onSelect, narrow)
 		return (
 			<Tree
 				groups={groups}

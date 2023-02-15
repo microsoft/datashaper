@@ -41,16 +41,17 @@ function groupName(group: ResourceRouteGroup, narrow = false): string {
  */
 export function useTreeItems(
 	groups: ResourceRouteGroup[],
-	onSelect: (v: ResourceRoute) => void,
+	onSelect?: (v: ResourceRoute) => void,
+	narrow?: boolean,
 ): TreeGroup[] {
 	return useMemo(
 		() =>
 			groups.flatMap((group) =>
 				group.resources.map((resource) =>
-					makeTreeItem(resource, group.type, onSelect),
+					makeTreeItem(resource, group.type, onSelect, narrow),
 				),
 			),
-		[groups, onSelect],
+		[groups, onSelect, narrow],
 	)
 }
 
@@ -58,13 +59,18 @@ function makeTreeItem(
 	resource: ResourceRoute,
 	group?: ResourceGroupType,
 	onSelect?: (v: ResourceRoute) => void,
+	narrow?: boolean,
 ): TreeItem {
 	const numChildren = resource.children?.length ?? 0
+	// add field wells to the top of the tree item if supplied, but only if we're in the normal width
+	// (narrow is not intended for tree interaction capability)
 	const customRender = resource.fieldWells
 		? (props: any, defaultRenderer: any) => {
 				return (
 					<>
-						{resource.fieldWells && <FieldWells fields={resource.fieldWells} />}
+						{resource.fieldWells && !narrow && (
+							<FieldWells fields={resource.fieldWells} />
+						)}
 						{defaultRenderer(props)}
 					</>
 				)
@@ -78,7 +84,9 @@ function makeTreeItem(
 		group,
 		children:
 			numChildren > 0
-				? resource.children?.map((c) => makeTreeItem(c, group, onSelect))
+				? resource.children?.map((c) =>
+						makeTreeItem(c, group, onSelect, narrow),
+				  )
 				: undefined,
 		menuItems: resource.menuItems,
 		onClick: () => onSelect?.(resource),
