@@ -41,7 +41,7 @@
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/workflow": "workspace:^",
 		"@essex/charts-react": "^1.1.9",
-		"@essex/components": "^3.6.12",
+		"@essex/components": "^3.6.13",
 		"@essex/styled-components": "^0.0.10",
 		"ahooks": "^3.7.4",
 		"d3-format": "^3.1.0",

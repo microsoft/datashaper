@@ -13,7 +13,7 @@
 	"dependencies": {
 		"@datashaper/react": "workspace:^",
 		"@datashaper/webapp": "workspace:^",
-		"@essex/components": "^3.6.12",
+		"@essex/components": "^3.6.13",
 		"@essex/storybook-config": "^0.1.2",
 		"@fluentui/font-icons-mdl2": "^8.5.8",
 		"@fluentui/react": "^8.105.4",
