@@ -82,6 +82,7 @@ function makeResourceRoute(
 		const href = target && hrefs.get(target.name)
 		if (target) {
 			const route: ResourceRoute = {
+				key: target.name,
 				title: target.title ?? target.name,
 				href,
 				icon: 'Link',
@@ -97,6 +98,7 @@ function makeResourceRoute(
 	const profile = profiles.get(resource.profile)!
 	const href = hrefs.get(resource.name)
 	const root: ResourceRoute = {
+		key: resource.name,
 		href,
 		title: resource.title ?? resource.name,
 		icon: profile.iconName,

@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useState } from 'react'
-import type { ResourceRouteGroup, ProfileFieldWell } from '../../../types.js'
+import { useEffect, useState } from 'react'
+import type { ResourceRouteGroup } from '../../../types.js'
 import { ResourceGroupType } from '../../../types.js'
 import { ResourceTree } from './ResourceTree.js'
 
@@ -14,73 +14,84 @@ const storyMetadata = {
 }
 export default storyMetadata
 
-const resources: ResourceRouteGroup[] = [
-	{
-		type: ResourceGroupType.Data,
-		resources: [
+const ResourceTreeComponent: React.FC = (args) => {
+	const [selectedRoute, setSelectedRoute] = useState<string | undefined>()
+	const [resources, setResources] = useState<ResourceRouteGroup[]>([])
+	useEffect(() => {
+		const res: ResourceRouteGroup[] = [
 			{
-				title: 'Graph',
-				icon: 'Flow',
-				children: [
+				type: ResourceGroupType.Data,
+				resources: [
 					{
-						title: 'Nodes',
-						icon: 'Link',
-						href: '/resources/data/graph/nodes',
-					},
-					{
-						title: 'Edges',
-						icon: 'Link',
-						href: '/resources/data/graph/edges',
-					},
-				],
-				fieldWells: [
-					{
-						key: 'nodes',
-						title: 'Node bindings',
-						placeholder: 'Select node list',
-						icon: 'CircleRing',
-						options: [
+						key: 'graph',
+						title: 'Graph',
+						icon: 'Flow',
+						children: [
 							{
 								key: 'nodes',
-								text: 'Nodes',
+								title: 'Nodes',
+								icon: 'Link',
+								href: '/resources/data/graph/nodes',
 							},
 							{
 								key: 'edges',
-								text: 'Edges',
+								title: 'Edges',
+								icon: 'Link',
+								href: '/resources/data/graph/edges',
 							},
 						],
-					},
-					{
-						key: 'edges',
-						title: 'Edge bindings',
-						placeholder: 'Select edge list',
-						icon: 'Line',
-						required: true,
-						options: [
+						fieldWells: [
 							{
 								key: 'nodes',
-								text: 'Nodes',
+								title: 'Node bindings',
+								placeholder: 'Select node list',
+								icon: 'CircleRing',
+								options: [
+									{
+										key: 'nodes',
+										text: 'Nodes',
+									},
+									{
+										key: 'edges',
+										text: 'Edges',
+									},
+								],
+								onChange: mapper('nodes', setResources),
 							},
 							{
 								key: 'edges',
-								text: 'Edges',
+								title: 'Edge bindings',
+								placeholder: 'Select edge list',
+								icon: 'Line',
+								required: true,
+								options: [
+									{
+										key: 'nodes',
+										text: 'Nodes',
+									},
+									{
+										key: 'edges',
+										text: 'Edges',
+									},
+								],
+								selectedKey: 'edges',
+								onChange: mapper('edges', setResources),
+							},
+							{
+								key: 'metadata',
+								title: 'Metadata table',
+								placeholder: 'Select metadata table',
+								icon: 'Table',
+								onChange: mapper('metadata', setResources),
 							},
 						],
-						selectedKey: 'edges',
-					},
-					{
-						key: 'metadata',
-						title: 'Metadata table',
-						placeholder: 'Select metadata table',
-						icon: 'Table',
 					},
 				],
 			},
-		],
-	},
-]
-const ResourceTreeComponent: React.FC = (args) => {
-	const [selectedRoute, setSelectedRoute] = useState<string | undefined>()
+		]
+		setResources(res)
+	}, [])
+
 	return (
 		<div
 			style={{
@@ -92,12 +103,35 @@ const ResourceTreeComponent: React.FC = (args) => {
 		>
 			<ResourceTree
 				{...args}
-				resources={resources}
+				resources={resources || []}
 				selectedRoute={selectedRoute}
 				onSelect={(res) => setSelectedRoute(res?.href)}
 			/>
 		</div>
 	)
+}
+
+const mapper = (wellKey: string, setter: any) => {
+	return (key: string) => {
+		setter((prev: ResourceRouteGroup[]) => {
+			return prev.map((group) => {
+				return {
+					...group,
+					resources: group.resources.map((r) => {
+						return {
+							...r,
+							fieldWells: r.fieldWells?.map((f) => {
+								return {
+									...f,
+									selectedKey: f.key === wellKey ? key : f.selectedKey,
+								}
+							}),
+						}
+					}),
+				}
+			})
+		})
+	}
 }
 
 export const ResourceTreeStory = {

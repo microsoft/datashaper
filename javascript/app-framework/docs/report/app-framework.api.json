@@ -1742,6 +1742,33 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ResourceRoute#key:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "key: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "key",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!ResourceRoute#menuItems:member",
               "docComment": "/**\n * Contextual Menu items for this resource\n */\n",
               "excerptTokens": [

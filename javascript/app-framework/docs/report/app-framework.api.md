@@ -150,6 +150,8 @@ export interface ResourceRoute {
     fieldWells?: ProfileFieldWell[];
     href?: string;
     icon?: string;
+    // (undocumented)
+    key: string;
     menuItems?: IContextualMenuItem[];
     props?: any;
     renderer?: React.ComponentType<any>;

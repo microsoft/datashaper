@@ -10,15 +10,8 @@ import styled from 'styled-components'
 export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: 4px;
-    padding: 4px;
-`
-
-export const FieldContainer = styled.div`
-	display: flex;
-	flex-direction: column;
 	gap: 2px;
-	padding: 0 8px 0 32px;
+	padding: 0 8px 0 0;
 `
 
 export const StyledIcon = styled(Icon)`

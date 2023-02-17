@@ -5,6 +5,6 @@
 
 import type { ProfileFieldWell } from '../../../types.js'
 
-export interface FieldWellsProps {
-	fields: ProfileFieldWell[]
+export interface FieldWellProps {
+	field: ProfileFieldWell
 }

@@ -5,34 +5,16 @@
 import type { IDropdownOption } from '@fluentui/react'
 import { Dropdown } from '@fluentui/react'
 import { memo, useCallback } from 'react'
-import type { ProfileFieldWell } from '../../../types.js'
 
 import {
 	Container,
-	FieldContainer,
 	Required,
 	StyledIcon,
 	Title,
 	useFieldDropdownProps,
 	Well,
-} from './FieldWells.styles.js'
-import type { FieldWellsProps } from './FieldWells.types.js'
-
-export const FieldWells: React.FC<FieldWellsProps> = memo(function FieldWells({
-	fields,
-}) {
-	return (
-		<Container>
-			{fields.map((field) => {
-				return <FieldWell key={`field-well-${field.key}`} field={field} />
-			})}
-		</Container>
-	)
-})
-
-interface FieldWellProps {
-	field: ProfileFieldWell
-}
+} from './FieldWell.styles.js'
+import type { FieldWellProps } from './FieldWell.types.js'
 
 export const FieldWell: React.FC<FieldWellProps> = memo(function FieldWell({
 	field,
@@ -47,7 +29,7 @@ export const FieldWell: React.FC<FieldWellProps> = memo(function FieldWell({
 	)
 	const disabled = !options || options.length === 0
 	return (
-		<FieldContainer>
+		<Container>
 			<Title>
 				{title}
 				<Required required={required} />
@@ -55,6 +37,7 @@ export const FieldWell: React.FC<FieldWellProps> = memo(function FieldWell({
 			<Well>
 				<StyledIcon iconName={icon} />
 				<Dropdown
+					onClick={(e) => e.stopPropagation()}
 					disabled={disabled}
 					options={options || []}
 					placeholder={disabled ? '(No valid options)' : placeholder}
@@ -63,6 +46,6 @@ export const FieldWell: React.FC<FieldWellProps> = memo(function FieldWell({
 					{...dropdownProps}
 				/>
 			</Well>
-		</FieldContainer>
+		</Container>
 	)
 })

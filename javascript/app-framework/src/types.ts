@@ -13,6 +13,7 @@ import type {
  * Data attached to resource-tree nodes
  */
 export interface ResourceRoute {
+	key: string
 	/**
 	 * The resource render route
 	 */

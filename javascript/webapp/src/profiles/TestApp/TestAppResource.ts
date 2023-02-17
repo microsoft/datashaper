@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Resource, type Maybe } from '@datashaper/workflow'
-import type { TableContainer } from '@datashaper/tables'
 import { TEST_APP_PROFILE } from './constants.js'
 
 export class TestAppResource extends Resource {
