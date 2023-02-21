@@ -136,71 +136,72 @@
 				  }
 			]
 		},
-		{
-			"name": "stocks",
-			"profile": "tablebundle",
-			"sources": [
-				{
-					"rel": "input",
-					"profile": "datatable",
-					"name": "stocks.csv",
-					"path": "data/stocks.csv"
-				},
-				{
-					"$schema": "https://microsoft.github.io/datashaper/schema/codebook/v1.0.0.json",
-					"title": "codebook.json",
-					"name": "codebook (3).json",
-					"profile": "codebook",
-					"fields": [
-					  {
-						"name": "Symbol",
-						"type": "string",
-						"nature": "nominal"
-					  },
-					  {
-						"name": "Date",
-						"type": "date",
-						"nature": "continuous"
-					  },
-					  {
-						"name": "Close",
-						"type": "number",
-						"nature": "continuous"
-					  },
-					  {
-						"name": "Volume",
-						"type": "number",
-						"nature": "discrete"
-					  },
-					  {
-						"name": "Open",
-						"type": "number",
-						"nature": "continuous"
-					  },
-					  {
-						"name": "High",
-						"type": "number",
-						"nature": "continuous"
-					  },
-					  {
-						"name": "Low",
-						"type": "number",
-						"nature": "continuous"
-					  },
-					  {
-						"name": "Week",
-						"type": "number",
-						"nature": "discrete"
-					  },
-					  {
-						"name": "Month",
-						"type": "number",
-						"nature": "discrete"
+		{"name":"Test App","$schema":"","profile":"test-app","count":0, "sources":[
+			{
+				"name": "stocks",
+				"profile": "tablebundle",
+				"sources": [
+					{
+						"rel": "input",
+						"profile": "datatable",
+						"name": "stocks.csv",
+						"path": "data/stocks.csv"
+					},
+					{
+						"$schema": "https://microsoft.github.io/datashaper/schema/codebook/v1.0.0.json",
+						"title": "codebook.json",
+						"name": "codebook (3).json",
+						"profile": "codebook",
+						"fields": [
+						  {
+							"name": "Symbol",
+							"type": "string",
+							"nature": "nominal"
+						  },
+						  {
+							"name": "Date",
+							"type": "date",
+							"nature": "continuous"
+						  },
+						  {
+							"name": "Close",
+							"type": "number",
+							"nature": "continuous"
+						  },
+						  {
+							"name": "Volume",
+							"type": "number",
+							"nature": "discrete"
+						  },
+						  {
+							"name": "Open",
+							"type": "number",
+							"nature": "continuous"
+						  },
+						  {
+							"name": "High",
+							"type": "number",
+							"nature": "continuous"
+						  },
+						  {
+							"name": "Low",
+							"type": "number",
+							"nature": "continuous"
+						  },
+						  {
+							"name": "Week",
+							"type": "number",
+							"nature": "discrete"
+						  },
+						  {
+							"name": "Month",
+							"type": "number",
+							"nature": "discrete"
+						  }
+						]
 					  }
-					]
-				  }
-			]
-		},
-		{"name":"Test App","$schema":"","profile":"test-app","count":0}
+				]
+			}
+		]}
 	]
 }
