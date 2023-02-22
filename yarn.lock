@@ -1908,6 +1908,7 @@ __metadata:
   resolution: "@datashaper/webapp@workspace:javascript/webapp"
   dependencies:
     "@datashaper/app-framework": "workspace:^"
+    "@datashaper/react": "workspace:^"
     "@datashaper/schema": "workspace:^"
     "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"

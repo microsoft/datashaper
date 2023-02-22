@@ -32,6 +32,7 @@
 	},
 	"dependencies": {
 		"@datashaper/app-framework": "workspace:^",
+		"@datashaper/react": "workspace:^",
 		"@datashaper/schema": "workspace:^",
 		"@datashaper/tables": "workspace:^",
 		"@datashaper/utilities": "workspace:^",
