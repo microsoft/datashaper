@@ -87,7 +87,6 @@ function makeTreeItem(
 						<div
 							style={{
 								width: '100%',
-
 								padding: '4px 0',
 								cursor: handleClick ? 'pointer' : 'default',
 							}}

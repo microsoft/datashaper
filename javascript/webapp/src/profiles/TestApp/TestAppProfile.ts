@@ -8,11 +8,11 @@ import type {
 	ProfileFieldWell,
 } from '@datashaper/app-framework'
 import { CommandBarSection, ResourceGroupType } from '@datashaper/app-framework'
-import type { ResourceSchema } from '@datashaper/schema'
+import { KnownProfile, ResourceSchema } from '@datashaper/schema'
 import { KnownRel } from '@datashaper/schema'
-import type { DataPackage } from '@datashaper/workflow'
-import { ResourceReference, dereference } from '@datashaper/workflow'
-import type { IContextualMenuItem } from '@fluentui/react'
+import type { DataPackage, Resource } from '@datashaper/workflow'
+import { ResourceReference, isReference } from '@datashaper/workflow'
+import type { IContextualMenuItem, IDropdownOption } from '@fluentui/react'
 
 import { TEST_APP_PROFILE } from './constants.js'
 import { TestApp } from './TestApp.js'
@@ -64,7 +64,15 @@ export class TestAppProfile implements AppProfile<TestAppResource> {
 	}
 
 	public getFieldWells(resource: TestAppResource): ProfileFieldWell[] {
+		// list out all root siblings as base options
 		const resources = this._dataPackage?.resources
+
+		// filter this full list to only include tables and not include the current resource
+		const options = createSourceFieldOptions(
+			this._dataPackage?.resources,
+			resource.sources,
+			(r) => r.profile === KnownProfile.TableBundle && r.name !== resource.name,
+		)
 		return [
 			{
 				key: 'input-table',
@@ -72,38 +80,58 @@ export class TestAppProfile implements AppProfile<TestAppResource> {
 				icon: 'Table',
 				placeholder: 'Select input table',
 				selectedKey: resource.input,
-				options: resources
-					?.filter((r) => r.profile === 'tablebundle')
-					.map((r) => ({
-						key: r.name,
-						text: r.title || r.name,
-					})),
+				options,
 				onChange: (key: string) => {
 					// TODO: this is going to be a common pattern, extract a helper
-					// create a new symlink if it doesn't already exist in the local sources
-					// and swap it in/out with this key, and remove the old one if changed
-					const dereferenced = resource.sources.map(dereference)
-					const existing = dereferenced.find((r) => r?.name === key)
-					if (!existing) {
-						const sibling = resources?.find((r) => r.name === key)
-						if (sibling) {
-							// remove the previous input
-							const filteredSources = dereferenced
-								.filter((s) => s?.name !== resource.input)
-								.filter((s) => s !== undefined) as ResourceReference[]
-							// create a new symlink to replace it
-							const reference = new ResourceReference()
-							reference.target = sibling
-							reference.rel = KnownRel.Input
-							resource.sources = [...filteredSources, reference]
-							// save the input for next time
-							resource.input = key
-						} else {
-							console.warn('no eligible sibling resource found to add', key)
-						}
+
+					// remove the previous input if relevant
+					// note: only actually remove it from the sources if it is a symlink
+					// if it is a child, it should only be unlinked as input, not removed
+					if (resource.input) {
+						resource.sources = resource.sources.filter((r) => {
+							if (!isReference(r)) {
+								return true
+							}
+							return r?.target?.name !== resource.input
+						})
 					}
+					// if the source is a sibling, create a symlink
+					// otherwise, it should already be a child
+					const sibling = resources?.find((r) => r?.name === key)
+					if (sibling) {
+						const reference = new ResourceReference()
+						reference.target = sibling
+						reference.rel = KnownRel.Input
+						resource.sources = [...resource.sources, reference]
+					}
+
+					resource.input = key
 				},
 			},
 		]
 	}
+}
+
+/**
+ * Makes a set of valid options to select from for a field well dropdown.
+ * This combines all siblings (if provided), all children (if provided),
+ * and a predicate to add additional filtering logic.
+ * @param resources - the sibling resources in the data package
+ * @param sources - child resources of the resource containing the well
+ */
+function createSourceFieldOptions(
+	resources: Resource[] | undefined,
+	sources: (Resource | ResourceReference)[],
+	predicate: (r: Resource | ResourceReference) => boolean,
+): IDropdownOption[] {
+	// list out all children that are not already links to roots
+	const children = sources.filter((r) => !isReference(r))
+	// combine all resources and filter with the provided predicte
+	const possible = [...(resources || []), ...children].filter(
+		predicate,
+	) as ResourceReference[]
+	return possible.map((r) => ({
+		key: r.name,
+		text: r.title || r.name,
+	}))
 }

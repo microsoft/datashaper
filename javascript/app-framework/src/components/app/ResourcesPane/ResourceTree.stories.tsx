@@ -30,13 +30,13 @@ const ResourceTreeComponent: React.FC = (args) => {
 							{
 								key: 'nodes',
 								title: 'Nodes',
-								icon: 'Link',
+								icon: 'Table',
 								href: '/resources/data/graph/nodes',
 							},
 							{
 								key: 'edges',
 								title: 'Edges',
-								icon: 'Link',
+								icon: 'Table',
 								href: '/resources/data/graph/edges',
 							},
 						],
