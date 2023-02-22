@@ -3,12 +3,17 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { IDropdownOption } from '@fluentui/react'
+import type {
+	IDropdownStyles,
+	IIconStyles,
+	ISelectableOption,
+} from '@fluentui/react'
+import type { CSSProperties } from 'react'
 
 /**
  * Defines an available field well.
  * This includes UX properties for how to visually represent it (title, icon, etc).
- * This implementation is rendered as a dropdown.
+ * This implementation is rendered with a dropdown, and is in many ways just a fancy stylized dropdown.
  */
 export interface FieldWellItem {
 	/**
@@ -34,7 +39,7 @@ export interface FieldWellItem {
 	/**
 	 * List of valid options that this field well can be set to.
 	 */
-	options?: IDropdownOption[]
+	options?: ISelectableOption[]
 	/**
 	 * Selected key for the dropdown.
 	 */
@@ -47,9 +52,18 @@ export interface FieldWellItem {
 	onChange?: (key: string) => void
 }
 
+export interface FieldWellStyles {
+	root?: CSSProperties
+	title?: CSSProperties
+	required?: CSSProperties
+	well?: CSSProperties
+	icon?: Partial<IIconStyles>
+	dropdown?: Partial<IDropdownStyles>
+}
+
 /**
  * Props for the FieldWell component.
  */
-export interface FieldWellProps {
-	field: FieldWellItem
+export interface FieldWellProps extends FieldWellItem {
+	styles?: FieldWellStyles
 }

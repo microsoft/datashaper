@@ -9,12 +9,13 @@ Props for the FieldWell component.
 <b>Signature:</b>
 
 ```typescript
-export interface FieldWellProps 
+export interface FieldWellProps extends FieldWellItem 
 ```
+<b>Extends:</b> [FieldWellItem](./react.fieldwellitem.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [field](./react.fieldwellprops.field.md) |  | [FieldWellItem](./react.fieldwellitem.md) |  |
+|  [styles?](./react.fieldwellprops.styles.md) |  | [FieldWellStyles](./react.fieldwellstyles.md) | <i>(Optional)</i> |
 

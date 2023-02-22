@@ -3,39 +3,46 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { IDropdownOption } from '@fluentui/react'
-import { Dropdown } from '@fluentui/react'
+import { Icon, Dropdown } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
 import {
 	Container,
 	Required,
-	StyledIcon,
 	Title,
 	useFieldDropdownProps,
+	useFieldWellStyles,
 	Well,
 } from './FieldWell.styles.js'
 import type { FieldWellProps } from './FieldWell.types.js'
 
 export const FieldWell: React.FC<FieldWellProps> = memo(function FieldWell({
-	field,
+	title,
+	placeholder,
+	icon,
+	required,
+	selectedKey,
+	options,
+	onChange,
+	styles,
 }) {
-	const dropdownProps = useFieldDropdownProps()
-	const { title, placeholder, icon, required, selectedKey, options } = field
+	const _styles = useFieldWellStyles(styles)
+	const dropdownProps = useFieldDropdownProps(_styles.dropdown)
 
 	const handleChange = useCallback(
 		(_e: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) =>
-			field.onChange?.((option?.key as string) || ''),
-		[field],
+			onChange?.((option?.key as string) || ''),
+		[onChange],
 	)
 	const disabled = !options || options.length === 0
 	return (
-		<Container>
-			<Title>
+		<Container style={_styles.root}>
+			<Title style={_styles.title}>
 				{title}
-				<Required required={required} />
+				<Required required={required} style={_styles.required} />
 			</Title>
-			<Well>
-				<StyledIcon iconName={icon} />
+			<Well style={_styles.well}>
+				<Icon iconName={icon} styles={_styles.icon} />
 				<Dropdown
 					onClick={(e) => e.stopPropagation()}
 					disabled={disabled}

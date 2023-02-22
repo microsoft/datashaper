@@ -92,7 +92,7 @@ function makeTreeItem(
 							}}
 							onClick={handleClick}
 						>
-							<FieldWell field={well} />
+							<FieldWell {...well} />
 						</div>
 					)
 				},

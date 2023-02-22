@@ -11,14 +11,13 @@ const storyMetadata = {
 }
 export default storyMetadata
 
-const PrimaryComponent: React.FC<FieldWellProps> = (args) => {
-	console.log(args)
+const Component: React.FC<FieldWellProps> = (args) => {
 	return (
 		<div
 			style={{
 				width: 200,
-				height: 80,
 				border: '1px solid orange',
+				padding: 8,
 			}}
 		>
 			<FieldWell {...args} />
@@ -26,24 +25,55 @@ const PrimaryComponent: React.FC<FieldWellProps> = (args) => {
 	)
 }
 
-export const Primary = {
-	render: PrimaryComponent,
-	args: {
-		field: {
+const well = {
+	key: 'nodes',
+	title: 'Node bindings',
+	placeholder: 'Select node list',
+	icon: 'CircleRing',
+	options: [
+		{
 			key: 'nodes',
-			title: 'Node bindings',
-			placeholder: 'Select node list',
-			icon: 'CircleRing',
-			options: [
-				{
-					key: 'nodes',
-					text: 'Nodes',
+			text: 'Nodes',
+		},
+		{
+			key: 'edges',
+			text: 'Edges',
+		},
+	],
+}
+
+export const Primary = {
+	render: Component,
+	args: {
+		...well,
+	},
+}
+
+export const Customized = {
+	render: Component,
+	args: {
+		...well,
+		required: true,
+		styles: {
+			root: {
+				border: '1px dotted dodgerblue',
+				padding: 8,
+			},
+			title: {
+				fontWeight: 'bold',
+			},
+			required: {
+				color: 'orange',
+			},
+			well: {
+				border: '1px solid dodgerblue',
+				borderRadius: 8,
+			},
+			icon: {
+				root: {
+					color: 'orange',
 				},
-				{
-					key: 'edges',
-					text: 'Edges',
-				},
-			],
+			},
 		},
 	},
 }

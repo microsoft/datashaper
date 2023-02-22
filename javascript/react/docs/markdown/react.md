@@ -29,8 +29,9 @@
 |  [CodebookProps](./react.codebookprops.md) | Props for the CodebookEditor component |
 |  [CodebookTableStyles](./react.codebooktablestyles.md) |  |
 |  [CommandBarColors](./react.commandbarcolors.md) |  |
-|  [FieldWellItem](./react.fieldwellitem.md) | Defines an available field well. This includes UX properties for how to visually represent it (title, icon, etc). This implementation is rendered as a dropdown. |
+|  [FieldWellItem](./react.fieldwellitem.md) | Defines an available field well. This includes UX properties for how to visually represent it (title, icon, etc). This implementation is rendered with a dropdown, and is in many ways just a fancy stylized dropdown. |
 |  [FieldWellProps](./react.fieldwellprops.md) | Props for the FieldWell component. |
+|  [FieldWellStyles](./react.fieldwellstyles.md) |  |
 |  [StepListProps](./react.steplistprops.md) |  |
 |  [StepListStyles](./react.stepliststyles.md) |  |
 |  [TableCommandsProps](./react.tablecommandsprops.md) |  |

@@ -19,9 +19,11 @@ import type { IDetailsGroupDividerProps } from '@fluentui/react';
 import type { IDetailsListProps } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
 import type { IDropdownStyles } from '@fluentui/react';
+import type { IIconStyles } from '@fluentui/react';
 import type { ILabelStyleProps } from '@fluentui/react';
 import type { ILabelStyles } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
+import type { ISelectableOption } from '@fluentui/react';
 import type { IStyleFunctionOrObject } from '@fluentui/utilities';
 import type { ITextFieldStyleProps } from '@fluentui/react';
 import type { ITextFieldStyles } from '@fluentui/react';
@@ -205,7 +207,7 @@ export interface FieldWellItem {
     icon?: string;
     key: string;
     onChange?: (key: string) => void;
-    options?: IDropdownOption[];
+    options?: ISelectableOption[];
     placeholder?: string;
     required?: boolean;
     selectedKey?: string;
@@ -215,9 +217,27 @@ export interface FieldWellItem {
 // Warning: (ae-missing-release-tag) "FieldWellProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface FieldWellProps {
+export interface FieldWellProps extends FieldWellItem {
     // (undocumented)
-    field: FieldWellItem;
+    styles?: FieldWellStyles;
+}
+
+// Warning: (ae-missing-release-tag) "FieldWellStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface FieldWellStyles {
+    // (undocumented)
+    dropdown?: Partial<IDropdownStyles>;
+    // (undocumented)
+    icon?: Partial<IIconStyles>;
+    // (undocumented)
+    required?: CSSProperties;
+    // (undocumented)
+    root?: CSSProperties;
+    // (undocumented)
+    title?: CSSProperties;
+    // (undocumented)
+    well?: CSSProperties;
 }
 
 // Warning: (ae-missing-release-tag) "GroupHeaderFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

@@ -3,19 +3,17 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useDropdownProps } from '@essex/components'
-import type { IDropdownProps } from '@fluentui/react'
-import { Icon } from '@fluentui/react'
+import type { IDropdownProps, IDropdownStyles } from '@fluentui/react'
+import { merge, useTheme } from '@fluentui/react'
+import { useMemo } from 'react'
 import styled from 'styled-components'
+import type { FieldWellStyles } from './FieldWell.types.js'
 
 export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 2px;
-	padding: 0 8px 0 0;
-`
-
-export const StyledIcon = styled(Icon)`
-	color: ${({ theme }) => theme.palette.neutralPrimary};
+	padding: 0;
 `
 
 export const Title = styled.div`
@@ -44,21 +42,40 @@ export const Well = styled.div`
 	padding: 3px 8px;
 `
 
-const staticDropdownStyles = {
-	styles: {
-		root: {
-			width: '100%',
-			border: 'none',
-		},
-		dropdown: {
-			border: 'none',
-		},
-		title: {
-			background: 'none',
-		},
-	},
+export function useFieldWellStyles(
+	styles?: Partial<FieldWellStyles>,
+): FieldWellStyles {
+	const theme = useTheme()
+	return useMemo(
+		() =>
+			merge(
+				{
+					dropdown: {
+						root: {
+							width: '100%',
+							border: 'none',
+						},
+						dropdown: {
+							border: 'none',
+						},
+						title: {
+							background: 'none',
+						},
+					},
+					icon: {
+						root: {
+							color: theme.palette.neutralPrimary,
+						},
+					},
+				},
+				styles,
+			),
+		[theme, styles],
+	)
 }
 
-export function useFieldDropdownProps(): Partial<IDropdownProps> {
-	return useDropdownProps(staticDropdownStyles, 'small')
+export function useFieldDropdownProps(
+	dropdownStyles?: Partial<IDropdownStyles>,
+): Partial<IDropdownProps> {
+	return useDropdownProps({ styles: dropdownStyles }, 'small')
 }

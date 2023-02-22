@@ -9,5 +9,5 @@ List of valid options that this field well can be set to.
 <b>Signature:</b>
 
 ```typescript
-options?: IDropdownOption[];
+options?: ISelectableOption[];
 ```

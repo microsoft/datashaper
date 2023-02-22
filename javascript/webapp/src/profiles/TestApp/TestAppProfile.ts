@@ -5,9 +5,9 @@
 import type {
 	AppProfileInitializationContext,
 	AppProfile,
-	ProfileFieldWell,
 } from '@datashaper/app-framework'
 import { CommandBarSection, ResourceGroupType } from '@datashaper/app-framework'
+import type { FieldWellItem } from '@datashaper/react'
 import type { ResourceSchema } from '@datashaper/schema'
 import { KnownProfile, KnownRel } from '@datashaper/schema'
 import type { DataPackage, Resource } from '@datashaper/workflow'
@@ -63,7 +63,7 @@ export class TestAppProfile implements AppProfile<TestAppResource> {
 		}
 	}
 
-	public getFieldWells(resource: TestAppResource): ProfileFieldWell[] {
+	public getFieldWells(resource: TestAppResource): FieldWellItem[] {
 		// list out all root siblings as base options
 		const resources = this._dataPackage?.resources
 

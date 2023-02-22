@@ -2324,7 +2324,7 @@
         {
           "kind": "Interface",
           "canonicalReference": "@datashaper/react!FieldWellItem:interface",
-          "docComment": "/**\n * Defines an available field well. This includes UX properties for how to visually represent it (title, icon, etc). This implementation is rendered as a dropdown.\n */\n",
+          "docComment": "/**\n * Defines an available field well. This includes UX properties for how to visually represent it (title, icon, etc). This implementation is rendered with a dropdown, and is in many ways just a fancy stylized dropdown.\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -2427,8 +2427,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "IDropdownOption",
-                  "canonicalReference": "@fluentui/react!IDropdownOption:interface"
+                  "text": "ISelectableOption",
+                  "canonicalReference": "@fluentui/react!ISelectableOption:interface"
                 },
                 {
                   "kind": "Content",
@@ -2566,7 +2566,16 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface FieldWellProps "
+              "text": "export interface FieldWellProps extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "FieldWellItem",
+              "canonicalReference": "@datashaper/react!FieldWellItem:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
           "releaseTag": "Public",
@@ -2575,17 +2584,17 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!FieldWellProps#field:member",
+              "canonicalReference": "@datashaper/react!FieldWellProps#styles:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "field: "
+                  "text": "styles?: "
                 },
                 {
                   "kind": "Reference",
-                  "text": "FieldWellItem",
-                  "canonicalReference": "@datashaper/react!FieldWellItem:interface"
+                  "text": "FieldWellStyles",
+                  "canonicalReference": "@datashaper/react!FieldWellStyles:interface"
                 },
                 {
                   "kind": "Content",
@@ -2593,9 +2602,225 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
-              "name": "field",
+              "name": "styles",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/react!FieldWellStyles:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface FieldWellStyles "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "FieldWellStyles",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!FieldWellStyles#dropdown:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "dropdown?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Partial",
+                  "canonicalReference": "!Partial:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "IDropdownStyles",
+                  "canonicalReference": "@fluentui/react!IDropdownStyles:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "dropdown",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!FieldWellStyles#icon:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "icon?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Partial",
+                  "canonicalReference": "!Partial:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "IIconStyles",
+                  "canonicalReference": "@fluentui/react!IIconStyles:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "icon",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!FieldWellStyles#required:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "required?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CSSProperties",
+                  "canonicalReference": "@types/react!~React.CSSProperties:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "required",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!FieldWellStyles#root:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "root?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CSSProperties",
+                  "canonicalReference": "@types/react!~React.CSSProperties:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "root",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!FieldWellStyles#title:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "title?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CSSProperties",
+                  "canonicalReference": "@types/react!~React.CSSProperties:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "title",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!FieldWellStyles#well:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "well?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CSSProperties",
+                  "canonicalReference": "@types/react!~React.CSSProperties:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "well",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
