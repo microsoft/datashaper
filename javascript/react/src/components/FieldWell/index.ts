@@ -2,9 +2,5 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
-import type { ProfileFieldWell } from '../../../types.js'
-
-export interface FieldWellProps {
-	field: ProfileFieldWell
-}
+export * from './FieldWell.js'
+export * from './FieldWell.types.js'

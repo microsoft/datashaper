@@ -193,6 +193,33 @@ export enum DisplayOrder {
 // @public (undocumented)
 export type DropdownOptionSelect = ((event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption<any> | undefined, index?: number | undefined) => void) | undefined;
 
+// Warning: (ae-missing-release-tag) "FieldWell" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const FieldWell: React.FC<FieldWellProps>;
+
+// Warning: (ae-missing-release-tag) "FieldWellItem" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface FieldWellItem {
+    icon?: string;
+    key: string;
+    onChange?: (key: string) => void;
+    options?: IDropdownOption[];
+    placeholder?: string;
+    required?: boolean;
+    selectedKey?: string;
+    title: string;
+}
+
+// Warning: (ae-missing-release-tag) "FieldWellProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface FieldWellProps {
+    // (undocumented)
+    field: FieldWellItem;
+}
+
 // Warning: (ae-missing-release-tag) "GroupHeaderFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)

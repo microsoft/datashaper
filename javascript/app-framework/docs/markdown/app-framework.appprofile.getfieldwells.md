@@ -9,5 +9,5 @@ Profiles can indicate interactive field wells to display directly in the resourc
 <b>Signature:</b>
 
 ```typescript
-getFieldWells?: (resource: Res) => ProfileFieldWell[];
+getFieldWells?: (resource: Res) => FieldWellItem[];
 ```

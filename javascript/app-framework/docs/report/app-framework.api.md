@@ -9,10 +9,10 @@
 import type { BaseFile } from '@datashaper/utilities';
 import type { DataPackage } from '@datashaper/workflow';
 import type { DataTable } from '@datashaper/workflow';
+import type { FieldWellItem } from '@datashaper/react';
 import type { IButtonStyles } from '@fluentui/react';
 import type { ICommandBarItemProps } from '@fluentui/react';
 import type { IContextualMenuItem } from '@fluentui/react';
-import type { IDropdownOption } from '@fluentui/react';
 import type { Maybe } from '@datashaper/workflow';
 import type { MutableRefObject } from 'react';
 import type { MutableSnapshot } from 'recoil';
@@ -29,7 +29,7 @@ import type { TableContainer } from '@datashaper/tables';
 // @public
 export interface AppProfile<Res extends Resource = Resource, Schema extends ResourceSchema = ResourceSchema> extends ProfileHandler<Res, Schema, AppProfileInitializationContext> {
     getCommandBarCommands?: (section: CommandBarSection) => IContextualMenuItem[] | undefined;
-    getFieldWells?: (resource: Res) => ProfileFieldWell[];
+    getFieldWells?: (resource: Res) => FieldWellItem[];
     getHelp?: () => Record<string, string>;
     getMenuItems?: (resource: Res) => IContextualMenuItem[];
     group?: ResourceGroupType;
@@ -98,20 +98,6 @@ export interface ProfileComponentProps<T extends Resource> {
     resource: T;
 }
 
-// Warning: (ae-missing-release-tag) "ProfileFieldWell" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface ProfileFieldWell {
-    icon?: string;
-    key: string;
-    onChange?: (key: string) => void;
-    options?: IDropdownOption[];
-    placeholder?: string;
-    required?: boolean;
-    selectedKey?: string;
-    title: string;
-}
-
 // Warning: (ae-missing-release-tag) "RecoilBasedProfileHost" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -147,7 +133,7 @@ export enum ResourceGroupType {
 export interface ResourceRoute {
     children?: ResourceRoute[];
     // (undocumented)
-    fieldWells?: ProfileFieldWell[];
+    fieldWells?: FieldWellItem[];
     href?: string;
     icon?: string;
     // (undocumented)

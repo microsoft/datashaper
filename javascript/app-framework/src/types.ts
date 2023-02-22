@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ResourceSchema } from '@datashaper/schema'
-import type { IContextualMenuItem, IDropdownOption } from '@fluentui/react'
+import type { FieldWellItem } from '@datashaper/react'
+import type { IContextualMenuItem } from '@fluentui/react'
 import type {
 	Resource,
 	DataPackage,
@@ -39,7 +40,7 @@ export interface ResourceRoute {
 	 */
 	menuItems?: IContextualMenuItem[]
 
-	fieldWells?: ProfileFieldWell[]
+	fieldWells?: FieldWellItem[]
 	/**
 	 * The renderer to use for this node
 	 */
@@ -122,7 +123,7 @@ export interface AppProfile<
 	 * @param resource
 	 * @returns
 	 */
-	getFieldWells?: (resource: Res) => ProfileFieldWell[]
+	getFieldWells?: (resource: Res) => FieldWellItem[]
 	/**
 	 * Profiles may supply a map of help content to be displayed in the global panel when open.
 	 * Each help record should have a unique key, and the value is the markdown content.
@@ -149,46 +150,4 @@ export interface ResourceRouteGroup {
 
 export interface ProfileComponentProps<T extends Resource> {
 	resource: T
-}
-
-/**
- * Defines an available field for a profile.
- * This includes UX properties for how to visually represent it (title, icon, etc).
- * This implementation is rendered as a dropdown.
- */
-export interface ProfileFieldWell {
-	/**
-	 * Unique key for the well.
-	 */
-	key: string
-	/**
-	 * Title to display above the well.
-	 */
-	title: string
-	/**
-	 * Name of an icon to render in front of the well dropdown.
-	 */
-	icon?: string
-	/**
-	 * Placeholder for the dropdown when no value is selected.
-	 */
-	placeholder?: string
-	/**
-	 * Indicate if the well is required - this will render a red asterisk next to the title.
-	 */
-	required?: boolean
-	/**
-	 * List of valid options that this field well can be set to.
-	 */
-	options?: IDropdownOption[]
-	/**
-	 * Selected key for the dropdown.
-	 */
-	selectedKey?: string
-	/**
-	 * Change handler for the dropdown, presenting the new selected key.
-	 * @param key
-	 * @returns
-	 */
-	onChange?: (key: string) => void
 }

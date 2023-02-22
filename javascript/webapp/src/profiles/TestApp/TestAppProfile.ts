@@ -8,8 +8,8 @@ import type {
 	ProfileFieldWell,
 } from '@datashaper/app-framework'
 import { CommandBarSection, ResourceGroupType } from '@datashaper/app-framework'
-import { KnownProfile, ResourceSchema } from '@datashaper/schema'
-import { KnownRel } from '@datashaper/schema'
+import type { ResourceSchema } from '@datashaper/schema'
+import { KnownProfile, KnownRel } from '@datashaper/schema'
 import type { DataPackage, Resource } from '@datashaper/workflow'
 import { ResourceReference, isReference } from '@datashaper/workflow'
 import type { IContextualMenuItem, IDropdownOption } from '@fluentui/react'

@@ -29,6 +29,8 @@
 |  [CodebookProps](./react.codebookprops.md) | Props for the CodebookEditor component |
 |  [CodebookTableStyles](./react.codebooktablestyles.md) |  |
 |  [CommandBarColors](./react.commandbarcolors.md) |  |
+|  [FieldWellItem](./react.fieldwellitem.md) | Defines an available field well. This includes UX properties for how to visually represent it (title, icon, etc). This implementation is rendered as a dropdown. |
+|  [FieldWellProps](./react.fieldwellprops.md) | Props for the FieldWell component. |
 |  [StepListProps](./react.steplistprops.md) |  |
 |  [StepListStyles](./react.stepliststyles.md) |  |
 |  [TableCommandsProps](./react.tablecommandsprops.md) |  |
@@ -40,6 +42,7 @@
 |  [ArqueroDetailsList](./react.arquerodetailslist.md) | Renders an arquero table using a fluent DetailsList. |
 |  [ArqueroTableHeader](./react.arquerotableheader.md) | Renders a header for an Arquero table |
 |  [Codebook](./react.codebook.md) |  |
+|  [FieldWell](./react.fieldwell.md) |  |
 |  [StepList](./react.steplist.md) |  |
 |  [TableCommands](./react.tablecommands.md) |  |
 

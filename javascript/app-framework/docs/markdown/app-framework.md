@@ -35,7 +35,6 @@
 |  [AppServices](./app-framework.appservices.md) |  |
 |  [DataShaperAppProps](./app-framework.datashaperappprops.md) |  |
 |  [ProfileComponentProps](./app-framework.profilecomponentprops.md) |  |
-|  [ProfileFieldWell](./app-framework.profilefieldwell.md) | Defines an available field for a profile. This includes UX properties for how to visually represent it (title, icon, etc). This implementation is rendered as a dropdown. |
 |  [RecoilBasedProfileHostProps](./app-framework.recoilbasedprofilehostprops.md) |  |
 |  [ResourceRoute](./app-framework.resourceroute.md) | Data attached to resource-tree nodes |
 |  [ResourceRouteGroup](./app-framework.resourceroutegroup.md) |  |

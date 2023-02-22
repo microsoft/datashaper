@@ -7,7 +7,7 @@ import { useMemo } from 'react'
 
 import type { ResourceRoute, ResourceRouteGroup } from '../../../types.js'
 import { ResourceGroupType } from '../../../types.js'
-import { FieldWell } from './FieldWell.js'
+import { FieldWell } from '@datashaper/react'
 
 /**
  * Extract the grouping instructions for the Tree component.
