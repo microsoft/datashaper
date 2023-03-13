@@ -3,3 +3,7 @@ releases:
   "@datashaper/react": minor
   "@datashaper/stories": patch
   "@datashaper/webapp": minor
+
+undecided:
+  - "@datashaper/utilities"
+  - "@datashaper/workflow"
