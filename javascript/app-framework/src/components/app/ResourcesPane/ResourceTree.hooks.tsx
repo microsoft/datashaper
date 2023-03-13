@@ -78,7 +78,7 @@ function makeTreeItem(
 				handled.add(well.selectedKey)
 			}
 			return {
-				key: route?.href || `empty-field-well-${well.key}`,
+				key: `well-${well.key}`,
 				iconName: well.icon,
 				text: well.title,
 				onRenderTitle: () => {
