@@ -207,6 +207,7 @@ export interface FieldWellItem {
     icon?: string;
     key: string;
     onChange?: (key: string) => void;
+    onReset?: () => void;
     options?: ISelectableOption[];
     placeholder?: string;
     required?: boolean;

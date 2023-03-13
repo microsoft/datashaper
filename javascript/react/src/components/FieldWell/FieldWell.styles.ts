@@ -3,7 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useDropdownProps } from '@essex/components'
-import type { IDropdownProps, IDropdownStyles } from '@fluentui/react'
+import type {
+	IButtonProps,
+	IDropdownProps,
+	IDropdownStyles,
+} from '@fluentui/react'
 import { merge, useTheme } from '@fluentui/react'
 import { useMemo } from 'react'
 import styled from 'styled-components'
@@ -78,4 +82,34 @@ export function useFieldDropdownProps(
 	dropdownStyles?: Partial<IDropdownStyles>,
 ): Partial<IDropdownProps> {
 	return useDropdownProps({ styles: dropdownStyles }, 'small')
+}
+
+export function useResetButtonProps(disabled?: boolean): IButtonProps {
+	const theme = useTheme()
+	return useMemo(
+		() => ({
+			iconProps: {
+				iconName: 'Clear',
+				styles: {
+					root: {
+						// TODO: this should be possible declaratively with fluent props for the disabled icon state
+						color: disabled
+							? theme.palette.neutralTertiaryAlt
+							: theme.palette.neutralPrimary,
+						fontSize: 9,
+					},
+				},
+			},
+			styles: {
+				root: {
+					borderRadius: 0,
+					padding: 0,
+					margin: 0,
+					width: 12,
+					height: 12,
+				},
+			},
+		}),
+		[theme, disabled],
+	)
 }

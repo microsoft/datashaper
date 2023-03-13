@@ -50,6 +50,11 @@ export interface FieldWellItem {
 	 * @returns
 	 */
 	onChange?: (key: string) => void
+	/**
+	 * Handler to indicate that a field well has been reset to its default state (no binding).
+	 * @returns
+	 */
+	onReset?: () => void
 }
 
 export interface FieldWellStyles {

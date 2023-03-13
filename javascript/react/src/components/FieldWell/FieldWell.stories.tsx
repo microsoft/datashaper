@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { useState } from 'react'
 import { FieldWell } from './FieldWell.js'
 import type { FieldWellProps } from './FieldWell.types.js'
 
@@ -12,6 +13,7 @@ const storyMetadata = {
 export default storyMetadata
 
 const Component: React.FC<FieldWellProps> = (args) => {
+	const [selectedKey, setSelectedKey] = useState<string | undefined>()
 	return (
 		<div
 			style={{
@@ -20,7 +22,12 @@ const Component: React.FC<FieldWellProps> = (args) => {
 				padding: 8,
 			}}
 		>
-			<FieldWell {...args} />
+			<FieldWell
+				{...args}
+				selectedKey={selectedKey}
+				onChange={setSelectedKey}
+				onReset={() => setSelectedKey(undefined)}
+			/>
 		</div>
 	)
 }
