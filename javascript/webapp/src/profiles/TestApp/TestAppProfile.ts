@@ -13,6 +13,7 @@ import { KnownProfile, KnownRel } from '@datashaper/schema'
 import type { DataPackage, Resource } from '@datashaper/workflow'
 import { ResourceReference, isReference } from '@datashaper/workflow'
 import type { IContextualMenuItem, IDropdownOption } from '@fluentui/react'
+import { DropdownMenuItemType } from '@fluentui/react'
 
 import { TEST_APP_PROFILE } from './constants.js'
 import { TestApp } from './TestApp.js'
@@ -138,14 +139,28 @@ function createSourceFieldOptions(
 	sources: (Resource | ResourceReference)[],
 	predicate: (r: Resource | ResourceReference) => boolean,
 ): IDropdownOption[] {
+	const siblings = (resources || [])
+		.filter(predicate)
+		.map((r) => resourceOption(r))
 	// list out all children that are not already links to roots
-	const children = sources.filter((r) => !isReference(r))
-	// combine all resources and filter with the provided predicte
-	const possible = [...(resources || []), ...children].filter(
-		predicate,
-	) as ResourceReference[]
-	return possible.map((r) => ({
-		key: r.name,
-		text: r.title || r.name,
-	}))
+	const children = sources
+		.filter((r) => !isReference(r))
+		.filter(predicate)
+		.map((r) => resourceOption(r))
+	return [
+		...siblings,
+		{
+			key: '__divider__',
+			text: '-',
+			itemType: DropdownMenuItemType.Divider,
+		},
+		...children,
+	]
+}
+
+function resourceOption(resource: Resource): IDropdownOption {
+	return {
+		key: resource.name,
+		text: resource.title || resource.name,
+	}
 }
