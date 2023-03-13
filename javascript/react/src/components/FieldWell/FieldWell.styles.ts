@@ -81,7 +81,20 @@ export function useFieldWellStyles(
 export function useFieldDropdownProps(
 	dropdownStyles?: Partial<IDropdownStyles>,
 ): Partial<IDropdownProps> {
-	return useDropdownProps({ styles: dropdownStyles }, 'small')
+	const base = useMemo(
+		() => ({
+			styles: merge(
+				{
+					title: {
+						border: 'none',
+					},
+				},
+				dropdownStyles,
+			),
+		}),
+		[dropdownStyles],
+	)
+	return useDropdownProps(base, 'small')
 }
 
 export function useResetButtonProps(disabled?: boolean): IButtonProps {
