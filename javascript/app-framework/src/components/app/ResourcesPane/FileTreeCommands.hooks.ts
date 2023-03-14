@@ -31,9 +31,9 @@ import type { FileDefinition } from './ResourcesPane.types.js'
  */
 export function useFileManagementCommands(
 	examples: FileDefinition[],
-	expanded: boolean,
 	setFile: (file: BaseFile) => void,
 	profiles: Map<string, AppProfile>,
+	narrow?: boolean,
 ): {
 	commands: ICommandBarItemProps[]
 	openCommands: IContextualMenuItem[]
@@ -66,15 +66,15 @@ export function useFileManagementCommands(
 		): ICommandBarItemProps => {
 			return {
 				key: text,
-				text: expanded ? text : undefined,
-				iconOnly: !expanded,
+				text: narrow ? undefined : text,
+				iconOnly: narrow,
 				iconProps,
 				buttonStyles,
 				subMenuProps: { items },
 				...extra,
 			}
 		},
-		[buttonStyles, expanded],
+		[buttonStyles, narrow],
 	)
 	const commands = useMemo<ICommandBarItemProps[]>(
 		() => [

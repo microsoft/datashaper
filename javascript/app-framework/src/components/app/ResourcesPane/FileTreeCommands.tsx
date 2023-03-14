@@ -22,27 +22,21 @@ import type { FileDefinition } from './ResourcesPane.types.js'
 const noop = () => undefined
 
 export interface FileTreeCommandsProps {
-	expanded: boolean
+	narrow?: boolean
 	examples: FileDefinition[]
 	profiles: Map<string, AppProfile>
 }
 export const FileTreeCommands: React.FC<FileTreeCommandsProps> = memo(
-	function FileTreeCommands({ expanded, examples, profiles }) {
+	function FileTreeCommands({ narrow, examples, profiles }) {
 		const commandBarStyles = useCommandbarStyles()
 		const [file, setFile] = useState<BaseFile | undefined>()
 		const { commands, openCommands, newCommands, saveCommands } =
-			useFileManagementCommands(examples, expanded, setFile, profiles)
+			useFileManagementCommands(examples, setFile, profiles, narrow)
 
 		return (
 			<>
 				<FileImport file={file} setFile={setFile} />
-				{expanded ? (
-					<Commands
-						items={commands}
-						styles={commandBarStyles}
-						onReduceData={noop}
-					/>
-				) : (
+				{narrow ? (
 					<CollapsedCommands>
 						<FileTreeTooltip content="New">
 							<CollapsedButton
@@ -72,6 +66,12 @@ export const FileTreeCommands: React.FC<FileTreeCommandsProps> = memo(
 							/>
 						</FileTreeTooltip>
 					</CollapsedCommands>
+				) : (
+					<Commands
+						items={commands}
+						styles={commandBarStyles}
+						onReduceData={noop}
+					/>
 				)}
 			</>
 		)

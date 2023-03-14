@@ -10,4 +10,7 @@ export const treeStyles = {
 		display: 'flex',
 		alignItems: 'center',
 	},
+	hierarchyLine: {
+		border: 'none',
+	},
 }

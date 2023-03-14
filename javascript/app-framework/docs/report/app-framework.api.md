@@ -9,6 +9,7 @@
 import type { BaseFile } from '@datashaper/utilities';
 import type { DataPackage } from '@datashaper/workflow';
 import type { DataTable } from '@datashaper/workflow';
+import type { FieldWellItem } from '@datashaper/react';
 import type { IButtonStyles } from '@fluentui/react';
 import type { ICommandBarItemProps } from '@fluentui/react';
 import type { IContextualMenuItem } from '@fluentui/react';
@@ -28,6 +29,7 @@ import type { TableContainer } from '@datashaper/tables';
 // @public
 export interface AppProfile<Res extends Resource = Resource, Schema extends ResourceSchema = ResourceSchema> extends ProfileHandler<Res, Schema, AppProfileInitializationContext> {
     getCommandBarCommands?: (section: CommandBarSection) => IContextualMenuItem[] | undefined;
+    getFieldWells?: (resource: Res) => FieldWellItem[];
     getHelp?: () => Record<string, string>;
     getMenuItems?: (resource: Res) => IContextualMenuItem[];
     group?: ResourceGroupType;
@@ -130,8 +132,12 @@ export enum ResourceGroupType {
 // @public
 export interface ResourceRoute {
     children?: ResourceRoute[];
+    // (undocumented)
+    fieldWells?: FieldWellItem[];
     href?: string;
     icon?: string;
+    // (undocumented)
+    key: string;
     menuItems?: IContextualMenuItem[];
     props?: any;
     renderer?: React.ComponentType<any>;

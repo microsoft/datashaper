@@ -15,7 +15,7 @@ import { RenameModal } from '../../modals/index.js'
 import { ResourcesPane } from '../ResourcesPane/index.js'
 import {
 	useAppServices,
-	useExpandedState,
+	useNarrowExpandCollapseState,
 	useFlattened,
 	useRegisteredProfiles,
 	useRegisterProfileHelp,
@@ -55,7 +55,7 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 	defaultHelp = 'resources.index',
 }) {
 	const ref = useRef<AllotmentHandle | null>(null)
-	const [expanded, onToggle, onChangeWidth] = useExpandedState(ref)
+	const [expanded, onToggle, onChangeWidth] = useNarrowExpandCollapseState(ref)
 
 	const navigate = useNavigate()
 	const fileTreeStyle = useFileTreeStyle()
@@ -101,12 +101,12 @@ const AppInner: React.FC<DataShaperAppProps> = memo(function AppInner({
 				>
 					<ResourcesPane
 						resources={resources}
-						expanded={expanded}
+						narrow={!expanded}
 						profiles={appProfiles}
 						style={fileTreeStyle}
 						selectedKey={selectedKey}
 						examples={examples}
-						onToggleExpanded={onToggle}
+						onToggleNarrow={onToggle}
 						onSelect={onSelect}
 						currentHelp={currentHelp}
 						helpContent={helpContent}

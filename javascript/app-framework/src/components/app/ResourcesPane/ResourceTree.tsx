@@ -10,15 +10,15 @@ import { treeStyles } from './ResourceTree.styles.js'
 import type { ResourceTreeProps } from './ResourceTree.types.js'
 
 export const ResourceTree: React.FC<ResourceTreeProps> = memo(
-	function ResourceTree({ resources, selectedRoute, onSelect, expanded }) {
-		const groups = useTreeGroups(resources, expanded)
-		const items = useTreeItems(resources, onSelect)
+	function ResourceTree({ resources, selectedRoute, onSelect, narrow }) {
+		const groups = useTreeGroups(resources, narrow)
+		const items = useTreeItems(resources, onSelect, narrow)
 		return (
 			<Tree
 				groups={groups}
 				items={items}
 				selectedKey={selectedRoute}
-				narrow={!expanded}
+				narrow={narrow}
 				styles={treeStyles}
 			/>
 		)

@@ -23,19 +23,19 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 	function ResourcesPane({
 		style,
 		className,
-		expanded,
+		narrow,
 		examples,
 		selectedKey,
 		resources,
 		profiles,
-		onToggleExpanded,
+		onToggleNarrow,
 		onSelect,
 		currentHelp,
 		helpContent,
 	}) {
-		const expandCollapseTooltip = expanded
-			? 'Show less information'
-			: 'Show more information'
+		const expandCollapseTooltip = narrow
+			? 'Show more information'
+			: 'Show less information'
 		const [helpVisible, { toggle: onToggleHelp }] = useBoolean(false)
 		const helpTooltip = helpVisible
 			? 'Hide interactive guidance'
@@ -43,7 +43,7 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 		return (
 			<Container style={style} className={className}>
 				<FileTreeCommands
-					expanded={expanded}
+					narrow={narrow}
 					examples={examples}
 					profiles={profiles}
 				/>
@@ -52,13 +52,13 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 						<TreeContainer>
 							<ResourceTree
 								resources={resources}
-								expanded={expanded}
+								narrow={narrow}
 								selectedRoute={selectedKey}
 								onSelect={onSelect}
 							/>
 						</TreeContainer>
 					</Allotment.Pane>
-					{expanded && helpVisible && (
+					{!narrow && helpVisible && (
 						<Allotment.Pane>
 							<HelpContainer>
 								<HelpPanel
@@ -71,15 +71,15 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 					)}
 				</Allotment>
 				<FooterMenu>
-					{expanded && (
+					{!narrow && (
 						<Tooltip content={helpTooltip} styles={tooltipStyles}>
 							<IconButton onClick={onToggleHelp} iconProps={icons.help} />
 						</Tooltip>
 					)}
 					<Tooltip content={expandCollapseTooltip} styles={tooltipStyles}>
 						<IconButton
-							onClick={onToggleExpanded}
-							iconProps={expanded ? icons.collapse : icons.expand}
+							onClick={onToggleNarrow}
+							iconProps={narrow ? icons.expand : icons.collapse}
 						/>
 					</Tooltip>
 				</FooterMenu>

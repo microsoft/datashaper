@@ -27,7 +27,7 @@ function useKnownAppProfiles(): AppProfile[] {
 	return useConst(() => defaultAppProfiles() as AppProfile<any, any>[])
 }
 
-export function useExpandedState(
+export function useNarrowExpandCollapseState(
 	ref: React.MutableRefObject<AllotmentHandle | null>,
 ): [boolean, () => void, (sizes: number[]) => void] {
 	const [
@@ -103,19 +103,29 @@ export function useRegisteredProfiles(
 	}, [dp, api, profiles, knownProfiles])
 }
 
+/**
+ * Flatten the grouped routes and all children into a single array for lookups.
+ * @param routes
+ * @returns
+ */
 export function useFlattened(routes: ResourceRouteGroup[]): ResourceRoute[] {
-	return useMemo<ResourceRoute[]>(() => {
-		const result: ResourceRoute[] = []
-		for (const group of routes) {
-			for (const r of group.resources) {
-				result.push(r)
-				if (r.children != null) {
-					result.push(...r.children)
-				}
-			}
+	// start with a flat list of the roots from each group,
+	// then send to the recursive compilation.
+	return useMemo<ResourceRoute[]>(
+		() => flattenRoutes(routes.flatMap((g) => g.resources)),
+		[routes],
+	)
+}
+
+function flattenRoutes(resources: ResourceRoute[]) {
+	const result: ResourceRoute[] = []
+	for (const r of resources) {
+		result.push(r)
+		if (r.children != null) {
+			result.push(...flattenRoutes(r.children))
 		}
-		return result
-	}, [routes])
+	}
+	return result
 }
 
 export function useAppServices(defaultHelp: string): {

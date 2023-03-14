@@ -12,6 +12,7 @@ import type { TestAppResource } from './TestAppResource.js'
 
 export const TestApp: React.FC<{ resource: TestAppResource }> = memo(
 	function TestApp({ resource }) {
+		console.log('TestApp', resource.toSchema())
 		return (
 			<RecoilBasedProfileHost
 				resource={resource}
@@ -43,8 +44,15 @@ const TestAppInner: React.FC = memo(function TestAppInner() {
 		<div style={{ margin: 20 }}>
 			<h1>Test App</h1>
 			<p>Value: {count}</p>
-			<DefaultButton text="Increment" onClick={increment} />
-			<DefaultButton text="Decrement" onClick={decrement} />
+			<div
+				style={{
+					display: 'flex',
+					gap: 10,
+				}}
+			>
+				<DefaultButton text="Increment" onClick={increment} />
+				<DefaultButton text="Decrement" onClick={decrement} />
+			</div>
 		</div>
 	)
 })

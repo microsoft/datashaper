@@ -36,11 +36,11 @@ export function useResourceRoutes(
 					const hrefs = getResourceHrefs(resources)
 					const grouped = groupResources(resources, profiles)
 					const groups: ResourceRouteGroup[] = []
-					grouped.forEach((resources, type) => {
+					grouped.forEach((res, type) => {
 						groups.push({
 							type,
-							resources: resources.map((r) =>
-								makeResourceRoute(r, services, profiles, hrefs),
+							resources: res.map((r) =>
+								makeResourceRoute(r, services, profiles, resources, hrefs),
 							),
 						})
 					})
@@ -73,6 +73,7 @@ function makeResourceRoute(
 	resource: Resource,
 	services: AppServices,
 	profiles: Map<string, AppProfile>,
+	resources: Resource[],
 	hrefs: Map<string, string>,
 ): ResourceRoute {
 	if (resource.isReference()) {
@@ -81,6 +82,7 @@ function makeResourceRoute(
 		const href = target && hrefs.get(target.name)
 		if (target) {
 			const route: ResourceRoute = {
+				key: target.name,
 				title: target.title ?? target.name,
 				href,
 				icon: 'Link',
@@ -96,6 +98,7 @@ function makeResourceRoute(
 	const profile = profiles.get(resource.profile)!
 	const href = hrefs.get(resource.name)
 	const root: ResourceRoute = {
+		key: resource.name,
 		href,
 		title: resource.title ?? resource.name,
 		icon: profile.iconName,
@@ -115,9 +118,10 @@ function makeResourceRoute(
 				onClick: () => resource.dispose(),
 			},
 		],
+		fieldWells: profile.getFieldWells?.(resource),
 		props: { resource },
 		children: (resource.sources ?? EMPTY_ARRAY).map((r) =>
-			makeResourceRoute(r, services, profiles, hrefs),
+			makeResourceRoute(r, services, profiles, resources, hrefs),
 		),
 	}
 

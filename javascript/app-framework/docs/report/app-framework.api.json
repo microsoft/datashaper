@@ -315,6 +315,42 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!AppProfile#getFieldWells:member",
+              "docComment": "/**\n * Profiles can indicate interactive field wells to display directly in the resource tree. These field wells can be populated by the resources, and will be rendered as a dropdown. Each field well can also dictate an onChange that updates the resource (e.g., sets an input binding).\n *\n * @param resource - \n *\n * @returns \n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getFieldWells?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(resource: Res) => "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FieldWellItem",
+                  "canonicalReference": "@datashaper/react!FieldWellItem:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "getFieldWells",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 4
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!AppProfile#getHelp:member",
               "docComment": "/**\n * Profiles may supply a map of help content to be displayed in the global panel when open. Each help record should have a unique key, and the value is the markdown content.\n *\n * @returns \n */\n",
               "excerptTokens": [
@@ -1382,6 +1418,38 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ResourceRoute#fieldWells:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fieldWells?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FieldWellItem",
+                  "canonicalReference": "@datashaper/react!FieldWellItem:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "fieldWells",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!ResourceRoute#href:member",
               "docComment": "/**\n * The resource render route\n */\n",
               "excerptTokens": [
@@ -1429,6 +1497,33 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "icon",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!ResourceRoute#key:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "key: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "key",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

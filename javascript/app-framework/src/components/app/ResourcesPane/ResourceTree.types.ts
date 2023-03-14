@@ -5,7 +5,7 @@
 import type { ResourceRoute, ResourceRouteGroup } from '../../../types.js'
 
 export interface ResourceTreeProps {
-	expanded: boolean
+	narrow?: boolean
 	selectedRoute?: string
 	resources: ResourceRouteGroup[]
 	onSelect: (resource: ResourceRoute) => void

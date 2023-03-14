@@ -7,9 +7,13 @@ import type {
 	AppProfile,
 } from '@datashaper/app-framework'
 import { CommandBarSection, ResourceGroupType } from '@datashaper/app-framework'
+import type { FieldWellItem } from '@datashaper/react'
 import type { ResourceSchema } from '@datashaper/schema'
-import type { DataPackage } from '@datashaper/workflow'
-import type { IContextualMenuItem } from '@fluentui/react'
+import { KnownProfile, KnownRel } from '@datashaper/schema'
+import type { DataPackage, Resource } from '@datashaper/workflow'
+import { ResourceReference, isReference } from '@datashaper/workflow'
+import type { IContextualMenuItem, IDropdownOption } from '@fluentui/react'
+import { DropdownMenuItemType } from '@fluentui/react'
 
 import { TEST_APP_PROFILE } from './constants.js'
 import { TestApp } from './TestApp.js'
@@ -58,5 +62,110 @@ export class TestAppProfile implements AppProfile<TestAppResource> {
 				},
 			]
 		}
+	}
+
+	public getFieldWells(resource: TestAppResource): FieldWellItem[] {
+		// list out all root siblings as base options
+		const siblings = this._dataPackage?.resources
+
+		// filter this full list to only include tables and not include the current resource
+		const options = createSourceFieldOptions(
+			this._dataPackage?.resources,
+			resource.sources,
+			(r) => r.profile === KnownProfile.TableBundle && r.name !== resource.name,
+		)
+		return [
+			{
+				key: 'input-table',
+				title: 'Input table',
+				icon: 'Table',
+				placeholder: 'Select input table',
+				selectedKey: resource.input,
+				options,
+				onChange: (key: string) => {
+					clearInput(resource)
+					linkInput(resource, siblings, key)
+					resource.input = key
+				},
+				onReset: () => {
+					// unwind the onChange logic
+					clearInput(resource)
+					resource.input = undefined
+				},
+			},
+		]
+	}
+}
+
+// if the source is a sibling, create a symlink
+// otherwise, it should already be a child
+function linkInput(
+	resource: TestAppResource,
+	siblings: Resource[] | undefined,
+	key: string,
+) {
+	const sibling = siblings?.find((r) => r?.name === key)
+	if (sibling) {
+		const reference = new ResourceReference()
+		reference.target = sibling
+		reference.rel = KnownRel.Input
+		resource.sources = [...resource.sources, reference]
+	}
+}
+
+// remove the previous input if relevant
+// note: only actually remove it from the sources if it is a symlink
+// if it is a child, it should only be unlinked as input, not removed
+function clearInput(resource: TestAppResource) {
+	if (resource.input) {
+		resource.sources = resource.sources.filter((r) => {
+			if (!isReference(r)) {
+				return true
+			}
+			return r?.target?.name !== resource.input
+		})
+	}
+}
+
+/**
+ * Makes a set of valid options to select from for a field well dropdown.
+ * This combines all siblings (if provided), all children (if provided),
+ * and a predicate to add additional filtering logic.
+ * @param resources - the sibling resources in the data package
+ * @param sources - child resources of the resource containing the well
+ */
+function createSourceFieldOptions(
+	resources: Resource[] | undefined,
+	sources: (Resource | ResourceReference)[],
+	predicate: (r: Resource | ResourceReference) => boolean,
+): IDropdownOption[] {
+	const siblings = (resources || [])
+		.filter(predicate)
+		.map((r) => resourceOption(r))
+	// list out all children that are not already links to roots
+	const children = sources
+		.filter((r) => !isReference(r))
+		.filter(predicate)
+		.map((r) => resourceOption(r))
+	return [
+		{
+			key: '__siblings__',
+			text: 'Package tables',
+			itemType: DropdownMenuItemType.Header,
+		},
+		...siblings,
+		{
+			key: '__children__',
+			text: 'Child tables',
+			itemType: DropdownMenuItemType.Header,
+		},
+		...children,
+	]
+}
+
+function resourceOption(resource: Resource): IDropdownOption {
+	return {
+		key: resource.name,
+		text: resource.title || resource.name,
 	}
 }

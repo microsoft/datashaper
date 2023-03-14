@@ -36,7 +36,7 @@
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"dependencies": {
-		"@zip.js/zip.js": "2.6.62",
+		"@zip.js/zip.js": "2.6.78",
 		"debug": "^4.3.4",
 		"tslib": "^2.5.0"
 	},

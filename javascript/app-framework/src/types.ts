@@ -3,17 +3,18 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ResourceSchema } from '@datashaper/schema'
+import type { FieldWellItem } from '@datashaper/react'
+import type { IContextualMenuItem } from '@fluentui/react'
 import type {
+	Resource,
 	DataPackage,
 	ProfileHandler,
-	Resource,
 } from '@datashaper/workflow'
-import type { IContextualMenuItem } from '@fluentui/react'
-
 /**
  * Data attached to resource-tree nodes
  */
 export interface ResourceRoute {
+	key: string
 	/**
 	 * The resource render route
 	 */
@@ -39,6 +40,7 @@ export interface ResourceRoute {
 	 */
 	menuItems?: IContextualMenuItem[]
 
+	fieldWells?: FieldWellItem[]
 	/**
 	 * The renderer to use for this node
 	 */
@@ -114,6 +116,14 @@ export interface AppProfile<
 	 */
 	getMenuItems?: (resource: Res) => IContextualMenuItem[]
 
+	/**
+	 * Profiles can indicate interactive field wells to display directly in the resource tree.
+	 * These field wells can be populated by the resources, and will be rendered as a dropdown.
+	 * Each field well can also dictate an onChange that updates the resource (e.g., sets an input binding).
+	 * @param resource
+	 * @returns
+	 */
+	getFieldWells?: (resource: Res) => FieldWellItem[]
 	/**
 	 * Profiles may supply a map of help content to be displayed in the global panel when open.
 	 * Each help record should have a unique key, and the value is the markdown content.
