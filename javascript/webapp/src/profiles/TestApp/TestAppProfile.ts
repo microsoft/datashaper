@@ -148,11 +148,16 @@ function createSourceFieldOptions(
 		.filter(predicate)
 		.map((r) => resourceOption(r))
 	return [
+		{
+			key: '__siblings__',
+			text: 'Package tables',
+			itemType: DropdownMenuItemType.Header,
+		},
 		...siblings,
 		{
-			key: '__divider__',
-			text: '-',
-			itemType: DropdownMenuItemType.Divider,
+			key: '__children__',
+			text: 'Child tables',
+			itemType: DropdownMenuItemType.Header,
 		},
 		...children,
 	]
