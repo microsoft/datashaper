@@ -61,7 +61,6 @@
                     "$ref": "#/definitions/DataType"
                 },
                 "fixedcount": {
-                    "description": "Fixed number of bins.\nNote that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary -\nthis means there is always one extra bin for the max value when using fixed count.",
                     "type": "number"
                 },
                 "fixedwidth": {
@@ -75,6 +74,10 @@
                 "min": {
                     "description": "Min boundary to categorize values into.\nIf cell values are below this, they will default to -Infinity unless clamped.",
                     "type": "number"
+                },
+                "nice": {
+                    "description": "Fixed number of bins.\nNote that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary -\nthis means there is always one extra bin for the max value when using fixed count.",
+                    "type": "boolean"
                 },
                 "printRange": {
                     "description": "If true, the range for each bin will be printed as the cell value instead of the truncated numeric value.\nThis is useful for treating the",
@@ -476,6 +479,10 @@
                     "$ref": "#/definitions/VariableNature",
                     "description": "Data nature. This is primarily applicable to numbers, which have different characters that define how we should display them in charts.\ndefault: continuous\nTODO: there is a large block of nature-related content in CauseDis. is some of this transient application state? how much do we need to carry in a schema?"
                 },
+                "subtype": {
+                    "$ref": "#/definitions/DataType",
+                    "description": "If the type is an array, this is the type of the array elements."
+                },
                 "tags": {
                     "description": "Optional descriptive tags for the field.",
                     "items": {
@@ -601,6 +608,18 @@
                 },
                 "value": {
                     "description": "Value to fill in empty cells"
+                }
+            },
+            "type": "object"
+        },
+        "InputColumnArgs": {
+            "properties": {
+                "column": {
+                    "description": "Name of the input column for columnnar operations.",
+                    "type": "string"
+                },
+                "dataType": {
+                    "$ref": "#/definitions/DataType"
                 }
             },
             "type": "object"
@@ -1827,7 +1846,7 @@
                         {
                             "properties": {
                                 "args": {
-                                    "$ref": "#/definitions/InputColumnListArgs"
+                                    "$ref": "#/definitions/InputColumnArgs"
                                 },
                                 "verb": {
                                     "enum": [
@@ -1997,13 +2016,6 @@
         "name": {
             "description": "User-specified name. This will serve as the local id (i.e., like a filename.) and should be URI-compatible.\nThis should be editable, just like any other filename on a file system.",
             "type": "string"
-        },
-        "output": {
-            "description": "The output bindings",
-            "items": {
-                "type": "string"
-            },
-            "type": "array"
         },
         "path": {
             "anyOf": [

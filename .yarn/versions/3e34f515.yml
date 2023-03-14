@@ -1,8 +1,0 @@
-releases:
-  "@datashaper/app-framework": patch
-  "@datashaper/react": patch
-  "@datashaper/schema": minor
-  "@datashaper/stories": patch
-  "@datashaper/tables": major
-  "@datashaper/webapp": patch
-  "@datashaper/workflow": patch
