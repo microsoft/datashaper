@@ -14,5 +14,5 @@
 		"esModuleInterop": false,
 		"isolatedModules": true
 	},
-	"include": ["src", "../react/src/components/FieldWell/FieldWell.tsx"]
+	"include": ["src"]
 }
