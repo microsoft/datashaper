@@ -39,14 +39,14 @@
 		"@datashaper/workflow": "workspace:^",
 		"@essex/components": "^3.6.14",
 		"@essex/hooks": "^4.0.19",
-		"@fluentui/font-icons-mdl2": "^8.5.12",
-		"@fluentui/react": "^8.106.5",
-		"@fluentui/react-hooks": "^8.6.19",
+		"@fluentui/font-icons-mdl2": "^8.5.13",
+		"@fluentui/react": "^8.106.8",
+		"@fluentui/react-hooks": "^8.6.20",
 		"@thematic/core": "^4.0.4",
 		"@thematic/d3": "^2.0.19",
 		"@thematic/fluent": "^5.0.5",
 		"@thematic/react": "^2.1.6",
-		"ahooks": "^3.7.5",
+		"ahooks": "^3.7.6",
 		"allotment": "1.18.1",
 		"arquero": "^5.1.0",
 		"chroma-js": "2.4.2",
@@ -58,22 +58,22 @@
 		"react-dropzone": "^12.1.0",
 		"react-error-boundary": "^3.1.4",
 		"react-is": "^18.2.0",
-		"react-router-dom": "^6.6.2",
+		"react-router-dom": "^6.9.0",
 		"recoil": "^0.7.7",
-		"styled-components": "^5.3.8"
+		"styled-components": "^5.3.9"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^24.0.3",
-		"@types/chroma-js": "^2.1.4",
+		"@types/chroma-js": "^2.4.0",
 		"@types/debug": "^4.1.7",
-		"@types/lodash-es": "^4.17.6",
-		"@types/node": "^18.11.18",
-		"@types/react": "^18.0.28",
+		"@types/lodash-es": "^4.17.7",
+		"@types/node": "^18.15.7",
+		"@types/react": "^18.0.29",
 		"@types/react-dom": "^18.0.11",
 		"@types/react-router-dom": "^5.3.3",
 		"@types/styled-components": "^5.1.26",
 		"shx": "^0.3.4",
 		"typescript": "^4.9.5",
-		"webpack": "^5.75.0"
+		"webpack": "^5.76.3"
 	}
 }
