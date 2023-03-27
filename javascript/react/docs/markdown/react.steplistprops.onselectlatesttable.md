@@ -9,5 +9,5 @@ Event handler for when the latest output table is selected. 'Latest' button will
 <b>Signature:</b>
 
 ```typescript
-onSelectLatestTable: () => void;
+onSelectLatestTable?: () => void;
 ```

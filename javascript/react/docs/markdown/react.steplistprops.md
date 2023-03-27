@@ -17,8 +17,8 @@ export interface StepListProps
 |  [onDelete?](./react.steplistprops.ondelete.md) |  | (index: number) =&gt; void | <i>(Optional)</i> Deletes a workflow step at the specified index |
 |  [onSave?](./react.steplistprops.onsave.md) |  | (step: Step, index?: number) =&gt; void | <i>(Optional)</i> Event handler for when a step needs to be saved |
 |  [onSelect?](./react.steplistprops.onselect.md) |  | (name: string) =&gt; void | <i>(Optional)</i> Event handler for when a step is selected. |
-|  [onSelectInputTable](./react.steplistprops.onselectinputtable.md) |  | () =&gt; void | Event handler for when the input table is selected. 'Original' button will not be shown if this is not provided. |
-|  [onSelectLatestTable](./react.steplistprops.onselectlatesttable.md) |  | () =&gt; void | Event handler for when the latest output table is selected. 'Latest' button will not be shown if this is not provided. |
+|  [onSelectInputTable?](./react.steplistprops.onselectinputtable.md) |  | () =&gt; void | <i>(Optional)</i> Event handler for when the input table is selected. 'Original' button will not be shown if this is not provided. |
+|  [onSelectLatestTable?](./react.steplistprops.onselectlatesttable.md) |  | () =&gt; void | <i>(Optional)</i> Event handler for when the latest output table is selected. 'Latest' button will not be shown if this is not provided. |
 |  [order?](./react.steplistprops.order.md) |  | [DisplayOrder](./react.displayorder.md) | <i>(Optional)</i> The order to render the steps in. Default = latest on top |
 |  [selectedKey?](./react.steplistprops.selectedkey.md) |  | string | <i>(Optional)</i> Id of the selected step |
 |  [styles?](./react.steplistprops.styles.md) |  | [StepListStyles](./react.stepliststyles.md) | <i>(Optional)</i> Styling for the step list |

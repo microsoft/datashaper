@@ -9,5 +9,5 @@ Event handler for when the input table is selected. 'Original' button will not b
 <b>Signature:</b>
 
 ```typescript
-onSelectInputTable: () => void;
+onSelectInputTable?: () => void;
 ```

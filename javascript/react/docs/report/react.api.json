@@ -3336,7 +3336,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "onSelectInputTable: "
+                  "text": "onSelectInputTable?: "
                 },
                 {
                   "kind": "Content",
@@ -3348,7 +3348,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "onSelectInputTable",
               "propertyTypeTokenRange": {
@@ -3363,7 +3363,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "onSelectLatestTable: "
+                  "text": "onSelectLatestTable?: "
                 },
                 {
                   "kind": "Content",
@@ -3375,7 +3375,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "onSelectLatestTable",
               "propertyTypeTokenRange": {

@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-unhot: (id: string) => import("../index.js").StepNode<import("@datashaper/tables").TableContainer<unknown>, UnhotArgs>
+unhot: (id: string) => import("../index.js").StepNode<import("../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js").TableContainer<unknown>, UnhotArgs>
 ```

@@ -4,8 +4,8 @@
  */
 
 export {
+	Codebook,
 	type CodebookProps,
 	type CodebookTableStyles,
-	Codebook,
 } from './Codebook/index.js'
 export { useDefaultCodebookStyles } from './styles.js'

@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-orderby: (id: string) => import("../index.js").StepNode<import("@datashaper/tables").TableContainer<unknown>, OrderbyArgs>
+orderby: (id: string) => import("../index.js").StepNode<import("../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js").TableContainer<unknown>, OrderbyArgs>
 ```

@@ -291,8 +291,8 @@ export interface StepListProps {
     onDelete?: (index: number) => void;
     onSave?: (step: Step, index?: number) => void;
     onSelect?: (name: string) => void;
-    onSelectInputTable: () => void;
-    onSelectLatestTable: () => void;
+    onSelectInputTable?: () => void;
+    onSelectLatestTable?: () => void;
     order?: DisplayOrder;
     selectedKey?: string;
     styles?: StepListStyles;

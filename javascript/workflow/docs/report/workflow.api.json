@@ -192,12 +192,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -1360,7 +1360,7 @@
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -1404,12 +1404,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -1453,12 +1453,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -1874,7 +1874,7 @@
                 {
                   "kind": "Reference",
                   "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
+                  "canonicalReference": "@datashaper/workflow!TableContainer:interface"
                 },
                 {
                   "kind": "Content",
@@ -2003,7 +2003,7 @@
                 {
                   "kind": "Reference",
                   "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
+                  "canonicalReference": "@datashaper/workflow!TableContainer:interface"
                 },
                 {
                   "kind": "Content",
@@ -2055,7 +2055,7 @@
                 {
                   "kind": "Reference",
                   "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
+                  "canonicalReference": "@datashaper/workflow!TableContainer:interface"
                 },
                 {
                   "kind": "Content",
@@ -2417,7 +2417,7 @@
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -2542,7 +2542,7 @@
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -4389,7 +4389,7 @@
                 {
                   "kind": "Reference",
                   "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
+                  "canonicalReference": "@datashaper/workflow!TableContainer:interface"
                 },
                 {
                   "kind": "Content",
@@ -4441,7 +4441,7 @@
                 {
                   "kind": "Reference",
                   "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
+                  "canonicalReference": "@datashaper/workflow!TableContainer:interface"
                 },
                 {
                   "kind": "Content",
@@ -4899,7 +4899,7 @@
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -4943,12 +4943,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -5393,12 +5393,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -5595,7 +5595,7 @@
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -5639,12 +5639,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -5816,12 +5816,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -5865,12 +5865,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -5914,12 +5914,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -6274,12 +6274,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -6386,12 +6386,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -7569,12 +7569,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -9062,12 +9062,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -9111,12 +9111,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -9975,12 +9975,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -10494,12 +10494,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -10543,12 +10543,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -11654,12 +11654,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -11703,12 +11703,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -11752,12 +11752,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -11826,12 +11826,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -12750,7 +12750,7 @@
                 {
                   "kind": "Reference",
                   "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
+                  "canonicalReference": "@datashaper/workflow!TableContainer:interface"
                 },
                 {
                   "kind": "Content",
@@ -12802,7 +12802,7 @@
                 {
                   "kind": "Reference",
                   "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
+                  "canonicalReference": "@datashaper/workflow!TableContainer:interface"
                 },
                 {
                   "kind": "Content",
@@ -13079,7 +13079,7 @@
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -13225,7 +13225,7 @@
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -13264,7 +13264,7 @@
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -13273,7 +13273,7 @@
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -13419,12 +13419,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -13468,12 +13468,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -13508,12 +13508,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -13588,12 +13588,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -13628,12 +13628,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -13813,12 +13813,12 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
+              "text": "<import(\"../../../../.yarn/__virtual__/@datashaper-tables-virtual-cb2f1a5962/1/javascript/tables/src/types.js\")."
             },
             {
               "kind": "Reference",
               "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+              "canonicalReference": "@datashaper/workflow!TableContainer:interface"
             },
             {
               "kind": "Content",
@@ -14149,7 +14149,7 @@
                 {
                   "kind": "Reference",
                   "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
+                  "canonicalReference": "@datashaper/workflow!TableContainer:interface"
                 },
                 {
                   "kind": "Content",
@@ -14213,7 +14213,7 @@
                 {
                   "kind": "Reference",
                   "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
+                  "canonicalReference": "@datashaper/workflow!TableContainer:interface"
                 },
                 {
                   "kind": "Content",
@@ -14681,7 +14681,7 @@
                 {
                   "kind": "Reference",
                   "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
+                  "canonicalReference": "@datashaper/workflow!TableContainer:interface"
                 },
                 {
                   "kind": "Content",
@@ -14703,7 +14703,7 @@
                 {
                   "kind": "Reference",
                   "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
+                  "canonicalReference": "@datashaper/workflow!TableContainer:interface"
                 },
                 {
                   "kind": "Content",
@@ -15002,7 +15002,7 @@
                 {
                   "kind": "Reference",
                   "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
+                  "canonicalReference": "@datashaper/workflow!TableContainer:interface"
                 },
                 {
                   "kind": "Content",
@@ -15054,7 +15054,7 @@
                 {
                   "kind": "Reference",
                   "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
+                  "canonicalReference": "@datashaper/workflow!TableContainer:interface"
                 },
                 {
                   "kind": "Content",
@@ -15202,7 +15202,7 @@
                 {
                   "kind": "Reference",
                   "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
+                  "canonicalReference": "@datashaper/workflow!TableContainer:interface"
                 },
                 {
                   "kind": "Content",
@@ -15272,7 +15272,7 @@
                 {
                   "kind": "Reference",
                   "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
+                  "canonicalReference": "@datashaper/workflow!TableContainer:interface"
                 },
                 {
                   "kind": "Content",
@@ -15646,7 +15646,7 @@
                 {
                   "kind": "Reference",
                   "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
+                  "canonicalReference": "@datashaper/workflow!TableContainer:interface"
                 },
                 {
                   "kind": "Content",

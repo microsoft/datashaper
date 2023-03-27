@@ -47,13 +47,13 @@ export interface StepListProps {
 	 * Event handler for when the latest output table is selected.
 	 * 'Latest' button will not be shown if this is not provided.
 	 */
-	onSelectLatestTable: () => void
+	onSelectLatestTable?: () => void
 
 	/**
 	 * Event handler for when the input table is selected.
 	 * 'Original' button will not be shown if this is not provided.
 	 */
-	onSelectInputTable: () => void
+	onSelectInputTable?: () => void
 
 	/**
 	 * Event handler for when a step needs to be saved

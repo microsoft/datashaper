@@ -201,7 +201,9 @@ export function minimumValidator(
 		(type === DataType.Number || type === DataType.Date)
 	) {
 		const validate = (value: Date | number) =>
-			type === DataType.Date ? value.valueOf() >= minimum : value >= minimum
+			isDate(value, type)
+				? value.valueOf() >= minimum
+				: (value as number) >= minimum
 		return (values) => {
 			const result = {
 				name,
@@ -244,7 +246,7 @@ export function maximumValidator(
 	const { maximum } = constraints
 	if (maximum !== undefined) {
 		const validate = (value: Date | number) =>
-			type === DataType.Date ? value.valueOf() <= maximum : value <= maximum
+			isDate(value, type) ? value.valueOf() <= maximum : value <= maximum
 		return (values) => {
 			const result = {
 				name,
@@ -356,4 +358,11 @@ export function enumValidator(
 			}
 		}
 	}
+}
+
+function isDate(
+	_value: Date | number,
+	type: DataType | undefined,
+): _value is Date {
+	return type === DataType.Date
 }
