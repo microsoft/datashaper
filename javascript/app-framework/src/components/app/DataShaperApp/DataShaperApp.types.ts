@@ -4,7 +4,7 @@
  */
 import type React from 'react'
 
-import type { AppProfile } from '../../../types.js'
+import type { AppProfile, ResourceTreeViewMode } from '../../../types.js'
 import type { FileDefinition } from '../ResourcesPane/index.js'
 
 export interface DataShaperAppProps {
@@ -38,4 +38,9 @@ export interface DataShaperAppProps {
 	 * Indicates the help content to show when the application has no resources selected.
 	 */
 	defaultHelp?: string
+
+	/**
+	 * The default view mode to use on load
+	 */
+	defaultResourceTreeViewMode?: ResourceTreeViewMode
 }
