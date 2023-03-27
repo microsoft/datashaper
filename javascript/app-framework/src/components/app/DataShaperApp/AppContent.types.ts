@@ -1,5 +1,9 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import type { Resource } from '@datashaper/workflow'
-import { AppServices } from '../../../types.js'
+import type { AppServices } from '../../../types.js'
 import type { DataShaperAppProps } from './DataShaperApp.types.js'
 
 export interface AppContentProps {

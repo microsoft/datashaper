@@ -1,3 +1,7 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { memo, useCallback, useMemo } from 'react'
 import { ResourcesPane } from '../ResourcesPane/ResourcesPane.js'
 import {
@@ -6,9 +10,9 @@ import {
 } from './AppLayout.hooks.js'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useResourceRoutes } from './useResourceRoutes.js'
-import { ResourceRoute } from '../../../types.js'
+import type { ResourceRoute } from '../../../types.js'
 import { useFileTreeStyle } from './AppLayout.styles.js'
-import { AppResourcesProps } from './AppResources.types.js'
+import type { AppResourcesProps } from './AppResources.types.js'
 
 export const AppResources: React.FC<AppResourcesProps> = memo(
 	function AppResources({

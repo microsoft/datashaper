@@ -1,6 +1,10 @@
-import { AppServices } from '../../../types.js'
-import { DataShaperAppProps } from './DataShaperApp.types.js'
-import { FileDefinition } from '../ResourcesPane/ResourcesPane.types.js'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+import type { AppServices } from '../../../types.js'
+import type { DataShaperAppProps } from './DataShaperApp.types.js'
+import type { FileDefinition } from '../ResourcesPane/ResourcesPane.types.js'
 
 export interface AppResourcesProps {
 	api: AppServices

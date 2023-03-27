@@ -2,12 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Allotment, AllotmentHandle } from 'allotment'
+import type { AllotmentHandle } from 'allotment'
+import { Allotment } from 'allotment'
 import { memo, useRef } from 'react'
 import { EMPTY_ARRAY } from '../../../empty.js'
 import { ResourceTreeViewMode } from '../../../types.js'
 import {
+	ctrlShiftEnter,
 	useAppServices,
+	useKeyboardComboEffect,
 	useNarrowExpandCollapseState,
 } from './AppLayout.hooks.js'
 import type { DataShaperAppProps } from './DataShaperApp.types.js'
@@ -18,6 +21,7 @@ import {
 	PANE_EXPANDED_SIZE,
 	PANE_MAX_SIZE,
 } from './AppLayout.styles.js'
+import { useBoolean } from '@fluentui/react-hooks'
 
 export const AppLayout: React.FC<DataShaperAppProps> = memo(function AppInner({
 	className,
@@ -28,6 +32,9 @@ export const AppLayout: React.FC<DataShaperAppProps> = memo(function AppInner({
 	defaultHelp = 'resources.index',
 	defaultResourceTreeViewMode = ResourceTreeViewMode.Expanded,
 }) {
+	const [isResourceTreeHidden, { toggle: toggleResourceTree }] = useBoolean(
+		defaultResourceTreeViewMode === ResourceTreeViewMode.Hidden,
+	)
 	const ref = useRef<AllotmentHandle | null>(null)
 	const [expanded, onToggle, onChangeWidth] = useNarrowExpandCollapseState(
 		defaultResourceTreeViewMode !== ResourceTreeViewMode.Collapsed,
@@ -44,8 +51,9 @@ export const AppLayout: React.FC<DataShaperAppProps> = memo(function AppInner({
 			{children}
 		</AppContent>
 	)
+	useKeyboardComboEffect(ctrlShiftEnter, toggleResourceTree)
 
-	return defaultResourceTreeViewMode === ResourceTreeViewMode.Hidden ? (
+	return isResourceTreeHidden ? (
 		content
 	) : (
 		<Allotment

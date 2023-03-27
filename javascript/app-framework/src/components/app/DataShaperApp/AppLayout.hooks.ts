@@ -24,6 +24,31 @@ function useKnownAppProfiles(): AppProfile[] {
 	return useConst(() => defaultAppProfiles() as AppProfile<any, any>[])
 }
 
+export function ctrlShiftEnter(e: KeyboardEvent): boolean {
+	return e.key === 'Enter' && e.shiftKey && e.ctrlKey
+}
+
+/**
+ * Use a keyboard combo effect
+ * @param trigger - The callback to fire
+ */
+export function useKeyboardComboEffect(
+	isActivated: (e: KeyboardEvent) => boolean,
+	trigger: () => void,
+) {
+	useEffect(() => {
+		const keydownHandler = (e: KeyboardEvent): void => {
+			if (isActivated(e)) {
+				trigger()
+			}
+		}
+		document.addEventListener('keydown', keydownHandler)
+		return () => {
+			document.removeEventListener('keydown', keydownHandler)
+		}
+	}, [isActivated, trigger])
+}
+
 export function useNarrowExpandCollapseState(
 	initialExpanded: boolean,
 	ref: React.MutableRefObject<AllotmentHandle | null>,

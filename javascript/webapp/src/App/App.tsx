@@ -4,11 +4,7 @@
  */
 import 'allotment/dist/style.css'
 
-import {
-	type AppProfile,
-	ResourceTreeViewMode,
-	DataShaperApp,
-} from '@datashaper/app-framework'
+import { type AppProfile, DataShaperApp } from '@datashaper/app-framework'
 import { Spinner } from '@fluentui/react'
 import { useConst } from '@fluentui/react-hooks'
 import { memo, Suspense } from 'react'
@@ -32,11 +28,7 @@ export const App: React.FC = memo(function App() {
 					<Suspense fallback={<Spinner />}>
 						<StyleContext>
 							<Layout>
-								<DataShaperApp
-									examples={examples}
-									profiles={customProfiles}
-									defaultResourceTreeViewMode={ResourceTreeViewMode.Expanded}
-								>
+								<DataShaperApp examples={examples} profiles={customProfiles}>
 									<About />
 								</DataShaperApp>
 							</Layout>
