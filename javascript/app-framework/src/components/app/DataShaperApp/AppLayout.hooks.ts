@@ -35,7 +35,7 @@ export function ctrlShiftEnter(e: KeyboardEvent): boolean {
 export function useKeyboardComboEffect(
 	isActivated: (e: KeyboardEvent) => boolean,
 	trigger: () => void,
-) {
+): void {
 	useEffect(() => {
 		const keydownHandler = (e: KeyboardEvent): void => {
 			if (isActivated(e)) {
