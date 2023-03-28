@@ -1,0 +1,4 @@
+releases:
+  "@datashaper/app-framework": minor
+  "@datashaper/stories": patch
+  "@datashaper/webapp": patch

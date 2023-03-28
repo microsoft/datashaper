@@ -151,3 +151,9 @@ export interface ResourceRouteGroup {
 export interface ProfileComponentProps<T extends Resource> {
 	resource: T
 }
+
+export enum ResourceTreeViewMode {
+	Expanded = 'expanded',
+	Collapsed = 'collapsed',
+	Hidden = 'hidden',
+}

@@ -18,22 +18,45 @@ import type {
 	ResourceRoute,
 	ResourceRouteGroup,
 } from '../../../types.js'
-import {
-	PANE_BREAK_WIDTH,
-	PANE_COLLAPSED_SIZE,
-} from './DataShaperApp.styles.js'
+import { PANE_BREAK_WIDTH, PANE_COLLAPSED_SIZE } from './AppLayout.styles.js'
 
 function useKnownAppProfiles(): AppProfile[] {
 	return useConst(() => defaultAppProfiles() as AppProfile<any, any>[])
 }
 
+export function ctrlShiftEnter(e: KeyboardEvent): boolean {
+	return e.key === 'Enter' && e.shiftKey && e.ctrlKey
+}
+
+/**
+ * Use a keyboard combo effect
+ * @param trigger - The callback to fire
+ */
+export function useKeyboardComboEffect(
+	isActivated: (e: KeyboardEvent) => boolean,
+	trigger: () => void,
+): void {
+	useEffect(() => {
+		const keydownHandler = (e: KeyboardEvent): void => {
+			if (isActivated(e)) {
+				trigger()
+			}
+		}
+		document.addEventListener('keydown', keydownHandler)
+		return () => {
+			document.removeEventListener('keydown', keydownHandler)
+		}
+	}, [isActivated, trigger])
+}
+
 export function useNarrowExpandCollapseState(
+	initialExpanded: boolean,
 	ref: React.MutableRefObject<AllotmentHandle | null>,
 ): [boolean, () => void, (sizes: number[]) => void] {
 	const [
 		expanded,
 		{ toggle: toggleExpanded, setTrue: expand, setFalse: collapse },
-	] = useBoolean(true)
+	] = useBoolean(initialExpanded)
 	const onChangeWidth = useOnChangeWidth(expanded, collapse, expand)
 	const onToggle = useOnToggle(ref, expanded, toggleExpanded)
 	return [expanded, onToggle, onChangeWidth]
@@ -139,7 +162,7 @@ export function useAppServices(defaultHelp: string): {
 	help: {
 		currentHelp: string | undefined
 		helpContent: Record<string, string>
-		onInitializeHelp: any
+		onInitializeHelp: (help: Record<string, string>) => void
 	}
 } {
 	const dp = useDataPackage()
@@ -226,7 +249,7 @@ export function useAppServices(defaultHelp: string): {
  */
 export function useRegisterProfileHelp(
 	profiles: Map<string, AppProfile>,
-	onInitializeHelp: any,
+	onInitializeHelp: (help: Record<string, string>) => void,
 ): void {
 	useEffect(() => {
 		let help: Record<string, string> = {}
