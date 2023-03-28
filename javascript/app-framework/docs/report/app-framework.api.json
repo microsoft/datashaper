@@ -951,6 +951,34 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!DataShaperAppProps#defaultResourceTreeViewMode:member",
+              "docComment": "/**\n * The default view mode to use on load\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "defaultResourceTreeViewMode?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceTreeViewMode",
+                  "canonicalReference": "@datashaper/app-framework!ResourceTreeViewMode:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "defaultResourceTreeViewMode",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!DataShaperAppProps#examples:member",
               "docComment": "/**\n * Examples to provide\n */\n",
               "excerptTokens": [
@@ -1726,6 +1754,85 @@
             }
           ],
           "extendsTokenRanges": []
+        },
+        {
+          "kind": "Enum",
+          "canonicalReference": "@datashaper/app-framework!ResourceTreeViewMode:enum",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare enum ResourceTreeViewMode "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ResourceTreeViewMode",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/app-framework!ResourceTreeViewMode.Collapsed:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Collapsed = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"collapsed\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Collapsed"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/app-framework!ResourceTreeViewMode.Expanded:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Expanded = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"expanded\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Expanded"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/app-framework!ResourceTreeViewMode.Hidden:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Hidden = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"hidden\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Hidden"
+            }
+          ]
         },
         {
           "kind": "Function",

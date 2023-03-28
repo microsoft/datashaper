@@ -10,6 +10,7 @@
 |  --- | --- |
 |  [CommandBarSection](./app-framework.commandbarsection.md) |  |
 |  [ResourceGroupType](./app-framework.resourcegrouptype.md) |  |
+|  [ResourceTreeViewMode](./app-framework.resourcetreeviewmode.md) |  |
 
 ## Functions
 

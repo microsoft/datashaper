@@ -84,6 +84,7 @@ export interface DataShaperAppProps {
     children: React_2.ReactNode;
     className?: string;
     defaultHelp?: string;
+    defaultResourceTreeViewMode?: ResourceTreeViewMode;
     // Warning: (ae-forgotten-export) The symbol "FileDefinition" needs to be exported by the entry point index.d.ts
     examples?: FileDefinition[];
     fallback?: React_2.ReactNode;
@@ -152,6 +153,18 @@ export interface ResourceRouteGroup {
     resources: ResourceRoute[];
     // (undocumented)
     type: ResourceGroupType;
+}
+
+// Warning: (ae-missing-release-tag) "ResourceTreeViewMode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum ResourceTreeViewMode {
+    // (undocumented)
+    Collapsed = "collapsed",
+    // (undocumented)
+    Expanded = "expanded",
+    // (undocumented)
+    Hidden = "hidden"
 }
 
 // Warning: (ae-missing-release-tag) "useDataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
