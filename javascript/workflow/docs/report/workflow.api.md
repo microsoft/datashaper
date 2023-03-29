@@ -1162,6 +1162,8 @@ export class WorkflowProfile implements ProfileHandler<Workflow, WorkflowSchema>
     createInstance(schema: WorkflowSchema | undefined): Promise<Workflow>;
     // (undocumented)
     readonly profile: Profile;
+    // (undocumented)
+    save(data: Workflow, dataPath: string, files: Map<string, Blob>): Promise<string[]>;
 }
 
 // (No @packageDocumentation comment for this package)

@@ -206,21 +206,21 @@ export class LoadResourcesOperation {
 		)
 	}
 
-	private async readResource(entry: string): Promise<ResourceSchema> {
+	// this only attempts to load resource schemas as defined in json files
+	// if any other file types are included, they are silently ignored
+	private async readResource(
+		entry: string,
+	): Promise<ResourceSchema | undefined> {
 		// if the item is a string, look up the resource in the files map
 		let result: ResourceSchema | undefined
-
 		const blob = this.files.get(entry)
 		const resourceText = await blob?.text()
-		if (resourceText != null) {
+		if (entry.endsWith('json') && resourceText != null) {
 			try {
 				result = JSON.parse(resourceText) as ResourceSchema
 			} catch (e) {
 				console.error(`error parsing resource ${entry}`, e)
 			}
-		}
-		if (result == null) {
-			throw new Error(`could not resolve resource "${entry}"`)
 		}
 		return result
 	}
