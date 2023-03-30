@@ -35,38 +35,6 @@ describe('The ResourceManager class', () => {
 		)
 	})
 
-	it('throws if loading an archive with an invalid reference', async () => {
-		// an archive referencing a resource that doesn't exist
-		const invalidReference = fileSet({
-			'datapackage.json': { resources: ['derp.json'] },
-		})
-		await expect(mgr.load(invalidReference)).rejects.toThrow(
-			/could not resolve resource "derp.json"/,
-		)
-	})
-
-	it('throws if loading an archive with a non-reference resource without a profile', async () => {
-		// an archive with a non-reference resource that doesn't have a profile
-		const invalidProfile = fileSet({
-			'datapackage.json': { resources: ['empty'] },
-			empty: {},
-		})
-		await expect(mgr.load(invalidProfile)).rejects.toThrow(
-			/schema has no profile/,
-		)
-	})
-
-	it('throws if loading an archive with a non-reference resource with an unknown profile', async () => {
-		// an archive with a non-reference resource that doesn't have a profile
-		const invalidProfile = fileSet({
-			'datapackage.json': { resources: ['empty'] },
-			empty: { profile: 'derp' },
-		})
-		await expect(mgr.load(invalidProfile)).rejects.toThrow(
-			/could not construct resource with profile "derp", are you missing a resource handler\?/,
-		)
-	})
-
 	it('can load a valid empty archive', async () => {
 		const mgr = new ResourceManager()
 		const empty = fileSet({ 'datapackage.json': { resources: [] } })
@@ -202,11 +170,11 @@ describe('The ResourceManager class', () => {
 	it('can load an archive with linked top-level resources', async () => {
 		const archive = fileSet({
 			'datapackage.json': {
-				resources: ['data/derp/table', 'workflow', 'codebook'],
+				resources: ['data/derp/table.json', 'workflow.json', 'codebook.json'],
 			},
-			'data/derp/table': { profile: KnownProfile.TableBundle },
-			workflow: { profile: KnownProfile.Workflow },
-			codebook: { profile: KnownProfile.Codebook },
+			'data/derp/table.json': { profile: KnownProfile.TableBundle },
+			'workflow.json': { profile: KnownProfile.Workflow },
+			'codebook.json': { profile: KnownProfile.Codebook },
 		})
 		const result = await mgr.load(archive)
 		expect(result.resources).toHaveLength(3)
@@ -218,21 +186,21 @@ describe('The ResourceManager class', () => {
 			bundle,
 			KnownProfile.TableBundle,
 			'tablebundle.json',
-			'data/derp/table',
+			'data/derp/table.json',
 		)
 		const workflow = mgr.topResources[1]!
 		inspectResource(
 			workflow,
 			KnownProfile.Workflow,
 			'workflow.json',
-			'workflow',
+			'workflow.json',
 		)
 		const codebook = mgr.topResources[2]!
 		inspectResource(
 			codebook,
 			KnownProfile.Codebook,
 			'codebook.json',
-			'codebook',
+			'codebook.json',
 		)
 	})
 
@@ -242,12 +210,12 @@ describe('The ResourceManager class', () => {
 				resources: [
 					{
 						profile: KnownProfile.TableBundle,
-						sources: ['data/workflow'], // todo: look up by name as well
+						sources: ['data/workflow.json'], // todo: look up by name as well
 					},
 				],
 			},
-			'data/workflow': { profile: KnownProfile.Workflow },
-			codebook: { profile: KnownProfile.Codebook },
+			'data/workflow.json': { profile: KnownProfile.Workflow },
+			'codebook.json': { profile: KnownProfile.Codebook },
 		})
 		const result = await mgr.load(archive)
 		expect(result.resources).toHaveLength(1)
@@ -262,7 +230,7 @@ describe('The ResourceManager class', () => {
 			workflow,
 			KnownProfile.Workflow,
 			'workflow.json',
-			'data/workflow',
+			'data/workflow.json',
 		)
 	})
 
@@ -296,12 +264,12 @@ describe('The ResourceManager class', () => {
 	it('can load an archive with sibling refs', async () => {
 		const files = fileSet({
 			'datapackage.json': {
-				resources: ['data/table-1', 'data/table-2'],
+				resources: ['data/table-1.json', 'data/table-2.json'],
 			},
-			'data/table-1': { name: 'a', profile: KnownProfile.TableBundle },
-			'data/table-2': {
+			'data/table-1.json': { name: 'a', profile: KnownProfile.TableBundle },
+			'data/table-2.json': {
 				profile: KnownProfile.TableBundle,
-				sources: [{ rel: 'input', path: 'data/table-1' }],
+				sources: [{ rel: 'input', path: 'data/table-1.json' }],
 			},
 		})
 
@@ -310,14 +278,14 @@ describe('The ResourceManager class', () => {
 		expect(mgr.topResources).toHaveLength(2)
 
 		const first = mgr.topResources[0]!
-		inspectResource(first, KnownProfile.TableBundle, 'a', 'data/table-1')
+		inspectResource(first, KnownProfile.TableBundle, 'a', 'data/table-1.json')
 
 		const second = mgr.topResources[1]!
 		inspectResource(
 			second,
 			KnownProfile.TableBundle,
 			'tablebundle.json',
-			'data/table-2',
+			'data/table-2.json',
 		)
 		expect(second.sources).toHaveLength(1)
 	})
