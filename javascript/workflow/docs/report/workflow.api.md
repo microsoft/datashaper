@@ -990,6 +990,8 @@ export class TableBundleProfile implements ProfileHandler<TableBundle, TableBund
     createInstance(schema?: TableBundleSchema): Promise<TableBundle>;
     // (undocumented)
     readonly profile: Profile;
+    // (undocumented)
+    save(data: TableBundle, dataPath: string, files: Map<string, Blob>): Promise<string[]>;
 }
 
 // Warning: (ae-missing-release-tag) "TableEmitter" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

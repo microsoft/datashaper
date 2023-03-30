@@ -22,4 +22,5 @@ export declare class TableBundleProfile implements ProfileHandler<TableBundle, T
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
 |  [createInstance(schema)](./workflow.tablebundleprofile.createinstance.md) |  |  |
+|  [save(data, dataPath, files)](./workflow.tablebundleprofile.save.md) |  |  |
 
