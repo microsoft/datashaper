@@ -990,6 +990,8 @@ export class TableBundleProfile implements ProfileHandler<TableBundle, TableBund
     createInstance(schema?: TableBundleSchema): Promise<TableBundle>;
     // (undocumented)
     readonly profile: Profile;
+    // (undocumented)
+    save(data: TableBundle, dataPath: string, files: Map<string, Blob>): Promise<string[]>;
 }
 
 // Warning: (ae-missing-release-tag) "TableEmitter" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1162,8 +1164,6 @@ export class WorkflowProfile implements ProfileHandler<Workflow, WorkflowSchema>
     createInstance(schema: WorkflowSchema | undefined): Promise<Workflow>;
     // (undocumented)
     readonly profile: Profile;
-    // (undocumented)
-    save(data: Workflow, dataPath: string, files: Map<string, Blob>): Promise<string[]>;
 }
 
 // (No @packageDocumentation comment for this package)

@@ -13049,6 +13049,105 @@
               },
               "isStatic": false,
               "isProtected": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!TableBundleProfile#save:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "save(data: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TableBundle",
+                  "canonicalReference": "@datashaper/workflow!TableBundle:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", dataPath: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", files: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Map",
+                  "canonicalReference": "!Map:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Blob",
+                  "canonicalReference": "!Blob:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string[]>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 10,
+                "endIndex": 12
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "data",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "dataPath",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "files",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 5,
+                    "endIndex": 9
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "name": "save"
             }
           ],
           "implementsTokenRanges": [
@@ -15979,105 +16078,6 @@
               },
               "isStatic": false,
               "isProtected": false
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "@datashaper/workflow!WorkflowProfile#save:member(1)",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "save(data: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Workflow",
-                  "canonicalReference": "@datashaper/workflow!Workflow:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", dataPath: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", files: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Map",
-                  "canonicalReference": "!Map:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<string, "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Blob",
-                  "canonicalReference": "!Blob:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Promise",
-                  "canonicalReference": "!Promise:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<string[]>"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 10,
-                "endIndex": 12
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "data",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": false
-                },
-                {
-                  "parameterName": "dataPath",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 3,
-                    "endIndex": 4
-                  },
-                  "isOptional": false
-                },
-                {
-                  "parameterName": "files",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 5,
-                    "endIndex": 9
-                  },
-                  "isOptional": false
-                }
-              ],
-              "isOptional": false,
-              "name": "save"
             }
           ],
           "implementsTokenRanges": [

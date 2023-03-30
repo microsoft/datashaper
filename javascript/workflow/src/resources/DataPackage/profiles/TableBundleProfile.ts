@@ -20,4 +20,18 @@ export class TableBundleProfile
 		}
 		return Promise.resolve(result)
 	}
+
+	public save(
+		data: TableBundle,
+		dataPath: string,
+		files: Map<string, Blob>,
+	): Promise<string[]> {
+		const result: string[] = []
+		if (data.output?.table) {
+			const path = `${dataPath}${data.name || 'output'}.csv`
+			result.push(path)
+			files.set(path, new Blob([data.output.table.toCSV()]))
+		}
+		return Promise.resolve(result)
+	}
 }

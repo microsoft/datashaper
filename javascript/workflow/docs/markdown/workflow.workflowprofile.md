@@ -22,5 +22,4 @@ export declare class WorkflowProfile implements ProfileHandler<Workflow, Workflo
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
 |  [createInstance(schema)](./workflow.workflowprofile.createinstance.md) |  |  |
-|  [save(data, dataPath, files)](./workflow.workflowprofile.save.md) |  |  |
 
