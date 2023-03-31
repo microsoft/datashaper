@@ -265,12 +265,12 @@ export function useRegisterProfileHelp(
 	}, [profiles, onInitializeHelp])
 }
 
-export function useInitialDataPackageLoad(url: string | undefined) {
+export function useInitialDataPackageLoad(url: string | undefined): void {
 	const loadDataPackage = useLoadDataPackage()
 
 	useEffect(() => {
 		if (url != null) {
 			loadDataPackage(url)
 		}
-	}, [loadDataPackage])
+	}, [url, loadDataPackage])
 }

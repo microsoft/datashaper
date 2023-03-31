@@ -20,5 +20,6 @@ export interface DataShaperAppProps
 |  [defaultResourceTreeViewMode?](./app-framework.datashaperappprops.defaultresourcetreeviewmode.md) |  | [ResourceTreeViewMode](./app-framework.resourcetreeviewmode.md) | <i>(Optional)</i> The default view mode to use on load |
 |  [examples?](./app-framework.datashaperappprops.examples.md) |  | FileDefinition\[\] | <i>(Optional)</i> Examples to provide |
 |  [fallback?](./app-framework.datashaperappprops.fallback.md) |  | React.ReactNode | <i>(Optional)</i> The React node to render when the selected resource cannot be found |
+|  [initialDataPackageUrl?](./app-framework.datashaperappprops.initialdatapackageurl.md) |  | string | <i>(Optional)</i> The initial data-package URL to load (useful for demos) |
 |  [profiles?](./app-framework.datashaperappprops.profiles.md) |  | [AppProfile](./app-framework.appprofile.md)<!-- -->\[\] | <i>(Optional)</i> Custom profile renderers |
 

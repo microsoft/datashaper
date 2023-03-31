@@ -1039,6 +1039,33 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!DataShaperAppProps#initialDataPackageUrl:member",
+              "docComment": "/**\n * The initial data-package URL to load (useful for demos)\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "initialDataPackageUrl?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "initialDataPackageUrl",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!DataShaperAppProps#profiles:member",
               "docComment": "/**\n * Custom profile renderers\n */\n",
               "excerptTokens": [
@@ -2029,6 +2056,33 @@
             }
           ],
           "name": "useHelpOnMount"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/app-framework!useLoadDataPackage:function(1)",
+          "docComment": "/**\n * Load a datapackage json from a URL\n *\n * @returns A callback to load a datapackage json from a URL\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useLoadDataPackage(): "
+            },
+            {
+              "kind": "Content",
+              "text": "(url: string) => void"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [],
+          "name": "useLoadDataPackage"
         },
         {
           "kind": "Function",
