@@ -17,6 +17,11 @@ import { About } from './About.js'
 import { ErrorBoundary } from './ErrorBoundary.js'
 import { StyleContext } from './StyleContext.js'
 
+const examples = [
+	{ name: 'Smoking', url: 'examples/smoking.json' },
+	{ name: 'Companies', url: 'examples/companies.json' },
+]
+
 export const App: React.FC = memo(function App() {
 	const customProfiles = useConst<AppProfile[]>(
 		() => [new TestAppProfile()] as AppProfile<any, any>[],
@@ -39,8 +44,3 @@ export const App: React.FC = memo(function App() {
 		</ErrorBoundary>
 	)
 })
-
-const examples = [
-	{ name: 'Smoking', url: 'examples/smoking.json' },
-	{ name: 'Companies', url: 'examples/companies.json' },
-]

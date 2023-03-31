@@ -20,6 +20,7 @@
 |  [useDatasetMenuItems(selected, onClick)](./app-framework.usedatasetmenuitems.md) |  |
 |  [useDataTableSource(pkg)](./app-framework.usedatatablesource.md) | Use the raw source table from a data package without any workflow applied to it. |
 |  [useHelpOnMount(key)](./app-framework.usehelponmount.md) | Request help when a component renders |
+|  [useLoadDataPackage()](./app-framework.useloaddatapackage.md) | Load a datapackage json from a URL |
 |  [useMenuButtonStyles()](./app-framework.usemenubuttonstyles.md) |  |
 |  [useOnOutsideClick(ref, onClickOutside)](./app-framework.useonoutsideclick.md) | Hook that alerts clicks outside of the passed ref |
 |  [usePersistenceService()](./app-framework.usepersistenceservice.md) |  |

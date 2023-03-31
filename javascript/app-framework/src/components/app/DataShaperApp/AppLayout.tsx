@@ -10,6 +10,7 @@ import { ResourceTreeViewMode } from '../../../types.js'
 import {
 	ctrlShiftEnter,
 	useAppServices,
+	useInitialDataPackageLoad,
 	useKeyboardComboEffect,
 	useNarrowExpandCollapseState,
 } from './AppLayout.hooks.js'
@@ -29,6 +30,7 @@ export const AppLayout: React.FC<DataShaperAppProps> = memo(function AppInner({
 	profiles,
 	children,
 	fallback = children,
+	initialDataPackageUrl,
 	defaultHelp = 'resources.index',
 	defaultResourceTreeViewMode = ResourceTreeViewMode.Expanded,
 }) {
@@ -52,6 +54,7 @@ export const AppLayout: React.FC<DataShaperAppProps> = memo(function AppInner({
 		</AppContent>
 	)
 	useKeyboardComboEffect(ctrlShiftEnter, toggleResourceTree)
+	useInitialDataPackageLoad(initialDataPackageUrl)
 
 	return isResourceTreeHidden ? (
 		content

@@ -88,6 +88,7 @@ export interface DataShaperAppProps {
     // Warning: (ae-forgotten-export) The symbol "FileDefinition" needs to be exported by the entry point index.d.ts
     examples?: FileDefinition[];
     fallback?: React_2.ReactNode;
+    initialDataPackageUrl?: string;
     profiles?: AppProfile[];
 }
 
@@ -186,6 +187,11 @@ export function useDataTableSource(pkg: DataTable | undefined): Maybe<TableConta
 //
 // @public
 export function useHelpOnMount(key: string): void;
+
+// Warning: (ae-missing-release-tag) "useLoadDataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useLoadDataPackage(): (url: string) => void;
 
 // Warning: (ae-missing-release-tag) "useMenuButtonStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

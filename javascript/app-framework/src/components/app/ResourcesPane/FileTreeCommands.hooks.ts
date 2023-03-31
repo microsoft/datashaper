@@ -19,6 +19,7 @@ import { CommandBarSection } from '../../../types.js'
 import { TABLE_TYPES, ZIP_TYPES } from './ResourcesPane.constants.js'
 import { icons } from './ResourcesPane.styles.js'
 import type { FileDefinition } from './ResourcesPane.types.js'
+import { useLoadDataPackage } from '../../../hooks/useLoadDataPackage.js'
 
 /**
  * Gets the file-managament commandbar items
@@ -153,22 +154,13 @@ function useOpenMenuItems(
 	profiles: Map<string, AppProfile>,
 	setFile: (file: BaseFile) => void,
 ): IContextualMenuItem[] {
-	const dataPackage = useDataPackage()
 	const uploadZip = useUploadZip()
 	const onOpenFileRequested = useOnOpenFileRequested()
+	const loadDataPackage = useLoadDataPackage()
 
 	const onClickExample = useCallback(
-		(ex: FileDefinition) => {
-			void fetch(ex.url)
-				.then((res) => res.blob())
-				.then((data) => {
-					const files = new Map<string, Blob>()
-					files.set('datapackage.json', data)
-					return dataPackage.load(files)
-				})
-				.catch((err) => console.error('error loading example file', err))
-		},
-		[dataPackage],
+		(ex: FileDefinition) => void loadDataPackage(ex.url),
+		[loadDataPackage],
 	)
 
 	const onClickUploadTable = useCallback(

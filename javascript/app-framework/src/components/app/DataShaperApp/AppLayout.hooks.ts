@@ -19,6 +19,7 @@ import type {
 	ResourceRouteGroup,
 } from '../../../types.js'
 import { PANE_BREAK_WIDTH, PANE_COLLAPSED_SIZE } from './AppLayout.styles.js'
+import { useLoadDataPackage } from '../../../hooks/useLoadDataPackage.js'
 
 function useKnownAppProfiles(): AppProfile[] {
 	return useConst(() => defaultAppProfiles() as AppProfile<any, any>[])
@@ -262,4 +263,14 @@ export function useRegisterProfileHelp(
 		}
 		onInitializeHelp(help)
 	}, [profiles, onInitializeHelp])
+}
+
+export function useInitialDataPackageLoad(url: string | undefined): void {
+	const loadDataPackage = useLoadDataPackage()
+
+	useEffect(() => {
+		if (url != null) {
+			loadDataPackage(url)
+		}
+	}, [url, loadDataPackage])
 }
