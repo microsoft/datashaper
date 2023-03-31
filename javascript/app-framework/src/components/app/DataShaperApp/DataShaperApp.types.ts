@@ -43,4 +43,9 @@ export interface DataShaperAppProps {
 	 * The default view mode to use on load
 	 */
 	defaultResourceTreeViewMode?: ResourceTreeViewMode
+
+	/**
+	 * The initial data-package URL to load (useful for demos)
+	 */
+	initialDataPackageUrl?: string
 }
