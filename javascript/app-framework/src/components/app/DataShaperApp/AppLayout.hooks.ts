@@ -20,6 +20,7 @@ import type {
 } from '../../../types.js'
 import { PANE_BREAK_WIDTH, PANE_COLLAPSED_SIZE } from './AppLayout.styles.js'
 import { useLoadDataPackage } from '../../../hooks/useLoadDataPackage.js'
+import { useNavigate } from 'react-router-dom'
 
 function useKnownAppProfiles(): AppProfile[] {
 	return useConst(() => defaultAppProfiles() as AppProfile<any, any>[])
@@ -265,12 +266,19 @@ export function useRegisterProfileHelp(
 	}, [profiles, onInitializeHelp])
 }
 
-export function useInitialDataPackageLoad(url: string | undefined): void {
+export function useInitialDataPackageLoad(
+	url: string | undefined,
+	route: string | undefined,
+): void {
 	const loadDataPackage = useLoadDataPackage()
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		if (url != null) {
 			loadDataPackage(url)
 		}
-	}, [url, loadDataPackage])
+		if (route != null) {
+			navigate(route)
+		}
+	}, [url, route, loadDataPackage])
 }
