@@ -280,5 +280,5 @@ export function useInitialDataPackageLoad(
 		if (route != null) {
 			navigate(route)
 		}
-	}, [url, route, loadDataPackage])
+	}, [url, route, navigate, loadDataPackage])
 }
