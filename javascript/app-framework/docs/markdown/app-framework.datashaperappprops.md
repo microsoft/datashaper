@@ -21,5 +21,6 @@ export interface DataShaperAppProps
 |  [examples?](./app-framework.datashaperappprops.examples.md) |  | FileDefinition\[\] | <i>(Optional)</i> Examples to provide |
 |  [fallback?](./app-framework.datashaperappprops.fallback.md) |  | React.ReactNode | <i>(Optional)</i> The React node to render when the selected resource cannot be found |
 |  [initialDataPackageUrl?](./app-framework.datashaperappprops.initialdatapackageurl.md) |  | string | <i>(Optional)</i> The initial data-package URL to load (useful for demos) |
+|  [initialRoute?](./app-framework.datashaperappprops.initialroute.md) |  | string | <i>(Optional)</i> The initial route to load (useful for demos). Resources are routed under <code>/resource/{resource.name}</code> |
 |  [profiles?](./app-framework.datashaperappprops.profiles.md) |  | [AppProfile](./app-framework.appprofile.md)<!-- -->\[\] | <i>(Optional)</i> Custom profile renderers |
 
