@@ -89,6 +89,7 @@ export interface DataShaperAppProps {
     examples?: FileDefinition[];
     fallback?: React_2.ReactNode;
     initialDataPackageUrl?: string;
+    initialRoute?: string;
     profiles?: AppProfile[];
 }
 

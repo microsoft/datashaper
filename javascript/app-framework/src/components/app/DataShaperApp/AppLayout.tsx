@@ -31,6 +31,7 @@ export const AppLayout: React.FC<DataShaperAppProps> = memo(function AppInner({
 	children,
 	fallback = children,
 	initialDataPackageUrl,
+	initialRoute,
 	defaultHelp = 'resources.index',
 	defaultResourceTreeViewMode = ResourceTreeViewMode.Expanded,
 }) {
@@ -54,7 +55,7 @@ export const AppLayout: React.FC<DataShaperAppProps> = memo(function AppInner({
 		</AppContent>
 	)
 	useKeyboardComboEffect(ctrlShiftEnter, toggleResourceTree)
-	useInitialDataPackageLoad(initialDataPackageUrl)
+	useInitialDataPackageLoad(initialDataPackageUrl, initialRoute)
 
 	return isResourceTreeHidden ? (
 		content

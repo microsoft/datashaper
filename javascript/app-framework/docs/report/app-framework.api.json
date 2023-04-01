@@ -1066,6 +1066,33 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!DataShaperAppProps#initialRoute:member",
+              "docComment": "/**\n * The initial route to load (useful for demos). Resources are routed under `/resource/{resource.name}`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "initialRoute?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "initialRoute",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!DataShaperAppProps#profiles:member",
               "docComment": "/**\n * Custom profile renderers\n */\n",
               "excerptTokens": [

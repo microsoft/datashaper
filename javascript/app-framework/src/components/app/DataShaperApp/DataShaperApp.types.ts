@@ -48,4 +48,10 @@ export interface DataShaperAppProps {
 	 * The initial data-package URL to load (useful for demos)
 	 */
 	initialDataPackageUrl?: string
+
+	/**
+	 * The initial route to load (useful for demos).
+	 * Resources are routed under `/resource/{resource.name}`
+	 */
+	initialRoute?: string
 }
