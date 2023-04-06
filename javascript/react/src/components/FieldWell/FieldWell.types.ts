@@ -37,6 +37,10 @@ export interface FieldWellItem {
 	 */
 	required?: boolean
 	/**
+	 * Indicate if the well is disabled - this will render the well as disabled.
+	 */
+	disabled?: boolean
+	/**
 	 * List of valid options that this field well can be set to.
 	 */
 	options?: ISelectableOption[]
