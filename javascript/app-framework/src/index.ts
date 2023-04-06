@@ -9,4 +9,5 @@ export {
 	type RecoilBasedProfileHostProps,
 } from './components/index.js'
 export * from './hooks/index.js'
+export * from './settings/index.js'
 export * from './types.js'

@@ -157,3 +157,7 @@ export enum ResourceTreeViewMode {
 	Collapsed = 'collapsed',
 	Hidden = 'hidden',
 }
+
+export interface ApplicationSettings {
+	darkMode?: boolean
+}

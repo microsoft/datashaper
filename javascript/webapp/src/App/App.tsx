@@ -26,6 +26,7 @@ export const App: React.FC = memo(function App() {
 	const customProfiles = useConst<AppProfile[]>(
 		() => [new TestAppProfile()] as AppProfile<any, any>[],
 	)
+
 	return (
 		<ErrorBoundary>
 			<RecoilRoot>

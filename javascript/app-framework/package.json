@@ -37,6 +37,7 @@
 		"@monaco-editor/react": "^4.4.6",
 		"ahooks": "^3.7.6",
 		"allotment": "1.18.1",
+		"localforage": "^1.10.0",
 		"monaco-editor": "^0.36.1",
 		"observable-hooks": "^4.2.1",
 		"react-if": "^4.1.4",
