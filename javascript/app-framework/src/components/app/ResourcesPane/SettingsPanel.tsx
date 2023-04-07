@@ -63,7 +63,7 @@ function useUnwrapProfiles(profiles: Map<string, AppProfile>) {
 	return useMemo(() => {
 		const blocks: ProfileMeta[] = [
 			{
-				key: 'application',
+				key: '--application--',
 				title: 'Application',
 			},
 		]

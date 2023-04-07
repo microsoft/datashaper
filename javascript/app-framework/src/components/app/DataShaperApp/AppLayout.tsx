@@ -13,6 +13,7 @@ import {
 	useInitialDataPackageLoad,
 	useKeyboardComboEffect,
 	useNarrowExpandCollapseState,
+	useSetDefaultApplicationSettings,
 } from './AppLayout.hooks.js'
 import type { DataShaperAppProps } from './DataShaperApp.types.js'
 import { AppContent } from './AppContent.js'
@@ -34,6 +35,7 @@ export const AppLayout: React.FC<DataShaperAppProps> = memo(function AppInner({
 	initialRoute,
 	defaultHelp = 'resources.index',
 	defaultResourceTreeViewMode = ResourceTreeViewMode.Expanded,
+	settings
 }) {
 	const [isResourceTreeHidden, { toggle: toggleResourceTree }] = useBoolean(
 		defaultResourceTreeViewMode === ResourceTreeViewMode.Hidden,
@@ -56,6 +58,7 @@ export const AppLayout: React.FC<DataShaperAppProps> = memo(function AppInner({
 	)
 	useKeyboardComboEffect(ctrlShiftEnter, toggleResourceTree)
 	useInitialDataPackageLoad(initialDataPackageUrl, initialRoute)
+	useSetDefaultApplicationSettings(settings)
 
 	return isResourceTreeHidden ? (
 		content

@@ -2,12 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { memo, useEffect } from 'react'
+import { memo } from 'react'
 import { DataPackageProvider } from '../../../context/index.js'
 import type { DataShaperAppProps } from './DataShaperApp.types.js'
 import { AppLayout } from './AppLayout.js'
-import { useSetApplicationSettings } from '../../../settings/index.js'
-import type { ApplicationSettings } from '../../../types.js'
 
 /**
  * A component for rendering a data-shaper application.
@@ -17,8 +15,6 @@ import type { ApplicationSettings } from '../../../types.js'
  */
 export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 	function DataShaperApp(props) {
-		const { settings } = props
-		useSetDefaultSettings(settings)
 		return (
 			<DataPackageProvider>
 				{/* use a new component to allow for the new datapackage to exist in context */}
@@ -27,10 +23,3 @@ export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 		)
 	},
 )
-
-function useSetDefaultSettings(settings?: ApplicationSettings) {
-	const setter = useSetApplicationSettings()
-	useEffect(() => {
-		setter((prev) => ({ ...prev, ...settings }))
-	}, [settings, setter])
-}
