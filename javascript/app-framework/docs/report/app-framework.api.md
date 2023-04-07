@@ -28,7 +28,7 @@ import type { TableContainer } from '@datashaper/tables';
 // Warning: (ae-missing-release-tag) "ApplicationSettings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ApplicationSettings {
+export interface ApplicationSettings extends Settings {
     // (undocumented)
     darkMode?: boolean;
 }
@@ -36,17 +36,19 @@ export interface ApplicationSettings {
 // Warning: (ae-missing-release-tag) "AppProfile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface AppProfile<Res extends Resource = Resource, Schema extends ResourceSchema = ResourceSchema> extends ProfileHandler<Res, Schema, AppProfileInitializationContext> {
+export interface AppProfile<Res extends Resource = Resource, Schema extends ResourceSchema = ResourceSchema, ProfileSettings extends Settings = Settings> extends ProfileHandler<Res, Schema, AppProfileInitializationContext> {
     getCommandBarCommands?: (section: CommandBarSection) => IContextualMenuItem[] | undefined;
     getFieldWells?: (resource: Res) => FieldWellItem[];
     getHelp?: () => Record<string, string>;
     getMenuItems?: (resource: Res) => IContextualMenuItem[];
+    getSettings?: () => ProfileSettings;
     group?: ResourceGroupType;
     iconName: string;
     renderer: React.ComponentType<{
         href: string;
         resource: Res;
         api: AppServices;
+        settings: Settings;
     }>;
     title: string;
 }
@@ -179,6 +181,12 @@ export enum ResourceTreeViewMode {
     Hidden = "hidden"
 }
 
+// Warning: (ae-missing-release-tag) "Settings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface Settings {
+}
+
 // Warning: (ae-missing-release-tag) "useApplicationSettings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -236,12 +244,17 @@ export function usePersistenceService(): PersistenceService;
 // Warning: (ae-missing-release-tag) "useProfileSettings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useProfileSettings(profile: string): [any, SetterOrUpdater<any>];
+export function useProfileSettings<T extends Settings>(profile: string): [T, SetterOrUpdater<T>];
+
+// Warning: (ae-missing-release-tag) "useProfileSettingsInitializer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useProfileSettingsInitializer(): (profile: string, value: any) => void;
 
 // Warning: (ae-missing-release-tag) "useProfileSettingsValue" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useProfileSettingsValue(profile: string): any;
+export function useProfileSettingsValue<T extends Settings>(profile: string): T;
 
 // Warning: (ae-missing-release-tag) "useSetApplicationSettings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -251,7 +264,7 @@ export function useSetApplicationSettings(): SetterOrUpdater<ApplicationSettings
 // Warning: (ae-missing-release-tag) "useSetProfileSettings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useSetProfileSettings(profile: string): SetterOrUpdater<any>;
+export function useSetProfileSettings<T extends Settings>(profile: string): SetterOrUpdater<T>;
 
 // Warning: (ae-missing-release-tag) "useTableBundle" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

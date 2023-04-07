@@ -35,7 +35,7 @@ export const AppLayout: React.FC<DataShaperAppProps> = memo(function AppInner({
 	initialRoute,
 	defaultHelp = 'resources.index',
 	defaultResourceTreeViewMode = ResourceTreeViewMode.Expanded,
-	settings
+	settings,
 }) {
 	const [isResourceTreeHidden, { toggle: toggleResourceTree }] = useBoolean(
 		defaultResourceTreeViewMode === ResourceTreeViewMode.Hidden,

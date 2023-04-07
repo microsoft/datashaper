@@ -13,5 +13,6 @@ renderer: React.ComponentType<{
         href: string;
         resource: Res;
         api: AppServices;
+        settings: Settings;
     }>;
 ```

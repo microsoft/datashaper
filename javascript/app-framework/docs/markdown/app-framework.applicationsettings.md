@@ -7,8 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-export interface ApplicationSettings 
+export interface ApplicationSettings extends Settings 
 ```
+<b>Extends:</b> [Settings](./app-framework.settings.md)
 
 ## Properties
 

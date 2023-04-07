@@ -9,7 +9,7 @@ Get the recoil state tuple for a specific profile's settings
 <b>Signature:</b>
 
 ```typescript
-export declare function useProfileSettings(profile: string): [any, SetterOrUpdater<any>];
+export declare function useProfileSettings<T extends Settings>(profile: string): [T, SetterOrUpdater<T>];
 ```
 
 ## Parameters
@@ -20,6 +20,6 @@ export declare function useProfileSettings(profile: string): [any, SetterOrUpdat
 
 <b>Returns:</b>
 
-\[any, SetterOrUpdater&lt;any&gt;\]
+\[T, SetterOrUpdater&lt;T&gt;\]
 
 

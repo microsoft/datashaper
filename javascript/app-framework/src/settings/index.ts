@@ -9,7 +9,7 @@ import {
 	useRecoilState,
 	useRecoilTransaction_UNSTABLE,
 } from 'recoil'
-import type { ApplicationSettings } from '../types.js'
+import type { ApplicationSettings, Settings } from '../types.js'
 import type { SetterOrUpdater } from 'recoil'
 
 const defaultApplicationSettings: ApplicationSettings = {
@@ -32,13 +32,21 @@ const settingsFamily = atomFamily<any, string>({
 
 /**
  * Create a callback for dynamically setting profile settings.
- * @returns 
+ * @returns
  */
-export function useProfileSettingsInitializer(): (profile: string, value: any) => void {
-	return useRecoilTransaction_UNSTABLE(({ set }) => 
-		(profile: string, value: any) => set(settingsFamily(profile), value)
-		
-	)
+export function useProfileSettingsInitializer(): (
+	profile: string,
+	value: any,
+) => void {
+	return useRecoilTransaction_UNSTABLE(({ get, set }) =>
+		(profile: string, value: any) => {
+			const current = get(settingsFamily(profile))
+			// run once only, this is an initializer
+			// TODO: wire this through a defaults mechanism on the atom
+			if (!current) {
+				set(settingsFamily(profile), value)
+			}
+		})
 }
 /**
  * Get the recoil state tuple for top-level application settings
@@ -72,9 +80,9 @@ export function useSetApplicationSettings(): SetterOrUpdater<ApplicationSettings
  * @param profile
  * @returns
  */
-export function useProfileSettings(
+export function useProfileSettings<T extends Settings>(
 	profile: string,
-): [any, SetterOrUpdater<any>] {
+): [T, SetterOrUpdater<T>] {
 	return useRecoilState(settingsFamily(profile))
 }
 
@@ -83,13 +91,17 @@ export function useProfileSettings(
  * @param profile
  * @returns
  */
-export function useProfileSettingsValue(profile: string): any {
+export function useProfileSettingsValue<T extends Settings>(
+	profile: string,
+): T {
 	return useRecoilValue(settingsFamily(profile))
 }
 
 /**
  * Get the setter for a profile's settings.
  */
-export function useSetProfileSettings(profile: string): SetterOrUpdater<any> {
+export function useSetProfileSettings<T extends Settings>(
+	profile: string,
+): SetterOrUpdater<T> {
 	return useSetRecoilState(settingsFamily(profile))
 }

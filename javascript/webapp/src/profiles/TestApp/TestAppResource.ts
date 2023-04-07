@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Resource, type Maybe } from '@datashaper/workflow'
+import type { Settings } from '@datashaper/app-framework'
+import { Resource } from '@datashaper/workflow'
 import { TEST_APP_PROFILE } from './constants.js'
 
 export class TestAppResource extends Resource {
@@ -45,4 +46,9 @@ export class TestAppResource extends Resource {
 		super.loadSchema(schema)
 		this.count = schema.count ?? 0
 	}
+}
+
+export interface TestAppSettings extends Settings {
+	title: string
+	version: number
 }

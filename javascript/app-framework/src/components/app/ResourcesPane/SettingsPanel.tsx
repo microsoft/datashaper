@@ -37,7 +37,8 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
 const SettingsBlock: React.FC<{ profile: ProfileMeta }> = ({ profile }) => {
 	const [settings, setter] = useProfileSettings(profile.key)
 	const handleChange = useCallback(
-		(key: string, value: any) => setter((prev: any) => ({ ...prev, [key]: value })),
+		(key: string, value: any) =>
+			setter((prev: any) => ({ ...prev, [key]: value })),
 		[setter],
 	)
 	// TODO: this shouldn't be necessary - app services should _only_ provide the profiles with registered settings

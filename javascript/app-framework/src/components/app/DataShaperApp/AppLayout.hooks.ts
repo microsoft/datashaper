@@ -22,7 +22,10 @@ import type {
 import { PANE_BREAK_WIDTH, PANE_COLLAPSED_SIZE } from './AppLayout.styles.js'
 import { useLoadDataPackage } from '../../../hooks/useLoadDataPackage.js'
 import { useNavigate } from 'react-router-dom'
-import { useProfileSettingsInitializer, useSetApplicationSettings } from '../../../settings/index.js'
+import {
+	useProfileSettingsInitializer,
+	useSetApplicationSettings,
+} from '../../../settings/index.js'
 
 function useKnownAppProfiles(): AppProfile[] {
 	return useConst(() => defaultAppProfiles() as AppProfile<any, any>[])
@@ -268,7 +271,9 @@ export function useRegisterProfileHelp(
 	}, [profiles, onInitializeHelp])
 }
 
-export function useRegisterProfileSettings(profiles: Map<string, AppProfile>): void {
+export function useRegisterProfileSettings(
+	profiles: Map<string, AppProfile>,
+): void {
 	const setter = useProfileSettingsInitializer()
 	useEffect(() => {
 		for (const profile of profiles.values()) {
@@ -297,7 +302,9 @@ export function useInitialDataPackageLoad(
 	}, [url, route, navigate, loadDataPackage])
 }
 
-export function useSetDefaultApplicationSettings(settings?: ApplicationSettings): void {
+export function useSetDefaultApplicationSettings(
+	settings?: ApplicationSettings,
+): void {
 	const setter = useSetApplicationSettings()
 	useEffect(() => {
 		setter((prev) => ({ ...prev, ...settings }))

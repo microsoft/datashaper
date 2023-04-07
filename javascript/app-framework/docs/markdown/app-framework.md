@@ -27,6 +27,7 @@
 |  [useOnOutsideClick(ref, onClickOutside)](./app-framework.useonoutsideclick.md) | Hook that alerts clicks outside of the passed ref |
 |  [usePersistenceService()](./app-framework.usepersistenceservice.md) |  |
 |  [useProfileSettings(profile)](./app-framework.useprofilesettings.md) | Get the recoil state tuple for a specific profile's settings |
+|  [useProfileSettingsInitializer()](./app-framework.useprofilesettingsinitializer.md) | Create a callback for dynamically setting profile settings. |
 |  [useProfileSettingsValue(profile)](./app-framework.useprofilesettingsvalue.md) | Get a profile's settings value only. |
 |  [useSetApplicationSettings()](./app-framework.usesetapplicationsettings.md) | Get the setter for application settings. |
 |  [useSetProfileSettings(profile)](./app-framework.usesetprofilesettings.md) | Get the setter for a profile's settings. |
@@ -47,6 +48,7 @@
 |  [RecoilBasedProfileHostProps](./app-framework.recoilbasedprofilehostprops.md) |  |
 |  [ResourceRoute](./app-framework.resourceroute.md) | Data attached to resource-tree nodes |
 |  [ResourceRouteGroup](./app-framework.resourceroutegroup.md) |  |
+|  [Settings](./app-framework.settings.md) |  |
 
 ## Variables
 

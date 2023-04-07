@@ -9,7 +9,7 @@ Get a profile's settings value only.
 <b>Signature:</b>
 
 ```typescript
-export declare function useProfileSettingsValue(profile: string): any;
+export declare function useProfileSettingsValue<T extends Settings>(profile: string): T;
 ```
 
 ## Parameters
@@ -20,6 +20,6 @@ export declare function useProfileSettingsValue(profile: string): any;
 
 <b>Returns:</b>
 
-any
+T
 
 

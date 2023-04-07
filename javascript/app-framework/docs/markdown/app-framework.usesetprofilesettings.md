@@ -9,7 +9,7 @@ Get the setter for a profile's settings.
 <b>Signature:</b>
 
 ```typescript
-export declare function useSetProfileSettings(profile: string): SetterOrUpdater<any>;
+export declare function useSetProfileSettings<T extends Settings>(profile: string): SetterOrUpdater<T>;
 ```
 
 ## Parameters
@@ -20,5 +20,5 @@ export declare function useSetProfileSettings(profile: string): SetterOrUpdater<
 
 <b>Returns:</b>
 
-SetterOrUpdater&lt;any&gt;
+SetterOrUpdater&lt;T&gt;
 
