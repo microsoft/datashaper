@@ -7,6 +7,7 @@ import {
 	atomFamily,
 	useRecoilValue,
 	useRecoilState,
+	useRecoilTransaction_UNSTABLE,
 } from 'recoil'
 import type { ApplicationSettings } from '../types.js'
 import type { SetterOrUpdater } from 'recoil'
@@ -29,6 +30,16 @@ const settingsFamily = atomFamily<any, string>({
 	},
 })
 
+/**
+ * Create a callback for dynamically setting profile settings.
+ * @returns 
+ */
+export function useProfileSettingsInitializer(): (profile: string, value: any) => void {
+	return useRecoilTransaction_UNSTABLE(({ set }) => 
+		(profile: string, value: any) => set(settingsFamily(profile), value)
+		
+	)
+}
 /**
  * Get the recoil state tuple for top-level application settings
  * @returns

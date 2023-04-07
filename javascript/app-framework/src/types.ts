@@ -130,6 +130,12 @@ export interface AppProfile<
 	 * @returns
 	 */
 	getHelp?: () => Record<string, string>
+	/**
+	 * Profiles may supply a block of settings values that the user can configure.
+	 * These will be displayed/edited in a centralized UX, and passed as props to the profile renderer.
+	 * @returns 
+	 */
+	getSettings?: () => Record<string, string | number | boolean>
 }
 
 export enum CommandBarSection {

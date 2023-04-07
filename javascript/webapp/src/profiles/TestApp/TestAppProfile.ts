@@ -96,6 +96,13 @@ export class TestAppProfile implements AppProfile<TestAppResource> {
 			},
 		]
 	}
+
+	public getSettings(): Record<string, string | number | boolean> {
+		return {
+			title: 'Tester',
+			version: 1
+		}
+	}
 }
 
 // if the source is a sibling, create a symlink

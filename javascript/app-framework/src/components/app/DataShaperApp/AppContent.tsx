@@ -9,7 +9,7 @@ import { AppServicesContext } from '../../../context/app_services/index.js'
 import { EMPTY_OBJECT } from '../../../empty.js'
 import type { ResourceRoute } from '../../../types.js'
 import { RenameModal } from '../../modals/index.js'
-import { useFlattened, useRegisteredProfiles } from './AppLayout.hooks.js'
+import { useFlattened, useRegisterProfileSettings, useRegisteredProfiles } from './AppLayout.hooks.js'
 import { useResourceRoutes } from './useResourceRoutes.js'
 import type { AppContentProps } from './AppContent.types.js'
 
@@ -28,7 +28,7 @@ export const AppContent: React.FC<AppContentProps> = memo(function AppContent({
 	const appProfiles = useRegisteredProfiles(api, profiles)
 	const resources = useResourceRoutes(api, appProfiles)
 	const flattenedRoutes = useFlattened(resources)
-
+	useRegisterProfileSettings(appProfiles)
 	return (
 		<AppServicesContext.Provider value={api}>
 			<Routes>
