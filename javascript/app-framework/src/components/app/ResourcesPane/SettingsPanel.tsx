@@ -10,7 +10,7 @@ import type { SettingsPanelProps } from './SettingsPanel.types.js'
 import { icons } from './ResourcesPane.styles.js'
 import { CollapsiblePanel, Settings } from '@essex/components'
 import type { AppProfile } from '../../../types.js'
-import { useFrameworkSettings } from '../../../settings/index.js'
+import { useProfileSettings } from '../../../settings/index.js'
 
 export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
 	function SettingsPanel({ onToggleExpanded, profiles }) {
@@ -35,7 +35,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
 )
 
 const SettingsBlock: React.FC<{ profile: ProfileMeta }> = ({ profile }) => {
-	const [settings, setter] = useFrameworkSettings(profile.key)
+	const [settings, setter] = useProfileSettings(profile.key)
 	const handleChange = useCallback(
 		(key: string, value: any) => setter({ [key]: value }),
 		[setter],

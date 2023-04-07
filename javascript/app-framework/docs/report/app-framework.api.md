@@ -20,6 +20,7 @@ import type { ProfileHandler } from '@datashaper/workflow';
 import type { default as React_2 } from 'react';
 import type { Resource } from '@datashaper/workflow';
 import type { ResourceSchema } from '@datashaper/schema';
+import type { SetterOrUpdater } from 'recoil';
 import type { Snapshot } from 'recoil';
 import type { TableBundle } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
@@ -178,6 +179,19 @@ export enum ResourceTreeViewMode {
     Hidden = "hidden"
 }
 
+// Warning: (ae-missing-release-tag) "useApplicationSettings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useApplicationSettings(): [
+ApplicationSettings,
+SetterOrUpdater<ApplicationSettings>
+];
+
+// Warning: (ae-missing-release-tag) "useApplicationSettingsValue" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useApplicationSettingsValue(): ApplicationSettings;
+
 // Warning: (ae-missing-release-tag) "useDataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -192,16 +206,6 @@ export function useDatasetMenuItems(selected: string | undefined, onClick: (tabl
 //
 // @public
 export function useDataTableSource(pkg: DataTable | undefined): Maybe<TableContainer>;
-
-// Warning: (ae-missing-release-tag) "useFrameworkSettings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useFrameworkSettings(resource?: string): [any, (value: any, key?: string) => void];
-
-// Warning: (ae-missing-release-tag) "useFrameworkSettingsValue" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useFrameworkSettingsValue(resource?: string): any;
 
 // Warning: (ae-missing-release-tag) "useHelpOnMount" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -229,10 +233,25 @@ export function useOnOutsideClick(ref: MutableRefObject<HTMLElement | null>, onC
 // @public (undocumented)
 export function usePersistenceService(): PersistenceService;
 
-// Warning: (ae-missing-release-tag) "useSetFrameworkSettings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "useProfileSettings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useSetFrameworkSettings(resource?: string): (value: any, key?: string) => void;
+export function useProfileSettings(profile: string): [any, SetterOrUpdater<any>];
+
+// Warning: (ae-missing-release-tag) "useProfileSettingsValue" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useProfileSettingsValue(profile: string): any;
+
+// Warning: (ae-missing-release-tag) "useSetApplicationSettings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useSetApplicationSettings(): SetterOrUpdater<ApplicationSettings>;
+
+// Warning: (ae-missing-release-tag) "useSetProfileSettings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useSetProfileSettings(profile: string): SetterOrUpdater<any>;
 
 // Warning: (ae-missing-release-tag) "useTableBundle" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

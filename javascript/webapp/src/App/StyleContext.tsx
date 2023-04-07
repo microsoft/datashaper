@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useFrameworkSettingsValue } from '@datashaper/app-framework'
+import { useApplicationSettingsValue } from '@datashaper/app-framework'
 import { loadById } from '@thematic/core'
 import { loadFluentTheme, ThematicFluentProvider } from '@thematic/fluent'
 import { ApplicationStyles } from '@thematic/react'
@@ -19,7 +19,7 @@ export const StyleContext: React.FC<
 		/* nothing */
 	}>
 > = memo(function StyleContext({ children }) {
-	const settings = useFrameworkSettingsValue()
+	const settings = useApplicationSettingsValue()
 	const theme = loadById('default', {
 		dark: settings.darkMode,
 	})

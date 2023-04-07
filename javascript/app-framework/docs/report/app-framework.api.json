@@ -1975,6 +1975,88 @@
         },
         {
           "kind": "Function",
+          "canonicalReference": "@datashaper/app-framework!useApplicationSettings:function(1)",
+          "docComment": "/**\n * Get the recoil state tuple for top-level application settings\n *\n * @returns \n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useApplicationSettings(): "
+            },
+            {
+              "kind": "Content",
+              "text": "[\n    "
+            },
+            {
+              "kind": "Reference",
+              "text": "ApplicationSettings",
+              "canonicalReference": "@datashaper/app-framework!ApplicationSettings:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ",\n    "
+            },
+            {
+              "kind": "Reference",
+              "text": "SetterOrUpdater",
+              "canonicalReference": "recoil!SetterOrUpdater:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "ApplicationSettings",
+              "canonicalReference": "@datashaper/app-framework!ApplicationSettings:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">\n]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 8
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [],
+          "name": "useApplicationSettings"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/app-framework!useApplicationSettingsValue:function(1)",
+          "docComment": "/**\n * Get the application settings value only.\n *\n * @returns \n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useApplicationSettingsValue(): "
+            },
+            {
+              "kind": "Reference",
+              "text": "ApplicationSettings",
+              "canonicalReference": "@datashaper/app-framework!ApplicationSettings:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [],
+          "name": "useApplicationSettingsValue"
+        },
+        {
+          "kind": "Function",
           "canonicalReference": "@datashaper/app-framework!useDataPackage:function(1)",
           "docComment": "",
           "excerptTokens": [
@@ -2124,94 +2206,6 @@
             }
           ],
           "name": "useDataTableSource"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/app-framework!useFrameworkSettings:function(1)",
-          "docComment": "/**\n * Return a [value, setter] tuple for a resource's settings, just like the normal recoil useRecoilState. The variant here is that this allows you to target a specific resource's settings, and the setter also optionally accepts a key to target a specific value instead of the entire block. Note that setting the entire block does a merge over the previous, not a complete overwrite.\n *\n * @param resource - \n *\n * @returns \n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function useFrameworkSettings(resource?: "
-            },
-            {
-              "kind": "Content",
-              "text": "string"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Content",
-              "text": "[any, (value: any, key?: string) => void]"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 3,
-            "endIndex": 4
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "resource",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": true
-            }
-          ],
-          "name": "useFrameworkSettings"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/app-framework!useFrameworkSettingsValue:function(1)",
-          "docComment": "/**\n * Get a settings block for a resource.\n *\n * @param resource - \n *\n * @returns \n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function useFrameworkSettingsValue(resource?: "
-            },
-            {
-              "kind": "Content",
-              "text": "string"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Content",
-              "text": "any"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 3,
-            "endIndex": 4
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "resource",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": true
-            }
-          ],
-          "name": "useFrameworkSettingsValue"
         },
         {
           "kind": "Function",
@@ -2416,12 +2410,12 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@datashaper/app-framework!useSetFrameworkSettings:function(1)",
-          "docComment": "/**\n * Get a setter for a resource's settings. If a key is provided in the setter, only that value is written, Otherwise it is the entire block. Note that setting the entire block does a merge over the previous, not a complete overwrite.\n */\n",
+          "canonicalReference": "@datashaper/app-framework!useProfileSettings:function(1)",
+          "docComment": "/**\n * Get the recoil state tuple for a specific profile's settings\n *\n * @param profile - \n *\n * @returns \n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare function useSetFrameworkSettings(resource?: "
+              "text": "export declare function useProfileSettings(profile: "
             },
             {
               "kind": "Content",
@@ -2433,7 +2427,60 @@
             },
             {
               "kind": "Content",
-              "text": "(value: any, key?: string) => void"
+              "text": "[any, "
+            },
+            {
+              "kind": "Reference",
+              "text": "SetterOrUpdater",
+              "canonicalReference": "recoil!SetterOrUpdater:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<any>]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 6
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "profile",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "useProfileSettings"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/app-framework!useProfileSettingsValue:function(1)",
+          "docComment": "/**\n * Get a profile's settings value only.\n *\n * @param profile - \n *\n * @returns \n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useProfileSettingsValue(profile: "
+            },
+            {
+              "kind": "Content",
+              "text": "string"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "any"
             },
             {
               "kind": "Content",
@@ -2448,15 +2495,105 @@
           "overloadIndex": 1,
           "parameters": [
             {
-              "parameterName": "resource",
+              "parameterName": "profile",
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isOptional": true
+              "isOptional": false
             }
           ],
-          "name": "useSetFrameworkSettings"
+          "name": "useProfileSettingsValue"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/app-framework!useSetApplicationSettings:function(1)",
+          "docComment": "/**\n * Get the setter for application settings.\n *\n * @returns \n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useSetApplicationSettings(): "
+            },
+            {
+              "kind": "Reference",
+              "text": "SetterOrUpdater",
+              "canonicalReference": "recoil!SetterOrUpdater:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "ApplicationSettings",
+              "canonicalReference": "@datashaper/app-framework!ApplicationSettings:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 5
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [],
+          "name": "useSetApplicationSettings"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/app-framework!useSetProfileSettings:function(1)",
+          "docComment": "/**\n * Get the setter for a profile's settings.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useSetProfileSettings(profile: "
+            },
+            {
+              "kind": "Content",
+              "text": "string"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "SetterOrUpdater",
+              "canonicalReference": "recoil!SetterOrUpdater:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<any>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 5
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "profile",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "useSetProfileSettings"
         },
         {
           "kind": "Function",

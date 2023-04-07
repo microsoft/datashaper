@@ -16,17 +16,20 @@
 
 |  Function | Description |
 |  --- | --- |
+|  [useApplicationSettings()](./app-framework.useapplicationsettings.md) | Get the recoil state tuple for top-level application settings |
+|  [useApplicationSettingsValue()](./app-framework.useapplicationsettingsvalue.md) | Get the application settings value only. |
 |  [useDataPackage()](./app-framework.usedatapackage.md) |  |
 |  [useDatasetMenuItems(selected, onClick)](./app-framework.usedatasetmenuitems.md) |  |
 |  [useDataTableSource(pkg)](./app-framework.usedatatablesource.md) | Use the raw source table from a data package without any workflow applied to it. |
-|  [useFrameworkSettings(resource)](./app-framework.useframeworksettings.md) | Return a \[value, setter\] tuple for a resource's settings, just like the normal recoil useRecoilState. The variant here is that this allows you to target a specific resource's settings, and the setter also optionally accepts a key to target a specific value instead of the entire block. Note that setting the entire block does a merge over the previous, not a complete overwrite. |
-|  [useFrameworkSettingsValue(resource)](./app-framework.useframeworksettingsvalue.md) | Get a settings block for a resource. |
 |  [useHelpOnMount(key)](./app-framework.usehelponmount.md) | Request help when a component renders |
 |  [useLoadDataPackage()](./app-framework.useloaddatapackage.md) | Load a datapackage json from a URL |
 |  [useMenuButtonStyles()](./app-framework.usemenubuttonstyles.md) |  |
 |  [useOnOutsideClick(ref, onClickOutside)](./app-framework.useonoutsideclick.md) | Hook that alerts clicks outside of the passed ref |
 |  [usePersistenceService()](./app-framework.usepersistenceservice.md) |  |
-|  [useSetFrameworkSettings(resource)](./app-framework.usesetframeworksettings.md) | Get a setter for a resource's settings. If a key is provided in the setter, only that value is written, Otherwise it is the entire block. Note that setting the entire block does a merge over the previous, not a complete overwrite. |
+|  [useProfileSettings(profile)](./app-framework.useprofilesettings.md) | Get the recoil state tuple for a specific profile's settings |
+|  [useProfileSettingsValue(profile)](./app-framework.useprofilesettingsvalue.md) | Get a profile's settings value only. |
+|  [useSetApplicationSettings()](./app-framework.usesetapplicationsettings.md) | Get the setter for application settings. |
+|  [useSetProfileSettings(profile)](./app-framework.usesetprofilesettings.md) | Get the setter for a profile's settings. |
 |  [useTableBundle(name)](./app-framework.usetablebundle.md) |  |
 |  [useTableBundleOutput(pkg)](./app-framework.usetablebundleoutput.md) | Uses the latest table from a data package. This is updatde as the package changes |
 |  [useTableBundles()](./app-framework.usetablebundles.md) |  |

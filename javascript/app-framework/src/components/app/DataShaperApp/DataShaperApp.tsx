@@ -6,7 +6,7 @@ import { memo, useEffect } from 'react'
 import { DataPackageProvider } from '../../../context/index.js'
 import type { DataShaperAppProps } from './DataShaperApp.types.js'
 import { AppLayout } from './AppLayout.js'
-import { useSetFrameworkSettings } from '../../../settings/index.js'
+import { useSetApplicationSettings } from '../../../settings/index.js'
 import type { ApplicationSettings } from '../../../types.js'
 
 /**
@@ -29,8 +29,8 @@ export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 )
 
 function useSetDefaultSettings(settings?: ApplicationSettings) {
-	const setter = useSetFrameworkSettings()
+	const setter = useSetApplicationSettings()
 	useEffect(() => {
-		setter(settings)
+		setter((prev) => ({ ...prev, ...settings }))
 	}, [settings, setter])
 }
