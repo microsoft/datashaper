@@ -6,12 +6,10 @@ import { initializeIcons } from '@fluentui/font-icons-mdl2'
 import { createRoot } from 'react-dom/client'
 
 import { App } from './App/index.js'
-import { setDefaultSettings } from './localStorageHandler/index.js'
 
 function mount(): void {
 	try {
 		const rootElement = document.getElementById('root')
-		setDefaultSettings()
 		const root = createRoot(rootElement!)
 		root.render(<App />)
 	} catch (err) {

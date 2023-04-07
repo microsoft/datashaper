@@ -23,4 +23,5 @@ export interface DataShaperAppProps
 |  [initialDataPackageUrl?](./app-framework.datashaperappprops.initialdatapackageurl.md) |  | string | <i>(Optional)</i> The initial data-package URL to load (useful for demos) |
 |  [initialRoute?](./app-framework.datashaperappprops.initialroute.md) |  | string | <i>(Optional)</i> The initial route to load (useful for demos). Resources are routed under <code>/resource/{resource.name}</code> |
 |  [profiles?](./app-framework.datashaperappprops.profiles.md) |  | [AppProfile](./app-framework.appprofile.md)<!-- -->\[\] | <i>(Optional)</i> Custom profile renderers |
+|  [settings?](./app-framework.datashaperappprops.settings.md) |  | Record&lt;string, [ApplicationSettings](./app-framework.applicationsettings.md)<!-- -->&gt; | <i>(Optional)</i> Object of application-level settings. If unset, defaults will be used. If only partially set, defaults will be used for the unset values. |
 

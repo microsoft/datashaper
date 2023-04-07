@@ -16,6 +16,7 @@ export interface FieldWellItem
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [disabled?](./react.fieldwellitem.disabled.md) |  | boolean | <i>(Optional)</i> Indicate if the well is disabled - this will render the well as disabled. |
 |  [icon?](./react.fieldwellitem.icon.md) |  | string | <i>(Optional)</i> Name of an icon to render in front of the well dropdown. |
 |  [key](./react.fieldwellitem.key.md) |  | string | Unique key for the well. |
 |  [onChange?](./react.fieldwellitem.onchange.md) |  | (key: string) =&gt; void | <i>(Optional)</i> Change handler for the dropdown, presenting the new selected key. |

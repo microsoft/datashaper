@@ -19,11 +19,14 @@
 |  [useDataPackage()](./app-framework.usedatapackage.md) |  |
 |  [useDatasetMenuItems(selected, onClick)](./app-framework.usedatasetmenuitems.md) |  |
 |  [useDataTableSource(pkg)](./app-framework.usedatatablesource.md) | Use the raw source table from a data package without any workflow applied to it. |
+|  [useFrameworkSettings(resource)](./app-framework.useframeworksettings.md) | Return a \[value, setter\] tuple for a resource's settings, just like the normal recoil useRecoilState. The variant here is that this allows you to target a specific resource's settings, and the setter also optionally accepts a key to target a specific value instead of the entire block. Note that setting the entire block does a merge over the previous, not a complete overwrite. |
+|  [useFrameworkSettingsValue(resource)](./app-framework.useframeworksettingsvalue.md) | Get a settings block for a resource. |
 |  [useHelpOnMount(key)](./app-framework.usehelponmount.md) | Request help when a component renders |
 |  [useLoadDataPackage()](./app-framework.useloaddatapackage.md) | Load a datapackage json from a URL |
 |  [useMenuButtonStyles()](./app-framework.usemenubuttonstyles.md) |  |
 |  [useOnOutsideClick(ref, onClickOutside)](./app-framework.useonoutsideclick.md) | Hook that alerts clicks outside of the passed ref |
 |  [usePersistenceService()](./app-framework.usepersistenceservice.md) |  |
+|  [useSetFrameworkSettings(resource)](./app-framework.usesetframeworksettings.md) | Get a setter for a resource's settings. If a key is provided in the setter, only that value is written, Otherwise it is the entire block. Note that setting the entire block does a merge over the previous, not a complete overwrite. |
 |  [useTableBundle(name)](./app-framework.usetablebundle.md) |  |
 |  [useTableBundleOutput(pkg)](./app-framework.usetablebundleoutput.md) | Uses the latest table from a data package. This is updatde as the package changes |
 |  [useTableBundles()](./app-framework.usetablebundles.md) |  |
@@ -32,6 +35,7 @@
 
 |  Interface | Description |
 |  --- | --- |
+|  [ApplicationSettings](./app-framework.applicationsettings.md) |  |
 |  [AppProfile](./app-framework.appprofile.md) | Classes implementing this interface are used to represent the Profile within the app framework. This largely includes user interface elements that build upon the underlying Profile functionality. |
 |  [AppProfileInitializationContext](./app-framework.appprofileinitializationcontext.md) |  |
 |  [AppServices](./app-framework.appservices.md) |  |

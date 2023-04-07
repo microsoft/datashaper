@@ -24,6 +24,14 @@ import type { Snapshot } from 'recoil';
 import type { TableBundle } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
 
+// Warning: (ae-missing-release-tag) "ApplicationSettings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ApplicationSettings {
+    // (undocumented)
+    darkMode?: boolean;
+}
+
 // Warning: (ae-missing-release-tag) "AppProfile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -91,6 +99,7 @@ export interface DataShaperAppProps {
     initialDataPackageUrl?: string;
     initialRoute?: string;
     profiles?: AppProfile[];
+    settings?: Record<string, ApplicationSettings>;
 }
 
 // Warning: (ae-missing-release-tag) "ProfileComponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -184,6 +193,16 @@ export function useDatasetMenuItems(selected: string | undefined, onClick: (tabl
 // @public
 export function useDataTableSource(pkg: DataTable | undefined): Maybe<TableContainer>;
 
+// Warning: (ae-missing-release-tag) "useFrameworkSettings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useFrameworkSettings(resource?: string): [any, (value: any, key?: string) => void];
+
+// Warning: (ae-missing-release-tag) "useFrameworkSettingsValue" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useFrameworkSettingsValue(resource?: string): any;
+
 // Warning: (ae-missing-release-tag) "useHelpOnMount" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -209,6 +228,11 @@ export function useOnOutsideClick(ref: MutableRefObject<HTMLElement | null>, onC
 //
 // @public (undocumented)
 export function usePersistenceService(): PersistenceService;
+
+// Warning: (ae-missing-release-tag) "useSetFrameworkSettings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useSetFrameworkSettings(resource?: string): (value: any, key?: string) => void;
 
 // Warning: (ae-missing-release-tag) "useTableBundle" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

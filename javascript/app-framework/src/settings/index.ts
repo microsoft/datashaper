@@ -19,7 +19,7 @@ const settingsFamily = atomFamily<any, string>({
 			case 'application':
 				return defaultApplicationSettings
 			default:
-				return {}
+				return undefined
 		}
 	},
 })
@@ -33,8 +33,9 @@ const settingsFamily = atomFamily<any, string>({
  * @returns
  */
 export function useFrameworkSettings(
+	// TODO: rather than use this as a magic key, we can expose a standalone hook for getting application settings that consumers can use
 	resource = 'application',
-): [any, (value: any, key?: string) => void] {
+): [any, (update: any) => void] {
 	const value = useFrameworkSettingsValue(resource)
 	const setter = useSetFrameworkSettings(resource)
 	return [value, setter]
@@ -51,26 +52,18 @@ export function useFrameworkSettingsValue(resource = 'application'): any {
 
 /**
  * Get a setter for a resource's settings.
- * If a key is provided in the setter, only that value is written,
- * Otherwise it is the entire block.
- * Note that setting the entire block does a merge over the previous, not a complete overwrite.
+ * Note that this does a *merge* over the previous, not a complete overwrite.
  */
 export function useSetFrameworkSettings(
 	resource = 'application',
-): (value: any, key?: string) => void {
+): (update: any) => void {
 	const setter = useSetRecoilState(settingsFamily(resource))
 	return useCallback(
-		(value: any, key?: string) => {
+		(update: any) => {
 			setter((prev: any) => {
-				if (key) {
-					return {
-						...prev,
-						[key]: value,
-					}
-				}
 				return {
 					...prev,
-					...value,
+					...update,
 				}
 			})
 		},

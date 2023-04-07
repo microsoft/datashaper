@@ -2,38 +2,38 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import localforage from 'localforage'
+// import localforage from 'localforage'
 
-import type { Settings } from '../models/Settings.js'
+// import type { Settings } from '../models/Settings.js'
 
-export async function setDarkMode(isDarkMode: boolean): Promise<void> {
-	await localforage.setItem('isDarkMode', isDarkMode).catch((error) => {
-		console.log('error saving into indexDB')
-	})
-}
+// export async function setDarkMode(isDarkMode: boolean): Promise<void> {
+// 	await localforage.setItem('isDarkMode', isDarkMode).catch((error) => {
+// 		console.log('error saving into indexDB')
+// 	})
+// }
 
-export async function isDarkMode(): Promise<boolean> {
-	const darkMode = await localforage.getItem('isDarkMode')
-	let darkModeCasted = false
+// export async function isDarkMode(): Promise<boolean> {
+// 	const darkMode = await localforage.getItem('isDarkMode')
+// 	let darkModeCasted = false
 
-	if (darkMode !== undefined) darkModeCasted = darkMode as boolean
+// 	if (darkMode !== undefined) darkModeCasted = darkMode as boolean
 
-	return darkModeCasted
-}
+// 	return darkModeCasted
+// }
 
-async function setDefaultDarkModeValue(): Promise<void> {
-	const darkMode = await localforage.getItem('isDarkMode')
-	if (darkMode === undefined) setDarkMode(false)
-}
+// async function setDefaultDarkModeValue(): Promise<void> {
+// 	const darkMode = await localforage.getItem('isDarkMode')
+// 	if (darkMode === undefined) setDarkMode(false)
+// }
 
-export function setDefaultSettings(): void {
-	setDefaultDarkModeValue()
-}
+// export function setDefaultSettings(): void {
+// 	setDefaultDarkModeValue()
+// }
 
-export async function getDefaultSettings(): Promise<Settings> {
-	const settingsResponse: Settings = {
-		isDarkMode: await isDarkMode(),
-	}
+// export async function getDefaultSettings(): Promise<Settings> {
+// 	const settingsResponse: Settings = {
+// 		isDarkMode: await isDarkMode(),
+// 	}
 
-	return settingsResponse
-}
+// 	return settingsResponse
+// }

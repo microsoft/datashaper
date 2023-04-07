@@ -2337,6 +2337,33 @@
           "members": [
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!FieldWellItem#disabled:member",
+              "docComment": "/**\n * Indicate if the well is disabled - this will render the well as disabled.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "disabled?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "disabled",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/react!FieldWellItem#icon:member",
               "docComment": "/**\n * Name of an icon to render in front of the well dropdown.\n */\n",
               "excerptTokens": [
