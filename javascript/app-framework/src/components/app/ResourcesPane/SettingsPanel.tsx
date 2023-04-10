@@ -9,8 +9,11 @@ import { Container, Content, Header, Inner } from './SettingsPanel.styles.js'
 import type { SettingsPanelProps } from './SettingsPanel.types.js'
 import { icons } from './ResourcesPane.styles.js'
 import { CollapsiblePanel, Settings } from '@essex/components'
-import type { AppProfile } from '../../../types.js'
-import { useProfileSettings } from '../../../settings/index.js'
+import type { AppProfile, ProfileSettings } from '../../../types.js'
+import {
+	useApplicationSettings,
+	useProfileSettings,
+} from '../../../settings/index.js'
 
 export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
 	function SettingsPanel({ onToggleExpanded, profiles }) {
@@ -22,9 +25,10 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
 					Settings
 				</Header>
 				<Content>
+					<ApplicationBlock />
 					{blocks.map((block) => (
-						<SettingsBlock
-							key={`settings-block-${block.key}`}
+						<ProfileBlock
+							key={`settings-block-${block.profile}`}
 							profile={block}
 						/>
 					))}
@@ -34,19 +38,33 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
 	},
 )
 
-const SettingsBlock: React.FC<{ profile: ProfileMeta }> = ({ profile }) => {
-	const [settings, setter] = useProfileSettings(profile.key)
+const ApplicationBlock: React.FC = () => {
+	const [settings, setter] = useApplicationSettings()
+	return (
+		<SettingsBlock title={'Application'} settings={settings} setter={setter} />
+	)
+}
+
+const ProfileBlock: React.FC<{ profile: AppProfile }> = ({ profile }) => {
+	const [settings, setter] = useProfileSettings(profile.profile)
+
+	return (
+		<SettingsBlock title={profile.title} settings={settings} setter={setter} />
+	)
+}
+
+const SettingsBlock: React.FC<{
+	title: string
+	settings: ProfileSettings
+	setter: any
+}> = ({ title, settings, setter }) => {
 	const handleChange = useCallback(
 		(key: string, value: any) =>
 			setter((prev: any) => ({ ...prev, [key]: value })),
 		[setter],
 	)
-	// TODO: this shouldn't be necessary - app services should _only_ provide the profiles with registered settings
-	if (!settings) {
-		return null
-	}
 	return (
-		<CollapsiblePanel title={profile.title}>
+		<CollapsiblePanel title={title}>
 			<Inner>
 				<Settings settings={settings} onChange={handleChange} />
 			</Inner>
@@ -54,25 +72,13 @@ const SettingsBlock: React.FC<{ profile: ProfileMeta }> = ({ profile }) => {
 	)
 }
 
-interface ProfileMeta {
-	key: string
-	title: string
-}
-
-// TODO: this should all move into the app services
 function useUnwrapProfiles(profiles: Map<string, AppProfile>) {
 	return useMemo(() => {
-		const blocks: ProfileMeta[] = [
-			{
-				key: '--application--',
-				title: 'Application',
-			},
-		]
-		profiles.forEach((value, key) => {
-			blocks.push({
-				key,
-				title: value.title,
-			})
+		const blocks: AppProfile[] = []
+		profiles.forEach((profile) => {
+			if (profile.getSettings) {
+				blocks.push(profile)
+			}
 		})
 		return blocks.sort((a, b) => a.title.localeCompare(b.title))
 	}, [profiles])

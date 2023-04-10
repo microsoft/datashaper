@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Settings } from '@datashaper/app-framework'
+import type { ProfileSettings } from '@datashaper/app-framework'
 import { Resource } from '@datashaper/workflow'
 import { TEST_APP_PROFILE } from './constants.js'
 
@@ -48,7 +48,7 @@ export class TestAppResource extends Resource {
 	}
 }
 
-export interface TestAppSettings extends Settings {
+export interface TestAppSettings extends ProfileSettings {
 	title: string
 	version: number
 }

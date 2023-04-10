@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import {
-	type Settings,
+	type ProfileComponentProps,
 	RecoilBasedProfileHost,
 } from '@datashaper/app-framework'
 import { DefaultButton } from '@fluentui/react'
@@ -13,10 +13,8 @@ import { atom, useRecoilState } from 'recoil'
 
 import type { TestAppResource, TestAppSettings } from './TestAppResource.js'
 
-export interface TestAppProps {
-	resource: TestAppResource
-	settings: TestAppSettings
-}
+export interface TestAppProps
+	extends ProfileComponentProps<TestAppResource, TestAppSettings> {}
 
 export const TestApp: React.FC<TestAppProps> = memo(function TestApp({
 	resource,
@@ -52,7 +50,7 @@ const TestAppInner: React.FC<TestAppProps> = memo(function TestAppInner({
 
 	return (
 		<div style={{ margin: 20 }}>
-			<h1>{`Test App: ${settings.title} version ${settings.version}`}</h1>
+			<h1>{`Test App: ${settings?.title} version ${settings?.version}`}</h1>
 			<p>Value: {count}</p>
 			<div
 				style={{
