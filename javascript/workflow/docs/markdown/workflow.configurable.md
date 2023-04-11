@@ -15,4 +15,5 @@ export interface Configurable<T = unknown>
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [config](./workflow.configurable.config.md) |  | T |  |
+|  [config$](./workflow.configurable.config_.md) |  | Observable&lt;T&gt; |  |
 

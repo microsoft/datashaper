@@ -196,6 +196,8 @@ export const concat: (id: string) => SetOperationNode<unknown>;
 // @public (undocumented)
 export interface Configurable<T = unknown> {
     // (undocumented)
+    config$: Observable<T>;
+    // (undocumented)
     config: T;
 }
 

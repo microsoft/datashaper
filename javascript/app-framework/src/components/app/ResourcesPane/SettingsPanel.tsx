@@ -25,7 +25,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
 					<ApplicationBlock />
 					{blocks.map((block) => (
 						<ResourceBlock
-							key={`settings-block-${block.profile}`}
+							key={`settings-block-${block.name}`}
 							resource={block}
 						/>
 					))}

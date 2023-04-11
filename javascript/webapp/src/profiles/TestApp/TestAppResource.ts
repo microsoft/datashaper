@@ -4,6 +4,8 @@
  */
 import type { Configurable } from '@datashaper/workflow'
 import { Resource } from '@datashaper/workflow'
+import type { Observable } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
 import { TEST_APP_PROFILE } from './constants.js'
 
 export interface TestAppConfig {
@@ -19,8 +21,11 @@ export class TestAppResource
 	public readonly profile = TEST_APP_PROFILE
 	private _count = 0
 	private _input: string | undefined
-	private _config: TestAppConfig = { title: 'Tester', version: 1 }
 
+	private _config$ = new BehaviorSubject<TestAppConfig>({
+		title: 'Tester',
+		version: 1,
+	})
 	public override defaultName(): string {
 		return 'Test App'
 	}
@@ -43,12 +48,16 @@ export class TestAppResource
 		return this._input
 	}
 
+	public get config$(): Observable<TestAppConfig> {
+		return this._config$
+	}
+
 	public get config(): TestAppConfig {
-		return this._config
+		return this._config$.value
 	}
 
 	public set config(value: TestAppConfig) {
-		this._config = value
+		this._config$.next(value)
 		this._onChange.next()
 	}
 

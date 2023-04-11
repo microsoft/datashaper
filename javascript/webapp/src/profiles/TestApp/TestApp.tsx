@@ -7,6 +7,7 @@ import {
 	RecoilBasedProfileHost,
 } from '@datashaper/app-framework'
 import { DefaultButton } from '@fluentui/react'
+import { useObservableState } from 'observable-hooks'
 import { memo, useCallback } from 'react'
 import type { MutableSnapshot, Snapshot } from 'recoil'
 import { atom, useRecoilState } from 'recoil'
@@ -45,10 +46,10 @@ const TestAppInner: React.FC<TestAppProps> = memo(function TestAppInner({
 	const [count, setCount] = useRecoilState(countState)
 	const increment = useCallback(() => setCount((c) => c + 1), [setCount])
 	const decrement = useCallback(() => setCount((c) => c - 1), [setCount])
-
+	const config = useObservableState(resource.config$, resource.config)
 	return (
 		<div style={{ margin: 20 }}>
-			<h1>{`Test App: ${resource.config.title} version ${resource.config.version}`}</h1>
+			<h1>{`Test App: ${config.title} version ${config.version}`}</h1>
 			<p>Value: {count}</p>
 			<div
 				style={{
