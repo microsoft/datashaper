@@ -191,6 +191,14 @@ export function columnTransformVerbs(filter?: (verb: Verb) => boolean): Verb[];
 // @public (undocumented)
 export const concat: (id: string) => SetOperationNode<unknown>;
 
+// Warning: (ae-missing-release-tag) "Configurable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface Configurable<T extends ResourceConfig = ResourceConfig> {
+    // (undocumented)
+    config: T;
+}
+
 // Warning: (ae-missing-release-tag) "convert" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -857,6 +865,11 @@ export abstract class Resource extends Named implements ResourceSchema, Resource
     // (undocumented)
     toSchema(): ResourceSchema;
 }
+
+// Warning: (ae-missing-release-tag) "ResourceConfig" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type ResourceConfig = {};
 
 // Warning: (ae-missing-release-tag) "ResourceConstructor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

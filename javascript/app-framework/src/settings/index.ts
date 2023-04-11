@@ -3,4 +3,3 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export * from './application.js'
-export * from './profiles.js'

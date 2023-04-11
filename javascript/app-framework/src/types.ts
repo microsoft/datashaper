@@ -78,7 +78,6 @@ export interface AppProfileInitializationContext {
 export interface AppProfile<
 	Res extends Resource = Resource,
 	Schema extends ResourceSchema = ResourceSchema,
-	Settings extends ProfileSettings = ProfileSettings,
 > extends ProfileHandler<Res, Schema, AppProfileInitializationContext> {
 	/**
 	 * A friendly title for the profile, used for resource creation. (e.g. "New <title>")
@@ -103,7 +102,6 @@ export interface AppProfile<
 		href: string
 		resource: Res
 		api: AppServices
-		settings: Settings
 	}>
 
 	/**
@@ -132,12 +130,6 @@ export interface AppProfile<
 	 * @returns
 	 */
 	getHelp?: () => Record<string, string>
-	/**
-	 * Profiles may supply a block of settings values that the user can configure.
-	 * These will be displayed/edited in a centralized UX, and passed as props to the profile renderer.
-	 * @returns
-	 */
-	getSettings?: () => Settings
 }
 
 export enum CommandBarSection {
@@ -156,12 +148,8 @@ export interface ResourceRouteGroup {
 	resources: ResourceRoute[]
 }
 
-export interface ProfileComponentProps<
-	T extends Resource,
-	S extends ProfileSettings = ProfileSettings,
-> {
+export interface ProfileComponentProps<T extends Resource> {
 	resource: T
-	settings?: S
 }
 
 export enum ResourceTreeViewMode {
@@ -170,8 +158,6 @@ export enum ResourceTreeViewMode {
 	Hidden = 'hidden',
 }
 
-export interface ProfileSettings {}
-
-export interface ApplicationSettings extends ProfileSettings {
+export interface ApplicationSettings {
 	darkMode?: boolean
 }

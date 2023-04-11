@@ -11,14 +11,12 @@ import { memo, useCallback } from 'react'
 import type { MutableSnapshot, Snapshot } from 'recoil'
 import { atom, useRecoilState } from 'recoil'
 
-import type { TestAppResource, TestAppSettings } from './TestAppResource.js'
+import type { TestAppResource } from './TestAppResource.js'
 
-export interface TestAppProps
-	extends ProfileComponentProps<TestAppResource, TestAppSettings> {}
+export interface TestAppProps extends ProfileComponentProps<TestAppResource> {}
 
 export const TestApp: React.FC<TestAppProps> = memo(function TestApp({
 	resource,
-	settings,
 }) {
 	return (
 		<RecoilBasedProfileHost
@@ -26,7 +24,7 @@ export const TestApp: React.FC<TestAppProps> = memo(function TestApp({
 			loadState={loadState}
 			saveState={saveState}
 		>
-			<TestAppInner resource={resource} settings={settings} />
+			<TestAppInner resource={resource} />
 		</RecoilBasedProfileHost>
 	)
 })
@@ -42,7 +40,7 @@ function saveState(resource: TestAppResource, snapshot: Snapshot): void {
 }
 
 const TestAppInner: React.FC<TestAppProps> = memo(function TestAppInner({
-	settings,
+	resource,
 }) {
 	const [count, setCount] = useRecoilState(countState)
 	const increment = useCallback(() => setCount((c) => c + 1), [setCount])
@@ -50,7 +48,7 @@ const TestAppInner: React.FC<TestAppProps> = memo(function TestAppInner({
 
 	return (
 		<div style={{ margin: 20 }}>
-			<h1>{`Test App: ${settings?.title} version ${settings?.version}`}</h1>
+			<h1>{`Test App: ${resource.config.title} version ${resource.config.version}`}</h1>
 			<p>Value: {count}</p>
 			<div
 				style={{

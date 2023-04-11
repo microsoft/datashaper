@@ -3,21 +3,22 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { IconButton } from '@fluentui/react'
-import { memo, useCallback, useMemo } from 'react'
-
+import React, { memo, useCallback, useMemo } from 'react'
 import { Container, Content, Header, Inner } from './SettingsPanel.styles.js'
 import type { SettingsPanelProps } from './SettingsPanel.types.js'
 import { icons } from './ResourcesPane.styles.js'
+import type {
+	Resource,
+	Configurable,
+	ResourceConfig,
+} from '@datashaper/workflow'
 import { CollapsiblePanel, Settings } from '@essex/components'
-import type { AppProfile, ProfileSettings } from '../../../types.js'
-import {
-	useApplicationSettings,
-	useProfileSettings,
-} from '../../../settings/index.js'
+import type { ResourceRouteGroup } from '../../../types.js'
+import { useApplicationSettings } from '../../../settings/index.js'
 
 export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
-	function SettingsPanel({ onToggleExpanded, profiles }) {
-		const blocks = useUnwrapProfiles(profiles)
+	function SettingsPanel({ onToggleExpanded, resources }) {
+		const blocks = useUnwrapResources(resources)
 		return (
 			<Container>
 				<Header>
@@ -27,9 +28,9 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
 				<Content>
 					<ApplicationBlock />
 					{blocks.map((block) => (
-						<ProfileBlock
+						<ResourceBlock
 							key={`settings-block-${block.profile}`}
-							profile={block}
+							resource={block}
 						/>
 					))}
 				</Content>
@@ -38,6 +39,9 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
 	},
 )
 
+/**
+ * Special settings block for global application.
+ */
 const ApplicationBlock: React.FC = () => {
 	const [settings, setter] = useApplicationSettings()
 	return (
@@ -45,18 +49,32 @@ const ApplicationBlock: React.FC = () => {
 	)
 }
 
-const ProfileBlock: React.FC<{ profile: AppProfile }> = ({ profile }) => {
-	const [settings, setter] = useProfileSettings(profile.profile)
+interface Res extends Resource, Configurable {}
 
+/**
+ * Settings block for a resource instance.
+ */
+const ResourceBlock: React.FC<{ resource: Res }> = ({ resource }) => {
+	const { config } = resource
+	const setter = useCallback(
+		(callback: (previous: ResourceConfig) => ResourceConfig) =>
+			(resource.config = callback(config)),
+		[resource, config],
+	)
 	return (
-		<SettingsBlock title={profile.title} settings={settings} setter={setter} />
+		<SettingsBlock title={resource.name} settings={config} setter={setter} />
 	)
 }
 
+/**
+ * Generic settings block for any type.
+ * Uses underlying essex auto-settings component.
+ * Note the mapping of essex onChange to an object updater pattern.
+ */
 const SettingsBlock: React.FC<{
 	title: string
-	settings: ProfileSettings
-	setter: any
+	settings: ResourceConfig
+	setter: (callback: (previous: ResourceConfig) => ResourceConfig) => void
 }> = ({ title, settings, setter }) => {
 	const handleChange = useCallback(
 		(key: string, value: any) =>
@@ -72,14 +90,15 @@ const SettingsBlock: React.FC<{
 	)
 }
 
-function useUnwrapProfiles(profiles: Map<string, AppProfile>) {
+/**
+ * Resource routes are grouped, and then have the actual resource nested as props.
+ * This flat maps and unpacks all of thate to return a single list of resources containing config blocks.
+ */
+function useUnwrapResources(resources: ResourceRouteGroup[]) {
 	return useMemo(() => {
-		const blocks: AppProfile[] = []
-		profiles.forEach((profile) => {
-			if (profile.getSettings) {
-				blocks.push(profile)
-			}
-		})
-		return blocks.sort((a, b) => a.title.localeCompare(b.title))
-	}, [profiles])
+		return resources
+			.flatMap((r) => r.resources)
+			.map((r) => r.props.resource)
+			.filter((res) => res.config !== undefined)
+	}, [resources])
 }

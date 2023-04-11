@@ -68,6 +68,7 @@
 
 |  Interface | Description |
 |  --- | --- |
+|  [Configurable](./workflow.configurable.md) |  |
 |  [Emitter](./workflow.emitter.md) | A data emitter for a type of output |
 |  [Graph](./workflow.graph.md) |  |
 |  [Node\_2](./workflow.node_2.md) | A graph processing node |
@@ -143,6 +144,7 @@
 |  [Maybe](./workflow.maybe.md) |  |
 |  [NodeId](./workflow.nodeid.md) |  |
 |  [Readable](./workflow.readable.md) |  |
+|  [ResourceConfig](./workflow.resourceconfig.md) |  |
 |  [SocketName](./workflow.socketname.md) |  |
 |  [StepFunction](./workflow.stepfunction.md) |  |
 |  [TableEmitter](./workflow.tableemitter.md) | An emitter for TableContainers |

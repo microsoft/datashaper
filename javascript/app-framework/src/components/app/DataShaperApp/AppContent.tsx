@@ -9,14 +9,9 @@ import { AppServicesContext } from '../../../context/app_services/index.js'
 import { EMPTY_OBJECT } from '../../../empty.js'
 import type { ResourceRoute } from '../../../types.js'
 import { RenameModal } from '../../modals/index.js'
-import {
-	useFlattened,
-	useRegisterProfileSettings,
-	useRegisteredProfiles,
-} from './AppLayout.hooks.js'
+import { useFlattened, useRegisteredProfiles } from './AppLayout.hooks.js'
 import { useResourceRoutes } from './useResourceRoutes.js'
 import type { AppContentProps } from './AppContent.types.js'
-import { useProfileSettingsValue } from '../../../settings/index.js'
 
 export const AppContent: React.FC<AppContentProps> = memo(function AppContent({
 	api,
@@ -33,7 +28,6 @@ export const AppContent: React.FC<AppContentProps> = memo(function AppContent({
 	const appProfiles = useRegisteredProfiles(api, profiles)
 	const resources = useResourceRoutes(api, appProfiles)
 	const flattenedRoutes = useFlattened(resources)
-	useRegisterProfileSettings(appProfiles)
 	return (
 		<AppServicesContext.Provider value={api}>
 			<Routes>
@@ -64,9 +58,6 @@ export const AppContent: React.FC<AppContentProps> = memo(function AppContent({
 
 const MatchedRoute: React.FC<{ data: ResourceRoute }> = memo(
 	function MatchedRoute({ data: { props, renderer: R, href } }) {
-		const settings = useProfileSettingsValue(props.resource.profile)
-		return R ? (
-			<R href={href} {...(props ?? EMPTY_OBJECT)} settings={settings} />
-		) : null
+		return R ? <R href={href} {...(props ?? EMPTY_OBJECT)} /> : null
 	},
 )

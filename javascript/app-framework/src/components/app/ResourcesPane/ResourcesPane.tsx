@@ -76,7 +76,7 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 						<Allotment.Pane>
 							<PanelContainer>
 								<SettingsPanel
-									profiles={profiles}
+									resources={resources}
 									onToggleExpanded={onToggleSettings}
 								/>
 							</PanelContainer>

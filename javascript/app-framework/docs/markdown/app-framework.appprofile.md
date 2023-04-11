@@ -9,7 +9,7 @@ Classes implementing this interface are used to represent the Profile within the
 <b>Signature:</b>
 
 ```typescript
-export interface AppProfile<Res extends Resource = Resource, Schema extends ResourceSchema = ResourceSchema, ProfileSettings extends Settings = Settings> extends ProfileHandler<Res, Schema, AppProfileInitializationContext> 
+export interface AppProfile<Res extends Resource = Resource, Schema extends ResourceSchema = ResourceSchema> extends ProfileHandler<Res, Schema, AppProfileInitializationContext> 
 ```
 <b>Extends:</b> ProfileHandler&lt;Res, Schema, [AppProfileInitializationContext](./app-framework.appprofileinitializationcontext.md)<!-- -->&gt;
 
@@ -21,9 +21,8 @@ export interface AppProfile<Res extends Resource = Resource, Schema extends Reso
 |  [getFieldWells?](./app-framework.appprofile.getfieldwells.md) |  | (resource: Res) =&gt; FieldWellItem\[\] | <i>(Optional)</i> Profiles can indicate interactive field wells to display directly in the resource tree. These field wells can be populated by the resources, and will be rendered as a dropdown. Each field well can also dictate an onChange that updates the resource (e.g., sets an input binding). |
 |  [getHelp?](./app-framework.appprofile.gethelp.md) |  | () =&gt; Record&lt;string, string&gt; | <i>(Optional)</i> Profiles may supply a map of help content to be displayed in the global panel when open. Each help record should have a unique key, and the value is the markdown content. |
 |  [getMenuItems?](./app-framework.appprofile.getmenuitems.md) |  | (resource: Res) =&gt; IContextualMenuItem\[\] | <i>(Optional)</i> Create contextual menu items for a resource |
-|  [getSettings?](./app-framework.appprofile.getsettings.md) |  | () =&gt; ProfileSettings | <i>(Optional)</i> Profiles may supply a block of settings values that the user can configure. These will be displayed/edited in a centralized UX, and passed as props to the profile renderer. |
 |  [group?](./app-framework.appprofile.group.md) |  | [ResourceGroupType](./app-framework.resourcegrouptype.md) | <i>(Optional)</i> The grouping for this resource type. The default is 'app'. This grouping determines what resources this is rendered with in the tree-view. |
 |  [iconName](./app-framework.appprofile.iconname.md) |  | string | The icon name to use in the file-tree |
-|  [renderer](./app-framework.appprofile.renderer.md) |  | React.ComponentType&lt;{ href: string; resource: Res; api: [AppServices](./app-framework.appservices.md)<!-- -->; settings: [Settings](./app-framework.settings.md)<!-- -->; }&gt; | Render the profile |
+|  [renderer](./app-framework.appprofile.renderer.md) |  | React.ComponentType&lt;{ href: string; resource: Res; api: [AppServices](./app-framework.appservices.md)<!-- -->; }&gt; | Render the profile |
 |  [title](./app-framework.appprofile.title.md) |  | string | A friendly title for the profile, used for resource creation. (e.g. "New <title>") |
 

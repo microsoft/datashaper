@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { AppProfile } from '../../../types.js'
+import type { ResourceRouteGroup } from '../../../types.js'
 
 export interface SettingsPanelProps {
 	onToggleExpanded: () => void
-	profiles: Map<string, AppProfile>
+	resources: ResourceRouteGroup[]
 }

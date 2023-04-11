@@ -17,7 +17,6 @@ import { DropdownMenuItemType } from '@fluentui/react'
 
 import { TEST_APP_PROFILE } from './constants.js'
 import { TestApp } from './TestApp.js'
-import type { TestAppSettings } from './TestAppResource.js'
 import { TestAppResource } from './TestAppResource.js'
 
 export class TestAppProfile implements AppProfile<TestAppResource> {
@@ -96,13 +95,6 @@ export class TestAppProfile implements AppProfile<TestAppResource> {
 				},
 			},
 		]
-	}
-
-	public getSettings(): TestAppSettings {
-		return {
-			title: 'Tester',
-			version: 1,
-		}
 	}
 }
 
