@@ -7,13 +7,9 @@ import React, { memo, useCallback, useMemo } from 'react'
 import { Container, Content, Header, Inner } from './SettingsPanel.styles.js'
 import type { SettingsPanelProps } from './SettingsPanel.types.js'
 import { icons } from './ResourcesPane.styles.js'
-import type {
-	Resource,
-	Configurable,
-	ResourceConfig,
-} from '@datashaper/workflow'
+import type { Resource, Configurable } from '@datashaper/workflow'
 import { CollapsiblePanel, Settings } from '@essex/components'
-import type { ResourceRouteGroup } from '../../../types.js'
+import type { ApplicationSettings, ResourceRouteGroup } from '../../../types.js'
 import { useApplicationSettings } from '../../../settings/index.js'
 
 export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
@@ -43,21 +39,28 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
  * Special settings block for global application.
  */
 const ApplicationBlock: React.FC = () => {
-	const [settings, setter] = useApplicationSettings()
+	const [settings, setSettings] = useApplicationSettings()
+	const setter = useCallback(
+		(callback: (previous: unknown) => unknown) =>
+			setSettings(callback(settings) as ApplicationSettings),
+		[settings, setSettings],
+	)
 	return (
 		<SettingsBlock title={'Application'} settings={settings} setter={setter} />
 	)
 }
 
-interface Res extends Resource, Configurable {}
+interface ConfigurableResource extends Resource, Configurable {}
 
 /**
  * Settings block for a resource instance.
  */
-const ResourceBlock: React.FC<{ resource: Res }> = ({ resource }) => {
+const ResourceBlock: React.FC<{ resource: ConfigurableResource }> = ({
+	resource,
+}) => {
 	const { config } = resource
 	const setter = useCallback(
-		(callback: (previous: ResourceConfig) => ResourceConfig) =>
+		(callback: (previous: unknown) => unknown) =>
 			(resource.config = callback(config)),
 		[resource, config],
 	)
@@ -73,8 +76,8 @@ const ResourceBlock: React.FC<{ resource: Res }> = ({ resource }) => {
  */
 const SettingsBlock: React.FC<{
 	title: string
-	settings: ResourceConfig
-	setter: (callback: (previous: ResourceConfig) => ResourceConfig) => void
+	settings: unknown
+	setter: (callback: (previous: unknown) => unknown) => void
 }> = ({ title, settings, setter }) => {
 	const handleChange = useCallback(
 		(key: string, value: any) =>

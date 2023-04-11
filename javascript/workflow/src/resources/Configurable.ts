@@ -1,5 +1,3 @@
-export type ResourceConfig = {}
-
-export interface Configurable<T extends ResourceConfig = ResourceConfig> {
+export interface Configurable<T = unknown> {
 	config: T
 }

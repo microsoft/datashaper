@@ -2,9 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Configurable, ResourceConfig } from '@datashaper/workflow'
+import type { Configurable } from '@datashaper/workflow'
 import { Resource } from '@datashaper/workflow'
 import { TEST_APP_PROFILE } from './constants.js'
+
+export interface TestAppConfig {
+	title: string
+	version: number
+}
 
 export class TestAppResource
 	extends Resource
@@ -61,9 +66,4 @@ export class TestAppResource
 		this.count = schema.count ?? 0
 		this.config = schema.config
 	}
-}
-
-export interface TestAppConfig extends ResourceConfig {
-	title: string
-	version: number
 }

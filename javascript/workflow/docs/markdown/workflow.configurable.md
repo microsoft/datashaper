@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface Configurable<T extends ResourceConfig = ResourceConfig> 
+export interface Configurable<T = unknown> 
 ```
 
 ## Properties
