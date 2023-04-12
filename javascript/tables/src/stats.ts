@@ -71,11 +71,8 @@ function requiredStats(table: ColumnTable): Record<string, any> {
 		acc[`${cur}.mode`] = op.mode(cur)
 		return acc
 	}, {} as Record<string, any>)
-	const result = table.rollup(args).objects()[0]
-	if (result == null) {
-		throw new Error('stats rollup unsuccessful')
-	}
-	return result
+	const result = table.rollup(args).objects()[0]	
+	return result ?? {}
 }
 
 function optionalStats(
@@ -96,10 +93,7 @@ function optionalStats(
 	}, {} as Record<string, any>)
 
 	const result = table.rollup(args).objects()[0]
-	if (result == null) {
-		throw new Error('optionalStats rollup unsuccessful')
-	}
-	return result
+	return result ?? {}
 }
 
 function binning(
