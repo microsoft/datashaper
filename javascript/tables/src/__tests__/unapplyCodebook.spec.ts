@@ -46,7 +46,7 @@ describe('unapply codebook tests', () => {
 
 		const element = codebookResult.fields.find(
 			(element) => element.name === 'diagnosis',
-		)!
+		)
 		const mappingElements: Record<number, string> = {
 			0: 'heart disease',
 			1: 'diabetes type I',
@@ -58,7 +58,7 @@ describe('unapply codebook tests', () => {
 
 		const element2 = codebookResult.fields.find(
 			(element) => element.name === 'test',
-		)!
+		)
 		const mappingElements2: Record<number, string> = {
 			0: 'Test1',
 			1: 'Test2',

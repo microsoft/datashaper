@@ -297,7 +297,7 @@
 			"name": "allergies",
 			"title": "Uses Allergy Medication",
 			"description": "USE ALLERGIES MEDICATION IN 1971,  1:EVER, 0:NEVER",
-			"type": "number",	
+			"type": "number",
 			"nature": "binary"
 		},
 		{

@@ -251,10 +251,7 @@
 			"args": {
 				"to": "Symbol",
 				"columns": [
-					"ticker-AAPL",
-					"ticker-AMZN",
-					"ticker-GOOG",
-					"ticker-MSFT",
+					"ticker-AAPL", "ticker-AMZN", "ticker-GOOG", "ticker-MSFT",
 					"ticker-ZNGA"
 				]
 			}

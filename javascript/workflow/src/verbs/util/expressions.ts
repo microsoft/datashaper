@@ -28,14 +28,16 @@ export function compareAll(
 	logical = BooleanOperator.OR,
 ): CompareWrapper {
 	return escape((d: Record<string, string | number>): 0 | 1 | null => {
-		const left = d[column]!
+		const left = d[column]
+
 		// TODO: the logical evaluate below has shortcuts that could optimize
 		// this check by shortcutting evaluation once it is clear the logical operator
 		// cannot be satisfied
 		const comparisons = criteria.map((filter) => {
 			const { value, operator, type } = filter
 			const right =
-				type === FilterCompareType.Column ? d[`${value.toString()}`]! : value
+				type === FilterCompareType.Column ? d[`${value.toString()}`] : value
+
 			return compareValues(left, right, operator)
 		})
 
@@ -64,9 +66,9 @@ export function compare(
 	type: FilterCompareType,
 ): CompareWrapper {
 	return escape((d: Record<string, string | number>): 0 | 1 | null => {
-		const left = d[column]!
+		const left = d[column]
 		const right =
-			type === FilterCompareType.Column ? d[`${value.toString()}`]! : value
+			type === FilterCompareType.Column ? d[`${value.toString()}`] : value
 
 		return compareValues(left, right, operator)
 	}) as CompareWrapper

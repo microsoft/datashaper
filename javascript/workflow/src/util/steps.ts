@@ -16,43 +16,43 @@ enum Tags {
 	 * An input table is required.
 	 * CHAIN and FETCH for example do not require table inputs.
 	 */
-	InputTable,
+	InputTable = 0,
 	/**
 	 * More than one input table is required (e.g., set operations).
 	 */
-	InputTableList,
+	InputTableList = 1,
 	/**
 	 * A single input column is input
 	 */
-	InputColumn,
+	InputColumn = 2,
 	/**
 	 * Input column list
 	 */
-	InputColumnList,
+	InputColumnList = 3,
 	/**
 	 * The column inputs are a map of string -> string
 	 */
-	InputColumnRecord,
+	InputColumnRecord = 4,
 	/**
 	 * A key and value input column are required
 	 */
-	InputKeyValue,
+	InputKeyValue = 5,
 	/**
 	 * A single output column is input
 	 */
-	OutputColumn,
+	OutputColumn = 6,
 	/**
 	 * This verb can modify the rows of a table
 	 */
-	RowModifying,
+	RowModifying = 7,
 	/**
 	 * This verb can only operate on numeric input columns
 	 */
-	NumericOnly,
+	NumericOnly = 8,
 	/**
 	 * This verb accepts no arguments.
 	 */
-	NoArgs,
+	NoArgs = 9,
 }
 
 // TODO: this could be cleaner with a bitwise operator

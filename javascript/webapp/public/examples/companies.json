@@ -17,28 +17,28 @@
 					"name": "codebook.json",
 					"profile": "codebook",
 					"fields": [
-					  {
-						"name": "ID",
-						"type": "number",
-						"nature": "ordinal"
-					  },
-					  {
-						"name": "Name",
-						"type": "string",
-						"nature": "nominal"
-					  },
-					  {
-						"name": "Employees",
-						"type": "number",
-						"nature": "discrete"
-					  },
-					  {
-						"name": "US",
-						"type": "boolean",
-						"nature": "binary"
-					  }
+						{
+							"name": "ID",
+							"type": "number",
+							"nature": "ordinal"
+						},
+						{
+							"name": "Name",
+							"type": "string",
+							"nature": "nominal"
+						},
+						{
+							"name": "Employees",
+							"type": "number",
+							"nature": "discrete"
+						},
+						{
+							"name": "US",
+							"type": "boolean",
+							"nature": "binary"
+						}
 					]
-				  }
+				}
 			]
 		},
 		{
@@ -57,43 +57,43 @@
 					"name": "codebook (1).json",
 					"profile": "codebook",
 					"fields": [
-					  {
-						"name": "ID",
-						"type": "number",
-						"nature": "discrete"
-					  },
-					  {
-						"name": "Name",
-						"type": "string",
-						"nature": "binary"
-					  },
-					  {
-						"name": "Employees",
-						"type": "number",
-						"nature": "discrete"
-					  },
-					  {
-						"name": "US",
-						"type": "boolean",
-						"nature": "binary"
-					  },
-					  {
-						"name": "Headquarters",
-						"type": "string",
-						"nature": "nominal"
-					  },
-					  {
-						"name": "Founded",
-						"type": "date",
-						"nature": "continuous"
-					  },
-					  {
-						"name": "Array",
-						"type": "array",
-						"nature": "nominal"
-					  }
+						{
+							"name": "ID",
+							"type": "number",
+							"nature": "discrete"
+						},
+						{
+							"name": "Name",
+							"type": "string",
+							"nature": "binary"
+						},
+						{
+							"name": "Employees",
+							"type": "number",
+							"nature": "discrete"
+						},
+						{
+							"name": "US",
+							"type": "boolean",
+							"nature": "binary"
+						},
+						{
+							"name": "Headquarters",
+							"type": "string",
+							"nature": "nominal"
+						},
+						{
+							"name": "Founded",
+							"type": "date",
+							"nature": "continuous"
+						},
+						{
+							"name": "Array",
+							"type": "array",
+							"nature": "nominal"
+						}
 					]
-				  }
+				}
 			]
 		},
 		{
@@ -112,96 +112,102 @@
 					"name": "codebook (2).json",
 					"profile": "codebook",
 					"fields": [
-					  {
-						"name": "ID",
-						"type": "number",
-						"nature": "ordinal"
-					  },
-					  {
-						"name": "Product",
-						"type": "string",
-						"nature": "continuous"
-					  },
-					  {
-						"name": "FY20 Sales",
-						"type": "number",
-						"nature": "discrete"
-					  },
-					  {
-						"name": "FY21 Sales",
-						"type": "number",
-						"nature": "discrete"
-					  }
+						{
+							"name": "ID",
+							"type": "number",
+							"nature": "ordinal"
+						},
+						{
+							"name": "Product",
+							"type": "string",
+							"nature": "continuous"
+						},
+						{
+							"name": "FY20 Sales",
+							"type": "number",
+							"nature": "discrete"
+						},
+						{
+							"name": "FY21 Sales",
+							"type": "number",
+							"nature": "discrete"
+						}
 					]
-				  }
+				}
 			]
 		},
-		{"name":"Test App","$schema":"","profile":"test-app","count":0, "sources":[
-			{
-				"name": "stocks",
-				"profile": "tablebundle",
-				"sources": [
-					{
-						"rel": "input",
-						"profile": "datatable",
-						"name": "stocks.csv",
-						"path": "data/stocks.csv"
-					},
-					{
-						"$schema": "https://microsoft.github.io/datashaper/schema/codebook/v1.0.0.json",
-						"title": "codebook.json",
-						"name": "codebook (3).json",
-						"profile": "codebook",
-						"fields": [
-						  {
-							"name": "Symbol",
-							"type": "string",
-							"nature": "nominal"
-						  },
-						  {
-							"name": "Date",
-							"type": "date",
-							"nature": "continuous"
-						  },
-						  {
-							"name": "Close",
-							"type": "number",
-							"nature": "continuous"
-						  },
-						  {
-							"name": "Volume",
-							"type": "number",
-							"nature": "discrete"
-						  },
-						  {
-							"name": "Open",
-							"type": "number",
-							"nature": "continuous"
-						  },
-						  {
-							"name": "High",
-							"type": "number",
-							"nature": "continuous"
-						  },
-						  {
-							"name": "Low",
-							"type": "number",
-							"nature": "continuous"
-						  },
-						  {
-							"name": "Week",
-							"type": "number",
-							"nature": "discrete"
-						  },
-						  {
-							"name": "Month",
-							"type": "number",
-							"nature": "discrete"
-						  }
-						]
-					  }
-				]
-			}
-		]}
+		{
+			"name": "Test App",
+			"$schema": "",
+			"profile": "test-app",
+			"count": 0,
+			"sources": [
+				{
+					"name": "stocks",
+					"profile": "tablebundle",
+					"sources": [
+						{
+							"rel": "input",
+							"profile": "datatable",
+							"name": "stocks.csv",
+							"path": "data/stocks.csv"
+						},
+						{
+							"$schema": "https://microsoft.github.io/datashaper/schema/codebook/v1.0.0.json",
+							"title": "codebook.json",
+							"name": "codebook (3).json",
+							"profile": "codebook",
+							"fields": [
+								{
+									"name": "Symbol",
+									"type": "string",
+									"nature": "nominal"
+								},
+								{
+									"name": "Date",
+									"type": "date",
+									"nature": "continuous"
+								},
+								{
+									"name": "Close",
+									"type": "number",
+									"nature": "continuous"
+								},
+								{
+									"name": "Volume",
+									"type": "number",
+									"nature": "discrete"
+								},
+								{
+									"name": "Open",
+									"type": "number",
+									"nature": "continuous"
+								},
+								{
+									"name": "High",
+									"type": "number",
+									"nature": "continuous"
+								},
+								{
+									"name": "Low",
+									"type": "number",
+									"nature": "continuous"
+								},
+								{
+									"name": "Week",
+									"type": "number",
+									"nature": "discrete"
+								},
+								{
+									"name": "Month",
+									"type": "number",
+									"nature": "discrete"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
 	]
 }

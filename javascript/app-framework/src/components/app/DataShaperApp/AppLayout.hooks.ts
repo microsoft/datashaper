@@ -269,20 +269,26 @@ export function useRegisterProfileHelp(
 }
 
 export function useInitialDataPackageLoad(
-	url: string | undefined,
-	route: string | undefined,
+	initialUrl: string | undefined,
+	initialRoute: string | undefined,
 ): void {
 	const loadDataPackage = useLoadDataPackage()
 	const navigate = useNavigate()
 
-	useEffect(() => {
-		if (url != null) {
-			loadDataPackage(url)
-		}
-		if (route != null) {
-			navigate(route)
-		}
-	}, [url, route, navigate, loadDataPackage])
+	useEffect(
+		() => {
+			if (initialUrl != null) {
+				loadDataPackage(initialUrl)
+			}
+			if (initialRoute != null) {
+				navigate(initialRoute)
+			}
+		},
+		/* eslint-disable-next-line react-hooks/exhaustive-deps */
+		[
+			/* only fire once */
+		],
+	)
 }
 
 export function useSetDefaultApplicationSettings(

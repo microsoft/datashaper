@@ -17,24 +17,21 @@ export const ColumnValidationStory: ComponentStory<typeof ArqueroDetailsList> =
 		const codebookResult = generateCodebook(companiesRaw)
 		const metadata = introspect(companiesRaw, true)
 		// inject a few constraints to test & render
-		codebookResult.fields.find(
-			(element) => element.name === 'ID',
-		)!.constraints = {
+		let found = codebookResult.fields.find((e) => e.name === 'ID')
+		found.constraints = {
 			required: true,
 			unique: true,
 			minimum: 2,
 			maximum: 3,
 		}
-		codebookResult.fields.find(
-			(element) => element.name === 'Name',
-		)!.constraints = {
+
+		found = codebookResult.fields.find((e) => e.name === 'Name')
+		found.constraints = {
 			enum: ['Microsoft', 'Apple', 'Google'],
 		}
-		codebookResult.fields.find(
-			(element) => element.name === 'Employees',
-		)!.constraints = {
-			minimum: 160000,
-		}
+
+		found = codebookResult.fields.find((e) => e.name === 'Employees')
+		found.constraints = { minimum: 160000 }
 
 		const validationResult: ValidationResult = validateTable(
 			companiesRaw,

@@ -4,24 +4,15 @@
 		"//#generate:versions": {
 			"dependsOn": [],
 			"outputs": [
-				"javascript/schema/versions.js",
-				"javascript/schema/versions.d.ts"
+				"javascript/schema/versions.js", "javascript/schema/versions.d.ts"
 			]
 		},
 		"build": {
-			"dependsOn": [
-				"//#generate:versions",
-				"^build"
-			],
-			"outputs": [
-				"dist/**",
-				"docs/**"
-			]
+			"dependsOn": ["//#generate:versions", "^build"],
+			"outputs": ["dist/**", "docs/**"]
 		},
 		"test": {
-			"dependsOn": [
-				"build"
-			],
+			"dependsOn": ["build"],
 			"outputs": [],
 			"cache": false
 		},
@@ -38,44 +29,20 @@
 			"outputs": []
 		},
 		"bundle": {
-			"dependsOn": [
-				"^build",
-				"build"
-			],
-			"outputs": [
-				"build/**",
-				"storybook-static/**"
-			]
+			"dependsOn": ["^build", "build"],
+			"outputs": ["build/**", "storybook-static/**"]
 		},
 		"ci": {
-			"dependsOn": [
-				"build",
-				"check",
-				"test",
-				"check-deps",
-				"bundle"
-			],
-			"outputs": [
-				"dist/**",
-				"docs/**",
-				"build/**",
-				"storybook-static/**"
-			]
+			"dependsOn": ["build", "check", "test", "check-deps", "bundle"],
+			"outputs": ["dist/**", "docs/**", "build/**", "storybook-static/**"]
 		},
 		"prestart": {
-			"dependsOn": [
-				"^prestart"
-			],
-			"outputs": [
-				"dist/**"
-			]
+			"dependsOn": ["^prestart"],
+			"outputs": ["dist/**"]
 		},
 		"start": {
 			"cache": false,
-			"dependsOn": [
-				"prestart",
-				"^build"
-			],
+			"dependsOn": ["prestart", "^build"],
 			"outputs": []
 		},
 		"clean": {

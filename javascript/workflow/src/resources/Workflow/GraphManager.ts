@@ -104,7 +104,10 @@ export class GraphManager extends Disposable {
 
 	public removeStep(index: number): Node<TableContainer> {
 		const steps = this.steps
-		const step = steps[index]!
+		const step = steps[index]
+		if (step == null) {
+			throw new Error(`step@${index} is invalid`)
+		}
 		const prevStep = index > 0 ? steps[index - 1] : undefined
 		const nextStep = index + 1 < this.length ? steps[index + 1] : undefined
 		const node = this.getNode(step.id)
@@ -131,7 +134,11 @@ export class GraphManager extends Disposable {
 
 	public updateStep(stepInput: StepInput, index: number): Step {
 		const steps = this.steps
-		const prevVersion = steps[index]!
+		const prevVersion = steps[index]
+
+		if (prevVersion == null) {
+			throw new Error(`invalid step@${index}`)
+		}
 		const step = readStep(stepInput, steps[index - 1])
 		const node = this.getNode(step.id)
 		this._steps$.next([
@@ -171,7 +178,11 @@ export class GraphManager extends Disposable {
 		if (steps.length === 0) {
 			return undefined
 		}
-		const lastStepId = steps[steps.length - 1]!.id
+		const lastStep = steps[steps.length - 1]
+		if (lastStep == null) {
+			return undefined
+		}
+		const lastStepId = lastStep.id
 		const lastNode = this.getNode(lastStepId)
 		// Nodes use BehaviorSubject internally
 		return lastNode.output$ as Observable<Maybe<TableContainer>>

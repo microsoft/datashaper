@@ -73,7 +73,7 @@ function defineTestCase(parentPath: string, test: string) {
 						compareTables(expected, result.table, o)
 						resolve()
 					} else {
-						workflow.read$(o)!.subscribe((actual) => {
+						workflow.read$(o)?.subscribe((actual) => {
 							if (actual?.table) {
 								compareTables(expected, actual?.table, o)
 								resolve()

@@ -6,6 +6,7 @@ import type { Step } from '@datashaper/workflow'
 import { MultiDropdown } from '@essex/components'
 import { Fragment, memo } from 'react'
 
+import { EMPTY_ARRAY } from '../../../../empty.js'
 import {
 	useDropdownChangeAllHandler,
 	useDropdownChangeHandler,
@@ -51,7 +52,7 @@ export const MultiChoiceInput: React.FC<{
 				placeholder={placeholder}
 				styles={dropdownStyles}
 				selectedKeys={current}
-				options={options!}
+				options={options ?? EMPTY_ARRAY}
 				disabled={disabled}
 				onChange={dropdownChangeHandler}
 				onChangeAll={dropdownChangeAllHandler}

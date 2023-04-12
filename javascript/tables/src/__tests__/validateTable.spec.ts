@@ -1,4 +1,4 @@
-/*!
+/*?
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
@@ -19,8 +19,9 @@ function createCodebook(
 ): CodebookSchema {
 	const codebook = generateCodebook(table)
 	Object.keys(constraints).forEach((fieldName) => {
-		codebook.fields.find((field) => field.name === fieldName)!.constraints = {
-			...constraints[fieldName],
+		const found = codebook.fields.find((field) => field.name === fieldName)
+		if (found != null) {
+			found.constraints = { ...constraints[fieldName] }
 		}
 	})
 	return codebook
@@ -48,18 +49,18 @@ describe('validate table', () => {
 		it('without indexes', () => {
 			const result = validateTable(companies2, codebook)
 			expect(result.errors).toHaveLength(1)
-			expect(result.errors[0]!.name).toBe('US')
-			expect(result.errors[0]!.rule).toBe(ErrorCode.Required)
-			expect(result.errors[0]!.indexes).toBeUndefined()
+			expect(result.errors[0]?.name).toBe('US')
+			expect(result.errors[0]?.rule).toBe(ErrorCode.Required)
+			expect(result.errors[0]?.indexes).toBeUndefined()
 		})
 
 		it('with indexes', () => {
 			const result = validateTable(companies2, codebook, true)
 			expect(result.errors).toHaveLength(1)
-			expect(result.errors[0]!.name).toBe('US')
-			expect(result.errors[0]!.rule).toBe(ErrorCode.Required)
-			expect(result.errors[0]!.indexes![0]).toBe(0)
-			expect(result.errors[0]!.indexes![1]).toBe(4)
+			expect(result.errors[0]?.name).toBe('US')
+			expect(result.errors[0]?.rule).toBe(ErrorCode.Required)
+			expect(result.errors[0]?.indexes?.[0]).toBe(0)
+			expect(result.errors[0]?.indexes?.[1]).toBe(4)
 		})
 	})
 
@@ -69,18 +70,18 @@ describe('validate table', () => {
 		it('without indexes', () => {
 			const result = validateTable(companies, codebook)
 			expect(result.errors).toHaveLength(1)
-			expect(result.errors[0]!.name).toBe('US')
-			expect(result.errors[0]!.rule).toBe(ErrorCode.Unique)
+			expect(result.errors[0]?.name).toBe('US')
+			expect(result.errors[0]?.rule).toBe(ErrorCode.Unique)
 		})
 
 		it('with indexes', () => {
 			const result = validateTable(companies, codebook, true)
 			expect(result.errors).toHaveLength(1)
-			expect(result.errors[0]!.name).toBe('US')
-			expect(result.errors[0]!.rule).toBe(ErrorCode.Unique)
-			expect(result.errors[0]!.indexes![0]).toBe(1)
-			expect(result.errors[0]!.indexes![1]).toBe(2)
-			expect(result.errors[0]!.indexes![2]).toBe(3)
+			expect(result.errors[0]?.name).toBe('US')
+			expect(result.errors[0]?.rule).toBe(ErrorCode.Unique)
+			expect(result.errors[0]?.indexes?.[0]).toBe(1)
+			expect(result.errors[0]?.indexes?.[1]).toBe(2)
+			expect(result.errors[0]?.indexes?.[2]).toBe(3)
 		})
 	})
 
@@ -90,17 +91,17 @@ describe('validate table', () => {
 		it('without indexes', () => {
 			const result = validateTable(companies, codebook)
 			expect(result.errors).toHaveLength(1)
-			expect(result.errors[0]!.name).toBe('Name')
-			expect(result.errors[0]!.rule).toBe(ErrorCode.MinLength)
-			expect(result.errors[0]!.indexes).toBeUndefined()
+			expect(result.errors[0]?.name).toBe('Name')
+			expect(result.errors[0]?.rule).toBe(ErrorCode.MinLength)
+			expect(result.errors[0]?.indexes).toBeUndefined()
 		})
 
 		it('with indexes', () => {
 			const result = validateTable(companies, codebook, true)
 			expect(result.errors).toHaveLength(1)
-			expect(result.errors[0]!.name).toBe('Name')
-			expect(result.errors[0]!.rule).toBe(ErrorCode.MinLength)
-			expect(result.errors[0]!.indexes![0]).toBe(1)
+			expect(result.errors[0]?.name).toBe('Name')
+			expect(result.errors[0]?.rule).toBe(ErrorCode.MinLength)
+			expect(result.errors[0]?.indexes?.[0]).toBe(1)
 		})
 	})
 
@@ -110,21 +111,21 @@ describe('validate table', () => {
 		it('without indexes', () => {
 			const result = validateTable(companies, codebook)
 			expect(result.errors).toHaveLength(1)
-			expect(result.errors[0]!.name).toBe('Name')
-			expect(result.errors[0]!.rule).toBe(ErrorCode.MaxLength)
-			expect(result.errors[0]!.indexes).toBeUndefined()
+			expect(result.errors[0]?.name).toBe('Name')
+			expect(result.errors[0]?.rule).toBe(ErrorCode.MaxLength)
+			expect(result.errors[0]?.indexes).toBeUndefined()
 		})
 
 		it('with indexes', () => {
 			const result = validateTable(companies, codebook, true)
 			expect(result.errors).toHaveLength(1)
-			expect(result.errors[0]!.name).toBe('Name')
-			expect(result.errors[0]!.rule).toBe(ErrorCode.MaxLength)
-			expect(result.errors[0]!.indexes).toHaveLength(4)
-			expect(result.errors[0]!.indexes![0]).toBe(0)
-			expect(result.errors[0]!.indexes![1]).toBe(2)
-			expect(result.errors[0]!.indexes![2]).toBe(3)
-			expect(result.errors[0]!.indexes![3]).toBe(4)
+			expect(result.errors[0]?.name).toBe('Name')
+			expect(result.errors[0]?.rule).toBe(ErrorCode.MaxLength)
+			expect(result.errors[0]?.indexes).toHaveLength(4)
+			expect(result.errors[0]?.indexes?.[0]).toBe(0)
+			expect(result.errors[0]?.indexes?.[1]).toBe(2)
+			expect(result.errors[0]?.indexes?.[2]).toBe(3)
+			expect(result.errors[0]?.indexes?.[3]).toBe(4)
 		})
 	})
 
@@ -134,18 +135,18 @@ describe('validate table', () => {
 		it('without indexes', () => {
 			const result = validateTable(companies, codebook)
 			expect(result.errors).toHaveLength(1)
-			expect(result.errors[0]!.name).toBe('ID')
-			expect(result.errors[0]!.rule).toBe(ErrorCode.Minimum)
-			expect(result.errors[0]!.indexes).toBeUndefined()
+			expect(result.errors[0]?.name).toBe('ID')
+			expect(result.errors[0]?.rule).toBe(ErrorCode.Minimum)
+			expect(result.errors[0]?.indexes).toBeUndefined()
 		})
 
 		it('with indexes', () => {
 			const result = validateTable(companies, codebook, true)
 			expect(result.errors).toHaveLength(1)
-			expect(result.errors[0]!.name).toBe('ID')
-			expect(result.errors[0]!.rule).toBe(ErrorCode.Minimum)
-			expect(result.errors[0]!.indexes).toHaveLength(1)
-			expect(result.errors[0]!.indexes![0]).toBe(0)
+			expect(result.errors[0]?.name).toBe('ID')
+			expect(result.errors[0]?.rule).toBe(ErrorCode.Minimum)
+			expect(result.errors[0]?.indexes).toHaveLength(1)
+			expect(result.errors[0]?.indexes?.[0]).toBe(0)
 		})
 	})
 
@@ -155,20 +156,20 @@ describe('validate table', () => {
 		it('without indexes', () => {
 			const result = validateTable(companies, codebook)
 			expect(result.errors).toHaveLength(1)
-			expect(result.errors[0]!.name).toBe('ID')
-			expect(result.errors[0]!.rule).toBe(ErrorCode.Maximum)
-			expect(result.errors[0]!.indexes).toBeUndefined()
+			expect(result.errors[0]?.name).toBe('ID')
+			expect(result.errors[0]?.rule).toBe(ErrorCode.Maximum)
+			expect(result.errors[0]?.indexes).toBeUndefined()
 		})
 
 		it('with indexes', () => {
 			const result = validateTable(companies, codebook, true)
 			expect(result.errors).toHaveLength(1)
-			expect(result.errors[0]!.name).toBe('ID')
-			expect(result.errors[0]!.rule).toBe(ErrorCode.Maximum)
-			expect(result.errors[0]!.indexes).toHaveLength(3)
-			expect(result.errors[0]!.indexes![0]).toBe(2)
-			expect(result.errors[0]!.indexes![1]).toBe(3)
-			expect(result.errors[0]!.indexes![2]).toBe(4)
+			expect(result.errors[0]?.name).toBe('ID')
+			expect(result.errors[0]?.rule).toBe(ErrorCode.Maximum)
+			expect(result.errors[0]?.indexes).toHaveLength(3)
+			expect(result.errors[0]?.indexes?.[0]).toBe(2)
+			expect(result.errors[0]?.indexes?.[1]).toBe(3)
+			expect(result.errors[0]?.indexes?.[2]).toBe(4)
 		})
 	})
 
@@ -180,19 +181,19 @@ describe('validate table', () => {
 		it('without indexes', () => {
 			const result = validateTable(companies, codebook)
 			expect(result.errors).toHaveLength(1)
-			expect(result.errors[0]!.name).toBe('Name')
-			expect(result.errors[0]!.rule).toBe(ErrorCode.Enum)
-			expect(result.errors[0]!.indexes).toBeUndefined()
+			expect(result.errors[0]?.name).toBe('Name')
+			expect(result.errors[0]?.rule).toBe(ErrorCode.Enum)
+			expect(result.errors[0]?.indexes).toBeUndefined()
 		})
 
 		it('with indexes', () => {
 			const result = validateTable(companies, codebook, true)
 			expect(result.errors).toHaveLength(1)
-			expect(result.errors[0]!.name).toBe('Name')
-			expect(result.errors[0]!.rule).toBe(ErrorCode.Enum)
-			expect(result.errors[0]!.indexes).toHaveLength(2)
-			expect(result.errors[0]!.indexes![0]).toBe(3)
-			expect(result.errors[0]!.indexes![1]).toBe(4)
+			expect(result.errors[0]?.name).toBe('Name')
+			expect(result.errors[0]?.rule).toBe(ErrorCode.Enum)
+			expect(result.errors[0]?.indexes).toHaveLength(2)
+			expect(result.errors[0]?.indexes?.[0]).toBe(3)
+			expect(result.errors[0]?.indexes?.[1]).toBe(4)
 		})
 	})
 
@@ -202,21 +203,21 @@ describe('validate table', () => {
 		it('without indexes', () => {
 			const result = validateTable(companies, codebook)
 			expect(result.errors).toHaveLength(1)
-			expect(result.errors[0]!.name).toBe('Name')
-			expect(result.errors[0]!.rule).toBe(ErrorCode.Pattern)
-			expect(result.errors[0]!.indexes).toBeUndefined()
+			expect(result.errors[0]?.name).toBe('Name')
+			expect(result.errors[0]?.rule).toBe(ErrorCode.Pattern)
+			expect(result.errors[0]?.indexes).toBeUndefined()
 		})
 
 		it('with indexes', () => {
 			const result = validateTable(companies, codebook, true)
 			expect(result.errors).toHaveLength(1)
-			expect(result.errors[0]!.name).toBe('Name')
-			expect(result.errors[0]!.rule).toBe(ErrorCode.Pattern)
-			expect(result.errors[0]!.indexes).toHaveLength(4)
-			expect(result.errors[0]!.indexes![0]).toBe(0)
-			expect(result.errors[0]!.indexes![1]).toBe(1)
-			expect(result.errors[0]!.indexes![2]).toBe(2)
-			expect(result.errors[0]!.indexes![3]).toBe(4)
+			expect(result.errors[0]?.name).toBe('Name')
+			expect(result.errors[0]?.rule).toBe(ErrorCode.Pattern)
+			expect(result.errors[0]?.indexes).toHaveLength(4)
+			expect(result.errors[0]?.indexes?.[0]).toBe(0)
+			expect(result.errors[0]?.indexes?.[1]).toBe(1)
+			expect(result.errors[0]?.indexes?.[2]).toBe(2)
+			expect(result.errors[0]?.indexes?.[3]).toBe(4)
 		})
 	})
 
@@ -229,12 +230,12 @@ describe('validate table', () => {
 
 			const result = validateTable(companies, codebook)
 			expect(result.errors).toHaveLength(3)
-			expect(result.errors[0]!.name).toBe('ID')
-			expect(result.errors[0]!.rule).toBe(ErrorCode.Minimum)
-			expect(result.errors[1]!.name).toBe('Name')
-			expect(result.errors[1]!.rule).toBe(ErrorCode.MaxLength)
-			expect(result.errors[2]!.name).toBe('Name')
-			expect(result.errors[2]!.rule).toBe(ErrorCode.Enum)
+			expect(result.errors[0]?.name).toBe('ID')
+			expect(result.errors[0]?.rule).toBe(ErrorCode.Minimum)
+			expect(result.errors[1]?.name).toBe('Name')
+			expect(result.errors[1]?.rule).toBe(ErrorCode.MaxLength)
+			expect(result.errors[2]?.name).toBe('Name')
+			expect(result.errors[2]?.rule).toBe(ErrorCode.Enum)
 		})
 
 		it('mixed errors', () => {
@@ -245,10 +246,10 @@ describe('validate table', () => {
 
 			const result = validateTable(companies, codebook)
 			expect(result.errors).toHaveLength(2)
-			expect(result.errors[0]!.name).toBe('Name')
-			expect(result.errors[0]!.rule).toBe(ErrorCode.MaxLength)
-			expect(result.errors[1]!.name).toBe('Name')
-			expect(result.errors[1]!.rule).toBe(ErrorCode.Enum)
+			expect(result.errors[0]?.name).toBe('Name')
+			expect(result.errors[0]?.rule).toBe(ErrorCode.MaxLength)
+			expect(result.errors[1]?.name).toBe('Name')
+			expect(result.errors[1]?.rule).toBe(ErrorCode.Enum)
 		})
 
 		it('no fields have errors', () => {

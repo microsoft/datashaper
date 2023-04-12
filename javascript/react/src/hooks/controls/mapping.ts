@@ -18,7 +18,7 @@ export function useHandleKeyChange(
 				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				key === previousKey.toString()
 					? (mapping[newKey] = mapList[key])
-					: (mapping[key] = mapList[key]!)
+					: (mapping[key] = mapList[key])
 			}
 
 			onChange?.(mapping)
@@ -41,7 +41,7 @@ export function useHandleValueChange(
 				keyElement === key.toString()
 					? (mapping[keyElement] =
 							dataType === DataType.Date ? new Date(newValue) : newValue)
-					: (mapping[keyElement] = mapList[keyElement]!)
+					: (mapping[keyElement] = mapList[keyElement])
 			}
 
 			onChange?.(mapping)

@@ -34,7 +34,12 @@ export const App: React.FC = memo(function App() {
 					<Suspense fallback={<Spinner />}>
 						<StyleContext>
 							<Layout>
-								<DataShaperApp examples={examples} profiles={customProfiles}>
+								<DataShaperApp
+									examples={examples}
+									profiles={customProfiles}
+									// initialDataPackageUrl="examples/smoking.json"
+									// initialRoute="resource/nhefs"
+								>
 									<About />
 								</DataShaperApp>
 							</Layout>
