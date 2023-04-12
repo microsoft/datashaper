@@ -4,7 +4,7 @@
  */
 import type { Subscription } from 'rxjs'
 
-import toposort from '../util/toposort.js'
+import toposort from '@essex/toposort'
 import type { Graph, Node, NodeId } from './types.js'
 
 export class DefaultGraph<T> implements Graph<T> {

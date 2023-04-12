@@ -2421,6 +2421,7 @@ __metadata:
     "@datashaper/utilities": "workspace:^"
     "@essex/jest-config": ^21.0.21
     "@essex/scripts": ^24.0.4
+    "@essex/toposort": ^1.0.7
     "@essex/tsconfig-base": ^2.0.0
     "@types/d3-time-format": ^4.0.0
     "@types/debug": ^4.1.7
@@ -3083,6 +3084,13 @@ __metadata:
   version: 3.0.16
   resolution: "@essex/toolbox@npm:3.0.16"
   checksum: 7b155eda2b5565804542431fa5e64d95392e33f880e44053e5d3294593480b01174a052b33cfeebf13d7e0f35401cfe4e3262d732f2a29af7c797248b8e141d9
+  languageName: node
+  linkType: hard
+
+"@essex/toposort@npm:^1.0.7":
+  version: 1.0.7
+  resolution: "@essex/toposort@npm:1.0.7"
+  checksum: 24bec819aff7ac39067164547c25686781ae87fcdfba8131edc4e2f8f4d23c2634325a7cdb44b91069058132dbf6fe03ee824bc43d77965e8785b481619bc998
   languageName: node
   linkType: hard
 

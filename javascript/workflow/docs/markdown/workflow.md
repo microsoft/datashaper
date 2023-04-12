@@ -40,7 +40,6 @@
 |  Function | Description |
 |  --- | --- |
 |  [argsHasOutputColumn(args)](./workflow.argshasoutputcolumn.md) |  |
-|  [array(nodes, edges)](./workflow.array.md) |  |
 |  [cloneStep(step, columnNames)](./workflow.clonestep.md) |  |
 |  [columnTransformVerbs(filter)](./workflow.columntransformverbs.md) | These are steps that specifically operate on an input/output column only. In other words, they do not cause a change in the number of rows in a table, such as an aggregate or filter would, and only replace or add one column. |
 |  [createNode(step)](./workflow.createnode.md) |  |

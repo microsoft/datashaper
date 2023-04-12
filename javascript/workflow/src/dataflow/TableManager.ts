@@ -111,7 +111,7 @@ export class TableManager {
 			created = true
 		}
 
-		result = this._tables.get(id)
+		const result = this._tables.get(id)
 		if (result == null) {
 			throw new Error(`could not get table with id ${id}`)
 		}

@@ -48,7 +48,7 @@ function applyDefaultSpread(table: ColumnTable, column: string, to?: string[]) {
 function applyOnehotSpread(table: ColumnTable, column: string): ColumnTable {
 	// collect all of the unique values for each onehot column
 	const hash = createUniqueColumnValuesHash(table, column)
-	const values = hash[column]
+	const values = hash[column] ?? {}
 	const args = Object.keys(values)
 		.sort()
 		.reduce((acc, value) => {

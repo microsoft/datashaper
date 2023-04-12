@@ -9,14 +9,22 @@ export function firstOneWinsStrategy(
 	singleRow: RowObject,
 	columns: string[],
 ): Value {
-	let firstValidValue: Value = singleRow[columns[0]]
+	const firstCol = columns[0]
+	if (firstCol == null) {
+		throw new Error('no valid first column')
+	}	
+	let firstValidValue: Value = singleRow[firstCol]
 	let foundFirstValidValue = false
 	let i = 0
 
 	while (!foundFirstValidValue && i < columns.length) {
-		if (singleRow[columns[i]] !== undefined && singleRow[columns[i]] !== null) {
-			firstValidValue = singleRow[columns[i]]
-			foundFirstValidValue = true
+		const col = columns[i]
+		if (col != null) {
+			const sr = singleRow[col]
+			if (sr != null) {
+				firstValidValue = sr
+				foundFirstValidValue = true
+			}
 		}
 		i++
 	}
@@ -28,14 +36,25 @@ export function lastOneWinsStrategy(
 	singleRow: RowObject,
 	columns: string[],
 ): Value {
-	let lastValidValue: Value = singleRow[columns[0]]
+	const firstCol = columns[0]
+	if (firstCol == null) {
+		throw new Error('no columns available')
+	}
 
+	let lastValidValue: Value | undefined = singleRow[firstCol]
 	for (let i = 0; i < columns.length; i++) {
-		if (singleRow[columns[i]] !== undefined && singleRow[columns[i]] !== null) {
-			lastValidValue = singleRow[columns[i]]
+		const col = columns[i]
+		if (col != null) {
+			const sr = singleRow[col]
+			if (sr != null) {
+				lastValidValue = sr
+			}
 		}
 	}
 
+	if (lastValidValue == null) {
+		throw new Error('no valid values')
+	}
 	return lastValidValue
 }
 
@@ -46,8 +65,12 @@ export function arrayStrategy(
 	const concat = []
 
 	for (let i = 0; i < columns.length; i++) {
-		if (singleRow[columns[i]] !== undefined && singleRow[columns[i]] !== null) {
-			concat.push(singleRow[columns[i]])
+		const col = columns[i]
+		if (col != null) {
+			const sr = singleRow[col]
+			if (sr != null) {
+				concat.push(sr)
+			}
 		}
 	}
 

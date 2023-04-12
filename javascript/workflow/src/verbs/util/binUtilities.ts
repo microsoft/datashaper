@@ -78,11 +78,17 @@ export function calculateWidthDoane(
 			})
 
 			for (let i = 0; i < temp.length; i++) {
-				temp[i] = temp[i] / sigma
+				const val = temp[i]
+				if (val != null) {
+					temp[i] = val / sigma
+				}
 			}
 
 			for (let i = 0; i < temp.length; i++) {
-				temp[i] = Math.pow(temp[i], 3)
+				const val = temp[i]
+				if (val != null) {
+					temp[i] = Math.pow(val, 3)
+				}
 			}
 
 			const g1 = temp.reduce((a, b) => a + b, 0) / temp.length
@@ -152,7 +158,14 @@ export function estimateBinValues(
 
 	const numBins = calculateBinCount(min, max, width)
 	const binEdges = linspace(min, max, numBins + 1)
-	return [min, max, binEdges[1] - binEdges[0]]
+
+	const binMax = binEdges[1]
+	const binMin = binEdges[0]
+
+	if (binMax == null || binMin == null) {
+		throw new Error(`invalid bin boundaries [${binMin}, ${binMax}]`)
+	}
+	return [min, max, binMax - binMin]
 }
 
 function estimateWidth(
@@ -196,8 +209,8 @@ export function calculateNiceRounding(
 export function roundNumber(value: number, opt: Opts): number {
 	const str = value.toString()
 	const decimals = str.split('.')
-	const whole = decimals[0]
-	const fractional = decimals[1] || ''
+	const whole = decimals[0] ?? '0'
+	const fractional = decimals[1] ?? ''
 	const numberOfDecimals = getNumberOfDecimals(str)
 
 	if (value < 1 && numberOfDecimals > 10) {
