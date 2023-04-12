@@ -1,64 +1,57 @@
 {
-  "search.exclude": {
-    "**/.yarn": true,
-    "**/.pnp.*": true
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "rome.rome"
-  },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "rome.rome"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "rome.rome"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "rome.rome"
-  },
-  "eslint.nodePath": ".yarn/sdks",
-  "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
-  "typescript.tsdk": ".yarn/sdks/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true,
-  "appService.showBuildDuringDeployPrompt": false,
-  "javascript.preferences.importModuleSpecifier": "relative",
-  "javascript.preferences.importModuleSpecifierEnding": "js",
-  "typescript.preferences.importModuleSpecifier": "relative",
-  "typescript.preferences.importModuleSpecifierEnding": "js",
-  "explorer.fileNesting.enabled": true,
-  "explorer.fileNesting.patterns": {
-    "*.ts": "${capture}.ts, ${capture}.hooks.ts, ${capture}.hooks.tsx, ${capture}.stories.tsx, ${capture}.story.tsx, ${capture}.spec.tsx, ${capture}.base.ts, ${capture}.base.tsx, ${capture}.types.ts, ${capture}.styles.ts, ${capture}.styles.tsx, ${capture}.utils.ts, ${capture}.utils.tsx, ${capture}.constants.ts, ${capture}.module.scss, ${capture}.module.css, ${capture}.md",
-    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
-    "*.jsx": "${capture}.js",
-    "*.tsx": "${capture}.ts, ${capture}.hooks.ts, ${capture}.hooks.tsx, ${capture}.stories.tsx, ${capture}.story.tsx, ${capture}.spec.tsx, ${capture}.base.ts, ${capture}.base.tsx, ${capture}.types.ts, ${capture}.styles.ts, ${capture}.styles.tsx, ${capture}.utils.ts, ${capture}.utils.tsx, ${capture}.constants.ts, ${capture}.module.scss, ${capture}.module.css, ${capture}.md, ${capture}.css",
-    "tsconfig.json": "tsconfig.*.json",
-    "package.json": "turbo.json, tsconfig.json, rome.json, .npmignore",
-    "README.md": "SECURITY.md, SUPPORT.md, CODE_OF_CONDUCT.md, LICENSE",
-    ".eslintrc": ".eslintignore",
-    ".prettierrc": ".prettierignore",
-    ".gitattributes": ".gitignore",
-    ".yarnrc.yml": "yarn.lock, .pnp.*",
-    "jest.config.js": "jest.setup.mjs"
-  },
-  "python.linting.flake8Enabled": true,
-  "python.linting.enabled": true,
-  "python.formatting.provider": "black",
-  "python.linting.flake8Args": [
-    "--max-line-length=88"
-  ],
-  "editor.formatOnSave": true,
-  "python.testing.pytestArgs": [
-    "tests"
-  ],
-  "python.testing.unittestEnabled": false,
-  "python.testing.pytestEnabled": true,
-  "python.sortImports.args": [
-    "--profile",
-    "black"
-  ],
-  "[python]": {
-    "editor.codeActionsOnSave": {
-      "source.organizeImports": true
-    }
-  },
-  "autoDocstring.docstringFormat": "sphinx"
+	"search.exclude": {
+		"**/.yarn": true,
+		"**/.pnp.*": true
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "rome.rome"
+	},
+	"[javascriptreact]": {
+		"editor.defaultFormatter": "rome.rome"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "rome.rome"
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "rome.rome"
+	},
+	"eslint.nodePath": ".yarn/sdks",
+	"prettier.prettierPath": ".yarn/sdks/prettier/index.js",
+	"typescript.tsdk": ".yarn/sdks/typescript/lib",
+	"typescript.enablePromptUseWorkspaceTsdk": true,
+	"appService.showBuildDuringDeployPrompt": false,
+	"javascript.preferences.importModuleSpecifier": "relative",
+	"javascript.preferences.importModuleSpecifierEnding": "js",
+	"typescript.preferences.importModuleSpecifier": "relative",
+	"typescript.preferences.importModuleSpecifierEnding": "js",
+	"explorer.fileNesting.enabled": true,
+	"explorer.fileNesting.patterns": {
+		"*.ts": "${capture}.ts, ${capture}.hooks.ts, ${capture}.hooks.tsx, ${capture}.stories.tsx, ${capture}.story.tsx, ${capture}.spec.tsx, ${capture}.base.ts, ${capture}.base.tsx, ${capture}.types.ts, ${capture}.styles.ts, ${capture}.styles.tsx, ${capture}.utils.ts, ${capture}.utils.tsx, ${capture}.constants.ts, ${capture}.module.scss, ${capture}.module.css, ${capture}.md",
+		"*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+		"*.jsx": "${capture}.js",
+		"*.tsx": "${capture}.ts, ${capture}.hooks.ts, ${capture}.hooks.tsx, ${capture}.stories.tsx, ${capture}.story.tsx, ${capture}.spec.tsx, ${capture}.base.ts, ${capture}.base.tsx, ${capture}.types.ts, ${capture}.styles.ts, ${capture}.styles.tsx, ${capture}.utils.ts, ${capture}.utils.tsx, ${capture}.constants.ts, ${capture}.module.scss, ${capture}.module.css, ${capture}.md, ${capture}.css",
+		"tsconfig.json": "tsconfig.*.json",
+		"package.json": "turbo.json, tsconfig.json, rome.json, .npmignore",
+		"README.md": "SECURITY.md, SUPPORT.md, CODE_OF_CONDUCT.md, LICENSE",
+		".eslintrc": ".eslintignore",
+		".prettierrc": ".prettierignore",
+		".gitattributes": ".gitignore",
+		".yarnrc.yml": "yarn.lock, .pnp.*",
+		"jest.config.js": "jest.setup.mjs"
+	},
+	"python.linting.flake8Enabled": true,
+	"python.linting.enabled": true,
+	"python.formatting.provider": "black",
+	"python.linting.flake8Args": ["--max-line-length=88"],
+	"editor.formatOnSave": true,
+	"python.testing.pytestArgs": ["tests"],
+	"python.testing.unittestEnabled": false,
+	"python.testing.pytestEnabled": true,
+	"python.sortImports.args": ["--profile", "black"],
+	"[python]": {
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": true
+		}
+	},
+	"autoDocstring.docstringFormat": "sphinx"
 }
