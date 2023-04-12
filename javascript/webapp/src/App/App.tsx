@@ -36,8 +36,8 @@ export const App: React.FC = memo(function App() {
 								<DataShaperApp
 									examples={examples}
 									profiles={customProfiles}
-									initialDataPackageUrl="examples/smoking.json"
-									initialRoute="resource/nhefs"
+									// initialDataPackageUrl="examples/smoking.json"
+									// initialRoute="resource/nhefs"
 								>
 									<About />
 								</DataShaperApp>

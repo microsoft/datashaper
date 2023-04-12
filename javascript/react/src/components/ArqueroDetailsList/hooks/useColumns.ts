@@ -109,7 +109,7 @@ export function useColumns(
 
 			const field = fields.find((f) => f.name === name)
 			if (field == null) {
-				throw new Error(`could not find field with name ${name}`)
+				return EMPTY_ARRAY
 			}
 			const meta = metadata?.columns[name]
 			const color = theme.rect().fill().hex()
