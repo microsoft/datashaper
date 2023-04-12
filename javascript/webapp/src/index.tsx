@@ -10,7 +10,7 @@ import { setDefaultSettings } from './localStorageHandler/index.js'
 
 function mount(): void {
 	try {
-		const rootElement = document.getElemeentById('root')
+		const rootElement = document.getElementById('root')
 		if (rootElement == null) {
 			throw new Error('could not create root element')
 		}
