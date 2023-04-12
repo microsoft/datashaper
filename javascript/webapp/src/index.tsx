@@ -13,7 +13,7 @@ function mount(): void {
 		if (rootElement == null) {
 			throw new Error('could not create root element')
 		}
-		setDefaultSettings()
+		// setDefaultSettings()
 		const root = createRoot(rootElement)
 		root.render(<App />)
 	} catch (err) {

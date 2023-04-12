@@ -2374,7 +2374,6 @@ __metadata:
     "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/workflow": "workspace:^"
-    "@essex/components": ^3.6.15
     "@essex/hooks": ^4.0.20
     "@essex/scripts": ^24.0.4
     "@fluentui/font-icons-mdl2": ^8.5.13
@@ -2392,7 +2391,6 @@ __metadata:
     "@types/react-dom": ^18.0.11
     "@types/react-router-dom": ^5.3.3
     "@types/styled-components": ^5.1.26
-    ahooks: ^3.7.6
     allotment: 1.18.1
     arquero: ^5.1.0
     chroma-js: 2.4.2
