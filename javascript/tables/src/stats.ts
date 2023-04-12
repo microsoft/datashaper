@@ -71,7 +71,7 @@ function requiredStats(table: ColumnTable): Record<string, any> {
 		acc[`${cur}.mode`] = op.mode(cur)
 		return acc
 	}, {} as Record<string, any>)
-	const result = table.rollup(args).objects()[0]	
+	const result = table.rollup(args).objects()[0]
 	return result ?? {}
 }
 
