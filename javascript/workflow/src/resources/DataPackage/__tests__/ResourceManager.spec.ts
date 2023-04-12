@@ -21,8 +21,8 @@ describe('The ResourceManager class', () => {
 		path = name,
 	) => {
 		expect(resource).toBeDefined()
-		expect(resource!.profile).toBe(profile)
-		expect(resource!.name).toBe(name)
+		expect(resource?.profile).toBe(profile)
+		expect(resource?.name).toBe(name)
 		expect(mgr.getResource(name)).toBe(resource)
 		expect(mgr.getResourceByPath(path)).toBe(resource)
 	}
@@ -54,7 +54,7 @@ describe('The ResourceManager class', () => {
 		expect(result.resources).toHaveLength(1)
 
 		inspectResource(
-			mgr.topResources[0]!,
+			mgr.topResources[0],
 			KnownProfile.TableBundle,
 			'tablebundle.json',
 		)
@@ -70,7 +70,7 @@ describe('The ResourceManager class', () => {
 		expect(result.resources).toHaveLength(1)
 
 		inspectResource(
-			mgr.topResources[0]!,
+			mgr.topResources[0],
 			KnownProfile.TableBundle,
 			'tablebundle.json',
 		)
@@ -89,12 +89,12 @@ describe('The ResourceManager class', () => {
 		expect(result.resources).toHaveLength(2)
 
 		inspectResource(
-			mgr.topResources[0]!,
+			mgr.topResources[0],
 			KnownProfile.TableBundle,
 			'tablebundle.json',
 		)
 		inspectResource(
-			mgr.topResources[1]!,
+			mgr.topResources[1],
 			KnownProfile.TableBundle,
 			'tablebundle (1).json',
 		)
@@ -114,17 +114,17 @@ describe('The ResourceManager class', () => {
 		expect(result.resources).toHaveLength(3)
 
 		inspectResource(
-			mgr.topResources[0]!,
+			mgr.topResources[0],
 			KnownProfile.TableBundle,
 			'tablebundle (1).json',
 		)
 		inspectResource(
-			mgr.topResources[1]!,
+			mgr.topResources[1],
 			KnownProfile.TableBundle,
 			'tablebundle.json',
 		)
 		inspectResource(
-			mgr.topResources[2]!,
+			mgr.topResources[2],
 			KnownProfile.TableBundle,
 			'tablebundle (2).json',
 		)
@@ -151,7 +151,7 @@ describe('The ResourceManager class', () => {
 		const result = await mgr.load(archive)
 		expect(result.resources).toHaveLength(1)
 
-		const bundle = mgr.topResources[0]!
+		const bundle = mgr.topResources[0]
 		inspectResource(bundle, KnownProfile.TableBundle, 'tablebundle.json')
 
 		const datatable = mgr.getResource('table.csv')
@@ -181,21 +181,21 @@ describe('The ResourceManager class', () => {
 
 		expect(mgr.topResources).toHaveLength(3)
 
-		const bundle = mgr.topResources[0]!
+		const bundle = mgr.topResources[0]
 		inspectResource(
 			bundle,
 			KnownProfile.TableBundle,
 			'tablebundle.json',
 			'data/derp/table.json',
 		)
-		const workflow = mgr.topResources[1]!
+		const workflow = mgr.topResources[1]
 		inspectResource(
 			workflow,
 			KnownProfile.Workflow,
 			'workflow.json',
 			'workflow.json',
 		)
-		const codebook = mgr.topResources[2]!
+		const codebook = mgr.topResources[2]
 		inspectResource(
 			codebook,
 			KnownProfile.Codebook,
@@ -221,11 +221,11 @@ describe('The ResourceManager class', () => {
 		expect(result.resources).toHaveLength(1)
 		expect(mgr.topResources).toHaveLength(1)
 
-		const bundle = mgr.topResources[0]!
+		const bundle = mgr.topResources[0]
 		inspectResource(bundle, KnownProfile.TableBundle, 'tablebundle.json')
 		expect(bundle.sources).toHaveLength(1)
 
-		const workflow = bundle.sources[0]!
+		const workflow = bundle.sources[0]
 		inspectResource(
 			workflow,
 			KnownProfile.Workflow,
@@ -255,7 +255,7 @@ describe('The ResourceManager class', () => {
 		expect(mgr.topSize).toBe(1)
 		expect(mgr.topResources).toHaveLength(1)
 
-		const tableBundle = mgr.topResources[0]!
+		const tableBundle = mgr.topResources[0]
 		inspectResource(tableBundle, KnownProfile.TableBundle, 'mutant-disease')
 
 		expect(tableBundle.sources).toHaveLength(2)
@@ -277,10 +277,10 @@ describe('The ResourceManager class', () => {
 		expect(mgr.topSize).toBe(2)
 		expect(mgr.topResources).toHaveLength(2)
 
-		const first = mgr.topResources[0]!
+		const first = mgr.topResources[0]
 		inspectResource(first, KnownProfile.TableBundle, 'a', 'data/table-1.json')
 
-		const second = mgr.topResources[1]!
+		const second = mgr.topResources[1]
 		inspectResource(
 			second,
 			KnownProfile.TableBundle,
@@ -307,10 +307,10 @@ describe('The ResourceManager class', () => {
 		expect(mgr.topSize).toBe(2)
 		expect(mgr.topResources).toHaveLength(2)
 
-		const first = mgr.topResources[0]!
+		const first = mgr.topResources[0]
 		inspectResource(first, KnownProfile.TableBundle, 'a')
 
-		const second = mgr.topResources[1]!
+		const second = mgr.topResources[1]
 		inspectResource(second, KnownProfile.TableBundle, 'tablebundle.json')
 		expect(second.sources).toHaveLength(1)
 	})

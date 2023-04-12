@@ -15,7 +15,7 @@ export const ViewOptions: React.FC<ViewOptionsProps> = memo(
 				<ButtonChoiceGroup
 					options={options}
 					selectedKey={selectedKey}
-					onChange={(_, option) => onChange(option!.key)}
+					onChange={(_, option) => onChange(option.key)}
 				/>
 			</ViewOptionsContainer>
 		)

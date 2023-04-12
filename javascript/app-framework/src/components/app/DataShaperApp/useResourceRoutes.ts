@@ -95,7 +95,7 @@ function makeResourceRoute(
 		// TODO:  this should return a raw text renderer
 		return {} as ResourceRoute
 	}
-	const profile = profiles.get(resource.profile)!
+	const profile = profiles.get(resource.profile)
 	const href = hrefs.get(resource.name)
 	const root: ResourceRoute = {
 		key: resource.name,
@@ -140,9 +140,9 @@ function groupResources(
 		if (r.profile != null) {
 			const profile = profiles.get(r.profile)
 			if (profile?.group === ResourceGroupType.Data) {
-				map.get(ResourceGroupType.Data)!.push(r)
+				map.get(ResourceGroupType.Data)?.push(r)
 			} else {
-				map.get(ResourceGroupType.Apps)!.push(r)
+				map.get(ResourceGroupType.Apps)?.push(r)
 			}
 		}
 	}

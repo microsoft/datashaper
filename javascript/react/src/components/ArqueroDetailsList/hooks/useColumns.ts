@@ -107,7 +107,10 @@ export function useColumns(
 			// without completely recreating the details header render
 			const { iconName, ...defaults } = column
 
-			const field = fields.find((f) => f.name === name)!
+			const field = fields.find((f) => f.name === name)
+			if (field == null) {
+				throw new Error(`could not find field with name ${name}`)
+			}
 			const meta = metadata?.columns[name]
 			const color = theme.rect().fill().hex()
 			const onRender =

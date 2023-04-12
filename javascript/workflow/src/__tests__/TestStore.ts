@@ -222,6 +222,6 @@ export class TestStore {
 	}
 
 	public table(name: string = this._defaultTableName): ColumnTable {
-		return this._tables.get(name)!.table!
+		return this._tables.get(name).table
 	}
 }

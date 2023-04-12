@@ -18,7 +18,7 @@ export function useSubsetTable(
 			// doing this stops the super error from arquero while the real columns aren't re-rendered
 			const tableColumns = table.columnNames()
 			existingColumnNames = columns
-				.map((col) => col.fieldName!)
+				.map((col) => col.fieldName)
 				.filter((col) => tableColumns.includes(col))
 		}
 

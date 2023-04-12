@@ -27,7 +27,7 @@ export function useHandleColumnChange(
 				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				key === previous
 					? (columns[oldName] = newName)
-					: (columns[key] = columnList[key]!)
+					: (columns[key] = columnList[key])
 			}
 
 			onChange?.({

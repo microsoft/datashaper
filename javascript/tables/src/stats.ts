@@ -71,7 +71,7 @@ function requiredStats(table: ColumnTable): Record<string, any> {
 		acc[`${cur}.mode`] = op.mode(cur)
 		return acc
 	}, {} as Record<string, any>)
-	return table.rollup(args).objects()[0]!
+	return table.rollup(args).objects()[0]
 }
 
 function optionalStats(
@@ -90,7 +90,7 @@ function optionalStats(
 		}
 		return acc
 	}, {} as Record<string, any>)
-	return table.rollup(args).objects()[0]!
+	return table.rollup(args).objects()[0]
 }
 
 function binning(
@@ -133,8 +133,8 @@ function binning(
 				count: d['count'],
 			}))
 		// numeric sort puts null at the front - format to match categories style if present
-		if (bins[0]!.min === null) {
-			bins[0]!.min = '(empty)'
+		if (bins[0].min === null) {
+			bins[0].min = '(empty)'
 		}
 		// make sure we actually have 10
 		acc[`${cur}.bins`] = fillBins(bins, min, max, 10, distinct)
@@ -166,8 +166,8 @@ function fillBins(
 				count: 0,
 			},
 	)
-	if (bins[0]!.min === '(empty)') {
-		filled.unshift(bins[0]!)
+	if (bins[0]?.min === '(empty)') {
+		filled.unshift(bins[0])
 	}
 	return filled
 }

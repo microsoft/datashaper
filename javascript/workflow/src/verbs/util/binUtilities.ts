@@ -78,11 +78,11 @@ export function calculateWidthDoane(
 			})
 
 			for (let i = 0; i < temp.length; i++) {
-				temp[i] = temp[i]! / sigma
+				temp[i] = temp[i] / sigma
 			}
 
 			for (let i = 0; i < temp.length; i++) {
-				temp[i] = Math.pow(temp[i]!, 3)
+				temp[i] = Math.pow(temp[i], 3)
 			}
 
 			const g1 = temp.reduce((a, b) => a + b, 0) / temp.length
@@ -152,7 +152,7 @@ export function estimateBinValues(
 
 	const numBins = calculateBinCount(min, max, width)
 	const binEdges = linspace(min, max, numBins + 1)
-	return [min, max, binEdges[1]! - binEdges[0]!]
+	return [min, max, binEdges[1] - binEdges[0]]
 }
 
 function estimateWidth(
@@ -196,9 +196,10 @@ export function calculateNiceRounding(
 export function roundNumber(value: number, opt: Opts): number {
 	const str = value.toString()
 	const decimals = str.split('.')
-	const whole = decimals[0]!
+	const whole = decimals[0]
 	const fractional = decimals[1] || ''
 	const numberOfDecimals = getNumberOfDecimals(str)
+
 	if (value < 1 && numberOfDecimals > 10) {
 		const rounding = opt === Opts.Down ? '0' : '9'
 		const fractionalPreRounding = fractional.substring(0, ROUND_PRECISION)
@@ -209,26 +210,21 @@ export function roundNumber(value: number, opt: Opts): number {
 		return Number(finalNumber.toFixed(ROUND_PRECISION))
 	} else if (value < 1 && numberOfDecimals <= 10) {
 		const finalNumber = Number(
-			`${decimals[0]!}.${(decimals[1] || '').substring(
-				0,
-				numberOfDecimals / ROUND_PRECISION,
-			)}${opt === Opts.Down ? '0' : '9'}${(decimals[1] || '').substring(
-				numberOfDecimals / ROUND_PRECISION + 1,
-			)}`,
+			`${whole}.${fractional.substring(0, numberOfDecimals / ROUND_PRECISION)}${
+				opt === Opts.Down ? '0' : '9'
+			}${fractional.substring(numberOfDecimals / ROUND_PRECISION + 1)}`,
 		)
 		return Number(finalNumber.toFixed(numberOfDecimals / ROUND_PRECISION))
 	} else {
-		if (decimals[0]!.length > 1) {
+		if (whole.length > 1) {
 			const finalNumber = Number(
 				str.substring(0, INTEGER_PRECISION) +
 					(opt === Opts.Down ? '0' : '9') +
 					str.substring(INTEGER_PRECISION + 1),
 			)
 			return Number(finalNumber.toPrecision(INTEGER_PRECISION))
-		} else if (decimals[0]!.length <= 1 && decimals.length > 1) {
-			const finalNumber = Number(
-				decimals[0]! + (opt === Opts.Down ? '.0' : '.9'),
-			)
+		} else if (whole.length <= 1 && decimals.length > 1) {
+			const finalNumber = Number(whole + (opt === Opts.Down ? '.0' : '.9'))
 			return Number(finalNumber.toPrecision(INTEGER_PRECISION))
 		}
 

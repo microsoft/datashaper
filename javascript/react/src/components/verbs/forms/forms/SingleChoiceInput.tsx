@@ -43,7 +43,7 @@ export const SingleChoiceInput: React.FC<{
 				placeholder={placeholder}
 				styles={dropdownStyles}
 				selectedKey={current as number | string}
-				options={options!}
+				options={options}
 				onChange={dropdownChangeHandler}
 			/>
 		</Wrapper>

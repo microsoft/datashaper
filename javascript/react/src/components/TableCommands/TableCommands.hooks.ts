@@ -46,7 +46,7 @@ function getOverflowVerbItems(
 			topDivider: true,
 			title: group.label,
 			items: group.verbs.map((verb) => {
-				const found = Object.entries(Verb).find((v) => v[1] === verb)!
+				const found = Object.entries(Verb).find((v) => v[1] === verb)
 				return {
 					key: found[1],
 					text: found[0],

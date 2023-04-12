@@ -10,9 +10,12 @@ import { setDefaultSettings } from './localStorageHandler/index.js'
 
 function mount(): void {
 	try {
-		const rootElement = document.getElementById('root')
+		const rootElement = document.getElemeentById('root')
+		if (rootElement == null) {
+			throw new Error('could not create root element')
+		}
 		setDefaultSettings()
-		const root = createRoot(rootElement!)
+		const root = createRoot(rootElement)
 		root.render(<App />)
 	} catch (err) {
 		console.error('error rendering application', err)

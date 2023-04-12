@@ -23,7 +23,7 @@ export function useCheckboxes(): {
 				onChange: (
 					_ev?: React.FormEvent<HTMLElement | HTMLInputElement>,
 					checked?: boolean,
-				) => setNear(checked!),
+				) => setNear(checked),
 			},
 			{
 				label: 'Show far bar',
@@ -31,7 +31,7 @@ export function useCheckboxes(): {
 				onChange: (
 					_ev?: React.FormEvent<HTMLElement | HTMLInputElement>,
 					checked?: boolean,
-				) => setFar(checked!),
+				) => setFar(checked),
 			},
 		]
 	}, [near, far, setNear, setFar])

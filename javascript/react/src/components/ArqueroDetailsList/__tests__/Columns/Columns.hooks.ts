@@ -62,9 +62,9 @@ export function useColumns(checkboxes: ICheckboxProps[]): {
 		return checkboxes
 			.filter((c) => c.checked)
 			.map(({ label }) => ({
-				key: label!,
-				name: label!,
-				fieldName: label!,
+				key: label,
+				name: label,
+				fieldName: label,
 				minWidth: 100,
 				// add some icons so we can confirm alignment in the headers
 				iconName:

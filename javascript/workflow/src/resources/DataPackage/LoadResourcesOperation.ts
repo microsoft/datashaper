@@ -179,7 +179,7 @@ export class LoadResourcesOperation {
 
 		// Read all children scemas
 		for (let i = 0; i < schemas.length; i++) {
-			const { schema, path } = schemas[i]!
+			const { schema, path } = schemas[i]
 			const sources = schema.sources ?? []
 			schemas.push(...(await readEntries(sources, `${path}/`)))
 		}

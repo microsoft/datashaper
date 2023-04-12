@@ -25,7 +25,7 @@ export const HelpPanel: React.FC<HelpPanelProps> = memo(function HelpPanel({
 			<Content>
 				<If condition={currentHelp != null}>
 					<Then>
-						<MarkdownBrowser home={currentHelp!} content={helpContent} />
+						<MarkdownBrowser home={currentHelp} content={helpContent} />
 					</Then>
 					<Else>No help content selected.</Else>
 				</If>

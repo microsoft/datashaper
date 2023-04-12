@@ -20,7 +20,8 @@ export function readJSONTable(
 	const obj = JSON.parse(text)
 	const _schema = defaultSchema(schema)
 	const { shape } = _schema
-	const { orientation } = shape!
+	const orientation = shape?.orientation ?? DataOrientation.Records
+
 	switch (orientation) {
 		case DataOrientation.Records:
 			return fromJSONRecords(obj)

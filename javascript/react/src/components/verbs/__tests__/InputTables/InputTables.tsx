@@ -23,9 +23,9 @@ export const InputTables: React.FC<InputTablesProps> = memo(
 				{tables.map((table) => {
 					return (
 						<Table key={table.id}>
-							<ArqueroTableHeader name={table.id} table={table.table!} />
+							<ArqueroTableHeader name={table.id} table={table.table} />
 							<ArqueroDetailsList
-								table={table.table!}
+								table={table.table}
 								isHeaderFixed
 								styles={{ root: { height: 400 } }}
 							/>

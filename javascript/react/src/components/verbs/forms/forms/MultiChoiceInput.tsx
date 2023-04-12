@@ -51,7 +51,7 @@ export const MultiChoiceInput: React.FC<{
 				placeholder={placeholder}
 				styles={dropdownStyles}
 				selectedKeys={current}
-				options={options!}
+				options={options}
 				disabled={disabled}
 				onChange={dropdownChangeHandler}
 				onChangeAll={dropdownChangeAllHandler}

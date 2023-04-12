@@ -50,7 +50,7 @@ export const ComboBoxInput: React.FC<{
 				styles={dropdownStyles}
 				selectedKey={current as number | string}
 				text={allowFreeform === true ? (current as string) : ''}
-				options={options!}
+				options={options}
 				disabled={disabled}
 				onChange={changeHandler}
 				onInputValueChange={valueChangeHandler}

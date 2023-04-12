@@ -142,7 +142,7 @@ export function nand(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
 	}
 	let nand = 0
 	for (let i = 0; i < comparisons.length; i++) {
-		nand += comparisons[i]!
+		nand += comparisons[i]
 		if (comparisons[i] === 0) {
 			return 1
 		}

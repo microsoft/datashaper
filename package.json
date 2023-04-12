@@ -10,7 +10,7 @@
 		"_fix_packages": "turbo run fix",
 		"_check_packages": "turbo run check",
 		"rome_check": "rome ci .",
-		"rome_fix": "rome check . --apply-suggested",
+		"rome_fix": "rome check . --apply",
 		"generate:versions": "yarn node scripts/create_versions_file.mjs",
 		"clean": "turbo run clean --parallel",
 		"build": "turbo run build",
