@@ -95,7 +95,7 @@ function makeResourceRoute(
 		// TODO:  this should return a raw text renderer
 		return {} as ResourceRoute
 	}
-	const profile = profiles.get(resource.profile)
+	const profile = profiles.get(resource.profile) as AppProfile
 	const href = hrefs.get(resource.name)
 	const root: ResourceRoute = {
 		key: resource.name,

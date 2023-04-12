@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ButtonChoiceGroup } from '@essex/components'
-import { memo } from 'react'
+import type { IChoiceGroupOption } from '@fluentui/react'
+import { memo, useCallback } from 'react'
 
 import { ViewOptionsContainer } from './ViewOptions.styles.js'
 import type { ViewOptionsProps } from './ViewOptions.types.js'
@@ -15,7 +16,11 @@ export const ViewOptions: React.FC<ViewOptionsProps> = memo(
 				<ButtonChoiceGroup
 					options={options}
 					selectedKey={selectedKey}
-					onChange={(_, option) => onChange(option.key)}
+					onChange={useCallback((_: unknown, option: IChoiceGroupOption | undefined) => {
+						if (option != null) {
+							onChange(option.key)
+						}
+					}, [onChange])}
 				/>
 			</ViewOptionsContainer>
 		)

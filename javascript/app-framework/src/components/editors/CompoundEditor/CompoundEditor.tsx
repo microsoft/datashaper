@@ -18,7 +18,7 @@ import { ViewOptions } from './ViewOptions.js'
 export const CompoundEditor: React.FC<CompoundEditorProps> = memo(
 	function CompoundEditor({ resource, editors }) {
 		const [selectedKey, setSelectedKey] = useState<string>(
-			editors[editors.length - 1].key,
+			editors[editors.length - 1]?.key ?? '',
 		)
 		const options = useViewOptions(editors)
 		const Renderer = useRenderer(editors, selectedKey)
@@ -29,14 +29,14 @@ export const CompoundEditor: React.FC<CompoundEditorProps> = memo(
 					selectedKey={selectedKey}
 					onChange={setSelectedKey}
 				/>
-				<Renderer resource={resource} />
+				{Renderer && <Renderer resource={resource} />}
 			</>
 		)
 	},
 )
 
 function useRenderer(editors: EditorConfig[], selectedKey: string) {
-	return editors.find((editor) => editor.key === selectedKey).renderer
+	return editors.find((editor) => editor.key === selectedKey)?.renderer
 }
 
 function useViewOptions(editors: EditorConfig[]) {
