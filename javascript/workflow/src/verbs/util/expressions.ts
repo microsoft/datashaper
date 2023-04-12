@@ -37,7 +37,7 @@ export function compareAll(
 			const { value, operator, type } = filter
 			const right =
 				type === FilterCompareType.Column ? d[`${value.toString()}`] : value
-			
+
 			return compareValues(left, right, operator)
 		})
 

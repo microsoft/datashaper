@@ -12,7 +12,7 @@ export function firstOneWinsStrategy(
 	const firstCol = columns[0]
 	if (firstCol == null) {
 		throw new Error('no valid first column')
-	}	
+	}
 	let firstValidValue: Value = singleRow[firstCol]
 	let foundFirstValidValue = false
 	let i = 0
