@@ -47,9 +47,12 @@ function getOverflowVerbItems(
 			title: group.label,
 			items: group.verbs.map((verb) => {
 				const found = Object.entries(Verb).find((v) => v[1] === verb)
+				if (found == null || found.length < 2) {
+					throw new Error('could not get overflow verb items')
+				}
 				return {
-					key: found[1],
-					text: found[0],
+					key: found[1] as string,
+					text: found[0] as string,
 					onClick: onCallStep,
 					data: { id },
 					disabled: group?.alwaysEnabled ? false : disabled,

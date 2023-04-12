@@ -13,13 +13,13 @@ export function useSubsetTable(
 ): ColumnTable {
 	return useMemo(() => {
 		let existingColumnNames = table.columnNames()
-		if (columns && columns.length > 0) {
+		if (columns != null && columns?.length > 0) {
 			// for some reason, it updates here first when changing a table.
 			// doing this stops the super error from arquero while the real columns aren't re-rendered
 			const tableColumns = table.columnNames()
 			existingColumnNames = columns
 				.map((col) => col.fieldName)
-				.filter((col) => tableColumns.includes(col))
+				.filter((col) => tableColumns.includes(col as string)) as string[]
 		}
 
 		// choosing wrong delimiters makes data get wrongly parsed and in some cases

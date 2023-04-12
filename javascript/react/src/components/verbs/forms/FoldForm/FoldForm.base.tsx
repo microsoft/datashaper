@@ -21,7 +21,12 @@ export const FoldFormBase: React.FC<StepFormBaseProps<FoldArgs>> = memo(
 					type: FormInputType.Text,
 					required: true,
 					current: step.args.to ? step.args.to[0] : '',
-					onChange: (s, val) => (s.args.to[0] = val as string),
+					onChange: (s, val) => {
+						const target = s.args.to
+						if (target != null) {
+							target[0] = val as string
+						}
+					},
 				},
 				{
 					label: 'Value name to use',
@@ -29,7 +34,12 @@ export const FoldFormBase: React.FC<StepFormBaseProps<FoldArgs>> = memo(
 					type: FormInputType.Text,
 					required: true,
 					current: step.args.to ? step.args.to[1] : '',
-					onChange: (s, val) => (s.args.to[1] = val as string),
+					onChange: (s, val) => {
+						const target = s.args.to
+						if (target != null) {
+							target[1] = val as string
+						}
+					},
 				},
 			],
 			[step],

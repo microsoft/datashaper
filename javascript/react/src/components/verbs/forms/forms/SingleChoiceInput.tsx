@@ -6,6 +6,7 @@ import type { Step } from '@datashaper/workflow'
 import { Dropdown } from '@fluentui/react'
 import { Fragment, memo } from 'react'
 
+import { EMPTY_ARRAY } from '../../../../empty.js'
 import { useDropdownChangeHandler } from '../../../../hooks/index.js'
 import type { StepChangeFunction } from '../../../../types.js'
 import { dropdownStyles } from '../styles.js'
@@ -43,7 +44,7 @@ export const SingleChoiceInput: React.FC<{
 				placeholder={placeholder}
 				styles={dropdownStyles}
 				selectedKey={current as number | string}
-				options={options}
+				options={options ?? EMPTY_ARRAY}
 				onChange={dropdownChangeHandler}
 			/>
 		</Wrapper>
