@@ -7,6 +7,7 @@ import { ComboBox } from '@fluentui/react'
 import noop from 'lodash-es/noop.js'
 import { Fragment, memo } from 'react'
 
+import { EMPTY_ARRAY } from '../../../../empty.js'
 import {
 	useComboBoxChangeHandler,
 	useComboBoxInputValueChangeHandler,
@@ -50,7 +51,7 @@ export const ComboBoxInput: React.FC<{
 				styles={dropdownStyles}
 				selectedKey={current as number | string}
 				text={allowFreeform === true ? (current as string) : ''}
-				options={options!}
+				options={options ?? EMPTY_ARRAY}
 				disabled={disabled}
 				onChange={changeHandler}
 				onInputValueChange={valueChangeHandler}

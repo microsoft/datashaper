@@ -27,7 +27,7 @@ export const ProjectManagementCommandBar: React.FC<ProjectManagementCommandBarPr
 			workflow,
 			tables,
 			outputTables,
-			itemProps,
+			itemProps ?? {},
 			onUpdateWorkflowJson,
 			onUpdateTables,
 			setError,

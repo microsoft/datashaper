@@ -149,6 +149,6 @@ async function checkPersisted(files: Map<string, Blob>, expected: any) {
 	const dpBlob = files.get('datapackage.json')
 	expect(dpBlob).toBeDefined()
 
-	const dpJson = JSON.parse(await dpBlob!.text())
+	const dpJson = JSON.parse(await dpBlob.text())
 	expect(dpJson.resources).toHaveLength(expected.tables.length)
 }

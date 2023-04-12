@@ -110,7 +110,12 @@ export class TableManager {
 			this._tables.set(id, new DelegateSubject<TableContainer>())
 			created = true
 		}
-		return [this._tables.get(id)!, created]
+
+		const result = this._tables.get(id)
+		if (result == null) {
+			throw new Error(`could not get table with id ${id}`)
+		}
+		return [result, created]
 	}
 
 	public toArray(

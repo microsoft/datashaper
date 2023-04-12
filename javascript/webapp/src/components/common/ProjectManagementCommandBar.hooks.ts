@@ -24,14 +24,14 @@ export function useProjectManagementCommands(
 	workflow: Workflow,
 	tables: TableContainer[],
 	outputTables: TableContainer[],
-	itemProps: Partial<ICommandBarItemProps> = {},
+	itemProps: Partial<ICommandBarItemProps>,
 	onUpdateWorkflowJson: (workflow: WorkflowSchema) => void,
 	onUpdateTables: (tables: TableContainer[]) => void,
 	onError?: (error: string) => void,
 ): ICommandBarItemProps[] {
-	const downloadPipeline = useDownloadWorkflow(workflow)
 	const downloadCsv = useDownloadCsv(outputTables)
 	const downloadZip = useDownloadZip(workflow, tables, outputTables)
+	const downloadPipeline = useDownloadWorkflow(workflow)
 	const handleJsonUpload = useHandleJsonUpload(onUpdateWorkflowJson, onError)
 	const handleCsvUpload = useHandleCsvUpload(onUpdateTables)
 	const handleZipUpload = useHandleZipUpload(

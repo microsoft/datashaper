@@ -72,11 +72,11 @@ export class Codebook extends Resource implements TableTransformer {
 	private recomputeOutput = (): void => {
 		if (this._input?.table != null && this.fields.length > 0) {
 			const encodedTable = applyCodebook(
-				this._input?.table!,
+				this._input?.table,
 				this,
 				CodebookStrategy.DataTypeAndMapping,
 			)
-			this._output$.next({ ...this._input!, table: encodedTable })
+			this._output$.next({ ...this._input, table: encodedTable })
 		} else {
 			this._output$.next(this._input)
 		}

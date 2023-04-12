@@ -35,7 +35,7 @@ function binExpr(input: ColumnTable, args: BinArgs) {
 function computeBins(input: ColumnTable, args: BinArgs) {
 	const { strategy, column, fixedwidth, fixedcount, nice } = args
 	const stats = getStats(input, column, args.min, args.max)
-	let [min, max] = stats
+	const [min, max] = stats
 	switch (strategy) {
 		case BinStrategy.FixedWidth:
 			if (!fixedwidth) {

@@ -14,7 +14,7 @@ export function guessDataTypeFromValues(
 	const mapTypes = new Map()
 
 	for (let i = 0; i < limit && i < values.length; i++) {
-		const dataTypeResult = guesser(`${values[i]!}`)
+		const dataTypeResult = guesser(`${values[i]}`)
 		mapTypes.set(dataTypeResult, true)
 	}
 

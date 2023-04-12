@@ -238,7 +238,7 @@ function useOnOpenFileRequested(): (
 					// eslint-disable-next-line
 					if (e?.target?.files?.length) {
 						// eslint-disable-next-line
-						for (let file of e.target.files as FileList) {
+						for (const file of e.target.files as FileList) {
 							try {
 								const { name }: { name: string } = file
 								const baseFile = createBaseFile(file, { name })

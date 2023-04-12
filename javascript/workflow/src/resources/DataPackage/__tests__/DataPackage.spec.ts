@@ -25,9 +25,9 @@ describe('the data package', () => {
 
 		expect(dp.resources).toHaveLength(1)
 
-		const table = dp.resources[0]!
-		expect(table.name).toBe('foo')
-		expect(table.sources).toHaveLength(2)
+		const table = dp.resources[0]
+		expect(table?.name).toBe('foo')
+		expect(table?.sources).toHaveLength(2)
 	})
 
 	it('can load a datapackage object with conflicting implicit names', async () => {
@@ -59,8 +59,8 @@ describe('the data package', () => {
 
 		expect(dp.resources).toHaveLength(2)
 
-		const foo = dp.resources[0]!
-		const bar = dp.resources[1]!
+		const foo = dp.resources[0] as Resource
+		const bar = dp.resources[1] as Resource
 
 		expect(dp.resourceManager.names.sort()).toStrictEqual(
 			[

@@ -55,7 +55,7 @@ export function useInputTables(inputs: TableContainer[]): TableContainer[] {
 	useEffect(() => {
 		if (inputs) {
 			const withMeta = inputs.map((table) => {
-				const meta = introspect(table.table!, true)
+				const meta = introspect(table.table, true)
 				return container(table.id, table.table, meta)
 			})
 			setTables(withMeta)

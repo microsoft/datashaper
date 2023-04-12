@@ -13,8 +13,8 @@ import { op } from 'arquero'
 import { bool } from './data-types.js'
 
 export function compareValues(
-	left: string | number | boolean | Date,
-	right: string | number | boolean | Date,
+	left: string | number | boolean | Date | null | undefined,
+	right: string | number | boolean | Date | null | undefined,
 	operator:
 		| NumericComparisonOperator
 		| StringComparisonOperator
@@ -42,7 +42,7 @@ export function compareValues(
 		// but basically if the compare is not explicitly requesting a compare check,
 		// null values should be ignored
 		return null
-	} else if (typeof left === 'number') {
+	} else if (typeof left === 'number' && right != null) {
 		const num = +right
 		return compareNumbers(left, num, operator as NumericComparisonOperator)
 	} else if (typeof left === 'string') {
@@ -60,7 +60,7 @@ export function compareValues(
 	return 0
 }
 
-function isEmpty(value: string | number | boolean | Date) {
+function isEmpty(value: string | number | boolean | Date | null | undefined) {
 	if (value === null || value === undefined) {
 		return 1
 	}

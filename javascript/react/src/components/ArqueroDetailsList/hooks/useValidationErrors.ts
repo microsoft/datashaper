@@ -18,7 +18,7 @@ export function useValidationErrors(
 	return useMemo(
 		() =>
 			(validationResult?.errors
-				?.map((e) => (e.validate ? e.validate!([value]) : undefined))
+				?.map((e) => e.validate?.([value]) ?? undefined)
 				.filter((e) => e !== undefined) || []) as FieldError[],
 		[value, validationResult],
 	)

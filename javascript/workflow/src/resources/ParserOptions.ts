@@ -1,4 +1,4 @@
-/*!
+/*
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
@@ -56,7 +56,7 @@ export class ParserOptions extends Observed implements ParserOptionsSchema {
 	}
 
 	public set delimiter(delimiter: string | undefined) {
-		this._delimiter$.next(delimiter ?? ParserOptionsDefaults.delimiter!)
+		this._delimiter$.next(delimiter ?? ParserOptionsDefaults.delimiter)
 		this._onChange.next()
 	}
 
@@ -82,7 +82,7 @@ export class ParserOptions extends Observed implements ParserOptionsSchema {
 	}
 
 	public set header(value: boolean | undefined) {
-		this._header$.next(value ?? ParserOptionsDefaults.header!)
+		this._header$.next(value ?? ParserOptionsDefaults.header)
 		this._onChange.next()
 	}
 
@@ -95,7 +95,7 @@ export class ParserOptions extends Observed implements ParserOptionsSchema {
 	}
 
 	public set lineTerminator(value: string | undefined) {
-		this._lineTerminator$.next(value ?? ParserOptionsDefaults.lineTerminator!)
+		this._lineTerminator$.next(value ?? ParserOptionsDefaults.lineTerminator)
 		this._onChange.next()
 	}
 
@@ -108,7 +108,7 @@ export class ParserOptions extends Observed implements ParserOptionsSchema {
 	}
 
 	public set quoteChar(value: string | undefined) {
-		this._quoteChar$.next(value ?? ParserOptionsDefaults.quoteChar!)
+		this._quoteChar$.next(value ?? ParserOptionsDefaults.quoteChar)
 		this._onChange.next()
 	}
 
@@ -147,7 +147,7 @@ export class ParserOptions extends Observed implements ParserOptionsSchema {
 	}
 
 	public set skipBlankLines(value: boolean | undefined) {
-		this._skipBlankLines$.next(value ?? ParserOptionsDefaults.skipBlankLines!)
+		this._skipBlankLines$.next(value ?? ParserOptionsDefaults.skipBlankLines)
 		this._onChange.next()
 	}
 
@@ -160,7 +160,7 @@ export class ParserOptions extends Observed implements ParserOptionsSchema {
 	}
 
 	public set skipRows(value: number | undefined) {
-		this._skipRows$.next(value ?? ParserOptionsDefaults.skipRows!)
+		this._skipRows$.next(value ?? ParserOptionsDefaults.skipRows)
 		this._onChange.next()
 	}
 
@@ -173,7 +173,7 @@ export class ParserOptions extends Observed implements ParserOptionsSchema {
 	}
 
 	public set readRows(value: number | undefined) {
-		this._readRows$.next(value ?? ParserOptionsDefaults.readRows!)
+		this._readRows$.next(value ?? ParserOptionsDefaults.readRows)
 		this._onChange.next()
 	}
 
@@ -204,7 +204,7 @@ export class ParserOptions extends Observed implements ParserOptionsSchema {
 		this._escapeChar$.next(defaults.escapeChar)
 		this._commentStart$.next(defaults.comment)
 
-		if (!quiet) {
+		if (quiet) {
 			this._onChange.next()
 		}
 	}

@@ -73,7 +73,7 @@ describe('applyCodebook', () => {
 
 		const element = codebook.fields.find(
 			(element) => element.name === 'diagnosis',
-		)!
+		)
 
 		const mappingElements: Record<number, string> = {
 			0: 'heart disease',
@@ -84,7 +84,7 @@ describe('applyCodebook', () => {
 
 		element.mapping = mappingElements
 
-		const element2 = codebook.fields.find((element) => element.name === 'test')!
+		const element2 = codebook.fields.find((element) => element.name === 'test')
 		const mappingElements2: Record<number, string> = {
 			0: 'Test1',
 			1: 'Test2',
