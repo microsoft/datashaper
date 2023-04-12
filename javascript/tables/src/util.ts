@@ -64,14 +64,14 @@ export function formatNumberStr(
 	// test that the thousands separator is a valid construction left of the decimal
 	// (optional 1-3 for first group, only 3 exactly for subsequent groups)
 	const parts = template.split('.')
-	const splits = parts[0].split(',')
+	const splits = parts[0]?.split(',') ?? []
 	// first split in any thousands notation can be 0-3
 	if (splits && splits.length > 1) {
-		if (splits[0].length > 3) {
+		if ((splits[0]?.length ?? 0) > 3) {
 			return ''
 		}
 		for (let i = 1; i < splits.length; i++) {
-			if (splits[i].length !== 3) {
+			if (splits[i]?.length !== 3) {
 				return ''
 			}
 		}
