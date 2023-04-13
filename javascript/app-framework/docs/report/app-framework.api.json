@@ -174,50 +174,6 @@
       "members": [
         {
           "kind": "Interface",
-          "canonicalReference": "@datashaper/app-framework!ApplicationSettings:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface ApplicationSettings "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "ApplicationSettings",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!ApplicationSettings#darkMode:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "darkMode?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "darkMode",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Interface",
           "canonicalReference": "@datashaper/app-framework!AppProfile:interface",
           "docComment": "/**\n * Classes implementing this interface are used to represent the Profile within the app framework. This largely includes user interface elements that build upon the underlying Profile functionality.\n */\n",
           "excerptTokens": [
@@ -1023,6 +979,33 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!DataShaperAppProps#defaultSettings:member",
+              "docComment": "/**\n * Object of user-definable application-level settings.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "defaultSettings?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "any"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "defaultSettings",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!DataShaperAppProps#examples:member",
               "docComment": "/**\n * Examples to provide\n */\n",
               "excerptTokens": [
@@ -1165,47 +1148,6 @@
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!DataShaperAppProps#settings:member",
-              "docComment": "/**\n * Object of application-level settings. If unset, defaults will be used. If only partially set, defaults will be used for the unset values.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "settings?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Record",
-                  "canonicalReference": "!Record:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<string, "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ApplicationSettings",
-                  "canonicalReference": "@datashaper/app-framework!ApplicationSettings:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "settings",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 5
               }
             }
           ],
@@ -1984,16 +1926,7 @@
             },
             {
               "kind": "Content",
-              "text": "[\n    "
-            },
-            {
-              "kind": "Reference",
-              "text": "ApplicationSettings",
-              "canonicalReference": "@datashaper/app-framework!ApplicationSettings:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ",\n    "
+              "text": "[any, "
             },
             {
               "kind": "Reference",
@@ -2002,16 +1935,7 @@
             },
             {
               "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "ApplicationSettings",
-              "canonicalReference": "@datashaper/app-framework!ApplicationSettings:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">\n]"
+              "text": "<any>]"
             },
             {
               "kind": "Content",
@@ -2020,7 +1944,7 @@
           ],
           "returnTypeTokenRange": {
             "startIndex": 1,
-            "endIndex": 8
+            "endIndex": 4
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -2037,9 +1961,8 @@
               "text": "export declare function useApplicationSettingsValue(): "
             },
             {
-              "kind": "Reference",
-              "text": "ApplicationSettings",
-              "canonicalReference": "@datashaper/app-framework!ApplicationSettings:interface"
+              "kind": "Content",
+              "text": "any"
             },
             {
               "kind": "Content",
@@ -2424,16 +2347,7 @@
             },
             {
               "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "ApplicationSettings",
-              "canonicalReference": "@datashaper/app-framework!ApplicationSettings:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
+              "text": "<any>"
             },
             {
               "kind": "Content",
@@ -2442,7 +2356,7 @@
           ],
           "returnTypeTokenRange": {
             "startIndex": 1,
-            "endIndex": 5
+            "endIndex": 3
           },
           "releaseTag": "Public",
           "overloadIndex": 1,

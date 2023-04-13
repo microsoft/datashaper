@@ -14,7 +14,7 @@ import { atom, useRecoilState } from 'recoil'
 
 import type { TestAppResource } from './TestAppResource.js'
 
-export interface TestAppProps extends ProfileComponentProps<TestAppResource> {}
+export type TestAppProps = ProfileComponentProps<TestAppResource>
 
 export const TestApp: React.FC<TestAppProps> = memo(function TestApp({
 	resource,

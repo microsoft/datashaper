@@ -9,7 +9,7 @@ import type { SettingsPanelProps } from './SettingsPanel.types.js'
 import { icons } from './ResourcesPane.styles.js'
 import type { Resource, Configurable } from '@datashaper/workflow'
 import { CollapsiblePanel, Settings } from '@essex/components'
-import type { ApplicationSettings, ResourceRouteGroup } from '../../../types.js'
+import type { ResourceRouteGroup } from '../../../types.js'
 import { useApplicationSettings } from '../../../settings/index.js'
 
 export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
@@ -42,7 +42,7 @@ const ApplicationBlock: React.FC = () => {
 	const [settings, setSettings] = useApplicationSettings()
 	const setter = useCallback(
 		(callback: (previous: unknown) => unknown) =>
-			setSettings(callback(settings) as ApplicationSettings),
+			setSettings(callback(settings)),
 		[settings, setSettings],
 	)
 	return (

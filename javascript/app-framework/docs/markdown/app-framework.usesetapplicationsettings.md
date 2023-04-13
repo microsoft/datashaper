@@ -9,10 +9,10 @@ Get the setter for application settings.
 <b>Signature:</b>
 
 ```typescript
-export declare function useSetApplicationSettings(): SetterOrUpdater<ApplicationSettings>;
+export declare function useSetApplicationSettings(): SetterOrUpdater<any>;
 ```
 <b>Returns:</b>
 
-SetterOrUpdater&lt;[ApplicationSettings](./app-framework.applicationsettings.md)<!-- -->&gt;
+SetterOrUpdater&lt;any&gt;
 
 

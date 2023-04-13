@@ -4,11 +4,7 @@
  */
 import type React from 'react'
 
-import type {
-	AppProfile,
-	ApplicationSettings,
-	ResourceTreeViewMode,
-} from '../../../types.js'
+import type { AppProfile, ResourceTreeViewMode } from '../../../types.js'
 import type { FileDefinition } from '../ResourcesPane/index.js'
 
 export interface DataShaperAppProps {
@@ -44,11 +40,9 @@ export interface DataShaperAppProps {
 	defaultHelp?: string
 
 	/**
-	 * Object of application-level settings.
-	 * If unset, defaults will be used.
-	 * If only partially set, defaults will be used for the unset values.
+	 * Object of user-definable application-level settings.
 	 */
-	settings?: Record<string, ApplicationSettings>
+	defaultSettings?: any
 
 	/**
 	 * The default view mode to use on load

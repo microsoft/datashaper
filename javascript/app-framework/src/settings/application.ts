@@ -4,25 +4,17 @@
  */
 import type { SetterOrUpdater } from 'recoil'
 import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
-import type { ApplicationSettings } from '../types.js'
 
-const defaultApplicationSettings: ApplicationSettings = {
-	darkMode: true,
-}
-
-const state = atom<ApplicationSettings>({
+const state = atom({
 	key: 'framework-application-settings',
-	default: defaultApplicationSettings,
+	default: {},
 })
 
 /**
  * Get the recoil state tuple for top-level application settings
  * @returns
  */
-export function useApplicationSettings(): [
-	ApplicationSettings,
-	SetterOrUpdater<ApplicationSettings>,
-] {
+export function useApplicationSettings(): [any, SetterOrUpdater<any>] {
 	return useRecoilState(state)
 }
 
@@ -30,7 +22,7 @@ export function useApplicationSettings(): [
  * Get the application settings value only.
  * @returns
  */
-export function useApplicationSettingsValue(): ApplicationSettings {
+export function useApplicationSettingsValue(): any {
 	return useRecoilValue(state)
 }
 
@@ -38,6 +30,6 @@ export function useApplicationSettingsValue(): ApplicationSettings {
  * Get the setter for application settings.
  * @returns
  */
-export function useSetApplicationSettings(): SetterOrUpdater<ApplicationSettings> {
+export function useSetApplicationSettings(): SetterOrUpdater<any> {
 	return useSetRecoilState(state)
 }

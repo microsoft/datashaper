@@ -9,10 +9,10 @@ Get the application settings value only.
 <b>Signature:</b>
 
 ```typescript
-export declare function useApplicationSettingsValue(): ApplicationSettings;
+export declare function useApplicationSettingsValue(): any;
 ```
 <b>Returns:</b>
 
-[ApplicationSettings](./app-framework.applicationsettings.md)
+any
 
 

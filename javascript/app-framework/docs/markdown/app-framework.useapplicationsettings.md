@@ -9,13 +9,10 @@ Get the recoil state tuple for top-level application settings
 <b>Signature:</b>
 
 ```typescript
-export declare function useApplicationSettings(): [
-    ApplicationSettings,
-    SetterOrUpdater<ApplicationSettings>
-];
+export declare function useApplicationSettings(): [any, SetterOrUpdater<any>];
 ```
 <b>Returns:</b>
 
-\[ [ApplicationSettings](./app-framework.applicationsettings.md)<!-- -->, SetterOrUpdater&lt;[ApplicationSettings](./app-framework.applicationsettings.md)<!-- -->&gt; \]
+\[any, SetterOrUpdater&lt;any&gt;\]
 
 

@@ -7,9 +7,13 @@ import { CommandBar, CommandBarButton, useTheme } from '@fluentui/react'
 import { useMemo } from 'react'
 import styled from 'styled-components'
 
+// override the command background, which does not update properly in fluent after first render
 export const Commands = styled(CommandBar)`
 	.ms-CommandBar {
 		padding-left: unset;
+	}
+	.ms-Button {
+		background: ${({ theme }) => theme.palette.neutralLighter};
 	}
 `
 

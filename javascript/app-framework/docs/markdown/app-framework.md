@@ -35,7 +35,6 @@
 
 |  Interface | Description |
 |  --- | --- |
-|  [ApplicationSettings](./app-framework.applicationsettings.md) |  |
 |  [AppProfile](./app-framework.appprofile.md) | Classes implementing this interface are used to represent the Profile within the app framework. This largely includes user interface elements that build upon the underlying Profile functionality. |
 |  [AppProfileInitializationContext](./app-framework.appprofileinitializationcontext.md) |  |
 |  [AppServices](./app-framework.appservices.md) |  |

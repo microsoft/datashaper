@@ -16,17 +16,21 @@ import { TestAppProfile } from '../profiles/index.js'
 import { About } from './About.js'
 import { ErrorBoundary } from './ErrorBoundary.js'
 import { StyleContext } from './StyleContext.js'
+import type { AppSettings } from '../types.js'
 
 const examples = [
 	{ name: 'Smoking', url: 'examples/smoking.json' },
 	{ name: 'Companies', url: 'examples/companies.json' },
 ]
 
+const defaultSettings: AppSettings = {
+	darkMode: true,
+}
+
 export const App: React.FC = memo(function App() {
 	const customProfiles = useConst<AppProfile[]>(
 		() => [new TestAppProfile()] as AppProfile<any, any>[],
 	)
-
 	return (
 		<ErrorBoundary>
 			<RecoilRoot>
@@ -37,8 +41,7 @@ export const App: React.FC = memo(function App() {
 								<DataShaperApp
 									examples={examples}
 									profiles={customProfiles}
-									// initialDataPackageUrl="examples/smoking.json"
-									// initialRoute="resource/nhefs"
+									defaultSettings={defaultSettings}
 								>
 									<About />
 								</DataShaperApp>

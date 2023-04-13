@@ -11,6 +11,7 @@ import {
 	createGlobalStyle,
 	ThemeProvider as ThemeProviderRaw,
 } from 'styled-components'
+import type { AppSettings } from '../types.js'
 
 const ThemeProvider = ThemeProviderRaw as any
 
@@ -19,7 +20,7 @@ export const StyleContext: React.FC<
 		/* nothing */
 	}>
 > = memo(function StyleContext({ children }) {
-	const settings = useApplicationSettingsValue()
+	const settings = useApplicationSettingsValue() as AppSettings
 	const theme = loadById('default', {
 		dark: settings.darkMode,
 	})

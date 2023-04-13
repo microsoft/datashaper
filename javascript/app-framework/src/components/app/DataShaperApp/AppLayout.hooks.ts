@@ -17,7 +17,6 @@ import type {
 	AppProfile,
 	ResourceRoute,
 	ResourceRouteGroup,
-	ApplicationSettings,
 } from '../../../types.js'
 import { PANE_BREAK_WIDTH, PANE_COLLAPSED_SIZE } from './AppLayout.styles.js'
 import { useLoadDataPackage } from '../../../hooks/useLoadDataPackage.js'
@@ -292,10 +291,10 @@ export function useInitialDataPackageLoad(
 }
 
 export function useSetDefaultApplicationSettings(
-	settings?: ApplicationSettings,
+	settings?: any,
 ): void {
 	const setter = useSetApplicationSettings()
 	useEffect(() => {
-		setter((prev) => ({ ...prev, ...settings }))
+		setter((prev: any) => ({ ...prev, ...settings }))
 	}, [settings, setter])
 }
