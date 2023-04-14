@@ -90,4 +90,12 @@ export class DefaultGraph<T> implements Graph<T> {
 		})
 		return edges
 	}
+
+	public printStats(): void {
+		const log = "Graph Stats\n" + [...this._nodes.values()].map(n => {
+			const {id, version, recalculations, recalculationCauses } = n.stats
+			return `  Node[${id}]: Version ${version}; ${recalculations} recalculations ${JSON.stringify(recalculationCauses)}`
+		}).join("\n")
+		console.log(log)
+	}
 }

@@ -71,6 +71,37 @@ export interface Node<T, Config = unknown> {
 	 * Gets a current output value
 	 */
 	readonly output: Maybe<T>
+
+	/**
+	 * The diagnostic statistics for this node
+	 */
+	readonly stats: NodeStats
+}
+
+
+/**
+ * An interface for node statistics.
+ */
+export interface NodeStats {
+	/**
+	 * The unique identifier for this node
+	 */
+	id: NodeId
+
+	/**
+	 * The number of times this node's value has changed
+	 */
+	version: number
+
+	/**
+	 * The number of times this node has been recalculated
+	 */
+	recalculations: number
+
+	/**
+	 * Specific causes of recalculations
+	 */
+	recalculationCauses: Record<string, number>
 }
 
 /**

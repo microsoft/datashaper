@@ -15,7 +15,7 @@ import type {
 	SocketName,
 	VariadicNodeBinding,
 } from '../types'
-import { NodeInput } from '../types.js'
+import { NodeInput, NodeStats } from '../types.js'
 
 const log = debug('datashaper:BaseNode')
 
@@ -23,6 +23,11 @@ const DEFAULT_INPUT_NAME = NodeInput.Source
 
 export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	public id: NodeId = uuid()
+
+	// Performance tracing
+	private _version = 0
+	private _recalculations = 0
+	private _recalculationCauses: Record<string, number> = {}
 
 	// Observable Outputs
 	private _config$ = new BehaviorSubject<Maybe<Config>>(undefined)
@@ -33,12 +38,21 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	private _inputValues = new Map<SocketName, BehaviorSubject<Maybe<T>>>()
 	private _inputErrors = new Map<SocketName, BehaviorSubject<unknown>>()
 	private _inputSubscriptions = new Map<SocketName, Subscription>()
-
+	
 	// Variadic Inputs
 	private _disposeVariadicInputs: Maybe<() => void>
 	private _getVariadicInputs: Maybe<() => Maybe<T>[]>
 
 	public constructor(public readonly inputs: SocketName[] = []) {}
+
+	public get stats(): NodeStats {
+		return {
+			id: this.id,
+			version: this._version,
+			recalculations: this._recalculations,
+			recalculationCauses: this._recalculationCauses,
+		}
+	}
 
 	public get config$(): Observable<Maybe<Config>> {
 		return this._config$
@@ -52,7 +66,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		if (value !== this.config) {
 			this._config$.next(value)
 			log(`${this.id} set config`)
-			void this.recalculate()
+			void this.recalculate('configure')
 		}
 	}
 
@@ -126,16 +140,18 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 
 			// empty array of initial inputs
 			const values: Maybe<T>[] = binding.map(() => undefined)
-			const subs = binding.map((i, index) =>
-				i.node.output$.subscribe((v) => {
+			const subs = binding.map((i, index) => {
+				return i.node.output$.subscribe((v) => {
 					values[index] = v
-					this.recalculate()
-				}),
-			)
+					this.recalculate(`input_variadic@${i}`)
+				})
+			})
 
 			// provide class-level access to the current values
 			this._disposeVariadicInputs = () => subs.forEach((s) => s.unsubscribe())
 			this._getVariadicInputs = () => values
+			
+			this.recalculate('bindvar')
 		}
 
 		const bindSingleInput = (binding: NodeBinding<T>) => {
@@ -158,23 +174,27 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 						next: (value) => {
 							this._inputValues.get(input)?.next(value)
 							this._inputErrors.get(input)?.next(undefined)
-							this.recalculate()
+							this.recalculate(`input@${String(input)}[${binding.node.id}]`)
 						},
 						error: (error: unknown) => {
 							this._inputValues.get(input)?.next(undefined)
 							this._inputErrors.get(input)?.next(error)
-							this?.recalculate()
+							this?.recalculate('input_error')
 						},
 					}),
 				)
 			}
 
 			const input = this.verifyInputSocketName(binding.input)
+			if (this.hasBoundInputWithNode(input, binding.node.id)) {
+				return
+			}
+				
 			this.unbindSilent(input)
-
 			addBinding()
 			lazilyAddInputObservable()
 			listenToInput()
+			this.recalculate('bind')
 		}
 
 		if (Array.isArray(binding)) {
@@ -182,15 +202,20 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		} else {
 			bindSingleInput(binding)
 		}
-		this.recalculate()
+	}
+
+	private hasBoundInputWithNode(name: SocketName, nodeId: NodeId) {
+		return this.bindings.some(
+			(i) =>
+				i.input === name && i.node.id === nodeId
+		)
 	}
 
 	protected hasBoundInput(name: SocketName): boolean {
-		const existing = this.bindings.find(
+		return this.bindings.some(
 			(i) =>
 				i.input === name || (isDefaultInput(i.input) && isDefaultInput(name)),
 		)
-		return existing != null
 	}
 
 	public unbind(name: SocketName): void {
@@ -198,7 +223,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		log(`${this.id} unbinding socket ${String(name)}`)
 		if (this.hasBoundInput(name)) {
 			this.unbindSilent(name)
-			this.recalculate()
+			this.recalculate('unbind')
 		} else {
 			throw new Error(`no socket installed at "${String(name)}"`)
 		}
@@ -239,8 +264,13 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * Calculate the value of this processing node. This may be invoked even if this
 	 * processing node is not fully configured. recalulate() should account for this
 	 */
-	protected recalculate = (): void => {
+	protected recalculate = (cause: string): void => {
 		try {
+			this._recalculations++
+			if (this._recalculationCauses[cause] == null) {
+				this._recalculationCauses[cause] = 0
+			}
+			this._recalculationCauses[cause]++
 			this.doRecalculate()
 		} catch (err) {
 			log(`recalculation error in node ${this.id}`, err)
@@ -264,6 +294,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 */
 	protected emit = (value: Maybe<T>): void => {
 		if (value !== this.output) {
+			this._version++
 			log(`${this.id} emitting ${value == null ? 'undefined' : 'value'}`)
 			this._output$.next(value ?? undefined)
 		}
