@@ -228,7 +228,6 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 			addBinding()
 			lazilyAddInputObservable()
 			listenToInput()
-			this.recalculate('bind')
 		}
 
 		if (Array.isArray(binding)) {
