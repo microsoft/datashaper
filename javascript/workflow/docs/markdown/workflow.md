@@ -72,6 +72,7 @@
 |  [Graph](./workflow.graph.md) |  |
 |  [Node\_2](./workflow.node_2.md) | A graph processing node |
 |  [NodeBinding](./workflow.nodebinding.md) | A binding for a value being emitted from a node |
+|  [NodeStats](./workflow.nodestats.md) | An interface for node statistics. |
 |  [ProfileHandler](./workflow.profilehandler.md) | A custom profile handler |
 |  [ProfileInitializationContext](./workflow.profileinitializationcontext.md) |  |
 |  [ResourceConstructor](./workflow.resourceconstructor.md) | A constructor for a resource |

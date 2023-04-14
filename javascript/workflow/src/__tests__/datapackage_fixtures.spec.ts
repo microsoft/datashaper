@@ -86,6 +86,10 @@ function defineTestCase(parentPath: string, test: string) {
 					expect(processedTable.metadata?.rows).toEqual(
 						processedTable.table?.numRows(),
 					)
+
+					if (process.env['PRINT_STATS'] != null) {
+						workflow?.printStats()
+					}
 				}
 				await checkPersisted(await datapackage.save(), expected)
 			} finally {

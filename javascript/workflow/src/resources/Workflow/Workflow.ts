@@ -90,6 +90,10 @@ export class Workflow extends Resource implements TableTransformer {
 		}
 	}
 
+	public printStats(): void {
+		this._graphMgr.printStats()
+	}
+
 	private rebindDefaultOutput() {
 		const data$ = this._graphMgr.lastOutput$ ?? this._tableMgr.in$
 		this._tableMgr.setDefaultOutputSource(data$)

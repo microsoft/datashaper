@@ -58,6 +58,7 @@ export declare class Workflow extends Resource implements TableTransformer
 |  [hasInputName(input)](./workflow.workflow.hasinputname.md) |  |  |
 |  [hasOutputName(name)](./workflow.workflow.hasoutputname.md) |  |  |
 |  [loadSchema(schema, quiet)](./workflow.workflow.loadschema.md) |  |  |
+|  [printStats()](./workflow.workflow.printstats.md) |  |  |
 |  [read(name)](./workflow.workflow.read.md) |  | Observe an output name |
 |  [read$(name)](./workflow.workflow.read_.md) |  | Observe an output name |
 |  [removeInputName(name)](./workflow.workflow.removeinputname.md) |  |  |

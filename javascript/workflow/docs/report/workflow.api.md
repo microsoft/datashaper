@@ -107,7 +107,9 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     get output$(): Observable<Maybe<T>>;
     // (undocumented)
     get output(): Maybe<T>;
-    protected recalculate: () => void;
+    protected recalculate: (cause: string) => void;
+    // (undocumented)
+    get stats(): NodeStats;
     // (undocumented)
     unbind(name: SocketName): void;
     protected verifyInputSocketName(name?: SocketName): SocketName;
@@ -367,6 +369,8 @@ export class DefaultGraph<T> implements Graph<T> {
     // (undocumented)
     node(id: NodeId): Node_2<T>;
     get nodes(): NodeId[];
+    // (undocumented)
+    printStats(): void;
     // (undocumented)
     remove(removeId: NodeId): void;
     // (undocumented)
@@ -644,6 +648,7 @@ interface Node_2<T, Config = unknown> {
     readonly inputs: SocketName[];
     readonly output$: Observable<Maybe<T>>;
     readonly output: Maybe<T>;
+    readonly stats: NodeStats;
     unbind(name?: SocketName): void;
 }
 export { Node_2 as Node }
@@ -677,6 +682,16 @@ export enum NodeInput {
 export enum NodeOutput {
     // (undocumented)
     Target = "target"
+}
+
+// Warning: (ae-missing-release-tag) "NodeStats" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface NodeStats {
+    id: NodeId;
+    recalculationCauses: Record<string, number>;
+    recalculations: number;
+    version: number;
 }
 
 // Warning: (ae-missing-release-tag) "ObservableNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1134,6 +1149,8 @@ export class Workflow extends Resource implements TableTransformer {
     get outputNames$(): Observable<string[]>;
     // (undocumented)
     get outputNames(): string[];
+    // (undocumented)
+    printStats(): void;
     // (undocumented)
     readonly profile = KnownProfile.Workflow;
     read$(name?: string): Observable<Maybe<TableContainer>>;
