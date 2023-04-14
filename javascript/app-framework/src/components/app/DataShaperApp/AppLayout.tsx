@@ -13,7 +13,7 @@ import {
 	useInitialDataPackageLoad,
 	useKeyboardComboEffect,
 	useNarrowExpandCollapseState,
-	useSetDefaultApplicationSettings,
+	useSetDefaultSettings,
 } from './AppLayout.hooks.js'
 import type { DataShaperAppProps } from './DataShaperApp.types.js'
 import { AppContent } from './AppContent.js'
@@ -58,7 +58,7 @@ export const AppLayout: React.FC<DataShaperAppProps> = memo(function AppInner({
 	)
 	useKeyboardComboEffect(ctrlShiftEnter, toggleResourceTree)
 	useInitialDataPackageLoad(initialDataPackageUrl, initialRoute)
-	useSetDefaultApplicationSettings(defaultSettings)
+	useSetDefaultSettings(defaultSettings)
 
 	return isResourceTreeHidden ? (
 		content

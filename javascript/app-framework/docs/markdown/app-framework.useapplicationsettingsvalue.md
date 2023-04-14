@@ -4,15 +4,15 @@
 
 ## useApplicationSettingsValue() function
 
-Get the application settings value only.
+Return a read-only copy of the application settings. Note that settings are managed in the centralized settings panel.
 
 <b>Signature:</b>
 
 ```typescript
-export declare function useApplicationSettingsValue(): any;
+export declare function useApplicationSettingsValue(): unknown;
 ```
 <b>Returns:</b>
 
-any
+unknown
 
 

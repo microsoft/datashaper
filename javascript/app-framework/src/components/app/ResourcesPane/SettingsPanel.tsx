@@ -10,7 +10,7 @@ import { icons } from './ResourcesPane.styles.js'
 import type { Resource, Configurable } from '@datashaper/workflow'
 import { CollapsiblePanel, Settings } from '@essex/components'
 import type { ResourceRouteGroup } from '../../../types.js'
-import { useApplicationSettings } from '../../../settings/index.js'
+import { useApplicationSettings } from '../../../settings/application.js'
 
 export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
 	function SettingsPanel({ onToggleExpanded, resources }) {

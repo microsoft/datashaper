@@ -16,8 +16,7 @@
 
 |  Function | Description |
 |  --- | --- |
-|  [useApplicationSettings()](./app-framework.useapplicationsettings.md) | Get the recoil state tuple for top-level application settings |
-|  [useApplicationSettingsValue()](./app-framework.useapplicationsettingsvalue.md) | Get the application settings value only. |
+|  [useApplicationSettingsValue()](./app-framework.useapplicationsettingsvalue.md) | Return a read-only copy of the application settings. Note that settings are managed in the centralized settings panel. |
 |  [useDataPackage()](./app-framework.usedatapackage.md) |  |
 |  [useDatasetMenuItems(selected, onClick)](./app-framework.usedatasetmenuitems.md) |  |
 |  [useDataTableSource(pkg)](./app-framework.usedatatablesource.md) | Use the raw source table from a data package without any workflow applied to it. |
@@ -26,7 +25,6 @@
 |  [useMenuButtonStyles()](./app-framework.usemenubuttonstyles.md) |  |
 |  [useOnOutsideClick(ref, onClickOutside)](./app-framework.useonoutsideclick.md) | Hook that alerts clicks outside of the passed ref |
 |  [usePersistenceService()](./app-framework.usepersistenceservice.md) |  |
-|  [useSetApplicationSettings()](./app-framework.usesetapplicationsettings.md) | Get the setter for application settings. |
 |  [useTableBundle(name)](./app-framework.usetablebundle.md) |  |
 |  [useTableBundleOutput(pkg)](./app-framework.usetablebundleoutput.md) | Uses the latest table from a data package. This is updatde as the package changes |
 |  [useTableBundles()](./app-framework.usetablebundles.md) |  |
