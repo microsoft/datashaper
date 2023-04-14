@@ -6,13 +6,6 @@ License: MIT
 */
 
 /*!
-    localForage -- Offline Storage, Improved
-    Version 1.10.0
-    https://localforage.github.io/localForage
-    (c) 2013-2017 Mozilla, Apache License 2.0
-*/
-
-/*!
   Copyright (c) 2018 Jed Watson.
   Licensed under the MIT License (MIT), see
   http://jedwatson.github.io/classnames
