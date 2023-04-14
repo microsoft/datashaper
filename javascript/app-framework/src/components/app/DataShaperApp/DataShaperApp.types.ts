@@ -42,7 +42,7 @@ export interface DataShaperAppProps {
 	/**
 	 * Object of user-definable application-level settings.
 	 */
-	defaultSettings?: any
+	defaultSettings?: unknown
 
 	/**
 	 * The default view mode to use on load

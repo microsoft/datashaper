@@ -9,5 +9,5 @@ Object of user-definable application-level settings.
 <b>Signature:</b>
 
 ```typescript
-defaultSettings?: any;
+defaultSettings?: unknown;
 ```

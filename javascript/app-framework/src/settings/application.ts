@@ -22,6 +22,7 @@ const storageEffect =
 			setSelf(saved ? JSON.parse(saved) : DEFAULT)
 		} catch (_e) {
 			// quietly ignore ls errors
+			console.warn('Error reading settings from local storage, using defaults.')
 			setSelf(DEFAULT)
 		}
 
@@ -33,6 +34,7 @@ const storageEffect =
 					: localStorage.setItem(key, JSON.stringify(newValue))
 			} catch (_e) {
 				// quietly ignore ls errors
+				console.warn('Error saving settings to local storage.')
 			}
 		})
 	}

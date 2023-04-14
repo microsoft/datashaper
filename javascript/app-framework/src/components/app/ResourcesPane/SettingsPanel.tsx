@@ -14,7 +14,7 @@ import { useApplicationSettings } from '../../../settings/application.js'
 
 export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
 	function SettingsPanel({ onToggleExpanded, resources }) {
-		const blocks = useUnwrapResources(resources)
+		const blocks = useUnpackedResources(resources)
 		return (
 			<Container>
 				<Header>
@@ -97,7 +97,7 @@ const SettingsBlock: React.FC<{
  * Resource routes are grouped, and then have the actual resource nested as props.
  * This flat maps and unpacks all of thate to return a single list of resources containing config blocks.
  */
-function useUnwrapResources(resources: ResourceRouteGroup[]) {
+function useUnpackedResources(resources: ResourceRouteGroup[]) {
 	return useMemo(() => {
 		return resources
 			.flatMap((r) => r.resources)

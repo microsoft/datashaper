@@ -85,7 +85,7 @@ export interface DataShaperAppProps {
     className?: string;
     defaultHelp?: string;
     defaultResourceTreeViewMode?: ResourceTreeViewMode;
-    defaultSettings?: any;
+    defaultSettings?: unknown;
     // Warning: (ae-forgotten-export) The symbol "FileDefinition" needs to be exported by the entry point index.d.ts
     examples?: FileDefinition[];
     fallback?: React_2.ReactNode;
