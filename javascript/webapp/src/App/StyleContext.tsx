@@ -21,7 +21,6 @@ export const StyleContext: React.FC<
 	}>
 > = memo(function StyleContext({ children }) {
 	const settings = useApplicationSettingsValue() as AppSettings
-	console.log('settings', settings)
 	const theme = loadById('default', {
 		dark: settings.darkMode,
 	})
