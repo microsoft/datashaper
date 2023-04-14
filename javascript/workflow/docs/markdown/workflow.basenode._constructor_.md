@@ -4,7 +4,7 @@
 
 ## BaseNode.(constructor)
 
-Constructs a new instance of the `BaseNode` class
+Creates a new instance of the BaseNode
 
 <b>Signature:</b>
 
@@ -16,5 +16,5 @@ constructor(inputs?: SocketName[]);
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  inputs | [SocketName](./workflow.socketname.md)<!-- -->\[\] | <i>(Optional)</i> |
+|  inputs | [SocketName](./workflow.socketname.md)<!-- -->\[\] | <i>(Optional)</i> the input socket names |
 

@@ -78,7 +78,6 @@ export interface Node<T, Config = unknown> {
 	readonly stats: NodeStats
 }
 
-
 /**
  * An interface for node statistics.
  */

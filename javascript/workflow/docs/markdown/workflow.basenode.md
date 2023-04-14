@@ -15,7 +15,7 @@ export declare abstract class BaseNode<T, Config> implements Node<T, Config>
 
 |  Constructor | Modifiers | Description |
 |  --- | --- | --- |
-|  [(constructor)(inputs)](./workflow.basenode._constructor_.md) |  | Constructs a new instance of the <code>BaseNode</code> class |
+|  [(constructor)(inputs)](./workflow.basenode._constructor_.md) |  | Creates a new instance of the BaseNode |
 
 ## Properties
 
@@ -29,6 +29,7 @@ export declare abstract class BaseNode<T, Config> implements Node<T, Config>
 |  [emitError](./workflow.basenode.emiterror.md) | <code>protected</code> | (error: unknown) =&gt; void | Emits a downstream error |
 |  [id](./workflow.basenode.id.md) |  | [NodeId](./workflow.nodeid.md) |  |
 |  [inputs](./workflow.basenode.inputs.md) | <code>readonly</code> | [SocketName](./workflow.socketname.md)<!-- -->\[\] |  |
+|  [isBindingRequired](./workflow.basenode.isbindingrequired.md) | <p><code>protected</code></p><p><code>readonly</code></p> | boolean | If 'isBindingRequired' is true (the default), then config-changes will not drive recomputes if no input bindings are present. |
 |  [output](./workflow.basenode.output.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;T&gt; |  |
 |  [output$](./workflow.basenode.output_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;T&gt;&gt; |  |
 |  [recalculate](./workflow.basenode.recalculate.md) | <code>protected</code> | (cause: string) =&gt; void | Calculate the value of this processing node. This may be invoked even if this processing node is not fully configured. recalulate() should account for this |
@@ -45,7 +46,9 @@ export declare abstract class BaseNode<T, Config> implements Node<T, Config>
 |  [getInputValues()](./workflow.basenode.getinputvalues.md) | <code>protected</code> | Gets a map of named inputs to the current value. |
 |  [getVariadicInputValues()](./workflow.basenode.getvariadicinputvalues.md) | <code>protected</code> |  |
 |  [hasBoundInput(name)](./workflow.basenode.hasboundinput.md) | <code>protected</code> |  |
+|  [hasBoundInputWithNode(name, nodeId)](./workflow.basenode.hasboundinputwithnode.md) | <code>protected</code> |  |
 |  [inputValue(name)](./workflow.basenode.inputvalue.md) | <code>protected</code> |  |
+|  [isSocketNameEqual(name, name2)](./workflow.basenode.issocketnameequal.md) | <code>protected</code> |  |
 |  [unbind(name)](./workflow.basenode.unbind.md) |  |  |
 |  [verifyInputSocketName(name)](./workflow.basenode.verifyinputsocketname.md) | <code>protected</code> | Verifies that an input socket name is known |
 

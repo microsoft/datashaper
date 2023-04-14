@@ -55,7 +55,7 @@ export class GraphManager extends Disposable {
 		return this._numSteps$
 	}
 
-	public printStats(): void { 
+	public printStats(): void {
 		this._graph.printStats()
 	}
 
