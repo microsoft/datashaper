@@ -85,6 +85,7 @@ export interface DataShaperAppProps {
     className?: string;
     defaultHelp?: string;
     defaultResourceTreeViewMode?: ResourceTreeViewMode;
+    defaultSettings?: unknown;
     // Warning: (ae-forgotten-export) The symbol "FileDefinition" needs to be exported by the entry point index.d.ts
     examples?: FileDefinition[];
     fallback?: React_2.ReactNode;
@@ -168,6 +169,11 @@ export enum ResourceTreeViewMode {
     // (undocumented)
     Hidden = "hidden"
 }
+
+// Warning: (ae-missing-release-tag) "useApplicationSettingsValue" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useApplicationSettingsValue(): unknown;
 
 // Warning: (ae-missing-release-tag) "useDataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

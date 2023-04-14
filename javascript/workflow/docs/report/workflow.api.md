@@ -186,6 +186,16 @@ export function columnTransformVerbs(filter?: (verb: Verb) => boolean): Verb[];
 // @public (undocumented)
 export const concat: (id: string) => SetOperationNode<unknown>;
 
+// Warning: (ae-missing-release-tag) "Configurable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface Configurable<T = unknown> {
+    // (undocumented)
+    config$: Observable<T>;
+    // (undocumented)
+    config: T;
+}
+
 // Warning: (ae-missing-release-tag) "convert" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)

@@ -40,6 +40,11 @@ export interface DataShaperAppProps {
 	defaultHelp?: string
 
 	/**
+	 * Object of user-definable application-level settings.
+	 */
+	defaultSettings?: unknown
+
+	/**
 	 * The default view mode to use on load
 	 */
 	defaultResourceTreeViewMode?: ResourceTreeViewMode

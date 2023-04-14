@@ -4,6 +4,7 @@
  */
 export * from '../predicates.js'
 export * from './Codebook.js'
+export * from './Configurable.js'
 export * from './DataPackage/index.js'
 export * from './DataShape.js'
 export * from './DataTable.js'

@@ -16,6 +16,7 @@
 
 |  Function | Description |
 |  --- | --- |
+|  [useApplicationSettingsValue()](./app-framework.useapplicationsettingsvalue.md) | Return a read-only copy of the application settings. Note that settings are managed in the centralized settings panel. |
 |  [useDataPackage()](./app-framework.usedatapackage.md) |  |
 |  [useDatasetMenuItems(selected, onClick)](./app-framework.usedatasetmenuitems.md) |  |
 |  [useDataTableSource(pkg)](./app-framework.usedatatablesource.md) | Use the raw source table from a data package without any workflow applied to it. |

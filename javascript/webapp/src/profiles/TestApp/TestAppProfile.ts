@@ -81,6 +81,7 @@ export class TestAppProfile implements AppProfile<TestAppResource> {
 				icon: 'Table',
 				placeholder: 'Select input table',
 				selectedKey: resource.input,
+				disabled: options.length === 2, // if there's only 2 options, it's just the headers
 				options,
 				onChange: (key: string) => {
 					clearInput(resource)

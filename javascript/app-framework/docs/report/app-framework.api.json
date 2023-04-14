@@ -979,6 +979,33 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!DataShaperAppProps#defaultSettings:member",
+              "docComment": "/**\n * Object of user-definable application-level settings.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "defaultSettings?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "unknown"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "defaultSettings",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!DataShaperAppProps#examples:member",
               "docComment": "/**\n * Examples to provide\n */\n",
               "excerptTokens": [
@@ -1887,6 +1914,33 @@
               "name": "Hidden"
             }
           ]
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/app-framework!useApplicationSettingsValue:function(1)",
+          "docComment": "/**\n * Return a read-only copy of the application settings. Note that settings are managed in the centralized settings panel.\n *\n * @returns \n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useApplicationSettingsValue(): "
+            },
+            {
+              "kind": "Content",
+              "text": "unknown"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [],
+          "name": "useApplicationSettingsValue"
         },
         {
           "kind": "Function",

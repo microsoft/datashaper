@@ -23,6 +23,7 @@ export const FieldWell: React.FC<FieldWellProps> = memo(function FieldWell({
 	placeholder,
 	icon,
 	required,
+	disabled,
 	selectedKey,
 	options,
 	onChange,
@@ -30,7 +31,7 @@ export const FieldWell: React.FC<FieldWellProps> = memo(function FieldWell({
 	styles,
 }) {
 	const _styles = useFieldWellStyles(styles)
-	const dropdownDisabled = !options || options.length === 0
+	const dropdownDisabled = disabled || !options || options.length === 0
 	const dropdownProps = useFieldDropdownProps(_styles.dropdown)
 
 	const resetDisabled = selectedKey === undefined

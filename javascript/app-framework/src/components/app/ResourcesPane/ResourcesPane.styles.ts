@@ -18,7 +18,7 @@ export const TreeContainer = styled.div`
 	overflow-y: auto;
 `
 
-export const HelpContainer = styled.div`
+export const PanelContainer = styled.div`
 	width: 100%;
 	height: 100%;
 	border-top: 2px solid ${({ theme }) => theme.palette.neutralTertiaryAlt};
@@ -39,4 +39,5 @@ export const icons = {
 	openFile: { iconName: 'FabricOpenFolderHorizontal' },
 	newFile: { iconName: 'NewFolder' },
 	help: { iconName: 'ReadingMode' },
+	settings: { iconName: 'Settings' },
 }

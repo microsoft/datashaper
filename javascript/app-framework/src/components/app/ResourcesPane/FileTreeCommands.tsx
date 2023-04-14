@@ -32,7 +32,6 @@ export const FileTreeCommands: React.FC<FileTreeCommandsProps> = memo(
 		const [file, setFile] = useState<BaseFile | undefined>()
 		const { commands, openCommands, newCommands, saveCommands } =
 			useFileManagementCommands(examples, setFile, profiles, narrow)
-
 		return (
 			<>
 				<FileImport file={file} setFile={setFile} />

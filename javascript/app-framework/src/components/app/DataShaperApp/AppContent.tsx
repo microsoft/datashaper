@@ -28,7 +28,6 @@ export const AppContent: React.FC<AppContentProps> = memo(function AppContent({
 	const appProfiles = useRegisteredProfiles(api, profiles)
 	const resources = useResourceRoutes(api, appProfiles)
 	const flattenedRoutes = useFlattened(resources)
-
 	return (
 		<AppServicesContext.Provider value={api}>
 			<Routes>

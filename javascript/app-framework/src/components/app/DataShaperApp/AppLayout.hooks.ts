@@ -21,6 +21,7 @@ import type {
 import { PANE_BREAK_WIDTH, PANE_COLLAPSED_SIZE } from './AppLayout.styles.js'
 import { useLoadDataPackage } from '../../../hooks/useLoadDataPackage.js'
 import { useNavigate } from 'react-router-dom'
+import { useSetDefaultApplicationSettings } from '../../../settings/application.js'
 
 function useKnownAppProfiles(): AppProfile[] {
 	return useConst(() => defaultAppProfiles() as AppProfile<any, any>[])
@@ -185,7 +186,7 @@ export function useAppServices(defaultHelp: string): {
 		return {
 			/**
 			 * Initiates a resource rename
-			 * @param resource - The resource to renamew
+			 * @param resource - The resource to rename
 			 * @returns A promise that resolves to the new name of the resource
 			 */
 			renameResource: (resource: Resource) => {
@@ -287,4 +288,11 @@ export function useInitialDataPackageLoad(
 			/* only fire once */
 		],
 	)
+}
+
+export function useSetDefaultSettings(settings?: any): void {
+	const setter = useSetDefaultApplicationSettings()
+	useEffect(() => {
+		setter(settings)
+	}, [settings, setter])
 }

@@ -204,6 +204,7 @@ export const FieldWell: React.FC<FieldWellProps>;
 //
 // @public
 export interface FieldWellItem {
+    disabled?: boolean;
     icon?: string;
     key: string;
     onChange?: (key: string) => void;

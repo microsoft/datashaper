@@ -4,20 +4,13 @@
  */
 import { memo } from 'react'
 
-import { Container, StyledFontIcon, Title } from './Header.styles.js'
+import { Container, Title } from './Header.styles.js'
 import type { HeaderProps } from './Header.types.js'
 
-export const Header: React.FC<HeaderProps> = memo(function Header({
-	onSettingsClick,
-}) {
+export const Header: React.FC<HeaderProps> = memo(function Header({}) {
 	return (
 		<Container>
 			<Title>DataShaper</Title>
-			<StyledFontIcon
-				aria-label="Settings"
-				iconName="Settings"
-				onClick={onSettingsClick}
-			/>
 		</Container>
 	)
 })

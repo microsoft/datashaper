@@ -13,12 +13,13 @@ import { HelpPanel } from './HelpPanel.js'
 import {
 	Container,
 	FooterMenu,
-	HelpContainer,
+	PanelContainer,
 	icons,
 	TreeContainer,
 } from './ResourcesPane.styles.js'
 import type { ResourcesPaneProps } from './ResourcesPane.types.js'
 import { ResourceTree } from './ResourceTree.js'
+import { SettingsPanel } from './SettingsPanel.js'
 export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 	function ResourcesPane({
 		style,
@@ -37,9 +38,11 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 			? 'Show more information'
 			: 'Show less information'
 		const [helpVisible, { toggle: onToggleHelp }] = useBoolean(false)
-		const helpTooltip = helpVisible
-			? 'Hide interactive guidance'
-			: 'Show interactive guidance'
+		const helpTooltip = `${helpVisible ? 'Hide' : 'Show'} interactive guidance`
+		const [settingsVisible, { toggle: onToggleSettings }] = useBoolean(false)
+		const settingsTooltip = `${
+			settingsVisible ? 'Hide' : 'Show'
+		} settings window`
 		return (
 			<Container style={style} className={className}>
 				<FileTreeCommands
@@ -60,21 +63,39 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 					</Allotment.Pane>
 					{!narrow && helpVisible && (
 						<Allotment.Pane>
-							<HelpContainer>
+							<PanelContainer>
 								<HelpPanel
 									currentHelp={currentHelp}
 									helpContent={helpContent}
 									onToggleExpanded={onToggleHelp}
 								/>
-							</HelpContainer>
+							</PanelContainer>
+						</Allotment.Pane>
+					)}
+					{!narrow && settingsVisible && (
+						<Allotment.Pane>
+							<PanelContainer>
+								<SettingsPanel
+									resources={resources}
+									onToggleExpanded={onToggleSettings}
+								/>
+							</PanelContainer>
 						</Allotment.Pane>
 					)}
 				</Allotment>
 				<FooterMenu>
 					{!narrow && (
-						<Tooltip content={helpTooltip} styles={tooltipStyles}>
-							<IconButton onClick={onToggleHelp} iconProps={icons.help} />
-						</Tooltip>
+						<div>
+							<Tooltip content={helpTooltip} styles={tooltipStyles}>
+								<IconButton onClick={onToggleHelp} iconProps={icons.help} />
+							</Tooltip>
+							<Tooltip content={settingsTooltip} styles={tooltipStyles}>
+								<IconButton
+									onClick={onToggleSettings}
+									iconProps={icons.settings}
+								/>
+							</Tooltip>
+						</div>
 					)}
 					<Tooltip content={expandCollapseTooltip} styles={tooltipStyles}>
 						<IconButton

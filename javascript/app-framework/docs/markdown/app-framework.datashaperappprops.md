@@ -18,6 +18,7 @@ export interface DataShaperAppProps
 |  [className?](./app-framework.datashaperappprops.classname.md) |  | string | <i>(Optional)</i> CSS Classname |
 |  [defaultHelp?](./app-framework.datashaperappprops.defaulthelp.md) |  | string | <i>(Optional)</i> Indicates the help content to show when the application has no resources selected. |
 |  [defaultResourceTreeViewMode?](./app-framework.datashaperappprops.defaultresourcetreeviewmode.md) |  | [ResourceTreeViewMode](./app-framework.resourcetreeviewmode.md) | <i>(Optional)</i> The default view mode to use on load |
+|  [defaultSettings?](./app-framework.datashaperappprops.defaultsettings.md) |  | unknown | <i>(Optional)</i> Object of user-definable application-level settings. |
 |  [examples?](./app-framework.datashaperappprops.examples.md) |  | FileDefinition\[\] | <i>(Optional)</i> Examples to provide |
 |  [fallback?](./app-framework.datashaperappprops.fallback.md) |  | React.ReactNode | <i>(Optional)</i> The React node to render when the selected resource cannot be found |
 |  [initialDataPackageUrl?](./app-framework.datashaperappprops.initialdatapackageurl.md) |  | string | <i>(Optional)</i> The initial data-package URL to load (useful for demos) |

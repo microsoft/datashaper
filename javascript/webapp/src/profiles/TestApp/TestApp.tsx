@@ -2,28 +2,33 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { RecoilBasedProfileHost } from '@datashaper/app-framework'
+import {
+	type ProfileComponentProps,
+	RecoilBasedProfileHost,
+} from '@datashaper/app-framework'
 import { DefaultButton } from '@fluentui/react'
+import { useObservableState } from 'observable-hooks'
 import { memo, useCallback } from 'react'
 import type { MutableSnapshot, Snapshot } from 'recoil'
 import { atom, useRecoilState } from 'recoil'
 
 import type { TestAppResource } from './TestAppResource.js'
 
-export const TestApp: React.FC<{ resource: TestAppResource }> = memo(
-	function TestApp({ resource }) {
-		console.log('TestApp', resource.toSchema())
-		return (
-			<RecoilBasedProfileHost
-				resource={resource}
-				loadState={loadState}
-				saveState={saveState}
-			>
-				<TestAppInner />
-			</RecoilBasedProfileHost>
-		)
-	},
-)
+export type TestAppProps = ProfileComponentProps<TestAppResource>
+
+export const TestApp: React.FC<TestAppProps> = memo(function TestApp({
+	resource,
+}) {
+	return (
+		<RecoilBasedProfileHost
+			resource={resource}
+			loadState={loadState}
+			saveState={saveState}
+		>
+			<TestAppInner resource={resource} />
+		</RecoilBasedProfileHost>
+	)
+})
 
 const countState = atom<number>({ key: 'count', default: 0 })
 
@@ -35,14 +40,16 @@ function saveState(resource: TestAppResource, snapshot: Snapshot): void {
 	resource.count = count
 }
 
-const TestAppInner: React.FC = memo(function TestAppInner() {
+const TestAppInner: React.FC<TestAppProps> = memo(function TestAppInner({
+	resource,
+}) {
 	const [count, setCount] = useRecoilState(countState)
 	const increment = useCallback(() => setCount((c) => c + 1), [setCount])
 	const decrement = useCallback(() => setCount((c) => c - 1), [setCount])
-
+	const config = useObservableState(resource.config$, resource.config)
 	return (
 		<div style={{ margin: 20 }}>
-			<h1>Test App</h1>
+			<h1>{`Test App: ${config.title} version ${config.version}`}</h1>
 			<p>Value: {count}</p>
 			<div
 				style={{

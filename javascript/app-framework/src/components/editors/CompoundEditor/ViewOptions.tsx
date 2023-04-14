@@ -16,11 +16,14 @@ export const ViewOptions: React.FC<ViewOptionsProps> = memo(
 				<ButtonChoiceGroup
 					options={options}
 					selectedKey={selectedKey}
-					onChange={useCallback((_: unknown, option: IChoiceGroupOption | undefined) => {
-						if (option != null) {
-							onChange(option.key)
-						}
-					}, [onChange])}
+					onChange={useCallback(
+						(_: unknown, option: IChoiceGroupOption | undefined) => {
+							if (option != null) {
+								onChange(option.key)
+							}
+						},
+						[onChange],
+					)}
 				/>
 			</ViewOptionsContainer>
 		)
