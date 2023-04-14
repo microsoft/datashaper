@@ -188,13 +188,31 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 					input,
 					binding.node.output$.subscribe({
 						next: (value) => {
-							this._inputValues.get(input)?.next(value)
-							this._inputErrors.get(input)?.next(undefined)
-							this.recalculate(`input@${String(input)}[${binding.node.id}]`)
+							const values = this._inputValues.get(input) as BehaviorSubject<
+								Maybe<T>
+							>
+							const errors = this._inputErrors.get(
+								input,
+							) as BehaviorSubject<unknown>
+
+							if (errors.value != null) {
+								errors.next(undefined)
+							}
+							if (values.value !== value) {
+								values.next(value)
+								this.recalculate(`input@${String(input)}[${binding.node.id}]`)
+							}
 						},
 						error: (error: unknown) => {
-							this._inputValues.get(input)?.next(undefined)
-							this._inputErrors.get(input)?.next(error)
+							const values = this._inputValues.get(input) as BehaviorSubject<
+								Maybe<T>
+							>
+							const errors = this._inputErrors.get(
+								input,
+							) as BehaviorSubject<unknown>
+
+							values.next(undefined)
+							errors.next(error)
 							this?.recalculate('input_error')
 						},
 					}),
