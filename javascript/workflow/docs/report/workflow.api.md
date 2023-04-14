@@ -98,11 +98,16 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     // (undocumented)
     protected hasBoundInput(name: SocketName): boolean;
     // (undocumented)
+    protected hasBoundInputWithNode(name: SocketName, nodeId: NodeId): boolean;
+    // (undocumented)
     id: NodeId;
     // (undocumented)
     readonly inputs: SocketName[];
     // (undocumented)
     protected inputValue(name?: SocketName): Maybe<T>;
+    protected get isBindingRequired(): boolean;
+    // (undocumented)
+    protected isSocketNameEqual(name: SocketName | undefined, name2: SocketName): boolean;
     // (undocumented)
     get output$(): Observable<Maybe<T>>;
     // (undocumented)

@@ -15,6 +15,10 @@ export class ValueNode extends BaseNode<number, number> {
 		this.emit(value)
 	}
 
+	protected override get isBindingRequired(): boolean {
+		return false
+	}
+
 	protected doRecalculate(): void {
 		if (this.config != null) {
 			this.emit(this.config)

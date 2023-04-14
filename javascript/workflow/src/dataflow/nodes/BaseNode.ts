@@ -38,12 +38,18 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	private _inputValues = new Map<SocketName, BehaviorSubject<Maybe<T>>>()
 	private _inputErrors = new Map<SocketName, BehaviorSubject<unknown>>()
 	private _inputSubscriptions = new Map<SocketName, Subscription>()
-	
+
 	// Variadic Inputs
 	private _disposeVariadicInputs: Maybe<() => void>
 	private _getVariadicInputs: Maybe<() => Maybe<T>[]>
 
-	public constructor(public readonly inputs: SocketName[] = []) {}
+	/**
+	 * Creates a new instance of the BaseNode
+	 * @param inputs - the input socket names
+	 */
+	public constructor(public readonly inputs: SocketName[] = []) {
+		// nada
+	}
 
 	public get stats(): NodeStats {
 		return {
@@ -66,8 +72,18 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		if (value !== this.config) {
 			this._config$.next(value)
 			log(`${this.id} set config`)
-			void this.recalculate('configure')
+			if (!this.isBindingRequired || this.bindings.length > 0) {
+				void this.recalculate('configure')
+			}
 		}
+	}
+
+	/**
+	 * If 'isBindingRequired' is true (the default), then config-changes will not drive recomputes if no input
+	 * bindings are present.
+	 */
+	protected get isBindingRequired(): boolean {
+		return true
 	}
 
 	// #endregion field accessors
@@ -150,7 +166,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 			// provide class-level access to the current values
 			this._disposeVariadicInputs = () => subs.forEach((s) => s.unsubscribe())
 			this._getVariadicInputs = () => values
-			
+
 			this.recalculate('bindvar')
 		}
 
@@ -172,13 +188,31 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 					input,
 					binding.node.output$.subscribe({
 						next: (value) => {
-							this._inputValues.get(input)?.next(value)
-							this._inputErrors.get(input)?.next(undefined)
-							this.recalculate(`input@${String(input)}[${binding.node.id}]`)
+							const values = this._inputValues.get(input) as BehaviorSubject<
+								Maybe<T>
+							>
+							const errors = this._inputErrors.get(
+								input,
+							) as BehaviorSubject<unknown>
+
+							if (errors.value != null) {
+								errors.next(undefined)
+							}
+							if (values.value !== value) {
+								values.next(value)
+								this.recalculate(`input@${String(input)}[${binding.node.id}]`)
+							}
 						},
 						error: (error: unknown) => {
-							this._inputValues.get(input)?.next(undefined)
-							this._inputErrors.get(input)?.next(error)
+							const values = this._inputValues.get(input) as BehaviorSubject<
+								Maybe<T>
+							>
+							const errors = this._inputErrors.get(
+								input,
+							) as BehaviorSubject<unknown>
+
+							values.next(undefined)
+							errors.next(error)
 							this?.recalculate('input_error')
 						},
 					}),
@@ -189,12 +223,11 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 			if (this.hasBoundInputWithNode(input, binding.node.id)) {
 				return
 			}
-				
+
 			this.unbindSilent(input)
 			addBinding()
 			lazilyAddInputObservable()
 			listenToInput()
-			this.recalculate('bind')
 		}
 
 		if (Array.isArray(binding)) {
@@ -204,18 +237,21 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		}
 	}
 
-	private hasBoundInputWithNode(name: SocketName, nodeId: NodeId) {
+	protected hasBoundInputWithNode(name: SocketName, nodeId: NodeId) {
 		return this.bindings.some(
-			(i) =>
-				i.input === name && i.node.id === nodeId
+			(i) => this.isSocketNameEqual(i.input, name) && i.node.id === nodeId,
 		)
 	}
 
 	protected hasBoundInput(name: SocketName): boolean {
-		return this.bindings.some(
-			(i) =>
-				i.input === name || (isDefaultInput(i.input) && isDefaultInput(name)),
-		)
+		return this.bindings.some((i) => this.isSocketNameEqual(i.input, name))
+	}
+
+	protected isSocketNameEqual(
+		name: SocketName | undefined,
+		name2: SocketName,
+	): boolean {
+		return name === name2 || (isDefaultInput(name) && isDefaultInput(name2))
 	}
 
 	public unbind(name: SocketName): void {
