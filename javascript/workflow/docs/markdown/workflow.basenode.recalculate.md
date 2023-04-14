@@ -9,5 +9,5 @@ Calculate the value of this processing node. This may be invoked even if this pr
 <b>Signature:</b>
 
 ```typescript
-protected recalculate: () => void;
+protected recalculate: (cause: string) => void;
 ```

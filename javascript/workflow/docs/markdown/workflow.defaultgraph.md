@@ -25,6 +25,7 @@ export declare class DefaultGraph<T> implements Graph<T>
 |  [clear()](./workflow.defaultgraph.clear.md) |  |  |
 |  [hasNode(id)](./workflow.defaultgraph.hasnode.md) |  |  |
 |  [node(id)](./workflow.defaultgraph.node.md) |  |  |
+|  [printStats()](./workflow.defaultgraph.printstats.md) |  |  |
 |  [remove(removeId)](./workflow.defaultgraph.remove.md) |  |  |
 |  [validate()](./workflow.defaultgraph.validate.md) |  |  |
 

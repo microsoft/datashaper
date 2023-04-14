@@ -24,6 +24,7 @@ export interface Node<T, Config = unknown>
 |  [inputs](./workflow.node_2.inputs.md) | <code>readonly</code> | [SocketName](./workflow.socketname.md)<!-- -->\[\] | Named input sockets |
 |  [output](./workflow.node_2.output.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;T&gt; | Gets a current output value |
 |  [output$](./workflow.node_2.output_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;T&gt;&gt; | Gets the output value stream |
+|  [stats](./workflow.node_2.stats.md) | <code>readonly</code> | [NodeStats](./workflow.nodestats.md) | The diagnostic statistics for this node |
 
 ## Methods
 

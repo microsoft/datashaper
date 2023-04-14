@@ -1121,7 +1121,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "() => void"
+                  "text": "(cause: string) => void"
                 },
                 {
                   "kind": "Content",
@@ -1138,6 +1138,36 @@
               },
               "isStatic": false,
               "isProtected": true
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!BaseNode#stats:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get stats(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NodeStats",
+                  "canonicalReference": "@datashaper/workflow!NodeStats:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "stats",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -5149,6 +5179,36 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!DefaultGraph#printStats:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "printStats(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "name": "printStats"
+            },
+            {
+              "kind": "Method",
               "canonicalReference": "@datashaper/workflow!DefaultGraph#remove:member(1)",
               "docComment": "",
               "excerptTokens": [
@@ -8320,6 +8380,34 @@
               }
             },
             {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/workflow!Node_2#stats:member",
+              "docComment": "/**\n * The diagnostic statistics for this node\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly stats: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NodeStats",
+                  "canonicalReference": "@datashaper/workflow!NodeStats:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "stats",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
               "kind": "MethodSignature",
               "canonicalReference": "@datashaper/workflow!Node_2#unbind:member(1)",
               "docComment": "/**\n * Clear an input socket\n *\n * @param name - The input socket name\n */\n",
@@ -8577,6 +8665,137 @@
               "name": "Target"
             }
           ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/workflow!NodeStats:interface",
+          "docComment": "/**\n * An interface for node statistics.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface NodeStats "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "NodeStats",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/workflow!NodeStats#id:member",
+              "docComment": "/**\n * The unique identifier for this node\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "id: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NodeId",
+                  "canonicalReference": "@datashaper/workflow!NodeId:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "id",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/workflow!NodeStats#recalculationCauses:member",
+              "docComment": "/**\n * Specific causes of recalculations\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "recalculationCauses: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Record",
+                  "canonicalReference": "!Record:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string, number>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "recalculationCauses",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/workflow!NodeStats#recalculations:member",
+              "docComment": "/**\n * The number of times this node has been recalculated\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "recalculations: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "recalculations",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/workflow!NodeStats#version:member",
+              "docComment": "/**\n * The number of times this node's value has changed\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "version: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "version",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
         },
         {
           "kind": "Class",
@@ -15146,6 +15365,36 @@
               },
               "isStatic": false,
               "isProtected": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!Workflow#printStats:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "printStats(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "name": "printStats"
             },
             {
               "kind": "Property",
