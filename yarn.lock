@@ -2102,6 +2102,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     react-if: ^4.1.4
+    react-is: ^18.2.0
     react-router-dom: ^6.9.0
     recoil: ^0.7.7
     rxjs: ^7.8.0
@@ -2118,6 +2119,7 @@ __metadata:
     arquero: ">= 5"
     react: ">= 18"
     react-dom: ">= 18"
+    react-is: ">= 18"
     react-router-dom: ">= 6"
     recoil: ">= 0.7"
     styled-components: ">= 5"
@@ -2215,6 +2217,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     react-if: ^4.1.4
+    react-is: ^18.2.0
     rxjs: ^7.8.0
     styled-components: ^5.3.9
     tslib: ^2.5.0
@@ -2230,6 +2233,7 @@ __metadata:
     arquero: ">= 5"
     react: ">= 18"
     react-dom: ">= 18"
+    react-is: ">= 18"
     styled-components: ">= 5"
   peerDependenciesMeta:
     "@fluentui/react":
@@ -2295,6 +2299,7 @@ __metadata:
     "@storybook/preset-react-webpack": ^7.0.4
     "@storybook/react": 7.0.4
     "@storybook/react-webpack5": 7.0.4
+    "@thematic/color": ^4.0.7
     "@thematic/core": ^4.0.5
     "@thematic/d3": ^2.0.20
     "@thematic/fluent": ^5.0.6
@@ -2302,6 +2307,7 @@ __metadata:
     arquero: ^5.1.0
     react: ^18.2.0
     react-dom: ^18.2.0
+    react-is: ^18.2.0
     require-from-string: ^2.0.2
     storybook: 7.0.4
     styled-components: ^5.3.9
@@ -5784,6 +5790,25 @@ __metadata:
     "@types/node":
       optional: true
   checksum: 890944ff8dc074e4e062b3d2165eb7532b522264bdfbc7181a4edf54d7d77e9d8efe62001a7cb76cab597228c3eae10b4bec8446837aef31239da35768f502ec
+  languageName: node
+  linkType: hard
+
+"@thematic/color@npm:^4.0.7":
+  version: 4.0.7
+  resolution: "@thematic/color@npm:4.0.7"
+  dependencies:
+    chroma-js: ^2.4.2
+    color-blind: ^0.1.3
+    hsluv: ^1.0.0
+  peerDependencies:
+    "@types/chroma-js": "*"
+    "@types/node": "*"
+  peerDependenciesMeta:
+    "@types/chroma-js":
+      optional: true
+    "@types/node":
+      optional: true
+  checksum: f2d73172d344508559c1a903997b0e4b4334f8e3a0081fdc2c00a63f7dd539c5750f72ffeff3d784b52c30e0220d739db3106d2c1db4727f0e9eb37a7275727f
   languageName: node
   linkType: hard
 

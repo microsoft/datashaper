@@ -19,6 +19,7 @@
 		"@fluentui/react": "^8.107.4",
 		"@fluentui/react-hooks": "^8.6.20",
 		"@fluentui/utilities": "^8.13.9",
+		"@thematic/color": "^4.0.7",
 		"@thematic/core": "^4.0.5",
 		"@thematic/d3": "^2.0.20",
 		"@thematic/fluent": "^5.0.6",
@@ -26,6 +27,7 @@
 		"arquero": "^5.1.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
+		"react-is": "^18.2.0",
 		"styled-components": "^5.3.9"
 	},
 	"devDependencies": {
