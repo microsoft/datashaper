@@ -3,3 +3,4 @@ releases:
   "@datashaper/react": patch
   "@datashaper/stories": patch
   "@datashaper/webapp": patch
+  "@datashaper/workflow": patch
