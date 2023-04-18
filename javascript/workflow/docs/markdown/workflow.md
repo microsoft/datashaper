@@ -67,7 +67,7 @@
 
 |  Interface | Description |
 |  --- | --- |
-|  [Configurable](./workflow.configurable.md) |  |
+|  [Configurable](./workflow.configurable.md) | Implement this to signal that your resource is configurable. Implementors must supply their own management of the config object/observable. See the webapp's TestAppResource for an example. |
 |  [Emitter](./workflow.emitter.md) | A data emitter for a type of output |
 |  [Graph](./workflow.graph.md) |  |
 |  [Node\_2](./workflow.node_2.md) | A graph processing node |

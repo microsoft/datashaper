@@ -4,6 +4,8 @@
 
 ## Configurable interface
 
+Implement this to signal that your resource is configurable. Implementors must supply their own management of the config object/observable. See the webapp's TestAppResource for an example.
+
 <b>Signature:</b>
 
 ```typescript
