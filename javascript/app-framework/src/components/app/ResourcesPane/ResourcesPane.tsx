@@ -55,6 +55,7 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 						<TreeContainer>
 							<ResourceTree
 								resources={resources}
+								profiles={profiles}
 								narrow={narrow}
 								selectedRoute={selectedKey}
 								onSelect={onSelect}
@@ -77,6 +78,7 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 							<PanelContainer>
 								<SettingsPanel
 									resources={resources}
+									profiles={profiles}
 									onToggleExpanded={onToggleSettings}
 								/>
 							</PanelContainer>

@@ -12,11 +12,13 @@ import type { ResourceSchema } from '@datashaper/schema'
 import { KnownProfile, KnownRel } from '@datashaper/schema'
 import type { DataPackage, Resource } from '@datashaper/workflow'
 import { ResourceReference, isReference } from '@datashaper/workflow'
+import type { SettingsConfig, SettingConfig } from '@essex/components'
 import type { IContextualMenuItem, IDropdownOption } from '@fluentui/react'
 import { DropdownMenuItemType } from '@fluentui/react'
 
 import { TEST_APP_PROFILE } from './constants.js'
 import { TestApp } from './TestApp.js'
+import type { TestAppConfig } from './TestAppResource.js'
 import { TestAppResource } from './TestAppResource.js'
 
 export class TestAppProfile implements AppProfile<TestAppResource> {
@@ -34,7 +36,8 @@ export class TestAppProfile implements AppProfile<TestAppResource> {
 	public createInstance(
 		schema?: ResourceSchema | undefined,
 	): Promise<TestAppResource> {
-		const result = new TestAppResource()
+		const defaultSettings = getDefaultSettings(this.getSettingsConfig())
+		const result = new TestAppResource(defaultSettings)
 		if (schema != null) {
 			result.loadSchema(schema)
 		}
@@ -96,6 +99,33 @@ export class TestAppProfile implements AppProfile<TestAppResource> {
 			},
 		]
 	}
+
+	public getSettingsConfig(): SettingsConfig {
+		return {
+			title: {
+				defaultValue: 'Tester',
+			},
+			version: {
+				defaultValue: 1,
+			},
+			language: {
+				defaultValue: 'JavaScript',
+				params: {
+					options: ['JavaScript', 'TypeScript', 'Python', 'Rust'],
+				},
+			},
+		}
+	}
+}
+
+// iterate through the settings config and construct
+// a basic object using the default values
+function getDefaultSettings(config: SettingsConfig): TestAppConfig {
+	return (Object.entries(config) as Array<[keyof TestAppConfig, SettingConfig]>).reduce((acc, cur) => {
+		const [key, conf] = cur
+		acc[key] = conf.defaultValue
+		return acc
+	}, {} as any) as TestAppConfig // `any` here works around an issue with the empty initial object since all properties on TestAppConfig are required
 }
 
 // if the source is a sibling, create a symlink
