@@ -141,6 +141,10 @@
 			"$schema": "",
 			"profile": "test-app",
 			"count": 0,
+			"config": {
+				"title": "Tested",
+				"version": 2
+			},
 			"sources": [
 				{
 					"name": "stocks",
