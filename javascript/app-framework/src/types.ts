@@ -10,6 +10,7 @@ import type {
 	DataPackage,
 	ProfileHandler,
 } from '@datashaper/workflow'
+import type { SettingsConfig } from '@essex/components'
 /**
  * Data attached to resource-tree nodes
  */
@@ -130,6 +131,12 @@ export interface AppProfile<
 	 * @returns
 	 */
 	getHelp?: () => Record<string, string>
+	/**
+	 * Profiles may supply a settings configuration to be used by resources. This is a template describing the settings properties and UX.
+	 * The default values will be set on new resource instances, and the template will be used to populate the global settings UX panel controls for each instance.
+	 * @returns
+	 */
+	getSettingsConfig?: () => SettingsConfig
 }
 
 export enum CommandBarSection {

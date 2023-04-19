@@ -49,7 +49,7 @@ const TestAppInner: React.FC<TestAppProps> = memo(function TestAppInner({
 	const config = useObservableState(resource.config$, resource.config)
 	return (
 		<div style={{ margin: 20 }}>
-			<h1>{`Test App: ${config.title} version ${config.version}`}</h1>
+			<h1>{`Test App: ${config.title} with language: ${config.language}, version ${config.version}`}</h1>
 			<p>Value: {count}</p>
 			<div
 				style={{

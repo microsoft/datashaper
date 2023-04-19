@@ -11,6 +11,7 @@ import { TEST_APP_PROFILE } from './constants.js'
 export interface TestAppConfig {
 	title: string
 	version: number
+	language: string
 }
 
 export class TestAppResource
@@ -22,10 +23,13 @@ export class TestAppResource
 	private _count = 0
 	private _input: string | undefined
 
-	private _config$ = new BehaviorSubject<TestAppConfig>({
-		title: 'Tester',
-		version: 1,
-	})
+	private _config$: BehaviorSubject<TestAppConfig>
+
+	constructor(config: TestAppConfig) {
+		super()
+		this._config$ = new BehaviorSubject(config)
+	}
+
 	public override defaultName(): string {
 		return 'Test App'
 	}

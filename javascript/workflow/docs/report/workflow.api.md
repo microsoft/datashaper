@@ -195,7 +195,7 @@ export const concat: (id: string) => SetOperationNode<unknown>;
 
 // Warning: (ae-missing-release-tag) "Configurable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export interface Configurable<T = unknown> {
     // (undocumented)
     config$: Observable<T>;

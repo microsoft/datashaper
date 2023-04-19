@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { SettingsConfig } from '@essex/components'
 import { IconButton } from '@fluentui/react'
 import React, { memo, useCallback, useMemo } from 'react'
 import { Container, Content, Header, Inner } from './SettingsPanel.styles.js'
@@ -9,11 +10,16 @@ import type { SettingsPanelProps } from './SettingsPanel.types.js'
 import { icons } from './ResourcesPane.styles.js'
 import type { Resource, Configurable } from '@datashaper/workflow'
 import { CollapsiblePanel, Settings } from '@essex/components'
-import type { ResourceRouteGroup } from '../../../types.js'
+import type { AppProfile, ResourceRouteGroup } from '../../../types.js'
 import { useApplicationSettings } from '../../../settings/application.js'
 
+/**
+ * Manages the display of settings for any resources in the application that declared a settings configuration.
+ * The `settings` object is a raw object of settings values, while `config` is a configuration object that
+ * defines the relevant attributes of the settings such as optional labels, list options, etc.
+ */
 export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
-	function SettingsPanel({ onToggleExpanded, resources }) {
+	function SettingsPanel({ onToggleExpanded, resources, profiles }) {
 		const blocks = useUnpackedResources(resources)
 		return (
 			<Container>
@@ -27,6 +33,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
 						<ResourceBlock
 							key={`settings-block-${block.name}`}
 							resource={block}
+							profile={profiles.get(block.profile)!}
 						/>
 					))}
 				</Content>
@@ -55,17 +62,24 @@ interface ConfigurableResource extends Resource, Configurable {}
 /**
  * Settings block for a resource instance.
  */
-const ResourceBlock: React.FC<{ resource: ConfigurableResource }> = ({
-	resource,
-}) => {
-	const { config } = resource
+const ResourceBlock: React.FC<{
+	resource: ConfigurableResource
+	profile: AppProfile
+}> = ({ resource, profile }) => {
+	const { config: settings } = resource
+	const config = profile.getSettingsConfig?.()
 	const setter = useCallback(
 		(callback: (previous: unknown) => unknown) =>
-			(resource.config = callback(config)),
-		[resource, config],
+			(resource.config = callback(settings)),
+		[resource, settings],
 	)
 	return (
-		<SettingsBlock title={resource.name} settings={config} setter={setter} />
+		<SettingsBlock
+			title={resource.name}
+			settings={settings}
+			settingsConfig={config}
+			setter={setter}
+		/>
 	)
 }
 
@@ -78,7 +92,8 @@ const SettingsBlock: React.FC<{
 	title: string
 	settings: unknown
 	setter: (callback: (previous: unknown) => unknown) => void
-}> = ({ title, settings, setter }) => {
+	settingsConfig?: SettingsConfig
+}> = ({ title, settings, setter, settingsConfig }) => {
 	const handleChange = useCallback(
 		(key: string, value: any) =>
 			setter((prev: any) => ({ ...prev, [key]: value })),
@@ -87,7 +102,11 @@ const SettingsBlock: React.FC<{
 	return (
 		<CollapsiblePanel title={title}>
 			<Inner>
-				<Settings settings={settings} onChange={handleChange} />
+				<Settings
+					settings={settings}
+					config={settingsConfig}
+					onChange={handleChange}
+				/>
 			</Inner>
 		</CollapsiblePanel>
 	)
@@ -98,10 +117,12 @@ const SettingsBlock: React.FC<{
  * This flat maps and unpacks all of thate to return a single list of resources containing config blocks.
  */
 function useUnpackedResources(resources: ResourceRouteGroup[]) {
-	return useMemo(() => {
-		return resources
-			.flatMap((r) => r.resources)
-			.map((r) => r.props.resource)
-			.filter((res) => res.config !== undefined)
-	}, [resources])
+	return useMemo(
+		() =>
+			resources
+				.flatMap((r) => r.resources)
+				.map((r) => r.props.resource)
+				.filter((res) => res.config !== undefined),
+		[resources],
+	)
 }

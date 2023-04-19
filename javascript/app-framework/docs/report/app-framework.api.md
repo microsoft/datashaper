@@ -20,6 +20,7 @@ import type { ProfileHandler } from '@datashaper/workflow';
 import type { default as React_2 } from 'react';
 import type { Resource } from '@datashaper/workflow';
 import type { ResourceSchema } from '@datashaper/schema';
+import type { SettingsConfig } from '@essex/components';
 import type { Snapshot } from 'recoil';
 import type { TableBundle } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
@@ -32,6 +33,7 @@ export interface AppProfile<Res extends Resource = Resource, Schema extends Reso
     getFieldWells?: (resource: Res) => FieldWellItem[];
     getHelp?: () => Record<string, string>;
     getMenuItems?: (resource: Res) => IContextualMenuItem[];
+    getSettingsConfig?: () => SettingsConfig;
     group?: ResourceGroupType;
     iconName: string;
     renderer: React.ComponentType<{

@@ -290,7 +290,7 @@ export function useInitialDataPackageLoad(
 	)
 }
 
-export function useSetDefaultSettings(settings?: any): void {
+export function useSetDefaultAppSettings(settings?: any): void {
 	const setter = useSetDefaultApplicationSettings()
 	useEffect(() => {
 		setter(settings)
