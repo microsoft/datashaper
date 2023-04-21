@@ -114,6 +114,12 @@ export class TestAppProfile implements AppProfile<TestAppResource> {
 					options: ['JavaScript', 'TypeScript', 'Python', 'Rust'],
 				},
 			},
+			metrics: {
+				defaultValue: ['accuracy'],
+				params: {
+					options: ['accuracy', 'precision', 'recall', 'f1'],
+				},
+			},
 		}
 	}
 }
@@ -121,7 +127,9 @@ export class TestAppProfile implements AppProfile<TestAppResource> {
 // iterate through the settings config and construct
 // a basic object using the default values
 function getDefaultSettings(config: SettingsConfig): TestAppConfig {
-	return (Object.entries(config) as Array<[keyof TestAppConfig, SettingConfig]>).reduce((acc, cur) => {
+	return (
+		Object.entries(config) as Array<[keyof TestAppConfig, SettingConfig]>
+	).reduce((acc, cur) => {
 		const [key, conf] = cur
 		acc[key] = conf.defaultValue
 		return acc
