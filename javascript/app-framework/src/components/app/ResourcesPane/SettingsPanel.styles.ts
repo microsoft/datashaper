@@ -8,6 +8,11 @@ export const Container = styled.div`
     height: 100%;
 `
 
+export const Contents = styled.div`
+    height: 100%;
+    overflow-y: scroll;
+`
+
 export const Header = styled.div`
     height: 37px;
     display: flex;

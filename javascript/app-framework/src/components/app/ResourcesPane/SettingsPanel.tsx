@@ -5,13 +5,14 @@
 import type { SettingsConfig } from '@essex/components'
 import { IconButton } from '@fluentui/react'
 import React, { memo, useCallback, useMemo } from 'react'
-import { Container, Content, Header, Inner } from './SettingsPanel.styles.js'
+import { Container, Content, Contents, Header, Inner } from './SettingsPanel.styles.js'
 import type { SettingsPanelProps } from './SettingsPanel.types.js'
 import { icons } from './ResourcesPane.styles.js'
 import type { Resource, Configurable } from '@datashaper/workflow'
 import { CollapsiblePanel, Settings } from '@essex/components'
 import type { AppProfile, ResourceRouteGroup } from '../../../types.js'
 import { useApplicationSettings } from '../../../settings/application.js'
+import { useObservableState } from 'observable-hooks'
 
 /**
  * Manages the display of settings for any resources in the application that declared a settings configuration.
@@ -23,6 +24,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
 		const blocks = useUnpackedResources(resources)
 		return (
 			<Container>
+				<Contents>
 				<Header>
 					<IconButton iconProps={icons.settings} onClick={onToggleExpanded} />
 					Settings
@@ -37,6 +39,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
 						/>
 					))}
 				</Content>
+				</Contents>
 			</Container>
 		)
 	},
@@ -66,7 +69,7 @@ const ResourceBlock: React.FC<{
 	resource: ConfigurableResource
 	profile: AppProfile
 }> = ({ resource, profile }) => {
-	const { config: settings } = resource
+	const settings = useObservableState(resource.config$, resource.config)
 	const config = profile.getSettingsConfig?.()
 	const setter = useCallback(
 		(callback: (previous: unknown) => unknown) =>

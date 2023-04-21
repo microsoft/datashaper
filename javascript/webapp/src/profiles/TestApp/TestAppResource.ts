@@ -12,6 +12,7 @@ export interface TestAppConfig {
 	title: string
 	version: number
 	language: string
+	metrics: string[]
 }
 
 export class TestAppResource

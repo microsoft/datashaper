@@ -114,6 +114,12 @@ export class TestAppProfile implements AppProfile<TestAppResource> {
 					options: ['JavaScript', 'TypeScript', 'Python', 'Rust'],
 				},
 			},
+			metrics: {
+				defaultValue: ['accuracy'],
+				params: {
+					options: ['accuracy', 'precision', 'recall', 'f1'],
+				}
+			}
 		}
 	}
 }
