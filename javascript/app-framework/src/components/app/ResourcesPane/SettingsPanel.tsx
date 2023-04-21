@@ -5,7 +5,13 @@
 import type { SettingsConfig } from '@essex/components'
 import { IconButton } from '@fluentui/react'
 import React, { memo, useCallback, useMemo } from 'react'
-import { Container, Content, Contents, Header, Inner } from './SettingsPanel.styles.js'
+import {
+	Container,
+	Content,
+	Contents,
+	Header,
+	Inner,
+} from './SettingsPanel.styles.js'
 import type { SettingsPanelProps } from './SettingsPanel.types.js'
 import { icons } from './ResourcesPane.styles.js'
 import type { Resource, Configurable } from '@datashaper/workflow'
@@ -25,20 +31,20 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
 		return (
 			<Container>
 				<Contents>
-				<Header>
-					<IconButton iconProps={icons.settings} onClick={onToggleExpanded} />
-					Settings
-				</Header>
-				<Content>
-					<ApplicationBlock />
-					{blocks.map((block) => (
-						<ResourceBlock
-							key={`settings-block-${block.name}`}
-							resource={block}
-							profile={profiles.get(block.profile)!}
-						/>
-					))}
-				</Content>
+					<Header>
+						<IconButton iconProps={icons.settings} onClick={onToggleExpanded} />
+						Settings
+					</Header>
+					<Content>
+						<ApplicationBlock />
+						{blocks.map((block) => (
+							<ResourceBlock
+								key={`settings-block-${block.name}`}
+								resource={block}
+								profile={profiles.get(block.profile)!}
+							/>
+						))}
+					</Content>
 				</Contents>
 			</Container>
 		)
