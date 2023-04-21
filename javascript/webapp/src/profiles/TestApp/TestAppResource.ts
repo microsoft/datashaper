@@ -78,6 +78,6 @@ export class TestAppResource
 	public override loadSchema(schema: any): void {
 		super.loadSchema(schema)
 		this.count = schema.count ?? 0
-		this.config = schema.config
+		this.config = { ...this.config, ...schema.config }
 	}
 }
