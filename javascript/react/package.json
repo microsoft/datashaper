@@ -41,7 +41,7 @@
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/workflow": "workspace:^",
 		"@essex/charts-react": "^1.1.11",
-		"@essex/components": "^3.8.0",
+		"@essex/components": "^3.8.1",
 		"@essex/styled-components": "^0.0.13",
 		"ahooks": "^3.7.6",
 		"d3-format": "^3.1.0",
@@ -55,7 +55,7 @@
 	"devDependencies": {
 		"@essex/scripts": "^24.0.4",
 		"@essex/tsconfig-base": "^2.0.0",
-		"@fluentui/react": "^8.107.6",
+		"@fluentui/react": "^8.108.1",
 		"@fluentui/react-hooks": "^8.6.20",
 		"@fluentui/utilities": "^8.13.9",
 		"@thematic/core": "^4.0.7",
@@ -68,11 +68,11 @@
 		"@types/react": "^18.0.35",
 		"@types/react-dom": "^18.0.11",
 		"@types/styled-components": "^5.1.26",
-		"arquero": "^5.1.0",
+		"arquero": "^5.2.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-is": "^18.2.0",
-		"styled-components": "^5.3.9",
+		"styled-components": "^5.3.10",
 		"typescript": "^5.0.4"
 	},
 	"peerDependencies": {
