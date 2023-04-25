@@ -215,6 +215,14 @@
             },
             {
               "kind": "Content",
+              "text": ", Context = "
+            },
+            {
+              "kind": "Content",
+              "text": "unknown"
+            },
+            {
+              "kind": "Content",
               "text": "> extends "
             },
             {
@@ -233,7 +241,7 @@
             },
             {
               "kind": "Content",
-              "text": ">"
+              "text": "<Context>>"
             },
             {
               "kind": "Content",
@@ -262,6 +270,17 @@
               "defaultTypeTokenRange": {
                 "startIndex": 7,
                 "endIndex": 8
+              }
+            },
+            {
+              "typeParameterName": "Context",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 9,
+                "endIndex": 10
               }
             }
           ],
@@ -579,8 +598,8 @@
           ],
           "extendsTokenRanges": [
             {
-              "startIndex": 9,
-              "endIndex": 13
+              "startIndex": 11,
+              "endIndex": 15
             }
           ]
         },
@@ -591,10 +610,31 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface AppProfileInitializationContext "
+              "text": "export interface AppProfileInitializationContext<T = "
+            },
+            {
+              "kind": "Content",
+              "text": "unknown"
+            },
+            {
+              "kind": "Content",
+              "text": "> "
             }
           ],
           "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
           "name": "AppProfileInitializationContext",
           "preserveMemberOrder": false,
           "members": [
@@ -621,6 +661,33 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "api",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!AppProfileInitializationContext#appContext:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "appContext?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "T"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "appContext",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -892,13 +959,61 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface DataShaperAppProps "
+              "text": "export interface DataShaperAppProps<T = "
+            },
+            {
+              "kind": "Content",
+              "text": "unknown"
+            },
+            {
+              "kind": "Content",
+              "text": "> "
             }
           ],
           "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
           "name": "DataShaperAppProps",
           "preserveMemberOrder": false,
           "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!DataShaperAppProps#appContext:member",
+              "docComment": "/**\n * Apps may supply an arbitrary context object that will be passed down to resources. This provides a seam for injecting app-specific functionality into resources such as async pre-load setup.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "appContext?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "T"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "appContext",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!DataShaperAppProps#children:member",

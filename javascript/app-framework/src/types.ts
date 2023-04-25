@@ -67,9 +67,10 @@ export interface AppServices {
 	requestHelp(key: string): void
 }
 
-export interface AppProfileInitializationContext {
+export interface AppProfileInitializationContext<T = unknown> {
 	dataPackage: DataPackage
 	api: AppServices
+	appContext?: T
 }
 
 /**
@@ -79,7 +80,12 @@ export interface AppProfileInitializationContext {
 export interface AppProfile<
 	Res extends Resource = Resource,
 	Schema extends ResourceSchema = ResourceSchema,
-> extends ProfileHandler<Res, Schema, AppProfileInitializationContext> {
+	Context = unknown,
+> extends ProfileHandler<
+		Res,
+		Schema,
+		AppProfileInitializationContext<Context>
+	> {
 	/**
 	 * A friendly title for the profile, used for resource creation. (e.g. "New <title>")
 	 */

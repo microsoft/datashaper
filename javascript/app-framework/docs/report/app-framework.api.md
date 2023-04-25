@@ -28,7 +28,7 @@ import type { TableContainer } from '@datashaper/tables';
 // Warning: (ae-missing-release-tag) "AppProfile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface AppProfile<Res extends Resource = Resource, Schema extends ResourceSchema = ResourceSchema> extends ProfileHandler<Res, Schema, AppProfileInitializationContext> {
+export interface AppProfile<Res extends Resource = Resource, Schema extends ResourceSchema = ResourceSchema, Context = unknown> extends ProfileHandler<Res, Schema, AppProfileInitializationContext<Context>> {
     getCommandBarCommands?: (section: CommandBarSection) => IContextualMenuItem[] | undefined;
     getFieldWells?: (resource: Res) => FieldWellItem[];
     getHelp?: () => Record<string, string>;
@@ -47,9 +47,11 @@ export interface AppProfile<Res extends Resource = Resource, Schema extends Reso
 // Warning: (ae-missing-release-tag) "AppProfileInitializationContext" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface AppProfileInitializationContext {
+export interface AppProfileInitializationContext<T = unknown> {
     // (undocumented)
     api: AppServices;
+    // (undocumented)
+    appContext?: T;
     // (undocumented)
     dataPackage: DataPackage;
 }
@@ -82,7 +84,8 @@ export const DataShaperApp: React.FC<DataShaperAppProps>;
 // Warning: (ae-missing-release-tag) "DataShaperAppProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface DataShaperAppProps {
+export interface DataShaperAppProps<T = unknown> {
+    appContext?: T;
     children: React_2.ReactNode;
     className?: string;
     defaultHelp?: string;

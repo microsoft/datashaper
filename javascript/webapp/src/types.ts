@@ -5,3 +5,9 @@
 export interface AppSettings {
 	darkMode: boolean
 }
+
+export interface AppContext {
+	initialSettings: {
+		name: string
+	}
+}

@@ -9,9 +9,9 @@ Classes implementing this interface are used to represent the Profile within the
 <b>Signature:</b>
 
 ```typescript
-export interface AppProfile<Res extends Resource = Resource, Schema extends ResourceSchema = ResourceSchema> extends ProfileHandler<Res, Schema, AppProfileInitializationContext> 
+export interface AppProfile<Res extends Resource = Resource, Schema extends ResourceSchema = ResourceSchema, Context = unknown> extends ProfileHandler<Res, Schema, AppProfileInitializationContext<Context>> 
 ```
-<b>Extends:</b> ProfileHandler&lt;Res, Schema, [AppProfileInitializationContext](./app-framework.appprofileinitializationcontext.md)<!-- -->&gt;
+<b>Extends:</b> ProfileHandler&lt;Res, Schema, [AppProfileInitializationContext](./app-framework.appprofileinitializationcontext.md)<!-- -->&lt;Context&gt;&gt;
 
 ## Properties
 

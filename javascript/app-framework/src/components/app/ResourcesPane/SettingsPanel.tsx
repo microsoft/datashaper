@@ -115,7 +115,7 @@ const SettingsBlock: React.FC<{
 
 /**
  * Resource routes are grouped, and then have the actual resource nested as props.
- * This flat maps and unpacks all of thate to return a single list of resources containing config blocks.
+ * This flat maps and unpacks all of that to return a single list of resources containing config blocks.
  */
 function useUnpackedResources(resources: ResourceRouteGroup[]) {
 	return useMemo(

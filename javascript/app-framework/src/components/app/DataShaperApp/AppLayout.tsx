@@ -36,6 +36,7 @@ export const AppLayout: React.FC<DataShaperAppProps> = memo(function AppInner({
 	defaultHelp = 'resources.index',
 	defaultResourceTreeViewMode = ResourceTreeViewMode.Expanded,
 	defaultSettings,
+	appContext,
 }) {
 	const [isResourceTreeHidden, { toggle: toggleResourceTree }] = useBoolean(
 		defaultResourceTreeViewMode === ResourceTreeViewMode.Hidden,
@@ -51,6 +52,7 @@ export const AppLayout: React.FC<DataShaperAppProps> = memo(function AppInner({
 			api={api}
 			rename={rename}
 			profiles={profiles}
+			appContext={appContext}
 			fallback={fallback}
 		>
 			{children}
@@ -74,6 +76,7 @@ export const AppLayout: React.FC<DataShaperAppProps> = memo(function AppInner({
 				<AppResources
 					api={api}
 					profiles={profiles}
+					appContext={appContext}
 					help={help}
 					examples={examples}
 					expanded={expanded}

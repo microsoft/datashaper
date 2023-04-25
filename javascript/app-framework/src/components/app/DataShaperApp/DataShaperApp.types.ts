@@ -7,7 +7,7 @@ import type React from 'react'
 import type { AppProfile, ResourceTreeViewMode } from '../../../types.js'
 import type { FileDefinition } from '../ResourcesPane/index.js'
 
-export interface DataShaperAppProps {
+export interface DataShaperAppProps<T = unknown> {
 	/**
 	 * CSS Classname
 	 */
@@ -59,4 +59,9 @@ export interface DataShaperAppProps {
 	 * Resources are routed under `/resource/{resource.name}`
 	 */
 	initialRoute?: string
+	/**
+	 * Apps may supply an arbitrary context object that will be passed down to resources.
+	 * This provides a seam for injecting app-specific functionality into resources such as async pre-load setup.
+	 */
+	appContext?: T
 }
