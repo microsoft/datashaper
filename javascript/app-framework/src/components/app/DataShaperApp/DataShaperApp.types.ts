@@ -62,6 +62,7 @@ export interface DataShaperAppProps<T = unknown> {
 	/**
 	 * Apps may supply an arbitrary context object that will be passed down to resources.
 	 * This provides a seam for injecting app-specific functionality into resources such as async pre-load setup.
+	 * NOTE: in the future this should be replaced by a dependency injection system.
 	 */
 	appContext?: T
 }
