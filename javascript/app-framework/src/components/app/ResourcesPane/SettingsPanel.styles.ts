@@ -8,11 +8,6 @@ export const Container = styled.div`
     height: 100%;
 `
 
-export const Contents = styled.div`
-    height: 100%;
-    overflow-y: scroll;
-`
-
 export const Header = styled.div`
     height: 37px;
     display: flex;
@@ -26,12 +21,12 @@ export const Header = styled.div`
 `
 
 export const Content = styled.div`
-    height: 100%;
+    height: calc(100% - 37px);
     overflow-y: auto;
 `
 
 export const Inner = styled.div`
     height: 100%;
-    overflow-y: auto;
+    overflow-y: none;
     padding: 10px;
 `
