@@ -107,9 +107,10 @@ function useOnChangeWidth(
 	).run
 }
 
-export function useRegisteredProfiles(
+export function useRegisteredProfiles<T = unknown>(
 	api: AppServices,
 	profiles: AppProfile[] | undefined,
+	appContext?: T,
 ): Map<string, AppProfile> {
 	const dp = useDataPackage()
 	const knownProfiles = useKnownAppProfiles()
@@ -121,12 +122,12 @@ export function useRegisteredProfiles(
 		]
 		const result = new Map<string, AppProfile>()
 		for (const p of allProfiles) {
-			p.initialize?.({ api, dataPackage: dp })
+			p.initialize?.({ api, dataPackage: dp, appContext })
 			result.set(p.profile, p)
 			dp.addResourceHandler(p as ProfileHandler<Resource>)
 		}
 		return result
-	}, [dp, api, profiles, knownProfiles])
+	}, [dp, api, profiles, knownProfiles, appContext])
 }
 
 /**

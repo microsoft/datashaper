@@ -18,6 +18,7 @@ export const AppResources: React.FC<AppResourcesProps> = memo(
 	function AppResources({
 		api,
 		profiles,
+		appContext,
 		examples,
 		help: { currentHelp, helpContent, onInitializeHelp },
 		expanded,
@@ -25,7 +26,7 @@ export const AppResources: React.FC<AppResourcesProps> = memo(
 	}) {
 		const navigate = useNavigate()
 		const pathname = useLocation().pathname
-		const appProfiles = useRegisteredProfiles(api, profiles)
+		const appProfiles = useRegisteredProfiles(api, profiles, appContext)
 		const resources = useResourceRoutes(api, appProfiles)
 		const fileTreeStyle = useFileTreeStyle()
 		const selectedKey = useMemo(() => decodeURI(pathname), [pathname])

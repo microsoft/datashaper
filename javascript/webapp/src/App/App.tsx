@@ -16,7 +16,7 @@ import { TestAppProfile } from '../profiles/index.js'
 import { About } from './About.js'
 import { ErrorBoundary } from './ErrorBoundary.js'
 import { StyleContext } from './StyleContext.js'
-import type { AppSettings } from '../types.js'
+import type { AppContext, AppSettings } from '../types.js'
 
 const examples = [
 	{ name: 'Smoking', url: 'examples/smoking.json' },
@@ -25,6 +25,12 @@ const examples = [
 
 const defaultSettings: AppSettings = {
 	darkMode: true,
+}
+
+const context: AppContext = {
+	initialSettings: {
+		name: 'Tester',
+	},
 }
 
 export const App: React.FC = memo(function App() {
@@ -42,6 +48,7 @@ export const App: React.FC = memo(function App() {
 									examples={examples}
 									profiles={customProfiles}
 									defaultSettings={defaultSettings}
+									appContext={context}
 								>
 									<About />
 								</DataShaperApp>

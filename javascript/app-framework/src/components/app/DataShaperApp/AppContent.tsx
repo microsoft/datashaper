@@ -22,10 +22,11 @@ export const AppContent: React.FC<AppContentProps> = memo(function AppContent({
 		onAccept: onAcceptRename,
 	},
 	profiles,
+	appContext,
 	children,
 	fallback,
 }) {
-	const appProfiles = useRegisteredProfiles(api, profiles)
+	const appProfiles = useRegisteredProfiles(api, profiles, appContext)
 	const resources = useResourceRoutes(api, appProfiles)
 	const flattenedRoutes = useFlattened(resources)
 	return (

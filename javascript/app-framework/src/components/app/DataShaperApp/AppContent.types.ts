@@ -6,12 +6,13 @@ import type { Resource } from '@datashaper/workflow'
 import type { AppServices } from '../../../types.js'
 import type { DataShaperAppProps } from './DataShaperApp.types.js'
 
-export interface AppContentProps {
+export interface AppContentProps<T = unknown> {
 	profiles: DataShaperAppProps['profiles']
 	children: React.ReactNode
 	fallback: React.ReactNode
 	api: AppServices
 	rename: RenameModalState
+	appContext?: T
 }
 
 interface RenameModalState {

@@ -20,17 +20,25 @@ import { TEST_APP_PROFILE } from './constants.js'
 import { TestApp } from './TestApp.js'
 import type { TestAppConfig } from './TestAppResource.js'
 import { TestAppResource } from './TestAppResource.js'
+import type { AppContext } from '../../types.js'
 
-export class TestAppProfile implements AppProfile<TestAppResource> {
+export class TestAppProfile
+	implements AppProfile<TestAppResource, ResourceSchema, AppContext>
+{
 	public readonly profile = TEST_APP_PROFILE
 	public readonly title = 'Test App'
 	public readonly iconName = 'TestBeaker'
 	public readonly renderer = TestApp
 	public readonly group = ResourceGroupType.Apps
 	private _dataPackage: DataPackage | undefined
+	private _appContext: AppContext | undefined
 
-	public initialize({ dataPackage }: AppProfileInitializationContext): void {
+	public initialize({
+		dataPackage,
+		appContext,
+	}: AppProfileInitializationContext): void {
 		this._dataPackage = dataPackage
+		this._appContext = appContext as AppContext
 	}
 
 	public createInstance(
@@ -103,7 +111,7 @@ export class TestAppProfile implements AppProfile<TestAppResource> {
 	public getSettingsConfig(): SettingsConfig {
 		return {
 			title: {
-				defaultValue: 'Tester',
+				defaultValue: this._appContext?.initialSettings.name,
 			},
 			version: {
 				defaultValue: 1,

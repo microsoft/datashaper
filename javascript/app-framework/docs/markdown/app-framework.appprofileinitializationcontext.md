@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface AppProfileInitializationContext 
+export interface AppProfileInitializationContext<T = unknown> 
 ```
 
 ## Properties
@@ -15,5 +15,6 @@ export interface AppProfileInitializationContext
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [api](./app-framework.appprofileinitializationcontext.api.md) |  | [AppServices](./app-framework.appservices.md) |  |
+|  [appContext?](./app-framework.appprofileinitializationcontext.appcontext.md) |  | T | <i>(Optional)</i> |
 |  [dataPackage](./app-framework.appprofileinitializationcontext.datapackage.md) |  | DataPackage |  |
 

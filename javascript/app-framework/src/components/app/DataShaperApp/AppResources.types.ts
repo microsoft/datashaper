@@ -6,9 +6,10 @@ import type { AppServices } from '../../../types.js'
 import type { DataShaperAppProps } from './DataShaperApp.types.js'
 import type { FileDefinition } from '../ResourcesPane/ResourcesPane.types.js'
 
-export interface AppResourcesProps {
+export interface AppResourcesProps<T = unknown> {
 	api: AppServices
 	profiles: DataShaperAppProps['profiles']
+	appContext?: T
 	help: HelpState
 	examples: FileDefinition[]
 	expanded: boolean
