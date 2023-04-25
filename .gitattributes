@@ -4,4 +4,6 @@
 *.ts text eol=lf
 *.tsx text eol=lf
 *.json text eol=lf
-*.yml text eol=lf
+*.yml text eol=
+javascript/*/docs/** linguist-generated=true
+yarn.lock linguist-generated=true
