@@ -14,7 +14,7 @@ export interface DataShaperAppProps<T = unknown>
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [appContext?](./app-framework.datashaperappprops.appcontext.md) |  | T | <i>(Optional)</i> Apps may supply an arbitrary context object that will be passed down to resources. This provides a seam for injecting app-specific functionality into resources such as async pre-load setup. |
+|  [appContext?](./app-framework.datashaperappprops.appcontext.md) |  | T | <i>(Optional)</i> Apps may supply an arbitrary context object that will be passed down to resources. This provides a seam for injecting app-specific functionality into resources such as async pre-load setup. NOTE: in the future this should be replaced by a dependency injection system. |
 |  [children](./app-framework.datashaperappprops.children.md) |  | React.ReactNode | The child node to render as the "Front Page" of the app. This is the default view when no resource is selected |
 |  [className?](./app-framework.datashaperappprops.classname.md) |  | string | <i>(Optional)</i> CSS Classname |
 |  [defaultHelp?](./app-framework.datashaperappprops.defaulthelp.md) |  | string | <i>(Optional)</i> Indicates the help content to show when the application has no resources selected. |
