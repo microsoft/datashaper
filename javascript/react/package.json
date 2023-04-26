@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/react",
-	"version": "20.1.6",
+	"version": "20.1.7",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -41,7 +41,7 @@
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/workflow": "workspace:^",
 		"@essex/charts-react": "^1.1.11",
-		"@essex/components": "^3.8.1",
+		"@essex/components": "^3.8.2",
 		"@essex/styled-components": "^0.0.13",
 		"ahooks": "^3.7.6",
 		"d3-format": "^3.1.0",

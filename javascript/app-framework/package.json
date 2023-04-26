@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/app-framework",
-	"version": "0.9.0",
+	"version": "0.9.1",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -33,7 +33,7 @@
 		"@datashaper/tables": "workspace:^",
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/workflow": "workspace:^",
-		"@essex/components": "^3.8.1",
+		"@essex/components": "^3.8.2",
 		"@monaco-editor/react": "^4.5.0",
 		"ahooks": "^3.7.6",
 		"allotment": "1.18.1",

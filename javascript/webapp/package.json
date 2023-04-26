@@ -1,7 +1,7 @@
 {
 	"name": "@datashaper/webapp",
 	"private": true,
-	"version": "4.6.8",
+	"version": "4.6.9",
 	"main": "src/index.ts",
 	"author": "Nathan Evans <naevans@microsoft.com>",
 	"license": "MIT",
@@ -37,7 +37,7 @@
 		"@datashaper/tables": "workspace:^",
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/workflow": "workspace:^",
-		"@essex/components": "^3.8.1",
+		"@essex/components": "^3.8.2",
 		"@essex/hooks": "^4.0.21",
 		"@fluentui/font-icons-mdl2": "^8.5.13",
 		"@fluentui/react": "^8.108.1",
