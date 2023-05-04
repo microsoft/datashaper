@@ -20,7 +20,7 @@ import type {
 } from '../../../types.js'
 import { PANE_BREAK_WIDTH, PANE_COLLAPSED_SIZE } from './AppLayout.styles.js'
 import { useLoadDataPackage } from '../../../hooks/useLoadDataPackage.js'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useSetDefaultApplicationSettings } from '../../../settings/application.js'
 
 function useKnownAppProfiles(): AppProfile[] {
@@ -274,13 +274,14 @@ export function useInitialDataPackageLoad(
 ): void {
 	const loadDataPackage = useLoadDataPackage()
 	const navigate = useNavigate()
-
+	const location = useLocation()
 	useEffect(
 		() => {
 			if (initialUrl != null) {
 				loadDataPackage(initialUrl)
 			}
-			if (initialRoute != null) {
+			// only navigate to the initial route if we're on the default homepage, otherwise respect prior navigation
+			if (initialRoute != null && location.key === 'default') {
 				navigate(initialRoute)
 			}
 		},
