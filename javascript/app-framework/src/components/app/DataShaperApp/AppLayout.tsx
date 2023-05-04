@@ -13,6 +13,7 @@ import {
 	useInitialDataPackageLoad,
 	useKeyboardComboEffect,
 	useNarrowExpandCollapseState,
+	useRegisteredProfiles,
 	useSetDefaultAppSettings,
 } from './AppLayout.hooks.js'
 import type { DataShaperAppProps } from './DataShaperApp.types.js'
@@ -47,12 +48,12 @@ export const AppLayout: React.FC<DataShaperAppProps> = memo(function AppInner({
 		ref,
 	)
 	const { api, rename, help } = useAppServices(defaultHelp)
+	const appProfiles = useRegisteredProfiles(api, profiles, appContext)
 	const content = (
 		<AppContent
 			api={api}
 			rename={rename}
-			profiles={profiles}
-			appContext={appContext}
+			appProfiles={appProfiles}
 			fallback={fallback}
 		>
 			{children}
@@ -75,8 +76,7 @@ export const AppLayout: React.FC<DataShaperAppProps> = memo(function AppInner({
 			<Allotment.Pane {...resourcePaneProps}>
 				<AppResources
 					api={api}
-					profiles={profiles}
-					appContext={appContext}
+					appProfiles={appProfiles}
 					help={help}
 					examples={examples}
 					expanded={expanded}

@@ -6,7 +6,6 @@ import { memo, useCallback, useMemo } from 'react'
 import { ResourcesPane } from '../ResourcesPane/ResourcesPane.js'
 import {
 	useRegisterProfileHelp,
-	useRegisteredProfiles,
 } from './AppLayout.hooks.js'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useResourceRoutes } from './useResourceRoutes.js'
@@ -17,8 +16,7 @@ import type { AppResourcesProps } from './AppResources.types.js'
 export const AppResources: React.FC<AppResourcesProps> = memo(
 	function AppResources({
 		api,
-		profiles,
-		appContext,
+		appProfiles,
 		examples,
 		help: { currentHelp, helpContent, onInitializeHelp },
 		expanded,
@@ -26,7 +24,6 @@ export const AppResources: React.FC<AppResourcesProps> = memo(
 	}) {
 		const navigate = useNavigate()
 		const pathname = useLocation().pathname
-		const appProfiles = useRegisteredProfiles(api, profiles, appContext)
 		const resources = useResourceRoutes(api, appProfiles)
 		const fileTreeStyle = useFileTreeStyle()
 		const selectedKey = useMemo(() => decodeURI(pathname), [pathname])

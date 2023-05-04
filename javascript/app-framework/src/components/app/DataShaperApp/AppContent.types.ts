@@ -3,16 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Resource } from '@datashaper/workflow'
-import type { AppServices } from '../../../types.js'
-import type { DataShaperAppProps } from './DataShaperApp.types.js'
+import type { AppProfile, AppServices } from '../../../types.js'
 
-export interface AppContentProps<T = unknown> {
-	profiles: DataShaperAppProps['profiles']
+export interface AppContentProps {
+	appProfiles: Map<string, AppProfile>
 	children: React.ReactNode
 	fallback: React.ReactNode
 	api: AppServices
 	rename: RenameModalState
-	appContext?: T
 }
 
 interface RenameModalState {
