@@ -2,14 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { AppServices } from '../../../types.js'
-import type { DataShaperAppProps } from './DataShaperApp.types.js'
+import type { AppProfile, AppServices } from '../../../types.js'
 import type { FileDefinition } from '../ResourcesPane/ResourcesPane.types.js'
 
-export interface AppResourcesProps<T = unknown> {
+export interface AppResourcesProps {
 	api: AppServices
-	profiles: DataShaperAppProps['profiles']
-	appContext?: T
+	appProfiles: Map<string, AppProfile>
 	help: HelpState
 	examples: FileDefinition[]
 	expanded: boolean
