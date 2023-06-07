@@ -4,9 +4,7 @@
  */
 import { memo, useCallback, useMemo } from 'react'
 import { ResourcesPane } from '../ResourcesPane/ResourcesPane.js'
-import {
-	useRegisterProfileHelp,
-} from './AppLayout.hooks.js'
+import { useRegisterProfileHelp } from './AppLayout.hooks.js'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useResourceRoutes } from './useResourceRoutes.js'
 import type { ResourceRoute } from '../../../types.js'
