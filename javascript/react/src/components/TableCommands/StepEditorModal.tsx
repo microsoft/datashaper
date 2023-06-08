@@ -48,13 +48,13 @@ export const StepEditorModal: React.FC<StepEditorModalProps> = memo(
 							<IconButton
 								onClick={toggleGuidance}
 								iconProps={icons['help']}
-								ariaLabel="Expand verb guidance"
+								ariaLabel='Expand verb guidance'
 							/>
 						) : null}
 						<IconButton
 							onClick={onDismiss}
 							iconProps={icons['cancel']}
-							ariaLabel="Close verb creation modal"
+							ariaLabel='Close verb creation modal'
 						/>
 					</HeaderButtons>
 				</Header>

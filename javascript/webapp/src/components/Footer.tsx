@@ -56,8 +56,8 @@ const Link: FC<
 		</LinkDiv>
 	) : (
 		<LinkA
-			target="_blank"
-			rel="noreferrer"
+			target='_blank'
+			rel='noreferrer'
 			href={href}
 			style={style}
 			className={className}

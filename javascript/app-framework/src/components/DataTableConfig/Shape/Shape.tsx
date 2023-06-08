@@ -37,27 +37,27 @@ export const Shape: React.FC<ShapeProps> = memo(function Shape({ shape }) {
 				<FieldContainer>
 					<SpinButton
 						labelPosition={Position.top}
-						label="Rows"
+						label='Rows'
 						value={matrix?.[0].toString() || ''}
 						min={0}
 						step={1}
 						onChange={(_, value) =>
 							onMatrixChange(+(value as string), matrix?.[1] || 0)
 						}
-						incrementButtonAriaLabel="Increase value by 1"
-						decrementButtonAriaLabel="Decrease value by 1"
+						incrementButtonAriaLabel='Increase value by 1'
+						decrementButtonAriaLabel='Decrease value by 1'
 					/>
 					<SpinButton
 						labelPosition={Position.top}
-						label="Columns"
+						label='Columns'
 						value={matrix?.[1].toString() || ''}
 						min={0}
 						step={1}
 						onChange={(_, value) =>
 							onMatrixChange(matrix?.[0] || 0, +(value as string))
 						}
-						incrementButtonAriaLabel="Increase value by 1"
-						decrementButtonAriaLabel="Decrease value by 1"
+						incrementButtonAriaLabel='Increase value by 1'
+						decrementButtonAriaLabel='Decrease value by 1'
 					/>
 				</FieldContainer>
 			</When>

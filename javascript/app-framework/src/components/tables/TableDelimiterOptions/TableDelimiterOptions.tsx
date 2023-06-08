@@ -61,13 +61,15 @@ export const TableDelimiterOptions: React.FC<{
 			<RadioGroup
 				defaultSelectedKey={selected}
 				options={delimiterOptions}
-				onChange={(_: any, option: IChoiceGroupOption) => onDelimeterChange(option)}
+				onChange={(_: any, option: IChoiceGroupOption) =>
+					onDelimeterChange(option)
+				}
 				styles={choiceGroupStyles}
 			/>
 			<OtherTextField
-				autoComplete="off"
-				title="custom delimiter"
-				name="customDelimiter"
+				autoComplete='off'
+				title='custom delimiter'
+				name='customDelimiter'
 				disabled={!isOther}
 				value={value}
 				onChange={onChangeCustomDelimeter}

@@ -37,7 +37,7 @@ export const Headers: React.FC<{
 	return (
 		<Container>
 			<Checkbox
-				label="Headers in first row"
+				label='Headers in first row'
 				checked={header}
 				onChange={(_, value) => (parser.header = value)}
 			/>

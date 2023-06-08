@@ -15,7 +15,7 @@ export const CodebookDataTypeField: React.FC<CodebookEnumDropdownFieldProps> =
 
 		return (
 			<EnumDropdown
-				title="type"
+				title='type'
 				disabled={field.exclude}
 				selectedKey={field.type}
 				{...props}

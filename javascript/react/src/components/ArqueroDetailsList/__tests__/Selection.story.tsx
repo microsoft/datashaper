@@ -31,7 +31,7 @@ export const SelectionStory: ComponentStory<typeof ArqueroDetailsList> = (
 			}}
 			showColumnBorders
 			sortable
-			defaultSortColumn="Date"
+			defaultSortColumn='Date'
 			{...args}
 			table={stocks}
 			metadata={metadata}

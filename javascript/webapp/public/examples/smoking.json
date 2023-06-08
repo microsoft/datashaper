@@ -366,8 +366,17 @@
 						{
 							"args": {
 								"columns": [
-									"index", "sex", "age", "race", "education", "wt71", "wt82_71",
-									"smokeintensity", "smkintensity82_71", "active", "exercise",
+									"index",
+									"sex",
+									"age",
+									"race",
+									"education",
+									"wt71",
+									"wt82_71",
+									"smokeintensity",
+									"smkintensity82_71",
+									"active",
+									"exercise",
 									"smokeyrs"
 								]
 							},
@@ -490,7 +499,11 @@
 							"description": "Maps several columns' null code of 2 to actual nulls",
 							"args": {
 								"columns": [
-									"birthcontrol", "boweltrouble", "diabetes", "hbp", "hbpmed"
+									"birthcontrol",
+									"boweltrouble",
+									"diabetes",
+									"hbp",
+									"hbpmed"
 								],
 								"value": 2
 							}
@@ -499,18 +512,63 @@
 							"verb": "select",
 							"args": {
 								"columns": [
-									"active", "age", "alcoholfreq", "alcoholhowmuch",
-									"alcoholtype", "allergies", "asthma", "birthcontrol",
-									"boweltrouble", "bronch", "cholesterol", "chroniccough",
-									"colitis", "dbp", "death", "diabetes", "education",
-									"exercise", "hayfever", "hbp", "hbpmed", "headache",
-									"hepatitis", "hf", "hightax82", "ht", "income", "infection",
-									"lackpep", "marital", "nerves", "nervousbreak", "otherpain",
-									"pepticulcer", "pica", "polio", "pregnancies", "price71",
-									"price71_82", "price82", "qsmk", "sbp", "school", "sex",
-									"smkintensity82_71", "smokeintensity", "smokeyrs", "tax71",
-									"tax71_82", "tax82", "tb", "tumor", "weakheart", "wt71",
-									"wt82", "wt82_71", "wtloss"
+									"active",
+									"age",
+									"alcoholfreq",
+									"alcoholhowmuch",
+									"alcoholtype",
+									"allergies",
+									"asthma",
+									"birthcontrol",
+									"boweltrouble",
+									"bronch",
+									"cholesterol",
+									"chroniccough",
+									"colitis",
+									"dbp",
+									"death",
+									"diabetes",
+									"education",
+									"exercise",
+									"hayfever",
+									"hbp",
+									"hbpmed",
+									"headache",
+									"hepatitis",
+									"hf",
+									"hightax82",
+									"ht",
+									"income",
+									"infection",
+									"lackpep",
+									"marital",
+									"nerves",
+									"nervousbreak",
+									"otherpain",
+									"pepticulcer",
+									"pica",
+									"polio",
+									"pregnancies",
+									"price71",
+									"price71_82",
+									"price82",
+									"qsmk",
+									"sbp",
+									"school",
+									"sex",
+									"smkintensity82_71",
+									"smokeintensity",
+									"smokeyrs",
+									"tax71",
+									"tax71_82",
+									"tax82",
+									"tb",
+									"tumor",
+									"weakheart",
+									"wt71",
+									"wt82",
+									"wt82_71",
+									"wtloss"
 								]
 							}
 						}

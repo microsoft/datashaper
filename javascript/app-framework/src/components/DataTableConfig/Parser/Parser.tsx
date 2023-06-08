@@ -52,33 +52,33 @@ export const Parser: React.FC<ParserProps> = memo(function Parser({ parser }) {
 					onChange={(delim: string) => (parser.delimiter = delim)}
 				/>
 			</FlexContainer>
-			<Expando label="Advanced" styles={expandoStyles}>
+			<Expando label='Advanced' styles={expandoStyles}>
 				<FlexContainer>
 					<Headers parser={parser} />
 					<FieldContainer>
 						<SpinButton
 							labelPosition={Position.top}
-							label="Skip rows"
+							label='Skip rows'
 							value={skipRows?.toString()}
 							min={0}
 							step={1}
 							onChange={(_, value) => (parser.skipRows = +(value as string))}
-							incrementButtonAriaLabel="Increase value by 1"
-							decrementButtonAriaLabel="Decrease value by 1"
+							incrementButtonAriaLabel='Increase value by 1'
+							decrementButtonAriaLabel='Decrease value by 1'
 						/>
 						<SpinButton
 							labelPosition={Position.top}
-							label="Read rows"
+							label='Read rows'
 							value={readRows?.toString()}
 							min={0}
 							step={1}
 							onChange={(_, value) => (parser.readRows = +(value as string))}
-							incrementButtonAriaLabel="Increase value by 1"
-							decrementButtonAriaLabel="Decrease value by 1"
+							incrementButtonAriaLabel='Increase value by 1'
+							decrementButtonAriaLabel='Decrease value by 1'
 						/>
 					</FieldContainer>
 					<TextField
-						label="Comment character"
+						label='Comment character'
 						onChange={(_, value) => (parser.comment = value)}
 						value={comment}
 					/>
@@ -89,18 +89,18 @@ export const Parser: React.FC<ParserProps> = memo(function Parser({ parser }) {
 						onChange={(_, option) => (parser.lineTerminator = option?.key)}
 					/>
 					<TextField
-						label="Quote character"
+						label='Quote character'
 						onChange={(_, value) => (parser.quoteChar = value)}
 						value={quoteChar}
 					/>
 					<TextField
-						label="Escape character"
+						label='Escape character'
 						onChange={(_, value) => (parser.escapeChar = value)}
 						value={escapeChar}
 					/>
 
 					<Checkbox
-						label="Skip blank lines"
+						label='Skip blank lines'
 						checked={skipBlankLines}
 						onChange={(_, value) => (parser.skipBlankLines = value)}
 					/>

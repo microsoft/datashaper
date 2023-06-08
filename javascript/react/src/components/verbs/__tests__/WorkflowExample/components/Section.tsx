@@ -17,7 +17,7 @@ import type { SectionProps } from './Section.types.js'
 export const Section: React.FC<React.PropsWithChildren<SectionProps>> = memo(
 	function Section({ title, subtitle, children }) {
 		return (
-			<Container className="section">
+			<Container className='section'>
 				<Titles>
 					<H1>{title}</H1>
 					<H2>{subtitle}</H2>

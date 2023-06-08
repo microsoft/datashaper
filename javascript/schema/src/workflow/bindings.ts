@@ -63,18 +63,20 @@ export interface VariadicInput extends BasicInput {
 }
 
 export interface UnknownInput {
-	input?: string | {
-		/** 
-		 * Possible main input 
-		 **/
-		source?: WorkflowStepId
+	input?:
+		| string
+		| {
+				/**
+				 * Possible main input
+				 **/
+				source?: WorkflowStepId
 
-		/**
-		 * Possible variadic input
-		 */
-		others?: WorkflowStepId[]
+				/**
+				 * Possible variadic input
+				 */
+				others?: WorkflowStepId[]
 
-		/** Possible other input */
-		[key: string]: WorkflowStepId | WorkflowStepId[] | undefined	
-	}
+				/** Possible other input */
+				[key: string]: WorkflowStepId | WorkflowStepId[] | undefined
+		  }
 }

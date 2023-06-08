@@ -18,7 +18,7 @@ export const CodebookDescriptionField: React.FC<CodebookTextFieldProps> = memo(
 				multiline
 				styles={styles}
 				disabled={field.exclude}
-				name="displayName"
+				name='displayName'
 				value={field.description}
 				onChange={onChangeValue}
 				rows={3}

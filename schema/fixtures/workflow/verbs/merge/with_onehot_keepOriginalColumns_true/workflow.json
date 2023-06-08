@@ -6,7 +6,10 @@
 			"input": "table31",
 			"args": {
 				"columns": [
-					"Name_Microsoft", "Name_Amazon", "Name_Samsung", "Name_Google"
+					"Name_Microsoft",
+					"Name_Amazon",
+					"Name_Samsung",
+					"Name_Google"
 				],
 				"strategy": "first one wins",
 				"to": "NewColumn",

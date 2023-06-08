@@ -711,8 +711,13 @@
 						{
 							"args": {
 								"columns": [
-									"index", "diabetes_hypertension", "subject_inclusion",
-									"chronic_disease", "gender", "death", "age_group"
+									"index",
+									"diabetes_hypertension",
+									"subject_inclusion",
+									"chronic_disease",
+									"gender",
+									"death",
+									"age_group"
 								]
 							},
 							"verb": "select"

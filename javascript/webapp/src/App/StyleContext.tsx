@@ -28,7 +28,7 @@ export const StyleContext: React.FC<
 	return (
 		<>
 			<GlobalStyle />
-			<ThematicFluentProvider theme={theme} className="fluent-theme-provider">
+			<ThematicFluentProvider theme={theme} className='fluent-theme-provider'>
 				<ApplicationStyles />
 				<ThemeProvider theme={fluentTheme}>{children}</ThemeProvider>
 			</ThematicFluentProvider>

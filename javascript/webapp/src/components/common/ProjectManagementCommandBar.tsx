@@ -40,7 +40,7 @@ export const ProjectManagementCommandBar: React.FC<ProjectManagementCommandBarPr
 						messageBarType={MessageBarType.error}
 						isMultiline={false}
 						onDismiss={() => setError('')}
-						dismissButtonAriaLabel="Close"
+						dismissButtonAriaLabel='Close'
 					>
 						{error}
 					</MessageBar>

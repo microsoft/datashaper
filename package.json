@@ -27,7 +27,7 @@
 		"test:": "yarn test",
 		"start": "SB_QUIET=true turbo run start --parallel",
 		"deploy": "turbo run deploy",
-		"ci": "turbo run ci",
+		"ci": "turbo run ci && yarn rome_check",
 		"is_clean": "git diff-index HEAD --quiet || (git status && exit 1)",
 		"release": "run-s clean _version_cut ci _release_packages _cut_schema _copy_versions",
 		"update_sdks": "yarn dlx @yarnpkg/sdks vscode"

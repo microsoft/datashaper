@@ -45,8 +45,18 @@
 		"DataType": {
 			"description": "Explicit data type of the value (i.e., for a column or property).\nTODO: clarify/update null/undefined",
 			"enum": [
-				"array", "boolean", "date", "datetime", "integer", "null", "number",
-				"object", "string", "time", "undefined", "unknown"
+				"array",
+				"boolean",
+				"date",
+				"datetime",
+				"integer",
+				"null",
+				"number",
+				"object",
+				"string",
+				"time",
+				"undefined",
+				"unknown"
 			],
 			"type": "string"
 		},

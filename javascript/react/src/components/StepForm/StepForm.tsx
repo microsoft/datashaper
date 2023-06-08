@@ -71,7 +71,7 @@ export const StepForm: React.FC<StepFormProps> = memo(function StepForm({
 	useDefaultOutputNameInitially(s, output, changeOutput)
 
 	return StepArgs == null ? null : (
-		<Container className="step-component">
+		<Container className='step-component'>
 			{/* Input Column List */}
 			{isInputColumnListStep(s) ? (
 				<MultiDropdown
