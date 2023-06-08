@@ -104,10 +104,6 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	unorder: [Tags.InputTable, Tags.NoArgs],
 	unroll: [Tags.InputTable, Tags.RowModifying, Tags.InputColumn],
 	window: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
-	genid: [Tags.InputTable, Tags.OutputColumn],
-	chunk: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
-	summarize: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
-	embed: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
 }
 
 const INPUT_TABLE_VERBS = filterByTag(Tags.InputTable)
