@@ -259,8 +259,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "NodeRef",
-                  "canonicalReference": "@datashaper/schema!NodeRef:type"
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
                 },
                 {
                   "kind": "Content",
@@ -3845,8 +3845,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "NodeRef",
-                  "canonicalReference": "@datashaper/schema!NodeRef:type"
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
                 },
                 {
                   "kind": "Content",
@@ -3854,8 +3854,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "NodeRef",
-                  "canonicalReference": "@datashaper/schema!NodeRef:type"
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
                 },
                 {
                   "kind": "Content",
@@ -7325,31 +7325,6 @@
             }
           ],
           "extendsTokenRanges": []
-        },
-        {
-          "kind": "TypeAlias",
-          "canonicalReference": "@datashaper/schema!NodeRef:type",
-          "docComment": "/**\n * The Id of the step to which the input is bound\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export type NodeRef = "
-            },
-            {
-              "kind": "Content",
-              "text": "string"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "NodeRef",
-          "typeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 2
-          }
         },
         {
           "kind": "Enum",
@@ -11147,7 +11122,43 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "string | "
+                  "text": "string | {\n        source?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        others?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[];\n        [key: string]: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[] | undefined;\n    } | "
                 },
                 {
                   "kind": "Reference",
@@ -11160,8 +11171,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "NodeRef",
-                  "canonicalReference": "@datashaper/schema!NodeRef:type"
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
                 },
                 {
                   "kind": "Content",
@@ -11169,8 +11180,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "NodeRef",
-                  "canonicalReference": "@datashaper/schema!NodeRef:type"
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
                 },
                 {
                   "kind": "Content",
@@ -11187,7 +11198,7 @@
               "name": "input",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 8
+                "endIndex": 16
               }
             }
           ],
@@ -11486,8 +11497,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "NodeRef",
-                  "canonicalReference": "@datashaper/schema!NodeRef:type"
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
                 },
                 {
                   "kind": "Content",
@@ -11495,8 +11506,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "NodeRef",
-                  "canonicalReference": "@datashaper/schema!NodeRef:type"
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
                 },
                 {
                   "kind": "Content",
@@ -12773,6 +12784,31 @@
               "endIndex": 2
             }
           ]
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@datashaper/schema!WorkflowStepId:type",
+          "docComment": "/**\n * The Id of the step to which the input is bound\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export type WorkflowStepId = "
+            },
+            {
+              "kind": "Content",
+              "text": "string"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "WorkflowStepId",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
         }
       ]
     }

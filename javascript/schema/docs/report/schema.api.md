@@ -18,7 +18,7 @@ export interface AggregateArgs extends RollupArgs {
 // @public
 export interface BasicInput {
     input?: string | {
-        source: NodeRef;
+        source: WorkflowStepId;
     };
 }
 
@@ -368,8 +368,8 @@ export interface DeriveArgs extends OutputColumnArgs {
 // @public
 export interface DualInput extends BasicInput {
     input: {
-        source: NodeRef;
-        other: NodeRef;
+        source: WorkflowStepId;
+        other: WorkflowStepId;
     };
 }
 
@@ -744,11 +744,6 @@ export interface Named {
     name: string;
     title?: string;
 }
-
-// Warning: (ae-missing-release-tag) "NodeRef" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export type NodeRef = string;
 
 // Warning: (ae-missing-release-tag) "NumericComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1171,7 +1166,11 @@ export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
 // @public (undocumented)
 export interface UnknownInput {
     // (undocumented)
-    input?: string | Record<string, NodeRef | NodeRef[]>;
+    input?: string | {
+        source?: WorkflowStepId;
+        others?: WorkflowStepId[];
+        [key: string]: WorkflowStepId | WorkflowStepId[] | undefined;
+    } | Record<string, WorkflowStepId | WorkflowStepId[]>;
 }
 
 // Warning: (ae-missing-release-tag) "UnrollArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1213,8 +1212,8 @@ export enum VariableNature {
 // @public
 export interface VariadicInput extends BasicInput {
     input: {
-        source: NodeRef;
-        others?: NodeRef[];
+        source: WorkflowStepId;
+        others?: WorkflowStepId[];
     };
 }
 
@@ -1345,6 +1344,11 @@ export interface WorkflowSchema extends ResourceSchema {
     profile: 'workflow';
     steps?: Step[];
 }
+
+// Warning: (ae-missing-release-tag) "WorkflowStepId" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export type WorkflowStepId = string;
 
 // (No @packageDocumentation comment for this package)
 

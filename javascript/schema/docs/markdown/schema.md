@@ -130,7 +130,6 @@
 |  [FactoryInput](./schema.factoryinput.md) |  |
 |  [GenerateIdArgs](./schema.generateidargs.md) | Generate a new identifier for the given row into the output column. |
 |  [GroupbyArgs](./schema.groupbyargs.md) |  |
-|  [NodeRef](./schema.noderef.md) | The Id of the step to which the input is bound |
 |  [Profile](./schema.profile.md) | Resources must have a profile, which is a key defining how it should be interpreted. Profiles are essentially shorthand for a schema URL. The core profiles for DataShaper are defined here, but any application can define one as a string. |
 |  [Rel](./schema.rel.md) | A rel is a string that describes the relationship between a resource and its child. |
 |  [RenameArgs](./schema.renameargs.md) |  |
@@ -140,4 +139,5 @@
 |  [UnrollArgs](./schema.unrollargs.md) |  |
 |  [ValidationFunction](./schema.validationfunction.md) |  |
 |  [Value](./schema.value.md) | A cell/property value of any type. |
+|  [WorkflowStepId](./schema.workflowstepid.md) | The Id of the step to which the input is bound |
 

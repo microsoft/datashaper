@@ -6,7 +6,7 @@
 /**
  * The Id of the step to which the input is bound
  */
-export type NodeRef = string
+export type WorkflowStepId = string
 
 /**
  * Single-input, single-output step I/O
@@ -18,7 +18,7 @@ export interface BasicInput {
 	 * If undefined, the default output of the previous step will be used (if available).
 	 * If no previous step is available, this will remain undefined
 	 */
-	input?: string | { source: NodeRef }
+	input?: string | { source: WorkflowStepId }
 }
 
 /**
@@ -32,12 +32,12 @@ export interface DualInput extends BasicInput {
 		/**
 		 * The primary input, which must be specified
 		 */
-		source: NodeRef
+		source: WorkflowStepId
 
 		/**
 		 * The secondary input, which must be specified
 		 */
-		other: NodeRef
+		other: WorkflowStepId
 	}
 }
 
@@ -53,15 +53,29 @@ export interface VariadicInput extends BasicInput {
 		/**
 		 * The primary input
 		 */
-		source: NodeRef
+		source: WorkflowStepId
 
 		/**
 		 * The variadic secondary inputs
 		 */
-		others?: NodeRef[]
+		others?: WorkflowStepId[]
 	}
 }
 
 export interface UnknownInput {
-	input?: string | Record<string, NodeRef | NodeRef[]>
+	input?: string | {
+		/** 
+		 * Possible main input 
+		 **/
+		source?: WorkflowStepId
+
+		/**
+		 * Possible variadic input
+		 */
+		others?: WorkflowStepId[]
+
+		/** Possible other input */
+		[key: string]: WorkflowStepId | WorkflowStepId[] | undefined
+		
+	} | Record<string, WorkflowStepId | WorkflowStepId[]>
 }
