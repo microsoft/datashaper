@@ -8,17 +8,14 @@ import type {
 	BinArgs,
 	BinarizeArgs,
 	BooleanArgs,
-	ChunkArgs,
 	ConvertArgs,
 	DedupeArgs,
 	DeriveArgs,
-	EmbedArgs,
 	EncodeDecodeArgs,
 	EraseArgs,
 	FillArgs,
 	FilterArgs,
 	FoldArgs,
-	GenerateIdArgs,
 	GroupbyArgs,
 	ImputeArgs,
 	JoinArgs,
@@ -33,7 +30,6 @@ import type {
 	SampleArgs,
 	SelectArgs,
 	SpreadArgs,
-	SummarizeArgs,
 	UnfoldArgs,
 	UnhotArgs,
 	UnrollArgs,
@@ -93,10 +89,6 @@ export type Step = StepJsonCommon &
 		| ({ verb: Verb.Unorder } & BasicInput)
 		| ({ verb: Verb.Unroll; args?: UnrollArgs } & BasicInput)
 		| ({ verb: Verb.Window; args?: WindowArgs } & BasicInput)
-		| ({ verb: Verb.GenerateId; args?: GenerateIdArgs } & BasicInput)
-		| ({ verb: Verb.Chunk; args?: ChunkArgs } & BasicInput)
-		| ({ verb: Verb.Summarize; args?: SummarizeArgs } & BasicInput)
-		| ({ verb: Verb.Embed; args?: EmbedArgs } & BasicInput)
 
 		/**
 		 * Custom step - we may not know the verb, args, or binding pattern

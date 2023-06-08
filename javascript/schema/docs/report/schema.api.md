@@ -136,14 +136,6 @@ export interface Category {
     name: string;
 }
 
-// Warning: (ae-missing-release-tag) "ChunkArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface ChunkArgs extends InputColumnArgs, OutputColumnArgs {
-    // (undocumented)
-    chunkSize: number;
-}
-
 // Warning: (ae-missing-release-tag) "CodebookSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -373,13 +365,6 @@ export interface DualInput extends BasicInput {
     };
 }
 
-// Warning: (ae-missing-release-tag) "EmbedArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface EmbedArgs extends InputColumnArgs, OutputColumnArgs {
-    model?: string;
-}
-
 // Warning: (ae-missing-release-tag) "EncodeDecodeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -549,11 +534,6 @@ export enum FilterCompareType {
 export interface FoldArgs extends InputColumnListArgs {
     to?: [string, string];
 }
-
-// Warning: (ae-missing-release-tag) "GenerateIdArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export type GenerateIdArgs = OutputColumnArgs;
 
 // Warning: (ae-missing-release-tag) "GroupbyArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1064,18 +1044,6 @@ export type Step = StepJsonCommon & (({
 } & BasicInput) | ({
     verb: Verb.Window;
     args?: WindowArgs;
-} & BasicInput) | ({
-    verb: Verb.GenerateId;
-    args?: GenerateIdArgs;
-} & BasicInput) | ({
-    verb: Verb.Chunk;
-    args?: ChunkArgs;
-} & BasicInput) | ({
-    verb: Verb.Summarize;
-    args?: SummarizeArgs;
-} & BasicInput) | ({
-    verb: Verb.Embed;
-    args?: EmbedArgs;
 } & BasicInput)
 /**
 * Custom step - we may not know the verb, args, or binding pattern
@@ -1112,12 +1080,6 @@ export enum StringComparisonOperator {
     RegularExpression = "regex",
     // (undocumented)
     StartsWith = "starts with"
-}
-
-// Warning: (ae-missing-release-tag) "SummarizeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface SummarizeArgs extends InputColumnArgs, OutputColumnArgs {
 }
 
 // Warning: (ae-missing-release-tag) "TableBundleSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

@@ -33,7 +33,8 @@
                         {
                             "properties": {
                                 "source": {
-                                    "$ref": "#/definitions/PortBinding"
+                                    "description": "The Id of the step to which the input is bound",
+                                    "type": "string"
                                 }
                             },
                             "type": "object"
@@ -206,10 +207,8 @@
                     "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).\nURI-compliant path to the referenced resource (local or remote)."
                 },
                 "profile": {
+                    "const": "codebook",
                     "description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
-                    "enum": [
-                        "codebook"
-                    ],
                     "type": "string"
                 },
                 "rel": {
@@ -395,12 +394,12 @@
                     "description": "The inputs that must be bound; \"source\" & \"other\".",
                     "properties": {
                         "other": {
-                            "$ref": "#/definitions/PortBinding",
-                            "description": "The secondary input, which must be specified"
+                            "description": "The secondary input, which must be specified",
+                            "type": "string"
                         },
                         "source": {
-                            "$ref": "#/definitions/PortBinding",
-                            "description": "The primary input, which must be specified"
+                            "description": "The primary input, which must be specified",
+                            "type": "string"
                         }
                     },
                     "type": "object"
@@ -752,16 +751,6 @@
             ],
             "type": "string"
         },
-        "NamedPortBinding": {
-            "description": "An explicit step input binding",
-            "properties": {
-                "node": {
-                    "description": "The id of the input node to bind to",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
         "OnehotArgs": {
             "properties": {
                 "column": {
@@ -842,16 +831,6 @@
                 }
             },
             "type": "object"
-        },
-        "PortBinding": {
-            "anyOf": [
-                {
-                    "$ref": "#/definitions/NamedPortBinding"
-                },
-                {
-                    "type": "string"
-                }
-            ]
         },
         "RecodeArgs": {
             "properties": {
@@ -1027,9 +1006,7 @@
                                     "$ref": "#/definitions/AggregateArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "aggregate"
-                                    ],
+                                    "const": "aggregate",
                                     "type": "string"
                                 }
                             },
@@ -1051,9 +1028,7 @@
                                     "$ref": "#/definitions/BinArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "bin"
-                                    ],
+                                    "const": "bin",
                                     "type": "string"
                                 }
                             },
@@ -1075,9 +1050,7 @@
                                     "$ref": "#/definitions/BinarizeArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "binarize"
-                                    ],
+                                    "const": "binarize",
                                     "type": "string"
                                 }
                             },
@@ -1099,9 +1072,7 @@
                                     "$ref": "#/definitions/BooleanArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "boolean"
-                                    ],
+                                    "const": "boolean",
                                     "type": "string"
                                 }
                             },
@@ -1120,9 +1091,7 @@
                         {
                             "properties": {
                                 "verb": {
-                                    "enum": [
-                                        "concat"
-                                    ],
+                                    "const": "concat",
                                     "type": "string"
                                 }
                             },
@@ -1144,9 +1113,7 @@
                                     "$ref": "#/definitions/ConvertArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "convert"
-                                    ],
+                                    "const": "convert",
                                     "type": "string"
                                 }
                             },
@@ -1168,9 +1135,7 @@
                                     "$ref": "#/definitions/Partial<InputColumnListArgs>"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "dedupe"
-                                    ],
+                                    "const": "dedupe",
                                     "type": "string"
                                 }
                             },
@@ -1192,9 +1157,7 @@
                                     "$ref": "#/definitions/DeriveArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "derive"
-                                    ],
+                                    "const": "derive",
                                     "type": "string"
                                 }
                             },
@@ -1213,9 +1176,7 @@
                         {
                             "properties": {
                                 "verb": {
-                                    "enum": [
-                                        "difference"
-                                    ],
+                                    "const": "difference",
                                     "type": "string"
                                 }
                             },
@@ -1237,9 +1198,7 @@
                                     "$ref": "#/definitions/EncodeDecodeArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "decode"
-                                    ],
+                                    "const": "decode",
                                     "type": "string"
                                 }
                             },
@@ -1261,9 +1220,7 @@
                                     "$ref": "#/definitions/EncodeDecodeArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "encode"
-                                    ],
+                                    "const": "encode",
                                     "type": "string"
                                 }
                             },
@@ -1285,9 +1242,7 @@
                                     "$ref": "#/definitions/EraseArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "erase"
-                                    ],
+                                    "const": "erase",
                                     "type": "string"
                                 }
                             },
@@ -1309,9 +1264,7 @@
                                     "$ref": "#/definitions/FillArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "fill"
-                                    ],
+                                    "const": "fill",
                                     "type": "string"
                                 }
                             },
@@ -1333,9 +1286,7 @@
                                     "$ref": "#/definitions/FilterArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "filter"
-                                    ],
+                                    "const": "filter",
                                     "type": "string"
                                 }
                             },
@@ -1357,9 +1308,7 @@
                                     "$ref": "#/definitions/FoldArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "fold"
-                                    ],
+                                    "const": "fold",
                                     "type": "string"
                                 }
                             },
@@ -1381,9 +1330,7 @@
                                     "$ref": "#/definitions/InputColumnListArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "groupby"
-                                    ],
+                                    "const": "groupby",
                                     "type": "string"
                                 }
                             },
@@ -1405,9 +1352,7 @@
                                     "$ref": "#/definitions/ImputeArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "impute"
-                                    ],
+                                    "const": "impute",
                                     "type": "string"
                                 }
                             },
@@ -1426,9 +1371,7 @@
                         {
                             "properties": {
                                 "verb": {
-                                    "enum": [
-                                        "intersect"
-                                    ],
+                                    "const": "intersect",
                                     "type": "string"
                                 }
                             },
@@ -1450,9 +1393,7 @@
                                     "$ref": "#/definitions/JoinArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "join"
-                                    ],
+                                    "const": "join",
                                     "type": "string"
                                 }
                             },
@@ -1474,9 +1415,7 @@
                                     "$ref": "#/definitions/LookupArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "lookup"
-                                    ],
+                                    "const": "lookup",
                                     "type": "string"
                                 }
                             },
@@ -1498,9 +1437,7 @@
                                     "$ref": "#/definitions/MergeArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "merge"
-                                    ],
+                                    "const": "merge",
                                     "type": "string"
                                 }
                             },
@@ -1522,9 +1459,7 @@
                                     "$ref": "#/definitions/OnehotArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "onehot"
-                                    ],
+                                    "const": "onehot",
                                     "type": "string"
                                 }
                             },
@@ -1546,9 +1481,7 @@
                                     "$ref": "#/definitions/OrderbyArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "orderby"
-                                    ],
+                                    "const": "orderby",
                                     "type": "string"
                                 }
                             },
@@ -1570,9 +1503,7 @@
                                     "$ref": "#/definitions/PivotArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "pivot"
-                                    ],
+                                    "const": "pivot",
                                     "type": "string"
                                 }
                             },
@@ -1594,9 +1525,7 @@
                                     "$ref": "#/definitions/RecodeArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "recode"
-                                    ],
+                                    "const": "recode",
                                     "type": "string"
                                 }
                             },
@@ -1618,9 +1547,7 @@
                                     "$ref": "#/definitions/InputColumnRecordArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "rename"
-                                    ],
+                                    "const": "rename",
                                     "type": "string"
                                 }
                             },
@@ -1642,9 +1569,7 @@
                                     "$ref": "#/definitions/RollupArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "rollup"
-                                    ],
+                                    "const": "rollup",
                                     "type": "string"
                                 }
                             },
@@ -1666,9 +1591,7 @@
                                     "$ref": "#/definitions/SampleArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "sample"
-                                    ],
+                                    "const": "sample",
                                     "type": "string"
                                 }
                             },
@@ -1690,9 +1613,7 @@
                                     "$ref": "#/definitions/InputColumnListArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "select"
-                                    ],
+                                    "const": "select",
                                     "type": "string"
                                 }
                             },
@@ -1714,9 +1635,7 @@
                                     "$ref": "#/definitions/SpreadArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "spread"
-                                    ],
+                                    "const": "spread",
                                     "type": "string"
                                 }
                             },
@@ -1738,9 +1657,7 @@
                                     "$ref": "#/definitions/InputKeyValueArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "unfold"
-                                    ],
+                                    "const": "unfold",
                                     "type": "string"
                                 }
                             },
@@ -1759,9 +1676,7 @@
                         {
                             "properties": {
                                 "verb": {
-                                    "enum": [
-                                        "ungroup"
-                                    ],
+                                    "const": "ungroup",
                                     "type": "string"
                                 }
                             },
@@ -1783,9 +1698,7 @@
                                     "$ref": "#/definitions/UnhotArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "unhot"
-                                    ],
+                                    "const": "unhot",
                                     "type": "string"
                                 }
                             },
@@ -1804,9 +1717,7 @@
                         {
                             "properties": {
                                 "verb": {
-                                    "enum": [
-                                        "union"
-                                    ],
+                                    "const": "union",
                                     "type": "string"
                                 }
                             },
@@ -1825,9 +1736,7 @@
                         {
                             "properties": {
                                 "verb": {
-                                    "enum": [
-                                        "unorder"
-                                    ],
+                                    "const": "unorder",
                                     "type": "string"
                                 }
                             },
@@ -1849,9 +1758,7 @@
                                     "$ref": "#/definitions/InputColumnArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "unroll"
-                                    ],
+                                    "const": "unroll",
                                     "type": "string"
                                 }
                             },
@@ -1873,9 +1780,7 @@
                                     "$ref": "#/definitions/WindowArgs"
                                 },
                                 "verb": {
-                                    "enum": [
-                                        "window"
-                                    ],
+                                    "const": "window",
                                     "type": "string"
                                 }
                             },
@@ -1883,6 +1788,25 @@
                         },
                         {
                             "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {},
+                                "verb": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/UnknownInput"
                         }
                     ]
                 }
@@ -1920,6 +1844,47 @@
             },
             "type": "object"
         },
+        "UnknownInput": {
+            "properties": {
+                "input": {
+                    "anyOf": [
+                        {
+                            "additionalProperties": {
+                                "anyOf": [
+                                    {
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "type": "array"
+                                    },
+                                    {
+                                        "type": "string"
+                                    }
+                                ]
+                            },
+                            "properties": {
+                                "others": {
+                                    "description": "Possible variadic input",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "source": {
+                                    "description": "Possible main input",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                }
+            },
+            "type": "object"
+        },
         "VariableNature": {
             "description": "Describes the semantic shape of a variable.\nThis has particular effect on how we display and compare data,\nsuch as using line charts for continuous versus bar charts for categorical.\nThis mostly applies to numeric variables, but strings for instance can be categorial.",
             "enum": [
@@ -1940,13 +1905,13 @@
                         "others": {
                             "description": "The variadic secondary inputs",
                             "items": {
-                                "$ref": "#/definitions/PortBinding"
+                                "type": "string"
                             },
                             "type": "array"
                         },
                         "source": {
-                            "$ref": "#/definitions/PortBinding",
-                            "description": "The primary input"
+                            "description": "The primary input",
+                            "type": "string"
                         }
                     },
                     "type": "object"
@@ -2032,10 +1997,8 @@
             "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).\nURI-compliant path to the referenced resource (local or remote)."
         },
         "profile": {
+            "const": "workflow",
             "description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
-            "enum": [
-                "workflow"
-            ],
             "type": "string"
         },
         "rel": {

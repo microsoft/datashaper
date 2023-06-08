@@ -82,9 +82,7 @@
             "type": "string"
         },
         "profile": {
-            "enum": [
-                "datapackage"
-            ],
+            "const": "datapackage",
             "type": "string"
         },
         "resources": {

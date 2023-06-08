@@ -13,7 +13,7 @@ export const DatasetContainer = styled.div`
 	height: 100%;
 `
 
-export const Message = styled(MessageBar)``
+export const Message = styled(MessageBar as any)``
 
 export const DetailsListContainer = styled.div`
 	height: 100%;

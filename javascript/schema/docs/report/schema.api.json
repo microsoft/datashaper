@@ -1395,77 +1395,6 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@datashaper/schema!ChunkArgs:interface",
-          "docComment": "/**\n * Chunk the input column (which should be of the \"string\" or \"array\" datatype) into a new column. This column will be an array of chunks of the given size.\n *\n * For strings this will be substrings, for arrays this will be subarrays.\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface ChunkArgs extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "InputColumnArgs",
-              "canonicalReference": "@datashaper/schema!InputColumnArgs:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ", "
-            },
-            {
-              "kind": "Reference",
-              "text": "OutputColumnArgs",
-              "canonicalReference": "@datashaper/schema!OutputColumnArgs:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "ChunkArgs",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!ChunkArgs#chunkSize:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "chunkSize: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "number"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "chunkSize",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 2
-            },
-            {
-              "startIndex": 3,
-              "endIndex": 4
-            }
-          ]
-        },
-        {
-          "kind": "Interface",
           "canonicalReference": "@datashaper/schema!CodebookSchema:interface",
           "docComment": "/**\n * This contains all of the field-level details for interpreting a dataset, including data types, mapping, and metadata. Note that with persisted metadata and field examples, a dataset can often be visualized and described to the user without actually loading the source file. resource profile: 'codebook'\n */\n",
           "excerptTokens": [
@@ -3885,77 +3814,6 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@datashaper/schema!EmbedArgs:interface",
-          "docComment": "/**\n * Perform an LLM vector embedding of the given text field into the given output field.w\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface EmbedArgs extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "InputColumnArgs",
-              "canonicalReference": "@datashaper/schema!InputColumnArgs:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ", "
-            },
-            {
-              "kind": "Reference",
-              "text": "OutputColumnArgs",
-              "canonicalReference": "@datashaper/schema!OutputColumnArgs:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "EmbedArgs",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!EmbedArgs#model:member",
-              "docComment": "/**\n * The embedding model to use. (Will use a configured default if not set.)\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "model?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "model",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 2
-            },
-            {
-              "startIndex": 3,
-              "endIndex": 4
-            }
-          ]
-        },
-        {
-          "kind": "Interface",
           "canonicalReference": "@datashaper/schema!EncodeDecodeArgs:interface",
           "docComment": "",
           "excerptTokens": [
@@ -5881,32 +5739,6 @@
               "endIndex": 2
             }
           ]
-        },
-        {
-          "kind": "TypeAlias",
-          "canonicalReference": "@datashaper/schema!GenerateIdArgs:type",
-          "docComment": "/**\n * Generate a new identifier for the given row into the output column.\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export type GenerateIdArgs = "
-            },
-            {
-              "kind": "Reference",
-              "text": "OutputColumnArgs",
-              "canonicalReference": "@datashaper/schema!OutputColumnArgs:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "GenerateIdArgs",
-          "typeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 2
-          }
         },
         {
           "kind": "TypeAlias",
@@ -10270,114 +10102,6 @@
             },
             {
               "kind": "Content",
-              "text": ") | ({\n    verb: "
-            },
-            {
-              "kind": "Reference",
-              "text": "Verb.GenerateId",
-              "canonicalReference": "@datashaper/schema!Verb.GenerateId:member"
-            },
-            {
-              "kind": "Content",
-              "text": ";\n    args?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "GenerateIdArgs",
-              "canonicalReference": "@datashaper/schema!GenerateIdArgs:type"
-            },
-            {
-              "kind": "Content",
-              "text": ";\n} & "
-            },
-            {
-              "kind": "Reference",
-              "text": "BasicInput",
-              "canonicalReference": "@datashaper/schema!BasicInput:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ") | ({\n    verb: "
-            },
-            {
-              "kind": "Reference",
-              "text": "Verb.Chunk",
-              "canonicalReference": "@datashaper/schema!Verb.Chunk:member"
-            },
-            {
-              "kind": "Content",
-              "text": ";\n    args?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "ChunkArgs",
-              "canonicalReference": "@datashaper/schema!ChunkArgs:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ";\n} & "
-            },
-            {
-              "kind": "Reference",
-              "text": "BasicInput",
-              "canonicalReference": "@datashaper/schema!BasicInput:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ") | ({\n    verb: "
-            },
-            {
-              "kind": "Reference",
-              "text": "Verb.Summarize",
-              "canonicalReference": "@datashaper/schema!Verb.Summarize:member"
-            },
-            {
-              "kind": "Content",
-              "text": ";\n    args?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "SummarizeArgs",
-              "canonicalReference": "@datashaper/schema!SummarizeArgs:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ";\n} & "
-            },
-            {
-              "kind": "Reference",
-              "text": "BasicInput",
-              "canonicalReference": "@datashaper/schema!BasicInput:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ") | ({\n    verb: "
-            },
-            {
-              "kind": "Reference",
-              "text": "Verb.Embed",
-              "canonicalReference": "@datashaper/schema!Verb.Embed:member"
-            },
-            {
-              "kind": "Content",
-              "text": ";\n    args?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "EmbedArgs",
-              "canonicalReference": "@datashaper/schema!EmbedArgs:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ";\n} & "
-            },
-            {
-              "kind": "Reference",
-              "text": "BasicInput",
-              "canonicalReference": "@datashaper/schema!BasicInput:interface"
-            },
-            {
-              "kind": "Content",
               "text": ")\n/**\n * Custom step - we may not know the verb, args, or binding pattern\n */\n | ({\n    verb: string;\n    args?: unknown;\n} & "
             },
             {
@@ -10398,7 +10122,7 @@
           "name": "Step",
           "typeTokenRange": {
             "startIndex": 1,
-            "endIndex": 239
+            "endIndex": 215
           }
         },
         {
@@ -10626,49 +10350,6 @@
               },
               "releaseTag": "Public",
               "name": "StartsWith"
-            }
-          ]
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/schema!SummarizeArgs:interface",
-          "docComment": "/**\n * Perform an LLM summmarization of the given text field into the given output field\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface SummarizeArgs extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "InputColumnArgs",
-              "canonicalReference": "@datashaper/schema!InputColumnArgs:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ", "
-            },
-            {
-              "kind": "Reference",
-              "text": "OutputColumnArgs",
-              "canonicalReference": "@datashaper/schema!OutputColumnArgs:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "SummarizeArgs",
-          "preserveMemberOrder": false,
-          "members": [],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 2
-            },
-            {
-              "startIndex": 3,
-              "endIndex": 4
             }
           ]
         },

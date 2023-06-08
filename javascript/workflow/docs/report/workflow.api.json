@@ -12668,7 +12668,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "[]>"
+                  "text": "[] | undefined>"
                 },
                 {
                   "kind": "Content",

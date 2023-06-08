@@ -36,7 +36,7 @@ export const Title = styled.h1`
 			: theme.palette.neutralTertiaryAlt};
 `
 
-export const StyledFontIcon = styled(FontIcon)`
+export const StyledFontIcon = styled(FontIcon as any)`
 	font-size: 18px;
 	height: 18px;
 	width: 18px;

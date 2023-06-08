@@ -57,7 +57,6 @@
 |  [BooleanArgs](./schema.booleanargs.md) |  |
 |  [BundleSchema](./schema.bundleschema.md) | A schema for defining custom bundle types. |
 |  [Category](./schema.category.md) | Describes a nomincal category in terms of category name and count of values in the category. |
-|  [ChunkArgs](./schema.chunkargs.md) | <p>Chunk the input column (which should be of the "string" or "array" datatype) into a new column. This column will be an array of chunks of the given size.</p><p>For strings this will be substrings, for arrays this will be subarrays.</p> |
 |  [CodebookSchema](./schema.codebookschema.md) | This contains all of the field-level details for interpreting a dataset, including data types, mapping, and metadata. Note that with persisted metadata and field examples, a dataset can often be visualized and described to the user without actually loading the source file. resource profile: 'codebook' |
 |  [Constraints](./schema.constraints.md) | Validation constraints for a field. |
 |  [ConvertArgs](./schema.convertargs.md) |  |
@@ -67,7 +66,6 @@
 |  [DataTableSchema](./schema.datatableschema.md) | This defines the table-containing resource type. A dataset can be embedded directly using the <code>data</code> property, or it can be linked to a raw file using the <code>path</code>. If the latter, optional format and parsing options can be applied to aid interpreting the file contents. resource profile: 'datatable' |
 |  [DeriveArgs](./schema.deriveargs.md) |  |
 |  [DualInput](./schema.dualinput.md) | Dual-input, single-output step I/O |
-|  [EmbedArgs](./schema.embedargs.md) | Perform an LLM vector embedding of the given text field into the given output field.w |
 |  [EncodeDecodeArgs](./schema.encodedecodeargs.md) |  |
 |  [EraseArgs](./schema.eraseargs.md) |  |
 |  [Field](./schema.field.md) | Contains the full schema definition and metadata for a data field (usually a table column). This includes the required data type, various data nature and rendering properties, potential validation rules, and mappings from a data dictionary. |
@@ -99,7 +97,6 @@
 |  [SampleArgs](./schema.sampleargs.md) |  |
 |  [SpreadArgs](./schema.spreadargs.md) |  |
 |  [StepJsonCommon](./schema.stepjsoncommon.md) | Common step properties |
-|  [SummarizeArgs](./schema.summarizeargs.md) | Perform an LLM summmarization of the given text field into the given output field |
 |  [TableBundleSchema](./schema.tablebundleschema.md) | <p>A table bundle encapsulates table-specific resources into a single resource with a prescribed workflow.</p><p>A tablebundle requires a <code>source</code> entry with rel="input" for the source table. A tablebundle may also include <code>source</code> entries with rel="codebook" and rel="workflow" for interpretation and processing of the source data table.</p> |
 |  [TypeHints](./schema.typehints.md) | Configuration values for interpreting data types when parsing a delimited file. By default, all values are read as strings - applying these type hints can derive primitive types from the strings. |
 |  [UnhotArgs](./schema.unhotargs.md) |  |
@@ -128,7 +125,6 @@
 |  --- | --- |
 |  [DedupeArgs](./schema.dedupeargs.md) |  |
 |  [FactoryInput](./schema.factoryinput.md) |  |
-|  [GenerateIdArgs](./schema.generateidargs.md) | Generate a new identifier for the given row into the output column. |
 |  [GroupbyArgs](./schema.groupbyargs.md) |  |
 |  [Profile](./schema.profile.md) | Resources must have a profile, which is a key defining how it should be interpreted. Profiles are essentially shorthand for a schema URL. The core profiles for DataShaper are defined here, but any application can define one as a string. |
 |  [Rel](./schema.rel.md) | A rel is a string that describes the relationship between a resource and its child. |

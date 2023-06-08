@@ -46,7 +46,7 @@
 		"@thematic/d3": "^2.0.22",
 		"@thematic/fluent": "^5.0.8",
 		"@thematic/react": "^2.1.9",
-		"allotment": "1.18.1",
+		"allotment": "1.19.0",
 		"arquero": "^5.2.0",
 		"chroma-js": "2.4.2",
 		"debug": "^4.3.4",

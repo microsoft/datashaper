@@ -105,10 +105,8 @@
             "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).\nURI-compliant path to the referenced resource (local or remote)."
         },
         "profile": {
+            "const": "tablebundle",
             "description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
-            "enum": [
-                "tablebundle"
-            ],
             "type": "string"
         },
         "rel": {

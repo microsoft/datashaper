@@ -512,33 +512,3 @@ export type UnrollArgs = InputColumnArgs
 export interface WindowArgs extends InputColumnArgs, OutputColumnArgs {
 	operation: WindowFunction
 }
-
-/**
- * Generate a new identifier for the given row into the output column.
- */
-export type GenerateIdArgs = OutputColumnArgs
-
-/**
- * Chunk the input column (which should be of the "string" or "array" datatype) into a new column.
- * This column will be an array of chunks of the given size. 
- * 
- * For strings this will be substrings, for arrays this will be subarrays.
- */
-export interface ChunkArgs extends InputColumnArgs, OutputColumnArgs {
-	chunkSize: number
-}
-
-/**
- * Perform an LLM summmarization of the given text field into the given output field
- */
-export interface SummarizeArgs extends InputColumnArgs, OutputColumnArgs {}
-
-/**
- * Perform an LLM vector embedding of the given text field into the given output field.w
- */
-export interface EmbedArgs extends InputColumnArgs, OutputColumnArgs {
-	/**
-	 * The embedding model to use. (Will use a configured default if not set.)
-	 */
-	model?: string
-}
