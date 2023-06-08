@@ -39,7 +39,9 @@ export const Headers: React.FC<{
 			<Checkbox
 				label='Headers in first row'
 				checked={header}
-				onChange={(_, value) => (parser.header = value)}
+				onChange={(_, value) => {
+					parser.header = value
+				}}
 			/>
 			{!header && (
 				<TextField

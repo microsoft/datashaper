@@ -28,6 +28,9 @@
 			},
 			"performance": {
 				"noDelete": "off"
+			},
+			"style": {
+				"noParameterAssign": "off"
 			}
 		}
 	},

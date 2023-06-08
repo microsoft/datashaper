@@ -10,7 +10,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
  * This is a store implementation pre-loaded with test tables to ease setup.
  */
 export class TestStore {
-	constructor(private _defaultTableName: string = 'table1') {
+	constructor(private _defaultTableName = 'table1') {
 		const table1 = table({
 			ID: [1, 2, 3, 4, 5],
 			name: ['A', 'B', 'C', 'D', 'E'],

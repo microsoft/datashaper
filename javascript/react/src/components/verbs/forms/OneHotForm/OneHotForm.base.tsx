@@ -21,7 +21,9 @@ export const OneHotFormBase: React.FC<StepFormBaseProps<OnehotArgs>> = memo(
 				label: `Prefix for column ${step.args.column ?? ''}`,
 				type: FormInputType.Text,
 				current: step.args.prefix,
-				onChange: (s: Step<OnehotArgs>, val: string) => (s.args.prefix = val),
+				onChange: (s: Step<OnehotArgs>, val: string) => {
+					s.args.prefix = val
+				},
 			}
 		}, [step])
 
@@ -31,7 +33,9 @@ export const OneHotFormBase: React.FC<StepFormBaseProps<OnehotArgs>> = memo(
 					label: 'Keep source columns',
 					type: FormInputType.Checkbox,
 					current: step.args.preserveSource,
-					onChange: (s, val) => (s.args.preserveSource = val as boolean),
+					onChange: (s, val) => {
+						s.args.preserveSource = val as boolean
+					},
 					advanced: true,
 				},
 				prefixInput,

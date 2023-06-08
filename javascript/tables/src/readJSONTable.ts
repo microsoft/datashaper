@@ -64,7 +64,8 @@ export function fromJSONColumnar(obj: any): ColumnTable {
 export function fromJSONArray(obj: any, shape?: DataShape): ColumnTable {
 	// all the data is a single column unless a matrix row x col layout is specified
 	if (shape?.matrix && shape?.matrix.length === 2) {
-		const [rows, cols] = shape?.matrix
+		const rows = shape?.matrix?.[0] ?? []
+		const cols = shape?.matrix?.[1] ?? []
 		// transpose into an array of arrays and then just use the fromValues function
 		// note that we're completely assuming the matrix definition is correct
 		const result = []

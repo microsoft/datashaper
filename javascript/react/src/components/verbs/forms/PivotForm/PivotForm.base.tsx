@@ -33,7 +33,9 @@ export const PivotFormBase: React.FC<
 				type: FormInputType.SingleChoice,
 				current: step.args.key,
 				options,
-				onChange: (s, val) => (s.args.key = val as string),
+				onChange: (s, val) => {
+					s.args.key = val as string
+				},
 			},
 			{
 				label: 'Column used as value',
@@ -42,13 +44,17 @@ export const PivotFormBase: React.FC<
 				type: FormInputType.SingleChoice,
 				current: step.args.value,
 				options,
-				onChange: (s, val) => (s.args.value = val as string),
+				onChange: (s, val) => {
+					s.args.value = val as string
+				},
 			},
 			enumDropdown(
 				'Function',
 				FieldAggregateOperation,
 				step.args.operation,
-				(s, val) => (s.args.operation = val as FieldAggregateOperation),
+				(s, val) => {
+					s.args.operation = val as FieldAggregateOperation
+				},
 			),
 		],
 		[step, options],

@@ -15,10 +15,11 @@ export function useHandleKeyChange(
 			const mapping: Record<Value, Value> = {}
 
 			for (const key in mapList) {
-				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-				key === previousKey.toString()
-					? (mapping[newKey] = mapList[key])
-					: (mapping[key] = mapList[key])
+				if (key === previousKey.toString()) {
+					mapping[newKey] = mapList[key]
+				} else {
+					mapping[key] = mapList[key]
+				}
 			}
 
 			onChange?.(mapping)
@@ -37,11 +38,12 @@ export function useHandleValueChange(
 			const mapping: Record<Value, Value> = {}
 
 			for (const keyElement in mapList) {
-				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-				keyElement === key.toString()
-					? (mapping[keyElement] =
-							dataType === DataType.Date ? new Date(newValue) : newValue)
-					: (mapping[keyElement] = mapList[keyElement])
+				mapping[keyElement] =
+					keyElement === key.toString()
+						? dataType === DataType.Date
+							? new Date(newValue)
+							: newValue
+						: mapList[keyElement]
 			}
 
 			onChange?.(mapping)

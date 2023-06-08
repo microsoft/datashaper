@@ -17,6 +17,7 @@ export const BooleanSymbolCell: React.FC<ColumnCellProps> = memo(
 		const attrs = useBooleanCircleAttrs(dimensions, item, column)
 		return (
 			<svg width={dimensions.width} height={dimensions.height}>
+				<title>Boolean Value</title>
 				<circle {...attrs} />
 			</svg>
 		)

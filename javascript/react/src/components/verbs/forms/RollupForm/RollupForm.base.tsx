@@ -21,7 +21,9 @@ export const RollupFormBase: React.FC<StepFormProps<RollupArgs>> = memo(
 					'Function',
 					FieldAggregateOperation,
 					step.args.operation,
-					(s, val) => (s.args.operation = val as FieldAggregateOperation),
+					(s, val) => {
+						s.args.operation = val as FieldAggregateOperation
+					},
 					{ required: true },
 				),
 			],

@@ -49,7 +49,9 @@ export const Parser: React.FC<ParserProps> = memo(function Parser({ parser }) {
 			<FlexContainer>
 				<Delimiter
 					selected={delimiter}
-					onChange={(delim: string) => (parser.delimiter = delim)}
+					onChange={(delim: string) => {
+						parser.delimiter = delim
+					}}
 				/>
 			</FlexContainer>
 			<Expando label='Advanced' styles={expandoStyles}>
@@ -62,7 +64,9 @@ export const Parser: React.FC<ParserProps> = memo(function Parser({ parser }) {
 							value={skipRows?.toString()}
 							min={0}
 							step={1}
-							onChange={(_, value) => (parser.skipRows = +(value as string))}
+							onChange={(_, value) => {
+								parser.skipRows = +(value as string)
+							}}
 							incrementButtonAriaLabel='Increase value by 1'
 							decrementButtonAriaLabel='Decrease value by 1'
 						/>
@@ -72,37 +76,49 @@ export const Parser: React.FC<ParserProps> = memo(function Parser({ parser }) {
 							value={readRows?.toString()}
 							min={0}
 							step={1}
-							onChange={(_, value) => (parser.readRows = +(value as string))}
+							onChange={(_, value) => {
+								parser.readRows = +(value as string)
+							}}
 							incrementButtonAriaLabel='Increase value by 1'
 							decrementButtonAriaLabel='Decrease value by 1'
 						/>
 					</FieldContainer>
 					<TextField
 						label='Comment character'
-						onChange={(_, value) => (parser.comment = value)}
+						onChange={(_, value) => {
+							parser.comment = value
+						}}
 						value={comment}
 					/>
 					<ChoiceGroup
 						label={'Line terminator'}
 						selectedKey={lineTerminator}
 						options={lineTerminatorOptions}
-						onChange={(_, option) => (parser.lineTerminator = option?.key)}
+						onChange={(_, option) => {
+							parser.lineTerminator = option?.key
+						}}
 					/>
 					<TextField
 						label='Quote character'
-						onChange={(_, value) => (parser.quoteChar = value)}
+						onChange={(_, value) => {
+							parser.quoteChar = value
+						}}
 						value={quoteChar}
 					/>
 					<TextField
 						label='Escape character'
-						onChange={(_, value) => (parser.escapeChar = value)}
+						onChange={(_, value) => {
+							parser.escapeChar = value
+						}}
 						value={escapeChar}
 					/>
 
 					<Checkbox
 						label='Skip blank lines'
 						checked={skipBlankLines}
-						onChange={(_, value) => (parser.skipBlankLines = value)}
+						onChange={(_, value) => {
+							parser.skipBlankLines = value
+						}}
 					/>
 				</FlexContainer>
 			</Expando>

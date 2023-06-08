@@ -27,7 +27,9 @@ export const SampleForm: React.FC<StepFormProps<SampleArgs>> = memo(
 	function SampleForm({ step, onChange }) {
 		const handleSizeChange = useSpinButtonChangeHandler(
 			step,
-			(s, val) => (s.args.size = num(val)),
+			(s, val) => {
+				s.args.size = num(val)
+			},
 			onChange,
 		)
 

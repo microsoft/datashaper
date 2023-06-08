@@ -24,14 +24,18 @@ export const Shape: React.FC<ShapeProps> = memo(function Shape({ shape }) {
 	const orientation = useObservableState(shape.orientation$, shape.orientation)
 	const matrix = useObservableState(shape.matrix$, shape.matrix)
 	const onMatrixChange = useCallback(
-		(rows: number, columns: number) => (shape.matrix = [rows, columns]),
+		(rows: number, columns: number) => {
+			shape.matrix = [rows, columns]
+		},
 		[shape],
 	)
 	return (
 		<Container>
 			<TableLayoutOptions
 				selected={orientation}
-				onChange={(orientation) => (shape.orientation = orientation)}
+				onChange={(orientation) => {
+					shape.orientation = orientation
+				}}
 			/>
 			<When condition={orientation === DataOrientation.Array}>
 				<FieldContainer>

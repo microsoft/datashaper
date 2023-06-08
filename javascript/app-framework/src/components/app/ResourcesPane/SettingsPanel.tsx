@@ -34,7 +34,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
 						<ResourceBlock
 							key={`settings-block-${block.name}`}
 							resource={block}
-							profile={profiles.get(block.profile)!}
+							profile={profiles.get(block.profile) as AppProfile}
 						/>
 					))}
 				</Content>
@@ -70,8 +70,9 @@ const ResourceBlock: React.FC<{
 	const settings = useObservableState(resource.config$, resource.config)
 	const config = profile.getSettingsConfig?.()
 	const setter = useCallback(
-		(callback: (previous: unknown) => unknown) =>
-			(resource.config = callback(settings)),
+		(callback: (previous: unknown) => unknown) => {
+			resource.config = callback(settings)
+		},
 		[resource, settings],
 	)
 	return (

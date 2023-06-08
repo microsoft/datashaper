@@ -31,13 +31,17 @@ export const DeriveFormBase: React.FC<
 				current: step.args.column1,
 				required: true,
 				options,
-				onChange: (s, arg) => (s.args.column1 = arg as string),
+				onChange: (s, arg) => {
+					s.args.column1 = arg as string
+				},
 			},
 			enumDropdown(
 				'Operation',
 				MathOperator,
 				step.args.operator,
-				(s, arg) => (s.args.operator = arg as MathOperator),
+				(s, arg) => {
+					s.args.operator = arg as MathOperator
+				},
 				{ required: true, placeholder: 'Choose operation' },
 			),
 			{
@@ -47,7 +51,9 @@ export const DeriveFormBase: React.FC<
 				options,
 				current: step.args.column2,
 				required: true,
-				onChange: (s, arg) => (s.args.column2 = arg as string),
+				onChange: (s, arg) => {
+					s.args.column2 = arg as string
+				},
 			},
 		],
 		[step, options],

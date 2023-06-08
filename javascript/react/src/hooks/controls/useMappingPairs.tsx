@@ -82,7 +82,7 @@ const ColumnPair: React.FC<{
 	const propertyValue = coerce(q, dataType)
 
 	if (dataType === DataType.Boolean) {
-		o === 'false' ? (keyValue = false) : (keyValue = true)
+		keyValue = o !== 'false'
 	}
 
 	const handleDeleteClick = () =>

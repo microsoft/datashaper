@@ -91,11 +91,12 @@ export function useInputColumnListChanged(
 ): DropdownChangeHandler {
 	return useDropdownChangeHandler<InputColumnListArgs>(
 		step as Step<InputColumnListArgs>,
-		(s, val) =>
-			(s.args.columns = toggleListItem(
+		(s, val) => {
+			s.args.columns = toggleListItem(
 				s.args.columns ?? EMPTY_ARRAY,
 				val as string,
-			)),
+			)
+		},
 		onChange,
 	)
 }
@@ -106,7 +107,9 @@ export function useInputColumnListAllChanged(
 ): DropdownChangeAllHandler {
 	return useDropdownChangeAllHandler<InputColumnListArgs>(
 		step as Step<InputColumnListArgs>,
-		(s, val) => (s.args.columns = val as string[]),
+		(s, val) => {
+			s.args.columns = val as string[]
+		},
 		onChangeAll,
 	)
 }
