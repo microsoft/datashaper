@@ -42,6 +42,8 @@ export function parseAs(
 			return parseDate(hints?.naValues)
 		case DataType.Undefined:
 			return parseUndefined(hints?.naValues)
+		case DataType.String:
+			return parseString(hints?.naValues)
 		default:
 			return parseString(hints?.naValues)
 	}

@@ -12,7 +12,8 @@
 			".pnp.loader.mjs",
 			"javascript/schema/versions.js",
 			".devcontainer",
-			"javascript/schema/versions.d.ts"
+			"javascript/schema/versions.d.ts",
+			"schema/"
 		]
 	},
 	"linter": {

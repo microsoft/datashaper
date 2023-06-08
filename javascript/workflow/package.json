@@ -29,7 +29,7 @@
 	"scripts": {
 		"clean": "essex clean dist docs",
 		"lint": "essex lint --fix --strict",
-		"test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
+		"test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand --detectOpenHandles",
 		"test:debug": "NODE_OPTIONS=--experimental-vm-modules yarn node --inspect-brk $(yarn bin jest) --runInBand --watch",
 		"build": "essex build --docs --skipExportCheck",
 		"release": "yarn npm publish --tolerate-republish --access public"
