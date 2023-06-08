@@ -44,12 +44,6 @@ export enum Verb {
 	Unorder = 'unorder',
 	Unroll = 'unroll',
 	Window = 'window',
-	GenerateId = 'genid',
-	Chunk = 'chunk',
-
-	// LLM-specific
-	Summarize = 'summarize',
-	Embed = 'embed',
 }
 
 export interface InputColumnArgs {
