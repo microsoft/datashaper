@@ -33,23 +33,23 @@
 		"update_sdks": "yarn dlx @yarnpkg/sdks vscode"
 	},
 	"devDependencies": {
-		"@essex/eslint-config": "^20.5.2",
-		"@essex/eslint-plugin": "^20.5.2",
-		"@essex/jest-config": "^21.0.21",
-		"@essex/scripts": "^24.0.4",
-		"@types/jest": "^29.5.0",
-		"@types/node": "^18.15.11",
-		"@types/semver": "^7.3.13",
+		"@essex/eslint-config": "^20.5.3",
+		"@essex/eslint-plugin": "^20.5.3",
+		"@essex/jest-config": "^21.0.22",
+		"@essex/scripts": "^24.0.5",
+		"@types/jest": "^29.5.2",
+		"@types/node": "^20.2.5",
+		"@types/semver": "^7.5.0",
 		"arquero": "^5.2.0",
-		"eslint": "^8.38.0",
+		"eslint": "^8.42.0",
 		"npm-run-all": "^4.1.5",
-		"rome": "^12.0.0",
-		"semver": "^7.4.0",
-		"turbo": "1.9.1",
-		"typescript": "^5.0.4"
+		"rome": "^12.1.3",
+		"semver": "^7.5.1",
+		"turbo": "1.10.2",
+		"typescript": "^5.1.3"
 	},
 	"workspaces": [
 		"javascript/*"
 	],
-	"packageManager": "yarn@3.5.0"
+	"packageManager": "yarn@3.6.0"
 }
