@@ -1192,8 +1192,6 @@ export enum Verb {
     // (undocumented)
     Boolean = "boolean",
     // (undocumented)
-    Chunk = "chunk",
-    // (undocumented)
     Concat = "concat",
     // (undocumented)
     Convert = "convert",
@@ -1206,8 +1204,6 @@ export enum Verb {
     // (undocumented)
     Difference = "difference",
     // (undocumented)
-    Embed = "embed",
-    // (undocumented)
     Encode = "encode",
     // (undocumented)
     Erase = "erase",
@@ -1217,8 +1213,6 @@ export enum Verb {
     Filter = "filter",
     // (undocumented)
     Fold = "fold",
-    // (undocumented)
-    GenerateId = "genid",
     // (undocumented)
     Groupby = "groupby",
     // (undocumented)
@@ -1249,8 +1243,6 @@ export enum Verb {
     Select = "select",
     // (undocumented)
     Spread = "spread",
-    // (undocumented)
-    Summarize = "summarize",
     // (undocumented)
     Unfold = "unfold",
     // (undocumented)

@@ -11289,27 +11289,6 @@
             },
             {
               "kind": "EnumMember",
-              "canonicalReference": "@datashaper/schema!Verb.Chunk:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "Chunk = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "\"chunk\""
-                }
-              ],
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "name": "Chunk"
-            },
-            {
-              "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!Verb.Concat:member",
               "docComment": "",
               "excerptTokens": [
@@ -11436,27 +11415,6 @@
             },
             {
               "kind": "EnumMember",
-              "canonicalReference": "@datashaper/schema!Verb.Embed:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "Embed = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "\"embed\""
-                }
-              ],
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "name": "Embed"
-            },
-            {
-              "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!Verb.Encode:member",
               "docComment": "",
               "excerptTokens": [
@@ -11559,27 +11517,6 @@
               },
               "releaseTag": "Public",
               "name": "Fold"
-            },
-            {
-              "kind": "EnumMember",
-              "canonicalReference": "@datashaper/schema!Verb.GenerateId:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "GenerateId = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "\"genid\""
-                }
-              ],
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "name": "GenerateId"
             },
             {
               "kind": "EnumMember",
@@ -11895,27 +11832,6 @@
               },
               "releaseTag": "Public",
               "name": "Spread"
-            },
-            {
-              "kind": "EnumMember",
-              "canonicalReference": "@datashaper/schema!Verb.Summarize:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "Summarize = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "\"summarize\""
-                }
-              ],
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "name": "Summarize"
             },
             {
               "kind": "EnumMember",
