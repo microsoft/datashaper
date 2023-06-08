@@ -17,5 +17,5 @@ export interface VariadicInput extends BasicInput
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [input](./schema.variadicinput.input.md) |  | { source: [PortBinding](./schema.portbinding.md)<!-- -->; others?: [PortBinding](./schema.portbinding.md)<!-- -->\[\]; } | The step inputs; a required "source" and optional, variadic "others". If this is a string, it is used to bind the primary input. |
+|  [input](./schema.variadicinput.input.md) |  | { source: [NodeRef](./schema.noderef.md)<!-- -->; others?: [NodeRef](./schema.noderef.md)<!-- -->\[\]; } | The step inputs; a required "source" and optional, variadic "others". If this is a string, it is used to bind the primary input. |
 

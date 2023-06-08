@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { BasicInput, DualInput, VariadicInput } from './bindings.js'
+import type { BasicInput, DualInput, UnknownInput, VariadicInput } from './bindings.js'
 import type {
 	AggregateArgs,
 	BinArgs,
@@ -97,4 +97,9 @@ export type Step = StepJsonCommon &
 		| ({ verb: Verb.Chunk; args?: ChunkArgs } & BasicInput)
 		| ({ verb: Verb.Summarize; args?: SummarizeArgs } & BasicInput)
 		| ({ verb: Verb.Embed; args?: EmbedArgs } & BasicInput)
+
+		/**
+		 * Custom step - we may not know the verb, args, or binding pattern
+		 */
+		| ({ verb: string; args?: unknown } & UnknownInput)
 	)

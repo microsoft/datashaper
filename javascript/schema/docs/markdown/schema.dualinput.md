@@ -17,5 +17,5 @@ export interface DualInput extends BasicInput
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [input](./schema.dualinput.input.md) |  | { source: [PortBinding](./schema.portbinding.md)<!-- -->; other: [PortBinding](./schema.portbinding.md)<!-- -->; } | The inputs that must be bound; "source" &amp; "other". |
+|  [input](./schema.dualinput.input.md) |  | { source: [NodeRef](./schema.noderef.md)<!-- -->; other: [NodeRef](./schema.noderef.md)<!-- -->; } | The inputs that must be bound; "source" &amp; "other". |
 

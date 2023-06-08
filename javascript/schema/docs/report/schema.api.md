@@ -18,7 +18,7 @@ export interface AggregateArgs extends RollupArgs {
 // @public
 export interface BasicInput {
     input?: string | {
-        source: PortBinding;
+        source: NodeRef;
     };
 }
 
@@ -134,6 +134,14 @@ export interface Category {
     count: number;
     // (undocumented)
     name: string;
+}
+
+// Warning: (ae-missing-release-tag) "ChunkArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface ChunkArgs extends InputColumnArgs, OutputColumnArgs {
+    // (undocumented)
+    chunkSize: number;
 }
 
 // Warning: (ae-missing-release-tag) "CodebookSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -360,9 +368,16 @@ export interface DeriveArgs extends OutputColumnArgs {
 // @public
 export interface DualInput extends BasicInput {
     input: {
-        source: PortBinding;
-        other: PortBinding;
+        source: NodeRef;
+        other: NodeRef;
     };
+}
+
+// Warning: (ae-missing-release-tag) "EmbedArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface EmbedArgs extends InputColumnArgs, OutputColumnArgs {
+    model?: string;
 }
 
 // Warning: (ae-missing-release-tag) "EncodeDecodeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -534,6 +549,11 @@ export enum FilterCompareType {
 export interface FoldArgs extends InputColumnListArgs {
     to?: [string, string];
 }
+
+// Warning: (ae-missing-release-tag) "GenerateIdArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export type GenerateIdArgs = OutputColumnArgs;
 
 // Warning: (ae-missing-release-tag) "GroupbyArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -725,12 +745,10 @@ export interface Named {
     title?: string;
 }
 
-// Warning: (ae-missing-release-tag) "NamedPortBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "NodeRef" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface NamedPortBinding {
-    node: string;
-}
+export type NodeRef = string;
 
 // Warning: (ae-missing-release-tag) "NumericComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -832,11 +850,6 @@ export interface PivotArgs extends InputKeyValueArgs {
     // (undocumented)
     operation: FieldAggregateOperation;
 }
-
-// Warning: (ae-missing-release-tag) "PortBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type PortBinding = string | NamedPortBinding;
 
 // Warning: (ae-missing-release-tag) "Profile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1056,7 +1069,26 @@ export type Step = StepJsonCommon & (({
 } & BasicInput) | ({
     verb: Verb.Window;
     args?: WindowArgs;
-} & BasicInput));
+} & BasicInput) | ({
+    verb: Verb.GenerateId;
+    args?: GenerateIdArgs;
+} & BasicInput) | ({
+    verb: Verb.Chunk;
+    args?: ChunkArgs;
+} & BasicInput) | ({
+    verb: Verb.Summarize;
+    args?: SummarizeArgs;
+} & BasicInput) | ({
+    verb: Verb.Embed;
+    args?: EmbedArgs;
+} & BasicInput)
+/**
+* Custom step - we may not know the verb, args, or binding pattern
+*/
+| ({
+    verb: string;
+    args?: unknown;
+} & UnknownInput));
 
 // Warning: (ae-missing-release-tag) "StepJsonCommon" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1085,6 +1117,12 @@ export enum StringComparisonOperator {
     RegularExpression = "regex",
     // (undocumented)
     StartsWith = "starts with"
+}
+
+// Warning: (ae-missing-release-tag) "SummarizeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface SummarizeArgs extends InputColumnArgs, OutputColumnArgs {
 }
 
 // Warning: (ae-missing-release-tag) "TableBundleSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1128,6 +1166,14 @@ export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
     preserveSource?: boolean;
 }
 
+// Warning: (ae-missing-release-tag) "UnknownInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface UnknownInput {
+    // (undocumented)
+    input?: string | Record<string, NodeRef | NodeRef[]>;
+}
+
 // Warning: (ae-missing-release-tag) "UnrollArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -1167,8 +1213,8 @@ export enum VariableNature {
 // @public
 export interface VariadicInput extends BasicInput {
     input: {
-        source: PortBinding;
-        others?: PortBinding[];
+        source: NodeRef;
+        others?: NodeRef[];
     };
 }
 
@@ -1185,6 +1231,8 @@ export enum Verb {
     // (undocumented)
     Boolean = "boolean",
     // (undocumented)
+    Chunk = "chunk",
+    // (undocumented)
     Concat = "concat",
     // (undocumented)
     Convert = "convert",
@@ -1197,6 +1245,8 @@ export enum Verb {
     // (undocumented)
     Difference = "difference",
     // (undocumented)
+    Embed = "embed",
+    // (undocumented)
     Encode = "encode",
     // (undocumented)
     Erase = "erase",
@@ -1206,6 +1256,8 @@ export enum Verb {
     Filter = "filter",
     // (undocumented)
     Fold = "fold",
+    // (undocumented)
+    GenerateId = "genid",
     // (undocumented)
     Groupby = "groupby",
     // (undocumented)
@@ -1236,6 +1288,8 @@ export enum Verb {
     Select = "select",
     // (undocumented)
     Spread = "spread",
+    // (undocumented)
+    Summarize = "summarize",
     // (undocumented)
     Unfold = "unfold",
     // (undocumented)

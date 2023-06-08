@@ -10,7 +10,7 @@ The inputs that must be bound; "source" &amp; "other".
 
 ```typescript
 input: {
-        source: PortBinding;
-        other: PortBinding;
+        source: NodeRef;
+        other: NodeRef;
     };
 ```

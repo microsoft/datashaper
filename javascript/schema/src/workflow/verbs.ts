@@ -46,6 +46,8 @@ export enum Verb {
 	Window = 'window',
 	GenerateId = 'genid',
 	Chunk = 'chunk',
+
+	// LLM-specific
 	Summarize = 'summarize',
 	Embed = 'embed',
 }
@@ -517,8 +519,10 @@ export interface WindowArgs extends InputColumnArgs, OutputColumnArgs {
 export type GenerateIdArgs = OutputColumnArgs
 
 /**
- * Chunk the input column (which should be of the "string" datatype) into a new column.
- * This column will be an array of strings.
+ * Chunk the input column (which should be of the "string" or "array" datatype) into a new column.
+ * This column will be an array of chunks of the given size. 
+ * 
+ * For strings this will be substrings, for arrays this will be subarrays.
  */
 export interface ChunkArgs extends InputColumnArgs, OutputColumnArgs {
 	chunkSize: number
