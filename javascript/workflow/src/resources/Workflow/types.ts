@@ -50,7 +50,7 @@ export interface StepInput<T extends object | void | unknown = unknown> {
 	 * Key = Input Socket Name
 	 * Value = Socket Binding to other node
 	 */
-	input?: Record<string, WorkflowStepId | WorkflowStepId[] | undefined>
+	input?: Record<string, WorkflowStepId | WorkflowStepId[]>
 }
 
 /**
@@ -78,5 +78,5 @@ export interface Step<T extends object | void | unknown = unknown> {
 	 * Key = Input Socket Name
 	 * Value = Socket Binding to other node
 	 */
-	input: Record<string, WorkflowStepId | WorkflowStepId[] | undefined>
+	input: Record<string, WorkflowStepId | WorkflowStepId[]>
 }

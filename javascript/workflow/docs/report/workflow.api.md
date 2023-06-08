@@ -10,7 +10,6 @@ import type { BinArgs } from '@datashaper/schema';
 import type { BinarizeArgs } from '@datashaper/schema';
 import type { BooleanArgs } from '@datashaper/schema';
 import type { CodebookSchema } from '@datashaper/schema';
-import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { ConvertArgs } from '@datashaper/schema';
 import { DataFormat } from '@datashaper/schema';
 import type { DataNature } from '@datashaper/schema';
@@ -22,7 +21,6 @@ import type { DeriveArgs } from '@datashaper/schema';
 import type { EncodeDecodeArgs } from '@datashaper/schema';
 import type { EraseArgs } from '@datashaper/schema';
 import type { Field } from '@datashaper/schema';
-import type { FieldMetadata } from '@datashaper/schema';
 import type { FillArgs } from '@datashaper/schema';
 import type { FilterArgs } from '@datashaper/schema';
 import type { FoldArgs } from '@datashaper/schema';
@@ -58,11 +56,10 @@ import type { WindowArgs } from '@datashaper/schema';
 import type { WorkflowSchema } from '@datashaper/schema';
 import type { WorkflowStepId } from '@datashaper/schema';
 
-// Warning: (ae-forgotten-export) The symbol "TableContainer" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "aggregate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const aggregate: (id: string) => StepNode<TableContainer_2<unknown>, AggregateArgs>;
+export const aggregate: (id: string) => StepNode<TableContainer<unknown>, AggregateArgs>;
 
 // Warning: (ae-missing-release-tag) "argsHasOutputColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -127,12 +124,12 @@ export const bin: (id: string) => StepNode<TableContainer<unknown>, BinArgs>;
 // Warning: (ae-missing-release-tag) "binarize" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const binarize: (id: string) => StepNode<TableContainer_2<unknown>, BinarizeArgs>;
+export const binarize: (id: string) => StepNode<TableContainer<unknown>, BinarizeArgs>;
 
 // Warning: (ae-missing-release-tag) "boolean" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const boolean: (id: string) => StepNode<TableContainer_2<unknown>, BooleanArgs>;
+export const boolean: (id: string) => StepNode<TableContainer<unknown>, BooleanArgs>;
 
 // Warning: (ae-missing-release-tag) "cloneStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -358,7 +355,7 @@ export const decode: (id: string) => StepNode<TableContainer<unknown>, EncodeDec
 // Warning: (ae-missing-release-tag) "dedupe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const dedupe: (id: string) => StepNode<TableContainer_2<unknown>, Partial<InputColumnListArgs>>;
+export const dedupe: (id: string) => StepNode<TableContainer<unknown>, Partial<InputColumnListArgs>>;
 
 // Warning: (ae-missing-release-tag) "DefaultGraph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -389,7 +386,7 @@ export const dereference: (r: Resource | ResourceReference) => Resource | undefi
 // Warning: (ae-missing-release-tag) "derive" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const derive: (id: string) => StepNode<TableContainer_2<unknown>, DeriveArgs>;
+export const derive: (id: string) => StepNode<TableContainer<unknown>, DeriveArgs>;
 
 // Warning: (ae-missing-release-tag) "difference" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -412,7 +409,7 @@ export const encode: (id: string) => StepNode<TableContainer<unknown>, EncodeDec
 // Warning: (ae-missing-release-tag) "erase" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const erase: (id: string) => StepNode<TableContainer_2<unknown>, EraseArgs>;
+export const erase: (id: string) => StepNode<TableContainer<unknown>, EraseArgs>;
 
 // Warning: (ae-missing-release-tag) "fetchFile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -427,17 +424,17 @@ export function fetchJson<T = any>(url: string): Promise<T>;
 // Warning: (ae-missing-release-tag) "fill" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const fill: (id: string) => StepNode<TableContainer_2<unknown>, FillArgs>;
+export const fill: (id: string) => StepNode<TableContainer<unknown>, FillArgs>;
 
 // Warning: (ae-missing-release-tag) "filter" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const filter: (id: string) => StepNode<TableContainer_2<unknown>, FilterArgs>;
+export const filter: (id: string) => StepNode<TableContainer<unknown>, FilterArgs>;
 
 // Warning: (ae-missing-release-tag) "fold" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const fold: (id: string) => StepNode<TableContainer_2<unknown>, FoldArgs>;
+export const fold: (id: string) => StepNode<TableContainer<unknown>, FoldArgs>;
 
 // Warning: (ae-missing-release-tag) "Graph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -456,7 +453,7 @@ export interface Graph<T> {
 // Warning: (ae-missing-release-tag) "groupby" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const groupby: (id: string) => StepNode<TableContainer_2<unknown>, InputColumnListArgs>;
+export const groupby: (id: string) => StepNode<TableContainer<unknown>, InputColumnListArgs>;
 
 // Warning: (ae-missing-release-tag) "Handler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -471,7 +468,7 @@ export type HandlerOf<T> = (input: T) => void;
 // Warning: (ae-missing-release-tag) "impute" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const impute: (id: string) => StepNode<TableContainer_2<unknown>, ImputeArgs>;
+export const impute: (id: string) => StepNode<TableContainer<unknown>, ImputeArgs>;
 
 // Warning: (ae-missing-release-tag) "intersect" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -610,7 +607,7 @@ export type Maybe<T> = T | undefined;
 // Warning: (ae-missing-release-tag) "merge" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const merge: (id: string) => StepNode<TableContainer_2<unknown>, MergeArgs>;
+export const merge: (id: string) => StepNode<TableContainer<unknown>, MergeArgs>;
 
 // Warning: (ae-missing-release-tag) "Named" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -728,12 +725,12 @@ export abstract class Observed extends Disposable {
 // Warning: (ae-missing-release-tag) "onehot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const onehot: (id: string) => StepNode<TableContainer_2<unknown>, OnehotArgs>;
+export const onehot: (id: string) => StepNode<TableContainer<unknown>, OnehotArgs>;
 
 // Warning: (ae-missing-release-tag) "orderby" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const orderby: (id: string) => StepNode<TableContainer_2<unknown>, OrderbyArgs>;
+export const orderby: (id: string) => StepNode<TableContainer<unknown>, OrderbyArgs>;
 
 // Warning: (ae-missing-release-tag) "ParserOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -799,7 +796,7 @@ export class ParserOptions extends Observed implements ParserOptions_2 {
 // Warning: (ae-missing-release-tag) "pivot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const pivot: (id: string) => StepNode<TableContainer_2<unknown>, PivotArgs>;
+export const pivot: (id: string) => StepNode<TableContainer<unknown>, PivotArgs>;
 
 // Warning: (ae-missing-release-tag) "ProfileHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -835,12 +832,12 @@ export function readStep<T extends object | void | unknown = any>({ verb, args, 
 // Warning: (ae-missing-release-tag) "recode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const recode: (id: string) => StepNode<TableContainer_2<unknown>, RecodeArgs>;
+export const recode: (id: string) => StepNode<TableContainer<unknown>, RecodeArgs>;
 
 // Warning: (ae-missing-release-tag) "rename" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const rename: (id: string) => StepNode<TableContainer_2<unknown>, InputColumnRecordArgs>;
+export const rename: (id: string) => StepNode<TableContainer<unknown>, InputColumnRecordArgs>;
 
 // Warning: (ae-missing-release-tag) "Resource" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -912,17 +909,17 @@ export class ResourceReference extends Resource {
 // Warning: (ae-missing-release-tag) "rollup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const rollup: (id: string) => StepNode<TableContainer_2<unknown>, RollupArgs>;
+export const rollup: (id: string) => StepNode<TableContainer<unknown>, RollupArgs>;
 
 // Warning: (ae-missing-release-tag) "sample" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const sample: (id: string) => StepNode<TableContainer_2<unknown>, SampleArgs>;
+export const sample: (id: string) => StepNode<TableContainer<unknown>, SampleArgs>;
 
 // Warning: (ae-missing-release-tag) "select" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const select: (id: string) => StepNode<TableContainer_2<unknown>, InputColumnListArgs>;
+export const select: (id: string) => StepNode<TableContainer<unknown>, InputColumnListArgs>;
 
 // Warning: (ae-missing-release-tag) "SocketName" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -932,7 +929,7 @@ export type SocketName = string | symbol;
 // Warning: (ae-missing-release-tag) "spread" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const spread: (id: string) => StepNode<TableContainer_2<unknown>, SpreadArgs>;
+export const spread: (id: string) => StepNode<TableContainer<unknown>, SpreadArgs>;
 
 // Warning: (ae-missing-release-tag) "Step" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -942,7 +939,7 @@ export interface Step<T extends object | void | unknown = unknown> {
     // (undocumented)
     description?: string;
     id: string;
-    input: Record<string, WorkflowStepId | WorkflowStepId[] | undefined>;
+    input: Record<string, WorkflowStepId | WorkflowStepId[]>;
     verb: Verb;
 }
 
@@ -959,7 +956,7 @@ export interface StepInput<T extends object | void | unknown = unknown> {
     // (undocumented)
     description?: string;
     id?: string;
-    input?: Record<string, WorkflowStepId | WorkflowStepId[] | undefined>;
+    input?: Record<string, WorkflowStepId | WorkflowStepId[]>;
     verb: Verb;
 }
 
@@ -1049,17 +1046,17 @@ export { Transformer_2 as Transformer }
 // Warning: (ae-missing-release-tag) "unfold" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const unfold: (id: string) => StepNode<TableContainer_2<unknown>, InputKeyValueArgs>;
+export const unfold: (id: string) => StepNode<TableContainer<unknown>, InputKeyValueArgs>;
 
 // Warning: (ae-missing-release-tag) "ungroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const ungroup: (id: string) => StepNode<TableContainer_2<unknown>, void>;
+export const ungroup: (id: string) => StepNode<TableContainer<unknown>, void>;
 
 // Warning: (ae-missing-release-tag) "unhot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const unhot: (id: string) => StepNode<TableContainer_2<unknown>, UnhotArgs>;
+export const unhot: (id: string) => StepNode<TableContainer<unknown>, UnhotArgs>;
 
 // Warning: (ae-missing-release-tag) "union" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1069,12 +1066,12 @@ export const union: (id: string) => SetOperationNode<unknown>;
 // Warning: (ae-missing-release-tag) "unorder" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const unorder: (id: string) => StepNode<TableContainer_2<unknown>, void>;
+export const unorder: (id: string) => StepNode<TableContainer<unknown>, void>;
 
 // Warning: (ae-missing-release-tag) "unroll" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const unroll: (id: string) => StepNode<TableContainer_2<unknown>, InputColumnArgs>;
+export const unroll: (id: string) => StepNode<TableContainer<unknown>, InputColumnArgs>;
 
 // Warning: (ae-missing-release-tag) "Unsubscribe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1094,7 +1091,7 @@ export function verbs(filter?: (verb: Verb) => boolean): Verb[];
 // Warning: (ae-missing-release-tag) "window" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-const window_2: (id: string) => StepNode<TableContainer_2<unknown>, WindowArgs>;
+const window_2: (id: string) => StepNode<TableContainer<unknown>, WindowArgs>;
 export { window_2 as window }
 
 // Warning: (ae-missing-release-tag) "Workflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
