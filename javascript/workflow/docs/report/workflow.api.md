@@ -36,13 +36,11 @@ import type { LookupArgs } from '@datashaper/schema';
 import type { Maybe as Maybe_2 } from '@datashaper/workflow';
 import type { MergeArgs } from '@datashaper/schema';
 import type { Named as Named_2 } from '@datashaper/schema';
-import type { NamedPortBinding } from '@datashaper/schema';
 import { Observable } from 'rxjs';
 import type { OnehotArgs } from '@datashaper/schema';
 import type { OrderbyArgs } from '@datashaper/schema';
 import type { ParserOptions as ParserOptions_2 } from '@datashaper/schema';
 import type { PivotArgs } from '@datashaper/schema';
-import type { PortBinding } from '@datashaper/schema';
 import type { Profile } from '@datashaper/schema';
 import type { RecodeArgs } from '@datashaper/schema';
 import type { ResourceSchema } from '@datashaper/schema';
@@ -58,6 +56,7 @@ import type { UnhotArgs } from '@datashaper/schema';
 import type { Verb } from '@datashaper/schema';
 import type { WindowArgs } from '@datashaper/schema';
 import type { WorkflowSchema } from '@datashaper/schema';
+import type { WorkflowStepId } from '@datashaper/schema';
 
 // Warning: (ae-forgotten-export) The symbol "TableContainer" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "aggregate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -943,9 +942,7 @@ export interface Step<T extends object | void | unknown = unknown> {
     // (undocumented)
     description?: string;
     id: string;
-    input: {
-        others?: NamedPortBinding[];
-    } & Record<string, NamedPortBinding>;
+    input: Record<string, WorkflowStepId | WorkflowStepId[] | undefined>;
     verb: Verb;
 }
 
@@ -962,9 +959,7 @@ export interface StepInput<T extends object | void | unknown = unknown> {
     // (undocumented)
     description?: string;
     id?: string;
-    input?: string | ({
-        others?: PortBinding[];
-    } & Record<string, PortBinding>);
+    input?: Record<string, WorkflowStepId | WorkflowStepId[] | undefined>;
     verb: Verb;
 }
 

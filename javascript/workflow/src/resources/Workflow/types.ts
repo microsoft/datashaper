@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { NamedPortBinding, PortBinding, Verb } from '@datashaper/schema'
+import type { WorkflowStepId, Verb } from '@datashaper/schema'
 
 /**
  * Options for exporting data-tables within Workflow instances.w
@@ -50,11 +50,7 @@ export interface StepInput<T extends object | void | unknown = unknown> {
 	 * Key = Input Socket Name
 	 * Value = Socket Binding to other node
 	 */
-	input?:
-		| string
-		| ({
-				others?: PortBinding[]
-		  } & Record<string, PortBinding>)
+	input?: Record<string, WorkflowStepId | WorkflowStepId[] | undefined>
 }
 
 /**
@@ -82,7 +78,5 @@ export interface Step<T extends object | void | unknown = unknown> {
 	 * Key = Input Socket Name
 	 * Value = Socket Binding to other node
 	 */
-	input: {
-		others?: NamedPortBinding[]
-	} & Record<string, NamedPortBinding>
+	input: Record<string, WorkflowStepId | WorkflowStepId[] | undefined>
 }

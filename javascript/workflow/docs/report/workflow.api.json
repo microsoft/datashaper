@@ -12377,19 +12377,6 @@
                   "text": "input: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "{\n        others?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "NamedPortBinding",
-                  "canonicalReference": "@datashaper/schema!NamedPortBinding:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "[];\n    } & "
-                },
-                {
                   "kind": "Reference",
                   "text": "Record",
                   "canonicalReference": "!Record:type"
@@ -12400,12 +12387,21 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "NamedPortBinding",
-                  "canonicalReference": "@datashaper/schema!NamedPortBinding:interface"
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
                 },
                 {
                   "kind": "Content",
-                  "text": ">"
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[] | undefined>"
                 },
                 {
                   "kind": "Content",
@@ -12418,7 +12414,7 @@
               "name": "input",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 8
+                "endIndex": 7
               }
             },
             {
@@ -12635,19 +12631,6 @@
                   "text": "input?: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "string | ({\n        others?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "PortBinding",
-                  "canonicalReference": "@datashaper/schema!PortBinding:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "[];\n    } & "
-                },
-                {
                   "kind": "Reference",
                   "text": "Record",
                   "canonicalReference": "!Record:type"
@@ -12658,12 +12641,21 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "PortBinding",
-                  "canonicalReference": "@datashaper/schema!PortBinding:type"
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
                 },
                 {
                   "kind": "Content",
-                  "text": ">)"
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[] | undefined>"
                 },
                 {
                   "kind": "Content",
@@ -12676,7 +12668,7 @@
               "name": "input",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 8
+                "endIndex": 7
               }
             },
             {

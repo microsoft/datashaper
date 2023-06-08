@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { NamedPortBinding, Verb } from '@datashaper/schema'
+import type { Verb } from '@datashaper/schema'
 
 import * as defaults from '../../verbs/defaults/index.js'
 import type { Step, StepInput } from './types.js'
@@ -61,37 +61,28 @@ function resolveInputs(
 	/**
 	 * Case: No input is defined, no previous step available.
 	 */
-	if (input == null && previous == null) {
-		return {}
-	} else if (input == null && previous != null) {
-		/**
-		 * Case: No input is defined, previous step is available, use it's default output
-		 */
-		return { source: { node: previous.id } }
+	if (input == null) {
+		if (previous == null) {
+			/**
+			 * Case: No input is defined, no previous step available.
+			 * This is the first step
+			 */
+			return {}
+		} else {
+			/**
+			 * Case: No input is defined, previous step is available, use it's default output
+			 */
+			return { source: previous.id }
+		}
 	} else if (typeof input === 'string') {
 		/**
 		 * Case: String shorthand is used, convert to object specification
 		 */
-		return { source: { node: input } }
+		return { source: input }
 	} else {
 		/**
-		 * Case: Object is used, preserve object specs and convert
-		 * string-shorthand specs to full input objects
+		 * Case 4: Object specification is used, return as-is
 		 */
-		const result: Step['input'] = { ...input } as any
-		Object.keys(result).forEach((k: string) => {
-			const binding = result[k]
-			if (typeof binding === 'string') {
-				result[k] = { node: binding as string } as NamedPortBinding
-			}
-		})
-
-		// Handle the variadic case (e.g. "others" array is defined)
-		if (result.others != null) {
-			result.others = result.others.map((o) =>
-				typeof o === 'string' ? { node: o } : (o as any as NamedPortBinding),
-			)
-		}
-		return result
+		return input
 	}
 }
