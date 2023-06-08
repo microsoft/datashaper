@@ -78,5 +78,9 @@ export interface Step<T extends object | void | unknown = unknown> {
 	 * Key = Input Socket Name
 	 * Value = Socket Binding to other node
 	 */
-	input: Record<string, WorkflowStepId | WorkflowStepId[]>
+	input: {
+		source?: WorkflowStepId
+		others?: WorkflowStepId[]
+		[key: string]: WorkflowStepId | WorkflowStepId[] | undefined
+	}
 }

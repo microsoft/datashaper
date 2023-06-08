@@ -1170,7 +1170,7 @@ export interface UnknownInput {
         source?: WorkflowStepId;
         others?: WorkflowStepId[];
         [key: string]: WorkflowStepId | WorkflowStepId[] | undefined;
-    } | Record<string, WorkflowStepId | WorkflowStepId[]>;
+    };
 }
 
 // Warning: (ae-missing-release-tag) "UnrollArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

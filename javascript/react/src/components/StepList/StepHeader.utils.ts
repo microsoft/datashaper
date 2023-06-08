@@ -58,8 +58,8 @@ export function deriveDetails(step: Step): string | undefined {
 		return (args as OutputColumnArgs).to
 	} else if (isInputTableListStep(step)) {
 		const others = step.input['other']
-			? step.input['other'].node
-			: step.input.others?.map((o) => o.node).join(',')
+			? step.input['other']
+			: step.input.others?.join(',')
 		return `with ${others}`
 	}
 }

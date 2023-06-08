@@ -11,5 +11,5 @@ input?: string | {
         source?: WorkflowStepId;
         others?: WorkflowStepId[];
         [key: string]: WorkflowStepId | WorkflowStepId[] | undefined;
-    } | Record<string, WorkflowStepId | WorkflowStepId[]>;
+    };
 ```

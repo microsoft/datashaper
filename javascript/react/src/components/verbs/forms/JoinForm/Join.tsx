@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { JoinArgs } from '@datashaper/schema'
+import type { JoinArgs, WorkflowStepId } from '@datashaper/schema'
 import { NodeInput } from '@datashaper/workflow'
 import { memo } from 'react'
 
@@ -22,11 +22,11 @@ export const JoinForm: React.FC<StepFormProps<JoinArgs>> = memo(
 		const tableOptions = useTableDropdownOptions(workflow)
 
 		const leftTable = useWorkflowDataTable(
-			input || step.input[NodeInput.Source]?.node,
+			input || step.input[NodeInput.Source],
 			workflow,
 		)
 		const rightTable = useWorkflowDataTable(
-			step.input[NodeInput.Other]?.node,
+			step.input[NodeInput.Other] as WorkflowStepId,
 			workflow,
 		)
 		const leftColumns = useColumnNames(leftTable)

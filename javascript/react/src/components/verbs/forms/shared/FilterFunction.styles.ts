@@ -10,12 +10,12 @@ export const Container = styled.div`
 	flex-direction: column;
 `
 
-export const TextValue = styled(TextField)`
+export const TextValue = styled(TextField as any)`
 	display: inline;
 	width: 135px;
 `
 
-export const OrLabel = styled(Label)`
+export const OrLabel = styled(Label as any)`
 	display: inline;
 	font-style: italic;
 	padding-left: 10px;
@@ -28,7 +28,7 @@ export const FilterContainer = styled.div`
 	margin-left: 16px;
 `
 
-export const BooleanToggle = styled(Toggle)`
+export const BooleanToggle = styled(Toggle as any)`
 	margin-top: 5px;
 `
 

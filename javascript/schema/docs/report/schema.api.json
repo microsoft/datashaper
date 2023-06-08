@@ -11158,34 +11158,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "[] | undefined;\n    } | "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Record",
-                  "canonicalReference": "!Record:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<string, "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "WorkflowStepId",
-                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": " | "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "WorkflowStepId",
-                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "[]>"
+                  "text": "[] | undefined;\n    }"
                 },
                 {
                   "kind": "Content",
@@ -11198,7 +11171,7 @@
               "name": "input",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 16
+                "endIndex": 10
               }
             }
           ],

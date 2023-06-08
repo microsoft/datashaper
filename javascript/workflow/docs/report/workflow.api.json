@@ -12377,13 +12377,26 @@
                   "text": "input: "
                 },
                 {
+                  "kind": "Content",
+                  "text": "{\n        source?: "
+                },
+                {
                   "kind": "Reference",
-                  "text": "Record",
-                  "canonicalReference": "!Record:type"
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
                 },
                 {
                   "kind": "Content",
-                  "text": "<string, "
+                  "text": ";\n        others?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[];\n        [key: string]: "
                 },
                 {
                   "kind": "Reference",
@@ -12401,7 +12414,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "[]>"
+                  "text": "[] | undefined;\n    }"
                 },
                 {
                   "kind": "Content",
@@ -12414,7 +12427,7 @@
               "name": "input",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 7
+                "endIndex": 10
               }
             },
             {

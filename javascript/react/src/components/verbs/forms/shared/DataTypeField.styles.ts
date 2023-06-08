@@ -19,11 +19,11 @@ export const leftStyles = {
 	},
 }
 
-export const TextValue = styled(TextField)`
+export const TextValue = styled(TextField as any)`
 	display: inline;
 `
 
-export const OrLabel = styled(Label)`
+export const OrLabel = styled(Label as any)`
 	display: inline;
 	padding-left: 10px;
 	padding-right: 10px;

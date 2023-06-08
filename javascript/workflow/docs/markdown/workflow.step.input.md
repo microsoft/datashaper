@@ -9,5 +9,9 @@ The bound inputs Key = Input Socket Name Value = Socket Binding to other node
 <b>Signature:</b>
 
 ```typescript
-input: Record<string, WorkflowStepId | WorkflowStepId[]>;
+input: {
+        source?: WorkflowStepId;
+        others?: WorkflowStepId[];
+        [key: string]: WorkflowStepId | WorkflowStepId[] | undefined;
+    };
 ```

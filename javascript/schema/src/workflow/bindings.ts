@@ -75,7 +75,6 @@ export interface UnknownInput {
 		others?: WorkflowStepId[]
 
 		/** Possible other input */
-		[key: string]: WorkflowStepId | WorkflowStepId[] | undefined
-		
-	} | Record<string, WorkflowStepId | WorkflowStepId[]>
+		[key: string]: WorkflowStepId | WorkflowStepId[] | undefined	
+	}
 }

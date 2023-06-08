@@ -50,7 +50,7 @@ export const StepForm: React.FC<StepFormProps> = memo(function StepForm({
 	hideInputColumn,
 }) {
 	/* Current Table Selection */
-	const tableId = s.input[NodeInput.Source]?.node
+	const tableId = s.input[NodeInput.Source]
 	const table = useWorkflowDataTable(tableId, g)
 
 	/* Column Options */
