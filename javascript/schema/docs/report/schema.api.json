@@ -259,8 +259,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "PortBinding",
-                  "canonicalReference": "@datashaper/schema!PortBinding:type"
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
                 },
                 {
                   "kind": "Content",
@@ -3774,8 +3774,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "PortBinding",
-                  "canonicalReference": "@datashaper/schema!PortBinding:type"
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
                 },
                 {
                   "kind": "Content",
@@ -3783,8 +3783,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "PortBinding",
-                  "canonicalReference": "@datashaper/schema!PortBinding:type"
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
                 },
                 {
                   "kind": "Content",
@@ -7159,50 +7159,6 @@
           "extendsTokenRanges": []
         },
         {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/schema!NamedPortBinding:interface",
-          "docComment": "/**\n * An explicit step input binding\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface NamedPortBinding "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "NamedPortBinding",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!NamedPortBinding#node:member",
-              "docComment": "/**\n * The id of the input node to bind to\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "node: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "node",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
           "kind": "Enum",
           "canonicalReference": "@datashaper/schema!NumericComparisonOperator:enum",
           "docComment": "",
@@ -8146,36 +8102,6 @@
               "endIndex": 2
             }
           ]
-        },
-        {
-          "kind": "TypeAlias",
-          "canonicalReference": "@datashaper/schema!PortBinding:type",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export type PortBinding = "
-            },
-            {
-              "kind": "Content",
-              "text": "string | "
-            },
-            {
-              "kind": "Reference",
-              "text": "NamedPortBinding",
-              "canonicalReference": "@datashaper/schema!NamedPortBinding:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "PortBinding",
-          "typeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 3
-          }
         },
         {
           "kind": "TypeAlias",
@@ -10176,6 +10102,15 @@
             },
             {
               "kind": "Content",
+              "text": ")\n/**\n * Custom step - we may not know the verb, args, or binding pattern\n */\n | ({\n    verb: string;\n    args?: unknown;\n} & "
+            },
+            {
+              "kind": "Reference",
+              "text": "UnknownInput",
+              "canonicalReference": "@datashaper/schema!UnknownInput:interface"
+            },
+            {
+              "kind": "Content",
               "text": "))"
             },
             {
@@ -10187,7 +10122,7 @@
           "name": "Step",
           "typeTokenRange": {
             "startIndex": 1,
-            "endIndex": 213
+            "endIndex": 215
           }
         },
         {
@@ -10844,6 +10779,86 @@
           ]
         },
         {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!UnknownInput:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface UnknownInput "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "UnknownInput",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!UnknownInput#input:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "input?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | {\n        source?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        others?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[];\n        [key: string]: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[] | undefined;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "input",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 10
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
           "kind": "TypeAlias",
           "canonicalReference": "@datashaper/schema!UnrollArgs:type",
           "docComment": "",
@@ -11136,8 +11151,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "PortBinding",
-                  "canonicalReference": "@datashaper/schema!PortBinding:type"
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
                 },
                 {
                   "kind": "Content",
@@ -11145,8 +11160,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "PortBinding",
-                  "canonicalReference": "@datashaper/schema!PortBinding:type"
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
                 },
                 {
                   "kind": "Content",
@@ -12339,6 +12354,31 @@
               "endIndex": 2
             }
           ]
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@datashaper/schema!WorkflowStepId:type",
+          "docComment": "/**\n * The Id of the step to which the input is bound\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export type WorkflowStepId = "
+            },
+            {
+              "kind": "Content",
+              "text": "string"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "WorkflowStepId",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
         }
       ]
     }

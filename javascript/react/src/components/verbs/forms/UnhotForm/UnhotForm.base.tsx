@@ -20,14 +20,18 @@ export const UnhotFormBase: React.FC<StepFormBaseProps<UnhotArgs>> = memo(
 					label: 'Keep source columns',
 					type: FormInputType.Checkbox,
 					current: step.args.preserveSource,
-					onChange: (s, val) => (s.args.preserveSource = val as boolean),
+					onChange: (s, val) => {
+						s.args.preserveSource = val as boolean
+					},
 					advanced: true,
 				},
 				{
 					label: 'Prefix',
 					type: FormInputType.Text,
 					current: step.args.prefix,
-					onChange: (s, val) => (s.args.prefix = val as string),
+					onChange: (s, val) => {
+						s.args.prefix = val as string
+					},
 					advanced: true,
 				},
 			],

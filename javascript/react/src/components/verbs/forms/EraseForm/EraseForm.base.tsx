@@ -22,7 +22,9 @@ export const EraseFormBase: React.FC<StepFormBaseProps<EraseArgs>> = memo(
 					current: step.args.value,
 					placeholder: 'Enter a value',
 					required: true,
-					onChange: (s, val) => (s.args.value = val),
+					onChange: (s, val) => {
+						s.args.value = val
+					},
 				},
 			],
 			[step],

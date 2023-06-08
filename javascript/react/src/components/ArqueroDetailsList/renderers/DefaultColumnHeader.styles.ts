@@ -15,13 +15,13 @@ export const HoverContainer = styled.div`
 	align-items: center;
 `
 
-export const LeftIcon = styled(Icon)`
+export const LeftIcon = styled(Icon as any)`
 	width: 14px;
 	position: absolute;
 	left: 8px;
 `
 
-export const RightIcon = styled(Icon)`
+export const RightIcon = styled(Icon as any)`
 	width: 14px;
 	position: absolute;
 	right: 8px;

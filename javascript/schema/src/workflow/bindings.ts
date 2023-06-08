@@ -2,17 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-export type PortBinding = string | NamedPortBinding
 
 /**
- * An explicit step input binding
+ * The Id of the step to which the input is bound
  */
-export interface NamedPortBinding {
-	/**
-	 * The id of the input node to bind to
-	 */
-	node: string
-}
+export type WorkflowStepId = string
 
 /**
  * Single-input, single-output step I/O
@@ -24,7 +18,7 @@ export interface BasicInput {
 	 * If undefined, the default output of the previous step will be used (if available).
 	 * If no previous step is available, this will remain undefined
 	 */
-	input?: string | { source: PortBinding }
+	input?: string | { source: WorkflowStepId }
 }
 
 /**
@@ -38,12 +32,12 @@ export interface DualInput extends BasicInput {
 		/**
 		 * The primary input, which must be specified
 		 */
-		source: PortBinding
+		source: WorkflowStepId
 
 		/**
 		 * The secondary input, which must be specified
 		 */
-		other: PortBinding
+		other: WorkflowStepId
 	}
 }
 
@@ -59,11 +53,30 @@ export interface VariadicInput extends BasicInput {
 		/**
 		 * The primary input
 		 */
-		source: PortBinding
+		source: WorkflowStepId
 
 		/**
 		 * The variadic secondary inputs
 		 */
-		others?: PortBinding[]
+		others?: WorkflowStepId[]
 	}
+}
+
+export interface UnknownInput {
+	input?:
+		| string
+		| {
+				/**
+				 * Possible main input
+				 **/
+				source?: WorkflowStepId
+
+				/**
+				 * Possible variadic input
+				 */
+				others?: WorkflowStepId[]
+
+				/** Possible other input */
+				[key: string]: WorkflowStepId | WorkflowStepId[] | undefined
+		  }
 }

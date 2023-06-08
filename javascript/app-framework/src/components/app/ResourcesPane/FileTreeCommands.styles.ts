@@ -8,7 +8,7 @@ import { useMemo } from 'react'
 import styled from 'styled-components'
 
 // override the command background, which does not update properly in fluent after first render
-export const Commands = styled(CommandBar)`
+export const Commands = styled(CommandBar as any)`
 	.ms-CommandBar {
 		padding-left: unset;
 	}
@@ -21,7 +21,7 @@ export const CollapsedCommands = styled.div`
 	background: ${({ theme }) => theme.palette.neutralLighter};
 `
 
-export const CollapsedButton = styled(CommandBarButton)`
+export const CollapsedButton = styled(CommandBarButton as any)`
 	width: inherit;
 `
 

@@ -26,7 +26,9 @@ export const UnfoldFormBase: React.FC<
 				placeholder: 'Choose column',
 				current: step.args.key,
 				required: true,
-				onChange: (s, val) => (s.args.key = val as string),
+				onChange: (s, val) => {
+					s.args.key = val as string
+				},
 			},
 			{
 				label: 'Column used as value',
@@ -35,7 +37,9 @@ export const UnfoldFormBase: React.FC<
 				options,
 				current: step.args.value,
 				required: true,
-				onChange: (s, val) => (s.args.value = val as string),
+				onChange: (s, val) => {
+					s.args.value = val as string
+				},
 			},
 		],
 		[step, options],

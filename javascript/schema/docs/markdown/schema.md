@@ -84,7 +84,6 @@
 |  [LookupArgs](./schema.lookupargs.md) |  |
 |  [MergeArgs](./schema.mergeargs.md) |  |
 |  [Named](./schema.named.md) | Base interface for sharing properties of named resources/objects. |
-|  [NamedPortBinding](./schema.namedportbinding.md) | An explicit step input binding |
 |  [OnehotArgs](./schema.onehotargs.md) |  |
 |  [OrderbyArgs](./schema.orderbyargs.md) |  |
 |  [OrderbyInstruction](./schema.orderbyinstruction.md) |  |
@@ -101,6 +100,7 @@
 |  [TableBundleSchema](./schema.tablebundleschema.md) | <p>A table bundle encapsulates table-specific resources into a single resource with a prescribed workflow.</p><p>A tablebundle requires a <code>source</code> entry with rel="input" for the source table. A tablebundle may also include <code>source</code> entries with rel="codebook" and rel="workflow" for interpretation and processing of the source data table.</p> |
 |  [TypeHints](./schema.typehints.md) | Configuration values for interpreting data types when parsing a delimited file. By default, all values are read as strings - applying these type hints can derive primitive types from the strings. |
 |  [UnhotArgs](./schema.unhotargs.md) |  |
+|  [UnknownInput](./schema.unknowninput.md) |  |
 |  [ValidationResult](./schema.validationresult.md) |  |
 |  [VariadicInput](./schema.variadicinput.md) | Multi-input, single output step I/O |
 |  [WindowArgs](./schema.windowargs.md) |  |
@@ -126,7 +126,6 @@
 |  [DedupeArgs](./schema.dedupeargs.md) |  |
 |  [FactoryInput](./schema.factoryinput.md) |  |
 |  [GroupbyArgs](./schema.groupbyargs.md) |  |
-|  [PortBinding](./schema.portbinding.md) |  |
 |  [Profile](./schema.profile.md) | Resources must have a profile, which is a key defining how it should be interpreted. Profiles are essentially shorthand for a schema URL. The core profiles for DataShaper are defined here, but any application can define one as a string. |
 |  [Rel](./schema.rel.md) | A rel is a string that describes the relationship between a resource and its child. |
 |  [RenameArgs](./schema.renameargs.md) |  |
@@ -136,4 +135,5 @@
 |  [UnrollArgs](./schema.unrollargs.md) |  |
 |  [ValidationFunction](./schema.validationfunction.md) |  |
 |  [Value](./schema.value.md) | A cell/property value of any type. |
+|  [WorkflowStepId](./schema.workflowstepid.md) | The Id of the step to which the input is bound |
 

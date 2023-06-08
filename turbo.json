@@ -4,7 +4,8 @@
 		"//#generate:versions": {
 			"dependsOn": [],
 			"outputs": [
-				"javascript/schema/versions.js", "javascript/schema/versions.d.ts"
+				"javascript/schema/versions.js",
+				"javascript/schema/versions.d.ts"
 			]
 		},
 		"build": {

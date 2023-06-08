@@ -55,15 +55,15 @@ export const Delimiter: React.FC<{
 	return (
 		<DelimiterContainer>
 			<ChoiceGroup
-				label="Delimiter"
+				label='Delimiter'
 				defaultSelectedKey={selected}
 				options={delimiterOptions}
 				onChange={(_, option) => onDelimeterChange(option)}
 			/>
 			<TextField
-				autoComplete="off"
-				title="custom delimiter"
-				name="customDelimiter"
+				autoComplete='off'
+				title='custom delimiter'
+				name='customDelimiter'
 				disabled={!isOther}
 				value={value}
 				onChange={onChangeCustomDelimeter}

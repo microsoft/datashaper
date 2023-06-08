@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { NamedPortBinding } from '@datashaper/schema'
+import type { WorkflowStepId } from '@datashaper/schema'
 
 import type { Node, SocketName } from '../../dataflow/types.js'
 import type { Step } from './types.js'
@@ -21,7 +21,7 @@ export function unique<T>(arr: T[]): T[] {
 
 export function isVariadicSocketName(
 	input: SocketName,
-	_binding: NamedPortBinding | NamedPortBinding[],
-): _binding is NamedPortBinding[] {
-	return input === 'others'
+	binding: WorkflowStepId | WorkflowStepId[],
+): binding is WorkflowStepId[] {
+	return input === 'others' || Array.isArray(binding)
 }

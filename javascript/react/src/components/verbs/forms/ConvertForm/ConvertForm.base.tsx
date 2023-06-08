@@ -29,14 +29,18 @@ export const ConvertFormBase: React.FC<
 				type: FormInputType.SingleChoice,
 				current: step.args.type,
 				options: getEnumDropdownOptions(ParseType),
-				onChange: (s, opt) => (s.args.type = opt as ParseType),
+				onChange: (s, opt) => {
+					s.args.type = opt as ParseType
+				},
 			},
 			{
 				label: 'Base (radix)',
 				if: step.args.type === ParseType.Integer,
 				type: FormInputType.Text,
 				current: step.args.radix ? `${step.args.radix}` : '',
-				onChange: (s, opt) => (s.args.radix = num(opt as string)),
+				onChange: (s, opt) => {
+					s.args.radix = num(opt as string)
+				},
 			},
 			{
 				label: 'Delimiter',
@@ -45,7 +49,9 @@ export const ConvertFormBase: React.FC<
 					isInputColumnArray(fields, step.args.column),
 				type: FormInputType.Text,
 				current: step.args.delimiter ? `${step.args.delimiter}` : '',
-				onChange: (s, opt) => (s.args.delimiter = opt as string),
+				onChange: (s, opt) => {
+					s.args.delimiter = opt as string
+				},
 			},
 			{
 				label: 'Date format pattern',
@@ -57,10 +63,12 @@ export const ConvertFormBase: React.FC<
 				current: step.args.formatPattern
 					? `${step.args.formatPattern}`
 					: undefined,
-				onChange: (s, opt, value) =>
-					(s.args.formatPattern = opt ? (opt as string) : value),
-				onInputValueChange: (s, value) =>
-					(s.args.formatPattern = value ? value : '%Y-%m-%d'),
+				onChange: (s, opt, value) => {
+					s.args.formatPattern = opt ? (opt as string) : value
+				},
+				onInputValueChange: (s, value) => {
+					s.args.formatPattern = value ? value : '%Y-%m-%d'
+				},
 			},
 		],
 		[step, fields],

@@ -168,9 +168,24 @@
 			"properties": {
 				"operator": {
 					"enum": [
-						"!=", "<", "<=", "=", ">", ">=", "after", "before", "contains",
-						"ends with", "equals", "is empty", "is false", "is not empty",
-						"is not equal", "is true", "regex", "starts with"
+						"!=",
+						"<",
+						"<=",
+						"=",
+						">",
+						">=",
+						"after",
+						"before",
+						"contains",
+						"ends with",
+						"equals",
+						"is empty",
+						"is false",
+						"is not empty",
+						"is not equal",
+						"is true",
+						"regex",
+						"starts with"
 					],
 					"type": "string"
 				},
@@ -272,9 +287,23 @@
 		"FieldAggregateOperation": {
 			"description": "This is the subset of aggregate functions that can operate\non a single field so we don't accommodate additional args.\nSee https://uwdata.github.io/arquero/api/op#aggregate-functions",
 			"enum": [
-				"any", "array_agg", "array_agg_distinct", "count", "distinct",
-				"invalid", "max", "mean", "median", "min", "mode", "product", "stdev",
-				"stdevp", "sum", "valid", "variance"
+				"any",
+				"array_agg",
+				"array_agg_distinct",
+				"count",
+				"distinct",
+				"invalid",
+				"max",
+				"mean",
+				"median",
+				"min",
+				"mode",
+				"product",
+				"stdev",
+				"stdevp",
+				"sum",
+				"valid",
+				"variance"
 			],
 			"type": "string"
 		},
@@ -384,8 +413,13 @@
 				},
 				"strategy": {
 					"enum": [
-						"anti join", "cross", "full outer", "inner", "left outer",
-						"right outer", "semi join"
+						"anti join",
+						"cross",
+						"full outer",
+						"inner",
+						"left outer",
+						"right outer",
+						"semi join"
 					],
 					"type": "string"
 				}
@@ -683,8 +717,14 @@
 		"WindowFunction": {
 			"description": "These are operations that perform windowed compute.\nSee https://uwdata.github.io/arquero/api/op#window-functions",
 			"enum": [
-				"cume_dist", "fill_down", "fill_up", "first_value", "last_value",
-				"percent_rank", "rank", "row_number"
+				"cume_dist",
+				"fill_down",
+				"fill_up",
+				"first_value",
+				"last_value",
+				"percent_rank",
+				"rank",
+				"row_number"
 			],
 			"type": "string"
 		}

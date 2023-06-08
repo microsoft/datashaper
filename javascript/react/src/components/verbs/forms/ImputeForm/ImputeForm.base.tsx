@@ -22,7 +22,9 @@ export const ImportFormBase: React.FC<StepFormBaseProps<ImputeArgs>> = memo(
 					type: FormInputType.Text,
 					current: step.args.value,
 					required: true,
-					onChange: (s, val) => (s.args.value = val as string),
+					onChange: (s, val) => {
+						s.args.value = val as string
+					},
 				},
 			],
 			[step],

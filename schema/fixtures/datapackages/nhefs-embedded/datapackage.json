@@ -29,8 +29,17 @@
 							"verb": "select",
 							"args": {
 								"columns": [
-									"index", "sex", "age", "race", "education", "wt71", "wt82_71",
-									"smokeintensity", "smkintensity82_71", "active", "exercise",
+									"index",
+									"sex",
+									"age",
+									"race",
+									"education",
+									"wt71",
+									"wt82_71",
+									"smokeintensity",
+									"smkintensity82_71",
+									"active",
+									"exercise",
 									"smokeyrs"
 								]
 							}

@@ -20,7 +20,9 @@ export const BooleanLogicFormBase: React.FC<StepFormBaseProps<BooleanArgs>> =
 					'Logical operator',
 					BooleanOperator,
 					step.args.operator,
-					(s, opt) => (s.args.operator = opt as BooleanOperator),
+					(s, opt) => {
+						s.args.operator = opt as BooleanOperator
+					},
 					{ required: true, placeholder: 'Choose boolean' },
 					{
 						or: 'OR',

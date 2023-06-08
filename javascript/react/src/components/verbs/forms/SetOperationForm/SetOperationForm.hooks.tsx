@@ -19,8 +19,6 @@ export function useOthers(
 	const tableOptions = useTableDropdownOptions(store)
 	return useMemo<(JSX.Element | null)[]>(() => {
 		return (step.input.others || EMPTY).map((input, index) => {
-			const other = input.node
-
 			// on delete, remove the input
 			const handleDeleteClick = () => {
 				onChange?.({
@@ -35,11 +33,11 @@ export function useOthers(
 				return null
 			}
 			return (
-				<LeftAlignedRow key={`set-op-${other}-${index}`}>
+				<LeftAlignedRow key={`set-op-${input}-${index}`}>
 					<TableDropdown
 						label={''}
 						options={tableOptions}
-						selectedKey={other}
+						selectedKey={input}
 						onChange={(_evt, option) => {
 							const update = { ...step }
 							if (option) {

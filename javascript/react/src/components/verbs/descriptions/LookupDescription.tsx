@@ -27,7 +27,7 @@ export const LookupDescription: React.FC<StepDescriptionProps<LookupArgs>> =
 			return [
 				{
 					before: 'lookup from',
-					value: props.step.input[NodeInput.Other]?.node,
+					value: props.step.input[NodeInput.Other],
 				},
 				{
 					before: 'on',

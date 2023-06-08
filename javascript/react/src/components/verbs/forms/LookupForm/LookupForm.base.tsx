@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { LookupArgs } from '@datashaper/schema'
+import type { LookupArgs, WorkflowStepId } from '@datashaper/schema'
 import { NodeInput } from '@datashaper/workflow'
 import type { IDropdownOption } from '@fluentui/react'
 import { memo, useMemo } from 'react'
@@ -36,8 +36,10 @@ export const LookupFormBase: React.FC<
 			tableDropdown(
 				'Join table',
 				tableOptions,
-				step.input[NodeInput.Other]?.node,
-				(s, val) => (s.input[NodeInput.Other] = { node: val as string }),
+				step.input[NodeInput.Other] as WorkflowStepId,
+				(s, val) => {
+					s.input[NodeInput.Other] = val as WorkflowStepId
+				},
 				{ required: true, placeholder: 'Choose column' },
 			),
 			...joinInputs(step, leftColumns, rightColumns),

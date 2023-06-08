@@ -167,7 +167,9 @@ describe('The Workflow Resource', () => {
 		wf.addOutput('intermediate')
 		wf.input = tInput
 		let val: TableContainer | undefined
-		binRead.subscribe((v) => (val = v))
+		binRead.subscribe((v) => {
+			val = v
+		})
 		expect(val).toBeDefined()
 
 		// doesn't blow up
@@ -200,7 +202,9 @@ describe('The Workflow Resource', () => {
 		wf.addOutput('intermediate')
 		const intermediateRead = wf.read$('intermediate')
 		let val: TableContainer | undefined
-		intermediateRead.subscribe((v) => (val = v))
+		intermediateRead.subscribe((v) => {
+			val = v
+		})
 		expect(val).toBeDefined()
 		expect(val?.id).toBe('intermediate')
 

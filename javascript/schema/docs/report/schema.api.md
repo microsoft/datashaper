@@ -18,7 +18,7 @@ export interface AggregateArgs extends RollupArgs {
 // @public
 export interface BasicInput {
     input?: string | {
-        source: PortBinding;
+        source: WorkflowStepId;
     };
 }
 
@@ -360,8 +360,8 @@ export interface DeriveArgs extends OutputColumnArgs {
 // @public
 export interface DualInput extends BasicInput {
     input: {
-        source: PortBinding;
-        other: PortBinding;
+        source: WorkflowStepId;
+        other: WorkflowStepId;
     };
 }
 
@@ -725,13 +725,6 @@ export interface Named {
     title?: string;
 }
 
-// Warning: (ae-missing-release-tag) "NamedPortBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface NamedPortBinding {
-    node: string;
-}
-
 // Warning: (ae-missing-release-tag) "NumericComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -832,11 +825,6 @@ export interface PivotArgs extends InputKeyValueArgs {
     // (undocumented)
     operation: FieldAggregateOperation;
 }
-
-// Warning: (ae-missing-release-tag) "PortBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type PortBinding = string | NamedPortBinding;
 
 // Warning: (ae-missing-release-tag) "Profile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1056,7 +1044,14 @@ export type Step = StepJsonCommon & (({
 } & BasicInput) | ({
     verb: Verb.Window;
     args?: WindowArgs;
-} & BasicInput));
+} & BasicInput)
+/**
+* Custom step - we may not know the verb, args, or binding pattern
+*/
+| ({
+    verb: string;
+    args?: unknown;
+} & UnknownInput));
 
 // Warning: (ae-missing-release-tag) "StepJsonCommon" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1128,6 +1123,18 @@ export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
     preserveSource?: boolean;
 }
 
+// Warning: (ae-missing-release-tag) "UnknownInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface UnknownInput {
+    // (undocumented)
+    input?: string | {
+        source?: WorkflowStepId;
+        others?: WorkflowStepId[];
+        [key: string]: WorkflowStepId | WorkflowStepId[] | undefined;
+    };
+}
+
 // Warning: (ae-missing-release-tag) "UnrollArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -1167,8 +1174,8 @@ export enum VariableNature {
 // @public
 export interface VariadicInput extends BasicInput {
     input: {
-        source: PortBinding;
-        others?: PortBinding[];
+        source: WorkflowStepId;
+        others?: WorkflowStepId[];
     };
 }
 
@@ -1291,6 +1298,11 @@ export interface WorkflowSchema extends ResourceSchema {
     profile: 'workflow';
     steps?: Step[];
 }
+
+// Warning: (ae-missing-release-tag) "WorkflowStepId" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export type WorkflowStepId = string;
 
 // (No @packageDocumentation comment for this package)
 

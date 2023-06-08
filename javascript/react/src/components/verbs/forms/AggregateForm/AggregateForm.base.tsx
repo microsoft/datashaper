@@ -29,14 +29,18 @@ export const AggregateFormBase: React.FC<
 				'Column to group by',
 				columns,
 				step.args.groupby,
-				(s, key) => (s.args.groupby = key as string),
+				(s, key) => {
+					s.args.groupby = key as string
+				},
 				{ required: true, placeholder: 'Choose column' },
 			),
 			enumDropdown(
 				'Function',
 				FieldAggregateOperation,
 				step.args.operation,
-				(s, key) => (s.args.operation = key as FieldAggregateOperation),
+				(s, key) => {
+					s.args.operation = key as FieldAggregateOperation
+				},
 				{ required: true, placeholder: 'Choose function' },
 			),
 		],

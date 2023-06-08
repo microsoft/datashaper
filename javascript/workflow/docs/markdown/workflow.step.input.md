@@ -10,6 +10,8 @@ The bound inputs Key = Input Socket Name Value = Socket Binding to other node
 
 ```typescript
 input: {
-        others?: NamedPortBinding[];
-    } & Record<string, NamedPortBinding>;
+        source?: WorkflowStepId;
+        others?: WorkflowStepId[];
+        [key: string]: WorkflowStepId | WorkflowStepId[] | undefined;
+    };
 ```

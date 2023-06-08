@@ -50,7 +50,7 @@ export const StepForm: React.FC<StepFormProps> = memo(function StepForm({
 	hideInputColumn,
 }) {
 	/* Current Table Selection */
-	const tableId = s.input[NodeInput.Source]?.node
+	const tableId = s.input[NodeInput.Source]
 	const table = useWorkflowDataTable(tableId, g)
 
 	/* Column Options */
@@ -71,7 +71,7 @@ export const StepForm: React.FC<StepFormProps> = memo(function StepForm({
 	useDefaultOutputNameInitially(s, output, changeOutput)
 
 	return StepArgs == null ? null : (
-		<Container className="step-component">
+		<Container className='step-component'>
 			{/* Input Column List */}
 			{isInputColumnListStep(s) ? (
 				<MultiDropdown

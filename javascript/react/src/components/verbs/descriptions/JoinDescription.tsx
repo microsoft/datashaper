@@ -18,7 +18,7 @@ export const JoinDescription: React.FC<StepDescriptionProps<JoinArgs>> = memo(
 			return [
 				{
 					before: 'with',
-					value: props.step.input[NodeInput.Other]?.node,
+					value: props.step.input[NodeInput.Other],
 				},
 				{
 					before: 'on',

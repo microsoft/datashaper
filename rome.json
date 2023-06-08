@@ -1,9 +1,19 @@
 {
 	"files": {
 		"ignore": [
-			"dist", "lib", "build", "python", "docs", "storybook-static", ".turbo",
-			".pnp.cjs", ".pnp.loader.mjs", "javascript/schema/versions.js",
-			".devcontainer", "javascript/schema/versions.d.ts"
+			"dist",
+			"lib",
+			"build",
+			"python",
+			"docs",
+			"storybook-static",
+			".turbo",
+			".pnp.cjs",
+			".pnp.loader.mjs",
+			"javascript/schema/versions.js",
+			".devcontainer",
+			"javascript/schema/versions.d.ts",
+			"schema/"
 		]
 	},
 	"linter": {
@@ -19,6 +29,9 @@
 			},
 			"performance": {
 				"noDelete": "off"
+			},
+			"style": {
+				"noParameterAssign": "off"
 			}
 		}
 	},

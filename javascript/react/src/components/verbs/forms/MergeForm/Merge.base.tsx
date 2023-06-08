@@ -26,7 +26,9 @@ export const MergeFormBase: React.FC<StepFormBaseProps<MergeArgs>> = memo(
 					'Merge strategy',
 					MergeStrategy,
 					step.args.strategy,
-					(s, val) => (s.args.strategy = val as MergeStrategy),
+					(s, val) => {
+						s.args.strategy = val as MergeStrategy
+					},
 					{ required: true, placeholder: 'Choose strategy' },
 				),
 				{
@@ -34,20 +36,26 @@ export const MergeFormBase: React.FC<StepFormBaseProps<MergeArgs>> = memo(
 					type: FormInputType.Text,
 					if: step.args.strategy === MergeStrategy.Concat,
 					current: step.args.delimiter,
-					onChange: (s, val) => (s.args.delimiter = val as string),
+					onChange: (s, val) => {
+						s.args.delimiter = val as string
+					},
 				},
 				{
 					label: 'Keep source columns',
 					type: FormInputType.Checkbox,
 					current: step.args.preserveSource,
-					onChange: (s, val) => (s.args.preserveSource = val as boolean),
+					onChange: (s, val) => {
+						s.args.preserveSource = val as boolean
+					},
 					advanced: true,
 				},
 				{
 					label: 'Unhot',
 					type: FormInputType.Checkbox,
 					current: step.args.unhot,
-					onChange: (s, val) => (s.args.unhot = val as boolean),
+					onChange: (s, val) => {
+						s.args.unhot = val as boolean
+					},
 					advanced: true,
 				},
 				{
@@ -55,7 +63,9 @@ export const MergeFormBase: React.FC<StepFormBaseProps<MergeArgs>> = memo(
 					type: FormInputType.Text,
 					if: step.args.unhot === true,
 					current: step.args.prefix,
-					onChange: (s, val) => (s.args.prefix = val as string),
+					onChange: (s, val) => {
+						s.args.prefix = val as string
+					},
 					advanced: true,
 				},
 			],

@@ -40,7 +40,6 @@ export const mergeStep: ColumnTableStep<MergeArgs> = (
 			case MergeStrategy.CreateArray:
 				return arrayStrategy(d, columns)
 			case MergeStrategy.FirstOneWins:
-			default:
 				return firstOneWinsStrategy(d, columns)
 		}
 	})

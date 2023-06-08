@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@datashaper/tables'
-import type { Observable } from 'rxjs'
-import { BehaviorSubject, from, map } from 'rxjs'
+import { type Observable, BehaviorSubject, from, map } from 'rxjs'
+import type { WorkflowStepId } from '@datashaper/schema'
 
 import { DefaultGraph } from '../../dataflow/DefaultGraph.js'
 import { observableNode } from '../../dataflow/index.js'
@@ -18,7 +18,7 @@ import type { Step, StepInput } from './types.js'
 import {
 	hasDefinedInputs,
 	hasPossibleInputs,
-	isVariadicSocketName,
+	isVariadicSocketName as isVariadic,
 } from './utils.js'
 
 const DEFAULT_INPUT = '__DEFAULT_INPUT__'
@@ -254,13 +254,15 @@ export class GraphManager extends Disposable {
 		// if any inputs nodes are in the graph explicitly, bind them
 		if (hasDefinedInputs(step)) {
 			for (const [input, binding] of Object.entries(step.input)) {
-				if (isVariadicSocketName(input, binding)) {
-					// Bind variadic input
-					node.bind(binding.map((b) => ({ node: this.getNode(b.node) })))
-				} else if (this.hasNode(binding.node)) {
-					// Bind Non-Variadic Input
-					const inputNode = this.getNode(binding.node)
-					node.bind({ input, node: inputNode })
+				if (binding != null) {
+					if (isVariadic(input, binding)) {
+						// Bind variadic input
+						node.bind(binding.map((b) => ({ node: this.getNode(b) })))
+					} else if (this.hasNode(binding as WorkflowStepId)) {
+						// Bind Non-Variadic Input
+						const inputNode = this.getNode(binding)
+						node.bind({ input, node: inputNode })
+					}
 				}
 			}
 		}

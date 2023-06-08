@@ -12,6 +12,6 @@ If undefined, the default output of the previous step will be used (if available
 
 ```typescript
 input?: string | {
-        source: PortBinding;
+        source: WorkflowStepId;
     };
 ```

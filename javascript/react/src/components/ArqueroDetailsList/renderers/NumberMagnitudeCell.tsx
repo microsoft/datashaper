@@ -36,6 +36,7 @@ export const NumberMagnitudeCell: React.FC<MagnitudeCellProps> = memo(
 		return (
 			<div style={style}>
 				<svg width={width} height={height}>
+					<title>Value</title>
 					<rect width={size} height={height} x={width - size} fill={barColor} />
 					<text
 						fill={textFill}

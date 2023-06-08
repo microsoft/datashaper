@@ -21,7 +21,9 @@ export const WindowFormBase: React.FC<StepFormProps<WindowArgs>> = memo(
 					'Function',
 					WindowFunction,
 					step.args.operation,
-					(s, val) => (s.args.operation = val as WindowFunction),
+					(s, val) => {
+						s.args.operation = val as WindowFunction
+					},
 					{ required: true, placeholder: 'Choose function' },
 				),
 			],

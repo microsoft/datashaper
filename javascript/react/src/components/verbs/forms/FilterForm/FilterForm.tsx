@@ -56,7 +56,9 @@ export const FilterForm: React.FC<StepFormProps<FilterArgs>> = memo(
 
 		const handleLogicalChange = useDropdownChangeHandler(
 			step,
-			(s, val) => (s.args.logical = val as BooleanOperator),
+			(s, val) => {
+				s.args.logical = val as BooleanOperator
+			},
 			onChange,
 		)
 		const filters = useFilters(

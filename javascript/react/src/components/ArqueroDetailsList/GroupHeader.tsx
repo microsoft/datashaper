@@ -39,9 +39,9 @@ export const GroupHeader: React.FC<React.PropsWithChildren<GroupHeaderProps>> =
 		return (
 			<HeaderContainer
 				// uses the ref to toggle if element is into view if the user didn't toggled it with the button
-				ref={(element: HTMLDivElement) =>
-					(ref.current = shouldLazyLoad ? element : undefined)
-				}
+				ref={(element: HTMLDivElement) => {
+					ref.current = shouldLazyLoad ? element : undefined
+				}}
 				groupLevel={group?.level as number}
 			>
 				<LevelButton

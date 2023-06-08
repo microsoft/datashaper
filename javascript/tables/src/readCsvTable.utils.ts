@@ -35,7 +35,6 @@ export function getParser(
 		case ParserType.PapaParse:
 			return papaParser
 		case ParserType.Arquero:
-		default:
 			return arqueroParser
 	}
 }

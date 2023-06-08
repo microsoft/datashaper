@@ -26,7 +26,7 @@ export const Code = styled.pre`
 
 export const ExampleContainer = styled.div``
 
-export const ExampleLabel = styled(Label)`
+export const ExampleLabel = styled(Label as any)`
 	font-weight: normal;
 	color: ${({ theme }: { theme: ITheme }) => theme.palette.neutralSecondary};
 `

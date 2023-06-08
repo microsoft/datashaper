@@ -4,7 +4,7 @@
  */
 import type { Subscription } from 'rxjs'
 
-import toposort from '@essex/toposort'
+import { toposort } from '@essex/toposort'
 import type { Graph, Node, NodeId } from './types.js'
 
 export class DefaultGraph<T> implements Graph<T> {
@@ -58,11 +58,9 @@ export class DefaultGraph<T> implements Graph<T> {
 			// clear the node from any connections
 			for (const innerNodeId of this._nodes.keys()) {
 				const node = this._nodes.get(innerNodeId)
-				if (node) {
-					for (const binding of node?.bindings || []) {
-						if (binding.node.id === removeId) {
-							node?.unbind(binding.input)
-						}
+				for (const binding of node?.bindings ?? []) {
+					if (binding.node.id === removeId) {
+						node?.unbind(binding.input)
 					}
 				}
 			}

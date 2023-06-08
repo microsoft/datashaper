@@ -21,14 +21,14 @@ export const CalendarContainer = styled.div`
 	align-items: center;
 `
 
-export const CalendarButton = styled(FontIcon)`
+export const CalendarButton = styled(FontIcon as any)`
 	display: inline;
 	float: left;
 	margin-left: 8px;
 	margin-right: 4px;
 `
 
-export const CalendarLabel = styled(Label)`
+export const CalendarLabel = styled(Label as any)`
 	display: inline;
 	float: left;
 	margin-left: 8px;

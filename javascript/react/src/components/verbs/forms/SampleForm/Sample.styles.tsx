@@ -20,7 +20,7 @@ export const InputLabel = styled.div`
 	width: 84px;
 `
 
-export const OrLabel = styled(Label)`
+export const OrLabel = styled(Label as any)`
 	display: inline;
 	font-style: italic;
 	padding-left: 10px;

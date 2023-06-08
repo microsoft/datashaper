@@ -6,7 +6,7 @@
 import { ChoiceGroup, TextField } from '@fluentui/react'
 import styled from 'styled-components'
 
-export const RadioGroup = styled(ChoiceGroup)`
+export const RadioGroup = styled(ChoiceGroup as any)`
 	.ms-ChoiceField-field {
 		display: flex;
 		align-items: center;
@@ -18,7 +18,7 @@ export const Container = styled.div`
 	gap: 10px;
 `
 
-export const OtherTextField = styled(TextField)`
+export const OtherTextField = styled(TextField as any)`
 	width: 50px;
 `
 

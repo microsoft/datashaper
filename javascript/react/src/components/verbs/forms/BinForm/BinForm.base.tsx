@@ -27,7 +27,9 @@ export const BinFormBase: React.FC<StepFormBaseProps<BinArgs>> = memo(
 					'Bin strategy',
 					BinStrategy,
 					step.args.strategy,
-					(s, opt) => (s.args.strategy = opt as BinStrategy),
+					(s, opt) => {
+						s.args.strategy = opt as BinStrategy
+					},
 					{ required: true },
 				),
 				{
@@ -37,7 +39,9 @@ export const BinFormBase: React.FC<StepFormBaseProps<BinArgs>> = memo(
 					min: 1,
 					max: 100,
 					step: 1,
-					onChange: (s, opt) => (s.args.fixedcount = num(opt as string)),
+					onChange: (s, opt) => {
+						s.args.fixedcount = num(opt as string)
+					},
 					current: step.args.fixedcount,
 				},
 				{
@@ -45,14 +49,18 @@ export const BinFormBase: React.FC<StepFormBaseProps<BinArgs>> = memo(
 					type: FormInputType.NumberSpinner,
 					if: step.args.strategy === BinStrategy.FixedWidth,
 					min: 1,
-					onChange: (s, opt) => (s.args.fixedwidth = num(opt as string)),
+					onChange: (s, opt) => {
+						s.args.fixedwidth = num(opt as string)
+					},
 					current: step.args.fixedwidth,
 				},
 				{
 					label: 'Min Boundary',
 					type: FormInputType.NumberSpinner,
 					if: step.args.strategy !== BinStrategy.Auto,
-					onChange: (s, opt) => (s.args.min = num(opt as string)),
+					onChange: (s, opt) => {
+						s.args.min = num(opt as string)
+					},
 					current: step.args.min,
 					advanced: true,
 				},
@@ -60,14 +68,18 @@ export const BinFormBase: React.FC<StepFormBaseProps<BinArgs>> = memo(
 					label: 'Max Boundary',
 					type: FormInputType.NumberSpinner,
 					if: step.args.strategy !== BinStrategy.Auto,
-					onChange: (s, opt) => (s.args.max = num(opt as string)),
+					onChange: (s, opt) => {
+						s.args.max = num(opt as string)
+					},
 					current: step.args.max,
 					advanced: true,
 				},
 				checkbox(
 					'Clamp to min/max',
 					step.args.clamped,
-					(s, val) => (s.args.clamped = val as boolean),
+					(s, val) => {
+						s.args.clamped = val as boolean
+					},
 					{
 						if: step.args.strategy !== BinStrategy.Auto,
 						styles: {
@@ -81,7 +93,9 @@ export const BinFormBase: React.FC<StepFormBaseProps<BinArgs>> = memo(
 				checkbox(
 					'Nice rounding',
 					step.args.nice,
-					(s, val) => (s.args.nice = val as boolean),
+					(s, val) => {
+						s.args.nice = val as boolean
+					},
 					{
 						if:
 							step.args.strategy !== BinStrategy.FixedWidth &&
@@ -96,7 +110,9 @@ export const BinFormBase: React.FC<StepFormBaseProps<BinArgs>> = memo(
 				checkbox(
 					'Print range as output',
 					step.args.printRange,
-					(s, opt) => (s.args.printRange = opt as boolean),
+					(s, opt) => {
+						s.args.printRange = opt as boolean
+					},
 					{
 						styles: {
 							root: {
