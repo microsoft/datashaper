@@ -6,17 +6,21 @@
 
 import json
 import os
+
 from collections import OrderedDict, defaultdict
-from dataclasses import dataclass, field
 from typing import Any, Callable, Dict, List, Optional, Set, Union
 from uuid import uuid4
 
 import pandas as pd
+
+from dataclasses import dataclass, field
+from jsonschema import validate as validate_schema
+
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import functions
 from datashaper.table_store import TableContainer
 from datashaper.types import Verb
-from jsonschema import validate as validate_schema
+
 
 # TODO: this won't work for a published package
 SCHEMA_FILE = "../../schema/workflow.json"
@@ -48,7 +52,6 @@ class ExecutionGraph:
         input_tables: Optional[Dict[str, pd.DataFrame]] = None,
         schema_path: Optional[str] = SCHEMA_FILE,
         verbs: Optional[Dict[str, Callable]] = functions,
-        #
         # TODO: the current schema definition does not work in Python
         validate: bool = False,
     ):
@@ -67,15 +70,12 @@ class ExecutionGraph:
                          Defaults to False.
         :type validate: bool, optional
         """
-
-        #
         # Perform JSON-schema validation
         if validate:
             with open(schema_path) as schema_file:
                 schema = json.load(schema_file)
                 validate_schema(workflow, schema)
 
-        #
         # Auto-load input tables if provided.
         if input_path is not None:
             for input in workflow["input"]:
@@ -87,7 +87,6 @@ class ExecutionGraph:
             for input, table in input_tables.items():
                 self.add_table(input, table)
 
-        #
         # Create the execution graph
         previous_step_id = None
         for step in workflow["steps"]:
