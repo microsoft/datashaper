@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "examples"
+version = "0.1.0"
+description = ""
+authors = ["Chris Trevino <chtrevin@microsoft.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+datashaper = { path = "../datashaper", develop = true }
+
+
+[tool.poetry.group.dev.dependencies]
+jupyter = "^1.0.0"
+poethepoet = "^0.20.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poe.tasks]
+start = "jupyter notebook --data-dir ../.."
+vast = "python -m examples.vast"
