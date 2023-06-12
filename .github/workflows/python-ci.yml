@@ -39,10 +39,10 @@ jobs:
         run: |
           poetry run poe check_format
 
-      - name: Lint
+      - name: Check
         working-directory: ./python/datashaper
         run: |
-          poetry run poe lint
+          poetry run poe check
 
       - name: Test
         working-directory: ./python/datashaper
