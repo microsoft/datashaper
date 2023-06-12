@@ -37,7 +37,7 @@ class ExecutionNode:
     result: Optional[TableContainer] = None
 
 
-class ExecutionGraph:
+class Workflow:
     """A data processing graph."""
 
     inputs: Dict[str, TableContainer] = {}
@@ -47,7 +47,7 @@ class ExecutionGraph:
 
     def __init__(
         self,
-        workflow: Dict,
+        schema: Dict,
         input_path: Optional[str] = None,
         input_tables: Optional[Dict[str, pd.DataFrame]] = None,
         schema_path: Optional[str] = SCHEMA_FILE,
@@ -57,8 +57,8 @@ class ExecutionGraph:
     ):
         """Create an execution graph from the Dict provided in workflow.
 
-        :param workflow: the Dict object that contains the workflow
-        :type workflow: Dict
+        :param schema: the Dict object that contains the workflow
+        :type schema: Dict
         :param input_path: Optional input path, if provided input
                            tables will be loaded relative to that path, defaults to None
         :type input_path: str, optional
@@ -73,12 +73,12 @@ class ExecutionGraph:
         # Perform JSON-schema validation
         if validate:
             with open(schema_path) as schema_file:
-                schema = json.load(schema_file)
-                validate_schema(workflow, schema)
+                schema_json = json.load(schema_file)
+                validate_schema(schema, schema_json)
 
         # Auto-load input tables if provided.
         if input_path is not None:
-            for input in workflow["input"]:
+            for input in schema["input"]:
                 # TODO: support other file formats
                 csv_table = pd.read_csv(os.path.join(input_path, f"{input}.csv"))
                 self.add_table(input, csv_table)
@@ -89,7 +89,7 @@ class ExecutionGraph:
 
         # Create the execution graph
         previous_step_id = None
-        for step in workflow["steps"]:
+        for step in schema["steps"]:
             step_id = step["id"] if "id" in step else str(uuid4())
             step_input = step["input"] if "input" in step else previous_step_id
             verb_fn = None
@@ -101,16 +101,16 @@ class ExecutionGraph:
                 # try to use a custom verb
                 verb_fn = verbs[step["verb"]]
 
-            workflow_step = ExecutionNode(
+            step = ExecutionNode(
                 node_id=step_id,
                 node_input=step_input,
                 verb=verb_fn,
                 args=step["args"] if "args" in step else {},
             )
-            self.__graph[step_id] = workflow_step
-            for input in ExecutionGraph.__inputs_list(step_input):
+            self.__graph[step_id] = step
+            for input in Workflow.__inputs_list(step_input):
                 self.__dependency_graph[input].add(step_id)
-            previous_step_id = workflow_step.node_id
+            previous_step_id = step.node_id
 
         self.__last_step_id = previous_step_id
 

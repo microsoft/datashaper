@@ -2,7 +2,7 @@ from typing import List
 
 import pandas as pd
 
-from datashaper import ExecutionGraph, TableContainer, VerbInput
+from datashaper import TableContainer, VerbInput, Workflow
 
 dtype = {"date(yyyyMMddHHmmss)": "string"}
 vast1 = pd.read_csv("../data/vast/csv-1700-1830.csv", dtype=dtype)
@@ -33,12 +33,12 @@ def embed_verb(input: VerbInput, column: str, to: str) -> TableContainer:
     return TableContainer(table=df)
 
 
-graph = ExecutionGraph(
+workflow = Workflow(
     verbs={
         "genid": genid_verb,
         "embed": embed_verb
     },
-    workflow={
+    schema={
         "steps": [
             {
                 "verb": "concat",
@@ -82,8 +82,9 @@ graph = ExecutionGraph(
     },
     input_tables={"vast1": vast1, "vast2": vast2, "vast3": vast3},
     validate=False,
+    schema_path="../../schema/workflow.json"
 )
 
-graph.run()
-result = graph.output()
+workflow.run()
+result = workflow.output()
 print("result: ", result)
