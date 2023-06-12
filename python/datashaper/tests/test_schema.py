@@ -50,7 +50,10 @@ def get_verb_test_specs(root: str) -> List[str]:
 def test_verbs_schema_input(fixture_path: str):
     with open(os.path.join(fixture_path, "workflow.json")) as workflow:
         pipeline = ExecutionGraph(
-            workflow=json.load(workflow), input_tables=TABLE_STORE_PATH
+            workflow=json.load(workflow),
+            input_path=TABLE_STORE_PATH,
+            validate=True,
+            schema_path=SCHEMA_PATH,
         )
 
     pipeline.run()
