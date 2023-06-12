@@ -1,6 +1,5 @@
 import json
 import os
-
 from http.client import HTTPConnection
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from threading import Thread
@@ -8,11 +7,8 @@ from typing import List
 
 import pandas as pd
 import pytest
-
-from pandas.testing import assert_frame_equal
-
 from datashaper.graph import ExecutionGraph
-
+from pandas.testing import assert_frame_equal
 
 FIXTURES_PATH = "fixtures/workflow"
 TABLE_STORE_PATH = "fixtures/workflow_inputs"
@@ -49,12 +45,15 @@ def get_verb_test_specs(root: str) -> List[str]:
 )
 def test_verbs_schema_input(fixture_path: str):
     with open(os.path.join(fixture_path, "workflow.json")) as workflow:
-        pipeline = ExecutionGraph(json.load(workflow), TABLE_STORE_PATH, SCHEMA_PATH)
+        pipeline = ExecutionGraph(
+            workflow=json.load(workflow),
+            input_tables=TABLE_STORE_PATH
+        )
 
     pipeline.run()
     for expected in os.listdir(fixture_path):
         if expected.endswith(".csv"):
-            result = pipeline.get(expected.split(".")[0])
+            result = pipeline.output(expected.split(".")[0])
             if isinstance(result, pd.DataFrame):
                 result.to_csv(
                     os.path.join(fixture_path, f"result_{expected}"), index=False
