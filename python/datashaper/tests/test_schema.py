@@ -56,7 +56,9 @@ def test_verbs_schema_input(fixture_path: str):
     pipeline.run()
     for expected in os.listdir(fixture_path):
         if expected.endswith(".csv"):
-            result = pipeline.output(expected.split(".")[0])
+            table_name = expected.split(".")[0]
+            table_name_arg = table_name if table_name != "expected" else None
+            result = pipeline.output(table_name_arg)
             if isinstance(result, pd.DataFrame):
                 result.to_csv(
                     os.path.join(fixture_path, f"result_{expected}"), index=False
