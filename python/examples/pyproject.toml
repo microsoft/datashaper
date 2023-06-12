@@ -39,6 +39,7 @@ _codespell = 'codespell dodiscover/ doc/ examples/ --ignore-words=.codespelligno
 
 start = "jupyter notebook --data-dir ../.."
 vast = "python -m examples.vast"
+test = "python -m examples.vast"
 
 [[tool.poe.tasks.check]]
 sequence = ['_flake8', '_bandit', '_codespell', 'check_format', '_pydocstyle']
