@@ -4,10 +4,11 @@ import pandas as pd
 
 from datashaper import TableContainer, VerbInput, Workflow
 
+gh_url = "https://raw.githubusercontent.com/darthtrevino/vast-mc3-data/main"
 dtype = {"date(yyyyMMddHHmmss)": "string"}
-vast1 = pd.read_csv("../data/vast/csv-1700-1830.csv", dtype=dtype)
-vast2 = pd.read_csv("../data/vast/csv-1831-2000.csv", dtype=dtype)
-vast3 = pd.read_csv("../data/vast/csv-2001-2131.csv", dtype=dtype)
+vast1 = pd.read_csv(f"{gh_url}/csv-1700-1830.csv", dtype=dtype)
+vast2 = pd.read_csv(f"{gh_url}/csv-1831-2000.csv", dtype=dtype)
+vast3 = pd.read_csv(f"{gh_url}/csv-2001-2131.csv", dtype=dtype)
 
 
 def embed(text: str) -> List[float]:
