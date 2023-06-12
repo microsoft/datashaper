@@ -15,6 +15,7 @@ jobs:
       matrix:
         python-version: [3.8]
         poetry-version: [1.3.1]
+        project: ["datashaper", "examples"]
 
     steps:
       - uses: actions/checkout@v2
@@ -29,22 +30,22 @@ jobs:
         with:
           poetry-version: ${{ matrix.poetry-version }}
 
-      - name: Install dependencies
+      - name: ${{ matrix.project }} - Install dependencies
         shell: bash
-        working-directory: ./python/datashaper
+        working-directory: ./python/${{ matrix.project }}
         run: poetry install
 
-      - name: Check Formatting
-        working-directory: ./python/datashaper
+      - name: ${{ matrix.project }} - Check Formatting
+        working-directory: ./python/${{ matrix.project }}
         run: |
           poetry run poe check_format
 
-      - name: Lint
-        working-directory: ./python/datashaper
+      - name: ${{ matrix.project }} - Check
+        working-directory: ./python/${{ matrix.project }}
         run: |
-          poetry run poe lint
+          poetry run poe check
 
-      - name: Test
-        working-directory: ./python/datashaper
+      - name: ${{ matrix.project }} - Test
+        working-directory: ./python/${{ matrix.project }}
         run: |
           poetry run poe test

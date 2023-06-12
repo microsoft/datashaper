@@ -10,7 +10,7 @@ license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.8"
+python = ">=3.8,<4"
 pandas = "^1.4.1"
 jsonschema = "^4.5.1"
 
@@ -24,7 +24,7 @@ isort = "^5.10.1"
 mypy = "^0.931"
 poethepoet = "^0.16.0"
 pydocstyle = "^6.1.1"
-pytest = "^5.2"
+pytest = "^7"
 pytest-cov = "^3.0.0"
 semversioner = "^1.3.0"
 toml = "^0.10.2"
@@ -72,10 +72,11 @@ _pydocstyle = 'pydocstyle datashaper'
 _codespell = 'codespell dodiscover/ doc/ examples/ --ignore-words=.codespellignore --skip "**/_build/*,**/auto_examples/*"'
 _changelog = 'semversioner changelog > CHANGELOG.md'
 _apply_version = 'semversioner release'
+
 test = "pytest  -v tests"
 
-[[tool.poe.tasks.lint]]
-sequence = ['_flake8', '_bandit', '_codespell', '_pydocstyle']
+[[tool.poe.tasks.check]]
+sequence = ['_flake8', '_bandit', '_codespell', 'check_format', '_pydocstyle']
 ignore_fail = 'return_non_zero'
 
 [[tool.poe.tasks.format]]

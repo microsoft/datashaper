@@ -11,7 +11,7 @@ import pytest
 
 from pandas.testing import assert_frame_equal
 
-from datashaper.graph import ExecutionGraph
+from datashaper import Workflow
 
 
 FIXTURES_PATH = "fixtures/workflow"
@@ -48,13 +48,20 @@ def get_verb_test_specs(root: str) -> List[str]:
     get_verb_test_specs(FIXTURES_PATH),
 )
 def test_verbs_schema_input(fixture_path: str):
-    with open(os.path.join(fixture_path, "workflow.json")) as workflow:
-        pipeline = ExecutionGraph(json.load(workflow), TABLE_STORE_PATH, SCHEMA_PATH)
+    with open(os.path.join(fixture_path, "workflow.json")) as schema:
+        workflow = Workflow(
+            schema=json.load(schema),
+            input_path=TABLE_STORE_PATH,
+            validate=True,
+            schema_path=SCHEMA_PATH,
+        )
 
-    pipeline.run()
+    workflow.run()
     for expected in os.listdir(fixture_path):
         if expected.endswith(".csv"):
-            result = pipeline.get(expected.split(".")[0])
+            table_name = expected.split(".")[0]
+            table_name_arg = table_name if table_name != "expected" else None
+            result = workflow.output(table_name_arg)
             if isinstance(result, pd.DataFrame):
                 result.to_csv(
                     os.path.join(fixture_path, f"result_{expected}"), index=False

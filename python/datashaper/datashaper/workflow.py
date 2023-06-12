@@ -14,7 +14,7 @@ from uuid import uuid4
 import pandas as pd
 
 from dataclasses import dataclass, field
-from jsonschema import validate
+from jsonschema import validate as validate_schema
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import functions
@@ -22,6 +22,7 @@ from datashaper.table_store import TableContainer
 from datashaper.types import Verb
 
 
+# TODO: this won't work for a published package
 SCHEMA_FILE = "../../schema/workflow.json"
 
 
@@ -36,47 +37,82 @@ class ExecutionNode:
     result: Optional[TableContainer] = None
 
 
-class ExecutionGraph:
+class Workflow:
     """A data processing graph."""
 
     inputs: Dict[str, TableContainer] = {}
     __graph: Dict[str, ExecutionNode] = OrderedDict()
     __dependency_graph: Dict[str, set] = defaultdict(set)
+    __last_step_id: str = None
 
     def __init__(
-        self, workflow: Dict, input_path: str = "", schema_path: str = SCHEMA_FILE
+        self,
+        schema: Dict,
+        input_path: Optional[str] = None,
+        input_tables: Optional[Dict[str, pd.DataFrame]] = None,
+        schema_path: Optional[str] = SCHEMA_FILE,
+        verbs: Optional[Dict[str, Callable]] = functions,
+        # TODO: the current schema definition does not work in Python
+        validate: bool = False,
     ):
         """Create an execution graph from the Dict provided in workflow.
 
-        :param workflow: the Dict object that contains the workflow
-        :type workflow: Dict
+        :param schema: the Dict object that contains the workflow
+        :type schema: Dict
         :param input_path: Optional input path, if provided input
-                           tables will be loaded relative to that path, defaults to ""
+                           tables will be loaded relative to that path, defaults to None
         :type input_path: str, optional
+        :param schema_path: Optional Workflow schema path, if provided input
+                           tables will be loaded relative to that path, defaults to
+                           a known JSON schema path.
+        :type schema_path: str, optional
+        :param validate: Optional value, if true perform JSON-schema validation.
+                         Defaults to False.
+        :type validate: bool, optional
         """
-        with open(schema_path) as schema_file:
-            schema = json.load(schema_file)
-        validate(workflow, schema)
+        # Perform JSON-schema validation
+        if validate:
+            with open(schema_path) as schema_file:
+                schema_json = json.load(schema_file)
+                validate_schema(schema, schema_json)
 
-        for input in workflow["input"]:
-            self.inputs[input] = TableContainer(
-                table=pd.read_csv(os.path.join(input_path, f"{input}.csv"))
-            )
+        # Auto-load input tables if provided.
+        if input_path is not None:
+            for input in schema["input"]:
+                # TODO: support other file formats
+                csv_table = pd.read_csv(os.path.join(input_path, f"{input}.csv"))
+                self.add_table(input, csv_table)
 
+        if input_tables is not None:
+            for input, table in input_tables.items():
+                self.add_table(input, table)
+
+        # Create the execution graph
         previous_step_id = None
-        for step in workflow["steps"]:
+        for step in schema["steps"]:
             step_id = step["id"] if "id" in step else str(uuid4())
             step_input = step["input"] if "input" in step else previous_step_id
-            workflow_step = ExecutionNode(
+            verb_fn = None
+
+            try:
+                # try to find a built-in verb
+                verb_fn = functions[Verb(step["verb"])]
+            except ValueError:
+                # try to use a custom verb
+                verb_fn = verbs[step["verb"]]
+
+            step = ExecutionNode(
                 node_id=step_id,
                 node_input=step_input,
-                verb=functions[Verb(step["verb"])],
+                verb=verb_fn,
                 args=step["args"] if "args" in step else {},
             )
-            self.__graph[step_id] = workflow_step
-            for input in ExecutionGraph.__inputs_list(step_input):
+            self.__graph[step_id] = step
+            for input in Workflow.__inputs_list(step_input):
                 self.__dependency_graph[input].add(step_id)
-            previous_step_id = workflow_step.node_id
+            previous_step_id = step.node_id
+
+        self.__last_step_id = previous_step_id
 
     @staticmethod
     def __inputs_list(input):
@@ -127,8 +163,15 @@ class ExecutionGraph:
                     ]
             return {"input": VerbInput(**input_mapping)}
 
-    def get(self, id: str) -> pd.DataFrame:
+    def add_table(self, id: str, table: pd.DataFrame) -> None:
+        """Add a dataframe to the graph with a given id."""
+        self.inputs[id] = TableContainer(table=table)
+
+    def output(self, id: Optional[str] = None) -> pd.DataFrame:
         """Get a dataframe from the graph by id."""
+        if id is None:
+            id = self.__last_step_id
+
         container: Optional[TableContainer] = self.__graph[id].result
         if container is None:
             raise Exception("Value not calculated yet.")
@@ -137,11 +180,11 @@ class ExecutionGraph:
 
     def run(self):
         """Run the execution graph."""
-        visitted: Set[str] = set()
+        visited: Set[str] = set()
         executable_nodes = []
 
         for node_key in self.__graph.keys():
-            if self.__check_inputs(node_key, visitted):
+            if self.__check_inputs(node_key, visited):
                 executable_nodes.append(node_key)
 
         while len(executable_nodes) > 0:
@@ -152,9 +195,9 @@ class ExecutionGraph:
                 **self.__resolve_inputs(executable_node.node_input),
             )
             executable_node.result = result
-            visitted.add(current_id)
+            visited.add(current_id)
             for possible in self.__dependency_graph[current_id]:
-                if self.__check_inputs(possible, visitted):
+                if self.__check_inputs(possible, visited):
                     executable_nodes.append(possible)
 
     def export(self):
