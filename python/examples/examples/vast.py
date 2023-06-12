@@ -1,8 +1,11 @@
+"""Sample workflow for VAST MC3 data."""
+
 from typing import List
 
 import pandas as pd
 
 from datashaper import TableContainer, VerbInput, Workflow
+
 
 gh_url = "https://raw.githubusercontent.com/darthtrevino/vast-mc3-data/main"
 dtype = {"date(yyyyMMddHHmmss)": "string"}
@@ -12,12 +15,12 @@ vast3 = pd.read_csv(f"{gh_url}/csv-2001-2131.csv", dtype=dtype)
 
 
 def embed(text: str) -> List[float]:
+    """Perform a text embedding."""
     return [0.1, 0.2, 0.3]
 
 
 def genid_verb(input: VerbInput, hash: List[str], to: str) -> TableContainer:
-    """A custom verb to generate IDs per row."""
-
+    """Generate IDs for each row. A pipeline verb."""
     df = input.source.table.copy()
 
     def hash_row(row) -> str:
@@ -29,16 +32,14 @@ def genid_verb(input: VerbInput, hash: List[str], to: str) -> TableContainer:
 
 
 def embed_verb(input: VerbInput, column: str, to: str) -> TableContainer:
+    """Embed text per row. A pipeline verb."""
     df = input.source.table.copy()
     df[to] = df.apply(lambda row: embed(row[column]), axis=1)
     return TableContainer(table=df)
 
 
 workflow = Workflow(
-    verbs={
-        "genid": genid_verb,
-        "embed": embed_verb
-    },
+    verbs={"genid": genid_verb, "embed": embed_verb},
     schema={
         "steps": [
             {
@@ -56,34 +57,18 @@ workflow = Workflow(
             },
             {
                 "verb": "select",
-                "args": {
-                    "columns": [
-                        "type",
-                        "datetime",
-                        "author",
-                        "message"
-                    ]
-                },
+                "args": {"columns": ["type", "datetime", "author", "message"]},
             },
             {
                 "verb": "genid",
-                "args": {
-                    "to": "id",
-                    "hash": ["datetime", "author", "message"]
-                }
+                "args": {"to": "id", "hash": ["datetime", "author", "message"]},
             },
-            {
-                "verb": "embed",
-                "args": {
-                    "to": "embedding",
-                    "column": "message"
-                }
-            }
+            {"verb": "embed", "args": {"to": "embedding", "column": "message"}},
         ]
     },
     input_tables={"vast1": vast1, "vast2": vast2, "vast3": vast3},
     validate=False,
-    schema_path="../../schema/workflow.json"
+    schema_path="../../schema/workflow.json",
 )
 
 workflow.run()

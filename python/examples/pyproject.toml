@@ -13,6 +13,14 @@ datashaper = { path = "../datashaper", develop = true }
 [tool.poetry.group.dev.dependencies]
 jupyter = "^1.0.0"
 poethepoet = "^0.20.0"
+bandit = "^1.7.4"
+black = "^22.3.0"
+codespell = "^2.1.0"
+flake8 = "^4.0.1"
+isort = "^5.10.1"
+pydocstyle = "^6.1.1"
+pytest = "^7"
+
 
 [build-system]
 requires = ["poetry-core"]
@@ -20,5 +28,47 @@ build-backend = "poetry.core.masonry.api"
 
 
 [tool.poe.tasks]
+_flake8 = 'flake8 examples'
+_bandit = 'bandit -r examples'
+_black = 'black examples'
+_isort = 'isort examples'
+_black_check = 'black --check examples'
+_isort_check = 'isort --check examples'
+_pydocstyle = 'pydocstyle examples'
+_codespell = 'codespell dodiscover/ doc/ examples/ --ignore-words=.codespellignore --skip "**/_build/*,**/auto_examples/*"'
+
 start = "jupyter notebook --data-dir ../.."
 vast = "python -m examples.vast"
+
+[[tool.poe.tasks.check]]
+sequence = ['_flake8', '_bandit', '_codespell', 'check_format', '_pydocstyle']
+ignore_fail = 'return_non_zero'
+
+[[tool.poe.tasks.format]]
+sequence = ['_black', '_isort']
+ignore_fail = 'return_non_zero'
+
+[[tool.poe.tasks.check_format]]
+sequence = ['_black_check', '_isort_check']
+ignore_fail = 'return_non_zero'
+
+[tool.pydocstyle]
+match = '^(?!setup|__init__|test_).*\.py'
+match-dir = '^datashaper.*'
+
+[tool.black]
+target-version = ['py36']
+force-exclude = '''
+.*/setup\.py$
+'''
+
+[tool.isort]
+py_version = 36
+profile = "black"
+force_single_line = false
+combine_as_imports = true
+lines_between_types = 1
+lines_after_imports = 2
+src_paths = ["datashaper", "tests"]
+extend_skip = ["setup.py"]
+
