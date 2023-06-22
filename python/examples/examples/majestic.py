@@ -1,11 +1,9 @@
 """Sample workflow for VAST MC3 data."""
 
 import json
-import os
 
 import pandas as pd
 import pyarrow as pa
-import pyarrow.parquet as pq
 import requests
 
 from datashaper import Workflow
@@ -15,7 +13,8 @@ from .verbs import embed
 
 
 def load_dataframe_from_json_url(url: str, array_property: str) -> pd.DataFrame:
-    response = requests.get(url)
+    """Load a pandas dataframe form a JSON URL."""
+    response = requests.get(url, timeout=60)
     response.encoding = "utf-8-sig"
     json_data = json.loads(response.text)
     json_records = json_data[array_property]

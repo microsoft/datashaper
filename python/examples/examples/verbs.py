@@ -1,3 +1,4 @@
+"""Custom verbs for data processing."""
 from typing import List
 
 from datashaper import TableContainer, VerbInput
