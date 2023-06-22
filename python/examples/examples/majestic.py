@@ -4,6 +4,8 @@ import json
 import os
 
 import pandas as pd
+import pyarrow as pa
+import pyarrow.parquet as pq
 import requests
 
 from datashaper import Workflow
@@ -93,3 +95,9 @@ print("result: ", result)
 
 mkdirp('out')
 result.to_parquet("out/majestic.parquet")
+
+# Write PyArrow Table to Arrow file
+table = pa.Table.from_pandas(result)
+with pa.OSFile('out/majestic.arrow', 'wb') as f:
+    with pa.RecordBatchFileWriter(f, table.schema) as writer:
+        writer.write_table(table)

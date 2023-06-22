@@ -14,4 +14,8 @@ export const DATA_FORMAT_OPTIONS = [
 		key: DataFormat.JSON,
 		text: DataFormat.JSON.toUpperCase(),
 	},
+	{
+		key: DataFormat.ARROW,
+		text: DataFormat.ARROW.toUpperCase(),
+	},
 ]
