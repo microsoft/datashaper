@@ -4,8 +4,8 @@ import pandas as pd
 
 from datashaper import Workflow
 
-from .verbs import embed_mock as embed
-from .verbs import genid
+from .verbs import embed_mock as embed, genid
+
 
 gh_url = "https://raw.githubusercontent.com/darthtrevino/vast-mc3-data/main"
 dtype = {"date(yyyyMMddHHmmss)": "string"}

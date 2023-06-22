@@ -93,11 +93,11 @@ workflow.run()
 result = workflow.output()
 print("result: ", result)
 
-mkdirp('out')
+mkdirp("out")
 result.to_parquet("out/majestic.parquet")
 
 # Write PyArrow Table to Arrow file
 table = pa.Table.from_pandas(result)
-with pa.OSFile('out/majestic.arrow', 'wb') as f:
+with pa.OSFile("out/majestic.arrow", "wb") as f:
     with pa.RecordBatchFileWriter(f, table.schema) as writer:
         writer.write_table(table)
