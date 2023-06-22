@@ -8,6 +8,10 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = ">=3.8,<4"
 datashaper = { path = "../datashaper", develop = true }
+requests = "^2.31.0"
+pyarrow = "^12.0.1"
+fastparquet = "^2023.4.0"
+openai = "^0.27.8"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -39,6 +43,7 @@ _codespell = 'codespell dodiscover/ doc/ examples/ --ignore-words=.codespelligno
 
 start = "jupyter notebook --data-dir ../.."
 vast = "python -m examples.vast"
+majestic = "python -m examples.majestic"
 test = "python -m examples.vast"
 
 [[tool.poe.tasks.check]]
