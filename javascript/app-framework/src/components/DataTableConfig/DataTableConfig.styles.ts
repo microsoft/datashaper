@@ -15,7 +15,6 @@ export const FormatContainer = styled.div`
 	width: 100%;
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
 `
 
 export const ParserContainer = styled.div`
@@ -28,4 +27,3 @@ export const ShapeContainer = styled.div`
 	flex-direction: column;
 	gap: 12px;
 `
-export const buttonChoiceGroupStyles = { alignSelf: 'flex-start' }

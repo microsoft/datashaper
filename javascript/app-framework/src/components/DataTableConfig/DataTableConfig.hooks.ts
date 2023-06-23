@@ -4,7 +4,7 @@
  */
 import { DataFormat, DataOrientation } from '@datashaper/schema'
 import type { DataTable } from '@datashaper/workflow'
-import type { IChoiceGroupOption } from '@fluentui/react'
+import type { IDropdownOption } from '@fluentui/react'
 import { useObservableState } from 'observable-hooks'
 import { useCallback } from 'react'
 
@@ -12,14 +12,14 @@ export function useChangeHandlers(resource: DataTable): {
 	format: DataFormat
 	onChangeFormat: (
 		evt?: React.FormEvent<HTMLElement | HTMLInputElement>,
-		option?: IChoiceGroupOption,
+		option?: IDropdownOption,
 	) => void
 } {
 	const format = useObservableState(resource.format$, resource.format)
 	const onChangeFormat = useCallback(
 		(
 			_e?: React.FormEvent<HTMLElement | HTMLInputElement>,
-			option?: IChoiceGroupOption,
+			option?: IDropdownOption,
 		) => {
 			resource.format = option?.key as DataFormat
 			if (option?.key === DataFormat.CSV) {

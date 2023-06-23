@@ -4,13 +4,12 @@
  */
 import { DataFormat } from '@datashaper/schema'
 import type { DataTable } from '@datashaper/workflow'
-import { ButtonChoiceGroup } from '@essex/components'
+import { Dropdown } from '@fluentui/react'
 import { memo } from 'react'
 import { Case, Switch } from 'react-if'
 
 import { useChangeHandlers } from './DataTableConfig.hooks.js'
 import {
-	buttonChoiceGroupStyles,
 	Container,
 	FormatContainer,
 	ParserContainer,
@@ -30,8 +29,8 @@ export const DataTableConfig: React.FC<DataTableSchemaComponentProps> = memo(
 		return (
 			<Container>
 				<FormatContainer>
-					<ButtonChoiceGroup
-						style={buttonChoiceGroupStyles}
+					<Dropdown
+						label='Data Format'
 						options={DATA_FORMAT_OPTIONS}
 						selectedKey={format}
 						onChange={onChangeFormat}
