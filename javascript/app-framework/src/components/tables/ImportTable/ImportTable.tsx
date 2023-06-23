@@ -37,6 +37,7 @@ import {
 	textFieldStyles,
 } from './ImportTable.styles.js'
 import type { ImportTableProps } from './ImportTable.types.js'
+import { DataFormat } from '@datashaper/schema'
 
 const icons = {
 	cancel: { iconName: 'Cancel' },
@@ -45,9 +46,11 @@ const icons = {
 export const ImportTable: React.FC<ImportTableProps> = memo(
 	function ImportTable({ file, onCancel, onOpenTable }) {
 		const { delimiter, format, extension, content } = useFileAttributes(file)
+		const isTextFormat = format === DataFormat.CSV || format === DataFormat.JSON
+		const isDataFormatTyped = format === DataFormat.ARROW
 
 		const [name, setName] = useState<string>(removeExtension(file.name ?? ''))
-		const [autoType, setAutoType] = useState<boolean>(true)
+		const [autoType, setAutoType] = useState<boolean>(!isDataFormatTyped)
 
 		const { table, metadata, previewError, onLoadPreview } = usePreview(
 			file,
@@ -84,12 +87,16 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 						<DataTableConfig resource={draftSchema} />
 					</Sidebar>
 					<MainContent>
-						<Label>Input text</Label>
-						<ReadOnlyTextField
-							multiline
-							value={content || ''}
-							styles={textFieldStyles}
-						/>
+						{isTextFormat && (
+							<>
+								<Label>Input text</Label>
+								<ReadOnlyTextField
+									multiline
+									value={content || ''}
+									styles={textFieldStyles}
+								/>
+							</>
+						)}
 						<Label>Final table</Label>
 						<PreviewContent>
 							<Preview error={previewError} table={table} metadata={metadata} />
@@ -97,6 +104,7 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 					</MainContent>
 				</ModalBody>
 				<ModalFooter
+					autotypeDisabled={isDataFormatTyped}
 					disabled={!!previewError}
 					autoType={autoType}
 					onAutoTypeChange={setAutoType}
@@ -124,10 +132,12 @@ const ModalHeader: React.FC<{ onHideModal: () => void }> = memo(
 
 const ModalFooter: React.FC<{
 	disabled: boolean
+	autotypeDisabled?: boolean
 	autoType: boolean
 	onAutoTypeChange: (checked: boolean) => void
 	onClick: () => void
 }> = memo(function ModalFooter({
+	autotypeDisabled,
 	disabled,
 	autoType,
 	onAutoTypeChange,
@@ -135,13 +145,15 @@ const ModalFooter: React.FC<{
 }) {
 	return (
 		<Footer>
-			<Checkbox
-				label={'Discover data types'}
-				checked={autoType}
-				onChange={(_: any, checked?: boolean) =>
-					onAutoTypeChange(checked ?? false)
-				}
-			/>
+			{!autotypeDisabled && (
+				<Checkbox
+					label={'Discover data types'}
+					checked={autoType}
+					onChange={(_: any, checked?: boolean) =>
+						onAutoTypeChange(checked ?? false)
+					}
+				/>
+			)}
 			<PrimaryButton disabled={disabled} text='OK' onClick={onClick} />
 		</Footer>
 	)

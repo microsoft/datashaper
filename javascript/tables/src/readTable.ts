@@ -33,8 +33,17 @@ export async function readTable(
 	}
 	const table = await textTable(input, schema)
 	const opts = defaultOptions(options)
+	const isTypedFormat = schema.format === DataFormat.ARROW
+
+	// TODO: should we eventually perform some casting/typing work on arrow tables? They're already strongly typed
 	if (opts?.codebook || opts?.autoType) {
-		return applyTyping(table, schema, opts)
+		if (isTypedFormat) {
+			console.warn(
+				`not applying codebook or auto-typing to pre-typed data format ${schema.format}`,
+			)
+		} else {
+			return applyTyping(table, schema, opts)
+		}
 	}
 	return table
 }
