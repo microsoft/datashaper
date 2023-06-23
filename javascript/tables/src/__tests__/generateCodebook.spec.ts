@@ -119,7 +119,7 @@ describe('generateCodebook', () => {
 			// infers types from the string values, using the pandas-compatible type hints
 			const parsed = await fromCSV(csv, { autoType: false })
 			const codebook = await generateCodebook(parsed)
-			
+
 			expect(codebook.fields).toHaveLength(3)
 			expect(codebook.fields[0]?.name).toBe('id')
 			expect(codebook.fields[0]?.type).toBe(DataType.Number)

@@ -2,7 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { DataFormat, DataOrientation, type CodebookSchema } from '@datashaper/schema'
+import {
+	DataFormat,
+	DataOrientation,
+	type CodebookSchema,
+} from '@datashaper/schema'
 import { type TableMetadata, introspect, readTable } from '@datashaper/tables'
 import type { BaseFile } from '@datashaper/utilities'
 import { extension, guessDelimiter } from '@datashaper/utilities'
@@ -136,7 +140,7 @@ export function useCodebook(
 				autoType,
 				format,
 				onInferring: setColumnBeingInferred,
-				onProgress: setProgress
+				onProgress: setProgress,
 			})
 				.then(setCodebook)
 				.catch((err) => console.error(err))

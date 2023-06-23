@@ -88,7 +88,7 @@ describe('validate table', () => {
 	describe('minLength constraint', () => {
 		const codebook = createCodebook(companies, { Name: { minLength: 6 } })
 
-		it('without indexes',async () => {
+		it('without indexes', async () => {
 			const result = validateTable(await companies, await codebook)
 			expect(result.errors).toHaveLength(1)
 			expect(result.errors[0]?.name).toBe('Name')
@@ -108,7 +108,7 @@ describe('validate table', () => {
 	describe('maxLength constraint', () => {
 		const codebook = createCodebook(companies, { Name: { maxLength: 5 } })
 
-		it('without indexes',async () => {
+		it('without indexes', async () => {
 			const result = validateTable(await companies, await codebook)
 			expect(result.errors).toHaveLength(1)
 			expect(result.errors[0]?.name).toBe('Name')
@@ -116,7 +116,7 @@ describe('validate table', () => {
 			expect(result.errors[0]?.indexes).toBeUndefined()
 		})
 
-		it('with indexes', async() => {
+		it('with indexes', async () => {
 			const result = validateTable(await companies, await codebook, true)
 			expect(result.errors).toHaveLength(1)
 			expect(result.errors[0]?.name).toBe('Name')
@@ -132,7 +132,7 @@ describe('validate table', () => {
 	describe('minimum constraint', () => {
 		const codebook = createCodebook(companies, { ID: { minimum: 2 } })
 
-		it('without indexes', async() => {
+		it('without indexes', async () => {
 			const result = validateTable(await companies, await codebook)
 			expect(result.errors).toHaveLength(1)
 			expect(result.errors[0]?.name).toBe('ID')

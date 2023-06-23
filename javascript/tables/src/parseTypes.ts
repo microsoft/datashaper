@@ -119,7 +119,7 @@ export function parseArray(
 		}
 
 		// NOTE: Array.isArray won't return true on typed arrays (e.g. Float64Array)
-		// We could check for each typed array type, but that's a lot of cases. 
+		// We could check for each typed array type, but that's a lot of cases.
 		// Instead, we'll just check to see if this is a string, and if so, parse the array out.
 		const array = typeof value === 'string' ? value.split(delimiter) : value
 

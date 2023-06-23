@@ -46,7 +46,7 @@ export function validateTable(
 
 /**
  * Validates a column against a Field definition's constraints.
- * @param table - the table to validate 
+ * @param table - the table to validate
  * @param name - the name of the column
  * @param dataType - the type of the column
  * @param constraints - the field constraints to validate against

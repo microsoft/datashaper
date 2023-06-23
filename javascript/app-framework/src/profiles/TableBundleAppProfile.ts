@@ -111,12 +111,15 @@ export class TableBundleAppProfile
 				text: 'Add Codebook',
 				iconProps: { iconName: this.codebookProfile.iconName },
 				onClick: () => {
-					const table = resource.input?.output?.table
-					this.codebookProfile
-						.createInstance?.(table && generateCodebook(table))
-						.then((codebook) => {
+					const execute = async () => {
+						const table = resource.input?.output?.table
+						const codebook = table && (await generateCodebook(table))
+
+						this.codebookProfile.createInstance?.(codebook).then((codebook) => {
 							resource.sources = [...resource.sources, codebook]
 						})
+					}
+					void execute()
 				},
 			})
 		}
