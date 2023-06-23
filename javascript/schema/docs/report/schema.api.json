@@ -10428,6 +10428,61 @@
           "members": [
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!TypeHints#arrayDelimiter:member",
+              "docComment": "/**\n * The character to use for delimiting arrays.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "arrayDelimiter?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "arrayDelimiter",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!TypeHints#dataFormat:member",
+              "docComment": "/**\n * The data format\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "dataFormat?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataFormat",
+                  "canonicalReference": "@datashaper/schema!DataFormat:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "dataFormat",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!TypeHints#dateFormat:member",
               "docComment": "/**\n * Default date format to use when parsing dates. The Codebook can override this at the column level. Default: yyyy-MM-dd TODO: spark has a separate config for datetime. Do we care?\n */\n",
               "excerptTokens": [

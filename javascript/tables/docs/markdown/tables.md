@@ -29,7 +29,7 @@
 |  [guessDataType(options)](./tables.guessdatatype.md) | Factory function to provide a type guessing function for any string value. This uses optional type hints to account for string values such as boolean and null formats. |
 |  [guessDelimiter(text, config)](./tables.guessdelimiter.md) |  |
 |  [introspect(table, detailed, columns)](./tables.introspect.md) | Performs type inference and stats on a table/columns. |
-|  [isArray(delimiter)](./tables.isarray.md) | Detect if a string is an array by looking for the delimiter. It's expected that in a CSV any array cells will be quoted. Also note that if the default delimiter, comma, is used, these may be detected as valid numbers if checked first. |
+|  [isArray(delimiter, format)](./tables.isarray.md) | Detect if a string is an array by looking for the delimiter. It's expected that in a CSV any array cells will be quoted. Also note that if the default delimiter, comma, is used, these may be detected as valid numbers if checked first. |
 |  [isBoolean(falseValues, trueValues)](./tables.isboolean.md) |  |
 |  [isDate(value)](./tables.isdate.md) |  |
 |  [isNull(naValues)](./tables.isnull.md) |  |

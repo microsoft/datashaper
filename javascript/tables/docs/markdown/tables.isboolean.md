@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function isBoolean(falseValues?: string[], trueValues?: string[]): (value: string) => boolean;
+export declare function isBoolean(falseValues?: string[], trueValues?: string[]): (value: unknown) => boolean;
 ```
 
 ## Parameters
@@ -19,5 +19,5 @@ export declare function isBoolean(falseValues?: string[], trueValues?: string[])
 
 <b>Returns:</b>
 
-(value: string) =&gt; boolean
+(value: unknown) =&gt; boolean
 

@@ -8,12 +8,12 @@
 
 ```typescript
 export declare function typeGuesserFactory(options?: TypeHints): {
-    isNull: (value: string) => boolean;
-    isBoolean: (value: string) => boolean;
-    isNumber: (value: string) => boolean;
-    isArray: (value: string) => boolean;
-    isObject: (value: string) => boolean;
-    isDate: (value: string) => boolean;
+    isNull: (value: unknown) => boolean;
+    isBoolean: (value: unknown) => boolean;
+    isNumber: (value: unknown) => boolean;
+    isArray: (value: unknown) => boolean;
+    isObject: (value: unknown) => boolean;
+    isDate: (value: unknown) => boolean;
 };
 ```
 
@@ -25,5 +25,5 @@ export declare function typeGuesserFactory(options?: TypeHints): {
 
 <b>Returns:</b>
 
-{ isNull: (value: string) =&gt; boolean; isBoolean: (value: string) =&gt; boolean; isNumber: (value: string) =&gt; boolean; isArray: (value: string) =&gt; boolean; isObject: (value: string) =&gt; boolean; isDate: (value: string) =&gt; boolean; }
+{ isNull: (value: unknown) =&gt; boolean; isBoolean: (value: unknown) =&gt; boolean; isNumber: (value: unknown) =&gt; boolean; isArray: (value: unknown) =&gt; boolean; isObject: (value: unknown) =&gt; boolean; isDate: (value: unknown) =&gt; boolean; }
 

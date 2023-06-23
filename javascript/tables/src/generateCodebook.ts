@@ -49,8 +49,14 @@ export async function generateCodebook(
 
 					if (opts.autoType) {
 						const values: string[] = table.array(column) as string[]
-						const columnType = guessDataTypeFromValues(values, opts.autoMax)
+						const columnType = guessDataTypeFromValues(
+							values,
+							opts?.format,
+							opts.autoMax,
+						)
+
 						field.type = columnType
+
 						if (columnType === DataType.Array) {
 							// TODO: is it worth finding the nature _within_ arrays?
 							// right now they will not be assigned a nature
@@ -59,7 +65,11 @@ export async function generateCodebook(
 							const flat = values.flatMap((v) =>
 								v ? arrayParse(v.toString()) : null,
 							)
-							const subtype = guessDataTypeFromValues(flat, opts.autoMax)
+							const subtype = guessDataTypeFromValues(
+								flat,
+								opts?.format,
+								opts.autoMax,
+							)
 							field.subtype = subtype
 						} else {
 							const parse = parseAs(columnType)

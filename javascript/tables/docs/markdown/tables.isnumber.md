@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function isNumber(decimal?: string, thousands?: string): (value: string) => boolean;
+export declare function isNumber(decimal?: string, thousands?: string): (value: unknown) => boolean;
 ```
 
 ## Parameters
@@ -19,5 +19,5 @@ export declare function isNumber(decimal?: string, thousands?: string): (value: 
 
 <b>Returns:</b>
 
-(value: string) =&gt; boolean
+(value: unknown) =&gt; boolean
 

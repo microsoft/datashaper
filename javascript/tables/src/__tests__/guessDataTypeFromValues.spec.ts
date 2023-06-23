@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { DataType } from '@datashaper/schema'
+import { DataFormat, DataType } from '@datashaper/schema'
 
 import { guessDataTypeFromValues } from '../guessDataTypeFromValues.js'
 
@@ -95,7 +95,7 @@ describe('guessDataTypeFromValues', () => {
 		})
 
 		it('limit misses mixed types', () => {
-			const columnType = guessDataTypeFromValues(values, 3)
+			const columnType = guessDataTypeFromValues(values, DataFormat.CSV, 3)
 			expect(columnType).toBe(DataType.Number)
 		})
 	})

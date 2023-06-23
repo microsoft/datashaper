@@ -15,7 +15,7 @@ import { DataType } from '@datashaper/schema';
 import type { Field } from '@datashaper/schema';
 import type { FieldMetadata } from '@datashaper/schema';
 import type { ParserOptions } from '@datashaper/schema';
-import type { TypeHints } from '@datashaper/schema';
+import { TypeHints } from '@datashaper/schema';
 import type { ValidationFunction } from '@datashaper/schema';
 import type { ValidationResult } from '@datashaper/schema';
 import type { Value } from '@datashaper/schema';
@@ -141,32 +141,32 @@ columns?: string[]): TableMetadata;
 // Warning: (ae-missing-release-tag) "isArray" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function isArray(delimiter?: string): (value: string) => boolean;
+export function isArray(delimiter: string, format: DataFormat): (value: unknown) => boolean;
 
 // Warning: (ae-missing-release-tag) "isBoolean" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function isBoolean(falseValues?: string[], trueValues?: string[]): (value: string) => boolean;
+export function isBoolean(falseValues?: string[], trueValues?: string[]): (value: unknown) => boolean;
 
 // Warning: (ae-missing-release-tag) "isDate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function isDate(value: string): boolean;
+export function isDate(value: unknown): boolean;
 
 // Warning: (ae-missing-release-tag) "isNull" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function isNull(naValues?: string[]): (value: string) => boolean;
+export function isNull(naValues?: string[]): (value: unknown) => boolean;
 
 // Warning: (ae-missing-release-tag) "isNumber" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function isNumber(decimal?: string, thousands?: string): (value: string) => boolean;
+export function isNumber(decimal?: string, thousands?: string): (value: unknown) => boolean;
 
 // Warning: (ae-missing-release-tag) "isObject" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function isObject(value: string): boolean;
+export function isObject(value: unknown): boolean;
 
 // Warning: (ae-missing-release-tag) "isValidNumber" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -196,7 +196,7 @@ export function minLengthValidator(field: Field, includeIndexes: boolean): Valid
 // Warning: (ae-missing-release-tag) "parseArray" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function parseArray(subtype?: DataType, options?: TypeHints, delimiter?: string): (value: string) => any[] | null;
+export function parseArray(subtype?: DataType, options?: TypeHints, delimiter?: string): (value: unknown) => any[] | null;
 
 // Warning: (ae-missing-release-tag) "parseAs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -306,12 +306,12 @@ export interface TableMetadata {
 //
 // @public (undocumented)
 export function typeGuesserFactory(options?: TypeHints): {
-    isNull: (value: string) => boolean;
-    isBoolean: (value: string) => boolean;
-    isNumber: (value: string) => boolean;
-    isArray: (value: string) => boolean;
-    isObject: (value: string) => boolean;
-    isDate: (value: string) => boolean;
+    isNull: (value: unknown) => boolean;
+    isBoolean: (value: unknown) => boolean;
+    isNumber: (value: unknown) => boolean;
+    isArray: (value: unknown) => boolean;
+    isObject: (value: unknown) => boolean;
+    isDate: (value: unknown) => boolean;
 };
 
 // Warning: (ae-missing-release-tag) "unapplyCodebook" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

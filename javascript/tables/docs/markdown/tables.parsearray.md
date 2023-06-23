@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function parseArray(subtype?: DataType, options?: TypeHints, delimiter?: string): (value: string) => any[] | null;
+export declare function parseArray(subtype?: DataType, options?: TypeHints, delimiter?: string): (value: unknown) => any[] | null;
 ```
 
 ## Parameters
@@ -20,5 +20,5 @@ export declare function parseArray(subtype?: DataType, options?: TypeHints, deli
 
 <b>Returns:</b>
 
-(value: string) =&gt; any\[\] \| null
+(value: unknown) =&gt; any\[\] \| null
 

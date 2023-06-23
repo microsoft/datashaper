@@ -16,6 +16,8 @@ export interface TypeHints
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [arrayDelimiter?](./schema.typehints.arraydelimiter.md) |  | string | <i>(Optional)</i> The character to use for delimiting arrays. |
+|  [dataFormat?](./schema.typehints.dataformat.md) |  | [DataFormat](./schema.dataformat.md) | <i>(Optional)</i> The data format |
 |  [dateFormat?](./schema.typehints.dateformat.md) |  | string | <i>(Optional)</i> Default date format to use when parsing dates. The Codebook can override this at the column level. Default: yyyy-MM-dd TODO: spark has a separate config for datetime. Do we care? |
 |  [decimal?](./schema.typehints.decimal.md) |  | string | <i>(Optional)</i> Character to use when parsing decimal numbers. Default: . |
 |  [falseValues?](./schema.typehints.falsevalues.md) |  | string\[\] | <i>(Optional)</i> Default: case-insenstive word "false". |

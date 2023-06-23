@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function isNull(naValues?: string[]): (value: string) => boolean;
+export declare function isNull(naValues?: string[]): (value: unknown) => boolean;
 ```
 
 ## Parameters
@@ -18,5 +18,5 @@ export declare function isNull(naValues?: string[]): (value: string) => boolean;
 
 <b>Returns:</b>
 
-(value: string) =&gt; boolean
+(value: unknown) =&gt; boolean
 

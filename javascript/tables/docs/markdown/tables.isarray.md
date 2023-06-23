@@ -9,16 +9,17 @@ Detect if a string is an array by looking for the delimiter. It's expected that 
 <b>Signature:</b>
 
 ```typescript
-export declare function isArray(delimiter?: string): (value: string) => boolean;
+export declare function isArray(delimiter: string, format: DataFormat): (value: unknown) => boolean;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  delimiter | string | <i>(Optional)</i> |
+|  delimiter | string |  |
+|  format | DataFormat |  |
 
 <b>Returns:</b>
 
-(value: string) =&gt; boolean
+(value: unknown) =&gt; boolean
 

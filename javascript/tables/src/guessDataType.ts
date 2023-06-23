@@ -2,13 +2,19 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
-import type { TypeHints } from '@datashaper/schema'
-import { DataType, TypeHintsDefaults } from '@datashaper/schema'
+import {
+	DataType,
+	TypeHintsDefaults,
+	DataFormat,
+	type TypeHints,
+} from '@datashaper/schema'
 import isFinite from 'lodash-es/isFinite.js'
 import isPlainObject from 'lodash-es/isPlainObject.js'
 import toNumber from 'lodash-es/toNumber.js'
 import moment from 'moment'
+/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+// @ts-ignore
+import isTypedArray from 'is-typed-array'
 
 import { formatNumberStr, getDate } from './util.js'
 
@@ -50,18 +56,21 @@ export function guessDataType(
 }
 
 export function typeGuesserFactory(options?: TypeHints): {
-	isNull: (value: string) => boolean
-	isBoolean: (value: string) => boolean
-	isNumber: (value: string) => boolean
-	isArray: (value: string) => boolean
-	isObject: (value: string) => boolean
-	isDate: (value: string) => boolean
+	isNull: (value: unknown) => boolean
+	isBoolean: (value: unknown) => boolean
+	isNumber: (value: unknown) => boolean
+	isArray: (value: unknown) => boolean
+	isObject: (value: unknown) => boolean
+	isDate: (value: unknown) => boolean
 } {
 	return {
 		isNull: isNull(options?.naValues),
 		isBoolean: isBoolean(options?.trueValues, options?.falseValues),
 		isNumber: isNumber(options?.decimal, options?.thousands),
-		isArray: isArray(),
+		isArray: isArray(
+			options?.arrayDelimiter ?? ',',
+			options?.dataFormat ?? DataFormat.CSV,
+		),
 		isObject,
 		isDate,
 	}
@@ -69,9 +78,9 @@ export function typeGuesserFactory(options?: TypeHints): {
 
 export function isNull(
 	naValues = TypeHintsDefaults.naValues,
-): (value: string) => boolean {
-	const naValuesSet = new Set(naValues)
-	return function (value: string) {
+): (value: unknown) => boolean {
+	const naValuesSet = new Set<unknown>(naValues)
+	return function (value: unknown) {
 		if (value === null) return true
 
 		return naValuesSet.has(value)
@@ -81,27 +90,32 @@ export function isNull(
 export function isBoolean(
 	falseValues = TypeHintsDefaults.falseValues,
 	trueValues = TypeHintsDefaults.trueValues,
-): (value: string) => boolean {
+): (value: unknown) => boolean {
 	const booleanSet = new Set(
 		[...falseValues, ...trueValues].map((v) => v.toLowerCase()),
 	)
-	return function (value: string) {
+	return function (value: unknown) {
 		if (value === null) return false
-
-		const str = value.toLowerCase()
-		return booleanSet.has(str)
+		if (typeof value === 'boolean') return true
+		if (typeof value === 'string') {
+			const str = value.toLowerCase()
+			return booleanSet.has(str)
+		}
+		return false
 	}
 }
 
 export function isNumber(
 	decimal = TypeHintsDefaults.decimal,
 	thousands = TypeHintsDefaults.thousands,
-): (value: string) => boolean {
-	return function (value: string) {
-		if (value === null) return false
-
-		const n = formatNumberStr(value, { decimal, thousands })
-		return n === '' ? false : isFinite(toNumber(n))
+): (value: unknown) => boolean {
+	return function (value: unknown) {
+		if (typeof value === 'string' || typeof value === 'number') {
+			const n = formatNumberStr(value, { decimal, thousands })
+			const result = n === '' ? false : isFinite(toNumber(n))
+			return result
+		}
+		return false
 	}
 }
 
@@ -110,28 +124,51 @@ export function isNumber(
  * It's expected that in a CSV any array cells will be quoted.
  * Also note that if the default delimiter, comma, is used, these may be detected as valid numbers if checked first.
  */
-export function isArray(delimiter = ','): (value: string) => boolean {
+export function isArray(
+	delimiter: string,
+	format: DataFormat,
+): (value: unknown) => boolean {
 	const reg = new RegExp(`${delimiter}`)
-	return (value: string) => {
-		try {
+	return (value: unknown) => {
+		if (Array.isArray(value) || isTypedArray(value)) {
+			return true
+		} else if (typeof value === 'string' && format === DataFormat.CSV) {
+			// only use array inference on CSV source files
 			return reg.test(value)
-		} catch {
+		} else {
 			return false
 		}
 	}
 }
 
-export function isObject(value: string): boolean {
+export function isObject(value: unknown): boolean {
 	try {
-		const object = JSON.parse(value)
-		return isPlainObject(object)
+		if (
+			typeof value !== 'string' &&
+			typeof value !== 'number' &&
+			typeof value !== 'boolean' &&
+			!Array.isArray(value) &&
+			!isTypedArray(value) &&
+			isPlainObject(value)
+		) {
+			return true
+		} else if (typeof value === 'string') {
+			const object = JSON.parse(value)
+			return isPlainObject(object)
+		}
+		return false
 	} catch {
 		return false
 	}
 }
 
-export function isDate(value: string): boolean {
+export function isDate(value: unknown): boolean {
 	if (value === null) return false
 
-	return moment(getDate(value)).isValid()
+	if (value instanceof Date) {
+		return true
+	} else if (typeof value === 'string') {
+		return moment(getDate(value)).isValid()
+	}
+	return false
 }
