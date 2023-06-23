@@ -7,9 +7,7 @@ import type { TypeHints, Value } from '@datashaper/schema'
 import { DataType, TypeHintsDefaults } from '@datashaper/schema'
 import toNumber from 'lodash-es/toNumber.js'
 import moment from 'moment'
-/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
-// @ts-ignore
-import isTypedArray from 'is-typed-array'
+import isTypedArray from 'lodash-es/isTypedArray.js'
 import { guessDataType, typeGuesserFactory } from './guessDataType.js'
 import { formatNumberStr, getDate } from './util.js'
 

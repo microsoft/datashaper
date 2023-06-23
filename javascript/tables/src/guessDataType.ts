@@ -12,12 +12,9 @@ import isFinite from 'lodash-es/isFinite.js'
 import isPlainObject from 'lodash-es/isPlainObject.js'
 import toNumber from 'lodash-es/toNumber.js'
 import moment from 'moment'
-/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
-// @ts-ignore
-import isTypedArray from 'is-typed-array'
+import isTypedArray from 'lodash-es/isTypedArray.js'
 
 import { formatNumberStr, getDate } from './util.js'
-
 /**
  * Factory function to provide a type guessing function for any string value.
  * This uses optional type hints to account for string values such as boolean and null formats.
@@ -26,10 +23,10 @@ import { formatNumberStr, getDate } from './util.js'
  */
 export function guessDataType(
 	options?: TypeHints,
-): (value: string) => DataType {
+): (value: unknown) => DataType {
 	const { isNull, isBoolean, isNumber, isArray, isObject, isDate } =
 		typeGuesserFactory(options)
-	return function (value: string) {
+	return function (value: unknown) {
 		if (isNull(value)) {
 			return DataType.Null
 		}

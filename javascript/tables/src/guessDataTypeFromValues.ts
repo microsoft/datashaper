@@ -15,7 +15,7 @@ export function guessDataTypeFromValues(
 	const detectedTypes = new Set<DataType>()
 
 	for (let i = 0; i < limit && i < values.length; i++) {
-		const type = guesser(`${values[i]}`)
+		const type = guesser(values[i])
 		detectedTypes.add(type)
 	}
 

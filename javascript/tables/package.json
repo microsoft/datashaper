@@ -37,7 +37,6 @@
 	},
 	"dependencies": {
 		"@datashaper/schema": "workspace:^",
-		"is-typed-array": "^1.1.10",
 		"lodash-es": "^4.17.21",
 		"moment": "^2.29.4",
 		"papaparse": "^5.4.1"
