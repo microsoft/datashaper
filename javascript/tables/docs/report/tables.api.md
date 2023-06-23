@@ -125,7 +125,7 @@ export function getters(table: ColumnTable): Record<string, (i: number) => any>;
 // Warning: (ae-missing-release-tag) "guessDataType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function guessDataType(options?: TypeHints): (value: string) => DataType;
+export function guessDataType(options?: TypeHints): (value: unknown) => DataType;
 
 // Warning: (ae-missing-release-tag) "guessDelimiter" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

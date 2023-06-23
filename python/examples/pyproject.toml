@@ -43,6 +43,7 @@ _codespell = 'codespell dodiscover/ doc/ examples/ --ignore-words=.codespelligno
 
 start = "jupyter notebook --data-dir ../.."
 vast = "python -m examples.vast"
+majestic = "python -m examples.majestic"
 test = "python -m examples.vast"
 
 [[tool.poe.tasks.check]]

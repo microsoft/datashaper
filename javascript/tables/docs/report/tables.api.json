@@ -1455,7 +1455,7 @@
             },
             {
               "kind": "Content",
-              "text": "(value: string) => "
+              "text": "(value: unknown) => "
             },
             {
               "kind": "Reference",
