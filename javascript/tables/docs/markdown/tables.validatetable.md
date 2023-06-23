@@ -16,8 +16,8 @@ export declare function validateTable(table: ColumnTable, codebook: CodebookSche
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  table | ColumnTable |  |
-|  codebook | CodebookSchema |  |
+|  table | ColumnTable | the table to validate |
+|  codebook | CodebookSchema | the codebook to use |
 |  includeIndexes | boolean | <i>(Optional)</i> indicate whether to include the indexes of the rows that failed validation for each field |
 
 <b>Returns:</b>

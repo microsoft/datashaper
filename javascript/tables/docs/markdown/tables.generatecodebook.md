@@ -8,9 +8,12 @@
 
 ```typescript
 export declare function generateCodebook(table: ColumnTable, options?: {
+    format?: DataFormat;
     autoType?: boolean;
     autoMax?: number;
-}): CodebookSchema;
+    onInferring?: (column: string) => void;
+    onProgress?: (numComplete: number) => void;
+}): Promise<CodebookSchema>;
 ```
 
 ## Parameters
@@ -18,9 +21,9 @@ export declare function generateCodebook(table: ColumnTable, options?: {
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  table | ColumnTable |  |
-|  options | { autoType?: boolean; autoMax?: number; } | <i>(Optional)</i> |
+|  options | { format?: DataFormat; autoType?: boolean; autoMax?: number; onInferring?: (column: string) =&gt; void; onProgress?: (numComplete: number) =&gt; void; } | <i>(Optional)</i> |
 
 <b>Returns:</b>
 
-CodebookSchema
+Promise&lt;CodebookSchema&gt;
 

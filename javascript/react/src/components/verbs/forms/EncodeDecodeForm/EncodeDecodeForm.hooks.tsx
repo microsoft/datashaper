@@ -5,12 +5,16 @@
 import type { CodebookSchema } from '@datashaper/schema'
 import { generateCodebook } from '@datashaper/tables'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
-import { useMemo } from 'react'
+import { useEffect, useState } from 'react'
 
 export function useCodebookContent(
 	table?: ColumnTable,
 ): CodebookSchema | undefined {
-	return useMemo(() => {
-		return table && generateCodebook(table)
+	const [codebook, setCodebook] = useState<CodebookSchema | undefined>()
+	useEffect(() => {
+		if (table) {
+			generateCodebook(table).then(setCodebook)
+		}
 	}, [table])
+	return codebook
 }

@@ -4,10 +4,11 @@
  */
 import { StatsColumnType } from '@datashaper/react'
 import type { TableContainer, TableMetadata } from '@datashaper/tables'
-import { generateCodebook } from '@datashaper/tables'
 import { removeExtension } from '@datashaper/utilities'
 import { ReadOnlyTextField } from '@essex/components'
 import {
+	Spinner,
+	ProgressIndicator,
 	Checkbox,
 	IconButton,
 	Label,
@@ -21,6 +22,7 @@ import { memo, useCallback, useState } from 'react'
 import { DataTableConfig } from '../../DataTableConfig/DataTableConfig.js'
 import { RawTable } from '../RawTable/RawTable.js'
 import {
+	useCodebook,
 	useDraftSchema,
 	useFileAttributes,
 	usePreview,
@@ -50,7 +52,7 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 		const isDataFormatTyped = format === DataFormat.ARROW
 
 		const [name, setName] = useState<string>(removeExtension(file.name ?? ''))
-		const [autoType, setAutoType] = useState<boolean>(!isDataFormatTyped)
+		const [autoType, setAutoType] = useState<boolean>(true)
 
 		const { table, metadata, previewError, onLoadPreview } = usePreview(
 			file,
@@ -58,6 +60,12 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 		)
 
 		const draftSchema = useDraftSchema(delimiter, format, onLoadPreview)
+		const {
+			codebook,
+			isLoading: isCodebookLoading,
+			columnBeingInferred,
+			progress: codebookProgress,
+		} = useCodebook(table, autoType, format)
 
 		const onClickImport = useCallback(() => {
 			if (table) {
@@ -65,10 +73,9 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 				const tableContainer = { id, table } as TableContainer
 				// TODO: this is a bit inefficient, because a codebook is generated transitively in the readTable method when autoType is true
 				// we should separate those two functions. if a table is typed, generating the codebook can be much quicker.
-				const codebook = autoType ? generateCodebook(table) : undefined
 				onOpenTable(tableContainer, draftSchema.toSchema(), codebook)
 			}
-		}, [onOpenTable, table, name, extension, draftSchema, autoType])
+		}, [onOpenTable, table, name, extension, draftSchema, codebook])
 
 		return (
 			<Modal styles={modalStyles} isOpen={true} onDismiss={onCancel} isBlocking>
@@ -97,10 +104,31 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 								/>
 							</>
 						)}
-						<Label>Final table</Label>
-						<PreviewContent>
-							<Preview error={previewError} table={table} metadata={metadata} />
-						</PreviewContent>
+						{isCodebookLoading ? (
+							<>
+								<Spinner />
+								<Label>
+									{columnBeingInferred == null
+										? ''
+										: `Inferring type of ${columnBeingInferred}`}
+								</Label>
+
+								<ProgressIndicator
+									percentComplete={codebookProgress / (table?.numCols() || 1)}
+								/>
+							</>
+						) : (
+							<>
+								<Label>Final table</Label>
+								<PreviewContent>
+									<Preview
+										error={previewError}
+										table={table}
+										metadata={metadata}
+									/>
+								</PreviewContent>
+							</>
+						)}
 					</MainContent>
 				</ModalBody>
 				<ModalFooter
@@ -137,7 +165,6 @@ const ModalFooter: React.FC<{
 	onAutoTypeChange: (checked: boolean) => void
 	onClick: () => void
 }> = memo(function ModalFooter({
-	autotypeDisabled,
 	disabled,
 	autoType,
 	onAutoTypeChange,
@@ -145,15 +172,13 @@ const ModalFooter: React.FC<{
 }) {
 	return (
 		<Footer>
-			{!autotypeDisabled && (
-				<Checkbox
-					label={'Discover data types'}
-					checked={autoType}
-					onChange={(_: any, checked?: boolean) =>
-						onAutoTypeChange(checked ?? false)
-					}
-				/>
-			)}
+			<Checkbox
+				label={'Discover data types'}
+				checked={autoType}
+				onChange={(_: any, checked?: boolean) =>
+					onAutoTypeChange(checked ?? false)
+				}
+			/>
 			<PrimaryButton disabled={disabled} text='OK' onClick={onClick} />
 		</Footer>
 	)

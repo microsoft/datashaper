@@ -10,16 +10,13 @@ import { inferColumnNature } from '../inferColumnNature.js'
 
 describe('Infer column nature tests', () => {
 	describe('discrete', () => {
-		const csv = fs.readFileSync('./src/__tests__/data/stocks.csv', {
-			encoding: 'utf8',
-			flag: 'r',
-		})
-
-		const parsed = fromCSV(csv)
-
-		const nature = inferColumnNature(parsed, 'Volume')
-
-		it('should return true', () => {
+		it('should return true', async () => {
+			const csv = fs.readFileSync('./src/__tests__/data/stocks.csv', {
+				encoding: 'utf8',
+				flag: 'r',
+			})
+			const parsed = await fromCSV(csv)
+			const nature = inferColumnNature(parsed, 'Volume')
 			expect(nature).toBe(VariableNature.Discrete)
 		})
 	})
@@ -30,11 +27,9 @@ describe('Infer column nature tests', () => {
 			flag: 'r',
 		})
 
-		const parsed = fromCSV(csv)
-
-		const nature = inferColumnNature(parsed, 'index', 11)
-
-		it('should return true', () => {
+		it('should return true', async () => {
+			const parsed = await fromCSV(csv)
+			const nature = inferColumnNature(parsed, 'index', 11)
 			expect(nature).toBe(VariableNature.Ordinal)
 		})
 	})
@@ -45,11 +40,9 @@ describe('Infer column nature tests', () => {
 			flag: 'r',
 		})
 
-		const parsed = fromCSV(csv)
-
-		const nature = inferColumnNature(parsed, 'Symbol')
-
-		it('should return true', () => {
+		it('should return true', async () => {
+			const parsed = await fromCSV(csv)
+			const nature = inferColumnNature(parsed, 'Symbol')
 			expect(nature).toBe(VariableNature.Nominal)
 		})
 	})
@@ -60,11 +53,9 @@ describe('Infer column nature tests', () => {
 			flag: 'r',
 		})
 
-		const parsed = fromCSV(csv)
-
-		const nature = inferColumnNature(parsed, 'US')
-
-		it('should return true', () => {
+		it('should return true', async () => {
+			const parsed = await fromCSV(csv)
+			const nature = inferColumnNature(parsed, 'US')
 			expect(nature).toBe(VariableNature.Binary)
 		})
 	})
@@ -75,11 +66,9 @@ describe('Infer column nature tests', () => {
 			flag: 'r',
 		})
 
-		const parsed = fromCSV(csv)
-
-		const nature = inferColumnNature(parsed, 'Close')
-
-		it('should return true', () => {
+		it('should return true', async () => {
+			const parsed = await fromCSV(csv)
+			const nature = inferColumnNature(parsed, 'Close')
 			expect(nature).toBe(VariableNature.Continuous)
 		})
 	})

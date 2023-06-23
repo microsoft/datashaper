@@ -18,17 +18,15 @@ describe('unapply codebook tests', () => {
 			flag: 'r',
 		})
 
-		const parsed = fromCSV(csv, { autoType: false })
+		it('should return a column table', async () => {
+			const parsed = await fromCSV(csv, { autoType: false })
+			const codebookResult = await generateCodebook(parsed)
+			const resultTable = applyCodebook(
+				parsed,
+				codebookResult,
+				CodebookStrategy.DataTypeOnly,
+			)
 
-		const codebookResult = generateCodebook(parsed)
-
-		const resultTable = applyCodebook(
-			parsed,
-			codebookResult,
-			CodebookStrategy.DataTypeOnly,
-		)
-
-		it('should return a column table', () => {
 			expect(resultTable.numRows()).toBe(10)
 			expect(resultTable.numCols()).toBe(8)
 		})
@@ -40,41 +38,40 @@ describe('unapply codebook tests', () => {
 			flag: 'r',
 		})
 
-		const parsed = fromCSV(csv, { autoType: false })
+		it('should return a column table with mapping values', async () => {
+			const parsed = await fromCSV(csv, { autoType: false })
 
-		const codebookResult = generateCodebook(parsed)
+			const codebookResult = await generateCodebook(parsed)
 
-		const element = codebookResult.fields.find(
-			(element) => element.name === 'diagnosis',
-		)
-		const mappingElements: Record<number, string> = {
-			0: 'heart disease',
-			1: 'diabetes type I',
-			2: 'diabetes type II',
-			3: 'diabetes type III',
-		}
+			const element = codebookResult.fields.find(
+				(element) => element.name === 'diagnosis',
+			)
+			const mappingElements: Record<number, string> = {
+				0: 'heart disease',
+				1: 'diabetes type I',
+				2: 'diabetes type II',
+				3: 'diabetes type III',
+			}
 
-		element.mapping = mappingElements
+			if (element) element.mapping = mappingElements
 
-		const element2 = codebookResult.fields.find(
-			(element) => element.name === 'test',
-		)
-		const mappingElements2: Record<number, string> = {
-			0: 'Test1',
-			1: 'Test2',
-			2: 'Test3',
-			3: 'Test4',
-		}
+			const element2 = codebookResult.fields.find(
+				(element) => element.name === 'test',
+			)
+			const mappingElements2: Record<number, string> = {
+				0: 'Test1',
+				1: 'Test2',
+				2: 'Test3',
+				3: 'Test4',
+			}
 
-		element2.mapping = mappingElements2
+			if (element2) element2.mapping = mappingElements2
 
-		const resultTable = unapplyCodebook(
-			parsed,
-			codebookResult,
-			CodebookStrategy.DataTypeAndMapping,
-		)
-
-		it('should return a column table with mapping values', () => {
+			const resultTable = unapplyCodebook(
+				parsed,
+				codebookResult,
+				CodebookStrategy.DataTypeAndMapping,
+			)
 			expect(resultTable.numRows()).toBe(7)
 			expect(resultTable.numCols()).toBe(3)
 			expect(resultTable.get('diagnosis', 0)).toBe('0')
