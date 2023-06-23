@@ -1124,7 +1124,7 @@
         {
           "kind": "Function",
           "canonicalReference": "@datashaper/tables!formatNumberStr:function(1)",
-          "docComment": "/**\n * Formats a string using specified numeric parser options, so that it is ready for standard numeric parsing. (i.e., default js impl is to consider '.' a decimal). If the string has invalid construction to be a number, an empty string will be returned, which will be parsed as NaN. We do this because parseInt does not recognize the thousands separator, but if we remove them all even in invalid cases (e.g., '1,00'), invalid numbers could be parsed downstream as valid. The same occurs with decimal separators: parseFloat will ignore anything after the first.\n *\n * @param value - \n *\n * @param options - \n *\n * @returns \n */\n",
+          "docComment": "/**\n * Formats a string using specified numeric parser options, so that it is ready for standard numeric parsing. (i.e., default js impl is to consider '.' a decimal). If the string has invalid construction to be a number, an empty string will be returned, which will be parsed as NaN. We do this because parseInt does not recognize the thousands separator, but if we remove them all even in invalid cases (e.g., '1,00'), invalid numbers could be parsed downstream as valid. The same occurs with decimal separators: parseFloat will ignore anything after the first.\n *\n * @param value - the value to format\n *\n * @param options - formatting options\n *\n * @returns \n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1209,8 +1209,21 @@
             },
             {
               "kind": "Reference",
+              "text": "Promise",
+              "canonicalReference": "!Promise:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
               "text": "ColumnTable",
               "canonicalReference": "arquero!default:class"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
             },
             {
               "kind": "Content",
@@ -1219,7 +1232,7 @@
           ],
           "returnTypeTokenRange": {
             "startIndex": 5,
-            "endIndex": 6
+            "endIndex": 9
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -1263,11 +1276,29 @@
             },
             {
               "kind": "Content",
-              "text": "{\n    autoType?: boolean;\n    autoMax?: number;\n}"
+              "text": "{\n    format?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "DataFormat",
+              "canonicalReference": "@datashaper/schema!DataFormat:enum"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n    autoType?: boolean;\n    autoMax?: number;\n    onInferring?: (column: string) => void;\n    onProgress?: (numComplete: number) => void;\n}"
             },
             {
               "kind": "Content",
               "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Promise",
+              "canonicalReference": "!Promise:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
             },
             {
               "kind": "Reference",
@@ -1276,12 +1307,16 @@
             },
             {
               "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
               "text": ";"
             }
           ],
           "returnTypeTokenRange": {
-            "startIndex": 5,
-            "endIndex": 6
+            "startIndex": 7,
+            "endIndex": 11
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -1298,7 +1333,7 @@
               "parameterName": "options",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
-                "endIndex": 4
+                "endIndex": 6
               },
               "isOptional": true
             }
@@ -3819,7 +3854,7 @@
         {
           "kind": "Function",
           "canonicalReference": "@datashaper/tables!validateColumn:function(1)",
-          "docComment": "/**\n * Validates a column against a Field definition's constraints.\n *\n * @param table - \n *\n * @param name - \n *\n * @param dataType - \n *\n * @param constraints - \n *\n * @param includeIndexes - indicate whether to include the indexes of the row instances that failed validation\n *\n * @returns \n */\n",
+          "docComment": "/**\n * Validates a column against a Field definition's constraints.\n *\n * @param table - the table to validate\n *\n * @param name - the name of the column\n *\n * @param dataType - the type of the column\n *\n * @param constraints - the field constraints to validate against\n *\n * @param includeIndexes - indicate whether to include the indexes of the row instances that failed validation\n *\n * @returns \n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -3898,7 +3933,7 @@
         {
           "kind": "Function",
           "canonicalReference": "@datashaper/tables!validateTable:function(1)",
-          "docComment": "/**\n * Validates an entire table against a codebook's Field constraints.\n *\n * @param table - \n *\n * @param codebook - \n *\n * @param includeIndexes - indicate whether to include the indexes of the rows that failed validation for each field\n *\n * @returns \n */\n",
+          "docComment": "/**\n * Validates an entire table against a codebook's Field constraints.\n *\n * @param table - the table to validate\n *\n * @param codebook - the codebook to use\n *\n * @param includeIndexes - indicate whether to include the indexes of the rows that failed validation for each field\n *\n * @returns \n */\n",
           "excerptTokens": [
             {
               "kind": "Content",

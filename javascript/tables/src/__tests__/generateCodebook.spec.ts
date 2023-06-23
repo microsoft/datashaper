@@ -18,11 +18,11 @@ describe('generateCodebook', () => {
 
 		// we are not autotyping here to confirm that our codebook generation correctly
 		// infers types from the string values, using the pandas-compatible type hints
-		const parsed = fromCSV(csv, { autoType: false })
 
-		const codebook = generateCodebook(parsed)
+		it('should return a codebook object', async () => {
+			const parsed = await fromCSV(csv, { autoType: false })
+			const codebook = await generateCodebook(parsed)
 
-		it('should return a codebook object', () => {
 			expect(codebook.fields).toHaveLength(8)
 			expect(codebook.fields[0]?.name).toBe('index')
 			expect(codebook.fields[0]?.type).toBe(DataType.Number)
@@ -65,11 +65,9 @@ describe('generateCodebook', () => {
 				flag: 'r',
 			})
 
-			const parsed = fromCSV(csv, { autoType: false })
-
-			const codebook = generateCodebook(parsed)
-
-			it('should return a codebook object', () => {
+			it('should return a codebook object', async () => {
+				const parsed = await fromCSV(csv, { autoType: false })
+				const codebook = await generateCodebook(parsed)
 				expect(codebook.fields).toHaveLength(9)
 				expect(codebook.fields[0]?.name).toBe('Symbol')
 				expect(codebook.fields[0]?.type).toBe(DataType.String)
@@ -116,13 +114,12 @@ describe('generateCodebook', () => {
 			flag: 'r',
 		})
 
-		// we are not autotyping here to confirm that our codebook generation correctly
-		// infers types from the string values, using the pandas-compatible type hints
-		const parsed = fromCSV(csv, { autoType: false })
-
-		const codebook = generateCodebook(parsed)
-
-		it('should discover array subtypes', () => {
+		it('should discover array subtypes', async () => {
+			// we are not autotyping here to confirm that our codebook generation correctly
+			// infers types from the string values, using the pandas-compatible type hints
+			const parsed = await fromCSV(csv, { autoType: false })
+			const codebook = await generateCodebook(parsed)
+			
 			expect(codebook.fields).toHaveLength(3)
 			expect(codebook.fields[0]?.name).toBe('id')
 			expect(codebook.fields[0]?.type).toBe(DataType.Number)

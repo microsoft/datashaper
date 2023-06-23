@@ -15,20 +15,20 @@ import { readCsvTable } from './readCsvTable.js'
  * Meant for quick-and-dirty reads, with the advantage that our default parsing aligns with pandas.
  * Use readTable for more control over schema options and formats.
  */
-export function fromCSV(
+export async function fromCSV(
 	text: string,
 	options: CSVParseOptions = {
 		autoType: true,
 		autoMax: Infinity,
 	},
-): ColumnTable {
+): Promise<ColumnTable> {
 	const { autoType, autoMax, ...rest } = options
 
 	const csv = readCsvTable(text, {
 		parser: rest,
 	})
 	if (options?.autoType) {
-		const codebook = generateCodebook(csv, options)
+		const codebook = await generateCodebook(csv, options)
 		return applyCodebook(csv, codebook, CodebookStrategy.DataTypeOnly)
 	}
 	return csv

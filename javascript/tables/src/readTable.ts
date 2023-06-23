@@ -31,21 +31,36 @@ export async function readTable(
 	if (input == null) {
 		return Promise.resolve(undefined)
 	}
-	const table = await textTable(input, schema)
+	const table = await readTableInner(input, schema)
 	const opts = defaultOptions(options)
-	const isTypedFormat = schema.format === DataFormat.ARROW
 
 	// TODO: should we eventually perform some casting/typing work on arrow tables? They're already strongly typed
-	if (opts?.codebook || opts?.autoType) {
-		if (isTypedFormat) {
-			console.warn(
-				`not applying codebook or auto-typing to pre-typed data format ${schema.format}`,
-			)
-		} else {
-			return applyTyping(table, schema, opts)
-		}
+	if (!isBinaryFormat(schema.format) && (opts?.codebook || opts?.autoType)) {
+		const codebook =
+			opts?.codebook ?? (await inferCodebook(table, schema.format, opts))
+		return applyCodebook(table, codebook, CodebookStrategy.DataTypeOnly, schema)
 	}
 	return table
+}
+
+function isBinaryFormat(format: DataFormat | undefined) {
+	return format === DataFormat.ARROW
+}
+
+async function inferCodebook(
+	table: ColumnTable,
+	format: DataFormat | undefined,
+	opts: ReadTableOptions,
+) {
+	if (opts.codebook != null) {
+		return opts.codebook
+	} else {
+		return await generateCodebook(table, {
+			format,
+			autoType: opts.autoType,
+			autoMax: opts.autoMax,
+		})
+	}
 }
 
 /**
@@ -55,7 +70,7 @@ export async function readTable(
  * @param schema
  * @returns
  */
-async function textTable(
+async function readTableInner(
 	input: Blob | string,
 	schema: Partial<DataTableSchema>,
 ): Promise<ColumnTable> {
@@ -76,24 +91,6 @@ async function textTable(
 		default:
 			throw new Error(`unknown data format: ${format}`)
 	}
-}
-
-function applyTyping(
-	table: ColumnTable,
-	schema: Partial<DataTableSchema>,
-	options: {
-		codebook?: CodebookSchema
-		autoType?: boolean
-		autoMax?: number
-	},
-): ColumnTable {
-	const codebook =
-		options.codebook ||
-		generateCodebook(table, {
-			autoType: options.autoType,
-			autoMax: options.autoMax,
-		})
-	return applyCodebook(table, codebook, CodebookStrategy.DataTypeOnly, schema)
 }
 
 function defaultSchema(

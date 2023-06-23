@@ -22,8 +22,8 @@ import {
 
 /**
  * Validates an entire table against a codebook's Field constraints.
- * @param table
- * @param codebook
+ * @param table - the table to validate
+ * @param codebook - the codebook to use
  * @param includeIndexes - indicate whether to include the indexes of the rows that failed validation for each field
  * @returns
  */
@@ -46,10 +46,10 @@ export function validateTable(
 
 /**
  * Validates a column against a Field definition's constraints.
- * @param table
- * @param name
- * @param dataType
- * @param constraints
+ * @param table - the table to validate 
+ * @param name - the name of the column
+ * @param dataType - the type of the column
+ * @param constraints - the field constraints to validate against
  * @param includeIndexes - indicate whether to include the indexes of the row instances that failed validation
  * @returns
  */

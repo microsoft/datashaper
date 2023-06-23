@@ -19,8 +19,8 @@ export declare function formatNumberStr(value: string | number, options?: {
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  value | string \| number |  |
-|  options | { decimal?: string; thousands?: string; } | <i>(Optional)</i> |
+|  value | string \| number | the value to format |
+|  options | { decimal?: string; thousands?: string; } | <i>(Optional)</i> formatting options |
 
 <b>Returns:</b>
 

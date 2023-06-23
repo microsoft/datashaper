@@ -16,8 +16,8 @@ import toNumber from 'lodash-es/toNumber.js'
  * but if we remove them all even in invalid cases (e.g., '1,00'), invalid
  * numbers could be parsed downstream as valid.
  * The same occurs with decimal separators: parseFloat will ignore anything after the first.
- * @param value
- * @param options
+ * @param value - the value to format
+ * @param options - formatting options
  * @returns
  */
 export function formatNumberStr(

@@ -16,7 +16,7 @@ export declare function validateColumn(table: ColumnTable, field: Field, include
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  table | ColumnTable |  |
+|  table | ColumnTable | the table to validate |
 |  field | Field |  |
 |  includeIndexes | boolean | indicate whether to include the indexes of the row instances that failed validation |
 

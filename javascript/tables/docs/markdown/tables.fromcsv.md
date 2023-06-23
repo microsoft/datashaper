@@ -9,7 +9,7 @@ Drop-in replacement for arquero fromCSV, using our internal parsing with auto-ty
 <b>Signature:</b>
 
 ```typescript
-export declare function fromCSV(text: string, options?: CSVParseOptions): ColumnTable;
+export declare function fromCSV(text: string, options?: CSVParseOptions): Promise<ColumnTable>;
 ```
 
 ## Parameters
@@ -21,5 +21,5 @@ export declare function fromCSV(text: string, options?: CSVParseOptions): Column
 
 <b>Returns:</b>
 
-ColumnTable
+Promise&lt;ColumnTable&gt;
 

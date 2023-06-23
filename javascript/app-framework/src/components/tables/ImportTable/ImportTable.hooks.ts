@@ -2,15 +2,16 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { DataFormat, DataOrientation } from '@datashaper/schema'
-import type { TableMetadata } from '@datashaper/tables'
-import { introspect, readTable } from '@datashaper/tables'
+import { DataFormat, DataOrientation, type CodebookSchema } from '@datashaper/schema'
+import { type TableMetadata, introspect, readTable } from '@datashaper/tables'
 import type { BaseFile } from '@datashaper/utilities'
 import { extension, guessDelimiter } from '@datashaper/utilities'
 import { DataTable } from '@datashaper/workflow'
 import { table as atable } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { generateCodebook } from '@datashaper/tables'
+
 export function useFileAttributes(file: BaseFile): {
 	delimiter: string
 	extension: string
@@ -103,4 +104,62 @@ export function useDraftSchema(
 		onChange(schema)
 		return schema
 	}, [format, delimiter, onChange])
+}
+
+export function useCodebook(
+	table: ColumnTable | undefined,
+	autoType: boolean,
+	format: DataFormat,
+): {
+	codebook: CodebookSchema | undefined
+	isLoading: boolean
+	columnBeingInferred: string | undefined
+	progress: number
+} {
+	const [codebook, setCodebook] = useState<CodebookSchema | undefined>(
+		undefined,
+	)
+	const [columnBeingInferred, setColumnBeingInferred] = useState<
+		string | undefined
+	>(undefined)
+	const [isLoading, setIsLoading] = useState(true)
+	const [progress, setProgress] = useState(0)
+
+	useEffect(() => {
+		if (table && autoType) {
+			setIsLoading(true)
+			setCodebook(undefined)
+			setColumnBeingInferred(undefined)
+			setProgress(0)
+
+			generateCodebook(table, {
+				autoType,
+				format,
+				onInferring: setColumnBeingInferred,
+				onProgress: setProgress
+			})
+				.then(setCodebook)
+				.catch((err) => console.error(err))
+				.finally(() => {
+					setColumnBeingInferred(undefined)
+					setIsLoading(false)
+					setProgress(0)
+				})
+		}
+	}, [
+		table,
+		autoType,
+		format,
+		setIsLoading,
+		setCodebook,
+		setColumnBeingInferred,
+		setProgress,
+	])
+
+	return {
+		codebook,
+		isLoading,
+		columnBeingInferred,
+		progress,
+	}
 }
