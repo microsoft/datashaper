@@ -1094,6 +1094,8 @@ export interface TableBundleSchema extends ResourceSchema {
 //
 // @public
 export interface TypeHints {
+    arrayDelimiter?: string;
+    dataFormat?: DataFormat;
     dateFormat?: string;
     decimal?: string;
     falseValues?: string[];

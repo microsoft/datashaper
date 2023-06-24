@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import { DataFormat } from '../data.js'
 import type { TypeHints } from './TypeHints.js'
 
 /**
@@ -11,6 +12,8 @@ import type { TypeHints } from './TypeHints.js'
  * https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#csv-text-files
  */
 export const TypeHintsDefaults: Required<TypeHints> = {
+	dataFormat: DataFormat.CSV,
+	arrayDelimiter: ",",
 	trueValues: ['true'],
 	falseValues: ['false'],
 	naValues: [

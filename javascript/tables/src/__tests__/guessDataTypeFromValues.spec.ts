@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { DataType } from '@datashaper/schema'
+import { DataFormat, DataType } from '@datashaper/schema'
 
 import { guessDataTypeFromValues } from '../guessDataTypeFromValues.js'
 
@@ -38,9 +38,17 @@ describe('guessDataTypeFromValues', () => {
 	})
 
 	describe('array', () => {
-		const columnType = guessDataTypeFromValues(['<NA>', 'a,b', 'd', 'f,g'])
-
 		it('should return array', () => {
+			// TODO: CSV text cells should be quoted
+			const columnType = guessDataTypeFromValues(['<NA>', 'a,b', 'd', 'f,g'])
+			expect(columnType).toBe(DataType.Array)
+		})
+
+		it('should detect typed arrays', () => {
+			const columnType = guessDataTypeFromValues([
+				new Float64Array([1.1, 2.1, 3.1]),
+				new Float64Array([4.3, 5.2, 6.4]),
+			])
 			expect(columnType).toBe(DataType.Array)
 		})
 	})
@@ -95,7 +103,7 @@ describe('guessDataTypeFromValues', () => {
 		})
 
 		it('limit misses mixed types', () => {
-			const columnType = guessDataTypeFromValues(values, 3)
+			const columnType = guessDataTypeFromValues(values, DataFormat.CSV, 3)
 			expect(columnType).toBe(DataType.Number)
 		})
 	})

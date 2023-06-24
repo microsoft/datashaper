@@ -174,6 +174,14 @@
         "TypeHints": {
             "description": "Configuration values for interpreting data types when parsing a delimited file.\nBy default, all values are read as strings - applying these type hints can derive primitive types from the strings.",
             "properties": {
+                "arrayDelimiter": {
+                    "description": "The character to use for delimiting arrays.",
+                    "type": "string"
+                },
+                "dataFormat": {
+                    "$ref": "#/definitions/DataFormat",
+                    "description": "The data format"
+                },
                 "dateFormat": {
                     "description": "Default date format to use when parsing dates. The Codebook can override this at the column level.\nDefault: yyyy-MM-dd\nTODO: spark has a separate config for datetime. Do we care?",
                     "type": "string"

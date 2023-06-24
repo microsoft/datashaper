@@ -2,11 +2,22 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+
+import type { DataFormat } from "../data.js"
+
 /**
  * Configuration values for interpreting data types when parsing a delimited file.
  * By default, all values are read as strings - applying these type hints can derive primitive types from the strings.
  */
 export interface TypeHints {
+	/**
+	 * The data format
+	 */
+	dataFormat?: DataFormat
+	/**
+	 * The character to use for delimiting arrays.
+	 */
+	arrayDelimiter?: string
 	/**
 	 * Default: case-insenstive word "true".
 	 */

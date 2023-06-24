@@ -7,7 +7,7 @@ import type { TypeHints, Value } from '@datashaper/schema'
 import { DataType, TypeHintsDefaults } from '@datashaper/schema'
 import toNumber from 'lodash-es/toNumber.js'
 import moment from 'moment'
-
+import isTypedArray from 'lodash-es/isTypedArray.js'
 import { guessDataType, typeGuesserFactory } from './guessDataType.js'
 import { formatNumberStr, getDate } from './util.js'
 
@@ -111,28 +111,33 @@ export function parseArray(
 	subtype = DataType.String,
 	options?: TypeHints,
 	delimiter = ',',
-): (value: string) => any[] | null {
+): (value: unknown) => any[] | null {
 	const { isNull } = typeGuesserFactory(options)
-	return function parseArray(value: string) {
+	return function parseArray(value: unknown) {
 		if (isNull(value)) {
 			return null
+		}
+		if (Array.isArray(value) || isTypedArray(value)) {
+			return value as any[]
 		}
 
 		// NOTE: Array.isArray won't return true on typed arrays (e.g. Float64Array)
 		// We could check for each typed array type, but that's a lot of cases.
 		// Instead, we'll just check to see if this is a string, and if so, parse the array out.
-		const array = typeof value === 'string' ? value.split(delimiter) : value
-
-		try {
-			const parsed = array.map((i) => {
-				const item = `${i}`
-				const parser = parseAs(subtype, subtype, options)
-				return parser(item)
-			})
-			return parsed
-		} catch {
-			return array
+		if (typeof value === 'string') {
+			const array = value.split(delimiter)
+			try {
+				const parsed = array.map((i) => {
+					const item = `${i}`
+					const parser = parseAs(subtype, subtype, options)
+					return parser(item)
+				})
+				return parsed
+			} catch {
+				return array
+			}
 		}
+		throw new Error(`could not parse array value ${value}`)
 	}
 }
 

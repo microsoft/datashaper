@@ -9,7 +9,7 @@ Factory function to provide a type guessing function for any string value. This 
 <b>Signature:</b>
 
 ```typescript
-export declare function guessDataType(options?: TypeHints): (value: string) => DataType;
+export declare function guessDataType(options?: TypeHints): (value: unknown) => DataType;
 ```
 
 ## Parameters
@@ -20,7 +20,7 @@ export declare function guessDataType(options?: TypeHints): (value: string) => D
 
 <b>Returns:</b>
 
-(value: string) =&gt; DataType
+(value: unknown) =&gt; DataType
 
 A function that evaluates the datatype of inputs
 

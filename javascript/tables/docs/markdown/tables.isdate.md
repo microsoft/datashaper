@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function isDate(value: string): boolean;
+export declare function isDate(value: unknown): boolean;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  value | string |  |
+|  value | unknown |  |
 
 <b>Returns:</b>
 
