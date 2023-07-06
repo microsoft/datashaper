@@ -10,7 +10,7 @@
 					"profile": "datatable",
 					"title": "nhefs.csv",
 					"name": "datatable.json",
-					"path": "https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/1268/20/nhefs.csv",
+					"path": "https://raw.githubusercontent.com/BiomedSciAI/causallib/master/causallib/datasets/data/nhefs/NHEFS.csv",
 					"metadata": {
 						"source": "https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/",
 						"citation": "Hernán MA, Robins JM (2020). Causal Inference: What If. Boca Raton: Chapman & Hall/CRC"
