@@ -68,7 +68,7 @@ describe('FileCollection.add', () => {
 
 	it('should add a file from a url to the FileCollection', async () => {
 		await fileCollection.add(
-			'https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/1268/20/nhefs.csv',
+			'https://microsoft.github.io/datashaper/data/NHEFS.csv',
 		)
 		expect(fileCollection.list()).toHaveLength(1)
 	})
