@@ -479,7 +479,6 @@ export interface SampleArgs {
 
 	/**
 	 * The randomization seed to use for sampling to ensure stable sampling.
-	 * This may not be supported in all environments. JS/Arquero do not support a seed value, however Pandas does.
 	 */
 	seed?: number
 }
