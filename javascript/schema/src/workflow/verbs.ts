@@ -404,10 +404,65 @@ export enum CodebookStrategy {
 export interface LookupArgs extends JoinArgsBase, InputColumnListArgs {}
 
 export enum MergeStrategy {
+	/**
+	 * Use the first valid value from the the input column list.
+	 * e.g.
+	 * 
+	 * columns = ['x', 'y', 'z']
+	 * x = null, y = 2, z = 3
+	 * 
+	 * Result = 2
+	 */
 	FirstOneWins = 'first one wins',
+
+	/**
+	 * Use the last valid value from the input column list.
+	 * 
+	 * e.g.
+	 * 
+	 * columns = ['x', 'y', 'z']
+	 * x = null, y = 2, z = 3
+	 * 
+	 * Result = 3
+	 */
 	LastOneWins = 'last one wins',
+
+	/**
+	 * Concatenate all valid values from the valid values from the input column list into a string using a delimiter.
+	 * e.g.
+	 * 
+	 * columns = ['x', 'y', 'z']
+	 * x = null, y = 2, z = 3
+	 * 
+	 * Result = "2,3"
+	 */
 	Concat = 'concat',
+
+	/**
+	 * Create an array of values from the valid values from the input column list
+	 * 
+	 * e.g.
+	 * 
+	 * columns = ['x', 'y', 'z']
+	 * x = null, y = 2, z = 3
+	 * 
+	 * Result = [2, 3]
+	 */
 	CreateArray = 'array',
+
+	/**
+	 * Create an dictionary of values from the valid values from the input column list.
+	 * The input column list _must_ be of size 2. 
+	 * The first column will be used as the key, the second as the value.
+	 * 
+	 * e.g.
+	 * 
+	 * columns = ['id', 'value']
+	 * id = 123, value = 500
+	 * 
+	 * Result = { "id": 123, "value": 500 }
+	 */
+	CreateDict = 'dict',
 }
 
 export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
