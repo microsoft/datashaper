@@ -11,9 +11,5 @@ def sample(
     input: VerbInput, size: int = None, proportion: int = None, seed: int = None
 ):
     input_table = input.get_input()
-    output = input_table.sample(
-        n=size,
-        frac=proportion,
-        random_state=seed
-    )
+    output = input_table.sample(n=size, frac=proportion, random_state=seed)
     return TableContainer(table=output)
