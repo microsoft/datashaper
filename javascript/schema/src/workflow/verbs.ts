@@ -469,12 +469,18 @@ export interface SampleArgs {
 	 * This takes precedence over proportion.
 	 */
 	size?: number
+
 	/**
 	 * If table size is unknown ahead of time, specify a proportion of rows to sample.
 	 * If size is specified, it will be used instead, otherwise computed from this
 	 * proportion using the table.numRows()
 	 */
 	proportion?: number
+
+	/**
+	 * The randomization seed to use for sampling to ensure stable sampling.
+	 */
+	seed?: number
 }
 
 export type SelectArgs = InputColumnListArgs

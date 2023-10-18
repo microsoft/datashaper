@@ -8790,6 +8790,33 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!SampleArgs#seed:member",
+              "docComment": "/**\n * The randomization seed to use for sampling to ensure stable sampling.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "seed?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "seed",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!SampleArgs#size:member",
               "docComment": "/**\n * Number of rows to sample from the table. This takes precedence over proportion.\n */\n",
               "excerptTokens": [

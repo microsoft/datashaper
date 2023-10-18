@@ -41,6 +41,14 @@ export const SampleForm: React.FC<StepFormProps<SampleArgs>> = memo(
 			onChange,
 		)
 
+		const handleSeedChange = useSpinButtonChangeHandler(
+			step,
+			(s, val) => {
+				s.args.seed = val != null ? +val : undefined
+			},
+			onChange,
+		)
+
 		return (
 			<Container>
 				<Input>
@@ -67,6 +75,16 @@ export const SampleForm: React.FC<StepFormProps<SampleArgs>> = memo(
 						}
 						styles={spinStyles}
 						onChange={handlePercentChange}
+					/>
+				</Input>
+				<Input>
+					<InputLabel>seed</InputLabel>
+					<SpinButton
+						step={1}
+						max={1000}
+						value={step.args.seed ? `${step.args.seed}` : ''}
+						styles={spinStyles}
+						onChange={handleSeedChange}
 					/>
 				</Input>
 			</Container>

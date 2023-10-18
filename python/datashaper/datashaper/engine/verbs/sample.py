@@ -7,7 +7,9 @@ from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.table_store import TableContainer
 
 
-def sample(input: VerbInput, size: int = None, proportion: int = None):
+def sample(
+    input: VerbInput, size: int = None, proportion: int = None, seed: int = None
+):
     input_table = input.get_input()
-    output = input_table.sample(n=size, frac=proportion)
+    output = input_table.sample(n=size, frac=proportion, random_state=seed)
     return TableContainer(table=output)

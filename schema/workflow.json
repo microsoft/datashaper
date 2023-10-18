@@ -950,6 +950,10 @@
                     "description": "If table size is unknown ahead of time, specify a proportion of rows to sample.\nIf size is specified, it will be used instead, otherwise computed from this\nproportion using the table.numRows()",
                     "type": "number"
                 },
+                "seed": {
+                    "description": "The randomization seed to use for sampling to ensure stable sampling.",
+                    "type": "number"
+                },
                 "size": {
                     "description": "Number of rows to sample from the table.\nThis takes precedence over proportion.",
                     "type": "number"
