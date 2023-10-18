@@ -4,10 +4,9 @@
 #
 """Common types used across the datashaper codebase."""
 
+from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any, Dict, List, Union
-
-from dataclasses import dataclass, field
 
 
 class Verb(Enum):
@@ -269,6 +268,7 @@ class MergeStrategy(Enum):
     LastOneWins = "last one wins"
     Concat = "concat"
     CreateArray = "array"
+    CreateDict = "dict"
 
 
 class WindowFunction(Enum):

@@ -746,6 +746,7 @@
             "enum": [
                 "array",
                 "concat",
+                "dict",
                 "first one wins",
                 "last one wins"
             ],

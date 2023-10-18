@@ -452,15 +452,18 @@ export enum MergeStrategy {
 
 	/**
 	 * Create an dictionary of values from the valid values from the input column list.
-	 * The input column list _must_ be of size 2. 
-	 * The first column will be used as the key, the second as the value.
+	 * The input column list _must_ be of size 2.
+	 * Each input column value _must_ be an array.
+	 * 
+	 * The length of the key array must equal the length of the value array.
+	 * The first column will be used as the keys, the second as the values.
 	 * 
 	 * e.g.
 	 * 
 	 * columns = ['id', 'value']
-	 * id = 123, value = 500
+	 * id = [1, 2, 3, null, 5, 6], value = [100, 200, 300, 400, 500, null]
 	 * 
-	 * Result = { "id": 123, "value": 500 }
+	 * Result = { "1": 100, "2": 200, "3": 300, "5": 500 }
 	 */
 	CreateDict = 'dict',
 }

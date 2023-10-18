@@ -6977,7 +6977,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!MergeStrategy.Concat:member",
-              "docComment": "",
+              "docComment": "/**\n * Concatenate all valid values from the valid values from the input column list into a string using a delimiter. e.g.\n *\n * columns = ['x', 'y', 'z'] x = null, y = 2, z = 3\n *\n * Result = \"2,3\"\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -6998,7 +6998,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!MergeStrategy.CreateArray:member",
-              "docComment": "",
+              "docComment": "/**\n * Create an array of values from the valid values from the input column list\n *\n * e.g.\n *\n * columns = ['x', 'y', 'z'] x = null, y = 2, z = 3\n *\n * Result = [2, 3]\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -7018,8 +7018,29 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!MergeStrategy.CreateDict:member",
+              "docComment": "/**\n * Create an dictionary of values from the valid values from the input column list. The input column list _must_ be of size 2. Each input column value _must_ be an array.\n *\n * The length of the key array must equal the length of the value array. The first column will be used as the keys, the second as the values.\n *\n * e.g.\n *\n * columns = ['id', 'value'] id = [1, 2, 3, null, 5, 6], value = [100, 200, 300, 400, 500, null]\n *\n * Result = { \"1\": 100, \"2\": 200, \"3\": 300, \"5\": 500 }\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CreateDict = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"dict\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CreateDict"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!MergeStrategy.FirstOneWins:member",
-              "docComment": "",
+              "docComment": "/**\n * Use the first valid value from the the input column list. e.g.\n *\n * columns = ['x', 'y', 'z'] x = null, y = 2, z = 3\n *\n * Result = 2\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -7040,7 +7061,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!MergeStrategy.LastOneWins:member",
-              "docComment": "",
+              "docComment": "/**\n * Use the last valid value from the input column list.\n *\n * e.g.\n *\n * columns = ['x', 'y', 'z'] x = null, y = 2, z = 3\n *\n * Result = 3\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

@@ -13,6 +13,7 @@ import {
 	concatStrategy,
 	firstOneWinsStrategy,
 	lastOneWinsStrategy,
+	dictStrategy,
 } from './util/merge.js'
 import { unhotOperation } from './util/unhot-logic.js'
 
@@ -41,6 +42,10 @@ export const mergeStep: ColumnTableStep<MergeArgs> = (
 				return arrayStrategy(d, columns)
 			case MergeStrategy.FirstOneWins:
 				return firstOneWinsStrategy(d, columns)
+			case MergeStrategy.CreateDict:
+				return dictStrategy(d, columns)
+			default:
+				throw new Error(`unhandled merge strategy ${strategy}`)
 		}
 	})
 

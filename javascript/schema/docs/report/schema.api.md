@@ -706,13 +706,10 @@ export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
 //
 // @public (undocumented)
 export enum MergeStrategy {
-    // (undocumented)
     Concat = "concat",
-    // (undocumented)
     CreateArray = "array",
-    // (undocumented)
+    CreateDict = "dict",
     FirstOneWins = "first one wins",
-    // (undocumented)
     LastOneWins = "last one wins"
 }
 

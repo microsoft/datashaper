@@ -1,0 +1,25 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "convert",
+			"input": "table32",
+			"args": {
+				"column": "ids",
+				"type": "array",
+				"delimiter": ";"
+			}
+		},
+		{
+			"verb": "convert",
+			"id": "expected",
+			"args": {
+				"column": "values",
+				"type": "array",
+				"delimiter": ";"
+			}
+		}
+	],
+
+	"input": ["table32"]
+}

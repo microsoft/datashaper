@@ -77,6 +77,52 @@ export function arrayStrategy(
 	return concat
 }
 
+/**
+ * TODO: use https://uwdata.github.io/arquero/api/op#row_object?
+ * @param singleRow - the row to collapse
+ * @param columns 
+ * @returns 
+ */
+export function dictStrategy(
+	singleRow: RowObject,
+	columns: string[],
+): Record<string, Value> | null {
+	if (columns.length !== 2) {
+		throw new Error(
+			`merge strategy 'CreateDict' requires exactly two columns, found ${columns.length}`,
+		)
+	}
+
+	const [keysCol, valuesCol] = columns
+	if (keysCol == null || valuesCol == null) {
+		throw new Error(`merge strategy 'CreateDict' requires two valid column names`)
+	}
+	
+	const keys = singleRow[keysCol]
+	const values = singleRow[valuesCol]
+
+	if (!Array.isArray(keys)) {
+		throw new Error(
+			`merge strategy 'CreateDict' requires 'key' column to be an array, found ${keys} in ${JSON.stringify(singleRow)}`
+		)
+	}
+	if (!Array.isArray(values)) {
+		throw new Error(
+			`merge strategy 'CreateDict' requires 'value' column to be an array, found ${values}`,
+		)
+	}
+
+	const result: Record<string, any> = []
+	for (let i = 0; i < keys.length; i++) {
+		const key = keys[i]
+		const value = values[i]
+		if (key != null && value != null) {
+			result[key] = value
+		}
+	}
+	return result
+}
+
 export function concatStrategy(
 	singleRow: RowObject,
 	columns: string[],
