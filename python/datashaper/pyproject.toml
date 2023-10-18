@@ -73,7 +73,7 @@ _codespell = 'codespell dodiscover/ doc/ examples/ --ignore-words=.codespelligno
 _changelog = 'semversioner changelog > CHANGELOG.md'
 _apply_version = 'semversioner release'
 
-test = "pytest  -v tests"
+test = "pytest -v tests"
 
 [[tool.poe.tasks.check]]
 sequence = ['_flake8', '_bandit', '_codespell', 'check_format', '_pydocstyle']
