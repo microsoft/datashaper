@@ -5,7 +5,7 @@
 import { useMicrosoftConsentBanner } from '@essex/hooks'
 import { useTheme } from '@fluentui/react'
 import type { FC } from 'react'
-import { memo } from 'react'
+import { memo, useMemo } from 'react'
 
 import { constants, Container, LinkA, LinkDiv } from './Footer.styles.js'
 
@@ -17,26 +17,27 @@ export const Footer: FC = memo(function Footer() {
 		onChange: (c: any) => console.log('consent changed', c),
 	}
 	const [, manageConsent] = useMicrosoftConsentBanner(CONSENT_CONF)
-
+	// override link color to provide subtle footer while still meeting contrast requirements
+	const style = useMemo(() => ({ color: theme.palette.neutralSecondary }), [theme])
 	return (
 		<Container>
-			<Link href={constants.privacyUrl}>Privacy</Link>
+			<Link href={constants.privacyUrl} style={style}>Privacy</Link>
 			{' | '}
 			<Link
 				id={'managecookies'}
 				onClick={manageConsent}
-				style={{ color: theme.palette.themePrimary }}
+				style={style}
 			>
 				Cookies
 			</Link>
 			{' | '}
-			<Link href={constants.termsOfUseUrl}>Terms of Use</Link>
+			<Link href={constants.termsOfUseUrl} style={style}>Terms of Use</Link>
 			{' | '}
-			<Link href={constants.trademarksUrl}>Trademarks</Link>
+			<Link href={constants.trademarksUrl} style={style}>Trademarks</Link>
 			{' | '}
-			<Link href={constants.microsoft}>{constants.copyright}</Link>
+			<Link href={constants.microsoft} style={style}>{constants.copyright}</Link>
 			{' | '}
-			<Link href={constants.github}>GitHub</Link>
+			<Link href={constants.github} style={style}>GitHub</Link>
 		</Container>
 	)
 })
