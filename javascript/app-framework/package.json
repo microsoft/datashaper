@@ -33,7 +33,7 @@
 		"@datashaper/tables": "workspace:^",
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/workflow": "workspace:^",
-		"@essex/components": "^3.8.2",
+		"@essex/components": "^4.0.0",
 		"@monaco-editor/react": "^4.5.1",
 		"ahooks": "^3.7.7",
 		"allotment": "1.19.0",
