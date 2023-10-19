@@ -13,7 +13,7 @@ export const Container = styled.footer`
 	justify-content: center;
 	gap: 18px;
 	align-items: center;
-	color: ${({ theme }) => theme.palette.neutralTertiary};
+	color: ${({ theme }) => theme.palette.neutralSecondary};
 	background: ${({ theme }) => theme.palette.neutralLight};
 	border-top: 1px solid ${({ theme }) => theme.palette.neutralTertiaryAlt};
 `
