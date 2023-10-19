@@ -14,8 +14,9 @@ export declare enum MergeStrategy
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  Concat | <code>&quot;concat&quot;</code> |  |
-|  CreateArray | <code>&quot;array&quot;</code> |  |
-|  FirstOneWins | <code>&quot;first one wins&quot;</code> |  |
-|  LastOneWins | <code>&quot;last one wins&quot;</code> |  |
+|  Concat | <code>&quot;concat&quot;</code> | <p>Concatenate all valid values from the valid values from the input column list into a string using a delimiter. e.g.</p><p>columns = \['x', 'y', 'z'\] x = null, y = 2, z = 3</p><p>Result = "2,3"</p> |
+|  CreateArray | <code>&quot;array&quot;</code> | <p>Create an array of values from the valid values from the input column list</p><p>e.g.</p><p>columns = \['x', 'y', 'z'\] x = null, y = 2, z = 3</p><p>Result = \[2, 3\]</p> |
+|  CreateDict | <code>&quot;dict&quot;</code> | <p>Create an dictionary of values from the valid values from the input column list. The input column list \_must\_ be of size 2. Each input column value \_must\_ be an array.</p><p>The length of the key array must equal the length of the value array. The first column will be used as the keys, the second as the values.</p><p>e.g.</p><p>columns = \['id', 'value'\] id = \[1, 2, 3, null, 5, 6\], value = \[100, 200, 300, 400, 500, null\]</p><p>Result = { "1": 100, "2": 200, "3": 300, "5": 500 }</p> |
+|  FirstOneWins | <code>&quot;first one wins&quot;</code> | <p>Use the first valid value from the the input column list. e.g.</p><p>columns = \['x', 'y', 'z'\] x = null, y = 2, z = 3</p><p>Result = 2</p> |
+|  LastOneWins | <code>&quot;last one wins&quot;</code> | <p>Use the last valid value from the input column list.</p><p>e.g.</p><p>columns = \['x', 'y', 'z'\] x = null, y = 2, z = 3</p><p>Result = 3</p> |
 

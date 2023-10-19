@@ -5,7 +5,7 @@
 from functools import partial
 from typing import List
 
-from datashaper.engine.verbs.utils.merge_utils import __strategy_mapping
+from datashaper.engine.verbs.utils.merge_utils import strategy_mapping
 from datashaper.engine.verbs.utils.unhot_utils import unhot_operation
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.table_store import TableContainer
@@ -22,18 +22,18 @@ def merge(
     unhot: bool = False,
     prefix: str = "",
 ):
+    def get_input_table():
+        if unhot:
+            return unhot_operation(input, columns, prefix).get_input()
+        else:
+            return input.get_input()
+
     merge_strategy = MergeStrategy(strategy)
-
-    input_table = (
-        unhot_operation(input, columns, prefix).get_input()
-        if unhot
-        else input.get_input()
-    )
-
+    input_table = get_input_table()
     output = input_table.copy()
 
     output[to] = output[columns].apply(
-        partial(__strategy_mapping[merge_strategy], delim=delimiter), axis=1
+        partial(strategy_mapping[merge_strategy], delim=delimiter), axis=1
     )
 
     filteredList: list[str] = []

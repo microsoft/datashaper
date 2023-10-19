@@ -1,0 +1,42 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "convert",
+			"input": "table32",
+			"args": {
+				"column": "ids",
+				"type": "array",
+				"delimiter": ";"
+			}
+		},
+		{
+			"verb": "convert",
+			"args": {
+				"column": "values",
+				"type": "array",
+				"delimiter": ";"
+			}
+		},
+		{
+			"verb": "merge",
+			"input": "table32",
+			"args": {
+				"columns": ["ids", "values"],
+				"strategy": "dict",
+				"to": "mapping",
+				"preserveSource": true
+			},
+			"id": "expected"
+		},
+		{
+			"verb": "select",
+			"id": "expected",
+			"args": {
+				"columns": ["mapping"]
+			}
+		}
+	],
+
+	"input": ["table32"]
+}
