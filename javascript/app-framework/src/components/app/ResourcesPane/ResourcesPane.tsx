@@ -89,12 +89,13 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 					{!narrow && (
 						<div>
 							<Tooltip content={helpTooltip} styles={tooltipStyles}>
-								<IconButton onClick={onToggleHelp} iconProps={icons.help} />
+								<IconButton onClick={onToggleHelp} iconProps={icons.help} ariaLabel="Open help"/>
 							</Tooltip>
 							<Tooltip content={settingsTooltip} styles={tooltipStyles}>
 								<IconButton
 									onClick={onToggleSettings}
 									iconProps={icons.settings}
+									ariaLabel="Open settings"
 								/>
 							</Tooltip>
 						</div>
@@ -103,6 +104,7 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 						<IconButton
 							onClick={onToggleNarrow}
 							iconProps={narrow ? icons.expand : icons.collapse}
+							ariaLabel="Collapse resource pane"
 						/>
 					</Tooltip>
 				</FooterMenu>
