@@ -18,26 +18,35 @@ export const Footer: FC = memo(function Footer() {
 	}
 	const [, manageConsent] = useMicrosoftConsentBanner(CONSENT_CONF)
 	// override link color to provide subtle footer while still meeting contrast requirements
-	const style = useMemo(() => ({ color: theme.palette.neutralSecondary }), [theme])
+	const style = useMemo(
+		() => ({ color: theme.palette.neutralSecondary }),
+		[theme],
+	)
 	return (
 		<Container>
-			<Link href={constants.privacyUrl} style={style}>Privacy</Link>
+			<Link href={constants.privacyUrl} style={style}>
+				Privacy
+			</Link>
 			{' | '}
-			<Link
-				id={'managecookies'}
-				onClick={manageConsent}
-				style={style}
-			>
+			<Link id={'managecookies'} onClick={manageConsent} style={style}>
 				Cookies
 			</Link>
 			{' | '}
-			<Link href={constants.termsOfUseUrl} style={style}>Terms of Use</Link>
+			<Link href={constants.termsOfUseUrl} style={style}>
+				Terms of Use
+			</Link>
 			{' | '}
-			<Link href={constants.trademarksUrl} style={style}>Trademarks</Link>
+			<Link href={constants.trademarksUrl} style={style}>
+				Trademarks
+			</Link>
 			{' | '}
-			<Link href={constants.microsoft} style={style}>{constants.copyright}</Link>
+			<Link href={constants.microsoft} style={style}>
+				{constants.copyright}
+			</Link>
 			{' | '}
-			<Link href={constants.github} style={style}>GitHub</Link>
+			<Link href={constants.github} style={style}>
+				GitHub
+			</Link>
 		</Container>
 	)
 })
