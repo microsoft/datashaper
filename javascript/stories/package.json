@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/stories",
-	"version": "0.3.17",
+	"version": "0.4.0",
 	"private": true,
 	"author": "Chris Trevino <chtrevin@microsoft.com>",
 	"scripts": {

@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/tables",
-	"version": "7.0.3",
+	"version": "8.0.0",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
