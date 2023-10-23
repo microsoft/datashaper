@@ -11,12 +11,12 @@ from typing import Any, Callable, Dict, Optional, Set
 from uuid import uuid4
 
 import pandas as pd
-from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.engine.verbs.verbs_mapping import functions
-from datashaper.execution_node import ExecutionNode
+from datashaper.engine import VerbInput, functions
+from datashaper.execution import ExecutionNode, VerbDefinitions
 from datashaper.table_store import TableContainer
-from datashaper.types import Verb
 from jsonschema import validate as validate_schema
+
+from python.datashaper.datashaper.engine.types import Verb
 
 # TODO: this won't work for a published package
 SCHEMA_FILE = "../../schema/workflow.json"
@@ -25,20 +25,21 @@ SCHEMA_FILE = "../../schema/workflow.json"
 class Workflow:
     """A data processing graph."""
 
-    inputs: Dict[str, TableContainer] = {}
-    __graph: Dict[str, ExecutionNode] = OrderedDict()
-    __dependency_graph: Dict[str, set] = defaultdict(set)
+    inputs: dict[str, TableContainer] = {}
+    __graph: dict[str, ExecutionNode] = OrderedDict()
+    __dependency_graph: dict[str, set] = defaultdict(set)
     __last_step_id: str = None
 
     def __init__(
         self,
-        schema: Dict,
+        schema: dict[str, Any],
         input_path: Optional[str] = None,
-        input_tables: Optional[Dict[str, pd.DataFrame]] = None,
+        input_tables: Optional[dict[str, pd.DataFrame]] = None,
         schema_path: Optional[str] = SCHEMA_FILE,
-        verbs: Optional[Dict[str, Callable]] = functions,
+        verbs: Optional[dict[str, Callable]] = functions,
         # TODO: the current schema definition does not work in Python
         validate: bool = False,
+        default_input: Optional[str] = "datasource",
     ):
         """Create an execution graph from the Dict provided in workflow.
 
@@ -54,6 +55,9 @@ class Workflow:
         :param validate: Optional value, if true perform JSON-schema validation.
                          Defaults to False.
         :type validate: bool, optional
+        
+        :param default_input: Optional value, the default input for the first step.
+        :type default_input: str, optional
         """
         # Perform JSON-schema validation
         if validate:
@@ -76,16 +80,11 @@ class Workflow:
         previous_step_id = None
         for step in schema["steps"]:
             step_id = step["id"] if "id" in step else str(uuid4())
-            step_input = step["input"] if "input" in step else previous_step_id
-            verb_fn = None
-
-            try:
-                # try to find a built-in verb
-                verb_fn = functions[Verb(step["verb"])]
-            except ValueError:
-                # try to use a custom verb
-                verb_fn = verbs[step["verb"]]
-
+            step_input = (
+                step["input"] if "input" in step else previous_step_id
+            ) or default_input
+            verb_fn = Workflow.__get_verb_fn(step["verb"], verbs)
+            
             step = ExecutionNode(
                 node_id=step_id,
                 node_input=step_input,
@@ -111,6 +110,18 @@ class Workflow:
                 else:
                     inputs.extend(value)
             return inputs
+        
+    @staticmethod
+    def __get_verb_fn(verb: str, verbs: Optional[VerbDefinitions]) -> Callable:
+        """Get the verb function from the name."""
+        try:
+            # try to find a built-in verb
+            return functions[Verb(verb)]
+        except ValueError:
+            # try to use a custom verb
+            if verbs is None or verb not in verbs:
+                raise ValueError(f"Verb {verb} not found in verbs")
+            return verbs[verb]
 
     def __check_inputs(self, node_key, visitted):
         node = self.__graph[node_key]
