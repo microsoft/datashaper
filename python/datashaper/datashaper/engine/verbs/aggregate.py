@@ -5,10 +5,11 @@
 
 from typing import List
 
-from datashaper.engine.pandas.aggregate_mapping import aggregate_operation_mapping
-from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.table_store import TableContainer
-from datashaper.types import FieldAggregateOperation
+
+from ..pandas.aggregate_mapping import aggregate_operation_mapping
+from ..types import FieldAggregateOperation
+from .verb_input import VerbInput
 
 
 def aggregate(

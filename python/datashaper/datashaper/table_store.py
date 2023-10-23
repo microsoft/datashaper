@@ -10,7 +10,7 @@ from typing import Any, Dict, Generic, List, Optional, TypeVar, Union
 import pandas as pd
 from pandas.core.groupby import DataFrameGroupBy
 
-from python.datashaper.datashaper.engine.types import Bin, Category, DataType
+from .engine.types import Bin, Category, DataType
 
 
 @dataclass

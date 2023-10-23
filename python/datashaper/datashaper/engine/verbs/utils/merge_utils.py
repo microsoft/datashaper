@@ -1,13 +1,11 @@
 from typing import Any, Callable, Dict
 
 import pandas as pd
-
 from pandas.api.types import is_bool
 
-from datashaper.types import MergeStrategy
+from ...types import MergeStrategy
 
-
-__strategy_mapping: Dict[MergeStrategy, Callable] = {
+strategy_mapping: Dict[MergeStrategy, Callable] = {
     MergeStrategy.FirstOneWins: lambda values, **kwargs: values.dropna().apply(
         lambda x: correct_type(x)
     )[0],

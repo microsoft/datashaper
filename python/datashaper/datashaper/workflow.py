@@ -7,16 +7,15 @@
 import json
 import os
 from collections import OrderedDict, defaultdict
-from typing import Any, Callable, Dict, Optional, Set
+from typing import Any, Callable, Optional, Set
 from uuid import uuid4
 
 import pandas as pd
-from datashaper.engine import VerbInput, functions
-from datashaper.execution import ExecutionNode, VerbDefinitions
-from datashaper.table_store import TableContainer
 from jsonschema import validate as validate_schema
 
-from python.datashaper.datashaper.engine.types import Verb
+from .engine import Verb, VerbInput, functions
+from .execution import ExecutionNode, VerbDefinitions
+from .table_store import TableContainer
 
 # TODO: this won't work for a published package
 SCHEMA_FILE = "../../schema/workflow.json"
@@ -60,7 +59,7 @@ class Workflow:
         :type default_input: str, optional
         """
         # Perform JSON-schema validation
-        if validate:
+        if validate and schema_path is not None:
             with open(schema_path) as schema_file:
                 schema_json = json.load(schema_file)
                 validate_schema(schema, schema_json)

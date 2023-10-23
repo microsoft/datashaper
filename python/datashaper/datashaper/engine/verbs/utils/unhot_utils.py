@@ -1,9 +1,8 @@
 import copy
-
 from math import nan
 from typing import List
 
-from datashaper.engine.verbs.verb_input import VerbInput
+from ..verb_input import VerbInput
 
 
 def unhot_operation(input: VerbInput, columns: List[str], prefix: str):

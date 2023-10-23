@@ -6,7 +6,7 @@
 from dataclasses import dataclass, field
 from typing import Any, Callable, Optional, Union
 
-from datashaper.table_store import TableContainer
+from ..table_store import TableContainer
 
 
 @dataclass

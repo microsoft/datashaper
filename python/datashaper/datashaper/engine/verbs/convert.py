@@ -4,18 +4,16 @@
 #
 
 import numbers
-
 from datetime import datetime
 from typing import Callable, Dict, Optional, Union
 
 import numpy as np
 import pandas as pd
-
 from pandas.api.types import is_bool_dtype, is_numeric_dtype
 
-from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.table_store import TableContainer
-from datashaper.types import ParseType
+from ...table_store import TableContainer
+from ..types import ParseType
+from .verb_input import VerbInput
 
 
 def convert_int(value: str, radix: int) -> Union[int, float]:

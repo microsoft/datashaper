@@ -9,7 +9,7 @@ from uuid import uuid4
 
 import pandas as pd
 
-from datashaper.types import (
+from ..types import (
     BooleanComparisonOperator,
     BooleanLogicalOperator,
     FilterArgs,
@@ -17,7 +17,6 @@ from datashaper.types import (
     NumericComparisonOperator,
     StringComparisonOperator,
 )
-
 
 _boolean_function_map = {
     BooleanLogicalOperator.OR: lambda df, columns: df[columns].any(axis="columns")

@@ -5,8 +5,8 @@
 
 from typing import List
 
-from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.table_store import TableContainer
+from ...table_store import TableContainer
+from .verb_input import VerbInput
 
 
 def dedupe(input: VerbInput, columns: List[str] = None):

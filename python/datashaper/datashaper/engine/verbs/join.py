@@ -7,10 +7,9 @@ from typing import List
 
 import pandas as pd
 
-from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.table_store import TableContainer
-from datashaper.types import JoinStrategy
-
+from ...table_store import TableContainer
+from ..types import JoinStrategy
+from .verb_input import VerbInput
 
 __strategy_mapping = {
     JoinStrategy.Inner: "inner",

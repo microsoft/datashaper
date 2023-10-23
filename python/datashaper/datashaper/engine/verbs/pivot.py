@@ -3,10 +3,10 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from datashaper.engine.pandas.aggregate_mapping import aggregate_operation_mapping
-from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.table_store import TableContainer
-from datashaper.types import FieldAggregateOperation
+from ...table_store import TableContainer
+from ..pandas.aggregate_mapping import aggregate_operation_mapping
+from ..types import FieldAggregateOperation
+from .verb_input import VerbInput
 
 
 def pivot(input: VerbInput, key: str, value: str, operation: str):

@@ -5,8 +5,8 @@
 
 import pandas as pd
 
-from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.table_store import TableContainer
+from ...table_store import TableContainer
+from .verb_input import VerbInput
 
 
 def unfold(input: VerbInput, key: str, value: str):

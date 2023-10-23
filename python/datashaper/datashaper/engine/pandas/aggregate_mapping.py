@@ -1,7 +1,6 @@
 from functools import reduce
 
-from datashaper.types import FieldAggregateOperation
-
+from ..types import FieldAggregateOperation
 
 aggregate_operation_mapping = {
     FieldAggregateOperation.Any: "first",

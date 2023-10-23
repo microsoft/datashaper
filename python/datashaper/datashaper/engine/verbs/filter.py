@@ -4,13 +4,11 @@
 #
 
 import logging
-
 from typing import List, Union
 
-from datashaper.engine.pandas.filter_df import filter_df
-from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.table_store import TableContainer
-from datashaper.types import (
+from ...table_store import TableContainer
+from ..pandas.filter_df import filter_df
+from ..types import (
     BooleanComparisonOperator,
     BooleanLogicalOperator,
     Criterion,
@@ -19,6 +17,7 @@ from datashaper.types import (
     NumericComparisonOperator,
     StringComparisonOperator,
 )
+from .verb_input import VerbInput
 
 
 def _get_operator(

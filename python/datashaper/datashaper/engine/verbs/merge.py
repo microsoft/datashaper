@@ -5,11 +5,11 @@
 from functools import partial
 from typing import List
 
-from datashaper.engine.verbs.utils.merge_utils import __strategy_mapping
-from datashaper.engine.verbs.utils.unhot_utils import unhot_operation
-from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.table_store import TableContainer
-from datashaper.types import MergeStrategy
+from ...table_store import TableContainer
+from ..types import MergeStrategy
+from .utils.merge_utils import __strategy_mapping
+from .utils.unhot_utils import unhot_operation
+from .verb_input import VerbInput
 
 
 def merge(
