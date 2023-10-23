@@ -201,16 +201,16 @@ class Workflow(Generic[Context]):
 
         return run_ctx
 
-    def __check_inputs(self, node_key, visited):
+    def _check_inputs(self, node_key, visited):
         node = self.__graph[node_key]
         return all(
             [
                 input in visited or input in self.inputs
-                for input in self.__inputs_list(node.node_input)
+                for input in Workflow.__inputs_list(node.node_input)
             ]
         )
 
-    def __resolve_inputs(self, inputs):
+    def _resolve_inputs(self, inputs):
         if isinstance(inputs, str):
             return {
                 "input": VerbInput(
@@ -263,7 +263,7 @@ class Workflow(Generic[Context]):
         verb_timing: VerbTiming = {}
 
         for node_key in self.__graph.keys():
-            if self.__check_inputs(node_key, visited):
+            if self._check_inputs(node_key, visited):
                 executable_nodes.append(node_key)
 
         wf_progress = create_progress_reporter(
@@ -287,7 +287,7 @@ class Workflow(Generic[Context]):
             # execute the verb
             result = executable_node.verb(
                 **executable_node.args,
-                **self.__resolve_inputs(executable_node.node_input),
+                **self._resolve_inputs(executable_node.node_input),
                 **Workflow.__resolve_run_context(
                     executable_node, context, verb_reporter
                 ),
@@ -301,13 +301,13 @@ class Workflow(Generic[Context]):
             # move to the next verb
             visited.add(current_id)
             for possible in self.__dependency_graph[current_id]:
-                if self.__check_inputs(possible, visited):
+                if self._check_inputs(possible, visited):
                     executable_nodes.append(possible)
             verb_idx += 1
 
         for node in self.__graph.keys():
             if node not in visited:
-                if not self.__check_inputs(node, visited):
+                if not self._check_inputs(node, visited):
                     raise ValueError(f"Missing inputs for node {node}!")
 
     def export(self):
