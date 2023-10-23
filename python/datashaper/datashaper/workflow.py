@@ -8,11 +8,13 @@ import inspect
 import json
 import os
 import time
+
 from collections import OrderedDict, defaultdict
 from typing import Any, Callable, Generic, Optional, Set, TypeVar
 from uuid import uuid4
 
 import pandas as pd
+
 from jsonschema import validate as validate_schema
 
 from .engine import Verb, VerbInput, functions
@@ -24,6 +26,7 @@ from .progress import (
     create_progress_reporter,
 )
 from .table_store import Table, TableContainer
+
 
 # TODO: this won't work for a published package
 SCHEMA_FILE = "../../schema/workflow.json"
@@ -117,7 +120,7 @@ class Workflow(Generic[Context]):
     def name(self) -> str:
         """Get the name of the workflow, inferred from the schema json input."""
         return self._schema.get("name", "Workflow")
-    
+
     @property
     def dependencies(self) -> Set[str]:
         """Get the dependencies of the workflow."""
