@@ -8,18 +8,19 @@ from rich.progress import Progress, TaskID, TimeElapsedColumn
 from rich.spinner import Spinner
 from rich.tree import Tree
 
-from .types import ProgressReporter, ProgressStatus
+from .types import ProgressStatus, StatusReportHandler
 
 
 console: Console | None = None
 tree: Tree | None = None
 live: Live | None = None
+initialized: bool = False
 
 
 def get_root_tree() -> Tree:
-    global console, tree, initted, live
-    if not initted:
-        initted = True
+    global console, tree, initialized, live
+    if not initialized:
+        initialized = True
         console = Console()
         group = Group(Spinner("dots", "Executing Pipeline..."), fit=True)
         tree = Tree(group)
@@ -37,8 +38,8 @@ progress_trees: dict[str, Tree] = {}
 
 # TODO: This progress logic needs to be rethought
 def create_progress_reporter(
-    prefix: str, parent: ProgressReporter | None = None, transient=True
-) -> ProgressReporter:
+    prefix: str, parent: StatusReportHandler | None = None, transient=True
+) -> StatusReportHandler:
     tree = get_root_tree()
     task: TaskID | None = None
     id = uuid.uuid4().hex

@@ -3,7 +3,7 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from typing import Callable, Dict
+from typing import Callable
 
 from ..types import Verb
 from .aggregate import aggregate
@@ -44,7 +44,7 @@ from .window import window
 
 
 # This map contains the mapping between all verbs and functions.
-functions: Dict[Verb, Callable] = {
+functions: dict[Verb, Callable] = {
     Verb.Aggregate: aggregate,
     Verb.Bin: bin,
     Verb.Binarize: binarize,

@@ -17,8 +17,8 @@ import pandas as pd
 
 from jsonschema import validate as validate_schema
 
-from .engine import Verb, VerbInput, VerbTiming, functions
-from .execution import ExecutionNode, VerbDefinitions, noop
+from .engine import Verb, VerbInput, functions
+from .execution import ExecutionNode, VerbDefinitions, VerbTiming, noop
 from .progress import (
     ProgressStatus,
     StatusReportHandler,
@@ -120,7 +120,7 @@ class Workflow(Generic[Context]):
     @property
     def name(self) -> str:
         """Get the name of the workflow, inferred from the schema json input."""
-        return self._schema["name"] or "Workflow"
+        return self._schema.get("name", "Workflow")
 
     def _get_depends_on(self) -> Set[str]:
         depends_on: set[str] = set()
@@ -173,7 +173,9 @@ class Workflow(Generic[Context]):
 
     @staticmethod
     def __resolve_run_context(
-        exec_node: ExecutionNode, context: Context, reporter: VerbStatusReporter
+        exec_node: ExecutionNode,
+        context: Optional[Context],
+        reporter: VerbStatusReporter,
     ) -> dict[str, Any]:
         """Injects the run context into the workflow steps."""
 
@@ -192,9 +194,10 @@ class Workflow(Generic[Context]):
             run_ctx["reporter"] = reporter
 
         # Pass in individual context items
-        for context_key in dir(context):
-            if context_key in verb_args and context_key not in exec_node.args:
-                run_ctx[context_key] = getattr(context, context_key)
+        if context is not None:
+            for context_key in dir(context):
+                if context_key in verb_args and context_key not in exec_node.args:
+                    run_ctx[context_key] = getattr(context, context_key)
 
         return run_ctx
 
@@ -252,7 +255,7 @@ class Workflow(Generic[Context]):
             return container.table
 
     def run(
-        self, context: Context, on_progress: StatusReportHandler = noop
+        self, context: Context = None, on_progress: StatusReportHandler = noop
     ) -> VerbTiming:
         """Run the execution graph."""
         visited: Set[str] = set()

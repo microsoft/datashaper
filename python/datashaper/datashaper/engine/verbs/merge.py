@@ -7,7 +7,7 @@ from typing import List
 
 from ...table_store import TableContainer
 from ..types import MergeStrategy
-from .utils.merge_utils import __strategy_mapping
+from .utils.merge_utils import strategy_mapping
 from .utils.unhot_utils import unhot_operation
 from .verb_input import VerbInput
 
@@ -33,7 +33,7 @@ def merge(
     output = input_table.copy()
 
     output[to] = output[columns].apply(
-        partial(__strategy_mapping[merge_strategy], delim=delimiter), axis=1
+        partial(strategy_mapping[merge_strategy], delim=delimiter), axis=1
     )
 
     filteredList: list[str] = []
