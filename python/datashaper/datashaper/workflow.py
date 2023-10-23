@@ -6,35 +6,20 @@
 
 import json
 import os
-
 from collections import OrderedDict, defaultdict
-from typing import Any, Callable, Dict, List, Optional, Set, Union
+from typing import Any, Callable, Dict, Optional, Set
 from uuid import uuid4
 
 import pandas as pd
-
-from dataclasses import dataclass, field
-from jsonschema import validate as validate_schema
-
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import functions
+from datashaper.execution_node import ExecutionNode
 from datashaper.table_store import TableContainer
 from datashaper.types import Verb
-
+from jsonschema import validate as validate_schema
 
 # TODO: this won't work for a published package
 SCHEMA_FILE = "../../schema/workflow.json"
-
-
-@dataclass
-class ExecutionNode:
-    """A data processing node in the execution pipeline."""
-
-    node_id: str
-    verb: Callable
-    node_input: Union[str, Dict[str, List[str]]]
-    args: Dict[str, Any] = field(default_factory=dict)
-    result: Optional[TableContainer] = None
 
 
 class Workflow:
