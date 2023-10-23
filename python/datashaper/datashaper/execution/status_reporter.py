@@ -1,6 +1,7 @@
 from abc import ABCMeta, abstractmethod
-from dataclasses import dataclass
 from typing import Any, Callable
+
+from dataclasses import dataclass
 
 
 @dataclass
@@ -16,8 +17,10 @@ class ProgressStatus:
     completed_items: int | None = None
     """Number of items completed"""
 
+
 StatusReportHandler = Callable[[ProgressStatus], Any]
 """A progress reporter function."""
+
 
 class StatusReporter(metaclass=ABCMeta):
     """Provides a way to report status updates from the pipeline."""

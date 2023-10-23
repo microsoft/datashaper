@@ -42,6 +42,7 @@ from .unorder import unorder
 from .unroll import unroll
 from .window import window
 
+
 # This map contains the mapping between all verbs and functions.
 functions: Dict[Verb, Callable] = {
     Verb.Aggregate: aggregate,

@@ -4,11 +4,13 @@
 #
 
 import numbers
+
 from datetime import datetime
 from typing import Callable, Dict, Optional, Union
 
 import numpy as np
 import pandas as pd
+
 from pandas.api.types import is_bool_dtype, is_numeric_dtype
 
 from ...table_store import TableContainer

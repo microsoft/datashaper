@@ -7,6 +7,7 @@ from typing import Callable, Dict
 
 import numpy as np
 import pandas as pd
+
 from pandas.api.types import is_numeric_dtype
 
 from ...table_store import TableContainer

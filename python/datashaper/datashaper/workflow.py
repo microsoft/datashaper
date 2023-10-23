@@ -6,16 +6,19 @@
 
 import json
 import os
+
 from collections import OrderedDict, defaultdict
 from typing import Any, Callable, Optional, Set
 from uuid import uuid4
 
 import pandas as pd
+
 from jsonschema import validate as validate_schema
 
 from .engine import Verb, VerbInput, functions
 from .execution import ExecutionNode, VerbDefinitions
-from .table_store import TableContainer
+from .table_store import Table, TableContainer
+
 
 # TODO: this won't work for a published package
 SCHEMA_FILE = "../../schema/workflow.json"
@@ -24,6 +27,7 @@ SCHEMA_FILE = "../../schema/workflow.json"
 class Workflow:
     """A data processing graph."""
 
+    schema: dict[str, Any]
     inputs: dict[str, TableContainer] = {}
     __graph: dict[str, ExecutionNode] = OrderedDict()
     __dependency_graph: dict[str, set] = defaultdict(set)
@@ -54,10 +58,12 @@ class Workflow:
         :param validate: Optional value, if true perform JSON-schema validation.
                          Defaults to False.
         :type validate: bool, optional
-        
+
         :param default_input: Optional value, the default input for the first step.
         :type default_input: str, optional
         """
+        self._schema = schema
+
         # Perform JSON-schema validation
         if validate and schema_path is not None:
             with open(schema_path) as schema_file:
@@ -83,7 +89,7 @@ class Workflow:
                 step["input"] if "input" in step else previous_step_id
             ) or default_input
             verb_fn = Workflow.__get_verb_fn(step["verb"], verbs)
-            
+
             step = ExecutionNode(
                 node_id=step_id,
                 node_input=step_input,
@@ -97,6 +103,11 @@ class Workflow:
 
         self.__last_step_id = previous_step_id
 
+    @property
+    def name(self) -> str:
+        """Get the name of the workflow, inferred from the schema json input."""
+        return self._schema["name"] or "Workflow"
+
     @staticmethod
     def __inputs_list(input):
         if isinstance(input, str):
@@ -109,7 +120,7 @@ class Workflow:
                 else:
                     inputs.extend(value)
             return inputs
-        
+
     @staticmethod
     def __get_verb_fn(verb: str, verbs: Optional[VerbDefinitions]) -> Callable:
         """Get the verb function from the name."""
@@ -162,14 +173,16 @@ class Workflow:
         """Add a dataframe to the graph with a given id."""
         self.inputs[id] = TableContainer(table=table)
 
-    def output(self, id: Optional[str] = None) -> pd.DataFrame:
+    def output(self, id: Optional[str] = None) -> Table:
         """Get a dataframe from the graph by id."""
         if id is None:
             id = self.__last_step_id
 
         container: Optional[TableContainer] = self.__graph[id].result
         if container is None:
-            raise Exception("Value not calculated yet.")
+            raise Exception(
+                f"Value not {self.name}: {self.__graph[id].verb.__name__} calculated yet."
+            )
         else:
             return container.table
 

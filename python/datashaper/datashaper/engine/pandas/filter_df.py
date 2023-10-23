@@ -18,6 +18,7 @@ from ..types import (
     StringComparisonOperator,
 )
 
+
 _boolean_function_map = {
     BooleanLogicalOperator.OR: lambda df, columns: df[columns].any(axis="columns")
     if columns != ""

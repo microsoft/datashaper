@@ -7,6 +7,7 @@ from typing import Union
 
 import numpy as np
 import pandas as pd
+
 from pandas.core.groupby import DataFrameGroupBy
 
 from ...table_store import TableContainer

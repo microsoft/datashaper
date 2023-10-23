@@ -11,6 +11,7 @@ from ...table_store import TableContainer
 from ..types import JoinStrategy
 from .verb_input import VerbInput
 
+
 __strategy_mapping = {
     JoinStrategy.Inner: "inner",
     JoinStrategy.LeftOuter: "left",
