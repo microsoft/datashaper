@@ -8,13 +8,11 @@ import inspect
 import json
 import os
 import time
-
 from collections import OrderedDict, defaultdict
 from typing import Any, Callable, Generic, Optional, Set, TypeVar
 from uuid import uuid4
 
 import pandas as pd
-
 from jsonschema import validate as validate_schema
 
 from .engine import Verb, VerbInput, functions
@@ -27,7 +25,6 @@ from .progress import (
 )
 from .table_store import Table, TableContainer
 
-
 # TODO: this won't work for a published package
 SCHEMA_FILE = "../../schema/workflow.json"
 
@@ -37,13 +34,12 @@ Context = TypeVar("Context")
 class Workflow(Generic[Context]):
     """A data processing graph."""
 
-    schema: dict[str, Any]
-    inputs: dict[str, TableContainer] = {}
-    __graph: dict[str, ExecutionNode] = OrderedDict()
-    __dependency_graph: dict[str, set] = defaultdict(set)
-    __last_step_id: str = None
-
-    depends_on: Set[str]
+    _schema: dict[str, Any]
+    _inputs: dict[str, TableContainer] = {}
+    _graph: dict[str, ExecutionNode] = OrderedDict()
+    _dependency_graph: dict[str, set] = defaultdict(set)
+    _last_step_id: str = None
+    _dependencies: Set[str]
     """Externals that this workflow depends on"""
 
     def __init__(
@@ -76,7 +72,7 @@ class Workflow(Generic[Context]):
         :type default_input: str, optional
         """
         self._schema = schema
-        self.depends_on = self._get_depends_on()
+        self.depends_on = self._compute_dependencies()
 
         # Perform JSON-schema validation
         if validate and schema_path is not None:
@@ -110,20 +106,25 @@ class Workflow(Generic[Context]):
                 verb=verb_fn,
                 args=step["args"] if "args" in step else {},
             )
-            self.__graph[step_id] = step
+            self._graph[step_id] = step
             for input in Workflow.__inputs_list(step_input):
-                self.__dependency_graph[input].add(step_id)
+                self._dependency_graph[input].add(step_id)
             previous_step_id = step.node_id
 
-        self.__last_step_id = previous_step_id
+        self._last_step_id = previous_step_id
 
     @property
     def name(self) -> str:
         """Get the name of the workflow, inferred from the schema json input."""
         return self._schema.get("name", "Workflow")
+    
+    @property
+    def dependencies(self) -> Set[str]:
+        """Get the dependencies of the workflow."""
+        return self.dependencies
 
-    def _get_depends_on(self) -> Set[str]:
-        depends_on: set[str] = set()
+    def _compute_dependencies(self) -> Set[str]:
+        deps: set[str] = set()
         known: set[str] = set()
 
         for step in self._schema["steps"]:
@@ -133,18 +134,18 @@ class Workflow(Generic[Context]):
             if "input" in step:
                 step_input = step["input"]
                 if isinstance(step_input, str):
-                    depends_on.add(step_input)
+                    deps.add(step_input)
                 else:
-                    depends_on.add(step_input["source"])
+                    deps.add(step_input["source"])
                     if "others" in step_input:
                         for e in step_input["others"]:
-                            depends_on.add(e)
+                            deps.add(e)
                     if "depends_on" in step_input:
                         for e in step_input["depends_on"]:
-                            depends_on.add(e)
+                            deps.add(e)
 
         # Remove known steps from dep list
-        return depends_on.difference(known)
+        return deps.difference(known)
 
     @staticmethod
     def __inputs_list(input):
@@ -202,10 +203,10 @@ class Workflow(Generic[Context]):
         return run_ctx
 
     def _check_inputs(self, node_key, visited):
-        node = self.__graph[node_key]
+        node = self._graph[node_key]
         return all(
             [
-                input in visited or input in self.inputs
+                input in visited or input in self._inputs
                 for input in Workflow.__inputs_list(node.node_input)
             ]
         )
@@ -214,9 +215,9 @@ class Workflow(Generic[Context]):
         if isinstance(inputs, str):
             return {
                 "input": VerbInput(
-                    input=self.inputs[inputs]
-                    if inputs in self.inputs
-                    else self.__graph[inputs].result
+                    input=self._inputs[inputs]
+                    if inputs in self._inputs
+                    else self._graph[inputs].result
                 )
             }
         else:
@@ -224,32 +225,32 @@ class Workflow(Generic[Context]):
             for key, value in inputs.items():
                 if isinstance(value, str):
                     input_mapping[key] = (
-                        self.inputs[value]
-                        if value in self.inputs
-                        else self.__graph[value].result
+                        self._inputs[value]
+                        if value in self._inputs
+                        else self._graph[value].result
                     )
                 else:
                     input_mapping[key] = [
-                        self.inputs[input]
-                        if input in self.inputs
-                        else self.__graph[input].result
+                        self._inputs[input]
+                        if input in self._inputs
+                        else self._graph[input].result
                         for input in value
                     ]
             return {"input": VerbInput(**input_mapping)}
 
     def add_table(self, id: str, table: pd.DataFrame) -> None:
         """Add a dataframe to the graph with a given id."""
-        self.inputs[id] = TableContainer(table=table)
+        self._inputs[id] = TableContainer(table=table)
 
     def output(self, id: Optional[str] = None) -> Table:
         """Get a dataframe from the graph by id."""
         if id is None:
-            id = self.__last_step_id
+            id = self._last_step_id
 
-        container: Optional[TableContainer] = self.__graph[id].result
+        container: Optional[TableContainer] = self._graph[id].result
         if container is None:
             raise Exception(
-                f"Value not {self.name}: {self.__graph[id].verb.__name__} calculated yet."
+                f"Value not {self.name}: {self._graph[id].verb.__name__} calculated yet."
             )
         else:
             return container.table
@@ -262,7 +263,7 @@ class Workflow(Generic[Context]):
         executable_nodes = []
         verb_timing: VerbTiming = {}
 
-        for node_key in self.__graph.keys():
+        for node_key in self._graph.keys():
             if self._check_inputs(node_key, visited):
                 executable_nodes.append(node_key)
 
@@ -273,7 +274,7 @@ class Workflow(Generic[Context]):
 
         while len(executable_nodes) > 0:
             current_id = executable_nodes.pop(0)
-            executable_node = self.__graph[current_id]
+            executable_node = self._graph[current_id]
             verb_name = executable_node.verb.__name__
 
             # set up verb progress reporter
@@ -300,12 +301,12 @@ class Workflow(Generic[Context]):
 
             # move to the next verb
             visited.add(current_id)
-            for possible in self.__dependency_graph[current_id]:
+            for possible in self._dependency_graph[current_id]:
                 if self._check_inputs(possible, visited):
                     executable_nodes.append(possible)
             verb_idx += 1
 
-        for node in self.__graph.keys():
+        for node in self._graph.keys():
             if node not in visited:
                 if not self._check_inputs(node, visited):
                     raise ValueError(f"Missing inputs for node {node}!")
@@ -313,7 +314,7 @@ class Workflow(Generic[Context]):
     def export(self):
         """Export the graph into a workflow JSON object."""
         return {
-            "input": [input_name for input_name in self.inputs.keys()],
+            "input": [input_name for input_name in self._inputs.keys()],
             "steps": [
                 {
                     "id": step.node_id,
@@ -321,6 +322,6 @@ class Workflow(Generic[Context]):
                     "input": step.node_input,
                     "args": step.args,
                 }
-                for step in self.__graph.values()
+                for step in self._graph.values()
             ],
         }
