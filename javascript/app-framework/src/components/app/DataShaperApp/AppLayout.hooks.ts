@@ -281,7 +281,10 @@ export function useInitialDataPackageLoad(
 				loadDataPackage(initialUrl)
 			}
 			// only navigate to the initial route if we're on the default homepage, otherwise respect prior navigation
-			if (initialRoute != null && (location.key === 'default' || location.pathname === initialRoute)) {
+			if (
+				initialRoute != null &&
+				(location.key === 'default' || location.pathname === initialRoute)
+			) {
 				navigate(initialRoute)
 			}
 		},

@@ -30,6 +30,10 @@ export const Title = styled.h1`
 	align-self: center;
 	margin: 0;
 	padding: 0;
+`
+
+export const TitleLink = styled.a`
+	text-decoration: none;
 	color: ${({ theme }) =>
 		theme.isInverted
 			? theme.palette.neutralSecondary
