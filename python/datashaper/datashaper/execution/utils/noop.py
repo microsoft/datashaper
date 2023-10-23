@@ -1,0 +1,2 @@
+def noop() -> None:
+    pass

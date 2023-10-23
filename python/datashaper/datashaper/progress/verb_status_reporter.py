@@ -1,6 +1,7 @@
 from typing import Any
 
-from .status_reporter import ProgressStatus, StatusReporter, StatusReportHandler
+from .status_reporter import StatusReporter
+from .types import ProgressStatus, StatusReportHandler
 
 
 class VerbStatusReporter(StatusReporter):

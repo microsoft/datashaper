@@ -4,27 +4,37 @@
 #
 """The graph module contains the graph classes used by the datashaper."""
 
+import inspect
 import json
 import os
+import time
 
 from collections import OrderedDict, defaultdict
-from typing import Any, Callable, Optional, Set
+from typing import Any, Callable, Generic, Optional, Set, TypeVar
 from uuid import uuid4
 
 import pandas as pd
 
 from jsonschema import validate as validate_schema
 
-from .engine import Verb, VerbInput, functions
-from .execution import ExecutionNode, VerbDefinitions
+from .engine import Verb, VerbInput, VerbTiming, functions
+from .execution import ExecutionNode, VerbDefinitions, noop
+from .progress import (
+    ProgressStatus,
+    StatusReportHandler,
+    VerbStatusReporter,
+    create_progress_reporter,
+)
 from .table_store import Table, TableContainer
 
 
 # TODO: this won't work for a published package
 SCHEMA_FILE = "../../schema/workflow.json"
 
+Context = TypeVar("Context")
 
-class Workflow:
+
+class Workflow(Generic[Context]):
     """A data processing graph."""
 
     schema: dict[str, Any]
@@ -32,6 +42,9 @@ class Workflow:
     __graph: dict[str, ExecutionNode] = OrderedDict()
     __dependency_graph: dict[str, set] = defaultdict(set)
     __last_step_id: str = None
+
+    depends_on: Set[str]
+    """Externals that this workflow depends on"""
 
     def __init__(
         self,
@@ -63,6 +76,7 @@ class Workflow:
         :type default_input: str, optional
         """
         self._schema = schema
+        self.depends_on = self._get_depends_on()
 
         # Perform JSON-schema validation
         if validate and schema_path is not None:
@@ -108,6 +122,30 @@ class Workflow:
         """Get the name of the workflow, inferred from the schema json input."""
         return self._schema["name"] or "Workflow"
 
+    def _get_depends_on(self) -> Set[str]:
+        depends_on: set[str] = set()
+        known: set[str] = set()
+
+        for step in self._schema["steps"]:
+            if "id" in step:
+                known.add(step["id"])
+
+            if "input" in step:
+                step_input = step["input"]
+                if isinstance(step_input, str):
+                    depends_on.add(step_input)
+                else:
+                    depends_on.add(step_input["source"])
+                    if "others" in step_input:
+                        for e in step_input["others"]:
+                            depends_on.add(e)
+                    if "depends_on" in step_input:
+                        for e in step_input["depends_on"]:
+                            depends_on.add(e)
+
+        # Remove known steps from dep list
+        return depends_on.difference(known)
+
     @staticmethod
     def __inputs_list(input):
         if isinstance(input, str):
@@ -133,11 +171,38 @@ class Workflow:
                 raise ValueError(f"Verb {verb} not found in verbs")
             return verbs[verb]
 
-    def __check_inputs(self, node_key, visitted):
+    @staticmethod
+    def __resolve_run_context(
+        exec_node: ExecutionNode, context: Context, reporter: VerbStatusReporter
+    ) -> dict[str, Any]:
+        """Injects the run context into the workflow steps."""
+
+        def argument_names(fn):
+            return inspect.getfullargspec(fn).args
+
+        verb_args = argument_names(exec_node.verb)
+        run_ctx: dict[str, Any] = {}
+
+        # Pass in the top-level context
+        if "context" in verb_args and "context" not in exec_node.args:
+            run_ctx["context"] = context
+
+        # Pass in the verb reporter
+        if "reporter" in verb_args and "reporter" not in exec_node.args:
+            run_ctx["reporter"] = reporter
+
+        # Pass in individual context items
+        for context_key in dir(context):
+            if context_key in verb_args and context_key not in exec_node.args:
+                run_ctx[context_key] = getattr(context, context_key)
+
+        return run_ctx
+
+    def __check_inputs(self, node_key, visited):
         node = self.__graph[node_key]
         return all(
             [
-                input in visitted or input in self.inputs
+                input in visited or input in self.inputs
                 for input in self.__inputs_list(node.node_input)
             ]
         )
@@ -186,27 +251,61 @@ class Workflow:
         else:
             return container.table
 
-    def run(self):
+    def run(
+        self, context: Context, on_progress: StatusReportHandler = noop
+    ) -> VerbTiming:
         """Run the execution graph."""
         visited: Set[str] = set()
         executable_nodes = []
+        verb_timing: VerbTiming = {}
 
         for node_key in self.__graph.keys():
             if self.__check_inputs(node_key, visited):
                 executable_nodes.append(node_key)
 
+        wf_progress = create_progress_reporter(
+            f"Workflow: {self.name}", transient=False
+        )
+        verb_idx = 0
+
         while len(executable_nodes) > 0:
             current_id = executable_nodes.pop(0)
             executable_node = self.__graph[current_id]
+            verb_name = executable_node.verb.__name__
+
+            # set up verb progress reporter
+            progress = create_progress_reporter(f"verb: {verb_name}", wf_progress)
+            verb_reporter = VerbStatusReporter(
+                f"{self.name}.{verb_name}.{verb_idx}", on_progress, progress
+            )
+            progress(ProgressStatus(progress=0))
+            start_verb_time = time.time()
+
+            # execute the verb
             result = executable_node.verb(
                 **executable_node.args,
                 **self.__resolve_inputs(executable_node.node_input),
+                **Workflow.__resolve_run_context(
+                    executable_node, context, verb_reporter
+                ),
             )
+
+            # record the verb timing and report progress
+            verb_timing[f"verb_{verb_name}_{verb_idx}"] = time.time() - start_verb_time
+            progress(ProgressStatus(progress=1))
             executable_node.result = result
+
+            # move to the next verb
             visited.add(current_id)
             for possible in self.__dependency_graph[current_id]:
                 if self.__check_inputs(possible, visited):
                     executable_nodes.append(possible)
+            verb_idx += 1
+
+        for node in self.__graph.keys():
+            if node not in visited:
+                if not self.__check_inputs(node, visited):
+                    raise ValueError(f"Missing inputs for node {node}!")
 
     def export(self):
         """Export the graph into a workflow JSON object."""
