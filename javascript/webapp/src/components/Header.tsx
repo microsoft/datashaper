@@ -4,13 +4,15 @@
  */
 import { memo } from 'react'
 
-import { Container, Title } from './Header.styles.js'
+import { Container, Title, TitleLink } from './Header.styles.js'
 import type { HeaderProps } from './Header.types.js'
 
 export const Header: React.FC<HeaderProps> = memo(function Header() {
 	return (
 		<Container>
-			<Title>DataShaper</Title>
+			<Title>
+				<TitleLink href='/'>DataShaper</TitleLink>
+			</Title>
 		</Container>
 	)
 })
