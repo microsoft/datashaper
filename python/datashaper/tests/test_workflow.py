@@ -1,8 +1,9 @@
 import asyncio
 import unittest
-from dataclasses import dataclass
 
 import pandas as pd
+
+from dataclasses import dataclass
 
 from datashaper import (
     DEFAULT_INPUT_NAME,
@@ -159,7 +160,7 @@ class TestWorkflowRun(unittest.TestCase):
         )
         result = workflow.output()
         row = result.iloc[0]
-        assert row['b'] == row['a'] + 1
+        assert row["b"] == row["a"] + 1
 
     def test_workflow_with_transform_util_verb_throwing(self):
         with self.assertRaises(ValueError) as ctx:
