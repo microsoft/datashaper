@@ -1,11 +1,9 @@
 import traceback
-
 from typing import Any, Callable, Tuple, TypeVar
 
 import pandas as pd
 
 from .parallelize import parallelize
-
 
 ItemType = TypeVar("ItemType")
 
@@ -23,7 +21,7 @@ def transform_pandas_table(
         try:
             return func(row[1])
         except Exception as e:
-            print(f"Error in apply_parallel: {e}")
+            print(f"Error in transform_pandas_table: {e}")
             traceback.print_exc()
             raise e
 

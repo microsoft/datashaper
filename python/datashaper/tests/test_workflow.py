@@ -1,9 +1,8 @@
 import asyncio
 import unittest
+from dataclasses import dataclass
 
 import pandas as pd
-
-from dataclasses import dataclass
 
 from datashaper import (
     DEFAULT_INPUT_NAME,
@@ -15,7 +14,7 @@ from datashaper import (
     VerbInput,
     VerbStatusReporter,
     Workflow,
-    apply_parallel_transform,
+    derive_from_rows,
     progress_iterable,
 )
 
@@ -452,7 +451,7 @@ def create_parallel_transforming_verb():
             row["b"] = row["a"] + 1
             return row
 
-        results = apply_parallel_transform(input, reporter, transform_row)
+        results = derive_from_rows(input, reporter, transform_row)
 
         return TableContainer(table=pd.DataFrame(results))
 
@@ -464,7 +463,7 @@ def create_parallel_transforming_verb_throwing():
         def transform_row(row: pd.Series):
             raise ValueError("oh no, this should be expected")
 
-        results = apply_parallel_transform(input, reporter, transform_row)
+        results = derive_from_rows(input, reporter, transform_row)
 
         return TableContainer(table=pd.DataFrame(results))
 
