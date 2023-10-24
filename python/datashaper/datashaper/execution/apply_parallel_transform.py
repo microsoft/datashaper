@@ -1,10 +1,9 @@
-from typing import Any, Callable, TypeVar
+from typing import Callable, TypeVar
 
 import pandas as pd
 
 from ..engine import VerbInput
 from ..progress import StatusReportHandler
-from ..table_store import TableContainer
 from .utils import transform_pandas_table, with_progress
 
 
