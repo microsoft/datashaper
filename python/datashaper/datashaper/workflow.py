@@ -4,17 +4,16 @@
 #
 """The graph module contains the graph classes used by the datashaper."""
 
+import asyncio
 import inspect
 import json
 import os
 import time
-
 from collections import OrderedDict, defaultdict
 from typing import Any, Callable, Generic, Optional, Set, TypeVar
 from uuid import uuid4
 
 import pandas as pd
-
 from jsonschema import validate as validate_schema
 
 from .engine import Verb, VerbInput, functions
@@ -27,22 +26,24 @@ from .progress import (
 )
 from .table_store import Table, TableContainer
 
-
 # TODO: this won't work for a published package
 SCHEMA_FILE = "../../schema/workflow.json"
 
 Context = TypeVar("Context")
+
+DEFAULT_INPUT_NAME = "__DEFAULT_INPUT__"
 
 
 class Workflow(Generic[Context]):
     """A data processing graph."""
 
     _schema: dict[str, Any]
-    _inputs: dict[str, TableContainer] = {}
-    _graph: dict[str, ExecutionNode] = OrderedDict()
-    _dependency_graph: dict[str, set] = defaultdict(set)
-    _last_step_id: str = None
+    _inputs: dict[str, TableContainer]
+    _graph: dict[str, ExecutionNode]
+    _dependency_graph: dict[str, set]
+    _last_step_id: str
     _dependencies: Set[str]
+
     """Externals that this workflow depends on"""
 
     def __init__(
@@ -54,7 +55,7 @@ class Workflow(Generic[Context]):
         verbs: Optional[dict[str, Callable]] = functions,
         # TODO: the current schema definition does not work in Python
         validate: bool = False,
-        default_input: Optional[str] = "datasource",
+        default_input: Optional[str] = DEFAULT_INPUT_NAME,
     ):
         """Create an execution graph from the Dict provided in workflow.
 
@@ -75,7 +76,10 @@ class Workflow(Generic[Context]):
         :type default_input: str, optional
         """
         self._schema = schema
-        self.depends_on = self._compute_dependencies()
+        self._dependencies = self._compute_dependencies()
+        self._dependency_graph = defaultdict(set)
+        self._graph = OrderedDict()
+        self._inputs = {}
 
         # Perform JSON-schema validation
         if validate and schema_path is not None:
@@ -124,43 +128,49 @@ class Workflow(Generic[Context]):
     @property
     def dependencies(self) -> Set[str]:
         """Get the dependencies of the workflow."""
-        return self.dependencies
+        return self._dependencies
 
     def _compute_dependencies(self) -> Set[str]:
         deps: set[str] = set()
         known: set[str] = set()
+        steps: list[dict] = self._schema["steps"]
 
-        for step in self._schema["steps"]:
-            if "id" in step:
-                known.add(step["id"])
+        if len(steps) > 0:
+            if "input" not in steps[0]:
+                deps.add(DEFAULT_INPUT_NAME)
 
-            if "input" in step:
-                step_input = step["input"]
-                if isinstance(step_input, str):
-                    deps.add(step_input)
-                else:
-                    deps.add(step_input["source"])
-                    if "others" in step_input:
-                        for e in step_input["others"]:
-                            deps.add(e)
-                    if "depends_on" in step_input:
-                        for e in step_input["depends_on"]:
-                            deps.add(e)
+            for step in self._schema["steps"]:
+                if "id" in step:
+                    known.add(step["id"])
+
+                if "input" in step:
+                    step_input = step["input"]
+                    if isinstance(step_input, str):
+                        deps.add(step_input)
+                    else:
+                        deps.add(step_input["source"])
+                        if "others" in step_input:
+                            for e in step_input["others"]:
+                                deps.add(e)
+                        if "depends_on" in step_input:
+                            for e in step_input["depends_on"]:
+                                deps.add(e)
 
         # Remove known steps from dep list
         return deps.difference(known)
 
     @staticmethod
-    def __inputs_list(input):
+    def __inputs_list(input: str | dict[str, Any] | None) -> list[str]:
         if isinstance(input, str):
             return [input]
         else:
             inputs = []
-            for value in input.values():
-                if isinstance(value, str):
-                    inputs.append(value)
-                else:
-                    inputs.extend(value)
+            if input is not None:
+                for value in input.values():
+                    if isinstance(value, str):
+                        inputs.append(value)
+                    else:
+                        inputs.extend(value)
             return inputs
 
     @staticmethod
@@ -205,7 +215,7 @@ class Workflow(Generic[Context]):
 
         return run_ctx
 
-    def _check_inputs(self, node_key, visited):
+    def _check_inputs(self, node_key: str, visited: set[str]):
         node = self._graph[node_key]
         return all(
             [
@@ -253,7 +263,7 @@ class Workflow(Generic[Context]):
         container: Optional[TableContainer] = self._graph[id].result
         if container is None:
             raise Exception(
-                f"Value not {self.name}: {self._graph[id].verb.__name__} calculated yet."
+                f"Value not calculated yet. {self.name}: {self._graph[id].verb.__name__} ."
             )
         else:
             return container.table
@@ -297,6 +307,9 @@ class Workflow(Generic[Context]):
                 ),
             )
 
+            if inspect.iscoroutine(result):
+                result = asyncio.run(result)
+
             # record the verb timing and report progress
             verb_timing[f"verb_{verb_name}_{verb_idx}"] = time.time() - start_verb_time
             progress(ProgressStatus(progress=1))
@@ -309,10 +322,10 @@ class Workflow(Generic[Context]):
                     executable_nodes.append(possible)
             verb_idx += 1
 
-        for node in self._graph.keys():
-            if node not in visited:
-                if not self._check_inputs(node, visited):
-                    raise ValueError(f"Missing inputs for node {node}!")
+        for node_id in self._graph.keys():
+            if node_id not in visited:
+                if not self._check_inputs(node_id, visited):
+                    raise ValueError(f"Missing inputs for node {node_id}!")
 
     def export(self):
         """Export the graph into a workflow JSON object."""

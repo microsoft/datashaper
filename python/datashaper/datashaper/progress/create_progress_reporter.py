@@ -68,7 +68,6 @@ def create_progress_reporter(
         if progress_update.description is not None:
             progress_description = f" - {progress_update.description}"
 
-        # print(f"{prefix} total items: {progress_update.total_items}")
         completed = progress_update.completed_items or progress_update.progress
         total = progress_update.total_items or 1
         progress_ele.update(
