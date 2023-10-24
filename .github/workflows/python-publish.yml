@@ -1,35 +1,46 @@
 name: Python-Publish-CI
 on:
   push:
-    workflow_dispatch:
       branches: [main]
+
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    name: Upload release to PyPI
     if: github.ref == 'refs/heads/main'
-    strategy:
-      matrix:
-        python-version: [3.8]
-        poetry-version: [1.3.1]
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/datashaper
+    permissions:
+        id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
+    
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python 3.10
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: '3.10'
 
-      - name: Install Poetry ${{ matrix.poetry-version }}
+      - name: Install Poetry 1.6.1
         uses: abatilo/actions-poetry@v2.1.6
         with:
-          poetry-version: ${{ matrix.poetry-version }}
+          poetry-version: '1.6.1'
 
       - name: Install dependencies
         shell: bash
         working-directory: ./python/datashaper
-        run: python -m poetry install
+        run: poetry install
 
-      - name: Publish to PyPi
+      - name: Build Distributable
+        shell: bash
         working-directory: ./python/datashaper
-        run: |
-          python -m poetry publish --build --skip-existing --username ${{ secrets.PYPI_USERNAME }} --password ${{ secrets.PYPI_PASSWORD }}
+        run: poetry build
+
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: python/datashaper/dist
+          skip-existing: true
+          verbose: true
+      
