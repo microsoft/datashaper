@@ -6,6 +6,7 @@ from ..engine import VerbInput
 from ..progress import StatusReportHandler
 from .utils import transform_pandas_table, with_progress
 
+
 ItemType = TypeVar("ItemType")
 
 

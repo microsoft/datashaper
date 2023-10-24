@@ -1,8 +1,9 @@
 import asyncio
 import unittest
-from dataclasses import dataclass
 
 import pandas as pd
+
+from dataclasses import dataclass
 
 from datashaper import (
     DEFAULT_INPUT_NAME,
