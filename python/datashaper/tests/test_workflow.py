@@ -1,8 +1,9 @@
 import asyncio
 import unittest
-from dataclasses import dataclass
 
 import pandas as pd
+
+from dataclasses import dataclass
 
 from datashaper import (
     DEFAULT_INPUT_NAME,
@@ -437,30 +438,35 @@ def create_async_verb():
 
     return async_verb
 
+
 def create_parallel_transforming_verb():
-    def transform(input: VerbInput, reporter: VerbStatusReporter, progress: VerbStatusReporter):
+    def transform(
+        input: VerbInput, reporter: VerbStatusReporter, progress: VerbStatusReporter
+    ):
         def transform_row(row: pd.Series):
-            items = [1,2,3]
+            items = [1, 2, 3]
             progress_iterable(items, progress)
             row["b"] = row["a"] + 1
             return row
-        
+
         results = apply_parallel_transform(input, reporter, transform_row)
-        
+
         return TableContainer(table=pd.DataFrame(results))
 
     return transform
+
 
 def create_parallel_transforming_verb_throwing():
     def transform(input: VerbInput, reporter: VerbStatusReporter):
         def transform_row(row: pd.Series):
             raise ValueError("oh no, this should be expected")
-        
+
         results = apply_parallel_transform(input, reporter, transform_row)
-        
+
         return TableContainer(table=pd.DataFrame(results))
 
     return transform
+
 
 def create_context_consuming_verb():
     def context_verb(

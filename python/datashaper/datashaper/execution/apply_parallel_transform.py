@@ -7,6 +7,7 @@ from ..progress import StatusReportHandler
 from ..table_store import TableContainer
 from .utils import transform_pandas_table, with_progress
 
+
 ItemType = TypeVar("ItemType")
 
 
