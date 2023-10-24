@@ -30,11 +30,11 @@ def apply_parallel_transform(
 
     if len(errors) > 0:
         reporter.error(
-            "Received errors during entity extraction",
+            "Received errors during parallel transformation",
             {"errors": [str(error or "") for error in errors]},
         )
         raise ValueError(
-            "Errors occurred while running entity extraction, could not complete!"
+            "Errors occurred while running parallel transformation, could not complete!"
         )
 
     return results
