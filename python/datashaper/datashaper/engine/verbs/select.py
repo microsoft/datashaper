@@ -5,8 +5,8 @@
 
 from typing import List
 
-from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.table_store import TableContainer
+from ...engine.verbs.verb_input import VerbInput
+from ...table_store import TableContainer
 
 
 def select(input: VerbInput, columns: List[str]):

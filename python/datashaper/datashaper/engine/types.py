@@ -5,7 +5,7 @@
 """Common types used across the datashaper codebase."""
 
 from enum import Enum
-from typing import Any, Dict, List, Union
+from typing import Any, Union
 
 from dataclasses import dataclass, field
 
@@ -92,9 +92,9 @@ class Step:
     """A workflow processing step."""
 
     verb: Verb
-    input: Union[str, Dict[str, str]]
-    output: Union[str, Dict[str, str]]
-    args: Dict[str, Any] = field(default_factory=dict)
+    input: Union[str, dict[str, str]]
+    output: Union[str, dict[str, str]]
+    args: dict[str, Any] = field(default_factory=dict)
 
 
 class JoinStrategy(Enum):
@@ -111,7 +111,7 @@ class JoinStrategy(Enum):
 
 @dataclass
 class InputColumnArgs:
-    """Column argument for verbs oberating on a single column."""
+    """Column argument for verbs operating on a single column."""
 
     column: str
 
@@ -222,7 +222,7 @@ class BooleanLogicalOperator(Enum):
 class FilterArgs(InputColumnArgs):
     """Filter criteria for a column."""
 
-    criteria: List[Criterion]
+    criteria: list[Criterion]
     logical: BooleanLogicalOperator = BooleanLogicalOperator.OR
 
 

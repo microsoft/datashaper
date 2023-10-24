@@ -11,7 +11,7 @@ import pandas as pd
 from dataclasses import dataclass
 from pandas.core.groupby import DataFrameGroupBy
 
-from datashaper.types import Bin, Category, DataType
+from .engine.types import Bin, Category, DataType
 
 
 @dataclass

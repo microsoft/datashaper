@@ -8,8 +8,8 @@ from typing import List
 import numpy as np
 import pandas as pd
 
-from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.table_store import TableContainer
+from ...table_store import TableContainer
+from .verb_input import VerbInput
 
 
 def __normal_spread(input_table, columns, to, delimiter):

@@ -3,8 +3,8 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.table_store import TableContainer
+from ...table_store import TableContainer
+from .verb_input import VerbInput
 
 
 def ungroup(input: VerbInput):

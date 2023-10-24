@@ -5,9 +5,9 @@
 
 from typing import Dict, List
 
-from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.table_store import TableContainer
-from datashaper.types import OrderByInstruction, SortDirection
+from ...table_store import TableContainer
+from ..types import OrderByInstruction, SortDirection
+from .verb_input import VerbInput
 
 
 def orderby(input: VerbInput, orders: List[Dict]):

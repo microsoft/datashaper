@@ -10,9 +10,9 @@ import pandas as pd
 
 from pandas.core.groupby import DataFrameGroupBy
 
-from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.table_store import TableContainer
-from datashaper.types import WindowFunction
+from ...table_store import TableContainer
+from ..types import WindowFunction
+from .verb_input import VerbInput
 
 
 def _get_window_indexer(

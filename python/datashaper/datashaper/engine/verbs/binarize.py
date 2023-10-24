@@ -5,16 +5,11 @@
 
 from typing import List
 
-from datashaper.engine.pandas.filter_df import filter_df
-from datashaper.engine.verbs.filter import _get_operator
-from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.table_store import TableContainer
-from datashaper.types import (
-    BooleanLogicalOperator,
-    Criterion,
-    FilterArgs,
-    FilterCompareType,
-)
+from ...table_store import TableContainer
+from ..pandas.filter_df import filter_df
+from ..types import BooleanLogicalOperator, Criterion, FilterArgs, FilterCompareType
+from .filter import _get_operator
+from .verb_input import VerbInput
 
 
 def binarize(

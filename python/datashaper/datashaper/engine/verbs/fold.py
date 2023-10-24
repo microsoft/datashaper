@@ -5,8 +5,8 @@
 
 from typing import List, Tuple
 
-from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.table_store import TableContainer
+from ...table_store import TableContainer
+from .verb_input import VerbInput
 
 
 def fold(input: VerbInput, to: Tuple[str, str], columns: List[str]):

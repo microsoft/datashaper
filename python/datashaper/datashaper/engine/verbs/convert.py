@@ -13,9 +13,9 @@ import pandas as pd
 
 from pandas.api.types import is_bool_dtype, is_numeric_dtype
 
-from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.table_store import TableContainer
-from datashaper.types import ParseType
+from ...table_store import TableContainer
+from ..types import ParseType
+from .verb_input import VerbInput
 
 
 def convert_int(value: str, radix: int) -> Union[int, float]:
@@ -114,9 +114,6 @@ def convert(
     radix: Optional[int] = None,
     formatPattern: str = "%Y-%m-%d",
 ):
-    print(input)
-    print(column)
-    print(to)
     parse_type = ParseType(type)
 
     input_table = input.get_input()

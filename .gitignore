@@ -8,6 +8,7 @@ coverage/
 docsTemp/
 .turbo/
 .swc/
+.temp/
 stats.json
 deploy.zip
 
