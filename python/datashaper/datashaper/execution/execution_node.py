@@ -2,7 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-"""The graph module contains the graph classes used by the datashaper."""
+"""Contains the definition for the ExecutionNode type."""
 from typing import Any, Callable, Optional, Union
 
 from dataclasses import dataclass, field
