@@ -1,15 +1,15 @@
 import asyncio
 import unittest
+from dataclasses import dataclass
 
 import pandas as pd
-
-from dataclasses import dataclass
 
 from datashaper import (
     DEFAULT_INPUT_NAME,
     ConsoleStatusReporter,
     FileStatusReporter,
     ProgressStatus,
+    StatusReportHandler,
     TableContainer,
     VerbStatusReporter,
     Workflow,
@@ -403,6 +403,7 @@ def create_context_consuming_verb():
         input: TableContainer,
         context: PipelineRunContext,
         reporter: VerbStatusReporter,
+        progress: StatusReportHandler,
         a: int,
         b: int,
     ):
@@ -410,6 +411,7 @@ def create_context_consuming_verb():
         assert reporter is not None
         assert a is not None
         assert b is not None
+        assert progress is not None
         reporter.error("test error")
         reporter.warning("test warning")
         reporter.log("test log")
