@@ -17,7 +17,7 @@ def apply_parallel_transform(
     num_threads: int = 4,
     stagger: int = 0,
 ) -> list[ItemType]:
-    """Generate entities for each row, and optionally a graph of those entities."""
+    """Apply a generic transform function to each row. Any errors will be reported and thrown."""
     output = input.get_input().copy()
     total_rows = len(output)
 
