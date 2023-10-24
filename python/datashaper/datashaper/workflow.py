@@ -24,6 +24,7 @@ from .progress import (
     NoopStatusReporter,
     ProgressStatus,
     StatusReporter,
+    StatusReportHandler,
     VerbStatusReporter,
     create_progress_reporter,
 )
@@ -202,6 +203,7 @@ class Workflow(Generic[Context]):
 
         verb_args = argument_names(exec_node.verb)
         run_ctx: dict[str, Any] = {}
+        progress: StatusReportHandler = lambda progress: reporter.progress(progress)
 
         # Pass in the top-level context
         if "context" in verb_args and "context" not in exec_node.args:
@@ -210,6 +212,10 @@ class Workflow(Generic[Context]):
         # Pass in the verb reporter
         if "reporter" in verb_args and "reporter" not in exec_node.args:
             run_ctx["reporter"] = reporter
+
+        # Pass in the progress
+        if "progress" in verb_args and "progress" not in exec_node.args:
+            run_ctx["progress"] = progress
 
         # Pass in individual context items
         if context is not None:

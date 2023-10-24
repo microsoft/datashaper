@@ -10,6 +10,7 @@ from datashaper import (
     ConsoleStatusReporter,
     FileStatusReporter,
     ProgressStatus,
+    StatusReportHandler,
     TableContainer,
     VerbStatusReporter,
     Workflow,
@@ -403,6 +404,7 @@ def create_context_consuming_verb():
         input: TableContainer,
         context: PipelineRunContext,
         reporter: VerbStatusReporter,
+        progress: StatusReportHandler,
         a: int,
         b: int,
     ):
@@ -410,6 +412,7 @@ def create_context_consuming_verb():
         assert reporter is not None
         assert a is not None
         assert b is not None
+        assert progress is not None
         reporter.error("test error")
         reporter.warning("test warning")
         reporter.log("test log")
