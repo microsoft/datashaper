@@ -1,10 +1,19 @@
 import asyncio
 import unittest
-from dataclasses import dataclass
 
 import pandas as pd
 
-from datashaper import DEFAULT_INPUT_NAME, TableContainer, VerbStatusReporter, Workflow
+from dataclasses import dataclass
+
+from datashaper import (
+    DEFAULT_INPUT_NAME,
+    ConsoleStatusReporter,
+    FileStatusReporter,
+    ProgressStatus,
+    TableContainer,
+    VerbStatusReporter,
+    Workflow,
+)
 
 from .helpers import mock_verbs, mock_workflows
 
@@ -126,6 +135,46 @@ class TestWorkflowRun(unittest.TestCase):
         workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
         workflow.run(
             context=create_fake_run_context(),
+        )
+
+    def test_basic_workflow_with_file_status_reporter(self):
+        reporter = FileStatusReporter("./.temp")
+        workflow = Workflow(
+            verbs={
+                "test_verb": create_context_consuming_verb(),
+            },
+            schema={
+                "name": "test_workflow",
+                "steps": [
+                    {"verb": "test_verb", "input": {"source": DEFAULT_INPUT_NAME}},
+                ],
+            },
+            validate=False,
+        )
+        workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
+        workflow.run(
+            context=create_fake_run_context(),
+            status_reporter=reporter,
+        )
+
+    def test_basic_workflow_with_console_status_reporter(self):
+        reporter = ConsoleStatusReporter()
+        workflow = Workflow(
+            verbs={
+                "test_verb": create_context_consuming_verb(),
+            },
+            schema={
+                "name": "test_workflow",
+                "steps": [
+                    {"verb": "test_verb", "input": {"source": DEFAULT_INPUT_NAME}},
+                ],
+            },
+            validate=False,
+        )
+        workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
+        workflow.run(
+            context=create_fake_run_context(),
+            status_reporter=reporter,
         )
 
     def test_workflow_with_async_verb(self):
@@ -361,6 +410,11 @@ def create_context_consuming_verb():
         assert reporter is not None
         assert a is not None
         assert b is not None
+        reporter.error("test error")
+        reporter.warning("test warning")
+        reporter.log("test log")
+        reporter.progress(ProgressStatus(progress=0.5, description="test progress"))
+        reporter.progress(ProgressStatus(progress=0.7))
         return TableContainer(table=input.get_input())
 
     return context_verb

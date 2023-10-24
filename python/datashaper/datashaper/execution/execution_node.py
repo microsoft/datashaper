@@ -3,8 +3,9 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """The graph module contains the graph classes used by the datashaper."""
-from dataclasses import dataclass, field
 from typing import Any, Callable, Optional, Union
+
+from dataclasses import dataclass, field
 
 from ..table_store import TableContainer
 
@@ -18,4 +19,3 @@ class ExecutionNode:
     node_input: Union[str, dict[str, list[str]]]
     args: dict[str, Any] = field(default_factory=dict)
     result: Optional[TableContainer] = None
-

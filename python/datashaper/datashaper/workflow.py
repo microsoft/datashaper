@@ -9,22 +9,26 @@ import inspect
 import json
 import os
 import time
+
 from collections import OrderedDict, defaultdict
 from typing import Any, Callable, Generic, Optional, Set, TypeVar
 from uuid import uuid4
 
 import pandas as pd
+
 from jsonschema import validate as validate_schema
 
 from .engine import Verb, VerbInput, functions
-from .execution import ExecutionNode, VerbDefinitions, VerbTiming, noop
+from .execution import ExecutionNode, VerbDefinitions, VerbTiming
 from .progress import (
+    NoopStatusReporter,
     ProgressStatus,
-    StatusReportHandler,
+    StatusReporter,
     VerbStatusReporter,
     create_progress_reporter,
 )
 from .table_store import Table, TableContainer
+
 
 # TODO: this won't work for a published package
 SCHEMA_FILE = "../../schema/workflow.json"
@@ -269,7 +273,9 @@ class Workflow(Generic[Context]):
             return container.table
 
     def run(
-        self, context: Context = None, on_progress: StatusReportHandler = noop
+        self,
+        context: Context = None,
+        status_reporter: Optional[StatusReporter] = NoopStatusReporter(),
     ) -> VerbTiming:
         """Run the execution graph."""
         visited: Set[str] = set()
@@ -293,7 +299,7 @@ class Workflow(Generic[Context]):
             # set up verb progress reporter
             progress = create_progress_reporter(f"verb: {verb_name}", wf_progress)
             verb_reporter = VerbStatusReporter(
-                f"{self.name}.{verb_name}.{verb_idx}", on_progress, progress
+                f"{self.name}.{verb_name}.{verb_idx}", status_reporter, progress
             )
             progress(ProgressStatus(progress=0))
             start_verb_time = time.time()
