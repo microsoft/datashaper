@@ -3,8 +3,8 @@ from typing import Callable, TypeVar
 import pandas as pd
 
 from ..engine import VerbInput
-from ..progress import StatusReportHandler
-from .utils import transform_pandas_table, with_progress
+from ..progress import StatusReportHandler, progress_callback
+from .utils import transform_pandas_table
 
 
 ItemType = TypeVar("ItemType")
@@ -23,7 +23,7 @@ def derive_from_rows(
 
     results, errors = transform_pandas_table(
         output,
-        with_progress(transform, reporter.progress, total_rows),
+        progress_callback(transform, reporter.progress, total_rows),
         num_threads=num_threads,
         stagger=stagger,
     )

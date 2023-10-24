@@ -1,6 +1,6 @@
 from typing import Iterable, TypeVar
 
-from ...progress import ProgressStatus, StatusReportHandler
+from .types import ProgressStatus, StatusReportHandler
 
 
 T = TypeVar("T")

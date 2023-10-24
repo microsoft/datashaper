@@ -1,9 +1,9 @@
 from typing import Any, Callable
 
-from ...progress import ProgressStatus, StatusReportHandler
+from .types import ProgressStatus, StatusReportHandler
 
 
-def with_progress(
+def progress_callback(
     callback: Callable[..., Any], progress: StatusReportHandler, num_total: int
 ) -> Callable[..., Any]:
     """Wrap a callback with a progress handler. Every time the callback is called, the progress handler will be called with the current progress."""
