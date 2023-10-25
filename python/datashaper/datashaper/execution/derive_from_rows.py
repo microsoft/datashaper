@@ -2,8 +2,8 @@ from typing import Callable, TypeVar
 
 import pandas as pd
 
-from ..engine import VerbInput
 from ..progress import StatusReportHandler, progress_callback
+from ..table_store import Table
 from .utils import transform_pandas_table
 
 
@@ -11,14 +11,14 @@ ItemType = TypeVar("ItemType")
 
 
 def derive_from_rows(
-    input: VerbInput,
+    input: Table,
     reporter: StatusReportHandler,
     transform: Callable[[pd.Series], ItemType],
     num_threads: int = 4,
     stagger: int = 0,
 ) -> list[ItemType]:
     """Apply a generic transform function to each row. Any errors will be reported and thrown."""
-    output = input.get_input().copy()
+    output = input.copy()
     total_rows = len(output)
 
     results, errors = transform_pandas_table(
