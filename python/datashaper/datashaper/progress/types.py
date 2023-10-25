@@ -13,6 +13,7 @@ class ProgressStatus:
 
     total_items: int | None = None
     """Total number of items"""
+
     completed_items: int | None = None
     """Number of items completed"""
 

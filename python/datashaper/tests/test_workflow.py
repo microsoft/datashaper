@@ -141,7 +141,7 @@ class TestWorkflowRun(unittest.TestCase):
             context=create_fake_run_context(),
         )
 
-    def test_workflow_with_transform_util_verb(self):
+    def test_workflow_with(self):
         workflow = Workflow(
             verbs={
                 "test_verb": create_parallel_transforming_verb(),
@@ -452,7 +452,7 @@ def create_parallel_transforming_verb():
             row["b"] = row["a"] + 1
             return row
 
-        results = derive_from_rows(input.get_input(), reporter, transform_row)
+        results = derive_from_rows(input.get_input().copy(), transform_row, reporter)
 
         return TableContainer(table=pd.DataFrame(results))
 
@@ -464,7 +464,7 @@ def create_parallel_transforming_verb_throwing():
         def transform_row(row: pd.Series):
             raise ValueError("oh no, this should be expected")
 
-        results = derive_from_rows(input.get_input(), reporter, transform_row)
+        results = derive_from_rows(input.get_input().copy(), transform_row, reporter)
 
         return TableContainer(table=pd.DataFrame(results))
 
