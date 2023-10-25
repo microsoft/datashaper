@@ -2,7 +2,7 @@ from typing import Callable, TypeVar
 
 import pandas as pd
 
-from ..progress import StatusReportHandler, progress_callback
+from ..progress import StatusReporter, progress_callback
 from ..table_store import Table
 from .utils import transform_pandas_table
 
@@ -12,18 +12,21 @@ ItemType = TypeVar("ItemType")
 
 def derive_from_rows(
     input: Table,
-    reporter: StatusReportHandler,
     transform: Callable[[pd.Series], ItemType],
+    reporter: StatusReporter | None = None,
     num_threads: int = 4,
     stagger: int = 0,
 ) -> list[ItemType]:
     """Apply a generic transform function to each row. Any errors will be reported and thrown."""
-    output = input.copy()
-    total_rows = len(output)
+    callback = (
+        progress_callback(transform, reporter.progress, len(input))
+        if reporter is not None
+        else transform
+    )
 
     results, errors = transform_pandas_table(
-        output,
-        progress_callback(transform, reporter.progress, total_rows),
+        input,
+        callback,
         num_threads=num_threads,
         stagger=stagger,
     )
