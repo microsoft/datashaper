@@ -9,8 +9,8 @@ def genid(input: VerbInput, hash: List[str], to: str) -> TableContainer:
     df = input.source.table.copy()
 
     def hash_row(row) -> str:
-        hashtext = "".join([str(row[column]) for column in hash])
-        return f"hash({hashtext})"
+        hashed = "".join([str(row[column]) for column in hash])
+        return f"hash({hashed})"
 
     df[to] = df.apply(lambda row: hash_row(row), axis=1)
     return TableContainer(table=df)

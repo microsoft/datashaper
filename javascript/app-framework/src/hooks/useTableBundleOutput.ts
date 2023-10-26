@@ -8,7 +8,7 @@ import { useObservableState } from 'observable-hooks'
 import { from } from 'rxjs'
 
 /**
- * Uses the latest table from a data package. This is updatde as the package changes
+ * Uses the latest table from a data package. This is update as the package changes
  * @param pkg - The data package to load the table from
  * @returns The latest table
  */

@@ -9,7 +9,7 @@ import type { FileDefinition } from '../ResourcesPane/index.js'
 
 export interface DataShaperAppProps<T = unknown> {
 	/**
-	 * CSS Classname
+	 * CSS class name
 	 */
 	className?: string
 

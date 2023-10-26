@@ -44,7 +44,7 @@ describe('DefaultGraph', () => {
 		graph.validate()
 	})
 
-	it('can detect cicles', () => {
+	it('can detect cycles', () => {
 		const graph = new DefaultGraph<number>()
 
 		// add before bind

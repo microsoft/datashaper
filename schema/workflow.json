@@ -4,7 +4,7 @@
         "AggregateArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations.",
                     "type": "string"
                 },
                 "dataType": {
@@ -55,7 +55,7 @@
                     "type": "boolean"
                 },
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations.",
                     "type": "string"
                 },
                 "dataType": {
@@ -111,7 +111,7 @@
         "BinarizeArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations.",
                     "type": "string"
                 },
                 "criteria": {
@@ -208,7 +208,7 @@
                 },
                 "profile": {
                     "const": "codebook",
-                    "description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
+                    "description": "Defines the resource type.\nKnown resource types should have accompanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
                     "type": "string"
                 },
                 "rel": {
@@ -216,7 +216,7 @@
                     "type": "string"
                 },
                 "sources": {
-                    "description": "List of resources that underly this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
+                    "description": "List of resources that underlie this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
                     "items": {
                         "anyOf": [
                             {
@@ -288,7 +288,7 @@
         "ConvertArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations.",
                     "type": "string"
                 },
                 "dataType": {
@@ -421,7 +421,7 @@
         "EraseArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations.",
                     "type": "string"
                 },
                 "dataType": {
@@ -546,7 +546,7 @@
         "FilterArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations.",
                     "type": "string"
                 },
                 "criteria": {
@@ -599,7 +599,7 @@
         "ImputeArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations.",
                     "type": "string"
                 },
                 "dataType": {
@@ -614,7 +614,7 @@
         "InputColumnArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations.",
                     "type": "string"
                 },
                 "dataType": {
@@ -754,7 +754,7 @@
         "OnehotArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations.",
                     "type": "string"
                 },
                 "dataType": {
@@ -835,7 +835,7 @@
         "RecodeArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations.",
                     "type": "string"
                 },
                 "dataType": {
@@ -843,7 +843,7 @@
                 },
                 "mapping": {
                     "$ref": "#/definitions/Record<any,any>",
-                    "description": "Mapping of old value to new for the recoding.\nNote that the key must be coercable to a string for map lookup."
+                    "description": "Mapping of old value to new for the recoding.\nNote that the key must be coercible to a string for map lookup."
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
@@ -859,7 +859,7 @@
             "type": "object"
         },
         "ResourceSchema": {
-            "description": "Parent class for any resource type understood by the system.\nAny object type that extends from Resouce is expected to have a standalone schema published.\nFor project state, this can be left as generic as possible for now.",
+            "description": "Parent class for any resource type understood by the system.\nAny object type that extends from Resource is expected to have a standalone schema published.\nFor project state, this can be left as generic as possible for now.",
             "properties": {
                 "$schema": {
                     "description": "The JSON schema for this resource.",
@@ -896,7 +896,7 @@
                     "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).\nURI-compliant path to the referenced resource (local or remote)."
                 },
                 "profile": {
-                    "description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
+                    "description": "Defines the resource type.\nKnown resource types should have accompanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
                     "type": "string"
                 },
                 "rel": {
@@ -904,7 +904,7 @@
                     "type": "string"
                 },
                 "sources": {
-                    "description": "List of resources that underly this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
+                    "description": "List of resources that underlie this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
                     "items": {
                         "anyOf": [
                             {
@@ -927,7 +927,7 @@
         "RollupArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations.",
                     "type": "string"
                 },
                 "dataType": {
@@ -971,7 +971,7 @@
         "SpreadArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations.",
                     "type": "string"
                 },
                 "dataType": {
@@ -1890,7 +1890,7 @@
             "type": "object"
         },
         "VariableNature": {
-            "description": "Describes the semantic shape of a variable.\nThis has particular effect on how we display and compare data,\nsuch as using line charts for continuous versus bar charts for categorical.\nThis mostly applies to numeric variables, but strings for instance can be categorial.",
+            "description": "Describes the semantic shape of a variable.\nThis has particular effect on how we display and compare data,\nsuch as using line charts for continuous versus bar charts for categorical.\nThis mostly applies to numeric variables, but strings for instance can be categorical.",
             "enum": [
                 "binary",
                 "continuous",
@@ -1926,7 +1926,7 @@
         "WindowArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations.",
                     "type": "string"
                 },
                 "dataType": {
@@ -2002,7 +2002,7 @@
         },
         "profile": {
             "const": "workflow",
-            "description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
+            "description": "Defines the resource type.\nKnown resource types should have accompanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
             "type": "string"
         },
         "rel": {
@@ -2010,7 +2010,7 @@
             "type": "string"
         },
         "sources": {
-            "description": "List of resources that underly this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
+            "description": "List of resources that underlie this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
             "items": {
                 "anyOf": [
                     {

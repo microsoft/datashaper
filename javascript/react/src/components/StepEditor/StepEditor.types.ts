@@ -34,7 +34,7 @@ export interface StepEditorProps {
 
 	/**
 	 * Callback fired when the step is configured and "run" is clicked, indicating
-	 * the application should execute the contructed/edited step.
+	 * the application should execute the constructed/edited step.
 	 */
 	onSave?: (step: Step) => void
 

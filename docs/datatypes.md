@@ -3,9 +3,9 @@ Data types present a number of thorny edge cases when dealing with different lan
 
 ## Common tricky use cases:
 - Text-based data files may contain strings that represent primitive values. Parsing these files should respect the data file's intent even if it overrides default language behavior. The most common example of this is probably boolean data columns with the values "true" and "false". JavaScript will naturally parse any non-empty string as `true`, so "false" -> `true`. A similar situation has been observed with "null".
-- Dates can be represented in a wide variey of formats, and parsing/guessing implementations differ by platform and library.
+- Dates can be represented in a wide variety of formats, and parsing/guessing implementations differ by platform and library.
   - `new Date()` in JavaScript is problematic, and may also conflict with pandas' [date guessing](https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html?highlight=date#date-handling).
-- Autotomatic type discovery for columns is performed by both Arquero and pandas, but may have different results.
+- Automatic type discovery for columns is performed by both Arquero and pandas, but may have different results.
 - Some verbs can only be performed on certain data types, and other verbs can work with different data types but have different operators available. For example:
   - [bin](./verbs/bin.md) requires numeric input types.
   - [filter](./verbs/filter.md) requires different comparison operators depending on type (e.g., string 'contains' versus numeric 'less than').
@@ -19,8 +19,8 @@ The following rules will be observed across implementations to ensure consistent
 - Pandas' [missing data logic](https://pandas.pydata.org/pandas-docs/stable/user_guide/missing_data.html#missing-data) will be used for computations and boolean evaluations.
   - In general, this means null values are carried forward and may result in null outputs.
   - For boolean comparisons, null propagation is situation-dependent (see [three-valued logic](https://en.wikipedia.org/wiki/Three-valued_logic#Kleene_and_Priest_logics)). For example, if any operand in an OR comparison is `true`, the evaluation can return `true` even with nulls present.
-- Coercing unparseable strings to dates will result in an `Invalid Date` (JavaScript) or `NaT` (pandas.to_datetime with errors='coerce').
-- Coercing unparseable strings to numbers will result in `NaN` (pandas.to_numeric with errors='coerce').
+- Coercing unparsable strings to dates will result in an `Invalid Date` (JavaScript) or `NaT` (pandas.to_datetime with errors='coerce').
+- Coercing unparsable strings to numbers will result in `NaN` (pandas.to_numeric with errors='coerce').
 - When reading text files, the pandas default strings for [missing values](https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#na-values) and [booleans](https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#boolean-values) will be used.
 - [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) will be used for standard date formatting. Other date formats will not be auto-guessed.
   - When providing a custom parse or format pattern, we follow python and use the [1989 C standard tokens](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior). [d3-time-format](https://github.com/d3/d3-time-format) supports this standard for JavaScript.

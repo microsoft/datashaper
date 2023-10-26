@@ -24,6 +24,6 @@ export interface Graph<T>
 |  [clear()](./workflow.graph.clear.md) | Clears out the graph of all nodes, inputs, and outputs |
 |  [hasNode(id)](./workflow.graph.hasnode.md) | Determines if the graph contains a node by id |
 |  [node(id)](./workflow.graph.node.md) | Retrieves a node by id. |
-|  [remove(id)](./workflow.graph.remove.md) | Remove a node from the grpah |
+|  [remove(id)](./workflow.graph.remove.md) | Remove a node from the graph |
 |  [validate()](./workflow.graph.validate.md) | Verify that the graph is a valid dag (no cycles) |
 

@@ -5,7 +5,7 @@
 import { BooleanOperator } from '@datashaper/schema'
 
 /**
- * Evalutes a list of booleans using a logical operator.
+ * Evaluates a list of booleans using a logical operator.
  * Because real-world data can have empties, we follow pandas and use three-valued logic.
  * https://en.wikipedia.org/wiki/Three-valued_logic#Kleene_and_Priest_logics
  * We also support single values and more than two.
@@ -132,7 +132,7 @@ export function nor(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
  * Logical NAND (not AND).
  * If any value is false, this returns true.
  * If all values are true, this returns false.
- * If there are no falses but there are nulls, this is unknown and will return null.
+ * If there are no false values but there are nulls, this is unknown and will return null.
  * @param comparisons
  * @returns
  */

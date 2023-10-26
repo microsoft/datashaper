@@ -9,7 +9,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { StepChangeFunction } from '../../../types.js'
 
 /**
- * For reusable subcomponents that are combined in one interface
+ * For reusable sub-components that are combined in one interface
  * to manipulate a step.
  */
 export interface StepSubformProps<T extends object | void | unknown = unknown>
@@ -42,7 +42,7 @@ export interface StepFormProps<T extends object | void | unknown = unknown>
 	table?: ColumnTable
 	/**
 	 * Optional override of step input - there are many scenarios
-	 * (particularly chains) where the driving input table for UI visbility should be shared,
+	 * (particularly chains) where the driving input table for UI visibility should be shared,
 	 * but the input to the actual step is an intermediate table.
 	 */
 	input?: string

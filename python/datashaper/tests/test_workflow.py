@@ -1,9 +1,8 @@
 import asyncio
 import unittest
+from dataclasses import dataclass
 
 import pandas as pd
-
-from dataclasses import dataclass
 
 from datashaper import (
     DEFAULT_INPUT_NAME,
@@ -23,7 +22,7 @@ from .helpers import mock_verbs, mock_workflows
 
 
 class TestWorkflowRun(unittest.TestCase):
-    def test_define_basic_workflow_doesnt_crash(self):
+    def test_define_basic_workflow_does_not_crash(self):
         workflow = Workflow(
             verbs={
                 "test_verb": create_passthrough_verb(),
@@ -42,7 +41,7 @@ class TestWorkflowRun(unittest.TestCase):
         )
         self.assertIsNotNone(workflow.export())
 
-    def test_run_basic_workflow_doesnt_crash(self):
+    def test_run_basic_workflow_does_not_crash(self):
         workflow = Workflow(
             verbs={
                 "test_verb": create_passthrough_verb(),
@@ -61,7 +60,7 @@ class TestWorkflowRun(unittest.TestCase):
         )
         self.assertIsNotNone(workflow.export())
 
-    def test_create_basic_workflow_with_test_inputs_doesnt_crash(self):
+    def test_create_basic_workflow_with_test_inputs_does_not_crash(self):
         wf = Workflow(
             verbs={
                 "test_verb": create_passthrough_verb(),

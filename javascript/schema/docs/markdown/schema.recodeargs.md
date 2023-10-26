@@ -15,5 +15,5 @@ export interface RecodeArgs extends InputColumnArgs, OutputColumnArgs
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [mapping](./schema.recodeargs.mapping.md) |  | Record&lt;[Value](./schema.value.md)<!-- -->, [Value](./schema.value.md)<!-- -->&gt; | Mapping of old value to new for the recoding. Note that the key must be coercable to a string for map lookup. |
+|  [mapping](./schema.recodeargs.mapping.md) |  | Record&lt;[Value](./schema.value.md)<!-- -->, [Value](./schema.value.md)<!-- -->&gt; | Mapping of old value to new for the recoding. Note that the key must be coercible to a string for map lookup. |
 

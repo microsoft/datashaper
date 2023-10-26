@@ -36,7 +36,7 @@ export function stats(
 			invalid: reqStats[`${cur}.invalid`],
 			mode,
 		}
-		const optn =
+		const opt_num =
 			type === DataType.Number
 				? {
 						minimum: optStats[`${cur}.minimum`],
@@ -47,7 +47,7 @@ export function stats(
 						bins: bins[`${cur}.bins`],
 				  }
 				: {}
-		const optt =
+		const opt_string =
 			type === DataType.String
 				? {
 						categories: cats[`${cur}`],
@@ -55,8 +55,8 @@ export function stats(
 				: {}
 		acc[cur] = {
 			...req,
-			...optn,
-			...optt,
+			...opt_num,
+			...opt_string,
 		}
 		return acc
 	}, {} as Record<string, FieldMetadata>)
@@ -119,7 +119,7 @@ function binning(
 	}, {} as Record<string, any>)
 
 	const binRollup = table.select(numeric).derive(binArgs)
-	// for each binned column, derive a sorted & counted subtable.
+	// for each binned column, derive a sorted & counted sub-table.
 	// note that only bins with at least one entry will have a row,
 	// so we could have less than 10 bins - hence the fill
 	const counted = numeric.reduce((acc, cur) => {
@@ -213,11 +213,11 @@ function filterColumns(
 	filter?: FilterFunction,
 ): FilterFunction {
 	const set = new Set(columns)
-	const filt = filter || (() => true)
+	const filterFn = filter || (() => true)
 	return (name, index, array) => {
 		if (columns) {
-			return set.has(name) && filt(name, index, array)
+			return set.has(name) && filterFn(name, index, array)
 		}
-		return filt(name, index, array)
+		return filterFn(name, index, array)
 	}
 }

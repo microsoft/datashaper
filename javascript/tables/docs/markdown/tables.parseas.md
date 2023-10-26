@@ -16,7 +16,7 @@ export declare function parseAs(type?: DataType, subtype?: DataType, hints?: Typ
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  type | DataType | <i>(Optional)</i> the datatype to interperet as |
+|  type | DataType | <i>(Optional)</i> the datatype to interpret as |
 |  subtype | DataType | <i>(Optional)</i> the subtype of the datatype (i.e., if the main type is an array) |
 |  hints | TypeHints | <i>(Optional)</i> type hinting information |
 

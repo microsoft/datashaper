@@ -65,7 +65,7 @@ function makeTreeItem(
 	// (a) rendered if empty, so that options can be selected, and
 	// (b) rendered _in place of_ the child resource, so we don't have redundant child entries.
 	// so:
-	// 1: iterate the field wells if present, creating a tree item for each. these should have no href, so are "unclickable"
+	// 1: iterate the field wells if present, creating a tree item for each. these should have no href, so are "un-clickable"
 	// 1.1: if any well has a selected key, then we don't need to render the child resource, save it for later
 	// 2: iterate the child resources and create an item for each one that isn't already marked from the wells
 	const handled = new Set<string>()

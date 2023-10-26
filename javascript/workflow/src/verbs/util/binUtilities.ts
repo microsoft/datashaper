@@ -123,9 +123,9 @@ export function standardDeviation(values: number[], precision = 3): number {
 	})
 
 	const variance = (squareNumbersSum - (sum * sum) / N) / (N - 1)
-	const standarDeviationResult = Math.sqrt(variance)
+	const stddev = Math.sqrt(variance)
 
-	return Number(standarDeviationResult.toFixed(precision))
+	return Number(stddev.toFixed(precision))
 }
 
 function ascending(a: number, b: number): number {

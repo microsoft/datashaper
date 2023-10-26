@@ -129,7 +129,7 @@ a`
 			})
 		})
 
-		describe('no autotyping', () => {
+		describe('no auto-typing', () => {
 			it('everything is a string', async () => {
 				const table = (await readTable(
 					json,

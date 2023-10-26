@@ -26,7 +26,7 @@
 |  [useOnOutsideClick(ref, onClickOutside)](./app-framework.useonoutsideclick.md) | Hook that alerts clicks outside of the passed ref |
 |  [usePersistenceService()](./app-framework.usepersistenceservice.md) |  |
 |  [useTableBundle(name)](./app-framework.usetablebundle.md) |  |
-|  [useTableBundleOutput(pkg)](./app-framework.usetablebundleoutput.md) | Uses the latest table from a data package. This is updatde as the package changes |
+|  [useTableBundleOutput(pkg)](./app-framework.usetablebundleoutput.md) | Uses the latest table from a data package. This is update as the package changes |
 |  [useTableBundles()](./app-framework.usetablebundles.md) |  |
 
 ## Interfaces

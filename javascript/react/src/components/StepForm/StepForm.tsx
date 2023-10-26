@@ -37,7 +37,7 @@ import { Container } from './StepForm.styles.js'
 import type { StepFormProps } from './StepForm.types.js'
 
 /**
- * Let's us render the Steps in a loop while memoing all the functions
+ * Let's us render the Steps in a loop while memoizing all the functions
  */
 export const StepForm: React.FC<StepFormProps> = memo(function StepForm({
 	step: s,

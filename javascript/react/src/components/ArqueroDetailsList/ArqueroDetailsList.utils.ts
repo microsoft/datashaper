@@ -22,8 +22,8 @@ export function getDropdownValue(
 	rowIndex: number,
 	column?: IColumn,
 ): IDropdownOption[] {
-	const itens = getValue(item, column)
-	const uniqueValues = uniqWith(itens, isEqual)
+	const items = getValue(item, column)
+	const uniqueValues = uniqWith(items, isEqual)
 	const orderedValues = orderBy(uniqueValues)
 	return orderedValues.map((value: any, index: number) => {
 		return {

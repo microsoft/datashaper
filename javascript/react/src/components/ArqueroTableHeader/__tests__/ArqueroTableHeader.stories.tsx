@@ -18,7 +18,7 @@ const meta = {
 			'Symbol',
 			'Date',
 			'Close',
-			'Volumne',
+			'Volume',
 			'Open',
 			'High',
 			'Low',

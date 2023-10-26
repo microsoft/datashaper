@@ -21,7 +21,7 @@ export interface ModalState {
 	hide(): void
 
 	/**
-	 * A callback to toggle modol visibility
+	 * A callback to toggle modal visibility
 	 */
 	toggle(): void
 }

@@ -32,7 +32,7 @@ Object.keys(versions).forEach((name) => {
 		fs.mkdirSync(webappVersionDirectory)
 	}
 
-	// copy the latest named schems (no version #)
+	// copy the latest named schemas (no version #)
 	fs.copyFileSync(
 		path.join(schemaDir, latestSchema),
 		path.join(webappVersionDirectory, latestSchema),

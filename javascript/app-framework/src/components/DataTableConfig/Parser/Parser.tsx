@@ -49,8 +49,8 @@ export const Parser: React.FC<ParserProps> = memo(function Parser({ parser }) {
 			<FlexContainer>
 				<Delimiter
 					selected={delimiter}
-					onChange={(delim: string) => {
-						parser.delimiter = delim
+					onChange={(delimiter: string) => {
+						parser.delimiter = delimiter
 					}}
 				/>
 			</FlexContainer>

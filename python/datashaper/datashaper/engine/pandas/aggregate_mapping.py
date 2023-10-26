@@ -2,7 +2,6 @@ from functools import reduce
 
 from ..types import FieldAggregateOperation
 
-
 aggregate_operation_mapping = {
     FieldAggregateOperation.Any: "first",
     FieldAggregateOperation.Count: "count",
@@ -18,6 +17,6 @@ aggregate_operation_mapping = {
     FieldAggregateOperation.StDev: "std",
     FieldAggregateOperation.StDevPopulation: "",
     FieldAggregateOperation.Variance: "variance",
-    FieldAggregateOperation.ArraryAgg: lambda series: list(series),
+    FieldAggregateOperation.ArrayAgg: lambda series: list(series),
     FieldAggregateOperation.ArrayAggDistinct: lambda series: list(set(series)),
 }

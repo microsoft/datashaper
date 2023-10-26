@@ -1276,7 +1276,7 @@
             {
               "kind": "Property",
               "canonicalReference": "@datashaper/workflow!BaseNode#recalculate:member",
-              "docComment": "/**\n * Calculate the value of this processing node. This may be invoked even if this processing node is not fully configured. recalulate() should account for this\n */\n",
+              "docComment": "/**\n * Calculate the value of this processing node. This may be invoked even if this processing node is not fully configured. recalculate() should account for this\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -6409,7 +6409,7 @@
             {
               "kind": "MethodSignature",
               "canonicalReference": "@datashaper/workflow!Graph#remove:member(1)",
-              "docComment": "/**\n * Remove a node from the grpah\n */\n",
+              "docComment": "/**\n * Remove a node from the graph\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

@@ -1,0 +1,26 @@
+$schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+version: '0.2'
+allowCompoundWords: true
+dictionaryDefinitions:
+  - name: dictionary
+    path: './dictionary.txt'
+    addWords: true
+dictionaries:
+  - dictionary
+ignorePaths:
+  - 'node_modules'
+  - 'storybook-static'
+  - 'output'
+  - 'dist'
+  - 'build'
+  - 'javascript/*/docs'
+  - './javascript/webapp/public/schema'
+  - './schema'
+  - .turbo
+  - '*.csv'
+  - '*.parquet'
+  - '*.arrow'
+  - smoking.json
+  - __pycache__
+  - pyproject.toml
+  - '*.ipynb'

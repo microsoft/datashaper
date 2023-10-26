@@ -74,10 +74,10 @@ function useColumnPairs(
 	return useMemo(() => {
 		const { columns } = step.args
 		return Object.entries(columns || EMPTY_OBJECT).map((column, index) => {
-			const [oldname] = column
+			const [oldName] = column
 			return (
 				<ColumnPair
-					key={`column-rename-${oldname}-${index}`}
+					key={`column-rename-${oldName}-${index}`}
 					table={table}
 					column={column}
 					step={step}
@@ -96,9 +96,9 @@ const ColumnPair: React.FC<{
 	onChange: (previous: string, oldName: string, newName: string) => void
 	onDelete: (name: string) => void
 }> = memo(function ColumnPair({ table, column, step, onChange, onDelete }) {
-	const [oldname, newname] = column
+	const [oldName, newName] = column
 	const columnFilter = (name: string) => {
-		if (name === oldname) {
+		if (name === oldName) {
 			return true
 		}
 		if (step.args.columns?.[name]) {
@@ -109,14 +109,14 @@ const ColumnPair: React.FC<{
 	const handleColumnChange = (
 		_e: React.FormEvent<HTMLDivElement>,
 		opt?: IDropdownOption<any> | undefined,
-	) => onChange(oldname, (opt?.key as string) || oldname, newname)
+	) => onChange(oldName, (opt?.key as string) || oldName, newName)
 	const handleTextChange = (
 		_e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
 		newValue?: string,
 	) => {
-		onChange(oldname, oldname, newValue ?? '')
+		onChange(oldName, oldName, newValue ?? '')
 	}
-	const handleDeleteClick = () => onDelete(oldname)
+	const handleDeleteClick = () => onDelete(oldName)
 	const columns = useColumnNames(table, columnFilter)
 	const options = useSimpleDropdownOptions(columns)
 
@@ -125,7 +125,7 @@ const ColumnPair: React.FC<{
 			<TableColumnDropdown
 				options={options}
 				label={undefined}
-				selectedKey={oldname}
+				selectedKey={oldName}
 				onChange={handleColumnChange}
 				styles={narrowerDropdownStyles}
 			/>
@@ -135,7 +135,7 @@ const ColumnPair: React.FC<{
 			/>
 			<TextField
 				placeholder={'New name'}
-				value={newname}
+				value={newName}
 				onChange={handleTextChange}
 				styles={narrowerDropdownStyles}
 			/>

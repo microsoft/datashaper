@@ -30,7 +30,7 @@
 |  [SetOp](./schema.setop.md) |  |
 |  [SortDirection](./schema.sortdirection.md) |  |
 |  [StringComparisonOperator](./schema.stringcomparisonoperator.md) |  |
-|  [VariableNature](./schema.variablenature.md) | Describes the semantic shape of a variable. This has particular effect on how we display and compare data, such as using line charts for continuous versus bar charts for categorical. This mostly applies to numeric variables, but strings for instance can be categorial. |
+|  [VariableNature](./schema.variablenature.md) | Describes the semantic shape of a variable. This has particular effect on how we display and compare data, such as using line charts for continuous versus bar charts for categorical. This mostly applies to numeric variables, but strings for instance can be categorical. |
 |  [Verb](./schema.verb.md) |  |
 |  [WindowFunction](./schema.windowfunction.md) | These are operations that perform windowed compute. See https://uwdata.github.io/arquero/api/op\#window-functions |
 
@@ -56,7 +56,7 @@
 |  [BinarizeArgs](./schema.binarizeargs.md) |  |
 |  [BooleanArgs](./schema.booleanargs.md) |  |
 |  [BundleSchema](./schema.bundleschema.md) | A schema for defining custom bundle types. |
-|  [Category](./schema.category.md) | Describes a nomincal category in terms of category name and count of values in the category. |
+|  [Category](./schema.category.md) | Describes a nominal category in terms of category name and count of values in the category. |
 |  [CodebookSchema](./schema.codebookschema.md) | This contains all of the field-level details for interpreting a dataset, including data types, mapping, and metadata. Note that with persisted metadata and field examples, a dataset can often be visualized and described to the user without actually loading the source file. resource profile: 'codebook' |
 |  [Constraints](./schema.constraints.md) | Validation constraints for a field. |
 |  [ConvertArgs](./schema.convertargs.md) |  |
@@ -92,7 +92,7 @@
 |  [PivotArgs](./schema.pivotargs.md) |  |
 |  [RecodeArgs](./schema.recodeargs.md) |  |
 |  [RelationshipConstraint](./schema.relationshipconstraint.md) |  |
-|  [ResourceSchema](./schema.resourceschema.md) | Parent class for any resource type understood by the system. Any object type that extends from Resouce is expected to have a standalone schema published. For project state, this can be left as generic as possible for now. |
+|  [ResourceSchema](./schema.resourceschema.md) | Parent class for any resource type understood by the system. Any object type that extends from Resource is expected to have a standalone schema published. For project state, this can be left as generic as possible for now. |
 |  [RollupArgs](./schema.rollupargs.md) |  |
 |  [SampleArgs](./schema.sampleargs.md) |  |
 |  [SpreadArgs](./schema.spreadargs.md) |  |
