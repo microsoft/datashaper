@@ -2,6 +2,7 @@
 	"recommendations": [
 		"arcanis.vscode-zipfs",
 		"dbaeumer.vscode-eslint",
-		"rome.rome"
+		"rome.rome",
+		"streetsidesoftware.code-spell-checker"
 	]
 }
