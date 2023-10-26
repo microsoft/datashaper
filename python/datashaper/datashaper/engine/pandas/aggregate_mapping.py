@@ -2,6 +2,7 @@ from functools import reduce
 
 from ..types import FieldAggregateOperation
 
+
 aggregate_operation_mapping = {
     FieldAggregateOperation.Any: "first",
     FieldAggregateOperation.Count: "count",

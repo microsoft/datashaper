@@ -17,8 +17,7 @@ export const About: React.FC = memo(function About() {
 			<p>
 				At the heart of DataShaper is a set of verbs that describe kinds of data
 				transformations that are applied to data-tables. These verbs can be
-				chained together to form data 
-				workflows.
+				chained together to form data workflows.
 			</p>
 			<h2>React API</h2>
 			<p>
