@@ -172,7 +172,7 @@ function compareValue(expected: any, actual: any): void {
 		const actualDate = new Date(actual)
 		expect(expected.getTime()).toEqual(actualDate.getTime())
 	} else {
-		// comparing unknown types resolves issues with potential auto-typing on the expected csv text versus live types in the workflow output
+		// comparing unknown types resolves issues with potential autotyping on the expected csv text versus live types in the workflow output
 		expect(actual.toString()).toEqual(expected.toString())
 	}
 }

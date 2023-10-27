@@ -9,7 +9,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { StepChangeFunction } from '../../../types.js'
 
 /**
- * For reusable sub-components that are combined in one interface
+ * For reusable subcomponents that are combined in one interface
  * to manipulate a step.
  */
 export interface StepSubformProps<T extends object | void | unknown = unknown>

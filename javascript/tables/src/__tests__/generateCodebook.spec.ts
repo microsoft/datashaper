@@ -16,7 +16,7 @@ describe('generateCodebook', () => {
 			flag: 'r',
 		})
 
-		// we are not auto-typing here to confirm that our codebook generation correctly
+		// we are not autotyping here to confirm that our codebook generation correctly
 		// infers types from the string values, using the pandas-compatible type hints
 
 		it('should return a codebook object', async () => {
@@ -115,7 +115,7 @@ describe('generateCodebook', () => {
 		})
 
 		it('should discover array subtypes', async () => {
-			// we are not auto-typing here to confirm that our codebook generation correctly
+			// we are not autotyping here to confirm that our codebook generation correctly
 			// infers types from the string values, using the pandas-compatible type hints
 			const parsed = await fromCSV(csv, { autoType: false })
 			const codebook = await generateCodebook(parsed)

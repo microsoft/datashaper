@@ -22,7 +22,7 @@
 |  [format(value, options)](./tables.format.md) | Returns a nice formatted string for a number |
 |  [formatIfNumber(value)](./tables.formatifnumber.md) | Returns a formatted string for a number, otherwise returns the original value |
 |  [formatNumberStr(value, options)](./tables.formatnumberstr.md) | Formats a string using specified numeric parser options, so that it is ready for standard numeric parsing. (i.e., default js impl is to consider '.' a decimal). If the string has invalid construction to be a number, an empty string will be returned, which will be parsed as NaN. We do this because parseInt does not recognize the thousands separator, but if we remove them all even in invalid cases (e.g., '1,00'), invalid numbers could be parsed downstream as valid. The same occurs with decimal separators: parseFloat will ignore anything after the first. |
-|  [fromCSV(text, options)](./tables.fromcsv.md) | Drop-in replacement for arquero fromCSV, using our internal parsing with auto-typing turned on. Meant for quick-and-dirty reads, with the advantage that our default parsing aligns with pandas. Use readTable for more control over schema options and formats. |
+|  [fromCSV(text, options)](./tables.fromcsv.md) | Drop-in replacement for arquero fromCSV, using our internal parsing with autotyping turned on. Meant for quick-and-dirty reads, with the advantage that our default parsing aligns with pandas. Use readTable for more control over schema options and formats. |
 |  [generateCodebook(table, options)](./tables.generatecodebook.md) |  |
 |  [getDate(value)](./tables.getdate.md) |  |
 |  [getters(table)](./tables.getters.md) | Returns a map of all of the column getters for a table. |

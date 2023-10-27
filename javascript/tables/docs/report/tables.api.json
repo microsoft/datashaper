@@ -1184,7 +1184,7 @@
         {
           "kind": "Function",
           "canonicalReference": "@datashaper/tables!fromCSV:function(1)",
-          "docComment": "/**\n * Drop-in replacement for arquero fromCSV, using our internal parsing with auto-typing turned on. Meant for quick-and-dirty reads, with the advantage that our default parsing aligns with pandas. Use readTable for more control over schema options and formats.\n */\n",
+          "docComment": "/**\n * Drop-in replacement for arquero fromCSV, using our internal parsing with autotyping turned on. Meant for quick-and-dirty reads, with the advantage that our default parsing aligns with pandas. Use readTable for more control over schema options and formats.\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
