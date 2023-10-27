@@ -36,7 +36,7 @@ export function stats(
 			invalid: reqStats[`${cur}.invalid`],
 			mode,
 		}
-		const opt_num =
+		const optsNum =
 			type === DataType.Number
 				? {
 						minimum: optStats[`${cur}.minimum`],
@@ -47,7 +47,7 @@ export function stats(
 						bins: bins[`${cur}.bins`],
 				  }
 				: {}
-		const opt_string =
+		const optsStr =
 			type === DataType.String
 				? {
 						categories: cats[`${cur}`],
@@ -55,8 +55,8 @@ export function stats(
 				: {}
 		acc[cur] = {
 			...req,
-			...opt_num,
-			...opt_string,
+			...optsNum,
+			...optsStr,
 		}
 		return acc
 	}, {} as Record<string, FieldMetadata>)
