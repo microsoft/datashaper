@@ -9,11 +9,11 @@ import binning from './specs/binning.json'
 import categorical from './specs/categorical.json'
 import dropdown from './specs/dropdown.json'
 import everyOperation from './specs/every-operation.json'
-import multiStepBinarize from './specs/multi-step-binarize.json'
+import multiStepBinarize from './specs/multistep-binarize.json'
 import onehotUnhot from './specs/onehot-unhot.json'
 import sparkbar from './specs/sparkbar.json'
 import sparkline from './specs/sparkline.json'
-import spreadHot from './specs/spread-onehot.json'
+import spreadHot from './specs/spreadhot.json'
 import { WorkflowExampleStory } from './WorkflowExample/WorkflowExample.story.js'
 
 const storyMetadata = {
