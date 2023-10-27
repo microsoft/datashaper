@@ -119,7 +119,7 @@ function binning(
 	}, {} as Record<string, any>)
 
 	const binRollup = table.select(numeric).derive(binArgs)
-	// for each binned column, derive a sorted & counted sub-table.
+	// for each binned column, derive a sorted & counted subtable.
 	// note that only bins with at least one entry will have a row,
 	// so we could have less than 10 bins - hence the fill
 	const counted = numeric.reduce((acc, cur) => {
