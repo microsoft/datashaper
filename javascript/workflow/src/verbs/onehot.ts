@@ -30,10 +30,10 @@ export const onehotStep: ColumnTableStep<OnehotArgs> = (
 		) as ExprObject
 		return acc
 	}, {} as Record<string, ExprObject>)
-	const onehot_result = input.derive(args, {
+	const onehotted = input.derive(args, {
 		after: input.columnNames()[input.numCols() - 1],
 	})
-	return preserveSource ? onehot_result : onehot_result.select(not(column))
+	return preserveSource ? onehotted : onehotted.select(not(column))
 }
 
 export const onehot = stepVerbFactory(onehotStep)

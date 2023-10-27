@@ -31,7 +31,7 @@ export function compareAll(
 		const left = d[column]
 
 		// TODO: the logical evaluate below has shortcuts that could optimize
-		// this check by short-cutting evaluation once it is clear the logical operator
+		// this check by shortcutting evaluation once it is clear the logical operator
 		// cannot be satisfied
 		const comparisons = criteria.map((filter) => {
 			const { value, operator, type } = filter
