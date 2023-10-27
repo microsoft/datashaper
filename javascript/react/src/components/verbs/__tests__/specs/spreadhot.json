@@ -4,7 +4,7 @@
 	"description": "Demonstrates the spread verb with a onehot flag to encode as binary columns.",
 	"steps": [
 		{
-			"id": "spread_hot",
+			"id": "spreadhot",
 			"verb": "spread",
 			"input": {
 				"source": "companies2"
