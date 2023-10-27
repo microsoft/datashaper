@@ -12,6 +12,7 @@ QNAN
 href
 hrefs
 noscript
+unclickable
 
 # Libraries
 Arquero
