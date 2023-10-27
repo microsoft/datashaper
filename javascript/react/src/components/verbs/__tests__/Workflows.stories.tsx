@@ -9,11 +9,11 @@ import binning from './specs/binning.json'
 import categorical from './specs/categorical.json'
 import dropdown from './specs/dropdown.json'
 import everyOperation from './specs/every-operation.json'
-import multiStepBinarize from './specs/multistep-binarize.json'
-import onehotUnhot from './specs/onehot-unhot.json'
+import multistepBinarize from './specs/multistep-binarize.json'
+import onehotunhot from './specs/onehot-unhot.json'
 import sparkbar from './specs/sparkbar.json'
 import sparkline from './specs/sparkline.json'
-import spreadHot from './specs/spreadhot.json'
+import spreadhot from './specs/spreadhot.json'
 import { WorkflowExampleStory } from './WorkflowExample/WorkflowExample.story.js'
 
 const storyMetadata = {
@@ -53,11 +53,11 @@ export const DropdownCells = {
 	},
 }
 
-export const MultiStepBinarize = {
+export const MultistepBinarize = {
 	render: WorkflowExampleStory.bind({}),
 
 	args: {
-		schema: multiStepBinarize as WorkflowSchema,
+		schema: multistepBinarize as WorkflowSchema,
 	},
 }
 
@@ -65,7 +65,7 @@ export const OnehotUnhot = {
 	render: WorkflowExampleStory.bind({}),
 
 	args: {
-		schema: onehotUnhot as WorkflowSchema,
+		schema: onehotunhot as WorkflowSchema,
 	},
 
 	name: 'Onehot/Unhot',
@@ -101,6 +101,6 @@ export const SpreadHot = {
 	render: WorkflowExampleStory.bind({}),
 
 	args: {
-		schema: spreadHot as WorkflowSchema,
+		schema: spreadhot as WorkflowSchema,
 	},
 }
