@@ -4,7 +4,7 @@
 
 ## DataShaperAppProps.className property
 
-CSS class name
+CSS Classname
 
 <b>Signature:</b>
 

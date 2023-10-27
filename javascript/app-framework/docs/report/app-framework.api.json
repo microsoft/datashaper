@@ -1045,7 +1045,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!DataShaperAppProps#className:member",
-              "docComment": "/**\n * CSS class name\n */\n",
+              "docComment": "/**\n * CSS Classname\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

@@ -4,7 +4,7 @@
 
 ## fromCSV() function
 
-Drop-in replacement for arquero fromCSV, using our internal parsing with autotyping turned on. Meant for quick-and-dirty reads, with the advantage that our default parsing aligns with pandas. Use readTable for more control over schema options and formats.
+Drop-in replacement for arquero fromCSV, using our internal parsing with auto-typing turned on. Meant for quick-and-dirty reads, with the advantage that our default parsing aligns with pandas. Use readTable for more control over schema options and formats.
 
 <b>Signature:</b>
 
