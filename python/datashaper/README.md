@@ -35,12 +35,12 @@ parents = pd.DataFrame({
 # id   kid
 # 1    billy
 # 1    jill
-# 2    jeff
+# 2    kaden
 # 2    kyle
 # 3    moe
 kids = pd.DataFrame({
     "id": [1, 1, 2, 2, 3],
-    "kid": ['billy', 'jill', 'jeff', 'kyle', 'moe']
+    "kid": ['billy', 'jill', 'kaden', 'kyle', 'moe']
 })
 
 pipeline = Pipeline()
@@ -61,7 +61,7 @@ pipeline.add(Step(
 # id   name    kid
 # 1    bob     billy
 # 1    bob     jill
-# 2    joe     jeff
+# 2    joe     kaden
 # 2    joe     kyle
 # 3    jane    moe
 result = pipeline.run()

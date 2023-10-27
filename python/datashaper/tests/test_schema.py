@@ -1,6 +1,5 @@
 import json
 import os
-
 from http.client import HTTPConnection
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from threading import Thread
@@ -8,11 +7,9 @@ from typing import List
 
 import pandas as pd
 import pytest
-
 from pandas.testing import assert_frame_equal
 
 from datashaper import Workflow
-
 
 FIXTURES_PATH = "fixtures/workflow"
 TABLE_STORE_PATH = "fixtures/workflow_inputs"
@@ -36,11 +33,11 @@ def read_csv(path: str) -> pd.DataFrame:
 
 
 def get_verb_test_specs(root: str) -> List[str]:
-    sub_folders: List[str] = []
+    subfolders: List[str] = []
     for root, _, files in os.walk(root):
         if "workflow.json" in files:
-            sub_folders.append(root)
-    return sub_folders
+            subfolders.append(root)
+    return subfolders
 
 
 @pytest.mark.parametrize(

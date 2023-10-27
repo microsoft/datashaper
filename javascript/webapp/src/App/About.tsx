@@ -22,7 +22,7 @@ export const About: React.FC = memo(function About() {
 			<h2>React API</h2>
 			<p>
 				DataShaper provides a React-based UI library for defining and
-				configuring data-flows, and observing their outputs.
+				configuring dataflows, and observing their outputs.
 			</p>
 			<h2>App Framework</h2>
 			<p>

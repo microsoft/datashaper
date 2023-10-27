@@ -91,11 +91,11 @@ def bin(
     else:
         bin_edges = __bin_edges_mapping[bin_strategy](input_table[column], min_max)
 
-    digitized = np.digitize(input_table[column], bin_edges)
+    indices = np.digitize(input_table[column], bin_edges)
     value_edges = [
         __get_bucket_value(
             bin_edges,
-            digitized,
+            indices,
             n,
             clamped,
             min_max,
