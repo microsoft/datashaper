@@ -97,7 +97,7 @@ export const Sparkline = {
 	},
 }
 
-export const SpreadHot = {
+export const Spreadhot = {
 	render: WorkflowExampleStory.bind({}),
 
 	args: {
