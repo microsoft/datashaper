@@ -17,7 +17,7 @@ export async function loadTable(
 ): Promise<ColumnTable> {
 	const text = await getDsvFileContent(file)
 	const delimiter = options.delimiter || guessDelimiter(file.name)
-	// set a much higher default auto-max to catch mixed types in large tables
+	// set a much higher default automax to catch mixed types in large tables
 	// this has a negligible effect on small tables, and tolerable on large ones
 	return fromCSV(text, { delimiter, autoMax: 1000000, ...options })
 }
