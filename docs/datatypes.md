@@ -14,7 +14,7 @@ Data types present a number of thorny edge cases when dealing with different lan
 ## Rules
 The following rules will be observed across implementations to ensure consistent treatment of data values:
 - `null` (JavaScript) or `None` (Python) will be used for empty cell values. `undefined` will be avoided in JavaScript for data table values.
-- `null` or `None` will not be coerced to other types, either during autotyping or with the [convert](./verbs/convert.md) verb. If required, [impute](./verbs/impute.md) can be used to fill nulls with other values.
+- `null` or `None` will not be coerced to other types, either during auto-typing or with the [convert](./verbs/convert.md) verb. If required, [impute](./verbs/impute.md) can be used to fill nulls with other values.
 - We use nullable values to account for missing data. E.g., `null` is a valid cell value in an integer or boolean column to represent missing data (as opposed to casting to `NaN` or `false`).
 - Pandas' [missing data logic](https://pandas.pydata.org/pandas-docs/stable/user_guide/missing_data.html#missing-data) will be used for computations and boolean evaluations.
   - In general, this means null values are carried forward and may result in null outputs.
@@ -24,4 +24,4 @@ The following rules will be observed across implementations to ensure consistent
 - When reading text files, the pandas default strings for [missing values](https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#na-values) and [booleans](https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#boolean-values) will be used.
 - [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) will be used for standard date formatting. Other date formats will not be auto-guessed.
   - When providing a custom parse or format pattern, we follow python and use the [1989 C standard tokens](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior). [d3-time-format](https://github.com/d3/d3-time-format) supports this standard for JavaScript.
-- We provide users with the option to turn autotyping off to ensure we do not lose data inappropriately.
+- We provide users with the option to turn auto-typing off to ensure we do not lose data inappropriately.
