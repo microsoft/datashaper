@@ -12,8 +12,8 @@ import { pretty } from './StatsColumnHeader.constants.js'
 
 export function useTooltip(stats?: FieldMetadata): string {
 	return useMemo(() => {
-		const { bins, categories, ...args } = stats || EMPTY_OBJECT
-		return Object.entries(args).reduce((acc, cur, idx) => {
+		const { bins, categories, ...nobins } = stats || EMPTY_OBJECT
+		return Object.entries(nobins).reduce((acc, cur, idx) => {
 			const [key, value] = cur
 			const nice = upperFirst(pretty[key] || key)
 			return `${acc}${idx > 0 ? '\n' : ''}${nice}: ${formatIfNumber(value)}`
