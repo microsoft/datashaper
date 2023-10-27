@@ -18,7 +18,7 @@ export const Delimiter: React.FC<{
 		useBoolean(false)
 	const [value, setValue] = useState(isOther ? selected : '')
 
-	const onDelimeterChange = useCallback(
+	const onDelimiterChange = useCallback(
 		(option?: IChoiceGroupOption) => {
 			if (option?.key === 'Other') {
 				customDelimiter()
@@ -38,7 +38,7 @@ export const Delimiter: React.FC<{
 		},
 	)
 
-	const onChangeCustomDelimeter = useCallback(
+	const onChangeCustomDelimiter = useCallback(
 		(
 			_: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
 			newValue?: string,
@@ -58,7 +58,7 @@ export const Delimiter: React.FC<{
 				label='Delimiter'
 				defaultSelectedKey={selected}
 				options={delimiterOptions}
-				onChange={(_, option) => onDelimeterChange(option)}
+				onChange={(_, option) => onDelimiterChange(option)}
 			/>
 			<TextField
 				autoComplete='off'
@@ -66,7 +66,7 @@ export const Delimiter: React.FC<{
 				name='customDelimiter'
 				disabled={!isOther}
 				value={value}
-				onChange={onChangeCustomDelimeter}
+				onChange={onChangeCustomDelimiter}
 			/>
 		</DelimiterContainer>
 	)

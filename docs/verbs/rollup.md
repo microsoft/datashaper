@@ -18,7 +18,7 @@ Performs aggregation operations on table columns. Normally the table should be [
 - `median`: finds the median of the values
 - `stdev`: computes the standard deviation of the values
 - `stdevp`: computes the population standard deviation of the values
-- `variance`: computes the variane of the values
+- `variance`: computes the variance of the values
 - `array_agg`: collects all of the values in an array
 - `array_agg_distinct`: collects all of the unique values in an array
 

@@ -1,6 +1,6 @@
 # app-framework
 
-The DataShaper app-framework package provides infrastructure for creating new applications that include core DataShaper functionality by default, as well as extensibility to build your own interfaces that are managedby the system consistently.
+The DataShaper app-framework package provides infrastructure for creating new applications that include core DataShaper functionality by default, as well as extensibility to build your own interfaces that are managed by the system consistently.
 
 ## Resources
 

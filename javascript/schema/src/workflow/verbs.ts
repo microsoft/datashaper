@@ -48,7 +48,7 @@ export enum Verb {
 
 export interface InputColumnArgs {
 	/**
-	 * Name of the input column for columnnar operations.
+	 * Name of the input column for columnar operations.
 	 */
 	column: string
 	dataType?: DataType
@@ -449,7 +449,7 @@ export interface PivotArgs extends InputKeyValueArgs {
 export interface RecodeArgs extends InputColumnArgs, OutputColumnArgs {
 	/**
 	 * Mapping of old value to new for the recoding.
-	 * Note that the key must be coercable to a string for map lookup.
+	 * Note that the key must be coercible to a string for map lookup.
 	 */
 	mapping: Record<Value, Value>
 }

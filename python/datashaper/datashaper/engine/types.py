@@ -134,7 +134,7 @@ class FieldAggregateOperation(Enum):
     StDev = "stdev"
     StDevPopulation = "stdevp"
     Variance = "variance"
-    ArraryAgg = "array_agg"
+    ArrayAgg = "array_agg"
     ArrayAggDistinct = "array_agg_distinct"
 
 

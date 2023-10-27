@@ -245,7 +245,7 @@ export class GraphManager extends Disposable {
 		const node = this.getNode(step.id)
 		node.config = step.args
 
-		// first bind the standrd input to the step, either the previous step or the default input
+		// first bind the standard input to the step, either the previous step or the default input
 		if (prevStep == null) {
 			node.bind({ node: this.getDefaultInput() })
 		} else if (prevStep != null) {

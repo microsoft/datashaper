@@ -17,7 +17,7 @@ export function useColumnValueOptions(
 	values?: Value[],
 	filter?: (value: Value) => boolean,
 ): IDropdownOption[] {
-	const vals = useMemo(() => {
+	const valueList = useMemo(() => {
 		if (!(column && table && column) || column.trim().length === 0) {
 			return EMPTY_ARRAY
 		}
@@ -41,5 +41,5 @@ export function useColumnValueOptions(
 		const list = values ? values : getFallback()
 		return filter ? list.filter(filter) : list
 	}, [column, table, values, filter])
-	return useSimpleDropdownOptions(vals)
+	return useSimpleDropdownOptions(valueList)
 }

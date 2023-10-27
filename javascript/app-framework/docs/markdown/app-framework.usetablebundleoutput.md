@@ -4,7 +4,7 @@
 
 ## useTableBundleOutput() function
 
-Uses the latest table from a data package. This is updatde as the package changes
+Uses the latest table from a data package. This is update as the package changes
 
 <b>Signature:</b>
 

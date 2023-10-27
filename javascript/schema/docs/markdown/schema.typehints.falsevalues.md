@@ -4,7 +4,7 @@
 
 ## TypeHints.falseValues property
 
-Default: case-insenstive word "false".
+Default: case-insensitive word "false".
 
 <b>Signature:</b>
 

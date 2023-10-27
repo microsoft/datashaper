@@ -4,7 +4,7 @@
 
 ## ResourceSchema.profile property
 
-Defines the resource type. Known resource types should have accommpanying processors and rendering components. Unknown resource types can be interrogated to determine if the format is understandable by an existing component. Note that this could be inferred from $schema, but a simple string here is easier to deal with in code.
+Defines the resource type. Known resource types should have accompanying processors and rendering components. Unknown resource types can be interrogated to determine if the format is understandable by an existing component. Note that this could be inferred from $schema, but a simple string here is easier to deal with in code.
 
 <b>Signature:</b>
 

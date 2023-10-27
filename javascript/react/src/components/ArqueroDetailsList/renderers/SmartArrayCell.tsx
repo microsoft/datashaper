@@ -16,7 +16,7 @@ import { ArrayDropdownCell } from './ArrayDropdownCell.js'
 import { CategoricalBarCell, SparkbarCell, SparklineCell } from './index.js'
 import type { RichCellProps } from './types.js'
 
-const HISTO_MAX = 20
+const HISTOGRAM_MAX = 20
 const DROPDOWN_MAX = 15
 /**
  * Chooses what sort of array display would be best.
@@ -26,9 +26,9 @@ export const SmartArrayCell: React.FC<RichCellProps> = memo(
 		const { item, column, index } = props
 		const values = getValue(item, column) || EMPTY_ARRAY
 		const cellWidth = column?.currentWidth || 0
-		const histo = categories(values) as Record<string, number>
-		const histoLength = Object.keys(histo).length
-		const dist = isDistinctCategories(histo)
+		const histogram = categories(values) as Record<string, number>
+		const histogramLength = Object.keys(histogram).length
+		const dist = isDistinctCategories(histogram)
 		return (
 			<Switch>
 				<Case condition={values.length <= 3}>
@@ -37,8 +37,8 @@ export const SmartArrayCell: React.FC<RichCellProps> = memo(
 				<Case condition={values.length <= DROPDOWN_MAX}>
 					<ArrayDropdownCell rowIndex={index || 0} {...props} />
 				</Case>
-				<Case condition={histoLength <= HISTO_MAX && !dist}>
-					<CategoricalBarCell {...props} categories={histo} />
+				<Case condition={histogramLength <= HISTOGRAM_MAX && !dist}>
+					<CategoricalBarCell {...props} categories={histogram} />
 				</Case>
 				{/* if bars can be at least one pixel, otherwise use a line */}
 				<Case condition={values.length <= cellWidth}>

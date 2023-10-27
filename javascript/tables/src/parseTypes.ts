@@ -13,7 +13,7 @@ import { formatNumberStr, getDate } from './util.js'
 
 /**
  * Factory function to create a value parser based on defined data type and type hints
- * @param type - the datatype to interperet as
+ * @param type - the datatype to interpret as
  * @param subtype - the subtype of the datatype (i.e., if the main type is an array)
  * @param hints - type hinting information
  * @returns A parsed value
@@ -155,7 +155,7 @@ export function parseObject(
 			const parsed = Object.keys(obj).reduce(
 				(acc: Record<string, any>, key: string) => {
 					const item = `${obj[key]}`
-					// for objects we'll just do our best with property types - we don't support detailed subobject structures right now
+					// for objects we'll just do our best with property types - we don't support detailed sub-object structures right now
 					const type = subTypeChecker(item)
 					const parser = parseAs(type, type, options)
 					acc[key] = parser(item)

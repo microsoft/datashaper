@@ -4,7 +4,7 @@
 
 ## Graph.remove() method
 
-Remove a node from the grpah
+Remove a node from the graph
 
 <b>Signature:</b>
 

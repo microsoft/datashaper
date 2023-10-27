@@ -48,7 +48,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * @param inputs - the input socket names
 	 */
 	public constructor(public readonly inputs: SocketName[] = []) {
-		// nada
+		// none
 	}
 
 	public get stats(): NodeStats {
@@ -298,7 +298,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 
 	/**
 	 * Calculate the value of this processing node. This may be invoked even if this
-	 * processing node is not fully configured. recalulate() should account for this
+	 * processing node is not fully configured. recalculate() should account for this
 	 */
 	protected recalculate = (cause: string): void => {
 		try {

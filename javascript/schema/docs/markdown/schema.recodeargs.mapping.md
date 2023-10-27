@@ -4,7 +4,7 @@
 
 ## RecodeArgs.mapping property
 
-Mapping of old value to new for the recoding. Note that the key must be coercable to a string for map lookup.
+Mapping of old value to new for the recoding. Note that the key must be coercible to a string for map lookup.
 
 <b>Signature:</b>
 

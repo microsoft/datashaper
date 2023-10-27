@@ -92,7 +92,7 @@ export function useOnDeleteStep(
  * Get a function to call when a step is created
  * @param save - The save function to call when the step is created
  * @param selectOutput - A function to select the output after the step is created
- * @param dismissModal - The function used to dismill the modal
+ * @param dismissModal - The function used to dismiss the modal
  * @returns
  */
 export function useOnCreateStep(

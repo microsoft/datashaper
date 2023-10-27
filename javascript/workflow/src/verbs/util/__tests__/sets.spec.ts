@@ -48,7 +48,7 @@ describe('test for set util', () => {
 			store.table('table2'),
 		])
 
-		// no dups in table2, so output should match original
+		// no dupes in table2, so output should match original
 		expect(result.numCols()).toBe(3)
 		expect(result.numRows()).toBe(5)
 	})

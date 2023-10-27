@@ -147,7 +147,7 @@ export interface Graph<T> {
 	add(node: Node<T>): void
 
 	/**
-	 * Remove a node from the grpah
+	 * Remove a node from the graph
 	 */
 	remove(id: NodeId): void
 

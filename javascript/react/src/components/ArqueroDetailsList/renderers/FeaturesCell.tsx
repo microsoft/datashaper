@@ -39,7 +39,7 @@ export const FeaturesCell: React.FC<FeatureCellProps> = memo(
 		const type = field?.type
 		const value = getValue(item, column)
 		const magnitude = useNumberMagnitude(value, metadata, type)
-		const histo = categories(value)
+		const histogram = categories(value)
 		return (
 			<CellContainer onClick={onSelect} {...props}>
 				<Switch>
@@ -77,14 +77,14 @@ export const FeaturesCell: React.FC<FeatureCellProps> = memo(
 					<Case
 						condition={features.showCategoricalBar && type === DataType.Array}
 					>
-						<CategoricalBarCell {...props} categories={histo} />
+						<CategoricalBarCell {...props} categories={histogram} />
 					</Case>
 					<Case
 						condition={
 							features.showSparkbar &&
 							type === DataType.Array &&
-							histo &&
-							histo['length' ?? 0]
+							histogram &&
+							histogram['length' ?? 0]
 						}
 					>
 						<SparkbarCell {...props} />

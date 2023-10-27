@@ -11,7 +11,7 @@ import { useTextAlignStyle } from './hooks.js'
 import type { FormattedCellProps } from './types.js'
 
 /**
- * Basic endering of number values.
+ * Basic rendering of number values.
  */
 export const NumberCell: React.FC<FormattedCellProps> = memo(
 	function NumberCell({ item, column, textAlign = 'right', numberFormat }) {

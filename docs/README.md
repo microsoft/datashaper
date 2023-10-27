@@ -1,4 +1,4 @@
-The core idea with these components is largely analagous to the object-oriented chain-of-responsibility pattern. We construct a workflow, which is a series of table transformation steps (e.g., middleware). We supply a table store to read and write to (e.g., context). After workflow execution is complete, we retrieve one or more output tables from the context.
+The core idea with these components is largely analogous to the object-oriented chain-of-responsibility pattern. We construct a workflow, which is a series of table transformation steps (e.g., middleware). We supply a table store to read and write to (e.g., context). After workflow execution is complete, we retrieve one or more output tables from the context.
 
 The fundamental unit of work in the system is a **verb**. Verbs represent primitive operations that return a table. Most verbs require an input table to transform.
 

@@ -4,7 +4,7 @@
 
 ## Category interface
 
-Describes a nomincal category in terms of category name and count of values in the category.
+Describes a nominal category in terms of category name and count of values in the category.
 
 <b>Signature:</b>
 

@@ -23,7 +23,7 @@ describe('BaseNode', () => {
 		expect(() => sum.unbind('derp')).toThrow(/unknown input socket name "derp"/)
 	})
 
-	it('will throw an error if uninstalling an ininitialized input socket', () => {
+	it('will throw an error if uninstalling an initialized input socket', () => {
 		const sum = new AddNode()
 		expect(() => sum.unbind(Input.LHS)).toThrow(/no socket installed at "lhs"/)
 	})
@@ -75,13 +75,13 @@ describe('BaseNode', () => {
 
 		expect(subtraction.output).toBe(4)
 
-		const mult = new MultiplyNode()
-		mult.bind({ input: Input.LHS, node: subtraction })
-		mult.bind({ input: Input.RHS, node: two })
-		expect(mult.output).toBe(8)
+		const multiply = new MultiplyNode()
+		multiply.bind({ input: Input.LHS, node: subtraction })
+		multiply.bind({ input: Input.RHS, node: two })
+		expect(multiply.output).toBe(8)
 
 		const div = new DivideNode()
-		div.bind({ input: Input.LHS, node: mult })
+		div.bind({ input: Input.LHS, node: multiply })
 		div.bind({ input: Input.RHS, node: two })
 		expect(div.output).toBe(4)
 	})

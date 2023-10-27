@@ -56,9 +56,9 @@ export function fixedBinStep(
 	clamped = false,
 	format = false,
 ): string | object {
-	const binner = bin(min, max, step, clamped)
+	const binFn = bin(min, max, step, clamped)
 	return escape((d: any) => {
-		const value = binner(d[column])
+		const value = binFn(d[column])
 		if (format) {
 			if (value < min) {
 				return `<${min}`
@@ -82,14 +82,14 @@ export function fixedBinStep(
  * Returns a function that places values in an actual bin, by truncating it to the lower bound.
  * This differs slightly from arquero by not using an exclusive max at the top end,
  * which would always result in one more bin than desired.
- * Our approach aligns with the behaviour of numpy.
+ * Our approach aligns with the behavior of numpy.
  * https://numpy.org/doc/stable/reference/generated/numpy.histogram.html
  */
 function bin(min: number, max: number, step: number, clamped: boolean) {
 	const count = Math.floor((max - min) / step)
 	const ultimate = min + step * count
 	const penultimate = min + step * (count - 1)
-	const rebinmax = ultimate >= max
+	const adjust_bin_max = ultimate >= max
 	return function (value: number): number {
 		// if the ultimate bin is >= the max, put those values in the prior bin
 		// this is due to arquero's exclusive max bound, which will just bin those exact
@@ -100,7 +100,7 @@ function bin(min: number, max: number, step: number, clamped: boolean) {
 			if (candidate === -Infinity) {
 				return min
 			} else if (candidate === Infinity) {
-				return rebinmax ? penultimate : ultimate
+				return adjust_bin_max ? penultimate : ultimate
 			}
 		}
 

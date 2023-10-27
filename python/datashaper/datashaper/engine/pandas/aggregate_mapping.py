@@ -18,6 +18,6 @@ aggregate_operation_mapping = {
     FieldAggregateOperation.StDev: "std",
     FieldAggregateOperation.StDevPopulation: "",
     FieldAggregateOperation.Variance: "variance",
-    FieldAggregateOperation.ArraryAgg: lambda series: list(series),
+    FieldAggregateOperation.ArrayAgg: lambda series: list(series),
     FieldAggregateOperation.ArrayAggDistinct: lambda series: list(set(series)),
 }

@@ -22,7 +22,7 @@ import type { FileDefinition } from './ResourcesPane.types.js'
 import { useLoadDataPackage } from '../../../hooks/useLoadDataPackage.js'
 
 /**
- * Gets the file-managament commandbar items
+ * Gets the file-management commandbar items
  *
  * @param examples - The provided examples
  * @param expanded - Whether the pane is expended

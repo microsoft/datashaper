@@ -2494,7 +2494,7 @@
         {
           "kind": "Function",
           "canonicalReference": "@datashaper/app-framework!useTableBundleOutput:function(1)",
-          "docComment": "/**\n * Uses the latest table from a data package. This is updatde as the package changes\n *\n * @param pkg - The data package to load the table from\n *\n * @returns The latest table\n */\n",
+          "docComment": "/**\n * Uses the latest table from a data package. This is update as the package changes\n *\n * @param pkg - The data package to load the table from\n *\n * @returns The latest table\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",

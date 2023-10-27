@@ -4,7 +4,7 @@
 
 ## BaseNode.recalculate property
 
-Calculate the value of this processing node. This may be invoked even if this processing node is not fully configured. recalulate() should account for this
+Calculate the value of this processing node. This may be invoked even if this processing node is not fully configured. recalculate() should account for this
 
 <b>Signature:</b>
 
