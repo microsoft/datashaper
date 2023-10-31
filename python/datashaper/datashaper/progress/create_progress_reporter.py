@@ -10,7 +10,6 @@ from rich.tree import Tree
 
 from .types import ProgressStatus, StatusReportHandler
 
-
 console: Console | None = None
 tree: Tree | None = None
 live: Live | None = None
@@ -19,7 +18,7 @@ initialized: bool = False
 
 def get_root_tree() -> Tree:
     global console, tree, initialized, live
-    if not initialized:
+    if initialized is False:
         initialized = True
         console = Console()
         group = Group(Spinner("dots", "Executing Pipeline..."), fit=True)
