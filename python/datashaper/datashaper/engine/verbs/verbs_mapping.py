@@ -34,6 +34,7 @@ from .rollup import rollup
 from .sample import sample
 from .select import select
 from .spread import spread
+from .strings import replace, upper
 from .unfold import unfold
 from .ungroup import ungroup
 from .unhot import unhot
@@ -41,7 +42,6 @@ from .union import union
 from .unorder import unorder
 from .unroll import unroll
 from .window import window
-
 
 # This map contains the mapping between all verbs and functions.
 functions: dict[Verb, Callable] = {
@@ -73,6 +73,8 @@ functions: dict[Verb, Callable] = {
     Verb.Sample: sample,
     Verb.Select: select,
     Verb.Spread: spread,
+    Verb.StringsReplace: replace,
+    Verb.StringsUpper: upper,
     Verb.Unfold: unfold,
     Verb.Ungroup: ungroup,
     Verb.Unhot: unhot,
