@@ -1,7 +1,7 @@
 name: Version Check
 on: [push, pull_request]
 env:
-  DEFAULT_NODE_VERSION: 16
+  DEFAULT_NODE_VERSION: 18
 jobs:
   version-check:
     runs-on: ubuntu-latest
