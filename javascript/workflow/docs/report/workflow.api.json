@@ -12955,8 +12955,8 @@
             },
             {
               "kind": "Reference",
-              "text": "StringReplaceArgs",
-              "canonicalReference": "@datashaper/schema!StringReplaceArgs:interface"
+              "text": "StringsReplaceArgs",
+              "canonicalReference": "@datashaper/schema!StringsReplaceArgs:interface"
             },
             {
               "kind": "Content",
@@ -12982,8 +12982,8 @@
             },
             {
               "kind": "Reference",
-              "text": "StringArgs",
-              "canonicalReference": "@datashaper/schema!StringArgs:interface"
+              "text": "StringsArgs",
+              "canonicalReference": "@datashaper/schema!StringsArgs:interface"
             },
             {
               "kind": "Content",

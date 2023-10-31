@@ -97,8 +97,8 @@
 |  [SampleArgs](./schema.sampleargs.md) |  |
 |  [SpreadArgs](./schema.spreadargs.md) |  |
 |  [StepJsonCommon](./schema.stepjsoncommon.md) | Common step properties |
-|  [StringArgs](./schema.stringargs.md) |  |
-|  [StringReplaceArgs](./schema.stringreplaceargs.md) |  |
+|  [StringsArgs](./schema.stringsargs.md) |  |
+|  [StringsReplaceArgs](./schema.stringsreplaceargs.md) |  |
 |  [TableBundleSchema](./schema.tablebundleschema.md) | <p>A table bundle encapsulates table-specific resources into a single resource with a prescribed workflow.</p><p>A tablebundle requires a <code>source</code> entry with rel="input" for the source table. A tablebundle may also include <code>source</code> entries with rel="codebook" and rel="workflow" for interpretation and processing of the source data table.</p> |
 |  [TypeHints](./schema.typehints.md) | Configuration values for interpreting data types when parsing a delimited file. By default, all values are read as strings - applying these type hints can derive primitive types from the strings. |
 |  [UnhotArgs](./schema.unhotargs.md) |  |

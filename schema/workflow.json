@@ -1658,10 +1658,32 @@
                         {
                             "properties": {
                                 "args": {
-                                    "$ref": "#/definitions/StringReplaceArgs"
+                                    "$ref": "#/definitions/StringsReplaceArgs"
                                 },
                                 "verb": {
                                     "const": "strings.replace",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/StringsArgs"
+                                },
+                                "verb": {
+                                    "const": "strings.upper",
                                     "type": "string"
                                 }
                             },
@@ -1849,10 +1871,26 @@
             },
             "type": "object"
         },
-        "StringReplaceArgs": {
+        "StringsArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations.",
+                    "type": "string"
+                },
+                "dataType": {
+                    "$ref": "#/definitions/DataType"
+                },
+                "to": {
+                    "description": "Name of the output column to receive the operation's result.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "StringsReplaceArgs": {
+            "properties": {
+                "column": {
+                    "description": "Name of the input column for columnar operations.",
                     "type": "string"
                 },
                 "dataType": {

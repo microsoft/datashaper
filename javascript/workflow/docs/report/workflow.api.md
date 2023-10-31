@@ -46,8 +46,8 @@ import type { RollupArgs } from '@datashaper/schema';
 import type { SampleArgs } from '@datashaper/schema';
 import type { SetOp } from '@datashaper/schema';
 import type { SpreadArgs } from '@datashaper/schema';
-import { StringArgs } from '@datashaper/schema';
-import { StringReplaceArgs } from '@datashaper/schema';
+import { StringsArgs } from '@datashaper/schema';
+import { StringsReplaceArgs } from '@datashaper/schema';
 import { Subject } from 'rxjs';
 import type { Subscription } from 'rxjs';
 import type { TableBundleSchema } from '@datashaper/schema';
@@ -984,8 +984,8 @@ export function stepNodeFactory<T, Args>(stepFunction: StepFunction<T, Args>): (
 //
 // @public (undocumented)
 export const strings: {
-    replace: (id: string) => StepNode<TableContainer<unknown>, StringReplaceArgs>;
-    upper: (id: string) => StepNode<TableContainer<unknown>, StringArgs>;
+    replace: (id: string) => StepNode<TableContainer<unknown>, StringsReplaceArgs>;
+    upper: (id: string) => StepNode<TableContainer<unknown>, StringsArgs>;
 };
 
 // Warning: (ae-missing-release-tag) "TableBundle" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

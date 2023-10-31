@@ -1029,7 +1029,10 @@ export type Step = StepJsonCommon & (({
     args?: SpreadArgs;
 } & BasicInput) | ({
     verb: Verb.StringsReplace;
-    args?: StringReplaceArgs;
+    args?: StringsReplaceArgs;
+} & BasicInput) | ({
+    verb: Verb.StringsUpper;
+    args?: StringsArgs;
 } & BasicInput) | ({
     verb: Verb.Unfold;
     args?: UnfoldArgs;
@@ -1064,12 +1067,6 @@ export interface StepJsonCommon {
     id?: string;
 }
 
-// Warning: (ae-missing-release-tag) "StringArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface StringArgs extends InputColumnArgs, OutputColumnArgs {
-}
-
 // Warning: (ae-missing-release-tag) "StringComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -1092,10 +1089,16 @@ export enum StringComparisonOperator {
     StartsWith = "starts with"
 }
 
-// Warning: (ae-missing-release-tag) "StringReplaceArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "StringsArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface StringReplaceArgs extends StringArgs {
+export interface StringsArgs extends InputColumnArgs, OutputColumnArgs {
+}
+
+// Warning: (ae-missing-release-tag) "StringsReplaceArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StringsReplaceArgs extends StringsArgs {
     // (undocumented)
     flags?: string;
     // (undocumented)

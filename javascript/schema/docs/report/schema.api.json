@@ -9980,8 +9980,35 @@
             },
             {
               "kind": "Reference",
-              "text": "StringReplaceArgs",
-              "canonicalReference": "@datashaper/schema!StringReplaceArgs:interface"
+              "text": "StringsReplaceArgs",
+              "canonicalReference": "@datashaper/schema!StringsReplaceArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n} & "
+            },
+            {
+              "kind": "Reference",
+              "text": "BasicInput",
+              "canonicalReference": "@datashaper/schema!BasicInput:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ") | ({\n    verb: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Verb.StringsUpper",
+              "canonicalReference": "@datashaper/schema!Verb.StringsUpper:member"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n    args?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "StringsArgs",
+              "canonicalReference": "@datashaper/schema!StringsArgs:interface"
             },
             {
               "kind": "Content",
@@ -10176,7 +10203,7 @@
           "name": "Step",
           "typeTokenRange": {
             "startIndex": 1,
-            "endIndex": 221
+            "endIndex": 227
           }
         },
         {
@@ -10222,49 +10249,6 @@
             }
           ],
           "extendsTokenRanges": []
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/schema!StringArgs:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface StringArgs extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "InputColumnArgs",
-              "canonicalReference": "@datashaper/schema!InputColumnArgs:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ", "
-            },
-            {
-              "kind": "Reference",
-              "text": "OutputColumnArgs",
-              "canonicalReference": "@datashaper/schema!OutputColumnArgs:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "StringArgs",
-          "preserveMemberOrder": false,
-          "members": [],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 2
-            },
-            {
-              "startIndex": 3,
-              "endIndex": 4
-            }
-          ]
         },
         {
           "kind": "Enum",
@@ -10452,17 +10436,26 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@datashaper/schema!StringReplaceArgs:interface",
+          "canonicalReference": "@datashaper/schema!StringsArgs:interface",
           "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface StringReplaceArgs extends "
+              "text": "export interface StringsArgs extends "
             },
             {
               "kind": "Reference",
-              "text": "StringArgs",
-              "canonicalReference": "@datashaper/schema!StringArgs:interface"
+              "text": "InputColumnArgs",
+              "canonicalReference": "@datashaper/schema!InputColumnArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "OutputColumnArgs",
+              "canonicalReference": "@datashaper/schema!OutputColumnArgs:interface"
             },
             {
               "kind": "Content",
@@ -10470,12 +10463,46 @@
             }
           ],
           "releaseTag": "Public",
-          "name": "StringReplaceArgs",
+          "name": "StringsArgs",
+          "preserveMemberOrder": false,
+          "members": [],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            },
+            {
+              "startIndex": 3,
+              "endIndex": 4
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!StringsReplaceArgs:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface StringsReplaceArgs extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "StringsArgs",
+              "canonicalReference": "@datashaper/schema!StringsArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "StringsReplaceArgs",
           "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!StringReplaceArgs#flags:member",
+              "canonicalReference": "@datashaper/schema!StringsReplaceArgs#flags:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -10502,7 +10529,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!StringReplaceArgs#pattern:member",
+              "canonicalReference": "@datashaper/schema!StringsReplaceArgs#pattern:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -10529,7 +10556,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!StringReplaceArgs#replacement:member",
+              "canonicalReference": "@datashaper/schema!StringsReplaceArgs#replacement:member",
               "docComment": "",
               "excerptTokens": [
                 {

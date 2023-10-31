@@ -8,7 +8,7 @@
 
 ```typescript
 strings: {
-    replace: (id: string) => import("../../index.js").StepNode<import("@datashaper/tables").TableContainer<unknown>, import("@datashaper/schema").StringReplaceArgs>;
-    upper: (id: string) => import("../../index.js").StepNode<import("@datashaper/tables").TableContainer<unknown>, import("@datashaper/schema").StringArgs>;
+    replace: (id: string) => import("../../index.js").StepNode<import("@datashaper/tables").TableContainer<unknown>, import("@datashaper/schema").StringsReplaceArgs>;
+    upper: (id: string) => import("../../index.js").StepNode<import("@datashaper/tables").TableContainer<unknown>, import("@datashaper/schema").StringsArgs>;
 }
 ```
