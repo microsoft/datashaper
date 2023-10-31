@@ -12923,6 +12923,82 @@
           "name": "stepNodeFactory"
         },
         {
+          "kind": "Variable",
+          "canonicalReference": "@datashaper/workflow!strings:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "strings: "
+            },
+            {
+              "kind": "Content",
+              "text": "{\n    replace: (id: string) => import(\"../../index.js\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "StepNode",
+              "canonicalReference": "@datashaper/workflow!StepNode:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<import(\"@datashaper/tables\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "TableContainer",
+              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<unknown>, import(\"@datashaper/schema\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "StringReplaceArgs",
+              "canonicalReference": "@datashaper/schema!StringReplaceArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">;\n    upper: (id: string) => import(\"../../index.js\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "StepNode",
+              "canonicalReference": "@datashaper/workflow!StepNode:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<import(\"@datashaper/tables\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "TableContainer",
+              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<unknown>, import(\"@datashaper/schema\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "StringArgs",
+              "canonicalReference": "@datashaper/schema!StringArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">;\n}"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "strings",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 14
+          }
+        },
+        {
           "kind": "Class",
           "canonicalReference": "@datashaper/workflow!TableBundle:class",
           "docComment": "",

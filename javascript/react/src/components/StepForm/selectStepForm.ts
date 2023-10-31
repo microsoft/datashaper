@@ -35,6 +35,7 @@ import {
 	WindowForm,
 } from '../verbs/forms/index.js'
 import type { StepFormProps } from '../verbs/index.js'
+import { StringsReplaceForm } from '../verbs/forms/strings/StringsReplaceForm/StringsReplaceForm.js'
 
 const verb: Record<string, React.FC<StepFormProps<any>>> = {
 	aggregate: AggregateForm,
@@ -67,6 +68,8 @@ const verb: Record<string, React.FC<StepFormProps<any>>> = {
 	sample: SampleForm,
 	select: NoParametersForm,
 	spread: SpreadForm,
+	'strings.replace': StringsReplaceForm,
+	'strings.upper': NoParametersForm,
 	unfold: UnfoldForm,
 	ungroup: NoParametersForm,
 	unhot: UnhotForm,
@@ -84,6 +87,8 @@ export function selectStepForm(
 	step: Step<unknown>,
 ): React.FC<StepFormProps<unknown>> {
 	const result = verb[step.verb]
+	console.log(step.verb)
+	console.log(verb)
 	if (!result) {
 		throw new Error(`verb ${step.verb} not found`)
 	}

@@ -1,0 +1,27 @@
+{
+	"$schema": "../../../../../../../schema/workflow.json",
+	"name": "String operations",
+	"description": "Demonstrates string sub-verbs",
+	"steps": [
+		{
+			"verb": "strings.replace",
+			"input": {
+				"source": "companies"
+			},
+			"args": {
+				"column": "Name",
+				"to": "Replace",
+				"pattern": "le",
+				"replacement": "X"
+			}
+		},
+		{
+			"verb": "strings.upper",
+			"args": {
+				"column": "Name",
+				"to": "Upper"
+			}
+		}
+	],
+	"input": ["companies", "companies2", "products", "stocks"]
+}

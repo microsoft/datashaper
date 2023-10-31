@@ -1,0 +1,15 @@
+{
+	"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v2.json",
+	"steps": [
+		{
+			"verb": "strings.upper",
+			"input": "companies",
+			"args": {
+				"column": "Name",
+				"to": "newColumn"
+			},
+			"id": "expected"
+		}
+	],
+	"input": ["companies"]
+}

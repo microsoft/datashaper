@@ -37,6 +37,8 @@ export enum Verb {
 	Sample = 'sample',
 	Select = 'select',
 	Spread = 'spread',
+	StringsReplace = 'strings.replace',
+	StringsUpper = 'strings.upper',
 	Unfold = 'unfold',
 	Ungroup = 'ungroup',
 	Unhot = 'unhot',
@@ -498,6 +500,14 @@ export interface SpreadArgs extends InputColumnArgs {
 	 */
 	onehot?: boolean
 	preserveSource?: boolean
+}
+
+export interface StringsArgs extends InputColumnArgs, OutputColumnArgs {}
+
+export interface StringsReplaceArgs extends StringsArgs {
+	pattern: string
+	replacement: string
+	flags?: string
 }
 
 export type UnfoldArgs = InputKeyValueArgs

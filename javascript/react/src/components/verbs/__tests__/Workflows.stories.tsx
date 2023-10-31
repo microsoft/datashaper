@@ -14,6 +14,7 @@ import onehotunhot from './specs/onehot-unhot.json'
 import sparkbar from './specs/sparkbar.json'
 import sparkline from './specs/sparkline.json'
 import spreadhot from './specs/spreadhot.json'
+import strings from './specs/strings.json'
 import { WorkflowExampleStory } from './WorkflowExample/WorkflowExample.story.js'
 
 const storyMetadata = {
@@ -102,5 +103,13 @@ export const Spreadhot = {
 
 	args: {
 		schema: spreadhot as WorkflowSchema,
+	},
+}
+
+export const Strings = {
+	render: WorkflowExampleStory.bind({}),
+
+	args: {
+		schema: strings as WorkflowSchema,
 	},
 }

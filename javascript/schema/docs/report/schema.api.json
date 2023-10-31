@@ -9971,6 +9971,33 @@
             },
             {
               "kind": "Reference",
+              "text": "Verb.StringsReplace",
+              "canonicalReference": "@datashaper/schema!Verb.StringsReplace:member"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n    args?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "StringReplaceArgs",
+              "canonicalReference": "@datashaper/schema!StringReplaceArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n} & "
+            },
+            {
+              "kind": "Reference",
+              "text": "BasicInput",
+              "canonicalReference": "@datashaper/schema!BasicInput:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ") | ({\n    verb: "
+            },
+            {
+              "kind": "Reference",
               "text": "Verb.Unfold",
               "canonicalReference": "@datashaper/schema!Verb.Unfold:member"
             },
@@ -10149,7 +10176,7 @@
           "name": "Step",
           "typeTokenRange": {
             "startIndex": 1,
-            "endIndex": 215
+            "endIndex": 221
           }
         },
         {
@@ -10195,6 +10222,49 @@
             }
           ],
           "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!StringArgs:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface StringArgs extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "InputColumnArgs",
+              "canonicalReference": "@datashaper/schema!InputColumnArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "OutputColumnArgs",
+              "canonicalReference": "@datashaper/schema!OutputColumnArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "StringArgs",
+          "preserveMemberOrder": false,
+          "members": [],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            },
+            {
+              "startIndex": 3,
+              "endIndex": 4
+            }
+          ]
         },
         {
           "kind": "Enum",
@@ -10377,6 +10447,118 @@
               },
               "releaseTag": "Public",
               "name": "StartsWith"
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!StringReplaceArgs:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface StringReplaceArgs extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "StringArgs",
+              "canonicalReference": "@datashaper/schema!StringArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "StringReplaceArgs",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!StringReplaceArgs#flags:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "flags?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "flags",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!StringReplaceArgs#pattern:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "pattern: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "pattern",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!StringReplaceArgs#replacement:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "replacement: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "replacement",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
             }
           ]
         },
@@ -11914,6 +12096,48 @@
               },
               "releaseTag": "Public",
               "name": "Spread"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!Verb.StringsReplace:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "StringsReplace = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"strings.replace\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "StringsReplace"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!Verb.StringsUpper:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "StringsUpper = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"strings.upper\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "StringsUpper"
             },
             {
               "kind": "EnumMember",

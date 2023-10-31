@@ -1658,6 +1658,28 @@
                         {
                             "properties": {
                                 "args": {
+                                    "$ref": "#/definitions/StringReplaceArgs"
+                                },
+                                "verb": {
+                                    "const": "strings.replace",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
                                     "$ref": "#/definitions/InputKeyValueArgs"
                                 },
                                 "verb": {
@@ -1822,6 +1844,31 @@
             "properties": {
                 "id": {
                     "description": "A unique identifier for this step",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "StringReplaceArgs": {
+            "properties": {
+                "column": {
+                    "description": "Name of the input column for columnnar operations.",
+                    "type": "string"
+                },
+                "dataType": {
+                    "$ref": "#/definitions/DataType"
+                },
+                "flags": {
+                    "type": "string"
+                },
+                "pattern": {
+                    "type": "string"
+                },
+                "replacement": {
+                    "type": "string"
+                },
+                "to": {
+                    "description": "Name of the output column to receive the operation's result.",
                     "type": "string"
                 }
             },

@@ -1,0 +1,18 @@
+{
+	"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v2.json",
+	"steps": [
+		{
+			"verb": "strings.replace",
+			"input": "companies",
+			"args": {
+				"column": "Name",
+				"to": "newColumn",
+				"pattern": "am|le",
+				"flags": "gi",
+				"replacement": "X"
+			},
+			"id": "expected"
+		}
+	],
+	"input": ["companies"]
+}

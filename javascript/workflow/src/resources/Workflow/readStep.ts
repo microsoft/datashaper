@@ -38,8 +38,11 @@ export function readStep<T extends object | void | unknown = any>(
 	}
 
 	// each verb should have default verb-specific params defined, load them up and merge into the step
-	const factories = defaults as any as Record<string, () => Partial<T>>
-	const factory = factories[verb]
+	// note that scoped verbs will have a root and a sub-object in their name, check for this case
+	const factories = defaults as any
+	const [root, sub] = verb.split('.')
+	// rome-ignore lint/style/noNonNullAssertion: if the split has a second value, the first will be defined
+	const factory: () => Partial<T> = sub ? factories[root!][sub] : factories[root!]
 
 	if (!factory) {
 		throw new Error(`missing verb defaults [${verb}]`)
