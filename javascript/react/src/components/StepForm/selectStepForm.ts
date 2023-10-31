@@ -87,8 +87,6 @@ export function selectStepForm(
 	step: Step<unknown>,
 ): React.FC<StepFormProps<unknown>> {
 	const result = verb[step.verb]
-	console.log(step.verb)
-	console.log(verb)
 	if (!result) {
 		throw new Error(`verb ${step.verb} not found`)
 	}

@@ -31,6 +31,15 @@ export const StringsReplaceFormBase: React.FC<StepFormProps<StringsReplaceArgs>>
 						s.args.replacement = val as string
 					},
 				},
+				{
+					label: 'Flags',
+					type: FormInputType.Text,
+					current: step.args.flags,
+					advanced: true,
+					onChange: (s, val) => {
+						s.args.flags = val as string
+					},
+				},
 			],
 			[step],
 		)

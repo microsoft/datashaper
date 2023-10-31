@@ -17,6 +17,9 @@
 		},
 		{
 			"verb": "strings.upper",
+			"input": {
+				"source": "companies"
+			},
 			"args": {
 				"column": "Name",
 				"to": "Upper"
