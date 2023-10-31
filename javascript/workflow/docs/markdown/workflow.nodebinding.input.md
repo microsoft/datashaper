@@ -9,5 +9,5 @@ The named input on the target node (otherwise default)
 <b>Signature:</b>
 
 ```typescript
-input?: SocketName;
+input?: SocketName | undefined;
 ```

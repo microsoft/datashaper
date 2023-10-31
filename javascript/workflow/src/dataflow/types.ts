@@ -21,9 +21,14 @@ export interface Node<T, Config = unknown> {
 	readonly id: NodeId
 
 	/**
-	 * Named input sockets
+	 * Named input sockets, in addition to the implicit default input socket
 	 */
 	readonly inputs: SocketName[]
+
+	/**
+	 * Named output sockets, in addition to the implicit default output socket
+	 */
+	readonly outputs: SocketName[]
 
 	/**
 	 * The node's mutable configuration
@@ -73,6 +78,18 @@ export interface Node<T, Config = unknown> {
 	readonly output: Maybe<T>
 
 	/**
+	 * Gets a current output value
+	 * @param name - The named output to retrieve
+	 */
+	namedOutput$(name: SocketName): Observable<Maybe<T>>
+
+	/**
+	 * Gets a current output value
+	 * @param name - The named output to retrieve
+	 */
+	namedOutput(name: SocketName): Maybe<T>
+
+	/**
 	 * The diagnostic statistics for this node
 	 */
 	readonly stats: NodeStats
@@ -113,9 +130,14 @@ export interface NodeBinding<T> {
 	node: Node<T>
 
 	/**
+	 * The named output on the target node (otherwise default)
+	 */
+	output?: SocketName | undefined
+
+	/**
 	 * The named input on the target node (otherwise default)
 	 */
-	input?: SocketName
+	input?: SocketName | undefined
 }
 
 export interface Graph<T> {

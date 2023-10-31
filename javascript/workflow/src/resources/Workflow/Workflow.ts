@@ -410,10 +410,11 @@ export class Workflow extends Resource implements TableTransformer {
 		}
 	}
 
-	private observeOutput(name: string) {
+	private observeOutput(name: string, output?: string | undefined) {
 		const [outputTable] = this._tableMgr.ensure(name)
-		const n = this._graphMgr.getOrCreateNode(name)
-		outputTable.input = n.output$
+		const node = this._graphMgr.getOrCreateNode(name)
+		outputTable.input =
+			output == null ? node.output$ : node.namedOutput$(output)
 	}
 
 	public static async validate(workflowJson: WorkflowSchema): Promise<boolean> {

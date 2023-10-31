@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-get output$(): Observable<Maybe<T>>;
+get output$(): BehaviorSubject<Maybe<T>>;
 ```

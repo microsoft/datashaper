@@ -8,6 +8,7 @@ import isNil from 'lodash-es/isNil.js'
 import { memo, useMemo } from 'react'
 
 import type { DescriptionRow, VerbDescriptionProps } from './types.js'
+import type { WorkflowStepId } from '@datashaper/schema'
 
 function VerbDescriptionFn<T extends object | void>({
 	step,
@@ -41,7 +42,7 @@ function VerbDescriptionFn<T extends object | void>({
 		return loop(rows)
 	}, [rows])
 	const shouldShowOutputColumn = showOutputColumn && isOutputColumnStep(step)
-	const input = step.input[NodeInput.Source]
+	const input = step.input[NodeInput.Source] as WorkflowStepId
 	return (
 		<Container style={style}>
 			<Verb>{step.verb}</Verb>

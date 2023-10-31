@@ -4,11 +4,10 @@
  */
 import type { TableContainer } from '@datashaper/tables'
 import { type Observable, BehaviorSubject, from, map } from 'rxjs'
-import type { WorkflowStepId } from '@datashaper/schema'
 
 import { DefaultGraph } from '../../dataflow/DefaultGraph.js'
 import { observableNode } from '../../dataflow/index.js'
-import type { Node } from '../../dataflow/types.js'
+import type { Node, VariadicNodeBinding } from '../../dataflow/types.js'
 import type { Maybe } from '../../primitives.js'
 import { DelegateSubject } from '../../util/DelegateSubject.js'
 import { Disposable } from '../Disposable.js'
@@ -19,6 +18,7 @@ import {
 	hasDefinedInputs,
 	hasPossibleInputs,
 	isVariadicSocketName as isVariadic,
+	isWorkflowStepId,
 } from './utils.js'
 
 const DEFAULT_INPUT = '__DEFAULT_INPUT__'
@@ -257,11 +257,26 @@ export class GraphManager extends Disposable {
 				if (binding != null) {
 					if (isVariadic(input, binding)) {
 						// Bind variadic input
-						node.bind(binding.map((b) => ({ node: this.getNode(b) })))
-					} else if (this.hasNode(binding as WorkflowStepId)) {
-						// Bind Non-Variadic Input
-						const inputNode = this.getNode(binding)
-						node.bind({ input, node: inputNode })
+						const variadicBindings: VariadicNodeBinding<any> = binding.map(
+							(b) => {
+								const nodeId = isWorkflowStepId(b) ? b : b.source
+								const outputName = isWorkflowStepId(b) ? undefined : b.output
+								const node = this.getNode(nodeId)
+								return { node, output: outputName }
+							},
+						)
+						node.bind(variadicBindings)
+					} else {
+						const nodeId = isWorkflowStepId(binding) ? binding : binding.source
+						const outputName = isWorkflowStepId(binding)
+							? undefined
+							: binding.output
+
+						if (this.hasNode(nodeId)) {
+							// Bind Non-Variadic Input
+							const inputNode = this.getNode(nodeId)
+							node.bind({ input, node: inputNode, output: outputName })
+						}
 					}
 				}
 			}

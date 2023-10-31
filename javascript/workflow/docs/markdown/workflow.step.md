@@ -9,7 +9,7 @@ Resolved step data, used in living workflows
 <b>Signature:</b>
 
 ```typescript
-export interface Step<T extends object | void | unknown = unknown> 
+export interface Step<T extends object | unknown = unknown> 
 ```
 
 ## Properties
@@ -19,6 +19,6 @@ export interface Step<T extends object | void | unknown = unknown>
 |  [args](./workflow.step.args.md) |  | T | The verb arguments |
 |  [description?](./workflow.step.description.md) |  | string | <i>(Optional)</i> |
 |  [id](./workflow.step.id.md) |  | string | A unique identifier for this step |
-|  [input](./workflow.step.input.md) |  | { source?: WorkflowStepId; others?: WorkflowStepId\[\]; \[key: string\]: WorkflowStepId \| WorkflowStepId\[\] \| undefined; } | The bound inputs Key = Input Socket Name Value = Socket Binding to other node |
+|  [input](./workflow.step.input.md) |  | { source?: WorkflowInput; others?: WorkflowInput\[\]; \[key: string\]: WorkflowInput \| WorkflowInput\[\] \| undefined; } | The bound inputs Key = Input Socket Name Value = Socket Binding to other node |
 |  [verb](./workflow.step.verb.md) |  | Verb | The verb being execute |
 

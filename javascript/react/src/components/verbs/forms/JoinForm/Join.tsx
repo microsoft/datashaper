@@ -22,7 +22,7 @@ export const JoinForm: React.FC<StepFormProps<JoinArgs>> = memo(
 		const tableOptions = useTableDropdownOptions(workflow)
 
 		const leftTable = useWorkflowDataTable(
-			input || step.input[NodeInput.Source],
+			input || (step.input[NodeInput.Source] as WorkflowStepId),
 			workflow,
 		)
 		const rightTable = useWorkflowDataTable(

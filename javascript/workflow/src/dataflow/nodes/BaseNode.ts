@@ -34,6 +34,9 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	private _output$ = new BehaviorSubject<Maybe<T>>(undefined)
 	private _bindings$ = new BehaviorSubject<NodeBinding<T>[]>([])
 
+	// Named, non-default outputs
+	private _namedOutputs: Map<SocketName, BehaviorSubject<Maybe<T>>> = new Map()
+
 	// Input Subscriptions
 	private _inputValues = new Map<SocketName, BehaviorSubject<Maybe<T>>>()
 	private _inputErrors = new Map<SocketName, BehaviorSubject<unknown>>()
@@ -47,8 +50,13 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * Creates a new instance of the BaseNode
 	 * @param inputs - the input socket names
 	 */
-	public constructor(public readonly inputs: SocketName[] = []) {
-		// none
+	public constructor(
+		public readonly inputs: SocketName[] = [],
+		public readonly outputs: SocketName[] = [],
+	) {
+		for (const output of outputs) {
+			this._namedOutputs.set(output, new BehaviorSubject<Maybe<T>>(undefined))
+		}
 	}
 
 	public get stats(): NodeStats {
@@ -138,12 +146,24 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 
 	// #region output
 
-	public get output$(): Observable<Maybe<T>> {
+	public get output$(): BehaviorSubject<Maybe<T>> {
 		return this._output$
 	}
 
 	public get output(): Maybe<T> {
 		return this._output$.value
+	}
+
+	public namedOutput$(name: SocketName): BehaviorSubject<Maybe<T>> {
+		const result = this._namedOutputs.get(name)
+		if (result == null) {
+			throw new Error(`no output named "${String(name)}"`)
+		}
+		return result
+	}
+
+	public namedOutput(name: SocketName): Maybe<T> {
+		return this.namedOutput$(name).value
 	}
 
 	// #endregion outputs
@@ -156,17 +176,24 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 
 			// empty array of initial inputs
 			const values: Maybe<T>[] = binding.map(() => undefined)
-			const subs = binding.map((i, index) => {
-				return i.node.output$.subscribe((v) => {
+			const subs = binding.map((binding, index) => {
+				const output =
+					binding.output == null
+						? binding.node.output$
+						: binding.node.namedOutput$(binding.output)
+				return output.subscribe((v) => {
 					values[index] = v
-					this.recalculate(`input_variadic@${i}`)
+					this.recalculate(`input_variadic@${binding}`)
 				})
 			})
 
 			// provide class-level access to the current values
-			this._disposeVariadicInputs = () => subs.forEach((s) => s.unsubscribe())
+			this._disposeVariadicInputs = () => {
+				for (const sub of subs) {
+					sub.unsubscribe()
+				}
+			}
 			this._getVariadicInputs = () => values
-
 			this.recalculate('bindvar')
 		}
 
@@ -184,9 +211,14 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 				}
 			}
 			const listenToInput = () => {
+				const output =
+					binding.output == null
+						? binding.node.output$
+						: binding.node.namedOutput$(binding.output)
+
 				this._inputSubscriptions.set(
 					input,
-					binding.node.output$.subscribe({
+					output.subscribe({
 						next: (value) => {
 							const values = this._inputValues.get(input) as BehaviorSubject<
 								Maybe<T>
@@ -220,7 +252,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 			}
 
 			const input = this.verifyInputSocketName(binding.input)
-			if (this.hasBoundInputWithNode(input, binding.node.id)) {
+			if (this.hasBoundInputWithNode(input, binding.node.id, binding.output)) {
 				return
 			}
 
@@ -237,9 +269,16 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		}
 	}
 
-	protected hasBoundInputWithNode(name: SocketName, nodeId: NodeId) {
+	protected hasBoundInputWithNode(
+		name: SocketName,
+		nodeId: NodeId,
+		output: SocketName | undefined,
+	) {
 		return this.bindings.some(
-			(i) => this.isSocketNameEqual(i.input, name) && i.node.id === nodeId,
+			(i) =>
+				this.isSocketNameEqual(i.input, name) &&
+				i.node.id === nodeId &&
+				output === i.output,
 		)
 	}
 
@@ -328,11 +367,13 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * @param value - The output value
 	 * @param output - The output socket name
 	 */
-	protected emit = (value: Maybe<T>): void => {
-		if (value !== this.output) {
+	protected emit = (value: Maybe<T>, output?: string | undefined): void => {
+		const observable = output == null ? this.output$ : this.namedOutput$(output)
+
+		if (value !== observable.value) {
 			this._version++
 			log(`${this.id} emitting ${value == null ? 'undefined' : 'value'}`)
-			this._output$.next(value ?? undefined)
+			observable.next(value ?? undefined)
 		}
 	}
 
@@ -342,6 +383,9 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 */
 	protected emitError = (error: unknown): void => {
 		this._output$.error(error)
+		for (const o of this._namedOutputs.values()) {
+			o.error(error)
+		}
 	}
 
 	// #endregion

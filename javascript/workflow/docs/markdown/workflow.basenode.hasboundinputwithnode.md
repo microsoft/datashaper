@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-protected hasBoundInputWithNode(name: SocketName, nodeId: NodeId): boolean;
+protected hasBoundInputWithNode(name: SocketName, nodeId: NodeId, output: SocketName | undefined): boolean;
 ```
 
 ## Parameters
@@ -16,6 +16,7 @@ protected hasBoundInputWithNode(name: SocketName, nodeId: NodeId): boolean;
 |  --- | --- | --- |
 |  name | [SocketName](./workflow.socketname.md) |  |
 |  nodeId | [NodeId](./workflow.nodeid.md) |  |
+|  output | [SocketName](./workflow.socketname.md) \| undefined |  |
 
 <b>Returns:</b>
 

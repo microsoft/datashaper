@@ -4,7 +4,7 @@
 
 ## Node\_2.inputs property
 
-Named input sockets
+Named input sockets, in addition to the implicit default input socket
 
 <b>Signature:</b>
 

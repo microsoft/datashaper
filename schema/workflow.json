@@ -29,20 +29,7 @@
             "description": "Single-input, single-output step I/O",
             "properties": {
                 "input": {
-                    "anyOf": [
-                        {
-                            "properties": {
-                                "source": {
-                                    "description": "The Id of the step to which the input is bound",
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ],
+                    "$ref": "#/definitions/WorkflowInput",
                     "description": "Standard step input; single source with default name \"source\".\n\nIf undefined, the default output of the previous step will be used (if available).\nIf no previous step is available, this will remain undefined"
                 }
             },
@@ -394,12 +381,12 @@
                     "description": "The inputs that must be bound; \"source\" & \"other\".",
                     "properties": {
                         "other": {
-                            "description": "The secondary input, which must be specified",
-                            "type": "string"
+                            "$ref": "#/definitions/WorkflowInput",
+                            "description": "The secondary input, which must be specified"
                         },
                         "source": {
-                            "description": "The primary input, which must be specified",
-                            "type": "string"
+                            "$ref": "#/definitions/WorkflowInput",
+                            "description": "The primary input, which must be specified"
                         }
                     },
                     "type": "object"
@@ -1853,11 +1840,35 @@
                 "input": {
                     "anyOf": [
                         {
+                            "properties": {
+                                "output": {
+                                    "type": "string"
+                                },
+                                "source": {
+                                    "description": "The Id of the step to which the input is bound",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
                             "additionalProperties": {
                                 "anyOf": [
                                     {
+                                        "properties": {
+                                            "output": {
+                                                "type": "string"
+                                            },
+                                            "source": {
+                                                "description": "The Id of the step to which the input is bound",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    {
                                         "items": {
-                                            "type": "string"
+                                            "$ref": "#/definitions/WorkflowInput"
                                         },
                                         "type": "array"
                                     },
@@ -1870,13 +1881,13 @@
                                 "others": {
                                     "description": "Possible variadic input",
                                     "items": {
-                                        "type": "string"
+                                        "$ref": "#/definitions/WorkflowInput"
                                     },
                                     "type": "array"
                                 },
                                 "source": {
-                                    "description": "Possible main input",
-                                    "type": "string"
+                                    "$ref": "#/definitions/WorkflowInput",
+                                    "description": "Possible main input"
                                 }
                             },
                             "type": "object"
@@ -1909,13 +1920,13 @@
                         "others": {
                             "description": "The variadic secondary inputs",
                             "items": {
-                                "type": "string"
+                                "$ref": "#/definitions/WorkflowInput"
                             },
                             "type": "array"
                         },
                         "source": {
-                            "description": "The primary input",
-                            "type": "string"
+                            "$ref": "#/definitions/WorkflowInput",
+                            "description": "The primary input"
                         }
                     },
                     "type": "object"
@@ -1955,6 +1966,25 @@
                 "row_number"
             ],
             "type": "string"
+        },
+        "WorkflowInput": {
+            "anyOf": [
+                {
+                    "properties": {
+                        "output": {
+                            "type": "string"
+                        },
+                        "source": {
+                            "description": "The Id of the step to which the input is bound",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                }
+            ]
         }
     },
     "description": "The root wrangling workflow specification.\nresource profile: 'workflow'",

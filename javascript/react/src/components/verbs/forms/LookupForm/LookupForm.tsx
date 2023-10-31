@@ -20,7 +20,7 @@ import { LookupFormBase } from './LookupForm.base.js'
 export const LookupForm: React.FC<StepFormProps<LookupArgs>> = memo(
 	function LookupForm({ step, workflow, onChange }) {
 		const leftTable = useWorkflowDataTable(
-			step.input[NodeInput.Source],
+			step.input[NodeInput.Source] as WorkflowStepId,
 			workflow,
 		)
 		const rightTable = useWorkflowDataTable(
