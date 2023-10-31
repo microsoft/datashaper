@@ -12,15 +12,18 @@ from datashaper import (
     ProgressStatus,
     StatusReportHandler,
     TableContainer,
+    VerbInput,
     VerbStatusReporter,
     Workflow,
+    derive_from_rows,
+    progress_iterable,
 )
 
 from .helpers import mock_verbs, mock_workflows
 
 
 class TestWorkflowRun(unittest.TestCase):
-    def test_define_basic_workflow_doesnt_crash(self):
+    def test_define_basic_workflow_does_not_crash(self):
         workflow = Workflow(
             verbs={
                 "test_verb": create_passthrough_verb(),
@@ -39,7 +42,7 @@ class TestWorkflowRun(unittest.TestCase):
         )
         self.assertIsNotNone(workflow.export())
 
-    def test_run_basic_workflow_doesnt_crash(self):
+    def test_run_basic_workflow_does_not_crash(self):
         workflow = Workflow(
             verbs={
                 "test_verb": create_passthrough_verb(),
@@ -58,7 +61,7 @@ class TestWorkflowRun(unittest.TestCase):
         )
         self.assertIsNotNone(workflow.export())
 
-    def test_create_basic_workflow_with_test_inputs_doesnt_crash(self):
+    def test_create_basic_workflow_with_test_inputs_does_not_crash(self):
         wf = Workflow(
             verbs={
                 "test_verb": create_passthrough_verb(),
@@ -137,6 +140,46 @@ class TestWorkflowRun(unittest.TestCase):
         workflow.run(
             context=create_fake_run_context(),
         )
+
+    def test_workflow_with(self):
+        workflow = Workflow(
+            verbs={
+                "test_verb": create_parallel_transforming_verb(),
+            },
+            schema={
+                "name": "test_workflow",
+                "steps": [
+                    {"verb": "test_verb", "input": {"source": DEFAULT_INPUT_NAME}},
+                ],
+            },
+            validate=False,
+        )
+        workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
+        workflow.run(
+            context=create_fake_run_context(),
+        )
+        result = workflow.output()
+        row = result.iloc[0]
+        assert row["b"] == row["a"] + 1
+
+    def test_workflow_with_transform_util_verb_throwing(self):
+        with self.assertRaises(ValueError) as ctx:
+            workflow = Workflow(
+                verbs={
+                    "test_verb": create_parallel_transforming_verb_throwing(),
+                },
+                schema={
+                    "name": "test_workflow",
+                    "steps": [
+                        {"verb": "test_verb", "input": {"source": DEFAULT_INPUT_NAME}},
+                    ],
+                },
+                validate=False,
+            )
+            workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
+            workflow.run(
+                context=create_fake_run_context(),
+            )
 
     def test_basic_workflow_with_file_status_reporter(self):
         reporter = FileStatusReporter("./.temp")
@@ -397,6 +440,35 @@ def create_async_verb():
         return TableContainer(table=input.get_input())
 
     return async_verb
+
+
+def create_parallel_transforming_verb():
+    def transform(
+        input: VerbInput, reporter: VerbStatusReporter, progress: VerbStatusReporter
+    ):
+        def transform_row(row: pd.Series):
+            items = [1, 2, 3]
+            progress_iterable(items, progress)
+            row["b"] = row["a"] + 1
+            return row
+
+        results = derive_from_rows(input.get_input().copy(), transform_row, reporter)
+
+        return TableContainer(table=pd.DataFrame(results))
+
+    return transform
+
+
+def create_parallel_transforming_verb_throwing():
+    def transform(input: VerbInput, reporter: VerbStatusReporter):
+        def transform_row(row: pd.Series):
+            raise ValueError("oh no, this should be expected")
+
+        results = derive_from_rows(input.get_input().copy(), transform_row, reporter)
+
+        return TableContainer(table=pd.DataFrame(results))
+
+    return transform
 
 
 def create_context_consuming_verb():

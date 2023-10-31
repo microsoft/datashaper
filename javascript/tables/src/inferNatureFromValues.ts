@@ -38,8 +38,9 @@ export function inferNatureFromValues(
 		...options,
 	}
 
-	const vals = opts.limit < Infinity ? values.slice(0, opts.limit) : values
-	const uniques = [...new Set(vals)].filter(
+	const valuesList =
+		opts.limit < Infinity ? values.slice(0, opts.limit) : values
+	const uniques = [...new Set(valuesList)].filter(
 		(val) => val !== undefined && val !== null && val !== opts.nullValue,
 	)
 

@@ -22,7 +22,7 @@ export const TableDelimiterOptions: React.FC<{
 		useBoolean(false)
 	const [value, setValue] = useState(isOther ? selected : '')
 
-	const onDelimeterChange = useCallback(
+	const onDelimiterChange = useCallback(
 		(option?: IChoiceGroupOption) => {
 			if (option?.key === 'Other') {
 				customDelimiter()
@@ -42,7 +42,7 @@ export const TableDelimiterOptions: React.FC<{
 		},
 	)
 
-	const onChangeCustomDelimeter = useCallback(
+	const onChangeCustomDelimiter = useCallback(
 		(
 			_: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
 			newValue?: string,
@@ -62,7 +62,7 @@ export const TableDelimiterOptions: React.FC<{
 				defaultSelectedKey={selected}
 				options={delimiterOptions}
 				onChange={(_: any, option: IChoiceGroupOption) =>
-					onDelimeterChange(option)
+					onDelimiterChange(option)
 				}
 				styles={choiceGroupStyles}
 			/>
@@ -72,7 +72,7 @@ export const TableDelimiterOptions: React.FC<{
 				name='customDelimiter'
 				disabled={!isOther}
 				value={value}
-				onChange={onChangeCustomDelimeter}
+				onChange={onChangeCustomDelimiter}
 			/>
 		</Container>
 	)

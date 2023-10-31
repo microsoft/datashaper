@@ -20,9 +20,9 @@ export interface TypeHints
 |  [dataFormat?](./schema.typehints.dataformat.md) |  | [DataFormat](./schema.dataformat.md) | <i>(Optional)</i> The data format |
 |  [dateFormat?](./schema.typehints.dateformat.md) |  | string | <i>(Optional)</i> Default date format to use when parsing dates. The Codebook can override this at the column level. Default: yyyy-MM-dd TODO: spark has a separate config for datetime. Do we care? |
 |  [decimal?](./schema.typehints.decimal.md) |  | string | <i>(Optional)</i> Character to use when parsing decimal numbers. Default: . |
-|  [falseValues?](./schema.typehints.falsevalues.md) |  | string\[\] | <i>(Optional)</i> Default: case-insenstive word "false". |
+|  [falseValues?](./schema.typehints.falsevalues.md) |  | string\[\] | <i>(Optional)</i> Default: case-insensitive word "false". |
 |  [infinity?](./schema.typehints.infinity.md) |  | \[string, string\] | <i>(Optional)</i> Strings to parse as negative and positive infinity. Default: case insensitive \["-inf", "inf"\]. |
 |  [naValues?](./schema.typehints.navalues.md) |  | string\[\] | <i>(Optional)</i> Strings to consider NaN or null. Default: \['-1.\#IND', '1.\#QNAN', '1.\#IND', '-1.\#QNAN', '\#N/A N/A', '\#N/A', 'N/A', 'n/a', 'NA', '<NA>', '\#NA', 'NULL', 'null', 'NaN', '-NaN', 'nan', '-nan', ''\] |
 |  [thousands?](./schema.typehints.thousands.md) |  | string | <i>(Optional)</i> For large numbers that have been written with a thousands separator, you can set the thousands keyword to a string of length 1 so that integers will be parsed correctly. By default, numbers with a thousands separator will be parsed as strings. Default: none. |
-|  [trueValues?](./schema.typehints.truevalues.md) |  | string\[\] | <i>(Optional)</i> Default: case-insenstive word "true". |
+|  [trueValues?](./schema.typehints.truevalues.md) |  | string\[\] | <i>(Optional)</i> Default: case-insensitive word "true". |
 

@@ -5,7 +5,7 @@
 
 from typing import List
 
-from ...table_store import TableContainer
+from ...table_store import Table, TableContainer
 
 
 class VerbInput:
@@ -33,8 +33,8 @@ class VerbInput:
         if other is not None or others is not None:
             self.others = [other] if other is not None else others
 
-    def get_input(self):
+    def get_input(self) -> Table:
         return self.source.table
 
-    def get_others(self):
+    def get_others(self) -> list[Table]:
         return [other.table for other in self.others]

@@ -1295,7 +1295,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!BundleSchema#profile:member",
-              "docComment": "/**\n * Defines the resource type. Known resource types should have accommpanying processors and rendering components. Unknown resource types can be interrogated to determine if the format is understandable by an existing component. Note that this could be inferred from $schema, but a simple string here is easier to deal with in code.\n */\n",
+              "docComment": "/**\n * Defines the resource type. Known resource types should have accompanying processors and rendering components. Unknown resource types can be interrogated to determine if the format is understandable by an existing component. Note that this could be inferred from $schema, but a simple string here is easier to deal with in code.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1325,7 +1325,7 @@
         {
           "kind": "Interface",
           "canonicalReference": "@datashaper/schema!Category:interface",
-          "docComment": "/**\n * Describes a nomincal category in terms of category name and count of values in the category.\n */\n",
+          "docComment": "/**\n * Describes a nominal category in terms of category name and count of values in the category.\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -5842,7 +5842,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!InputColumnArgs#column:member",
-              "docComment": "/**\n * Name of the input column for columnnar operations.\n */\n",
+              "docComment": "/**\n * Name of the input column for columnar operations.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -8168,7 +8168,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!RecodeArgs#mapping:member",
-              "docComment": "/**\n * Mapping of old value to new for the recoding. Note that the key must be coercable to a string for map lookup.\n */\n",
+              "docComment": "/**\n * Mapping of old value to new for the recoding. Note that the key must be coercible to a string for map lookup.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -8443,7 +8443,7 @@
         {
           "kind": "Interface",
           "canonicalReference": "@datashaper/schema!ResourceSchema:interface",
-          "docComment": "/**\n * Parent class for any resource type understood by the system. Any object type that extends from Resouce is expected to have a standalone schema published. For project state, this can be left as generic as possible for now.\n */\n",
+          "docComment": "/**\n * Parent class for any resource type understood by the system. Any object type that extends from Resource is expected to have a standalone schema published. For project state, this can be left as generic as possible for now.\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -8574,7 +8574,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!ResourceSchema#profile:member",
-              "docComment": "/**\n * Defines the resource type. Known resource types should have accommpanying processors and rendering components. Unknown resource types can be interrogated to determine if the format is understandable by an existing component. Note that this could be inferred from $schema, but a simple string here is easier to deal with in code.\n */\n",
+              "docComment": "/**\n * Defines the resource type. Known resource types should have accompanying processors and rendering components. Unknown resource types can be interrogated to determine if the format is understandable by an existing component. Note that this could be inferred from $schema, but a simple string here is easier to deal with in code.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -8634,7 +8634,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!ResourceSchema#sources:member",
-              "docComment": "/**\n * List of resources that underly this resource. This gives us the ability to create hierarchical or linked structures to represent complex combinations. For example, a parent resource can have source tables, a workflow, and a table schema that all combine to create a fully-realized, strongly typed, and transformed output table. Entire Resource objects may be embedded here, or a string path to the Resource definition JSON.\n */\n",
+              "docComment": "/**\n * List of resources that underlie this resource. This gives us the ability to create hierarchical or linked structures to represent complex combinations. For example, a parent resource can have source tables, a workflow, and a table schema that all combine to create a fully-realized, strongly typed, and transformed output table. Entire Resource objects may be embedded here, or a string path to the Resource definition JSON.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -10747,7 +10747,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!TypeHints#falseValues:member",
-              "docComment": "/**\n * Default: case-insenstive word \"false\".\n */\n",
+              "docComment": "/**\n * Default: case-insensitive word \"false\".\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -10855,7 +10855,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!TypeHints#trueValues:member",
-              "docComment": "/**\n * Default: case-insenstive word \"true\".\n */\n",
+              "docComment": "/**\n * Default: case-insensitive word \"true\".\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -11259,7 +11259,7 @@
         {
           "kind": "Enum",
           "canonicalReference": "@datashaper/schema!VariableNature:enum",
-          "docComment": "/**\n * Describes the semantic shape of a variable. This has particular effect on how we display and compare data, such as using line charts for continuous versus bar charts for categorical. This mostly applies to numeric variables, but strings for instance can be categorial.\n */\n",
+          "docComment": "/**\n * Describes the semantic shape of a variable. This has particular effect on how we display and compare data, such as using line charts for continuous versus bar charts for categorical. This mostly applies to numeric variables, but strings for instance can be categorical.\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",

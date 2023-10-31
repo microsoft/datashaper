@@ -10,7 +10,7 @@ from ..types import BinStrategy
 from .verb_input import VerbInput
 
 
-def __get_bucket_value(bin_edges, inds, n, clamped, min_max, value, printRange):
+def __get_bucket_value(bin_edges, indices, n, clamped, min_max, value, printRange):
     if value < min_max[0]:
         if printRange:
             return f"<{min_max[0]}"
@@ -23,7 +23,7 @@ def __get_bucket_value(bin_edges, inds, n, clamped, min_max, value, printRange):
         if printRange:
             return f"{int(bin_edges[-2])} to {min_max[1]}"
         return bin_edges[-2]
-    index = min(inds[n] - 1, len(bin_edges) - 1)
+    index = min(indices[n] - 1, len(bin_edges) - 1)
     if printRange:
         return (
             f"{int(bin_edges[index])} to {min_max[1]}"
@@ -91,11 +91,11 @@ def bin(
     else:
         bin_edges = __bin_edges_mapping[bin_strategy](input_table[column], min_max)
 
-    inds = np.digitize(input_table[column], bin_edges)
+    indices = np.digitize(input_table[column], bin_edges)
     value_edges = [
         __get_bucket_value(
             bin_edges,
-            inds,
+            indices,
             n,
             clamped,
             min_max,

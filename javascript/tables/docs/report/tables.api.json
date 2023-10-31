@@ -2326,7 +2326,7 @@
         {
           "kind": "Function",
           "canonicalReference": "@datashaper/tables!parseAs:function(1)",
-          "docComment": "/**\n * Factory function to create a value parser based on defined data type and type hints\n *\n * @param type - the datatype to interperet as\n *\n * @param subtype - the subtype of the datatype (i.e., if the main type is an array)\n *\n * @param hints - type hinting information\n *\n * @returns A parsed value\n */\n",
+          "docComment": "/**\n * Factory function to create a value parser based on defined data type and type hints\n *\n * @param type - the datatype to interpret as\n *\n * @param subtype - the subtype of the datatype (i.e., if the main type is an array)\n *\n * @param hints - type hinting information\n *\n * @returns A parsed value\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",

@@ -269,7 +269,7 @@ export class ResourceManager {
 	/**
 	 * Resets the resource manager to a new set of files
 	 *
-	 * @param files - the archive to reset fromw
+	 * @param files - the archive to reset from
 	 * @returns The loaded datapackage schema
 	 */
 	public async load(files: Map<string, Blob>): Promise<DataPackageSchema> {

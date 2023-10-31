@@ -117,7 +117,7 @@ const INPUT_KEY_VALUE_VERBS = filterByTag(Tags.InputKeyValue)
 const OUTPUT_COLUMN_VERBS = filterByTag(Tags.OutputColumn)
 const ROW_MODIFYING_VERBS = filterByTag(Tags.RowModifying)
 const NUMERIC_VERBS = filterByTag(Tags.NumericOnly)
-const NOARGS_VERBS = filterByTag(Tags.NoArgs)
+const NO_ARGS_VERBS = filterByTag(Tags.NoArgs)
 
 function filterByTag(tag: Tags) {
 	return Object.keys(TaggedVerbs).filter((key) => {
@@ -203,7 +203,7 @@ export function isNumericInputStep(step: Step): boolean {
  * @returns
  */
 export function isNoArgsStep(step: Step): boolean {
-	return isTagged(step, NOARGS_VERBS)
+	return isTagged(step, NO_ARGS_VERBS)
 }
 
 function isTagged(step: Step, verbs: Verb[]): boolean {

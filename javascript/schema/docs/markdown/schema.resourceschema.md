@@ -4,7 +4,7 @@
 
 ## ResourceSchema interface
 
-Parent class for any resource type understood by the system. Any object type that extends from Resouce is expected to have a standalone schema published. For project state, this can be left as generic as possible for now.
+Parent class for any resource type understood by the system. Any object type that extends from Resource is expected to have a standalone schema published. For project state, this can be left as generic as possible for now.
 
 <b>Signature:</b>
 
@@ -21,7 +21,7 @@ export interface ResourceSchema extends Named
 |  [homepage?](./schema.resourceschema.homepage.md) |  | string | <i>(Optional)</i> URL to a public webpage that describes this resource. |
 |  [license?](./schema.resourceschema.license.md) |  | string | <i>(Optional)</i> SPDX license string. https://spdx.org/licenses/ |
 |  [path?](./schema.resourceschema.path.md) |  | string \| string\[\] | <i>(Optional)</i> URI-compliant path to the resource (local or remote). If array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables). URI-compliant path to the referenced resource (local or remote). |
-|  [profile?](./schema.resourceschema.profile.md) |  | [Profile](./schema.profile.md) | <i>(Optional)</i> Defines the resource type. Known resource types should have accommpanying processors and rendering components. Unknown resource types can be interrogated to determine if the format is understandable by an existing component. Note that this could be inferred from $schema, but a simple string here is easier to deal with in code. |
+|  [profile?](./schema.resourceschema.profile.md) |  | [Profile](./schema.profile.md) | <i>(Optional)</i> Defines the resource type. Known resource types should have accompanying processors and rendering components. Unknown resource types can be interrogated to determine if the format is understandable by an existing component. Note that this could be inferred from $schema, but a simple string here is easier to deal with in code. |
 |  [rel?](./schema.resourceschema.rel.md) |  | [Rel](./schema.rel.md) \| string | <p><i>(Optional)</i> The relationship of this resource to the parent resource.</p><p>Note: If the resource is a profile-free reference object (e.g. { "rel": "input", "path": "path/to/datatable.json" }<!-- -->,</p><p>Then the relationship is \_external\_ the target resource and should not be persisted in the object )</p> |
-|  [sources?](./schema.resourceschema.sources.md) |  | (string \| [ResourceSchema](./schema.resourceschema.md)<!-- -->)\[\] | <i>(Optional)</i> List of resources that underly this resource. This gives us the ability to create hierarchical or linked structures to represent complex combinations. For example, a parent resource can have source tables, a workflow, and a table schema that all combine to create a fully-realized, strongly typed, and transformed output table. Entire Resource objects may be embedded here, or a string path to the Resource definition JSON. |
+|  [sources?](./schema.resourceschema.sources.md) |  | (string \| [ResourceSchema](./schema.resourceschema.md)<!-- -->)\[\] | <i>(Optional)</i> List of resources that underlie this resource. This gives us the ability to create hierarchical or linked structures to represent complex combinations. For example, a parent resource can have source tables, a workflow, and a table schema that all combine to create a fully-realized, strongly typed, and transformed output table. Entire Resource objects may be embedded here, or a string path to the Resource definition JSON. |
 

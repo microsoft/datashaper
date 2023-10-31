@@ -7,13 +7,13 @@ There are four goals of the project:
 1.  Create a shareable client/server schema for serialized wrangling instructions. This is in the ./schema folder. TypeScript types and JSONSchema generation is in javascript/schema, and published schemas are copied out to ./schema along with test cases that are executed by JavaScript and Python builds to ensure parity.
 2.  Maintain an implementation of a basic client-side wrangling engine (largely based on [Arquero](https://github.com/uwdata/arquero)). This is in the ./javascript folder.
 3.  Maintain a python implementation using common wrangling libraries (e.g., [pandas](https://pandas.pydata.org/)) for backend or data science deployments. This is in the ./python folder.
-4.  Provide some reusable React components so wrangling operations can be incorporated into webapps easily. This is in the ./javascript/react folder.
+4.  Provide some reusable React components so wrangling operations can be incorporated into web applications easily. This is in the ./javascript/react folder.
 
 Individual documentation for the JavaScript and Python implementations can be found in their respective folders. Broad documentation about building pipelines and the available verbs is available in the [docs](docs) folder
 
 We currently have six primary JavaScript packages:
 
-- [react](javascript/react/docs/markdown/index.md) - this is a set of React components for each verb that you can include in web apps that enable tranformation pipeline building.
+- [react](javascript/react/docs/markdown/index.md) - this is a set of React components for each verb that you can include in web apps that enable transformation pipeline building.
 - [schema](javascript/schema/docs/markdown/index.md) - this is a set of core types and associated JSONSchema definitions for formalizing our data package and resource models (including the definitions for table parsing, Codebooks, and Workflows).
 - [tables](javascript/tables/docs/markdown/index.md) - this is the primary set of utilities for loading and parsing data tables, using Arquero under the hood.
 - [utilities](javascript/utilities/docs/markdown/index.md) - this is a set of helpers for working with files, etc., to ease building data wrangling applications.

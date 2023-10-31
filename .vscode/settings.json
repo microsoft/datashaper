@@ -31,8 +31,8 @@
 		"*.jsx": "${capture}.js",
 		"*.tsx": "${capture}.ts, ${capture}.hooks.ts, ${capture}.hooks.tsx, ${capture}.stories.tsx, ${capture}.story.tsx, ${capture}.spec.tsx, ${capture}.base.ts, ${capture}.base.tsx, ${capture}.types.ts, ${capture}.styles.ts, ${capture}.styles.tsx, ${capture}.utils.ts, ${capture}.utils.tsx, ${capture}.constants.ts, ${capture}.module.scss, ${capture}.module.css, ${capture}.md, ${capture}.css",
 		"tsconfig.json": "tsconfig.*.json",
-		"package.json": "turbo.json, tsconfig.json, rome.json, .npmignore",
-		"README.md": "SECURITY.md, SUPPORT.md, CODE_OF_CONDUCT.md, LICENSE",
+		"package.json": "package-lock.json, turbo.json, tsconfig.json, rome.json, .npmignore, dictionary.txt, cspell.config.yaml",
+		"README.md": "SECURITY.md, SUPPORT.md, CODE_OF_CONDUCT.md, LICENSE, CODEOWNERS",
 		".eslintrc": ".eslintignore",
 		".prettierrc": ".prettierignore",
 		".gitattributes": ".gitignore",
@@ -52,5 +52,15 @@
 			"source.organizeImports": true
 		}
 	},
-	"autoDocstring.docstringFormat": "sphinx"
+	"autoDocstring.docstringFormat": "sphinx",
+	"cSpell.customDictionaries": {
+		"project-words": {
+			"name": "project-words",
+			"path": "${workspaceRoot}/dictionary.txt",
+			"description": "Words used in this project",
+			"addWords": true
+		},
+		"custom": true,
+		"internal-terms": true
+	}
 }

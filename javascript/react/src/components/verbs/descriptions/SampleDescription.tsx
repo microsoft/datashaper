@@ -9,7 +9,7 @@ import { memo, useMemo } from 'react'
 import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
 
-const perc = format('.0%')
+const pct = format('.0%')
 
 export const SampleDescription: React.FC<StepDescriptionProps<SampleArgs>> =
 	memo(function SampleDescription(props) {
@@ -20,7 +20,7 @@ export const SampleDescription: React.FC<StepDescriptionProps<SampleArgs>> =
 			return [
 				{
 					before: 'random',
-					value: args.size || perc(args.proportion || 0),
+					value: args.size || pct(args.proportion || 0),
 					after: args.size ? (args.size === 1 ? 'row' : 'rows') : ' of rows',
 				},
 			]

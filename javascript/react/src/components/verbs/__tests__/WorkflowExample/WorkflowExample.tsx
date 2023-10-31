@@ -26,7 +26,7 @@ export const WorkflowExample: React.FC<WorkflowExampleProps> = memo(
 		const workflow = useMemo(() => new Workflow(schema), [schema])
 		const wf = useWorkflow(workflow, tables)
 		const steps = useWorkflowSteps(wf, DisplayOrder.FirstOnTop)
-		const outputs = useMemo(() => wf.outputNames, [wf])
+		const outputs = useMemo(() => wf.steps.map(s => s.id), [wf])
 		const onStepSave = (step: Step, index: number) => wf.updateStep(step, index)
 		const onStepOutputChange = useCallback(
 			(step: Step, output: string | undefined) => {

@@ -31,7 +31,7 @@ export enum DataType {
  * Describes the semantic shape of a variable.
  * This has particular effect on how we display and compare data,
  * such as using line charts for continuous versus bar charts for categorical.
- * This mostly applies to numeric variables, but strings for instance can be categorial.
+ * This mostly applies to numeric variables, but strings for instance can be categorical.
  */
 export enum VariableNature {
 	/**

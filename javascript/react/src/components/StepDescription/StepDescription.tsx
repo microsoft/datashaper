@@ -9,7 +9,7 @@ import { Container } from './StepDescription.styles.js'
 import type { StepDescriptionProps } from './StepDescription.types.js'
 
 /**
- * Let's us render the Steps in a loop while memoing all the functions
+ * Let's us render the Steps in a loop while memoizing all the functions
  */
 export const StepDescription: React.FC<StepDescriptionProps> = memo(
 	function StepComponent({ step, output }) {

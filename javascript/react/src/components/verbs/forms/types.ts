@@ -42,7 +42,7 @@ export interface StepFormProps<T extends object | void | unknown = unknown>
 	table?: ColumnTable
 	/**
 	 * Optional override of step input - there are many scenarios
-	 * (particularly chains) where the driving input table for UI visbility should be shared,
+	 * (particularly chains) where the driving input table for UI visibility should be shared,
 	 * but the input to the actual step is an intermediate table.
 	 */
 	input?: string

@@ -177,7 +177,7 @@ export class LoadResourcesOperation {
 		// Read the top-level schemas
 		const schemas = await readEntries(dataPackage.resources)
 
-		// Read all children scemas
+		// Read all children schemas
 		for (let i = 0; i < schemas.length; i++) {
 			const s = schemas[i]
 			if (s != null) {

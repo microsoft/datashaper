@@ -32,7 +32,7 @@ export declare abstract class BaseNode<T, Config> implements Node<T, Config>
 |  [isBindingRequired](./workflow.basenode.isbindingrequired.md) | <p><code>protected</code></p><p><code>readonly</code></p> | boolean | If 'isBindingRequired' is true (the default), then config-changes will not drive recomputes if no input bindings are present. |
 |  [output](./workflow.basenode.output.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;T&gt; |  |
 |  [output$](./workflow.basenode.output_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;T&gt;&gt; |  |
-|  [recalculate](./workflow.basenode.recalculate.md) | <code>protected</code> | (cause: string) =&gt; void | Calculate the value of this processing node. This may be invoked even if this processing node is not fully configured. recalulate() should account for this |
+|  [recalculate](./workflow.basenode.recalculate.md) | <code>protected</code> | (cause: string) =&gt; void | Calculate the value of this processing node. This may be invoked even if this processing node is not fully configured. recalculate() should account for this |
 |  [stats](./workflow.basenode.stats.md) | <code>readonly</code> | [NodeStats](./workflow.nodestats.md) |  |
 
 ## Methods

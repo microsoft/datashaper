@@ -4,7 +4,7 @@
 
 ## ResourceSchema.sources property
 
-List of resources that underly this resource. This gives us the ability to create hierarchical or linked structures to represent complex combinations. For example, a parent resource can have source tables, a workflow, and a table schema that all combine to create a fully-realized, strongly typed, and transformed output table. Entire Resource objects may be embedded here, or a string path to the Resource definition JSON.
+List of resources that underlie this resource. This gives us the ability to create hierarchical or linked structures to represent complex combinations. For example, a parent resource can have source tables, a workflow, and a table schema that all combine to create a fully-realized, strongly typed, and transformed output table. Entire Resource objects may be embedded here, or a string path to the Resource definition JSON.
 
 <b>Signature:</b>
 

@@ -7,7 +7,7 @@ _The input column for a binning operation must be a numeric data type._
 Multiple binning strategies are supported. Please see the [numpy documentation](https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html) for detailed descriptions of the algorithms.
 
 - Auto: uses automatic bin boundary guessing to create optimal default bins.
-- Fd: Freedman diaconis estimator, resilient to outliers.
+- Fd: Freedman-Diaconis estimator, resilient to outliers.
 - Doane: Better for non-normal datasets.
 - Scott: Less robust but takes data variability into account.
 - Stone: Based on leave-one-out cross-validation.

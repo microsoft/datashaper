@@ -1,0 +1,96 @@
+# Python Idioms
+PYTHONPATH
+pycache
+nopython
+virtualenv
+pyproject
+ipynb
+pymodule
+
+# JavaScript Idioms
+QNAN
+href
+hrefs
+noscript
+unclickable
+
+# Libraries
+Arquero
+pandarallel
+numpy
+linspace
+immer
+ahooks
+fluentui
+
+# Library Methods/Args
+Expando
+dtype
+mkdirp
+iloc
+virtualenvs
+iterrows
+dropna
+astype
+aggfunc
+fillna
+isna
+arange
+bindvar
+atable
+strptime
+isin
+
+# Technical Terms / Studies
+Freedman-Diaconis
+Doane
+Sturges
+NHEFS
+NHANES
+Hyattsville
+NCHS
+QUDT
+Subform
+binarized
+binnable
+
+# Verbs
+binarize
+genid
+umap
+concat
+onehot
+unhot
+groupby
+ungroup
+unorder
+rollup
+dedupe
+cume_dist
+
+# Args & Functions
+stdevp
+nand
+xnor
+nunique
+unapply
+unlisten
+toposort
+castable
+stdev
+
+# Corporate Terms
+MSRC
+msrc
+Dayenne
+Souza
+Carvajal
+Worthen
+Blanco
+
+# Test
+derp
+kaden
+Hola
+ABCDEFGHIJKLMPQRSTUVWXYZ
+ZNGA

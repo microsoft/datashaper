@@ -11,7 +11,7 @@ import { DisplayOrder } from '../../enums.js'
 
 /**
  * Gets the workflow processing steps
- * @param workflow - the workflow intsance
+ * @param workflow - the workflow instance
  * @returns
  */
 export function useWorkflowSteps(

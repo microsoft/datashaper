@@ -36,7 +36,7 @@ export function stats(
 			invalid: reqStats[`${cur}.invalid`],
 			mode,
 		}
-		const optn =
+		const optsNum =
 			type === DataType.Number
 				? {
 						minimum: optStats[`${cur}.minimum`],
@@ -47,7 +47,7 @@ export function stats(
 						bins: bins[`${cur}.bins`],
 				  }
 				: {}
-		const optt =
+		const optsStr =
 			type === DataType.String
 				? {
 						categories: cats[`${cur}`],
@@ -55,8 +55,8 @@ export function stats(
 				: {}
 		acc[cur] = {
 			...req,
-			...optn,
-			...optt,
+			...optsNum,
+			...optsStr,
 		}
 		return acc
 	}, {} as Record<string, FieldMetadata>)
@@ -213,11 +213,11 @@ function filterColumns(
 	filter?: FilterFunction,
 ): FilterFunction {
 	const set = new Set(columns)
-	const filt = filter || (() => true)
+	const filterFn = filter || (() => true)
 	return (name, index, array) => {
 		if (columns) {
-			return set.has(name) && filt(name, index, array)
+			return set.has(name) && filterFn(name, index, array)
 		}
-		return filt(name, index, array)
+		return filterFn(name, index, array)
 	}
 }

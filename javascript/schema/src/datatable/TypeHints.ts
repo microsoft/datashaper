@@ -19,11 +19,11 @@ export interface TypeHints {
 	 */
 	arrayDelimiter?: string
 	/**
-	 * Default: case-insenstive word "true".
+	 * Default: case-insensitive word "true".
 	 */
 	trueValues?: string[]
 	/**
-	 * Default: case-insenstive word "false".
+	 * Default: case-insensitive word "false".
 	 */
 	falseValues?: string[]
 	/**
