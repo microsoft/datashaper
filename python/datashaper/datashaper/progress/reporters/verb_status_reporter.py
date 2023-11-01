@@ -17,7 +17,6 @@ class VerbStatusReporter(StatusReporter):
         self._pipeline_status = pipeline_status
 
     def progress(self, progress: ProgressStatus):
-        print(f"VERB PROGRESS {self._name}", progress)
         self._progress(progress)
 
         description = progress.description
