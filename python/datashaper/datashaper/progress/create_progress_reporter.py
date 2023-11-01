@@ -10,41 +10,36 @@ from rich.tree import Tree
 
 from .types import ProgressStatus, StatusReportHandler
 
-console: Console | None = None
-tree: Tree | None = None
-live: Live | None = None
-initialized: bool = False
 
+class ProgressReportContext:
+    console: Console
+    _group: Group
+    tree: Tree
+    _live: Live
 
-def get_root_tree() -> Tree:
-    global console, tree, initialized, live
-    if initialized is False:
-        initialized = True
-        console = Console()
-        group = Group(Spinner("dots", "Executing Pipeline..."), fit=True)
-        tree = Tree(group)
-        live = Live(
-            tree, console=console, refresh_per_second=4, vertical_overflow="crop"
+    def __init__(self):
+        self.console = Console()
+        self._group = Group(Spinner("dots", "Executing Pipeline..."), fit=True)
+        self.tree = Tree(self._group)
+        self._live  = Live(
+            self.tree, console=self.console, refresh_per_second=4, vertical_overflow="crop"
         )
-        live.start()
-    if tree is None:
-        raise Exception("Tree is None, and that is impossible")
-    return tree
+        self._live.start()
 
-
+root_context = ProgressReportContext()
 progress_trees: dict[str, Tree] = {}
 
 
 # TODO: This progress logic needs to be rethought
-def create_progress_reporter(
+def  create_progress_reporter(
     prefix: str, parent: StatusReportHandler | None = None, transient=True
 ) -> StatusReportHandler:
-    tree = get_root_tree()
+    
     task: TaskID | None = None
     id = uuid.uuid4().hex
 
     progress_columns = [*Progress.get_default_columns(), TimeElapsedColumn()]
-    progress_ele = Progress(*progress_columns, console=console, transient=transient)
+    progress_ele = Progress(*progress_columns, console=root_context.console, transient=transient)
 
     progress_tree = Tree(prefix)
     progress_tree.add(progress_ele)
@@ -56,7 +51,7 @@ def create_progress_reporter(
         parent_tree = progress_trees[parent.__progress_id__]
         parent_tree.hide_root = False
     else:
-        parent_tree = tree
+        parent_tree = root_context.tree
     parent_tree.add(progress_tree)
 
     def handle_progress(progress_update: ProgressStatus):
