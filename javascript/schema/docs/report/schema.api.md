@@ -1100,7 +1100,9 @@ export interface StringsArgs extends InputColumnArgs, OutputColumnArgs {
 // @public (undocumented)
 export interface StringsReplaceArgs extends StringsArgs {
     // (undocumented)
-    flags?: string;
+    caseInsensitive?: boolean;
+    // (undocumented)
+    globalSearch?: boolean;
     // (undocumented)
     pattern: string;
     // (undocumented)

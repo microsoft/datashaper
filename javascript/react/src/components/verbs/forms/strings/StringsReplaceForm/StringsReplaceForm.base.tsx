@@ -32,12 +32,21 @@ export const StringsReplaceFormBase: React.FC<StepFormProps<StringsReplaceArgs>>
 					},
 				},
 				{
-					label: 'Flags',
-					type: FormInputType.Text,
-					current: step.args.flags,
+					label: 'Global search',
+					type: FormInputType.Checkbox,
+					current: step.args.globalSearch,
 					advanced: true,
 					onChange: (s, val) => {
-						s.args.flags = val as string
+						s.args.globalSearch = val as boolean
+					},
+				},
+				{
+					label: 'Case insensitive match',
+					type: FormInputType.Checkbox,
+					current: step.args.caseInsensitive,
+					advanced: true,
+					onChange: (s, val) => {
+						s.args.caseInsensitive = val as boolean
 					},
 				},
 			],

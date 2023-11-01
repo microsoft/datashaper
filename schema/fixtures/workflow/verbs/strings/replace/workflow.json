@@ -8,7 +8,8 @@
 				"column": "Name",
 				"to": "newColumn",
 				"pattern": "am|le",
-				"flags": "gi",
+				"globalMatch": true,
+				"caseInsensitive": true,
 				"replacement": "X"
 			},
 			"id": "expected"

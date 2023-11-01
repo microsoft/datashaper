@@ -15,7 +15,8 @@ export interface StringsReplaceArgs extends StringsArgs
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [flags?](./schema.stringsreplaceargs.flags.md) |  | string | <i>(Optional)</i> |
+|  [caseInsensitive?](./schema.stringsreplaceargs.caseinsensitive.md) |  | boolean | <i>(Optional)</i> |
+|  [globalSearch?](./schema.stringsreplaceargs.globalsearch.md) |  | boolean | <i>(Optional)</i> |
 |  [pattern](./schema.stringsreplaceargs.pattern.md) |  | string |  |
 |  [replacement](./schema.stringsreplaceargs.replacement.md) |  | string |  |
 

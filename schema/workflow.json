@@ -1889,6 +1889,9 @@
         },
         "StringsReplaceArgs": {
             "properties": {
+                "caseInsensitive": {
+                    "type": "boolean"
+                },
                 "column": {
                     "description": "Name of the input column for columnar operations.",
                     "type": "string"
@@ -1896,8 +1899,8 @@
                 "dataType": {
                     "$ref": "#/definitions/DataType"
                 },
-                "flags": {
-                    "type": "string"
+                "globalSearch": {
+                    "type": "boolean"
                 },
                 "pattern": {
                     "type": "string"

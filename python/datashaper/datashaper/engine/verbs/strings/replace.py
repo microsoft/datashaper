@@ -7,14 +7,9 @@ from ....table_store import TableContainer
 from ..verb_input import VerbInput
 
 
-def replace(input: VerbInput, column: str, to: str, pattern: str, replacement: str, flags: str = None):
-    n = 1
-    case = True
-    if flags is not None:
-        if "g" in flags:
-            n = -1
-        if "i" in flags:
-            case = False
+def replace(input: VerbInput, column: str, to: str, pattern: str, replacement: str, globalMatch=False, caseInsensitive=False):
+    n = -1 if globalMatch else 1
+    case = False if caseInsensitive else True
     input_table = input.get_input()
     output = input_table.copy()
     output[to] = output[column].str.replace(pat=pattern, repl=replacement, n=n, case=case)

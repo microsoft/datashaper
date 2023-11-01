@@ -10502,16 +10502,16 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!StringsReplaceArgs#flags:member",
+              "canonicalReference": "@datashaper/schema!StringsReplaceArgs#caseInsensitive:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "flags?: "
+                  "text": "caseInsensitive?: "
                 },
                 {
                   "kind": "Content",
-                  "text": "string"
+                  "text": "boolean"
                 },
                 {
                   "kind": "Content",
@@ -10521,7 +10521,34 @@
               "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
-              "name": "flags",
+              "name": "caseInsensitive",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!StringsReplaceArgs#globalSearch:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "globalSearch?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "globalSearch",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

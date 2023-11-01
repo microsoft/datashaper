@@ -507,7 +507,8 @@ export interface StringsArgs extends InputColumnArgs, OutputColumnArgs {}
 export interface StringsReplaceArgs extends StringsArgs {
 	pattern: string
 	replacement: string
-	flags?: string
+	globalSearch?: boolean
+	caseInsensitive?: boolean
 }
 
 export type UnfoldArgs = InputKeyValueArgs

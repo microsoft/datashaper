@@ -1,6 +1,6 @@
 # replace
 
-Replaces text that matches a [regular expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) pattern with new text. By default this is case-sensitive and only finds the first match. Use regular expression [flags](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#advanced_searching_with_flags) to modify this behavior.
+Replaces text that matches a [regular expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) pattern with new text. By default this is case-sensitive and only finds the first match. Use the `caseInsensitive` and `globalSearch` flags to modify this behavior.
 
 ## Example
 
