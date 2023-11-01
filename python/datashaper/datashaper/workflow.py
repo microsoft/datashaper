@@ -217,7 +217,7 @@ class Workflow(Generic[Context]):
          # Pass in individual context items
         if context is not None:
             for context_key in dir(context):
-                if not context_key.startswith("__"):
+                if context_key in verb_args:
                     run_ctx[context_key] = getattr(context, context_key)
 
         print("run_context", run_ctx)
