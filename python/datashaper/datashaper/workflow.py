@@ -278,7 +278,7 @@ class Workflow(Generic[Context]):
         self,
         context: Context = None,
         status_reporter: Optional[StatusReporter] = NoopStatusReporter(),
-        create_verb_progress_reporter: Optional[Callable[[str], StatusReportHandler]] = None
+        create_verb_progress_reporter: Optional[Callable[[str], StatusReportHandler]] = lambda: lambda progress: None,
     ) -> VerbTiming:
         """Run the execution graph."""
         visited: Set[str] = set()
