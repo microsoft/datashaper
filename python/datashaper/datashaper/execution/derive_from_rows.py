@@ -6,6 +6,7 @@ from ..progress import StatusReporter, progress_callback
 from ..table_store import Table
 from .utils import transform_pandas_table
 
+
 ItemType = TypeVar("ItemType")
 
 
