@@ -98,6 +98,7 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	select: [Tags.InputTable, Tags.InputColumnList],
 	spread: [Tags.InputTable, Tags.InputColumn],
 	'strings.replace': [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
+	'strings.lower': [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
 	'strings.upper': [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
 	unfold: [Tags.InputTable, Tags.RowModifying, Tags.InputKeyValue],
 	ungroup: [Tags.InputTable, Tags.NoArgs],

@@ -16,6 +16,16 @@
 			}
 		},
 		{
+			"verb": "strings.lower",
+			"input": {
+				"source": "companies"
+			},
+			"args": {
+				"column": "Name",
+				"to": "Lower"
+			}
+		},
+		{
 			"verb": "strings.upper",
 			"input": {
 				"source": "companies"

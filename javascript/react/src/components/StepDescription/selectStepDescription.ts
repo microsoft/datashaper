@@ -69,6 +69,7 @@ const descriptions: Record<string, React.FC<StepDescriptionProps<any>>> = {
 	select: NoParametersDescription,
 	spread: SpreadDescription,
 	'strings.replace': StringsReplaceDescription,
+	'strings.lower': NoParametersDescription,
 	'strings.upper': NoParametersDescription,
 	unfold: UnfoldDescription,
 	ungroup: NoParametersDescription,

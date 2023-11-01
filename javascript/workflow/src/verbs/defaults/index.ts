@@ -34,6 +34,7 @@ export const unroll = inputColumnList
 export const window = outputColumn
 export const strings = {
     replace: outputColumn,
+    lower: outputColumn,
     upper: outputColumn,
 }
 

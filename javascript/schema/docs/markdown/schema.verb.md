@@ -44,6 +44,7 @@ export declare enum Verb
 |  Sample | <code>&quot;sample&quot;</code> |  |
 |  Select | <code>&quot;select&quot;</code> |  |
 |  Spread | <code>&quot;spread&quot;</code> |  |
+|  StringsLower | <code>&quot;strings.lower&quot;</code> |  |
 |  StringsReplace | <code>&quot;strings.replace&quot;</code> |  |
 |  StringsUpper | <code>&quot;strings.upper&quot;</code> |  |
 |  Unfold | <code>&quot;unfold&quot;</code> |  |

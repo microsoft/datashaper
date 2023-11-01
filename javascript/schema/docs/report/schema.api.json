@@ -9998,6 +9998,33 @@
             },
             {
               "kind": "Reference",
+              "text": "Verb.StringsLower",
+              "canonicalReference": "@datashaper/schema!Verb.StringsLower:member"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n    args?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "StringsArgs",
+              "canonicalReference": "@datashaper/schema!StringsArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n} & "
+            },
+            {
+              "kind": "Reference",
+              "text": "BasicInput",
+              "canonicalReference": "@datashaper/schema!BasicInput:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ") | ({\n    verb: "
+            },
+            {
+              "kind": "Reference",
               "text": "Verb.StringsUpper",
               "canonicalReference": "@datashaper/schema!Verb.StringsUpper:member"
             },
@@ -10203,7 +10230,7 @@
           "name": "Step",
           "typeTokenRange": {
             "startIndex": 1,
-            "endIndex": 227
+            "endIndex": 233
           }
         },
         {
@@ -12150,6 +12177,27 @@
               },
               "releaseTag": "Public",
               "name": "Spread"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!Verb.StringsLower:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "StringsLower = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"strings.lower\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "StringsLower"
             },
             {
               "kind": "EnumMember",

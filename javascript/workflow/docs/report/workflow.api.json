@@ -12960,6 +12960,33 @@
             },
             {
               "kind": "Content",
+              "text": ">;\n    lower: (id: string) => import(\"../../index.js\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "StepNode",
+              "canonicalReference": "@datashaper/workflow!StepNode:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<import(\"@datashaper/tables\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "TableContainer",
+              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<unknown>, import(\"@datashaper/schema\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "StringsArgs",
+              "canonicalReference": "@datashaper/schema!StringsArgs:interface"
+            },
+            {
+              "kind": "Content",
               "text": ">;\n    upper: (id: string) => import(\"../../index.js\")."
             },
             {
@@ -12995,7 +13022,7 @@
           "name": "strings",
           "variableTypeTokenRange": {
             "startIndex": 1,
-            "endIndex": 14
+            "endIndex": 20
           }
         },
         {

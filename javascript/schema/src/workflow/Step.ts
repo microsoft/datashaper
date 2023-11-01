@@ -90,6 +90,7 @@ export type Step = StepJsonCommon &
 		| ({ verb: Verb.Select; args?: SelectArgs } & BasicInput)
 		| ({ verb: Verb.Spread; args?: SpreadArgs } & BasicInput)
 		| ({ verb: Verb.StringsReplace; args?: StringsReplaceArgs } & BasicInput)
+		| ({ verb: Verb.StringsLower; args?: StringsArgs } & BasicInput)
 		| ({ verb: Verb.StringsUpper; args?: StringsArgs } & BasicInput)
 		| ({ verb: Verb.Unfold; args?: UnfoldArgs } & BasicInput)
 		| ({ verb: Verb.Ungroup } & BasicInput)

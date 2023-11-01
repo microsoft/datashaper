@@ -1683,6 +1683,28 @@
                                     "$ref": "#/definitions/StringsArgs"
                                 },
                                 "verb": {
+                                    "const": "strings.lower",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/StringsArgs"
+                                },
+                                "verb": {
                                     "const": "strings.upper",
                                     "type": "string"
                                 }

@@ -9,6 +9,7 @@
 ```typescript
 strings: {
     replace: (id: string) => import("../../index.js").StepNode<import("@datashaper/tables").TableContainer<unknown>, import("@datashaper/schema").StringsReplaceArgs>;
+    lower: (id: string) => import("../../index.js").StepNode<import("@datashaper/tables").TableContainer<unknown>, import("@datashaper/schema").StringsArgs>;
     upper: (id: string) => import("../../index.js").StepNode<import("@datashaper/tables").TableContainer<unknown>, import("@datashaper/schema").StringsArgs>;
 }
 ```

@@ -34,7 +34,7 @@ from .rollup import rollup
 from .sample import sample
 from .select import select
 from .spread import spread
-from .strings import replace, upper
+from .strings import lower, replace, upper
 from .unfold import unfold
 from .ungroup import ungroup
 from .unhot import unhot
@@ -74,6 +74,7 @@ functions: dict[Verb, Callable] = {
     Verb.Select: select,
     Verb.Spread: spread,
     Verb.StringsReplace: replace,
+    Verb.StringsLower: lower,
     Verb.StringsUpper: upper,
     Verb.Unfold: unfold,
     Verb.Ungroup: ungroup,

@@ -985,6 +985,7 @@ export function stepNodeFactory<T, Args>(stepFunction: StepFunction<T, Args>): (
 // @public (undocumented)
 export const strings: {
     replace: (id: string) => StepNode<TableContainer<unknown>, StringsReplaceArgs>;
+    lower: (id: string) => StepNode<TableContainer<unknown>, StringsArgs>;
     upper: (id: string) => StepNode<TableContainer<unknown>, StringsArgs>;
 };
 

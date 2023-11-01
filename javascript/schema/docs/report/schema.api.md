@@ -1031,6 +1031,9 @@ export type Step = StepJsonCommon & (({
     verb: Verb.StringsReplace;
     args?: StringsReplaceArgs;
 } & BasicInput) | ({
+    verb: Verb.StringsLower;
+    args?: StringsArgs;
+} & BasicInput) | ({
     verb: Verb.StringsUpper;
     args?: StringsArgs;
 } & BasicInput) | ({
@@ -1272,6 +1275,8 @@ export enum Verb {
     Select = "select",
     // (undocumented)
     Spread = "spread",
+    // (undocumented)
+    StringsLower = "strings.lower",
     // (undocumented)
     StringsReplace = "strings.replace",
     // (undocumented)

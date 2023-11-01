@@ -44,6 +44,7 @@ class Verb(Enum):
     Select = "select"
     Spread = "spread"
     StringsReplace = "strings.replace"
+    StringsLower = "strings.lower"
     StringsUpper = "strings.upper"
     Unfold = "unfold"
     Ungroup = "ungroup"

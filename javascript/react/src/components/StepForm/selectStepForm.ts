@@ -69,6 +69,7 @@ const verb: Record<string, React.FC<StepFormProps<any>>> = {
 	select: NoParametersForm,
 	spread: SpreadForm,
 	'strings.replace': StringsReplaceForm,
+	'strings.lower': NoParametersForm,
 	'strings.upper': NoParametersForm,
 	unfold: UnfoldForm,
 	ungroup: NoParametersForm,
