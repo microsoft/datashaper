@@ -1,11 +1,9 @@
 # Print iterations progress
 # https://stackoverflow.com/a/34325723
 import time
-
 from concurrent.futures import Future, ThreadPoolExecutor, wait
 from multiprocessing import cpu_count
 from typing import Callable, Iterable, Tuple, TypeVar
-
 
 InType = TypeVar("InType")
 OutType = TypeVar("OutType")
@@ -22,6 +20,7 @@ def parallelize(
     if num_threads is None or num_threads == 0:
         num_threads = 2 * cpu_count()
 
+    print(f"Parallelizing with {num_threads} threads")
     executor = ThreadPoolExecutor(max_workers=num_threads)
 
     def execute(item: InType):

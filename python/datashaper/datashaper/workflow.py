@@ -279,9 +279,9 @@ class Workflow(Generic[Context]):
 
     def run(
         self,
-        context: Context = None,
-        on_verb_timing: Optional[Callable[[str, float], None]] = None,
+        context: Optional[Context] = None,
         status_reporter: Optional[StatusReporter] = NoopStatusReporter(),
+        on_verb_timing: Optional[Callable[[str, float], None]] = None,
         create_verb_progress_reporter: Optional[Callable[[str], StatusReportHandler]] = _create_default_verb_status_reporter,
     ) -> None:
         """Run the execution graph."""
