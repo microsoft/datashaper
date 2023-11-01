@@ -204,6 +204,12 @@ class Workflow(Generic[Context]):
         run_ctx: dict[str, Any] = {}
         progress: StatusReportHandler = lambda progress: reporter.progress(progress)
 
+        # Pass in individual context items
+        if context is not None:
+            for context_key in dir(context):
+                if context_key in verb_args and context_key not in exec_node.args:
+                    run_ctx[context_key] = getattr(context, context_key)
+
         # Pass in the top-level context
         if "context" in verb_args and "context" not in exec_node.args:
             run_ctx["context"] = context
@@ -215,12 +221,6 @@ class Workflow(Generic[Context]):
         # Pass in the progress
         if "progress" in verb_args and "progress" not in exec_node.args:
             run_ctx["progress"] = progress
-
-         # Pass in individual context items
-        if context is not None:
-            for context_key in dir(context):
-                if context_key in verb_args:
-                    run_ctx[context_key] = getattr(context, context_key)
 
         return run_ctx
 
