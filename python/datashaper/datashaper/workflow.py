@@ -19,14 +19,13 @@ import pandas as pd
 from jsonschema import validate as validate_schema
 
 from .engine import Verb, VerbInput, functions
-from .execution import ExecutionNode, VerbDefinitions, VerbTiming
+from .execution import ExecutionNode, VerbDefinitions
 from .progress import (
     NoopStatusReporter,
     ProgressStatus,
     StatusReporter,
     StatusReportHandler,
     VerbStatusReporter,
-    create_progress_reporter,
 )
 from .table_store import Table, TableContainer
 
@@ -37,6 +36,10 @@ SCHEMA_FILE = "../../schema/workflow.json"
 Context = TypeVar("Context")
 
 DEFAULT_INPUT_NAME = "datasource"
+
+
+def _create_default_verb_status_reporter(name: str) -> StatusReportHandler:
+    return lambda progress: None
 
 
 class Workflow(Generic[Context]):
@@ -205,6 +208,12 @@ class Workflow(Generic[Context]):
         run_ctx: dict[str, Any] = {}
         progress: StatusReportHandler = lambda progress: reporter.progress(progress)
 
+        # Pass in individual context items
+        if context is not None:
+            for context_key in dir(context):
+                if context_key in verb_args and context_key not in exec_node.args:
+                    run_ctx[context_key] = getattr(context, context_key)
+
         # Pass in the top-level context
         if "context" in verb_args and "context" not in exec_node.args:
             run_ctx["context"] = context
@@ -216,12 +225,6 @@ class Workflow(Generic[Context]):
         # Pass in the progress
         if "progress" in verb_args and "progress" not in exec_node.args:
             run_ctx["progress"] = progress
-
-        # Pass in individual context items
-        if context is not None:
-            for context_key in dir(context):
-                if context_key in verb_args and context_key not in exec_node.args:
-                    run_ctx[context_key] = getattr(context, context_key)
 
         return run_ctx
 
@@ -280,21 +283,21 @@ class Workflow(Generic[Context]):
 
     def run(
         self,
-        context: Context = None,
+        context: Optional[Context] = None,
         status_reporter: Optional[StatusReporter] = NoopStatusReporter(),
-    ) -> VerbTiming:
+        on_verb_timing: Optional[Callable[[str, float], None]] = None,
+        create_verb_progress_reporter: Optional[
+            Callable[[str], StatusReportHandler]
+        ] = _create_default_verb_status_reporter,
+    ) -> None:
         """Run the execution graph."""
         visited: Set[str] = set()
         executable_nodes = []
-        verb_timing: VerbTiming = {}
 
         for node_key in self._graph.keys():
             if self._check_inputs(node_key, visited):
                 executable_nodes.append(node_key)
 
-        wf_progress = create_progress_reporter(
-            f"Workflow: {self.name}", transient=False
-        )
         verb_idx = 0
 
         while len(executable_nodes) > 0:
@@ -303,7 +306,7 @@ class Workflow(Generic[Context]):
             verb_name = executable_node.verb.__name__
 
             # set up verb progress reporter
-            progress = create_progress_reporter(f"verb: {verb_name}", wf_progress)
+            progress = create_verb_progress_reporter(f"verb: {verb_name}")
             verb_reporter = VerbStatusReporter(
                 f"{self.name}.{verb_name}.{verb_idx}", status_reporter, progress
             )
@@ -322,8 +325,12 @@ class Workflow(Generic[Context]):
             if inspect.iscoroutine(result):
                 result = asyncio.run(result)
 
-            # record the verb timing and report progress
-            verb_timing[f"verb_{verb_name}_{verb_idx}"] = time.time() - start_verb_time
+            # Record Verb Timing
+            if on_verb_timing is not None:
+                on_verb_timing(
+                    f"verb_{verb_name}_{verb_idx}", time.time() - start_verb_time
+                )
+
             progress(ProgressStatus(progress=1))
             executable_node.result = result
 
