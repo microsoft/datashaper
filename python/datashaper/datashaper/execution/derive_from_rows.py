@@ -13,18 +13,11 @@ def derive_from_rows(
     input: Table,
     transform: Callable[[pd.Series], ItemType],
     reporter: StatusReporter,
-    progress: StatusReportHandler | None = None,
-    tag: str = 'derive_from_rows',
     num_threads: int = 4,
     stagger: int = 0,
 ) -> list[ItemType]:
     """Apply a generic transform function to each row. Any errors will be reported and thrown."""
-    callback = (
-        progress_callback(callback=transform, progress=progress, num_total=len(input), tag=tag)
-        if progress is not None
-        else transform
-    )
-
+    callback = progress_callback(callback=transform, progress=reporter.progress, num_total=len(input))
     results, errors = transform_pandas_table(
         input,
         callback,
