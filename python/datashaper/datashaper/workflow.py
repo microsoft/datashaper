@@ -24,7 +24,6 @@ from .progress import (
     StatusReporter,
     StatusReportHandler,
     VerbStatusReporter,
-    create_progress_reporter,
 )
 from .table_store import Table, TableContainer
 
@@ -279,6 +278,7 @@ class Workflow(Generic[Context]):
         self,
         context: Context = None,
         status_reporter: Optional[StatusReporter] = NoopStatusReporter(),
+        create_verb_progress_reporter: Optional[Callable[[str], StatusReportHandler]] = None
     ) -> VerbTiming:
         """Run the execution graph."""
         visited: Set[str] = set()
@@ -289,9 +289,7 @@ class Workflow(Generic[Context]):
             if self._check_inputs(node_key, visited):
                 executable_nodes.append(node_key)
 
-        wf_progress = create_progress_reporter(
-            f"Workflow: {self.name}", transient=False
-        )
+        
         verb_idx = 0
 
         while len(executable_nodes) > 0:
@@ -300,7 +298,7 @@ class Workflow(Generic[Context]):
             verb_name = executable_node.verb.__name__
 
             # set up verb progress reporter
-            progress = create_progress_reporter(f"verb: {verb_name}", wf_progress)
+            progress = create_verb_progress_reporter(f"verb: {verb_name}")
             verb_reporter = VerbStatusReporter(
                 f"{self.name}.{verb_name}.{verb_idx}", status_reporter, progress
             )
