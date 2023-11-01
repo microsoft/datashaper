@@ -34,6 +34,9 @@ Context = TypeVar("Context")
 
 DEFAULT_INPUT_NAME = "datasource"
 
+def _create_default_verb_status_reporter(name: str) -> StatusReportHandler:
+    return lambda progress: None
+
 
 class Workflow(Generic[Context]):
     """A data processing graph."""
@@ -278,7 +281,7 @@ class Workflow(Generic[Context]):
         self,
         context: Context = None,
         status_reporter: Optional[StatusReporter] = NoopStatusReporter(),
-        create_verb_progress_reporter: Optional[Callable[[str], StatusReportHandler]] = lambda: lambda progress: None,
+        create_verb_progress_reporter: Optional[Callable[[str], StatusReportHandler]] = _create_default_verb_status_reporter,
     ) -> VerbTiming:
         """Run the execution graph."""
         visited: Set[str] = set()
