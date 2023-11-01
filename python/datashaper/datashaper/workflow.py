@@ -302,7 +302,6 @@ class Workflow(Generic[Context]):
 
             # set up verb progress reporter
             progress = create_verb_progress_reporter(f"verb: {verb_name}")
-            print("ProgressReporterFn=", progress)
             verb_reporter = VerbStatusReporter(
                 f"{self.name}.{verb_name}.{verb_idx}", status_reporter, progress
             )
