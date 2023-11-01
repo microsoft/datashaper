@@ -280,14 +280,14 @@ class Workflow(Generic[Context]):
     def run(
         self,
         context: Context = None,
+        verb_timing: Optional[VerbTiming] = {},
         status_reporter: Optional[StatusReporter] = NoopStatusReporter(),
         create_verb_progress_reporter: Optional[Callable[[str], StatusReportHandler]] = _create_default_verb_status_reporter,
-    ) -> VerbTiming:
+    ) -> None:
         """Run the execution graph."""
         visited: Set[str] = set()
         executable_nodes = []
-        verb_timing: VerbTiming = {}
-
+        
         for node_key in self._graph.keys():
             if self._check_inputs(node_key, visited):
                 executable_nodes.append(node_key)
@@ -319,6 +319,9 @@ class Workflow(Generic[Context]):
 
             if inspect.iscoroutine(result):
                 result = asyncio.run(result)
+
+            # Record Verb Timing
+            verb_timing[f"verb_{verb_name}_{verb_idx}"] = time.time() - start_verb_time
 
             # record the verb timing and report progress
             verb_timing[f"verb_{verb_name}_{verb_idx}"] = time.time() - start_verb_time
