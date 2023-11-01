@@ -17,7 +17,7 @@ import pandas as pd
 from jsonschema import validate as validate_schema
 
 from .engine import Verb, VerbInput, functions
-from .execution import ExecutionNode, VerbDefinitions, VerbTiming
+from .execution import ExecutionNode, VerbDefinitions
 from .progress import (
     NoopStatusReporter,
     ProgressStatus,
@@ -280,7 +280,7 @@ class Workflow(Generic[Context]):
     def run(
         self,
         context: Context = None,
-        verb_timing: Optional[VerbTiming] = {},
+        on_verb_timing: Optional[Callable[[str, float], None]] = None,
         status_reporter: Optional[StatusReporter] = NoopStatusReporter(),
         create_verb_progress_reporter: Optional[Callable[[str], StatusReportHandler]] = _create_default_verb_status_reporter,
     ) -> None:
@@ -321,10 +321,9 @@ class Workflow(Generic[Context]):
                 result = asyncio.run(result)
 
             # Record Verb Timing
-            verb_timing[f"verb_{verb_name}_{verb_idx}"] = time.time() - start_verb_time
+            if on_verb_timing is not None:
+                on_verb_timing(f"verb_{verb_name}_{verb_idx}", time.time() - start_verb_time)
 
-            # record the verb timing and report progress
-            verb_timing[f"verb_{verb_name}_{verb_idx}"] = time.time() - start_verb_time
             progress(ProgressStatus(progress=1))
             executable_node.result = result
 
