@@ -220,7 +220,6 @@ class Workflow(Generic[Context]):
                 if context_key in verb_args:
                     run_ctx[context_key] = getattr(context, context_key)
 
-        print("run_context", run_ctx)
         return run_ctx
 
     def _check_inputs(self, node_key: str, visited: set[str]):
