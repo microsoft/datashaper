@@ -20,7 +20,6 @@ def parallelize(
     if num_threads is None or num_threads == 0:
         num_threads = 2 * cpu_count()
 
-    print(f"Parallelizing with {num_threads} threads")
     executor = ThreadPoolExecutor(max_workers=num_threads)
 
     def execute(item: InType):
