@@ -9,11 +9,13 @@ import inspect
 import json
 import os
 import time
+
 from collections import OrderedDict, defaultdict
 from typing import Any, Callable, Generic, Optional, Set, TypeVar
 from uuid import uuid4
 
 import pandas as pd
+
 from jsonschema import validate as validate_schema
 
 from .engine import Verb, VerbInput, functions
@@ -27,12 +29,14 @@ from .progress import (
 )
 from .table_store import Table, TableContainer
 
+
 # TODO: this won't work for a published package
 SCHEMA_FILE = "../../schema/workflow.json"
 
 Context = TypeVar("Context")
 
 DEFAULT_INPUT_NAME = "datasource"
+
 
 def _create_default_verb_status_reporter(name: str) -> StatusReportHandler:
     return lambda progress: None
@@ -282,17 +286,18 @@ class Workflow(Generic[Context]):
         context: Optional[Context] = None,
         status_reporter: Optional[StatusReporter] = NoopStatusReporter(),
         on_verb_timing: Optional[Callable[[str, float], None]] = None,
-        create_verb_progress_reporter: Optional[Callable[[str], StatusReportHandler]] = _create_default_verb_status_reporter,
+        create_verb_progress_reporter: Optional[
+            Callable[[str], StatusReportHandler]
+        ] = _create_default_verb_status_reporter,
     ) -> None:
         """Run the execution graph."""
         visited: Set[str] = set()
         executable_nodes = []
-        
+
         for node_key in self._graph.keys():
             if self._check_inputs(node_key, visited):
                 executable_nodes.append(node_key)
 
-        
         verb_idx = 0
 
         while len(executable_nodes) > 0:
@@ -322,7 +327,9 @@ class Workflow(Generic[Context]):
 
             # Record Verb Timing
             if on_verb_timing is not None:
-                on_verb_timing(f"verb_{verb_name}_{verb_idx}", time.time() - start_verb_time)
+                on_verb_timing(
+                    f"verb_{verb_name}_{verb_idx}", time.time() - start_verb_time
+                )
 
             progress(ProgressStatus(progress=1))
             executable_node.result = result

@@ -6,6 +6,7 @@ from ..progress import StatusReporter, StatusReportHandler, progress_callback
 from ..table_store import Table
 from .utils import transform_pandas_table
 
+
 ItemType = TypeVar("ItemType")
 
 
@@ -17,7 +18,9 @@ def derive_from_rows(
     stagger: int = 0,
 ) -> list[ItemType]:
     """Apply a generic transform function to each row. Any errors will be reported and thrown."""
-    callback = progress_callback(callback=transform, progress=reporter.progress, num_total=len(input))
+    callback = progress_callback(
+        callback=transform, progress=reporter.progress, num_total=len(input)
+    )
     results, errors = transform_pandas_table(
         input,
         callback,

@@ -1,9 +1,11 @@
 # Print iterations progress
 # https://stackoverflow.com/a/34325723
 import time
+
 from concurrent.futures import Future, ThreadPoolExecutor, wait
 from multiprocessing import cpu_count
 from typing import Callable, Iterable, Tuple, TypeVar
+
 
 InType = TypeVar("InType")
 OutType = TypeVar("OutType")
