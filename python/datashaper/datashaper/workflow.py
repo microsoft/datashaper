@@ -9,13 +9,11 @@ import inspect
 import json
 import os
 import time
-
 from collections import OrderedDict, defaultdict
 from typing import Any, Callable, Generic, Optional, Set, TypeVar
 from uuid import uuid4
 
 import pandas as pd
-
 from jsonschema import validate as validate_schema
 
 from .engine import Verb, VerbInput, functions
@@ -29,7 +27,6 @@ from .progress import (
     create_progress_reporter,
 )
 from .table_store import Table, TableContainer
-
 
 # TODO: this won't work for a published package
 SCHEMA_FILE = "../../schema/workflow.json"
@@ -217,12 +214,13 @@ class Workflow(Generic[Context]):
         if "progress" in verb_args and "progress" not in exec_node.args:
             run_ctx["progress"] = progress
 
-        # Pass in individual context items
+         # Pass in individual context items
         if context is not None:
             for context_key in dir(context):
-                if context_key in verb_args and context_key not in exec_node.args:
+                if not context_key.startswith("__"):
                     run_ctx[context_key] = getattr(context, context_key)
 
+        print("run_context", run_ctx)
         return run_ctx
 
     def _check_inputs(self, node_key: str, visited: set[str]):

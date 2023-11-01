@@ -18,6 +18,7 @@ class ProgressReportContext:
     _live: Live
 
     def __init__(self):
+        print("CREATE ROOT PROGRESS REPORTER")
         self.console = Console()
         self._group = Group(Spinner("dots", "Executing Pipeline..."), fit=True)
         self.tree = Tree(self._group)
