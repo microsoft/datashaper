@@ -19,6 +19,7 @@ def progress_callback(
         nonlocal num_complete
         result = callback(*args, **kwargs)
         num_complete += 1
+        print("NUMCOMPLETE", num_complete, " out of ", num_total)
         progress(
             ProgressStatus(
                 total_items=num_total,
