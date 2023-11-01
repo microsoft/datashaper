@@ -19,7 +19,7 @@ def derive_from_rows(
 ) -> list[ItemType]:
     """Apply a generic transform function to each row. Any errors will be reported and thrown."""
     callback = (
-        progress_callback(progress=transform, progress=reporter.progress, num_total=len(input), tag=tag)
+        progress_callback(callback=transform, progress=reporter.progress, num_total=len(input), tag=tag)
         if reporter is not None
         else transform
     )
