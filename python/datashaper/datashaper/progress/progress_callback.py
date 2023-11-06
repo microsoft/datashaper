@@ -1,7 +1,7 @@
 from typing import Any, Callable
 
 from .progress_ticker import progress_ticker
-from .types import ProgressStatus, StatusReportHandler
+from .types import StatusReportHandler
 
 
 def progress_callback(
