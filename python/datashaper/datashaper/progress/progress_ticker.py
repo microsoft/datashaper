@@ -1,5 +1,3 @@
-from typing import Callable
-
 from .types import ProgessTicker, ProgressStatus, StatusReportHandler
 
 

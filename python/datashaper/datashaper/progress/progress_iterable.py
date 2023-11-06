@@ -1,7 +1,7 @@
 from typing import Iterable, TypeVar
 
 from .progress_ticker import progress_ticker
-from .types import ProgressStatus, StatusReportHandler
+from .types import StatusReportHandler
 
 T = TypeVar("T")
 
