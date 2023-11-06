@@ -1,6 +1,7 @@
 from typing import Iterable, TypeVar
 
-from .types import ProgressStatus, StatusReportHandler
+from .progress_ticker import progress_ticker
+from .types import StatusReportHandler
 
 
 T = TypeVar("T")
@@ -12,18 +13,12 @@ def progress_iterable(
     num_total: int | None = None,
 ) -> Iterable[T]:
     """Wrap an iterable with a progress handler. Every time an item is yielded, the progress handler will be called with the current progress."""
+
     if num_total is None:
         num_total = len(list(iterable))
 
-    num_complete = 0
+    tick = progress_ticker(progress, num_total)
+
     for item in iterable:
-        num_complete += 1
-        if progress is not None:
-            progress(
-                ProgressStatus(
-                    progress=None,
-                    total_items=num_total,
-                    completed_items=num_complete,
-                )
-            )
+        tick(1)
         yield item
