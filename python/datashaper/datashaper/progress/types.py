@@ -17,6 +17,6 @@ class ProgressStatus:
     """Number of items completed"""
 
 
-ProgessTicker = Callable[[Optional[int]], None]
+ProgressTicker = Callable[[Optional[int]], None]
 StatusReportHandler = Callable[[ProgressStatus], Any]
 """A progress reporter function."""
