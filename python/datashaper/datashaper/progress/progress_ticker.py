@@ -4,8 +4,8 @@ from .types import ProgressStatus, ProgressTicker, StatusReportHandler
 def progress_ticker(
     progress: StatusReportHandler | None, num_total: int
 ) -> ProgressTicker:
-    """Create a progress-reporting function given a target number of items. 
-    
+    """Create a progress-reporting function given a target number of items.
+
     Every time the returned function is called, the progress handler will be called with the current progress."""
     num_complete = 0
     if progress is not None:
