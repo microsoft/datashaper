@@ -1,11 +1,11 @@
 from typing import Callable
 
-from .types import ProgressStatus, StatusReportHandler
+from .types import ProgessTicker, ProgressStatus, StatusReportHandler
 
 
 def progress_ticker(
     progress: StatusReportHandler | None, num_total: int
-) -> Callable[[int], None]:
+) -> ProgessTicker:
     """Create a progress-reporting function given a target number of items. 
     
     Every time the returned function is called, the progress handler will be called with the current progress."""

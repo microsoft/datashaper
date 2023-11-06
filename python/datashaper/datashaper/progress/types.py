@@ -1,6 +1,5 @@
-from typing import Any, Callable
-
 from dataclasses import dataclass
+from typing import Any, Callable, Optional
 
 
 @dataclass
@@ -18,5 +17,6 @@ class ProgressStatus:
     """Number of items completed"""
 
 
+ProgessTicker = Callable[[Optional[int]], None]
 StatusReportHandler = Callable[[ProgressStatus], Any]
 """A progress reporter function."""
