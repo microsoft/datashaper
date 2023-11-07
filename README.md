@@ -1,6 +1,6 @@
 # DataShaper
 
-This project provides a collection of components for executing processing pipelines, particularly oriented to data wrangling. Detailed documentation is provided in subfolders, with an overview of high-level goals and concepts here.
+This project provides a collection of components for executing processing pipelines, particularly oriented to data wrangling. Detailed documentation is provided in subfolders, with an overview of high-level goals and concepts here. Most of the documentation within individual packages is tailored to developers needing to understand how the code is organized and executed. Higher-level concepts for the project as a whole, constructing workflows, etc. are in the root [docs](./docs/) folder.
 
 ## Motivation
 
@@ -22,6 +22,8 @@ We currently have seven primary JavaScript packages:
 - [utilities](javascript/utilities/docs/markdown/index.md) - this is a set of helpers for working with files, etc., to ease building data wrangling applications.
 - [webapp](javascript/webapp) - this is the deployable DataShaper webapp that includes all of the verb components and allows creation, execution, and saving of pipeline JSON files. We also rely on this to demonstrate example code, including a TestApp profile. If you're wondering how to build an app with DataShaper components, start here!
 - [workflow](javascript/workflow/docs/markdown/index.md) - this is the primary engine for pipeline execution. It includes low-level operational primitives to execute a wide variety of relational algebra transformations over Arquero tables.
+
+Also note that each JavaScript package has a generated docs folder containing Markdown API documentation extracted from code comments using [api-extractor](https://api-extractor.com/).
 
 The Python packages are much simpler, because there is no associated web application and component code.
 
