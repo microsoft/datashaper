@@ -17,3 +17,5 @@ Applies a sort operation on the table using a specified column and sort directio
 | 2   | Joe   |
 | 3   | Jenny |
 | 1   | Bob   |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.orderbyargs.md)

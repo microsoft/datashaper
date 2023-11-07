@@ -63,3 +63,5 @@ _boolean_
 | ---- | ---- |
 | 23   | 165  |
 | 354  | 300  |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.filterargs.md)

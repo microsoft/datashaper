@@ -27,3 +27,5 @@ Converts the data of a column from one type to another. This is normally used fo
 | 10  |
 | 22  |
 | NaN |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.convertargs.md)

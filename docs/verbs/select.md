@@ -17,3 +17,5 @@ Example
 | 1   | 32  |
 | 2   | 35  |
 | 3   | 31  |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.selectargs.md)

@@ -27,3 +27,5 @@ Additional options:
 | --- | ----------- | ----- | ------ |
 | 1   | [10, 15]    | 10    | 15     |
 | 2   | [1, 11, 18] | 1     | 11     |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.spreadargs.md)

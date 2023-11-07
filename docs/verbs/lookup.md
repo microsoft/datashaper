@@ -30,3 +30,5 @@ input 2
 | 1   | Bob   | 2022-01-08 |
 | 2   | Joe   | 2022-01-05 |
 | 3   | Jenny | 2022-01-01 |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.lookupargs.md)

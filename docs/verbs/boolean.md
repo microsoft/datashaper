@@ -86,3 +86,5 @@ Note that in formal boolean algebra some operators expect exactly two input valu
 | 0      |
 | 0      |
 | 1      |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.booleanargs.md)

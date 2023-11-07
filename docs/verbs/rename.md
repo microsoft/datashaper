@@ -17,3 +17,5 @@ Renames columns in a table.
 | 1   | Bob   |
 | 2   | Joe   |
 | 3   | Jenny |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.renameargs.md)
