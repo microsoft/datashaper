@@ -25,3 +25,5 @@ Allows mapping of cell contents from one one value to another. This is useful fo
 | word          | m365   |
 | excel         | m365   |
 | powerpoint    | m365   |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.recodeargs.md)

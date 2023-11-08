@@ -4,6 +4,8 @@
 
 ## FilterArgs.criteria property
 
+Filter criteria to apply to the column.
+
 <b>Signature:</b>
 
 ```typescript

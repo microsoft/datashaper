@@ -4,6 +4,8 @@
 
 ## DeriveArgs.operator property
 
+Math operation to perform row-by-row on the two columns
+
 <b>Signature:</b>
 
 ```typescript

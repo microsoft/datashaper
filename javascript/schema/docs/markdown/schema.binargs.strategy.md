@@ -4,6 +4,8 @@
 
 ## BinArgs.strategy property
 
+Binning technique to use.
+
 <b>Signature:</b>
 
 ```typescript

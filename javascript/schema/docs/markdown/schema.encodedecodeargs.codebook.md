@@ -4,6 +4,8 @@
 
 ## EncodeDecodeArgs.codebook property
 
+Codebook to apply to the table.
+
 <b>Signature:</b>
 
 ```typescript

@@ -28,3 +28,5 @@ Deduplicates table rows. A list of column names can be supplied to create the ke
 | Bob   | 32  |
 | Joe   | 35  |
 | Jenny | 31  |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.dedupeargs.md)

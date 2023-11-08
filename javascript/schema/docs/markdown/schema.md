@@ -8,7 +8,7 @@
 
 |  Enumeration | Description |
 |  --- | --- |
-|  [BinStrategy](./schema.binstrategy.md) |  |
+|  [BinStrategy](./schema.binstrategy.md) | Describes the binning technique to use. See numpy for detailed definitions: https://numpy.org/doc/stable/reference/generated/numpy.histogram\_bin\_edges.html |
 |  [BooleanComparisonOperator](./schema.booleancomparisonoperator.md) |  |
 |  [BooleanOperator](./schema.booleanoperator.md) |  |
 |  [CodebookStrategy](./schema.codebookstrategy.md) |  |
@@ -19,15 +19,15 @@
 |  [DateComparisonOperator](./schema.datecomparisonoperator.md) |  |
 |  [ErrorCode](./schema.errorcode.md) |  |
 |  [FieldAggregateOperation](./schema.fieldaggregateoperation.md) | This is the subset of aggregate functions that can operate on a single field so we don't accommodate additional args. See https://uwdata.github.io/arquero/api/op\#aggregate-functions |
-|  [FilterCompareType](./schema.filtercomparetype.md) |  |
+|  [FilterCompareType](./schema.filtercomparetype.md) | Indicates the comparison type used for a filter operation. This is done on a row-by-row basis. |
 |  [JoinStrategy](./schema.joinstrategy.md) |  |
 |  [KnownProfile](./schema.knownprofile.md) |  |
 |  [KnownRel](./schema.knownrel.md) |  |
 |  [MathOperator](./schema.mathoperator.md) |  |
 |  [MergeStrategy](./schema.mergestrategy.md) |  |
 |  [NumericComparisonOperator](./schema.numericcomparisonoperator.md) |  |
-|  [ParseType](./schema.parsetype.md) | This is a subset of data types available for parsing operations |
-|  [SetOp](./schema.setop.md) |  |
+|  [ParseType](./schema.parsetype.md) | This is a subset of data types available for parsing operations. |
+|  [SetOp](./schema.setop.md) | Indicates the type of set operation to perform across two collections. |
 |  [SortDirection](./schema.sortdirection.md) |  |
 |  [StringComparisonOperator](./schema.stringcomparisonoperator.md) |  |
 |  [VariableNature](./schema.variablenature.md) | Describes the semantic shape of a variable. This has particular effect on how we display and compare data, such as using line charts for continuous versus bar charts for categorical. This mostly applies to numeric variables, but strings for instance can be categorical. |

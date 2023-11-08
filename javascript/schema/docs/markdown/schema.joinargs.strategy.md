@@ -4,6 +4,8 @@
 
 ## JoinArgs.strategy property
 
+Type of join to perform
+
 <b>Signature:</b>
 
 ```typescript

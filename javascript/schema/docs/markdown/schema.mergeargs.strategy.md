@@ -4,6 +4,8 @@
 
 ## MergeArgs.strategy property
 
+Strategy to use for merging the input columns
+
 <b>Signature:</b>
 
 ```typescript

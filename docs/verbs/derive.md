@@ -17,3 +17,5 @@ Performs math operations across two columns to create a new combined column.
 | 224    |
 | 188    |
 | 354    |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.deriveargs.md)

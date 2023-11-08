@@ -16,5 +16,5 @@ export interface OnehotArgs extends InputColumnArgs
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [prefix?](./schema.onehotargs.prefix.md) |  | string | <i>(Optional)</i> Optional prefixes for the output column names |
-|  [preserveSource?](./schema.onehotargs.preservesource.md) |  | boolean | <i>(Optional)</i> |
+|  [preserveSource?](./schema.onehotargs.preservesource.md) |  | boolean | <i>(Optional)</i> Keep the original columns (default is to remove source columns). |
 

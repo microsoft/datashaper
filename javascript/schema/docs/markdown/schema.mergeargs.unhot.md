@@ -4,6 +4,8 @@
 
 ## MergeArgs.unhot property
 
+Indicates that columns should be "unhot" before merging. In other words, replace all 1s with the column name, and 0s with undefined.
+
 <b>Signature:</b>
 
 ```typescript

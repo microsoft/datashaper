@@ -15,5 +15,5 @@ export interface JoinArgs extends JoinArgsBase
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [strategy?](./schema.joinargs.strategy.md) |  | [JoinStrategy](./schema.joinstrategy.md) | <i>(Optional)</i> |
+|  [strategy?](./schema.joinargs.strategy.md) |  | [JoinStrategy](./schema.joinstrategy.md) | <i>(Optional)</i> Type of join to perform |
 

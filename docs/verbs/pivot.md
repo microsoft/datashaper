@@ -22,3 +22,5 @@ Performs an inverse of the [fold](./fold.md) operation, aggregating output value
 | id  | sales |
 | --- | ----- |
 | 7   | 793   |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.pivotargs.md)

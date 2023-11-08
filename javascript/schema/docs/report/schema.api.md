@@ -37,14 +37,12 @@ export interface Bin {
 // @public (undocumented)
 export interface BinArgs extends InputColumnArgs, OutputColumnArgs {
     clamped?: boolean;
-    // (undocumented)
     fixedcount?: number;
     fixedwidth?: number;
     max?: number;
     min?: number;
     nice?: boolean;
     printRange?: boolean;
-    // (undocumented)
     strategy: BinStrategy;
 }
 
@@ -56,7 +54,7 @@ export interface BinarizeArgs extends FilterArgs, OutputColumnArgs {
 
 // Warning: (ae-missing-release-tag) "BinStrategy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export enum BinStrategy {
     // (undocumented)
     Auto = "auto",
@@ -82,7 +80,6 @@ export enum BinStrategy {
 //
 // @public (undocumented)
 export interface BooleanArgs extends InputColumnListArgs, OutputColumnArgs {
-    // (undocumented)
     operator: BooleanOperator;
 }
 
@@ -149,11 +146,8 @@ export interface CodebookSchema extends ResourceSchema {
 //
 // @public (undocumented)
 export enum CodebookStrategy {
-    // (undocumented)
     DataTypeAndMapping = "data type and mapping",
-    // (undocumented)
     DataTypeOnly = "data type only",
-    // (undocumented)
     MappingOnly = "mapping only"
 }
 
@@ -175,12 +169,9 @@ export interface Constraints {
 //
 // @public (undocumented)
 export interface ConvertArgs extends InputColumnArgs, OutputColumnArgs {
-    // (undocumented)
     delimiter?: string;
-    // (undocumented)
     formatPattern?: string;
     radix?: number;
-    // (undocumented)
     type: ParseType;
 }
 
@@ -218,7 +209,6 @@ export function createWorkflowSchemaObject(input: FactoryInput<WorkflowSchema>):
 //
 // @public (undocumented)
 export interface Criterion {
-    // (undocumented)
     operator: NumericComparisonOperator | StringComparisonOperator | BooleanComparisonOperator | DateComparisonOperator;
     type: FilterCompareType;
     value?: Value;
@@ -351,7 +341,6 @@ export type DedupeArgs = Partial<InputColumnListArgs>;
 export interface DeriveArgs extends OutputColumnArgs {
     column1: string;
     column2: string;
-    // (undocumented)
     operator: MathOperator;
 }
 
@@ -369,9 +358,7 @@ export interface DualInput extends BasicInput {
 //
 // @public (undocumented)
 export interface EncodeDecodeArgs {
-    // (undocumented)
     codebook: CodebookSchema;
-    // (undocumented)
     strategy: CodebookStrategy;
 }
 
@@ -379,7 +366,6 @@ export interface EncodeDecodeArgs {
 //
 // @public (undocumented)
 export interface EraseArgs extends InputColumnArgs {
-    // (undocumented)
     value: Value;
 }
 
@@ -435,39 +421,22 @@ export interface Field extends Named {
 //
 // @public
 export enum FieldAggregateOperation {
-    // (undocumented)
     Any = "any",
-    // (undocumented)
     Count = "count",
-    // (undocumented)
     CountDistinct = "distinct",
-    // (undocumented)
     CreateArray = "array_agg",
-    // (undocumented)
     CreateArrayDistinct = "array_agg_distinct",
-    // (undocumented)
     Invalid = "invalid",
-    // (undocumented)
     Max = "max",
-    // (undocumented)
     Mean = "mean",
-    // (undocumented)
     Median = "median",
-    // (undocumented)
     Min = "min",
-    // (undocumented)
     Mode = "mode",
-    // (undocumented)
     Product = "product",
-    // (undocumented)
     StandardDeviation = "stdev",
-    // (undocumented)
     StandardDeviationPopulation = "stdevp",
-    // (undocumented)
     Sum = "sum",
-    // (undocumented)
     Valid = "valid",
-    // (undocumented)
     Variance = "variance"
 }
 
@@ -512,19 +481,15 @@ export interface FillArgs extends OutputColumnArgs {
 //
 // @public (undocumented)
 export interface FilterArgs extends InputColumnArgs {
-    // (undocumented)
     criteria: Criterion[];
-    // (undocumented)
     logical?: BooleanOperator;
 }
 
 // Warning: (ae-missing-release-tag) "FilterCompareType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export enum FilterCompareType {
-    // (undocumented)
     Column = "column",
-    // (undocumented)
     Value = "value"
 }
 
@@ -552,7 +517,6 @@ export interface ImputeArgs extends InputColumnArgs {
 // @public (undocumented)
 export interface InputColumnArgs {
     column: string;
-    // (undocumented)
     dataType?: DataType;
 }
 
@@ -560,7 +524,6 @@ export interface InputColumnArgs {
 //
 // @public
 export interface InputColumnListArgs {
-    // (undocumented)
     columns: string[];
 }
 
@@ -583,7 +546,6 @@ export interface InputKeyValueArgs {
 //
 // @public (undocumented)
 export interface JoinArgs extends JoinArgsBase {
-    // (undocumented)
     strategy?: JoinStrategy;
 }
 
@@ -692,13 +654,9 @@ export enum MathOperator {
 // @public (undocumented)
 export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
     delimiter?: string;
-    // (undocumented)
     prefix?: string;
-    // (undocumented)
     preserveSource?: boolean;
-    // (undocumented)
     strategy: MergeStrategy;
-    // (undocumented)
     unhot?: boolean;
 }
 
@@ -706,13 +664,9 @@ export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
 //
 // @public (undocumented)
 export enum MergeStrategy {
-    // (undocumented)
     Concat = "concat",
-    // (undocumented)
     CreateArray = "array",
-    // (undocumented)
     FirstOneWins = "first one wins",
-    // (undocumented)
     LastOneWins = "last one wins"
 }
 
@@ -752,7 +706,6 @@ export enum NumericComparisonOperator {
 // @public (undocumented)
 export interface OnehotArgs extends InputColumnArgs {
     prefix?: string;
-    // (undocumented)
     preserveSource?: boolean;
 }
 
@@ -767,9 +720,7 @@ export interface OrderbyArgs {
 //
 // @public (undocumented)
 export interface OrderbyInstruction {
-    // (undocumented)
     column: string;
-    // (undocumented)
     direction?: SortDirection;
 }
 
@@ -805,16 +756,11 @@ export const ParserOptionsDefaults: ParserOptions;
 //
 // @public
 export enum ParseType {
-    // (undocumented)
     Array = "array",
-    // (undocumented)
     Boolean = "boolean",
-    // (undocumented)
     Date = "date",
     Decimal = "float",
-    // (undocumented)
     Integer = "int",
-    // (undocumented)
     String = "string"
 }
 
@@ -822,7 +768,6 @@ export enum ParseType {
 //
 // @public (undocumented)
 export interface PivotArgs extends InputKeyValueArgs {
-    // (undocumented)
     operation: FieldAggregateOperation;
 }
 
@@ -903,15 +848,11 @@ export type SelectArgs = InputColumnListArgs;
 
 // Warning: (ae-missing-release-tag) "SetOp" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export enum SetOp {
-    // (undocumented)
     Concat = "concat",
-    // (undocumented)
     Difference = "difference",
-    // (undocumented)
     Intersect = "intersect",
-    // (undocumented)
     Union = "union"
 }
 
@@ -931,7 +872,6 @@ export enum SortDirection {
 export interface SpreadArgs extends InputColumnArgs {
     delimiter?: string;
     onehot?: boolean;
-    // (undocumented)
     preserveSource?: boolean;
     // (undocumented)
     to: string[];
@@ -1151,7 +1091,6 @@ export type UnfoldArgs = InputKeyValueArgs;
 export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
     // (undocumented)
     prefix?: string;
-    // (undocumented)
     preserveSource?: boolean;
 }
 
@@ -1301,7 +1240,6 @@ export enum Verb {
 //
 // @public (undocumented)
 export interface WindowArgs extends InputColumnArgs, OutputColumnArgs {
-    // (undocumented)
     operation: WindowFunction;
 }
 

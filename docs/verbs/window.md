@@ -52,3 +52,5 @@ Performs window operations on table columns. Normally the table should be [group
 | 2   | 1     | 1      |
 | 2   | 11    | 1      |
 | 2   | 18    | 1      |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.windowargs.md)

@@ -15,5 +15,5 @@ export interface WindowArgs extends InputColumnArgs, OutputColumnArgs
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [operation](./schema.windowargs.operation.md) |  | [WindowFunction](./schema.windowfunction.md) |  |
+|  [operation](./schema.windowargs.operation.md) |  | [WindowFunction](./schema.windowfunction.md) | Window function to apply to the column. |
 

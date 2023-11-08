@@ -4,6 +4,8 @@
 
 ## MergeArgs.preserveSource property
 
+Keep the original columns (default is to remove source columns).
+
 <b>Signature:</b>
 
 ```typescript

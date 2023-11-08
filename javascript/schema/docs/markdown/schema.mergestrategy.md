@@ -14,8 +14,8 @@ export declare enum MergeStrategy
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  Concat | <code>&quot;concat&quot;</code> |  |
-|  CreateArray | <code>&quot;array&quot;</code> |  |
-|  FirstOneWins | <code>&quot;first one wins&quot;</code> |  |
-|  LastOneWins | <code>&quot;last one wins&quot;</code> |  |
+|  Concat | <code>&quot;concat&quot;</code> | Concat all values into a string |
+|  CreateArray | <code>&quot;array&quot;</code> | Concat all values into an array |
+|  FirstOneWins | <code>&quot;first one wins&quot;</code> | Use the first valid value found in the list |
+|  LastOneWins | <code>&quot;last one wins&quot;</code> | Use the last valid value found in the list |
 

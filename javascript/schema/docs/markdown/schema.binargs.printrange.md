@@ -4,7 +4,7 @@
 
 ## BinArgs.printRange property
 
-If true, the range for each bin will be printed as the cell value instead of the truncated numeric value. This is useful for treating the
+If true, the range for each bin will be printed as the cell value instead of the truncated numeric value.
 
 <b>Signature:</b>
 

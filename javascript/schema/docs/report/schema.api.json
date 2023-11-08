@@ -416,7 +416,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!BinArgs#fixedcount:member",
-              "docComment": "",
+              "docComment": "/**\n * Fixed number of bins. Note that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary - this means there is always one extra bin for the max value when using fixed count.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -524,7 +524,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!BinArgs#nice:member",
-              "docComment": "/**\n * Fixed number of bins. Note that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary - this means there is always one extra bin for the max value when using fixed count.\n */\n",
+              "docComment": "/**\n * Indicates whether bins should be rounded in a readable human-friendly way.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -551,7 +551,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!BinArgs#printRange:member",
-              "docComment": "/**\n * If true, the range for each bin will be printed as the cell value instead of the truncated numeric value. This is useful for treating the\n */\n",
+              "docComment": "/**\n * If true, the range for each bin will be printed as the cell value instead of the truncated numeric value.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -578,7 +578,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!BinArgs#strategy:member",
-              "docComment": "",
+              "docComment": "/**\n * Binning technique to use.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -661,7 +661,7 @@
         {
           "kind": "Enum",
           "canonicalReference": "@datashaper/schema!BinStrategy:enum",
-          "docComment": "",
+          "docComment": "/**\n * Describes the binning technique to use. See numpy for detailed definitions: https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -898,7 +898,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!BooleanArgs#operator:member",
-              "docComment": "",
+              "docComment": "/**\n * Boolean comparison type to apply across the list of input column values\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1115,7 +1115,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!BooleanOperator.NAND:member",
-              "docComment": "/**\n * Any number conditions can match but not all of them for the result to be true\n */\n",
+              "docComment": "/**\n * Any number of conditions can match but not all of them for the result to be true\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1178,7 +1178,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!BooleanOperator.XNOR:member",
-              "docComment": "/**\n * Every pairwise comparison must two true or two false to be true\n */\n",
+              "docComment": "/**\n * Every pairwise comparison must be two `true` or two `false` to be true\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1501,7 +1501,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!CodebookStrategy.DataTypeAndMapping:member",
-              "docComment": "",
+              "docComment": "/**\n * Apply both data type and mapping for each column, per the codebook definition\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1522,7 +1522,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!CodebookStrategy.DataTypeOnly:member",
-              "docComment": "",
+              "docComment": "/**\n * Only parse data types for each column, per the codebook definition\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1543,7 +1543,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!CodebookStrategy.MappingOnly:member",
-              "docComment": "",
+              "docComment": "/**\n * Only apply mappings for each column, per the codebook definition\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1831,7 +1831,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!ConvertArgs#delimiter:member",
-              "docComment": "",
+              "docComment": "/**\n * Delimiter to use for identifying decimals when converting strings to numbers.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1858,7 +1858,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!ConvertArgs#formatPattern:member",
-              "docComment": "",
+              "docComment": "/**\n * Format string to use when converting strings to dates. Follows strptime format.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1885,7 +1885,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!ConvertArgs#radix:member",
-              "docComment": "/**\n * Optional radix to use for parsing strings into ints\n */\n",
+              "docComment": "/**\n * Radix to use for parsing strings into ints\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1912,7 +1912,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!ConvertArgs#type:member",
-              "docComment": "",
+              "docComment": "/**\n * Output type to convert the column values to.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -2289,7 +2289,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!Criterion#operator:member",
-              "docComment": "",
+              "docComment": "/**\n * Filter operator to execute. Note the correct operator for the column data type must be used.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3703,7 +3703,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!DeriveArgs#operator:member",
-              "docComment": "",
+              "docComment": "/**\n * Math operation to perform row-by-row on the two columns\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3829,7 +3829,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!EncodeDecodeArgs#codebook:member",
-              "docComment": "",
+              "docComment": "/**\n * Codebook to apply to the table.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3857,7 +3857,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!EncodeDecodeArgs#strategy:member",
-              "docComment": "",
+              "docComment": "/**\n * Strategy for applying the codebook to the table.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3911,7 +3911,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!EraseArgs#value:member",
-              "docComment": "",
+              "docComment": "/**\n * Value to match and erase (set to undefined) in the column\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4579,7 +4579,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!FieldAggregateOperation.Any:member",
-              "docComment": "",
+              "docComment": "/**\n * Select any value. Implementation-dependent - this could be random, the first found, etc.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4600,7 +4600,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!FieldAggregateOperation.Count:member",
-              "docComment": "",
+              "docComment": "/**\n * Count the number of values\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4621,7 +4621,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!FieldAggregateOperation.CountDistinct:member",
-              "docComment": "",
+              "docComment": "/**\n * Count the number of unique values\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4642,7 +4642,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!FieldAggregateOperation.CreateArray:member",
-              "docComment": "",
+              "docComment": "/**\n * Collect all of the values into an array\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4663,7 +4663,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!FieldAggregateOperation.CreateArrayDistinct:member",
-              "docComment": "",
+              "docComment": "/**\n * Collect all of the unique values into an array\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4684,7 +4684,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!FieldAggregateOperation.Invalid:member",
-              "docComment": "",
+              "docComment": "/**\n * Count only the valid values\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4705,7 +4705,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!FieldAggregateOperation.Max:member",
-              "docComment": "",
+              "docComment": "/**\n * Find the max value\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4726,7 +4726,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!FieldAggregateOperation.Mean:member",
-              "docComment": "",
+              "docComment": "/**\n * Compute the mean of the values\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4747,7 +4747,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!FieldAggregateOperation.Median:member",
-              "docComment": "",
+              "docComment": "/**\n * Compute the median of the values\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4768,7 +4768,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!FieldAggregateOperation.Min:member",
-              "docComment": "",
+              "docComment": "/**\n * Find the min value\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4789,7 +4789,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!FieldAggregateOperation.Mode:member",
-              "docComment": "",
+              "docComment": "/**\n * Compute the mode of the values\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4810,7 +4810,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!FieldAggregateOperation.Product:member",
-              "docComment": "",
+              "docComment": "/**\n * Compute the product of the values\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4831,7 +4831,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!FieldAggregateOperation.StandardDeviation:member",
-              "docComment": "",
+              "docComment": "/**\n * Compute the standard deviation of the values\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4852,7 +4852,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!FieldAggregateOperation.StandardDeviationPopulation:member",
-              "docComment": "",
+              "docComment": "/**\n * Compute the population standard deviation of the values\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4873,7 +4873,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!FieldAggregateOperation.Sum:member",
-              "docComment": "",
+              "docComment": "/**\n * Sum the values\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4894,7 +4894,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!FieldAggregateOperation.Valid:member",
-              "docComment": "",
+              "docComment": "/**\n * Count only the valid (non-null, non-error) values\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4915,7 +4915,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!FieldAggregateOperation.Variance:member",
-              "docComment": "",
+              "docComment": "/**\n * Compute the variance of the values\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -5500,7 +5500,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!FillArgs#value:member",
-              "docComment": "/**\n * Value to fill in the new column\n */\n",
+              "docComment": "/**\n * Value to fill in the new column. All rows will receive this value.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -5559,7 +5559,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!FilterArgs#criteria:member",
-              "docComment": "",
+              "docComment": "/**\n * Filter criteria to apply to the column.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -5591,7 +5591,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!FilterArgs#logical:member",
-              "docComment": "",
+              "docComment": "/**\n * Boolean operator to apply to the criteria if more than one.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -5627,7 +5627,7 @@
         {
           "kind": "Enum",
           "canonicalReference": "@datashaper/schema!FilterCompareType:enum",
-          "docComment": "",
+          "docComment": "/**\n * Indicates the comparison type used for a filter operation. This is done on a row-by-row basis.\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -5641,7 +5641,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!FilterCompareType.Column:member",
-              "docComment": "",
+              "docComment": "/**\n * The comparison value is the value from the same row in another column\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -5662,7 +5662,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!FilterCompareType.Value:member",
-              "docComment": "",
+              "docComment": "/**\n * The comparison value is a literal value\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -5842,7 +5842,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!InputColumnArgs#column:member",
-              "docComment": "/**\n * Name of the input column for columnar operations.\n */\n",
+              "docComment": "/**\n * Name of the input column for columnar operations\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -5869,7 +5869,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!InputColumnArgs#dataType:member",
-              "docComment": "",
+              "docComment": "/**\n * Expected data type for values in the column\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -5914,7 +5914,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!InputColumnListArgs#columns:member",
-              "docComment": "",
+              "docComment": "/**\n * List of input columns for operations that work across multiple columns\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -6087,7 +6087,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!JoinArgs#strategy:member",
-              "docComment": "",
+              "docComment": "/**\n * Type of join to perform\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -6815,7 +6815,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!MergeArgs#delimiter:member",
-              "docComment": "/**\n * This is only necessary if mergeStrategy.Concat is used. If it is not supplied, the values are just mashed together.\n */\n",
+              "docComment": "/**\n * Delimiter to use when merging columns into a string. This is only necessary if MergeStrategy.Concat is used. If it is not supplied, the values are just mashed together.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -6842,7 +6842,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!MergeArgs#prefix:member",
-              "docComment": "",
+              "docComment": "/**\n * Prefix to strip from column names when using unhot (only relevant if columns were originally onehot encoded with a prefix).\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -6869,7 +6869,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!MergeArgs#preserveSource:member",
-              "docComment": "",
+              "docComment": "/**\n * Keep the original columns (default is to remove source columns).\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -6896,7 +6896,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!MergeArgs#strategy:member",
-              "docComment": "",
+              "docComment": "/**\n * Strategy to use for merging the input columns\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -6924,7 +6924,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!MergeArgs#unhot:member",
-              "docComment": "",
+              "docComment": "/**\n * Indicates that columns should be \"unhot\" before merging. In other words, replace all 1s with the column name, and 0s with undefined.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -6977,7 +6977,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!MergeStrategy.Concat:member",
-              "docComment": "",
+              "docComment": "/**\n * Concat all values into a string\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -6998,7 +6998,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!MergeStrategy.CreateArray:member",
-              "docComment": "",
+              "docComment": "/**\n * Concat all values into an array\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -7019,7 +7019,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!MergeStrategy.FirstOneWins:member",
-              "docComment": "",
+              "docComment": "/**\n * Use the first valid value found in the list\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -7040,7 +7040,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!MergeStrategy.LastOneWins:member",
-              "docComment": "",
+              "docComment": "/**\n * Use the last valid value found in the list\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -7395,7 +7395,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!OnehotArgs#preserveSource:member",
-              "docComment": "",
+              "docComment": "/**\n * Keep the original columns (default is to remove source columns).\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -7493,7 +7493,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!OrderbyInstruction#column:member",
-              "docComment": "",
+              "docComment": "/**\n * Name of the column to order by\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -7520,7 +7520,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!OrderbyInstruction#direction:member",
-              "docComment": "",
+              "docComment": "/**\n * Direction to order by\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -7905,7 +7905,7 @@
         {
           "kind": "Enum",
           "canonicalReference": "@datashaper/schema!ParseType:enum",
-          "docComment": "/**\n * This is a subset of data types available for parsing operations\n */\n",
+          "docComment": "/**\n * This is a subset of data types available for parsing operations.\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -7919,7 +7919,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!ParseType.Array:member",
-              "docComment": "",
+              "docComment": "/**\n * Type is an array of values.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -7940,7 +7940,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!ParseType.Boolean:member",
-              "docComment": "",
+              "docComment": "/**\n * Type is a binary boolean (true/false)\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -7961,7 +7961,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!ParseType.Date:member",
-              "docComment": "",
+              "docComment": "/**\n * Type is a date\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -7982,7 +7982,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!ParseType.Decimal:member",
-              "docComment": "/**\n * Arquero has a parse_float and parse_int. While both are a 'number' in JavaScript, the distinction allows users to control how a string is interpreted.\n */\n",
+              "docComment": "/**\n * Type is a decimal (floating point number). Note that in JavaScript integers and decimals are both represented as \"number\", but the distinction is helpful for formatting/display and understanding user intent.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -8003,7 +8003,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!ParseType.Integer:member",
-              "docComment": "",
+              "docComment": "/**\n * Type is an integer (whole number)\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -8024,7 +8024,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!ParseType.String:member",
-              "docComment": "",
+              "docComment": "/**\n * Type is a string of text.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -8070,7 +8070,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!PivotArgs#operation:member",
-              "docComment": "",
+              "docComment": "/**\n * Aggregate/rollup operation to perform when doing the pivot.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -8874,7 +8874,7 @@
         {
           "kind": "Enum",
           "canonicalReference": "@datashaper/schema!SetOp:enum",
-          "docComment": "",
+          "docComment": "/**\n * Indicates the type of set operation to perform across two collections.\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -8888,7 +8888,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!SetOp.Concat:member",
-              "docComment": "",
+              "docComment": "/**\n * Concatenate the two collections together\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -8909,7 +8909,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!SetOp.Difference:member",
-              "docComment": "",
+              "docComment": "/**\n * Return the difference of the two collections\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -8930,7 +8930,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!SetOp.Intersect:member",
-              "docComment": "",
+              "docComment": "/**\n * Return the intersection of the two collections\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -8951,7 +8951,7 @@
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!SetOp.Union:member",
-              "docComment": "",
+              "docComment": "/**\n * Return the union of the two collections\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -9109,7 +9109,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!SpreadArgs#preserveSource:member",
-              "docComment": "",
+              "docComment": "/**\n * Keep the original columns (default is to remove source columns).\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -11087,7 +11087,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!UnhotArgs#preserveSource:member",
-              "docComment": "",
+              "docComment": "/**\n * Keep the original columns (default is to remove source columns).\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -12425,7 +12425,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!WindowArgs#operation:member",
-              "docComment": "",
+              "docComment": "/**\n * Window function to apply to the column.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

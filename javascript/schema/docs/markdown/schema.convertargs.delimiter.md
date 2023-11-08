@@ -4,6 +4,8 @@
 
 ## ConvertArgs.delimiter property
 
+Delimiter to use for identifying decimals when converting strings to numbers.
+
 <b>Signature:</b>
 
 ```typescript

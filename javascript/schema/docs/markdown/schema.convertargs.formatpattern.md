@@ -4,6 +4,8 @@
 
 ## ConvertArgs.formatPattern property
 
+Format string to use when converting strings to dates. Follows strptime format.
+
 <b>Signature:</b>
 
 ```typescript

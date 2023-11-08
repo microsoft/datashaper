@@ -15,9 +15,9 @@ export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [delimiter?](./schema.mergeargs.delimiter.md) |  | string | <i>(Optional)</i> This is only necessary if mergeStrategy.Concat is used. If it is not supplied, the values are just mashed together. |
-|  [prefix?](./schema.mergeargs.prefix.md) |  | string | <i>(Optional)</i> |
-|  [preserveSource?](./schema.mergeargs.preservesource.md) |  | boolean | <i>(Optional)</i> |
-|  [strategy](./schema.mergeargs.strategy.md) |  | [MergeStrategy](./schema.mergestrategy.md) |  |
-|  [unhot?](./schema.mergeargs.unhot.md) |  | boolean | <i>(Optional)</i> |
+|  [delimiter?](./schema.mergeargs.delimiter.md) |  | string | <i>(Optional)</i> Delimiter to use when merging columns into a string. This is only necessary if MergeStrategy.Concat is used. If it is not supplied, the values are just mashed together. |
+|  [prefix?](./schema.mergeargs.prefix.md) |  | string | <i>(Optional)</i> Prefix to strip from column names when using unhot (only relevant if columns were originally onehot encoded with a prefix). |
+|  [preserveSource?](./schema.mergeargs.preservesource.md) |  | boolean | <i>(Optional)</i> Keep the original columns (default is to remove source columns). |
+|  [strategy](./schema.mergeargs.strategy.md) |  | [MergeStrategy](./schema.mergestrategy.md) | Strategy to use for merging the input columns |
+|  [unhot?](./schema.mergeargs.unhot.md) |  | boolean | <i>(Optional)</i> Indicates that columns should be "unhot" before merging. In other words, replace all 1s with the column name, and 0s with undefined. |
 

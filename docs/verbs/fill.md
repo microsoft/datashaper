@@ -17,3 +17,5 @@ Creates a new output column and fills it with a fixed value.
 | 1   | hi     |
 | 2   | hi     |
 | 3   | hi     |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.fillargs.md)

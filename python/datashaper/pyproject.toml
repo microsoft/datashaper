@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "datashaper"
-version = "0.0.13"
+version = "0.0.15"
 description = "This project provides a collection of utilities for doing lightweight data wrangling."
 authors = [
     "Nathan Evans <naevans@microsoft.com>",
@@ -13,7 +13,6 @@ readme = "README.md"
 python = ">=3.8,<4"
 pandas = "^1.4.1"
 jsonschema = "^4.5.1"
-rich = "^13.6.0"
 
 [tool.poetry.group.dev.dependencies]
 bandit = "^1.7.4"

@@ -4,6 +4,8 @@
 
 ## BooleanArgs.operator property
 
+Boolean comparison type to apply across the list of input column values
+
 <b>Signature:</b>
 
 ```typescript

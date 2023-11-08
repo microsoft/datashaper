@@ -4,6 +4,8 @@
 
 ## BinStrategy enum
 
+Describes the binning technique to use. See numpy for detailed definitions: https://numpy.org/doc/stable/reference/generated/numpy.histogram\_bin\_edges.html
+
 <b>Signature:</b>
 
 ```typescript

@@ -14,6 +14,6 @@ export interface EncodeDecodeArgs
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [codebook](./schema.encodedecodeargs.codebook.md) |  | [CodebookSchema](./schema.codebookschema.md) |  |
-|  [strategy](./schema.encodedecodeargs.strategy.md) |  | [CodebookStrategy](./schema.codebookstrategy.md) |  |
+|  [codebook](./schema.encodedecodeargs.codebook.md) |  | [CodebookSchema](./schema.codebookschema.md) | Codebook to apply to the table. |
+|  [strategy](./schema.encodedecodeargs.strategy.md) |  | [CodebookStrategy](./schema.codebookstrategy.md) | Strategy for applying the codebook to the table. |
 

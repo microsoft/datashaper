@@ -14,7 +14,7 @@ export declare enum CodebookStrategy
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  DataTypeAndMapping | <code>&quot;data type and mapping&quot;</code> |  |
-|  DataTypeOnly | <code>&quot;data type only&quot;</code> |  |
-|  MappingOnly | <code>&quot;mapping only&quot;</code> |  |
+|  DataTypeAndMapping | <code>&quot;data type and mapping&quot;</code> | Apply both data type and mapping for each column, per the codebook definition |
+|  DataTypeOnly | <code>&quot;data type only&quot;</code> | Only parse data types for each column, per the codebook definition |
+|  MappingOnly | <code>&quot;mapping only&quot;</code> | Only apply mappings for each column, per the codebook definition |
 

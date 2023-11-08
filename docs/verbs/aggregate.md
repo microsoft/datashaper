@@ -18,3 +18,5 @@ Combines a [groupby](./groupby.md) with a [rollup](./rollup.md) to support all-i
 | --- | ------ |
 | 1   | 25     |
 | 2   | 30     |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.aggregateargs.md)
