@@ -52,7 +52,7 @@ export interface InputColumnArgs {
 	 */
 	column: string
 	/**
-	 * Expected data ttpe for values in the column
+	 * Expected data type for values in the column
 	 */
 	dataType?: DataType
 }
@@ -372,7 +372,7 @@ export enum BinStrategy {
 
 export interface BinArgs extends InputColumnArgs, OutputColumnArgs {
 	/**
-	 * Binning techinique to use.
+	 * Binning technique to use.
 	 */
 	strategy: BinStrategy
 	/**
@@ -450,7 +450,7 @@ export interface DeriveArgs extends OutputColumnArgs {
 	 */
 	column2: string
 	/**
-	 * Math opertion to perform row-by-row on the two columns
+	 * Math operation to perform row-by-row on the two columns
 	 */
 	operator: MathOperator
 }
