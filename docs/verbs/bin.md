@@ -67,3 +67,5 @@ You may supply a fixed min/max to set the outer bin boundaries. By default, if d
 | 10  |
 | 20  |
 | 20  |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.binargs.md)

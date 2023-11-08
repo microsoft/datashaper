@@ -4,6 +4,8 @@
 
 ## OrderbyInstruction.column property
 
+Name of the column to order by
+
 <b>Signature:</b>
 
 ```typescript

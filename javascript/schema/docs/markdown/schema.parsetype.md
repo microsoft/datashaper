@@ -4,7 +4,7 @@
 
 ## ParseType enum
 
-This is a subset of data types available for parsing operations
+This is a subset of data types available for parsing operations.
 
 <b>Signature:</b>
 
@@ -16,10 +16,10 @@ export declare enum ParseType
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  Array | <code>&quot;array&quot;</code> |  |
-|  Boolean | <code>&quot;boolean&quot;</code> |  |
-|  Date | <code>&quot;date&quot;</code> |  |
-|  Decimal | <code>&quot;float&quot;</code> | Arquero has a parse\_float and parse\_int. While both are a 'number' in JavaScript, the distinction allows users to control how a string is interpreted. |
-|  Integer | <code>&quot;int&quot;</code> |  |
-|  String | <code>&quot;string&quot;</code> |  |
+|  Array | <code>&quot;array&quot;</code> | Type is an array of values. |
+|  Boolean | <code>&quot;boolean&quot;</code> | Type is a binary boolean (true/false) |
+|  Date | <code>&quot;date&quot;</code> | Type is a date |
+|  Decimal | <code>&quot;float&quot;</code> | Type is a decimal (floating point number). Note that in JavaScript integers and decimals are both represented as "number", but the distinction is helpful for formatting/display and understanding user intent. |
+|  Integer | <code>&quot;int&quot;</code> | Type is an integer (whole number) |
+|  String | <code>&quot;string&quot;</code> | Type is a string of text. |
 

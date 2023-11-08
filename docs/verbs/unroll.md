@@ -18,3 +18,5 @@ Unrolls array-valued cells into new rows. Similar to [spread](./spread.md), but 
 | 2   | 1      |
 | 2   | 11     |
 | 2   | 18     |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.unrollargs.md)

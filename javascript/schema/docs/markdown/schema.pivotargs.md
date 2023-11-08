@@ -15,5 +15,5 @@ export interface PivotArgs extends InputKeyValueArgs
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [operation](./schema.pivotargs.operation.md) |  | [FieldAggregateOperation](./schema.fieldaggregateoperation.md) |  |
+|  [operation](./schema.pivotargs.operation.md) |  | [FieldAggregateOperation](./schema.fieldaggregateoperation.md) | Aggregate/rollup operation to perform when doing the pivot. |
 

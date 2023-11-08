@@ -54,3 +54,4 @@ Additional options:
 | Bill  |        | Williams | Bill Williams |
 |       | Colin  | Jeeves   | Colin Jeeves  |
 
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.mergeargs.md)

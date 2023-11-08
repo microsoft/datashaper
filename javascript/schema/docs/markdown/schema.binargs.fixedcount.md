@@ -4,6 +4,8 @@
 
 ## BinArgs.fixedcount property
 
+Fixed number of bins. Note that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary - this means there is always one extra bin for the max value when using fixed count.
+
 <b>Signature:</b>
 
 ```typescript

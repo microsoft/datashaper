@@ -15,6 +15,6 @@ export interface FilterArgs extends InputColumnArgs
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [criteria](./schema.filterargs.criteria.md) |  | [Criterion](./schema.criterion.md)<!-- -->\[\] |  |
-|  [logical?](./schema.filterargs.logical.md) |  | [BooleanOperator](./schema.booleanoperator.md) | <i>(Optional)</i> |
+|  [criteria](./schema.filterargs.criteria.md) |  | [Criterion](./schema.criterion.md)<!-- -->\[\] | Filter criteria to apply to the column. |
+|  [logical?](./schema.filterargs.logical.md) |  | [BooleanOperator](./schema.booleanoperator.md) | <i>(Optional)</i> Boolean operator to apply to the criteria if more than one. |
 

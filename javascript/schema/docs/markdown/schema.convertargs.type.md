@@ -4,6 +4,8 @@
 
 ## ConvertArgs.type property
 
+Output type to convert the column values to.
+
 <b>Signature:</b>
 
 ```typescript

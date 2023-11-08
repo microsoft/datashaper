@@ -1,0 +1,3 @@
+# tables
+
+This package contains a number of data processing functions and utilities for working with tables. This includes importing/parsing, applying codebooks, computing column statistics, etc. The core internal transport format used for tables within DataShaper is Arquero. Importantly, our file readers align with Python/pandas to ensure we have processing parity for client and server implementations of our pipelines.

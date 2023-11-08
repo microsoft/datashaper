@@ -30,3 +30,5 @@ Note: if you need to split categorical data into binarized columns, use [onehot]
 | 0   |
 | 1   |
 | 1   |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.binarizeargs.md)

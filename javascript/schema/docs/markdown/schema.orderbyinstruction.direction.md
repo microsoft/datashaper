@@ -4,6 +4,8 @@
 
 ## OrderbyInstruction.direction property
 
+Direction to order by
+
 <b>Signature:</b>
 
 ```typescript

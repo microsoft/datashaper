@@ -20,3 +20,5 @@ Takes a list of input columns and folds them into a new pair of `[key, value]` c
 | name | Joe   |
 | id   | 3     |
 | name | Jenny |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.foldargs.md)

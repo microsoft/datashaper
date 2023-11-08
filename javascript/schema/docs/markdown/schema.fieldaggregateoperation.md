@@ -16,21 +16,21 @@ export declare enum FieldAggregateOperation
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  Any | <code>&quot;any&quot;</code> |  |
-|  Count | <code>&quot;count&quot;</code> |  |
-|  CountDistinct | <code>&quot;distinct&quot;</code> |  |
-|  CreateArray | <code>&quot;array_agg&quot;</code> |  |
-|  CreateArrayDistinct | <code>&quot;array_agg_distinct&quot;</code> |  |
-|  Invalid | <code>&quot;invalid&quot;</code> |  |
-|  Max | <code>&quot;max&quot;</code> |  |
-|  Mean | <code>&quot;mean&quot;</code> |  |
-|  Median | <code>&quot;median&quot;</code> |  |
-|  Min | <code>&quot;min&quot;</code> |  |
-|  Mode | <code>&quot;mode&quot;</code> |  |
-|  Product | <code>&quot;product&quot;</code> |  |
-|  StandardDeviation | <code>&quot;stdev&quot;</code> |  |
-|  StandardDeviationPopulation | <code>&quot;stdevp&quot;</code> |  |
-|  Sum | <code>&quot;sum&quot;</code> |  |
-|  Valid | <code>&quot;valid&quot;</code> |  |
-|  Variance | <code>&quot;variance&quot;</code> |  |
+|  Any | <code>&quot;any&quot;</code> | Select any value. Implementation-dependent - this could be random, the first found, etc. |
+|  Count | <code>&quot;count&quot;</code> | Count the number of values |
+|  CountDistinct | <code>&quot;distinct&quot;</code> | Count the number of unique values |
+|  CreateArray | <code>&quot;array_agg&quot;</code> | Collect all of the values into an array |
+|  CreateArrayDistinct | <code>&quot;array_agg_distinct&quot;</code> | Collect all of the unique values into an array |
+|  Invalid | <code>&quot;invalid&quot;</code> | Count only the valid values |
+|  Max | <code>&quot;max&quot;</code> | Find the max value |
+|  Mean | <code>&quot;mean&quot;</code> | Compute the mean of the values |
+|  Median | <code>&quot;median&quot;</code> | Compute the median of the values |
+|  Min | <code>&quot;min&quot;</code> | Find the min value |
+|  Mode | <code>&quot;mode&quot;</code> | Compute the mode of the values |
+|  Product | <code>&quot;product&quot;</code> | Compute the product of the values |
+|  StandardDeviation | <code>&quot;stdev&quot;</code> | Compute the standard deviation of the values |
+|  StandardDeviationPopulation | <code>&quot;stdevp&quot;</code> | Compute the population standard deviation of the values |
+|  Sum | <code>&quot;sum&quot;</code> | Sum the values |
+|  Valid | <code>&quot;valid&quot;</code> | Count only the valid (non-null, non-error) values |
+|  Variance | <code>&quot;variance&quot;</code> | Compute the variance of the values |
 

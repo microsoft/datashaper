@@ -20,3 +20,5 @@ Reverses a [fold](./fold.md) operation. This is similar to a [pivot](./pivot.md)
 | 1   | Bob   |
 | 2   | Joe   |
 | 3   | Jenny |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.unfoldargs.md)

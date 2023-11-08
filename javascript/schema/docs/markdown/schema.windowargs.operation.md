@@ -4,6 +4,8 @@
 
 ## WindowArgs.operation property
 
+Window function to apply to the column.
+
 <b>Signature:</b>
 
 ```typescript

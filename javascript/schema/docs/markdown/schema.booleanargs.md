@@ -15,5 +15,5 @@ export interface BooleanArgs extends InputColumnListArgs, OutputColumnArgs
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [operator](./schema.booleanargs.operator.md) |  | [BooleanOperator](./schema.booleanoperator.md) |  |
+|  [operator](./schema.booleanargs.operator.md) |  | [BooleanOperator](./schema.booleanoperator.md) | Boolean comparison type to apply across the list of input column values |
 

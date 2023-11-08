@@ -17,3 +17,5 @@ Clears cell values that match a specific value. The opposite of [impute](./imput
 | 1   | Bob  |
 | 2   | Joe  |
 | 3   |      |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.eraseargs.md)

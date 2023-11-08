@@ -20,7 +20,7 @@ For boolean _comparison_ operators, use the [binarize](./binarize.md) verb.
 - NOR (not OR): no values can be `true`
 - NAND (not AND): any values can be `true` but not _all_ can
 - XOR (exclusive OR): every pairwise comparison must contain one `true` and one `false` value
-- XNOR (not exclusive OR): Every pairwise comparison must two `true` or two `false` to be `true`
+- XNOR (not exclusive OR): Every pairwise comparison must be two `true` or two `false` to be `true`
 
 Note that in formal boolean algebra some operators expect exactly two input values. For data wrangling convenience we allow any number of input values and have worded the definitions above accordingly. Because real-world data also often has missing data that represent unknown values, our boolean logic mimics the [pandas approach](https://pandas.pydata.org/pandas-docs/stable/user_guide/boolean.html) and uses [three-valued logic](https://en.wikipedia.org/wiki/Three-valued_logic).
 
@@ -86,3 +86,5 @@ Note that in formal boolean algebra some operators expect exactly two input valu
 | 0      |
 | 0      |
 | 1      |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.booleanargs.md)

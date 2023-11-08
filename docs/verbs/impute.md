@@ -21,3 +21,5 @@ Fills in any invalid values with a specified value. Invalid values include NaN, 
 | 3   | Doe   |
 | 4   | Jenny |
 | 5   | Doe   |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.imputeargs.md)

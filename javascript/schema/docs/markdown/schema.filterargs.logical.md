@@ -4,6 +4,8 @@
 
 ## FilterArgs.logical property
 
+Boolean operator to apply to the criteria if more than one.
+
 <b>Signature:</b>
 
 ```typescript

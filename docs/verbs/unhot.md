@@ -20,3 +20,5 @@ Additional options:
 | --- | --------- |
 | 1   | Microsoft |
 | 2   | Bing      |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.unhotargs.md)

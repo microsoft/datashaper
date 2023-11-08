@@ -15,5 +15,5 @@ export interface FillArgs extends OutputColumnArgs
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [value](./schema.fillargs.value.md) |  | [Value](./schema.value.md) | Value to fill in the new column |
+|  [value](./schema.fillargs.value.md) |  | [Value](./schema.value.md) | Value to fill in the new column. All rows will receive this value. |
 

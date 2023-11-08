@@ -16,5 +16,5 @@ export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [prefix?](./schema.unhotargs.prefix.md) |  | string | <i>(Optional)</i> |
-|  [preserveSource?](./schema.unhotargs.preservesource.md) |  | boolean | <i>(Optional)</i> |
+|  [preserveSource?](./schema.unhotargs.preservesource.md) |  | boolean | <i>(Optional)</i> Keep the original columns (default is to remove source columns). |
 

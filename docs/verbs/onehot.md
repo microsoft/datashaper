@@ -25,3 +25,5 @@ An optional prefix can be supplied for the output columns to help differentiate 
 | sofa  | 0     | 0    | 1    |
 | sofa  | 0     | 0    | 1    |
 | lamp  | 0     | 1    | 0    |
+
+[API docs](https://github.com/microsoft/datashaper/blob/main/javascript/schema/docs/markdown/schema.onehotargs.md)
