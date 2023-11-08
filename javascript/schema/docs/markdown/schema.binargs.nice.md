@@ -4,7 +4,7 @@
 
 ## BinArgs.nice property
 
-Fixed number of bins. Note that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary - this means there is always one extra bin for the max value when using fixed count.
+Indicates whether bins should be rounded in a readable human-friendly way.
 
 <b>Signature:</b>
 

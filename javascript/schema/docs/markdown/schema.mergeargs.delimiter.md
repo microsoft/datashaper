@@ -4,7 +4,7 @@
 
 ## MergeArgs.delimiter property
 
-This is only necessary if mergeStrategy.Concat is used. If it is not supplied, the values are just mashed together.
+Delimiter to use when merging columns into a string. This is only necessary if MergeStrategy.Concat is used. If it is not supplied, the values are just mashed together.
 
 <b>Signature:</b>
 

@@ -4,6 +4,8 @@
 
 ## Criterion.operator property
 
+Filter operator to execute. Note the correct operator for the column data type must be used.
+
 <b>Signature:</b>
 
 ```typescript

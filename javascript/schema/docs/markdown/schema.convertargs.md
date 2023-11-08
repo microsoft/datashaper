@@ -15,8 +15,8 @@ export interface ConvertArgs extends InputColumnArgs, OutputColumnArgs
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [delimiter?](./schema.convertargs.delimiter.md) |  | string | <i>(Optional)</i> |
-|  [formatPattern?](./schema.convertargs.formatpattern.md) |  | string | <i>(Optional)</i> |
-|  [radix?](./schema.convertargs.radix.md) |  | number | <i>(Optional)</i> Optional radix to use for parsing strings into ints |
-|  [type](./schema.convertargs.type.md) |  | [ParseType](./schema.parsetype.md) |  |
+|  [delimiter?](./schema.convertargs.delimiter.md) |  | string | <i>(Optional)</i> Delimiter to use for identifying decimals when converting strings to numbers. |
+|  [formatPattern?](./schema.convertargs.formatpattern.md) |  | string | <i>(Optional)</i> Format string to use when converting strings to dates. Follows strptime format. |
+|  [radix?](./schema.convertargs.radix.md) |  | number | <i>(Optional)</i> Radix to use for parsing strings into ints |
+|  [type](./schema.convertargs.type.md) |  | [ParseType](./schema.parsetype.md) | Output type to convert the column values to. |
 

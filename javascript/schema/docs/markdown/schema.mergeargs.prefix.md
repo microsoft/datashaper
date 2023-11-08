@@ -4,6 +4,8 @@
 
 ## MergeArgs.prefix property
 
+Prefix to strip from column names when using unhot (only relevant if columns were originally onehot encoded with a prefix).
+
 <b>Signature:</b>
 
 ```typescript

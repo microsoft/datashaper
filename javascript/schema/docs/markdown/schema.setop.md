@@ -4,6 +4,8 @@
 
 ## SetOp enum
 
+Indicates the type of set operation to perform across two collections.
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,8 +16,8 @@ export declare enum SetOp
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  Concat | <code>&quot;concat&quot;</code> |  |
-|  Difference | <code>&quot;difference&quot;</code> |  |
-|  Intersect | <code>&quot;intersect&quot;</code> |  |
-|  Union | <code>&quot;union&quot;</code> |  |
+|  Concat | <code>&quot;concat&quot;</code> | Concatenate the two collections together |
+|  Difference | <code>&quot;difference&quot;</code> | Return the difference of the two collections |
+|  Intersect | <code>&quot;intersect&quot;</code> | Return the intersection of the two collections |
+|  Union | <code>&quot;union&quot;</code> | Return the union of the two collections |
 

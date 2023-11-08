@@ -15,9 +15,9 @@ export declare enum BooleanOperator
 |  Member | Value | Description |
 |  --- | --- | --- |
 |  AND | <code>&quot;and&quot;</code> | All conditions must match for the result to be true |
-|  NAND | <code>&quot;nand&quot;</code> | Any number conditions can match but not all of them for the result to be true |
+|  NAND | <code>&quot;nand&quot;</code> | Any number of conditions can match but not all of them for the result to be true |
 |  NOR | <code>&quot;nor&quot;</code> | None of the conditions can match for the result to be true |
 |  OR | <code>&quot;or&quot;</code> | Any match sets the result to true |
-|  XNOR | <code>&quot;xnor&quot;</code> | Every pairwise comparison must two true or two false to be true |
+|  XNOR | <code>&quot;xnor&quot;</code> | Every pairwise comparison must be two <code>true</code> or two <code>false</code> to be true |
 |  XOR | <code>&quot;xor&quot;</code> | Every pairwise comparison must contain one true and one false value |
 

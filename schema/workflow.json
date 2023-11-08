@@ -4,11 +4,12 @@
         "AggregateArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "groupby": {
                     "description": "Column to group by",
@@ -55,13 +56,15 @@
                     "type": "boolean"
                 },
                 "column": {
-                    "description": "Name of the input column for columnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "fixedcount": {
+                    "description": "Fixed number of bins.\nNote that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary -\nthis means there is always one extra bin for the max value when using fixed count.",
                     "type": "number"
                 },
                 "fixedwidth": {
@@ -77,15 +80,16 @@
                     "type": "number"
                 },
                 "nice": {
-                    "description": "Fixed number of bins.\nNote that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary -\nthis means there is always one extra bin for the max value when using fixed count.",
+                    "description": "Indicates whether bins should be rounded in a readable human-friendly way.",
                     "type": "boolean"
                 },
                 "printRange": {
-                    "description": "If true, the range for each bin will be printed as the cell value instead of the truncated numeric value.\nThis is useful for treating the",
+                    "description": "If true, the range for each bin will be printed as the cell value instead of the truncated numeric value.",
                     "type": "boolean"
                 },
                 "strategy": {
-                    "$ref": "#/definitions/BinStrategy"
+                    "$ref": "#/definitions/BinStrategy",
+                    "description": "Binning technique to use."
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
@@ -95,6 +99,7 @@
             "type": "object"
         },
         "BinStrategy": {
+            "description": "Describes the binning technique to use.\nSee numpy for detailed definitions: https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html",
             "enum": [
                 "auto",
                 "doane",
@@ -111,20 +116,23 @@
         "BinarizeArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "criteria": {
+                    "description": "Filter criteria to apply to the column.",
                     "items": {
                         "$ref": "#/definitions/Criterion"
                     },
                     "type": "array"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "logical": {
-                    "$ref": "#/definitions/BooleanOperator"
+                    "$ref": "#/definitions/BooleanOperator",
+                    "description": "Boolean operator to apply to the criteria if more than one."
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
@@ -136,13 +144,15 @@
         "BooleanArgs": {
             "properties": {
                 "columns": {
+                    "description": "List of input columns for operations that work across multiple columns",
                     "items": {
                         "type": "string"
                     },
                     "type": "array"
                 },
                 "operator": {
-                    "$ref": "#/definitions/BooleanOperator"
+                    "$ref": "#/definitions/BooleanOperator",
+                    "description": "Boolean comparison type to apply across the list of input column values"
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
@@ -288,20 +298,23 @@
         "ConvertArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "delimiter": {
+                    "description": "Delimiter to use for identifying decimals when converting strings to numbers.",
                     "type": "string"
                 },
                 "formatPattern": {
+                    "description": "Format string to use when converting strings to dates. Follows strptime format.",
                     "type": "string"
                 },
                 "radix": {
-                    "description": "Optional radix to use for parsing strings into ints",
+                    "description": "Radix to use for parsing strings into ints",
                     "type": "number"
                 },
                 "to": {
@@ -309,7 +322,8 @@
                     "type": "string"
                 },
                 "type": {
-                    "$ref": "#/definitions/ParseType"
+                    "$ref": "#/definitions/ParseType",
+                    "description": "Output type to convert the column values to."
                 }
             },
             "type": "object"
@@ -317,6 +331,7 @@
         "Criterion": {
             "properties": {
                 "operator": {
+                    "description": "Filter operator to execute. Note the correct operator for the column data type must be used.",
                     "enum": [
                         "!=",
                         "<",
@@ -378,7 +393,8 @@
                     "type": "string"
                 },
                 "operator": {
-                    "$ref": "#/definitions/MathOperator"
+                    "$ref": "#/definitions/MathOperator",
+                    "description": "Math operation to perform row-by-row on the two columns"
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
@@ -410,10 +426,12 @@
         "EncodeDecodeArgs": {
             "properties": {
                 "codebook": {
-                    "$ref": "#/definitions/CodebookSchema"
+                    "$ref": "#/definitions/CodebookSchema",
+                    "description": "Codebook to apply to the table."
                 },
                 "strategy": {
-                    "$ref": "#/definitions/CodebookStrategy"
+                    "$ref": "#/definitions/CodebookStrategy",
+                    "description": "Strategy for applying the codebook to the table."
                 }
             },
             "type": "object"
@@ -421,14 +439,15 @@
         "EraseArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "value": {
-                    "description": "A cell/property value of any type."
+                    "description": "Value to match and erase (set to undefined) in the column"
                 }
             },
             "type": "object"
@@ -538,7 +557,7 @@
                     "type": "string"
                 },
                 "value": {
-                    "description": "Value to fill in the new column"
+                    "description": "Value to fill in the new column. All rows will receive this value."
                 }
             },
             "type": "object"
@@ -546,25 +565,29 @@
         "FilterArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "criteria": {
+                    "description": "Filter criteria to apply to the column.",
                     "items": {
                         "$ref": "#/definitions/Criterion"
                     },
                     "type": "array"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "logical": {
-                    "$ref": "#/definitions/BooleanOperator"
+                    "$ref": "#/definitions/BooleanOperator",
+                    "description": "Boolean operator to apply to the criteria if more than one."
                 }
             },
             "type": "object"
         },
         "FilterCompareType": {
+            "description": "Indicates the comparison type used for a filter operation.\nThis is done on a row-by-row basis.",
             "enum": [
                 "column",
                 "value"
@@ -574,6 +597,7 @@
         "FoldArgs": {
             "properties": {
                 "columns": {
+                    "description": "List of input columns for operations that work across multiple columns",
                     "items": {
                         "type": "string"
                     },
@@ -599,11 +623,12 @@
         "ImputeArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "value": {
                     "description": "Value to fill in empty cells"
@@ -614,11 +639,12 @@
         "InputColumnArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 }
             },
             "type": "object"
@@ -627,6 +653,7 @@
             "description": "Base interface for a number of operations that work on a column list.",
             "properties": {
                 "columns": {
+                    "description": "List of input columns for operations that work across multiple columns",
                     "items": {
                         "type": "string"
                     },
@@ -667,7 +694,8 @@
                     "type": "array"
                 },
                 "strategy": {
-                    "$ref": "#/definitions/JoinStrategy"
+                    "$ref": "#/definitions/JoinStrategy",
+                    "description": "Type of join to perform"
                 }
             },
             "type": "object"
@@ -687,6 +715,7 @@
         "LookupArgs": {
             "properties": {
                 "columns": {
+                    "description": "List of input columns for operations that work across multiple columns",
                     "items": {
                         "type": "string"
                     },
@@ -714,29 +743,34 @@
         "MergeArgs": {
             "properties": {
                 "columns": {
+                    "description": "List of input columns for operations that work across multiple columns",
                     "items": {
                         "type": "string"
                     },
                     "type": "array"
                 },
                 "delimiter": {
-                    "description": "This is only necessary if mergeStrategy.Concat is used.\nIf it is not supplied, the values are just mashed together.",
+                    "description": "Delimiter to use when merging columns into a string.\nThis is only necessary if MergeStrategy.Concat is used.\nIf it is not supplied, the values are just mashed together.",
                     "type": "string"
                 },
                 "prefix": {
+                    "description": "Prefix to strip from column names when using unhot (only relevant if columns were originally onehot encoded with a prefix).",
                     "type": "string"
                 },
                 "preserveSource": {
+                    "description": "Keep the original columns (default is to remove source columns).",
                     "type": "boolean"
                 },
                 "strategy": {
-                    "$ref": "#/definitions/MergeStrategy"
+                    "$ref": "#/definitions/MergeStrategy",
+                    "description": "Strategy to use for merging the input columns"
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
                     "type": "string"
                 },
                 "unhot": {
+                    "description": "Indicates that columns should be \"unhot\" before merging. In other words, replace all 1s with the column name, and 0s with undefined.",
                     "type": "boolean"
                 }
             },
@@ -754,17 +788,19 @@
         "OnehotArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "prefix": {
                     "description": "Optional prefixes for the output column names",
                     "type": "string"
                 },
                 "preserveSource": {
+                    "description": "Keep the original columns (default is to remove source columns).",
                     "type": "boolean"
                 }
             },
@@ -785,16 +821,18 @@
         "OrderbyInstruction": {
             "properties": {
                 "column": {
+                    "description": "Name of the column to order by",
                     "type": "string"
                 },
                 "direction": {
-                    "$ref": "#/definitions/SortDirection"
+                    "$ref": "#/definitions/SortDirection",
+                    "description": "Direction to order by"
                 }
             },
             "type": "object"
         },
         "ParseType": {
-            "description": "This is a subset of data types available for parsing operations",
+            "description": "This is a subset of data types available for parsing operations.",
             "enum": [
                 "array",
                 "boolean",
@@ -808,6 +846,7 @@
         "Partial<InputColumnListArgs>": {
             "properties": {
                 "columns": {
+                    "description": "List of input columns for operations that work across multiple columns",
                     "items": {
                         "type": "string"
                     },
@@ -823,7 +862,8 @@
                     "type": "string"
                 },
                 "operation": {
-                    "$ref": "#/definitions/FieldAggregateOperation"
+                    "$ref": "#/definitions/FieldAggregateOperation",
+                    "description": "Aggregate/rollup operation to perform when doing the pivot."
                 },
                 "value": {
                     "description": "Value column for the operation",
@@ -835,11 +875,12 @@
         "RecodeArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "mapping": {
                     "$ref": "#/definitions/Record<any,any>",
@@ -927,11 +968,12 @@
         "RollupArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "operation": {
                     "$ref": "#/definitions/FieldAggregateOperation",
@@ -971,11 +1013,12 @@
         "SpreadArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "delimiter": {
                     "description": "Delimiter to use when converting string cell values into an array with String.split",
@@ -986,6 +1029,7 @@
                     "type": "boolean"
                 },
                 "preserveSource": {
+                    "description": "Keep the original columns (default is to remove source columns).",
                     "type": "boolean"
                 },
                 "to": {
@@ -1830,6 +1874,7 @@
         "UnhotArgs": {
             "properties": {
                 "columns": {
+                    "description": "List of input columns for operations that work across multiple columns",
                     "items": {
                         "type": "string"
                     },
@@ -1839,6 +1884,7 @@
                     "type": "string"
                 },
                 "preserveSource": {
+                    "description": "Keep the original columns (default is to remove source columns).",
                     "type": "boolean"
                 },
                 "to": {
@@ -1926,14 +1972,16 @@
         "WindowArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "operation": {
-                    "$ref": "#/definitions/WindowFunction"
+                    "$ref": "#/definitions/WindowFunction",
+                    "description": "Window function to apply to the column."
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",

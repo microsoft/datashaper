@@ -15,5 +15,5 @@ export interface EraseArgs extends InputColumnArgs
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [value](./schema.eraseargs.value.md) |  | [Value](./schema.value.md) |  |
+|  [value](./schema.eraseargs.value.md) |  | [Value](./schema.value.md) | Value to match and erase (set to undefined) in the column |
 

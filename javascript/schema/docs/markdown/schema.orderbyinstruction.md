@@ -14,6 +14,6 @@ export interface OrderbyInstruction
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [column](./schema.orderbyinstruction.column.md) |  | string |  |
-|  [direction?](./schema.orderbyinstruction.direction.md) |  | [SortDirection](./schema.sortdirection.md) | <i>(Optional)</i> |
+|  [column](./schema.orderbyinstruction.column.md) |  | string | Name of the column to order by |
+|  [direction?](./schema.orderbyinstruction.direction.md) |  | [SortDirection](./schema.sortdirection.md) | <i>(Optional)</i> Direction to order by |
 

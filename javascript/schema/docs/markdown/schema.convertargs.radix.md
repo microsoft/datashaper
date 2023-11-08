@@ -4,7 +4,7 @@
 
 ## ConvertArgs.radix property
 
-Optional radix to use for parsing strings into ints
+Radix to use for parsing strings into ints
 
 <b>Signature:</b>
 

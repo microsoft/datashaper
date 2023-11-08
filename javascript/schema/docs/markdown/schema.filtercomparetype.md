@@ -4,6 +4,8 @@
 
 ## FilterCompareType enum
 
+Indicates the comparison type used for a filter operation. This is done on a row-by-row basis.
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,6 +16,6 @@ export declare enum FilterCompareType
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  Column | <code>&quot;column&quot;</code> |  |
-|  Value | <code>&quot;value&quot;</code> |  |
+|  Column | <code>&quot;column&quot;</code> | The comparison value is the value from the same row in another column |
+|  Value | <code>&quot;value&quot;</code> | The comparison value is a literal value |
 

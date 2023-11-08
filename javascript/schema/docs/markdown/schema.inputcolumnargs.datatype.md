@@ -4,6 +4,8 @@
 
 ## InputColumnArgs.dataType property
 
+Expected data type for values in the column
+
 <b>Signature:</b>
 
 ```typescript

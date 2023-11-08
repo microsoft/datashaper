@@ -4,6 +4,8 @@
 
 ## EncodeDecodeArgs.strategy property
 
+Strategy for applying the codebook to the table.
+
 <b>Signature:</b>
 
 ```typescript

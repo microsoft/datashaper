@@ -4,6 +4,8 @@
 
 ## PivotArgs.operation property
 
+Aggregate/rollup operation to perform when doing the pivot.
+
 <b>Signature:</b>
 
 ```typescript

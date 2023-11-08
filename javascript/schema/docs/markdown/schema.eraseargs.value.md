@@ -4,6 +4,8 @@
 
 ## EraseArgs.value property
 
+Value to match and erase (set to undefined) in the column
+
 <b>Signature:</b>
 
 ```typescript

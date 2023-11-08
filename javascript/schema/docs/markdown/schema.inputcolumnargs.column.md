@@ -4,7 +4,7 @@
 
 ## InputColumnArgs.column property
 
-Name of the input column for columnar operations.
+Name of the input column for columnar operations
 
 <b>Signature:</b>
 

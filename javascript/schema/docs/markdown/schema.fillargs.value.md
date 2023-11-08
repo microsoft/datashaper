@@ -4,7 +4,7 @@
 
 ## FillArgs.value property
 
-Value to fill in the new column
+Value to fill in the new column. All rows will receive this value.
 
 <b>Signature:</b>
 
