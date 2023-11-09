@@ -9,9 +9,12 @@ import type { ColumnTableStep } from '../util/factories.js'
 import { stepVerbFactory } from '../util/factories.js'
 import { escape, op } from 'arquero'
 
-export const replaceStep: ColumnTableStep<StringsReplaceArgs> = (input, { column, pattern, replacement, globalSearch, caseInsensitive, to }) => {
+export const replaceStep: ColumnTableStep<StringsReplaceArgs> = (
+	input,
+	{ column, pattern, replacement, globalSearch, caseInsensitive, to },
+) => {
 	const flags = `${globalSearch ? 'g' : ''}${caseInsensitive ? 'i' : ''}`
-    const regex = new RegExp(pattern, flags)
+	const regex = new RegExp(pattern, flags)
 	const fn = escape((d: any) => op.replace(d[column], regex, replacement))
 	return input.derive({ [to]: fn })
 }

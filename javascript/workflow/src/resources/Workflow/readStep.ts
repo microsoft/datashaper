@@ -7,6 +7,7 @@ import type { Verb } from '@datashaper/schema'
 
 import * as defaults from '../../verbs/defaults/index.js'
 import type { Step, StepInput } from './types.js'
+import get from 'lodash-es/get.js'
 
 // TEMP: this creates a more readable id by doing a simple increment for each verb type
 // since this is global it will not align across pipelines or tables.
@@ -38,11 +39,9 @@ export function readStep<T extends object | void | unknown = any>(
 	}
 
 	// each verb should have default verb-specific params defined, load them up and merge into the step
-	// note that scoped verbs will have a root and a sub-object in their name, check for this case
+	// note that scoped verbs will have a root and a sub-object in their name, so we steeltoe arbitrary depth
 	const factories = defaults as any
-	const [root, sub] = verb.split('.')
-	// rome-ignore lint/style/noNonNullAssertion: if the split has a second value, the first will be defined
-	const factory: () => Partial<T> = sub ? factories[root!][sub] : factories[root!]
+	const factory: () => Partial<T> = get(factories, verb)
 
 	if (!factory) {
 		throw new Error(`missing verb defaults [${verb}]`)

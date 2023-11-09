@@ -8,17 +8,15 @@ import type { TableContainer } from '@datashaper/tables'
 import type { Node } from '../../dataflow/index.js'
 import * as verbs from '../../verbs/index.js'
 import type { Step } from './types.js'
+import get from 'lodash-es/get.js'
 
 type NodeFactory = (id: string) => Node<TableContainer>
 
 export function createNode(step: Step): Node<TableContainer> {
-
 	const factories = verbs as any
-	// note that scoped verbs will have a root and a sub-object in their name, check for this case
-	const [root, sub] = step.verb.split('.')
-	// rome-ignore lint/style/noNonNullAssertion: if the split has a second value, the first will be defined
-	const factory: NodeFactory = sub ? factories[root!][sub] : factories[root!]
-	
+	// note that scoped verbs will have a root and a sub-object in their name, so we steeltoe arbitrary depth
+	const factory: NodeFactory = get(factories, step.verb)
+
 	if (!factory) {
 		throw new Error(`unknown verb ${step.verb}`)
 	}

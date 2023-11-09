@@ -1940,11 +1940,12 @@
         "StringsArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
@@ -1959,11 +1960,12 @@
                     "type": "boolean"
                 },
                 "column": {
-                    "description": "Name of the input column for columnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "globalSearch": {
                     "type": "boolean"

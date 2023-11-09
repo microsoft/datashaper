@@ -32,10 +32,11 @@ export const rollup = outputColumn
 export const select = inputColumnList
 export const unroll = inputColumnList
 export const window = outputColumn
+
 export const strings = {
-    replace: outputColumn,
-    lower: outputColumn,
-    upper: outputColumn,
+	replace: outputColumn,
+	lower: outputColumn,
+	upper: outputColumn,
 }
 
 export const decode = empty

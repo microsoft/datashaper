@@ -22,7 +22,18 @@ export const groupedColumnVerbs: GroupedVerbs[] = [
 	},
 	{
 		label: 'Transforms',
-		verbs: ['convert', 'erase', 'fill', 'impute', 'onehot', 'spread', 'recode', 'strings.replace', 'strings.lower', 'strings.upper'],
+		verbs: [
+			'convert',
+			'erase',
+			'fill',
+			'impute',
+			'onehot',
+			'spread',
+			'recode',
+			'strings.replace',
+			'strings.lower',
+			'strings.upper',
+		],
 	},
 ]
 
