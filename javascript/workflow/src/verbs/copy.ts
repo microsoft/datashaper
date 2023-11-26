@@ -8,10 +8,7 @@ import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 import { escape } from 'arquero'
 
-export const copyStep: ColumnTableStep<CopyArgs> = (
-	input,
-	{ column, to },
-) => {
+export const copyStep: ColumnTableStep<CopyArgs> = (input, { column, to }) => {
 	// eslint-disable-next-line
 	const func: object = escape((d: any) => {
 		return d[column]
@@ -21,4 +18,3 @@ export const copyStep: ColumnTableStep<CopyArgs> = (
 }
 
 export const copy = stepVerbFactory(copyStep)
-

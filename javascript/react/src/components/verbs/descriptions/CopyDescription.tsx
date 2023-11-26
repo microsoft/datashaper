@@ -8,8 +8,8 @@ import type { CopyArgs } from '@datashaper/schema'
 import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
 
-export const CopyDescription: React.FC<StepDescriptionProps<CopyArgs>> =
-	memo(function CopyDescription(props) {
+export const CopyDescription: React.FC<StepDescriptionProps<CopyArgs>> = memo(
+	function CopyDescription(props) {
 		const rows = useMemo(() => {
 			const {
 				step: { args },
@@ -18,8 +18,9 @@ export const CopyDescription: React.FC<StepDescriptionProps<CopyArgs>> =
 				{
 					before: 'test',
 					value: args.test,
-				}
+				},
 			]
 		}, [props])
 		return <VerbDescription {...props} rows={rows} />
-	})
+	},
+)
