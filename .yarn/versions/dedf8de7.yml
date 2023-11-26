@@ -1,0 +1,9 @@
+releases:
+  "@datashaper/react": major
+  "@datashaper/schema": major
+  "@datashaper/workflow": major
+
+declined:
+  - "@datashaper/app-framework"
+  - "@datashaper/tables"
+  - "@datashaper/webapp"
