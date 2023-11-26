@@ -68,6 +68,7 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	boolean: [Tags.InputTable, Tags.OutputColumn, Tags.InputColumnList],
 	concat: [Tags.InputTable, Tags.InputTableList, Tags.RowModifying],
 	convert: [Tags.InputTable, Tags.InputColumn],
+	copy: [Tags.InputTable, Tags.OutputColumn, Tags.InputColumn],
 	dedupe: [Tags.InputTable, Tags.RowModifying, Tags.InputColumnList],
 	derive: [Tags.InputTable, Tags.OutputColumn],
 	difference: [Tags.InputTable, Tags.InputTableList, Tags.RowModifying],

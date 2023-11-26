@@ -13,6 +13,7 @@ export enum Verb {
 	Boolean = 'boolean',
 	Concat = 'concat',
 	Convert = 'convert',
+	Copy = 'copy',
 	Dedupe = 'dedupe',
 	Derive = 'derive',
 	Difference = 'difference',
@@ -593,6 +594,8 @@ export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
 	 */
 	preserveSource?: boolean
 }
+
+export interface CopyArgs extends InputColumnArgs, OutputColumnArgs {}
 
 export interface OnehotArgs extends InputColumnArgs {
 	/**

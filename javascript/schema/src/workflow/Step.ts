@@ -14,6 +14,7 @@ import type {
 	BinarizeArgs,
 	BooleanArgs,
 	ConvertArgs,
+	CopyArgs,
 	DedupeArgs,
 	DeriveArgs,
 	EncodeDecodeArgs,
@@ -63,6 +64,7 @@ export type Step = StepJsonCommon &
 		| ({ verb: Verb.Boolean; args?: BooleanArgs } & BasicInput)
 		| ({ verb: Verb.Concat } & VariadicInput)
 		| ({ verb: Verb.Convert; args?: ConvertArgs } & BasicInput)
+		| ({ verb: Verb.Copy; args?: CopyArgs } & BasicInput)
 		| ({ verb: Verb.Dedupe; args?: DedupeArgs } & BasicInput)
 		| ({ verb: Verb.Derive; args?: DeriveArgs } & BasicInput)
 		| ({ verb: Verb.Difference } & VariadicInput)
