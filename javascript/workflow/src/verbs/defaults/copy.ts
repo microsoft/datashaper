@@ -5,6 +5,6 @@
 import type { CopyArgs } from '@datashaper/schema'
 import { outputColumn } from './outputColumn.js'
 
-export const copy = (): CopyArgs => ({
+export const copy = (): Omit<CopyArgs, 'column'> => ({
 	...outputColumn(),
 })

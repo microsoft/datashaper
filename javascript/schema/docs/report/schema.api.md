@@ -175,6 +175,12 @@ export interface ConvertArgs extends InputColumnArgs, OutputColumnArgs {
     type: ParseType;
 }
 
+// Warning: (ae-missing-release-tag) "CopyArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface CopyArgs extends InputColumnArgs, OutputColumnArgs {
+}
+
 // Warning: (ae-missing-release-tag) "createCodebookSchemaObject" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -898,6 +904,9 @@ export type Step = StepJsonCommon & (({
     verb: Verb.Convert;
     args?: ConvertArgs;
 } & BasicInput) | ({
+    verb: Verb.Copy;
+    args?: CopyArgs;
+} & BasicInput) | ({
     verb: Verb.Dedupe;
     args?: DedupeArgs;
 } & BasicInput) | ({
@@ -1137,6 +1146,8 @@ export enum Verb {
     Concat = "concat",
     // (undocumented)
     Convert = "convert",
+    // (undocumented)
+    Copy = "copy",
     // (undocumented)
     Decode = "decode",
     // (undocumented)

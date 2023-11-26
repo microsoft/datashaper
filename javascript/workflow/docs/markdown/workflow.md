@@ -91,6 +91,7 @@
 |  [boolean](./workflow.boolean.md) |  |
 |  [concat](./workflow.concat.md) |  |
 |  [convert](./workflow.convert.md) |  |
+|  [copy](./workflow.copy.md) |  |
 |  [decode](./workflow.decode.md) |  |
 |  [dedupe](./workflow.dedupe.md) |  |
 |  [dereference](./workflow.dereference.md) |  |

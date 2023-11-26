@@ -11,6 +11,7 @@ import type { BinarizeArgs } from '@datashaper/schema';
 import type { BooleanArgs } from '@datashaper/schema';
 import type { CodebookSchema } from '@datashaper/schema';
 import type { ConvertArgs } from '@datashaper/schema';
+import type { CopyArgs } from '@datashaper/schema';
 import { DataFormat } from '@datashaper/schema';
 import type { DataNature } from '@datashaper/schema';
 import type { DataOrientation } from '@datashaper/schema';
@@ -203,6 +204,11 @@ export interface Configurable<T = unknown> {
 //
 // @public (undocumented)
 export const convert: (id: string) => StepNode<TableContainer<unknown>, ConvertArgs>;
+
+// Warning: (ae-missing-release-tag) "copy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const copy: (id: string) => StepNode<TableContainer<unknown>, CopyArgs>;
 
 // Warning: (ae-missing-release-tag) "CopyWithPartial" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

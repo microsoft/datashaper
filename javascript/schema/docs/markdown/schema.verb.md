@@ -20,6 +20,7 @@ export declare enum Verb
 |  Boolean | <code>&quot;boolean&quot;</code> |  |
 |  Concat | <code>&quot;concat&quot;</code> |  |
 |  Convert | <code>&quot;convert&quot;</code> |  |
+|  Copy | <code>&quot;copy&quot;</code> |  |
 |  Decode | <code>&quot;decode&quot;</code> |  |
 |  Dedupe | <code>&quot;dedupe&quot;</code> |  |
 |  Derive | <code>&quot;derive&quot;</code> |  |
