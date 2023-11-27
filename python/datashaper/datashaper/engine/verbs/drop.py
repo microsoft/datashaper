@@ -6,22 +6,14 @@ from typing import List
 
 from ...table_store import TableContainer
 from .verb_input import VerbInput
+import pandas as pd
 
 
 def drop(
     input: VerbInput,
     columns: List[str],
 ):
-    filteredList: list[str] = []
-
     output = input.get_input()
-
-    for col in output.columns:
-        try:
-            columns.index(col)
-        except ValueError:
-            filteredList.append(col)
-
-    output = output[filteredList]
+    output = output.drop(columns=columns)
 
     return TableContainer(table=output)
