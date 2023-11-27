@@ -11,6 +11,7 @@ def copy(
     to: str,
     column: str,
 ):
-    input[to] = input[column]
+    output = input.get_input()
+    output[to] = output[column]
 
-    return TableContainer(table=input)
+    return TableContainer(table=output)
