@@ -57,6 +57,7 @@ export const groupedTableVerbs: GroupedVerbs[] = [
 			'unorder',
 			'sample',
 			'select',
+			'drop',
 		],
 	},
 ]

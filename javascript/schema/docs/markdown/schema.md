@@ -125,6 +125,7 @@
 |  Type Alias | Description |
 |  --- | --- |
 |  [DedupeArgs](./schema.dedupeargs.md) |  |
+|  [DropArgs](./schema.dropargs.md) |  |
 |  [FactoryInput](./schema.factoryinput.md) |  |
 |  [GroupbyArgs](./schema.groupbyargs.md) |  |
 |  [Profile](./schema.profile.md) | Resources must have a profile, which is a key defining how it should be interpreted. Profiles are essentially shorthand for a schema URL. The core profiles for DataShaper are defined here, but any application can define one as a string. |

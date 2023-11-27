@@ -3780,6 +3780,32 @@
           ]
         },
         {
+          "kind": "TypeAlias",
+          "canonicalReference": "@datashaper/schema!DropArgs:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export type DropArgs = "
+            },
+            {
+              "kind": "Reference",
+              "text": "InputColumnListArgs",
+              "canonicalReference": "@datashaper/schema!InputColumnListArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "DropArgs",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
+        },
+        {
           "kind": "Interface",
           "canonicalReference": "@datashaper/schema!DualInput:interface",
           "docComment": "/**\n * Dual-input, single-output step I/O\n */\n",
@@ -9510,6 +9536,33 @@
             },
             {
               "kind": "Reference",
+              "text": "Verb.Drop",
+              "canonicalReference": "@datashaper/schema!Verb.Drop:member"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n    args?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "DropArgs",
+              "canonicalReference": "@datashaper/schema!DropArgs:type"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n} & "
+            },
+            {
+              "kind": "Reference",
+              "text": "BasicInput",
+              "canonicalReference": "@datashaper/schema!BasicInput:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ") | ({\n    verb: "
+            },
+            {
+              "kind": "Reference",
               "text": "Verb.Encode",
               "canonicalReference": "@datashaper/schema!Verb.Encode:member"
             },
@@ -10219,7 +10272,7 @@
           "name": "Step",
           "typeTokenRange": {
             "startIndex": 1,
-            "endIndex": 221
+            "endIndex": 227
           }
         },
         {
@@ -11585,6 +11638,27 @@
               },
               "releaseTag": "Public",
               "name": "Difference"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!Verb.Drop:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Drop = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"drop\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Drop"
             },
             {
               "kind": "EnumMember",

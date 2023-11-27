@@ -18,6 +18,7 @@ export enum Verb {
 	Derive = 'derive',
 	Difference = 'difference',
 	Decode = 'decode',
+	Drop = 'drop',
 	Encode = 'encode',
 	Erase = 'erase',
 	Fill = 'fill',
@@ -671,6 +672,8 @@ export interface SampleArgs {
 }
 
 export type SelectArgs = InputColumnListArgs
+
+export type DropArgs = InputColumnListArgs
 
 export interface SpreadArgs extends InputColumnArgs {
 	to: string[]

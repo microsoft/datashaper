@@ -49,6 +49,7 @@ const verb: Record<string, React.FC<StepFormProps<any>>> = {
 	derive: DeriveForm,
 	difference: SetOperationForm,
 	decode: EncodeDecodeForm,
+	drop: NoParametersForm,
 	encode: EncodeDecodeForm,
 	erase: EraseForm,
 	fill: FillForm,

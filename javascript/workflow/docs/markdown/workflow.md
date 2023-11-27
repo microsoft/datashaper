@@ -97,6 +97,7 @@
 |  [dereference](./workflow.dereference.md) |  |
 |  [derive](./workflow.derive.md) |  |
 |  [difference](./workflow.difference.md) |  |
+|  [drop](./workflow.drop.md) |  |
 |  [encode](./workflow.encode.md) |  |
 |  [erase](./workflow.erase.md) |  |
 |  [fill](./workflow.fill.md) |  |

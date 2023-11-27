@@ -25,6 +25,7 @@ export { unhot } from './unhot.js'
 export const aggregate = outputColumn
 export const dedupe = inputColumnList
 export const derive = outputColumn
+export const drop = inputColumnList
 export const erase = inputColumnList
 export const fill = outputColumn
 export const groupby = inputColumnList

@@ -49,6 +49,7 @@ const descriptions: Record<string, React.FC<StepDescriptionProps<any>>> = {
 	derive: DeriveDescription,
 	difference: SetOperationDescription,
 	decode: EncodeDecodeDescription,
+	drop: NoParametersDescription,
 	encode: EncodeDecodeDescription,
 	erase: EraseDescription,
 	fill: FillDescription,

@@ -1,0 +1,15 @@
+{
+	"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v2.json",
+	"steps": [
+		{
+			"verb": "drop",
+			"input": "companies",
+			"args": {
+				"columns": ["Name", "Employees", "US"]
+			},
+			"id": "expected"
+		}
+	],
+
+	"input": ["companies"]
+}

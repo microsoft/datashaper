@@ -350,6 +350,11 @@ export interface DeriveArgs extends OutputColumnArgs {
     operator: MathOperator;
 }
 
+// Warning: (ae-missing-release-tag) "DropArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type DropArgs = InputColumnListArgs;
+
 // Warning: (ae-missing-release-tag) "DualInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -918,6 +923,9 @@ export type Step = StepJsonCommon & (({
     verb: Verb.Decode;
     args?: EncodeDecodeArgs;
 } & BasicInput) | ({
+    verb: Verb.Drop;
+    args?: DropArgs;
+} & BasicInput) | ({
     verb: Verb.Encode;
     args?: EncodeDecodeArgs;
 } & BasicInput) | ({
@@ -1156,6 +1164,8 @@ export enum Verb {
     Derive = "derive",
     // (undocumented)
     Difference = "difference",
+    // (undocumented)
+    Drop = "drop",
     // (undocumented)
     Encode = "encode",
     // (undocumented)

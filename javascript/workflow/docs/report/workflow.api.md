@@ -399,6 +399,11 @@ export const derive: (id: string) => StepNode<TableContainer<unknown>, DeriveArg
 // @public (undocumented)
 export const difference: (id: string) => SetOperationNode<unknown>;
 
+// Warning: (ae-missing-release-tag) "drop" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const drop: (id: string) => StepNode<TableContainer<unknown>, InputColumnListArgs>;
+
 // Warning: (ae-missing-release-tag) "Emitter" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public

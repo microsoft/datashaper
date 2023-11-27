@@ -1304,6 +1304,28 @@
                         {
                             "properties": {
                                 "args": {
+                                    "$ref": "#/definitions/InputColumnListArgs"
+                                },
+                                "verb": {
+                                    "const": "drop",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
                                     "$ref": "#/definitions/EncodeDecodeArgs"
                                 },
                                 "verb": {

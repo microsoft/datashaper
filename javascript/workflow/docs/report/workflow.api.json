@@ -5732,6 +5732,55 @@
           }
         },
         {
+          "kind": "Variable",
+          "canonicalReference": "@datashaper/workflow!drop:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "drop: "
+            },
+            {
+              "kind": "Content",
+              "text": "(id: string) => import(\"../index.js\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "StepNode",
+              "canonicalReference": "@datashaper/workflow!StepNode:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<import(\"@datashaper/tables\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "TableContainer",
+              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<unknown>, import(\"@datashaper/schema\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "InputColumnListArgs",
+              "canonicalReference": "@datashaper/schema!InputColumnListArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "drop",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 8
+          }
+        },
+        {
           "kind": "Interface",
           "canonicalReference": "@datashaper/workflow!Emitter:interface",
           "docComment": "/**\n * A data emitter for a type of output\n */\n",
