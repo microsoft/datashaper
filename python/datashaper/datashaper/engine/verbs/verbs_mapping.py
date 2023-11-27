@@ -12,9 +12,11 @@ from .binarize import binarize
 from .boolean import boolean
 from .concat import concat
 from .convert import convert
+from .copy import copy
 from .dedupe import dedupe
 from .derive import derive
 from .difference import difference
+from .drop import drop
 from .erase import erase
 from .fill import fill
 from .filter import filter
@@ -51,9 +53,11 @@ functions: dict[Verb, Callable] = {
     Verb.Boolean: boolean,
     Verb.Concat: concat,
     Verb.Convert: convert,
+    Verb.Copy: copy,
     Verb.Dedupe: dedupe,
     Verb.Derive: derive,
     Verb.Difference: difference,
+    Verb.Drop: drop,
     Verb.Erase: erase,
     Verb.Fill: fill,
     Verb.Filter: filter,
