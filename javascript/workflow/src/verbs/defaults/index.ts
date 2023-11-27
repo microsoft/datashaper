@@ -11,6 +11,7 @@ export { bin } from './bin.js'
 export { binarize } from './binarize.js'
 export { boolean } from './boolean.js'
 export { convert } from './convert.js'
+export { copy } from './copy.js'
 export { filter } from './filter.js'
 export { fold } from './fold.js'
 export { join } from './join.js'
@@ -24,6 +25,7 @@ export { unhot } from './unhot.js'
 export const aggregate = outputColumn
 export const dedupe = inputColumnList
 export const derive = outputColumn
+export const drop = inputColumnList
 export const erase = inputColumnList
 export const fill = outputColumn
 export const groupby = inputColumnList
