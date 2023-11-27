@@ -14,12 +14,14 @@ def drop(
 ):
     filteredList: list[str] = []
 
-    for col in input.columns:
+    output = input.get_input()
+
+    for col in output.columns:
         try:
             columns.index(col)
         except ValueError:
             filteredList.append(col)
 
-    input = input[filteredList]
+    output = output[filteredList]
 
-    return TableContainer(table=input)
+    return TableContainer(table=output)
