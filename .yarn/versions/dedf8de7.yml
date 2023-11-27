@@ -1,7 +1,7 @@
 releases:
-  "@datashaper/react": major
-  "@datashaper/schema": major
-  "@datashaper/workflow": major
+  "@datashaper/react": minor
+  "@datashaper/schema": minor
+  "@datashaper/workflow": minor
 
 declined:
   - "@datashaper/app-framework"
