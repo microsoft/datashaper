@@ -4,8 +4,6 @@
 #
 from typing import List
 
-import pandas as pd
-
 from ...table_store import TableContainer
 from .verb_input import VerbInput
 
