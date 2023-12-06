@@ -359,6 +359,38 @@
 			}
 		},
 		{
+			"verb": "strings.replace",
+			"input": {
+				"source": "companies"
+			},
+			"args": {
+				"column": "Name",
+				"to": "Replace",
+				"pattern": "le",
+				"replacement": "X"
+			}
+		},
+		{
+			"verb": "strings.lower",
+			"input": {
+				"source": "companies"
+			},
+			"args": {
+				"column": "Name",
+				"to": "Lower"
+			}
+		},
+		{
+			"verb": "strings.upper",
+			"input": {
+				"source": "companies"
+			},
+			"args": {
+				"column": "Name",
+				"to": "Upper"
+			}
+		},
+		{
 			"id": "unfold",
 			"verb": "unfold",
 			"input": "fold",
