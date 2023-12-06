@@ -20,6 +20,7 @@ export const StringsReplaceFormBase: React.FC<
 				label: 'Pattern',
 				type: FormInputType.Text,
 				current: step.args.pattern,
+				required: true,
 				onChange: (s, val) => {
 					s.args.pattern = val as string
 				},
@@ -28,6 +29,7 @@ export const StringsReplaceFormBase: React.FC<
 				label: 'Replacement',
 				type: FormInputType.Text,
 				current: step.args.replacement,
+				required: true,
 				onChange: (s, val) => {
 					s.args.replacement = val as string
 				},
