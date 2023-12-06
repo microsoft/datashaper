@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { Verb } from '@datashaper/schema'
+import type { Verb } from '@datashaper/schema'
 import type { Step } from '@datashaper/workflow'
 import type {
 	ICommandBarItemProps,
@@ -65,7 +65,7 @@ function getOverflowVerbItems(
 				key,
 				text: upperFirst(key),
 				data: { id },
-				disabled
+				disabled,
 			}
 			if (typeof value === 'string') {
 				item.key = value
@@ -88,7 +88,7 @@ function getOverflowVerbItems(
 			sectionProps: {
 				topDivider: true,
 				title: group.label,
-				items: walk(verbs, group?.alwaysEnabled ? false : disabled, onCallStep)
+				items: walk(verbs, group?.alwaysEnabled ? false : disabled, onCallStep),
 			},
 		}
 		return menu
