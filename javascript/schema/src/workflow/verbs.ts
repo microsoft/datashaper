@@ -37,9 +37,6 @@ export enum Verb {
 	Sample = 'sample',
 	Select = 'select',
 	Spread = 'spread',
-	StringsReplace = 'strings.replace',
-	StringsLower = 'strings.lower',
-	StringsUpper = 'strings.upper',
 	Unfold = 'unfold',
 	Ungroup = 'ungroup',
 	Unhot = 'unhot',
@@ -47,6 +44,10 @@ export enum Verb {
 	Unorder = 'unorder',
 	Unroll = 'unroll',
 	Window = 'window',
+
+	StringsReplace = 'strings.replace',
+	StringsLower = 'strings.lower',
+	StringsUpper = 'strings.upper',
 }
 
 export interface InputColumnArgs {

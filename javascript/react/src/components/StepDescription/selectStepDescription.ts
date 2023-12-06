@@ -90,7 +90,10 @@ const descriptions = {
 export function selectStepDescription(
 	step: Step,
 ): React.FC<StepDescriptionProps> {
-	const result: React.FC<StepDescriptionProps<any>> = get(descriptions, step.verb)
+	const result: React.FC<StepDescriptionProps<any>> = get(
+		descriptions,
+		step.verb,
+	)
 	if (!result) {
 		throw new Error(`could not find step with verb ${step?.verb}`)
 	}
