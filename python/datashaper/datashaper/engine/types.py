@@ -16,7 +16,6 @@ class Verb(Enum):
     Bin = "bin"
     Binarize = "binarize"
     Boolean = "boolean"
-    Chain = "chain"
     Concat = "concat"
     Convert = "convert"
     Dedupe = "dedupe"
@@ -25,7 +24,6 @@ class Verb(Enum):
     Erase = "erase"
     Fill = "fill"
     Filter = "filter"
-    FilterAggregateLookup = "filter-aggregate-lookup"
     Fold = "fold"
     Groupby = "groupby"
     Impute = "impute"
@@ -33,7 +31,6 @@ class Verb(Enum):
     Join = "join"
     Lookup = "lookup"
     Merge = "merge"
-    MultiBinarize = "multi-binarize"
     OneHot = "onehot"
     Orderby = "orderby"
     Pivot = "pivot"
@@ -54,8 +51,6 @@ class Verb(Enum):
     Unroll = "unroll"
     Window = "window"
 
-
-compound_verbs = {Verb.Chain, Verb.FilterAggregateLookup, Verb.MultiBinarize}
 
 
 class Bin:

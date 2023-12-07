@@ -6,6 +6,7 @@
 from typing import Callable
 
 from ..types import Verb
+from . import strings
 from .aggregate import aggregate
 from .bin import bin
 from .binarize import binarize
@@ -34,7 +35,6 @@ from .rollup import rollup
 from .sample import sample
 from .select import select
 from .spread import spread
-from .strings import lower, replace, upper
 from .unfold import unfold
 from .ungroup import ungroup
 from .unhot import unhot
@@ -73,9 +73,9 @@ functions: dict[Verb, Callable] = {
     Verb.Sample: sample,
     Verb.Select: select,
     Verb.Spread: spread,
-    Verb.StringsReplace: replace,
-    Verb.StringsLower: lower,
-    Verb.StringsUpper: upper,
+    Verb.StringsReplace: strings.replace,
+    Verb.StringsLower: strings.lower,
+    Verb.StringsUpper: strings.upper,
     Verb.Unfold: unfold,
     Verb.Ungroup: ungroup,
     Verb.Unhot: unhot,
