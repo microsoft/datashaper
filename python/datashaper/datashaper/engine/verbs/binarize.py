@@ -5,6 +5,8 @@
 
 from typing import List
 
+from datashaper.engine.verbs.verbs_mapping import verb
+
 from ...table_store import TableContainer
 from ..pandas.filter_df import filter_df
 from ..types import BooleanLogicalOperator, Criterion, FilterArgs, FilterCompareType
@@ -12,6 +14,7 @@ from .filter import _get_operator
 from .verb_input import VerbInput
 
 
+@verb(name="binarize")
 def binarize(
     input: VerbInput, to: str, column: str, criteria: List, logical: str = "or"
 ):

@@ -18,16 +18,15 @@ import pandas as pd
 
 from jsonschema import validate as validate_schema
 
-from .engine import Verb, VerbInput, functions
-from .execution import ExecutionNode, VerbDefinitions
-from .progress import (
-    NoopStatusReporter,
-    ProgressStatus,
-    StatusReporter,
-    StatusReportHandler,
-    VerbStatusReporter,
-)
-from .table_store import Table, TableContainer
+from datashaper.engine.verbs.verb_input import VerbInput
+from datashaper.engine.verbs.verbs_mapping import VerbManager
+from datashaper.execution.execution_node import ExecutionNode
+from datashaper.execution.types import VerbDefinitions
+from datashaper.progress.reporters.noop_status_reporter import NoopStatusReporter
+from datashaper.progress.reporters.status_reporter import StatusReporter
+from datashaper.progress.reporters.verb_status_reporter import VerbStatusReporter
+from datashaper.progress.types import ProgressStatus, StatusReportHandler
+from datashaper.table_store import Table, TableContainer
 
 
 # TODO: this won't work for a published package
@@ -60,7 +59,7 @@ class Workflow(Generic[Context]):
         input_path: Optional[str] = None,
         input_tables: Optional[dict[str, pd.DataFrame]] = None,
         schema_path: Optional[str] = SCHEMA_FILE,
-        verbs: Optional[dict[str, Callable]] = functions,
+        verbs: Optional[dict[str, Callable]] = None,
         # TODO: the current schema definition does not work in Python
         validate: bool = False,
         default_input: Optional[str] = DEFAULT_INPUT_NAME,
@@ -105,6 +104,9 @@ class Workflow(Generic[Context]):
         if input_tables is not None:
             for input, table in input_tables.items():
                 self.add_table(input, table)
+
+        if verbs is not None:
+            VerbManager.get().register_verbs(verbs)
 
         # Create the execution graph
         previous_step_id = None
@@ -184,14 +186,11 @@ class Workflow(Generic[Context]):
     @staticmethod
     def __get_verb_fn(verb: str, verbs: Optional[VerbDefinitions]) -> Callable:
         """Get the verb function from the name."""
-        try:
-            # try to find a built-in verb
-            return functions[Verb(verb)]
-        except ValueError:
-            # try to use a custom verb
-            if verbs is None or verb not in verbs:
-                raise ValueError(f"Verb {verb} not found in verbs")
-            return verbs[verb]
+        verbs_manager = VerbManager.get()
+        if verb in verbs_manager:
+            return verbs_manager[verb]
+        else:
+            raise ValueError(f"Verb {verb} not found in verbs")
 
     @staticmethod
     def __resolve_run_context(

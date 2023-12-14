@@ -5,10 +5,13 @@
 
 from typing import Union
 
+from datashaper.engine.verbs.verbs_mapping import verb
+
 from ...table_store import TableContainer
 from .verb_input import VerbInput
 
 
+@verb(name="fill")
 def fill(
     input: VerbInput,
     to: str,

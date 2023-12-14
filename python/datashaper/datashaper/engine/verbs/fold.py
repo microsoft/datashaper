@@ -5,10 +5,13 @@
 
 from typing import List, Tuple
 
+from datashaper.engine.verbs.verbs_mapping import verb
+
 from ...table_store import TableContainer
 from .verb_input import VerbInput
 
 
+@verb(name="fold")
 def fold(input: VerbInput, to: Tuple[str, str], columns: List[str]):
     input_table = input.get_input()
     output = input_table.copy()

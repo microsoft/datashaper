@@ -10,6 +10,8 @@ import pandas as pd
 
 from pandas.core.groupby import DataFrameGroupBy
 
+from datashaper.engine.verbs.verbs_mapping import verb
+
 from ...table_store import TableContainer
 from ..types import WindowFunction
 from .verb_input import VerbInput
@@ -56,6 +58,7 @@ __window_function_map = {
 }
 
 
+@verb(name="window")
 def window(input: VerbInput, column: str, to: str, operation: str):
     window_operation = WindowFunction(operation)
 

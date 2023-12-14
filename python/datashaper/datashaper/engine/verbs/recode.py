@@ -5,6 +5,8 @@
 
 from typing import Dict
 
+from datashaper.engine.verbs.verbs_mapping import verb
+
 from ...table_store import TableContainer
 from .verb_input import VerbInput
 
@@ -14,6 +16,7 @@ class RecodeMap(dict):
         return key
 
 
+@verb(name="recode")
 def recode(input: VerbInput, to: str, column: str, mapping: Dict):
     mapping = RecodeMap(mapping)
 

@@ -7,6 +7,8 @@ from typing import List
 
 import pandas as pd
 
+from datashaper.engine.verbs.verbs_mapping import verb
+
 from ...table_store import TableContainer
 from ..types import JoinStrategy
 from .verb_input import VerbInput
@@ -39,6 +41,7 @@ def __clean_result(strategy: JoinStrategy, result: pd.DataFrame, source: pd.Data
         return result.drop("_merge", axis=1)
 
 
+@verb(name="join")
 def join(
     input: VerbInput,
     on: List[str] = None,

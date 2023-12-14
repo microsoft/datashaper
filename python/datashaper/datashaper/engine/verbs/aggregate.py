@@ -5,6 +5,7 @@
 
 from typing import List
 
+from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
 
 from ..pandas.aggregate_mapping import aggregate_operation_mapping
@@ -12,6 +13,7 @@ from ..types import FieldAggregateOperation
 from .verb_input import VerbInput
 
 
+@verb(name="aggregate")
 def aggregate(
     input: VerbInput, to: str, groupby: List[str], column: str, operation: str
 ) -> TableContainer:
