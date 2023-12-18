@@ -10,7 +10,9 @@ import type {
 	IDetailsGroupDividerProps,
 	IDetailsListProps,
 	IDropdownOption,
+	IObjectWithKey,
 	IRenderFunction,
+	Selection,
 } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { CSSProperties } from 'react'
@@ -44,6 +46,8 @@ export type ColumnSelectFunction = (
 	evt?: React.MouseEvent<HTMLElement>,
 	column?: IColumn | undefined,
 ) => void
+
+export type RowSelectFunction = (selection: IObjectWithKey[]) => void
 
 /**
  * Available column statistics to show in the Arquero Details List
@@ -161,6 +165,14 @@ export interface ArqueroDetailsListProps
 	 * If you need custom behavior, use the built-in table-level onColumnHeaderClick and per-column onClick
 	 */
 	onColumnSelect?: ColumnSelectFunction
+
+	/**
+	 * Fires an event of type Selection with functions to retrieve.
+	 * If you need custom behavior, use the built-in table-level onColumnHeaderClick and per-column onClick
+	 */
+	onRowSelect?: RowSelectFunction
+
+	// selectedRow?: IObjectWithKey[]
 	/**
 	 * If array cells are displayed with a dropdown, this will fire when a value is selected.
 	 */
