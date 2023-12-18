@@ -13,10 +13,12 @@ export enum Verb {
 	Boolean = 'boolean',
 	Concat = 'concat',
 	Convert = 'convert',
+	Copy = 'copy',
 	Dedupe = 'dedupe',
 	Derive = 'derive',
 	Difference = 'difference',
 	Decode = 'decode',
+	Drop = 'drop',
 	Encode = 'encode',
 	Erase = 'erase',
 	Fill = 'fill',
@@ -598,6 +600,8 @@ export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
 	preserveSource?: boolean
 }
 
+export interface CopyArgs extends InputColumnArgs, OutputColumnArgs {}
+
 export interface OnehotArgs extends InputColumnArgs {
 	/**
 	 * Optional prefixes for the output column names
@@ -672,6 +676,8 @@ export interface SampleArgs {
 }
 
 export type SelectArgs = InputColumnListArgs
+
+export type DropArgs = InputColumnListArgs
 
 export interface SpreadArgs extends InputColumnArgs {
 	to: string[]

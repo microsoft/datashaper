@@ -175,6 +175,12 @@ export interface ConvertArgs extends InputColumnArgs, OutputColumnArgs {
     type: ParseType;
 }
 
+// Warning: (ae-missing-release-tag) "CopyArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface CopyArgs extends InputColumnArgs, OutputColumnArgs {
+}
+
 // Warning: (ae-missing-release-tag) "createCodebookSchemaObject" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -343,6 +349,11 @@ export interface DeriveArgs extends OutputColumnArgs {
     column2: string;
     operator: MathOperator;
 }
+
+// Warning: (ae-missing-release-tag) "DropArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type DropArgs = InputColumnListArgs;
 
 // Warning: (ae-missing-release-tag) "DualInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -898,6 +909,9 @@ export type Step = StepJsonCommon & (({
     verb: Verb.Convert;
     args?: ConvertArgs;
 } & BasicInput) | ({
+    verb: Verb.Copy;
+    args?: CopyArgs;
+} & BasicInput) | ({
     verb: Verb.Dedupe;
     args?: DedupeArgs;
 } & BasicInput) | ({
@@ -908,6 +922,9 @@ export type Step = StepJsonCommon & (({
 } & VariadicInput) | ({
     verb: Verb.Decode;
     args?: EncodeDecodeArgs;
+} & BasicInput) | ({
+    verb: Verb.Drop;
+    args?: DropArgs;
 } & BasicInput) | ({
     verb: Verb.Encode;
     args?: EncodeDecodeArgs;
@@ -1167,6 +1184,8 @@ export enum Verb {
     // (undocumented)
     Convert = "convert",
     // (undocumented)
+    Copy = "copy",
+    // (undocumented)
     Decode = "decode",
     // (undocumented)
     Dedupe = "dedupe",
@@ -1174,6 +1193,8 @@ export enum Verb {
     Derive = "derive",
     // (undocumented)
     Difference = "difference",
+    // (undocumented)
+    Drop = "drop",
     // (undocumented)
     Encode = "encode",
     // (undocumented)

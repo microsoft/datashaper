@@ -328,6 +328,23 @@
             },
             "type": "object"
         },
+        "CopyArgs": {
+            "properties": {
+                "column": {
+                    "description": "Name of the input column for columnar operations",
+                    "type": "string"
+                },
+                "dataType": {
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
+                },
+                "to": {
+                    "description": "Name of the output column to receive the operation's result.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "Criterion": {
             "properties": {
                 "operator": {
@@ -1180,6 +1197,28 @@
                         {
                             "properties": {
                                 "args": {
+                                    "$ref": "#/definitions/CopyArgs"
+                                },
+                                "verb": {
+                                    "const": "copy",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
                                     "$ref": "#/definitions/Partial<InputColumnListArgs>"
                                 },
                                 "verb": {
@@ -1247,6 +1286,28 @@
                                 },
                                 "verb": {
                                     "const": "decode",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/InputColumnListArgs"
+                                },
+                                "verb": {
+                                    "const": "drop",
                                     "type": "string"
                                 }
                             },

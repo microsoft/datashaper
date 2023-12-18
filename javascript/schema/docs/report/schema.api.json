@@ -1950,6 +1950,49 @@
           ]
         },
         {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!CopyArgs:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface CopyArgs extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "InputColumnArgs",
+              "canonicalReference": "@datashaper/schema!InputColumnArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "OutputColumnArgs",
+              "canonicalReference": "@datashaper/schema!OutputColumnArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "CopyArgs",
+          "preserveMemberOrder": false,
+          "members": [],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            },
+            {
+              "startIndex": 3,
+              "endIndex": 4
+            }
+          ]
+        },
+        {
           "kind": "Function",
           "canonicalReference": "@datashaper/schema!createCodebookSchemaObject:function(1)",
           "docComment": "",
@@ -3735,6 +3778,32 @@
               "endIndex": 2
             }
           ]
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@datashaper/schema!DropArgs:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export type DropArgs = "
+            },
+            {
+              "kind": "Reference",
+              "text": "InputColumnListArgs",
+              "canonicalReference": "@datashaper/schema!InputColumnListArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "DropArgs",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
         },
         {
           "kind": "Interface",
@@ -9341,6 +9410,33 @@
             },
             {
               "kind": "Reference",
+              "text": "Verb.Copy",
+              "canonicalReference": "@datashaper/schema!Verb.Copy:member"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n    args?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "CopyArgs",
+              "canonicalReference": "@datashaper/schema!CopyArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n} & "
+            },
+            {
+              "kind": "Reference",
+              "text": "BasicInput",
+              "canonicalReference": "@datashaper/schema!BasicInput:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ") | ({\n    verb: "
+            },
+            {
+              "kind": "Reference",
               "text": "Verb.Dedupe",
               "canonicalReference": "@datashaper/schema!Verb.Dedupe:member"
             },
@@ -9424,6 +9520,33 @@
               "kind": "Reference",
               "text": "EncodeDecodeArgs",
               "canonicalReference": "@datashaper/schema!EncodeDecodeArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n} & "
+            },
+            {
+              "kind": "Reference",
+              "text": "BasicInput",
+              "canonicalReference": "@datashaper/schema!BasicInput:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ") | ({\n    verb: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Verb.Drop",
+              "canonicalReference": "@datashaper/schema!Verb.Drop:member"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n    args?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "DropArgs",
+              "canonicalReference": "@datashaper/schema!DropArgs:type"
             },
             {
               "kind": "Content",
@@ -10230,7 +10353,7 @@
           "name": "Step",
           "typeTokenRange": {
             "startIndex": 1,
-            "endIndex": 233
+            "endIndex": 245
           }
         },
         {
@@ -11676,6 +11799,27 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!Verb.Copy:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Copy = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"copy\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Copy"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!Verb.Decode:member",
               "docComment": "",
               "excerptTokens": [
@@ -11757,6 +11901,27 @@
               },
               "releaseTag": "Public",
               "name": "Difference"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!Verb.Drop:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Drop = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"drop\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Drop"
             },
             {
               "kind": "EnumMember",

@@ -60,6 +60,7 @@
 |  [CodebookSchema](./schema.codebookschema.md) | This contains all of the field-level details for interpreting a dataset, including data types, mapping, and metadata. Note that with persisted metadata and field examples, a dataset can often be visualized and described to the user without actually loading the source file. resource profile: 'codebook' |
 |  [Constraints](./schema.constraints.md) | Validation constraints for a field. |
 |  [ConvertArgs](./schema.convertargs.md) |  |
+|  [CopyArgs](./schema.copyargs.md) |  |
 |  [Criterion](./schema.criterion.md) |  |
 |  [DataPackageSchema](./schema.datapackageschema.md) | Defines a Data Package, which is a collection of data resources such as files and schemas. Loosely based on the Frictionless spec, but modified where needed to meet our needs. https://specs.frictionlessdata.io/data-package/ |
 |  [DataShape](./schema.datashape.md) | Defines parameters for understanding the logical structure of data contents. |
@@ -126,6 +127,7 @@
 |  Type Alias | Description |
 |  --- | --- |
 |  [DedupeArgs](./schema.dedupeargs.md) |  |
+|  [DropArgs](./schema.dropargs.md) |  |
 |  [FactoryInput](./schema.factoryinput.md) |  |
 |  [GroupbyArgs](./schema.groupbyargs.md) |  |
 |  [Profile](./schema.profile.md) | Resources must have a profile, which is a key defining how it should be interpreted. Profiles are essentially shorthand for a schema URL. The core profiles for DataShaper are defined here, but any application can define one as a string. |

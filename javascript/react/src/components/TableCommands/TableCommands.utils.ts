@@ -24,6 +24,7 @@ export const groupedColumnVerbs: GroupedVerbs[] = [
 		label: 'Transforms',
 		verbs: [
 			Verb.Convert,
+			Verb.Copy,
 			Verb.Erase,
 			Verb.Fill,
 			Verb.Impute,
@@ -73,6 +74,7 @@ export const groupedTableVerbs: GroupedVerbs[] = [
 			Verb.Unorder,
 			Verb.Sample,
 			Verb.Select,
+			Verb.Drop,
 		],
 	},
 ]

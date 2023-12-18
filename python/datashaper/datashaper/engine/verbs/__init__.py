@@ -5,9 +5,11 @@ from .binarize import binarize  # noqa F401, F403
 from .boolean import boolean  # noqa F401, F403
 from .concat import concat  # noqa F401, F403
 from .convert import convert  # noqa F401, F403
+from .copy import copy  # noqa F401, F403
 from .dedupe import dedupe  # noqa F401, F403
 from .derive import derive  # noqa F401, F403
 from .difference import difference  # noqa F401, F403
+from .drop import drop  # noqa F401, F403
 from .erase import erase  # noqa F401, F403
 from .fill import fill  # noqa F401, F403
 from .filter import filter  # noqa F401, F403
