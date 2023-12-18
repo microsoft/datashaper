@@ -1,0 +1,6 @@
+ID,Name,Employees,US,newColumn
+1,Microsoft,160000,true,MICROSOFT
+2,Apple,150000,true,APPLE
+3,Google,135000,true,GOOGLE
+4,Amazon,1250000,true,AMAZON
+5,Samsung,270000,false,SAMSUNG

@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '@datashaper/workflow'
+import get from 'lodash-es/get.js'
 
 import {
 	AggregateForm,
@@ -35,8 +36,9 @@ import {
 	WindowForm,
 } from '../verbs/forms/index.js'
 import type { StepFormProps } from '../verbs/index.js'
+import { StringsReplaceForm } from '../verbs/forms/strings/StringsReplaceForm/StringsReplaceForm.js'
 
-const verb: Record<string, React.FC<StepFormProps<any>>> = {
+const forms = {
 	aggregate: AggregateForm,
 	bin: BinForm,
 	binarize: BinarizeForm,
@@ -69,6 +71,11 @@ const verb: Record<string, React.FC<StepFormProps<any>>> = {
 	sample: SampleForm,
 	select: NoParametersForm,
 	spread: SpreadForm,
+	strings: {
+		replace: StringsReplaceForm,
+		lower: NoParametersForm,
+		upper: NoParametersForm,
+	},
 	unfold: UnfoldForm,
 	ungroup: NoParametersForm,
 	unhot: UnhotForm,
@@ -85,7 +92,7 @@ const verb: Record<string, React.FC<StepFormProps<any>>> = {
 export function selectStepForm(
 	step: Step<unknown>,
 ): React.FC<StepFormProps<unknown>> {
-	const result = verb[step.verb]
+	const result: React.FC<StepFormProps<any>> = get(forms, step.verb)
 	if (!result) {
 		throw new Error(`verb ${step.verb} not found`)
 	}

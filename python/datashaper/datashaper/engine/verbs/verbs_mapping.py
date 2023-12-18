@@ -3,85 +3,41 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
+from functools import cache
 from typing import Callable
 
-from ..types import Verb
-from .aggregate import aggregate
-from .bin import bin
-from .binarize import binarize
-from .boolean import boolean
-from .concat import concat
-from .convert import convert
-from .copy import copy
-from .dedupe import dedupe
-from .derive import derive
-from .difference import difference
-from .drop import drop
-from .erase import erase
-from .fill import fill
-from .filter import filter
-from .fold import fold
-from .groupby import groupby
-from .impute import impute
-from .intersect import intersect
-from .join import join
-from .lookup import lookup
-from .merge import merge
-from .onehot import onehot
-from .orderby import orderby
-from .pivot import pivot
-from .recode import recode
-from .rename import rename
-from .rollup import rollup
-from .sample import sample
-from .select import select
-from .spread import spread
-from .unfold import unfold
-from .ungroup import ungroup
-from .unhot import unhot
-from .union import union
-from .unorder import unorder
-from .unroll import unroll
-from .window import window
+from dataclasses import dataclass, field
+
+from datashaper.table_store import TableContainer
 
 
-# This map contains the mapping between all verbs and functions.
-functions: dict[Verb, Callable] = {
-    Verb.Aggregate: aggregate,
-    Verb.Bin: bin,
-    Verb.Binarize: binarize,
-    Verb.Boolean: boolean,
-    Verb.Concat: concat,
-    Verb.Convert: convert,
-    Verb.Copy: copy,
-    Verb.Dedupe: dedupe,
-    Verb.Derive: derive,
-    Verb.Difference: difference,
-    Verb.Drop: drop,
-    Verb.Erase: erase,
-    Verb.Fill: fill,
-    Verb.Filter: filter,
-    Verb.Fold: fold,
-    Verb.Groupby: groupby,
-    Verb.Impute: impute,
-    Verb.Intersect: intersect,
-    Verb.Join: join,
-    Verb.Lookup: lookup,
-    Verb.Merge: merge,
-    Verb.OneHot: onehot,
-    Verb.Orderby: orderby,
-    Verb.Pivot: pivot,
-    Verb.Recode: recode,
-    Verb.Rename: rename,
-    Verb.Rollup: rollup,
-    Verb.Sample: sample,
-    Verb.Select: select,
-    Verb.Spread: spread,
-    Verb.Unfold: unfold,
-    Verb.Ungroup: ungroup,
-    Verb.Unhot: unhot,
-    Verb.Union: union,
-    Verb.Unorder: unorder,
-    Verb.Unroll: unroll,
-    Verb.Window: window,
-}
+def verb(*args, **kwargs) -> Callable:
+    """Decorator for registering a verb."""
+
+    def inner(func: Callable[..., TableContainer]) -> Callable[..., TableContainer]:
+        VerbManager.get().register_verbs({kwargs["name"]: func})
+        return func
+
+    return inner
+
+
+@dataclass
+class VerbManager:
+    """Manages the verbs and their functions."""
+
+    verbs: dict[str, Callable] = field(default_factory=dict)
+
+    def __getitem__(self, verb: str) -> Callable[..., TableContainer]:
+        return self.verbs[verb]
+
+    def __contains__(self, verb: str) -> bool:
+        return verb in self.verbs
+
+    def register_verbs(self, verbs: dict[str, Callable]):
+        self.verbs.update(verbs)
+
+    @classmethod
+    @cache
+    def get(cls) -> "VerbManager":
+        """Returns the verb manager."""
+        return cls()

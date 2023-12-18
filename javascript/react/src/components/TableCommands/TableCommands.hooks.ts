@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { Verb } from '@datashaper/schema'
+import type { Verb } from '@datashaper/schema'
 import type { Step } from '@datashaper/workflow'
 import type {
 	ICommandBarItemProps,
@@ -30,6 +30,26 @@ import {
 } from './TableCommands.utils.js'
 import { getVerbIcon } from './verbIcons.js'
 
+function collapseScopedVerbs(verbs: string[]): Record<string, string | object> {
+	// note the handling of the accumulated package scopes to retain the full package name as we recurse
+	function walk(list: string[], container: any, pkg: string[] = []) {
+		list.forEach((name) => {
+			const parts = name.split('.')
+			if (parts.length === 1) {
+				container[name] = [...pkg, name].join('.')
+			} else {
+				const [scope, ...rest] = parts as [string, ...string[]]
+				if (!container[scope]) {
+					container[scope] = {}
+				}
+				walk([rest.join('.')], container[scope], [...pkg, scope])
+			}
+		})
+		return container
+	}
+	return walk(verbs, {})
+}
+
 function getOverflowVerbItems(
 	onCallStep: (
 		ev?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
@@ -39,27 +59,40 @@ function getOverflowVerbItems(
 	verbList: GroupedVerbs[],
 	id: string,
 ): ICommandBarItemProps[] {
-	return verbList.map((group) => ({
-		key: `__section-${group.label}__`,
-		itemType: ContextualMenuItemType.Section,
-		sectionProps: {
-			topDivider: true,
-			title: group.label,
-			items: group.verbs.map((verb) => {
-				const found = Object.entries(Verb).find((v) => v[1] === verb)
-				if (found == null || found.length < 2) {
-					throw new Error('could not get overflow verb items')
+	function walk(verbs: any, disabled: boolean, click: any) {
+		return Object.entries(verbs).map(([key, value]) => {
+			const item: ICommandBarItemProps = {
+				key,
+				text: upperFirst(key),
+				data: { id },
+				disabled,
+			}
+			if (typeof value === 'string') {
+				item.key = value
+				item.onClick = click
+			} else {
+				item.subMenuProps = {
+					items: walk(value, disabled, click),
 				}
-				return {
-					key: found[1] as string,
-					text: found[0] as string,
-					onClick: onCallStep,
-					data: { id },
-					disabled: group?.alwaysEnabled ? false : disabled,
-				}
-			}),
-		},
-	}))
+			}
+			return item
+		})
+	}
+
+	return verbList.map((group) => {
+		// collapse scoped verbs into a tree for hierarchical submenus
+		const verbs = collapseScopedVerbs(group.verbs)
+		const menu = {
+			key: `__section-${group.label}__`,
+			itemType: ContextualMenuItemType.Section,
+			sectionProps: {
+				topDivider: true,
+				title: group.label,
+				items: walk(verbs, group?.alwaysEnabled ? false : disabled, onCallStep),
+			},
+		}
+		return menu
+	})
 }
 
 function getMainVerbItems(

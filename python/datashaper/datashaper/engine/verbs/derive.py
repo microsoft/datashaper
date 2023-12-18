@@ -10,6 +10,8 @@ import pandas as pd
 
 from pandas.api.types import is_numeric_dtype
 
+from datashaper.engine.verbs.verbs_mapping import verb
+
 from ...table_store import TableContainer
 from ..types import MathOperator
 from .verb_input import VerbInput
@@ -36,6 +38,7 @@ __op_mapping: Dict[MathOperator, Callable] = {
 }
 
 
+@verb(name="derive")
 def derive(input: VerbInput, to: str, column1: str, column2: str, operator: str):
     math_operator = MathOperator(operator)
 

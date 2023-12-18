@@ -3,12 +3,15 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
+from datashaper.engine.verbs.verbs_mapping import verb
+
 from ...table_store import TableContainer
 from ..pandas.aggregate_mapping import aggregate_operation_mapping
 from ..types import FieldAggregateOperation
 from .verb_input import VerbInput
 
 
+@verb(name="pivot")
 def pivot(input: VerbInput, key: str, value: str, operation: str):
     aggregate_operation = FieldAggregateOperation(operation)
 

@@ -32,6 +32,12 @@ export const H2 = styled.h2`
 	color: ${({ theme }) => theme.palette.themePrimary};
 `
 
+export const H3 = styled.h2`
+	margin-top: 0;
+	margin-bottom: 0;
+	color: ${({ theme }) => theme.palette.themeTertiary};
+`
+
 export const StyledSeparator = styled(Separator)`
 	margin-left: 8px;
 	margin-right: 8px;

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '@datashaper/workflow'
-
+import get from 'lodash-es/get.js'
 import {
 	AggregateDescription,
 	BinarizeDescription,
@@ -30,13 +30,14 @@ import {
 	SampleDescription,
 	SetOperationDescription,
 	SpreadDescription,
+	StringsReplaceDescription,
 	UnfoldDescription,
 	UnhotDescription,
 	WindowDescription,
 } from '../verbs/descriptions/index.js'
 import type { StepDescriptionProps } from '../verbs/index.js'
 
-const descriptions: Record<string, React.FC<StepDescriptionProps<any>>> = {
+const descriptions = {
 	aggregate: AggregateDescription,
 	bin: BinDescription,
 	binarize: BinarizeDescription,
@@ -69,6 +70,11 @@ const descriptions: Record<string, React.FC<StepDescriptionProps<any>>> = {
 	sample: SampleDescription,
 	select: NoParametersDescription,
 	spread: SpreadDescription,
+	strings: {
+		replace: StringsReplaceDescription,
+		lower: NoParametersDescription,
+		upper: NoParametersDescription,
+	},
 	unfold: UnfoldDescription,
 	ungroup: NoParametersDescription,
 	unhot: UnhotDescription,
@@ -86,7 +92,10 @@ const descriptions: Record<string, React.FC<StepDescriptionProps<any>>> = {
 export function selectStepDescription(
 	step: Step,
 ): React.FC<StepDescriptionProps> {
-	const result = descriptions[step.verb]
+	const result: React.FC<StepDescriptionProps<any>> = get(
+		descriptions,
+		step.verb,
+	)
 	if (!result) {
 		throw new Error(`could not find step with verb ${step?.verb}`)
 	}

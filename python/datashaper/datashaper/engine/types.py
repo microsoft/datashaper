@@ -10,54 +10,6 @@ from typing import Any, Union
 from dataclasses import dataclass, field
 
 
-class Verb(Enum):
-    """The verbs that can be used in a pipeline."""
-
-    Aggregate = "aggregate"
-    Bin = "bin"
-    Binarize = "binarize"
-    Boolean = "boolean"
-    Chain = "chain"
-    Concat = "concat"
-    Convert = "convert"
-    Copy = "copy"
-    Dedupe = "dedupe"
-    Derive = "derive"
-    Difference = "difference"
-    Drop = "drop"
-    Erase = "erase"
-    Fill = "fill"
-    Filter = "filter"
-    FilterAggregateLookup = "filter-aggregate-lookup"
-    Fold = "fold"
-    Groupby = "groupby"
-    Impute = "impute"
-    Intersect = "intersect"
-    Join = "join"
-    Lookup = "lookup"
-    Merge = "merge"
-    MultiBinarize = "multi-binarize"
-    OneHot = "onehot"
-    Orderby = "orderby"
-    Pivot = "pivot"
-    Recode = "recode"
-    Rename = "rename"
-    Rollup = "rollup"
-    Sample = "sample"
-    Select = "select"
-    Spread = "spread"
-    Unfold = "unfold"
-    Ungroup = "ungroup"
-    Unhot = "unhot"
-    Union = "union"
-    Unorder = "unorder"
-    Unroll = "unroll"
-    Window = "window"
-
-
-compound_verbs = {Verb.Chain, Verb.FilterAggregateLookup, Verb.MultiBinarize}
-
-
 class Bin:
     """A data bin."""
 
@@ -93,7 +45,7 @@ class DataType(Enum):
 class Step:
     """A workflow processing step."""
 
-    verb: Verb
+    verb: str
     input: Union[str, dict[str, str]]
     output: Union[str, dict[str, str]]
     args: dict[str, Any] = field(default_factory=dict)

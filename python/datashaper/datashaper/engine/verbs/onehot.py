@@ -6,10 +6,13 @@
 import numpy as np
 import pandas as pd
 
+from datashaper.engine.verbs.verbs_mapping import verb
+
 from ...table_store import TableContainer
 from .verb_input import VerbInput
 
 
+@verb(name="onehot")
 def onehot(
     input: VerbInput,
     column: str,

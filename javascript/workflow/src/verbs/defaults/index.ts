@@ -35,6 +35,12 @@ export const select = inputColumnList
 export const unroll = inputColumnList
 export const window = outputColumn
 
+export const strings = {
+	replace: outputColumn,
+	lower: outputColumn,
+	upper: outputColumn,
+}
+
 export const decode = empty
 export const encode = empty
 export const concat = empty

@@ -15,7 +15,7 @@ import {
 } from '@datashaper/workflow'
 import { MultiDropdown } from '@essex/components'
 import { TextField } from '@fluentui/react'
-import { memo } from 'react'
+import { memo, useMemo } from 'react'
 
 import { useColumnNames } from '../../hooks/columns/useColumnNames.js'
 import { useSimpleDropdownOptions } from '../../hooks/fluent/useSimpleDropdownOptions.js'
@@ -70,6 +70,10 @@ export const StepForm: React.FC<StepFormProps> = memo(function StepForm({
 	/* Side Effects */
 	useDefaultOutputNameInitially(s, output, changeOutput)
 
+	const name = useMemo(() => {
+		const parts = s.verb.split('.')
+		return parts[parts.length - 1]
+	}, [s.verb])
 	return StepArgs == null ? null : (
 		<Container className='step-component'>
 			{/* Input Column List */}
@@ -91,7 +95,7 @@ export const StepForm: React.FC<StepFormProps> = memo(function StepForm({
 				<TableColumnDropdown
 					required
 					options={columnOptions}
-					label={`Column to ${s.verb}`}
+					label={`Column to ${name}`}
 					selectedKey={(s.args as InputColumnArgs).column}
 					onChange={onInputColumnChange}
 				/>

@@ -985,6 +985,15 @@ export type Step = StepJsonCommon & (({
     verb: Verb.Spread;
     args?: SpreadArgs;
 } & BasicInput) | ({
+    verb: Verb.StringsReplace;
+    args?: StringsReplaceArgs;
+} & BasicInput) | ({
+    verb: Verb.StringsLower;
+    args?: StringsArgs;
+} & BasicInput) | ({
+    verb: Verb.StringsUpper;
+    args?: StringsArgs;
+} & BasicInput) | ({
     verb: Verb.Unfold;
     args?: UnfoldArgs;
 } & BasicInput) | ({
@@ -1038,6 +1047,26 @@ export enum StringComparisonOperator {
     RegularExpression = "regex",
     // (undocumented)
     StartsWith = "starts with"
+}
+
+// Warning: (ae-missing-release-tag) "StringsArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StringsArgs extends InputColumnArgs, OutputColumnArgs {
+}
+
+// Warning: (ae-missing-release-tag) "StringsReplaceArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StringsReplaceArgs extends StringsArgs {
+    // (undocumented)
+    caseInsensitive?: boolean;
+    // (undocumented)
+    globalSearch?: boolean;
+    // (undocumented)
+    pattern: string;
+    // (undocumented)
+    replacement: string;
 }
 
 // Warning: (ae-missing-release-tag) "TableBundleSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1206,6 +1235,12 @@ export enum Verb {
     Select = "select",
     // (undocumented)
     Spread = "spread",
+    // (undocumented)
+    StringsLower = "strings.lower",
+    // (undocumented)
+    StringsReplace = "strings.replace",
+    // (undocumented)
+    StringsUpper = "strings.upper",
     // (undocumented)
     Unfold = "unfold",
     // (undocumented)

@@ -46,6 +46,10 @@ export enum Verb {
 	Unorder = 'unorder',
 	Unroll = 'unroll',
 	Window = 'window',
+
+	StringsReplace = 'strings.replace',
+	StringsLower = 'strings.lower',
+	StringsUpper = 'strings.upper',
 }
 
 export interface InputColumnArgs {
@@ -691,6 +695,15 @@ export interface SpreadArgs extends InputColumnArgs {
 	 * Keep the original columns (default is to remove source columns).
 	 */
 	preserveSource?: boolean
+}
+
+export interface StringsArgs extends InputColumnArgs, OutputColumnArgs {}
+
+export interface StringsReplaceArgs extends StringsArgs {
+	pattern: string
+	replacement: string
+	globalSearch?: boolean
+	caseInsensitive?: boolean
 }
 
 export type UnfoldArgs = InputKeyValueArgs

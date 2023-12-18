@@ -5,6 +5,8 @@
 
 import numpy as np
 
+from datashaper.engine.verbs.verbs_mapping import verb
+
 from ...table_store import TableContainer
 from ..types import BinStrategy
 from .verb_input import VerbInput
@@ -58,6 +60,7 @@ __bin_edges_mapping = {
 }
 
 
+@verb(name="bin")
 def bin(
     input: VerbInput,
     to: str,

@@ -1763,6 +1763,72 @@
                         {
                             "properties": {
                                 "args": {
+                                    "$ref": "#/definitions/StringsReplaceArgs"
+                                },
+                                "verb": {
+                                    "const": "strings.replace",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/StringsArgs"
+                                },
+                                "verb": {
+                                    "const": "strings.lower",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/StringsArgs"
+                                },
+                                "verb": {
+                                    "const": "strings.upper",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
                                     "$ref": "#/definitions/InputKeyValueArgs"
                                 },
                                 "verb": {
@@ -1927,6 +1993,52 @@
             "properties": {
                 "id": {
                     "description": "A unique identifier for this step",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "StringsArgs": {
+            "properties": {
+                "column": {
+                    "description": "Name of the input column for columnar operations",
+                    "type": "string"
+                },
+                "dataType": {
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
+                },
+                "to": {
+                    "description": "Name of the output column to receive the operation's result.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "StringsReplaceArgs": {
+            "properties": {
+                "caseInsensitive": {
+                    "type": "boolean"
+                },
+                "column": {
+                    "description": "Name of the input column for columnar operations",
+                    "type": "string"
+                },
+                "dataType": {
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
+                },
+                "globalSearch": {
+                    "type": "boolean"
+                },
+                "pattern": {
+                    "type": "string"
+                },
+                "replacement": {
+                    "type": "string"
+                },
+                "to": {
+                    "description": "Name of the output column to receive the operation's result.",
                     "type": "string"
                 }
             },

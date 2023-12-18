@@ -1,0 +1,6 @@
+ID,Name,Employees,US,newColumn
+1,Microsoft,160000,true,Microsoft
+2,Apple,150000,true,AppX
+3,Google,135000,true,GoogX
+4,Amazon,1250000,true,Xazon
+5,Samsung,270000,false,SXsung
