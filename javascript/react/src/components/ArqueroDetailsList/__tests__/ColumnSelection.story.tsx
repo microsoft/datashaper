@@ -11,7 +11,7 @@ import { ArqueroDetailsList } from '../ArqueroDetailsList.js'
 import type { ArqueroDetailsListProps } from '../ArqueroDetailsList.types.js'
 import { StatsColumnType } from '../ArqueroDetailsList.types.js'
 
-export const SelectionStory: ComponentStory<typeof ArqueroDetailsList> = (
+export const ColumnSelectionStory: ComponentStory<typeof ArqueroDetailsList> = (
 	args: ArqueroDetailsListProps,
 	{ loaded: { stocks } }: any,
 ): JSX.Element => {

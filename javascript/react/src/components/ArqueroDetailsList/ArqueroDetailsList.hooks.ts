@@ -9,6 +9,7 @@ import {
 	type IDetailsGroupRenderProps,
 	type IListProps,
 	GroupedListV2_unstable as GroupedListV2,
+	Selection,
 } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import type { RowObject } from 'arquero/dist/types/table/table'
@@ -17,6 +18,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type {
 	ArqueroDetailsListFeatures,
 	GroupHeaderFunction,
+	RowSelectFunction,
 } from './ArqueroDetailsList.types.js'
 import { debounceFn, groupBuilder } from './ArqueroDetailsList.utils.js'
 import { useGroupHeaderRenderer, useSortedGroups } from './hooks/index.js'
@@ -134,6 +136,17 @@ export function useOnColumnResizeHandler(
 		},
 		[setVersion],
 	)
+}
+
+export function useRowSelection(onRowSelect?: RowSelectFunction): Selection {
+	const rowSelection: Selection = new Selection({
+		onSelectionChanged: () => {
+			if (onRowSelect) {
+				onRowSelect(rowSelection.getSelection())
+			}
+		},
+	})
+	return rowSelection
 }
 
 /**

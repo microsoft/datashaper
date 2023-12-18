@@ -19,6 +19,7 @@ import {
 	useGroups,
 	useListProps,
 	useOnColumnResizeHandler,
+	useRowSelection,
 	useVersion,
 	useVirtualizedItems,
 } from './ArqueroDetailsList.hooks.js'
@@ -29,8 +30,8 @@ import {
 	useDetailsHeaderRenderer,
 	useDetailsListStyles,
 	useSlicedTable,
-	useSortedTable,
 	useSortHandling,
+	useSortedTable,
 	useStripedRowsRenderer,
 	useSubsetTable,
 } from './hooks/index.js'
@@ -38,6 +39,7 @@ import {
 /**
  * Renders an arquero table using a fluent DetailsList.
  */
+
 export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 	function ArqueroDetailsList({
 		table,
@@ -55,6 +57,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		onColumnSelect,
 		onCellDropdownSelect,
 		onRenderGroupHeader,
+		onRowSelect,
 		// extract props we want to set data-centric defaults for
 		selectionMode = SelectionMode.none,
 		layoutMode = DetailsListLayoutMode.fixedColumns,
@@ -78,7 +81,8 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		)
 
 		const fieldsInternal = useFields(table, fields)
-
+		const getKey = useGetKey()
+		const selection = useRowSelection(onRowSelect)
 		// first subset the table using the visible columns
 		// this will prevent any further operations on columns we aren't going to show
 		const subset = useSubsetTable(table, columns)
@@ -165,9 +169,10 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 					selectionMode={selectionMode}
 					layoutMode={layoutMode}
 					groups={groups}
-					getKey={useGetKey()}
+					getKey={onRowSelect ? undefined : getKey}
 					groupProps={groupProps}
 					columns={displayColumns}
+					selection={onRowSelect ? selection : undefined}
 					constrainMode={ConstrainMode.unconstrained}
 					onRenderRow={renderRow}
 					onRenderDetailsHeader={renderDetailsHeader}
