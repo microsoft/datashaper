@@ -7,7 +7,6 @@ import {
 	ConstrainMode,
 	DetailsList,
 	DetailsListLayoutMode,
-	Selection,
 	SelectionMode,
 } from '@fluentui/react'
 import { memo } from 'react'
@@ -20,6 +19,7 @@ import {
 	useGroups,
 	useListProps,
 	useOnColumnResizeHandler,
+	useRowSelection,
 	useVersion,
 	useVirtualizedItems,
 } from './ArqueroDetailsList.hooks.js'
@@ -73,14 +73,6 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		// passthrough the remainder as props
 		...props
 	}) {
-		const selection: Selection = new Selection({
-			onSelectionChanged: () => {
-				if (onRowSelect) {
-					onRowSelect(selection.getSelection())
-				}
-			},
-		})
-
 		const [version, setVersion] = useVersion(table, columns, compact)
 		const { sortColumn, sortDirection, onSort } = useSortHandling(
 			sortable,
@@ -90,6 +82,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 
 		const fieldsInternal = useFields(table, fields)
 		const getKey = useGetKey()
+		const selection = useRowSelection(onRowSelect)
 		// first subset the table using the visible columns
 		// this will prevent any further operations on columns we aren't going to show
 		const subset = useSubsetTable(table, columns)
