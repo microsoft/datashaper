@@ -5,10 +5,13 @@
 
 from typing import Union
 
+from datashaper.engine.verbs.verbs_mapping import verb
+
 from ...table_store import TableContainer
 from .verb_input import VerbInput
 
 
+@verb(name="erase")
 def erase(input: VerbInput, column: str, value: Union[str, int, float]):
     input_table = input.get_input()
     output = input_table.copy()

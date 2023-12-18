@@ -7,6 +7,8 @@ import logging
 
 from typing import List, Union
 
+from datashaper.engine.verbs.verbs_mapping import verb
+
 from ...table_store import TableContainer
 from ..pandas.filter_df import filter_df
 from ..types import (
@@ -41,6 +43,7 @@ def _get_operator(
     raise Exception(f"[{operator}] is not a recognized comparison operator")
 
 
+@verb(name="filter")
 def filter(input: VerbInput, column: str, criteria: List, logical: str = "or"):
     filter_criteria = [
         Criterion(

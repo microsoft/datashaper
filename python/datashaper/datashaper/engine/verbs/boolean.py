@@ -5,12 +5,15 @@
 
 from typing import List
 
+from datashaper.engine.verbs.verbs_mapping import verb
+
 from ...table_store import TableContainer
 from ..pandas.filter_df import _boolean_function_map
 from ..types import BooleanLogicalOperator
 from .verb_input import VerbInput
 
 
+@verb(name="boolean")
 def boolean(input: VerbInput, to: str, columns: List[str], operator: str):
 
     logical_operator = BooleanLogicalOperator(operator)

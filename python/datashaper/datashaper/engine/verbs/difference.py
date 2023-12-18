@@ -5,10 +5,13 @@
 
 import pandas as pd
 
+from datashaper.engine.verbs.verbs_mapping import verb
+
 from ...table_store import TableContainer
 from .verb_input import VerbInput
 
 
+@verb(name="difference")
 def difference(input: VerbInput):
     input_table = input.get_input()
     others = input.get_others()

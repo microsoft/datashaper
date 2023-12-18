@@ -4,53 +4,10 @@
 #
 """Common types used across the datashaper codebase."""
 
-from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any, Union
 
-
-class Verb(Enum):
-    """The verbs that can be used in a pipeline."""
-
-    Aggregate = "aggregate"
-    Bin = "bin"
-    Binarize = "binarize"
-    Boolean = "boolean"
-    Concat = "concat"
-    Convert = "convert"
-    Dedupe = "dedupe"
-    Derive = "derive"
-    Difference = "difference"
-    Erase = "erase"
-    Fill = "fill"
-    Filter = "filter"
-    Fold = "fold"
-    Groupby = "groupby"
-    Impute = "impute"
-    Intersect = "intersect"
-    Join = "join"
-    Lookup = "lookup"
-    Merge = "merge"
-    OneHot = "onehot"
-    Orderby = "orderby"
-    Pivot = "pivot"
-    Recode = "recode"
-    Rename = "rename"
-    Rollup = "rollup"
-    Sample = "sample"
-    Select = "select"
-    Spread = "spread"
-    StringsReplace = "strings.replace"
-    StringsLower = "strings.lower"
-    StringsUpper = "strings.upper"
-    Unfold = "unfold"
-    Ungroup = "ungroup"
-    Unhot = "unhot"
-    Union = "union"
-    Unorder = "unorder"
-    Unroll = "unroll"
-    Window = "window"
-
+from dataclasses import dataclass, field
 
 
 class Bin:
@@ -88,7 +45,7 @@ class DataType(Enum):
 class Step:
     """A workflow processing step."""
 
-    verb: Verb
+    verb: str
     input: Union[str, dict[str, str]]
     output: Union[str, dict[str, str]]
     args: dict[str, Any] = field(default_factory=dict)
