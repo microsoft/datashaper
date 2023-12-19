@@ -265,6 +265,33 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!ArqueroDetailsListFeatures#hideRowNumber:member",
+              "docComment": "/**\n * Option to hide the default row number, which is the first column with a detail styling. Default as false\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "hideRowNumber?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "hideRowNumber",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/react!ArqueroDetailsListFeatures#histogramColumnHeaders:member",
               "docComment": "/**\n * Include histograms in the headers of numeric columns.\n */\n",
               "excerptTokens": [
