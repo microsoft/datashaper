@@ -2,9 +2,10 @@ from typing import Callable, TypeVar
 
 import pandas as pd
 
-from ..progress import StatusReporter, progress_callback
-from ..table_store import Table
-from .utils import transform_pandas_table
+from datashaper.execution.utils import transform_pandas_table
+from datashaper.progress import progress_callback
+from datashaper.progress.reporters.status_reporter import StatusReporter
+from datashaper.table_store import Table
 
 
 ItemType = TypeVar("ItemType")

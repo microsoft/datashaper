@@ -1,3 +1,6 @@
-from .lower import lower  # noqa F401
-from .replace import replace  # noqa F401
-from .upper import upper  # noqa F401
+from .lower import lower
+from .replace import replace
+from .upper import upper
+
+
+__all__ = ["lower", "replace", "upper"]

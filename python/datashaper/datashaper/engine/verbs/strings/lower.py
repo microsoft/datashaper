@@ -3,10 +3,9 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
+from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-
-from ....table_store import TableContainer
-from ..verb_input import VerbInput
+from datashaper.table_store import TableContainer
 
 
 @verb(name="strings.lower")

@@ -5,7 +5,7 @@
 
 from typing import List
 
-from ...table_store import Table, TableContainer
+from datashaper.table_store import Table, TableContainer
 
 
 class VerbInput:

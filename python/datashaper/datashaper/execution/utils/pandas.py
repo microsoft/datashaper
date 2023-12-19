@@ -4,7 +4,7 @@ from typing import Any, Callable, Tuple, TypeVar
 
 import pandas as pd
 
-from .parallelize import parallelize
+from datashaper.execution.utils.parallelize import parallelize
 
 
 ItemType = TypeVar("ItemType")

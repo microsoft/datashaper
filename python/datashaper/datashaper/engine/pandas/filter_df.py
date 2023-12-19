@@ -3,13 +3,15 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
+import logging
+
 from functools import partial
 from typing import Callable, Dict, List, Tuple, Union
 from uuid import uuid4
 
 import pandas as pd
 
-from ..types import (
+from datashaper.engine.types import (
     BooleanComparisonOperator,
     BooleanLogicalOperator,
     FilterArgs,
@@ -19,7 +21,7 @@ from ..types import (
 )
 
 
-_boolean_function_map = {
+boolean_function_map = {
     BooleanLogicalOperator.OR: lambda df, columns: df[columns].any(axis="columns")
     if columns != ""
     else df.any(axis="columns"),
@@ -217,10 +219,30 @@ def filter_df(df: pd.DataFrame, args: FilterArgs) -> pd.Series:
                 df=df, column=args.column, target=criteria.value
             )
 
-    filtered_df["dwc_filter_result"] = _boolean_function_map[args.logical](
+    filtered_df["dwc_filter_result"] = boolean_function_map[args.logical](
         filtered_df[filters], ""
     )
 
     __correct_unknown_value(filtered_df, filters, "dwc_filter_result")
 
     return filtered_df["dwc_filter_result"]
+
+
+def get_operator(
+    operator: str,
+) -> Union[
+    StringComparisonOperator, NumericComparisonOperator, BooleanComparisonOperator
+]:
+    try:
+        return StringComparisonOperator(operator)
+    except Exception:
+        logging.info(f"[{operator}] is not a string comparison operator")
+    try:
+        return NumericComparisonOperator(operator)
+    except Exception:
+        logging.info(f"[{operator}] is not a numeric comparison operator")
+    try:
+        return BooleanComparisonOperator(operator)
+    except Exception:
+        logging.info(f"[{operator}] is not a boolean comparison operator")
+    raise Exception(f"[{operator}] is not a recognized comparison operator")

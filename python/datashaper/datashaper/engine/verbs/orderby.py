@@ -5,11 +5,10 @@
 
 from typing import Dict, List
 
+from datashaper.engine.types import OrderByInstruction, SortDirection
+from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-
-from ...table_store import TableContainer
-from ..types import OrderByInstruction, SortDirection
-from .verb_input import VerbInput
+from datashaper.table_store import TableContainer
 
 
 @verb(name="orderby")

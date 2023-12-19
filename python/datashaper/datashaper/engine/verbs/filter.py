@@ -3,44 +3,18 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-import logging
+from typing import List
 
-from typing import List, Union
-
-from datashaper.engine.verbs.verbs_mapping import verb
-
-from ...table_store import TableContainer
-from ..pandas.filter_df import filter_df
-from ..types import (
-    BooleanComparisonOperator,
+from datashaper.engine.pandas import filter_df, get_operator
+from datashaper.engine.types import (
     BooleanLogicalOperator,
     Criterion,
     FilterArgs,
     FilterCompareType,
-    NumericComparisonOperator,
-    StringComparisonOperator,
 )
-from .verb_input import VerbInput
-
-
-def _get_operator(
-    operator: str,
-) -> Union[
-    StringComparisonOperator, NumericComparisonOperator, BooleanComparisonOperator
-]:
-    try:
-        return StringComparisonOperator(operator)
-    except Exception:
-        logging.info(f"[{operator}] is not a string comparison operator")
-    try:
-        return NumericComparisonOperator(operator)
-    except Exception:
-        logging.info(f"[{operator}] is not a numeric comparison operator")
-    try:
-        return BooleanComparisonOperator(operator)
-    except Exception:
-        logging.info(f"[{operator}] is not a boolean comparison operator")
-    raise Exception(f"[{operator}] is not a recognized comparison operator")
+from datashaper.engine.verbs.verb_input import VerbInput
+from datashaper.engine.verbs.verbs_mapping import verb
+from datashaper.table_store import TableContainer
 
 
 @verb(name="filter")
@@ -49,7 +23,7 @@ def filter(input: VerbInput, column: str, criteria: List, logical: str = "or"):
         Criterion(
             value=arg.get("value", None),
             type=FilterCompareType(arg["type"]),
-            operator=_get_operator(arg["operator"]),
+            operator=get_operator(arg["operator"]),
         )
         for arg in criteria
     ]

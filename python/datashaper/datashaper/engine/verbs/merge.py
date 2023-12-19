@@ -5,13 +5,11 @@
 from functools import partial
 from typing import List
 
+from datashaper.engine.types import MergeStrategy
+from datashaper.engine.verbs.utils import strategy_mapping, unhot_operation
+from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-
-from ...table_store import TableContainer
-from ..types import MergeStrategy
-from .utils.merge_utils import strategy_mapping
-from .utils.unhot_utils import unhot_operation
-from .verb_input import VerbInput
+from datashaper.table_store import TableContainer
 
 
 @verb(name="merge")
