@@ -31,25 +31,22 @@ export function useTextStyle(
 	isClickable: boolean,
 ): React.CSSProperties {
 	const theme = useTheme()
-	const isRowNumber = column.data?.rowNumber
 	return useMemo(
 		() => ({
-			cursor: !isRowNumber && isClickable ? 'pointer' : 'inherit',
+			cursor: isClickable ? 'pointer' : 'inherit',
 			color: column.data?.virtual
 				? 'transparent'
-				: isRowNumber
-				? theme.palette.neutralTertiaryAlt
 				: column.data?.selected
 				? theme.palette.themePrimary
 				: theme.palette.neutralPrimary,
 			width: '100%',
-			textAlign: isRowNumber ? 'left' : ('center' as const),
+			textAlign: 'center' as const,
 			overflow: 'hidden' as const,
 			whiteSpace: 'nowrap' as const,
 			textOverflow: 'ellipsis' as const,
-			paddingLeft: isRowNumber ? 0 : 7, // this splits the icon margin to center the label
+			paddingLeft: 7, // this splits the icon margin to center the label
 		}),
-		[theme, column, isClickable, isRowNumber],
+		[theme, column, isClickable],
 	)
 }
 

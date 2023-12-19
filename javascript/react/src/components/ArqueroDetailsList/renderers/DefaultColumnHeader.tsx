@@ -95,12 +95,7 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 					</TooltipHost>
 				</When>
 				<When condition={!isIconOnly}>
-					<div
-						onClick={onColumnClick}
-						style={textStyle}
-						className='column-title'
-						title={column.name}
-					>
+					<div onClick={onColumnClick} style={textStyle} title={column.name}>
 						{column.name}
 					</div>
 					<When condition={sortable}>

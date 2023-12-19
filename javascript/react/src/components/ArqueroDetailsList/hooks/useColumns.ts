@@ -192,7 +192,7 @@ export function useColumns(
 				isSorted:
 					!!sortDirection && column.fieldName === sortColumn ? true : false,
 				isSortedDescending: sortDirection === 'desc',
-				styles: styles,
+				styles,
 				...defaults,
 				data: {
 					selected: column.key === selectedColumn,
