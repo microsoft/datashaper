@@ -9,7 +9,11 @@ import type {
 	ValidationResult,
 } from '@datashaper/schema'
 import type { TableMetadata } from '@datashaper/tables'
-import type { IColumn } from '@fluentui/react'
+import type {
+	IColumn,
+	IDetailsColumnProps,
+	IRenderFunction,
+} from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
@@ -31,6 +35,7 @@ import {
 } from '../renderers/index.js'
 import { useColumnNamesList, useColumnStyles } from './index.js'
 import { useCountMinWidth } from './useCountMinWidth.js'
+import { ROW_NUMBER_COLUMN_NAME } from '../ArqueroDetailsList.constants.js'
 
 export interface ColumnOptions {
 	features?: ArqueroDetailsListFeatures
@@ -43,6 +48,17 @@ export interface ColumnOptions {
 	compact?: boolean
 	resizable?: boolean
 }
+
+const rowNumberColumn = {
+	data: {
+		rowNumber: true,
+		virtual: true,
+	},
+	key: ROW_NUMBER_COLUMN_NAME,
+	name: 'Row-number',
+	fieldName: ROW_NUMBER_COLUMN_NAME,
+	minWidth: 30,
+} as IColumn
 
 /**
  * Overlays a number of special features onto the IColumn objects for a table.
@@ -82,16 +98,25 @@ export function useColumns(
 	const columnMinWidth = useCountMinWidth(features.commandBar)
 
 	return useMemo(() => {
-		const columnMap = reduce([
+		const columnMapList = [
 			...(columns || EMPTY_ARRAY),
 			...(virtualColumns || EMPTY_ARRAY),
-		])
+		]
+
 		const virtualNames = virtualColumns?.map((c) => c.key) || emptyArray()
-		return [...names, ...virtualNames].map((name) => {
+		const columnListNames = [...names, ...virtualNames]
+		if (!features.hideRowNumber) {
+			columnListNames.unshift(ROW_NUMBER_COLUMN_NAME)
+			columnMapList.unshift(rowNumberColumn)
+		}
+		const columnMap = reduce(columnMapList)
+
+		return columnListNames.map((name) => {
+			const isRowNumber = name === ROW_NUMBER_COLUMN_NAME
 			const column = columnMap[name] || {
 				key: name,
 				name,
-				minWidth: columnMinWidth,
+				minWidth: columnMap[name]?.minWidth || columnMinWidth,
 				fieldName: name,
 			}
 
@@ -125,7 +150,7 @@ export function useColumns(
 							field,
 							meta,
 							color,
-							onColumnSelect,
+							isRowNumber ? undefined : onColumnSelect,
 							onCellDropdownSelect,
 							errors,
 					  )
@@ -133,9 +158,9 @@ export function useColumns(
 			const headerRenderers = [
 				createRenderDefaultColumnHeader(
 					column,
-					sortable,
+					sortable && !isRowNumber,
 					errors,
-					onColumnSelect,
+					isRowNumber ? undefined : onColumnSelect,
 					onSort,
 				),
 			]
@@ -167,7 +192,7 @@ export function useColumns(
 				isSorted:
 					!!sortDirection && column.fieldName === sortColumn ? true : false,
 				isSortedDescending: sortDirection === 'desc',
-				styles,
+				styles: styles,
 				...defaults,
 				data: {
 					selected: column.key === selectedColumn,

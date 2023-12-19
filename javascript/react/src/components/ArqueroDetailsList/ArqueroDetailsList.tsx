@@ -29,8 +29,8 @@ import {
 	useDetailsHeaderRenderer,
 	useDetailsListStyles,
 	useSlicedTable,
-	useSortedTable,
 	useSortHandling,
+	useSortedTable,
 	useStripedRowsRenderer,
 	useSubsetTable,
 } from './hooks/index.js'
@@ -135,6 +135,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			striped,
 			showColumnBorders,
 			compactRowHeight,
+			features.hideRowNumber,
 		)
 		const renderDetailsHeader = useDetailsHeaderRenderer()
 		const groups = useGroups(
