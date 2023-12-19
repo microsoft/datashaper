@@ -9,7 +9,7 @@ import { Container } from './RowNumberCell.styles.js'
 import type { FormattedCellProps } from './types.js'
 
 /**
- * Standard rendering of Blank values (completely empty cell).
+ * Standard rendering of row number values (index cell).
  */
 export const RowNumberCell: React.FC<FormattedCellProps> = memo(
 	function RowNumberCell({ index }) {

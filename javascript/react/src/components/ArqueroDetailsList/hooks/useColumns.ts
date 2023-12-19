@@ -86,13 +86,12 @@ export function useColumns(
 			...(columns || EMPTY_ARRAY),
 			...(virtualColumns || EMPTY_ARRAY),
 		])
-
 		const virtualNames = virtualColumns?.map((c) => c.key) || emptyArray()
 		return [...names, ...virtualNames].map((name) => {
 			const column = columnMap[name] || {
 				key: name,
 				name,
-				minWidth: columnMap[name]?.minWidth || columnMinWidth,
+				minWidth: columnMinWidth,
 				fieldName: name,
 			}
 

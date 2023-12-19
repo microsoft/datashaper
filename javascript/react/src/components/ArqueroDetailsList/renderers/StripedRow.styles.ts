@@ -25,7 +25,7 @@ export function useStyles({
 > {
 	const theme = useThematicFluent()
 	return useMemo(() => {
-		const style = {
+		return {
 			root: {
 				minHeight: compact ? compactRowHeight : DEFAULT_ROW_HEIGHT,
 				height: compact ? compactRowHeight : DEFAULT_ROW_HEIGHT,
@@ -46,10 +46,8 @@ export function useStyles({
 					: 'none',
 				padding: 'unset',
 			},
-			fields: {},
 			...styles,
 		}
-		return style
 	}, [
 		theme,
 		striped,
