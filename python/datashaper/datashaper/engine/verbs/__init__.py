@@ -1,40 +1,87 @@
-from . import strings  # noqa F401, F403
-from .aggregate import aggregate  # noqa F401, F403
-from .bin import bin  # noqa F401, F403
-from .binarize import binarize  # noqa F401, F403
-from .boolean import boolean  # noqa F401, F403
-from .concat import concat  # noqa F401, F403
-from .convert import convert  # noqa F401, F403
-from .copy import copy  # noqa F401, F403
-from .dedupe import dedupe  # noqa F401, F403
-from .derive import derive  # noqa F401, F403
-from .difference import difference  # noqa F401, F403
-from .drop import drop  # noqa F401, F403
-from .erase import erase  # noqa F401, F403
-from .fill import fill  # noqa F401, F403
-from .filter import filter  # noqa F401, F403
-from .fold import fold  # noqa F401, F403
-from .groupby import groupby  # noqa F401, F403
-from .impute import impute  # noqa F401, F403
-from .intersect import intersect  # noqa F401, F403
-from .join import join  # noqa F401, F403
-from .lookup import lookup  # noqa F401, F403
-from .merge import merge  # noqa F401, F403
-from .onehot import onehot  # noqa F401, F403
-from .orderby import orderby  # noqa F401, F403
-from .pivot import pivot  # noqa F401, F403
-from .recode import recode  # noqa F401, F403
-from .rename import rename  # noqa F401, F403
-from .rollup import rollup  # noqa F401, F403
-from .sample import sample  # noqa F401, F403
-from .select import select  # noqa F401, F403
-from .spread import spread  # noqa F401, F403
-from .unfold import unfold  # noqa F401, F403
-from .ungroup import ungroup  # noqa F401, F403
-from .unhot import unhot  # noqa F401, F403
-from .union import union  # noqa F401, F403
-from .unorder import unorder  # noqa F401, F403
-from .unroll import unroll  # noqa F401, F403
-from .verb_input import VerbInput  # noqa F401, F403
-from .verbs_mapping import VerbManager, verb  # noqa F401, F403
-from .window import window  # noqa F401, F403
+from .aggregate import aggregate
+from .bin import bin
+from .binarize import binarize
+from .boolean import boolean
+from .concat import concat
+from .convert import convert
+from .copy import copy
+from .dedupe import dedupe
+from .derive import derive
+from .difference import difference
+from .drop import drop
+from .erase import erase
+from .fill import fill
+from .filter import filter
+from .fold import fold
+from .groupby import groupby
+from .impute import impute
+from .intersect import intersect
+from .join import join
+from .lookup import lookup
+from .merge import merge
+from .onehot import onehot
+from .orderby import orderby
+from .pivot import pivot
+from .recode import recode
+from .rename import rename
+from .rollup import rollup
+from .sample import sample
+from .select import select
+from .spread import spread
+from .strings import lower, replace, upper
+from .unfold import unfold
+from .ungroup import ungroup
+from .unhot import unhot
+from .union import union
+from .unorder import unorder
+from .unroll import unroll
+from .verb_input import VerbInput
+from .verbs_mapping import VerbManager, verb
+from .window import window
+
+
+__all__ = [
+    "lower",
+    "upper",
+    "replace",
+    "aggregate",
+    "bin",
+    "binarize",
+    "boolean",
+    "concat",
+    "convert",
+    "copy",
+    "dedupe",
+    "derive",
+    "difference",
+    "drop",
+    "erase",
+    "fill",
+    "filter",
+    "fold",
+    "groupby",
+    "impute",
+    "intersect",
+    "join",
+    "lookup",
+    "merge",
+    "onehot",
+    "orderby",
+    "pivot",
+    "recode",
+    "rename",
+    "rollup",
+    "sample",
+    "select",
+    "spread",
+    "unfold",
+    "ungroup",
+    "unhot",
+    "union",
+    "unorder",
+    "unroll",
+    "VerbInput",
+    "VerbManager",
+    "verb",
+    "window",
+]

@@ -1,4 +1,8 @@
-from .types import ProgressStatus, ProgressTicker, StatusReportHandler
+from datashaper.progress.types import (
+    ProgressStatus,
+    ProgressTicker,
+    StatusReportHandler,
+)
 
 
 def progress_ticker(

@@ -18,13 +18,14 @@ import pandas as pd
 
 from jsonschema import validate as validate_schema
 
-from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.engine.verbs.verbs_mapping import VerbManager
-from datashaper.execution.execution_node import ExecutionNode
+from datashaper.engine.verbs import VerbInput, VerbManager
+from datashaper.execution import ExecutionNode
 from datashaper.execution.types import VerbDefinitions
-from datashaper.progress.reporters.noop_status_reporter import NoopStatusReporter
-from datashaper.progress.reporters.status_reporter import StatusReporter
-from datashaper.progress.reporters.verb_status_reporter import VerbStatusReporter
+from datashaper.progress.reporters import (
+    NoopStatusReporter,
+    StatusReporter,
+    VerbStatusReporter,
+)
 from datashaper.progress.types import ProgressStatus, StatusReportHandler
 from datashaper.table_store import Table, TableContainer
 

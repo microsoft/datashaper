@@ -5,21 +5,17 @@ import pandas as pd
 
 from dataclasses import dataclass
 
-from datashaper import (
-    DEFAULT_INPUT_NAME,
+from datashaper.engine.verbs.verb_input import VerbInput
+from datashaper.execution import derive_from_rows
+from datashaper.progress import progress_iterable
+from datashaper.progress.reporters import (
     ConsoleStatusReporter,
     FileStatusReporter,
-    ProgressStatus,
-    StatusReportHandler,
-    TableContainer,
-    VerbInput,
     VerbStatusReporter,
-    Workflow,
-    derive_from_rows,
-    progress_iterable,
 )
-
-from .helpers import mock_verbs, mock_workflows
+from datashaper.progress.types import ProgressStatus, StatusReportHandler
+from datashaper.table_store import TableContainer
+from datashaper.workflow import DEFAULT_INPUT_NAME, Workflow
 
 
 class TestWorkflowRun(unittest.TestCase):

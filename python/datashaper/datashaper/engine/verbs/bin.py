@@ -5,11 +5,10 @@
 
 import numpy as np
 
+from datashaper.engine.types import BinStrategy
+from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-
-from ...table_store import TableContainer
-from ..types import BinStrategy
-from .verb_input import VerbInput
+from datashaper.table_store import TableContainer
 
 
 def __get_bucket_value(bin_edges, indices, n, clamped, min_max, value, printRange):

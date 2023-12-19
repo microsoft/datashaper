@@ -4,9 +4,9 @@ import os
 from io import TextIOWrapper
 from typing import Any
 
-from ..types import ProgressStatus
-from .console_status_reporter import print_warning
-from .status_reporter import StatusReporter
+from datashaper.progress.reporters.console_status_reporter import print_warning
+from datashaper.progress.reporters.status_reporter import StatusReporter
+from datashaper.progress.types import ProgressStatus
 
 
 class FileStatusReporter(StatusReporter):

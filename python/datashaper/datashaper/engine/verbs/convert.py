@@ -13,11 +13,10 @@ import pandas as pd
 
 from pandas.api.types import is_bool_dtype, is_numeric_dtype
 
+from datashaper.engine.types import ParseType
+from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-
-from ...table_store import TableContainer
-from ..types import ParseType
-from .verb_input import VerbInput
+from datashaper.table_store import TableContainer
 
 
 def convert_int(value: str, radix: int) -> Union[int, float]:

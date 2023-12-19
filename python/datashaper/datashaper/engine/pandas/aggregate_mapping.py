@@ -1,6 +1,6 @@
 from functools import reduce
 
-from ..types import FieldAggregateOperation
+from datashaper.engine.types import FieldAggregateOperation
 
 
 aggregate_operation_mapping = {

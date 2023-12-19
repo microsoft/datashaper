@@ -7,11 +7,10 @@ from typing import List
 
 import pandas as pd
 
+from datashaper.engine.types import JoinStrategy
+from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-
-from ...table_store import TableContainer
-from ..types import JoinStrategy
-from .verb_input import VerbInput
+from datashaper.table_store import TableContainer
 
 
 __strategy_mapping = {

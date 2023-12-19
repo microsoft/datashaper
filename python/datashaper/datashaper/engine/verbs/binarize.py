@@ -5,13 +5,16 @@
 
 from typing import List
 
+from datashaper.engine.pandas import filter_df, get_operator
+from datashaper.engine.types import (
+    BooleanLogicalOperator,
+    Criterion,
+    FilterArgs,
+    FilterCompareType,
+)
+from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-
-from ...table_store import TableContainer
-from ..pandas.filter_df import filter_df
-from ..types import BooleanLogicalOperator, Criterion, FilterArgs, FilterCompareType
-from .filter import _get_operator
-from .verb_input import VerbInput
+from datashaper.table_store import TableContainer
 
 
 @verb(name="binarize")
@@ -22,7 +25,7 @@ def binarize(
         Criterion(
             value=arg.get("value", None),
             type=FilterCompareType(arg["type"]),
-            operator=_get_operator(arg["operator"]),
+            operator=get_operator(arg["operator"]),
         )
         for arg in criteria
     ]

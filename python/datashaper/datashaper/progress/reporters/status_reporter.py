@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from typing import Any
 
-from ..types import ProgressStatus
+from datashaper.progress.types import ProgressStatus
 
 
 class StatusReporter(metaclass=ABCMeta):

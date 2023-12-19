@@ -1,7 +1,7 @@
 from typing import Any
 
-from ..types import ProgressStatus, StatusReportHandler
-from .status_reporter import StatusReporter
+from datashaper.progress.reporters.status_reporter import StatusReporter
+from datashaper.progress.types import ProgressStatus, StatusReportHandler
 
 
 class VerbStatusReporter(StatusReporter):
