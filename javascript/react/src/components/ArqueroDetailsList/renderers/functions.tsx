@@ -9,6 +9,7 @@ import type {
 	IRenderFunction,
 } from '@fluentui/react'
 
+import { ROW_NUMBER_COLUMN_NAME } from '../ArqueroDetailsList.constants.js'
 import type {
 	ArqueroDetailsListFeatures,
 	DropdownOptionSelect,
@@ -19,6 +20,7 @@ import { CommandBarContainer } from './CommandBarContainer.js'
 import { DefaultColumnHeader } from './DefaultColumnHeader.js'
 import { FeaturesCell } from './FeaturesCell.js'
 import { HistogramColumnHeader } from './HistogramColumnHeader.js'
+import { RowNumberCell } from './RowNumberCell.js'
 import { SmartCell, StatsColumnHeader } from './index.js'
 
 export const createRenderSmartCell = (
@@ -181,6 +183,16 @@ export const createRenderHistogramColumnHeader = (
 				{...props}
 			/>
 		)
+	}
+}
+
+export const createRenderRowNumberColumn = (): IColumn => {
+	return {
+		key: ROW_NUMBER_COLUMN_NAME,
+		name: '',
+		fieldName: ROW_NUMBER_COLUMN_NAME,
+		minWidth: 20,
+		onRender: (_?: any, index?: number) => <RowNumberCell index={index} />,
 	}
 }
 

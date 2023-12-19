@@ -29,4 +29,4 @@ export const HISTOGRAM_HEADER_PADDING = 8
 export const HISTOGRAM_HEADER_HEIGHT = 20
 export const HISTOGRAM_HEADER_COMPACT_HEIGHT = 16
 
-export const ROW_NUMBER_COLUMN_NAME = 'rowNumber'
+export const ROW_NUMBER_COLUMN_NAME = '__rowNumber__'

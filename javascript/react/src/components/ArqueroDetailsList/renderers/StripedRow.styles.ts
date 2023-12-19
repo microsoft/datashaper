@@ -19,7 +19,6 @@ export function useStyles({
 	compact,
 	compactRowHeight,
 	styles,
-	hideRowNumber,
 }: RichRowProps): IStyleFunctionOrObject<
 	IDetailsRowStyleProps,
 	IDetailsRowStyles
@@ -50,14 +49,6 @@ export function useStyles({
 			fields: {},
 			...styles,
 		}
-		if (!hideRowNumber) {
-			style.fields = {
-				'.ms-DetailsRow-cell:first-child > div': {
-					color: theme.palette.neutralQuaternary,
-					fontSize: '12px',
-				},
-			}
-		}
 		return style
 	}, [
 		theme,
@@ -67,6 +58,5 @@ export function useStyles({
 		itemIndex,
 		compact,
 		compactRowHeight,
-		hideRowNumber,
 	])
 }

@@ -75,6 +75,5 @@ export interface RichHeaderProps extends Partial<IDetailsColumnProps> {
 export interface RichRowProps extends IDetailsRowProps {
 	striped?: boolean
 	columnBorders?: boolean
-	hideRowNumber?: boolean
 	compactRowHeight: number
 }
