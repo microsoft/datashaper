@@ -29,11 +29,12 @@ import {
 	useDetailsHeaderRenderer,
 	useDetailsListStyles,
 	useSlicedTable,
-	useSortedTable,
 	useSortHandling,
+	useSortedTable,
 	useStripedRowsRenderer,
 	useSubsetTable,
 } from './hooks/index.js'
+import { createRenderRowNumberColumn } from './renderers/index.js'
 
 /**
  * Renders an arquero table using a fluent DetailsList.
@@ -122,6 +123,10 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			},
 			virtual.virtualColumns,
 		)
+
+		if (!features.hideRowNumber) {
+			displayColumns.unshift(createRenderRowNumberColumn())
+		}
 
 		const headerStyle = useDetailsListStyles(
 			isHeaderFixed,

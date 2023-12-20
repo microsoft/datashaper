@@ -9,7 +9,6 @@ import type {
 } from '@fluentui/react'
 import { useThematicFluent } from '@thematic/fluent'
 import { useMemo } from 'react'
-
 import { DEFAULT_ROW_HEIGHT } from '../ArqueroDetailsList.constants.js'
 import type { RichRowProps } from './types.js'
 

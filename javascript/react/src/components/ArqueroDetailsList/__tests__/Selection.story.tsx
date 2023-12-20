@@ -4,6 +4,7 @@
  */
 import { introspect } from '@datashaper/tables'
 import type { IColumn } from '@fluentui/react'
+import { Toggle } from '@fluentui/react'
 import type { ComponentStory } from '@storybook/react'
 import { useCallback, useMemo, useState } from 'react'
 
@@ -15,6 +16,7 @@ export const SelectionStory: ComponentStory<typeof ArqueroDetailsList> = (
 	args: ArqueroDetailsListProps,
 	{ loaded: { stocks } }: any,
 ): JSX.Element => {
+	const [showRowNumber, setShowRowNumber] = useState<boolean>(true)
 	const [selected, setSelected] = useState<string | undefined>()
 	const metadata = useMemo(() => introspect(stocks, true), [stocks])
 	const handleSelect = useCallback(
@@ -23,20 +25,30 @@ export const SelectionStory: ComponentStory<typeof ArqueroDetailsList> = (
 		[setSelected],
 	)
 	return (
-		<ArqueroDetailsList
-			features={{
-				statsColumnHeaders: true,
-				statsColumnTypes: [StatsColumnType.Type],
-				histogramColumnHeaders: true,
-			}}
-			showColumnBorders
-			sortable
-			defaultSortColumn='Date'
-			{...args}
-			table={stocks}
-			metadata={metadata}
-			selectedColumn={selected}
-			onColumnSelect={handleSelect}
-		/>
+		<>
+			<Toggle
+				label='Show row number'
+				onText='On'
+				offText='Off'
+				defaultChecked={showRowNumber}
+				onChange={() => setShowRowNumber((prev) => !prev)}
+			/>
+			<ArqueroDetailsList
+				features={{
+					statsColumnHeaders: true,
+					statsColumnTypes: [StatsColumnType.Type],
+					histogramColumnHeaders: true,
+					hideRowNumber: !showRowNumber,
+				}}
+				showColumnBorders
+				sortable
+				defaultSortColumn='Date'
+				{...args}
+				table={stocks}
+				metadata={metadata}
+				selectedColumn={selected}
+				onColumnSelect={handleSelect}
+			/>
+		</>
 	)
 }

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { TooltipHost, DirectionalHint } from '@fluentui/react'
+import { DirectionalHint, TooltipHost } from '@fluentui/react'
 import { useBoolean, useId } from '@fluentui/react-hooks'
 import { memo } from 'react'
 import { Else, If, Then, When } from 'react-if'
@@ -18,10 +18,10 @@ import {
 	useTextStyle,
 } from './DefaultColumnHeader.hooks.js'
 import {
-	hostStyles,
 	HoverContainer,
 	LeftIcon,
 	RightIcon,
+	hostStyles,
 } from './DefaultColumnHeader.styles.js'
 import type { DefaultColumnHeaderProps } from './DefaultColumnHeader.types.js'
 export type { DefaultColumnHeaderProps } from './DefaultColumnHeader.types.js'
