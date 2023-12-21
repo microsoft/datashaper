@@ -2,8 +2,10 @@
 from typing import List
 
 from datashaper import TableContainer, VerbInput
+from datashaper.engine.verbs import verb
 
 
+@verb(name="genid")
 def genid(input: VerbInput, hash: List[str], to: str) -> TableContainer:
     """Generate IDs for each row. A pipeline verb."""
     df = input.source.table.copy()
@@ -16,6 +18,7 @@ def genid(input: VerbInput, hash: List[str], to: str) -> TableContainer:
     return TableContainer(table=df)
 
 
+@verb(name="embed")
 def embed(input: VerbInput, column: str, to: str) -> TableContainer:
     """Embed text per row. A pipeline verb."""
     df = input.source.table.copy()
@@ -23,6 +26,7 @@ def embed(input: VerbInput, column: str, to: str) -> TableContainer:
     return TableContainer(table=df)
 
 
+@verb(name="embed_mock")
 def embed_mock(input: VerbInput, column: str, to: str) -> TableContainer:
     """Embed text per row. A pipeline verb."""
     df = input.source.table.copy()
