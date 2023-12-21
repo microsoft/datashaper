@@ -55,8 +55,25 @@ Core verbs are built into the toolkit, and should generally have JavaScript and 
 1. Schema definition - this is done by authoring TypeScript types in the [javascript/schema](./javascript/schema/) folder, which are then generated as JSONSchema during a build step.
 2. Cross-platform tests - these are defined in [schema/fixtures](./schema/fixtures), primarily in the workflow folder. Each fixture includes a workflow.json and an expected output csv file. Executors run in both JavaScript and Python to confirm that outputs match the expected table.
 3. JavaScript implementation - verbs are implemented in [javascript/workflow/verbs](./javascript/workflow/src/verbs/)
-4. Python implementation - verbs are implemented in [python/verbs](./python/datashaper/datashaper/engine/verbs/)
-5. Verb UX - individual verb UX components are in [javascript/react](./javascript/react/src/components/verbs/)
+4. Verb UX - individual verb UX components are in [javascript/react](./javascript/react/src/components/verbs/)
+
+#### Python implementation
+1. Verbs are implemented in [python/verbs](./python/datashaper/datashaper/engine/verbs/)
+2. Create a verb file following the json schema as package structure, for example, if in the schema the verbs is defined as:
+```json
+"verb": {
+    "const": "strings.upper",
+    "type": "string"
+}
+```
+The location of the verb must be in [datashaper.engine.verbs.strings.upper](./python/datashaper/datashaper/engine/verbs/strings/upper.py).
+
+3. Create a function that replicates the same functionality as the javascript version and use the `@verb` decorator to make it available to the Workflow engine. The `name` parameter of the decorator must match the package name defined in the schema. For example:
+```python
+@verb(name="strings.upper")
+def upper(input: VerbInput, column: str, to: str):
+    ...
+```
 
 ### Custom verbs
 
