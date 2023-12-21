@@ -22,12 +22,15 @@ class TestWorkflowRun(unittest.TestCase):
     def test_define_basic_workflow_does_not_crash(self):
         workflow = Workflow(
             verbs={
-                "test_verb": create_passthrough_verb(),
+                "test_define_basic_workflow_does_not_crash": create_passthrough_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
-                    {"verb": "test_verb", "input": {"source": DEFAULT_INPUT_NAME}},
+                    {
+                        "verb": "test_define_basic_workflow_does_not_crash",
+                        "input": {"source": DEFAULT_INPUT_NAME},
+                    },
                 ],
             },
             validate=False,
@@ -41,12 +44,15 @@ class TestWorkflowRun(unittest.TestCase):
     def test_run_basic_workflow_does_not_crash(self):
         workflow = Workflow(
             verbs={
-                "test_verb": create_passthrough_verb(),
+                "test_run_basic_workflow_does_not_crash": create_passthrough_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
-                    {"verb": "test_verb", "input": {"source": DEFAULT_INPUT_NAME}},
+                    {
+                        "verb": "test_run_basic_workflow_does_not_crash",
+                        "input": {"source": DEFAULT_INPUT_NAME},
+                    },
                 ],
             },
             validate=False,
@@ -60,14 +66,14 @@ class TestWorkflowRun(unittest.TestCase):
     def test_create_basic_workflow_with_test_inputs_does_not_crash(self):
         wf = Workflow(
             verbs={
-                "test_verb": create_passthrough_verb(),
+                "test_create_basic_workflow_with_test_inputs_does_not_crash": create_passthrough_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
                     {
                         "id": "123",
-                        "verb": "test_verb",
+                        "verb": "test_create_basic_workflow_with_test_inputs_does_not_crash",
                         "input": {"source": DEFAULT_INPUT_NAME},
                     },
                 ],
@@ -81,14 +87,14 @@ class TestWorkflowRun(unittest.TestCase):
     def test_workflow_dependencies(self):
         wf = Workflow(
             verbs={
-                "test_verb": create_passthrough_verb(),
+                "test_workflow_dependencies": create_passthrough_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
                     {
                         "id": "123",
-                        "verb": "test_verb",
+                        "verb": "test_workflow_dependencies",
                         "input": {
                             "source": DEFAULT_INPUT_NAME,
                             "depends_on": ["external_1", "external_2"],
@@ -96,10 +102,14 @@ class TestWorkflowRun(unittest.TestCase):
                     },
                     {
                         "id": "123",
-                        "verb": "test_verb",
+                        "verb": "test_workflow_dependencies",
                         "input": {"source": "external_3"},
                     },
-                    {"id": "123", "verb": "test_verb", "input": "external_4"},
+                    {
+                        "id": "123",
+                        "verb": "test_workflow_dependencies",
+                        "input": "external_4",
+                    },
                 ],
             },
             validate=False,
@@ -122,12 +132,15 @@ class TestWorkflowRun(unittest.TestCase):
     def test_basic_workflow_with_context_passing(self):
         workflow = Workflow(
             verbs={
-                "test_verb": create_context_consuming_verb(),
+                "test_basic_workflow_with_context_passing": create_context_consuming_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
-                    {"verb": "test_verb", "input": {"source": DEFAULT_INPUT_NAME}},
+                    {
+                        "verb": "test_basic_workflow_with_context_passing",
+                        "input": {"source": DEFAULT_INPUT_NAME},
+                    },
                 ],
             },
             validate=False,
@@ -140,12 +153,15 @@ class TestWorkflowRun(unittest.TestCase):
     def test_workflow_with(self):
         workflow = Workflow(
             verbs={
-                "test_verb": create_parallel_transforming_verb(),
+                "test_workflow_with": create_parallel_transforming_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
-                    {"verb": "test_verb", "input": {"source": DEFAULT_INPUT_NAME}},
+                    {
+                        "verb": "test_workflow_with",
+                        "input": {"source": DEFAULT_INPUT_NAME},
+                    },
                 ],
             },
             validate=False,
@@ -162,12 +178,15 @@ class TestWorkflowRun(unittest.TestCase):
         with self.assertRaises(ValueError) as ctx:
             workflow = Workflow(
                 verbs={
-                    "test_verb": create_parallel_transforming_verb_throwing(),
+                    "test_workflow_with_transform_util_verb_throwing": create_parallel_transforming_verb_throwing(),
                 },
                 schema={
                     "name": "test_workflow",
                     "steps": [
-                        {"verb": "test_verb", "input": {"source": DEFAULT_INPUT_NAME}},
+                        {
+                            "verb": "test_workflow_with_transform_util_verb_throwing",
+                            "input": {"source": DEFAULT_INPUT_NAME},
+                        },
                     ],
                 },
                 validate=False,
@@ -181,12 +200,15 @@ class TestWorkflowRun(unittest.TestCase):
         reporter = FileStatusReporter("./.temp")
         workflow = Workflow(
             verbs={
-                "test_verb": create_context_consuming_verb(),
+                "test_basic_workflow_with_file_status_reporter": create_context_consuming_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
-                    {"verb": "test_verb", "input": {"source": DEFAULT_INPUT_NAME}},
+                    {
+                        "verb": "test_basic_workflow_with_file_status_reporter",
+                        "input": {"source": DEFAULT_INPUT_NAME},
+                    },
                 ],
             },
             validate=False,
@@ -201,12 +223,15 @@ class TestWorkflowRun(unittest.TestCase):
         reporter = ConsoleStatusReporter()
         workflow = Workflow(
             verbs={
-                "test_verb": create_context_consuming_verb(),
+                "test_basic_workflow_with_console_status_reporter": create_context_consuming_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
-                    {"verb": "test_verb", "input": {"source": DEFAULT_INPUT_NAME}},
+                    {
+                        "verb": "test_basic_workflow_with_console_status_reporter",
+                        "input": {"source": DEFAULT_INPUT_NAME},
+                    },
                 ],
             },
             validate=False,
@@ -220,12 +245,15 @@ class TestWorkflowRun(unittest.TestCase):
     def test_workflow_with_async_verb(self):
         wf = Workflow(
             verbs={
-                "test_verb": create_async_verb(),
+                "test_workflow_with_async_verb": create_async_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
-                    {"verb": "test_verb", "input": {"source": DEFAULT_INPUT_NAME}},
+                    {
+                        "verb": "test_workflow_with_async_verb",
+                        "input": {"source": DEFAULT_INPUT_NAME},
+                    },
                 ],
             },
             validate=False,
@@ -240,13 +268,13 @@ class TestWorkflowRun(unittest.TestCase):
         with self.assertRaises(ValueError) as context:
             workflow = Workflow(
                 verbs={
-                    "test_verb": create_passthrough_verb(),
+                    "test_workflow_first_step_with_invalid_input_crashes": create_passthrough_verb(),
                 },
                 schema={
                     "name": "test_workflow",
                     "steps": [
                         {
-                            "verb": "test_verb",
+                            "verb": "test_workflow_first_step_with_invalid_input_crashes",
                             "input": {"source": "missing_input"},
                         },
                     ],
@@ -263,7 +291,7 @@ class TestWorkflowRun(unittest.TestCase):
         with self.assertRaises(ValueError) as context:
             workflow = Workflow(
                 verbs={
-                    "test_verb": create_passthrough_verb(),
+                    "test_workflow_invalid_verb_throws_error": create_passthrough_verb(),
                 },
                 schema={
                     "name": "test_workflow",
@@ -284,14 +312,14 @@ class TestWorkflowRun(unittest.TestCase):
     def test_workflow_steps_with_no_input_defaults_input_correctly(self):
         workflow = Workflow(
             verbs={
-                "test_verb": create_passthrough_verb(),
+                "test_workflow_steps_with_no_input_defaults_input_correctly": create_passthrough_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
                     {
                         "id": "test",
-                        "verb": "test_verb"
+                        "verb": "test_workflow_steps_with_no_input_defaults_input_correctly"
                         # First step is missing the input, it should default to DEFAULT_INPUT_NAME
                     },
                 ],
@@ -312,15 +340,17 @@ class TestWorkflowRun(unittest.TestCase):
         first_step_output = pd.DataFrame({"b": [1, 2, 3]})
         workflow = Workflow(
             verbs={
-                "test_verb": create_verb_that_returns(first_step_output),
+                "test_workflow_second_step_gets_first_steps_input": create_verb_that_returns(
+                    first_step_output
+                ),
                 # Pass along the input to the output
-                "test_verb2": create_passthrough_verb(),
+                "test_workflow_second_step_gets_first_steps_input2": create_passthrough_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
-                    {"verb": "test_verb"},
-                    {"verb": "test_verb2"},
+                    {"verb": "test_workflow_second_step_gets_first_steps_input"},
+                    {"verb": "test_workflow_second_step_gets_first_steps_input2"},
                 ],
             },
             validate=False,
@@ -342,15 +372,20 @@ class TestWorkflowRun(unittest.TestCase):
         workflow = Workflow(
             verbs={
                 # Pass along the input to the output
-                "test_verb": create_passthrough_verb(),
+                "test_workflow_second_step_gets_first_steps_input_when_first_step_has_non_default_input": create_passthrough_verb(),
                 # Pass along the input to the output
-                "test_verb2": create_passthrough_verb(),
+                "test_workflow_second_step_gets_first_steps_input_when_first_step_has_non_default_input2": create_passthrough_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
-                    {"verb": "test_verb", "input": {"source": "non_default_input"}},
-                    {"verb": "test_verb2"},
+                    {
+                        "verb": "test_workflow_second_step_gets_first_steps_input_when_first_step_has_non_default_input",
+                        "input": {"source": "non_default_input"},
+                    },
+                    {
+                        "verb": "test_workflow_second_step_gets_first_steps_input_when_first_step_has_non_default_input2"
+                    },
                 ],
             },
             validate=False,
@@ -371,20 +406,20 @@ class TestWorkflowRun(unittest.TestCase):
         workflow = Workflow(
             verbs={
                 # Pass along the input to the output
-                "test_verb": create_passthrough_verb(),
+                "test_workflow_second_step_gets_current_input_when_it_specifies_a_custom_input": create_passthrough_verb(),
                 # Pass along the input to the output
-                "test_verb2": create_passthrough_verb(),
+                "test_workflow_second_step_gets_current_input_when_it_specifies_a_custom_input2": create_passthrough_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
                     {
                         "id": "step_1",
-                        "verb": "test_verb",
+                        "verb": "test_workflow_second_step_gets_current_input_when_it_specifies_a_custom_input",
                     },
                     {
                         "id": "step_2",
-                        "verb": "test_verb2",
+                        "verb": "test_workflow_second_step_gets_current_input_when_it_specifies_a_custom_input2",
                         "input": {"source": "second_verb_input"},
                     },
                 ],
