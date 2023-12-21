@@ -1,87 +1,30 @@
-from .aggregate import aggregate
-from .bin import bin
-from .binarize import binarize
-from .boolean import boolean
-from .concat import concat
-from .convert import convert
-from .copy import copy
-from .dedupe import dedupe
-from .derive import derive
-from .difference import difference
-from .drop import drop
-from .erase import erase
-from .fill import fill
-from .filter import filter
-from .fold import fold
-from .groupby import groupby
-from .impute import impute
-from .intersect import intersect
-from .join import join
-from .lookup import lookup
-from .merge import merge
-from .onehot import onehot
-from .orderby import orderby
-from .pivot import pivot
-from .recode import recode
-from .rename import rename
-from .rollup import rollup
-from .sample import sample
-from .select import select
-from .spread import spread
-from .strings import lower, replace, upper
-from .unfold import unfold
-from .ungroup import ungroup
-from .unhot import unhot
-from .union import union
-from .unorder import unorder
-from .unroll import unroll
+import importlib
+import importlib.util
+import os
+import pkgutil
+
 from .verb_input import VerbInput
-from .verbs_mapping import VerbManager, verb
-from .window import window
+from .verbs_mapping import VerbManager
 
 
-__all__ = [
-    "lower",
-    "upper",
-    "replace",
-    "aggregate",
-    "bin",
-    "binarize",
-    "boolean",
-    "concat",
-    "convert",
-    "copy",
-    "dedupe",
-    "derive",
-    "difference",
-    "drop",
-    "erase",
-    "fill",
-    "filter",
-    "fold",
-    "groupby",
-    "impute",
-    "intersect",
-    "join",
-    "lookup",
-    "merge",
-    "onehot",
-    "orderby",
-    "pivot",
-    "recode",
-    "rename",
-    "rollup",
-    "sample",
-    "select",
-    "spread",
-    "unfold",
-    "ungroup",
-    "unhot",
-    "union",
-    "unorder",
-    "unroll",
-    "VerbInput",
-    "VerbManager",
-    "verb",
-    "window",
-]
+def load_verbs(module_path: str, module_name: str):
+    """
+    Loads the verbs from the given module path recursively.
+    This is useful to run all the @verb decorators and register the verbs in the verb manager.
+    """
+    for _, sub_module, is_module in pkgutil.iter_modules([module_path]):
+        if not is_module:
+            full_path = os.path.join(module_path, f"{sub_module}.py")
+            module = importlib.util.spec_from_file_location(module_name, full_path)
+            module_to_load = f"{module.name}.{sub_module}"
+            importlib.import_module(module_to_load)
+        else:
+            full_path = os.path.join(module_path, sub_module)
+            sub_module_name = f"{__name__}.{sub_module}"
+            load_verbs(full_path, sub_module_name)
+
+
+load_verbs(os.path.dirname(__file__), __name__)
+
+
+__all__ = ["VerbInput", "VerbManager", "load_verbs"]

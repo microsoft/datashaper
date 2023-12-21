@@ -28,13 +28,16 @@ class VerbManager:
     verbs: dict[str, Callable] = field(default_factory=dict)
 
     def __getitem__(self, verb: str) -> Callable[..., TableContainer]:
-        return self.verbs[verb]
+        return self.get_verb(verb)
 
     def __contains__(self, verb: str) -> bool:
         return verb in self.verbs
 
     def register_verbs(self, verbs: dict[str, Callable]):
         self.verbs.update(verbs)
+
+    def get_verb(self, verb: str) -> Callable[..., TableContainer]:
+        return self.verbs[verb]
 
     @classmethod
     @cache
