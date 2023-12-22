@@ -3,6 +3,7 @@ import importlib.util
 import logging
 import os
 import pkgutil
+import sys
 
 from .verb_input import VerbInput
 from .verbs_mapping import VerbManager, verb
@@ -11,11 +12,13 @@ from .verbs_mapping import VerbManager, verb
 logger = logging.getLogger(__name__)
 
 
-def load_verbs(module_path: str, module_name: str):
+def load_verbs(module):
     """
     Loads the verbs from the given module path recursively.
     This is useful to run all the @verb decorators and register the verbs in the verb manager.
     """
+    module_path = os.path.dirname(module.__file__)
+    module_name = module.__name__
     for _, sub_module, is_module in pkgutil.iter_modules([module_path]):
         if not is_module:
             full_path = os.path.join(module_path, f"{sub_module}.py")
@@ -26,10 +29,13 @@ def load_verbs(module_path: str, module_name: str):
         else:
             full_path = os.path.join(module_path, sub_module)
             sub_module_name = f"{__name__}.{sub_module}"
-            load_verbs(full_path, sub_module_name)
+            sub_module_rec = importlib.import_module(sub_module_name)
+            load_verbs(sub_module_rec)
 
 
-load_verbs(os.path.dirname(__file__), __name__)
+# Load core verbs into VerbManager
+mod = sys.modules[__name__]
+load_verbs(mod)
 
 
 __all__ = ["VerbInput", "VerbManager", "load_verbs", "verb"]
