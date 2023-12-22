@@ -7,7 +7,7 @@ import pytest
 
 NOTEBOOKS_PATH = "notebooks/"
 
-notebooks_list = [f.name for f in os.scandir(NOTEBOOKS_PATH) if f.name.endswith(".ipynb")]
+notebooks_list = [file.name for file in os.scandir(NOTEBOOKS_PATH) if file.name.endswith(".ipynb")]
 
 def _notebook_run(filepath):
     """Execute a notebook via nbconvert and collect output.
@@ -15,7 +15,7 @@ def _notebook_run(filepath):
 
     Source of this function: http://www.christianmoscardi.com/blog/2016/01/20/jupyter-testing.html
     """
-    with tempfile.NamedTemporaryFile(suffix=".ipynb") as fout:
+    with tempfile.NamedTemporaryFile(suffix=".ipynb") as temp_file:
         args = [
             "jupyter",
             "nbconvert",
@@ -25,13 +25,13 @@ def _notebook_run(filepath):
             "-y",
             "--no-prompt",
             "--output",
-            fout.name,
+            temp_file.name,
             filepath,
         ]
         subprocess.check_call(args)
 
-        fout.seek(0)
-        nb = nbformat.read(fout, nbformat.current_nbformat)
+        temp_file.seek(0)
+        nb = nbformat.read(temp_file, nbformat.current_nbformat)
 
     errors = [
         output for cell in nb.cells if "outputs" in cell for output in cell["outputs"] if output.output_type == "error"
