@@ -17,7 +17,7 @@
 					"size": {
 						"field": "d",
 						"domain": [0, 1],
-						"range": [1, 10]
+						"range": [1, 8]
 					},
 					"fill": {
 						"field": "clusterId",

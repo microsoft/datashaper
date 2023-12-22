@@ -24,6 +24,6 @@ const Container = styled.div``
 const Header = styled.div`
 		font-weight: bold;
 		padding: 4px;
-		background: #efefef;
-		border: 1px solid #ececec;
+		background: ${({ theme }) => theme.palette.neutralQuaternaryAlt};
+		border: 1px solid ${({ theme }) => theme.palette.neutralTertiaryAlt};
 	`

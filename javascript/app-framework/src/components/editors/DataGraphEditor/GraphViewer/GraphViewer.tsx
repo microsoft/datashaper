@@ -10,7 +10,7 @@ import { memo } from 'react'
 import '@react-sigma/core/lib/react-sigma.min.css'
 
 import { useGraph } from './GraphViewer.hooks.js'
-import { sigmaStyles } from './GraphViewer.styles.js'
+import { useSigmaStyles } from './GraphViewer.styles.js'
 import { SigmaContainer } from '@react-sigma/core'
 
 export interface GraphViewerProps {
@@ -20,6 +20,7 @@ export interface GraphViewerProps {
 
 export const GraphViewer: React.FC<GraphViewerProps> = memo(
 	function GraphViewer({ nodesTable, nodeBindings }) {
+		const sigmaStyles = useSigmaStyles()
 		const graph = useGraph(nodesTable, nodeBindings)
 		return <SigmaContainer graph={graph} style={sigmaStyles} />
 	},
