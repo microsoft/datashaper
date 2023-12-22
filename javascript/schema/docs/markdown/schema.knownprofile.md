@@ -15,6 +15,7 @@ export declare enum KnownProfile
 |  Member | Value | Description |
 |  --- | --- | --- |
 |  Codebook | <code>&quot;codebook&quot;</code> |  |
+|  DataGraph | <code>&quot;datagraph&quot;</code> |  |
 |  DataPackage | <code>&quot;datapackage&quot;</code> |  |
 |  DataTable | <code>&quot;datatable&quot;</code> |  |
 |  TableBundle | <code>&quot;tablebundle&quot;</code> |  |

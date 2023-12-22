@@ -4,6 +4,7 @@
  */
 import { versions } from '../versions.js'
 import type { CodebookSchema } from './codebook/CodebookSchema.js'
+import type { DataGraphSchema } from './datagraph/DataGraphSchema.js'
 import type { DataPackageSchema } from './datapackage/DataPackageSchema.js'
 import type { DataTableSchema } from './datatable/DataTableSchema.js'
 import { KnownProfile } from './enums/index.js'
@@ -76,6 +77,18 @@ export function createCodebookSchemaObject(
 		title: 'codebook',
 		name: input.name ?? 'codebook.json',
 		profile: KnownProfile.Codebook,
+		...input,
+	}
+}
+
+export function createDataGraphSchemaObject(
+	input: FactoryInput<DataGraphSchema>,
+): DataGraphSchema {
+	return {
+		$schema: 'TODO: G1',
+		title: 'Graph',
+		name: input.name ?? 'graph.json',
+		profile: KnownProfile.DataGraph,
 		...input,
 	}
 }

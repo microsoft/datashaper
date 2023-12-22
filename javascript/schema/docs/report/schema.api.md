@@ -123,6 +123,15 @@ export interface BundleSchema {
     profile?: string;
 }
 
+// Warning: (ae-missing-release-tag) "CartesianPointBindings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface CartesianPointBindings {
+    size?: NumericFieldScaleBinding;
+    x?: DataFieldBinding;
+    y?: DataFieldBinding;
+}
+
 // Warning: (ae-missing-release-tag) "Category" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -186,6 +195,11 @@ export interface CopyArgs extends InputColumnArgs, OutputColumnArgs {
 // @public (undocumented)
 export function createCodebookSchemaObject(input: FactoryInput<CodebookSchema>): CodebookSchema;
 
+// Warning: (ae-missing-release-tag) "createDataGraphSchemaObject" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function createDataGraphSchemaObject(input: FactoryInput<DataGraphSchema>): DataGraphSchema;
+
 // Warning: (ae-missing-release-tag) "createDataPackageSchemaObject" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -220,6 +234,14 @@ export interface Criterion {
     value?: Value;
 }
 
+// Warning: (ae-missing-release-tag) "DataFieldBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface DataFieldBinding {
+    // (undocumented)
+    field?: string;
+}
+
 // Warning: (ae-missing-release-tag) "DataFormat" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -227,6 +249,35 @@ export enum DataFormat {
     ARROW = "arrow",
     CSV = "csv",
     JSON = "json"
+}
+
+// Warning: (ae-missing-release-tag) "DataGraphEdges" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface DataGraphEdges {
+    identifier?: string;
+    input?: string;
+    source?: string;
+    target?: string;
+}
+
+// Warning: (ae-missing-release-tag) "DataGraphNodes" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface DataGraphNodes {
+    bindings: CartesianPointBindings;
+    identifier?: string;
+    input?: string;
+}
+
+// Warning: (ae-missing-release-tag) "DataGraphSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface DataGraphSchema extends ResourceSchema {
+    edges: DataGraphEdges;
+    nodes: DataGraphNodes;
+    // (undocumented)
+    profile: KnownProfile.DataGraph;
 }
 
 // Warning: (ae-missing-release-tag) "DataNature" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -594,6 +645,8 @@ export enum KnownProfile {
     // (undocumented)
     Codebook = "codebook",
     // (undocumented)
+    DataGraph = "datagraph",
+    // (undocumented)
     DataPackage = "datapackage",
     // (undocumented)
     DataTable = "datatable",
@@ -710,6 +763,14 @@ export enum NumericComparisonOperator {
     LessThanOrEqual = "<=",
     // (undocumented)
     NotEqual = "!="
+}
+
+// Warning: (ae-missing-release-tag) "NumericFieldScaleBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface NumericFieldScaleBinding extends DataFieldBinding {
+    domain?: [number, number];
+    range?: [number, number];
 }
 
 // Warning: (ae-missing-release-tag) "OnehotArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

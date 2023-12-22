@@ -9,10 +9,15 @@ import type { BehaviorSubject } from 'rxjs';
 import type { BinArgs } from '@datashaper/schema';
 import type { BinarizeArgs } from '@datashaper/schema';
 import type { BooleanArgs } from '@datashaper/schema';
+import type { CartesianPointBindings as CartesianPointBindings_2 } from '@datashaper/schema';
 import type { CodebookSchema } from '@datashaper/schema';
 import type { ConvertArgs } from '@datashaper/schema';
 import type { CopyArgs } from '@datashaper/schema';
+import type { DataFieldBinding as DataFieldBinding_2 } from '@datashaper/schema';
 import { DataFormat } from '@datashaper/schema';
+import type { DataGraphEdges } from '@datashaper/schema';
+import type { DataGraphNodes as DataGraphNodes_2 } from '@datashaper/schema';
+import type { DataGraphSchema } from '@datashaper/schema';
 import type { DataNature } from '@datashaper/schema';
 import type { DataOrientation } from '@datashaper/schema';
 import type { DataPackageSchema } from '@datashaper/schema';
@@ -35,6 +40,7 @@ import type { LookupArgs } from '@datashaper/schema';
 import type { Maybe as Maybe_2 } from '@datashaper/workflow';
 import type { MergeArgs } from '@datashaper/schema';
 import type { Named as Named_2 } from '@datashaper/schema';
+import type { NumericFieldScaleBinding as NumericFieldScaleBinding_2 } from '@datashaper/schema';
 import { Observable } from 'rxjs';
 import type { OnehotArgs } from '@datashaper/schema';
 import type { OrderbyArgs } from '@datashaper/schema';
@@ -134,6 +140,23 @@ export const binarize: (id: string) => StepNode<TableContainer<unknown>, Binariz
 // @public (undocumented)
 export const boolean: (id: string) => StepNode<TableContainer<unknown>, BooleanArgs>;
 
+// Warning: (ae-missing-release-tag) "CartesianPointBindings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class CartesianPointBindings extends Observed implements CartesianPointBindings_2 {
+    constructor(schema?: CartesianPointBindings_2);
+    // (undocumented)
+    loadSchema(schema: Maybe<CartesianPointBindings_2>, quiet?: boolean): void;
+    // (undocumented)
+    size: NumericFieldScaleBinding;
+    // (undocumented)
+    toSchema(): CartesianPointBindings_2;
+    // (undocumented)
+    x: DataFieldBinding;
+    // (undocumented)
+    y: DataFieldBinding;
+}
+
 // Warning: (ae-missing-release-tag) "cloneStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -221,6 +244,83 @@ export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 //
 // @public (undocumented)
 export function createNode(step: Step): Node_2<TableContainer>;
+
+// Warning: (ae-missing-release-tag) "DataFieldBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class DataFieldBinding extends Observed implements DataFieldBinding_2 {
+    constructor(schema?: DataFieldBinding_2);
+    // (undocumented)
+    get field$(): Observable<string | undefined>;
+    // (undocumented)
+    get field(): string | undefined;
+    set field(field: string | undefined);
+    // (undocumented)
+    loadSchema(schema: Maybe<DataFieldBinding_2>, quiet?: boolean): void;
+    // (undocumented)
+    toSchema(): DataFieldBinding_2;
+}
+
+// Warning: (ae-missing-release-tag) "DataGraph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class DataGraph extends Resource {
+    // (undocumented)
+    readonly $schema = "TODO";
+    constructor(data?: Readable<DataGraphSchema>);
+    // (undocumented)
+    defaultName(): string;
+    // (undocumented)
+    get edges$(): Observable<DataGraphEdges>;
+    // (undocumented)
+    get edges(): DataGraphEdges;
+    set edges(value: DataGraphEdges);
+    // (undocumented)
+    get edgesInput(): Maybe<TableBundle | DataTable>;
+    // (undocumented)
+    loadSchema(schema: Maybe<Readable<DataGraphSchema>>, quiet?: boolean): void;
+    // (undocumented)
+    readonly nodes: DataGraphNodes;
+    // (undocumented)
+    get nodesInput(): Maybe<TableBundle | DataTable>;
+    // (undocumented)
+    readonly profile = KnownProfile.DataGraph;
+    // (undocumented)
+    toSchema(): DataGraphSchema;
+}
+
+// Warning: (ae-missing-release-tag) "DataGraphNodes" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class DataGraphNodes extends Observed implements DataGraphNodes_2 {
+    constructor(schema?: DataGraphNodes_2);
+    // (undocumented)
+    bindings: CartesianPointBindings;
+    // (undocumented)
+    get identifier$(): Observable<string | undefined>;
+    // (undocumented)
+    get identifier(): string | undefined;
+    set identifier(identifier: string | undefined);
+    // (undocumented)
+    get input$(): Observable<string | undefined>;
+    // (undocumented)
+    get input(): string | undefined;
+    set input(input: string | undefined);
+    // (undocumented)
+    loadSchema(schema: Maybe<DataGraphNodes_2>, quiet?: boolean): void;
+    // (undocumented)
+    toSchema(): DataGraphNodes_2;
+}
+
+// Warning: (ae-missing-release-tag) "DataGraphProfile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class DataGraphProfile implements ProfileHandler<DataGraph, DataGraphSchema> {
+    // (undocumented)
+    createInstance(schema: DataGraphSchema | undefined): Promise<DataGraph>;
+    // (undocumented)
+    readonly profile: Profile;
+}
 
 // Warning: (ae-missing-release-tag) "DataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -706,6 +806,32 @@ export interface NodeStats {
     recalculationCauses: Record<string, number>;
     recalculations: number;
     version: number;
+}
+
+// Warning: (ae-missing-release-tag) "NumericFieldScaleBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class NumericFieldScaleBinding extends Observed implements NumericFieldScaleBinding_2 {
+    constructor(schema?: NumericFieldScaleBinding_2);
+    // (undocumented)
+    get domain$(): Observable<[number, number]>;
+    // (undocumented)
+    get domain(): [number, number];
+    set domain(domain: [number, number]);
+    // (undocumented)
+    get field$(): Observable<string | undefined>;
+    // (undocumented)
+    get field(): string | undefined;
+    set field(field: string | undefined);
+    // (undocumented)
+    loadSchema(schema: Maybe<NumericFieldScaleBinding_2>, quiet?: boolean): void;
+    // (undocumented)
+    get range$(): Observable<[number, number]>;
+    // (undocumented)
+    get range(): [number, number];
+    set range(range: [number, number]);
+    // (undocumented)
+    toSchema(): NumericFieldScaleBinding_2;
 }
 
 // Warning: (ae-missing-release-tag) "ObservableNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

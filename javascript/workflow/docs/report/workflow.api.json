@@ -1585,6 +1585,281 @@
           }
         },
         {
+          "kind": "Class",
+          "canonicalReference": "@datashaper/workflow!CartesianPointBindings:class",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class CartesianPointBindings extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Observed",
+              "canonicalReference": "@datashaper/workflow!Observed:class"
+            },
+            {
+              "kind": "Content",
+              "text": " implements "
+            },
+            {
+              "kind": "Reference",
+              "text": "CartesianPointBindingsSchema",
+              "canonicalReference": "@datashaper/schema!CartesianPointBindings:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "CartesianPointBindings",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@datashaper/workflow!CartesianPointBindings:constructor(1)",
+              "docComment": "/**\n * Constructs a new instance of the `CartesianPointBindings` class\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(schema?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CartesianPointBindingsSchema",
+                  "canonicalReference": "@datashaper/schema!CartesianPointBindings:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "schema",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": true
+                }
+              ]
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!CartesianPointBindings#loadSchema:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "loadSchema(schema: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Maybe",
+                  "canonicalReference": "@datashaper/workflow!Maybe:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CartesianPointBindingsSchema",
+                  "canonicalReference": "@datashaper/schema!CartesianPointBindings:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", quiet?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 9
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "schema",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 5
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "quiet",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "name": "loadSchema"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!CartesianPointBindings#size:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "size: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NumericFieldScaleBinding",
+                  "canonicalReference": "@datashaper/workflow!NumericFieldScaleBinding:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "size",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!CartesianPointBindings#toSchema:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "toSchema(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CartesianPointBindingsSchema",
+                  "canonicalReference": "@datashaper/schema!CartesianPointBindings:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "name": "toSchema"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!CartesianPointBindings#x:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "x: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataFieldBinding",
+                  "canonicalReference": "@datashaper/workflow!DataFieldBinding:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "x",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!CartesianPointBindings#y:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "y: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataFieldBinding",
+                  "canonicalReference": "@datashaper/workflow!DataFieldBinding:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "y",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
+          "implementsTokenRanges": [
+            {
+              "startIndex": 3,
+              "endIndex": 4
+            }
+          ]
+        },
+        {
           "kind": "Function",
           "canonicalReference": "@datashaper/workflow!cloneStep:function(1)",
           "docComment": "",
@@ -2818,6 +3093,1250 @@
             }
           ],
           "name": "createNode"
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@datashaper/workflow!DataFieldBinding:class",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class DataFieldBinding extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Observed",
+              "canonicalReference": "@datashaper/workflow!Observed:class"
+            },
+            {
+              "kind": "Content",
+              "text": " implements "
+            },
+            {
+              "kind": "Reference",
+              "text": "DataFieldBindingSchema",
+              "canonicalReference": "@datashaper/schema!DataFieldBinding:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "DataFieldBinding",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@datashaper/workflow!DataFieldBinding:constructor(1)",
+              "docComment": "/**\n * Constructs a new instance of the `DataFieldBinding` class\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(schema?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataFieldBindingSchema",
+                  "canonicalReference": "@datashaper/schema!DataFieldBinding:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "schema",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": true
+                }
+              ]
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!DataFieldBinding#field:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get field(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n\nset field(field: string | undefined);"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "field",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!DataFieldBinding#field$:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get field$(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Observable",
+                  "canonicalReference": "rxjs!Observable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string | undefined>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "field$",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!DataFieldBinding#loadSchema:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "loadSchema(schema: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Maybe",
+                  "canonicalReference": "@datashaper/workflow!Maybe:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataFieldBindingSchema",
+                  "canonicalReference": "@datashaper/schema!DataFieldBinding:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", quiet?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 9
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "schema",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 5
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "quiet",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "name": "loadSchema"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!DataFieldBinding#toSchema:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "toSchema(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataFieldBindingSchema",
+                  "canonicalReference": "@datashaper/schema!DataFieldBinding:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "name": "toSchema"
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
+          "implementsTokenRanges": [
+            {
+              "startIndex": 3,
+              "endIndex": 4
+            }
+          ]
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@datashaper/workflow!DataGraph:class",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class DataGraph extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Resource",
+              "canonicalReference": "@datashaper/workflow!Resource:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "DataGraph",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@datashaper/workflow!DataGraph:constructor(1)",
+              "docComment": "/**\n * Constructs a new instance of the `DataGraph` class\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(data?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Readable",
+                  "canonicalReference": "@datashaper/workflow!Readable:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataGraphSchema",
+                  "canonicalReference": "@datashaper/schema!DataGraphSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "data",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 5
+                  },
+                  "isOptional": true
+                }
+              ]
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!DataGraph#$schema:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly $schema = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"TODO\""
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "$schema",
+              "propertyTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!DataGraph#defaultName:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "defaultName(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "name": "defaultName"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!DataGraph#edges:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get edges(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataGraphEdges",
+                  "canonicalReference": "@datashaper/schema!DataGraphEdges:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n\nset edges(value: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataGraphEdges",
+                  "canonicalReference": "@datashaper/schema!DataGraphEdges:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "edges",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!DataGraph#edges$:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get edges$(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Observable",
+                  "canonicalReference": "rxjs!Observable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataGraphEdges",
+                  "canonicalReference": "@datashaper/schema!DataGraphEdges:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "edges$",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!DataGraph#edgesInput:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get edgesInput(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Maybe",
+                  "canonicalReference": "@datashaper/workflow!Maybe:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TableBundle",
+                  "canonicalReference": "@datashaper/workflow!TableBundle:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataTable",
+                  "canonicalReference": "@datashaper/workflow!DataTable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "edgesInput",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 7
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!DataGraph#loadSchema:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "loadSchema(schema: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Maybe",
+                  "canonicalReference": "@datashaper/workflow!Maybe:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Readable",
+                  "canonicalReference": "@datashaper/workflow!Readable:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataGraphSchema",
+                  "canonicalReference": "@datashaper/schema!DataGraphSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", quiet?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 10,
+                "endIndex": 11
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "schema",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 7
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "quiet",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 8,
+                    "endIndex": 9
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "name": "loadSchema"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!DataGraph#nodes:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly nodes: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataGraphNodes",
+                  "canonicalReference": "@datashaper/workflow!DataGraphNodes:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "nodes",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!DataGraph#nodesInput:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get nodesInput(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Maybe",
+                  "canonicalReference": "@datashaper/workflow!Maybe:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TableBundle",
+                  "canonicalReference": "@datashaper/workflow!TableBundle:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataTable",
+                  "canonicalReference": "@datashaper/workflow!DataTable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "nodesInput",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 7
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!DataGraph#profile:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly profile = "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "KnownProfile.DataGraph",
+                  "canonicalReference": "@datashaper/schema!KnownProfile.DataGraph:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "profile",
+              "propertyTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!DataGraph#toSchema:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "toSchema(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataGraphSchema",
+                  "canonicalReference": "@datashaper/schema!DataGraphSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "name": "toSchema"
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@datashaper/workflow!DataGraphNodes:class",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class DataGraphNodes extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Observed",
+              "canonicalReference": "@datashaper/workflow!Observed:class"
+            },
+            {
+              "kind": "Content",
+              "text": " implements "
+            },
+            {
+              "kind": "Reference",
+              "text": "DataGraphNodesSchema",
+              "canonicalReference": "@datashaper/schema!DataGraphNodes:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "DataGraphNodes",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@datashaper/workflow!DataGraphNodes:constructor(1)",
+              "docComment": "/**\n * Constructs a new instance of the `DataGraphNodes` class\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(schema?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataGraphNodesSchema",
+                  "canonicalReference": "@datashaper/schema!DataGraphNodes:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "schema",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": true
+                }
+              ]
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!DataGraphNodes#bindings:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "bindings: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CartesianPointBindings",
+                  "canonicalReference": "@datashaper/workflow!CartesianPointBindings:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "bindings",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!DataGraphNodes#identifier:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get identifier(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n\nset identifier(identifier: string | undefined);"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "identifier",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!DataGraphNodes#identifier$:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get identifier$(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Observable",
+                  "canonicalReference": "rxjs!Observable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string | undefined>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "identifier$",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!DataGraphNodes#input:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get input(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n\nset input(input: string | undefined);"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "input",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!DataGraphNodes#input$:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get input$(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Observable",
+                  "canonicalReference": "rxjs!Observable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string | undefined>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "input$",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!DataGraphNodes#loadSchema:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "loadSchema(schema: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Maybe",
+                  "canonicalReference": "@datashaper/workflow!Maybe:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataGraphNodesSchema",
+                  "canonicalReference": "@datashaper/schema!DataGraphNodes:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", quiet?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 9
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "schema",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 5
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "quiet",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "name": "loadSchema"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!DataGraphNodes#toSchema:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "toSchema(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataGraphNodesSchema",
+                  "canonicalReference": "@datashaper/schema!DataGraphNodes:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "name": "toSchema"
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
+          "implementsTokenRanges": [
+            {
+              "startIndex": 3,
+              "endIndex": 4
+            }
+          ]
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@datashaper/workflow!DataGraphProfile:class",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class DataGraphProfile implements "
+            },
+            {
+              "kind": "Reference",
+              "text": "ProfileHandler",
+              "canonicalReference": "@datashaper/workflow!ProfileHandler:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "DataGraph",
+              "canonicalReference": "@datashaper/workflow!DataGraph:class"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "DataGraphSchema",
+              "canonicalReference": "@datashaper/schema!DataGraphSchema:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "DataGraphProfile",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!DataGraphProfile#createInstance:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "createInstance(schema: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataGraphSchema",
+                  "canonicalReference": "@datashaper/schema!DataGraphSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataGraph",
+                  "canonicalReference": "@datashaper/workflow!DataGraph:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 8
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "schema",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "name": "createInstance"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!DataGraphProfile#profile:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly profile: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Profile",
+                  "canonicalReference": "@datashaper/schema!Profile:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "profile",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            }
+          ],
+          "implementsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 7
+            }
+          ]
         },
         {
           "kind": "Class",
@@ -9154,6 +10673,380 @@
             }
           ],
           "extendsTokenRanges": []
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@datashaper/workflow!NumericFieldScaleBinding:class",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class NumericFieldScaleBinding extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Observed",
+              "canonicalReference": "@datashaper/workflow!Observed:class"
+            },
+            {
+              "kind": "Content",
+              "text": " implements "
+            },
+            {
+              "kind": "Reference",
+              "text": "NumericFieldBindingSchema",
+              "canonicalReference": "@datashaper/schema!NumericFieldScaleBinding:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "NumericFieldScaleBinding",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@datashaper/workflow!NumericFieldScaleBinding:constructor(1)",
+              "docComment": "/**\n * Constructs a new instance of the `NumericFieldScaleBinding` class\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(schema?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NumericFieldBindingSchema",
+                  "canonicalReference": "@datashaper/schema!NumericFieldScaleBinding:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "schema",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": true
+                }
+              ]
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!NumericFieldScaleBinding#domain:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get domain(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "[number, number]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n\nset domain(domain: [number, number]);"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "domain",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!NumericFieldScaleBinding#domain$:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get domain$(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Observable",
+                  "canonicalReference": "rxjs!Observable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<[number, number]>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "domain$",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!NumericFieldScaleBinding#field:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get field(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n\nset field(field: string | undefined);"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "field",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!NumericFieldScaleBinding#field$:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get field$(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Observable",
+                  "canonicalReference": "rxjs!Observable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string | undefined>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "field$",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!NumericFieldScaleBinding#loadSchema:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "loadSchema(schema: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Maybe",
+                  "canonicalReference": "@datashaper/workflow!Maybe:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NumericFieldBindingSchema",
+                  "canonicalReference": "@datashaper/schema!NumericFieldScaleBinding:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", quiet?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 9
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "schema",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 5
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "quiet",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "name": "loadSchema"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!NumericFieldScaleBinding#range:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get range(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "[number, number]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n\nset range(range: [number, number]);"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "range",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!NumericFieldScaleBinding#range$:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get range$(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Observable",
+                  "canonicalReference": "rxjs!Observable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<[number, number]>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "range$",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!NumericFieldScaleBinding#toSchema:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "toSchema(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NumericFieldBindingSchema",
+                  "canonicalReference": "@datashaper/schema!NumericFieldScaleBinding:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "name": "toSchema"
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
+          "implementsTokenRanges": [
+            {
+              "startIndex": 3,
+              "endIndex": 4
+            }
+          ]
         },
         {
           "kind": "Class",

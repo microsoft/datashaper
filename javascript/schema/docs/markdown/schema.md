@@ -39,6 +39,7 @@
 |  Function | Description |
 |  --- | --- |
 |  [createCodebookSchemaObject(input)](./schema.createcodebookschemaobject.md) |  |
+|  [createDataGraphSchemaObject(input)](./schema.createdatagraphschemaobject.md) |  |
 |  [createDataPackageSchemaObject(input)](./schema.createdatapackageschemaobject.md) |  |
 |  [createDataTableSchemaObject(input)](./schema.createdatatableschemaobject.md) |  |
 |  [createSchemaValidator()](./schema.createschemavalidator.md) |  |
@@ -56,12 +57,17 @@
 |  [BinarizeArgs](./schema.binarizeargs.md) |  |
 |  [BooleanArgs](./schema.booleanargs.md) |  |
 |  [BundleSchema](./schema.bundleschema.md) | A schema for defining custom bundle types. |
+|  [CartesianPointBindings](./schema.cartesianpointbindings.md) | Describes the bindings between the fields necessary to render a point in cartesian space and the input data source. |
 |  [Category](./schema.category.md) | Describes a nominal category in terms of category name and count of values in the category. |
 |  [CodebookSchema](./schema.codebookschema.md) | This contains all of the field-level details for interpreting a dataset, including data types, mapping, and metadata. Note that with persisted metadata and field examples, a dataset can often be visualized and described to the user without actually loading the source file. resource profile: 'codebook' |
 |  [Constraints](./schema.constraints.md) | Validation constraints for a field. |
 |  [ConvertArgs](./schema.convertargs.md) |  |
 |  [CopyArgs](./schema.copyargs.md) |  |
 |  [Criterion](./schema.criterion.md) |  |
+|  [DataFieldBinding](./schema.datafieldbinding.md) | Describes a basic binding between a field in the input data source and a property of a visual element. |
+|  [DataGraphEdges](./schema.datagraphedges.md) | Describes the data input and visual bindings for graph edges. |
+|  [DataGraphNodes](./schema.datagraphnodes.md) | Describes the data input and visual bindings for graph nodes. |
+|  [DataGraphSchema](./schema.datagraphschema.md) | Describes the properties of a data graph, i.e., network. |
 |  [DataPackageSchema](./schema.datapackageschema.md) | Defines a Data Package, which is a collection of data resources such as files and schemas. Loosely based on the Frictionless spec, but modified where needed to meet our needs. https://specs.frictionlessdata.io/data-package/ |
 |  [DataShape](./schema.datashape.md) | Defines parameters for understanding the logical structure of data contents. |
 |  [DataTableSchema](./schema.datatableschema.md) | This defines the table-containing resource type. A dataset can be embedded directly using the <code>data</code> property, or it can be linked to a raw file using the <code>path</code>. If the latter, optional format and parsing options can be applied to aid interpreting the file contents. resource profile: 'datatable' |
@@ -85,6 +91,7 @@
 |  [LookupArgs](./schema.lookupargs.md) |  |
 |  [MergeArgs](./schema.mergeargs.md) |  |
 |  [Named](./schema.named.md) | Base interface for sharing properties of named resources/objects. |
+|  [NumericFieldScaleBinding](./schema.numericfieldscalebinding.md) | Describes the parameters to map a data field onto a numeric scale. |
 |  [OnehotArgs](./schema.onehotargs.md) |  |
 |  [OrderbyArgs](./schema.orderbyargs.md) |  |
 |  [OrderbyInstruction](./schema.orderbyinstruction.md) |  |

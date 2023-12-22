@@ -1324,6 +1324,107 @@
         },
         {
           "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!CartesianPointBindings:interface",
+          "docComment": "/**\n * Describes the bindings between the fields necessary to render a point in cartesian space and the input data source.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface CartesianPointBindings "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "CartesianPointBindings",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!CartesianPointBindings#size:member",
+              "docComment": "/**\n * Bindings for the size of the point.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "size?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NumericFieldScaleBinding",
+                  "canonicalReference": "@datashaper/schema!NumericFieldScaleBinding:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "size",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!CartesianPointBindings#x:member",
+              "docComment": "/**\n * Bindings for the x position.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "x?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataFieldBinding",
+                  "canonicalReference": "@datashaper/schema!DataFieldBinding:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "x",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!CartesianPointBindings#y:member",
+              "docComment": "/**\n * Bindings for the y position.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "y?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataFieldBinding",
+                  "canonicalReference": "@datashaper/schema!DataFieldBinding:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "y",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
           "canonicalReference": "@datashaper/schema!Category:interface",
           "docComment": "/**\n * Describes a nominal category in terms of category name and count of values in the category.\n */\n",
           "excerptTokens": [
@@ -2053,6 +2154,65 @@
         },
         {
           "kind": "Function",
+          "canonicalReference": "@datashaper/schema!createDataGraphSchemaObject:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function createDataGraphSchemaObject(input: "
+            },
+            {
+              "kind": "Reference",
+              "text": "FactoryInput",
+              "canonicalReference": "@datashaper/schema!FactoryInput:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "DataGraphSchema",
+              "canonicalReference": "@datashaper/schema!DataGraphSchema:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "DataGraphSchema",
+              "canonicalReference": "@datashaper/schema!DataGraphSchema:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 6,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "input",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "createDataGraphSchemaObject"
+        },
+        {
+          "kind": "Function",
           "canonicalReference": "@datashaper/schema!createDataPackageSchemaObject:function(1)",
           "docComment": "",
           "excerptTokens": [
@@ -2444,6 +2604,50 @@
           "extendsTokenRanges": []
         },
         {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!DataFieldBinding:interface",
+          "docComment": "/**\n * Describes a basic binding between a field in the input data source and a property of a visual element.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface DataFieldBinding "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "DataFieldBinding",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!DataFieldBinding#field:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "field?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "field",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
           "kind": "Enum",
           "canonicalReference": "@datashaper/schema!DataFormat:enum",
           "docComment": "/**\n * Base format the data is stored within. This will expand to include additional formats such as Arrow and Parquet over time. TODO: we've seen a number of examples in the wild using JSON Lines https://jsonlines.org/\n */\n",
@@ -2519,6 +2723,345 @@
               },
               "releaseTag": "Public",
               "name": "JSON"
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!DataGraphEdges:interface",
+          "docComment": "/**\n * Describes the data input and visual bindings for graph edges.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface DataGraphEdges "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "DataGraphEdges",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!DataGraphEdges#identifier:member",
+              "docComment": "/**\n * Identifier column for the edges.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "identifier?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "identifier",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!DataGraphEdges#input:member",
+              "docComment": "/**\n * Name of the input. TODO: should this map generically to an Input?\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "input?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "input",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!DataGraphEdges#source:member",
+              "docComment": "/**\n * Column containing the source node id.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "source?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "source",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!DataGraphEdges#target:member",
+              "docComment": "/**\n * Column containing the target node id.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "target?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "target",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!DataGraphNodes:interface",
+          "docComment": "/**\n * Describes the data input and visual bindings for graph nodes.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface DataGraphNodes "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "DataGraphNodes",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!DataGraphNodes#bindings:member",
+              "docComment": "/**\n * Visual bindings for the nodes.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "bindings: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CartesianPointBindings",
+                  "canonicalReference": "@datashaper/schema!CartesianPointBindings:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "bindings",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!DataGraphNodes#identifier:member",
+              "docComment": "/**\n * Identifier column for the nodes.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "identifier?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "identifier",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!DataGraphNodes#input:member",
+              "docComment": "/**\n * Name of the input. TODO: should this map generically to an Input?\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "input?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "input",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!DataGraphSchema:interface",
+          "docComment": "/**\n * Describes the properties of a data graph, i.e., network.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface DataGraphSchema extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "ResourceSchema",
+              "canonicalReference": "@datashaper/schema!ResourceSchema:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "DataGraphSchema",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!DataGraphSchema#edges:member",
+              "docComment": "/**\n * Edges descriptor.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "edges: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataGraphEdges",
+                  "canonicalReference": "@datashaper/schema!DataGraphEdges:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "edges",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!DataGraphSchema#nodes:member",
+              "docComment": "/**\n * Nodes descriptor.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "nodes: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DataGraphNodes",
+                  "canonicalReference": "@datashaper/schema!DataGraphNodes:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "nodes",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!DataGraphSchema#profile:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "profile: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "KnownProfile.DataGraph",
+                  "canonicalReference": "@datashaper/schema!KnownProfile.DataGraph:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "profile",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
             }
           ]
         },
@@ -6433,6 +6976,27 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!KnownProfile.DataGraph:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "DataGraph = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"datagraph\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "DataGraph"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!KnownProfile.DataPackage:member",
               "docComment": "",
               "excerptTokens": [
@@ -7408,6 +7972,91 @@
               },
               "releaseTag": "Public",
               "name": "NotEqual"
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!NumericFieldScaleBinding:interface",
+          "docComment": "/**\n * Describes the parameters to map a data field onto a numeric scale.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface NumericFieldScaleBinding extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "DataFieldBinding",
+              "canonicalReference": "@datashaper/schema!DataFieldBinding:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "NumericFieldScaleBinding",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!NumericFieldScaleBinding#domain:member",
+              "docComment": "/**\n * Domain of the input data (e.g., min/max values).\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "domain?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "[number, number]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "domain",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!NumericFieldScaleBinding#range:member",
+              "docComment": "/**\n * Output range to map to (e.g., min/max pixels on the display).\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "range?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "[number, number]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "range",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
             }
           ]
         },

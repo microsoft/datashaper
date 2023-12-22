@@ -18,6 +18,7 @@ export enum KnownProfile {
 	DataPackage = 'datapackage',
 	DataTable = 'datatable',
 	Codebook = 'codebook',
+	DataGraph = 'datagraph',
 	Workflow = 'workflow',
 	TableBundle = 'tablebundle',
 }

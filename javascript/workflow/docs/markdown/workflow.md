@@ -9,14 +9,20 @@
 |  Class | Description |
 |  --- | --- |
 |  [BaseNode](./workflow.basenode.md) |  |
+|  [CartesianPointBindings](./workflow.cartesianpointbindings.md) |  |
 |  [Codebook](./workflow.codebook.md) |  |
 |  [CodebookProfile](./workflow.codebookprofile.md) |  |
+|  [DataFieldBinding](./workflow.datafieldbinding.md) |  |
+|  [DataGraph](./workflow.datagraph.md) |  |
+|  [DataGraphNodes](./workflow.datagraphnodes.md) |  |
+|  [DataGraphProfile](./workflow.datagraphprofile.md) |  |
 |  [DataPackage](./workflow.datapackage.md) |  |
 |  [DataShape](./workflow.datashape.md) |  |
 |  [DataTable](./workflow.datatable.md) |  |
 |  [DataTableProfile](./workflow.datatableprofile.md) |  |
 |  [DefaultGraph](./workflow.defaultgraph.md) |  |
 |  [Named](./workflow.named.md) |  |
+|  [NumericFieldScaleBinding](./workflow.numericfieldscalebinding.md) |  |
 |  [ObservableNode](./workflow.observablenode.md) |  |
 |  [Observed](./workflow.observed.md) |  |
 |  [ParserOptions](./workflow.parseroptions.md) |  |

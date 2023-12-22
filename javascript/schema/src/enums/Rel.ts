@@ -16,5 +16,5 @@ export type Rel =
 export enum KnownRel {
 	Input = 'input',
 	Codebook = 'codebook',
-	Workflow = 'workflow',
+	Workflow = 'workflow'
 }

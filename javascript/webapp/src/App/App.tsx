@@ -21,6 +21,7 @@ import type { AppContext, AppSettings } from '../types.js'
 const examples = [
 	{ name: 'Smoking', url: 'examples/smoking.json' },
 	{ name: 'Companies', url: 'examples/companies.json' },
+	{ name: 'Graphs', url: 'examples/graphs.json' },
 ]
 
 const defaultSettings: AppSettings = {
@@ -49,6 +50,8 @@ export const App: React.FC = memo(function App() {
 									profiles={customProfiles}
 									defaultSettings={defaultSettings}
 									appContext={context}
+									initialDataPackageUrl='examples/graphs.json'
+									initialRoute='resource/synthetic_1'
 								>
 									<About />
 								</DataShaperApp>

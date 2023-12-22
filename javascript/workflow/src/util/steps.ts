@@ -38,7 +38,7 @@ enum Tags {
 	 */
 	InputKeyValue = 5,
 	/**
-	 * A single output column is input
+	 * A single output column is output
 	 */
 	OutputColumn = 6,
 	/**

@@ -1,0 +1,151 @@
+{
+	"name": "Graphs",
+	"resources": [
+		{
+			"name": "synthetic_1",
+			"profile": "datagraph",
+			"nodes": {
+				"input": "nodes",
+				"identifier": "id",
+				"bindings": {
+					"x": {
+						"field": "x"
+					},
+					"y": {
+						"field": "y"
+					},
+					"size": {
+						"field": "d",
+						"domain": [0, 1],
+						"range": [1, 10]
+					}
+				}
+			},
+			"edges": {
+				"input": "edges",
+				"source": "source",
+				"target": "target"
+			},
+			"sources": [
+				{
+					"path": "nodes",
+					"rel": "input"
+				},
+				{
+					"path": "edges",
+					"rel": "input"
+				}
+			]
+		},
+		{
+			"name": "nodes",
+			"profile": "tablebundle",
+			"sources": [
+				{
+					"rel": "input",
+					"profile": "datatable",
+					"name": "nodes.csv",
+					"path": "data/synthetic_1/nodes.csv"
+				},
+				{
+					"$schema": "https://microsoft.github.io/datashaper/schema/codebook/v1.0.0.json",
+					"title": "codebook",
+					"name": "codebook-nodes.json",
+					"profile": "codebook",
+					"fields": [
+						{
+							"name": "id",
+							"type": "string",
+							"nature": "nominal"
+						},
+						{
+							"name": "x",
+							"type": "number",
+							"nature": "continuous"
+						},
+						{
+							"name": "y",
+							"type": "number",
+							"nature": "continuous"
+						},
+						{
+							"name": "d",
+							"type": "number",
+							"nature": "continuous"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "edges",
+			"profile": "tablebundle",
+			"sources": [
+				{
+					"rel": "input",
+					"profile": "datatable",
+					"name": "edges.csv",
+					"path": "data/synthetic_1/edges.csv"
+				},
+				{
+					"$schema": "https://microsoft.github.io/datashaper/schema/codebook/v1.0.0.json",
+					"title": "codebook",
+					"name": "codebook-edges.json",
+					"profile": "codebook",
+					"fields": [
+						{
+							"name": "source",
+							"type": "string",
+							"nature": "nominal"
+						},
+						{
+							"name": "target",
+							"type": "string",
+							"nature": "nominal"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "join",
+			"profile": "tablebundle",
+			"sources": [
+				{
+					"rel": "input",
+					"profile": "datatable",
+					"name": "join.csv",
+					"path": "data/synthetic_1/join.csv"
+				},
+				{
+					"$schema": "https://microsoft.github.io/datashaper/schema/codebook/v1.0.0.json",
+					"title": "codebook",
+					"name": "codebook-join.json",
+					"profile": "codebook",
+					"fields": [
+						{
+							"name": "nodeId",
+							"type": "string",
+							"nature": "nominal"
+						},
+						{
+							"name": "clusterId",
+							"type": "string",
+							"nature": "nominal"
+						},
+						{
+							"name": "clusterLevel",
+							"type": "number",
+							"nature": "ordinal"
+						},
+						{
+							"name": "parentCluster",
+							"type": "string",
+							"nature": "nominal"
+						}
+					]
+				}
+			]
+		}
+	]
+}
