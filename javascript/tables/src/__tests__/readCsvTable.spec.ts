@@ -206,11 +206,10 @@ describe('readCsvTable', () => {
 				'https://covid19.who.int/WHO-COVID-19-global-data.csv',
 			).then((r) => r.text())
 			largeDataset = remoteDataset + remoteDataset
-			while(largeDataset.split("\n").length < 466890) {
+			while (largeDataset.split('\n').length < 466890) {
 				// Double size if it's not big enough
 				largeDataset = largeDataset + largeDataset
 			}
-			
 		})
 
 		describe('arquero reader', () => {
