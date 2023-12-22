@@ -6,6 +6,7 @@ import { Dropdown } from '@fluentui/react'
 import { useObservableState } from 'observable-hooks'
 import { memo } from 'react'
 import type {
+	ColorBinding,
 	DataFieldBinding,
 	NumericFieldScaleBinding,
 } from '@datashaper/workflow'
@@ -14,7 +15,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import { useColumnOptions } from './Column.hooks.js'
 
 export interface ColumnProps {
-	binding: DataFieldBinding | NumericFieldScaleBinding
+	binding: DataFieldBinding | NumericFieldScaleBinding | ColorBinding // TODO: these should inherit from the DataFieldBinding type
 	table: ColumnTable | undefined
 	label?: string
 }

@@ -8,6 +8,8 @@ import { useCallback, useMemo } from 'react'
 import { useObservableState } from 'observable-hooks'
 import { scaleLinear } from 'd3-scale'
 import Graph from 'graphology'
+import { useThematic } from '@thematic/react'
+import { op } from 'arquero'
 
 export function useGraph(
 	nodesTable: ColumnTable,
@@ -23,10 +25,11 @@ export function useGraph(
 	}, [nodes])
 }
 
-function useNodes(table: ColumnTable, nodeBindings: CartesianPointBindings) {
-	const x = useXBinding(nodeBindings)
-	const y = useYBinding(nodeBindings)
-	const size = useSizeBinding(nodeBindings)
+function useNodes(table: ColumnTable, bindings: CartesianPointBindings) {
+	const x = useXBinding(bindings)
+	const y = useYBinding(bindings)
+	const size = useSizeBinding(bindings)
+	const fill = useFillBinding(bindings, table)
 	return useMemo(() => {
 		const nodes = table.objects()
 		return nodes.map((node) => ({
@@ -34,32 +37,33 @@ function useNodes(table: ColumnTable, nodeBindings: CartesianPointBindings) {
 			x: x(node),
 			y: y(node),
 			size: size(node),
+			color: fill(node),
 		}))
 	}, [table, x, y, size])
 }
 
-function useXBinding(nodeBindings: CartesianPointBindings) {
-	const field = useObservableState(nodeBindings.x.field$, nodeBindings.x.field)
+function useXBinding(bindings: CartesianPointBindings) {
+	const field = useObservableState(bindings.x.field$, bindings.x.field)
 	return useCallback((node: any) => (field ? node[field] : 0), [field])
 }
 
-function useYBinding(nodeBindings: CartesianPointBindings) {
-	const field = useObservableState(nodeBindings.y.field$, nodeBindings.y.field)
+function useYBinding(bindings: CartesianPointBindings) {
+	const field = useObservableState(bindings.y.field$, bindings.y.field)
 	return useCallback((node: any) => (field ? node[field] : 0), [field])
 }
 
-function useSizeBinding(nodeBindings: CartesianPointBindings) {
+function useSizeBinding(bindings: CartesianPointBindings) {
 	const field = useObservableState(
-		nodeBindings.size.field$,
-		nodeBindings.size.field,
+		bindings.size.field$,
+		bindings.size.field,
 	)
 	const domain = useObservableState(
-		nodeBindings.size.domain$,
-		nodeBindings.size.domain,
+		bindings.size.domain$,
+		bindings.size.domain,
 	)
 	const range = useObservableState(
-		nodeBindings.size.range$,
-		nodeBindings.size.range,
+		bindings.size.range$,
+		bindings.size.range,
 	)
 	const scale = useMemo(
 		() =>
@@ -74,4 +78,51 @@ function useSizeBinding(nodeBindings: CartesianPointBindings) {
 		},
 		[field, scale],
 	)
+}
+
+function useFillBinding(bindings: CartesianPointBindings, table: ColumnTable) {
+	const field = useObservableState(bindings.fill.field$, bindings.fill.field)
+	const scale = useObservableState(bindings.fill.scale$, bindings.fill.scale)
+	const fn = useThematicColorScale(scale, table, field)
+	return useCallback((node: any) => (field ? fn(node[field]).hex() : '#ccc'), [field, fn])
+}
+
+
+function useThematicColorScale(
+	name: string,
+	table: ColumnTable,
+	field: string
+) {
+	console.log(name, field)
+	const uniques = useMemo(() => {
+		if (field) {
+		return table.rollup({
+			uniques: op.distinct(field)
+		}).objects()[0].uniques
+		}
+		return 1
+	}, [table, field])
+	console.log('uniques', uniques)
+	const theme = useThematic()
+	return useMemo(() => {
+		const scales = theme.scales()
+		switch (name) {
+			case 'nominalMuted':
+				return scales.nominalMuted(uniques)
+			case 'nominalBold':
+				return scales.nominalBold(uniques)
+			// case 'sequential':
+			// 	return scales.sequential(domain, scaleType)
+			// case 'sequential2':
+			// 	return scales.sequential2(domain, scaleType)
+			// case 'diverging':
+			// 	return scales.diverging(domain, scaleType)
+			// case 'diverging2':
+			// 	return scales.diverging2(domain, scaleType)
+			// case 'greys':
+			// 	return scales.greys(domain, scaleType)
+			default:
+				return scales.nominal(uniques)
+		}
+	}, [theme, name, uniques])
 }

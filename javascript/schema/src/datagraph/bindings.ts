@@ -25,6 +25,14 @@ export interface NumericFieldScaleBinding extends DataFieldBinding {
 	range?: [number, number]
 }
 
+// TODO: this is a very rudimentary start at a color binding
+export interface ColorBinding extends DataFieldBinding {
+    /**
+     * Thematic color scale name.
+     */
+    scale?: string
+}
+
 /**
  * Describes the bindings between the fields necessary to render a point in cartesian space and the input data source.
  */
@@ -41,4 +49,6 @@ export interface CartesianPointBindings {
      * Bindings for the size of the point.
      */
 	size?: NumericFieldScaleBinding
+
+    fill?: ColorBinding
 }

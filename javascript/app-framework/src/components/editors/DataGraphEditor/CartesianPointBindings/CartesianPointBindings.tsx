@@ -11,6 +11,7 @@ import type { CartesianPointBindingsProps } from './CartesianPointBindings.types
 import { Column } from './Column.js'
 import { NumericColumn } from './NumericColumn.js'
 import { BindingSection } from './BindingSection.js'
+import { FillColor } from './FillColor.js'
 
 export const CartesianPointBindings: React.FC<CartesianPointBindingsProps> =
 	memo(function CartesianPointBindings({ bindings, table }) {
@@ -25,6 +26,9 @@ export const CartesianPointBindings: React.FC<CartesianPointBindingsProps> =
 					</BindingSection>
 					<BindingSection label={'Node size'}>
 						<NumericColumn binding={bindings.size} table={table} />
+					</BindingSection>
+					<BindingSection label={'Node fill'}>
+						<FillColor binding={bindings.fill} table={table} />
 					</BindingSection>
 				</FlexContainer>
 			</Container>

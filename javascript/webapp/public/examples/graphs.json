@@ -18,6 +18,10 @@
 						"field": "d",
 						"domain": [0, 1],
 						"range": [1, 10]
+					},
+					"fill": {
+						"field": "clusterId",
+						"scale": "nominal"
 					}
 				}
 			},
@@ -74,7 +78,36 @@
 							"nature": "continuous"
 						}
 					]
-				}
+				},
+				{
+					"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v2.0.0.json",
+					"title": "workflow.json",
+					"name": "workflow.json",
+					"profile": "workflow",
+					"input": [
+					  "nodes",
+					  "edges",
+					  "join"
+					],
+					"steps": [
+					  {
+						"id": "lookup",
+						"args": {
+						  "on": [
+							"id",
+							"nodeId"
+						  ],
+						  "columns": [
+							"clusterId"
+						  ]
+						},
+						"verb": "lookup",
+						"input": {
+						  "other": "join" 
+						}
+					  }
+					]
+				  }
 			]
 		},
 		{
@@ -144,7 +177,37 @@
 							"nature": "nominal"
 						}
 					]
-				}
+				},
+				{
+					"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v2.0.0.json",
+					"title": "workflow.json",
+					"name": "workflow (1).json",
+					"profile": "workflow",
+					"input": [
+					  "nodes",
+					  "edges",
+					  "join"
+					],
+					"steps": [
+					  {
+						"id": "filter",
+						"args": {
+						  "criteria": [
+							{
+							  "operator": "=",
+							  "type": "value",
+							  "value": "0"
+							}
+						  ],
+						  "logical": "or",
+						  "to": "clusterLevel",
+						  "column": "clusterLevel"
+						},
+						"verb": "filter",
+						"input": {}
+					  }
+					]
+				  }
 			]
 		}
 	]

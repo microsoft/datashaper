@@ -5,6 +5,7 @@
 
 export * from '../predicates.js'
 export * from './Codebook.js'
+export * from './ColorBinding.js'
 export * from './Configurable.js'
 export * from './DataFieldBinding.js'
 export * from './DataGraph/index.js'
