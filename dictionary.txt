@@ -7,6 +7,7 @@ pyproject
 ipynb
 pymodule
 
+
 # JavaScript Idioms
 QNAN
 href
@@ -22,6 +23,8 @@ linspace
 immer
 ahooks
 fluentui
+nbformat
+nbconvert
 
 # Library Methods/Args
 Expando
