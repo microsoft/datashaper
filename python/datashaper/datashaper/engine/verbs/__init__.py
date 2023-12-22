@@ -28,7 +28,7 @@ def load_verbs(module):
             logger.info(f"Found module: {module_to_load}")
         else:
             full_path = os.path.join(module_path, sub_module)
-            sub_module_name = f"{__name__}.{sub_module}"
+            sub_module_name = f"{module_name}.{sub_module}"
             sub_module_rec = importlib.import_module(sub_module_name)
             load_verbs(sub_module_rec)
 
