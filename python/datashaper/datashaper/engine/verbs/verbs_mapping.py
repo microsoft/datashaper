@@ -34,6 +34,8 @@ class VerbManager:
         return verb in self.verbs
 
     def register_verbs(self, verbs: dict[str, Callable]):
+        if any(verb in self.verbs for verb in verbs.keys()):
+            raise ValueError("Verb already registered.")
         self.verbs.update(verbs)
 
     def get_verb(self, verb: str) -> Callable[..., TableContainer]:

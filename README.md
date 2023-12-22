@@ -70,10 +70,13 @@ The location of the verb must be in [datashaper.engine.verbs.strings.upper](./py
 
 3. Create a function that replicates the same functionality as the javascript version and use the `@verb` decorator to make it available to the Workflow engine. The `name` parameter of the decorator must match the package name defined in the schema. For example:
 ```python
-@verb(name="strings.upper")
+@verb(name="my_package.upper")
 def upper(input: VerbInput, column: str, to: str):
     ...
 ```
+
+
+**Important Note:** If a verb already exists with the same `name` you will get a `ValueError`, pick a unique name for each verb. For example if you try to create a new `"strings.upper"` you will get a `ValueError` if you want to create a custom version of this verb you could use `"my_package.upper"` like the example above.
 
 ### Custom verbs
 
