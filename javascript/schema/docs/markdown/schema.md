@@ -57,9 +57,11 @@
 |  [BinarizeArgs](./schema.binarizeargs.md) |  |
 |  [BooleanArgs](./schema.booleanargs.md) |  |
 |  [BundleSchema](./schema.bundleschema.md) | A schema for defining custom bundle types. |
+|  [CartesianLineBindings](./schema.cartesianlinebindings.md) | Describes the bindings between the fields necessary to render a line in cartesian space and the input data source. Note that edge x1/y1 and x2/y2 are derived from the source and target node positions, and hence do not need a binding config. TODO: the source/target binding implies an edge, not a generic line. |
 |  [CartesianPointBindings](./schema.cartesianpointbindings.md) | Describes the bindings between the fields necessary to render a point in cartesian space and the input data source. |
 |  [Category](./schema.category.md) | Describes a nominal category in terms of category name and count of values in the category. |
 |  [CodebookSchema](./schema.codebookschema.md) | This contains all of the field-level details for interpreting a dataset, including data types, mapping, and metadata. Note that with persisted metadata and field examples, a dataset can often be visualized and described to the user without actually loading the source file. resource profile: 'codebook' |
+|  [ColorBinding](./schema.colorbinding.md) |  |
 |  [Constraints](./schema.constraints.md) | Validation constraints for a field. |
 |  [ConvertArgs](./schema.convertargs.md) |  |
 |  [CopyArgs](./schema.copyargs.md) |  |

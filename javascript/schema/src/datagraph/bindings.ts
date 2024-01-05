@@ -52,3 +52,19 @@ export interface CartesianPointBindings {
 
     fill?: ColorBinding
 }
+
+/**
+ * Describes the bindings between the fields necessary to render a line in cartesian space and the input data source.
+ * Note that edge x1/y1 and x2/y2 are derived from the source and target node positions, and hence do not need a binding config.
+ * TODO: the source/target binding implies an edge, not a generic line.
+ */
+export interface CartesianLineBindings {
+    /**
+     * Bindings for the width of the edge.
+     */
+	width?: NumericFieldScaleBinding
+    /**
+     * Bindings for the color of the edge.
+     */
+    stroke?: string
+}

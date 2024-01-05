@@ -23,6 +23,7 @@ export declare class CartesianPointBindings extends Observed implements Cartesia
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [fill](./workflow.cartesianpointbindings.fill.md) |  | [ColorBinding](./workflow.colorbinding.md) |  |
 |  [size](./workflow.cartesianpointbindings.size.md) |  | [NumericFieldScaleBinding](./workflow.numericfieldscalebinding.md) |  |
 |  [x](./workflow.cartesianpointbindings.x.md) |  | [DataFieldBinding](./workflow.datafieldbinding.md) |  |
 |  [y](./workflow.cartesianpointbindings.y.md) |  | [DataFieldBinding](./workflow.datafieldbinding.md) |  |

@@ -9,13 +9,10 @@ import { BehaviorSubject } from 'rxjs'
 import type { Maybe } from '../primitives.js'
 import { Observed } from './Observed.js'
 
-export class ColorBinding
-	extends Observed
-	implements ColorBindingSchema
-{
+export class ColorBinding extends Observed implements ColorBindingSchema {
 	private _field = new BehaviorSubject<string | undefined>(undefined)
 	private _scale = new BehaviorSubject<string | undefined>('nominal')
-	
+
 	public constructor(schema?: ColorBindingSchema) {
 		super()
 		this.loadSchema(schema)
@@ -34,7 +31,6 @@ export class ColorBinding
 		this._onChange.next()
 	}
 
-
 	public get scale$(): Observable<string | undefined> {
 		return this._scale
 	}
@@ -48,7 +44,6 @@ export class ColorBinding
 		this._onChange.next()
 	}
 
-
 	public toSchema(): ColorBindingSchema {
 		return {
 			field: this._field.value,
@@ -56,10 +51,7 @@ export class ColorBinding
 		}
 	}
 
-	public loadSchema(
-		schema: Maybe<ColorBindingSchema>,
-		quiet?: boolean,
-	): void {
+	public loadSchema(schema: Maybe<ColorBindingSchema>, quiet?: boolean): void {
 		this._field.next(schema?.field)
 		this._scale.next(schema?.scale || 'nominal')
 

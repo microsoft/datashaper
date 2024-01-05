@@ -16,6 +16,7 @@ export interface CartesianPointBindings
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [fill?](./schema.cartesianpointbindings.fill.md) |  | [ColorBinding](./schema.colorbinding.md) | <i>(Optional)</i> |
 |  [size?](./schema.cartesianpointbindings.size.md) |  | [NumericFieldScaleBinding](./schema.numericfieldscalebinding.md) | <i>(Optional)</i> Bindings for the size of the point. |
 |  [x?](./schema.cartesianpointbindings.x.md) |  | [DataFieldBinding](./schema.datafieldbinding.md) | <i>(Optional)</i> Bindings for the x position. |
 |  [y?](./schema.cartesianpointbindings.y.md) |  | [DataFieldBinding](./schema.datafieldbinding.md) | <i>(Optional)</i> Bindings for the y position. |

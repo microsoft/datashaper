@@ -4,7 +4,7 @@
  */
 import type { ResourceSchema } from '../datapackage/ResourceSchema.js'
 import type { KnownProfile } from '../enums/index.js'
-import type { CartesianPointBindings } from './bindings.js'
+import type { CartesianLineBindings, CartesianPointBindings } from './bindings.js'
 
 /**
  * Describes the properties of a data graph, i.e., network.
@@ -61,4 +61,8 @@ export interface DataGraphEdges {
 	 * Column containing the target node id.
 	 */
 	target?: string
+	/**
+	 * Visual bindings for the edges.
+	 */
+	bindings: CartesianLineBindings
 }

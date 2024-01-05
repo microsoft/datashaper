@@ -15,17 +15,23 @@ import {
 	Header,
 } from './DataGraphEditor.styles.js'
 import { When } from 'react-if'
-import { useNodesInputTable } from './DataGraphEditor.hooks.js'
+import {
+	useEdgesInputTable,
+	useNodesInputTable,
+} from './DataGraphEditor.hooks.js'
 import { useToolPanelStyles } from '../styles.js'
 import { useToolPanelExpandCollapse } from '../hooks.js'
 import { CommandBar } from '@fluentui/react'
-import { CartesianPointBindings } from './CartesianPointBindings/index.js'
+
 import { GraphViewer } from './GraphViewer/GraphViewer.js'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
+import { EdgeBindings } from './bindings/EdgeBindings/EdgeBindings.js'
+import { NodeBindings } from './bindings/NodeBindings/NodeBindings.js'
 
 export const DataGraphEditor: React.FC<ProfileComponentProps<DataGraph>> = memo(
 	function DataGraphEditor({ resource }) {
 		const nodesInputTable = useNodesInputTable(resource)
+		const edgesInputTable = useEdgesInputTable(resource)
 
 		const toolPanelStyles = useToolPanelStyles()
 		const { collapsed, onToggleCollapsed, commandBar, iconProps } =
@@ -37,10 +43,12 @@ export const DataGraphEditor: React.FC<ProfileComponentProps<DataGraph>> = memo(
 						<CommandBar {...commandBar} />
 					</Header>
 					<GraphContainer>
-						<When condition={!!nodesInputTable}>
+						<When condition={!!nodesInputTable && !!edgesInputTable}>
 							<GraphViewer
 								nodesTable={nodesInputTable as ColumnTable}
+								edgesTable={edgesInputTable as ColumnTable}
 								nodeBindings={resource.nodes.bindings}
+								edgeBindings={resource.edges.bindings}
 							/>
 						</When>
 					</GraphContainer>
@@ -53,9 +61,15 @@ export const DataGraphEditor: React.FC<ProfileComponentProps<DataGraph>> = memo(
 					styles={toolPanelStyles}
 				>
 					<ConfigContainer>
-						<CartesianPointBindings
+						<NodeBindings
 							bindings={resource.nodes.bindings}
 							table={nodesInputTable}
+						/>
+					</ConfigContainer>
+					<ConfigContainer>
+						<EdgeBindings
+							bindings={resource.edges.bindings}
+							table={edgesInputTable}
 						/>
 					</ConfigContainer>
 				</ToolPanel>

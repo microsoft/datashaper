@@ -10,28 +10,29 @@ import { Column } from './Column.js'
 import styled from 'styled-components'
 import { Dropdown } from '@fluentui/react'
 
-export interface FillColorProps {
+export interface ColorScaleProps {
 	binding: ColorBinding
 	table: ColumnTable | undefined
 }
 
-export const FillColor: React.FC<FillColorProps> = memo(
-	function FillColor({ binding, table }) {
-		return (
-			<FlexContainer>
-				<Column table={table} binding={binding} />
-				<Dropdown
-					label={'Color scale'}
-					options={scaleOptions}
-					onChange={(_, option) => {
-						binding.scale = option?.key as string
-					}}
-					selectedKey={binding.scale}
-				/>
-			</FlexContainer>
-		)
-	},
-)
+export const ColorScale: React.FC<ColorScaleProps> = memo(function ColorScale({
+	binding,
+	table,
+}) {
+	return (
+		<FlexContainer>
+			<Column table={table} binding={binding} />
+			<Dropdown
+				label={'Color scale'}
+				options={scaleOptions}
+				onChange={(_, option) => {
+					binding.scale = option?.key as string
+				}}
+				selectedKey={binding.scale}
+			/>
+		</FlexContainer>
+	)
+})
 
 const FlexContainer = styled.div`
 		display: flex;
@@ -39,13 +40,17 @@ const FlexContainer = styled.div`
 		gap: 12px;
 	`
 
-	const scaleOptions = [{
+const scaleOptions = [
+	{
 		key: 'nominal',
-		text: 'Nominal'
-	}, {
+		text: 'Nominal',
+	},
+	{
 		key: 'nominalMuted',
-		text: 'Nominal Muted'
-	}, {
+		text: 'Nominal Muted',
+	},
+	{
 		key: 'nominalBold',
-		text: 'Nominal Bold'
-	}]
+		text: 'Nominal Bold',
+	},
+]

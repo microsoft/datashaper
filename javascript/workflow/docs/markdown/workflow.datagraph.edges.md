@@ -7,7 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-get edges(): DataGraphEdges;
-
-set edges(value: DataGraphEdges);
+readonly edges: DataGraphEdges;
 ```

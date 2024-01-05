@@ -9,9 +9,11 @@
 |  Class | Description |
 |  --- | --- |
 |  [BaseNode](./workflow.basenode.md) |  |
+|  [CartesianLineBindings](./workflow.cartesianlinebindings.md) |  |
 |  [CartesianPointBindings](./workflow.cartesianpointbindings.md) |  |
 |  [Codebook](./workflow.codebook.md) |  |
 |  [CodebookProfile](./workflow.codebookprofile.md) |  |
+|  [ColorBinding](./workflow.colorbinding.md) |  |
 |  [DataFieldBinding](./workflow.datafieldbinding.md) |  |
 |  [DataGraph](./workflow.datagraph.md) |  |
 |  [DataGraphNodes](./workflow.datagraphnodes.md) |  |

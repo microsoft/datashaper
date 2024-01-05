@@ -22,8 +22,7 @@ export declare class DataGraph extends Resource
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [$schema](./workflow.datagraph._schema.md) | <code>readonly</code> | (not declared) |  |
-|  [edges](./workflow.datagraph.edges.md) |  | DataGraphEdges |  |
-|  [edges$](./workflow.datagraph.edges_.md) | <code>readonly</code> | Observable&lt;DataGraphEdges&gt; |  |
+|  [edges](./workflow.datagraph.edges.md) | <code>readonly</code> | DataGraphEdges |  |
 |  [edgesInput](./workflow.datagraph.edgesinput.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;[TableBundle](./workflow.tablebundle.md) \| [DataTable](./workflow.datatable.md)<!-- -->&gt; |  |
 |  [nodes](./workflow.datagraph.nodes.md) | <code>readonly</code> | [DataGraphNodes](./workflow.datagraphnodes.md) |  |
 |  [nodesInput](./workflow.datagraph.nodesinput.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;[TableBundle](./workflow.tablebundle.md) \| [DataTable](./workflow.datatable.md)<!-- -->&gt; |  |

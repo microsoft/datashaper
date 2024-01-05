@@ -123,10 +123,20 @@ export interface BundleSchema {
     profile?: string;
 }
 
+// Warning: (ae-missing-release-tag) "CartesianLineBindings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface CartesianLineBindings {
+    stroke?: string;
+    width?: NumericFieldScaleBinding;
+}
+
 // Warning: (ae-missing-release-tag) "CartesianPointBindings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export interface CartesianPointBindings {
+    // (undocumented)
+    fill?: ColorBinding;
     size?: NumericFieldScaleBinding;
     x?: DataFieldBinding;
     y?: DataFieldBinding;
@@ -158,6 +168,13 @@ export enum CodebookStrategy {
     DataTypeAndMapping = "data type and mapping",
     DataTypeOnly = "data type only",
     MappingOnly = "mapping only"
+}
+
+// Warning: (ae-missing-release-tag) "ColorBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ColorBinding extends DataFieldBinding {
+    scale?: string;
 }
 
 // Warning: (ae-missing-release-tag) "Constraints" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -255,6 +272,7 @@ export enum DataFormat {
 //
 // @public
 export interface DataGraphEdges {
+    bindings: CartesianLineBindings;
     identifier?: string;
     input?: string;
     source?: string;

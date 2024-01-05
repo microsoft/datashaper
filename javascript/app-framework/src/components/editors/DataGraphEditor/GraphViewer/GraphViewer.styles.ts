@@ -3,14 +3,17 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { useThematic } from "@thematic/react"
-import { useMemo } from "react"
+import { useThematic } from '@thematic/react'
+import { useMemo } from 'react'
 
-export function useSigmaStyles() {
+export function useSigmaStyles(): React.CSSProperties {
 	const theme = useThematic()
-	return useMemo(() => ({
-		height: '100%',
-		width: '100%',
-		background: theme.plotArea().fill().hex(),
-	}), [theme])
+	return useMemo(
+		() => ({
+			height: '100%',
+			width: '100%',
+			background: theme.plotArea().fill().hex(),
+		}),
+		[theme],
+	)
 }

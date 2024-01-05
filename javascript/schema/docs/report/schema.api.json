@@ -1324,6 +1324,78 @@
         },
         {
           "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!CartesianLineBindings:interface",
+          "docComment": "/**\n * Describes the bindings between the fields necessary to render a line in cartesian space and the input data source. Note that edge x1/y1 and x2/y2 are derived from the source and target node positions, and hence do not need a binding config. TODO: the source/target binding implies an edge, not a generic line.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface CartesianLineBindings "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "CartesianLineBindings",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!CartesianLineBindings#stroke:member",
+              "docComment": "/**\n * Bindings for the color of the edge.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "stroke?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "stroke",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!CartesianLineBindings#width:member",
+              "docComment": "/**\n * Bindings for the width of the edge.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "width?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NumericFieldScaleBinding",
+                  "canonicalReference": "@datashaper/schema!NumericFieldScaleBinding:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "width",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
           "canonicalReference": "@datashaper/schema!CartesianPointBindings:interface",
           "docComment": "/**\n * Describes the bindings between the fields necessary to render a point in cartesian space and the input data source.\n */\n",
           "excerptTokens": [
@@ -1336,6 +1408,34 @@
           "name": "CartesianPointBindings",
           "preserveMemberOrder": false,
           "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!CartesianPointBindings#fill:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fill?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ColorBinding",
+                  "canonicalReference": "@datashaper/schema!ColorBinding:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "fill",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!CartesianPointBindings#size:member",
@@ -1661,6 +1761,64 @@
               },
               "releaseTag": "Public",
               "name": "MappingOnly"
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!ColorBinding:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface ColorBinding extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "DataFieldBinding",
+              "canonicalReference": "@datashaper/schema!DataFieldBinding:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ColorBinding",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!ColorBinding#scale:member",
+              "docComment": "/**\n * Thematic color scale name.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "scale?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "scale",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
             }
           ]
         },
@@ -2740,6 +2898,34 @@
           "name": "DataGraphEdges",
           "preserveMemberOrder": false,
           "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!DataGraphEdges#bindings:member",
+              "docComment": "/**\n * Visual bindings for the edges.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "bindings: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CartesianLineBindings",
+                  "canonicalReference": "@datashaper/schema!CartesianLineBindings:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "bindings",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!DataGraphEdges#identifier:member",

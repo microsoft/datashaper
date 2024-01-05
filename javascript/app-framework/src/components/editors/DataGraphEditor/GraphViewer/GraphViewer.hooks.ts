@@ -3,7 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
-import type { CartesianPointBindings } from '@datashaper/workflow'
+import type {
+	CartesianPointBindings,
+	CartesianLineBindings,
+} from '@datashaper/workflow'
 import { useCallback, useMemo } from 'react'
 import { useObservableState } from 'observable-hooks'
 import { scaleLinear } from 'd3-scale'
@@ -13,16 +16,23 @@ import { op } from 'arquero'
 
 export function useGraph(
 	nodesTable: ColumnTable,
+	edgesTable: ColumnTable,
 	nodeBindings: CartesianPointBindings,
+	edgeBindings: CartesianLineBindings,
 ): Graph {
 	const nodes = useNodes(nodesTable, nodeBindings)
+	const edges = useEdges(edgesTable, edgeBindings)
 	return useMemo(() => {
 		const graph = new Graph()
 		nodes.forEach((node) => {
 			graph.addNode(node.id, node)
 		})
+		edges.forEach((edge) => {
+			graph.addEdge(edge.source, edge.target, edge)
+		})
+
 		return graph
-	}, [nodes])
+	}, [nodes, edges])
 }
 
 function useNodes(table: ColumnTable, bindings: CartesianPointBindings) {
@@ -39,7 +49,48 @@ function useNodes(table: ColumnTable, bindings: CartesianPointBindings) {
 			size: size(node),
 			color: fill(node),
 		}))
-	}, [table, x, y, size])
+	}, [table, x, y, size, fill])
+}
+
+function useEdges(table: ColumnTable, bindings: CartesianLineBindings) {
+	const width = useWidthBinding(bindings)
+	const stroke = useStrokeBinding(bindings)
+	return useMemo(() => {
+		const edges = table.objects()
+		return edges.map((edge) => ({
+			...edge,
+			type: 'line',
+			size: width(edge),
+			color: stroke(edge),
+		}))
+	}, [table, width, stroke])
+}
+
+function useStrokeBinding(bindings: CartesianLineBindings) {
+	const stroke = useObservableState(bindings.stroke$, bindings.stroke)
+	return useCallback((edge: any) => (stroke ? stroke : '#ccc'), [stroke])
+}
+
+function useWidthBinding(bindings: CartesianLineBindings) {
+	const field = useObservableState(bindings.width.field$, bindings.width.field)
+	const domain = useObservableState(
+		bindings.width.domain$,
+		bindings.width.domain,
+	)
+	const range = useObservableState(bindings.width.range$, bindings.width.range)
+	const scale = useMemo(
+		() =>
+			scaleLinear()
+				.domain(domain || [0, 1])
+				.range(range || [1, 10]),
+		[domain, range],
+	)
+	return useCallback(
+		(edge: any) => {
+			return field ? scale(edge[field]) : 1
+		},
+		[field, scale],
+	)
 }
 
 function useXBinding(bindings: CartesianPointBindings) {
@@ -53,18 +104,9 @@ function useYBinding(bindings: CartesianPointBindings) {
 }
 
 function useSizeBinding(bindings: CartesianPointBindings) {
-	const field = useObservableState(
-		bindings.size.field$,
-		bindings.size.field,
-	)
-	const domain = useObservableState(
-		bindings.size.domain$,
-		bindings.size.domain,
-	)
-	const range = useObservableState(
-		bindings.size.range$,
-		bindings.size.range,
-	)
+	const field = useObservableState(bindings.size.field$, bindings.size.field)
+	const domain = useObservableState(bindings.size.domain$, bindings.size.domain)
+	const range = useObservableState(bindings.size.range$, bindings.size.range)
 	const scale = useMemo(
 		() =>
 			scaleLinear()
@@ -84,21 +126,25 @@ function useFillBinding(bindings: CartesianPointBindings, table: ColumnTable) {
 	const field = useObservableState(bindings.fill.field$, bindings.fill.field)
 	const scale = useObservableState(bindings.fill.scale$, bindings.fill.scale)
 	const fn = useThematicColorScale(scale, table, field)
-	return useCallback((node: any) => (field ? fn(node[field]).hex() : '#ccc'), [field, fn])
+	return useCallback(
+		(node: any) => (field ? fn(node[field]).hex() : '#ccc'),
+		[field, fn],
+	)
 }
-
 
 function useThematicColorScale(
 	name: string,
 	table: ColumnTable,
-	field: string
+	field: string,
 ) {
 	console.log(name, field)
 	const uniques = useMemo(() => {
 		if (field) {
-		return table.rollup({
-			uniques: op.distinct(field)
-		}).objects()[0].uniques
+			return table
+				.rollup({
+					uniques: op.distinct(field),
+				})
+				.objects()[0].uniques
 		}
 		return 1
 	}, [table, field])

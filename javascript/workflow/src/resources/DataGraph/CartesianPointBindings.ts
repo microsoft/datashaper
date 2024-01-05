@@ -29,7 +29,7 @@ export class CartesianPointBindings
 			x: this.x.toSchema(),
 			y: this.y.toSchema(),
 			size: this.size.toSchema(),
-			fill: this.fill.toSchema()
+			fill: this.fill.toSchema(),
 		}
 	}
 

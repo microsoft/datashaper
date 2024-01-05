@@ -16,6 +16,7 @@ export interface DataGraphEdges
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [bindings](./schema.datagraphedges.bindings.md) |  | [CartesianLineBindings](./schema.cartesianlinebindings.md) | Visual bindings for the edges. |
 |  [identifier?](./schema.datagraphedges.identifier.md) |  | string | <i>(Optional)</i> Identifier column for the edges. |
 |  [input?](./schema.datagraphedges.input.md) |  | string | <i>(Optional)</i> Name of the input. TODO: should this map generically to an Input? |
 |  [source?](./schema.datagraphedges.source.md) |  | string | <i>(Optional)</i> Column containing the source node id. |

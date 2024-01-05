@@ -8,10 +8,10 @@ import { Container, FlexContainer } from './CartesianPointBindings.styles.js'
 
 import type { CartesianPointBindingsProps } from './CartesianPointBindings.types.js'
 
-import { Column } from './Column.js'
-import { NumericColumn } from './NumericColumn.js'
-import { BindingSection } from './BindingSection.js'
-import { FillColor } from './FillColor.js'
+import { Column } from '../Column.js'
+import { NumericColumn } from '../NumericColumn.js'
+import { BindingSection } from '../BindingSection.js'
+import { FillColor } from '../ColorScale.js'
 
 export const CartesianPointBindings: React.FC<CartesianPointBindingsProps> =
 	memo(function CartesianPointBindings({ bindings, table }) {

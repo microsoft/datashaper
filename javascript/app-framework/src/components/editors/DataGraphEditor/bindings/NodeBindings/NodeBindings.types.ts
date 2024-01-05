@@ -5,7 +5,7 @@
 import type { CartesianPointBindings } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 
-export interface CartesianPointBindingsProps {
+export interface NodeBindingsProps {
 	bindings: CartesianPointBindings
 	table: ColumnTable | undefined
 }

@@ -9,13 +9,15 @@ import type { BehaviorSubject } from 'rxjs';
 import type { BinArgs } from '@datashaper/schema';
 import type { BinarizeArgs } from '@datashaper/schema';
 import type { BooleanArgs } from '@datashaper/schema';
+import type { CartesianLineBindings as CartesianLineBindings_2 } from '@datashaper/schema';
 import type { CartesianPointBindings as CartesianPointBindings_2 } from '@datashaper/schema';
 import type { CodebookSchema } from '@datashaper/schema';
+import type { ColorBinding as ColorBinding_2 } from '@datashaper/schema';
 import type { ConvertArgs } from '@datashaper/schema';
 import type { CopyArgs } from '@datashaper/schema';
 import type { DataFieldBinding as DataFieldBinding_2 } from '@datashaper/schema';
 import { DataFormat } from '@datashaper/schema';
-import type { DataGraphEdges } from '@datashaper/schema';
+import type { DataGraphEdges as DataGraphEdges_2 } from '@datashaper/schema';
 import type { DataGraphNodes as DataGraphNodes_2 } from '@datashaper/schema';
 import type { DataGraphSchema } from '@datashaper/schema';
 import type { DataNature } from '@datashaper/schema';
@@ -140,11 +142,31 @@ export const binarize: (id: string) => StepNode<TableContainer<unknown>, Binariz
 // @public (undocumented)
 export const boolean: (id: string) => StepNode<TableContainer<unknown>, BooleanArgs>;
 
+// Warning: (ae-missing-release-tag) "CartesianLineBindings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class CartesianLineBindings extends Observed implements CartesianLineBindings_2 {
+    constructor(schema?: CartesianLineBindings_2);
+    // (undocumented)
+    loadSchema(schema: Maybe<CartesianLineBindings_2>, quiet?: boolean): void;
+    // (undocumented)
+    get stroke$(): Observable<string | undefined>;
+    // (undocumented)
+    get stroke(): string | undefined;
+    set stroke(stroke: string | undefined);
+    // (undocumented)
+    toSchema(): CartesianLineBindings_2;
+    // (undocumented)
+    width: NumericFieldScaleBinding;
+}
+
 // Warning: (ae-missing-release-tag) "CartesianPointBindings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export class CartesianPointBindings extends Observed implements CartesianPointBindings_2 {
     constructor(schema?: CartesianPointBindings_2);
+    // (undocumented)
+    fill: ColorBinding;
     // (undocumented)
     loadSchema(schema: Maybe<CartesianPointBindings_2>, quiet?: boolean): void;
     // (undocumented)
@@ -202,6 +224,27 @@ export class CodebookProfile implements ProfileHandler<Codebook, CodebookSchema>
     createInstance(schema: CodebookSchema | undefined): Promise<Codebook>;
     // (undocumented)
     readonly profile: Profile;
+}
+
+// Warning: (ae-missing-release-tag) "ColorBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class ColorBinding extends Observed implements ColorBinding_2 {
+    constructor(schema?: ColorBinding_2);
+    // (undocumented)
+    get field$(): Observable<string | undefined>;
+    // (undocumented)
+    get field(): string | undefined;
+    set field(field: string | undefined);
+    // (undocumented)
+    loadSchema(schema: Maybe<ColorBinding_2>, quiet?: boolean): void;
+    // (undocumented)
+    get scale$(): Observable<string | undefined>;
+    // (undocumented)
+    get scale(): string | undefined;
+    set scale(scale: string | undefined);
+    // (undocumented)
+    toSchema(): ColorBinding_2;
 }
 
 // Warning: (ae-missing-release-tag) "columnTransformVerbs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -270,11 +313,10 @@ export class DataGraph extends Resource {
     constructor(data?: Readable<DataGraphSchema>);
     // (undocumented)
     defaultName(): string;
+    // Warning: (ae-forgotten-export) The symbol "DataGraphEdges" needs to be exported by the entry point index.d.ts
+    //
     // (undocumented)
-    get edges$(): Observable<DataGraphEdges>;
-    // (undocumented)
-    get edges(): DataGraphEdges;
-    set edges(value: DataGraphEdges);
+    readonly edges: DataGraphEdges;
     // (undocumented)
     get edgesInput(): Maybe<TableBundle | DataTable>;
     // (undocumented)

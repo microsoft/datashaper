@@ -28,7 +28,15 @@
 			"edges": {
 				"input": "edges",
 				"source": "source",
-				"target": "target"
+				"target": "target",
+				"bindings": {
+					"stroke": "#eee",
+					"width": {
+						"field": "weight",
+						"domain": [1, 4],
+						"range": [0.1, 1]
+					}
+				}
 			},
 			"sources": [
 				{
@@ -84,30 +92,21 @@
 					"title": "workflow.json",
 					"name": "workflow.json",
 					"profile": "workflow",
-					"input": [
-					  "nodes",
-					  "edges",
-					  "join"
-					],
+					"input": ["nodes", "edges", "join"],
 					"steps": [
-					  {
-						"id": "lookup",
-						"args": {
-						  "on": [
-							"id",
-							"nodeId"
-						  ],
-						  "columns": [
-							"clusterId"
-						  ]
-						},
-						"verb": "lookup",
-						"input": {
-						  "other": "join" 
+						{
+							"id": "lookup",
+							"args": {
+								"on": ["id", "nodeId"],
+								"columns": ["clusterId"]
+							},
+							"verb": "lookup",
+							"input": {
+								"other": "join"
+							}
 						}
-					  }
 					]
-				  }
+				}
 			]
 		},
 		{
@@ -135,6 +134,11 @@
 							"name": "target",
 							"type": "string",
 							"nature": "nominal"
+						},
+						{
+							"name": "weight",
+							"type": "number",
+							"nature": "continuous"
 						}
 					]
 				}
@@ -183,31 +187,27 @@
 					"title": "workflow.json",
 					"name": "workflow (1).json",
 					"profile": "workflow",
-					"input": [
-					  "nodes",
-					  "edges",
-					  "join"
-					],
+					"input": ["nodes", "edges", "join"],
 					"steps": [
-					  {
-						"id": "filter",
-						"args": {
-						  "criteria": [
-							{
-							  "operator": "=",
-							  "type": "value",
-							  "value": "0"
-							}
-						  ],
-						  "logical": "or",
-						  "to": "clusterLevel",
-						  "column": "clusterLevel"
-						},
-						"verb": "filter",
-						"input": {}
-					  }
+						{
+							"id": "filter",
+							"args": {
+								"criteria": [
+									{
+										"operator": "=",
+										"type": "value",
+										"value": "0"
+									}
+								],
+								"logical": "or",
+								"to": "clusterLevel",
+								"column": "clusterLevel"
+							},
+							"verb": "filter",
+							"input": {}
+						}
 					]
-				  }
+				}
 			]
 		}
 	]
