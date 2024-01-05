@@ -4,8 +4,8 @@
  */
 
 import type { DataGraph } from '@datashaper/workflow'
-import { memo } from 'react'
-import { ToolPanel } from '@essex/components'
+import { memo, useState } from 'react'
+import { ToolPanel, useToggleProps } from '@essex/components'
 import type { ProfileComponentProps } from '../../../types.js'
 import {
 	ConfigContainer,
@@ -21,13 +21,13 @@ import {
 } from './DataGraphEditor.hooks.js'
 import { useToolPanelStyles } from '../styles.js'
 import { useToolPanelExpandCollapse } from '../hooks.js'
-import { CommandBar } from '@fluentui/react'
+import { CommandBar, Toggle } from '@fluentui/react'
 
 import { GraphViewer } from './GraphViewer/GraphViewer.js'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import { EdgeBindings } from './bindings/EdgeBindings/EdgeBindings.js'
 import { NodeBindings } from './bindings/NodeBindings/NodeBindings.js'
-
+import styled from 'styled-components'
 export const DataGraphEditor: React.FC<ProfileComponentProps<DataGraph>> = memo(
 	function DataGraphEditor({ resource }) {
 		const nodesInputTable = useNodesInputTable(resource)
@@ -36,8 +36,10 @@ export const DataGraphEditor: React.FC<ProfileComponentProps<DataGraph>> = memo(
 		const toolPanelStyles = useToolPanelStyles()
 		const { collapsed, onToggleCollapsed, commandBar, iconProps } =
 			useToolPanelExpandCollapse('options-button', 'DataManagementSettings')
+
+		const [showEdges, setShowEdges] = useState<boolean>(false)
 		return (
-			<Container collapsed={collapsed}>
+			<Container collapsed={false}>
 				<MainContainer>
 					<Header>
 						<CommandBar {...commandBar} />
@@ -49,6 +51,7 @@ export const DataGraphEditor: React.FC<ProfileComponentProps<DataGraph>> = memo(
 								edgesTable={edgesInputTable as ColumnTable}
 								nodeBindings={resource.nodes.bindings}
 								edgeBindings={resource.edges.bindings}
+								showEdges={showEdges}
 							/>
 						</When>
 					</GraphContainer>
@@ -61,12 +64,14 @@ export const DataGraphEditor: React.FC<ProfileComponentProps<DataGraph>> = memo(
 					styles={toolPanelStyles}
 				>
 					<ConfigContainer>
+						<NodeHeader />
 						<NodeBindings
 							bindings={resource.nodes.bindings}
 							table={nodesInputTable}
 						/>
 					</ConfigContainer>
 					<ConfigContainer>
+						<EdgeHeader toggled={showEdges} onToggle={setShowEdges} />
 						<EdgeBindings
 							bindings={resource.edges.bindings}
 							table={edgesInputTable}
@@ -77,3 +82,36 @@ export const DataGraphEditor: React.FC<ProfileComponentProps<DataGraph>> = memo(
 		)
 	},
 )
+
+const Head = styled.div`
+	font-size: 20px;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding-left: 10px;
+	height: 48px;
+	display: flex;
+	gap: 12px;
+	align-items: center;
+`
+
+const NodeHeader: React.FC = memo(function NodeHeader() {
+	return <Head>Nodes</Head>
+})
+
+const EdgeHeader: React.FC<{ toggled; onToggle }> = memo(function EdgeHeader({
+	toggled,
+	onToggle,
+}) {
+	const toggleProps = useToggleProps(
+		{
+			checked: toggled,
+			onChange: (_, c) => onToggle(c),
+		},
+		'small',
+	)
+	return (
+		<Head>
+			Edges <Toggle {...toggleProps} />
+		</Head>
+	)
+})

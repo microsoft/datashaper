@@ -19,6 +19,7 @@ export function useGraph(
 	edgesTable: ColumnTable,
 	nodeBindings: CartesianPointBindings,
 	edgeBindings: CartesianLineBindings,
+	showEdges: boolean,
 ): Graph {
 	const nodes = useNodes(nodesTable, nodeBindings)
 	const edges = useEdges(edgesTable, edgeBindings)
@@ -27,12 +28,13 @@ export function useGraph(
 		nodes.forEach((node) => {
 			graph.addNode(node.id, node)
 		})
-		edges.forEach((edge) => {
-			graph.addEdge(edge.source, edge.target, edge)
-		})
-
+		if (showEdges) {
+			edges.forEach((edge) => {
+				graph.addEdge(edge.source, edge.target, edge)
+			})
+		}
 		return graph
-	}, [nodes, edges])
+	}, [nodes, edges, showEdges])
 }
 
 function useNodes(table: ColumnTable, bindings: CartesianPointBindings) {
@@ -137,7 +139,6 @@ function useThematicColorScale(
 	table: ColumnTable,
 	field: string,
 ) {
-	console.log(name, field)
 	const uniques = useMemo(() => {
 		if (field) {
 			return table
@@ -148,7 +149,6 @@ function useThematicColorScale(
 		}
 		return 1
 	}, [table, field])
-	console.log('uniques', uniques)
 	const theme = useThematic()
 	return useMemo(() => {
 		const scales = theme.scales()

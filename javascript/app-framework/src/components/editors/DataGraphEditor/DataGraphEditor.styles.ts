@@ -31,5 +31,4 @@ export const GraphContainer = styled.div`
 `
 
 export const ConfigContainer = styled.div`
-	padding: 10px;
 `
