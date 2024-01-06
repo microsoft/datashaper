@@ -21,7 +21,7 @@ export interface GraphViewerProps {
 	edgesTable: ColumnTable
 	nodeBindings: CartesianPointBindings
 	edgeBindings: CartesianLineBindings
-	showEdges?: boolean
+	edgeProportion?: number
 }
 
 export const GraphViewer: React.FC<GraphViewerProps> = memo(
@@ -30,7 +30,7 @@ export const GraphViewer: React.FC<GraphViewerProps> = memo(
 		edgesTable,
 		nodeBindings,
 		edgeBindings,
-		showEdges = false,
+		edgeProportion = false,
 	}) {
 		const sigmaStyles = useSigmaStyles()
 		const graph = useGraph(
@@ -38,7 +38,7 @@ export const GraphViewer: React.FC<GraphViewerProps> = memo(
 			edgesTable,
 			nodeBindings,
 			edgeBindings,
-			showEdges,
+			edgeProportion,
 		)
 		return <SigmaContainer graph={graph} style={sigmaStyles} />
 	},

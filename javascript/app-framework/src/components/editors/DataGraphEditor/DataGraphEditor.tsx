@@ -5,7 +5,7 @@
 
 import type { DataGraph } from '@datashaper/workflow'
 import { memo, useState } from 'react'
-import { ToolPanel, useToggleProps } from '@essex/components'
+import { ToolPanel, useSliderProps } from '@essex/components'
 import type { ProfileComponentProps } from '../../../types.js'
 import {
 	ConfigContainer,
@@ -21,7 +21,7 @@ import {
 } from './DataGraphEditor.hooks.js'
 import { useToolPanelStyles } from '../styles.js'
 import { useToolPanelExpandCollapse } from '../hooks.js'
-import { CommandBar, Toggle } from '@fluentui/react'
+import { CommandBar, Slider, Toggle } from '@fluentui/react'
 
 import { GraphViewer } from './GraphViewer/GraphViewer.js'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
@@ -37,7 +37,7 @@ export const DataGraphEditor: React.FC<ProfileComponentProps<DataGraph>> = memo(
 		const { collapsed, onToggleCollapsed, commandBar, iconProps } =
 			useToolPanelExpandCollapse('options-button', 'DataManagementSettings')
 
-		const [showEdges, setShowEdges] = useState<boolean>(false)
+		const [edgeProportion, setEdgeProportion] = useState<number>(0)
 		return (
 			<Container collapsed={false}>
 				<MainContainer>
@@ -51,7 +51,7 @@ export const DataGraphEditor: React.FC<ProfileComponentProps<DataGraph>> = memo(
 								edgesTable={edgesInputTable as ColumnTable}
 								nodeBindings={resource.nodes.bindings}
 								edgeBindings={resource.edges.bindings}
-								showEdges={showEdges}
+								edgeProportion={edgeProportion}
 							/>
 						</When>
 					</GraphContainer>
@@ -71,7 +71,7 @@ export const DataGraphEditor: React.FC<ProfileComponentProps<DataGraph>> = memo(
 						/>
 					</ConfigContainer>
 					<ConfigContainer>
-						<EdgeHeader toggled={showEdges} onToggle={setShowEdges} />
+						<EdgeHeader proportion={edgeProportion} onChanged={setEdgeProportion} />
 						<EdgeBindings
 							bindings={resource.edges.bindings}
 							table={edgesInputTable}
@@ -98,20 +98,28 @@ const NodeHeader: React.FC = memo(function NodeHeader() {
 	return <Head>Nodes</Head>
 })
 
-const EdgeHeader: React.FC<{ toggled; onToggle }> = memo(function EdgeHeader({
-	toggled,
-	onToggle,
+const EdgeHeader: React.FC<{ proportion; onChanged }> = memo(function EdgeHeader({
+	proportion,
+	onChanged,
 }) {
-	const toggleProps = useToggleProps(
+	const sliderProps = useSliderProps(
 		{
-			checked: toggled,
-			onChange: (_, c) => onToggle(c),
+			defaultValue: proportion,
+			min: 0,
+			max: 1,
+			step: 0.01,
+			onChanged: (_, c) => onChanged(c),
+			styles: {
+				root: {
+					width: 180
+				}
+			}
 		},
 		'small',
 	)
 	return (
 		<Head>
-			Edges <Toggle {...toggleProps} />
+			Edges <Slider {...sliderProps} />
 		</Head>
 	)
 })

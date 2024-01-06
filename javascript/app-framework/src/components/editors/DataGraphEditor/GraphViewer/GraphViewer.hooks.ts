@@ -19,22 +19,20 @@ export function useGraph(
 	edgesTable: ColumnTable,
 	nodeBindings: CartesianPointBindings,
 	edgeBindings: CartesianLineBindings,
-	showEdges: boolean,
+	edgeProportion?: number,
 ): Graph {
 	const nodes = useNodes(nodesTable, nodeBindings)
-	const edges = useEdges(edgesTable, edgeBindings)
+	const edges = useEdges(edgesTable, edgeBindings, edgeProportion)
 	return useMemo(() => {
 		const graph = new Graph()
 		nodes.forEach((node) => {
 			graph.addNode(node.id, node)
 		})
-		if (showEdges) {
-			edges.forEach((edge) => {
-				graph.addEdge(edge.source, edge.target, edge)
-			})
-		}
+		edges.forEach((edge) => {
+			graph.addEdge(edge.source, edge.target, edge)
+		})
 		return graph
-	}, [nodes, edges, showEdges])
+	}, [nodes, edges])
 }
 
 function useNodes(table: ColumnTable, bindings: CartesianPointBindings) {
@@ -54,18 +52,18 @@ function useNodes(table: ColumnTable, bindings: CartesianPointBindings) {
 	}, [table, x, y, size, fill])
 }
 
-function useEdges(table: ColumnTable, bindings: CartesianLineBindings) {
+function useEdges(table: ColumnTable, bindings: CartesianLineBindings, proportion = 0) {
 	const width = useWidthBinding(bindings)
 	const stroke = useStrokeBinding(bindings)
 	return useMemo(() => {
-		const edges = table.objects()
+		const edges = table.sample(table.numRows() * proportion).objects()
 		return edges.map((edge) => ({
 			...edge,
 			type: 'line',
 			size: width(edge),
 			color: stroke(edge),
 		}))
-	}, [table, width, stroke])
+	}, [table, width, stroke, proportion])
 }
 
 function useStrokeBinding(bindings: CartesianLineBindings) {
