@@ -8,7 +8,7 @@ from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
 
 
-@verb(name="sample")
+@verb(name="sample", does_not_mutate_input_tables=True)
 def sample(
     input: VerbInput, size: int = None, proportion: int = None, seed: int = None
 ):

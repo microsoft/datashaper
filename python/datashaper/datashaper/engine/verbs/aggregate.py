@@ -12,7 +12,7 @@ from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
 
 
-@verb(name="aggregate")
+@verb(name="aggregate", does_not_mutate_input_tables=True)
 def aggregate(
     input: VerbInput, to: str, groupby: List[str], column: str, operation: str
 ) -> TableContainer:

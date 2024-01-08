@@ -13,6 +13,6 @@ from datashaper.table_store import TableContainer
 @verb(name="impute")
 def impute(input: VerbInput, column: str, value: Union[str, int, float, bool]):
     input_table = input.get_input()
-    output = input_table.copy()
+    output = input_table
     output[column] = output[column].fillna(value)
     return TableContainer(table=output)

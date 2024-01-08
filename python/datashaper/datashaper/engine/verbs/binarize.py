@@ -36,7 +36,7 @@ def binarize(
     filter_result = filter_df(
         input_table, FilterArgs(column, filter_criteria, logical_operator)
     )
-    output = input_table.copy()
+    output = input_table
     output[to] = filter_result.map({True: 1, False: 0}, na_action="ignore")
 
     return TableContainer(table=output)

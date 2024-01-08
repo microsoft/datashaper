@@ -10,7 +10,7 @@ from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
 
 
-@verb(name="intersect")
+@verb(name="intersect", does_not_mutate_input_tables=True)
 def intersect(input: VerbInput):
     input_table = input.get_input()
     others = input.get_others()

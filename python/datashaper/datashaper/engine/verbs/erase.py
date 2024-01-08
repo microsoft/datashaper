@@ -13,7 +13,7 @@ from datashaper.table_store import TableContainer
 @verb(name="erase")
 def erase(input: VerbInput, column: str, value: Union[str, int, float]):
     input_table = input.get_input()
-    output = input_table.copy()
+    output = input_table
 
     output[column] = output[column].apply(
         lambda df_value: None if df_value == value else df_value

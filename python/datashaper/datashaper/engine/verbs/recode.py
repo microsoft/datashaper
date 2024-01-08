@@ -21,6 +21,6 @@ def recode(input: VerbInput, to: str, column: str, mapping: Dict):
 
     input_table = input.get_input()
 
-    output = input_table.copy()
+    output = input_table
     output[to] = output[column].map(mapping)
     return TableContainer(table=output)

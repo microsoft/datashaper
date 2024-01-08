@@ -40,7 +40,7 @@ def __clean_result(strategy: JoinStrategy, result: pd.DataFrame, source: pd.Data
         return result.drop("_merge", axis=1)
 
 
-@verb(name="join")
+@verb(name="join", does_not_mutate_input_tables=True)
 def join(
     input: VerbInput,
     on: List[str] = None,

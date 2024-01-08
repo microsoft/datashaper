@@ -66,12 +66,12 @@ def window(input: VerbInput, column: str, to: str, operation: str):
 
     if isinstance(input_table, DataFrameGroupBy):
         # ungroup table to add new column
-        output = input_table.obj.copy()
+        output = input_table.obj
         output[to] = window.reset_index()[column]
         # group again by original group by
         output = output.groupby(input_table.keys)
     else:
-        output = input_table.copy()
+        output = input_table
         output[to] = window
 
     return TableContainer(table=output)

@@ -10,7 +10,7 @@ from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
 
 
-@verb(name="pivot")
+@verb(name="pivot", does_not_mutate_input_tables=True)
 def pivot(input: VerbInput, key: str, value: str, operation: str):
     aggregate_operation = FieldAggregateOperation(operation)
 

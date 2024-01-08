@@ -3,21 +3,20 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from typing import List
 
 from datashaper.table_store import Table, TableContainer
 
 
 class VerbInput:
     source: TableContainer
-    others: List[TableContainer] = None
+    others: list[TableContainer] = None
 
     def __init__(
         self,
         input: TableContainer = None,
         source: TableContainer = None,
         other: TableContainer = None,
-        others: List[TableContainer] = None,
+        others: list[TableContainer] = None,
     ):
         if input is None and source is None:
             raise Exception("At least input or source must be provided")

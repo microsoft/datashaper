@@ -6,7 +6,7 @@ import pkgutil
 import sys
 
 from .verb_input import VerbInput
-from .verbs_mapping import VerbManager, verb
+from .verbs_mapping import VerbDetails, VerbManager, verb
 
 
 logger = logging.getLogger(__name__)
@@ -38,4 +38,4 @@ mod = sys.modules[__name__]
 load_verbs(mod)
 
 
-__all__ = ["VerbInput", "VerbManager", "load_verbs", "verb"]
+__all__ = ["VerbInput", "VerbManager", "load_verbs", "verb", "VerbDetails"]

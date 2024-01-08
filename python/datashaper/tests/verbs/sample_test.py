@@ -12,7 +12,7 @@ def make_verb_input(data: list, columns: list[str]):
 
 def test_sample():
     verb_input = make_verb_input([[1], [2], [3], [4], [5]], ["id"])
-    sample = VerbManager.get().get_verb("sample")
+    sample = VerbManager.get().get_verb("sample").func
     output = sample(input=verb_input, size=2)
     assert len(output.table) == 2
 
@@ -22,7 +22,7 @@ def test_sample_seed():
 
     values = None
     for i in range(0, 10):
-        sample = VerbManager.get().get_verb("sample")
+        sample = VerbManager.get().get_verb("sample").func
         output = sample(input=verb_input, size=2, seed=0xBEEF)
         ids = output.table["id"].values
 

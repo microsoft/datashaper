@@ -20,7 +20,7 @@ def unhot(
 
     input_table = unhot_operation(input, columns, prefix).get_input()
 
-    output = input_table.copy()
+    output = input_table
 
     output[to] = output[columns].apply(
         partial(strategy_mapping[merge_strategy]), axis=1

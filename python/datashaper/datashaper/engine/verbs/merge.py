@@ -31,7 +31,7 @@ def merge(
         else input.get_input()
     )
 
-    output = input_table.copy()
+    output = input_table
 
     output[to] = output[columns].apply(
         partial(strategy_mapping[merge_strategy], delim=delimiter), axis=1

@@ -8,7 +8,7 @@ from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
 
 
-@verb(name="unroll")
+@verb(name="unroll", does_not_mutate_input_tables=True)
 def unroll(input: VerbInput, column: str):
     input_table = input.get_input()
     output = input_table.explode(column)
