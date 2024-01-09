@@ -6,7 +6,6 @@
 from typing import Iterable
 
 import pandas as pd
-
 from datashaper.engine.pandas import aggregate_operation_mapping
 from datashaper.engine.types import FieldAggregateOperation
 from datashaper.engine.verbs.verb_input import VerbInput
@@ -14,7 +13,7 @@ from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
 
 
-@verb(name="rollup", does_not_mutate_input_tables=True)
+@verb(name="rollup", treats_input_tables_as_immutable=True)
 def rollup(input: VerbInput, column: str, to: str, operation: str):
     aggregate_operation = FieldAggregateOperation(operation)
     input_table = input.get_input()

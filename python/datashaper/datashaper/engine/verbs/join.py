@@ -6,12 +6,10 @@
 from typing import List
 
 import pandas as pd
-
 from datashaper.engine.types import JoinStrategy
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
-
 
 __strategy_mapping = {
     JoinStrategy.Inner: "inner",
@@ -40,7 +38,7 @@ def __clean_result(strategy: JoinStrategy, result: pd.DataFrame, source: pd.Data
         return result.drop("_merge", axis=1)
 
 
-@verb(name="join", does_not_mutate_input_tables=True)
+@verb(name="join", treats_input_tables_as_immutable=True)
 def join(
     input: VerbInput,
     on: List[str] = None,

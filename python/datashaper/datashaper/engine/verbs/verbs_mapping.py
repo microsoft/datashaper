@@ -3,22 +3,21 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
+from dataclasses import dataclass, field
 from functools import cache
 from typing import Callable
-
-from dataclasses import dataclass, field
 
 from datashaper.table_store import TableContainer
 
 
-def verb(name: str, does_not_mutate_input_tables: bool = False, **kwargs) -> Callable:
+def verb(name: str, treats_input_tables_as_immutable: bool = False, **kwargs) -> Callable:
     """Decorator for registering a verb."""
 
     def inner(func: Callable[..., TableContainer]) -> Callable[..., TableContainer]:
         verb = VerbDetails(
             name=name,
             func=func,
-            does_not_mutate_input_tables=does_not_mutate_input_tables,
+            treats_input_tables_as_immutable=treats_input_tables_as_immutable,
         )
         VerbManager.get().register(verb)
         return func
@@ -36,7 +35,7 @@ class VerbDetails:
     func: Callable[..., TableContainer]
     """Function to execute."""
 
-    does_not_mutate_input_tables: bool = False
+    treats_input_tables_as_immutable: bool = False
     """Whether the verb is free from mutations on input tables."""
 
 

@@ -4,13 +4,12 @@
 #
 
 import pandas as pd
-
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
 
 
-@verb(name="difference", does_not_mutate_input_tables=True)
+@verb(name="difference", treats_input_tables_as_immutable=True)
 def difference(input: VerbInput):
     input_table = input.get_input()
     others = input.get_others()
