@@ -1,8 +1,7 @@
 """Custom verbs for data processing."""
 from typing import List
 
-from datashaper import TableContainer, VerbInput
-from datashaper.engine.verbs import verb
+from datashaper import TableContainer, VerbInput, verb
 
 
 @verb(name="genid")
