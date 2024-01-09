@@ -3,14 +3,17 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from dataclasses import dataclass, field
 from functools import cache
 from typing import Callable
+
+from dataclasses import dataclass, field
 
 from datashaper.table_store import TableContainer
 
 
-def verb(name: str, treats_input_tables_as_immutable: bool = False, **kwargs) -> Callable:
+def verb(
+    name: str, treats_input_tables_as_immutable: bool = False, **kwargs
+) -> Callable:
     """Decorator for registering a verb."""
 
     def inner(func: Callable[..., TableContainer]) -> Callable[..., TableContainer]:

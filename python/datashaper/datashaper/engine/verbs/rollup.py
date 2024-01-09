@@ -6,6 +6,7 @@
 from typing import Iterable
 
 import pandas as pd
+
 from datashaper.engine.pandas import aggregate_operation_mapping
 from datashaper.engine.types import FieldAggregateOperation
 from datashaper.engine.verbs.verb_input import VerbInput

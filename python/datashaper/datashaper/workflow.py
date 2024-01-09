@@ -10,11 +10,15 @@ import json
 import os
 import time
 import traceback
+
 from collections import OrderedDict, defaultdict
 from typing import Any, Callable, Generic, Optional, TypeVar
 from uuid import uuid4
 
 import pandas as pd
+
+from jsonschema import validate as validate_schema
+
 from datashaper.engine.verbs import VerbDetails, VerbInput, VerbManager
 from datashaper.execution import ExecutionNode
 from datashaper.progress.reporters import (
@@ -24,7 +28,7 @@ from datashaper.progress.reporters import (
 )
 from datashaper.progress.types import ProgressStatus, StatusReportHandler
 from datashaper.table_store import Table, TableContainer
-from jsonschema import validate as validate_schema
+
 
 # TODO: this won't work for a published package
 SCHEMA_FILE = "../../schema/workflow.json"
