@@ -12,7 +12,10 @@ from datashaper.table_store import TableContainer
 
 
 def verb(
-    name: str, treats_input_tables_as_immutable: bool = False, **kwargs
+    name: str,
+    treats_input_tables_as_immutable: bool = False,
+    override_existing: bool = False,
+    **kwargs,
 ) -> Callable:
     """Decorator for registering a verb."""
 
@@ -22,7 +25,7 @@ def verb(
             func=func,
             treats_input_tables_as_immutable=treats_input_tables_as_immutable,
         )
-        VerbManager.get().register(verb)
+        VerbManager.get().register(verb, override_existing)
         return func
 
     return inner

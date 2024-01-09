@@ -788,7 +788,7 @@ dev = ["black (==22.3.0)", "hypothesis", "numpy", "pytest (>=5.30)", "pytest-xdi
 
 [[package]]
 name = "datashaper"
-version = "0.0.15"
+version = "0.0.17"
 description = "This project provides a collection of utilities for doing lightweight data wrangling."
 optional = false
 python-versions = ">=3.8,<4"
