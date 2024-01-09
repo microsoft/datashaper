@@ -1,3 +1,9 @@
+from .pandas import (
+    aggregate_operation_mapping,
+    boolean_function_map,
+    filter_df,
+    get_operator,
+)
 from .types import (
     Bin,
     BinStrategy,
@@ -55,4 +61,8 @@ __all__ = [
     "Union",
     "WindowFunction",
     "Step",
+    "aggregate_operation_mapping",
+    "boolean_function_map",
+    "filter_df",
+    "get_operator",
 ]

@@ -25,6 +25,10 @@ from .engine import (
     VerbInput,
     VerbManager,
     WindowFunction,
+    aggregate_operation_mapping,
+    boolean_function_map,
+    filter_df,
+    get_operator,
     load_verbs,
     verb,
 )
@@ -87,6 +91,10 @@ __all__ = [
     "Union",
     "WindowFunction",
     "Step",
+    "aggregate_operation_mapping",
+    "boolean_function_map",
+    "filter_df",
+    "get_operator",
     # Workflow Exports
     "Workflow",
     "DEFAULT_INPUT_NAME",
