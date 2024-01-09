@@ -8,6 +8,7 @@ from .reporters import (
     StatusReporter,
     VerbStatusReporter,
 )
+from .types import ProgressStatus, ProgressTicker, StatusReportHandler
 
 
 __all__ = [
@@ -19,4 +20,7 @@ __all__ = [
     "NoopStatusReporter",
     "StatusReporter",
     "VerbStatusReporter",
+    "ProgressTicker",
+    "ProgressStatus",
+    "StatusReportHandler",
 ]
