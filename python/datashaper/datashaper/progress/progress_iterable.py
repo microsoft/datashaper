@@ -1,8 +1,7 @@
 from typing import Iterable, TypeVar
 
-from datashaper.progress import progress_ticker
+from datashaper.progress.progress_ticker import progress_ticker
 from datashaper.progress.types import StatusReportHandler
-
 
 T = TypeVar("T")
 
