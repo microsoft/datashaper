@@ -3,10 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type {
-	CartesianLineBindings,
-	CartesianPointBindings,
-} from '@datashaper/workflow'
+import type { DataGraphEdges, DataGraphNodes } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import { memo } from 'react'
 
@@ -19,8 +16,8 @@ import { SigmaContainer } from '@react-sigma/core'
 export interface GraphViewerProps {
 	nodesTable: ColumnTable
 	edgesTable: ColumnTable
-	nodeBindings: CartesianPointBindings
-	edgeBindings: CartesianLineBindings
+	nodesDefinition: DataGraphNodes
+	edgesDefinition: DataGraphEdges
 	edgeProportion?: number
 }
 
@@ -28,16 +25,16 @@ export const GraphViewer: React.FC<GraphViewerProps> = memo(
 	function GraphViewer({
 		nodesTable,
 		edgesTable,
-		nodeBindings,
-		edgeBindings,
-		edgeProportion = false,
+		nodesDefinition,
+		edgesDefinition,
+		edgeProportion = 0,
 	}) {
 		const sigmaStyles = useSigmaStyles()
 		const graph = useGraph(
 			nodesTable,
 			edgesTable,
-			nodeBindings,
-			edgeBindings,
+			nodesDefinition,
+			edgesDefinition,
 			edgeProportion,
 		)
 		return <SigmaContainer graph={graph} style={sigmaStyles} />

@@ -70,12 +70,10 @@ export const TableBundleEditor: React.FC<ProfileComponentProps<TableBundle>> =
 			isInputSelected,
 			isLatestSelected,
 		)
-		const { collapsed, onToggleCollapsed, commandBar, iconProps } =
-			useToolPanelExpandCollapse(
-				'history-button',
-				'History',
-				`(${numSteps ?? '0'})`,
-			)
+		const { expanded, onToggleCollapsed, commandBar, iconProps } =
+			useToolPanelExpandCollapse('history-button', 'History', {
+				text: `(${numSteps ?? '0'})`,
+			})
 
 		const toolPanelStyles = useToolPanelStyles()
 		const tableHeaderColors = useTableHeaderColors()
@@ -109,7 +107,7 @@ export const TableBundleEditor: React.FC<ProfileComponentProps<TableBundle>> =
 			isInputSelected ? '@input' : ''
 		}`
 		return selectedTable?.table == null ? null : (
-			<Container collapsed={collapsed}>
+			<Container expanded={expanded}>
 				<DetailsListContainer>
 					<ArqueroTableHeader
 						background={tableHeaderColors.background}
@@ -143,7 +141,7 @@ export const TableBundleEditor: React.FC<ProfileComponentProps<TableBundle>> =
 						}}
 					/>
 				</DetailsListContainer>
-				{!collapsed && (
+				{expanded && (
 					<ToolPanel
 						headerText={toolPanelHeader}
 						onDismiss={onToggleCollapsed}

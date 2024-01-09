@@ -268,13 +268,19 @@ export enum DataFormat {
     JSON = "json"
 }
 
+// Warning: (ae-missing-release-tag) "DataGraphCollection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface DataGraphCollection {
+    identifier?: string;
+    input?: string;
+}
+
 // Warning: (ae-missing-release-tag) "DataGraphEdges" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface DataGraphEdges {
-    bindings: CartesianLineBindings;
-    identifier?: string;
-    input?: string;
+export interface DataGraphEdges extends DataGraphCollection {
+    bindings?: CartesianLineBindings;
     source?: string;
     target?: string;
 }
@@ -282,10 +288,8 @@ export interface DataGraphEdges {
 // Warning: (ae-missing-release-tag) "DataGraphNodes" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface DataGraphNodes {
-    bindings: CartesianPointBindings;
-    identifier?: string;
-    input?: string;
+export interface DataGraphNodes extends DataGraphCollection {
+    bindings?: CartesianPointBindings;
 }
 
 // Warning: (ae-missing-release-tag) "DataGraphSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

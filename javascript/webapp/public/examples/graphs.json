@@ -30,7 +30,6 @@
 				"source": "source",
 				"target": "target",
 				"bindings": {
-					"stroke": "#eee",
 					"width": {
 						"field": "weight",
 						"domain": [1, 4],

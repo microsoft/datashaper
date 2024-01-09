@@ -21,9 +21,9 @@ import {
 } from './DataGraphEditor.hooks.js'
 import { useToolPanelStyles } from '../styles.js'
 import { useToolPanelExpandCollapse } from '../hooks.js'
-import { CommandBar, Slider, Toggle } from '@fluentui/react'
+import { CommandBar, Slider } from '@fluentui/react'
 
-import { GraphViewer } from './GraphViewer/GraphViewer.js'
+import { GraphViewer } from '../../GraphViewer/GraphViewer.js'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import { EdgeBindings } from './bindings/EdgeBindings/EdgeBindings.js'
 import { NodeBindings } from './bindings/NodeBindings/NodeBindings.js'
@@ -34,12 +34,14 @@ export const DataGraphEditor: React.FC<ProfileComponentProps<DataGraph>> = memo(
 		const edgesInputTable = useEdgesInputTable(resource)
 
 		const toolPanelStyles = useToolPanelStyles()
-		const { collapsed, onToggleCollapsed, commandBar, iconProps } =
-			useToolPanelExpandCollapse('options-button', 'DataManagementSettings')
+		const { expanded, onToggleCollapsed, commandBar, iconProps } =
+			useToolPanelExpandCollapse('options-button', 'DataManagementSettings', {
+				defaultExpanded: true,
+			})
 
 		const [edgeProportion, setEdgeProportion] = useState<number>(0)
 		return (
-			<Container collapsed={false}>
+			<Container expanded={expanded}>
 				<MainContainer>
 					<Header>
 						<CommandBar {...commandBar} />
@@ -49,8 +51,8 @@ export const DataGraphEditor: React.FC<ProfileComponentProps<DataGraph>> = memo(
 							<GraphViewer
 								nodesTable={nodesInputTable as ColumnTable}
 								edgesTable={edgesInputTable as ColumnTable}
-								nodeBindings={resource.nodes.bindings}
-								edgeBindings={resource.edges.bindings}
+								nodesDefinition={resource.nodes}
+								edgesDefinition={resource.edges}
 								edgeProportion={edgeProportion}
 							/>
 						</When>
@@ -71,7 +73,10 @@ export const DataGraphEditor: React.FC<ProfileComponentProps<DataGraph>> = memo(
 						/>
 					</ConfigContainer>
 					<ConfigContainer>
-						<EdgeHeader proportion={edgeProportion} onChanged={setEdgeProportion} />
+						<EdgeHeader
+							proportion={edgeProportion}
+							onChanged={setEdgeProportion}
+						/>
 						<EdgeBindings
 							bindings={resource.edges.bindings}
 							table={edgesInputTable}
@@ -98,10 +103,10 @@ const NodeHeader: React.FC = memo(function NodeHeader() {
 	return <Head>Nodes</Head>
 })
 
-const EdgeHeader: React.FC<{ proportion; onChanged }> = memo(function EdgeHeader({
-	proportion,
-	onChanged,
-}) {
+const EdgeHeader: React.FC<{
+	proportion: number
+	onChanged: (newValue: number) => void
+}> = memo(function EdgeHeader({ proportion, onChanged }) {
 	const sliderProps = useSliderProps(
 		{
 			defaultValue: proportion,
@@ -111,9 +116,9 @@ const EdgeHeader: React.FC<{ proportion; onChanged }> = memo(function EdgeHeader
 			onChanged: (_, c) => onChanged(c),
 			styles: {
 				root: {
-					width: 180
-				}
-			}
+					width: 180,
+				},
+			},
 		},
 		'small',
 	)

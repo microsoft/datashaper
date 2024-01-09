@@ -3,4 +3,4 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export * from './EdgeBindings.js'
-export type { CartesianPointBindingsProps } from './EdgeBindings.types.js'
+export type { EdgeBindingsProps } from './EdgeBindings.types.js'

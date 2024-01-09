@@ -14,11 +14,12 @@ export const DetailsListContainer = styled.div`
 		${({ theme }: { theme: ITheme }) => theme.palette.neutralLighter};
 `
 
-export const Container = styled.div<{ collapsed: boolean }>`
+// TODO: this logic is repeated in each editor
+export const Container = styled.div<{ expanded: boolean }>`
 	height: 100%;
 	display: grid;
-	grid-template-columns: ${({ collapsed }) =>
-		collapsed ? '100% 0' : 'calc(100% - 280px) 280px '};
+	grid-template-columns: ${({ expanded }) =>
+		expanded ? 'calc(100% - 280px) 280px' : '100% 0'};
 `
 
 export const ConfigContainer = styled.div`

@@ -2886,50 +2886,22 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@datashaper/schema!DataGraphEdges:interface",
-          "docComment": "/**\n * Describes the data input and visual bindings for graph edges.\n */\n",
+          "canonicalReference": "@datashaper/schema!DataGraphCollection:interface",
+          "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface DataGraphEdges "
+              "text": "export interface DataGraphCollection "
             }
           ],
           "releaseTag": "Public",
-          "name": "DataGraphEdges",
+          "name": "DataGraphCollection",
           "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!DataGraphEdges#bindings:member",
-              "docComment": "/**\n * Visual bindings for the edges.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "bindings: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "CartesianLineBindings",
-                  "canonicalReference": "@datashaper/schema!CartesianLineBindings:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "bindings",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!DataGraphEdges#identifier:member",
-              "docComment": "/**\n * Identifier column for the edges.\n */\n",
+              "canonicalReference": "@datashaper/schema!DataGraphCollection#identifier:member",
+              "docComment": "/**\n * Identifier column for items in the collection.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -2955,8 +2927,8 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!DataGraphEdges#input:member",
-              "docComment": "/**\n * Name of the input. TODO: should this map generically to an Input?\n */\n",
+              "canonicalReference": "@datashaper/schema!DataGraphCollection#input:member",
+              "docComment": "/**\n * Name of the input containing the collection. TODO: should this map generically to an Input?\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -2975,6 +2947,60 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "input",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!DataGraphEdges:interface",
+          "docComment": "/**\n * Describes the data input and visual bindings for graph edges.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface DataGraphEdges extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "DataGraphCollection",
+              "canonicalReference": "@datashaper/schema!DataGraphCollection:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "DataGraphEdges",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!DataGraphEdges#bindings:member",
+              "docComment": "/**\n * Visual bindings for the edges.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "bindings?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CartesianLineBindings",
+                  "canonicalReference": "@datashaper/schema!CartesianLineBindings:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "bindings",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -3035,7 +3061,12 @@
               }
             }
           ],
-          "extendsTokenRanges": []
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            }
+          ]
         },
         {
           "kind": "Interface",
@@ -3044,7 +3075,16 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface DataGraphNodes "
+              "text": "export interface DataGraphNodes extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "DataGraphCollection",
+              "canonicalReference": "@datashaper/schema!DataGraphCollection:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
           "releaseTag": "Public",
@@ -3058,7 +3098,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "bindings: "
+                  "text": "bindings?: "
                 },
                 {
                   "kind": "Reference",
@@ -3071,70 +3111,21 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "bindings",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
               }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!DataGraphNodes#identifier:member",
-              "docComment": "/**\n * Identifier column for the nodes.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "identifier?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "identifier",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!DataGraphNodes#input:member",
-              "docComment": "/**\n * Name of the input. TODO: should this map generically to an Input?\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "input?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "input",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
             }
           ],
-          "extendsTokenRanges": []
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            }
+          ]
         },
         {
           "kind": "Interface",

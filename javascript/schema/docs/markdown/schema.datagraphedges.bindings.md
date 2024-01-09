@@ -9,5 +9,5 @@ Visual bindings for the edges.
 <b>Signature:</b>
 
 ```typescript
-bindings: CartesianLineBindings;
+bindings?: CartesianLineBindings;
 ```

@@ -9,16 +9,15 @@ Describes the data input and visual bindings for graph edges.
 <b>Signature:</b>
 
 ```typescript
-export interface DataGraphEdges 
+export interface DataGraphEdges extends DataGraphCollection 
 ```
+<b>Extends:</b> [DataGraphCollection](./schema.datagraphcollection.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [bindings](./schema.datagraphedges.bindings.md) |  | [CartesianLineBindings](./schema.cartesianlinebindings.md) | Visual bindings for the edges. |
-|  [identifier?](./schema.datagraphedges.identifier.md) |  | string | <i>(Optional)</i> Identifier column for the edges. |
-|  [input?](./schema.datagraphedges.input.md) |  | string | <i>(Optional)</i> Name of the input. TODO: should this map generically to an Input? |
+|  [bindings?](./schema.datagraphedges.bindings.md) |  | [CartesianLineBindings](./schema.cartesianlinebindings.md) | <i>(Optional)</i> Visual bindings for the edges. |
 |  [source?](./schema.datagraphedges.source.md) |  | string | <i>(Optional)</i> Column containing the source node id. |
 |  [target?](./schema.datagraphedges.target.md) |  | string | <i>(Optional)</i> Column containing the target node id. |
 

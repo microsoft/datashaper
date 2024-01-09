@@ -21,38 +21,32 @@ export interface DataGraphSchema extends ResourceSchema {
 	edges: DataGraphEdges
 }
 
-/**
- * Describes the data input and visual bindings for graph nodes.
- */
-export interface DataGraphNodes {
+export interface DataGraphCollection {
     /**
-     * Name of the input.
+     * Name of the input containing the collection.
      * TODO: should this map generically to an Input?
      */
 	input?: string
     /**
-     * Identifier column for the nodes.
+     * Identifier column for items in the collection.
      */
 	identifier?: string
+}
+
+/**
+ * Describes the data input and visual bindings for graph nodes.
+ */
+export interface DataGraphNodes extends DataGraphCollection {
     /**
      * Visual bindings for the nodes.
      */
-	bindings: CartesianPointBindings
+	bindings?: CartesianPointBindings
 }
 
 /**
  * Describes the data input and visual bindings for graph edges.
  */
-export interface DataGraphEdges {
-    /**
-     * Name of the input.
-     * TODO: should this map generically to an Input?
-     */
-	input?: string
-    /**
-     * Identifier column for the edges.
-     */
-	identifier?: string
+export interface DataGraphEdges extends DataGraphCollection {
 	/**
 	 * Column containing the source node id.
 	 */
@@ -64,5 +58,5 @@ export interface DataGraphEdges {
 	/**
 	 * Visual bindings for the edges.
 	 */
-	bindings: CartesianLineBindings
+	bindings?: CartesianLineBindings
 }

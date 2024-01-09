@@ -9,14 +9,13 @@ Describes the data input and visual bindings for graph nodes.
 <b>Signature:</b>
 
 ```typescript
-export interface DataGraphNodes 
+export interface DataGraphNodes extends DataGraphCollection 
 ```
+<b>Extends:</b> [DataGraphCollection](./schema.datagraphcollection.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [bindings](./schema.datagraphnodes.bindings.md) |  | [CartesianPointBindings](./schema.cartesianpointbindings.md) | Visual bindings for the nodes. |
-|  [identifier?](./schema.datagraphnodes.identifier.md) |  | string | <i>(Optional)</i> Identifier column for the nodes. |
-|  [input?](./schema.datagraphnodes.input.md) |  | string | <i>(Optional)</i> Name of the input. TODO: should this map generically to an Input? |
+|  [bindings?](./schema.datagraphnodes.bindings.md) |  | [CartesianPointBindings](./schema.cartesianpointbindings.md) | <i>(Optional)</i> Visual bindings for the nodes. |
 

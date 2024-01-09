@@ -29,10 +29,10 @@ export const DataTableEditor: React.FC<ProfileComponentProps<DataTable>> = memo(
 		const tableHeaderColors = useTableHeaderColors()
 		const tableHeaderStyles = useTableHeaderStyles()
 		const toolPanelStyles = useToolPanelStyles()
-		const { collapsed, onToggleCollapsed, commandBar, iconProps } =
+		const { expanded, onToggleCollapsed, commandBar, iconProps } =
 			useToolPanelExpandCollapse('options-button', 'DataManagementSettings')
 		return table?.table == null ? null : (
-			<Container collapsed={collapsed}>
+			<Container expanded={expanded}>
 				<DetailsListContainer>
 					<ArqueroTableHeader
 						background={tableHeaderColors.background}

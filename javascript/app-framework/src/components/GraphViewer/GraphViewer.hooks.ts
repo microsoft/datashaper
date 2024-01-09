@@ -6,6 +6,8 @@ import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import type {
 	CartesianPointBindings,
 	CartesianLineBindings,
+	DataGraphNodes,
+	DataGraphEdges,
 } from '@datashaper/workflow'
 import { useCallback, useMemo } from 'react'
 import { useObservableState } from 'observable-hooks'
@@ -17,58 +19,105 @@ import { op } from 'arquero'
 export function useGraph(
 	nodesTable: ColumnTable,
 	edgesTable: ColumnTable,
-	nodeBindings: CartesianPointBindings,
-	edgeBindings: CartesianLineBindings,
+	nodesDefinition: DataGraphNodes,
+	edgesDefinition: DataGraphEdges,
 	edgeProportion?: number,
 ): Graph {
-	const nodes = useNodes(nodesTable, nodeBindings)
-	const edges = useEdges(edgesTable, edgeBindings, edgeProportion)
+	const nodes = useNodes(nodesTable, nodesDefinition)
+	const edges = useEdges(edgesTable, edgesDefinition, edgeProportion)
+	console.log(nodes, edges)
 	return useMemo(() => {
 		const graph = new Graph()
+		// NOTE: graphology nodes must have an id, and edges must have a source and target (which map to node ids)
+		// they enforce this via independent required args on the addNode and addEdge methods, with the additional arg being the remaining
+		// node or edge properties such as size and color.
+		// our hooks return node and edge objects with all required properties, including the rendering options supported by sigma.
+		// Also note: sigma will throw if a duplicate node id is used, but duplicate edges are fine.
 		nodes.forEach((node) => {
-			graph.addNode(node.id, node)
+			// the graphology types are goofy, this method does exist in `graph`
+			;(graph as any).addNode(node.id, node)
 		})
 		edges.forEach((edge) => {
-			graph.addEdge(edge.source, edge.target, edge)
+			// the graphology types are goofy, this method does exist in `graph`
+			;(graph as any).addEdge(edge.source, edge.target, edge)
 		})
 		return graph
 	}, [nodes, edges])
 }
 
-function useNodes(table: ColumnTable, bindings: CartesianPointBindings) {
-	const x = useXBinding(bindings)
-	const y = useYBinding(bindings)
-	const size = useSizeBinding(bindings)
-	const fill = useFillBinding(bindings, table)
+function useNodes(table: ColumnTable, definition: DataGraphNodes) {
+	const id = useNodeId(definition)
+	const x = useXBinding(definition.bindings)
+	const y = useYBinding(definition.bindings)
+	const size = useSizeBinding(definition.bindings)
+	const fill = useFillBinding(definition.bindings, table)
 	return useMemo(() => {
 		const nodes = table.objects()
 		return nodes.map((node) => ({
-			...node,
+			id: id(node),
 			x: x(node),
 			y: y(node),
 			size: size(node),
 			color: fill(node),
 		}))
-	}, [table, x, y, size, fill])
+	}, [table, id, x, y, size, fill])
 }
 
-function useEdges(table: ColumnTable, bindings: CartesianLineBindings, proportion = 0) {
-	const width = useWidthBinding(bindings)
-	const stroke = useStrokeBinding(bindings)
+function useEdges(
+	table: ColumnTable,
+	definition: DataGraphEdges,
+	proportion = 0,
+) {
+	const id = useEdgeId(definition)
+	const source = useEdgeSource(definition)
+	const target = useEdgeTarget(definition)
+	const width = useWidthBinding(definition.bindings)
+	const stroke = useStrokeBinding(definition.bindings)
 	return useMemo(() => {
 		const edges = table.sample(table.numRows() * proportion).objects()
 		return edges.map((edge) => ({
-			...edge,
-			type: 'line',
+			id: id(edge),
+			source: source(edge),
+			target: target(edge),
 			size: width(edge),
 			color: stroke(edge),
 		}))
-	}, [table, width, stroke, proportion])
+	}, [table, id, source, target, width, stroke, proportion])
 }
 
+// NOTE: this is not actually necessary for sigma, but is for graspologic once we migrate.
+function useEdgeId(definition: DataGraphEdges) {
+	const identifier = useObservableState(
+		definition.identifier$,
+		definition.identifier,
+	)
+	const source = useEdgeSource(definition)
+	const target = useEdgeTarget(definition)
+	return useCallback(
+		(edge: any) =>
+			identifier ? edge[identifier] : `${source(edge)}--${target(edge)}`,
+		[identifier, source, target],
+	)
+}
+
+function useEdgeSource(definition: DataGraphEdges) {
+	const source = useObservableState(definition.source$, definition.source)
+	return useCallback((edge: any) => edge[source || 'source'], [source])
+}
+
+function useEdgeTarget(definition: DataGraphEdges) {
+	const target = useObservableState(definition.target$, definition.target)
+	return useCallback((edge: any) => edge[target || 'target'], [target])
+}
+
+// TODO: this will eventually have a variety of binding options instead of being a static color
 function useStrokeBinding(bindings: CartesianLineBindings) {
+	const theme = useThematic()
 	const stroke = useObservableState(bindings.stroke$, bindings.stroke)
-	return useCallback((edge: any) => (stroke ? stroke : '#ccc'), [stroke])
+	return useCallback(
+		(_edge: any) => (stroke ? stroke : theme.link().stroke().hex()),
+		[theme, stroke],
+	)
 }
 
 function useWidthBinding(bindings: CartesianLineBindings) {
@@ -91,6 +140,14 @@ function useWidthBinding(bindings: CartesianLineBindings) {
 		},
 		[field, scale],
 	)
+}
+
+function useNodeId(definition: DataGraphNodes) {
+	const identifier = useObservableState(
+		definition.identifier$,
+		definition.identifier,
+	)
+	return useCallback((edge: any) => edge[identifier || 'id'], [identifier])
 }
 
 function useXBinding(bindings: CartesianPointBindings) {
@@ -123,27 +180,29 @@ function useSizeBinding(bindings: CartesianPointBindings) {
 }
 
 function useFillBinding(bindings: CartesianPointBindings, table: ColumnTable) {
+	const theme = useThematic()
 	const field = useObservableState(bindings.fill.field$, bindings.fill.field)
 	const scale = useObservableState(bindings.fill.scale$, bindings.fill.scale)
-	const fn = useThematicColorScale(scale, table, field)
+	const fn = useThematicColorScale(scale || 'nominal', table, field)
 	return useCallback(
-		(node: any) => (field ? fn(node[field]).hex() : '#ccc'),
-		[field, fn],
+		(node: any) => (field ? fn(node[field]).hex() : theme.node().fill().hex()),
+		[field, fn, theme],
 	)
 }
 
 function useThematicColorScale(
 	name: string,
 	table: ColumnTable,
-	field: string,
+	field?: string,
 ) {
 	const uniques = useMemo(() => {
 		if (field) {
-			return table
+			const rollup = table
 				.rollup({
 					uniques: op.distinct(field),
 				})
-				.objects()[0].uniques
+				.objects()
+			return (rollup[0] as any)?.uniques || 1
 		}
 		return 1
 	}, [table, field])
@@ -166,6 +225,8 @@ function useThematicColorScale(
 			// case 'greys':
 			// 	return scales.greys(domain, scaleType)
 			default:
+				// TODO: thematic should have a scales.static option that just returns the default node fill
+				// this would allow greater plug-and-play when a function is always required
 				return scales.nominal(uniques)
 		}
 	}, [theme, name, uniques])

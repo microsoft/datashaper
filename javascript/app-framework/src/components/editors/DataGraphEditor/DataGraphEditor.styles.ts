@@ -5,11 +5,11 @@
 import type { ITheme } from '@fluentui/react'
 import styled from 'styled-components'
 
-export const Container = styled.div<{ collapsed: boolean }>`
+export const Container = styled.div<{ expanded: boolean }>`
 	height: 100%;
 	display: grid;
-	grid-template-columns: ${({ collapsed }) =>
-		collapsed ? '100% 0' : 'calc(100% - 280px) 280px '};
+	grid-template-columns: ${({ expanded }) =>
+		expanded ? 'calc(100% - 280px) 280px' : '100% 0'};
 `
 
 export const MainContainer = styled.div`

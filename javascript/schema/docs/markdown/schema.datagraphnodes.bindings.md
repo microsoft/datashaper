@@ -9,5 +9,5 @@ Visual bindings for the nodes.
 <b>Signature:</b>
 
 ```typescript
-bindings: CartesianPointBindings;
+bindings?: CartesianPointBindings;
 ```

@@ -14,9 +14,9 @@ export const DetailsListContainer = styled.div`
 		${({ theme }: { theme: ITheme }) => theme.palette.neutralLighter};
 `
 
-export const Container = styled.div<{ collapsed: boolean }>`
+export const Container = styled.div<{ expanded: boolean }>`
 	height: 100%;
 	display: grid;
-	grid-template-columns: ${({ collapsed }) =>
-		collapsed ? '100% 0' : 'calc(100% - 284px) 284px '};
+	grid-template-columns: ${({ expanded }) =>
+		expanded ? 'calc(100% - 284px) 284px' : '100% 0'};
 `

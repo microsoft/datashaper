@@ -3,4 +3,4 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export * from './NodeBindings.js'
-export type { CartesianPointBindingsProps } from './NodeBindings.types.js'
+export type { NodeBindingsProps } from './NodeBindings.types.js'

@@ -25,7 +25,7 @@ export interface NumericFieldScaleBinding extends DataFieldBinding {
 	range?: [number, number]
 }
 
-// TODO: this is a very rudimentary start at a color binding
+// TODO: this is a very rudimentary start at a color binding, see graph-drilldown for more permutations of fixed vs. dynamic color.
 export interface ColorBinding extends DataFieldBinding {
     /**
      * Thematic color scale name.

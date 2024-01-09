@@ -16,6 +16,7 @@
 |  [ColorBinding](./workflow.colorbinding.md) |  |
 |  [DataFieldBinding](./workflow.datafieldbinding.md) |  |
 |  [DataGraph](./workflow.datagraph.md) |  |
+|  [DataGraphEdges](./workflow.datagraphedges.md) |  |
 |  [DataGraphNodes](./workflow.datagraphnodes.md) |  |
 |  [DataGraphProfile](./workflow.datagraphprofile.md) |  |
 |  [DataPackage](./workflow.datapackage.md) |  |

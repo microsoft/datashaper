@@ -17,7 +17,7 @@ export const EdgeBindings: React.FC<EdgeBindingsProps> = memo(
 				</CollapsiblePanel>
 				<CollapsiblePanel title='Edge color' styles={panelStyles}>
 					<ColorPicker
-						color={bindings.stroke}
+						color={bindings.stroke || 'white'}
 						onChange={(_, color) => {
 							bindings.stroke = color.str
 						}}

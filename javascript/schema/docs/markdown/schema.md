@@ -67,6 +67,7 @@
 |  [CopyArgs](./schema.copyargs.md) |  |
 |  [Criterion](./schema.criterion.md) |  |
 |  [DataFieldBinding](./schema.datafieldbinding.md) | Describes a basic binding between a field in the input data source and a property of a visual element. |
+|  [DataGraphCollection](./schema.datagraphcollection.md) |  |
 |  [DataGraphEdges](./schema.datagraphedges.md) | Describes the data input and visual bindings for graph edges. |
 |  [DataGraphNodes](./schema.datagraphnodes.md) | Describes the data input and visual bindings for graph nodes. |
 |  [DataGraphSchema](./schema.datagraphschema.md) | Describes the properties of a data graph, i.e., network. |

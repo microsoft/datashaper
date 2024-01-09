@@ -25,14 +25,19 @@ import {
 export function useToolPanelExpandCollapse(
 	id: string,
 	iconName: string,
-	text?: string,
+	options?: {
+		text?: string
+		defaultExpanded?: boolean
+	},
 ): {
-	collapsed: boolean
+	expanded: boolean
 	onToggleCollapsed: () => void
 	commandBar: ICommandBarProps
 	iconProps: IIconProps
 } {
-	const [collapsed, { toggle: onToggleCollapsed }] = useBoolean(true)
+	const [expanded, { toggle: onToggleCollapsed }] = useBoolean(
+		options?.defaultExpanded ?? false,
+	)
 	const styles = useCommandBarStyles()
 	const colors = useTableHeaderColors()
 	const iconProps = useMemo(() => ({ iconName }), [iconName])
@@ -42,9 +47,9 @@ export function useToolPanelExpandCollapse(
 				{
 					key: id,
 					id,
-					disabled: !collapsed,
+					disabled: expanded,
 					iconProps,
-					text,
+					text: options?.text,
 					onClick: onToggleCollapsed,
 					buttonStyles,
 				} as ICommandBarItemProps,
@@ -52,11 +57,11 @@ export function useToolPanelExpandCollapse(
 			id,
 			styles,
 		}),
-		[id, iconProps, text, collapsed, onToggleCollapsed, styles],
+		[id, iconProps, options, expanded, onToggleCollapsed, styles],
 	)
 	const commandBar = useHeaderCommandBarDefaults(base, true, colors)
 	return {
-		collapsed,
+		expanded,
 		onToggleCollapsed,
 		commandBar,
 		iconProps,

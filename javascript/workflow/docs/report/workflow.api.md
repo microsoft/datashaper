@@ -313,8 +313,6 @@ export class DataGraph extends Resource {
     constructor(data?: Readable<DataGraphSchema>);
     // (undocumented)
     defaultName(): string;
-    // Warning: (ae-forgotten-export) The symbol "DataGraphEdges" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     readonly edges: DataGraphEdges;
     // (undocumented)
@@ -329,6 +327,39 @@ export class DataGraph extends Resource {
     readonly profile = KnownProfile.DataGraph;
     // (undocumented)
     toSchema(): DataGraphSchema;
+}
+
+// Warning: (ae-missing-release-tag) "DataGraphEdges" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class DataGraphEdges extends Observed implements DataGraphEdges_2 {
+    constructor(schema?: DataGraphEdges_2);
+    // (undocumented)
+    bindings: CartesianLineBindings;
+    // (undocumented)
+    get identifier$(): Observable<string | undefined>;
+    // (undocumented)
+    get identifier(): string | undefined;
+    set identifier(identifier: string | undefined);
+    // (undocumented)
+    get input$(): Observable<string | undefined>;
+    // (undocumented)
+    get input(): string | undefined;
+    set input(input: string | undefined);
+    // (undocumented)
+    loadSchema(schema: Maybe<DataGraphEdges_2>, quiet?: boolean): void;
+    // (undocumented)
+    get source$(): Observable<string | undefined>;
+    // (undocumented)
+    get source(): string | undefined;
+    set source(source: string | undefined);
+    // (undocumented)
+    get target$(): Observable<string | undefined>;
+    // (undocumented)
+    get target(): string | undefined;
+    set target(target: string | undefined);
+    // (undocumented)
+    toSchema(): DataGraphEdges_2;
 }
 
 // Warning: (ae-missing-release-tag) "DataGraphNodes" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
