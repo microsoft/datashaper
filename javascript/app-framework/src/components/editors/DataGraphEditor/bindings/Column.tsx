@@ -13,6 +13,7 @@ import type {
 
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import { useColumnOptions } from './Column.hooks.js'
+import type { Observable } from 'rxjs'
 
 export interface ColumnProps {
 	binding: DataFieldBinding | NumericFieldScaleBinding | ColorBinding // TODO: these should inherit from the DataFieldBinding type
@@ -38,3 +39,32 @@ export const Column: React.FC<ColumnProps> = memo(function Column({
 		/>
 	)
 })
+
+// TODO: this is pretty quick and dirty
+export interface ObservableColumnBindingProps {
+	observable: Observable<string | undefined>
+	initial: string | undefined
+	table: ColumnTable | undefined
+	onChange: (value: string) => void
+	label?: string
+}
+
+export const ObservableColumnBinding: React.FC<ObservableColumnBindingProps> =
+	memo(function Column({
+		observable,
+		initial,
+		table,
+		onChange,
+		label = 'Column',
+	}) {
+		const field = useObservableState(observable, initial)
+		const columnsOptions = useColumnOptions(table)
+		return (
+			<Dropdown
+				label={label}
+				options={columnsOptions}
+				onChange={(_, option) => onChange(option?.key as string)}
+				selectedKey={field}
+			/>
+		)
+	})

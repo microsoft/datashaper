@@ -67,20 +67,14 @@ export const DataGraphEditor: React.FC<ProfileComponentProps<DataGraph>> = memo(
 				>
 					<ConfigContainer>
 						<NodeHeader />
-						<NodeBindings
-							bindings={resource.nodes.bindings}
-							table={nodesInputTable}
-						/>
+						<NodeBindings definition={resource.nodes} table={nodesInputTable} />
 					</ConfigContainer>
 					<ConfigContainer>
 						<EdgeHeader
 							proportion={edgeProportion}
 							onChanged={setEdgeProportion}
 						/>
-						<EdgeBindings
-							bindings={resource.edges.bindings}
-							table={edgesInputTable}
-						/>
+						<EdgeBindings definition={resource.edges} table={edgesInputTable} />
 					</ConfigContainer>
 				</ToolPanel>
 			</Container>
@@ -97,6 +91,8 @@ const Head = styled.div`
 	display: flex;
 	gap: 12px;
 	align-items: center;
+	border-top: 1px solid ${({ theme }) => theme.palette.neutralTertiary};
+	border-bottom: 2px solid ${({ theme }) => theme.palette.neutralSecondary};
 `
 
 const NodeHeader: React.FC = memo(function NodeHeader() {

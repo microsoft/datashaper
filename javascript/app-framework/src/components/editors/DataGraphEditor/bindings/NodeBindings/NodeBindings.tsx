@@ -6,15 +6,26 @@ import { memo } from 'react'
 
 import type { NodeBindingsProps } from './NodeBindings.types.js'
 
-import { Column } from '../Column.js'
+import { Column, ObservableColumnBinding } from '../Column.js'
 import { NumericColumn } from '../NumericColumn.js'
 import { ColorScale } from '../ColorScale.js'
 import { CollapsiblePanelContainer, CollapsiblePanel } from '@essex/components'
 
 export const NodeBindings: React.FC<NodeBindingsProps> = memo(
-	function NodeBindings({ bindings, table }) {
+	function NodeBindings({ definition, table }) {
+		const bindings = definition.bindings
 		return (
 			<CollapsiblePanelContainer>
+				<CollapsiblePanel title='Node ID' styles={panelStyles}>
+					<ObservableColumnBinding
+						table={table}
+						observable={definition.identifier$}
+						initial={definition.identifier}
+						onChange={(update) => {
+							definition.identifier = update
+						}}
+					/>
+				</CollapsiblePanel>
 				<CollapsiblePanel title='Node X position' styles={panelStyles}>
 					<Column table={table} binding={bindings.x} />
 				</CollapsiblePanel>
