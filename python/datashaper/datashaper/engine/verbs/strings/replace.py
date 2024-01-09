@@ -21,7 +21,7 @@ def replace(
     n = -1 if globalMatch else 1
     case = False if caseInsensitive else True
     input_table = input.get_input()
-    output = input_table.copy()
+    output = input_table
     output[to] = output[column].str.replace(
         pat=pattern, repl=replacement, n=n, case=case
     )

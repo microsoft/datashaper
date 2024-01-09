@@ -12,7 +12,7 @@ from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
 
 
-@verb(name="lookup")
+@verb(name="lookup", treats_input_tables_as_immutable=True)
 def lookup(
     input: VerbInput,
     columns: List[str],

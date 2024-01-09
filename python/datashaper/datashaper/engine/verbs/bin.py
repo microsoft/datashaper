@@ -107,6 +107,6 @@ def bin(
         for n in range(len(input_table[column]))
     ]
 
-    output = input_table.copy()
+    output = input_table
     output[to] = value_edges
     return TableContainer(table=output)

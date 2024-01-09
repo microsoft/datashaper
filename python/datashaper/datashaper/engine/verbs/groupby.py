@@ -10,7 +10,7 @@ from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
 
 
-@verb(name="groupby")
+@verb(name="groupby", treats_input_tables_as_immutable=True)
 def groupby(input: VerbInput, columns: List[str]):
     input_table = input.get_input()
     output = input_table.groupby(by=columns)

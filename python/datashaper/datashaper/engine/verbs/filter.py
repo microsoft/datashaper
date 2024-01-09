@@ -17,7 +17,7 @@ from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
 
 
-@verb(name="filter")
+@verb(name="filter", treats_input_tables_as_immutable=True)
 def filter(input: VerbInput, column: str, criteria: List, logical: str = "or"):
     filter_criteria = [
         Criterion(

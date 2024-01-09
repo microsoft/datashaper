@@ -13,7 +13,7 @@ from datashaper.table_store import TableContainer
 @verb(name="unfold")
 def unfold(input: VerbInput, key: str, value: str):
     input_table = input.get_input()
-    output = input_table.copy()
+    output = input_table
 
     columns = len(output[key].unique())
 

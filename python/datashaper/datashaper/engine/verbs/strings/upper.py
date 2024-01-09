@@ -11,6 +11,6 @@ from datashaper.table_store import TableContainer
 @verb(name="strings.upper")
 def upper(input: VerbInput, column: str, to: str):
     input_table = input.get_input()
-    output = input_table.copy()
+    output = input_table
     output[to] = output[column].str.upper()
     return TableContainer(table=output)

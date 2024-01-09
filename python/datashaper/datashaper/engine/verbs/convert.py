@@ -119,7 +119,7 @@ def convert(
     parse_type = ParseType(type)
 
     input_table = input.get_input()
-    output = input_table.copy()
+    output = input_table
 
     output[to] = __type_mapping[parse_type](
         column=output[column], radix=radix, formatPattern=formatPattern

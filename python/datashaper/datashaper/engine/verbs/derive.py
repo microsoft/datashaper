@@ -42,7 +42,7 @@ def derive(input: VerbInput, to: str, column1: str, column2: str, operator: str)
     math_operator = MathOperator(operator)
 
     input_table = input.get_input()
-    output = input_table.copy()
+    output = input_table
     try:
         output[to] = __op_mapping[math_operator](output[column1], output[column2])
     except Exception:

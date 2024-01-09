@@ -11,7 +11,7 @@ from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
 
 
-@verb(name="orderby")
+@verb(name="orderby", treats_input_tables_as_immutable=True)
 def orderby(input: VerbInput, orders: List[Dict]):
     orders_instructions = [
         OrderByInstruction(

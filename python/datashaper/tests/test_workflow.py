@@ -283,7 +283,7 @@ class TestWorkflowRun(unittest.TestCase):
             )
 
             input_data = pd.DataFrame({"a": [1, 2, 3]})
-            workflow.add_table(DEFAULT_INPUT_NAME, input_data.copy())
+            workflow.add_table(DEFAULT_INPUT_NAME, input_data)
 
             workflow.run(context=create_fake_run_context())
 
@@ -306,7 +306,7 @@ class TestWorkflowRun(unittest.TestCase):
             )
 
             input_data = pd.DataFrame({"a": [1, 2, 3]})
-            workflow.add_table(DEFAULT_INPUT_NAME, input_data.copy())
+            workflow.add_table(DEFAULT_INPUT_NAME, input_data)
             workflow.run(context=create_fake_run_context())
 
     def test_workflow_steps_with_no_input_defaults_input_correctly(self):
@@ -328,7 +328,7 @@ class TestWorkflowRun(unittest.TestCase):
         )
 
         input_data = pd.DataFrame({"a": [1, 2, 3]})
-        workflow.add_table(DEFAULT_INPUT_NAME, input_data.copy())
+        workflow.add_table(DEFAULT_INPUT_NAME, input_data)
         workflow.run(context=create_fake_run_context())
 
         # Our test verb doesn't do anything, so the output should be the same as the input
@@ -357,7 +357,7 @@ class TestWorkflowRun(unittest.TestCase):
         )
 
         input_data = pd.DataFrame({"a": [1, 2, 3]})
-        workflow.add_table(DEFAULT_INPUT_NAME, input_data.copy())
+        workflow.add_table(DEFAULT_INPUT_NAME, input_data)
         workflow.run(context=create_fake_run_context())
 
         # Ensure the output looks like the "first_step_output"
@@ -391,7 +391,7 @@ class TestWorkflowRun(unittest.TestCase):
             validate=False,
         )
 
-        workflow.add_table("non_default_input", non_default_input.copy())
+        workflow.add_table("non_default_input", non_default_input)
         workflow.run(context=create_fake_run_context())
 
         # Ensure the output looks like the "first_step_output"
@@ -433,10 +433,10 @@ class TestWorkflowRun(unittest.TestCase):
         input_data = pd.DataFrame({"a": [1, 2, 3]})
 
         # Provide the default input
-        workflow.add_table(DEFAULT_INPUT_NAME, input_data.copy())
+        workflow.add_table(DEFAULT_INPUT_NAME, input_data)
 
         # provide the input data for the second verb
-        workflow.add_table("second_verb_input", second_verb_input.copy())
+        workflow.add_table("second_verb_input", second_verb_input)
 
         # Run the workflow
         workflow.run(context=create_fake_run_context())
@@ -483,7 +483,7 @@ def create_parallel_transforming_verb():
             row["b"] = row["a"] + 1
             return row
 
-        results = derive_from_rows(input.get_input().copy(), transform_row, reporter)
+        results = derive_from_rows(input.get_input(), transform_row, reporter)
 
         return TableContainer(table=pd.DataFrame(results))
 
@@ -495,7 +495,7 @@ def create_parallel_transforming_verb_throwing():
         def transform_row(row: pd.Series):
             raise ValueError("oh no, this should be expected")
 
-        results = derive_from_rows(input.get_input().copy(), transform_row, reporter)
+        results = derive_from_rows(input.get_input(), transform_row, reporter)
 
         return TableContainer(table=pd.DataFrame(results))
 

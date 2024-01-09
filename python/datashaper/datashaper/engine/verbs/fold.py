@@ -13,7 +13,7 @@ from datashaper.table_store import TableContainer
 @verb(name="fold")
 def fold(input: VerbInput, to: Tuple[str, str], columns: List[str]):
     input_table = input.get_input()
-    output = input_table.copy()
+    output = input_table
     columns = [column for column in output.columns if column not in columns]
 
     if len(columns) > 0:

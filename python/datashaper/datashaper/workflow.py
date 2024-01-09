@@ -9,18 +9,18 @@ import inspect
 import json
 import os
 import time
+import traceback
 
 from collections import OrderedDict, defaultdict
-from typing import Any, Callable, Generic, Optional, Set, TypeVar
+from typing import Any, Callable, Generic, Optional, TypeVar
 from uuid import uuid4
 
 import pandas as pd
 
 from jsonschema import validate as validate_schema
 
-from datashaper.engine.verbs import VerbInput, VerbManager
+from datashaper.engine.verbs import VerbDetails, VerbInput, VerbManager
 from datashaper.execution import ExecutionNode
-from datashaper.execution.types import VerbDefinitions
 from datashaper.progress.reporters import (
     NoopStatusReporter,
     StatusReporter,
@@ -50,7 +50,7 @@ class Workflow(Generic[Context]):
     _graph: dict[str, ExecutionNode]
     _dependency_graph: dict[str, set]
     _last_step_id: str
-    _dependencies: Set[str]
+    _dependencies: set[str]
 
     """Externals that this workflow depends on"""
 
@@ -112,16 +112,18 @@ class Workflow(Generic[Context]):
         # Create the execution graph
         previous_step_id = None
         for step in schema["steps"]:
-            step_id = step["id"] if "id" in step else str(uuid4())
+            step_has_defined_id = "id" in step
+            step_id = step["id"] if step_has_defined_id else str(uuid4())
             step_input = (
                 step["input"] if "input" in step else previous_step_id
             ) or default_input
-            verb_fn = Workflow.__get_verb_fn(step["verb"], verbs)
+            verb = Workflow.__get_verb(step["verb"])
 
             step = ExecutionNode(
                 node_id=step_id,
                 node_input=step_input,
-                verb=verb_fn,
+                verb=verb,
+                has_explicit_id=step_has_defined_id,
                 args=step["args"] if "args" in step else {},
             )
             self._graph[step_id] = step
@@ -137,11 +139,11 @@ class Workflow(Generic[Context]):
         return self._schema.get("name", "Workflow")
 
     @property
-    def dependencies(self) -> Set[str]:
+    def dependencies(self) -> set[str]:
         """Get the dependencies of the workflow."""
         return self._dependencies
 
-    def _compute_dependencies(self) -> Set[str]:
+    def _compute_dependencies(self) -> set[str]:
         deps: set[str] = set()
         known: set[str] = set()
         steps: list[dict] = self._schema["steps"]
@@ -185,13 +187,13 @@ class Workflow(Generic[Context]):
             return inputs
 
     @staticmethod
-    def __get_verb_fn(verb: str, verbs: Optional[VerbDefinitions]) -> Callable:
+    def __get_verb(verb: str) -> VerbDetails:
         """Get the verb function from the name."""
         verbs_manager = VerbManager.get()
-        if verb in verbs_manager:
-            return verbs_manager[verb]
-        else:
+        result = verbs_manager.get_verb(verb)
+        if result is None:
             raise ValueError(f"Verb {verb} not found in verbs")
+        return result
 
     @staticmethod
     def __resolve_run_context(
@@ -204,7 +206,7 @@ class Workflow(Generic[Context]):
         def argument_names(fn):
             return inspect.getfullargspec(fn).args
 
-        verb_args = argument_names(exec_node.verb)
+        verb_args = argument_names(exec_node.verb.func)
         run_ctx: dict[str, Any] = {}
         progress: StatusReportHandler = lambda progress: reporter.progress(progress)
 
@@ -237,31 +239,43 @@ class Workflow(Generic[Context]):
             ]
         )
 
-    def _resolve_inputs(self, inputs):
+    def _resolve_inputs(
+        self, verb: VerbDetails, inputs: str | dict[str, str | list[str]]
+    ) -> dict[str, Any]:
+        def input_table(name: str) -> TableContainer:
+            graph_node = self._graph[name] if name in self._graph else None
+            step_table_is_safe_to_mutate = (
+                graph_node is not None and not graph_node.has_explicit_id
+            )
+
+            # if the node has an explicit id or if the verb is mutation-free, skip the copy
+            #
+            # NOTE: if this is an input table, we can probably use the original table if this is the only reference in the workflow ... TODO
+            #
+            use_original_table = (
+                verb.treats_input_tables_as_immutable or step_table_is_safe_to_mutate
+            )
+
+            # pick either the input table or the original table
+            table_container = (
+                self._inputs[name] if name in self._inputs else self._graph[name].result
+            )
+
+            if use_original_table:
+                return table_container
+            else:
+                table = table_container.table.copy()
+                return TableContainer(table=table)
+
         if isinstance(inputs, str):
-            return {
-                "input": VerbInput(
-                    input=self._inputs[inputs]
-                    if inputs in self._inputs
-                    else self._graph[inputs].result
-                )
-            }
+            return {"input": VerbInput(input=input_table(inputs))}
         else:
-            input_mapping = {}
+            input_mapping: dict[str, TableContainer | list[TableContainer]] = {}
             for key, value in inputs.items():
                 if isinstance(value, str):
-                    input_mapping[key] = (
-                        self._inputs[value]
-                        if value in self._inputs
-                        else self._graph[value].result
-                    )
+                    input_mapping[key] = input_table(value)
                 else:
-                    input_mapping[key] = [
-                        self._inputs[input]
-                        if input in self._inputs
-                        else self._graph[input].result
-                        for input in value
-                    ]
+                    input_mapping[key] = [input_table(t) for t in value]
             return {"input": VerbInput(**input_mapping)}
 
     def add_table(self, id: str, table: pd.DataFrame) -> None:
@@ -291,19 +305,19 @@ class Workflow(Generic[Context]):
         ] = _create_default_verb_status_reporter,
     ) -> None:
         """Run the execution graph."""
-        visited: Set[str] = set()
-        executable_nodes = []
+        visited: set[str] = set()
+        nodes: list[ExecutionNode] = []
 
         for node_key in self._graph.keys():
             if self._check_inputs(node_key, visited):
-                executable_nodes.append(node_key)
+                nodes.append(node_key)
 
         verb_idx = 0
 
-        while len(executable_nodes) > 0:
-            current_id = executable_nodes.pop(0)
-            executable_node = self._graph[current_id]
-            verb_name = executable_node.verb.__name__
+        while len(nodes) > 0:
+            current_id = nodes.pop(0)
+            node = self._graph[current_id]
+            verb_name = node.verb.name
 
             # set up verb progress reporter
             progress = create_verb_progress_reporter(f"verb: {verb_name}")
@@ -314,13 +328,16 @@ class Workflow(Generic[Context]):
             start_verb_time = time.time()
 
             # execute the verb
-            result = executable_node.verb(
-                **executable_node.args,
-                **self._resolve_inputs(executable_node.node_input),
-                **Workflow.__resolve_run_context(
-                    executable_node, context, verb_reporter
-                ),
-            )
+            try:
+                inputs = self._resolve_inputs(node.verb, node.node_input)
+                verb_context = Workflow.__resolve_run_context(
+                    node, context, verb_reporter
+                )
+                result = node.verb.func(**node.args, **inputs, **verb_context)
+            except Exception as e:
+                message = f'Error executing verb "{verb_name}" in {self.name}: {e}'
+                status_reporter.error(message, traceback.format_exc())
+                raise e
 
             if inspect.iscoroutine(result):
                 result = asyncio.run(result)
@@ -332,13 +349,13 @@ class Workflow(Generic[Context]):
                 )
 
             progress(ProgressStatus(progress=1))
-            executable_node.result = result
+            node.result = result
 
             # move to the next verb
             visited.add(current_id)
             for possible in self._dependency_graph[current_id]:
                 if self._check_inputs(possible, visited):
-                    executable_nodes.append(possible)
+                    nodes.append(possible)
             verb_idx += 1
 
         for node_id in self._graph.keys():
@@ -353,7 +370,7 @@ class Workflow(Generic[Context]):
             "steps": [
                 {
                     "id": step.node_id,
-                    "verb": step.verb.__name__,
+                    "verb": step.verb.name,
                     "input": step.node_input,
                     "args": step.args,
                 }
