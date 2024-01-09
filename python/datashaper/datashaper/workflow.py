@@ -107,7 +107,7 @@ class Workflow(Generic[Context]):
                 self.add_table(input, table)
 
         if verbs is not None:
-            VerbManager.get().register_verbs(verbs)
+            VerbManager.get().register_verbs(verbs, override_existing=True)
 
         # Create the execution graph
         previous_step_id = None
