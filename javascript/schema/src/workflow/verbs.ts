@@ -351,6 +351,7 @@ export enum WindowFunction {
 	LastValue = 'last_value',
 	FillDown = 'fill_down',
 	FillUp = 'fill_up',
+	UUID = 'uuid'
 }
 
 export interface AggregateArgs extends RollupArgs {

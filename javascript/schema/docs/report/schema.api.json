@@ -12808,6 +12808,27 @@
               },
               "releaseTag": "Public",
               "name": "RowNumber"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!WindowFunction.UUID:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "UUID = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"uuid\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "UUID"
             }
           ]
         },

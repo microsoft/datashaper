@@ -21,6 +21,7 @@ import { evaluateBoolean } from './boolean-logic.js'
 import { compareValues } from './compare.js'
 import { bool } from './data-types.js'
 import type { CompareWrapper } from './types.js'
+import { v4 as uuid } from 'uuid'
 
 export function compareAll(
 	column: string,
@@ -107,11 +108,17 @@ const fieldOps = new Set([
 export function singleExpression(
 	column: string,
 	operation: FieldAggregateOperation | WindowFunction,
-): number | Op {
+): number | Op | object {
 	if (!fieldOps.has(operation)) {
 		throw new Error(
 			`Unsupported operation [${operation}], too many parameters needed`,
 		)
 	}
+
+	if (operation === WindowFunction.UUID) {
+		const fn = escape(() => uuid())
+		return fn
+	}
+
 	return op[operation](column)
 }

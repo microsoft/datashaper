@@ -1283,7 +1283,9 @@ export enum WindowFunction {
     // (undocumented)
     Rank = "rank",
     // (undocumented)
-    RowNumber = "row_number"
+    RowNumber = "row_number",
+    // (undocumented)
+    UUID = "uuid"
 }
 
 // Warning: (ae-missing-release-tag) "WorkflowSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

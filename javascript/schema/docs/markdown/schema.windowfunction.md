@@ -24,4 +24,5 @@ export declare enum WindowFunction
 |  PercentRank | <code>&quot;percent_rank&quot;</code> |  |
 |  Rank | <code>&quot;rank&quot;</code> |  |
 |  RowNumber | <code>&quot;row_number&quot;</code> |  |
+|  UUID | <code>&quot;uuid&quot;</code> |  |
 
