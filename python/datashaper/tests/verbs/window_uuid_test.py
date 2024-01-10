@@ -18,5 +18,3 @@ def test_window():
 
     assert len(uuids) == 5
     assert len(output.table) == 5
-
-
