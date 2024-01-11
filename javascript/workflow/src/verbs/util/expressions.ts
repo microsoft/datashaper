@@ -14,7 +14,7 @@ import {
 	FilterCompareType,
 	WindowFunction,
 } from '@datashaper/schema'
-import { escape, op } from 'arquero'
+import { escape, op, addWindowFunction } from 'arquero'
 import type { Op } from 'arquero/dist/types/op/op'
 
 import { evaluateBoolean } from './boolean-logic.js'
@@ -108,17 +108,20 @@ const fieldOps = new Set([
 export function singleExpression(
 	column: string,
 	operation: FieldAggregateOperation | WindowFunction,
-): number | Op | object {
+): number | Op {
 	if (!fieldOps.has(operation)) {
 		throw new Error(
 			`Unsupported operation [${operation}], too many parameters needed`,
 		)
 	}
 
-	if (operation === WindowFunction.UUID) {
-		const fn = escape(() => uuid())
-		return fn
-	}
+	addWindowFunction(WindowFunction.UUID, {
+		create: () => ({
+		  init: () => {},
+		  value: (column: string) => column !== null ? uuid() : ""
+		}),
+		param: [1, 0]
+	  }, {override: true});
 
-	return op[operation](column)
+	return (op as any)[operation](column)
 }
