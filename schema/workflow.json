@@ -2173,7 +2173,8 @@
                 "last_value",
                 "percent_rank",
                 "rank",
-                "row_number"
+                "row_number",
+                "uuid"
             ],
             "type": "string"
         }

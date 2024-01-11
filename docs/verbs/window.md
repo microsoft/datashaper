@@ -12,6 +12,7 @@ Performs window operations on table columns. Normally the table should be [group
 - `last_value`: Plucks the last value in the group and uses it as the output for the entire group
 - `fill_down`: Fills blank spaces down the column using last valid value from rows before the empty cell
 - `fill_up`: Fills blank spaces _up_ the column using last valid value from rows after the empty cell
+- `uuid`: Assigns an UUID value to each row
 
 ## Examples
 

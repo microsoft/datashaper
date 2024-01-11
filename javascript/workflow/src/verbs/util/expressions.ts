@@ -14,13 +14,14 @@ import {
 	FilterCompareType,
 	WindowFunction,
 } from '@datashaper/schema'
-import { escape, op } from 'arquero'
+import { escape, op, addWindowFunction } from 'arquero'
 import type { Op } from 'arquero/dist/types/op/op'
 
 import { evaluateBoolean } from './boolean-logic.js'
 import { compareValues } from './compare.js'
 import { bool } from './data-types.js'
 import type { CompareWrapper } from './types.js'
+import { v4 as uuid } from 'uuid'
 
 export function compareAll(
 	column: string,
@@ -113,5 +114,14 @@ export function singleExpression(
 			`Unsupported operation [${operation}], too many parameters needed`,
 		)
 	}
-	return op[operation](column)
+
+	return (op as any)[operation](column)
 }
+
+addWindowFunction(WindowFunction.UUID, {
+	create: () => ({
+		init: () => {},
+		value: (column: string) => (column !== null ? uuid() : ''),
+	}),
+	param: [1, 0],
+})

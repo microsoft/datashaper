@@ -236,6 +236,7 @@ class WindowFunction(Enum):
     LastValue = "last_value"
     FillDown = "fill_down"
     FillUp = "fill_up"
+    UUID = "uuid"
 
 
 @dataclass
