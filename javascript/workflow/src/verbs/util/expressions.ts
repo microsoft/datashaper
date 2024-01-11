@@ -115,13 +115,17 @@ export function singleExpression(
 		)
 	}
 
-	addWindowFunction(WindowFunction.UUID, {
-		create: () => ({
-		  init: () => {},
-		  value: (column: string) => column !== null ? uuid() : ""
-		}),
-		param: [1, 0]
-	  }, {override: true});
+	addWindowFunction(
+		WindowFunction.UUID,
+		{
+			create: () => ({
+				init: () => {},
+				value: (column: string) => (column !== null ? uuid() : ''),
+			}),
+			param: [1, 0],
+		},
+		{ override: true },
+	)
 
 	return (op as any)[operation](column)
 }
