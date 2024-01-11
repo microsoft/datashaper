@@ -9,15 +9,13 @@ import { useObservableState } from 'observable-hooks'
 export function useNodesInputTable(
 	resource: DataGraph,
 ): ColumnTable | undefined {
-	const nodesInput = resource.nodesInput
-	const table = useObservableState(nodesInput?.output$, nodesInput?.output)
+	const table = useObservableState(resource.nodesInput$, resource.nodesInput)
 	return table?.table
 }
 
 export function useEdgesInputTable(
 	resource: DataGraph,
 ): ColumnTable | undefined {
-	const edgesInput = resource.edgesInput
-	const table = useObservableState(edgesInput?.output$, edgesInput?.output)
+	const table = useObservableState(resource.edgesInput$, resource.edgesInput)
 	return table?.table
 }

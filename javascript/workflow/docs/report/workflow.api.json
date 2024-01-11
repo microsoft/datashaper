@@ -4143,17 +4143,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "TableBundle",
-                  "canonicalReference": "@datashaper/workflow!TableBundle:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": " | "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "DataTable",
-                  "canonicalReference": "@datashaper/workflow!DataTable:class"
+                  "text": "TableContainer",
+                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
                 },
                 {
                   "kind": "Content",
@@ -4168,6 +4159,58 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "edgesInput",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!DataGraph#edgesInput$:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get edgesInput$(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Observable",
+                  "canonicalReference": "rxjs!Observable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Maybe",
+                  "canonicalReference": "@datashaper/workflow!Maybe:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TableContainer",
+                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "edgesInput$",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 7
@@ -4311,17 +4354,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "TableBundle",
-                  "canonicalReference": "@datashaper/workflow!TableBundle:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": " | "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "DataTable",
-                  "canonicalReference": "@datashaper/workflow!DataTable:class"
+                  "text": "TableContainer",
+                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
                 },
                 {
                   "kind": "Content",
@@ -4336,6 +4370,58 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "nodesInput",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!DataGraph#nodesInput$:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get nodesInput$(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Observable",
+                  "canonicalReference": "rxjs!Observable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Maybe",
+                  "canonicalReference": "@datashaper/workflow!Maybe:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TableContainer",
+                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "nodesInput$",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 7

@@ -204,7 +204,7 @@ export class ParserOptions extends Observed implements ParserOptionsSchema {
 		this._escapeChar$.next(defaults.escapeChar)
 		this._commentStart$.next(defaults.comment)
 
-		if (quiet) {
+		if (!quiet) {
 			this._onChange.next()
 		}
 	}

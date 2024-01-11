@@ -94,7 +94,7 @@ export class DataGraphEdges extends Observed implements DataGraphEdgesSchema {
 		this._source$.next(schema?.source)
 		this._target$.next(schema?.target)
 		this.bindings.loadSchema(schema?.bindings, true)
-		if (quiet) {
+		if (!quiet) {
 			this._onChange.next()
 		}
 	}

@@ -41,7 +41,7 @@ export class CartesianPointBindings
 		this.y.loadSchema(schema?.y, true)
 		this.size.loadSchema(schema?.size, true)
 		this.fill.loadSchema(schema?.fill, true)
-		if (quiet) {
+		if (!quiet) {
 			this._onChange.next()
 		}
 	}

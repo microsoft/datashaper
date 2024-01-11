@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-get nodesInput(): Maybe<TableBundle | DataTable>;
+get nodesInput(): Maybe<TableContainer>;
 ```

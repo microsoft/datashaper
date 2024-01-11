@@ -82,7 +82,7 @@ export class NumericFieldScaleBinding
 		this._domain.next(schema?.domain || DOMAIN_DEFAULT)
 		this._range.next(schema?.range || RANGE_DEFAULT)
 
-		if (quiet) {
+		if (!quiet) {
 			this._onChange.next()
 		}
 	}

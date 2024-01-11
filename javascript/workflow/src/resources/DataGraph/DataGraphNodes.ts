@@ -62,7 +62,7 @@ export class DataGraphNodes extends Observed implements DataGraphNodesSchema {
 		this._input$.next(schema?.input)
 		this._identifier$.next(schema?.identifier)
 		this.bindings.loadSchema(schema?.bindings, true)
-		if (quiet) {
+		if (!quiet) {
 			this._onChange.next()
 		}
 	}

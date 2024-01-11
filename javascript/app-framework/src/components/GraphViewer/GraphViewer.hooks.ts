@@ -16,6 +16,22 @@ import Graph from 'graphology'
 import { useThematic } from '@thematic/react'
 import { op } from 'arquero'
 
+// temp
+interface GraphNode {
+	id: string
+	x: number
+	y: number
+	size: number
+	color: string
+}
+interface GraphEdge {
+	id: string
+	source: string
+	target: string
+	size: number
+	color: string
+}
+
 export function useGraph(
 	nodesTable: ColumnTable,
 	edgesTable: ColumnTable,
@@ -24,8 +40,7 @@ export function useGraph(
 	edgeProportion?: number,
 ): Graph {
 	const nodes = useNodes(nodesTable, nodesDefinition)
-	const edges = useEdges(edgesTable, edgesDefinition, edgeProportion)
-	console.log(nodes, edges)
+	const edges = useEdges(edgesTable, nodes, edgesDefinition, edgeProportion)
 	return useMemo(() => {
 		const graph = new Graph()
 		// NOTE: graphology nodes must have an id, and edges must have a source and target (which map to node ids)
@@ -45,15 +60,15 @@ export function useGraph(
 	}, [nodes, edges])
 }
 
-function useNodes(table: ColumnTable, definition: DataGraphNodes) {
+function useNodes(table: ColumnTable, definition: DataGraphNodes): GraphNode[] {
 	const id = useNodeId(definition)
 	const x = useXBinding(definition.bindings)
 	const y = useYBinding(definition.bindings)
 	const size = useSizeBinding(definition.bindings)
 	const fill = useFillBinding(definition.bindings, table)
-	return useMemo(() => {
-		const nodes = table.objects()
-		return nodes.map((node) => ({
+	const nodes = useMemo(() => {
+		const raw = table.objects()
+		return raw.map((node) => ({
 			id: id(node),
 			x: x(node),
 			y: y(node),
@@ -61,21 +76,28 @@ function useNodes(table: ColumnTable, definition: DataGraphNodes) {
 			color: fill(node),
 		}))
 	}, [table, id, x, y, size, fill])
+	return useMemo(() => {
+		// filter any invalid nodes, which can be caused by unmapped or mis-mapped columns
+		return nodes.filter((node) => node.id !== undefined)
+	}, [nodes])
 }
 
 function useEdges(
 	table: ColumnTable,
+	nodes: GraphNode[],
 	definition: DataGraphEdges,
 	proportion = 0,
-) {
+): GraphEdge[] {
 	const id = useEdgeId(definition)
 	const source = useEdgeSource(definition)
 	const target = useEdgeTarget(definition)
 	const width = useWidthBinding(definition.bindings)
 	const stroke = useStrokeBinding(definition.bindings)
-	return useMemo(() => {
-		const edges = table.sample(table.numRows() * proportion).objects()
-		return edges.map((edge) => ({
+	const edges = useMemo(() => {
+		const raw = table
+			? table.sample(table.numRows() * proportion).objects()
+			: []
+		return raw.map((edge) => ({
 			id: id(edge),
 			source: source(edge),
 			target: target(edge),
@@ -83,6 +105,17 @@ function useEdges(
 			color: stroke(edge),
 		}))
 	}, [table, id, source, target, width, stroke, proportion])
+	return useMemo(() => {
+		// filter any invalid edges, which can be caused by unmapped or mis-mapped columns
+		const hash = nodes.reduce((acc: Record<string, boolean>, node) => {
+			acc[node.id] = true
+			return acc
+		}, {})
+		return edges.filter(
+			(edge) =>
+				hash[edge.source] && hash[edge.target] && edge.source !== edge.target,
+		)
+	}, [nodes, edges])
 }
 
 // NOTE: this is not actually necessary for sigma, but is for graspologic once we migrate.
@@ -102,12 +135,12 @@ function useEdgeId(definition: DataGraphEdges) {
 
 function useEdgeSource(definition: DataGraphEdges) {
 	const source = useObservableState(definition.source$, definition.source)
-	return useCallback((edge: any) => edge[source || 'source'], [source])
+	return useCallback((edge: any) => (source ? edge[source] : ''), [source])
 }
 
 function useEdgeTarget(definition: DataGraphEdges) {
 	const target = useObservableState(definition.target$, definition.target)
-	return useCallback((edge: any) => edge[target || 'target'], [target])
+	return useCallback((edge: any) => (target ? edge[target] : ''), [target])
 }
 
 // TODO: this will eventually have a variety of binding options instead of being a static color
@@ -147,7 +180,10 @@ function useNodeId(definition: DataGraphNodes) {
 		definition.identifier$,
 		definition.identifier,
 	)
-	return useCallback((edge: any) => edge[identifier || 'id'], [identifier])
+	return useCallback(
+		(node: any) => identifier && node[identifier],
+		[identifier],
+	)
 }
 
 function useXBinding(bindings: CartesianPointBindings) {

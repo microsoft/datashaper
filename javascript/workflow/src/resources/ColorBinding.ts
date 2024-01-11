@@ -55,7 +55,7 @@ export class ColorBinding extends Observed implements ColorBindingSchema {
 		this._field.next(schema?.field)
 		this._scale.next(schema?.scale || 'nominal')
 
-		if (quiet) {
+		if (!quiet) {
 			this._onChange.next()
 		}
 	}

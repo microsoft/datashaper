@@ -47,7 +47,7 @@ export class CartesianLineBindings
 	): void {
 		this.width.loadSchema(schema?.width, true)
 		this._stroke.next(schema?.stroke)
-		if (quiet) {
+		if (!quiet) {
 			this._onChange.next()
 		}
 	}

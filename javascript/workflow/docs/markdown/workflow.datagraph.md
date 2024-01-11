@@ -23,9 +23,11 @@ export declare class DataGraph extends Resource
 |  --- | --- | --- | --- |
 |  [$schema](./workflow.datagraph._schema.md) | <code>readonly</code> | (not declared) |  |
 |  [edges](./workflow.datagraph.edges.md) | <code>readonly</code> | [DataGraphEdges](./workflow.datagraphedges.md) |  |
-|  [edgesInput](./workflow.datagraph.edgesinput.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;[TableBundle](./workflow.tablebundle.md) \| [DataTable](./workflow.datatable.md)<!-- -->&gt; |  |
+|  [edgesInput](./workflow.datagraph.edgesinput.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt; |  |
+|  [edgesInput$](./workflow.datagraph.edgesinput_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt;&gt; |  |
 |  [nodes](./workflow.datagraph.nodes.md) | <code>readonly</code> | [DataGraphNodes](./workflow.datagraphnodes.md) |  |
-|  [nodesInput](./workflow.datagraph.nodesinput.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;[TableBundle](./workflow.tablebundle.md) \| [DataTable](./workflow.datatable.md)<!-- -->&gt; |  |
+|  [nodesInput](./workflow.datagraph.nodesinput.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt; |  |
+|  [nodesInput$](./workflow.datagraph.nodesinput_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt;&gt; |  |
 |  [profile](./workflow.datagraph.profile.md) | <code>readonly</code> | (not declared) |  |
 
 ## Methods

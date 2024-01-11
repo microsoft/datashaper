@@ -42,7 +42,7 @@ export class DataFieldBinding extends Observed implements DataFieldBindingSchema
 	): void {
 		this._field.next(schema?.field)
 
-		if (quiet) {
+		if (!quiet) {
 			this._onChange.next()
 		}
 	}

@@ -47,7 +47,7 @@ export const DataGraphEditor: React.FC<ProfileComponentProps<DataGraph>> = memo(
 						<CommandBar {...commandBar} />
 					</Header>
 					<GraphContainer>
-						<When condition={!!nodesInputTable && !!edgesInputTable}>
+						<When condition={!!nodesInputTable}>
 							<GraphViewer
 								nodesTable={nodesInputTable as ColumnTable}
 								edgesTable={edgesInputTable as ColumnTable}

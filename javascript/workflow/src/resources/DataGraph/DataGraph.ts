@@ -13,6 +13,8 @@ import { TableBundle } from '../TableBundle.js'
 import { DataTable } from '../DataTable.js'
 import { DataGraphNodes } from './DataGraphNodes.js'
 import { DataGraphEdges } from './DataGraphEdges.js'
+import { BehaviorSubject, Observable } from 'rxjs'
+import type { TableContainer } from '@datashaper/tables'
 
 export class DataGraph extends Resource {
 	public readonly $schema = 'TODO'
@@ -21,26 +23,57 @@ export class DataGraph extends Resource {
 	public readonly nodes = new DataGraphNodes()
 	public readonly edges = new DataGraphEdges()
 
+	private readonly _nodesInput$ = new BehaviorSubject<Maybe<TableContainer>>(
+		undefined,
+	)
+	private readonly _edgesInput$ = new BehaviorSubject<Maybe<TableContainer>>(
+		undefined,
+	)
+
 	public constructor(data?: Readable<DataGraphSchema>) {
 		super()
 		this.loadSchema(data)
+
+		this.nodes.input$.subscribe((input) => {
+			if (input) {
+				const table = this.findInput(input)
+				table?.output$.subscribe((output) => {
+					this._nodesInput$.next(output)
+				})
+			}
+		})
+
+		this.edges.input$.subscribe((input) => {
+			if (input) {
+				const table = this.findInput(input)
+				table?.output$.subscribe((output) => {
+					this._edgesInput$.next(output)
+				})
+			}
+		})
 	}
 
 	public override defaultName(): string {
 		return 'Graph'
 	}
 
-	public get nodesInput(): Maybe<TableBundle | DataTable> {
-		const name = this.nodes?.input
-		const ref = this.sources.find((source) => {
-			const resource = dereference(source)
-			return resource?.name === name
-		})
-		return ref && (dereference(ref) as TableBundle | DataTable)
+	public get nodesInput$(): Observable<Maybe<TableContainer>> {
+		return this._nodesInput$
 	}
 
-	public get edgesInput(): Maybe<TableBundle | DataTable> {
-		const name = this.edges?.input
+	public get nodesInput(): Maybe<TableContainer> {
+		return this._nodesInput$.value
+	}
+
+	public get edgesInput$(): Observable<Maybe<TableContainer>> {
+		return this._edgesInput$
+	}
+
+	public get edgesInput(): Maybe<TableContainer> {
+		return this._edgesInput$.value
+	}
+
+	private findInput(name: string): Maybe<TableBundle | DataTable> {
 		const ref = this.sources.find((source) => {
 			const resource = dereference(source)
 			return resource?.name === name

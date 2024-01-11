@@ -316,13 +316,17 @@ export class DataGraph extends Resource {
     // (undocumented)
     readonly edges: DataGraphEdges;
     // (undocumented)
-    get edgesInput(): Maybe<TableBundle | DataTable>;
+    get edgesInput$(): Observable<Maybe<TableContainer>>;
+    // (undocumented)
+    get edgesInput(): Maybe<TableContainer>;
     // (undocumented)
     loadSchema(schema: Maybe<Readable<DataGraphSchema>>, quiet?: boolean): void;
     // (undocumented)
     readonly nodes: DataGraphNodes;
     // (undocumented)
-    get nodesInput(): Maybe<TableBundle | DataTable>;
+    get nodesInput$(): Observable<Maybe<TableContainer>>;
+    // (undocumented)
+    get nodesInput(): Maybe<TableContainer>;
     // (undocumented)
     readonly profile = KnownProfile.DataGraph;
     // (undocumented)
