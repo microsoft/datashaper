@@ -33,24 +33,7 @@ export class DataGraph extends Resource {
 	public constructor(data?: Readable<DataGraphSchema>) {
 		super()
 		this.loadSchema(data)
-
-		this.nodes.input$.subscribe((input) => {
-			if (input) {
-				const table = this.findInput(input)
-				table?.output$.subscribe((output) => {
-					this._nodesInput$.next(output)
-				})
-			}
-		})
-
-		this.edges.input$.subscribe((input) => {
-			if (input) {
-				const table = this.findInput(input)
-				table?.output$.subscribe((output) => {
-					this._edgesInput$.next(output)
-				})
-			}
-		})
+		this.wire()
 	}
 
 	public override defaultName(): string {
@@ -73,12 +56,37 @@ export class DataGraph extends Resource {
 		return this._edgesInput$.value
 	}
 
+	private wire() {
+		this.nodes.input$.subscribe((input) =>
+			this.bindInputTable(input, this._nodesInput$),
+		)
+		this.edges.input$.subscribe((input) =>
+			this.bindInputTable(input, this._edgesInput$),
+		)
+		this.onChange(() => {
+			this.bindInputTable(this.nodes.input, this._nodesInput$)
+			this.bindInputTable(this.edges.input, this._edgesInput$)
+		})
+	}
+
 	private findInput(name: string): Maybe<TableBundle | DataTable> {
 		const ref = this.sources.find((source) => {
 			const resource = dereference(source)
 			return resource?.name === name
 		})
 		return ref && (dereference(ref) as TableBundle | DataTable)
+	}
+
+	private bindInputTable(
+		name: string | undefined,
+		input$: BehaviorSubject<Maybe<TableContainer>>,
+	): void {
+		if (name) {
+			const table = this.findInput(name)
+			table?.output$.subscribe((output) => {
+				input$.next(output)
+			})
+		}
 	}
 
 	public override toSchema(): DataGraphSchema {
