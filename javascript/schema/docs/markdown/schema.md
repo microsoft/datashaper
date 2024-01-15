@@ -85,6 +85,7 @@
 |  [LookupArgs](./schema.lookupargs.md) |  |
 |  [MergeArgs](./schema.mergeargs.md) |  |
 |  [Named](./schema.named.md) | Base interface for sharing properties of named resources/objects. |
+|  [NoopArgs](./schema.noopargs.md) |  |
 |  [OnehotArgs](./schema.onehotargs.md) |  |
 |  [OrderbyArgs](./schema.orderbyargs.md) |  |
 |  [OrderbyInstruction](./schema.orderbyinstruction.md) |  |

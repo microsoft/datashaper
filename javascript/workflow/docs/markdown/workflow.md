@@ -119,6 +119,7 @@
 |  [isWorkflow](./workflow.isworkflow.md) |  |
 |  [isWorkflowSchema](./workflow.isworkflowschema.md) |  |
 |  [merge](./workflow.merge.md) |  |
+|  [noop](./workflow.noop.md) |  |
 |  [onehot](./workflow.onehot.md) |  |
 |  [orderby](./workflow.orderby.md) |  |
 |  [pivot](./workflow.pivot.md) |  |

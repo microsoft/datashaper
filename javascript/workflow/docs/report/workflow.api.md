@@ -35,6 +35,7 @@ import type { LookupArgs } from '@datashaper/schema';
 import type { Maybe as Maybe_2 } from '@datashaper/workflow';
 import type { MergeArgs } from '@datashaper/schema';
 import type { Named as Named_2 } from '@datashaper/schema';
+import type { NoopArgs } from '@datashaper/schema';
 import { Observable } from 'rxjs';
 import type { OnehotArgs } from '@datashaper/schema';
 import type { OrderbyArgs } from '@datashaper/schema';
@@ -707,6 +708,11 @@ export interface NodeStats {
     recalculations: number;
     version: number;
 }
+
+// Warning: (ae-missing-release-tag) "noop" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const noop: (id: string) => StepNode<TableContainer<unknown>, NoopArgs>;
 
 // Warning: (ae-missing-release-tag) "ObservableNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

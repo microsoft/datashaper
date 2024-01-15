@@ -46,6 +46,7 @@ export const encode = empty
 export const concat = empty
 export const difference = empty
 export const intersect = empty
+export const noop = empty
 export const onehot = empty
 export const orderby = empty
 export const recode = empty

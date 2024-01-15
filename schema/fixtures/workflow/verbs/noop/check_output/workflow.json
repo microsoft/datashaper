@@ -1,0 +1,15 @@
+{
+	"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v2.json",
+	"steps": [
+		{
+			"verb": "noop",
+			"input": "companies",
+			"args": {
+				"message": "Test noop verb"
+			},
+			"id": "expected"
+		}
+	],
+
+	"input": ["companies"]
+}

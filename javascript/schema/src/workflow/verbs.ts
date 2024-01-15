@@ -30,6 +30,7 @@ export enum Verb {
 	Join = 'join',
 	Lookup = 'lookup',
 	Merge = 'merge',
+	Noop = 'noop',
 	Onehot = 'onehot',
 	Orderby = 'orderby',
 	Pivot = 'pivot',
@@ -699,6 +700,10 @@ export interface SpreadArgs extends InputColumnArgs {
 }
 
 export interface StringsArgs extends InputColumnArgs, OutputColumnArgs {}
+
+export interface NoopArgs {
+	message?: string
+}
 
 export interface StringsReplaceArgs extends StringsArgs {
 	pattern: string

@@ -690,6 +690,14 @@ export interface Named {
     title?: string;
 }
 
+// Warning: (ae-missing-release-tag) "NoopArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface NoopArgs {
+    // (undocumented)
+    message?: string;
+}
+
 // Warning: (ae-missing-release-tag) "NumericComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -958,6 +966,9 @@ export type Step = StepJsonCommon & (({
     verb: Verb.Merge;
     args?: MergeArgs;
 } & BasicInput) | ({
+    verb: Verb.Noop;
+    args?: NoopArgs;
+} & BasicInput) | ({
     verb: Verb.Onehot;
     args?: OnehotArgs;
 } & BasicInput) | ({
@@ -1217,6 +1228,8 @@ export enum Verb {
     Lookup = "lookup",
     // (undocumented)
     Merge = "merge",
+    // (undocumented)
+    Noop = "noop",
     // (undocumented)
     Onehot = "onehot",
     // (undocumented)

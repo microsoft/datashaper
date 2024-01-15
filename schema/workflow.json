@@ -802,6 +802,14 @@
             ],
             "type": "string"
         },
+        "NoopArgs": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "OnehotArgs": {
             "properties": {
                 "column": {
@@ -1547,6 +1555,28 @@
                                 },
                                 "verb": {
                                     "const": "merge",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/NoopArgs"
+                                },
+                                "verb": {
+                                    "const": "noop",
                                     "type": "string"
                                 }
                             },
