@@ -37,10 +37,10 @@ export declare enum Verb
 |  Join | <code>&quot;join&quot;</code> |  |
 |  Lookup | <code>&quot;lookup&quot;</code> |  |
 |  Merge | <code>&quot;merge&quot;</code> |  |
-|  Noop | <code>&quot;noop&quot;</code> |  |
 |  Onehot | <code>&quot;onehot&quot;</code> |  |
 |  Orderby | <code>&quot;orderby&quot;</code> |  |
 |  Pivot | <code>&quot;pivot&quot;</code> |  |
+|  Print | <code>&quot;print&quot;</code> |  |
 |  Recode | <code>&quot;recode&quot;</code> |  |
 |  Rename | <code>&quot;rename&quot;</code> |  |
 |  Rollup | <code>&quot;rollup&quot;</code> |  |

@@ -7228,50 +7228,6 @@
           "extendsTokenRanges": []
         },
         {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/schema!NoopArgs:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface NoopArgs "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "NoopArgs",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!NoopArgs#message:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "message?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "message",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
           "kind": "Enum",
           "canonicalReference": "@datashaper/schema!NumericComparisonOperator:enum",
           "docComment": "",
@@ -8215,6 +8171,50 @@
               "endIndex": 2
             }
           ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!PrintArgs:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface PrintArgs "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "PrintArgs",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!PrintArgs#message:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "message?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "message",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
         },
         {
           "kind": "TypeAlias",
@@ -9895,8 +9895,8 @@
             },
             {
               "kind": "Reference",
-              "text": "Verb.Noop",
-              "canonicalReference": "@datashaper/schema!Verb.Noop:member"
+              "text": "Verb.Print",
+              "canonicalReference": "@datashaper/schema!Verb.Print:member"
             },
             {
               "kind": "Content",
@@ -9904,8 +9904,8 @@
             },
             {
               "kind": "Reference",
-              "text": "NoopArgs",
-              "canonicalReference": "@datashaper/schema!NoopArgs:interface"
+              "text": "PrintArgs",
+              "canonicalReference": "@datashaper/schema!PrintArgs:interface"
             },
             {
               "kind": "Content",
@@ -12227,27 +12227,6 @@
             },
             {
               "kind": "EnumMember",
-              "canonicalReference": "@datashaper/schema!Verb.Noop:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "Noop = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "\"noop\""
-                }
-              ],
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "name": "Noop"
-            },
-            {
-              "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!Verb.Onehot:member",
               "docComment": "",
               "excerptTokens": [
@@ -12308,6 +12287,27 @@
               },
               "releaseTag": "Public",
               "name": "Pivot"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!Verb.Print:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Print = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"print\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Print"
             },
             {
               "kind": "EnumMember",

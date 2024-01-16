@@ -9156,55 +9156,6 @@
           "extendsTokenRanges": []
         },
         {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/workflow!noop:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "noop: "
-            },
-            {
-              "kind": "Content",
-              "text": "(id: string) => import(\"../index.js\")."
-            },
-            {
-              "kind": "Reference",
-              "text": "StepNode",
-              "canonicalReference": "@datashaper/workflow!StepNode:class"
-            },
-            {
-              "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
-            },
-            {
-              "kind": "Reference",
-              "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "<unknown>, "
-            },
-            {
-              "kind": "Reference",
-              "text": "NoopArgs",
-              "canonicalReference": "@datashaper/schema!NoopArgs:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "noop",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 8
-          }
-        },
-        {
           "kind": "Class",
           "canonicalReference": "@datashaper/workflow!ObservableNode:class",
           "docComment": "",
@@ -10534,6 +10485,55 @@
           "isReadonly": true,
           "releaseTag": "Public",
           "name": "pivot",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 8
+          }
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@datashaper/workflow!print_2:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "print: "
+            },
+            {
+              "kind": "Content",
+              "text": "(id: string) => import(\"../index.js\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "StepNode",
+              "canonicalReference": "@datashaper/workflow!StepNode:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<import(\"@datashaper/tables\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "TableContainer",
+              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<unknown>, "
+            },
+            {
+              "kind": "Reference",
+              "text": "PrintArgs",
+              "canonicalReference": "@datashaper/schema!PrintArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "print_2",
           "variableTypeTokenRange": {
             "startIndex": 1,
             "endIndex": 8

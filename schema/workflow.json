@@ -802,14 +802,6 @@
             ],
             "type": "string"
         },
-        "NoopArgs": {
-            "properties": {
-                "message": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
         "OnehotArgs": {
             "properties": {
                 "column": {
@@ -892,6 +884,14 @@
                 },
                 "value": {
                     "description": "Value column for the operation",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "PrintArgs": {
+            "properties": {
+                "message": {
                     "type": "string"
                 }
             },
@@ -1573,10 +1573,10 @@
                         {
                             "properties": {
                                 "args": {
-                                    "$ref": "#/definitions/NoopArgs"
+                                    "$ref": "#/definitions/PrintArgs"
                                 },
                                 "verb": {
-                                    "const": "noop",
+                                    "const": "print",
                                     "type": "string"
                                 }
                             },

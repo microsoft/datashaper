@@ -690,14 +690,6 @@ export interface Named {
     title?: string;
 }
 
-// Warning: (ae-missing-release-tag) "NoopArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface NoopArgs {
-    // (undocumented)
-    message?: string;
-}
-
 // Warning: (ae-missing-release-tag) "NumericComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -788,6 +780,14 @@ export enum ParseType {
 // @public (undocumented)
 export interface PivotArgs extends InputKeyValueArgs {
     operation: FieldAggregateOperation;
+}
+
+// Warning: (ae-missing-release-tag) "PrintArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface PrintArgs {
+    // (undocumented)
+    message?: string;
 }
 
 // Warning: (ae-missing-release-tag) "Profile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -966,8 +966,8 @@ export type Step = StepJsonCommon & (({
     verb: Verb.Merge;
     args?: MergeArgs;
 } & BasicInput) | ({
-    verb: Verb.Noop;
-    args?: NoopArgs;
+    verb: Verb.Print;
+    args?: PrintArgs;
 } & BasicInput) | ({
     verb: Verb.Onehot;
     args?: OnehotArgs;
@@ -1229,13 +1229,13 @@ export enum Verb {
     // (undocumented)
     Merge = "merge",
     // (undocumented)
-    Noop = "noop",
-    // (undocumented)
     Onehot = "onehot",
     // (undocumented)
     Orderby = "orderby",
     // (undocumented)
     Pivot = "pivot",
+    // (undocumented)
+    Print = "print",
     // (undocumented)
     Recode = "recode",
     // (undocumented)
