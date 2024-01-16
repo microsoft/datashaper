@@ -12342,6 +12342,55 @@
           }
         },
         {
+          "kind": "Variable",
+          "canonicalReference": "@datashaper/workflow!spreadJson:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "spreadJson: "
+            },
+            {
+              "kind": "Content",
+              "text": "(id: string) => import(\"../index.js\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "StepNode",
+              "canonicalReference": "@datashaper/workflow!StepNode:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<import(\"@datashaper/tables\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "TableContainer",
+              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<unknown>, "
+            },
+            {
+              "kind": "Reference",
+              "text": "SpreadJsonArgs",
+              "canonicalReference": "@datashaper/schema!SpreadJsonArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "spreadJson",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 8
+          }
+        },
+        {
           "kind": "Interface",
           "canonicalReference": "@datashaper/workflow!Step:interface",
           "docComment": "/**\n * Resolved step data, used in living workflows\n */\n",

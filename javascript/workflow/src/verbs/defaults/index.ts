@@ -51,6 +51,7 @@ export const orderby = empty
 export const recode = empty
 export const rename = empty
 export const sample = empty
+export const spreadJson = empty
 export const ungroup = empty
 export const union = empty
 export const unorder = empty

@@ -37,6 +37,7 @@ import type {
 	SampleArgs,
 	SelectArgs,
 	SpreadArgs,
+	SpreadJsonArgs,
 	StringsArgs,
 	StringsReplaceArgs,
 	UnfoldArgs,
@@ -93,6 +94,7 @@ export type Step = StepJsonCommon &
 		| ({ verb: Verb.Sample; args?: SampleArgs } & BasicInput)
 		| ({ verb: Verb.Select; args?: SelectArgs } & BasicInput)
 		| ({ verb: Verb.Spread; args?: SpreadArgs } & BasicInput)
+		| ({ verb: Verb.SpreadJson; args?: SpreadJsonArgs } & BasicInput)
 		| ({ verb: Verb.StringsReplace; args?: StringsReplaceArgs } & BasicInput)
 		| ({ verb: Verb.StringsLower; args?: StringsArgs } & BasicInput)
 		| ({ verb: Verb.StringsUpper; args?: StringsArgs } & BasicInput)

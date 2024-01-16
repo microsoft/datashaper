@@ -70,6 +70,7 @@ const descriptions = {
 	sample: SampleDescription,
 	select: NoParametersDescription,
 	spread: SpreadDescription,
+	spreadJson: NoParametersDescription,
 	strings: {
 		replace: StringsReplaceDescription,
 		lower: NoParametersDescription,

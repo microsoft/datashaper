@@ -9238,6 +9238,51 @@
           ]
         },
         {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!SpreadJsonArgs:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface SpreadJsonArgs "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "SpreadJsonArgs",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!SpreadJsonArgs#jsonObject:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "jsonObject: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "JSON",
+                  "canonicalReference": "!JSON:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "jsonObject",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
           "kind": "TypeAlias",
           "canonicalReference": "@datashaper/schema!Step:type",
           "docComment": "/**\n * Specification for step items\n */\n",
@@ -10094,6 +10139,33 @@
             },
             {
               "kind": "Reference",
+              "text": "Verb.SpreadJson",
+              "canonicalReference": "@datashaper/schema!Verb.SpreadJson:member"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n    args?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "SpreadJsonArgs",
+              "canonicalReference": "@datashaper/schema!SpreadJsonArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n} & "
+            },
+            {
+              "kind": "Reference",
+              "text": "BasicInput",
+              "canonicalReference": "@datashaper/schema!BasicInput:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ") | ({\n    verb: "
+            },
+            {
+              "kind": "Reference",
               "text": "Verb.StringsReplace",
               "canonicalReference": "@datashaper/schema!Verb.StringsReplace:member"
             },
@@ -10353,7 +10425,7 @@
           "name": "Step",
           "typeTokenRange": {
             "startIndex": 1,
-            "endIndex": 245
+            "endIndex": 251
           }
         },
         {
@@ -12342,6 +12414,27 @@
               },
               "releaseTag": "Public",
               "name": "Spread"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!Verb.SpreadJson:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SpreadJson = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"spreadJson\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SpreadJson"
             },
             {
               "kind": "EnumMember",

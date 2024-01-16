@@ -128,6 +128,7 @@
 |  [sample](./workflow.sample.md) |  |
 |  [select](./workflow.select.md) |  |
 |  [spread](./workflow.spread.md) |  |
+|  [spreadJson](./workflow.spreadjson.md) |  |
 |  [strings](./workflow.strings.md) |  |
 |  [unfold](./workflow.unfold.md) |  |
 |  [ungroup](./workflow.ungroup.md) |  |

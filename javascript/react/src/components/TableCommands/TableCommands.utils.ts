@@ -30,6 +30,7 @@ export const groupedColumnVerbs: GroupedVerbs[] = [
 			Verb.Impute,
 			Verb.Onehot,
 			Verb.Spread,
+			Verb.SpreadJson,
 			Verb.Recode,
 			Verb.StringsReplace,
 			Verb.StringsLower,

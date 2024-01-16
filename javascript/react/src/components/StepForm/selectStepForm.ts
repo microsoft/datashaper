@@ -31,6 +31,7 @@ import {
 	SampleForm,
 	SetOperationForm,
 	SpreadForm,
+	SpreadJsonForm,
 	UnfoldForm,
 	UnhotForm,
 	WindowForm,
@@ -71,6 +72,7 @@ const forms = {
 	sample: SampleForm,
 	select: NoParametersForm,
 	spread: SpreadForm,
+	spreadJson: SpreadJsonForm,
 	strings: {
 		replace: StringsReplaceForm,
 		lower: NoParametersForm,

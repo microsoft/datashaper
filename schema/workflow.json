@@ -701,6 +701,14 @@
             },
             "type": "object"
         },
+        "JSON": {
+            "properties": {
+                "__@toStringTag@3501": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "JoinArgs": {
             "properties": {
                 "on": {
@@ -1054,6 +1062,14 @@
                         "type": "string"
                     },
                     "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "SpreadJsonArgs": {
+            "properties": {
+                "jsonObject": {
+                    "$ref": "#/definitions/JSON"
                 }
             },
             "type": "object"
@@ -1745,6 +1761,28 @@
                                 },
                                 "verb": {
                                     "const": "spread",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/SpreadJsonArgs"
+                                },
+                                "verb": {
+                                    "const": "spreadJson",
                                     "type": "string"
                                 }
                             },

@@ -97,6 +97,7 @@
 |  [RollupArgs](./schema.rollupargs.md) |  |
 |  [SampleArgs](./schema.sampleargs.md) |  |
 |  [SpreadArgs](./schema.spreadargs.md) |  |
+|  [SpreadJsonArgs](./schema.spreadjsonargs.md) |  |
 |  [StepJsonCommon](./schema.stepjsoncommon.md) | Common step properties |
 |  [StringsArgs](./schema.stringsargs.md) |  |
 |  [StringsReplaceArgs](./schema.stringsreplaceargs.md) |  |

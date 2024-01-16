@@ -39,6 +39,7 @@ export enum Verb {
 	Sample = 'sample',
 	Select = 'select',
 	Spread = 'spread',
+	SpreadJson = 'spreadJson',
 	Unfold = 'unfold',
 	Ungroup = 'ungroup',
 	Unhot = 'unhot',
@@ -467,6 +468,10 @@ export interface EraseArgs extends InputColumnArgs {
 	 * Value to match and erase (set to undefined) in the column
 	 */
 	value: Value
+}
+
+export interface SpreadJsonArgs {
+	jsonObject: JSON
 }
 
 export interface EncodeDecodeArgs {

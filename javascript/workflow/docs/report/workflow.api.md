@@ -47,6 +47,7 @@ import type { RollupArgs } from '@datashaper/schema';
 import type { SampleArgs } from '@datashaper/schema';
 import type { SetOp } from '@datashaper/schema';
 import type { SpreadArgs } from '@datashaper/schema';
+import type { SpreadJsonArgs } from '@datashaper/schema';
 import { StringsArgs } from '@datashaper/schema';
 import { StringsReplaceArgs } from '@datashaper/schema';
 import { Subject } from 'rxjs';
@@ -943,6 +944,11 @@ export type SocketName = string | symbol;
 //
 // @public (undocumented)
 export const spread: (id: string) => StepNode<TableContainer<unknown>, SpreadArgs>;
+
+// Warning: (ae-missing-release-tag) "spreadJson" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const spreadJson: (id: string) => StepNode<TableContainer<unknown>, SpreadJsonArgs>;
 
 // Warning: (ae-missing-release-tag) "Step" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
