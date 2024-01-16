@@ -8,8 +8,8 @@ from ...table_store import TableContainer
 from .verb_input import VerbInput
 
 
-@verb(name="noop")
-def noop(
+@verb(name="print")
+def print(
     input: VerbInput,
     message: str,
 ):

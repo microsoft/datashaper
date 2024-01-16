@@ -30,7 +30,7 @@ export enum Verb {
 	Join = 'join',
 	Lookup = 'lookup',
 	Merge = 'merge',
-	Noop = 'noop',
+	Print = 'print',
 	Onehot = 'onehot',
 	Orderby = 'orderby',
 	Pivot = 'pivot',
@@ -701,7 +701,7 @@ export interface SpreadArgs extends InputColumnArgs {
 
 export interface StringsArgs extends InputColumnArgs, OutputColumnArgs {}
 
-export interface NoopArgs {
+export interface PrintArgs {
 	message?: string
 }
 

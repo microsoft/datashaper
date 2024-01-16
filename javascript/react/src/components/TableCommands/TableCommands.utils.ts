@@ -8,7 +8,7 @@ import { Verb } from '@datashaper/schema'
 import type { GroupedVerbs } from './TableCommands.types.js'
 
 export const mainColumnVerbs = [
-	Verb.Noop,
+	Verb.Print,
 	Verb.Bin,
 	Verb.Binarize,
 	Verb.Filter,

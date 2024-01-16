@@ -61,7 +61,7 @@ const descriptions = {
 	join: JoinDescription,
 	lookup: LookupDescription,
 	merge: MergeDescription,
-	noop: NoParametersDescription,
+	print: NoParametersDescription,
 	onehot: OneHotDescription,
 	orderby: OrderbyDescription,
 	pivot: PivotDescription,

@@ -28,7 +28,7 @@ import type {
 	JoinArgs,
 	LookupArgs,
 	MergeArgs,
-	NoopArgs,
+	PrintArgs,
 	OnehotArgs,
 	OrderbyArgs,
 	PivotArgs,
@@ -85,7 +85,7 @@ export type Step = StepJsonCommon &
 		| ({ verb: Verb.Join; args?: JoinArgs } & DualInput)
 		| ({ verb: Verb.Lookup; args?: LookupArgs } & DualInput)
 		| ({ verb: Verb.Merge; args?: MergeArgs } & BasicInput)
-		| ({ verb: Verb.Noop; args?: NoopArgs } & BasicInput)
+		| ({ verb: Verb.Print; args?: PrintArgs } & BasicInput)
 		| ({ verb: Verb.Onehot; args?: OnehotArgs } & BasicInput)
 		| ({ verb: Verb.Orderby; args?: OrderbyArgs } & BasicInput)
 		| ({ verb: Verb.Pivot; args?: PivotArgs } & BasicInput)

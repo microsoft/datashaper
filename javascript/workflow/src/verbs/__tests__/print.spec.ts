@@ -3,21 +3,21 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
-import { noopStep } from '../noop.js'
+import { printStep } from '../print.js'
 import { jest } from '@jest/globals'
 
-describe('test for noop verb', () => {
+describe('test for print verb', () => {
 	let store: TestStore
 	beforeEach(() => {
 		store = new TestStore()
 	})
-	test('noop test', () => {
+	test('print test', () => {
 		const mockedConsole = jest.spyOn(console, 'log')
 
-		const result = noopStep(store.table('table4'), {
-			message: 'Test noop verb',
+		const result = printStep(store.table('table4'), {
+			message: 'Test print verb',
 		})
 
-		expect(mockedConsole).toHaveBeenCalledWith('Test noop verb')
+		expect(mockedConsole).toHaveBeenCalledWith('Test print verb')
 	})
 })
