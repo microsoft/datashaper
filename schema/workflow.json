@@ -891,6 +891,9 @@
         },
         "PrintArgs": {
             "properties": {
+                "limit": {
+                    "type": "number"
+                },
                 "message": {
                     "type": "string"
                 }

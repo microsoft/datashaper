@@ -7,9 +7,14 @@ import type { PrintArgs } from '@datashaper/schema'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 
-export const printStep: ColumnTableStep<PrintArgs> = (input, { message }) => {
+export const DEFAULT_LIMIT_ROWS = 10
+
+export const printStep: ColumnTableStep<PrintArgs> = (
+	input,
+	{ message, limit },
+) => {
 	console.log(message)
-	input.print()
+	input.print(limit !== undefined ? limit : DEFAULT_LIMIT_ROWS)
 	return input
 }
 

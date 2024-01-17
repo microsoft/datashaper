@@ -703,6 +703,7 @@ export interface StringsArgs extends InputColumnArgs, OutputColumnArgs {}
 
 export interface PrintArgs {
 	message?: string
+	limit?: number 
 }
 
 export interface StringsReplaceArgs extends StringsArgs {

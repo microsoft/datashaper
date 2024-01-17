@@ -5,7 +5,8 @@
 			"verb": "print",
 			"input": "companies",
 			"args": {
-				"message": "Test print verb"
+				"message": "Test print verb",
+				"limit": 4
 			},
 			"id": "expected"
 		}

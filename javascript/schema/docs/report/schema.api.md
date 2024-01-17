@@ -787,6 +787,8 @@ export interface PivotArgs extends InputKeyValueArgs {
 // @public (undocumented)
 export interface PrintArgs {
     // (undocumented)
+    limit?: number;
+    // (undocumented)
     message?: string;
 }
 

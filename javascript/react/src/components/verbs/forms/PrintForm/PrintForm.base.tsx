@@ -4,6 +4,7 @@
  */
 import type { PrintArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
+import { num } from '@datashaper/utilities'
 
 import { type FormInput, FormInputType, VerbForm } from '../forms/index.js'
 import type { StepFormBaseProps } from '../types.js'
@@ -17,7 +18,7 @@ export const PrintFormBase: React.FC<StepFormBaseProps<PrintArgs>> = memo(
 		const inputs = useMemo<FormInput<PrintArgs>[]>(
 			() => [
 				{
-					label: 'Message to be printed',
+					label: 'Message to print',
 					type: FormInputType.Text,
 					current: step.args.message,
 					placeholder: 'Message content',
@@ -25,6 +26,16 @@ export const PrintFormBase: React.FC<StepFormBaseProps<PrintArgs>> = memo(
 					onChange: (s, val) => {
 						s.args.message = String(val)
 					},
+				},
+				{
+					label: 'Number of rows to print',
+					type: FormInputType.NumberSpinner,
+					min: 1,
+					step: 1,
+					onChange: (s, opt) => {
+						s.args.limit = num(opt as string)
+					},
+					current: step.args.limit,
 				},
 			],
 			[step],

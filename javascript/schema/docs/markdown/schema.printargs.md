@@ -14,5 +14,6 @@ export interface PrintArgs
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [limit?](./schema.printargs.limit.md) |  | number | <i>(Optional)</i> |
 |  [message?](./schema.printargs.message.md) |  | string | <i>(Optional)</i> |
 

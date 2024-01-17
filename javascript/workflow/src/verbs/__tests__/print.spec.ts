@@ -16,6 +16,7 @@ describe('test for print verb', () => {
 
 		const result = printStep(store.table('table4'), {
 			message: 'Test print verb',
+			limit: 4,
 		})
 
 		expect(mockedConsole).toHaveBeenCalledWith('Test print verb')
