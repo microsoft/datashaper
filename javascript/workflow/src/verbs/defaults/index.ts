@@ -18,6 +18,7 @@ export { join } from './join.js'
 export { lookup } from './lookup.js'
 export { merge } from './merge.js'
 export { pivot } from './pivot.js'
+export { print } from './print.js'
 export { spread } from './spread.js'
 export { unfold } from './unfold.js'
 export { unhot } from './unhot.js'
@@ -46,7 +47,6 @@ export const encode = empty
 export const concat = empty
 export const difference = empty
 export const intersect = empty
-export const print = empty
 export const onehot = empty
 export const orderby = empty
 export const recode = empty
