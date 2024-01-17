@@ -5,5 +5,5 @@
 import type { PrintArgs } from '@datashaper/schema'
 
 export const print = (): PrintArgs => ({
-	limit: 10
+	limit: 10,
 })
