@@ -91,6 +91,7 @@
 |  [OutputColumnArgs](./schema.outputcolumnargs.md) |  |
 |  [ParserOptions](./schema.parseroptions.md) | Parsing options for delimited files. This is a mix of the options from pandas and spark. |
 |  [PivotArgs](./schema.pivotargs.md) |  |
+|  [PrintArgs](./schema.printargs.md) |  |
 |  [RecodeArgs](./schema.recodeargs.md) |  |
 |  [RelationshipConstraint](./schema.relationshipconstraint.md) |  |
 |  [ResourceSchema](./schema.resourceschema.md) | Parent class for any resource type understood by the system. Any object type that extends from Resource is expected to have a standalone schema published. For project state, this can be left as generic as possible for now. |

@@ -85,6 +85,7 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	join: [Tags.InputTable, Tags.InputTableList, Tags.RowModifying],
 	lookup: [Tags.InputTable, Tags.InputTableList, Tags.RowModifying],
 	merge: [Tags.InputTable, Tags.OutputColumn, Tags.InputColumnList],
+	print: [Tags.InputTable],
 	pivot: [Tags.InputTable, Tags.RowModifying, Tags.InputKeyValue],
 	onehot: [Tags.InputTable, Tags.InputColumn],
 	orderby: [Tags.InputTable],

@@ -889,6 +889,17 @@
             },
             "type": "object"
         },
+        "PrintArgs": {
+            "properties": {
+                "limit": {
+                    "type": "number"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "RecodeArgs": {
             "properties": {
                 "column": {
@@ -1547,6 +1558,28 @@
                                 },
                                 "verb": {
                                     "const": "merge",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/PrintArgs"
+                                },
+                                "verb": {
+                                    "const": "print",
                                     "type": "string"
                                 }
                             },

@@ -39,6 +39,7 @@
 		"@datashaper/tables": "workspace:^",
 		"@datashaper/utilities": "workspace:^",
 		"@essex/toposort": "^2.0.0",
+		"@jest/globals": "^29.7.0",
 		"d3-time-format": "^4.1.0",
 		"debug": "^4.3.4",
 		"exact-linspace": "^1.0.15",

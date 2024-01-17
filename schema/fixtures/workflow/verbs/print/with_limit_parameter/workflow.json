@@ -1,0 +1,16 @@
+{
+	"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v2.json",
+	"steps": [
+		{
+			"verb": "print",
+			"input": "companies",
+			"args": {
+				"message": "Test print verb",
+				"limit": 4
+			},
+			"id": "expected"
+		}
+	],
+
+	"input": ["companies"]
+}
