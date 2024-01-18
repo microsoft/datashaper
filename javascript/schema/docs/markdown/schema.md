@@ -66,6 +66,7 @@
 |  [DataShape](./schema.datashape.md) | Defines parameters for understanding the logical structure of data contents. |
 |  [DataTableSchema](./schema.datatableschema.md) | This defines the table-containing resource type. A dataset can be embedded directly using the <code>data</code> property, or it can be linked to a raw file using the <code>path</code>. If the latter, optional format and parsing options can be applied to aid interpreting the file contents. resource profile: 'datatable' |
 |  [DeriveArgs](./schema.deriveargs.md) |  |
+|  [DestructureArgs](./schema.destructureargs.md) |  |
 |  [DualInput](./schema.dualinput.md) | Dual-input, single-output step I/O |
 |  [EncodeDecodeArgs](./schema.encodedecodeargs.md) |  |
 |  [EraseArgs](./schema.eraseargs.md) |  |
@@ -97,7 +98,6 @@
 |  [RollupArgs](./schema.rollupargs.md) |  |
 |  [SampleArgs](./schema.sampleargs.md) |  |
 |  [SpreadArgs](./schema.spreadargs.md) |  |
-|  [SpreadJsonArgs](./schema.spreadjsonargs.md) |  |
 |  [StepJsonCommon](./schema.stepjsoncommon.md) | Common step properties |
 |  [StringsArgs](./schema.stringsargs.md) |  |
 |  [StringsReplaceArgs](./schema.stringsreplaceargs.md) |  |

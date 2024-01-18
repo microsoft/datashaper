@@ -24,6 +24,7 @@ export declare enum Verb
 |  Decode | <code>&quot;decode&quot;</code> |  |
 |  Dedupe | <code>&quot;dedupe&quot;</code> |  |
 |  Derive | <code>&quot;derive&quot;</code> |  |
+|  Destructure | <code>&quot;destructure&quot;</code> |  |
 |  Difference | <code>&quot;difference&quot;</code> |  |
 |  Drop | <code>&quot;drop&quot;</code> |  |
 |  Encode | <code>&quot;encode&quot;</code> |  |
@@ -46,7 +47,6 @@ export declare enum Verb
 |  Sample | <code>&quot;sample&quot;</code> |  |
 |  Select | <code>&quot;select&quot;</code> |  |
 |  Spread | <code>&quot;spread&quot;</code> |  |
-|  SpreadJson | <code>&quot;spreadJson&quot;</code> |  |
 |  StringsLower | <code>&quot;strings.lower&quot;</code> |  |
 |  StringsReplace | <code>&quot;strings.replace&quot;</code> |  |
 |  StringsUpper | <code>&quot;strings.upper&quot;</code> |  |

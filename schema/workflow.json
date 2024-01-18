@@ -420,6 +420,29 @@
             },
             "type": "object"
         },
+        "DestructureArgs": {
+            "properties": {
+                "column": {
+                    "description": "Name of the input column for columnar operations",
+                    "type": "string"
+                },
+                "dataType": {
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
+                },
+                "keys": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "preserveSource": {
+                    "description": "Keep the original columns (default is to remove source columns).",
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
         "DualInput": {
             "description": "Dual-input, single-output step I/O",
             "properties": {
@@ -696,14 +719,6 @@
                 },
                 "value": {
                     "description": "Value column for the operation",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "JSON": {
-            "properties": {
-                "__@toStringTag@3501": {
                     "type": "string"
                 }
             },
@@ -1062,14 +1077,6 @@
                         "type": "string"
                     },
                     "type": "array"
-                }
-            },
-            "type": "object"
-        },
-        "SpreadJsonArgs": {
-            "properties": {
-                "jsonObject": {
-                    "$ref": "#/definitions/JSON"
                 }
             },
             "type": "object"
@@ -1779,10 +1786,10 @@
                         {
                             "properties": {
                                 "args": {
-                                    "$ref": "#/definitions/SpreadJsonArgs"
+                                    "$ref": "#/definitions/DestructureArgs"
                                 },
                                 "verb": {
-                                    "const": "spreadJson",
+                                    "const": "destructure",
                                     "type": "string"
                                 }
                             },

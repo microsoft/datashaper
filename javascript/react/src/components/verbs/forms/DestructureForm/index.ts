@@ -2,4 +2,4 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-export { SpreadJsonForm } from './SpreadJsonForm.js'
+export { DestructureForm } from './DestructureForm.js'

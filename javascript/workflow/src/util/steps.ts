@@ -99,7 +99,7 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	sample: [Tags.InputTable, Tags.RowModifying],
 	select: [Tags.InputTable, Tags.InputColumnList],
 	spread: [Tags.InputTable, Tags.InputColumn],
-	spreadJson: [Tags.InputTable],
+	destructure: [Tags.InputTable],
 	'strings.replace': [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
 	'strings.lower': [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
 	'strings.upper': [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],

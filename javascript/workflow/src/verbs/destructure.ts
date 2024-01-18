@@ -2,17 +2,18 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { SpreadJsonArgs } from '@datashaper/schema'
+import type { DestructureArgs } from '@datashaper/schema'
 
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 
-export const spreadJsonStep: ColumnTableStep<SpreadJsonArgs> = (
+export const destructureStep: ColumnTableStep<DestructureArgs> = (
 	input,
-	{ jsonObject },
+	{ keys, preserveSource },
 ) => {
-	console.log(jsonObject)
+	console.log(keys)
+	console.log(preserveSource)
 	return input
 }
 
-export const spreadJson = stepVerbFactory(spreadJsonStep)
+export const destructure = stepVerbFactory(destructureStep)

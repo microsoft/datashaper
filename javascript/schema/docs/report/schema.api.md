@@ -350,6 +350,15 @@ export interface DeriveArgs extends OutputColumnArgs {
     operator: MathOperator;
 }
 
+// Warning: (ae-missing-release-tag) "DestructureArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface DestructureArgs extends InputColumnArgs {
+    // (undocumented)
+    keys?: string[];
+    preserveSource?: boolean;
+}
+
 // Warning: (ae-missing-release-tag) "DropArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -888,14 +897,6 @@ export interface SpreadArgs extends InputColumnArgs {
     to: string[];
 }
 
-// Warning: (ae-missing-release-tag) "SpreadJsonArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface SpreadJsonArgs {
-    // (undocumented)
-    jsonObject: JSON;
-}
-
 // Warning: (ae-missing-release-tag) "Step" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -993,8 +994,8 @@ export type Step = StepJsonCommon & (({
     verb: Verb.Spread;
     args?: SpreadArgs;
 } & BasicInput) | ({
-    verb: Verb.SpreadJson;
-    args?: SpreadJsonArgs;
+    verb: Verb.Destructure;
+    args?: DestructureArgs;
 } & BasicInput) | ({
     verb: Verb.StringsReplace;
     args?: StringsReplaceArgs;
@@ -1203,6 +1204,8 @@ export enum Verb {
     // (undocumented)
     Derive = "derive",
     // (undocumented)
+    Destructure = "destructure",
+    // (undocumented)
     Difference = "difference",
     // (undocumented)
     Drop = "drop",
@@ -1246,8 +1249,6 @@ export enum Verb {
     Select = "select",
     // (undocumented)
     Spread = "spread",
-    // (undocumented)
-    SpreadJson = "spreadJson",
     // (undocumented)
     StringsLower = "strings.lower",
     // (undocumented)

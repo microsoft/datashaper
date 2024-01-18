@@ -18,6 +18,7 @@ export enum Verb {
 	Derive = 'derive',
 	Difference = 'difference',
 	Decode = 'decode',
+	Destructure = 'destructure',
 	Drop = 'drop',
 	Encode = 'encode',
 	Erase = 'erase',
@@ -39,7 +40,6 @@ export enum Verb {
 	Sample = 'sample',
 	Select = 'select',
 	Spread = 'spread',
-	SpreadJson = 'spreadJson',
 	Unfold = 'unfold',
 	Ungroup = 'ungroup',
 	Unhot = 'unhot',
@@ -470,8 +470,12 @@ export interface EraseArgs extends InputColumnArgs {
 	value: Value
 }
 
-export interface SpreadJsonArgs {
-	jsonObject: JSON
+export interface DestructureArgs extends InputColumnArgs {
+	keys?: string[]
+	/**
+	 * Keep the original columns (default is to remove source columns).
+	 */
+	preserveSource?: boolean
 }
 
 export interface EncodeDecodeArgs {

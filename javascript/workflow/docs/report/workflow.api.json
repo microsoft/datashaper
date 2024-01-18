@@ -5702,6 +5702,55 @@
         },
         {
           "kind": "Variable",
+          "canonicalReference": "@datashaper/workflow!destructure:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "destructure: "
+            },
+            {
+              "kind": "Content",
+              "text": "(id: string) => import(\"../index.js\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "StepNode",
+              "canonicalReference": "@datashaper/workflow!StepNode:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<import(\"@datashaper/tables\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "TableContainer",
+              "canonicalReference": "@datashaper/tables!TableContainer:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<unknown>, "
+            },
+            {
+              "kind": "Reference",
+              "text": "DestructureArgs",
+              "canonicalReference": "@datashaper/schema!DestructureArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "destructure",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 8
+          }
+        },
+        {
+          "kind": "Variable",
           "canonicalReference": "@datashaper/workflow!difference:var",
           "docComment": "",
           "excerptTokens": [
@@ -12336,55 +12385,6 @@
           "isReadonly": true,
           "releaseTag": "Public",
           "name": "spread",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 8
-          }
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/workflow!spreadJson:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "spreadJson: "
-            },
-            {
-              "kind": "Content",
-              "text": "(id: string) => import(\"../index.js\")."
-            },
-            {
-              "kind": "Reference",
-              "text": "StepNode",
-              "canonicalReference": "@datashaper/workflow!StepNode:class"
-            },
-            {
-              "kind": "Content",
-              "text": "<import(\"@datashaper/tables\")."
-            },
-            {
-              "kind": "Reference",
-              "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "<unknown>, "
-            },
-            {
-              "kind": "Reference",
-              "text": "SpreadJsonArgs",
-              "canonicalReference": "@datashaper/schema!SpreadJsonArgs:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "spreadJson",
           "variableTypeTokenRange": {
             "startIndex": 1,
             "endIndex": 8
