@@ -12,7 +12,7 @@ import time
 import traceback
 
 from collections import OrderedDict, defaultdict
-from typing import Any, Callable, Generic, Optional, TypeVar
+from typing import Any, Callable, Generic, Optional, Protocol, TypeVar
 from uuid import uuid4
 
 import pandas as pd
@@ -37,6 +37,43 @@ Context = TypeVar("Context")
 
 DEFAULT_INPUT_NAME = "datasource"
 
+
+class WorkflowCallbacks(Protocol):
+    """A collection of callbacks that can be used to monitor the workflow execution."""
+
+    def on_workflow_start(self) -> None:
+        """Called when the workflow starts."""
+        ...
+    
+    def on_step_start(self, node: ExecutionNode) -> None:
+        """Called when a step starts."""
+        ...
+
+    def on_step_end(self, node: ExecutionNode) -> None:
+        """Called when a step ends."""
+        ...
+
+    def on_workflow_end(self) -> None:
+        """Called when the workflow ends."""
+        ...
+
+
+class NoOpCallbacks:
+    def on_workflow_start(self) -> None:
+        """Called when the workflow starts."""
+        pass
+    
+    def on_step_start(self, node: ExecutionNode) -> None:
+        """Called when a step starts."""
+        pass
+
+    def on_step_end(self, node: ExecutionNode) -> None:
+        """Called when a step ends."""
+        pass
+
+    def on_workflow_end(self) -> None:
+        """Called when the workflow ends."""
+        pass
 
 def _create_default_verb_status_reporter(name: str) -> StatusReportHandler:
     return lambda progress: None
@@ -294,6 +331,7 @@ class Workflow(Generic[Context]):
             )
         else:
             return container.table
+        
 
     def run(
         self,
@@ -303,10 +341,17 @@ class Workflow(Generic[Context]):
         create_verb_progress_reporter: Optional[
             Callable[[str], StatusReportHandler]
         ] = _create_default_verb_status_reporter,
+        workflow_callbacks: WorkflowCallbacks = None,
     ) -> None:
         """Run the execution graph."""
         visited: set[str] = set()
         nodes: list[ExecutionNode] = []
+
+
+        if workflow_callbacks is None:
+            workflow_callbacks = NoOpCallbacks()
+
+        workflow_callbacks.on_workflow_start()
 
         for node_key in self._graph.keys():
             if self._check_inputs(node_key, visited):
@@ -318,6 +363,8 @@ class Workflow(Generic[Context]):
             current_id = nodes.pop(0)
             node = self._graph[current_id]
             verb_name = node.verb.name
+
+            workflow_callbacks.on_step_start(node)
 
             # set up verb progress reporter
             progress = create_verb_progress_reporter(f"verb: {verb_name}")
@@ -351,6 +398,8 @@ class Workflow(Generic[Context]):
             progress(ProgressStatus(progress=1))
             node.result = result
 
+            workflow_callbacks.on_step_end(node)
+
             # move to the next verb
             visited.add(current_id)
             for possible in self._dependency_graph[current_id]:
@@ -362,6 +411,8 @@ class Workflow(Generic[Context]):
             if node_id not in visited:
                 if not self._check_inputs(node_id, visited):
                     raise ValueError(f"Missing inputs for node {node_id}!")
+                
+        workflow_callbacks.on_workflow_end()
 
     def export(self):
         """Export the graph into a workflow JSON object."""

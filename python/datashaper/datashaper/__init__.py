@@ -53,7 +53,7 @@ from .table_store import (
     TableContainer,
     TableMetadata,
 )
-from .workflow import DEFAULT_INPUT_NAME, Workflow
+from .workflow import DEFAULT_INPUT_NAME, Workflow, WorkflowCallbacks
 
 
 __all__ = [
@@ -97,6 +97,7 @@ __all__ = [
     "get_operator",
     # Workflow Exports
     "Workflow",
+    "WorkflowCallbacks",
     "DEFAULT_INPUT_NAME",
     # Tablestore Exports
     "ColumnStats",
