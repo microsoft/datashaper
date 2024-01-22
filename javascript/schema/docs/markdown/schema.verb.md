@@ -41,6 +41,7 @@ export declare enum Verb
 |  Onehot | <code>&quot;onehot&quot;</code> |  |
 |  Orderby | <code>&quot;orderby&quot;</code> |  |
 |  Pivot | <code>&quot;pivot&quot;</code> |  |
+|  Print | <code>&quot;print&quot;</code> |  |
 |  Recode | <code>&quot;recode&quot;</code> |  |
 |  Rename | <code>&quot;rename&quot;</code> |  |
 |  Rollup | <code>&quot;rollup&quot;</code> |  |

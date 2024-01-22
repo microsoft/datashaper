@@ -123,6 +123,7 @@
 |  [onehot](./workflow.onehot.md) |  |
 |  [orderby](./workflow.orderby.md) |  |
 |  [pivot](./workflow.pivot.md) |  |
+|  [print\_2](./workflow.print_2.md) |  |
 |  [recode](./workflow.recode.md) |  |
 |  [rename](./workflow.rename.md) |  |
 |  [rollup](./workflow.rollup.md) |  |

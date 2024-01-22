@@ -791,6 +791,16 @@ export interface PivotArgs extends InputKeyValueArgs {
     operation: FieldAggregateOperation;
 }
 
+// Warning: (ae-missing-release-tag) "PrintArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface PrintArgs {
+    // (undocumented)
+    limit?: number;
+    // (undocumented)
+    message?: string;
+}
+
 // Warning: (ae-missing-release-tag) "Profile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -966,6 +976,9 @@ export type Step = StepJsonCommon & (({
 } & DualInput) | ({
     verb: Verb.Merge;
     args?: MergeArgs;
+} & BasicInput) | ({
+    verb: Verb.Print;
+    args?: PrintArgs;
 } & BasicInput) | ({
     verb: Verb.Onehot;
     args?: OnehotArgs;
@@ -1237,6 +1250,8 @@ export enum Verb {
     Orderby = "orderby",
     // (undocumented)
     Pivot = "pivot",
+    // (undocumented)
+    Print = "print",
     // (undocumented)
     Recode = "recode",
     // (undocumented)

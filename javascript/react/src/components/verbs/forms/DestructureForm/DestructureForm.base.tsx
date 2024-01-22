@@ -25,6 +25,7 @@ export const DestructureFormBase: React.FC<StepFormBaseProps<DestructureArgs>> =
 					},
 					advanced: true,
 				},
+				//TODO: GAUDY ADD KEYS OPTIONAL
 			],
 			[step],
 		)

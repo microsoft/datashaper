@@ -41,6 +41,7 @@ import type { OnehotArgs } from '@datashaper/schema';
 import type { OrderbyArgs } from '@datashaper/schema';
 import type { ParserOptions as ParserOptions_2 } from '@datashaper/schema';
 import type { PivotArgs } from '@datashaper/schema';
+import type { PrintArgs } from '@datashaper/schema';
 import type { Profile } from '@datashaper/schema';
 import type { RecodeArgs } from '@datashaper/schema';
 import type { ResourceSchema } from '@datashaper/schema';
@@ -816,6 +817,12 @@ export class ParserOptions extends Observed implements ParserOptions_2 {
 //
 // @public (undocumented)
 export const pivot: (id: string) => StepNode<TableContainer<unknown>, PivotArgs>;
+
+// Warning: (ae-missing-release-tag) "print" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+const print_2: (id: string) => StepNode<TableContainer<unknown>, PrintArgs>;
+export { print_2 as print }
 
 // Warning: (ae-missing-release-tag) "ProfileHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
