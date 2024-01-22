@@ -12,8 +12,9 @@ import time
 import traceback
 
 from collections import OrderedDict, defaultdict
-from typing import Any, Callable, Generic, Optional, Protocol, TypeVar
+from typing import Any, Callable, Generic, Optional, TypeVar
 from uuid import uuid4
+from datashaper.workflow_callbacks import NoOpCallbacks, WorkflowCallbacks
 
 import pandas as pd
 
@@ -37,43 +38,6 @@ Context = TypeVar("Context")
 
 DEFAULT_INPUT_NAME = "datasource"
 
-
-class WorkflowCallbacks(Protocol):
-    """A collection of callbacks that can be used to monitor the workflow execution."""
-
-    def on_workflow_start(self) -> None:
-        """Called when the workflow starts."""
-        ...
-    
-    def on_step_start(self, node: ExecutionNode) -> None:
-        """Called when a step starts."""
-        ...
-
-    def on_step_end(self, node: ExecutionNode) -> None:
-        """Called when a step ends."""
-        ...
-
-    def on_workflow_end(self) -> None:
-        """Called when the workflow ends."""
-        ...
-
-
-class NoOpCallbacks:
-    def on_workflow_start(self) -> None:
-        """Called when the workflow starts."""
-        pass
-    
-    def on_step_start(self, node: ExecutionNode) -> None:
-        """Called when a step starts."""
-        pass
-
-    def on_step_end(self, node: ExecutionNode) -> None:
-        """Called when a step ends."""
-        pass
-
-    def on_workflow_end(self) -> None:
-        """Called when the workflow ends."""
-        pass
 
 def _create_default_verb_status_reporter(name: str) -> StatusReportHandler:
     return lambda progress: None
@@ -364,7 +328,6 @@ class Workflow(Generic[Context]):
             node = self._graph[current_id]
             verb_name = node.verb.name
 
-            workflow_callbacks.on_step_start(node)
 
             # set up verb progress reporter
             progress = create_verb_progress_reporter(f"verb: {verb_name}")
@@ -380,6 +343,7 @@ class Workflow(Generic[Context]):
                 verb_context = Workflow.__resolve_run_context(
                     node, context, verb_reporter
                 )
+                workflow_callbacks.on_step_start(node, inputs)
                 result = node.verb.func(**node.args, **inputs, **verb_context)
             except Exception as e:
                 message = f'Error executing verb "{verb_name}" in {self.name}: {e}'
@@ -398,7 +362,7 @@ class Workflow(Generic[Context]):
             progress(ProgressStatus(progress=1))
             node.result = result
 
-            workflow_callbacks.on_step_end(node)
+            workflow_callbacks.on_step_end(node, result)
 
             # move to the next verb
             visited.add(current_id)
