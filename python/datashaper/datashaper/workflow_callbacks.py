@@ -28,6 +28,8 @@ class WorkflowCallbacks(Protocol):
 
 
 class NoOpCallbacks:
+    """A collection of callbacks that do nothing."""
+
     def on_workflow_start(self) -> None:
         """Execute this callback when a workflow starts."""
         pass
