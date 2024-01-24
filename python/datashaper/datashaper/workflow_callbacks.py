@@ -10,12 +10,14 @@ class WorkflowCallbacks(Protocol):
     def on_workflow_start(self) -> None:
         """Called when the workflow starts."""
         ...
-    
+
     def on_step_start(self, node: ExecutionNode, inputs: Dict[str, Any]) -> None:
         """Called when a step starts."""
         ...
 
-    def on_step_end(self, node: ExecutionNode, result: Optional[TableContainer]) -> None:
+    def on_step_end(
+        self, node: ExecutionNode, result: Optional[TableContainer]
+    ) -> None:
         """Called when a step ends."""
         ...
 
@@ -28,12 +30,14 @@ class NoOpCallbacks:
     def on_workflow_start(self) -> None:
         """Called when the workflow starts."""
         pass
-    
+
     def on_step_start(self, node: ExecutionNode, inputs: Dict[str, Any]) -> None:
         """Called when a step starts."""
         pass
 
-    def on_step_end(self, node: ExecutionNode, result: Optional[TableContainer]) -> None:
+    def on_step_end(
+        self, node: ExecutionNode, result: Optional[TableContainer]
+    ) -> None:
         """Called when a step ends."""
         pass
 

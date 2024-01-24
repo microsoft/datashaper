@@ -7,8 +7,6 @@ import pytest
 
 NOTEBOOKS_PATH = "notebooks/"
 
-EXCLUDE = ["polars.ipynb"]
-
 notebooks_list = [file.name for file in os.scandir(NOTEBOOKS_PATH) if file.name.endswith(".ipynb")]
 
 def _notebook_run(filepath):
@@ -44,7 +42,5 @@ def _notebook_run(filepath):
 
 @pytest.mark.parametrize("notebook_filename", notebooks_list)
 def test_notebook(notebook_filename):
-    if notebook_filename in EXCLUDE:
-        return
     _, errors = _notebook_run(NOTEBOOKS_PATH + notebook_filename)
     assert errors == []

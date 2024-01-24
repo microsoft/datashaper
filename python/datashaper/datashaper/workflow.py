@@ -14,7 +14,6 @@ import traceback
 from collections import OrderedDict, defaultdict
 from typing import Any, Callable, Generic, Optional, TypeVar
 from uuid import uuid4
-from datashaper.workflow_callbacks import NoOpCallbacks, WorkflowCallbacks
 
 import pandas as pd
 
@@ -29,6 +28,7 @@ from datashaper.progress.reporters import (
 )
 from datashaper.progress.types import ProgressStatus, StatusReportHandler
 from datashaper.table_store import Table, TableContainer
+from datashaper.workflow_callbacks import NoOpCallbacks, WorkflowCallbacks
 
 
 # TODO: this won't work for a published package
@@ -295,7 +295,6 @@ class Workflow(Generic[Context]):
             )
         else:
             return container.table
-        
 
     def run(
         self,
@@ -310,7 +309,6 @@ class Workflow(Generic[Context]):
         """Run the execution graph."""
         visited: set[str] = set()
         nodes: list[ExecutionNode] = []
-
 
         if workflow_callbacks is None:
             workflow_callbacks = NoOpCallbacks()
@@ -327,7 +325,6 @@ class Workflow(Generic[Context]):
             current_id = nodes.pop(0)
             node = self._graph[current_id]
             verb_name = node.verb.name
-
 
             # set up verb progress reporter
             progress = create_verb_progress_reporter(f"verb: {verb_name}")
@@ -375,7 +372,7 @@ class Workflow(Generic[Context]):
             if node_id not in visited:
                 if not self._check_inputs(node_id, visited):
                     raise ValueError(f"Missing inputs for node {node_id}!")
-                
+
         workflow_callbacks.on_workflow_end()
 
     def export(self):
