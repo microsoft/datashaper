@@ -9,39 +9,39 @@ class WorkflowCallbacks(Protocol):
     """A collection of callbacks that can be used to monitor the workflow execution."""
 
     def on_workflow_start(self) -> None:
-        """Executes when the workflow starts."""
+        """Execute this callback when a workflow starts."""
         ...
 
     def on_step_start(self, node: ExecutionNode, inputs: Dict[str, Any]) -> None:
-        """Executes every time a step starts."""
+        """Execute this callback every time a step starts."""
         ...
 
     def on_step_end(
         self, node: ExecutionNode, result: Optional[TableContainer]
     ) -> None:
-        """Executes every time a step ends."""
+        """Execute this callback every time a step ends."""
         ...
 
     def on_workflow_end(self) -> None:
-        """Executes when the workflow ends."""
+        """Execute this callback when a workflow ends."""
         ...
 
 
 class NoOpCallbacks:
     def on_workflow_start(self) -> None:
-        """Executes when the workflow starts."""
+        """Execute this callback when a workflow starts."""
         pass
 
     def on_step_start(self, node: ExecutionNode, inputs: Dict[str, Any]) -> None:
-        """Executes every time a step starts."""
+        """Execute this callback every time a step starts."""
         pass
 
     def on_step_end(
         self, node: ExecutionNode, result: Optional[TableContainer]
     ) -> None:
-        """Executes every time a step ends."""
+        """Execute this callback every time a step ends."""
         pass
 
     def on_workflow_end(self) -> None:
-        """Executes when the workflow ends."""
+        """Execute this callback when a workflow ends."""
         pass
