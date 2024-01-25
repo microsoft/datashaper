@@ -345,6 +345,7 @@ class Workflow(Generic[Context]):
             except Exception as e:
                 message = f'Error executing verb "{verb_name}" in {self.name}: {e}'
                 status_reporter.error(message, traceback.format_exc())
+                workflow_callbacks.on_step_end(node, None)
                 raise e
 
             if inspect.iscoroutine(result):
