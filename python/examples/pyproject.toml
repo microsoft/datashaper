@@ -6,7 +6,7 @@ authors = ["Chris Trevino <chtrevin@microsoft.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.8,<4"
+python = ">=3.10,<4"
 datashaper = { path = "../datashaper", develop = true }
 requests = "^2.31.0"
 pyarrow = "^12.0.1"
@@ -82,4 +82,3 @@ lines_between_types = 1
 lines_after_imports = 2
 src_paths = ["datashaper", "tests"]
 extend_skip = ["setup.py"]
-

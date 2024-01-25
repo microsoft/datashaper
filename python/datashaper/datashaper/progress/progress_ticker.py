@@ -10,7 +10,8 @@ def progress_ticker(
 ) -> ProgressTicker:
     """Create a progress-reporting function given a target number of items.
 
-    Every time the returned function is called, the progress handler will be called with the current progress."""
+    Every time the returned function is called, the progress handler will be called with the current progress.
+    """
     num_complete = 0
     if progress is not None:
         progress(
