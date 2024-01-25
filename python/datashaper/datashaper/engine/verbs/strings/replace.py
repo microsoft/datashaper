@@ -23,6 +23,6 @@ def replace(
     input_table = input.get_input()
     output = input_table
     output[to] = output[column].str.replace(
-        pat=pattern, repl=replacement, n=n, case=case
+        pat=pattern, repl=replacement, n=n, case=case, regex=True,
     )
     return TableContainer(table=output)
