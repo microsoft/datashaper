@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "datashaper"
-version = "0.0.22"
+version = "0.0.23"
 description = "This project provides a collection of utilities for doing lightweight data wrangling."
 authors = [
     "Nathan Evans <naevans@microsoft.com>",
