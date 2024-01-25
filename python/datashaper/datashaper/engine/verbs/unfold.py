@@ -3,8 +3,8 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -24,9 +24,7 @@ def unfold(input: VerbInput, key: str, value: str):
     output.index = new_index
 
     output_temp = output.pivot(columns=key, values=value)
-    output.drop(columns=[key, value], axis=1, errors='ignore', inplace=True)
-    output = pd.concat(
-        [output.groupby(level=0).agg("first"), output_temp], axis=1
-    )
+    output.drop(columns=[key, value], axis=1, errors="ignore", inplace=True)
+    output = pd.concat([output.groupby(level=0).agg("first"), output_temp], axis=1)
 
     return TableContainer(table=output)
