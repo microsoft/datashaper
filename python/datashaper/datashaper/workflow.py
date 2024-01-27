@@ -28,6 +28,7 @@ from datashaper.progress.reporters import (
 )
 from datashaper.progress.types import ProgressStatus, StatusReportHandler
 from datashaper.table_store import Table, TableContainer
+from datashaper.workflow_callbacks import NoOpCallbacks, WorkflowCallbacks
 
 
 # TODO: this won't work for a published package
@@ -303,10 +304,16 @@ class Workflow(Generic[Context]):
         create_verb_progress_reporter: Optional[
             Callable[[str], StatusReportHandler]
         ] = _create_default_verb_status_reporter,
+        workflow_callbacks: WorkflowCallbacks = None,
     ) -> None:
         """Run the execution graph."""
         visited: set[str] = set()
         nodes: list[ExecutionNode] = []
+
+        if workflow_callbacks is None:
+            workflow_callbacks = NoOpCallbacks()
+
+        workflow_callbacks.on_workflow_start()
 
         for node_key in self._graph.keys():
             if self._check_inputs(node_key, visited):
@@ -333,10 +340,12 @@ class Workflow(Generic[Context]):
                 verb_context = Workflow.__resolve_run_context(
                     node, context, verb_reporter
                 )
+                workflow_callbacks.on_step_start(node, inputs)
                 result = node.verb.func(**node.args, **inputs, **verb_context)
             except Exception as e:
                 message = f'Error executing verb "{verb_name}" in {self.name}: {e}'
                 status_reporter.error(message, traceback.format_exc())
+                workflow_callbacks.on_step_end(node, None)
                 raise e
 
             if inspect.iscoroutine(result):
@@ -351,6 +360,8 @@ class Workflow(Generic[Context]):
             progress(ProgressStatus(progress=1))
             node.result = result
 
+            workflow_callbacks.on_step_end(node, result)
+
             # move to the next verb
             visited.add(current_id)
             for possible in self._dependency_graph[current_id]:
@@ -362,6 +373,8 @@ class Workflow(Generic[Context]):
             if node_id not in visited:
                 if not self._check_inputs(node_id, visited):
                     raise ValueError(f"Missing inputs for node {node_id}!")
+
+        workflow_callbacks.on_workflow_end()
 
     def export(self):
         """Export the graph into a workflow JSON object."""
