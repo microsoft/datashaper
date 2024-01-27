@@ -12,6 +12,7 @@ export { binarize } from './binarize.js'
 export { boolean } from './boolean.js'
 export { convert } from './convert.js'
 export { copy } from './copy.js'
+export { destructure } from './destructure.js'
 export { filter } from './filter.js'
 export { fold } from './fold.js'
 export { join } from './join.js'
@@ -52,7 +53,6 @@ export const orderby = empty
 export const recode = empty
 export const rename = empty
 export const sample = empty
-export const destructure = empty
 export const ungroup = empty
 export const union = empty
 export const unorder = empty

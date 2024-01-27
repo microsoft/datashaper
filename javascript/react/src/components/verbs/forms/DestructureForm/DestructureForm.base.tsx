@@ -23,11 +23,12 @@ export const DestructureFormBase: React.FC<StepFormBaseProps<DestructureArgs>> =
 					onChange: (s, val) => {
 						s.args.preserveSource = val as boolean
 					},
-					advanced: true,
+					advanced: false,
 				},
 				//TODO: GAUDY ADD KEYS OPTIONAL
 			],
 			[step],
 		)
+
 		return <VerbForm inputs={inputs} step={step} onChange={onChange} />
 	})
