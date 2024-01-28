@@ -18,11 +18,21 @@ export const destructureStep: ColumnTableStep<DestructureArgs> = (
 
 	for (let i = 0; i < tableArray.length; i++) {
 		if (tableArray[i] !== undefined && tableArray[i]![column] !== undefined) {
-			tableArray[i] = destructureSingleValue(
-				tableArray[i]!,
-				tableArray[i]![column]!,
-				keys,
-			)
+			if (Array.isArray(tableArray[i]![column]!)) {
+				tableArray[i] = destructureSingleValue(
+					tableArray[i]!,
+					JSON.parse(JSON.stringify(tableArray[i]![column]!)),
+					true,
+					keys,
+				)
+			} else {
+				tableArray[i] = destructureSingleValue(
+					tableArray[i]!,
+					JSON.parse(tableArray[i]![column]!),
+					false,
+					keys,
+				)
+			}
 		}
 	}
 
@@ -34,15 +44,24 @@ export const destructureStep: ColumnTableStep<DestructureArgs> = (
 function destructureSingleValue(
 	row: RowObject,
 	object: JSON,
+	isArray: boolean,
 	keys?: string[],
 ): RowObject {
+	let index = 0
 	for (let property in object) {
 		if (
 			keys === undefined ||
 			keys.length === 0 ||
 			(keys !== undefined && keys.includes(property))
-		)
-			row[property] = (object as any)[property]
+		) {
+			if (isArray) {
+				row['array_' + index] = (object as any)[property]
+			} else {
+				row[property] = (object as any)[property]
+			}
+
+			index++
+		}
 	}
 
 	return row
