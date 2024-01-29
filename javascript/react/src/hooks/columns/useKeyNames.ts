@@ -11,7 +11,7 @@ export function useKeyNames(
 	column: string,
 ): string[] {
 	return useMemo(() => {
-		let distinctKeys = new Set<string>()
+		const distinctKeys = new Set<string>()
 
 		if (table !== undefined) {
 			const columnSelected: RowObject[] = table.select(column).objects()
@@ -19,9 +19,9 @@ export function useKeyNames(
 			for (let i = 0; i < columnSelected.length; i++) {
 				if (!Array.isArray(columnSelected[i]![column])) {
 					//is an object
-					let singleObj = JSON.parse(columnSelected[i]![column])
+					const singleObj = JSON.parse(columnSelected[i]![column])
 
-					for (let property in singleObj) distinctKeys.add(property)
+					for (const property in singleObj) distinctKeys.add(property)
 				}
 			}
 		}

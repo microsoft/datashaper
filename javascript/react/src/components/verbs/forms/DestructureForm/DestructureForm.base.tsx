@@ -63,7 +63,7 @@ export const DestructureFormBase: React.FC<
 				advanced: false,
 			},
 		],
-		[step, keyNames],
+		[step, keyNames, columnDataType],
 	)
 
 	return <VerbForm inputs={inputs} step={step} onChange={onChange} />
