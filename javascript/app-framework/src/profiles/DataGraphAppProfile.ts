@@ -12,6 +12,7 @@ import { profileIcons } from './icons.js'
 import { DataGraphRenderer } from './renderers/DataGraphRenderer.js'
 import type { IContextualMenuItem } from '@fluentui/react'
 import { KnownRel, createDataGraphSchemaObject } from '@datashaper/schema'
+import { DeriveNodesFromEdges } from './renderers/datagraph/DeriveNodesFromEdgesTool.js'
 
 export class DataGraphAppProfile
 	extends DataGraphProfile
@@ -113,5 +114,13 @@ export class DataGraphAppProfile
 
 	public getHelp(): Record<string, string> {
 		return content
+	}
+
+	public getToolboxItems() {
+		return [{
+			key: 'graph-derive-nodes-from-edges',
+			title: 'Derive nodes from edges',
+			renderer: DeriveNodesFromEdges,
+		}]
 	}
 }

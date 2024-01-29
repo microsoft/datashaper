@@ -70,8 +70,8 @@ function useNodes(table: ColumnTable, definition: DataGraphNodes): GraphNode[] {
 		const raw = table.objects()
 		return raw.map((node) => ({
 			id: id(node),
-			x: x(node),
-			y: y(node),
+			x: parseFloat(x(node)), // TEMP: this is due to arquero csv serialization
+			y: parseFloat(y(node)),
 			size: size(node),
 			color: fill(node),
 		}))
@@ -232,7 +232,7 @@ function useThematicColorScale(
 	field?: string,
 ) {
 	const uniques = useMemo(() => {
-		if (field) {
+		if (field && table.column(field)) {
 			const rollup = table
 				.rollup({
 					uniques: op.distinct(field),

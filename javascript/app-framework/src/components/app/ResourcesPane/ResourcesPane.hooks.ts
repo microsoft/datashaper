@@ -58,3 +58,4 @@ function useAddTable(): AddTableHandler {
 		[store],
 	)
 }
+

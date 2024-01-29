@@ -143,6 +143,12 @@ export interface AppProfile<
 	 * @returns
 	 */
 	getSettingsConfig?: () => SettingsConfig
+	/**
+	 * Profiles may supply a list of toolbox items that they support, which will be shown in the central toolbox when an instance of this profile is selected.
+	 * @returns 
+	 */
+	getToolboxItems?: () => ToolboxItem[]
+
 }
 
 export enum CommandBarSection {
@@ -169,4 +175,10 @@ export enum ResourceTreeViewMode {
 	Expanded = 'expanded',
 	Collapsed = 'collapsed',
 	Hidden = 'hidden',
+}
+
+export interface ToolboxItem {
+	key: string
+	title: string,
+	renderer: React.ComponentType<any>,
 }

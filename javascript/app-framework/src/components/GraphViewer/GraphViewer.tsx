@@ -6,7 +6,6 @@
 import type { DataGraphEdges, DataGraphNodes } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import { memo } from 'react'
-
 import '@react-sigma/core/lib/react-sigma.min.css'
 
 import { useGraph } from './GraphViewer.hooks.js'

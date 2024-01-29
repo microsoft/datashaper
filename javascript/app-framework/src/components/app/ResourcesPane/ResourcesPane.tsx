@@ -20,6 +20,7 @@ import {
 import type { ResourcesPaneProps } from './ResourcesPane.types.js'
 import { ResourceTree } from './ResourceTree.js'
 import { SettingsPanel } from './SettingsPanel.js'
+import { ToolboxPanel } from './ToolboxPanel.js'
 export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 	function ResourcesPane({
 		style,
@@ -39,6 +40,10 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 			: 'Show less information'
 		const [helpVisible, { toggle: onToggleHelp }] = useBoolean(false)
 		const helpTooltip = `${helpVisible ? 'Hide' : 'Show'} interactive guidance`
+
+		const [toolboxVisible, { toggle: onToggleToolbox }] = useBoolean(true)
+		const toolboxTooltip = `${toolboxVisible ? 'Hide' : 'Show'} toolbox`
+
 		const [settingsVisible, { toggle: onToggleSettings }] = useBoolean(false)
 		const settingsTooltip = `${
 			settingsVisible ? 'Hide' : 'Show'
@@ -73,6 +78,18 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 							</PanelContainer>
 						</Allotment.Pane>
 					)}
+					{!narrow && toolboxVisible && (
+						<Allotment.Pane>
+							<PanelContainer>
+								<ToolboxPanel
+									resources={resources}
+									profiles={profiles}
+									selectedKey={selectedKey}
+									onToggleExpanded={onToggleToolbox}
+								/>
+							</PanelContainer>
+						</Allotment.Pane>
+					)}
 					{!narrow && settingsVisible && (
 						<Allotment.Pane>
 							<PanelContainer>
@@ -93,6 +110,13 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 									onClick={onToggleHelp}
 									iconProps={icons.help}
 									ariaLabel='Open help'
+								/>
+							</Tooltip>
+							<Tooltip content={toolboxTooltip} styles={tooltipStyles}>
+								<IconButton
+									onClick={onToggleToolbox}
+									iconProps={icons.toolbox}
+									ariaLabel='Open toolbox'
 								/>
 							</Tooltip>
 							<Tooltip content={settingsTooltip} styles={tooltipStyles}>

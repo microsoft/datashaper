@@ -39,5 +39,7 @@ export const icons = {
 	openFile: { iconName: 'FabricOpenFolderHorizontal' },
 	newFile: { iconName: 'NewFolder' },
 	help: { iconName: 'ReadingMode' },
+	toolbox: { iconName: 'Toolbox' },
+	tool: { iconName: 'Repair' },
 	settings: { iconName: 'Settings' },
 }

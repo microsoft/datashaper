@@ -2,5 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-export * from './ModalHost.js'
-export * from './RenameModal/index.js'
+export interface ModalHostProps extends React.PropsWithChildren {
+	title: string
+	isOpen: boolean
+	onDismiss: () => void
+}
