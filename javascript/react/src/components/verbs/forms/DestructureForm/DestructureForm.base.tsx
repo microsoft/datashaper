@@ -10,6 +10,7 @@ import { type FormInput, FormInputType, VerbForm } from '../forms/index.js'
 import type { StepFormBaseProps } from '../types.js'
 import { getSimpleDropdownOptions } from '../../../../hooks/fluent/useSimpleDropdownOptions.js'
 import { EMPTY_ARRAY } from '../../../../empty.js'
+import { DataType } from '@datashaper/schema'
 
 /**
  * Just the json object inputs for spread json.
@@ -17,15 +18,17 @@ import { EMPTY_ARRAY } from '../../../../empty.js'
  */
 export const DestructureFormBase: React.FC<
 	StepFormBaseProps<DestructureArgs> & {
-		keyNames: string[]
+		keyNames: string[],
+		columnDataType: DataType
 	}
-> = memo(function DestructureFormBase({ step, onChange, keyNames }) {
+> = memo(function DestructureFormBase({ step, onChange, keyNames, columnDataType }) {
 	const inputs = useMemo<FormInput<DestructureArgs>[]>(
 		() => [
 			{
 				label: 'Keys to filter',
 				placeholder: 'Choose keys',
 				required: false,
+				if: columnDataType === DataType.Object,
 				type: FormInputType.MultiChoice,
 				current: step.args.keys,
 				options: getSimpleDropdownOptions(keyNames),
@@ -37,6 +40,17 @@ export const DestructureFormBase: React.FC<
 				},
 				onChangeAll: (s, val) => {
 					s.args.keys = val as string[]
+				},
+			},
+			{
+				label: 'Column prefix',
+				type: FormInputType.Text,
+				current: step.args.prefix,
+				placeholder: 'Enter a prefix',
+				if: columnDataType === DataType.Array,
+				required: false,
+				onChange: (s, val) => {
+					s.args.prefix = val as string
 				},
 			},
 			{

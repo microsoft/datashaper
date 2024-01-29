@@ -12,27 +12,31 @@ import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 
 export const destructureStep: ColumnTableStep<DestructureArgs> = (
 	input,
-	{ column, keys, preserveSource = false },
+	{ column, keys, prefix = "array_", preserveSource = false },
 ) => {
 	const tableArray: RowObject[] = input.objects()
 
 	for (let i = 0; i < tableArray.length; i++) {
 		if (tableArray[i] !== undefined && tableArray[i]![column] !== undefined) {
-			if (Array.isArray(tableArray[i]![column]!)) {
+			if(Array.isArray(tableArray[i]![column]!)){
 				tableArray[i] = destructureSingleValue(
 					tableArray[i]!,
 					JSON.parse(JSON.stringify(tableArray[i]![column]!)),
 					true,
-					keys,
-				)
-			} else {
-				tableArray[i] = destructureSingleValue(
-					tableArray[i]!,
-					JSON.parse(tableArray[i]![column]!),
-					false,
-					keys,
+					prefix,
+					keys
 				)
 			}
+			else{
+				tableArray[i] = destructureSingleValue(
+					tableArray[i]!,
+					JSON.parse(tableArray[i]![column]! as string),
+					false,
+					prefix,
+					keys
+				)
+			}
+			
 		}
 	}
 
@@ -45,6 +49,7 @@ function destructureSingleValue(
 	row: RowObject,
 	object: JSON,
 	isArray: boolean,
+	prefix: string,
 	keys?: string[],
 ): RowObject {
 	let index = 0
@@ -55,7 +60,7 @@ function destructureSingleValue(
 			(keys !== undefined && keys.includes(property))
 		) {
 			if (isArray) {
-				row['array_' + index] = (object as any)[property]
+				row[prefix + index] = (object as any)[property]
 			} else {
 				row[property] = (object as any)[property]
 			}

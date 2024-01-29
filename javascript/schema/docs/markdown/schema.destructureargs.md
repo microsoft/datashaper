@@ -16,5 +16,6 @@ export interface DestructureArgs extends InputColumnArgs
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [keys?](./schema.destructureargs.keys.md) |  | string\[\] | <i>(Optional)</i> |
+|  [prefix?](./schema.destructureargs.prefix.md) |  | string | <i>(Optional)</i> |
 |  [preserveSource?](./schema.destructureargs.preservesource.md) |  | boolean | <i>(Optional)</i> Keep the original columns (default is to remove source columns). |
 

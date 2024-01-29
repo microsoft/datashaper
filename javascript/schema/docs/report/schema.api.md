@@ -356,6 +356,8 @@ export interface DeriveArgs extends OutputColumnArgs {
 export interface DestructureArgs extends InputColumnArgs {
     // (undocumented)
     keys?: string[];
+    // (undocumented)
+    prefix?: string;
     preserveSource?: boolean;
 }
 

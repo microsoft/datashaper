@@ -16,6 +16,6 @@ export const ObjectCell: React.FC<FormattedCellProps> = memo(
 	function ObjectCell({ item, column, textAlign = 'left' }) {
 		const value = getValue(item, column) || emptyObject()
 		const style = useTextAlignStyle(textAlign)
-		return <div style={style}>{value.toString()}</div>
+		return <div style={style}>{JSON.stringify(value)}</div>
 	},
 )

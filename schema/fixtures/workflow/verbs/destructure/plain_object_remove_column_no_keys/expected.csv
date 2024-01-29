@@ -1,0 +1,7 @@
+ID,item,quantity,a,b,c,d,e
+1,bed,45,123,BBBB,FALSE,,
+1,pillow,78,234,CCCC,TRUE,,null
+2,sofa,100,345,DDDD,FALSE,,null
+4,sofa,89,456,EEEE,TRUE,,null
+4,chair,50,678,FFFF,FALSE,,null
+4,stool,45,789,GGGG,TRUE,,null
