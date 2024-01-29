@@ -21,7 +21,7 @@ export const DestructureForm: React.FC<StepFormProps<DestructureArgs>> = memo(
 		const columnDataType = useColumnType(dataTable, step.args.column)
 
 		console.log(columnDataType)
-		
+
 		return (
 			<DestructureFormBase
 				keyNames={keyNames}

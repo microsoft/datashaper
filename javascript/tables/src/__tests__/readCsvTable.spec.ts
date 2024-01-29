@@ -196,13 +196,10 @@ describe('readCsvTable', () => {
 			})
 		})
 		describe('json csv', () => {
-			const csv = fs.readFileSync(
-				'./src/__tests__/data/column-json.csv',
-				{
-					encoding: 'utf8',
-					flag: 'r',
-				},
-			)
+			const csv = fs.readFileSync('./src/__tests__/data/column-json.csv', {
+				encoding: 'utf8',
+				flag: 'r',
+			})
 
 			it('column names', () => {
 				const table = readCsvTable(csv)

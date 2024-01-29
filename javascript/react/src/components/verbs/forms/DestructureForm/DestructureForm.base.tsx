@@ -18,10 +18,15 @@ import { DataType } from '@datashaper/schema'
  */
 export const DestructureFormBase: React.FC<
 	StepFormBaseProps<DestructureArgs> & {
-		keyNames: string[],
+		keyNames: string[]
 		columnDataType: DataType
 	}
-> = memo(function DestructureFormBase({ step, onChange, keyNames, columnDataType }) {
+> = memo(function DestructureFormBase({
+	step,
+	onChange,
+	keyNames,
+	columnDataType,
+}) {
 	const inputs = useMemo<FormInput<DestructureArgs>[]>(
 		() => [
 			{
