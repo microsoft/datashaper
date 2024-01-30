@@ -48,7 +48,7 @@ def destructure(
             output.loc[index] = _destructureSingleValue(
                 output.loc[index],
                 output[column][index],
-                type(output) is list,
+                type(output[column][index]) is list,
                 prefix,
                 keys,
             )
