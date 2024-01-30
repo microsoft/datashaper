@@ -1,0 +1,6 @@
+id,numbers,booleans,col_0,col_1,col_2
+1,"1,2,3,4","true,true,false",true,true,false
+2,"5,6,7,8","false,FALSE",false,FALSE,
+3,null,null,,,
+4,"9,10,11","true,null,false",true,null,false
+5,12,,,,

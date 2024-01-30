@@ -18,23 +18,13 @@ export const destructureStep: ColumnTableStep<DestructureArgs> = (
 
 	for (let i = 0; i < tableArray.length; i++) {
 		if (tableArray[i] !== undefined && tableArray[i]![column] !== undefined) {
-			if (Array.isArray(tableArray[i]![column]!)) {
-				tableArray[i] = destructureSingleValue(
-					tableArray[i]!,
-					JSON.parse(JSON.stringify(tableArray[i]![column]!)),
-					true,
-					prefix,
-					keys,
-				)
-			} else {
-				tableArray[i] = destructureSingleValue(
-					tableArray[i]!,
-					JSON.parse(tableArray[i]![column]! as string),
-					false,
-					prefix,
-					keys,
-				)
-			}
+			tableArray[i] = destructureSingleValue(
+				tableArray[i]!,
+				tableArray[i]![column]!,
+				Array.isArray(tableArray[i]![column]!),
+				prefix,
+				keys,
+			)
 		}
 	}
 
