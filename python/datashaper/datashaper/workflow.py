@@ -305,6 +305,28 @@ class Workflow(Generic[Context]):
             Callable[[str], StatusReportHandler]
         ] = _create_default_verb_status_reporter,
         workflow_callbacks: WorkflowCallbacks = None,
+    ):
+        loop = asyncio.get_event_loop()
+        task = loop.create_task(
+            self.arun(
+                context,
+                status_reporter,
+                on_verb_timing,
+                create_verb_progress_reporter,
+                workflow_callbacks,
+            )
+        )
+        loop.run_until_complete(task)
+
+    async def arun(
+        self,
+        context: Optional[Context] = None,
+        status_reporter: Optional[StatusReporter] = NoopStatusReporter(),
+        on_verb_timing: Optional[Callable[[str, float], None]] = None,
+        create_verb_progress_reporter: Optional[
+            Callable[[str], StatusReportHandler]
+        ] = _create_default_verb_status_reporter,
+        workflow_callbacks: WorkflowCallbacks = None,
     ) -> None:
         """Run the execution graph."""
         visited: set[str] = set()
@@ -341,15 +363,15 @@ class Workflow(Generic[Context]):
                     node, context, verb_reporter
                 )
                 workflow_callbacks.on_step_start(node, inputs)
-                result = node.verb.func(**node.args, **inputs, **verb_context)
+                if asyncio.iscoroutinefunction(node.verb.func):
+                    result = await node.verb.func(**node.args, **inputs, **verb_context)
+                else:
+                    result = node.verb.func(**node.args, **inputs, **verb_context)
             except Exception as e:
                 message = f'Error executing verb "{verb_name}" in {self.name}: {e}'
                 status_reporter.error(message, traceback.format_exc())
                 workflow_callbacks.on_step_end(node, None)
                 raise e
-
-            if inspect.iscoroutine(result):
-                result = asyncio.run(result)
 
             # Record Verb Timing
             if on_verb_timing is not None:

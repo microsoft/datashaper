@@ -4,7 +4,7 @@
 #
 
 from functools import cache
-from typing import Callable
+from typing import Any, Callable, Coroutine
 
 from dataclasses import dataclass, field
 
@@ -38,7 +38,7 @@ class VerbDetails:
     name: str
     """Name of the verb."""
 
-    func: Callable[..., TableContainer]
+    func: Callable[..., TableContainer] | Coroutine[Any, Any, TableContainer]
     """Function to execute."""
 
     treats_input_tables_as_immutable: bool = False
