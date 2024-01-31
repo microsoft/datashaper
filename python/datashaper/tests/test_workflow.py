@@ -10,7 +10,7 @@ from datashaper.execution import derive_from_rows
 from datashaper.progress import progress_iterable
 from datashaper.progress.types import Progress, ProgressHandler
 from datashaper.table_store import TableContainer
-from datashaper.types import VerbCallbacks
+from datashaper.types import VerbCallbacks, WorkflowOptions
 from datashaper.workflow import DEFAULT_INPUT_NAME, Workflow
 
 
@@ -35,6 +35,31 @@ class TestWorkflowRun(unittest.TestCase):
         workflow.run(
             context=create_fake_run_context(),
         )
+        self.assertIsNotNone(workflow.export())
+
+    def test_define_basic_workflow_with_profiling_creates_profile(self):
+        workflow = Workflow(
+            verbs={
+                "test_define_basic_workflow_does_not_crash": create_passthrough_verb(),
+            },
+            schema={
+                "name": "test_workflow",
+                "steps": [
+                    {
+                        "verb": "test_define_basic_workflow_does_not_crash",
+                        "input": {"source": DEFAULT_INPUT_NAME},
+                    },
+                ],
+            },
+            validate=False,
+        )
+        workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
+        result = workflow.run(
+            context=create_fake_run_context(),
+            options=WorkflowOptions(memory_profile=True),
+        )
+        self.assertIsNotNone(result.memory_profile)
+        self.assertIsNotNone(result.verb_timings)
         self.assertIsNotNone(workflow.export())
 
     def test_run_basic_workflow_does_not_crash(self):

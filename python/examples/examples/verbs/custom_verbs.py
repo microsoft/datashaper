@@ -1,11 +1,9 @@
 """Custom verbs for data processing."""
-from typing import List
-
 from datashaper import TableContainer, VerbInput, verb
 
 
 @verb(name="genid")
-def genid(input: VerbInput, hash: List[str], to: str) -> TableContainer:
+def genid(input: VerbInput, hash: list[str], to: str) -> TableContainer:
     """Generate IDs for each row. A pipeline verb."""
     df = input.source.table
 
@@ -33,6 +31,6 @@ def embed_mock(input: VerbInput, column: str, to: str) -> TableContainer:
     return TableContainer(table=df)
 
 
-def _embed(text: str) -> List[float]:
+def _embed(text: str) -> list[float]:
     """Perform a text embedding."""
     return [0.1, 0.2, 0.3]
