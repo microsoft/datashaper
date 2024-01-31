@@ -37,7 +37,13 @@ class DelegatingVerbCallbacks(VerbCallbacks):
     def progress(self, progress: Progress):
         self._workflow_callbacks.on_step_progress(progress)
 
-    def error(self, message: str, cause: Exception | None = None, stack: str | None = None, details: dict[str, Any] | None = None):
+    def error(
+        self,
+        message: str,
+        cause: Exception | None = None,
+        stack: str | None = None,
+        details: dict[str, Any] | None = None,
+    ):
         self._workflow_callbacks.on_error(message, cause, stack, details)
 
     def warning(self, message: str, details: dict[str, Any] | None = None):

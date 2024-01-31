@@ -36,7 +36,11 @@ class WorkflowCallbacks:
         pass
 
     def on_error(
-        self, message: str, cause: Exception | None = None, stack: str | None = None, details: dict[str, Any] | None = None
+        self,
+        message: str,
+        cause: Exception | None = None,
+        stack: str | None = None,
+        details: dict[str, Any] | None = None,
     ) -> None:
         """A call back handler for when an error occurs."""
         pass
@@ -49,6 +53,8 @@ class WorkflowCallbacks:
         """A call back handler for when a log message occurs."""
         pass
 
-    def on_measure(self, name: str, value: float, details: dict[str, Any] | None = None) -> None:
+    def on_measure(
+        self, name: str, value: float, details: dict[str, Any] | None = None
+    ) -> None:
         """A call back handler for when a measurement occurs."""
         pass
