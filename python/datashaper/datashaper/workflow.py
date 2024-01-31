@@ -28,6 +28,7 @@ from datashaper.progress.reporters import (
 )
 from datashaper.progress.types import ProgressStatus, StatusReportHandler
 from datashaper.table_store import Table, TableContainer
+from datashaper.types import VerbTiming, WorkflowRunResult
 from datashaper.workflow_callbacks import NoOpCallbacks, WorkflowCallbacks
 
 
@@ -300,12 +301,11 @@ class Workflow(Generic[Context]):
         self,
         context: Optional[Context] = None,
         status_reporter: Optional[StatusReporter] = NoopStatusReporter(),
-        on_verb_timing: Optional[Callable[[str, float], None]] = None,
         create_verb_progress_reporter: Optional[
             Callable[[str], StatusReportHandler]
         ] = _create_default_verb_status_reporter,
         workflow_callbacks: WorkflowCallbacks = None,
-    ) -> None:
+    ) -> WorkflowRunResult:
         """Run the execution graph."""
         visited: set[str] = set()
         nodes: list[ExecutionNode] = []
@@ -320,6 +320,8 @@ class Workflow(Generic[Context]):
                 nodes.append(node_key)
 
         verb_idx = 0
+
+        verb_timings: list[VerbTiming] = []
 
         while len(nodes) > 0:
             current_id = nodes.pop(0)
@@ -352,10 +354,14 @@ class Workflow(Generic[Context]):
                 result = asyncio.run(result)
 
             # Record Verb Timing
-            if on_verb_timing is not None:
-                on_verb_timing(
-                    f"verb_{verb_name}_{verb_idx}", time.time() - start_verb_time
+            verb_timings.append(
+                VerbTiming(
+                    id=node.node_id,
+                    verb=verb_name,
+                    index=verb_idx,
+                    timing=time.time() - start_verb_time,
                 )
+            )
 
             progress(ProgressStatus(progress=1))
             node.result = result
@@ -375,6 +381,7 @@ class Workflow(Generic[Context]):
                     raise ValueError(f"Missing inputs for node {node_id}!")
 
         workflow_callbacks.on_workflow_end()
+        return WorkflowRunResult(verb_timings=verb_timings)
 
     def export(self):
         """Export the graph into a workflow JSON object."""
