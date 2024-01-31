@@ -25,7 +25,7 @@ async def derive_from_rows_async(
     This is useful for IO bound operations.
     """
     max_parallelism = max_parallelism or 4
-    tick = progress_ticker(progress=callbacks.progress, num_total=len(input))
+    tick = progress_ticker(callbacks.progress, num_total=len(input))
     errors = []
 
     async def execute(
