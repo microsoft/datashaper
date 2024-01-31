@@ -6,7 +6,7 @@ from typing import Any, Awaitable, Callable, TypeVar
 
 import pandas as pd
 
-from datashaper import StatusReporter, progress_ticker
+from datashaper.progress import StatusReporter, progress_ticker
 
 
 ItemType = TypeVar("ItemType")
