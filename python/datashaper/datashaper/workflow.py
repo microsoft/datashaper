@@ -28,8 +28,12 @@ from datashaper.progress.reporters import (
 )
 from datashaper.progress.types import ProgressStatus, StatusReportHandler
 from datashaper.table_store import Table, TableContainer
-from datashaper.types import VerbTiming, WorkflowRunResult
-from datashaper.workflow_callbacks import NoOpCallbacks, WorkflowCallbacks
+from datashaper.types import (
+    NoopWorkflowCallbacks,
+    VerbTiming,
+    WorkflowCallbacks,
+    WorkflowRunResult,
+)
 
 
 # TODO: this won't work for a published package
@@ -311,7 +315,7 @@ class Workflow(Generic[Context]):
         nodes: list[ExecutionNode] = []
 
         if workflow_callbacks is None:
-            workflow_callbacks = NoOpCallbacks()
+            workflow_callbacks = NoopWorkflowCallbacks()
 
         workflow_callbacks.on_workflow_start()
 

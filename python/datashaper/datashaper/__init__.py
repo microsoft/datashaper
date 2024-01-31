@@ -32,7 +32,13 @@ from .engine import (
     load_verbs,
     verb,
 )
-from .execution import ExecutionNode, VerbDefinitions, derive_from_rows, parallelize
+from .execution import (
+    ExecutionNode,
+    VerbDefinitions,
+    derive_from_rows,
+    derive_from_rows_async,
+    parallelize,
+)
 from .progress import (
     ConsoleStatusReporter,
     FileStatusReporter,
@@ -53,11 +59,13 @@ from .table_store import (
     TableContainer,
     TableMetadata,
 )
-from .workflow import DEFAULT_INPUT_NAME, Workflow, WorkflowCallbacks
+from .types import VerbTiming, WorkflowCallbacks, WorkflowRunResult
+from .workflow import DEFAULT_INPUT_NAME, Workflow
 
 
 __all__ = [
     "derive_from_rows",
+    "derive_from_rows_async",
     "parallelize",
     "VerbDefinitions",
     "ExecutionNode",
@@ -97,8 +105,11 @@ __all__ = [
     "get_operator",
     # Workflow Exports
     "Workflow",
-    "WorkflowCallbacks",
     "DEFAULT_INPUT_NAME",
+    # Workflow Types
+    "WorkflowCallbacks",
+    "WorkflowRunResult",
+    "VerbTiming",
     # Tablestore Exports
     "ColumnStats",
     "ColumnMetadata",

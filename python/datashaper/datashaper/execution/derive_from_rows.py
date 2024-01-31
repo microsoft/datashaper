@@ -1,8 +1,10 @@
-from typing import Callable, TypeVar
+import traceback
+
+from typing import Any, Callable, TypeVar
 
 import pandas as pd
 
-from datashaper.execution.utils import transform_pandas_table
+from datashaper.execution.utils.parallelize import parallelize
 from datashaper.progress import progress_callback
 from datashaper.progress.reporters.status_reporter import StatusReporter
 from datashaper.table_store import Table
@@ -22,12 +24,16 @@ def derive_from_rows(
     callback = progress_callback(
         callback=transform, progress=reporter.progress, num_total=len(input)
     )
-    results, errors = transform_pandas_table(
-        input,
-        callback,
-        num_threads=num_threads,
-        stagger=stagger,
-    )
+
+    def transform_row(row: tuple[Any, pd.Series]) -> ItemType:
+        try:
+            return callback(row[1])
+        except Exception as e:
+            print(f"Error in transform_pandas_table: {e}")
+            traceback.print_exc()
+            raise e
+
+    results, errors = parallelize(input.iterrows(), transform_row, num_threads, stagger)
 
     if len(errors) > 0:
         reporter.error(
