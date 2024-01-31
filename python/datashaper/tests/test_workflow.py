@@ -8,13 +8,9 @@ from dataclasses import dataclass
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.execution import derive_from_rows
 from datashaper.progress import progress_iterable
-from datashaper.progress.reporters import (
-    ConsoleStatusReporter,
-    FileStatusReporter,
-    VerbStatusReporter,
-)
-from datashaper.progress.types import ProgressStatus, StatusReportHandler
+from datashaper.progress.types import Progress, ProgressHandler
 from datashaper.table_store import TableContainer
+from datashaper.types import VerbCallbacks
 from datashaper.workflow import DEFAULT_INPUT_NAME, Workflow
 
 
@@ -196,52 +192,6 @@ class TestWorkflowRun(unittest.TestCase):
                 context=create_fake_run_context(),
             )
 
-    def test_basic_workflow_with_file_status_reporter(self):
-        reporter = FileStatusReporter("./.temp")
-        workflow = Workflow(
-            verbs={
-                "test_basic_workflow_with_file_status_reporter": create_context_consuming_verb(),
-            },
-            schema={
-                "name": "test_workflow",
-                "steps": [
-                    {
-                        "verb": "test_basic_workflow_with_file_status_reporter",
-                        "input": {"source": DEFAULT_INPUT_NAME},
-                    },
-                ],
-            },
-            validate=False,
-        )
-        workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
-        workflow.run(
-            context=create_fake_run_context(),
-            status_reporter=reporter,
-        )
-
-    def test_basic_workflow_with_console_status_reporter(self):
-        reporter = ConsoleStatusReporter()
-        workflow = Workflow(
-            verbs={
-                "test_basic_workflow_with_console_status_reporter": create_context_consuming_verb(),
-            },
-            schema={
-                "name": "test_workflow",
-                "steps": [
-                    {
-                        "verb": "test_basic_workflow_with_console_status_reporter",
-                        "input": {"source": DEFAULT_INPUT_NAME},
-                    },
-                ],
-            },
-            validate=False,
-        )
-        workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
-        workflow.run(
-            context=create_fake_run_context(),
-            status_reporter=reporter,
-        )
-
     def test_workflow_with_async_verb(self):
         wf = Workflow(
             verbs={
@@ -263,6 +213,7 @@ class TestWorkflowRun(unittest.TestCase):
             context=create_fake_run_context(),
         )
         output = wf.output()
+        assert output.equals(pd.DataFrame({"a": [1, 2, 3]}))
 
     def test_workflow_first_step_with_invalid_input_crashes(self):
         with self.assertRaises(ValueError) as context:
@@ -474,16 +425,14 @@ def create_async_verb():
 
 
 def create_parallel_transforming_verb():
-    def transform(
-        input: VerbInput, reporter: VerbStatusReporter, progress: VerbStatusReporter
-    ):
+    def transform(input: VerbInput, verb_callbacks: VerbCallbacks):
         def transform_row(row: pd.Series):
             items = [1, 2, 3]
-            progress_iterable(items, progress)
+            progress_iterable(items, verb_callbacks.progress)
             row["b"] = row["a"] + 1
             return row
 
-        results = derive_from_rows(input.get_input(), transform_row, reporter)
+        results = derive_from_rows(input.get_input(), transform_row, verb_callbacks)
 
         return TableContainer(table=pd.DataFrame(results))
 
@@ -491,11 +440,11 @@ def create_parallel_transforming_verb():
 
 
 def create_parallel_transforming_verb_throwing():
-    def transform(input: VerbInput, reporter: VerbStatusReporter):
+    def transform(input: VerbInput, verb_callbacks: VerbCallbacks):
         def transform_row(row: pd.Series):
             raise ValueError("oh no, this should be expected")
 
-        results = derive_from_rows(input.get_input(), transform_row, reporter)
+        results = derive_from_rows(input.get_input(), transform_row, verb_callbacks)
 
         return TableContainer(table=pd.DataFrame(results))
 
@@ -506,21 +455,19 @@ def create_context_consuming_verb():
     def context_verb(
         input: TableContainer,
         context: PipelineRunContext,
-        reporter: VerbStatusReporter,
-        progress: StatusReportHandler,
+        verb_callbacks: VerbCallbacks,
         a: int,
         b: int,
     ):
         assert context is not None
-        assert reporter is not None
         assert a is not None
         assert b is not None
-        assert progress is not None
-        reporter.error("test error")
-        reporter.warning("test warning")
-        reporter.log("test log")
-        reporter.progress(ProgressStatus(progress=0.5, description="test progress"))
-        reporter.progress(ProgressStatus(progress=0.7))
+        assert verb_callbacks is not None
+        verb_callbacks.error("test error")
+        verb_callbacks.warning("test warning")
+        verb_callbacks.log("test log")
+        verb_callbacks.progress(Progress(percent=0.5, description="test progress"))
+        verb_callbacks.progress(Progress(percent=0.7))
         return TableContainer(table=input.get_input())
 
     return context_verb

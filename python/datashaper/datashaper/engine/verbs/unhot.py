@@ -1,5 +1,4 @@
 from functools import partial
-from typing import List
 
 from datashaper.engine.types import MergeStrategy
 from datashaper.engine.verbs.utils import strategy_mapping, unhot_operation
@@ -12,7 +11,7 @@ from datashaper.table_store import TableContainer
 def unhot(
     input: VerbInput,
     to: str,
-    columns: List[str],
+    columns: list[str],
     preserveSource: bool = False,
     prefix: str = "",
 ):

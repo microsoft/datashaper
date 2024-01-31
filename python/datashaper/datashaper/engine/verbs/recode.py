@@ -3,8 +3,6 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from typing import Dict
-
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
@@ -16,7 +14,7 @@ class RecodeMap(dict):
 
 
 @verb(name="recode")
-def recode(input: VerbInput, to: str, column: str, mapping: Dict):
+def recode(input: VerbInput, to: str, column: str, mapping: dict):
     mapping = RecodeMap(mapping)
 
     input_table = input.get_input()

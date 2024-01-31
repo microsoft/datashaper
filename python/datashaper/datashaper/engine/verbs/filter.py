@@ -2,9 +2,6 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-
-from typing import List
-
 from datashaper.engine.pandas import filter_df, get_operator
 from datashaper.engine.types import (
     BooleanLogicalOperator,
@@ -18,7 +15,7 @@ from datashaper.table_store import TableContainer
 
 
 @verb(name="filter", treats_input_tables_as_immutable=True)
-def filter(input: VerbInput, column: str, criteria: List, logical: str = "or"):
+def filter(input: VerbInput, column: str, criteria: list, logical: str = "or"):
     filter_criteria = [
         Criterion(
             value=arg.get("value", None),

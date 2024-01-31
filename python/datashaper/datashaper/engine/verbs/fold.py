@@ -3,7 +3,7 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from typing import List, Tuple
+from typing import Tuple
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -11,7 +11,7 @@ from datashaper.table_store import TableContainer
 
 
 @verb(name="fold")
-def fold(input: VerbInput, to: Tuple[str, str], columns: List[str]):
+def fold(input: VerbInput, to: Tuple[str, str], columns: list[str]):
     input_table = input.get_input()
     output = input_table
     columns = [column for column in output.columns if column not in columns]

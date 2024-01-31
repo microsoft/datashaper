@@ -21,17 +21,15 @@ from jsonschema import validate as validate_schema
 
 from datashaper.engine.verbs import VerbDetails, VerbInput, VerbManager
 from datashaper.execution import ExecutionNode
-from datashaper.progress.reporters import (
-    NoopStatusReporter,
-    StatusReporter,
-    VerbStatusReporter,
-)
-from datashaper.progress.types import ProgressStatus, StatusReportHandler
+from datashaper.progress.types import Progress
 from datashaper.table_store import Table, TableContainer
 from datashaper.types import (
-    NoopWorkflowCallbacks,
+    DelegatingVerbCallbacks,
+    MemoryProfile,
+    MemoryProfilingWorkflowCallbacks,
     VerbTiming,
     WorkflowCallbacks,
+    WorkflowOptions,
     WorkflowRunResult,
 )
 
@@ -42,10 +40,6 @@ SCHEMA_FILE = "../../schema/workflow.json"
 Context = TypeVar("Context")
 
 DEFAULT_INPUT_NAME = "datasource"
-
-
-def _create_default_verb_status_reporter(name: str) -> StatusReportHandler:
-    return lambda progress: None
 
 
 class Workflow(Generic[Context]):
@@ -205,16 +199,16 @@ class Workflow(Generic[Context]):
     def __resolve_run_context(
         exec_node: ExecutionNode,
         context: Optional[Context],
-        reporter: VerbStatusReporter,
+        workflow_callbacks: WorkflowCallbacks,
     ) -> dict[str, Any]:
         """Injects the run context into the workflow steps."""
+        verb_callbacks = DelegatingVerbCallbacks(workflow_callbacks)
 
         def argument_names(fn):
             return inspect.getfullargspec(fn).args
 
         verb_args = argument_names(exec_node.verb.func)
         run_ctx: dict[str, Any] = {}
-        progress: StatusReportHandler = lambda progress: reporter.progress(progress)
 
         # Pass in individual context items
         if context is not None:
@@ -226,13 +220,9 @@ class Workflow(Generic[Context]):
         if "context" in verb_args and "context" not in exec_node.args:
             run_ctx["context"] = context
 
-        # Pass in the verb reporter
-        if "reporter" in verb_args and "reporter" not in exec_node.args:
-            run_ctx["reporter"] = reporter
-
-        # Pass in the progress
-        if "progress" in verb_args and "progress" not in exec_node.args:
-            run_ctx["progress"] = progress
+        # Pass in the verb callbacks
+        if "verb_callbacks" in verb_args and "verb_callbacks" not in exec_node.args:
+            run_ctx["verb_callbacks"] = verb_callbacks
 
         return run_ctx
 
@@ -304,55 +294,49 @@ class Workflow(Generic[Context]):
     def run(
         self,
         context: Optional[Context] = None,
-        status_reporter: Optional[StatusReporter] = NoopStatusReporter(),
-        create_verb_progress_reporter: Optional[
-            Callable[[str], StatusReportHandler]
-        ] = _create_default_verb_status_reporter,
+        options: WorkflowOptions = WorkflowOptions(),
         workflow_callbacks: WorkflowCallbacks = None,
     ) -> WorkflowRunResult:
         """Run the execution graph."""
         visited: set[str] = set()
         nodes: list[ExecutionNode] = []
+        workflow_callbacks = workflow_callbacks or WorkflowCallbacks()
+        profiler: MemoryProfilingWorkflowCallbacks | None = None
 
-        if workflow_callbacks is None:
-            workflow_callbacks = NoopWorkflowCallbacks()
+        if options.memory_profile:
+            profiler = MemoryProfilingWorkflowCallbacks(workflow_callbacks)
+            workflow_callbacks = profiler
 
         workflow_callbacks.on_workflow_start()
-
         for node_key in self._graph.keys():
             if self._check_inputs(node_key, visited):
                 nodes.append(node_key)
 
         verb_idx = 0
-
         verb_timings: list[VerbTiming] = []
 
         while len(nodes) > 0:
             current_id = nodes.pop(0)
             node = self._graph[current_id]
             verb_name = node.verb.name
-
-            # set up verb progress reporter
-            progress = create_verb_progress_reporter(f"verb: {verb_name}")
-            verb_reporter = VerbStatusReporter(
-                f"{self.name}.{verb_name}.{verb_idx}", status_reporter, progress
-            )
-            progress(ProgressStatus(progress=0))
             start_verb_time = time.time()
 
             # execute the verb
             try:
                 inputs = self._resolve_inputs(node.verb, node.node_input)
                 verb_context = Workflow.__resolve_run_context(
-                    node, context, verb_reporter
+                    node, context, workflow_callbacks
                 )
                 workflow_callbacks.on_step_start(node, inputs)
+                workflow_callbacks.on_step_progress(Progress(percent=0))
                 result = node.verb.func(**node.args, **inputs, **verb_context)
             except Exception as e:
                 message = f'Error executing verb "{verb_name}" in {self.name}: {e}'
-                status_reporter.error(message, traceback.format_exc())
-                workflow_callbacks.on_step_end(node, None)
+                workflow_callbacks.on_error(message, e, traceback.format_exc())
                 raise e
+            finally:
+                workflow_callbacks.on_step_progress(Progress(percent=1))
+                workflow_callbacks.on_step_end(node, None)
 
             if inspect.iscoroutine(result):
                 result = asyncio.run(result)
@@ -366,11 +350,7 @@ class Workflow(Generic[Context]):
                     timing=time.time() - start_verb_time,
                 )
             )
-
-            progress(ProgressStatus(progress=1))
             node.result = result
-
-            workflow_callbacks.on_step_end(node, result)
 
             # move to the next verb
             visited.add(current_id)
@@ -385,7 +365,18 @@ class Workflow(Generic[Context]):
                     raise ValueError(f"Missing inputs for node {node_id}!")
 
         workflow_callbacks.on_workflow_end()
-        return WorkflowRunResult(verb_timings=verb_timings)
+        memory_profile: MemoryProfile | None = None
+        if profiler is not None:
+            memory_profile = MemoryProfile(
+                snapshot_stats=profiler.get_snapshot_stats(),
+                peak_stats=profiler.get_peak_stats(),
+                time_stats=profiler.get_time_stats(),
+                detailed_view=profiler.get_detailed_view(),
+            )
+
+        return WorkflowRunResult(
+            verb_timings=verb_timings, memory_profile=memory_profile
+        )
 
     def export(self):
         """Export the graph into a workflow JSON object."""

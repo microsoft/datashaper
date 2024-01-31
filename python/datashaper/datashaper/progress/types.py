@@ -1,11 +1,14 @@
-from typing import Any, Callable, Optional
+"""Progress reporting types"""
+from typing import Callable
 
 from dataclasses import dataclass
 
 
 @dataclass
-class ProgressStatus:
-    progress: float | None = None
+class Progress:
+    """A class representing the progress of a task."""
+
+    percent: float | None = None
     """0 - 1 progress"""
 
     description: str | None = None
@@ -15,9 +18,8 @@ class ProgressStatus:
     """Total number of items"""
 
     completed_items: int | None = None
-    """Number of items completed"""
+    """Number of items completed""" ""
 
 
-ProgressTicker = Callable[[Optional[int]], None]
-StatusReportHandler = Callable[[ProgressStatus], Any]
-"""A progress reporter function."""
+ProgressHandler = Callable[[Progress], None]
+"""A function to handle progress reports."""
