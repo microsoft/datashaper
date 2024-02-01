@@ -1,6 +1,7 @@
 """Contains the DelegatingVerbCallback definition."""
 from typing import Any
 
+from ...execution.execution_node import ExecutionNode
 from ...progress.types import Progress
 from ..workflow_callbacks.workflow_callbacks import WorkflowCallbacks
 from .verb_callbacks import VerbCallbacks
@@ -10,14 +11,16 @@ class DelegatingVerbCallbacks(VerbCallbacks):
     """A wrapper that implements VerbCallbacks that delegates to the underlying WorkflowCallbacks."""
 
     _workflow_callbacks: WorkflowCallbacks
+    _node: ExecutionNode
 
-    def __init__(self, workflow_callbacks: WorkflowCallbacks):
+    def __init__(self, node: ExecutionNode, workflow_callbacks: WorkflowCallbacks):
         """Create a new instance of DelegatingVerbCallbacks."""
         self._workflow_callbacks = workflow_callbacks
+        self._node = node
 
     def progress(self, progress: Progress):
         """A call back handler for when progress occurs."""
-        self._workflow_callbacks.on_step_progress(progress)
+        self._workflow_callbacks.on_step_progress(self._node, progress)
 
     def error(
         self,
