@@ -13,6 +13,7 @@ readme = "README.md"
 python = ">=3.10,<4"
 pandas = "^2.2.0"
 jsonschema = "^4.21.1"
+pyarrow = "^15.0.0"
 
 [tool.poetry.group.dev.dependencies]
 bandit = "^1.7.7"

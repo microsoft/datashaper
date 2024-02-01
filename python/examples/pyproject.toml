@@ -9,7 +9,6 @@ readme = "README.md"
 python = ">=3.10,<4"
 datashaper = { path = "../datashaper", develop = true }
 requests = "^2.31.0"
-pyarrow = "^12.0.1"
 fastparquet = "^2023.4.0"
 openai = "^0.27.8"
 nbconvert = "^7.13.0"
