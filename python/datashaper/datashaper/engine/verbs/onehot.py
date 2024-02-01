@@ -2,6 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+from typing import cast
 
 import numpy as np
 import pandas as pd
@@ -18,7 +19,7 @@ def onehot(
     prefix: str = "",
     preserveSource=False,
 ):
-    input_table = input.get_input()
+    input_table = cast(pd.DataFrame, input.get_input())
     input_table[column] = input_table[column].astype("category")
 
     dummies = pd.get_dummies(input_table[[column]], prefix=[prefix], prefix_sep="")

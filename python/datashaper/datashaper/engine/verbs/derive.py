@@ -3,7 +3,7 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from typing import Callable, Dict
+from typing import Callable, cast
 
 import numpy as np
 import pandas as pd
@@ -26,7 +26,7 @@ def __concatenate(col1: pd.Series, col2: pd.Series):
     return col1.astype(str) + col2.astype(str)
 
 
-__op_mapping: Dict[MathOperator, Callable] = {
+__op_mapping: dict[MathOperator, Callable] = {
     MathOperator.Add: lambda col1, col2: np.add(col1, col2)
     if is_numeric_dtype(col1) and is_numeric_dtype(col2)
     else __concatenate(col1, col2),
@@ -42,7 +42,7 @@ def derive(input: VerbInput, to: str, column1: str, column2: str, operator: str)
     math_operator = MathOperator(operator)
 
     input_table = input.get_input()
-    output = input_table
+    output = cast(pd.DataFrame, input_table)
     try:
         output[to] = __op_mapping[math_operator](output[column1], output[column2])
     except Exception:

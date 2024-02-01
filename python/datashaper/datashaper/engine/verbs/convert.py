@@ -6,7 +6,7 @@
 import numbers
 
 from datetime import datetime
-from typing import Callable, Dict, Optional, Union
+from typing import Callable, Optional, Union, cast
 
 import numpy as np
 import pandas as pd
@@ -89,7 +89,7 @@ def to_datetime(column: pd.Series) -> pd.Series:
         return pd.to_datetime(column, errors="coerce")
 
 
-__type_mapping: Dict[ParseType, Callable] = {
+__type_mapping: dict[ParseType, Callable] = {
     ParseType.Boolean: lambda column, **kwargs: column.apply(lambda x: convert_bool(x)),
     ParseType.Date: lambda column, formatPattern, **kwargs: to_datetime(column),
     ParseType.Decimal: lambda column, **kwargs: column.apply(
@@ -114,7 +114,7 @@ def convert(
     parse_type = ParseType(type)
 
     input_table = input.get_input()
-    output = input_table
+    output = cast(pd.DataFrame, input_table)
 
     output[to] = __type_mapping[parse_type](
         column=output[column], radix=radix, formatPattern=formatPattern

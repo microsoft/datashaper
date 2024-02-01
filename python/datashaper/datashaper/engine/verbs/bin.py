@@ -3,9 +3,10 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from typing import Optional
+from typing import Optional, cast
 
 import numpy as np
+import pandas as pd
 
 from datashaper.engine.types import BinStrategy
 from datashaper.engine.verbs.verb_input import VerbInput
@@ -13,7 +14,15 @@ from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
 
 
-def __get_bucket_value(bin_edges, indices, n, clamped, min_max, value, printRange):
+def __get_bucket_value(
+    bin_edges,
+    indices,
+    n: int,
+    clamped: bool | None,
+    min_max,
+    value,
+    printRange: bool | None,
+):
     if value < min_max[0]:
         if printRange:
             return f"<{min_max[0]}"
@@ -74,7 +83,7 @@ def bin(
     clamped: Optional[bool] = False,
     printRange: Optional[bool] = False,
 ):
-    input_table = input.get_input()
+    input_table = cast(pd.DataFrame, input.get_input())
     bin_strategy = BinStrategy(strategy)
     min_max = (
         (min, max)

@@ -2,6 +2,9 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+from typing import Any, cast
+
+import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -19,6 +22,6 @@ def recode(input: VerbInput, to: str, column: str, mapping: dict):
 
     input_table = input.get_input()
 
-    output = input_table
-    output[to] = output[column].map(mapping)
+    output = cast(pd.DataFrame, input_table)
+    output[to] = output[column].map(cast(Any, mapping))
     return TableContainer(table=output)
