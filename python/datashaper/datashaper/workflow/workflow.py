@@ -27,10 +27,10 @@ from datashaper.table_store import Table, TableContainer
 from .types import MemoryProfile, VerbTiming, WorkflowRunResult
 from .verb_callbacks import DelegatingVerbCallbacks
 from .workflow_callbacks import (
-    EnsuringWorkflowCallbacks,
     MemoryProfilingWorkflowCallbacks,
     NoopWorkflowCallbacks,
     WorkflowCallbacks,
+    WorkflowCallbacksRegistry,
 )
 
 
@@ -243,7 +243,7 @@ class Workflow(Generic[Context]):
         )
 
     def _resolve_inputs(
-        self, verb: VerbDetails, inputs: str | dict[str, str | list[str]]
+        self, verb: VerbDetails, inputs: str | dict[str, list[str]]
     ) -> dict[str, Any]:
         def input_table(name: str) -> TableContainer:
             graph_node = self._graph[name] if name in self._graph else None
@@ -382,17 +382,19 @@ class Workflow(Generic[Context]):
         return time.time() - start_verb_time
 
     def _get_workflow_callbacks(
-        self, callbacks: WorkflowCallbacks
+        self, callbacks: WorkflowCallbacks | None
     ) -> tuple[WorkflowCallbacks, MemoryProfilingWorkflowCallbacks | None]:
-        # Use the ensuring variant to guarantee that all protocol methods are available
-        callbacks = EnsuringWorkflowCallbacks(callbacks or NoopWorkflowCallbacks())
         profiler: MemoryProfilingWorkflowCallbacks | None = None
+        callback_handler = WorkflowCallbacksRegistry()
+
+        if callbacks is not None:
+            callback_handler.register(callbacks)
 
         if self._memory_profile:
-            profiler = MemoryProfilingWorkflowCallbacks(callbacks)
-            callbacks = profiler
+            profiler = MemoryProfilingWorkflowCallbacks()
+            callback_handler.register(profiler)
 
-        return (callbacks, profiler)
+        return (callback_handler, profiler)
 
     def export(self):
         """Export the graph into a workflow JSON object."""

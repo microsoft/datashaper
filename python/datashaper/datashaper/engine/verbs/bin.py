@@ -3,6 +3,8 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
+from typing import Optional
+
 import numpy as np
 
 from datashaper.engine.types import BinStrategy
@@ -65,12 +67,12 @@ def bin(
     to: str,
     column: str,
     strategy: str,
-    min: int = None,
-    max: int = None,
-    fixedcount: int = None,
-    fixedwidth: int = None,
-    clamped: bool = False,
-    printRange: bool = False,
+    min: Optional[int] = None,
+    max: Optional[int] = None,
+    fixedcount: Optional[int] = None,
+    fixedwidth: Optional[int] = None,
+    clamped: Optional[bool] = False,
+    printRange: Optional[bool] = False,
 ):
     input_table = input.get_input()
     bin_strategy = BinStrategy(strategy)
@@ -85,6 +87,7 @@ def bin(
             input_table[column], bins=fixedcount, range=min_max
         )
     elif bin_strategy == BinStrategy.FixedWidth:
+        fixedwidth = fixedwidth if fixedwidth is not None else 0
         bin_edges = np.histogram_bin_edges(
             input_table[column],
             bins=np.arange(min_max[0], min_max[1] + fixedwidth, fixedwidth, dtype=int),

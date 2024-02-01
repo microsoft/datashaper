@@ -62,13 +62,13 @@ def convert_date_str(value: datetime, formatPattern: str) -> Union[str, float]:
         return np.nan
 
 
-def to_str(column: pd.Series, formatPattern: str) -> pd.Series:
-    column_datetime: pd.Series = None
+def to_str(column: pd.Series, formatPattern: str) -> pd.DataFrame | pd.Series:
+    column_datetime: pd.Series | None = None
     if is_datetime64_any_dtype(column):
         column_datetime = pd.to_datetime(column, errors="ignore")
         return column_datetime.apply(lambda x: convert_date_str(x, formatPattern))
 
-    column_numeric: pd.Series = None
+    column_numeric: pd.Series | None = None
     if is_numeric_dtype(column):
         column_numeric = pd.to_numeric(column, errors="ignore")
     if column_numeric is not None and is_numeric_dtype(column_numeric):

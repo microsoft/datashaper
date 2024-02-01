@@ -4,7 +4,7 @@
 #
 """Common types used across the datashaper codebase."""
 
-from enum import Enum
+from enum import Enum, StrEnum
 from typing import Any, Union
 
 from dataclasses import dataclass, field
@@ -24,8 +24,7 @@ class Category:
     count: int
 
 
-@dataclass
-class DataType(Enum):
+class DataType(StrEnum):
     """Data type of a column."""
 
     Array = "array"
@@ -51,7 +50,7 @@ class Step:
     args: dict[str, Any] = field(default_factory=dict)
 
 
-class JoinStrategy(Enum):
+class JoinStrategy(StrEnum):
     """Table join strategies."""
 
     Inner = "inner"
@@ -70,7 +69,7 @@ class InputColumnArgs:
     column: str
 
 
-class FieldAggregateOperation(Enum):
+class FieldAggregateOperation(StrEnum):
     """Aggregate operations for fields."""
 
     Any = "any"
@@ -92,7 +91,7 @@ class FieldAggregateOperation(Enum):
     ArrayAggDistinct = "array_agg_distinct"
 
 
-class BinStrategy(Enum):
+class BinStrategy(StrEnum):
     """Binning strategy to use for the binning operation."""
 
     Auto = "auto"
@@ -106,14 +105,14 @@ class BinStrategy(Enum):
     FixedWidth = "fixed width"
 
 
-class FilterCompareType(Enum):
+class FilterCompareType(StrEnum):
     """Filter compare type."""
 
     Value = "value"
     Column = "column"
 
 
-class NumericComparisonOperator(Enum):
+class NumericComparisonOperator(StrEnum):
     """Numeric comparison operators."""
 
     Equals = "="
@@ -126,7 +125,7 @@ class NumericComparisonOperator(Enum):
     IsNotEmpty = "is not empty"
 
 
-class StringComparisonOperator(Enum):
+class StringComparisonOperator(StrEnum):
     """String comparison operators."""
 
     Equals = "equals"
@@ -139,7 +138,7 @@ class StringComparisonOperator(Enum):
     RegularExpression = "regex"
 
 
-class BooleanComparisonOperator(Enum):
+class BooleanComparisonOperator(StrEnum):
     """Boolean comparison operators."""
 
     Equals = "equals"
@@ -161,7 +160,7 @@ class Criterion:
     ]
 
 
-class BooleanLogicalOperator(Enum):
+class BooleanLogicalOperator(StrEnum):
     """Boolean logical operators."""
 
     OR = "or"
@@ -180,7 +179,7 @@ class FilterArgs(InputColumnArgs):
     logical: BooleanLogicalOperator = BooleanLogicalOperator.OR
 
 
-class SetOp(Enum):
+class SetOp(StrEnum):
     """Set operations for the difference and intersect verbs."""
 
     Concat = "concat"
@@ -189,7 +188,7 @@ class SetOp(Enum):
     Except = "except"
 
 
-class MathOperator(Enum):
+class MathOperator(StrEnum):
     """Mathematical operators."""
 
     Add = "+"
@@ -199,14 +198,14 @@ class MathOperator(Enum):
     Concatenate = "concat"
 
 
-class SortDirection(Enum):
+class SortDirection(StrEnum):
     """Sort direction for order by."""
 
     Ascending = "asc"
     Descending = "desc"
 
 
-class ParseType(Enum):
+class ParseType(StrEnum):
     """ParseType is used to specify the type of a column."""
 
     Boolean = "boolean"
@@ -216,7 +215,7 @@ class ParseType(Enum):
     String = "string"
 
 
-class MergeStrategy(Enum):
+class MergeStrategy(StrEnum):
     """Merge strategy for merge verb."""
 
     FirstOneWins = "first one wins"
@@ -225,7 +224,7 @@ class MergeStrategy(Enum):
     CreateArray = "array"
 
 
-class WindowFunction(Enum):
+class WindowFunction(StrEnum):
     """Windowing functions for window verb."""
 
     RowNumber = "row_number"

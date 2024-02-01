@@ -38,23 +38,23 @@ class WorkflowCallbacks(Protocol):
     def on_error(
         self,
         message: str,
-        cause: Exception | None = None,
-        stack: str | None = None,
-        details: dict[str, Any] | None = None,
+        cause: Optional[Exception] = None,
+        stack: Optional[str] = None,
+        details: Optional[dict] = None,
     ) -> None:
         """A call back handler for when an error occurs."""
         ...
 
-    def on_warning(self, message: str, details: dict[str, Any] | None = None) -> None:
+    def on_warning(self, message: str, details: Optional[dict] = None) -> None:
         """A call back handler for when a warning occurs."""
         ...
 
-    def on_log(self, message: str, details: dict[str, Any] | None = None) -> None:
+    def on_log(self, message: str, details: Optional[dict] = None) -> None:
         """A call back handler for when a log message occurs."""
         ...
 
     def on_measure(
-        self, name: str, value: float, details: dict[str, Any] | None = None
+        self, name: str, value: float, details: Optional[dict] = None
     ) -> None:
         """A call back handler for when a measurement occurs."""
         ...
