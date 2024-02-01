@@ -11,7 +11,7 @@ from typing import Callable, Dict, Optional, Union
 import numpy as np
 import pandas as pd
 
-from pandas.api.types import is_bool_dtype, is_numeric_dtype, is_datetime64_any_dtype
+from pandas.api.types import is_bool_dtype, is_datetime64_any_dtype, is_numeric_dtype
 
 from datashaper.engine.types import ParseType
 from datashaper.engine.verbs.verb_input import VerbInput
@@ -65,7 +65,7 @@ def convert_date_str(value: datetime, formatPattern: str) -> Union[str, float]:
 def to_str(column: pd.Series, formatPattern: str) -> pd.Series:
     column_datetime: pd.Series = None
     if is_datetime64_any_dtype(column):
-        column_datetime = pd.to_datetime(column, errors='ignore')
+        column_datetime = pd.to_datetime(column, errors="ignore")
         return column_datetime.apply(lambda x: convert_date_str(x, formatPattern))
 
     column_numeric: pd.Series = None
