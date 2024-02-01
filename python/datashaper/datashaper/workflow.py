@@ -325,9 +325,7 @@ class Workflow(Generic[Context]):
             # execute the verb
             try:
                 inputs = self._resolve_inputs(node.verb, node.node_input)
-                verb_context = Workflow.__resolve_run_context(
-                    node, context, callbacks
-                )
+                verb_context = Workflow.__resolve_run_context(node, context, callbacks)
                 callbacks.on_step_start(node, inputs)
                 callbacks.on_step_progress(Progress(percent=0))
                 result = node.verb.func(**node.args, **inputs, **verb_context)
