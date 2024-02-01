@@ -10,7 +10,7 @@ class VerbCallbacks(Protocol):
         "Report a progress update from the verb execution"
         ...
 
-    def on_error(
+    def error(
         self,
         message: str,
         cause: Exception | None = None,
