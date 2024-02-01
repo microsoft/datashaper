@@ -11,6 +11,7 @@ on:
       - "**/*.mjs"
       - "**/*.cjs"
       - "**/*.json"
+      - "yarn.lock"
       - .github/workflows/javascript-ci.yml
 jobs:
   build:
