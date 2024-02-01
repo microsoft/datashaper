@@ -202,7 +202,7 @@ class Workflow(Generic[Context]):
         workflow_callbacks: WorkflowCallbacks,
     ) -> dict[str, Any]:
         """Injects the run context into the workflow steps."""
-        verb_callbacks = DelegatingVerbCallbacks(workflow_callbacks)
+        callbacks = DelegatingVerbCallbacks(workflow_callbacks)
 
         def argument_names(fn):
             return inspect.getfullargspec(fn).args
@@ -221,8 +221,8 @@ class Workflow(Generic[Context]):
             run_ctx["context"] = context
 
         # Pass in the verb callbacks
-        if "verb_callbacks" in verb_args and "verb_callbacks" not in exec_node.args:
-            run_ctx["verb_callbacks"] = verb_callbacks
+        if "callbacks" in verb_args and "callbacks" not in exec_node.args:
+            run_ctx["callbacks"] = callbacks
 
         return run_ctx
 
@@ -294,20 +294,21 @@ class Workflow(Generic[Context]):
     def run(
         self,
         context: Optional[Context] = None,
-        options: WorkflowOptions = WorkflowOptions(),
-        workflow_callbacks: WorkflowCallbacks = None,
+        options: WorkflowOptions = None,
+        callbacks: WorkflowCallbacks = None,
     ) -> WorkflowRunResult:
         """Run the execution graph."""
         visited: set[str] = set()
         nodes: list[ExecutionNode] = []
-        workflow_callbacks = workflow_callbacks or WorkflowCallbacks()
+        callbacks = callbacks or WorkflowCallbacks()
+        options = options or WorkflowOptions()
         profiler: MemoryProfilingWorkflowCallbacks | None = None
 
         if options.memory_profile:
-            profiler = MemoryProfilingWorkflowCallbacks(workflow_callbacks)
-            workflow_callbacks = profiler
+            profiler = MemoryProfilingWorkflowCallbacks(callbacks)
+            callbacks = profiler
 
-        workflow_callbacks.on_workflow_start()
+        callbacks.on_workflow_start()
         for node_key in self._graph.keys():
             if self._check_inputs(node_key, visited):
                 nodes.append(node_key)
@@ -325,18 +326,18 @@ class Workflow(Generic[Context]):
             try:
                 inputs = self._resolve_inputs(node.verb, node.node_input)
                 verb_context = Workflow.__resolve_run_context(
-                    node, context, workflow_callbacks
+                    node, context, callbacks
                 )
-                workflow_callbacks.on_step_start(node, inputs)
-                workflow_callbacks.on_step_progress(Progress(percent=0))
+                callbacks.on_step_start(node, inputs)
+                callbacks.on_step_progress(Progress(percent=0))
                 result = node.verb.func(**node.args, **inputs, **verb_context)
             except Exception as e:
                 message = f'Error executing verb "{verb_name}" in {self.name}: {e}'
-                workflow_callbacks.on_error(message, e, traceback.format_exc())
+                callbacks.on_error(message, e, traceback.format_exc())
                 raise e
             finally:
-                workflow_callbacks.on_step_progress(Progress(percent=1))
-                workflow_callbacks.on_step_end(node, None)
+                callbacks.on_step_progress(Progress(percent=1))
+                callbacks.on_step_end(node, None)
 
             if inspect.iscoroutine(result):
                 result = asyncio.run(result)
@@ -364,7 +365,7 @@ class Workflow(Generic[Context]):
                 if not self._check_inputs(node_id, visited):
                     raise ValueError(f"Missing inputs for node {node_id}!")
 
-        workflow_callbacks.on_workflow_end()
+        callbacks.on_workflow_end()
         memory_profile: MemoryProfile | None = None
         if profiler is not None:
             memory_profile = MemoryProfile(

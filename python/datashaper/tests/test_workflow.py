@@ -450,14 +450,14 @@ def create_async_verb():
 
 
 def create_parallel_transforming_verb():
-    def transform(input: VerbInput, verb_callbacks: VerbCallbacks):
+    def transform(input: VerbInput, callbacks: VerbCallbacks):
         def transform_row(row: pd.Series):
             items = [1, 2, 3]
-            progress_iterable(items, verb_callbacks.progress)
+            progress_iterable(items, callbacks.progress)
             row["b"] = row["a"] + 1
             return row
 
-        results = derive_from_rows(input.get_input(), transform_row, verb_callbacks)
+        results = derive_from_rows(input.get_input(), transform_row, callbacks)
 
         return TableContainer(table=pd.DataFrame(results))
 
@@ -465,11 +465,11 @@ def create_parallel_transforming_verb():
 
 
 def create_parallel_transforming_verb_throwing():
-    def transform(input: VerbInput, verb_callbacks: VerbCallbacks):
+    def transform(input: VerbInput, callbacks: VerbCallbacks):
         def transform_row(row: pd.Series):
             raise ValueError("oh no, this should be expected")
 
-        results = derive_from_rows(input.get_input(), transform_row, verb_callbacks)
+        results = derive_from_rows(input.get_input(), transform_row, callbacks)
 
         return TableContainer(table=pd.DataFrame(results))
 
@@ -480,19 +480,19 @@ def create_context_consuming_verb():
     def context_verb(
         input: TableContainer,
         context: PipelineRunContext,
-        verb_callbacks: VerbCallbacks,
+        callbacks: VerbCallbacks,
         a: int,
         b: int,
     ):
         assert context is not None
         assert a is not None
         assert b is not None
-        assert verb_callbacks is not None
-        verb_callbacks.error("test error")
-        verb_callbacks.warning("test warning")
-        verb_callbacks.log("test log")
-        verb_callbacks.progress(Progress(percent=0.5, description="test progress"))
-        verb_callbacks.progress(Progress(percent=0.7))
+        assert callbacks is not None
+        callbacks.error("test error")
+        callbacks.warning("test warning")
+        callbacks.log("test log")
+        callbacks.progress(Progress(percent=0.5, description="test progress"))
+        callbacks.progress(Progress(percent=0.7))
         return TableContainer(table=input.get_input())
 
     return context_verb
