@@ -20,17 +20,17 @@ import pandas as pd
 from jsonschema import validate as validate_schema
 
 from datashaper.engine.verbs import VerbDetails, VerbInput, VerbManager
-from datashaper.execution import ExecutionNode
+from datashaper.execution.execution_node import ExecutionNode
 from datashaper.progress.types import Progress
 from datashaper.table_store import Table, TableContainer
-from datashaper.types import (
-    DelegatingVerbCallbacks,
-    MemoryProfile,
+
+from .types import MemoryProfile, VerbTiming, WorkflowOptions, WorkflowRunResult
+from .verb_callbacks import DelegatingVerbCallbacks
+from .workflow_callbacks import (
+    EnsuringWorkflowCallbacks,
     MemoryProfilingWorkflowCallbacks,
-    VerbTiming,
+    NoopWorkflowCallbacks,
     WorkflowCallbacks,
-    WorkflowOptions,
-    WorkflowRunResult,
 )
 
 
@@ -300,7 +300,8 @@ class Workflow(Generic[Context]):
         """Run the execution graph."""
         visited: set[str] = set()
         nodes: list[ExecutionNode] = []
-        callbacks = callbacks or WorkflowCallbacks()
+        # Use the ensuring variant to guarantee that all protocol methods are available
+        callbacks = EnsuringWorkflowCallbacks(callbacks or NoopWorkflowCallbacks())
         options = options or WorkflowOptions()
         profiler: MemoryProfilingWorkflowCallbacks | None = None
 

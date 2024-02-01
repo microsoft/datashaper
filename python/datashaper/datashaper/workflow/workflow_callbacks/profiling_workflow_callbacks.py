@@ -7,8 +7,8 @@ from typing import Any
 
 import pandas as pd
 
-from ..execution.execution_node import ExecutionNode
-from ..table_store import TableContainer
+from ...execution.execution_node import ExecutionNode
+from ...table_store import TableContainer
 from .workflow_callbacks import WorkflowCallbacks
 
 
@@ -43,7 +43,7 @@ class MemoryProfilingWorkflowCallbacks(WorkflowCallbacks):
         _, self._peak_start_workflow = tracemalloc.get_traced_memory()
         self._snapshots["all"].append(tracemalloc.take_snapshot())
         self._workflow_start = time.time()
-        super().on_workflow_start()
+        self._delegate.on_workflow_start()
 
     def on_step_start(self, node: ExecutionNode, inputs: dict[str, Any]) -> None:
         """Call when a step starts."""
@@ -51,7 +51,7 @@ class MemoryProfilingWorkflowCallbacks(WorkflowCallbacks):
         self._snapshots[node.verb.name].append(tracemalloc.take_snapshot())
         _, self._peak_start_verb = tracemalloc.get_traced_memory()
         self._verb_start = time.time()
-        super().on_step_start(node, inputs)
+        self._delegate.on_step_start(node, inputs)
 
     def on_step_end(self, node: ExecutionNode, result: TableContainer | None) -> None:
         """Call when a step ends."""
@@ -61,7 +61,7 @@ class MemoryProfilingWorkflowCallbacks(WorkflowCallbacks):
         # Get peak recorded during verb execution
         _, peak = tracemalloc.get_traced_memory()
         self._peak_memory[node.verb.name].append(peak - self._peak_start_verb)
-        super().on_step_end(node, result)
+        self._delegate.on_step_end(node, result)
 
     def on_workflow_end(self) -> None:
         """Call when the workflow ends."""
@@ -71,7 +71,7 @@ class MemoryProfilingWorkflowCallbacks(WorkflowCallbacks):
         _, peak = tracemalloc.get_traced_memory()
         self._peak_memory["all"].append(peak - self._peak_start_workflow)
         tracemalloc.stop()
-        super().on_workflow_end()
+        self._delegate.on_workflow_end()
 
     def get_snapshot_stats(self, sort_by="max"):
         """Get the snapshot stats."""

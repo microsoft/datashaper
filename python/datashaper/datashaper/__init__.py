@@ -54,14 +54,16 @@ from .table_store import (
     TableContainer,
     TableMetadata,
 )
-from .types import (
+from .workflow import (
+    DEFAULT_INPUT_NAME,
     MemoryProfile,
+    VerbCallbacks,
     VerbTiming,
+    Workflow,
     WorkflowCallbacks,
     WorkflowOptions,
     WorkflowRunResult,
 )
-from .workflow import DEFAULT_INPUT_NAME, Workflow
 
 
 __all__ = [
@@ -107,12 +109,12 @@ __all__ = [
     # Workflow Exports
     "Workflow",
     "DEFAULT_INPUT_NAME",
-    # Workflow Types
     "WorkflowOptions",
     "WorkflowCallbacks",
     "WorkflowRunResult",
     "VerbTiming",
     "MemoryProfile",
+    "VerbCallbacks",
     # Tablestore Exports
     "ColumnStats",
     "ColumnMetadata",
