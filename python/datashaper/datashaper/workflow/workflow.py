@@ -12,7 +12,7 @@ import time
 import traceback
 
 from collections import OrderedDict, defaultdict
-from typing import Any, Callable, Generic, Optional, TypeVar
+from typing import Any, Callable, Generic, Iterable, Optional, TypeVar
 from uuid import uuid4
 
 import pandas as pd
@@ -28,7 +28,6 @@ from .types import MemoryProfile, VerbTiming, WorkflowRunResult
 from .verb_callbacks import DelegatingVerbCallbacks
 from .workflow_callbacks import (
     MemoryProfilingWorkflowCallbacks,
-    NoopWorkflowCallbacks,
     WorkflowCallbacks,
     WorkflowCallbacksRegistry,
 )
@@ -48,7 +47,7 @@ class Workflow(Generic[Context]):
     _schema: dict[str, Any]
     _inputs: dict[str, TableContainer]
     _graph: dict[str, ExecutionNode]
-    _dependency_graph: dict[str, set]
+    _dependency_graph: dict[str, set[str]]
     _last_step_id: str
     _dependencies: set[str]
     _memory_profile: bool
@@ -301,13 +300,13 @@ class Workflow(Generic[Context]):
     def run(
         self,
         context: Optional[Context] = None,
-        callbacks: WorkflowCallbacks = None,
+        callbacks: Optional[WorkflowCallbacks] = None,
     ) -> WorkflowRunResult:
         """Run the execution graph."""
         visited: set[str] = set()
-        nodes: list[ExecutionNode] = []
+        nodes: list[str] = []
 
-        def enqueue_available_nodes(possible_nodes: list[str]) -> None:
+        def enqueue_available_nodes(possible_nodes: Iterable[str]) -> None:
             for possible_node in possible_nodes:
                 if self._check_inputs(possible_node, visited):
                     nodes.append(possible_node)
