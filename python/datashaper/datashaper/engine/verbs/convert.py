@@ -64,7 +64,6 @@ def convert_date_str(value: datetime, formatPattern: str) -> Union[str, float]:
 
 def to_str(column: pd.Series, formatPattern: str) -> pd.Series:
     column_datetime: pd.Series = None
-    print(column.dtype)
     if is_datetime64_any_dtype(column):
         column_datetime = pd.to_datetime(column, errors='ignore')
         return column_datetime.apply(lambda x: convert_date_str(x, formatPattern))
