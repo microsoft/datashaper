@@ -293,7 +293,7 @@ class Workflow(Generic[Context]):
         container: Optional[TableContainer] = self._graph[id].result
         if container is None:
             raise Exception(
-                f"Value not calculated yet. {self.name}: {self._graph[id].verb.__name__} ."
+                f"Value not calculated yet. {self.name}: {self._graph[id].verb.name} ."
             )
         else:
             return container.table
