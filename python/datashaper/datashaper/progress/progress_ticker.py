@@ -1,37 +1,34 @@
-from datashaper.progress.types import (
-    ProgressStatus,
-    ProgressTicker,
-    StatusReportHandler,
-)
+from datashaper.progress.types import Progress, ProgressHandler
 
 
-def progress_ticker(
-    progress: StatusReportHandler | None, num_total: int
-) -> ProgressTicker:
-    """Create a progress-reporting function given a target number of items.
+class ProgressTicker:
+    """A class that emits progress reports incrementally."""
 
-    Every time the returned function is called, the progress handler will be called with the current progress.
-    """
-    num_complete = 0
-    if progress is not None:
-        progress(
-            ProgressStatus(
-                total_items=num_total,
-                completed_items=0,
-            )
-        )
+    _callback: ProgressHandler | None
+    _num_total: int
+    _num_complete: int
 
-    def ticker(num_ticks: int = 1) -> None:
-        nonlocal num_complete
+    def __init__(self, callback: ProgressHandler | None, num_total: int):
+        self._callback = callback
+        self._num_total = num_total
+        self._num_complete = 0
 
-        num_complete += num_ticks
-
-        if progress is not None:
-            progress(
-                ProgressStatus(
-                    total_items=num_total,
-                    completed_items=num_complete,
+    def __call__(self, num_ticks: int = 1) -> None:
+        self._num_complete += num_ticks
+        if self._callback is not None:
+            self._callback(
+                Progress(
+                    total_items=self._num_total, completed_items=self._num_complete
                 )
             )
 
-    return ticker
+    def done(self) -> None:
+        if self._callback is not None:
+            self._callback(
+                Progress(total_items=self._num_total, completed_items=self._num_total)
+            )
+
+
+def progress_ticker(callback: ProgressHandler | None, num_total: int) -> ProgressTicker:
+    """Create a progress ticker."""
+    return ProgressTicker(callback, num_total)

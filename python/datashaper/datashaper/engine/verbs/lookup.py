@@ -2,9 +2,6 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-
-from typing import List
-
 import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
@@ -15,8 +12,8 @@ from datashaper.table_store import TableContainer
 @verb(name="lookup", treats_input_tables_as_immutable=True)
 def lookup(
     input: VerbInput,
-    columns: List[str],
-    on: List[str] = None,
+    columns: list[str],
+    on: list[str] = None,
 ):
     input_table: pd.DataFrame = input.get_input()
     other_table: pd.DataFrame = input.get_others()[0]

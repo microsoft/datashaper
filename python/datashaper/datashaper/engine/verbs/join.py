@@ -2,9 +2,6 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-
-from typing import List
-
 import pandas as pd
 
 from datashaper.engine.types import JoinStrategy
@@ -43,7 +40,7 @@ def __clean_result(strategy: JoinStrategy, result: pd.DataFrame, source: pd.Data
 @verb(name="join", treats_input_tables_as_immutable=True)
 def join(
     input: VerbInput,
-    on: List[str] = None,
+    on: list[str] = None,
     strategy: str = "inner",
 ):
     join_strategy = JoinStrategy(strategy)

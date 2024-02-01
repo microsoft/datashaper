@@ -1,7 +1,7 @@
 from typing import Iterable, TypeVar
 
-from datashaper.progress.progress_ticker import progress_ticker
-from datashaper.progress.types import StatusReportHandler
+from datashaper.progress.progress_ticker import ProgressTicker
+from datashaper.progress.types import ProgressHandler
 
 
 T = TypeVar("T")
@@ -9,7 +9,7 @@ T = TypeVar("T")
 
 def progress_iterable(
     iterable: Iterable[T],
-    progress: StatusReportHandler | None,
+    progress: ProgressHandler | None,
     num_total: int | None = None,
 ) -> Iterable[T]:
     """Wrap an iterable with a progress handler. Every time an item is yielded, the progress handler will be called with the current progress."""
@@ -17,7 +17,7 @@ def progress_iterable(
     if num_total is None:
         num_total = len(list(iterable))
 
-    tick = progress_ticker(progress, num_total)
+    tick = ProgressTicker(progress, num_total)
 
     for item in iterable:
         tick(1)

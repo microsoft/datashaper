@@ -2,9 +2,6 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-
-from typing import List
-
 from datashaper.engine.pandas import aggregate_operation_mapping
 from datashaper.engine.types import FieldAggregateOperation
 from datashaper.engine.verbs.verb_input import VerbInput
@@ -14,7 +11,7 @@ from datashaper.table_store import TableContainer
 
 @verb(name="aggregate", treats_input_tables_as_immutable=True)
 def aggregate(
-    input: VerbInput, to: str, groupby: List[str], column: str, operation: str
+    input: VerbInput, to: str, groupby: list[str], column: str, operation: str
 ) -> TableContainer:
     aggregate_operation = FieldAggregateOperation(operation)
     input_table = input.get_input()

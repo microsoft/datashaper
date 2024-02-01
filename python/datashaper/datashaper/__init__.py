@@ -40,14 +40,9 @@ from .execution import (
     parallelize,
 )
 from .progress import (
-    ConsoleStatusReporter,
-    FileStatusReporter,
-    NoopStatusReporter,
-    ProgressStatus,
+    Progress,
+    ProgressHandler,
     ProgressTicker,
-    StatusReporter,
-    StatusReportHandler,
-    VerbStatusReporter,
     progress_callback,
     progress_iterable,
     progress_ticker,
@@ -59,8 +54,15 @@ from .table_store import (
     TableContainer,
     TableMetadata,
 )
-from .types import VerbTiming, WorkflowCallbacks, WorkflowRunResult
-from .workflow import DEFAULT_INPUT_NAME, Workflow
+from .workflow import (
+    DEFAULT_INPUT_NAME,
+    MemoryProfile,
+    VerbCallbacks,
+    VerbTiming,
+    Workflow,
+    WorkflowCallbacks,
+    WorkflowRunResult,
+)
 
 
 __all__ = [
@@ -106,10 +108,11 @@ __all__ = [
     # Workflow Exports
     "Workflow",
     "DEFAULT_INPUT_NAME",
-    # Workflow Types
     "WorkflowCallbacks",
     "WorkflowRunResult",
     "VerbTiming",
+    "MemoryProfile",
+    "VerbCallbacks",
     # Tablestore Exports
     "ColumnStats",
     "ColumnMetadata",
@@ -120,12 +123,7 @@ __all__ = [
     "progress_callback",
     "progress_iterable",
     "progress_ticker",
-    "ConsoleStatusReporter",
-    "FileStatusReporter",
-    "NoopStatusReporter",
-    "StatusReporter",
-    "VerbStatusReporter",
-    "StatusReportHandler",
+    "ProgressHandler",
     "ProgressTicker",
-    "ProgressStatus",
+    "Progress",
 ]

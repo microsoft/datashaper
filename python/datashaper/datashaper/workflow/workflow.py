@@ -20,19 +20,17 @@ import pandas as pd
 from jsonschema import validate as validate_schema
 
 from datashaper.engine.verbs import VerbDetails, VerbInput, VerbManager
-from datashaper.execution import ExecutionNode
-from datashaper.progress.reporters import (
-    NoopStatusReporter,
-    StatusReporter,
-    VerbStatusReporter,
-)
-from datashaper.progress.types import ProgressStatus, StatusReportHandler
+from datashaper.execution.execution_node import ExecutionNode
+from datashaper.progress.types import Progress
 from datashaper.table_store import Table, TableContainer
-from datashaper.types import (
+
+from .types import MemoryProfile, VerbTiming, WorkflowRunResult
+from .verb_callbacks import DelegatingVerbCallbacks
+from .workflow_callbacks import (
+    EnsuringWorkflowCallbacks,
+    MemoryProfilingWorkflowCallbacks,
     NoopWorkflowCallbacks,
-    VerbTiming,
     WorkflowCallbacks,
-    WorkflowRunResult,
 )
 
 
@@ -44,10 +42,6 @@ Context = TypeVar("Context")
 DEFAULT_INPUT_NAME = "datasource"
 
 
-def _create_default_verb_status_reporter(name: str) -> StatusReportHandler:
-    return lambda progress: None
-
-
 class Workflow(Generic[Context]):
     """A data processing graph."""
 
@@ -57,6 +51,7 @@ class Workflow(Generic[Context]):
     _dependency_graph: dict[str, set]
     _last_step_id: str
     _dependencies: set[str]
+    _memory_profile: bool
 
     """Externals that this workflow depends on"""
 
@@ -65,11 +60,11 @@ class Workflow(Generic[Context]):
         schema: dict[str, Any],
         input_path: Optional[str] = None,
         input_tables: Optional[dict[str, pd.DataFrame]] = None,
-        schema_path: Optional[str] = SCHEMA_FILE,
+        schema_path: Optional[str] = None,
         verbs: Optional[dict[str, Callable]] = None,
-        # TODO: the current schema definition does not work in Python
-        validate: bool = False,
-        default_input: Optional[str] = DEFAULT_INPUT_NAME,
+        validate: Optional[bool] = False,
+        default_input: Optional[str] = None,
+        memory_profile: Optional[bool] = False,
     ):
         """Create an execution graph from the Dict provided in workflow.
 
@@ -89,13 +84,17 @@ class Workflow(Generic[Context]):
         :param default_input: Optional value, the default input for the first step.
         :type default_input: str, optional
         """
+        schema_path = schema_path or SCHEMA_FILE
+        default_input = default_input or DEFAULT_INPUT_NAME
         self._schema = schema
+        self._memory_profile = memory_profile
         self._dependencies = self._compute_dependencies()
         self._dependency_graph = defaultdict(set)
         self._graph = OrderedDict()
         self._inputs = {}
 
         # Perform JSON-schema validation
+        # TODO: the current schema definition does not work in Python
         if validate and schema_path is not None:
             with open(schema_path) as schema_file:
                 schema_json = json.load(schema_file)
@@ -205,16 +204,16 @@ class Workflow(Generic[Context]):
     def __resolve_run_context(
         exec_node: ExecutionNode,
         context: Optional[Context],
-        reporter: VerbStatusReporter,
+        workflow_callbacks: WorkflowCallbacks,
     ) -> dict[str, Any]:
         """Injects the run context into the workflow steps."""
+        callbacks = DelegatingVerbCallbacks(workflow_callbacks)
 
         def argument_names(fn):
             return inspect.getfullargspec(fn).args
 
         verb_args = argument_names(exec_node.verb.func)
         run_ctx: dict[str, Any] = {}
-        progress: StatusReportHandler = lambda progress: reporter.progress(progress)
 
         # Pass in individual context items
         if context is not None:
@@ -226,13 +225,9 @@ class Workflow(Generic[Context]):
         if "context" in verb_args and "context" not in exec_node.args:
             run_ctx["context"] = context
 
-        # Pass in the verb reporter
-        if "reporter" in verb_args and "reporter" not in exec_node.args:
-            run_ctx["reporter"] = reporter
-
-        # Pass in the progress
-        if "progress" in verb_args and "progress" not in exec_node.args:
-            run_ctx["progress"] = progress
+        # Pass in the verb callbacks
+        if "callbacks" in verb_args and "callbacks" not in exec_node.args:
+            run_ctx["callbacks"] = callbacks
 
         return run_ctx
 
@@ -304,88 +299,98 @@ class Workflow(Generic[Context]):
     def run(
         self,
         context: Optional[Context] = None,
-        status_reporter: Optional[StatusReporter] = NoopStatusReporter(),
-        create_verb_progress_reporter: Optional[
-            Callable[[str], StatusReportHandler]
-        ] = _create_default_verb_status_reporter,
-        workflow_callbacks: WorkflowCallbacks = None,
+        callbacks: WorkflowCallbacks = None,
     ) -> WorkflowRunResult:
         """Run the execution graph."""
         visited: set[str] = set()
         nodes: list[ExecutionNode] = []
 
-        if workflow_callbacks is None:
-            workflow_callbacks = NoopWorkflowCallbacks()
+        def enqueue_available_nodes(possible_nodes: list[str]) -> None:
+            for possible_node in possible_nodes:
+                if self._check_inputs(possible_node, visited):
+                    nodes.append(possible_node)
 
-        workflow_callbacks.on_workflow_start()
+        def assert_all_visited() -> None:
+            for node_id in self._graph.keys():
+                if node_id not in visited:
+                    if not self._check_inputs(node_id, visited):
+                        raise ValueError(f"Missing inputs for node {node_id}!")
 
-        for node_key in self._graph.keys():
-            if self._check_inputs(node_key, visited):
-                nodes.append(node_key)
+        # Use the ensuring variant to guarantee that all protocol methods are available
+        callbacks, profiler = self._get_workflow_callbacks(callbacks)
+        callbacks.on_workflow_start()
+        enqueue_available_nodes(self._graph.keys())
 
         verb_idx = 0
-
         verb_timings: list[VerbTiming] = []
-
         while len(nodes) > 0:
             current_id = nodes.pop(0)
             node = self._graph[current_id]
-            verb_name = node.verb.name
-
-            # set up verb progress reporter
-            progress = create_verb_progress_reporter(f"verb: {verb_name}")
-            verb_reporter = VerbStatusReporter(
-                f"{self.name}.{verb_name}.{verb_idx}", status_reporter, progress
-            )
-            progress(ProgressStatus(progress=0))
-            start_verb_time = time.time()
-
-            # execute the verb
-            try:
-                inputs = self._resolve_inputs(node.verb, node.node_input)
-                verb_context = Workflow.__resolve_run_context(
-                    node, context, verb_reporter
-                )
-                workflow_callbacks.on_step_start(node, inputs)
-                result = node.verb.func(**node.args, **inputs, **verb_context)
-            except Exception as e:
-                message = f'Error executing verb "{verb_name}" in {self.name}: {e}'
-                status_reporter.error(message, traceback.format_exc())
-                workflow_callbacks.on_step_end(node, None)
-                raise e
-
-            if inspect.iscoroutine(result):
-                result = asyncio.run(result)
-
-            # Record Verb Timing
+            timing = self._execute_verb(node, context, callbacks)
             verb_timings.append(
                 VerbTiming(
                     id=node.node_id,
-                    verb=verb_name,
+                    verb=node.verb.name,
                     index=verb_idx,
-                    timing=time.time() - start_verb_time,
+                    timing=timing,
                 )
             )
 
-            progress(ProgressStatus(progress=1))
-            node.result = result
-
-            workflow_callbacks.on_step_end(node, result)
-
             # move to the next verb
             visited.add(current_id)
-            for possible in self._dependency_graph[current_id]:
-                if self._check_inputs(possible, visited):
-                    nodes.append(possible)
+            enqueue_available_nodes(self._dependency_graph[current_id])
             verb_idx += 1
 
-        for node_id in self._graph.keys():
-            if node_id not in visited:
-                if not self._check_inputs(node_id, visited):
-                    raise ValueError(f"Missing inputs for node {node_id}!")
+        assert_all_visited()
+        callbacks.on_workflow_end()
 
-        workflow_callbacks.on_workflow_end()
-        return WorkflowRunResult(verb_timings=verb_timings)
+        return WorkflowRunResult(
+            verb_timings=verb_timings, memory_profile=_get_memory_profile(profiler)
+        )
+
+    def _execute_verb(
+        self,
+        node: ExecutionNode,
+        context: Optional[Context],
+        callbacks: WorkflowCallbacks,
+    ) -> float:
+        start_verb_time = time.time()
+
+        result = None
+        try:
+            inputs = self._resolve_inputs(node.verb, node.node_input)
+            verb_context = Workflow.__resolve_run_context(node, context, callbacks)
+            callbacks.on_step_start(node, inputs)
+            callbacks.on_step_progress(Progress(percent=0))
+            result = node.verb.func(**node.args, **inputs, **verb_context)
+        except Exception as e:
+            message = f'Error executing verb "{node.verb.name}" in {self.name}: {e}'
+            callbacks.on_error(message, e, traceback.format_exc())
+            raise e
+        finally:
+            callbacks.on_step_progress(Progress(percent=1))
+            callbacks.on_step_end(node, None)
+
+        if inspect.iscoroutine(result):
+            result = asyncio.run(result)
+
+        node.result = result
+
+        # Return verb timing
+        return time.time() - start_verb_time
+
+    def _get_workflow_callbacks(
+        self, callbacks: WorkflowCallbacks
+    ) -> tuple[WorkflowCallbacks, MemoryProfilingWorkflowCallbacks | None]:
+        # Use the ensuring variant to guarantee that all protocol methods are available
+        callbacks = EnsuringWorkflowCallbacks(callbacks or NoopWorkflowCallbacks())
+        profiler: MemoryProfilingWorkflowCallbacks | None = None
+
+        if self._memory_profile:
+            profiler = MemoryProfilingWorkflowCallbacks(callbacks)
+            callbacks = profiler
+
+        return (callbacks, profiler)
 
     def export(self):
         """Export the graph into a workflow JSON object."""
@@ -401,3 +406,17 @@ class Workflow(Generic[Context]):
                 for step in self._graph.values()
             ],
         }
+
+
+def _get_memory_profile(
+    profile: MemoryProfilingWorkflowCallbacks | None,
+) -> MemoryProfile | None:
+    if profile is not None:
+        return MemoryProfile(
+            snapshot_stats=profile.get_snapshot_stats(),
+            peak_stats=profile.get_peak_stats(),
+            time_stats=profile.get_time_stats(),
+            detailed_view=profile.get_detailed_view(),
+        )
+    else:
+        return None
