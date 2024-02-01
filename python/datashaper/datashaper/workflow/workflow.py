@@ -104,12 +104,14 @@ class Workflow(Generic[Context]):
         if input_path is not None:
             for input in schema["input"]:
                 # TODO: support other file formats
-                csv_table = pd.read_csv(os.path.join(input_path, f"{input}.csv"))
+                csv_table = pd.read_csv(
+                    os.path.join(input_path, f"{input}.csv"), engine="pyarrow"
+                )
                 self.add_table(input, csv_table)
 
         if input_tables is not None:
             for input, table in input_tables.items():
-                self.add_table(input, table)
+                self.add_table(input, table.convert_dtypes(dtype_backend="pyarrow"))
 
         if verbs is not None:
             VerbManager.get().register_verbs(verbs, override_existing=True)
