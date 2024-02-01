@@ -304,6 +304,84 @@ class Workflow(Generic[Context]):
         """Run the execution graph."""
         visited: set[str] = set()
         nodes: list[ExecutionNode] = []
+
+        def enqueue_available_nodes(possible_nodes: list[str]) -> None:
+            for possible_node in possible_nodes:
+                if self._check_inputs(possible_node, visited):
+                    nodes.append(possible_node)
+
+        def assert_all_visited() -> None:
+            for node_id in self._graph.keys():
+                if node_id not in visited:
+                    if not self._check_inputs(node_id, visited):
+                        raise ValueError(f"Missing inputs for node {node_id}!")
+
+        # Use the ensuring variant to guarantee that all protocol methods are available
+        callbacks, profiler = self._get_workflow_callbacks(callbacks)
+        callbacks.on_workflow_start()
+        enqueue_available_nodes(self._graph.keys())
+
+        verb_idx = 0
+        verb_timings: list[VerbTiming] = []
+        while len(nodes) > 0:
+            current_id = nodes.pop(0)
+            node = self._graph[current_id]
+            timing = self._execute_verb(node, context, callbacks)
+            verb_timings.append(
+                VerbTiming(
+                    id=node.node_id,
+                    verb=node.verb.name,
+                    index=verb_idx,
+                    timing=timing,
+                )
+            )
+
+            # move to the next verb
+            visited.add(current_id)
+            enqueue_available_nodes(self._dependency_graph[current_id])
+            verb_idx += 1
+
+        assert_all_visited()
+        callbacks.on_workflow_end()
+
+        return WorkflowRunResult(
+            verb_timings=verb_timings, memory_profile=_get_memory_profile(profiler)
+        )
+
+    def _execute_verb(
+        self,
+        node: ExecutionNode,
+        context: Optional[Context],
+        callbacks: WorkflowCallbacks,
+    ) -> float:
+        start_verb_time = time.time()
+
+        result = None
+        try:
+            inputs = self._resolve_inputs(node.verb, node.node_input)
+            verb_context = Workflow.__resolve_run_context(node, context, callbacks)
+            callbacks.on_step_start(node, inputs)
+            callbacks.on_step_progress(Progress(percent=0))
+            result = node.verb.func(**node.args, **inputs, **verb_context)
+        except Exception as e:
+            message = f'Error executing verb "{node.verb.name}" in {self.name}: {e}'
+            callbacks.on_error(message, e, traceback.format_exc())
+            raise e
+        finally:
+            callbacks.on_step_progress(Progress(percent=1))
+            callbacks.on_step_end(node, None)
+
+        if inspect.iscoroutine(result):
+            result = asyncio.run(result)
+
+        node.result = result
+
+        # Return verb timing
+        return time.time() - start_verb_time
+
+    def _get_workflow_callbacks(
+        self, callbacks: WorkflowCallbacks
+    ) -> tuple[WorkflowCallbacks, MemoryProfilingWorkflowCallbacks | None]:
         # Use the ensuring variant to guarantee that all protocol methods are available
         callbacks = EnsuringWorkflowCallbacks(callbacks or NoopWorkflowCallbacks())
         profiler: MemoryProfilingWorkflowCallbacks | None = None
@@ -312,74 +390,7 @@ class Workflow(Generic[Context]):
             profiler = MemoryProfilingWorkflowCallbacks(callbacks)
             callbacks = profiler
 
-        callbacks.on_workflow_start()
-        for node_key in self._graph.keys():
-            if self._check_inputs(node_key, visited):
-                nodes.append(node_key)
-
-        verb_idx = 0
-        verb_timings: list[VerbTiming] = []
-
-        while len(nodes) > 0:
-            current_id = nodes.pop(0)
-            node = self._graph[current_id]
-            verb_name = node.verb.name
-            start_verb_time = time.time()
-
-            # execute the verb
-            try:
-                inputs = self._resolve_inputs(node.verb, node.node_input)
-                verb_context = Workflow.__resolve_run_context(node, context, callbacks)
-                callbacks.on_step_start(node, inputs)
-                callbacks.on_step_progress(Progress(percent=0))
-                result = node.verb.func(**node.args, **inputs, **verb_context)
-            except Exception as e:
-                message = f'Error executing verb "{verb_name}" in {self.name}: {e}'
-                callbacks.on_error(message, e, traceback.format_exc())
-                raise e
-            finally:
-                callbacks.on_step_progress(Progress(percent=1))
-                callbacks.on_step_end(node, None)
-
-            if inspect.iscoroutine(result):
-                result = asyncio.run(result)
-
-            # Record Verb Timing
-            verb_timings.append(
-                VerbTiming(
-                    id=node.node_id,
-                    verb=verb_name,
-                    index=verb_idx,
-                    timing=time.time() - start_verb_time,
-                )
-            )
-            node.result = result
-
-            # move to the next verb
-            visited.add(current_id)
-            for possible in self._dependency_graph[current_id]:
-                if self._check_inputs(possible, visited):
-                    nodes.append(possible)
-            verb_idx += 1
-
-        for node_id in self._graph.keys():
-            if node_id not in visited:
-                if not self._check_inputs(node_id, visited):
-                    raise ValueError(f"Missing inputs for node {node_id}!")
-
-        callbacks.on_workflow_end()
-        memory_profile: MemoryProfile | None = None
-        if profiler is not None:
-            memory_profile = MemoryProfile(
-                snapshot_stats=profiler.get_snapshot_stats(),
-                peak_stats=profiler.get_peak_stats(),
-                time_stats=profiler.get_time_stats(),
-                detailed_view=profiler.get_detailed_view(),
-            )
-
-        return WorkflowRunResult(
-            verb_timings=verb_timings, memory_profile=memory_profile
-        )
+        return (callbacks, profiler)
 
     def export(self):
         """Export the graph into a workflow JSON object."""
@@ -395,3 +406,17 @@ class Workflow(Generic[Context]):
                 for step in self._graph.values()
             ],
         }
+
+
+def _get_memory_profile(
+    profile: MemoryProfilingWorkflowCallbacks | None,
+) -> MemoryProfile | None:
+    if profile is not None:
+        return MemoryProfile(
+            snapshot_stats=profile.get_snapshot_stats(),
+            peak_stats=profile.get_peak_stats(),
+            time_stats=profile.get_time_stats(),
+            detailed_view=profile.get_detailed_view(),
+        )
+    else:
+        return None
