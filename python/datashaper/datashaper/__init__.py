@@ -50,9 +50,12 @@ from .progress import (
 from .table_store import (
     ColumnMetadata,
     ColumnStats,
+    DefaultTableStore,
+    DiskCacheTableStore,
     Table,
     TableContainer,
     TableMetadata,
+    TableStore,
 )
 from .workflow import (
     DEFAULT_INPUT_NAME,
@@ -119,6 +122,9 @@ __all__ = [
     "TableMetadata",
     "TableContainer",
     "Table",
+    "TableStore",
+    "DefaultTableStore",
+    "DiskCacheTableStore",
     # Progress Exports
     "progress_callback",
     "progress_iterable",

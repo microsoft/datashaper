@@ -22,7 +22,7 @@ from jsonschema import validate as validate_schema
 from datashaper.engine.verbs import VerbDetails, VerbInput, VerbManager
 from datashaper.execution.execution_node import ExecutionNode
 from datashaper.progress.types import Progress
-from datashaper.table_store import Table, TableContainer
+from datashaper.table_store import DefaultTableStore, Table, TableContainer, TableStore
 
 from .types import MemoryProfile, VerbTiming, WorkflowRunResult
 from .verb_callbacks import DelegatingVerbCallbacks
@@ -46,7 +46,7 @@ class Workflow(Generic[Context]):
     """A data processing graph."""
 
     _schema: dict[str, Any]
-    _inputs: dict[str, TableContainer]
+    _table_store: TableStore
     _graph: dict[str, ExecutionNode]
     _dependency_graph: dict[str, set]
     _last_step_id: str
@@ -58,6 +58,7 @@ class Workflow(Generic[Context]):
     def __init__(
         self,
         schema: dict[str, Any],
+        table_store: Optional[TableStore] = None,
         input_path: Optional[str] = None,
         input_tables: Optional[dict[str, pd.DataFrame]] = None,
         schema_path: Optional[str] = None,
@@ -91,7 +92,9 @@ class Workflow(Generic[Context]):
         self._dependencies = self._compute_dependencies()
         self._dependency_graph = defaultdict(set)
         self._graph = OrderedDict()
-        self._inputs = {}
+        self._table_store = (
+            table_store if table_store is not None else DefaultTableStore()
+        )
 
         # Perform JSON-schema validation
         # TODO: the current schema definition does not work in Python
@@ -237,7 +240,7 @@ class Workflow(Generic[Context]):
         node = self._graph[node_key]
         return all(
             [
-                input in visited or input in self._inputs
+                input in self._table_store.list()
                 for input in Workflow.__inputs_list(node.node_input)
             ]
         )
@@ -260,9 +263,7 @@ class Workflow(Generic[Context]):
             )
 
             # pick either the input table or the original table
-            table_container = (
-                self._inputs[name] if name in self._inputs else self._graph[name].result
-            )
+            table_container = self._table_store.get(name)
 
             if use_original_table:
                 return table_container
@@ -283,14 +284,14 @@ class Workflow(Generic[Context]):
 
     def add_table(self, id: str, table: pd.DataFrame) -> None:
         """Add a dataframe to the graph with a given id."""
-        self._inputs[id] = TableContainer(table=table)
+        self._table_store.add(id, TableContainer(table))
 
     def output(self, id: Optional[str] = None) -> Table:
         """Get a dataframe from the graph by id."""
         if id is None:
             id = self._last_step_id
 
-        container: Optional[TableContainer] = self._graph[id].result
+        container: Optional[TableContainer] = self._table_store.get(id)
         if container is None:
             raise Exception(
                 f"Value not calculated yet. {self.name}: {self._graph[id].verb.__name__} ."
@@ -376,7 +377,7 @@ class Workflow(Generic[Context]):
         if inspect.iscoroutine(result):
             result = asyncio.run(result)
 
-        node.result = result
+        self._table_store.add(node.node_id, result)
 
         # Return verb timing
         return time.time() - start_verb_time
@@ -397,7 +398,7 @@ class Workflow(Generic[Context]):
     def export(self):
         """Export the graph into a workflow JSON object."""
         return {
-            "input": [input_name for input_name in self._inputs.keys()],
+            "input": [input_name for input_name in self._table_store.list()],
             "steps": [
                 {
                     "id": step.node_id,
