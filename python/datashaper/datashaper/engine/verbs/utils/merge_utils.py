@@ -29,5 +29,5 @@ def _correct_type(value: Any):
 
 
 def _create_array(column: pd.Series, delim: str) -> str:
-    column = column.dropna().apply(lambda x: _correct_type(x))
-    return delim.join(column.astype(str))
+    col: pd.DataFrame | pd.Series = column.dropna().apply(lambda x: _correct_type(x))
+    return delim.join(col.astype(str))

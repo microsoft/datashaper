@@ -3,6 +3,8 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
+from typing import Optional
+
 import numpy as np
 import pandas as pd
 
@@ -53,7 +55,7 @@ def __onehot_spread(input_table, columns, to, delimiter):
 def spread(
     input: VerbInput,
     column: str,
-    to: list[str] = None,
+    to: Optional[list[str]] = None,
     delimiter: str = ",",
     onehot: bool = False,
     preserveSource: bool = False,
