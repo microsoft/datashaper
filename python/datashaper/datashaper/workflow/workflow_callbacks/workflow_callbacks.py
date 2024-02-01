@@ -31,7 +31,7 @@ class WorkflowCallbacks(Protocol):
         """Execute this callback every time a step ends."""
         ...
 
-    def on_step_progress(self, progress: Progress) -> None:
+    def on_step_progress(self, node: ExecutionNode, progress: Progress) -> None:
         """A call back handler for when progress occurs."""
         ...
 

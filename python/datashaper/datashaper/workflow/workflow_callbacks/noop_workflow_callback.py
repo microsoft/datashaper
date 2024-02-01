@@ -5,7 +5,7 @@ from .workflow_callbacks import WorkflowCallbacks
 class NoopWorkflowCallbacks(WorkflowCallbacks):
     """A no-op implementation of WorkflowCallbacks."""
 
-    def on_step_progress(self, progress):
+    def on_step_progress(self, node, progress):
         """A no-op implementation of on_step_progress."""
         pass
 

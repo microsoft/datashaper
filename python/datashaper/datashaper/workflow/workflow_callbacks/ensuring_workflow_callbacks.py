@@ -38,10 +38,10 @@ class EnsuringWorkflowCallbacks(WorkflowCallbacks):
         if hasattr(self._delegate, "on_step_end"):
             self._delegate.on_step_end(node, result)
 
-    def on_step_progress(self, progress: Progress) -> None:
+    def on_step_progress(self, node: ExecutionNode, progress: Progress) -> None:
         """A call back handler for when progress occurs."""
         if hasattr(self._delegate, "on_step_progress"):
-            self._delegate.on_step_progress(progress)
+            self._delegate.on_step_progress(node, progress)
 
     def on_error(
         self,

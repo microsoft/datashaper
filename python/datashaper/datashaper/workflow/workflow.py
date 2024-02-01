@@ -209,7 +209,7 @@ class Workflow(Generic[Context]):
         workflow_callbacks: WorkflowCallbacks,
     ) -> dict[str, Any]:
         """Injects the run context into the workflow steps."""
-        callbacks = DelegatingVerbCallbacks(workflow_callbacks)
+        callbacks = DelegatingVerbCallbacks(exec_node, workflow_callbacks)
 
         def argument_names(fn):
             return inspect.getfullargspec(fn).args
@@ -363,14 +363,14 @@ class Workflow(Generic[Context]):
             inputs = self._resolve_inputs(node.verb, node.node_input)
             verb_context = Workflow.__resolve_run_context(node, context, callbacks)
             callbacks.on_step_start(node, inputs)
-            callbacks.on_step_progress(Progress(percent=0))
+            callbacks.on_step_progress(node, Progress(percent=0))
             result = node.verb.func(**node.args, **inputs, **verb_context)
         except Exception as e:
             message = f'Error executing verb "{node.verb.name}" in {self.name}: {e}'
             callbacks.on_error(message, e, traceback.format_exc())
             raise e
         finally:
-            callbacks.on_step_progress(Progress(percent=1))
+            callbacks.on_step_progress(node, Progress(percent=1))
             callbacks.on_step_end(node, None)
 
         if inspect.iscoroutine(result):
