@@ -1,4 +1,4 @@
-from .types import MemoryProfile, VerbTiming, WorkflowOptions, WorkflowRunResult
+from .types import MemoryProfile, VerbTiming, WorkflowRunResult
 from .verb_callbacks import DelegatingVerbCallbacks, VerbCallbacks
 from .workflow import DEFAULT_INPUT_NAME, Workflow
 from .workflow_callbacks import (
@@ -17,7 +17,6 @@ __all__ = [
     "VerbCallbacks",
     "DelegatingVerbCallbacks",
     "EnsuringWorkflowCallbacks",
-    "WorkflowOptions",
     "MemoryProfile",
     "MemoryProfilingWorkflowCallbacks",
 ]

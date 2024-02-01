@@ -45,11 +45,3 @@ class WorkflowRunResult:
 
     memory_profile: MemoryProfile | None = None
     """The memory profile of the workflow run."""
-
-
-@dataclass
-class WorkflowOptions:
-    """Options for running a workflow."""
-
-    memory_profile: bool | None = None
-    """Memory profiling."""

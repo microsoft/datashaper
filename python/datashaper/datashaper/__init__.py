@@ -61,7 +61,6 @@ from .workflow import (
     VerbTiming,
     Workflow,
     WorkflowCallbacks,
-    WorkflowOptions,
     WorkflowRunResult,
 )
 
@@ -109,7 +108,6 @@ __all__ = [
     # Workflow Exports
     "Workflow",
     "DEFAULT_INPUT_NAME",
-    "WorkflowOptions",
     "WorkflowCallbacks",
     "WorkflowRunResult",
     "VerbTiming",

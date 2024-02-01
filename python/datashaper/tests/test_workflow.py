@@ -12,7 +12,6 @@ from datashaper import (
     VerbCallbacks,
     VerbInput,
     Workflow,
-    WorkflowOptions,
     derive_from_rows,
     progress_iterable,
 )
@@ -36,13 +35,12 @@ class TestWorkflowRun(unittest.TestCase):
             validate=False,
         )
         workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
-        workflow.run(
-            context=create_fake_run_context(),
-        )
+        workflow.run(context=create_fake_run_context())
         self.assertIsNotNone(workflow.export())
 
     def test_define_basic_workflow_with_profiling_creates_profile(self):
         workflow = Workflow(
+            memory_profile=True,
             verbs={
                 "test_define_basic_workflow_does_not_crash": create_passthrough_verb(),
             },
@@ -58,10 +56,7 @@ class TestWorkflowRun(unittest.TestCase):
             validate=False,
         )
         workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
-        result = workflow.run(
-            context=create_fake_run_context(),
-            options=WorkflowOptions(memory_profile=True),
-        )
+        result = workflow.run(create_fake_run_context())
         self.assertIsNotNone(result.memory_profile)
         self.assertIsNotNone(result.verb_timings)
         self.assertIsNotNone(workflow.export())
@@ -83,9 +78,7 @@ class TestWorkflowRun(unittest.TestCase):
             validate=False,
         )
         workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
-        workflow.run(
-            context=create_fake_run_context(),
-        )
+        workflow.run(create_fake_run_context())
         self.assertIsNotNone(workflow.export())
 
     def test_create_basic_workflow_with_test_inputs_does_not_crash(self):
@@ -171,9 +164,7 @@ class TestWorkflowRun(unittest.TestCase):
             validate=False,
         )
         workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
-        workflow.run(
-            context=create_fake_run_context(),
-        )
+        workflow.run(create_fake_run_context())
 
     def test_workflow_with(self):
         workflow = Workflow(
@@ -192,9 +183,7 @@ class TestWorkflowRun(unittest.TestCase):
             validate=False,
         )
         workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
-        workflow.run(
-            context=create_fake_run_context(),
-        )
+        workflow.run(create_fake_run_context())
         result = workflow.output()
         row = result.iloc[0]
         assert row["b"] == row["a"] + 1
@@ -217,9 +206,7 @@ class TestWorkflowRun(unittest.TestCase):
                 validate=False,
             )
             workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
-            workflow.run(
-                context=create_fake_run_context(),
-            )
+            workflow.run(create_fake_run_context())
 
     def test_workflow_with_async_verb(self):
         wf = Workflow(
@@ -238,9 +225,7 @@ class TestWorkflowRun(unittest.TestCase):
             validate=False,
         )
         wf.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
-        wf.run(
-            context=create_fake_run_context(),
-        )
+        wf.run(create_fake_run_context())
         output = wf.output()
         assert output.equals(pd.DataFrame({"a": [1, 2, 3]}))
 
@@ -265,7 +250,7 @@ class TestWorkflowRun(unittest.TestCase):
             input_data = pd.DataFrame({"a": [1, 2, 3]})
             workflow.add_table(DEFAULT_INPUT_NAME, input_data)
 
-            workflow.run(context=create_fake_run_context())
+            workflow.run(create_fake_run_context())
 
     def test_workflow_invalid_verb_throws_error(self):
         with self.assertRaises(ValueError) as context:
@@ -419,7 +404,7 @@ class TestWorkflowRun(unittest.TestCase):
         workflow.add_table("second_verb_input", second_verb_input)
 
         # Run the workflow
-        workflow.run(context=create_fake_run_context())
+        workflow.run(create_fake_run_context())
 
         # Ensure the output looks like the "second_verb_input"
         input_json = second_verb_input.to_json(orient="records")

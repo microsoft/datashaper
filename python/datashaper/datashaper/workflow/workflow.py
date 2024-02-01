@@ -24,7 +24,7 @@ from datashaper.execution.execution_node import ExecutionNode
 from datashaper.progress.types import Progress
 from datashaper.table_store import Table, TableContainer
 
-from .types import MemoryProfile, VerbTiming, WorkflowOptions, WorkflowRunResult
+from .types import MemoryProfile, VerbTiming, WorkflowRunResult
 from .verb_callbacks import DelegatingVerbCallbacks
 from .workflow_callbacks import (
     EnsuringWorkflowCallbacks,
@@ -51,6 +51,7 @@ class Workflow(Generic[Context]):
     _dependency_graph: dict[str, set]
     _last_step_id: str
     _dependencies: set[str]
+    _memory_profile: bool
 
     """Externals that this workflow depends on"""
 
@@ -59,11 +60,11 @@ class Workflow(Generic[Context]):
         schema: dict[str, Any],
         input_path: Optional[str] = None,
         input_tables: Optional[dict[str, pd.DataFrame]] = None,
-        schema_path: Optional[str] = SCHEMA_FILE,
+        schema_path: Optional[str] = None,
         verbs: Optional[dict[str, Callable]] = None,
-        # TODO: the current schema definition does not work in Python
-        validate: bool = False,
-        default_input: Optional[str] = DEFAULT_INPUT_NAME,
+        validate: Optional[bool] = False,
+        default_input: Optional[str] = None,
+        memory_profile: Optional[bool] = False,
     ):
         """Create an execution graph from the Dict provided in workflow.
 
@@ -83,13 +84,17 @@ class Workflow(Generic[Context]):
         :param default_input: Optional value, the default input for the first step.
         :type default_input: str, optional
         """
+        schema_path = schema_path or SCHEMA_FILE
+        default_input = default_input or DEFAULT_INPUT_NAME
         self._schema = schema
+        self._memory_profile = memory_profile
         self._dependencies = self._compute_dependencies()
         self._dependency_graph = defaultdict(set)
         self._graph = OrderedDict()
         self._inputs = {}
 
         # Perform JSON-schema validation
+        # TODO: the current schema definition does not work in Python
         if validate and schema_path is not None:
             with open(schema_path) as schema_file:
                 schema_json = json.load(schema_file)
@@ -294,7 +299,6 @@ class Workflow(Generic[Context]):
     def run(
         self,
         context: Optional[Context] = None,
-        options: WorkflowOptions = None,
         callbacks: WorkflowCallbacks = None,
     ) -> WorkflowRunResult:
         """Run the execution graph."""
@@ -302,10 +306,9 @@ class Workflow(Generic[Context]):
         nodes: list[ExecutionNode] = []
         # Use the ensuring variant to guarantee that all protocol methods are available
         callbacks = EnsuringWorkflowCallbacks(callbacks or NoopWorkflowCallbacks())
-        options = options or WorkflowOptions()
         profiler: MemoryProfilingWorkflowCallbacks | None = None
 
-        if options.memory_profile:
+        if self._memory_profile:
             profiler = MemoryProfilingWorkflowCallbacks(callbacks)
             callbacks = profiler
 
