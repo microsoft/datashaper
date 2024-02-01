@@ -12,7 +12,7 @@ import time
 import traceback
 
 from collections import OrderedDict, defaultdict
-from typing import Any, Callable, Generic, Iterable, Optional, TypeVar
+from typing import Any, Callable, Generic, Iterable, Optional, TypeVar, cast
 from uuid import uuid4
 
 import pandas as pd
@@ -50,7 +50,7 @@ class Workflow(Generic[Context]):
     _dependency_graph: dict[str, set[str]]
     _last_step_id: str
     _dependencies: set[str]
-    _memory_profile: bool
+    _memory_profile: bool | None
 
     """Externals that this workflow depends on"""
 
@@ -137,7 +137,7 @@ class Workflow(Generic[Context]):
                 self._dependency_graph[input].add(step_id)
             previous_step_id = step.node_id
 
-        self._last_step_id = previous_step_id
+        self._last_step_id = cast(str, previous_step_id)
 
     @property
     def name(self) -> str:
@@ -263,6 +263,8 @@ class Workflow(Generic[Context]):
                 self._inputs[name] if name in self._inputs else self._graph[name].result
             )
 
+            if table_container is None:
+                raise ValueError(f"Input table {name} not found in inputs or graph")
             if use_original_table:
                 return table_container
             else:
@@ -278,7 +280,7 @@ class Workflow(Generic[Context]):
                     input_mapping[key] = input_table(value)
                 else:
                     input_mapping[key] = [input_table(t) for t in value]
-            return {"input": VerbInput(**input_mapping)}
+            return {"input": VerbInput(**cast(Any, input_mapping))}
 
     def add_table(self, id: str, table: pd.DataFrame) -> None:
         """Add a dataframe to the graph with a given id."""

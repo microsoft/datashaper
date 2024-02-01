@@ -38,7 +38,7 @@ class WorkflowCallbacks(Protocol):
     def on_error(
         self,
         message: str,
-        cause: Optional[Exception] = None,
+        cause: Optional[BaseException] = None,
         stack: Optional[str] = None,
         details: Optional[dict] = None,
     ) -> None:

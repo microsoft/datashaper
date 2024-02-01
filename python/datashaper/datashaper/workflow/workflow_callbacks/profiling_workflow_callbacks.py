@@ -7,14 +7,12 @@ from typing import Any, Optional
 
 import pandas as pd
 
-from datashaper import Progress
-
 from ...execution.execution_node import ExecutionNode
 from ...table_store import TableContainer
-from .workflow_callbacks import WorkflowCallbacks
+from .noop_workflow_callback import NoopWorkflowCallbacks
 
 
-class MemoryProfilingWorkflowCallbacks(WorkflowCallbacks):
+class MemoryProfilingWorkflowCallbacks(NoopWorkflowCallbacks):
     """Callbacks for memory profiling."""
 
     _snapshots: dict[str, list]
@@ -37,34 +35,6 @@ class MemoryProfilingWorkflowCallbacks(WorkflowCallbacks):
         self._workflow_start = 0
         self._verb_start = 0
 
-    def on_step_progress(self, node: ExecutionNode, progress: Progress) -> None:
-        """A call back handler for when progress occurs."""
-        pass
-
-    def on_error(
-        self,
-        message: str,
-        cause: Optional[Exception] = None,
-        stack: Optional[str] = None,
-        details: Optional[dict] = None,
-    ) -> None:
-        """A call back handler for when an error occurs."""
-        pass
-
-    def on_warning(self, message: str, details: Optional[dict] = None) -> None:
-        """A call back handler for when a warning occurs."""
-        pass
-
-    def on_log(self, message: str, details: Optional[dict] = None) -> None:
-        """A call back handler for when a log message occurs."""
-        pass
-
-    def on_measure(
-        self, name: str, value: float, details: Optional[dict] = None
-    ) -> None:
-        """A call back handler for when a measurement occurs."""
-        pass
-
     def on_workflow_start(self) -> None:
         """Call when the workflow starts."""
         tracemalloc.start()
@@ -79,7 +49,9 @@ class MemoryProfilingWorkflowCallbacks(WorkflowCallbacks):
         _, self._peak_start_verb = tracemalloc.get_traced_memory()
         self._verb_start = time.time()
 
-    def on_step_end(self, node: ExecutionNode, result: TableContainer | None) -> None:
+    def on_step_end(
+        self, node: ExecutionNode, result: Optional[TableContainer]
+    ) -> None:
         """Call when a step ends."""
         total_time = time.time() - self._verb_start
         self._timing[node.verb.name].append(total_time)

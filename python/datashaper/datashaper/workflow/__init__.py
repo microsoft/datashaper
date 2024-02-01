@@ -1,11 +1,7 @@
 from .types import MemoryProfile, VerbTiming, WorkflowRunResult
 from .verb_callbacks import DelegatingVerbCallbacks, VerbCallbacks
 from .workflow import DEFAULT_INPUT_NAME, Workflow
-from .workflow_callbacks import (
-    EnsuringWorkflowCallbacks,
-    MemoryProfilingWorkflowCallbacks,
-    WorkflowCallbacks,
-)
+from .workflow_callbacks import MemoryProfilingWorkflowCallbacks, WorkflowCallbacks
 
 
 __all__ = [
@@ -16,7 +12,6 @@ __all__ = [
     "WorkflowRunResult",
     "VerbCallbacks",
     "DelegatingVerbCallbacks",
-    "EnsuringWorkflowCallbacks",
     "MemoryProfile",
     "MemoryProfilingWorkflowCallbacks",
 ]

@@ -55,29 +55,29 @@ class WorkflowCallbacksRegistry:
     def on_error(
         self,
         message: str,
-        cause: Exception | None = None,
-        stack: str | None = None,
-        details: dict[str, Any] | None = None,
+        cause: Optional[BaseException] = None,
+        stack: Optional[str] = None,
+        details: Optional[dict] = None,
     ) -> None:
         """A call back handler for when an error occurs."""
         for callback in self._callbacks:
             if hasattr(callback, "on_error"):
                 callback.on_error(message, cause, stack, details)
 
-    def on_warning(self, message: str, details: dict[str, Any] | None = None) -> None:
+    def on_warning(self, message: str, details: Optional[dict] = None) -> None:
         """A call back handler for when a warning occurs."""
         for callback in self._callbacks:
             if hasattr(callback, "on_warning"):
                 callback.on_warning(message, details)
 
-    def on_log(self, message: str, details: dict[str, Any] | None = None) -> None:
+    def on_log(self, message: str, details: Optional[dict] = None) -> None:
         """A call back handler for when a log message occurs."""
         for callback in self._callbacks:
             if hasattr(callback, "on_log"):
                 callback.on_log(message, details)
 
     def on_measure(
-        self, name: str, value: float, details: dict[str, Any] | None = None
+        self, name: str, value: float, details: Optional[dict] = None
     ) -> None:
         """A call back handler for when a measurement occurs."""
         for callback in self._callbacks:

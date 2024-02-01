@@ -4,7 +4,7 @@
 #
 """Common types used across the datashaper codebase."""
 
-from enum import Enum, StrEnum
+from enum import StrEnum
 from typing import Any, Union
 
 from dataclasses import dataclass, field
