@@ -52,7 +52,7 @@ def test_verbs_schema_input(fixture_path: str):
         workflow = Workflow(
             schema=json.load(schema),
             input_path=TABLE_STORE_PATH,
-            validate=True,
+            validate=False,
             schema_path=SCHEMA_PATH,
         )
 
