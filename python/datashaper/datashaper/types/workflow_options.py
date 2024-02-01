@@ -5,8 +5,7 @@ from dataclasses import dataclass
 
 @dataclass
 class WorkflowOptions:
-    verbose: bool | None = None
-    """Verbose output."""
+    """Options for running a workflow."""
 
     memory_profile: bool | None = None
     """Memory profiling."""
