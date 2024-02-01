@@ -2876,7 +2876,7 @@ __metadata:
     "@essex/tsconfig-base": "npm:^2.0.0"
     "@types/jest": "npm:^29.5.2"
     "@types/lodash-es": "npm:^4.17.7"
-    "@types/papaparse": "npm:^5.3.7"
+    "@types/papaparse": "npm:^5.3.14"
     arquero: "npm:^5.2.0"
     jest: "npm:^29.5.0"
     lodash-es: "npm:^4.17.21"
@@ -7191,12 +7191,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/papaparse@npm:^5.3.7":
-  version: 5.3.7
-  resolution: "@types/papaparse@npm:5.3.7"
+"@types/papaparse@npm:^5.3.14":
+  version: 5.3.14
+  resolution: "@types/papaparse@npm:5.3.14"
   dependencies:
     "@types/node": "npm:*"
-  checksum: 4fef3e38e4d4ebf5b8f9f2ca96a822311284f788058c3d7983b6c841f28be3737ccd467dea280c7c363ee9ba57114980a62c1cf3c8e65a2521c72a8472b59005
+  checksum: 9bd5cc0e6a2c02def6c8903dc4604e499907cb465186ed3532390468082a06f023adbac0216428d0d8e8fe017206780a03d20007041e9fed47c8d391cd69a536
   languageName: node
   linkType: hard
 
