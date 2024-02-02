@@ -5,6 +5,7 @@ from .workflow_callbacks import (
     MemoryProfilingWorkflowCallbacks,
     NoopWorkflowCallbacks,
     WorkflowCallbacks,
+    WorkflowCallbacksManager,
 )
 
 
@@ -19,4 +20,5 @@ __all__ = [
     "MemoryProfile",
     "MemoryProfilingWorkflowCallbacks",
     "NoopWorkflowCallbacks",
+    "WorkflowCallbacksManager",
 ]

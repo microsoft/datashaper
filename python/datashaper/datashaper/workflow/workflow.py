@@ -29,7 +29,7 @@ from .verb_callbacks import DelegatingVerbCallbacks
 from .workflow_callbacks import (
     MemoryProfilingWorkflowCallbacks,
     WorkflowCallbacks,
-    WorkflowCallbacksRegistry,
+    WorkflowCallbacksManager,
 )
 
 
@@ -386,7 +386,7 @@ class Workflow(Generic[Context]):
         self, callbacks: WorkflowCallbacks | None
     ) -> tuple[WorkflowCallbacks, MemoryProfilingWorkflowCallbacks | None]:
         profiler: MemoryProfilingWorkflowCallbacks | None = None
-        callback_handler = WorkflowCallbacksRegistry()
+        callback_handler = WorkflowCallbacksManager()
 
         if callbacks is not None:
             callback_handler.register(callbacks)
