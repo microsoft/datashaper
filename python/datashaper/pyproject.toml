@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "datashaper"
-version = "0.0.32"
+version = "0.0.33"
 description = "This project provides a collection of utilities for doing lightweight data wrangling."
 authors = [
     "Nathan Evans <naevans@microsoft.com>",
@@ -29,6 +29,7 @@ semversioner = "^2.0.1"
 toml = "^0.10.2"
 coverage = "^7.4.0"
 pyright = "^1.1.349"
+pytest-asyncio = "^0.23.4"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -98,3 +99,6 @@ asyncio_mode = "auto"
 [tool.pyright]
 include = ["datashaper"]
 exclude = ["**/node_modules", "**/__pycache__"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
