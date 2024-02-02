@@ -85,5 +85,5 @@ src_paths = ["datashaper", "tests"]
 extend_skip = ["setup.py"]
 
 [tool.pyright]
-include = ["indexing_engine"]
+include = ["examples"]
 exclude = ["**/node_modules", "**/__pycache__"]

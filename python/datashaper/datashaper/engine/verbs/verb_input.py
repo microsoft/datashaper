@@ -9,8 +9,8 @@ from datashaper.table_store import Table, TableContainer
 
 
 class VerbInput:
-    _source: TableContainer
-    _others: list[TableContainer] | None = None
+    source: TableContainer
+    others: list[TableContainer] | None = None
 
     def __init__(
         self,
@@ -28,15 +28,15 @@ class VerbInput:
         if other is not None and others is not None:
             raise Exception("Only one of other or others can be provided")
 
-        self._source = input if input is not None else cast(TableContainer, source)
+        self.source = input if input is not None else cast(TableContainer, source)
 
         if other is not None or others is not None:
-            self._others = [other] if other is not None else others
+            self.others = [other] if other is not None else others
 
     def get_input(self) -> Table:
-        return self._source.table
+        return self.source.table
 
     def get_others(self) -> list[Table]:
-        if self._others is None:
+        if self.others is None:
             return []
-        return [other.table for other in self._others]
+        return [other.table for other in self.others]
