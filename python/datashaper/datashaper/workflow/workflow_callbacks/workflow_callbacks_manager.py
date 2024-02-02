@@ -7,7 +7,7 @@ from ...table_store import TableContainer
 from .workflow_callbacks import WorkflowCallbacks
 
 
-class WorkflowCallbacksRegistry:
+class WorkflowCallbacksManager(WorkflowCallbacks):
     """A registry of WorkflowCallbacks."""
 
     _callbacks: list[WorkflowCallbacks]
