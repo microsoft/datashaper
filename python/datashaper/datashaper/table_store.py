@@ -77,7 +77,7 @@ class TableStore(ABC):
     """A table store for storing and retrieving tables."""
 
     @abstractmethod
-    def add(self, name: str, table: Table) -> None:
+    def add(self, name: str, table: TableContainer) -> None:
         """Add a table to the store."""
         pass
 
