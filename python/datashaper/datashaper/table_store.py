@@ -9,7 +9,7 @@ import shutil
 import tempfile
 
 from abc import ABC, abstractmethod
-from functools import cache, lru_cache
+from functools import lru_cache
 from typing import Any, Dict, Generic, List, Optional, TypeVar, Union
 
 import pandas as pd
