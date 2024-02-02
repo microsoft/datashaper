@@ -149,6 +149,9 @@ export function useCodebook(
 					setIsLoading(false)
 					setProgress(0)
 				})
+		} else {
+			// reset if autotype is off or the table is not available
+			setCodebook(undefined)
 		}
 	}, [
 		table,
