@@ -106,6 +106,7 @@ class DefaultTableStore(TableStore):
     """A default table store implementation."""
 
     def __init__(self) -> None:
+        """Initialize the default table store."""
         self._tables: Dict[str, TableContainer] = {}
 
     def add(self, name: str, table: TableContainer) -> None:
@@ -135,6 +136,7 @@ class DiskCacheTableStore(TableStore):
     def __init__(
         self, maxsize: int = 128, persist: bool = False, verbose=False
     ) -> None:
+        """Initialize the disk cache table store."""
         self._persist = persist
         self._maxsize = maxsize
         self._verbose = verbose
