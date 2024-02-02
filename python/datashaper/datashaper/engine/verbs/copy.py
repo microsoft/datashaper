@@ -2,6 +2,10 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+from typing import cast
+
+import pandas as pd
+
 from datashaper.engine.verbs.verbs_mapping import verb
 
 from ...table_store import TableContainer
@@ -14,7 +18,7 @@ def copy(
     to: str,
     column: str,
 ):
-    output = input.get_input()
+    output = cast(pd.DataFrame, input.get_input())
     output[to] = output[column]
 
     return TableContainer(table=output)

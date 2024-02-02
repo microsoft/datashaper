@@ -51,7 +51,7 @@ class VerbManager:
 
     _verbs: dict[str, VerbDetails] = field(default_factory=dict)
 
-    def __getitem__(self, verb: str) -> VerbDetails:
+    def __getitem__(self, verb: str) -> VerbDetails | None:
         return self.get_verb(verb)
 
     def __contains__(self, verb: str) -> bool:
@@ -70,7 +70,7 @@ class VerbManager:
             raise ValueError(f"Verb {verb.name} already registered.")
         self._verbs.update({verb.name: verb})
 
-    def get_verb(self, verb: str) -> VerbDetails:
+    def get_verb(self, verb: str) -> VerbDetails | None:
         return self._verbs.get(verb)
 
     @classmethod

@@ -3,20 +3,21 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
+from typing import Optional, cast
 
 from datashaper.table_store import Table, TableContainer
 
 
 class VerbInput:
     source: TableContainer
-    others: list[TableContainer] = None
+    others: list[TableContainer] | None = None
 
     def __init__(
         self,
-        input: TableContainer = None,
-        source: TableContainer = None,
-        other: TableContainer = None,
-        others: list[TableContainer] = None,
+        input: Optional[TableContainer] = None,
+        source: Optional[TableContainer] = None,
+        other: Optional[TableContainer] = None,
+        others: Optional[list[TableContainer]] = None,
     ):
         if input is None and source is None:
             raise Exception("At least input or source must be provided")
@@ -27,7 +28,7 @@ class VerbInput:
         if other is not None and others is not None:
             raise Exception("Only one of other or others can be provided")
 
-        self.source = input if input is not None else source
+        self.source = input if input is not None else cast(TableContainer, source)
 
         if other is not None or others is not None:
             self.others = [other] if other is not None else others
@@ -36,4 +37,6 @@ class VerbInput:
         return self.source.table
 
     def get_others(self) -> list[Table]:
+        if self.others is None:
+            return []
         return [other.table for other in self.others]

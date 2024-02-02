@@ -13,11 +13,11 @@ class WorkflowCallbacks(Protocol):
     This base class is a "noop" implementation so that clients may implement just the callbacks they need.
     """
 
-    def on_workflow_start(self) -> None:
+    def on_workflow_start(self, name: str, instance: object) -> None:
         """Execute this callback when a workflow starts."""
         ...
 
-    def on_workflow_end(self) -> None:
+    def on_workflow_end(self, name: str, instance: object) -> None:
         """Execute this callback when a workflow ends."""
         ...
 
@@ -31,30 +31,30 @@ class WorkflowCallbacks(Protocol):
         """Execute this callback every time a step ends."""
         ...
 
-    def on_step_progress(self, progress: Progress) -> None:
+    def on_step_progress(self, node: ExecutionNode, progress: Progress) -> None:
         """A call back handler for when progress occurs."""
         ...
 
     def on_error(
         self,
         message: str,
-        cause: Exception | None = None,
-        stack: str | None = None,
-        details: dict[str, Any] | None = None,
+        cause: Optional[BaseException] = None,
+        stack: Optional[str] = None,
+        details: Optional[dict] = None,
     ) -> None:
         """A call back handler for when an error occurs."""
         ...
 
-    def on_warning(self, message: str, details: dict[str, Any] | None = None) -> None:
+    def on_warning(self, message: str, details: Optional[dict] = None) -> None:
         """A call back handler for when a warning occurs."""
         ...
 
-    def on_log(self, message: str, details: dict[str, Any] | None = None) -> None:
+    def on_log(self, message: str, details: Optional[dict] = None) -> None:
         """A call back handler for when a log message occurs."""
         ...
 
     def on_measure(
-        self, name: str, value: float, details: dict[str, Any] | None = None
+        self, name: str, value: float, details: Optional[dict] = None
     ) -> None:
         """A call back handler for when a measurement occurs."""
         ...

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "datashaper"
-version = "0.0.24"
+version = "0.0.32"
 description = "This project provides a collection of utilities for doing lightweight data wrangling."
 authors = [
     "Nathan Evans <naevans@microsoft.com>",
@@ -21,7 +21,6 @@ black = "^23.12.1"
 codespell = "^2.2.6"
 flake8 = "^7.0.0"
 isort = "^5.13.2"
-mypy = "^1.8.0"
 poethepoet = "^0.24.4"
 pydocstyle = "^6.3.0"
 pytest = "^7.4.4"
@@ -29,6 +28,7 @@ pytest-cov = "^4.1.0"
 semversioner = "^2.0.1"
 toml = "^0.10.2"
 coverage = "^7.4.0"
+pyright = "^1.1.349"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -51,14 +51,6 @@ force-exclude = '''
 .*/setup\.py$
 '''
 
-[tool.mypy]
-check_untyped_defs = true
-ignore_missing_imports = true
-warn_redundant_casts = true
-warn_unused_configs = true
-warn_unused_ignores = true
-files = "datashaper"
-
 [tool.coverage.run]
 omit = ["tests/*", ".*", "data/*"]
 
@@ -75,6 +67,7 @@ _changelog = 'semversioner changelog > CHANGELOG.md'
 _apply_version = 'semversioner release'
 _test_with_coverage = 'coverage run -m pytest'
 _coverage_report = 'coverage report --show-missing'
+_pyright = "pyright"
 
 # Pass in a test pattern
 test_only = "pytest -k"
@@ -84,7 +77,7 @@ sequence = ['_test_with_coverage', '_coverage_report']
 ignore_fail = 'return_non_zero'
 
 [[tool.poe.tasks.check]]
-sequence = ['_flake8', '_bandit', '_codespell', 'check_format', '_pydocstyle']
+sequence = ['_pyright', '_flake8', '_bandit', '_codespell', 'check_format', '_pydocstyle']
 ignore_fail = 'return_non_zero'
 
 [[tool.poe.tasks.format]]
@@ -101,3 +94,7 @@ match-dir = '^datashaper.*'
 
 [tool.pytest]
 asyncio_mode = "auto"
+
+[tool.pyright]
+include = ["datashaper"]
+exclude = ["**/node_modules", "**/__pycache__"]

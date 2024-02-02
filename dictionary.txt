@@ -6,7 +6,8 @@ virtualenv
 pyproject
 ipynb
 pymodule
-
+pyarrow
+dtypes
 
 # JavaScript Idioms
 QNAN

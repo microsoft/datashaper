@@ -60,10 +60,12 @@ from .table_store import (
 from .workflow import (
     DEFAULT_INPUT_NAME,
     MemoryProfile,
+    NoopWorkflowCallbacks,
     VerbCallbacks,
     VerbTiming,
     Workflow,
     WorkflowCallbacks,
+    WorkflowCallbacksManager,
     WorkflowRunResult,
 )
 
@@ -111,11 +113,13 @@ __all__ = [
     # Workflow Exports
     "Workflow",
     "DEFAULT_INPUT_NAME",
-    "WorkflowCallbacks",
     "WorkflowRunResult",
     "VerbTiming",
     "MemoryProfile",
     "VerbCallbacks",
+    "WorkflowCallbacks",
+    "NoopWorkflowCallbacks",
+    "WorkflowCallbacksManager",
     # Tablestore Exports
     "ColumnStats",
     "ColumnMetadata",

@@ -37,11 +37,10 @@ def derive_from_rows(
     results, errors = parallelize(input.iterrows(), transform_row, num_threads, stagger)
     tick.done()
 
+    for error in errors:
+        callbacks.error("Received errors during parallel transformation", error)
+
     if len(errors) > 0:
-        callbacks.error(
-            "Received errors during parallel transformation",
-            {"errors": [str(error or "") for error in errors]},
-        )
         raise ValueError(
             "Errors occurred while running parallel transformation, could not complete!"
         )
