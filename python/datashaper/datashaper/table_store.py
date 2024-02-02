@@ -10,7 +10,7 @@ import tempfile
 
 from abc import ABC, abstractmethod
 from functools import lru_cache
-from typing import Any, Dict, Generic, List, Optional, TypeVar, Union
+from typing import Any, Dict, Generic, TypeVar
 
 import pandas as pd
 
@@ -29,13 +29,13 @@ class ColumnStats:
     distinct: int
     invalid: int
     mode: Any
-    min: Optional[float] = None
-    max: Optional[float] = None
-    mean: Optional[float] = None
-    median: Optional[float] = None
-    stdev: Optional[float] = None
-    bins: Optional[List[Bin]] = None
-    categories: Optional[List[Category]] = None
+    min: float | None = None
+    max: float | None = None
+    mean: float | None = None
+    median: float | None = None
+    stdev: float | None = None
+    bins: list[Bin] | None = None
+    categories: list[Category] | None = None
 
 
 @dataclass
@@ -53,13 +53,13 @@ class TableMetadata:
 
     rows: int
     cols: int
-    columns: Dict[str, ColumnMetadata]
+    columns: dict[str, ColumnMetadata]
 
 
 T = TypeVar("T")
 
 
-Table = Union[pd.DataFrame, DataFrameGroupBy]
+Table = pd.DataFrame | DataFrameGroupBy
 
 
 @dataclass
@@ -69,8 +69,8 @@ class TableContainer(Generic[T]):
     table: Table
 
     # TODO: is this used? should we use it?
-    metadata: Optional[TableMetadata] = None
-    context: Optional[T] = None
+    metadata: TableMetadata | None = None
+    context: T | None = None
 
 
 class TableStore(ABC):
@@ -92,7 +92,7 @@ class TableStore(ABC):
         pass
 
     @abstractmethod
-    def list(self) -> List[str]:
+    def list(self) -> list[str]:
         """List the tables in the store."""
         pass
 
@@ -121,7 +121,7 @@ class DefaultTableStore(TableStore):
         """Remove a table from the store."""
         del self._tables[name]
 
-    def list(self) -> List[str]:
+    def list(self) -> list[str]:
         """List the tables in the store."""
         return list(self._tables.keys())
 
@@ -175,7 +175,7 @@ class DiskCacheTableStore(TableStore):
         """Remove a table from the store."""
         os.remove(f"{self._path}/{name}.parquet")
 
-    def list(self) -> List[str]:
+    def list(self) -> list[str]:
         """List the tables in the store."""
         return [
             f.removesuffix(".parquet")
