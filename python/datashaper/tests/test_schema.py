@@ -47,7 +47,7 @@ def get_verb_test_specs(root: str) -> List[str]:
     "fixture_path",
     get_verb_test_specs(FIXTURES_PATH),
 )
-def test_verbs_schema_input(fixture_path: str):
+async def test_verbs_schema_input(fixture_path: str):
     with open(os.path.join(fixture_path, "workflow.json")) as schema:
         workflow = Workflow(
             schema=json.load(schema),
@@ -56,7 +56,7 @@ def test_verbs_schema_input(fixture_path: str):
             schema_path=SCHEMA_PATH,
         )
 
-    workflow.run()
+    await workflow.run()
     for expected in os.listdir(fixture_path):
         if expected.endswith(".csv"):
             table_name = expected.split(".")[0]

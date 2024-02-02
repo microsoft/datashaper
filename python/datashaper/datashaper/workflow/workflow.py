@@ -4,7 +4,6 @@
 #
 """The data processing workflow definition."""
 
-import asyncio
 import inspect
 import json
 import os
@@ -299,7 +298,7 @@ class Workflow(Generic[Context]):
         else:
             return container.table
 
-    def run(
+    async def run(
         self,
         context: Optional[Context] = None,
         callbacks: Optional[WorkflowCallbacks] = None,
@@ -329,7 +328,7 @@ class Workflow(Generic[Context]):
         while len(nodes) > 0:
             current_id = nodes.pop(0)
             node = self._graph[current_id]
-            timing = self._execute_verb(node, context, callbacks)
+            timing = await self._execute_verb(node, context, callbacks)
             verb_timings.append(
                 VerbTiming(
                     id=node.node_id,
@@ -351,7 +350,7 @@ class Workflow(Generic[Context]):
             verb_timings=verb_timings, memory_profile=_get_memory_profile(profiler)
         )
 
-    def _execute_verb(
+    async def _execute_verb(
         self,
         node: ExecutionNode,
         context: Optional[Context],
@@ -370,7 +369,7 @@ class Workflow(Generic[Context]):
             # Unroll the result if it's a coroutine
             # (we need to do this before calling on_step_end)
             if inspect.iscoroutine(result):
-                result = asyncio.run(result)
+                result = await result
         except Exception as e:
             message = f'Error executing verb "{node.verb.name}" in {self.name}: {e}'
             callbacks.on_error(message, e, traceback.format_exc())
