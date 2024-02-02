@@ -137,6 +137,7 @@ class DiskCacheTableStore(TableStore):
         self, maxsize: int = 128, persist: bool = False, verbose=False
     ) -> None:
         """Initialize the disk cache table store."""
+        self._path = tempfile.mkdtemp()
         self._persist = persist
         self._maxsize = maxsize
         self._verbose = verbose
@@ -144,7 +145,6 @@ class DiskCacheTableStore(TableStore):
 
     def __enter__(self) -> TableStore:
         """Enter the context manager."""
-        self._path = tempfile.mkdtemp()
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
