@@ -20,8 +20,9 @@ def fold(input: VerbInput, to: Tuple[str, str], columns: list[str]):
         output = output.set_index(columns)
     output = output.stack(dropna=False).reset_index()
 
-    output = output.rename(
-        {output.filter(regex="level_[1-9]").columns[0]: to[0], 0: to[1]}, axis=1
-    ).reset_index()[columns + [to[0], to[1]]]
+    col: str = cast(str, output.filter(regex="level_[1-9]").columns[0])
+    output = output.rename({col: to[0], 0: to[1]}, axis=1).reset_index()[
+        columns + [to[0], to[1]]
+    ]
 
     return TableContainer(table=cast(Table, output))

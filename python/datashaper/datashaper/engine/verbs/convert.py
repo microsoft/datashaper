@@ -70,7 +70,7 @@ def to_str(column: pd.Series, formatPattern: str) -> pd.DataFrame | pd.Series:
 
     column_numeric: pd.Series | None = None
     if is_numeric_dtype(column):
-        column_numeric = pd.to_numeric(column, errors="ignore")
+        column_numeric = cast(pd.Series, pd.to_numeric(column, errors="ignore"))
     if column_numeric is not None and is_numeric_dtype(column_numeric):
         try:
             column_numeric = column_numeric.astype(pd.Int64Dtype)
