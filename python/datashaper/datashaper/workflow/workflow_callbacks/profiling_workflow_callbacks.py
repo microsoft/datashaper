@@ -3,19 +3,18 @@ import time
 import tracemalloc
 
 from collections import defaultdict
-from typing import Any
+from typing import Any, Optional
 
 import pandas as pd
 
 from ...execution.execution_node import ExecutionNode
 from ...table_store import TableContainer
-from .workflow_callbacks import WorkflowCallbacks
+from .noop_workflow_callback import NoopWorkflowCallbacks
 
 
-class MemoryProfilingWorkflowCallbacks(WorkflowCallbacks):
+class MemoryProfilingWorkflowCallbacks(NoopWorkflowCallbacks):
     """Callbacks for memory profiling."""
 
-    _delegate: WorkflowCallbacks
     _snapshots: dict[str, list]
     _peak_memory: dict[str, list]
     _timing: dict[str, list]
@@ -25,9 +24,8 @@ class MemoryProfilingWorkflowCallbacks(WorkflowCallbacks):
     _workflow_start: float
     _verb_start: float
 
-    def __init__(self, delegate: WorkflowCallbacks):
+    def __init__(self):
         """Create a new instance of MemoryProfilingWorkflowCallbacks."""
-        self._delegate = delegate
         self._snapshots = defaultdict(list)
         self._peak_memory = defaultdict(list)
         self._timing = defaultdict(list)
@@ -43,7 +41,6 @@ class MemoryProfilingWorkflowCallbacks(WorkflowCallbacks):
         _, self._peak_start_workflow = tracemalloc.get_traced_memory()
         self._snapshots["all"].append(tracemalloc.take_snapshot())
         self._workflow_start = time.time()
-        self._delegate.on_workflow_start()
 
     def on_step_start(self, node: ExecutionNode, inputs: dict[str, Any]) -> None:
         """Call when a step starts."""
@@ -51,9 +48,10 @@ class MemoryProfilingWorkflowCallbacks(WorkflowCallbacks):
         self._snapshots[node.verb.name].append(tracemalloc.take_snapshot())
         _, self._peak_start_verb = tracemalloc.get_traced_memory()
         self._verb_start = time.time()
-        self._delegate.on_step_start(node, inputs)
 
-    def on_step_end(self, node: ExecutionNode, result: TableContainer | None) -> None:
+    def on_step_end(
+        self, node: ExecutionNode, result: Optional[TableContainer]
+    ) -> None:
         """Call when a step ends."""
         total_time = time.time() - self._verb_start
         self._timing[node.verb.name].append(total_time)
@@ -61,7 +59,6 @@ class MemoryProfilingWorkflowCallbacks(WorkflowCallbacks):
         # Get peak recorded during verb execution
         _, peak = tracemalloc.get_traced_memory()
         self._peak_memory[node.verb.name].append(peak - self._peak_start_verb)
-        self._delegate.on_step_end(node, result)
 
     def on_workflow_end(self) -> None:
         """Call when the workflow ends."""
@@ -71,7 +68,6 @@ class MemoryProfilingWorkflowCallbacks(WorkflowCallbacks):
         _, peak = tracemalloc.get_traced_memory()
         self._peak_memory["all"].append(peak - self._peak_start_workflow)
         tracemalloc.stop()
-        self._delegate.on_workflow_end()
 
     def get_snapshot_stats(self, sort_by="max"):
         """Get the snapshot stats."""

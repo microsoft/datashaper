@@ -1,5 +1,5 @@
 """Contains the DelegatingVerbCallback definition."""
-from typing import Any
+from typing import Optional
 
 from ...execution.execution_node import ExecutionNode
 from ...progress.types import Progress
@@ -25,21 +25,21 @@ class DelegatingVerbCallbacks(VerbCallbacks):
     def error(
         self,
         message: str,
-        cause: Exception | None = None,
-        stack: str | None = None,
-        details: dict[str, Any] | None = None,
+        cause: Optional[BaseException] = None,
+        stack: Optional[str] = None,
+        details: Optional[dict] = None,
     ):
         """A call back handler for when an error occurs."""
         self._workflow_callbacks.on_error(message, cause, stack, details)
 
-    def warning(self, message: str, details: dict[str, Any] | None = None):
+    def warning(self, message: str, details: Optional[dict] = None):
         """A call back handler for when a warning occurs."""
         self._workflow_callbacks.on_warning(message, details)
 
-    def log(self, message: str, details: dict[str, Any] | None = None):
+    def log(self, message: str, details: Optional[dict] = None):
         """A call back handler for when a log occurs."""
         self._workflow_callbacks.on_log(message, details)
 
-    def measure(self, name: str, value: float, details: dict[str, Any] | None = None):
+    def measure(self, name: str, value: float, details: Optional[dict] = None):
         """A call back handler for when a measurement occurs."""
         self._workflow_callbacks.on_measure(name, value, details)

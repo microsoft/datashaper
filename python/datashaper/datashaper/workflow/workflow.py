@@ -12,7 +12,7 @@ import time
 import traceback
 
 from collections import OrderedDict, defaultdict
-from typing import Any, Callable, Generic, Optional, TypeVar
+from typing import Any, Callable, Generic, Iterable, Optional, TypeVar, cast
 from uuid import uuid4
 
 import pandas as pd
@@ -27,10 +27,9 @@ from datashaper.table_store import Table, TableContainer
 from .types import MemoryProfile, VerbTiming, WorkflowRunResult
 from .verb_callbacks import DelegatingVerbCallbacks
 from .workflow_callbacks import (
-    EnsuringWorkflowCallbacks,
     MemoryProfilingWorkflowCallbacks,
-    NoopWorkflowCallbacks,
     WorkflowCallbacks,
+    WorkflowCallbacksRegistry,
 )
 
 
@@ -48,10 +47,10 @@ class Workflow(Generic[Context]):
     _schema: dict[str, Any]
     _inputs: dict[str, TableContainer]
     _graph: dict[str, ExecutionNode]
-    _dependency_graph: dict[str, set]
+    _dependency_graph: dict[str, set[str]]
     _last_step_id: str
     _dependencies: set[str]
-    _memory_profile: bool
+    _memory_profile: bool | None
 
     """Externals that this workflow depends on"""
 
@@ -138,7 +137,7 @@ class Workflow(Generic[Context]):
                 self._dependency_graph[input].add(step_id)
             previous_step_id = step.node_id
 
-        self._last_step_id = previous_step_id
+        self._last_step_id = cast(str, previous_step_id)
 
     @property
     def name(self) -> str:
@@ -243,7 +242,7 @@ class Workflow(Generic[Context]):
         )
 
     def _resolve_inputs(
-        self, verb: VerbDetails, inputs: str | dict[str, str | list[str]]
+        self, verb: VerbDetails, inputs: str | dict[str, list[str]]
     ) -> dict[str, Any]:
         def input_table(name: str) -> TableContainer:
             graph_node = self._graph[name] if name in self._graph else None
@@ -264,6 +263,8 @@ class Workflow(Generic[Context]):
                 self._inputs[name] if name in self._inputs else self._graph[name].result
             )
 
+            if table_container is None:
+                raise ValueError(f"Input table {name} not found in inputs or graph")
             if use_original_table:
                 return table_container
             else:
@@ -279,7 +280,7 @@ class Workflow(Generic[Context]):
                     input_mapping[key] = input_table(value)
                 else:
                     input_mapping[key] = [input_table(t) for t in value]
-            return {"input": VerbInput(**input_mapping)}
+            return {"input": VerbInput(**cast(Any, input_mapping))}
 
     def add_table(self, id: str, table: pd.DataFrame) -> None:
         """Add a dataframe to the graph with a given id."""
@@ -301,13 +302,13 @@ class Workflow(Generic[Context]):
     def run(
         self,
         context: Optional[Context] = None,
-        callbacks: WorkflowCallbacks = None,
+        callbacks: Optional[WorkflowCallbacks] = None,
     ) -> WorkflowRunResult:
         """Run the execution graph."""
         visited: set[str] = set()
-        nodes: list[ExecutionNode] = []
+        nodes: list[str] = []
 
-        def enqueue_available_nodes(possible_nodes: list[str]) -> None:
+        def enqueue_available_nodes(possible_nodes: Iterable[str]) -> None:
             for possible_node in possible_nodes:
                 if self._check_inputs(possible_node, visited):
                     nodes.append(possible_node)
@@ -382,17 +383,19 @@ class Workflow(Generic[Context]):
         return time.time() - start_verb_time
 
     def _get_workflow_callbacks(
-        self, callbacks: WorkflowCallbacks
+        self, callbacks: WorkflowCallbacks | None
     ) -> tuple[WorkflowCallbacks, MemoryProfilingWorkflowCallbacks | None]:
-        # Use the ensuring variant to guarantee that all protocol methods are available
-        callbacks = EnsuringWorkflowCallbacks(callbacks or NoopWorkflowCallbacks())
         profiler: MemoryProfilingWorkflowCallbacks | None = None
+        callback_handler = WorkflowCallbacksRegistry()
+
+        if callbacks is not None:
+            callback_handler.register(callbacks)
 
         if self._memory_profile:
-            profiler = MemoryProfilingWorkflowCallbacks(callbacks)
-            callbacks = profiler
+            profiler = MemoryProfilingWorkflowCallbacks()
+            callback_handler.register(profiler)
 
-        return (callbacks, profiler)
+        return (callback_handler, profiler)
 
     def export(self):
         """Export the graph into a workflow JSON object."""

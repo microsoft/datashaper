@@ -1,4 +1,4 @@
-from typing import Any, Protocol
+from typing import Optional, Protocol
 
 from ...progress.types import Progress
 
@@ -13,18 +13,18 @@ class VerbCallbacks(Protocol):
     def error(
         self,
         message: str,
-        cause: Exception | None = None,
-        stack: str | None = None,
-        details: dict[str, Any] | None = None,
+        cause: Optional[BaseException] = None,
+        stack: Optional[str] = None,
+        details: Optional[dict] = None,
     ) -> None:
         "Report a error from the verb execution."
         ...
 
-    def warning(self, message: str, details: dict[str, Any] | None = None):
+    def warning(self, message: str, details: Optional[dict] = None):
         "Report a warning from verb execution."
         ...
 
-    def log(self, message: str, details: dict[str, Any] | None = None):
+    def log(self, message: str, details: Optional[dict] = None):
         "Report an informational message from the verb execution."
         ...
 

@@ -23,9 +23,10 @@ def load_verbs(module):
         if not is_module:
             full_path = os.path.join(module_path, f"{sub_module}.py")
             module = importlib.util.spec_from_file_location(module_name, full_path)
-            module_to_load = f"{module.name}.{sub_module}"
-            importlib.import_module(module_to_load)
-            logger.info(f"Found module: {module_to_load}")
+            if module is not None:
+                module_to_load = f"{module.name}.{sub_module}"
+                importlib.import_module(module_to_load)
+                logger.info(f"Found module: {module_to_load}")
         else:
             full_path = os.path.join(module_path, sub_module)
             sub_module_name = f"{module_name}.{sub_module}"

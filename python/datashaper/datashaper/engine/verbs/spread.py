@@ -3,8 +3,12 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
+from typing import Optional, cast
+
 import numpy as np
 import pandas as pd
+
+from pandas._typing import Axes
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -22,10 +26,7 @@ def __normal_spread(input_table, columns, to, delimiter):
             if len(new_columns[0]) > 1
             else [new_column_name]
         )
-        new_columns = pd.DataFrame(
-            new_columns,
-            columns=columns,
-        )
+        new_columns = pd.DataFrame(new_columns, columns=cast(Axes, columns))
         output = pd.concat([output, new_columns], axis=1)
 
     return output
@@ -53,7 +54,7 @@ def __onehot_spread(input_table, columns, to, delimiter):
 def spread(
     input: VerbInput,
     column: str,
-    to: list[str] = None,
+    to: Optional[list[str]] = None,
     delimiter: str = ",",
     onehot: bool = False,
     preserveSource: bool = False,

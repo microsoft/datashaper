@@ -3,7 +3,10 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
+from typing import Optional, cast
+
 import numpy as np
+import pandas as pd
 
 from datashaper.engine.types import BinStrategy
 from datashaper.engine.verbs.verb_input import VerbInput
@@ -11,7 +14,15 @@ from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
 
 
-def __get_bucket_value(bin_edges, indices, n, clamped, min_max, value, printRange):
+def __get_bucket_value(
+    bin_edges,
+    indices,
+    n: int,
+    clamped: bool | None,
+    min_max,
+    value,
+    printRange: bool | None,
+):
     if value < min_max[0]:
         if printRange:
             return f"<{min_max[0]}"
@@ -65,14 +76,14 @@ def bin(
     to: str,
     column: str,
     strategy: str,
-    min: int = None,
-    max: int = None,
-    fixedcount: int = None,
-    fixedwidth: int = None,
-    clamped: bool = False,
-    printRange: bool = False,
+    min: Optional[int] = None,
+    max: Optional[int] = None,
+    fixedcount: Optional[int] = None,
+    fixedwidth: Optional[int] = None,
+    clamped: Optional[bool] = False,
+    printRange: Optional[bool] = False,
 ):
-    input_table = input.get_input()
+    input_table = cast(pd.DataFrame, input.get_input())
     bin_strategy = BinStrategy(strategy)
     min_max = (
         (min, max)
@@ -85,6 +96,7 @@ def bin(
             input_table[column], bins=fixedcount, range=min_max
         )
     elif bin_strategy == BinStrategy.FixedWidth:
+        fixedwidth = fixedwidth if fixedwidth is not None else 0
         bin_edges = np.histogram_bin_edges(
             input_table[column],
             bins=np.arange(min_max[0], min_max[1] + fixedwidth, fixedwidth, dtype=int),
