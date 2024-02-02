@@ -73,7 +73,7 @@ class TableContainer(Generic[T]):
     context: Optional[T] = None
 
 
-class TableStore:
+class TableStore(ABC):
     """A table store for storing and retrieving tables."""
 
     @abstractmethod
