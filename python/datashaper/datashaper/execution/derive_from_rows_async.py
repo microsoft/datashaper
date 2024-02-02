@@ -6,7 +6,7 @@ from typing import Any, Awaitable, Callable, TypeVar
 
 import pandas as pd
 
-from datashaper.progress import progress_ticker
+from datashaper.progress import ProgressTicker, progress_ticker
 from datashaper.workflow import VerbCallbacks
 
 
@@ -29,26 +29,29 @@ async def derive_from_rows_async(
     errors = []
 
     async def execute(
-        row: tuple[Any, pd.Series], sem: asyncio.Semaphore
+        row: tuple[Any, pd.Series], tick: ProgressTicker
     ) -> ItemType | None:
-        async with sem:
-            try:
-                return await transform(row[1])
-            except Exception as e:
-                traceback.print_exc()
-                errors.append(e)
-                return None
-            finally:
-                tick(1)
+        try:
+            output = await transform(row[1])
+            tick(1)
+            return output
+        except Exception as e:
+            traceback.print_exc()
+            errors.append(e)
+            return None
 
-    sem = asyncio.Semaphore(max_parallelism)
-    tasks = [asyncio.create_task(execute(row, sem)) for row in input.iterrows()]
-    result = await asyncio.gather(*tasks)
+    async def execute_wrapper(row: tuple[Any, pd.Series], tick: ProgressTicker):
+        return await asyncio.to_thread(execute, row, tick)
+
+    async with asyncio.Semaphore(max_parallelism):
+        result = await asyncio.gather(
+            *[await execute_wrapper(row, tick) for row in input.iterrows()]
+        )
+
     tick.done()
 
     for error in errors:
         callbacks.error("Received errors during parallel transformation", error)
-
     if len(errors) > 0:
         raise ValueError(
             "Errors occurred while running parallel transformation, could not complete!"
