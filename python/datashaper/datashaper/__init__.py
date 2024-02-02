@@ -36,7 +36,8 @@ from .execution import (
     ExecutionNode,
     VerbDefinitions,
     derive_from_rows,
-    derive_from_rows_async,
+    derive_from_rows_asyncio,
+    derive_from_rows_asyncio_threads,
     parallelize,
 )
 from .progress import (
@@ -69,7 +70,8 @@ from .workflow import (
 
 __all__ = [
     "derive_from_rows",
-    "derive_from_rows_async",
+    "derive_from_rows_asyncio",
+    "derive_from_rows_asyncio_threads",
     "parallelize",
     "VerbDefinitions",
     "ExecutionNode",
