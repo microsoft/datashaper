@@ -10,11 +10,11 @@ from .workflow_callbacks import WorkflowCallbacks
 class NoopWorkflowCallbacks(WorkflowCallbacks):
     """A no-op implementation of WorkflowCallbacks."""
 
-    def on_workflow_start(self) -> None:
+    def on_workflow_start(self, name: str, instance: object) -> None:
         """Execute this callback when a workflow starts."""
         pass
 
-    def on_workflow_end(self) -> None:
+    def on_workflow_end(self, name: str, instance: object) -> None:
         """Execute this callback when a workflow ends."""
         pass
 

@@ -13,11 +13,11 @@ class WorkflowCallbacks(Protocol):
     This base class is a "noop" implementation so that clients may implement just the callbacks they need.
     """
 
-    def on_workflow_start(self) -> None:
+    def on_workflow_start(self, name: str, instance: object) -> None:
         """Execute this callback when a workflow starts."""
         ...
 
-    def on_workflow_end(self) -> None:
+    def on_workflow_end(self, name: str, instance: object) -> None:
         """Execute this callback when a workflow ends."""
         ...
 

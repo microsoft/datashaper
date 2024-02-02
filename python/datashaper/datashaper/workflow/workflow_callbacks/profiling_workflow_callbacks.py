@@ -35,7 +35,7 @@ class MemoryProfilingWorkflowCallbacks(NoopWorkflowCallbacks):
         self._workflow_start = 0
         self._verb_start = 0
 
-    def on_workflow_start(self) -> None:
+    def on_workflow_start(self, name: str, instance: object) -> None:
         """Call when the workflow starts."""
         tracemalloc.start()
         _, self._peak_start_workflow = tracemalloc.get_traced_memory()
@@ -60,7 +60,7 @@ class MemoryProfilingWorkflowCallbacks(NoopWorkflowCallbacks):
         _, peak = tracemalloc.get_traced_memory()
         self._peak_memory[node.verb.name].append(peak - self._peak_start_verb)
 
-    def on_workflow_end(self) -> None:
+    def on_workflow_end(self, name: str, instance: object) -> None:
         """Call when the workflow ends."""
         total_time = time.time() - self._workflow_start
         self._timing["all"].append(total_time)

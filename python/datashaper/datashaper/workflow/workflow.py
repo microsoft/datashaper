@@ -321,7 +321,7 @@ class Workflow(Generic[Context]):
 
         # Use the ensuring variant to guarantee that all protocol methods are available
         callbacks, profiler = self._get_workflow_callbacks(callbacks)
-        callbacks.on_workflow_start()
+        callbacks.on_workflow_start(self.name, self)
         enqueue_available_nodes(self._graph.keys())
 
         verb_idx = 0
@@ -345,7 +345,7 @@ class Workflow(Generic[Context]):
             verb_idx += 1
 
         assert_all_visited()
-        callbacks.on_workflow_end()
+        callbacks.on_workflow_end(self.name, self)
 
         return WorkflowRunResult(
             verb_timings=verb_timings, memory_profile=_get_memory_profile(profiler)
@@ -366,6 +366,11 @@ class Workflow(Generic[Context]):
             callbacks.on_step_start(node, inputs)
             callbacks.on_step_progress(node, Progress(percent=0))
             result = node.verb.func(**node.args, **inputs, **verb_context)
+
+            # Unroll the result if it's a coroutine
+            # (we need to do this before calling on_step_end)
+            if inspect.iscoroutine(result):
+                result = asyncio.run(result)
         except Exception as e:
             message = f'Error executing verb "{node.verb.name}" in {self.name}: {e}'
             callbacks.on_error(message, e, traceback.format_exc())
@@ -373,9 +378,6 @@ class Workflow(Generic[Context]):
         finally:
             callbacks.on_step_progress(node, Progress(percent=1))
             callbacks.on_step_end(node, None)
-
-        if inspect.iscoroutine(result):
-            result = asyncio.run(result)
 
         node.result = result
 
