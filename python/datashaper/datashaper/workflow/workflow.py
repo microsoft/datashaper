@@ -321,7 +321,7 @@ class Workflow(Generic[Context]):
 
         # Use the ensuring variant to guarantee that all protocol methods are available
         callbacks, profiler = self._get_workflow_callbacks(callbacks)
-        callbacks.on_workflow_start()
+        callbacks.on_workflow_start(self.name, self)
         enqueue_available_nodes(self._graph.keys())
 
         verb_idx = 0
@@ -345,7 +345,7 @@ class Workflow(Generic[Context]):
             verb_idx += 1
 
         assert_all_visited()
-        callbacks.on_workflow_end()
+        callbacks.on_workflow_end(self.name, self)
 
         return WorkflowRunResult(
             verb_timings=verb_timings, memory_profile=_get_memory_profile(profiler)

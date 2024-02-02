@@ -20,17 +20,17 @@ class WorkflowCallbacksManager(WorkflowCallbacks):
         """Register a new WorkflowCallbacks type."""
         self._callbacks.append(callbacks)
 
-    def on_workflow_start(self) -> None:
+    def on_workflow_start(self, name: str, instance: object) -> None:
         """Execute this callback when a workflow starts."""
         for callback in self._callbacks:
             if hasattr(callback, "on_workflow_start"):
-                callback.on_workflow_start()
+                callback.on_workflow_start(name, instance)
 
-    def on_workflow_end(self) -> None:
+    def on_workflow_end(self, name: str, instance: object) -> None:
         """Execute this callback when a workflow ends."""
         for callback in self._callbacks:
             if hasattr(callback, "on_workflow_end"):
-                callback.on_workflow_end()
+                callback.on_workflow_end(name, instance)
 
     def on_step_start(self, node: ExecutionNode, inputs: dict[str, Any]) -> None:
         """Execute this callback every time a step starts."""
