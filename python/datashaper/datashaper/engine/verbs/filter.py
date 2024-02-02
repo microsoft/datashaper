@@ -34,8 +34,8 @@ def filter(input: VerbInput, column: str, criteria: list, logical: str = "or"):
     filter_index = filter_df(
         input_table, FilterArgs(column, filter_criteria, logical_operator)
     )
-
-    idx = filter_index[filter_index is True].index  # type: ignore
+    sub_idx = filter_index == True  # noqa: E712
+    idx = filter_index[sub_idx].index  # type: ignore
     output = input_table[input_table.index.isin(idx)].reset_index(drop=True)
 
     return TableContainer(table=cast(Table, output))
