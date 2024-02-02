@@ -367,8 +367,8 @@ class Workflow(Generic[Context]):
             callbacks.on_step_progress(node, Progress(percent=0))
             result = node.verb.func(**node.args, **inputs, **verb_context)
 
-            # Unroll the result if it's a coroutine      
-            # (we need to do this before calling on_step_end)   
+            # Unroll the result if it's a coroutine
+            # (we need to do this before calling on_step_end)
             if inspect.iscoroutine(result):
                 result = asyncio.run(result)
         except Exception as e:
