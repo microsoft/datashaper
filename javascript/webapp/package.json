@@ -37,7 +37,7 @@
 		"@datashaper/tables": "workspace:^",
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/workflow": "workspace:^",
-		"@essex/components": "^4.0.0",
+		"@essex/components": "^4.2.0",
 		"@essex/hooks": "^4.0.21",
 		"@fluentui/font-icons-mdl2": "^8.5.21",
 		"@fluentui/react": "^8.110.2",
