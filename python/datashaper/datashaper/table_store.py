@@ -138,6 +138,7 @@ class DiskCacheTableStore(TableStore):
         self._persist = persist
         self._maxsize = maxsize
         self._verbose = verbose
+        self._cache_get = self._get_caching_function()
 
     def __enter__(self) -> TableStore:
         self._path = tempfile.mkdtemp()
@@ -153,7 +154,6 @@ class DiskCacheTableStore(TableStore):
             print(f"saving table {name} to disk")
         table.table.to_parquet(f"{self._path}/{name}.parquet")
 
-    @cache
     def _get_caching_function(self):
         @lru_cache(maxsize=self._maxsize)
         def get_table(name: str) -> TableContainer:
@@ -165,7 +165,7 @@ class DiskCacheTableStore(TableStore):
 
     def get(self, name: str) -> TableContainer:
         """Get a table from the store."""
-        return self._get_caching_function()(name)
+        return self._cache_get(name)
 
     def remove(self, name: str) -> None:
         """Remove a table from the store."""
