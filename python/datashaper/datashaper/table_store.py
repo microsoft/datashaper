@@ -10,7 +10,7 @@ import tempfile
 
 from abc import ABC, abstractmethod
 from functools import lru_cache
-from typing import Any, Dict, Generic, TypeVar
+from typing import Any, Generic, TypeVar
 
 import pandas as pd
 
@@ -107,7 +107,7 @@ class DefaultTableStore(TableStore):
 
     def __init__(self) -> None:
         """Initialize the default table store."""
-        self._tables: Dict[str, TableContainer] = {}
+        self._tables: dict[str, TableContainer] = {}
 
     def add(self, name: str, table: TableContainer) -> None:
         """Add a table to the store."""
