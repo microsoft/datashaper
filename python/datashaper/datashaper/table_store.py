@@ -143,10 +143,12 @@ class DiskCacheTableStore(TableStore):
         self._cache_get = self._get_caching_function()
 
     def __enter__(self) -> TableStore:
+        """Enter the context manager."""
         self._path = tempfile.mkdtemp()
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
+        """Exit the context manager."""
         if not self._persist:
             self.clear()
 
