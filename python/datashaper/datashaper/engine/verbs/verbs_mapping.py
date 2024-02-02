@@ -8,19 +8,20 @@ import math
 import traceback
 
 from collections import namedtuple
+from enum import Enum
 from functools import cache
 from inspect import signature
-from typing import Callable
+from typing import Any, Awaitable, Callable, Concatenate
 
 import numpy as np
 import pandas as pd
 
 from dataclasses import dataclass, field
-from traitlets import Any
+from typing_extensions import ParamSpec
 
 from datashaper.engine.verbs import VerbInput
 from datashaper.progress import ProgressTicker, progress_ticker
-from datashaper.table_store import TableContainer
+from datashaper.table_store import Table, TableContainer
 
 
 def verb(
@@ -43,24 +44,37 @@ def verb(
     return inner
 
 
+class AsyncIOType(str, Enum):
+    """Enum for asyncio type."""
+
+    ASYNCIO = "asyncio"
+    THREADED = "threaded"
+
+
 def new_row(old_tuple: tuple, new_column_name: str, value: Any) -> tuple:
     """Helper function to return rows in row-wise operations."""
     old_named_tuple_type = type(old_tuple)
-    return namedtuple(
-        old_named_tuple_type.__name__, old_named_tuple_type._fields + (new_column_name,)
-    )(*(old_tuple + (value,)))
+    original_fields = old_named_tuple_type._fields  # type: ignore
+    return namedtuple("NewRow", original_fields + (new_column_name,))(
+        *(old_tuple + (value,))
+    )
+
+
+P = ParamSpec("P")
 
 
 def parallel_verb(
     name: str,
     treats_input_tables_as_immutable: bool = False,
     override_existing: bool = False,
-    asyncio_type: str = "asyncio",
+    asyncio_type: AsyncIOType = AsyncIOType.ASYNCIO,
     **kwargs,
 ) -> Callable:
     """Decorator for registering a parallel verb."""
 
-    def inner(func: Callable[..., pd.DataFrame]) -> Callable[..., TableContainer]:
+    def inner(
+        func: Callable[Concatenate[Table | tuple, P], Awaitable[Table]]
+    ) -> Callable[Concatenate[VerbInput, Any, int, P], Awaitable[TableContainer]]:
         @verb(
             name=name,
             treats_input_tables_as_immutable=treats_input_tables_as_immutable,
@@ -70,20 +84,20 @@ def parallel_verb(
             input: VerbInput,
             callbacks: Any,
             max_parallelism: int = 4,
-            *args,
-            **kwargs,
+            *args: P.args,
+            **kwargs: P.kwargs,
         ):
             input_table = input.source.table
-            chunk_size = kwargs.pop("chunk_size", 1)
+            chunk_size: int = kwargs.pop("chunk_size", 1)  # type: ignore
             if chunk_size == 1:
                 chunks = input_table.itertuples()
             elif (
                 chunk_size > 0
-                and signature(func).parameters["chunk"].annotation == pd.DataFrame
-                and signature(func).return_annotation == pd.DataFrame
+                and signature(func).parameters["chunk"].annotation == Table
+                and signature(func).return_annotation == Table
             ):
-                chunks = np.array_split(
-                    input_table, math.ceil(len(input_table) / chunk_size)
+                chunks = np.array_split(  # type: ignore
+                    input_table, math.ceil(len(input_table) / chunk_size)  # type: ignore
                 )
             else:
                 raise NotImplementedError(
@@ -92,41 +106,50 @@ def parallel_verb(
 
             tick = progress_ticker(
                 callbacks.progress,
-                num_total=len(chunks) if chunk_size > 1 else len(input_table),
+                num_total=len(chunks) if chunk_size > 1 else len(input_table),  # type: ignore
             )
             errors = []
+            stack_traces = []
 
             async def execute(
-                chunk: pd.DataFrame | tuple, tick: ProgressTicker, *args, **kwargs
-            ) -> pd.DataFrame | tuple:
-                try:
-                    output = await func(chunk=chunk, *args, **kwargs)
-                    tick(1)
-                    return output
-                except Exception as e:
-                    traceback.print_exc()
-                    errors.append(e)
-                    return None
+                chunk: Table | tuple,
+                tick: ProgressTicker,
+                semaphore: asyncio.Semaphore,
+                /,
+                *args: P.args,
+                **kwargs: P.kwargs,
+            ) -> Table | tuple | None:
+                async with semaphore:
+                    try:
+                        output = await func(chunk, *args, **kwargs)
+                        tick(1)
+                        return output
+                    except Exception as e:
+                        stack_traces.append(traceback.format_exc())
+                        errors.append(e)
+                        return None
 
+            semaphore = asyncio.Semaphore(max_parallelism)
             futures = [
-                execute(chunk=chunk, tick=tick, *args, **kwargs) for chunk in chunks
+                execute(chunk, tick, semaphore, *args, **kwargs) for chunk in chunks
             ]
-            if asyncio_type == "threaded":
-                futures = [asyncio.to_thread(future) for future in futures]
 
-            async with asyncio.Semaphore(max_parallelism):
-                results = await asyncio.gather(*futures)
+            if asyncio_type == AsyncIOType.THREADED:
+                futures = [asyncio.to_thread(future) for future in futures]  # type: ignore
+
+            results = await asyncio.gather(*futures)
 
             tick.done()
 
-            for error in errors:
+            for error, stack_trace in zip(errors, stack_traces):
                 callbacks.error("Received errors during parallel transformation", error)
+                print(stack_trace)
             if len(errors) > 0:
                 raise ValueError(
                     "Errors occurred while running parallel transformation, could not complete!"
                 )
             if chunk_size > 1:
-                return TableContainer(pd.concat(results))
+                return TableContainer(pd.concat(results))  # type: ignore
             else:
                 return TableContainer(pd.DataFrame(results))
 

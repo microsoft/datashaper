@@ -4,7 +4,7 @@
 #
 """The tablestore module contains the table store classes used by the datashaper."""
 
-from typing import Any, Dict, Generic, List, Optional, TypeVar, Union
+from typing import Any, Dict, Generic, List, Optional, TypeVar
 
 import pandas as pd
 
@@ -53,7 +53,7 @@ class TableMetadata:
 T = TypeVar("T")
 
 
-Table = Union[pd.DataFrame, DataFrameGroupBy]
+Table = pd.DataFrame | DataFrameGroupBy
 
 
 @dataclass
