@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import type { Verb } from '@datashaper/schema'
 import type { Step } from '@datashaper/workflow'
-import { readStep } from '@datashaper/workflow'
+import { readStep, isOutputColumnStep } from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
 import { CommandBar } from '@fluentui/react'
 import { useObservable, useObservableState } from 'observable-hooks'
@@ -63,11 +63,17 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 				const verb = item?.key as Verb
 				const target = item?.data?.id ? item?.data?.id : verb
 				const id = createTableId(verb)
+				const args = { column: selectedColumn } as any
+
 				const _step = readStep({
 					id,
 					verb,
-					args: { to: selectedColumn, column: selectedColumn } as any,
+					args,
 				})
+				// if the verb has an output column, default it to the selected column as a direct replacement
+				if (isOutputColumnStep(_step)) {
+					_step.args.to = selectedColumn
+				}
 				setStep(_step)
 				setModalTarget(target)
 				showModal()
