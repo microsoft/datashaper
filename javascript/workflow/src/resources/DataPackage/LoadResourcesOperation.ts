@@ -2,7 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DataPackageSchema, ResourceSchema } from '@datashaper/schema'
+import {
+	KnownProfile,
+	type DataPackageSchema,
+	type ResourceSchema,
+} from '@datashaper/schema'
 
 import { isReferenceSchema } from '../../predicates.js'
 import type { Resource } from '../Resource.js'
@@ -233,7 +237,9 @@ export class LoadResourcesOperation {
 		if (schema.profile == null) {
 			throw new Error('schema has no profile')
 		}
-		const handler = this.mgr.profileHandlers.get(schema.profile)
+		const handler =
+			this.mgr.profileHandlers.get(schema.profile) ||
+			this.mgr.profileHandlers.get(KnownProfile.UnknownResource)
 		if (handler != null) {
 			result = await handler.createInstance(schema)
 		}

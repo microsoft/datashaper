@@ -49,6 +49,7 @@ export const App: React.FC = memo(function App() {
 									profiles={customProfiles}
 									defaultSettings={defaultSettings}
 									appContext={context}
+									initialDataPackageUrl='examples/companies.json'
 								>
 									<About />
 								</DataShaperApp>

@@ -213,6 +213,18 @@
 					]
 				}
 			]
+		},
+		{
+			"$schema": "https://example.com",
+			"name": "unknown-resource",
+			"profile": "basic-json",
+			"description": "This is an example of a resource block that is unknown to the system becuause its profile has not been registered.",
+			"sources": [
+				{
+					"rel": "input",
+					"path": "companies"
+				}
+			]
 		}
 	]
 }
