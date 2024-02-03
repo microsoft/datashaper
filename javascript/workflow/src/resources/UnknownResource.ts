@@ -13,7 +13,7 @@ import { Resource } from './Resource.js'
  */
 export class UnknownResource extends Resource {
 	public $schema = 'unknown'
-	public readonly profile = KnownProfile.UnknownResource
+	public profile = KnownProfile.UnknownResource
 
 	public override defaultTitle(): string {
 		return 'Unknown resource'

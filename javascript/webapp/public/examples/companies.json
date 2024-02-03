@@ -216,9 +216,10 @@
 		},
 		{
 			"$schema": "https://example.com",
-			"name": "unknown-resource",
+			"name": "json",
 			"profile": "basic-json",
 			"description": "This is an example of a resource block that is unknown to the system becuause its profile has not been registered.",
+			"newProperty": "This is a property unknown to the base Resource schema.",
 			"sources": [
 				{
 					"rel": "input",
