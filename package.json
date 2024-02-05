@@ -12,6 +12,7 @@
 		"_ci_packages": "turbo run ci",
 		"_ci_js_packages": "turbo run ci --filter=\"./javascript/*\"",
 		"_ci_py_packages": "turbo run ci --filter=\"./python/*\"",
+		"python_install": "turbo run python_install",
 		"rome_check": "rome ci .",
 		"rome_fix": "rome check . --apply",
 		"generate:versions": "yarn node scripts/create_versions_file.mjs",

@@ -28,7 +28,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-
+        
       - uses: actions/checkout@v3
 
       - name: Get yarn cache directory path
@@ -55,7 +55,7 @@ jobs:
       - run: yarn generate:versions
         name: Versions
 
-      - run: yarn ci
+      - run: yarn ci:javascript
         name: Verify
         env:
           DEBUG: "datashaper:network,datashaper:DataTableProfile"
