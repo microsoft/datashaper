@@ -1,0 +1,12 @@
+{
+    "name": "@datashaper-py/core",
+    "private": true,
+    "scripts": {
+        "python_install": "poetry install",
+        "check": "poetry run poe check",
+        "fix": "poetry run poe fix",
+        "format": "poetry run poe format",
+        "build": "poetry build",
+        "test": "poetry run poe test"
+    }
+}

@@ -8,6 +8,11 @@
 				"javascript/schema/versions.d.ts"
 			]
 		},
+		"python_install": {
+			"dependsOn": [],
+			"outputs": [],
+			"cache": false
+		},
 		"build": {
 			"dependsOn": ["//#generate:versions", "^build"],
 			"outputs": ["dist/**", "docs/**"]

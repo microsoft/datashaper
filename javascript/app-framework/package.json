@@ -41,8 +41,7 @@
 		"observable-hooks": "^4.2.2",
 		"react-if": "^4.1.4",
 		"rxjs": "^7.8.1",
-		"tslib": "^2.5.3",
-		"yarn": "^1.22.19"
+		"tslib": "^2.5.3"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^24.0.5",

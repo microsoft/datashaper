@@ -55,7 +55,7 @@ jobs:
       - run: yarn generate:versions
         name: Versions
 
-      - run: yarn ci
+      - run: yarn ci:javascript
         name: Verify
         env:
           DEBUG: "datashaper:network,datashaper:DataTableProfile"
