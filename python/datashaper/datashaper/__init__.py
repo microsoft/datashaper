@@ -50,8 +50,8 @@ from .progress import (
 from .table_store import (
     ColumnMetadata,
     ColumnStats,
-    DefaultTableStore,
-    DiskCacheTableStore,
+    DiskTableStore,
+    InMemoryTableStore,
     Table,
     TableContainer,
     TableMetadata,
@@ -127,8 +127,8 @@ __all__ = [
     "TableContainer",
     "Table",
     "TableStore",
-    "DefaultTableStore",
-    "DiskCacheTableStore",
+    "InMemoryTableStore",
+    "DiskTableStore",
     # Progress Exports
     "progress_callback",
     "progress_iterable",

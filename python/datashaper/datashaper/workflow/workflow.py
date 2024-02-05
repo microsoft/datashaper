@@ -22,7 +22,7 @@ from jsonschema import validate as validate_schema
 from datashaper.engine.verbs import VerbDetails, VerbInput, VerbManager
 from datashaper.execution.execution_node import ExecutionNode
 from datashaper.progress.types import Progress
-from datashaper.table_store import DefaultTableStore, Table, TableContainer, TableStore
+from datashaper.table_store import InMemoryTableStore, Table, TableContainer, TableStore
 
 from .types import MemoryProfile, VerbTiming, WorkflowRunResult
 from .verb_callbacks import DelegatingVerbCallbacks
@@ -92,7 +92,7 @@ class Workflow(Generic[Context]):
         self._dependency_graph = defaultdict(set)
         self._graph = OrderedDict()
         self._table_store = (
-            table_store if table_store is not None else DefaultTableStore()
+            table_store if table_store is not None else InMemoryTableStore()
         )
 
         # Perform JSON-schema validation
