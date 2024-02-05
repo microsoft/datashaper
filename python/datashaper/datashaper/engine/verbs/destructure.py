@@ -5,8 +5,6 @@
 
 from typing import List
 
-import numpy as np
-import pandas as pd
 import json
 
 from datashaper.engine.verbs.verb_input import VerbInput
