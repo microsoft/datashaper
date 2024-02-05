@@ -82,7 +82,7 @@ def parallel_verb(
         )
         async def wrapper(
             input: VerbInput,
-            callbacks: Any,
+            callbacks: Any,  # TODO: Change this to VerbCallbacks once I figure out the circular import issue
             max_parallelism: int = 4,
             *args: P.args,
             **kwargs: P.kwargs,
@@ -125,7 +125,9 @@ def parallel_verb(
                         tick(1)
                         return output
                     except Exception as e:
-                        stack_traces.append(traceback.format_exc())
+                        stack_trace = traceback.format_exc()
+                        print(stack_trace)
+                        stack_traces.append(stack_trace)
                         errors.append(e)
                         return None
 
@@ -142,8 +144,11 @@ def parallel_verb(
             tick.done()
 
             for error, stack_trace in zip(errors, stack_traces):
-                callbacks.error("Received errors during parallel transformation", error)
-                print(stack_trace)
+                callbacks.error(
+                    "Received errors during parallel transformation",
+                    error,
+                    stack=stack_trace,
+                )
             if len(errors) > 0:
                 raise ValueError(
                     "Errors occurred while running parallel transformation, could not complete!"
