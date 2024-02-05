@@ -38,15 +38,11 @@ export const MappingFields: React.FC<CodebookMappingFieldProps> = memo(
 		const handleKeyChange = useHandleKeyChange(values, onUpdateMapping)
 		const handleValueChange = useHandleValueChange(
 			values,
-			field.type,
+			undefined,
 			onUpdateMapping,
 		)
 		const handleDelete = useHandleDelete(values, onUpdateMapping)
-		const handleButtonClick = useHandleAddButtonClick(
-			onUpdateMapping,
-			values,
-			field.type,
-		)
+		const handleButtonClick = useHandleAddButtonClick(onUpdateMapping, values)
 
 		const columnPairs = useMappingPairs(
 			field.mapping ?? {},
