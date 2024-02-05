@@ -11,13 +11,12 @@ from collections import namedtuple
 from enum import Enum
 from functools import cache
 from inspect import signature
-from typing import Any, Awaitable, Callable, Concatenate
+from typing import Any, Awaitable, Callable, Concatenate, ParamSpec
 
 import numpy as np
 import pandas as pd
 
 from dataclasses import dataclass, field
-from typing_extensions import ParamSpec
 
 from datashaper.engine.verbs import VerbInput
 from datashaper.progress import ProgressTicker, progress_ticker
