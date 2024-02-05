@@ -13039,12 +13039,30 @@
                 },
                 {
                   "kind": "Reference",
+                  "text": "Array",
+                  "canonicalReference": "!Array:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
                   "text": "Step",
                   "canonicalReference": "@datashaper/schema!Step:type"
                 },
                 {
                   "kind": "Content",
-                  "text": "[]"
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorkflowSchema",
+                  "canonicalReference": "@datashaper/schema!WorkflowSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
                 },
                 {
                   "kind": "Content",
@@ -13057,7 +13075,7 @@
               "name": "steps",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 7
               }
             }
           ],

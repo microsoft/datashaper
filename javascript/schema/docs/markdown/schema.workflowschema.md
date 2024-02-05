@@ -19,5 +19,5 @@ export interface WorkflowSchema extends ResourceSchema
 |  --- | --- | --- | --- |
 |  [input?](./schema.workflowschema.input.md) |  | string\[\] | <i>(Optional)</i> A list of input names that are expected to be provided in addition to the workflow steps |
 |  [profile](./schema.workflowschema.profile.md) |  | 'workflow' |  |
-|  [steps?](./schema.workflowschema.steps.md) |  | [Step](./schema.step.md)<!-- -->\[\] | <i>(Optional)</i> The workflow steps |
+|  [steps?](./schema.workflowschema.steps.md) |  | Array&lt;[Step](./schema.step.md) \| [WorkflowSchema](./schema.workflowschema.md)<!-- -->&gt; | <i>(Optional)</i> The workflow steps |
 

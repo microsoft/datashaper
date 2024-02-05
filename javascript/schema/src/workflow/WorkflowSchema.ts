@@ -14,7 +14,7 @@ export interface WorkflowSchema extends ResourceSchema {
 	/**
 	 * The workflow steps
 	 */
-	steps?: Step[]
+	steps?: Array<Step | WorkflowSchema>
 
 	/**
 	 * A list of input names that are expected to be provided in addition to the workflow steps

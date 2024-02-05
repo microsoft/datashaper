@@ -1310,7 +1310,7 @@ export interface WorkflowSchema extends ResourceSchema {
     input?: string[];
     // (undocumented)
     profile: 'workflow';
-    steps?: Step[];
+    steps?: Array<Step | WorkflowSchema>;
 }
 
 // Warning: (ae-missing-release-tag) "WorkflowStepId" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

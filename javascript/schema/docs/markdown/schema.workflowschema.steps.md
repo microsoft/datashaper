@@ -9,5 +9,5 @@ The workflow steps
 <b>Signature:</b>
 
 ```typescript
-steps?: Step[];
+steps?: Array<Step | WorkflowSchema>;
 ```
