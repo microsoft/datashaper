@@ -6,7 +6,7 @@
 import logging
 
 from functools import partial
-from typing import Callable, Dict, List, Tuple, Union
+from typing import Callable, Union
 from uuid import uuid4
 
 import pandas as pd
@@ -47,16 +47,7 @@ boolean_function_map = {
 }
 
 
-def __check_unknown(row: Tuple, column_indexes: List[int]) -> bool:
-    for index in column_indexes:
-        if pd.isna(row[index]) or pd.isnull(row[index]):
-            return True
-    return False
-
-
-def __correct_unknown_value(
-    df: pd.DataFrame, columns: List[str], target: str
-) -> pd.DataFrame:
+def __correct_unknown_value(df: pd.DataFrame, columns: list[str], target: str) -> None:
     df[target] = df[columns + [target]].apply(
         lambda x: None if pd.isnull(x[columns]).any() else x[target], axis=1
     )
@@ -80,11 +71,11 @@ def __not_equals(
     return ~df[column] == target
 
 
-def __is_null(df: pd.DataFrame, column: str, **kwargs) -> pd.Series:
+def __is_null(df: pd.DataFrame, column: str, **kwargs) -> pd.DataFrame | pd.Series:
     return df[column].isnull()
 
 
-def __is_not_null(df: pd.DataFrame, column: str, **kwargs) -> pd.Series:
+def __is_not_null(df: pd.DataFrame, column: str, **kwargs) -> pd.DataFrame | pd.Series:
     return df[column].notnull()
 
 
@@ -93,7 +84,7 @@ def __contains(
     column: str,
     target: Union[pd.Series, str, int, float, bool],
     **kwargs,
-) -> pd.Series:
+) -> pd.DataFrame | pd.Series:
     return df[column].str.contains(str(target), regex=False)
 
 
@@ -102,7 +93,7 @@ def __startswith(
     column: str,
     target: Union[pd.Series, str, int, float, bool],
     **kwargs,
-) -> pd.Series:
+) -> pd.DataFrame | pd.Series:
     return df[column].str.startswith(str(target))
 
 
@@ -169,7 +160,7 @@ _empty_comparisons = {
     BooleanComparisonOperator.IsNotEmpty,
 }
 
-_operator_map: Dict[
+_operator_map: dict[
     Union[
         StringComparisonOperator, NumericComparisonOperator, BooleanComparisonOperator
     ],
@@ -199,8 +190,8 @@ _operator_map: Dict[
 }
 
 
-def filter_df(df: pd.DataFrame, args: FilterArgs) -> pd.Series:
-    filters: List[str] = []
+def filter_df(df: pd.DataFrame, args: FilterArgs) -> pd.DataFrame | pd.Series:
+    filters: list[str] = []
     filtered_df: pd.DataFrame = df.copy()
 
     for criteria in args.criteria:

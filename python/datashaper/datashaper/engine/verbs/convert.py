@@ -6,12 +6,12 @@
 import numbers
 
 from datetime import datetime
-from typing import Callable, Dict, Optional, Union
+from typing import Callable, Optional, Union, cast
 
 import numpy as np
 import pandas as pd
 
-from pandas.api.types import is_bool_dtype, is_numeric_dtype
+from pandas.api.types import is_bool_dtype, is_datetime64_any_dtype, is_numeric_dtype
 
 from datashaper.engine.types import ParseType
 from datashaper.engine.verbs.verb_input import VerbInput
@@ -62,20 +62,15 @@ def convert_date_str(value: datetime, formatPattern: str) -> Union[str, float]:
         return np.nan
 
 
-def is_datetime(column: pd.Series) -> bool:
-    return column.map(lambda x: isinstance(x, datetime)).all()
-
-
-def to_str(column: pd.Series, formatPattern: str) -> pd.Series:
-    column_datetime: pd.Series = None
-    if column.dtype == object:
+def to_str(column: pd.Series, formatPattern: str) -> pd.DataFrame | pd.Series:
+    column_datetime: pd.Series | None = None
+    if is_datetime64_any_dtype(column):
         column_datetime = pd.to_datetime(column, errors="ignore")
-    if column_datetime is not None and is_datetime(column_datetime):
         return column_datetime.apply(lambda x: convert_date_str(x, formatPattern))
 
-    column_numeric: pd.Series = None
-    if column.dtype == object:
-        column_numeric = pd.to_numeric(column, errors="ignore")
+    column_numeric: pd.Series | None = None
+    if is_numeric_dtype(column):
+        column_numeric = cast(pd.Series, pd.to_numeric(column, errors="ignore"))
     if column_numeric is not None and is_numeric_dtype(column_numeric):
         try:
             column_numeric = column_numeric.astype(pd.Int64Dtype)
@@ -94,7 +89,7 @@ def to_datetime(column: pd.Series) -> pd.Series:
         return pd.to_datetime(column, errors="coerce")
 
 
-__type_mapping: Dict[ParseType, Callable] = {
+__type_mapping: dict[ParseType, Callable] = {
     ParseType.Boolean: lambda column, **kwargs: column.apply(lambda x: convert_bool(x)),
     ParseType.Date: lambda column, formatPattern, **kwargs: to_datetime(column),
     ParseType.Decimal: lambda column, **kwargs: column.apply(
@@ -119,7 +114,7 @@ def convert(
     parse_type = ParseType(type)
 
     input_table = input.get_input()
-    output = input_table
+    output = cast(pd.DataFrame, input_table)
 
     output[to] = __type_mapping[parse_type](
         column=output[column], radix=radix, formatPattern=formatPattern

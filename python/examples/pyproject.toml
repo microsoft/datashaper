@@ -9,7 +9,6 @@ readme = "README.md"
 python = ">=3.10,<4"
 datashaper = { path = "../datashaper", develop = true }
 requests = "^2.31.0"
-pyarrow = "^12.0.1"
 fastparquet = "^2023.4.0"
 openai = "^0.27.8"
 nbconvert = "^7.13.0"
@@ -28,6 +27,7 @@ pytest = "^7"
 pytest-cov = "^3.0.0"
 ipykernel = "^6.27.1"
 nbformat = "^5.9.2"
+pyright = "^1.1.349"
 
 
 [build-system]
@@ -46,13 +46,14 @@ _pydocstyle = 'pydocstyle examples'
 _codespell = 'codespell dodiscover/ doc/ examples/ --ignore-words=.codespellignore --skip "**/_build/*,**/auto_examples/*"'
 _test_with_coverage = 'coverage run -m pytest'
 _coverage_report = 'coverage report --show-missing'
+_pyright = "pyright"
 
 [[tool.poe.tasks.test]]
 sequence = ['_test_with_coverage', '_coverage_report']
 ignore_fail = 'return_non_zero'
 
 [[tool.poe.tasks.check]]
-sequence = ['_flake8', '_bandit', '_codespell', 'check_format', '_pydocstyle']
+sequence = ['_pyright', '_flake8', '_bandit', '_codespell', 'check_format', '_pydocstyle']
 ignore_fail = 'return_non_zero'
 
 [[tool.poe.tasks.format]]
@@ -82,3 +83,7 @@ lines_between_types = 1
 lines_after_imports = 2
 src_paths = ["datashaper", "tests"]
 extend_skip = ["setup.py"]
+
+[tool.pyright]
+include = ["examples"]
+exclude = ["**/node_modules", "**/__pycache__"]

@@ -2,8 +2,9 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+from typing import Any, cast
 
-from typing import List
+import pandas as pd
 
 from datashaper.engine.pandas import filter_df, get_operator
 from datashaper.engine.types import (
@@ -19,7 +20,7 @@ from datashaper.table_store import TableContainer
 
 @verb(name="binarize")
 def binarize(
-    input: VerbInput, to: str, column: str, criteria: List, logical: str = "or"
+    input: VerbInput, to: str, column: str, criteria: list, logical: str = "or"
 ):
     filter_criteria = [
         Criterion(
@@ -31,12 +32,12 @@ def binarize(
     ]
     logical_operator = BooleanLogicalOperator(logical)
 
-    input_table = input.get_input()
+    input_table = cast(pd.DataFrame, input.get_input())
 
     filter_result = filter_df(
         input_table, FilterArgs(column, filter_criteria, logical_operator)
     )
     output = input_table
-    output[to] = filter_result.map({True: 1, False: 0}, na_action="ignore")
+    output[to] = filter_result.map(cast(Any, {True: 1, False: 0}), na_action="ignore")
 
     return TableContainer(table=output)
