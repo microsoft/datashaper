@@ -28,7 +28,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-        
+
       - uses: actions/checkout@v3
 
       - name: Get yarn cache directory path
