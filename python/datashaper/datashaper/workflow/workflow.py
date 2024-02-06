@@ -59,7 +59,7 @@ class Workflow(Generic[Context]):
         self,
         schema: dict[str, Any],
         input_path: Optional[str] = None,
-        input_tables: Optional[dict[str, pd.DataFrame]] = None,
+        input_tables: Optional[dict[str, Table]] = None,
         schema_path: Optional[str] = None,
         verbs: Optional[dict[str, Callable]] = None,
         validate: Optional[bool] = False,
@@ -139,10 +139,14 @@ class Workflow(Generic[Context]):
 
         self._last_step_id = cast(str, previous_step_id)
 
-    def derive(self, schema: dict[str, Any], input_tables: dict[str, pd.DataFrame]) -> "Workflow":
+    def derive(
+        self, schema: dict[str, Any], input_tables: dict[str, Table]
+    ) -> "Workflow":
         """Derive a new workflow from the current one."""
         # Verbs are already registered, and we don't need to validate the schema again
-        return Workflow(schema, input_tables=input_tables, validate=self._validate_schema)
+        return Workflow(
+            schema, input_tables=input_tables, validate=self._validate_schema
+        )
 
     @property
     def name(self) -> str:
@@ -235,7 +239,10 @@ class Workflow(Generic[Context]):
         if "callbacks" in verb_args and "callbacks" not in exec_node.args:
             run_ctx["callbacks"] = callbacks
 
-        if "workflow_instance" in verb_args and "workflow_instance" not in exec_node.args:
+        if (
+            "workflow_instance" in verb_args
+            and "workflow_instance" not in exec_node.args
+        ):
             run_ctx["workflow_instance"] = self
 
         return run_ctx
@@ -375,8 +382,8 @@ class Workflow(Generic[Context]):
                 "input": self._resolve_inputs(node.verb, node.node_input),
                 **verb_context,
             }
-            if node.args.input is not None:
-                node_input["input_arg"] = node.args.input
+            if node.args["input"] is not None:
+                node_input["input_arg"] = node.args["input"]
 
             callbacks.on_step_start(node, node_input)
             callbacks.on_step_progress(node, Progress(percent=0))
