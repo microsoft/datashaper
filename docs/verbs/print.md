@@ -1,6 +1,6 @@
 # Print
 
-prints the message and the table that is being sent as input in the console.
+Prints the input table to the debug console, along with an optional message.
 
 Example
 
