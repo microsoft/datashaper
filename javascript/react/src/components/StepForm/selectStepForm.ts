@@ -32,12 +32,12 @@ import {
 	SampleForm,
 	SetOperationForm,
 	SpreadForm,
+	StringsReplaceForm,
 	UnfoldForm,
 	UnhotForm,
 	WindowForm,
 } from '../verbs/forms/index.js'
 import type { StepFormProps } from '../verbs/index.js'
-import { StringsReplaceForm } from '../verbs/forms/strings/StringsReplaceForm/StringsReplaceForm.js'
 
 const forms = {
 	aggregate: AggregateForm,

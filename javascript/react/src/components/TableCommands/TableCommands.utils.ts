@@ -80,8 +80,6 @@ export const groupedTableVerbs: GroupedVerbs[] = [
 	{
 		label: 'Debug',
 		alwaysEnabled: true,
-		verbs: [
-			Verb.Print
-		],
+		verbs: [Verb.Print],
 	},
 ]

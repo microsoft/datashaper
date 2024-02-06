@@ -29,6 +29,11 @@ export const Title = styled.h3`
 	margin: 8px 0 8px 0;
 `
 
+export const Subtitle = styled.span`
+	padding-left: 8px;
+	color: ${({ theme }) => theme.palette.themePrimary};
+`
+
 export const HeaderButtons = styled.div`
 	display: flex;
 	justify-content: flex-end;
