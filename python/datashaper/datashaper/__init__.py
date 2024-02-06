@@ -1,3 +1,4 @@
+from .constants import DEFAULT_INPUT_NAME
 from .engine import (
     Bin,
     BinStrategy,
@@ -56,7 +57,6 @@ from .table_store import (
     TableMetadata,
 )
 from .workflow import (
-    DEFAULT_INPUT_NAME,
     MemoryProfile,
     NoopWorkflowCallbacks,
     VerbCallbacks,

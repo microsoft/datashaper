@@ -1,14 +1,17 @@
+from datashaper.constants import DEFAULT_INPUT_NAME
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import Table, TableContainer
-from datashaper.workflow.workflow import DEFAULT_INPUT_NAME, Workflow
+
+
+# from datashaper.workflow.workflow import Workflow
 
 
 @verb(name="workflow")
 async def workflow(
     input: VerbInput,
     workflow: dict,
-    workflow_instance: Workflow,
+    workflow_instance: object,
     input_arg: dict[str, str] | None = None,
 ):
     """Apply a sequence of operations to the input table."""

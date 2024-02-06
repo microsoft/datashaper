@@ -23,6 +23,7 @@ from datashaper.execution.execution_node import ExecutionNode
 from datashaper.progress.types import Progress
 from datashaper.table_store import Table, TableContainer
 
+from ..constants import DEFAULT_INPUT_NAME
 from .types import MemoryProfile, VerbTiming, WorkflowRunResult
 from .verb_callbacks import DelegatingVerbCallbacks
 from .workflow_callbacks import (
@@ -36,8 +37,6 @@ from .workflow_callbacks import (
 SCHEMA_FILE = "../../schema/workflow.json"
 
 Context = TypeVar("Context")
-
-DEFAULT_INPUT_NAME = "source"
 
 
 class Workflow(Generic[Context]):
@@ -79,9 +78,6 @@ class Workflow(Generic[Context]):
         :param validate: Optional value, if true perform JSON-schema validation.
                          Defaults to False.
         :type validate: bool, optional
-
-        :param default_input: Optional value, the default input for the first step.
-        :type default_input: str, optional
         """
         self._schema_path = schema_path or SCHEMA_FILE
         self._schema = schema
@@ -382,8 +378,9 @@ class Workflow(Generic[Context]):
                 "input": self._resolve_inputs(node.verb, node.node_input),
                 **verb_context,
             }
-            if node.args["input"] is not None:
-                node_input["input_arg"] = node.args["input"]
+            input_arg = node.args.get("input_arg", None)
+            if input_arg is not None:
+                node_input["input_arg"] = input_arg
 
             callbacks.on_step_start(node, node_input)
             callbacks.on_step_progress(node, Progress(percent=0))
