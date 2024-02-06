@@ -21,6 +21,7 @@ import {
 	isInputKeyValueStep,
 	isInputTableListStep,
 	isOutputColumnStep,
+	NodeInput
 } from '@datashaper/workflow'
 import { format } from 'd3-format'
 
@@ -57,8 +58,8 @@ export function deriveDetails(step: Step): string | undefined {
 	} else if (isOutputColumnStep(verb)) {
 		return (args as OutputColumnArgs).to
 	} else if (isInputTableListStep(verb)) {
-		const others = step.input['other']
-			? step.input['other']
+		const others = step.input[NodeInput.Other]
+			? step.input[NodeInput.Other]
 			: step.input.others?.join(',')
 		return `with ${others}`
 	}
