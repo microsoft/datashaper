@@ -46,17 +46,17 @@ export function deriveDetails(step: Step): string | undefined {
 			return sample(step)
 	}
 
-	if (isInputColumnStep(step)) {
+	if (isInputColumnStep(verb)) {
 		return (args as InputColumnArgs).column
-	} else if (isInputColumnListStep(step)) {
+	} else if (isInputColumnListStep(verb)) {
 		return (args as InputColumnListArgs).columns.join(',')
-	} else if (isInputColumnRecordStep(step)) {
+	} else if (isInputColumnRecordStep(verb)) {
 		return Object.keys((args as InputColumnRecordArgs).columns).join(',')
-	} else if (isInputKeyValueStep(step)) {
+	} else if (isInputKeyValueStep(verb)) {
 		return `${(args as PivotArgs).key} & ${(args as PivotArgs).value}`
-	} else if (isOutputColumnStep(step)) {
+	} else if (isOutputColumnStep(verb)) {
 		return (args as OutputColumnArgs).to
-	} else if (isInputTableListStep(step)) {
+	} else if (isInputTableListStep(verb)) {
 		const others = step.input['other']
 			? step.input['other']
 			: step.input.others?.join(',')

@@ -9,14 +9,14 @@ Indicates whether the supplied step requires an input key and value column.
 <b>Signature:</b>
 
 ```typescript
-export declare function isInputKeyValueStep(step: Step): boolean;
+export declare function isInputKeyValueStep(verb: Verb): boolean;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  step | [Step](./workflow.step.md) |  |
+|  verb | Verb |  |
 
 <b>Returns:</b>
 

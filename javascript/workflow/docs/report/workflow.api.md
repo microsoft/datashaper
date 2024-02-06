@@ -18,6 +18,7 @@ import type { DataOrientation } from '@datashaper/schema';
 import type { DataPackageSchema } from '@datashaper/schema';
 import type { DataShape as DataShape_2 } from '@datashaper/schema/dist/datatable/DataShape.js';
 import type { DataTableSchema } from '@datashaper/schema';
+import { DataType } from '@datashaper/schema';
 import type { DeriveArgs } from '@datashaper/schema';
 import type { EncodeDecodeArgs } from '@datashaper/schema';
 import type { EraseArgs } from '@datashaper/schema';
@@ -31,6 +32,7 @@ import { InputColumnListArgs } from '@datashaper/schema';
 import { InputColumnRecordArgs } from '@datashaper/schema';
 import { InputKeyValueArgs } from '@datashaper/schema';
 import type { JoinArgs } from '@datashaper/schema';
+import { KnownProfile } from '@datashaper/schema';
 import type { LookupArgs } from '@datashaper/schema';
 import type { Maybe as Maybe_2 } from '@datashaper/workflow';
 import type { MergeArgs } from '@datashaper/schema';
@@ -55,7 +57,7 @@ import type { Subscription } from 'rxjs';
 import type { TableBundleSchema } from '@datashaper/schema';
 import { TableContainer } from '@datashaper/tables';
 import type { UnhotArgs } from '@datashaper/schema';
-import type { Verb } from '@datashaper/schema';
+import { Verb } from '@datashaper/schema';
 import type { WindowArgs } from '@datashaper/schema';
 import type { WorkflowSchema } from '@datashaper/schema';
 import type { WorkflowStepId } from '@datashaper/schema';
@@ -181,11 +183,6 @@ export class CodebookProfile implements ProfileHandler<Codebook, CodebookSchema>
     // (undocumented)
     readonly profile: Profile;
 }
-
-// Warning: (ae-missing-release-tag) "columnTransformVerbs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function columnTransformVerbs(filter?: (verb: Verb) => boolean): Verb[];
 
 // Warning: (ae-forgotten-export) The symbol "SetOperationNode" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "concat" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -509,6 +506,11 @@ export const isDataTable: (r: Resource | undefined) => r is DataTable;
 // @public (undocumented)
 export const isDataTableSchema: (r: ResourceSchema | undefined) => r is DataTableSchema;
 
+// Warning: (ae-missing-release-tag) "isDataTypeSupported" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function isDataTypeSupported(verb: Verb, type?: DataType): boolean;
+
 // Warning: (ae-missing-release-tag) "isDefaultInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -517,47 +519,42 @@ export const isDefaultInput: (name?: SocketName) => name is undefined;
 // Warning: (ae-missing-release-tag) "isInputColumnListStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function isInputColumnListStep(step: Step): boolean;
+export function isInputColumnListStep(verb: Verb): boolean;
 
 // Warning: (ae-missing-release-tag) "isInputColumnRecordStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function isInputColumnRecordStep(step: Step): boolean;
+export function isInputColumnRecordStep(verb: Verb): boolean;
 
 // Warning: (ae-missing-release-tag) "isInputColumnStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function isInputColumnStep(step: Step): boolean;
+export function isInputColumnStep(verb: Verb): boolean;
 
 // Warning: (ae-missing-release-tag) "isInputKeyValueStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function isInputKeyValueStep(step: Step): boolean;
+export function isInputKeyValueStep(verb: Verb): boolean;
 
 // Warning: (ae-missing-release-tag) "isInputTableListStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function isInputTableListStep(step: Step): boolean;
-
-// Warning: (ae-missing-release-tag) "isInputTableStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function isInputTableStep(step: Step): boolean;
+export function isInputTableListStep(verb: Verb): boolean;
 
 // Warning: (ae-missing-release-tag) "isNoArgsStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function isNoArgsStep(step: Step): boolean;
+export function isNoArgsStep(verb: Verb): boolean;
 
 // Warning: (ae-missing-release-tag) "isNumericInputStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public
-export function isNumericInputStep(step: Step): boolean;
+// @public (undocumented)
+export function isNumericInputStep(verb: Verb): boolean;
 
 // Warning: (ae-missing-release-tag) "isOutputColumnStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function isOutputColumnStep(step: Step): boolean;
+export function isOutputColumnStep(verb: Verb): boolean;
 
 // Warning: (ae-missing-release-tag) "isReference" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1095,6 +1092,33 @@ export const unhot: (id: string) => StepNode<TableContainer<unknown>, UnhotArgs>
 //
 // @public (undocumented)
 export const union: (id: string) => SetOperationNode<unknown>;
+
+// Warning: (ae-missing-release-tag) "UnknownResource" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export class UnknownResource extends Resource {
+    // (undocumented)
+    $schema: string;
+    constructor(resource?: ResourceSchema);
+    // (undocumented)
+    defaultName(): string;
+    // (undocumented)
+    defaultTitle(): string;
+    // (undocumented)
+    profile: KnownProfile;
+    // (undocumented)
+    toSchema(): ResourceSchema;
+}
+
+// Warning: (ae-missing-release-tag) "UnknownResourceProfile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class UnknownResourceProfile implements ProfileHandler<UnknownResource, ResourceSchema> {
+    // (undocumented)
+    createInstance(schema: ResourceSchema | undefined): Promise<UnknownResource>;
+    // (undocumented)
+    readonly profile: Profile;
+}
 
 // Warning: (ae-missing-release-tag) "unorder" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

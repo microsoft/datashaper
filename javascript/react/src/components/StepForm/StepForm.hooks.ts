@@ -61,7 +61,9 @@ export function useColumnFilter(
 	}, [table])
 	return useCallback(
 		(name: string) => {
-			return isNumericInputStep(step) ? typeMap[name] === DataType.Number : true
+			return isNumericInputStep(step.verb)
+				? typeMap[name] === DataType.Number
+				: true
 		},
 		[typeMap, step],
 	)

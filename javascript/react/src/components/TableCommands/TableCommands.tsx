@@ -64,14 +64,13 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 				const target = item?.data?.id ? item?.data?.id : verb
 				const id = createTableId(verb)
 				const args = { column: selectedColumn } as any
-
 				const _step = readStep({
 					id,
 					verb,
 					args,
 				})
 				// if the verb has an output column, default it to the selected column as a direct replacement
-				if (isOutputColumnStep(_step)) {
+				if (isOutputColumnStep(verb)) {
 					_step.args.to = selectedColumn
 				}
 				setStep(_step)
@@ -93,6 +92,8 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 			color,
 			background,
 			commandBarProps,
+			selectedColumn,
+			metadata,
 		)
 		const tableCommands = useTableCommands(
 			onCallStep,

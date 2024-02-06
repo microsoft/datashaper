@@ -2,140 +2,215 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Verb } from '@datashaper/schema'
+import { DataType, Verb } from '@datashaper/schema'
 import cloneDeep from 'lodash-es/cloneDeep.js'
-import difference from 'lodash-es/difference.js'
-import intersection from 'lodash-es/intersection.js'
 
 import type { Step } from '../resources/index.js'
 import { argsHasOutputColumn } from './args.js'
 import { nextColumnName } from './workflowSuggestion.js'
 
-enum Tags {
-	/**
-	 * An input table is required.
-	 * CHAIN and FETCH for example do not require table inputs.
-	 */
-	InputTable = 0,
+/**
+ * Tags to assign to each verb for requirements querying.
+ * TODO: it would be nice if this was collocated with each verb.
+ */
+interface TaggedVerb {
 	/**
 	 * More than one input table is required (e.g., set operations).
 	 */
-	InputTableList = 1,
+	inputTableList?: boolean
 	/**
 	 * A single input column is input
 	 */
-	InputColumn = 2,
+	inputColumn?: boolean
 	/**
-	 * Input column list
+	 * A list of input columns is required (e.g., merge)
 	 */
-	InputColumnList = 3,
+	inputColumnList?: boolean
 	/**
-	 * The column inputs are a map of string -> string
+	 * The column inputs are a map of string -> string (this is for rename)
 	 */
-	InputColumnRecord = 4,
+	inputColumnRecord?: boolean
 	/**
 	 * A key and value input column are required
 	 */
-	InputKeyValue = 5,
+	inputKeyValue?: boolean
 	/**
-	 * A single output column is input
+	 * A single new output column is created
 	 */
-	OutputColumn = 6,
+	outputColumn?: boolean
 	/**
-	 * This verb can modify the rows of a table
+	 * This verb can modify the row count of a table (e.g., via rollup or filtering)
 	 */
-	RowModifying = 7,
-	/**
-	 * This verb can only operate on numeric input columns
-	 */
-	NumericOnly = 8,
+	rowModifying?: boolean
 	/**
 	 * This verb accepts no arguments.
 	 */
-	NoArgs = 9,
+	noArgs?: boolean
+	/**
+	 * Indicates that this verb can only operate on the specified types.
+	 * Absence of this property indicates that the verb can operate on any type.
+	 */
+	dataTypeConstraints?: DataType[]
 }
 
-// TODO: this could be cleaner with a bitwise operator
-const TaggedVerbs: Record<Verb, Tags[]> = {
-	aggregate: [
-		Tags.InputTable,
-		Tags.InputColumn,
-		Tags.OutputColumn,
-		Tags.RowModifying,
-	],
-	bin: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn, Tags.NumericOnly],
-	binarize: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
-	boolean: [Tags.InputTable, Tags.OutputColumn, Tags.InputColumnList],
-	concat: [Tags.InputTable, Tags.InputTableList, Tags.RowModifying],
-	convert: [Tags.InputTable, Tags.InputColumn],
-	copy: [Tags.InputTable, Tags.OutputColumn, Tags.InputColumn],
-	dedupe: [Tags.InputTable, Tags.RowModifying, Tags.InputColumnList],
-	derive: [Tags.InputTable, Tags.OutputColumn],
-	difference: [Tags.InputTable, Tags.InputTableList, Tags.RowModifying],
-	decode: [Tags.InputTable],
-	drop: [Tags.InputTable, Tags.InputColumnList],
-	encode: [Tags.InputTable],
-	erase: [Tags.InputTable, Tags.RowModifying, Tags.InputColumn],
-	fill: [Tags.InputTable, Tags.OutputColumn],
-	filter: [Tags.InputTable, Tags.InputColumn, Tags.RowModifying],
-	fold: [Tags.InputTable, Tags.RowModifying, Tags.InputColumnList],
-	groupby: [Tags.InputTable, Tags.InputColumnList],
-	impute: [Tags.InputTable, Tags.InputColumn],
-	intersect: [Tags.InputTable, Tags.InputTableList, Tags.RowModifying],
-	join: [Tags.InputTable, Tags.InputTableList, Tags.RowModifying],
-	lookup: [Tags.InputTable, Tags.InputTableList, Tags.RowModifying],
-	merge: [Tags.InputTable, Tags.OutputColumn, Tags.InputColumnList],
-	print: [Tags.InputTable],
-	pivot: [Tags.InputTable, Tags.RowModifying, Tags.InputKeyValue],
-	onehot: [Tags.InputTable, Tags.InputColumn],
-	orderby: [Tags.InputTable],
-	recode: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
-	rename: [Tags.InputTable, Tags.InputColumnRecord],
-	rollup: [
-		Tags.InputTable,
-		Tags.InputColumn,
-		Tags.OutputColumn,
-		Tags.RowModifying,
-	],
-	sample: [Tags.InputTable, Tags.RowModifying],
-	select: [Tags.InputTable, Tags.InputColumnList],
-	spread: [Tags.InputTable, Tags.InputColumn],
-	'strings.replace': [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
-	'strings.lower': [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
-	'strings.upper': [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
-	unfold: [Tags.InputTable, Tags.RowModifying, Tags.InputKeyValue],
-	ungroup: [Tags.InputTable, Tags.NoArgs],
-	unhot: [Tags.InputTable, Tags.OutputColumn, Tags.InputColumnList],
-	union: [Tags.InputTable, Tags.InputTableList, Tags.RowModifying],
-	unorder: [Tags.InputTable, Tags.NoArgs],
-	unroll: [Tags.InputTable, Tags.RowModifying, Tags.InputColumn],
-	window: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
-}
+const TaggedVerbs: Record<Verb, TaggedVerb> = {
+	aggregate: {
+		inputColumn: true,
+		outputColumn: true,
+		rowModifying: true,
+	},
+	bin: {
+		inputColumn: true,
+		outputColumn: true,
+		dataTypeConstraints: [DataType.Number, DataType.Integer],
+	},
+	binarize: {
+		inputColumn: true,
+		outputColumn: true,
+	},
+	boolean: {
+		outputColumn: true,
+		inputColumnList: true,
+	},
+	concat: {
+		inputTableList: true,
+		rowModifying: true,
+	},
+	convert: {
+		inputColumn: true,
+	},
+	copy: {
+		outputColumn: true,
+		inputColumn: true,
+	},
+	dedupe: {
+		rowModifying: true,
+		inputColumnList: true,
+	},
+	derive: {
+		outputColumn: true,
+	},
+	difference: {
+		inputTableList: true,
+		rowModifying: true,
+	},
+	decode: {},
+	drop: {
+		inputColumnList: true,
+	},
+	encode: {},
+	erase: {
+		rowModifying: true,
+		inputColumn: true,
+	},
+	fill: {
+		outputColumn: true,
+	},
+	filter: {
+		inputColumn: true,
+		rowModifying: true,
+	},
+	fold: {
+		rowModifying: true,
+		inputColumnList: true,
+	},
+	groupby: {
+		inputColumnList: true,
+	},
+	impute: {
+		inputColumn: true,
+	},
+	intersect: {
+		inputTableList: true,
+		rowModifying: true,
+	},
+	join: {
+		inputTableList: true,
+		rowModifying: true,
+	},
+	lookup: {
+		inputTableList: true,
+		rowModifying: true,
+	},
+	merge: {
+		outputColumn: true,
+		inputColumnList: true,
+	},
+	print: {},
+	pivot: {
+		rowModifying: true,
+		inputKeyValue: true,
+	},
+	onehot: {
+		inputColumn: true,
+	},
+	orderby: {},
+	recode: {
+		inputColumn: true,
+		outputColumn: true,
+	},
+	rename: {
+		inputColumnRecord: true,
+	},
+	rollup: {
+		inputColumn: true,
+		outputColumn: true,
+		rowModifying: true,
+	},
+	sample: {
+		rowModifying: true,
+	},
+	select: {
+		inputColumnList: true,
+	},
+	spread: {
+		inputColumn: true,
+		dataTypeConstraints: [DataType.Array],
+	},
+	'strings.replace': {
+		inputColumn: true,
+		outputColumn: true,
+		dataTypeConstraints: [DataType.String],
+	},
+	'strings.lower': {
+		inputColumn: true,
+		outputColumn: true,
+		dataTypeConstraints: [DataType.String],
+	},
+	'strings.upper': {
+		inputColumn: true,
+		outputColumn: true,
+		dataTypeConstraints: [DataType.String],
+	},
+	unfold: {
+		rowModifying: true,
+		inputKeyValue: true,
+	},
+	ungroup: {
+		noArgs: true,
+	},
+	unhot: {
+		outputColumn: true,
+		inputColumnList: true,
+	},
 
-const INPUT_TABLE_VERBS = filterByTag(Tags.InputTable)
-const INPUT_TABLE_LIST_VERBS = filterByTag(Tags.InputTableList)
-const INPUT_COLUMN_VERBS = filterByTag(Tags.InputColumn)
-const INPUT_COLUMN_LIST_VERBS = filterByTag(Tags.InputColumnList)
-const INPUT_COLUMN_RECORD_VERBS = filterByTag(Tags.InputColumnRecord)
-const INPUT_KEY_VALUE_VERBS = filterByTag(Tags.InputKeyValue)
-const OUTPUT_COLUMN_VERBS = filterByTag(Tags.OutputColumn)
-const ROW_MODIFYING_VERBS = filterByTag(Tags.RowModifying)
-const NUMERIC_VERBS = filterByTag(Tags.NumericOnly)
-const NO_ARGS_VERBS = filterByTag(Tags.NoArgs)
+	union: {
+		inputTableList: true,
+		rowModifying: true,
+	},
+	unorder: {
+		noArgs: true,
+	},
 
-function filterByTag(tag: Tags) {
-	return Object.keys(TaggedVerbs).filter((key) => {
-		return TaggedVerbs[key as Verb].findIndex((t) => t === tag) >= 0
-	}) as Verb[]
-}
-
-/**
- * Indicates whether this step requires an input table.
- * @param step -
- * @returns
- */
-export function isInputTableStep(step: Step): boolean {
-	return isTagged(step, INPUT_TABLE_VERBS)
+	unroll: {
+		rowModifying: true,
+		inputColumn: true,
+		dataTypeConstraints: [DataType.Array],
+	},
+	window: {
+		inputColumn: true,
+		outputColumn: true,
+	},
 }
 
 /**
@@ -143,8 +218,8 @@ export function isInputTableStep(step: Step): boolean {
  * @param step -
  * @returns
  */
-export function isInputTableListStep(step: Step): boolean {
-	return isTagged(step, INPUT_TABLE_LIST_VERBS)
+export function isInputTableListStep(verb: Verb): boolean {
+	return !!TaggedVerbs[verb].inputTableList
 }
 
 /**
@@ -152,8 +227,8 @@ export function isInputTableListStep(step: Step): boolean {
  * @param step -
  * @returns
  */
-export function isInputColumnStep(step: Step): boolean {
-	return isTagged(step, INPUT_COLUMN_VERBS)
+export function isInputColumnStep(verb: Verb): boolean {
+	return !!TaggedVerbs[verb].inputColumn
 }
 
 /**
@@ -161,8 +236,8 @@ export function isInputColumnStep(step: Step): boolean {
  * @param step -
  * @returns
  */
-export function isInputColumnListStep(step: Step): boolean {
-	return isTagged(step, INPUT_COLUMN_LIST_VERBS)
+export function isInputColumnListStep(verb: Verb): boolean {
+	return !!TaggedVerbs[verb].inputColumnList
 }
 
 /**
@@ -170,8 +245,8 @@ export function isInputColumnListStep(step: Step): boolean {
  * @param step -
  * @returns
  */
-export function isInputColumnRecordStep(step: Step): boolean {
-	return isTagged(step, INPUT_COLUMN_RECORD_VERBS)
+export function isInputColumnRecordStep(verb: Verb): boolean {
+	return !!TaggedVerbs[verb].inputColumnRecord
 }
 
 /**
@@ -179,8 +254,8 @@ export function isInputColumnRecordStep(step: Step): boolean {
  * @param step -
  * @returns
  */
-export function isInputKeyValueStep(step: Step): boolean {
-	return isTagged(step, INPUT_KEY_VALUE_VERBS)
+export function isInputKeyValueStep(verb: Verb): boolean {
+	return !!TaggedVerbs[verb].inputKeyValue
 }
 
 /**
@@ -188,17 +263,8 @@ export function isInputKeyValueStep(step: Step): boolean {
  * @param step -
  * @returns
  */
-export function isOutputColumnStep(step: Step): boolean {
-	return isTagged(step, OUTPUT_COLUMN_VERBS)
-}
-
-/**
- * Indicates whether this step can only operate on numeric values.
- * @param step -
- * @returns
- */
-export function isNumericInputStep(step: Step): boolean {
-	return isTagged(step, NUMERIC_VERBS)
+export function isOutputColumnStep(verb: Verb): boolean {
+	return !!TaggedVerbs[verb].outputColumn
 }
 
 /**
@@ -206,26 +272,16 @@ export function isNumericInputStep(step: Step): boolean {
  * @param step -
  * @returns
  */
-export function isNoArgsStep(step: Step): boolean {
-	return isTagged(step, NO_ARGS_VERBS)
+export function isNoArgsStep(verb: Verb): boolean {
+	return !!TaggedVerbs[verb].noArgs
 }
 
-function isTagged(step: Step, verbs: Verb[]): boolean {
-	return verbs.findIndex((v) => v === step.verb) >= 0
-}
-
-/**
- * These are steps that specifically operate on an input/output column only.
- * In other words, they do not cause a change in the number of rows in a table,
- * such as an aggregate or filter would, and only replace or add one column.
- * @param filter -
- * @returns
- */
-export function columnTransformVerbs(
-	filter: (verb: Verb) => boolean = () => true,
-): Verb[] {
-	const columnBased = intersection(INPUT_COLUMN_VERBS, OUTPUT_COLUMN_VERBS)
-	return difference(columnBased, ROW_MODIFYING_VERBS).filter(filter)
+// TODO: this is only used in one place to filter columns, and could be replaced with more generic logic for any type matching
+export function isNumericInputStep(verb: Verb): boolean {
+	return (
+		isDataTypeSupported(verb, DataType.Number) ||
+		isDataTypeSupported(verb, DataType.Integer)
+	)
 }
 
 /**
@@ -242,11 +298,24 @@ export function cloneStep(
 	columnNames?: string[],
 ): Step<unknown> {
 	const clone = cloneDeep(step) as any
-
 	if (columnNames?.length) {
 		if (argsHasOutputColumn(clone.args)) {
-			clone.args['to'] = nextColumnName(clone.args['to'] as string, columnNames)
+			clone.args.to = nextColumnName(clone.args.to as string, columnNames)
 		}
 	}
 	return clone
+}
+
+/**
+ * Indicates whether the specified data type is supported by the step.
+ * @param verb
+ * @param type
+ * @returns
+ */
+export function isDataTypeSupported(verb: Verb, type?: DataType): boolean {
+	const constraints = TaggedVerbs[verb]?.dataTypeConstraints
+	if (!constraints || !type) {
+		return true
+	}
+	return !!constraints.find((t) => t === type)
 }

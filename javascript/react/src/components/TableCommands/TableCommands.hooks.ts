@@ -3,8 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Verb } from '@datashaper/schema'
-import type { Step } from '@datashaper/workflow'
+import { type Verb } from '@datashaper/schema'
+import type { TableMetadata } from '@datashaper/tables'
+import { type Step, isDataTypeSupported } from '@datashaper/workflow'
 import type {
 	ICommandBarItemProps,
 	ICommandBarProps,
@@ -50,7 +51,7 @@ function collapseScopedVerbs(verbs: string[]): Record<string, string | object> {
 	return walk(verbs, {})
 }
 
-function getOverflowVerbItems(
+function getOverflowTableVerbItems(
 	onCallStep: (
 		ev?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
 		item?: IContextualMenuItem,
@@ -95,7 +96,61 @@ function getOverflowVerbItems(
 	})
 }
 
-function getMainVerbItems(
+function getOverflowColumnVerbItems(
+	onCallStep: (
+		ev?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
+		item?: IContextualMenuItem,
+	) => void,
+	disabled: boolean,
+	verbList: GroupedVerbs[],
+	id: string,
+	selectedColumn?: string,
+	metadata?: TableMetadata,
+): ICommandBarItemProps[] {
+	function walk(verbs: any, disabled: boolean, click: any) {
+		return Object.entries(verbs).map(([key, value]) => {
+			// TODO: it would be really nice to disable the parent menu if all submenu items are disabled
+			const enabled = shouldColumnVerbBeEnabled(
+				value as Verb,
+				disabled,
+				selectedColumn,
+				metadata,
+			)
+			const item: ICommandBarItemProps = {
+				key,
+				text: upperFirst(key),
+				data: { id },
+				disabled: !enabled,
+			}
+			if (typeof value === 'string') {
+				item.key = value
+				item.onClick = click
+			} else {
+				item.subMenuProps = {
+					items: walk(value, disabled, click),
+				}
+			}
+			return item
+		})
+	}
+
+	return verbList.map((group) => {
+		// collapse scoped verbs into a tree for hierarchical submenus
+		const verbs = collapseScopedVerbs(group.verbs)
+		const menu = {
+			key: `__section-${group.label}__`,
+			itemType: ContextualMenuItemType.Section,
+			sectionProps: {
+				topDivider: true,
+				title: group.label,
+				items: walk(verbs, group?.alwaysEnabled ? false : disabled, onCallStep),
+			},
+		}
+		return menu
+	})
+}
+
+function getMainTableVerbItems(
 	onCallStep: (
 		ev?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
 		item?: IContextualMenuItem,
@@ -103,27 +158,77 @@ function getMainVerbItems(
 	verbList: Verb[],
 	disabled: boolean,
 ): ICommandBarItemProps[] {
-	const items = [
-		{
-			key: `divider${uniqueId()}`,
-			id: `divider${uniqueId()}`,
-			commandBarButtonAs: VerticalDivider,
-			buttonStyles: { wrapper: { padding: '8px 2px', height: '100%' } },
-			itemType: ContextualMenuItemType.Divider,
-		} as ICommandBarItemProps,
-	]
+	const items = [dividerItem()]
 	verbList.forEach((verb) => {
-		items.push({
-			key: verb,
-			text: upperFirst(verb),
-			id: verb,
-			iconProps: { iconName: getVerbIcon(verb) },
-			onClick: onCallStep,
-			disabled,
-		} as ICommandBarItemProps)
+		items.push(itemTemplate(verb, disabled, onCallStep))
 	})
-
 	return items
+}
+
+function getMainColumnVerbItems(
+	onCallStep: (
+		ev?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
+		item?: IContextualMenuItem,
+	) => void,
+	verbList: Verb[],
+	disabled: boolean,
+	selectedColumn?: string,
+	metadata?: TableMetadata,
+): ICommandBarItemProps[] {
+	const items = [dividerItem()]
+	verbList.forEach((verb) => {
+		const enabled = shouldColumnVerbBeEnabled(
+			verb,
+			disabled,
+			selectedColumn,
+			metadata,
+		)
+		items.push(itemTemplate(verb, !enabled, onCallStep))
+	})
+	return items
+}
+
+function dividerItem() {
+	return {
+		key: `divider${uniqueId()}`,
+		id: `divider${uniqueId()}`,
+		commandBarButtonAs: VerticalDivider,
+		buttonStyles: { wrapper: { padding: '8px 2px', height: '100%' } },
+		itemType: ContextualMenuItemType.Divider,
+	} as ICommandBarItemProps
+}
+
+function itemTemplate(
+	verb: Verb,
+	disabled: boolean,
+	onCallStep: (
+		ev?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
+		item?: IContextualMenuItem,
+	) => void,
+) {
+	return {
+		key: verb,
+		text: upperFirst(verb),
+		id: verb,
+		iconProps: { iconName: getVerbIcon(verb) },
+		onClick: onCallStep,
+		disabled,
+	} as ICommandBarItemProps
+}
+
+// this function checks a verbs tags against the selected column's data type to determine if it should be operational
+function shouldColumnVerbBeEnabled(
+	verb: Verb,
+	disabled: boolean,
+	selectedColumn?: string,
+	metadata?: TableMetadata,
+) {
+	// explicit disabled always overrides type checks
+	// also automatically disabled if no column is selected, since these require an input column
+	if (disabled || !selectedColumn) {
+		return false
+	}
+	return isDataTypeSupported(verb, metadata?.columns[selectedColumn]?.type)
 }
 
 export function useColumnCommands(
@@ -135,23 +240,33 @@ export function useColumnCommands(
 	color?: string,
 	background?: string,
 	baseProps?: Partial<ICommandBarProps>,
+	selectedColumn?: string,
+	metadata?: TableMetadata,
 ): ICommandBarProps {
 	const base = useMemo(() => {
 		const id = 'overflowColumn'
 		return merge(
 			{
-				items: getMainVerbItems(onCallStep, mainColumnVerbs, disabled),
-				overflowItems: getOverflowVerbItems(
+				items: getMainColumnVerbItems(
+					onCallStep,
+					mainColumnVerbs,
+					disabled,
+					selectedColumn,
+					metadata,
+				),
+				overflowItems: getOverflowColumnVerbItems(
 					onCallStep,
 					disabled,
 					groupedColumnVerbs,
 					id,
+					selectedColumn,
+					metadata,
 				),
 				id,
 			},
 			baseProps,
 		)
-	}, [onCallStep, disabled, baseProps])
+	}, [onCallStep, selectedColumn, disabled, metadata, baseProps])
 	return useHeaderCommandBarDefaults(base, false, { color, background })
 }
 
@@ -169,8 +284,8 @@ export function useTableCommands(
 		const id = 'overflowTable'
 		return merge(
 			{
-				items: getMainVerbItems(onCallStep, mainTableVerbs, disabled),
-				overflowItems: getOverflowVerbItems(
+				items: getMainTableVerbItems(onCallStep, mainTableVerbs, disabled),
+				overflowItems: getOverflowTableVerbItems(
 					onCallStep,
 					disabled,
 					groupedTableVerbs,

@@ -118,6 +118,7 @@ export const TableBundleEditor: React.FC<ProfileComponentProps<TableBundle>> =
 							<TableCommands
 								{...tableCommandProps}
 								workflow={workflow}
+								metadata={selectedTable.metadata}
 								selectedColumn={selectedColumn}
 								onAddStep={onCreate}
 								onRemoveStep={onDelete}

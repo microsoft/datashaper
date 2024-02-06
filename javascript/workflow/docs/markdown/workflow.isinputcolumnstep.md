@@ -9,14 +9,14 @@ Indicates whether the supplied step requires a single input column.
 <b>Signature:</b>
 
 ```typescript
-export declare function isInputColumnStep(step: Step): boolean;
+export declare function isInputColumnStep(verb: Verb): boolean;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  step | [Step](./workflow.step.md) |  |
+|  verb | Verb |  |
 
 <b>Returns:</b>
 

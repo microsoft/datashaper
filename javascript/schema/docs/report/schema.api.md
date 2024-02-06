@@ -600,6 +600,8 @@ export enum KnownProfile {
     // (undocumented)
     TableBundle = "tablebundle",
     // (undocumented)
+    UnknownResource = "unknown",
+    // (undocumented)
     Workflow = "workflow"
 }
 

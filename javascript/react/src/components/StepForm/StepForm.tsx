@@ -77,7 +77,7 @@ export const StepForm: React.FC<StepFormProps> = memo(function StepForm({
 	return StepArgs == null ? null : (
 		<Container className='step-component'>
 			{/* Input Column List */}
-			{isInputColumnListStep(s) ? (
+			{isInputColumnListStep(s.verb) ? (
 				<MultiDropdown
 					required={true}
 					label={'Columns'}
@@ -91,7 +91,7 @@ export const StepForm: React.FC<StepFormProps> = memo(function StepForm({
 			) : null}
 
 			{/* Input Column */}
-			{!hideInputColumn && isInputColumnStep(s) ? (
+			{!hideInputColumn && isInputColumnStep(s.verb) ? (
 				<TableColumnDropdown
 					required
 					options={columnOptions}
@@ -111,7 +111,7 @@ export const StepForm: React.FC<StepFormProps> = memo(function StepForm({
 			/>
 
 			{/* Output Column */}
-			{isOutputColumnStep(s) ? (
+			{isOutputColumnStep(s.verb) ? (
 				<TextField
 					required
 					label={'New column name'}

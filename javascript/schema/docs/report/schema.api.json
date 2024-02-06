@@ -6496,6 +6496,27 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!KnownProfile.UnknownResource:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "UnknownResource = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"unknown\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "UnknownResource"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "@datashaper/schema!KnownProfile.Workflow:member",
               "docComment": "",
               "excerptTokens": [

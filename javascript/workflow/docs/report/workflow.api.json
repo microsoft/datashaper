@@ -2406,64 +2406,6 @@
           ]
         },
         {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/workflow!columnTransformVerbs:function(1)",
-          "docComment": "/**\n * These are steps that specifically operate on an input/output column only. In other words, they do not cause a change in the number of rows in a table, such as an aggregate or filter would, and only replace or add one column.\n *\n * @param filter - \n *\n * @returns \n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function columnTransformVerbs(filter?: "
-            },
-            {
-              "kind": "Content",
-              "text": "(verb: "
-            },
-            {
-              "kind": "Reference",
-              "text": "Verb",
-              "canonicalReference": "@datashaper/schema!Verb:enum"
-            },
-            {
-              "kind": "Content",
-              "text": ") => boolean"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Reference",
-              "text": "Verb",
-              "canonicalReference": "@datashaper/schema!Verb:enum"
-            },
-            {
-              "kind": "Content",
-              "text": "[]"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 5,
-            "endIndex": 7
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "filter",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 4
-              },
-              "isOptional": true
-            }
-          ],
-          "name": "columnTransformVerbs"
-        },
-        {
           "kind": "Variable",
           "canonicalReference": "@datashaper/workflow!concat:var",
           "docComment": "",
@@ -6940,6 +6882,68 @@
           }
         },
         {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/workflow!isDataTypeSupported:function(1)",
+          "docComment": "/**\n * Indicates whether the specified data type is supported by the step.\n *\n * @param verb - \n *\n * @param type - \n *\n * @returns \n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function isDataTypeSupported(verb: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Verb",
+              "canonicalReference": "@datashaper/schema!Verb:enum"
+            },
+            {
+              "kind": "Content",
+              "text": ", type?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "DataType",
+              "canonicalReference": "@datashaper/schema!DataType:enum"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "boolean"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 6
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "verb",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "type",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "isDataTypeSupported"
+        },
+        {
           "kind": "Variable",
           "canonicalReference": "@datashaper/workflow!isDefaultInput:var",
           "docComment": "",
@@ -6986,12 +6990,12 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare function isInputColumnListStep(step: "
+              "text": "export declare function isInputColumnListStep(verb: "
             },
             {
               "kind": "Reference",
-              "text": "Step",
-              "canonicalReference": "@datashaper/workflow!Step:interface"
+              "text": "Verb",
+              "canonicalReference": "@datashaper/schema!Verb:enum"
             },
             {
               "kind": "Content",
@@ -7014,7 +7018,7 @@
           "overloadIndex": 1,
           "parameters": [
             {
-              "parameterName": "step",
+              "parameterName": "verb",
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -7031,12 +7035,12 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare function isInputColumnRecordStep(step: "
+              "text": "export declare function isInputColumnRecordStep(verb: "
             },
             {
               "kind": "Reference",
-              "text": "Step",
-              "canonicalReference": "@datashaper/workflow!Step:interface"
+              "text": "Verb",
+              "canonicalReference": "@datashaper/schema!Verb:enum"
             },
             {
               "kind": "Content",
@@ -7059,7 +7063,7 @@
           "overloadIndex": 1,
           "parameters": [
             {
-              "parameterName": "step",
+              "parameterName": "verb",
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -7076,12 +7080,12 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare function isInputColumnStep(step: "
+              "text": "export declare function isInputColumnStep(verb: "
             },
             {
               "kind": "Reference",
-              "text": "Step",
-              "canonicalReference": "@datashaper/workflow!Step:interface"
+              "text": "Verb",
+              "canonicalReference": "@datashaper/schema!Verb:enum"
             },
             {
               "kind": "Content",
@@ -7104,7 +7108,7 @@
           "overloadIndex": 1,
           "parameters": [
             {
-              "parameterName": "step",
+              "parameterName": "verb",
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -7121,12 +7125,12 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare function isInputKeyValueStep(step: "
+              "text": "export declare function isInputKeyValueStep(verb: "
             },
             {
               "kind": "Reference",
-              "text": "Step",
-              "canonicalReference": "@datashaper/workflow!Step:interface"
+              "text": "Verb",
+              "canonicalReference": "@datashaper/schema!Verb:enum"
             },
             {
               "kind": "Content",
@@ -7149,7 +7153,7 @@
           "overloadIndex": 1,
           "parameters": [
             {
-              "parameterName": "step",
+              "parameterName": "verb",
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -7166,12 +7170,12 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare function isInputTableListStep(step: "
+              "text": "export declare function isInputTableListStep(verb: "
             },
             {
               "kind": "Reference",
-              "text": "Step",
-              "canonicalReference": "@datashaper/workflow!Step:interface"
+              "text": "Verb",
+              "canonicalReference": "@datashaper/schema!Verb:enum"
             },
             {
               "kind": "Content",
@@ -7194,7 +7198,7 @@
           "overloadIndex": 1,
           "parameters": [
             {
-              "parameterName": "step",
+              "parameterName": "verb",
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -7206,62 +7210,17 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@datashaper/workflow!isInputTableStep:function(1)",
-          "docComment": "/**\n * Indicates whether this step requires an input table.\n *\n * @param step - \n *\n * @returns \n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function isInputTableStep(step: "
-            },
-            {
-              "kind": "Reference",
-              "text": "Step",
-              "canonicalReference": "@datashaper/workflow!Step:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Content",
-              "text": "boolean"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 3,
-            "endIndex": 4
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "step",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            }
-          ],
-          "name": "isInputTableStep"
-        },
-        {
-          "kind": "Function",
           "canonicalReference": "@datashaper/workflow!isNoArgsStep:function(1)",
           "docComment": "/**\n * Indicates whether this step accepts arguments\n *\n * @param step - \n *\n * @returns \n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare function isNoArgsStep(step: "
+              "text": "export declare function isNoArgsStep(verb: "
             },
             {
               "kind": "Reference",
-              "text": "Step",
-              "canonicalReference": "@datashaper/workflow!Step:interface"
+              "text": "Verb",
+              "canonicalReference": "@datashaper/schema!Verb:enum"
             },
             {
               "kind": "Content",
@@ -7284,7 +7243,7 @@
           "overloadIndex": 1,
           "parameters": [
             {
-              "parameterName": "step",
+              "parameterName": "verb",
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -7297,16 +7256,16 @@
         {
           "kind": "Function",
           "canonicalReference": "@datashaper/workflow!isNumericInputStep:function(1)",
-          "docComment": "/**\n * Indicates whether this step can only operate on numeric values.\n *\n * @param step - \n *\n * @returns \n */\n",
+          "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare function isNumericInputStep(step: "
+              "text": "export declare function isNumericInputStep(verb: "
             },
             {
               "kind": "Reference",
-              "text": "Step",
-              "canonicalReference": "@datashaper/workflow!Step:interface"
+              "text": "Verb",
+              "canonicalReference": "@datashaper/schema!Verb:enum"
             },
             {
               "kind": "Content",
@@ -7329,7 +7288,7 @@
           "overloadIndex": 1,
           "parameters": [
             {
-              "parameterName": "step",
+              "parameterName": "verb",
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -7346,12 +7305,12 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare function isOutputColumnStep(step: "
+              "text": "export declare function isOutputColumnStep(verb: "
             },
             {
               "kind": "Reference",
-              "text": "Step",
-              "canonicalReference": "@datashaper/workflow!Step:interface"
+              "text": "Verb",
+              "canonicalReference": "@datashaper/schema!Verb:enum"
             },
             {
               "kind": "Content",
@@ -7374,7 +7333,7 @@
           "overloadIndex": 1,
           "parameters": [
             {
-              "parameterName": "step",
+              "parameterName": "verb",
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -14309,6 +14268,368 @@
             "startIndex": 1,
             "endIndex": 4
           }
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@datashaper/workflow!UnknownResource:class",
+          "docComment": "/**\n * Represents an instance of an unknown resource type. This allows us to load and display arbitrary resources that have not been explicitly registered.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class UnknownResource extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Resource",
+              "canonicalReference": "@datashaper/workflow!Resource:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "UnknownResource",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@datashaper/workflow!UnknownResource:constructor(1)",
+              "docComment": "/**\n * Constructs a new instance of the `UnknownResource` class\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(resource?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceSchema",
+                  "canonicalReference": "@datashaper/schema!ResourceSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "resource",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": true
+                }
+              ]
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!UnknownResource#$schema:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "$schema: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "$schema",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!UnknownResource#defaultName:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "defaultName(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "name": "defaultName"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!UnknownResource#defaultTitle:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "defaultTitle(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "name": "defaultTitle"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!UnknownResource#profile:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "profile: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "KnownProfile",
+                  "canonicalReference": "@datashaper/schema!KnownProfile:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "profile",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!UnknownResource#toSchema:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "toSchema(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceSchema",
+                  "canonicalReference": "@datashaper/schema!ResourceSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "name": "toSchema"
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@datashaper/workflow!UnknownResourceProfile:class",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class UnknownResourceProfile implements "
+            },
+            {
+              "kind": "Reference",
+              "text": "ProfileHandler",
+              "canonicalReference": "@datashaper/workflow!ProfileHandler:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "UnknownResource",
+              "canonicalReference": "@datashaper/workflow!UnknownResource:class"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "ResourceSchema",
+              "canonicalReference": "@datashaper/schema!ResourceSchema:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "UnknownResourceProfile",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!UnknownResourceProfile#createInstance:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "createInstance(schema: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceSchema",
+                  "canonicalReference": "@datashaper/schema!ResourceSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "UnknownResource",
+                  "canonicalReference": "@datashaper/workflow!UnknownResource:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 8
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "schema",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "name": "createInstance"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!UnknownResourceProfile#profile:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly profile: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Profile",
+                  "canonicalReference": "@datashaper/schema!Profile:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "profile",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            }
+          ],
+          "implementsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 7
+            }
+          ]
         },
         {
           "kind": "Variable",

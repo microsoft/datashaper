@@ -4,22 +4,19 @@
 
 ## isNumericInputStep() function
 
-Indicates whether this step can only operate on numeric values.
-
 <b>Signature:</b>
 
 ```typescript
-export declare function isNumericInputStep(step: Step): boolean;
+export declare function isNumericInputStep(verb: Verb): boolean;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  step | [Step](./workflow.step.md) |  |
+|  verb | Verb |  |
 
 <b>Returns:</b>
 
 boolean
-
 

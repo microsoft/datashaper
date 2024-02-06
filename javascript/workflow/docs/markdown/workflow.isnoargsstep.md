@@ -9,14 +9,14 @@ Indicates whether this step accepts arguments
 <b>Signature:</b>
 
 ```typescript
-export declare function isNoArgsStep(step: Step): boolean;
+export declare function isNoArgsStep(verb: Verb): boolean;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  step | [Step](./workflow.step.md) |  |
+|  verb | Verb |  |
 
 <b>Returns:</b>
 
