@@ -5,7 +5,7 @@ from typing import Any, Awaitable, Callable, Optional, TypeVar, cast
 
 import pandas as pd
 
-from ..workflow.verb_callbacks import VerbCallbacks
+from ..workflow.verb_callbacks.verb_callbacks import VerbCallbacks
 from .derive_from_rows_base import ExecuteFn, derive_from_rows_base
 
 

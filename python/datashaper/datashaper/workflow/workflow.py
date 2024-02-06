@@ -23,7 +23,7 @@ from datashaper.execution.execution_node import ExecutionNode
 from datashaper.progress.types import Progress
 from datashaper.table_store import Table, TableContainer
 
-from ..constants import DEFAULT_INPUT_NAME
+from .constants import DEFAULT_INPUT_NAME
 from .types import MemoryProfile, VerbTiming, WorkflowRunResult
 from .verb_callbacks import DelegatingVerbCallbacks
 from .workflow_callbacks import (

@@ -7,7 +7,7 @@ from typing import Any, Awaitable, Callable, TypeVar
 import pandas as pd
 
 from ..progress import progress_ticker
-from ..workflow.verb_callbacks import VerbCallbacks
+from ..workflow.verb_callbacks.verb_callbacks import VerbCallbacks
 
 
 ItemType = TypeVar("ItemType")

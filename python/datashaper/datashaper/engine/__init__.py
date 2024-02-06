@@ -29,10 +29,11 @@ from .types import (
     Union,
     WindowFunction,
 )
-from .verbs import VerbDetails, VerbInput, VerbManager, load_verbs, verb
+from .verbs import AsyncIOType, VerbDetails, VerbInput, VerbManager, load_verbs, verb
 
 
 __all__ = [
+    "AsyncIOType",
     "VerbInput",
     "VerbDetails",
     "verb",

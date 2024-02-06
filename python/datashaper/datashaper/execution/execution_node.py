@@ -7,7 +7,7 @@ from typing import Any, Optional, Union
 
 from dataclasses import dataclass, field
 
-from datashaper.engine.verbs import VerbDetails
+from datashaper.engine.verbs.verbs_mapping import VerbDetails
 from datashaper.table_store import TableContainer
 
 
