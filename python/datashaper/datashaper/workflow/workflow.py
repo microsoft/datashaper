@@ -37,7 +37,7 @@ SCHEMA_FILE = "../../schema/workflow.json"
 
 Context = TypeVar("Context")
 
-DEFAULT_INPUT_NAME = "datasource"
+DEFAULT_INPUT_NAME = "source"
 
 
 class Workflow(Generic[Context]):
@@ -50,6 +50,8 @@ class Workflow(Generic[Context]):
     _last_step_id: str
     _dependencies: set[str]
     _memory_profile: bool | None
+    _validate_schema: bool | None
+    _schema_path: str | None
 
     """Externals that this workflow depends on"""
 
@@ -61,7 +63,6 @@ class Workflow(Generic[Context]):
         schema_path: Optional[str] = None,
         verbs: Optional[dict[str, Callable]] = None,
         validate: Optional[bool] = False,
-        default_input: Optional[str] = None,
         memory_profile: Optional[bool] = False,
     ):
         """Create an execution graph from the Dict provided in workflow.
@@ -82,19 +83,19 @@ class Workflow(Generic[Context]):
         :param default_input: Optional value, the default input for the first step.
         :type default_input: str, optional
         """
-        schema_path = schema_path or SCHEMA_FILE
-        default_input = default_input or DEFAULT_INPUT_NAME
+        self._schema_path = schema_path or SCHEMA_FILE
         self._schema = schema
         self._memory_profile = memory_profile
         self._dependencies = self._compute_dependencies()
         self._dependency_graph = defaultdict(set)
         self._graph = OrderedDict()
         self._inputs = {}
+        self._validate_schema = validate
 
         # Perform JSON-schema validation
         # TODO: the current schema definition does not work in Python
-        if validate and schema_path is not None:
-            with open(schema_path) as schema_file:
+        if validate and self._schema_path is not None:
+            with open(self._schema_path) as schema_file:
                 schema_json = json.load(schema_file)
                 validate_schema(schema, schema_json)
 
@@ -121,7 +122,7 @@ class Workflow(Generic[Context]):
             step_id = step["id"] if step_has_defined_id else str(uuid4())
             step_input = (
                 step["input"] if "input" in step else previous_step_id
-            ) or default_input
+            ) or DEFAULT_INPUT_NAME
             verb = Workflow.__get_verb(step["verb"])
 
             step = ExecutionNode(
@@ -137,6 +138,11 @@ class Workflow(Generic[Context]):
             previous_step_id = step.node_id
 
         self._last_step_id = cast(str, previous_step_id)
+
+    def derive(self, schema: dict[str, Any], input_tables: dict[str, pd.DataFrame]) -> "Workflow":
+        """Derive a new workflow from the current one."""
+        # Verbs are already registered, and we don't need to validate the schema again
+        return Workflow(schema, input_tables=input_tables, validate=self._validate_schema)
 
     @property
     def name(self) -> str:
@@ -200,8 +206,8 @@ class Workflow(Generic[Context]):
             raise ValueError(f"Verb {verb} not found in verbs")
         return result
 
-    @staticmethod
-    def __resolve_run_context(
+    def _resolve_run_context(
+        self,
         exec_node: ExecutionNode,
         context: Optional[Context],
         workflow_callbacks: WorkflowCallbacks,
@@ -229,6 +235,9 @@ class Workflow(Generic[Context]):
         if "callbacks" in verb_args and "callbacks" not in exec_node.args:
             run_ctx["callbacks"] = callbacks
 
+        if "workflow_instance" in verb_args and "workflow_instance" not in exec_node.args:
+            run_ctx["workflow_instance"] = self
+
         return run_ctx
 
     def _check_inputs(self, node_key: str, visited: set[str]):
@@ -242,7 +251,7 @@ class Workflow(Generic[Context]):
 
     def _resolve_inputs(
         self, verb: VerbDetails, inputs: str | dict[str, list[str]]
-    ) -> dict[str, Any]:
+    ) -> VerbInput:
         def input_table(name: str) -> TableContainer:
             graph_node = self._graph[name] if name in self._graph else None
             step_table_is_safe_to_mutate = (
@@ -271,7 +280,7 @@ class Workflow(Generic[Context]):
                 return TableContainer(table=table)
 
         if isinstance(inputs, str):
-            return {"input": VerbInput(input=input_table(inputs))}
+            return VerbInput(input=input_table(inputs))
         else:
             input_mapping: dict[str, TableContainer | list[TableContainer]] = {}
             for key, value in inputs.items():
@@ -279,7 +288,7 @@ class Workflow(Generic[Context]):
                     input_mapping[key] = input_table(value)
                 else:
                     input_mapping[key] = [input_table(t) for t in value]
-            return {"input": VerbInput(**cast(Any, input_mapping))}
+            return VerbInput(**cast(Any, input_mapping))
 
     def add_table(self, id: str, table: pd.DataFrame) -> None:
         """Add a dataframe to the graph with a given id."""
@@ -360,11 +369,18 @@ class Workflow(Generic[Context]):
 
         result = None
         try:
-            inputs = self._resolve_inputs(node.verb, node.node_input)
-            verb_context = Workflow.__resolve_run_context(node, context, callbacks)
-            callbacks.on_step_start(node, inputs)
+            verb_context = self._resolve_run_context(node, context, callbacks)
+            node_input: dict = {
+                **node.args,
+                "input": self._resolve_inputs(node.verb, node.node_input),
+                **verb_context,
+            }
+            if node.args.input is not None:
+                node_input["input_arg"] = node.args.input
+
+            callbacks.on_step_start(node, node_input)
             callbacks.on_step_progress(node, Progress(percent=0))
-            result = node.verb.func(**node.args, **inputs, **verb_context)
+            result = node.verb.func(**node_input)
 
             # Unroll the result if it's a coroutine
             # (we need to do this before calling on_step_end)
