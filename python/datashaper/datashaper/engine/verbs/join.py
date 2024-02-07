@@ -2,17 +2,16 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Join verb implementation."""
 from typing import Optional, cast
 
 import pandas as pd
-
 from pandas._typing import MergeHow, Suffixes
 
 from datashaper.engine.types import JoinStrategy
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
-
 
 __strategy_mapping: dict[JoinStrategy, MergeHow] = {
     JoinStrategy.Inner: "inner",
@@ -54,6 +53,7 @@ def join(
     on: Optional[list[str]] = None,
     strategy: str = "inner",
 ):
+    """Join verb implementation."""
     join_strategy = JoinStrategy(strategy)
     input_table = cast(pd.DataFrame, input.get_input())
     other = cast(pd.DataFrame, input.get_others()[0])

@@ -2,6 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Binarize verb implementation."""
 from typing import Any, cast
 
 import pandas as pd
@@ -22,6 +23,7 @@ from datashaper.table_store import TableContainer
 def binarize(
     input: VerbInput, to: str, column: str, criteria: list, logical: str = "or"
 ):
+    """Binarize verb implementation."""
     filter_criteria = [
         Criterion(
             value=arg.get("value", None),

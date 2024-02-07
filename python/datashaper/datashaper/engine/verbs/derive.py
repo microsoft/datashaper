@@ -2,12 +2,11 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-
+"""Derive verb implementation."""
 from typing import Callable, cast
 
 import numpy as np
 import pandas as pd
-
 from pandas.api.types import is_numeric_dtype
 
 from datashaper.engine.types import MathOperator
@@ -39,6 +38,7 @@ __op_mapping: dict[MathOperator, Callable] = {
 
 @verb(name="derive")
 def derive(input: VerbInput, to: str, column1: str, column2: str, operator: str):
+    """Derive verb implementation."""
     math_operator = MathOperator(operator)
 
     input_table = input.get_input()

@@ -9,13 +9,11 @@ import json
 import os
 import time
 import traceback
-
 from collections import OrderedDict, defaultdict
 from typing import Any, Callable, Generic, Iterable, Optional, TypeVar, cast
 from uuid import uuid4
 
 import pandas as pd
-
 from jsonschema import validate as validate_schema
 
 from datashaper.engine.verbs import VerbDetails, VerbInput, VerbManager
@@ -30,7 +28,6 @@ from .workflow_callbacks import (
     WorkflowCallbacks,
     WorkflowCallbacksManager,
 )
-
 
 # TODO: this won't work for a published package
 SCHEMA_FILE = "../../schema/workflow.json"

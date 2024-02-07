@@ -1,3 +1,4 @@
+"""Wraps a callback with a progress handler. Every time the callback is called, the progress handler will be called with the current progress."""
 from typing import Any, Callable
 
 from datashaper.progress.progress_ticker import ProgressTicker
@@ -8,7 +9,6 @@ def progress_callback(
     callback: Callable[..., Any], progress: ProgressHandler | None, num_total: int
 ) -> Callable[..., Any]:
     """Wrap a callback with a progress handler. Every time the callback is called, the progress handler will be called with the current progress."""
-
     tick = ProgressTicker(progress, num_total)
 
     def wrapper(*args, **kwargs):

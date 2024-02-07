@@ -2,7 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-
+"""Bin verb implementation."""
 from typing import Optional, cast
 
 import numpy as np
@@ -83,6 +83,7 @@ def bin(
     clamped: Optional[bool] = False,
     printRange: Optional[bool] = False,
 ):
+    """Bin verb implementation."""
     input_table = cast(pd.DataFrame, input.get_input())
     bin_strategy = BinStrategy(strategy)
     min_max = (

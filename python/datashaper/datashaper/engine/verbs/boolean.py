@@ -2,6 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Boolean verb implementation."""
 from typing import cast
 
 import pandas as pd
@@ -15,6 +16,7 @@ from datashaper.table_store import TableContainer
 
 @verb(name="boolean")
 def boolean(input: VerbInput, to: str, columns: list[str], operator: str):
+    """Boolean verb implementation."""
     logical_operator = BooleanLogicalOperator(operator)
     input_table = input.get_input()
     output = cast(pd.DataFrame, input_table)

@@ -1,18 +1,14 @@
 import json
 import os
-
-from http.client import HTTPConnection
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from threading import Thread
 from typing import List
 
 import pandas as pd
 import pytest
-
 from pandas.testing import assert_frame_equal
 
 from datashaper import Workflow
-
 
 FIXTURES_PATH = "fixtures/workflow"
 TABLE_STORE_PATH = "fixtures/workflow_inputs"

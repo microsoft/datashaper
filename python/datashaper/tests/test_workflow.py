@@ -1,9 +1,8 @@
 import asyncio
 import unittest
+from dataclasses import dataclass
 
 import pandas as pd
-
-from dataclasses import dataclass
 
 from datashaper import (
     DEFAULT_INPUT_NAME,
@@ -189,7 +188,7 @@ class TestWorkflowRun(unittest.IsolatedAsyncioTestCase):
         assert row["b"] == row["a"] + 1
 
     async def test_workflow_with_transform_util_verb_throwing(self):
-        with self.assertRaises(ValueError) as ctx:
+        with self.assertRaises(ValueError):
             workflow = Workflow(
                 verbs={
                     "test_workflow_with_transform_util_verb_throwing": create_parallel_transforming_verb_throwing(),
@@ -230,7 +229,7 @@ class TestWorkflowRun(unittest.IsolatedAsyncioTestCase):
         assert output.equals(pd.DataFrame({"a": [1, 2, 3]}))
 
     async def test_workflow_first_step_with_invalid_input_crashes(self):
-        with self.assertRaises(ValueError) as context:
+        with self.assertRaises(ValueError):
             workflow = Workflow(
                 verbs={
                     "test_workflow_first_step_with_invalid_input_crashes": create_passthrough_verb(),
@@ -253,7 +252,7 @@ class TestWorkflowRun(unittest.IsolatedAsyncioTestCase):
             await workflow.run(create_fake_run_context())
 
     async def test_workflow_invalid_verb_throws_error(self):
-        with self.assertRaises(ValueError) as context:
+        with self.assertRaises(ValueError):
             workflow = Workflow(
                 verbs={
                     "test_workflow_invalid_verb_throws_error": create_passthrough_verb(),
@@ -284,7 +283,7 @@ class TestWorkflowRun(unittest.IsolatedAsyncioTestCase):
                 "steps": [
                     {
                         "id": "test",
-                        "verb": "test_workflow_steps_with_no_input_defaults_input_correctly"
+                        "verb": "test_workflow_steps_with_no_input_defaults_input_correctly",
                         # First step is missing the input, it should default to DEFAULT_INPUT_NAME
                     },
                 ],

@@ -48,6 +48,7 @@ _pyright = "pyright"
 
 # Pass in a test pattern
 test_only = "pytest -k"
+fix = "ruff check --fix ."
 
 [[tool.poe.tasks.format]]
 sequence = ['_sort_imports', '_format_code']

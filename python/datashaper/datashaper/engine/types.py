@@ -4,10 +4,9 @@
 #
 """Common types used across the datashaper codebase."""
 
+from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any, Union
-
-from dataclasses import dataclass, field
 
 
 class Bin:

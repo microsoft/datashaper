@@ -19,7 +19,7 @@ class DelegatingVerbCallbacks(VerbCallbacks):
         self._node = node
 
     def progress(self, progress: Progress):
-        """A call back handler for when progress occurs."""
+        """Handle when progress occurs."""
         self._workflow_callbacks.on_step_progress(self._node, progress)
 
     def error(
@@ -29,17 +29,17 @@ class DelegatingVerbCallbacks(VerbCallbacks):
         stack: Optional[str] = None,
         details: Optional[dict] = None,
     ):
-        """A call back handler for when an error occurs."""
+        """Handle when an error occurs."""
         self._workflow_callbacks.on_error(message, cause, stack, details)
 
     def warning(self, message: str, details: Optional[dict] = None):
-        """A call back handler for when a warning occurs."""
+        """Handle when a warning occurs."""
         self._workflow_callbacks.on_warning(message, details)
 
     def log(self, message: str, details: Optional[dict] = None):
-        """A call back handler for when a log occurs."""
+        """Handle when a log occurs."""
         self._workflow_callbacks.on_log(message, details)
 
     def measure(self, name: str, value: float, details: Optional[dict] = None):
-        """A call back handler for when a measurement occurs."""
+        """Handle when a measurement occurs."""
         self._workflow_callbacks.on_measure(name, value, details)

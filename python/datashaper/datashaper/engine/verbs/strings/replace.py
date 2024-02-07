@@ -2,8 +2,8 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Replace verb implementation."""
 import re
-
 from typing import cast
 
 import pandas as pd
@@ -23,6 +23,7 @@ def replace(
     globalMatch=False,
     caseInsensitive=False,
 ):
+    """Replace verb implementation."""
     n = 0 if globalMatch else 1
     input_table = input.get_input()
     output = cast(pd.DataFrame, input_table)

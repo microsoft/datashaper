@@ -1,6 +1,5 @@
 """A module containing the derive_from_rows_async method."""
 import asyncio
-
 from typing import Awaitable, Callable, Optional, TypeVar
 
 import pandas as pd
@@ -8,7 +7,6 @@ import pandas as pd
 from datashaper.workflow import VerbCallbacks
 
 from .derive_from_rows_base import ExecuteFn, derive_from_rows_base
-
 
 ItemType = TypeVar("ItemType")
 

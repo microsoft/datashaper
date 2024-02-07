@@ -1,3 +1,4 @@
+"""Verbs and Execution Utilities."""
 from .pandas import (
     aggregate_operation_mapping,
     boolean_function_map,
@@ -26,11 +27,9 @@ from .types import (
     SortDirection,
     Step,
     StringComparisonOperator,
-    Union,
     WindowFunction,
 )
 from .verbs import VerbDetails, VerbInput, VerbManager, load_verbs, verb
-
 
 __all__ = [
     "VerbInput",
@@ -58,7 +57,6 @@ __all__ = [
     "SetOp",
     "SortDirection",
     "StringComparisonOperator",
-    "Union",
     "WindowFunction",
     "Step",
     "aggregate_operation_mapping",

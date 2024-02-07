@@ -1,7 +1,7 @@
+"""Mapping of FieldAggregateOperation to pandas aggregate functions."""
 from functools import reduce
 
 from datashaper.engine.types import FieldAggregateOperation
-
 
 aggregate_operation_mapping = {
     FieldAggregateOperation.Any: "first",

@@ -2,12 +2,11 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-
+"""Spread verb implementation."""
 from typing import Optional, cast
 
 import numpy as np
 import pandas as pd
-
 from pandas._typing import Axes
 
 from datashaper.engine.verbs.verb_input import VerbInput
@@ -59,6 +58,7 @@ def spread(
     onehot: bool = False,
     preserveSource: bool = False,
 ):
+    """Spread verb implementation."""
     input_table = input.get_input()
     if to is None:
         to = [column]

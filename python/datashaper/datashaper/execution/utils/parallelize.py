@@ -1,16 +1,14 @@
-# Print iterations progress
-# https://stackoverflow.com/a/34325723
+"""Parallelize a function over an iterable."""
 import time
-
 from concurrent.futures import Future, ThreadPoolExecutor, wait
 from multiprocessing import cpu_count
 from typing import Callable, Iterable, Tuple, TypeVar
-
 
 InType = TypeVar("InType")
 OutType = TypeVar("OutType")
 
 
+# Print iterations progress https://stackoverflow.com/a/34325723
 def parallelize(
     iterable: Iterable[InType],
     func: Callable[[InType], OutType],

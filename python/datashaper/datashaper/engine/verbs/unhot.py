@@ -1,3 +1,4 @@
+"""Unhot verb implementation."""
 from typing import cast
 
 import pandas as pd
@@ -16,6 +17,7 @@ def unhot(
     preserveSource: bool = False,
     prefix: str = "",
 ):
+    """Unhot verb implementation."""
     input_table = cast(pd.DataFrame, input.get_input())
     output_table = unhot_operation(input_table, columns, to, prefix)
 

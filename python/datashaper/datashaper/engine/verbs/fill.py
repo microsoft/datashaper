@@ -2,7 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-
+"""Fill verb implementation."""
 from typing import Union, cast
 
 import pandas as pd
@@ -18,6 +18,7 @@ def fill(
     to: str,
     value: Union[str, int, float, bool],
 ):
+    """Fill verb implementation."""
     input_table = input.get_input()
     output = cast(pd.DataFrame, input_table)
     output[to] = value

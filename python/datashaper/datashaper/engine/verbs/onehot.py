@@ -2,6 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Onehot verb implementation."""
 from typing import cast
 
 import numpy as np
@@ -19,6 +20,7 @@ def onehot(
     prefix: str = "",
     preserveSource=False,
 ):
+    """Onehot verb implementation."""
     input_table = cast(pd.DataFrame, input.get_input())
     input_table[column] = input_table[column].astype("category")
 

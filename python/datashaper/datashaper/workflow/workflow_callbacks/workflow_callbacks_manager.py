@@ -47,7 +47,7 @@ class WorkflowCallbacksManager(WorkflowCallbacks):
                 callback.on_step_end(node, result)
 
     def on_step_progress(self, node: ExecutionNode, progress: Progress) -> None:
-        """A call back handler for when progress occurs."""
+        """Handle when progress occurs."""
         for callback in self._callbacks:
             if hasattr(callback, "on_step_progress"):
                 callback.on_step_progress(node, progress)
@@ -59,19 +59,19 @@ class WorkflowCallbacksManager(WorkflowCallbacks):
         stack: Optional[str] = None,
         details: Optional[dict] = None,
     ) -> None:
-        """A call back handler for when an error occurs."""
+        """Handle when an error occurs."""
         for callback in self._callbacks:
             if hasattr(callback, "on_error"):
                 callback.on_error(message, cause, stack, details)
 
     def on_warning(self, message: str, details: Optional[dict] = None) -> None:
-        """A call back handler for when a warning occurs."""
+        """Handle when a warning occurs."""
         for callback in self._callbacks:
             if hasattr(callback, "on_warning"):
                 callback.on_warning(message, details)
 
     def on_log(self, message: str, details: Optional[dict] = None) -> None:
-        """A call back handler for when a log message occurs."""
+        """Handle when a log message occurs."""
         for callback in self._callbacks:
             if hasattr(callback, "on_log"):
                 callback.on_log(message, details)
@@ -79,7 +79,7 @@ class WorkflowCallbacksManager(WorkflowCallbacks):
     def on_measure(
         self, name: str, value: float, details: Optional[dict] = None
     ) -> None:
-        """A call back handler for when a measurement occurs."""
+        """Handle when a measurement occurs."""
         for callback in self._callbacks:
             if hasattr(callback, "on_measure"):
                 callback.on_measure(name, value, details)

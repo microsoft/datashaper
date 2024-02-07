@@ -2,6 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Lower verb implementation."""
 from typing import cast
 
 import pandas as pd
@@ -13,6 +14,7 @@ from datashaper.table_store import TableContainer
 
 @verb(name="strings.lower")
 def lower(input: VerbInput, column: str, to: str):
+    """Transform a column by applyng a string-lowercase."""
     input_table = input.get_input()
     output = cast(pd.DataFrame, input_table)
     output[to] = output[column].str.lower()

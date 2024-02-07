@@ -2,12 +2,13 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Verb decorators and manager."""
 
 import asyncio
 import math
 import traceback
-
 from collections import namedtuple
+from dataclasses import dataclass, field
 from enum import Enum
 from functools import cache
 from inspect import signature
@@ -15,8 +16,6 @@ from typing import Any, Awaitable, Callable, Concatenate, ParamSpec
 
 import numpy as np
 import pandas as pd
-
-from dataclasses import dataclass, field
 
 from datashaper.engine.verbs import VerbInput
 from datashaper.progress import ProgressTicker, progress_ticker
@@ -29,7 +28,7 @@ def verb(
     override_existing: bool = False,
     **kwargs,
 ) -> Callable:
-    """Decorator for registering a verb."""
+    """Apply a decorator for registering a verb."""
 
     def inner(func: Callable[..., TableContainer]) -> Callable[..., TableContainer]:
         verb = VerbDetails(
@@ -51,7 +50,7 @@ class AsyncIOType(str, Enum):
 
 
 def new_row(old_tuple: tuple, new_column_name: str, value: Any) -> tuple:
-    """Helper function to return rows in row-wise operations."""
+    """Return rows in row-wise operations."""
     old_named_tuple_type = type(old_tuple)
     original_fields = old_named_tuple_type._fields  # type: ignore
     return namedtuple("NewRow", original_fields + (new_column_name,))(
@@ -69,10 +68,10 @@ def parallel_verb(
     asyncio_type: AsyncIOType = AsyncIOType.ASYNCIO,
     **kwargs,
 ) -> Callable:
-    """Decorator for registering a parallel verb."""
+    """Apply a decorator for registering a parallel verb."""
 
     def inner(
-        func: Callable[Concatenate[Table | tuple, P], Awaitable[Table]]
+        func: Callable[Concatenate[Table | tuple, P], Awaitable[Table]],
     ) -> Callable[Concatenate[VerbInput, Any, int, P], Awaitable[TableContainer]]:
         @verb(
             name=name,
@@ -96,7 +95,8 @@ def parallel_verb(
                 and signature(func).return_annotation == Table
             ):
                 chunks = np.array_split(  # type: ignore
-                    input_table, math.ceil(len(input_table) / chunk_size)  # type: ignore
+                    input_table,  # type: ignore
+                    math.ceil(len(input_table) / chunk_size),  # type: ignore
                 )
             else:
                 raise NotImplementedError(
@@ -183,29 +183,32 @@ class VerbManager:
     _verbs: dict[str, VerbDetails] = field(default_factory=dict)
 
     def __getitem__(self, verb: str) -> VerbDetails | None:
+        """Get a verb by name."""
         return self.get_verb(verb)
 
     def __contains__(self, verb: str) -> bool:
+        """Check if a verb is registered."""
         return verb in self._verbs
 
     def register_verbs(
         self, verbs: dict[str, Callable], override_existing=False
     ) -> None:
-        """Registers verbs."""
+        """Register verbs."""
         for name, func in verbs.items():
             self.register(VerbDetails(name=name, func=func), override_existing)
 
     def register(self, verb: VerbDetails, override_existing=False) -> None:
-        """Registers a verb."""
+        """Register a verb."""
         if not override_existing and verb.name in self._verbs:
             raise ValueError(f"Verb {verb.name} already registered.")
         self._verbs.update({verb.name: verb})
 
     def get_verb(self, verb: str) -> VerbDetails | None:
+        """Get a verb by name."""
         return self._verbs.get(verb)
 
     @classmethod
     @cache
     def get(cls) -> "VerbManager":
-        """Returns the verb manager."""
+        """Get the verb manager."""
         return cls()

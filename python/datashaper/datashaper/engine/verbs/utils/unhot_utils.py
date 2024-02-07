@@ -1,12 +1,11 @@
+"""Unwind one-hot encoding."""
 import pandas as pd
 
 
 def unhot_operation(
     input: pd.DataFrame, columns: list[str], to: str, prefix: str
 ) -> pd.DataFrame | pd.Series:
-    """
-    Unwind one-hot encoding.
-    """
+    """Unwind one-hot encoding."""
     copyInput = input.copy()
 
     id_vars = [col for col in copyInput.columns if col not in columns]

@@ -4,11 +4,10 @@
 #
 """The tablestore module contains the table store classes used by the datashaper."""
 
+from dataclasses import dataclass
 from typing import Any, Dict, Generic, List, Optional, TypeVar
 
 import pandas as pd
-
-from dataclasses import dataclass
 from pandas.core.groupby import DataFrameGroupBy
 
 from datashaper.engine.types import Bin, Category, DataType

@@ -2,6 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Filter verb implementation."""
 from typing import cast
 
 import pandas as pd
@@ -20,6 +21,7 @@ from datashaper.table_store import Table, TableContainer
 
 @verb(name="filter", treats_input_tables_as_immutable=True)
 def filter(input: VerbInput, column: str, criteria: list, logical: str = "or"):
+    """Filter verb implementation."""
     filter_criteria = [
         Criterion(
             value=arg.get("value", None),

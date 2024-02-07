@@ -2,13 +2,15 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-
+"""A class to represent the table inputs into a verb."""
 from typing import Optional, cast
 
 from datashaper.table_store import Table, TableContainer
 
 
 class VerbInput:
+    """A class to represent the table inputs into a verb."""
+
     source: TableContainer
     others: list[TableContainer] | None = None
 
@@ -34,9 +36,11 @@ class VerbInput:
             self.others = [other] if other is not None else others
 
     def get_input(self) -> Table:
+        """Get the input table."""
         return self.source.table
 
     def get_others(self) -> list[Table]:
+        """Get the other tables."""
         if self.others is None:
             return []
         return [other.table for other in self.others]

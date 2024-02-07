@@ -1,5 +1,5 @@
+"""Apply a generic transform function to each row in a table."""
 import traceback
-
 from typing import Any, Callable, TypeVar
 
 import pandas as pd
@@ -8,7 +8,6 @@ from datashaper.execution.utils.parallelize import parallelize
 from datashaper.progress import progress_ticker
 from datashaper.table_store import Table
 from datashaper.workflow import VerbCallbacks
-
 
 ItemType = TypeVar("ItemType")
 
@@ -21,7 +20,6 @@ def derive_from_rows(
     stagger: int = 0,
 ) -> list[ItemType]:
     """Apply a generic transform function to each row. Any errors will be reported and thrown."""
-
     tick = progress_ticker(callbacks.progress, num_total=len(input))
 
     def transform_row(row: tuple[Any, pd.Series]) -> ItemType:

@@ -1,14 +1,12 @@
 """A module containing the derive_from_rows_async method."""
 import asyncio
 import traceback
-
 from typing import Any, Awaitable, Callable, TypeVar
 
 import pandas as pd
 
 from ..progress import progress_ticker
 from ..workflow.verb_callbacks import VerbCallbacks
-
 
 ItemType = TypeVar("ItemType")
 

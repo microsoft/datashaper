@@ -2,7 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-
+"""Fold verb implementation."""
 from typing import Tuple, cast
 
 from datashaper.engine.verbs.verb_input import VerbInput
@@ -12,6 +12,7 @@ from datashaper.table_store import Table, TableContainer
 
 @verb(name="fold")
 def fold(input: VerbInput, to: Tuple[str, str], columns: list[str]):
+    """Fold verb implementation."""
     input_table = input.get_input()
     output = input_table
     columns = [column for column in output.columns if column not in columns]

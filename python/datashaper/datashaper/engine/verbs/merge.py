@@ -2,6 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Merge verb implementation."""
 from functools import partial
 from typing import cast
 
@@ -25,6 +26,7 @@ def merge(
     unhot: bool = False,
     prefix: str = "",
 ):
+    """Merge verb implementation."""
     merge_strategy = MergeStrategy(strategy)
 
     input_table = cast(pd.DataFrame, input.get_input())

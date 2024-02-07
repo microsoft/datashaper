@@ -2,13 +2,13 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Window verb implementation."""
 
 from typing import Union
 from uuid import uuid4
 
 import numpy as np
 import pandas as pd
-
 from pandas.core.groupby import DataFrameGroupBy
 
 from datashaper.engine.types import WindowFunction
@@ -61,6 +61,7 @@ __window_function_map = {
 
 @verb(name="window")
 def window(input: VerbInput, column: str, to: str, operation: str):
+    """Apply a window function to a column in a table."""
     window_operation = WindowFunction(operation)
 
     input_table = input.get_input()

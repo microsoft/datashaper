@@ -1,3 +1,4 @@
+"""A package containing the base verbs."""
 import importlib
 import importlib.util
 import logging
@@ -8,13 +9,13 @@ import sys
 from .verb_input import VerbInput
 from .verbs_mapping import VerbDetails, VerbManager, verb
 
-
 logger = logging.getLogger(__name__)
 
 
 def load_verbs(module):
     """
-    Loads the verbs from the given module path recursively.
+    Load the verbs from the given module path recursively.
+
     This is useful to run all the @verb decorators and register the verbs in the verb manager.
     """
     module_path = os.path.dirname(module.__file__)

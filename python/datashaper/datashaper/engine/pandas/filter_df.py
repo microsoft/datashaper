@@ -2,9 +2,8 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-
+"""Verb filtering utilities."""
 import logging
-
 from functools import partial
 from typing import Callable, Union
 from uuid import uuid4
@@ -19,7 +18,6 @@ from datashaper.engine.types import (
     NumericComparisonOperator,
     StringComparisonOperator,
 )
-
 
 boolean_function_map = {
     BooleanLogicalOperator.OR: lambda df, columns: df[columns].any(axis="columns")
@@ -191,6 +189,7 @@ _operator_map: dict[
 
 
 def filter_df(df: pd.DataFrame, args: FilterArgs) -> pd.DataFrame | pd.Series:
+    """Filter a DataFrame based on the input criteria."""
     filters: list[str] = []
     filtered_df: pd.DataFrame = df.copy()
 
@@ -224,6 +223,7 @@ def get_operator(
 ) -> Union[
     StringComparisonOperator, NumericComparisonOperator, BooleanComparisonOperator
 ]:
+    """Get a comparison operator based on the input string."""
     try:
         return StringComparisonOperator(operator)
     except Exception:

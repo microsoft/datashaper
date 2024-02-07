@@ -2,15 +2,13 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-
+"""Convert verb implementation."""
 import numbers
-
 from datetime import datetime
 from typing import Callable, Optional, Union, cast
 
 import numpy as np
 import pandas as pd
-
 from pandas.api.types import is_bool_dtype, is_datetime64_any_dtype, is_numeric_dtype
 
 from datashaper.engine.types import ParseType
@@ -19,14 +17,14 @@ from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
 
 
-def convert_int(value: str, radix: int) -> Union[int, float]:
+def _convert_int(value: str, radix: int) -> Union[int, float]:
     try:
         return int(value, radix)
     except ValueError:
         return np.nan
 
 
-def to_int(column, radix):
+def _to_int(column, radix):
     if radix is None:
         if column.str.startswith("0x").any() or column.str.startswith("0X").any():
             radix = 16
@@ -34,17 +32,17 @@ def to_int(column, radix):
             radix = 8
         else:
             radix = 10
-    return column.apply(lambda x: convert_int(x, radix))
+    return column.apply(lambda x: _convert_int(x, radix))
 
 
-def convert_float(value: str) -> float:
+def _convert_float(value: str) -> float:
     try:
         return float(value)
     except ValueError:
         return np.nan
 
 
-def convert_bool(value: str) -> bool:
+def _convert_bool(value: str) -> bool:
     if (
         isinstance(value, str)
         and (value.lower() == "false" or len(value) == 0)
@@ -55,18 +53,18 @@ def convert_bool(value: str) -> bool:
         return True
 
 
-def convert_date_str(value: datetime, formatPattern: str) -> Union[str, float]:
+def _convert_date_str(value: datetime, formatPattern: str) -> Union[str, float]:
     try:
         return datetime.strftime(value, formatPattern)
     except Exception:
         return np.nan
 
 
-def to_str(column: pd.Series, formatPattern: str) -> pd.DataFrame | pd.Series:
+def _to_str(column: pd.Series, formatPattern: str) -> pd.DataFrame | pd.Series:
     if is_datetime64_any_dtype(column) or (
         isinstance(column.dtype, pd.ArrowDtype) and "timestamp" in column.dtype.name
     ):
-        return column.apply(lambda x: convert_date_str(x, formatPattern))
+        return column.apply(lambda x: _convert_date_str(x, formatPattern))
 
     column_numeric: pd.Series | None = None
     if is_numeric_dtype(column):
@@ -82,7 +80,7 @@ def to_str(column: pd.Series, formatPattern: str) -> pd.DataFrame | pd.Series:
     return column.apply(lambda x: "" if pd.isna(x) else str(x))
 
 
-def to_datetime(column: pd.Series) -> pd.Series:
+def _to_datetime(column: pd.Series) -> pd.Series:
     if column.dropna().map(lambda x: isinstance(x, numbers.Number)).all():
         return pd.to_datetime(column, unit="ms", errors="coerce")
     else:
@@ -90,13 +88,15 @@ def to_datetime(column: pd.Series) -> pd.Series:
 
 
 __type_mapping: dict[ParseType, Callable] = {
-    ParseType.Boolean: lambda column, **kwargs: column.apply(lambda x: convert_bool(x)),
-    ParseType.Date: lambda column, formatPattern, **kwargs: to_datetime(column),
-    ParseType.Decimal: lambda column, **kwargs: column.apply(
-        lambda x: convert_float(x)
+    ParseType.Boolean: lambda column, **kwargs: column.apply(
+        lambda x: _convert_bool(x)
     ),
-    ParseType.Integer: lambda column, radix, **kwargs: to_int(column, radix),
-    ParseType.String: lambda column, formatPattern, **kwargs: to_str(
+    ParseType.Date: lambda column, formatPattern, **kwargs: _to_datetime(column),
+    ParseType.Decimal: lambda column, **kwargs: column.apply(
+        lambda x: _convert_float(x)
+    ),
+    ParseType.Integer: lambda column, radix, **kwargs: _to_int(column, radix),
+    ParseType.String: lambda column, formatPattern, **kwargs: _to_str(
         column, formatPattern
     ),
 }
@@ -111,8 +111,8 @@ def convert(
     radix: Optional[int] = None,
     formatPattern: str = "%Y-%m-%d",
 ):
+    """Convert verb implementation."""
     parse_type = ParseType(type)
-
     input_table = input.get_input()
     output = cast(pd.DataFrame, input_table)
 

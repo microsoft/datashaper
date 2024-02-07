@@ -1,7 +1,6 @@
-"""Progress reporting types"""
-from typing import Callable
-
+"""Progress reporting types."""
 from dataclasses import dataclass
+from typing import Callable
 
 
 @dataclass

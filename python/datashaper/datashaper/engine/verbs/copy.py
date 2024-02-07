@@ -2,6 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Copy verb implementation."""
 from typing import cast
 
 import pandas as pd
@@ -18,6 +19,7 @@ def copy(
     to: str,
     column: str,
 ):
+    """Copy verb implementation."""
     output = cast(pd.DataFrame, input.get_input())
     output[to] = output[column]
 

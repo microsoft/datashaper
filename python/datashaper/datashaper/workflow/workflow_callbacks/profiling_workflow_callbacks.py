@@ -1,7 +1,6 @@
 """Memory profiling callbacks."""
 import time
 import tracemalloc
-
 from collections import defaultdict
 from typing import Any, Optional
 

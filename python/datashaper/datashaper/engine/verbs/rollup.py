@@ -2,7 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-
+"""Rollup verb implementation."""
 from typing import Iterable
 
 import pandas as pd
@@ -16,6 +16,7 @@ from datashaper.table_store import TableContainer
 
 @verb(name="rollup", treats_input_tables_as_immutable=True)
 def rollup(input: VerbInput, column: str, to: str, operation: str):
+    """Rollup verb implementation."""
     aggregate_operation = FieldAggregateOperation(operation)
     input_table = input.get_input()
 

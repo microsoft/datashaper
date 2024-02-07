@@ -1,3 +1,4 @@
+"""DataShaper is a library for declarative data manipulation and transformation."""
 from .engine import (
     Bin,
     BinStrategy,
@@ -20,7 +21,6 @@ from .engine import (
     SortDirection,
     Step,
     StringComparisonOperator,
-    Union,
     VerbDetails,
     VerbInput,
     VerbManager,
@@ -67,7 +67,6 @@ from .workflow import (
     WorkflowRunResult,
 )
 
-
 __all__ = [
     "derive_from_rows",
     "derive_from_rows_asyncio",
@@ -102,7 +101,6 @@ __all__ = [
     "SetOp",
     "SortDirection",
     "StringComparisonOperator",
-    "Union",
     "WindowFunction",
     "Step",
     "aggregate_operation_mapping",

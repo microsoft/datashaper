@@ -29,7 +29,7 @@ class NoopWorkflowCallbacks(WorkflowCallbacks):
         pass
 
     def on_step_progress(self, node: ExecutionNode, progress: Progress) -> None:
-        """A call back handler for when progress occurs."""
+        """Handle when progress occurs."""
         pass
 
     def on_error(
@@ -39,19 +39,19 @@ class NoopWorkflowCallbacks(WorkflowCallbacks):
         stack: Optional[str] = None,
         details: Optional[dict] = None,
     ) -> None:
-        """A call back handler for when an error occurs."""
+        """Handle when an error occurs."""
         pass
 
     def on_warning(self, message: str, details: Optional[dict] = None) -> None:
-        """A call back handler for when a warning occurs."""
+        """Handle when a warning occurs."""
         pass
 
     def on_log(self, message: str, details: Optional[dict] = None) -> None:
-        """A call back handler for when a log message occurs."""
+        """Handle when a log message occurs."""
         pass
 
     def on_measure(
         self, name: str, value: float, details: Optional[dict] = None
     ) -> None:
-        """A call back handler for when a measurement occurs."""
+        """Handle when a measurement occurs."""
         pass

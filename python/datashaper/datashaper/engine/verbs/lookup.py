@@ -2,6 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Lookup verb implementation."""
 from typing import Optional, cast
 
 import pandas as pd
@@ -17,6 +18,7 @@ def lookup(
     columns: list[str],
     on: Optional[list[str]] = None,
 ):
+    """Lookup verb implementation."""
     input_table: pd.DataFrame = cast(pd.DataFrame, input.get_input())
     other_table: pd.DataFrame = cast(pd.DataFrame, input.get_others()[0])
 

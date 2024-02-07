@@ -3,9 +3,8 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Contains the definition for the ExecutionNode type."""
-from typing import Any, Optional, Union
-
 from dataclasses import dataclass, field
+from typing import Any, Optional, Union
 
 from datashaper.engine.verbs import VerbDetails
 from datashaper.table_store import TableContainer

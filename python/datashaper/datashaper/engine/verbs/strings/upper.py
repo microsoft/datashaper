@@ -2,6 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Upper verb implementation."""
 from typing import cast
 
 import pandas as pd
@@ -13,6 +14,7 @@ from datashaper.table_store import TableContainer
 
 @verb(name="strings.upper")
 def upper(input: VerbInput, column: str, to: str):
+    """Upper verb implementation."""
     input_table = input.get_input()
     output = cast(pd.DataFrame, input_table)
     output[to] = output[column].str.upper()

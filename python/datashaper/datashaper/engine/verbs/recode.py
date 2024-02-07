@@ -2,6 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Recode verb implementation."""
 from typing import Any, cast
 
 import pandas as pd
@@ -12,12 +13,16 @@ from datashaper.table_store import TableContainer
 
 
 class RecodeMap(dict):
+    """Recode map class."""
+
     def __missing__(self, key):
+        """Return the key if it is not found in the mapping."""
         return key
 
 
 @verb(name="recode")
 def recode(input: VerbInput, to: str, column: str, mapping: dict):
+    """Recode verb implementation."""
     mapping = RecodeMap(mapping)
 
     input_table = input.get_input()
