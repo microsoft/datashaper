@@ -3,7 +3,7 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Join verb implementation."""
-from typing import Optional, cast
+from typing import cast
 
 import pandas as pd
 from pandas._typing import MergeHow, Suffixes
@@ -50,7 +50,7 @@ def __clean_result(
 @verb(name="join", treats_input_tables_as_immutable=True)
 def join(
     input: VerbInput,
-    on: Optional[list[str]] = None,
+    on: list[str] | None = None,
     strategy: str = "inner",
 ):
     """Join verb implementation."""

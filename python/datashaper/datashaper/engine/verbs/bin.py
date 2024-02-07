@@ -3,7 +3,7 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Bin verb implementation."""
-from typing import Optional, cast
+from typing import cast
 
 import numpy as np
 import pandas as pd
@@ -76,12 +76,12 @@ def bin(
     to: str,
     column: str,
     strategy: str,
-    min: Optional[int] = None,
-    max: Optional[int] = None,
-    fixedcount: Optional[int] = None,
-    fixedwidth: Optional[int] = None,
-    clamped: Optional[bool] = False,
-    printRange: Optional[bool] = False,  # noqa: N803
+    min: int | None = None,
+    max: int | None = None,
+    fixedcount: int | None = None,
+    fixedwidth: int | None = None,
+    clamped: bool | None = False,
+    printRange: bool | None = False,  # noqa: N803
 ):
     """Bin verb implementation."""
     input_table = cast(pd.DataFrame, input.get_input())

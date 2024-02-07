@@ -3,7 +3,7 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Lookup verb implementation."""
-from typing import Optional, cast
+from typing import cast
 
 import pandas as pd
 
@@ -16,7 +16,7 @@ from datashaper.table_store import TableContainer
 def lookup(
     input: VerbInput,
     columns: list[str],
-    on: Optional[list[str]] = None,
+    on: list[str] | None = None,
 ):
     """Lookup verb implementation."""
     input_table: pd.DataFrame = cast(pd.DataFrame, input.get_input())

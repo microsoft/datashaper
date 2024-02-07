@@ -4,8 +4,9 @@
 #
 """Convert verb implementation."""
 import numbers
+from collections.abc import Callable
 from datetime import datetime
-from typing import Callable, Optional, Union, cast
+from typing import cast
 
 import numpy as np
 import pandas as pd
@@ -17,7 +18,7 @@ from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
 
 
-def _convert_int(value: str, radix: int) -> Union[int, float]:
+def _convert_int(value: str, radix: int) -> int | float:
     try:
         return int(value, radix)
     except ValueError:
@@ -53,7 +54,7 @@ def _convert_bool(value: str) -> bool:
         return True
 
 
-def _convert_date_str(value: datetime, format_pattern: str) -> Union[str, float]:
+def _convert_date_str(value: datetime, format_pattern: str) -> str | float:
     try:
         return datetime.strftime(value, format_pattern)
     except Exception:
@@ -108,7 +109,7 @@ def convert(
     column: str,
     to: str,
     type: str,
-    radix: Optional[int] = None,
+    radix: int | None = None,
     formatPattern: str = "%Y-%m-%d",  # noqa: N803
 ):
     """Convert verb implementation."""

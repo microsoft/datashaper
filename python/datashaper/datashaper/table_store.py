@@ -5,7 +5,7 @@
 """The tablestore module contains the table store classes used by the datashaper."""
 
 from dataclasses import dataclass
-from typing import Any, Dict, Generic, List, Optional, TypeVar
+from typing import Any, Generic, TypeVar
 
 import pandas as pd
 from pandas.core.groupby import DataFrameGroupBy
@@ -22,13 +22,13 @@ class ColumnStats:
     distinct: int
     invalid: int
     mode: Any
-    min: Optional[float] = None
-    max: Optional[float] = None
-    mean: Optional[float] = None
-    median: Optional[float] = None
-    stdev: Optional[float] = None
-    bins: Optional[List[Bin]] = None
-    categories: Optional[List[Category]] = None
+    min: float | None = None
+    max: float | None = None
+    mean: float | None = None
+    median: float | None = None
+    stdev: float | None = None
+    bins: list[Bin] | None = None
+    categories: list[Category] | None = None
 
 
 @dataclass
@@ -46,7 +46,7 @@ class TableMetadata:
 
     rows: int
     cols: int
-    columns: Dict[str, ColumnMetadata]
+    columns: dict[str, ColumnMetadata]
 
 
 T = TypeVar("T")
@@ -60,5 +60,5 @@ class TableContainer(Generic[T]):
     """A container for a table and its metadata."""
 
     table: Table
-    metadata: Optional[TableMetadata] = None
-    context: Optional[T] = None
+    metadata: TableMetadata | None = None
+    context: T | None = None

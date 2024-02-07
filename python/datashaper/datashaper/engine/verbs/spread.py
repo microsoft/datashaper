@@ -3,7 +3,7 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Spread verb implementation."""
-from typing import Optional, cast
+from typing import cast
 
 import numpy as np
 import pandas as pd
@@ -53,7 +53,7 @@ def __onehot_spread(input_table, columns, to, delimiter):
 def spread(
     input: VerbInput,
     column: str,
-    to: Optional[list[str]] = None,
+    to: list[str] | None = None,
     delimiter: str = ",",
     onehot: bool = False,
     preserveSource: bool = False,  # noqa: N803

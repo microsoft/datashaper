@@ -1,5 +1,5 @@
 """A module containing the WorkflowCallbacks registry."""
-from typing import Any, Optional
+from typing import Any
 
 from ...execution.execution_node import ExecutionNode
 from ...progress import Progress
@@ -38,9 +38,7 @@ class WorkflowCallbacksManager(WorkflowCallbacks):
             if hasattr(callback, "on_step_start"):
                 callback.on_step_start(node, inputs)
 
-    def on_step_end(
-        self, node: ExecutionNode, result: Optional[TableContainer]
-    ) -> None:
+    def on_step_end(self, node: ExecutionNode, result: TableContainer | None) -> None:
         """Execute this callback every time a step ends."""
         for callback in self._callbacks:
             if hasattr(callback, "on_step_end"):
@@ -55,30 +53,28 @@ class WorkflowCallbacksManager(WorkflowCallbacks):
     def on_error(
         self,
         message: str,
-        cause: Optional[BaseException] = None,
-        stack: Optional[str] = None,
-        details: Optional[dict] = None,
+        cause: BaseException | None = None,
+        stack: str | None = None,
+        details: dict | None = None,
     ) -> None:
         """Handle when an error occurs."""
         for callback in self._callbacks:
             if hasattr(callback, "on_error"):
                 callback.on_error(message, cause, stack, details)
 
-    def on_warning(self, message: str, details: Optional[dict] = None) -> None:
+    def on_warning(self, message: str, details: dict | None = None) -> None:
         """Handle when a warning occurs."""
         for callback in self._callbacks:
             if hasattr(callback, "on_warning"):
                 callback.on_warning(message, details)
 
-    def on_log(self, message: str, details: Optional[dict] = None) -> None:
+    def on_log(self, message: str, details: dict | None = None) -> None:
         """Handle when a log message occurs."""
         for callback in self._callbacks:
             if hasattr(callback, "on_log"):
                 callback.on_log(message, details)
 
-    def on_measure(
-        self, name: str, value: float, details: Optional[dict] = None
-    ) -> None:
+    def on_measure(self, name: str, value: float, details: dict | None = None) -> None:
         """Handle when a measurement occurs."""
         for callback in self._callbacks:
             if hasattr(callback, "on_measure"):

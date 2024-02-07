@@ -3,7 +3,7 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Fill verb implementation."""
-from typing import Union, cast
+from typing import cast
 
 import pandas as pd
 
@@ -16,7 +16,7 @@ from datashaper.table_store import TableContainer
 def fill(
     input: VerbInput,
     to: str,
-    value: Union[str, int, float, bool],
+    value: str | int | float | bool,
 ):
     """Fill verb implementation."""
     input_table = input.get_input()

@@ -1,5 +1,5 @@
 """Execution utility typings."""
-from typing import Callable
+from collections.abc import Callable
 
 from datashaper.table_store import TableContainer
 

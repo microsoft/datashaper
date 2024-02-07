@@ -2,7 +2,7 @@
 import time
 import tracemalloc
 from collections import defaultdict
-from typing import Any, Optional
+from typing import Any
 
 import pandas as pd
 
@@ -48,9 +48,7 @@ class MemoryProfilingWorkflowCallbacks(NoopWorkflowCallbacks):
         _, self._peak_start_verb = tracemalloc.get_traced_memory()
         self._verb_start = time.time()
 
-    def on_step_end(
-        self, node: ExecutionNode, result: Optional[TableContainer]
-    ) -> None:
+    def on_step_end(self, node: ExecutionNode, result: TableContainer | None) -> None:
         """Call when a step ends."""
         total_time = time.time() - self._verb_start
         self._timing[node.verb.name].append(total_time)

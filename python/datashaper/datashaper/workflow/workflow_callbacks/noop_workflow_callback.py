@@ -1,5 +1,5 @@
 """A no-op implementation of WorkflowCallbacks."""
-from typing import Any, Optional
+from typing import Any
 
 from ...execution.execution_node import ExecutionNode
 from ...progress import Progress
@@ -22,9 +22,7 @@ class NoopWorkflowCallbacks(WorkflowCallbacks):
         """Execute this callback every time a step starts."""
         pass
 
-    def on_step_end(
-        self, node: ExecutionNode, result: Optional[TableContainer]
-    ) -> None:
+    def on_step_end(self, node: ExecutionNode, result: TableContainer | None) -> None:
         """Execute this callback every time a step ends."""
         pass
 
@@ -35,23 +33,21 @@ class NoopWorkflowCallbacks(WorkflowCallbacks):
     def on_error(
         self,
         message: str,
-        cause: Optional[BaseException] = None,
-        stack: Optional[str] = None,
-        details: Optional[dict] = None,
+        cause: BaseException | None = None,
+        stack: str | None = None,
+        details: dict | None = None,
     ) -> None:
         """Handle when an error occurs."""
         pass
 
-    def on_warning(self, message: str, details: Optional[dict] = None) -> None:
+    def on_warning(self, message: str, details: dict | None = None) -> None:
         """Handle when a warning occurs."""
         pass
 
-    def on_log(self, message: str, details: Optional[dict] = None) -> None:
+    def on_log(self, message: str, details: dict | None = None) -> None:
         """Handle when a log message occurs."""
         pass
 
-    def on_measure(
-        self, name: str, value: float, details: Optional[dict] = None
-    ) -> None:
+    def on_measure(self, name: str, value: float, details: dict | None = None) -> None:
         """Handle when a measurement occurs."""
         pass

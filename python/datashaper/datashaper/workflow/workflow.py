@@ -10,7 +10,8 @@ import os
 import time
 import traceback
 from collections import OrderedDict, defaultdict
-from typing import Any, Callable, Generic, Iterable, Optional, TypeVar, cast
+from collections.abc import Callable, Iterable
+from typing import Any, Generic, TypeVar, cast
 from uuid import uuid4
 
 import pandas as pd
@@ -53,13 +54,13 @@ class Workflow(Generic[Context]):
     def __init__(
         self,
         schema: dict[str, Any],
-        input_path: Optional[str] = None,
-        input_tables: Optional[dict[str, pd.DataFrame]] = None,
-        schema_path: Optional[str] = None,
-        verbs: Optional[dict[str, Callable]] = None,
-        validate: Optional[bool] = False,
-        default_input: Optional[str] = None,
-        memory_profile: Optional[bool] = False,
+        input_path: str | None = None,
+        input_tables: dict[str, pd.DataFrame] | None = None,
+        schema_path: str | None = None,
+        verbs: dict[str, Callable] | None = None,
+        validate: bool | None = False,
+        default_input: str | None = None,
+        memory_profile: bool | None = False,
     ):
         """Create an execution graph from the Dict provided in workflow.
 
@@ -202,7 +203,7 @@ class Workflow(Generic[Context]):
     @staticmethod
     def __resolve_run_context(
         exec_node: ExecutionNode,
-        context: Optional[Context],
+        context: Context | None,
         workflow_callbacks: WorkflowCallbacks,
     ) -> dict[str, Any]:
         """Injects the run context into the workflow steps."""
@@ -284,12 +285,12 @@ class Workflow(Generic[Context]):
         """Add a dataframe to the graph with a given id."""
         self._inputs[id] = TableContainer(table=table)
 
-    def output(self, id: Optional[str] = None) -> Table:
+    def output(self, id: str | None = None) -> Table:
         """Get a dataframe from the graph by id."""
         if id is None:
             id = self._last_step_id
 
-        container: Optional[TableContainer] = self._graph[id].result
+        container: TableContainer | None = self._graph[id].result
         if container is None:
             raise Exception(
                 f"Value not calculated yet. {self.name}: {self._graph[id].verb.name} ."
@@ -299,8 +300,8 @@ class Workflow(Generic[Context]):
 
     async def run(
         self,
-        context: Optional[Context] = None,
-        callbacks: Optional[WorkflowCallbacks] = None,
+        context: Context | None = None,
+        callbacks: WorkflowCallbacks | None = None,
     ) -> WorkflowRunResult:
         """Run the execution graph."""
         visited: set[str] = set()
@@ -352,7 +353,7 @@ class Workflow(Generic[Context]):
     async def _execute_verb(
         self,
         node: ExecutionNode,
-        context: Optional[Context],
+        context: Context | None,
         callbacks: WorkflowCallbacks,
     ) -> float:
         start_verb_time = time.time()

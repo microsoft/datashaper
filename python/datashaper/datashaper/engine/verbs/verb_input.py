@@ -3,7 +3,7 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """A class to represent the table inputs into a verb."""
-from typing import Optional, cast
+from typing import cast
 
 from datashaper.table_store import Table, TableContainer
 
@@ -16,10 +16,10 @@ class VerbInput:
 
     def __init__(
         self,
-        input: Optional[TableContainer] = None,
-        source: Optional[TableContainer] = None,
-        other: Optional[TableContainer] = None,
-        others: Optional[list[TableContainer]] = None,
+        input: TableContainer | None = None,
+        source: TableContainer | None = None,
+        other: TableContainer | None = None,
+        others: list[TableContainer] | None = None,
     ):
         if input is None and source is None:
             raise Exception("At least input or source must be provided")

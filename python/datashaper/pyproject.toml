@@ -92,7 +92,7 @@ select = [
     #"C90", # Mccabe Complexity
     "I", # Isort
     "N", # Naming Conventions
-    # "UP", # pyupgrade - use modern conventions
+    "UP", # pyupgrade - use modern conventions
     # "YTT", # Correct sys.version_info usage
     # "ANN", # Type Annotations
     # "ASYNC", # Async Functions

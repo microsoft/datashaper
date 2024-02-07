@@ -1,5 +1,5 @@
 """Defines the interface for verb callbacks."""
-from typing import Optional, Protocol
+from typing import Protocol
 
 from ...progress.types import Progress
 
@@ -14,18 +14,18 @@ class VerbCallbacks(Protocol):
     def error(
         self,
         message: str,
-        cause: Optional[BaseException] = None,
-        stack: Optional[str] = None,
-        details: Optional[dict] = None,
+        cause: BaseException | None = None,
+        stack: str | None = None,
+        details: dict | None = None,
     ) -> None:
         """Report a error from the verb execution."""
         ...
 
-    def warning(self, message: str, details: Optional[dict] = None):
+    def warning(self, message: str, details: dict | None = None):
         """Report a warning from verb execution."""
         ...
 
-    def log(self, message: str, details: Optional[dict] = None):
+    def log(self, message: str, details: dict | None = None):
         """Report an informational message from the verb execution."""
         ...
 

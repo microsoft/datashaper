@@ -4,7 +4,6 @@
 #
 """Window verb implementation."""
 
-from typing import Union
 from uuid import uuid4
 
 import numpy as np
@@ -19,7 +18,7 @@ from datashaper.table_store import TableContainer
 
 def _get_window_indexer(
     column: pd.Series, fixed_size=False
-) -> Union[int, pd.api.indexers.BaseIndexer]:
+) -> int | pd.api.indexers.BaseIndexer:
     if fixed_size:
         return pd.api.indexers.FixedForwardWindowIndexer(window_size=len(column))
     else:

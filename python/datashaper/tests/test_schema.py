@@ -2,7 +2,6 @@ import json
 import os
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from threading import Thread
-from typing import List
 
 import pandas as pd
 import pytest
@@ -31,8 +30,8 @@ def read_csv(path: str) -> pd.DataFrame:
     return df
 
 
-def get_verb_test_specs(root: str) -> List[str]:
-    subfolders: List[str] = []
+def get_verb_test_specs(root: str) -> list[str]:
+    subfolders: list[str] = []
     for root, _, files in os.walk(root):
         if "workflow.json" in files:
             subfolders.append(root)

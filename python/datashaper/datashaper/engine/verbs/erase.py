@@ -3,7 +3,7 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Erase verb implementation."""
-from typing import Union, cast
+from typing import cast
 
 import pandas as pd
 
@@ -13,7 +13,7 @@ from datashaper.table_store import TableContainer
 
 
 @verb(name="erase")
-def erase(input: VerbInput, column: str, value: Union[str, int, float]):
+def erase(input: VerbInput, column: str, value: str | int | float):
     """Erase verb implementation."""
     input_table = input.get_input()
     output = cast(pd.DataFrame, input_table)

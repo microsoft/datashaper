@@ -4,7 +4,7 @@
 #
 """Contains the definition for the ExecutionNode type."""
 from dataclasses import dataclass, field
-from typing import Any, Optional, Union
+from typing import Any
 
 from datashaper.engine.verbs import VerbDetails
 from datashaper.table_store import TableContainer
@@ -23,11 +23,11 @@ class ExecutionNode:
     verb: VerbDetails
     """The verb to execute in this graph node."""
 
-    node_input: Union[str, dict[str, list[str]]]
+    node_input: str | dict[str, list[str]]
     """The input to this node."""
 
     args: dict[str, Any] = field(default_factory=dict)
     """The arguments to pass to the verb."""
 
-    result: Optional[TableContainer] = None
+    result: TableContainer | None = None
     """The result of executing this node."""

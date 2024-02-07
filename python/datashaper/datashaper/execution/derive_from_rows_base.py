@@ -1,7 +1,8 @@
 """A module containing the derive_from_rows_async method."""
 import asyncio
 import traceback
-from typing import Any, Awaitable, Callable, TypeVar
+from collections.abc import Awaitable, Callable
+from typing import Any, TypeVar
 
 import pandas as pd
 

@@ -8,11 +8,12 @@ import asyncio
 import math
 import traceback
 from collections import namedtuple
+from collections.abc import Awaitable, Callable
 from dataclasses import dataclass, field
 from enum import Enum
 from functools import cache
 from inspect import signature
-from typing import Any, Awaitable, Callable, Concatenate, ParamSpec
+from typing import Any, Concatenate, ParamSpec
 
 import numpy as np
 import pandas as pd

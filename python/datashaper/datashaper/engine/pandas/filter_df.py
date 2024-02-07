@@ -4,8 +4,8 @@
 #
 """Verb filtering utilities."""
 import logging
+from collections.abc import Callable
 from functools import partial
-from typing import Callable, Union
 from uuid import uuid4
 
 import pandas as pd
@@ -54,7 +54,7 @@ def __correct_unknown_value(df: pd.DataFrame, columns: list[str], target: str) -
 def __equals(
     df: pd.DataFrame,
     column: str,
-    target: Union[pd.Series, str, int, float, bool],
+    target: pd.Series | str | int | float | bool,
     **kwargs,
 ) -> pd.Series:
     return df[column] == target
@@ -63,7 +63,7 @@ def __equals(
 def __not_equals(
     df: pd.DataFrame,
     column: str,
-    target: Union[pd.Series, str, int, float, bool],
+    target: pd.Series | str | int | float | bool,
     **kwargs,
 ) -> pd.Series:
     return ~df[column] == target
@@ -80,7 +80,7 @@ def __is_not_null(df: pd.DataFrame, column: str, **kwargs) -> pd.DataFrame | pd.
 def __contains(
     df: pd.DataFrame,
     column: str,
-    target: Union[pd.Series, str, int, float, bool],
+    target: pd.Series | str | int | float | bool,
     **kwargs,
 ) -> pd.DataFrame | pd.Series:
     return df[column].str.contains(str(target), regex=False)
@@ -89,7 +89,7 @@ def __contains(
 def __startswith(
     df: pd.DataFrame,
     column: str,
-    target: Union[pd.Series, str, int, float, bool],
+    target: pd.Series | str | int | float | bool,
     **kwargs,
 ) -> pd.DataFrame | pd.Series:
     return df[column].str.startswith(str(target))
@@ -98,7 +98,7 @@ def __startswith(
 def __endswith(
     df: pd.DataFrame,
     column: str,
-    target: Union[pd.Series, str, int, float, bool],
+    target: pd.Series | str | int | float | bool,
     **kwargs,
 ) -> pd.Series:
     return df[column].str.endswith(str(target))
@@ -107,7 +107,7 @@ def __endswith(
 def __regex(
     df: pd.DataFrame,
     column: str,
-    target: Union[pd.Series, str, int, float, bool],
+    target: pd.Series | str | int | float | bool,
     **kwargs,
 ) -> pd.Series:
     return df[column].str.contains(str(target), regex=True)
@@ -116,7 +116,7 @@ def __regex(
 def __gt(
     df: pd.DataFrame,
     column: str,
-    target: Union[pd.Series, str, int, float, bool],
+    target: pd.Series | str | int | float | bool,
     **kwargs,
 ) -> pd.Series:
     return df[column] > target
@@ -125,7 +125,7 @@ def __gt(
 def __gte(
     df: pd.DataFrame,
     column: str,
-    target: Union[pd.Series, str, int, float, bool],
+    target: pd.Series | str | int | float | bool,
     **kwargs,
 ) -> pd.Series:
     return df[column] >= target
@@ -134,7 +134,7 @@ def __gte(
 def __lt(
     df: pd.DataFrame,
     column: str,
-    target: Union[pd.Series, str, int, float, bool],
+    target: pd.Series | str | int | float | bool,
     **kwargs,
 ) -> pd.Series:
     return df[column] < target
@@ -143,7 +143,7 @@ def __lt(
 def __lte(
     df: pd.DataFrame,
     column: str,
-    target: Union[pd.Series, str, int, float, bool],
+    target: pd.Series | str | int | float | bool,
     **kwargs,
 ) -> pd.Series:
     return df[column] <= target
@@ -159,9 +159,7 @@ _empty_comparisons = {
 }
 
 _operator_map: dict[
-    Union[
-        StringComparisonOperator, NumericComparisonOperator, BooleanComparisonOperator
-    ],
+    StringComparisonOperator | NumericComparisonOperator | BooleanComparisonOperator,
     Callable,
 ] = {
     StringComparisonOperator.Contains: __contains,
@@ -220,9 +218,7 @@ def filter_df(df: pd.DataFrame, args: FilterArgs) -> pd.DataFrame | pd.Series:
 
 def get_operator(
     operator: str,
-) -> Union[
-    StringComparisonOperator, NumericComparisonOperator, BooleanComparisonOperator
-]:
+) -> StringComparisonOperator | NumericComparisonOperator | BooleanComparisonOperator:
     """Get a comparison operator based on the input string."""
     try:
         return StringComparisonOperator(operator)

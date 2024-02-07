@@ -3,7 +3,8 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Derive verb implementation."""
-from typing import Callable, cast
+from collections.abc import Callable
+from typing import cast
 
 import numpy as np
 import pandas as pd

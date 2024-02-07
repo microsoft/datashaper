@@ -1,8 +1,9 @@
 """Parallelize a function over an iterable."""
 import time
+from collections.abc import Callable, Iterable
 from concurrent.futures import Future, ThreadPoolExecutor, wait
 from multiprocessing import cpu_count
-from typing import Callable, Iterable, Tuple, TypeVar
+from typing import TypeVar
 
 InType = TypeVar("InType")
 OutType = TypeVar("OutType")
@@ -15,7 +16,7 @@ def parallelize(
     num_threads: int | None = None,
     stagger: int | None = None,
     stop_on_error: bool = False,
-) -> Tuple[list[OutType], list[BaseException | None]]:
+) -> tuple[list[OutType], list[BaseException | None]]:
     """Apply a function to each row of a dataframe, in parallel."""
     if num_threads is None or num_threads == 0:
         num_threads = 2 * cpu_count()

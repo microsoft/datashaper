@@ -6,13 +6,13 @@
 
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Union
+from typing import Any
 
 
 class Bin:
     """A data bin."""
 
-    min: Union[float, str]
+    min: float | str
     count: int
 
 
@@ -44,8 +44,8 @@ class Step:
     """A workflow processing step."""
 
     verb: str
-    input: Union[str, dict[str, str]]
-    output: Union[str, dict[str, str]]
+    input: str | dict[str, str]
+    output: str | dict[str, str]
     args: dict[str, Any] = field(default_factory=dict)
 
 
@@ -154,9 +154,7 @@ class Criterion:
 
     value: Any
     type: FilterCompareType
-    operator: Union[
-        NumericComparisonOperator, StringComparisonOperator, BooleanComparisonOperator
-    ]
+    operator: NumericComparisonOperator | StringComparisonOperator | BooleanComparisonOperator
 
 
 class BooleanLogicalOperator(str, Enum):

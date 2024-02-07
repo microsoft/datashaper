@@ -3,7 +3,7 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Rollup verb implementation."""
-from typing import Iterable
+from collections.abc import Iterable
 
 import pandas as pd
 

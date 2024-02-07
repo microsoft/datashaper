@@ -1,5 +1,5 @@
 """Collection of callbacks that can be used to monitor the workflow execution."""
-from typing import Any, Optional, Protocol
+from typing import Any, Protocol
 
 from datashaper.execution.execution_node import ExecutionNode
 from datashaper.progress import Progress
@@ -25,9 +25,7 @@ class WorkflowCallbacks(Protocol):
         """Execute this callback every time a step starts."""
         ...
 
-    def on_step_end(
-        self, node: ExecutionNode, result: Optional[TableContainer]
-    ) -> None:
+    def on_step_end(self, node: ExecutionNode, result: TableContainer | None) -> None:
         """Execute this callback every time a step ends."""
         ...
 
@@ -38,23 +36,21 @@ class WorkflowCallbacks(Protocol):
     def on_error(
         self,
         message: str,
-        cause: Optional[BaseException] = None,
-        stack: Optional[str] = None,
-        details: Optional[dict] = None,
+        cause: BaseException | None = None,
+        stack: str | None = None,
+        details: dict | None = None,
     ) -> None:
         """Handle when an error occurs."""
         ...
 
-    def on_warning(self, message: str, details: Optional[dict] = None) -> None:
+    def on_warning(self, message: str, details: dict | None = None) -> None:
         """Handle when a warning occurs."""
         ...
 
-    def on_log(self, message: str, details: Optional[dict] = None) -> None:
+    def on_log(self, message: str, details: dict | None = None) -> None:
         """Handle when a log message occurs."""
         ...
 
-    def on_measure(
-        self, name: str, value: float, details: Optional[dict] = None
-    ) -> None:
+    def on_measure(self, name: str, value: float, details: dict | None = None) -> None:
         """Handle when a measurement occurs."""
         ...

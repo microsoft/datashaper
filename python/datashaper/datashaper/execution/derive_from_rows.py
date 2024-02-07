@@ -1,6 +1,7 @@
 """Apply a generic transform function to each row in a table."""
 import traceback
-from typing import Any, Callable, TypeVar
+from collections.abc import Callable
+from typing import Any, TypeVar
 
 import pandas as pd
 
