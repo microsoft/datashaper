@@ -88,12 +88,10 @@ select = [
     "E4", "E7", "E9",
     "F", # Pyflakes https://docs.astral.sh/ruff/rules/#pyflakes-fd    
     "D", # pydocstyle
-    #"E", # pycodestyle
-    # "D401", # Require an imperative mood for all docstrings.    
-    # "W291", # No trailing whitespace
-    # "C90", # Mccabe Complexity
-    # "I", # Isort
-    # "N", # Naming Conventions
+    "W291", # No trailing whitespace
+    #"C90", # Mccabe Complexity
+    "I", # Isort
+    "N", # Naming Conventions
     # "UP", # pyupgrade - use modern conventions
     # "YTT", # Correct sys.version_info usage
     # "ANN", # Type Annotations

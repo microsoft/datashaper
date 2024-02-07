@@ -56,7 +56,7 @@ def spread(
     to: Optional[list[str]] = None,
     delimiter: str = ",",
     onehot: bool = False,
-    preserveSource: bool = False,
+    preserveSource: bool = False,  # noqa: N803
 ):
     """Spread verb implementation."""
     input_table = input.get_input()

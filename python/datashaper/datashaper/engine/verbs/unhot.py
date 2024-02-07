@@ -14,7 +14,7 @@ def unhot(
     input: VerbInput,
     to: str,
     columns: list[str],
-    preserveSource: bool = False,
+    preserveSource: bool = False,  # noqa: N803
     prefix: str = "",
 ):
     """Unhot verb implementation."""

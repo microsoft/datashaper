@@ -53,18 +53,18 @@ def _convert_bool(value: str) -> bool:
         return True
 
 
-def _convert_date_str(value: datetime, formatPattern: str) -> Union[str, float]:
+def _convert_date_str(value: datetime, format_pattern: str) -> Union[str, float]:
     try:
-        return datetime.strftime(value, formatPattern)
+        return datetime.strftime(value, format_pattern)
     except Exception:
         return np.nan
 
 
-def _to_str(column: pd.Series, formatPattern: str) -> pd.DataFrame | pd.Series:
+def _to_str(column: pd.Series, format_pattern: str) -> pd.DataFrame | pd.Series:
     if is_datetime64_any_dtype(column) or (
         isinstance(column.dtype, pd.ArrowDtype) and "timestamp" in column.dtype.name
     ):
-        return column.apply(lambda x: _convert_date_str(x, formatPattern))
+        return column.apply(lambda x: _convert_date_str(x, format_pattern))
 
     column_numeric: pd.Series | None = None
     if is_numeric_dtype(column):
@@ -91,13 +91,13 @@ __type_mapping: dict[ParseType, Callable] = {
     ParseType.Boolean: lambda column, **kwargs: column.apply(
         lambda x: _convert_bool(x)
     ),
-    ParseType.Date: lambda column, formatPattern, **kwargs: _to_datetime(column),
+    ParseType.Date: lambda column, format_pattern, **kwargs: _to_datetime(column),
     ParseType.Decimal: lambda column, **kwargs: column.apply(
         lambda x: _convert_float(x)
     ),
     ParseType.Integer: lambda column, radix, **kwargs: _to_int(column, radix),
-    ParseType.String: lambda column, formatPattern, **kwargs: _to_str(
-        column, formatPattern
+    ParseType.String: lambda column, format_pattern, **kwargs: _to_str(
+        column, format_pattern
     ),
 }
 
@@ -109,7 +109,7 @@ def convert(
     to: str,
     type: str,
     radix: Optional[int] = None,
-    formatPattern: str = "%Y-%m-%d",
+    formatPattern: str = "%Y-%m-%d",  # noqa: N803
 ):
     """Convert verb implementation."""
     parse_type = ParseType(type)

@@ -22,7 +22,7 @@ def merge(
     columns: list[str],
     strategy: str,
     delimiter: str = "",
-    preserveSource: bool = False,
+    preserveSource: bool = False,  # noqa: N803
     unhot: bool = False,
     prefix: str = "",
 ):
