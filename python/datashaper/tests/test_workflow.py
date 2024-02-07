@@ -39,7 +39,7 @@ class TestWorkflowRun(unittest.IsolatedAsyncioTestCase):
         )
         workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
         await workflow.run(context=create_fake_run_context())
-        self.assertIsNotNone(workflow.export())
+        assert workflow.export() is not None
 
     async def test_define_basic_workflow_with_profiling_creates_profile(self):
         workflow = Workflow(
@@ -60,9 +60,9 @@ class TestWorkflowRun(unittest.IsolatedAsyncioTestCase):
         )
         workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
         result = await workflow.run(create_fake_run_context())
-        self.assertIsNotNone(result.memory_profile)
-        self.assertIsNotNone(result.verb_timings)
-        self.assertIsNotNone(workflow.export())
+        assert result.memory_profile is not None
+        assert result.verb_timings is not None
+        assert workflow.export() is not None
 
     async def test_run_basic_workflow_does_not_crash(self):
         workflow = Workflow(
@@ -82,7 +82,7 @@ class TestWorkflowRun(unittest.IsolatedAsyncioTestCase):
         )
         workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
         await workflow.run(create_fake_run_context())
-        self.assertIsNotNone(workflow.export())
+        assert workflow.export() is not None
 
     async def test_create_basic_workflow_with_test_inputs_does_not_crash(self):
         wf = Workflow(
@@ -102,7 +102,7 @@ class TestWorkflowRun(unittest.IsolatedAsyncioTestCase):
             validate=False,
             input_tables={DEFAULT_INPUT_NAME: pd.DataFrame({"a": [1, 2, 3]})},
         )
-        self.assertSetEqual(wf.dependencies, set([DEFAULT_INPUT_NAME]))
+        assert wf.dependencies == set([DEFAULT_INPUT_NAME])
         await wf.run()
 
     def test_workflow_dependencies(self):
@@ -136,17 +136,14 @@ class TestWorkflowRun(unittest.IsolatedAsyncioTestCase):
             validate=False,
             input_tables={DEFAULT_INPUT_NAME: pd.DataFrame({"a": [1, 2, 3]})},
         )
-        self.assertSetEqual(
-            wf.dependencies,
-            set(
-                [
-                    DEFAULT_INPUT_NAME,
-                    "external_1",
-                    "external_2",
-                    "external_3",
-                    "external_4",
-                ]
-            ),
+        assert wf.dependencies == set(
+            [
+                DEFAULT_INPUT_NAME,
+                "external_1",
+                "external_2",
+                "external_3",
+                "external_4",
+            ]
         )
         # don't run, will throw because dependencies are explicitly missing
 
@@ -297,7 +294,7 @@ class TestWorkflowRun(unittest.IsolatedAsyncioTestCase):
         # Our test verb doesn't do anything, so the output should be the same as the input
         input_json = input_data.to_json(orient="records")
         output_json = workflow.output().to_json(orient="records")
-        self.assertEqual(input_json, output_json)
+        assert input_json == output_json
 
     async def test_workflow_second_step_gets_first_steps_input(self):
         first_step_output = pd.DataFrame({"b": [1, 2, 3]})
@@ -326,7 +323,7 @@ class TestWorkflowRun(unittest.IsolatedAsyncioTestCase):
         # Ensure the output looks like the "first_step_output"
         input_json = first_step_output.to_json(orient="records")
         output_json = workflow.output().to_json(orient="records")
-        self.assertEqual(input_json, output_json)
+        assert input_json == output_json
 
     async def test_workflow_second_step_gets_first_steps_input_when_first_step_has_non_default_input(
         self,
@@ -360,7 +357,7 @@ class TestWorkflowRun(unittest.IsolatedAsyncioTestCase):
         # Ensure the output looks like the "first_step_output"
         input_json = non_default_input.to_json(orient="records")
         output_json = workflow.output().to_json(orient="records")
-        self.assertEqual(input_json, output_json)
+        assert input_json == output_json
 
     async def test_workflow_second_step_gets_current_input_when_it_specifies_a_custom_input(
         self,
@@ -407,7 +404,7 @@ class TestWorkflowRun(unittest.IsolatedAsyncioTestCase):
         # Ensure the output looks like the "second_verb_input"
         input_json = second_verb_input.to_json(orient="records")
         output_json = workflow.output().to_json(orient="records")
-        self.assertEqual(input_json, output_json)
+        assert input_json == output_json
 
 
 @dataclass
@@ -454,7 +451,7 @@ def create_parallel_transforming_verb():
 def create_parallel_transforming_verb_throwing():
     def transform(input: VerbInput, callbacks: VerbCallbacks):
         def transform_row(_row: pd.Series):
-            raise VerbError("oh no, this should be expected")
+            raise VerbError
 
         results = derive_from_rows(input.get_input(), transform_row, callbacks)
 

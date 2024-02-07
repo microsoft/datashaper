@@ -13,14 +13,14 @@ from pandas.api.types import is_numeric_dtype
 from datashaper.engine.types import MathOperator
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.errors import VerbError
+from datashaper.errors import VerbOperationNotSupportedError
 from datashaper.table_store import TableContainer
 
 
 def __multiply(col1: pd.Series, col2: pd.Series) -> np.ndarray:
     if is_numeric_dtype(col1) and is_numeric_dtype(col2):
         return np.multiply(col1, col2)
-    raise VerbError("Operation not supported")
+    raise VerbOperationNotSupportedError
 
 
 def __concatenate(col1: pd.Series, col2: pd.Series) -> pd.Series:

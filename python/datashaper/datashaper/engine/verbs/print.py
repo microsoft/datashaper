@@ -12,7 +12,9 @@ from datashaper.table_store import TableContainer
 def print_verb(input: VerbInput, message: str, limit: int = 10) -> TableContainer:
     """Print verb implementation."""
     output = input.get_input()
-    print(message)
-    print(output.to_string(max_rows=limit))
+
+    # TODO(Chris): should we use a logger for these instead of prints?
+    print(message)  # noqa: T201
+    print(output.to_string(max_rows=limit))  # noqa: T201
 
     return TableContainer(table=output)

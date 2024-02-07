@@ -1,4 +1,5 @@
 """Parallelize a function over an iterable."""
+import logging
 import time
 from collections.abc import Callable, Iterable
 from concurrent.futures import Future, ThreadPoolExecutor, wait
@@ -7,6 +8,8 @@ from typing import TypeVar
 
 InType = TypeVar("InType")
 OutType = TypeVar("OutType")
+
+logger = logging.getLogger(__name__)
 
 
 # Print iterations progress https://stackoverflow.com/a/34325723
@@ -26,8 +29,8 @@ def parallelize(
     def execute(item: InType) -> OutType:
         try:
             return func(item)
-        except Exception as e:
-            print(f"Error in parallelize: {e}")
+        except Exception:
+            logger.exception("Error parallelizing")
             raise
 
     futures: list[Future] = []

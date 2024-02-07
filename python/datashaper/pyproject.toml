@@ -85,53 +85,14 @@ docstring-code-line-length = 20
 
 [tool.ruff.lint]
 select = [
-    "E4", "E7", "E9",
-    "F", # Pyflakes https://docs.astral.sh/ruff/rules/#pyflakes-fd    
-    "D", # pydocstyle
-    "W291", # No trailing whitespace
-    #"C90", # Mccabe Complexity
-    "I", # Isort
-    "N", # Naming Conventions
-    "UP", # pyupgrade - use modern conventions
-    "YTT", # Correct sys.version_info usage
-    "ANN", # Type Annotations
-    "ASYNC", # Async Functions
-    "S", # Bandit (security)
+    "E4", "E7", "E9", "F", "D", "W291", "I", "N", "UP", "YTT", "ANN", "ASYNC", "S", "B", "DTZ", "T10", "EM", "ICN", "G", "INP", "PIE", "PYI", "PT", "Q",
+    "RSE", "RET", "SLF", "SLOT", "SIM", "TID", "TCH", "INT", "ARG", "PTH", 'ERA', "PD", "TRY", "FLY", "PERF", "LOG", "A", "C90", "T20",
     # "BLE", # Don't catch blind exceptions,
     # "FBT", # use named arguments for boolean flags
-    "B", # Bugbear, design issues
-    # "A", # Don't shadow builtins
     # "C4", # Comprehension checks
-    "DTZ", # Datetime checks
-    "T10", # Remove debug statements
-    # "EM", # Error messages
-    "ICN", # Import Conventions
-    "G", # Logging Formats
-    "INP", # check for missing __init__.py
-    "PIE", # flake8-pie - misc lints
-    # "T20", # no print statements
-    "PYI", # stub files
-    "PT", # testing style
-    "Q", # consistent quoting
-    "RSE", # flake8-raise
-    "RET", # flake8-return
-    "SLF", # no external member access
-    "SLOT", # flake8-slots
-    "SIM", # flake8-simplify
-    "TID", # flake8-tidy-imports
-    "TCH", # flake8-ctype-checking
-    "INT",
-    "ARG",
-    "PTH",
     # "TD", # todos
-    # "FIX", # fixme
-    "ERA", # no commented-out code
-    "PD", # Pandas,
-    "TRY",
-    "FLY",
-    "PERF",
+    #"FIX", # fixme
     #"FURB", <preview only>
-    "LOG",
     #"RUF"
 ]
 ignore = [
@@ -140,19 +101,14 @@ ignore = [
     "ANN102",
     # Conflicts with interface argument checking
     "ARG002",
-    # Not really necessary
     "ANN204",
-    "PYI041",
-    # Testing idioms
-    "PT009",
-    # TODO: Inspect these for validity
+    # TODO: Inspect these pandas rules for validity
     "PD002",
     "PD010",
     "PD013",
     # TODO RE-Enable when we get bandwidth
-    "EM101",
-    "TRY003",
-    "ANN401"
+    "ANN401",
+    "C901",
 ]
 
 [tool.ruff.lint.per-file-ignores]

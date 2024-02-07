@@ -104,7 +104,7 @@ def convert(
     input: VerbInput,
     column: str,
     to: str,
-    type: str,
+    type: str,  # noqa: A002
     radix: int | None = None,
     formatPattern: str = "%Y-%m-%d",  # noqa: N803
 ) -> TableContainer:

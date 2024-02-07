@@ -5,6 +5,7 @@
 """Verb decorators and manager."""
 
 import asyncio
+import logging
 import math
 import traceback
 from collections.abc import Awaitable, Callable
@@ -16,11 +17,14 @@ import numpy as np
 import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
+from datashaper.errors import VerbParallelizationError
 from datashaper.progress import ProgressTicker, progress_ticker
 from datashaper.table_store import Table, TableContainer
 from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
 
 from .verbs_mapping import verb
+
+logger = logging.getLogger(__name__)
 
 
 class AsyncIOType(str, Enum):
@@ -31,6 +35,8 @@ class AsyncIOType(str, Enum):
 
 
 P = ParamSpec("P")
+
+_CHUNKS_NOT_SUPPORTED = "chunk_size > 1 is only supported for DataFrame inputs and outputs. Use chunk_size = 1 for item-wise operations."
 
 
 def new_row(old_tuple: tuple, new_column_name: str, value: Any) -> tuple:
@@ -80,9 +86,7 @@ def parallel_verb(
                     math.ceil(len(input_table) / chunk_size),  # type: ignore
                 )
             else:
-                raise NotImplementedError(
-                    "chunk_size > 1 is only supported for DataFrame inputs and outputs. Use chunk_size = 1 for item-wise operations."
-                )
+                raise NotImplementedError(_CHUNKS_NOT_SUPPORTED)
 
             tick = progress_ticker(
                 callbacks.progress,
@@ -105,7 +109,7 @@ def parallel_verb(
                         tick(1)
                     except Exception as e:
                         stack_trace = traceback.format_exc()
-                        print(stack_trace)
+                        logger.exception("Error executing parallel verb.")
                         stack_traces.append(stack_trace)
                         errors.append(e)
                         return None
@@ -131,9 +135,7 @@ def parallel_verb(
                     stack=stack_trace,
                 )
             if len(errors) > 0:
-                raise ValueError(
-                    "Errors occurred while running parallel transformation, could not complete!"
-                )
+                raise VerbParallelizationError(len(errors))
             if chunk_size > 1:
                 return TableContainer(pd.concat(results))  # type: ignore
 

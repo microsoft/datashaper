@@ -33,9 +33,9 @@ def read_csv(path: str) -> pd.DataFrame:
 
 def get_verb_test_specs(root: str) -> list[str]:
     subfolders: list[str] = []
-    for dir, _, files in os.walk(root):
+    for data_dir, _, files in os.walk(root):
         if "workflow.json" in files:
-            subfolders.append(dir)
+            subfolders.append(data_dir)
     return subfolders
 
 

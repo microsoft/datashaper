@@ -6,6 +6,7 @@ from typing import Any, TypeVar
 
 import pandas as pd
 
+from datashaper.errors import VerbParallelizationError
 from datashaper.progress import progress_ticker
 from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
 
@@ -54,8 +55,6 @@ async def derive_from_rows_base(
         callbacks.error("parallel transformation error", error, stack)
 
     if len(errors) > 0:
-        raise ValueError(
-            f"{len(errors)} Errors occurred while running parallel transformation, could not complete!"
-        )
+        raise VerbParallelizationError(len(errors))
 
     return result

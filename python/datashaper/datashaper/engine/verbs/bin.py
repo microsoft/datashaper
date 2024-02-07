@@ -49,38 +49,38 @@ def __get_bucket_value(
 
 
 __bin_edges_mapping = {
-    BinStrategy.Auto: lambda column, range: np.histogram_bin_edges(
-        column, bins="auto", range=range
+    BinStrategy.Auto: lambda column, min_max: np.histogram_bin_edges(
+        column, bins="auto", range=min_max
     ),
-    BinStrategy.Fd: lambda column, range: np.histogram_bin_edges(
-        column, bins="fd", range=range
+    BinStrategy.Fd: lambda column, min_max: np.histogram_bin_edges(
+        column, bins="fd", range=min_max
     ),
-    BinStrategy.Sturges: lambda column, range: np.histogram_bin_edges(
-        column, bins="sturges", range=range
+    BinStrategy.Sturges: lambda column, min_max: np.histogram_bin_edges(
+        column, bins="sturges", range=min_max
     ),
-    BinStrategy.Doane: lambda column, range: np.histogram_bin_edges(
-        column, bins="doane", range=range
+    BinStrategy.Doane: lambda column, min_max: np.histogram_bin_edges(
+        column, bins="doane", range=min_max
     ),
-    BinStrategy.Scott: lambda column, range: np.histogram_bin_edges(
-        column, bins="scott", range=range
+    BinStrategy.Scott: lambda column, min_max: np.histogram_bin_edges(
+        column, bins="scott", range=min_max
     ),
-    BinStrategy.Rice: lambda column, range: np.histogram_bin_edges(
-        column, bins="rice", range=range
+    BinStrategy.Rice: lambda column, min_max: np.histogram_bin_edges(
+        column, bins="rice", range=min_max
     ),
-    BinStrategy.Sqrt: lambda column, range: np.histogram_bin_edges(
-        column, bins="sqrt", range=range
+    BinStrategy.Sqrt: lambda column, min_max: np.histogram_bin_edges(
+        column, bins="sqrt", range=min_max
     ),
 }
 
 
 @verb(name="bin")
-def bin(
+def bin_verb(
     input: VerbInput,
     to: str,
     column: str,
     strategy: str,
-    min: int | None = None,
-    max: int | None = None,
+    min: int | None = None,  # noqa: A002
+    max: int | None = None,  # noqa: A002
     fixedcount: int | None = None,
     fixedwidth: int | None = None,
     clamped: bool | None = False,

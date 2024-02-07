@@ -1,15 +1,17 @@
 """Apply a generic transform function to each row in a table."""
-import traceback
+import logging
 from collections.abc import Callable
 from typing import Any, TypeVar
 
 import pandas as pd
 
+from datashaper.errors import VerbParallelizationError
 from datashaper.execution.utils.parallelize import parallelize
 from datashaper.progress import progress_ticker
 from datashaper.table_store import Table
 from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
 
+logger = logging.getLogger(__name__)
 ItemType = TypeVar("ItemType")
 
 
@@ -26,9 +28,8 @@ def derive_from_rows(
     def transform_row(row: tuple[Any, pd.Series]) -> ItemType:
         try:
             return transform(row[1])
-        except Exception as e:
-            print(f"Error in transform_pandas_table: {e}")
-            traceback.print_exc()
+        except Exception:
+            logger.exception("error transforming row")
             raise
         finally:
             tick(1)
@@ -40,8 +41,6 @@ def derive_from_rows(
         callbacks.error("Received errors during parallel transformation", error)
 
     if len(errors) > 0:
-        raise ValueError(
-            "Errors occurred while running parallel transformation, could not complete!"
-        )
+        raise VerbParallelizationError(len(errors))
 
     return results

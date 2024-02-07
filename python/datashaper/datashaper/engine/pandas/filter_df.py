@@ -55,7 +55,7 @@ def __correct_unknown_value(df: pd.DataFrame, columns: list[str], target: str) -
 def __equals(
     df: pd.DataFrame,
     column: str,
-    target: pd.Series | str | int | float | bool,
+    target: pd.Series | str | float | bool,
     **_kwargs: dict,
 ) -> pd.Series:
     return df[column] == target
@@ -64,7 +64,7 @@ def __equals(
 def __not_equals(
     df: pd.DataFrame,
     column: str,
-    target: pd.Series | str | int | float | bool,
+    target: pd.Series | str | float | bool,
     **_kwargs: dict,
 ) -> pd.Series:
     return ~df[column] == target
@@ -85,7 +85,7 @@ def __is_not_null(
 def __contains(
     df: pd.DataFrame,
     column: str,
-    target: pd.Series | str | int | float | bool,
+    target: pd.Series | str | float | bool,
     **_kwargs: dict,
 ) -> pd.DataFrame | pd.Series:
     return df[column].str.contains(str(target), regex=False)
@@ -94,7 +94,7 @@ def __contains(
 def __startswith(
     df: pd.DataFrame,
     column: str,
-    target: pd.Series | str | int | float | bool,
+    target: pd.Series | str | float | bool,
     **_kwargs: dict,
 ) -> pd.DataFrame | pd.Series:
     return df[column].str.startswith(str(target))
@@ -103,7 +103,7 @@ def __startswith(
 def __endswith(
     df: pd.DataFrame,
     column: str,
-    target: pd.Series | str | int | float | bool,
+    target: pd.Series | str | float | bool,
     **_kwargs: dict,
 ) -> pd.Series:
     return df[column].str.endswith(str(target))
@@ -112,7 +112,7 @@ def __endswith(
 def __regex(
     df: pd.DataFrame,
     column: str,
-    target: pd.Series | str | int | float | bool,
+    target: pd.Series | str | float | bool,
     **_kwargs: dict,
 ) -> pd.Series:
     return df[column].str.contains(str(target), regex=True)
@@ -121,7 +121,7 @@ def __regex(
 def __gt(
     df: pd.DataFrame,
     column: str,
-    target: pd.Series | str | int | float | bool,
+    target: pd.Series | str | float | bool,
     **_kwargs: dict,
 ) -> pd.Series:
     return df[column] > target
@@ -130,7 +130,7 @@ def __gt(
 def __gte(
     df: pd.DataFrame,
     column: str,
-    target: pd.Series | str | int | float | bool,
+    target: pd.Series | str | float | bool,
     **_kwargs: dict,
 ) -> pd.Series:
     return df[column] >= target
@@ -139,7 +139,7 @@ def __gte(
 def __lt(
     df: pd.DataFrame,
     column: str,
-    target: pd.Series | str | int | float | bool,
+    target: pd.Series | str | float | bool,
     **_kwargs: dict,
 ) -> pd.Series:
     return df[column] < target
@@ -148,7 +148,7 @@ def __lt(
 def __lte(
     df: pd.DataFrame,
     column: str,
-    target: pd.Series | str | int | float | bool,
+    target: pd.Series | str | float | bool,
     **_kwargs: dict,
 ) -> pd.Series:
     return df[column] <= target

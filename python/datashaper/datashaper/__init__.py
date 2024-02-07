@@ -37,8 +37,15 @@ from .engine import (
 )
 from .errors import (
     InvalidVerbInputError,
+    NoVerbInputsProvidedError,
     UnsupportedComparisonOperatorError,
+    VerbAlreadyRegisteredError,
     VerbError,
+    VerbHasMultipleDefaultInputsError,
+    VerbHasMultipleDefaultOthersError,
+    VerbOperationNotSupportedError,
+    VerbParallelizationError,
+    WorkflowError,
     WorkflowMissingInputError,
     WorkflowOutputNotReadyError,
     WorkflowVerbNotFoundError,
@@ -151,4 +158,11 @@ __all__ = [
     "WorkflowMissingInputError",
     "WorkflowOutputNotReadyError",
     "WorkflowVerbNotFoundError",
+    "VerbAlreadyRegisteredError",
+    "VerbParallelizationError",
+    "WorkflowError",
+    "NoVerbInputsProvidedError",
+    "VerbHasMultipleDefaultInputsError",
+    "VerbHasMultipleDefaultOthersError",
+    "VerbOperationNotSupportedError",
 ]

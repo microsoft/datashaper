@@ -4,8 +4,31 @@
 class VerbError(ValueError):
     """Exception for invalid verb input."""
 
-    def __init__(self, message: str):
-        super().__init__(message)
+    def __init__(self, message: str | None = None):
+        super().__init__(message or "A verb error occurred")
+
+
+class VerbOperationNotSupportedError(VerbError):
+    """Exception for invalid verb input."""
+
+    def __init__(self):
+        super().__init__("Operation not supported")
+
+
+class VerbParallelizationError(VerbError):
+    """Exception for invalid verb input."""
+
+    def __init__(self, num_errors: int):
+        super().__init__(
+            f"{num_errors} Errors occurred while running parallel transformation, could not complete!"
+        )
+
+
+class VerbAlreadyRegisteredError(VerbError):
+    """Exception for invalid verb input."""
+
+    def __init__(self, verb: str):
+        super().__init__(f"Verb {verb} already registered.")
 
 
 class UnsupportedComparisonOperatorError(VerbError):
@@ -20,6 +43,27 @@ class InvalidVerbInputError(VerbError):
 
     def __init__(self, message: str):
         super().__init__(message)
+
+
+class VerbHasMultipleDefaultInputsError(VerbError):
+    """Exception for invalid verb input."""
+
+    def __init__(self):
+        super().__init__("Only one of input or source can be provided")
+
+
+class VerbHasMultipleDefaultOthersError(VerbError):
+    """Exception for invalid verb input."""
+
+    def __init__(self):
+        super().__init__("Only one of other or others can be provided")
+
+
+class NoVerbInputsProvidedError(InvalidVerbInputError):
+    """Exception for invalid verb input."""
+
+    def __init__(self):
+        super().__init__("At least input or source must be provided")
 
 
 class WorkflowError(RuntimeError):
@@ -41,8 +85,12 @@ class WorkflowOutputNotReadyError(WorkflowError):
 class WorkflowMissingInputError(WorkflowError):
     """Exception for invalid verb input."""
 
-    def __init__(self, message: str):
-        super().__init__(message)
+    def __init__(self, name: str | None = None):
+        super().__init__(
+            f"Workflow missing input: {name}"
+            if name is not None
+            else "Workflow missing inputs"
+        )
 
 
 class WorkflowVerbNotFoundError(WorkflowError):

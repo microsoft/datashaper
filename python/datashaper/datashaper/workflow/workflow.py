@@ -202,7 +202,7 @@ class Workflow(Generic[Context]):
         verbs_manager = VerbManager.get()
         result = verbs_manager.get_verb(verb)
         if result is None:
-            raise WorkflowVerbNotFoundError(f"Verb {verb} not found in verbs")
+            raise WorkflowVerbNotFoundError(verb)
         return result
 
     @staticmethod
@@ -268,7 +268,7 @@ class Workflow(Generic[Context]):
             )
 
             if table_container is None:
-                raise ValueError(f"Input table {name} not found in inputs or graph")
+                raise WorkflowMissingInputError(name)
             if use_original_table:
                 return table_container
 
@@ -317,9 +317,7 @@ class Workflow(Generic[Context]):
         def assert_all_visited() -> None:
             for node_id in self._graph:
                 if node_id not in visited and not self._check_inputs(node_id, visited):
-                    raise WorkflowMissingInputError(
-                        f"Missing inputs for node {node_id}!"
-                    )
+                    raise WorkflowMissingInputError
 
         # Use the ensuring variant to guarantee that all protocol methods are available
         callbacks, profiler = self._get_workflow_callbacks(callbacks)

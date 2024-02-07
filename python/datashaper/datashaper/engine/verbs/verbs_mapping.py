@@ -8,6 +8,7 @@ from collections.abc import Callable
 from dataclasses import dataclass, field
 from functools import cache
 
+from datashaper.errors import VerbAlreadyRegisteredError
 from datashaper.table_store import TableContainer
 
 from .types import VerbDetails
@@ -57,7 +58,7 @@ class VerbManager:
     def register(self, verb: VerbDetails, override_existing: bool = False) -> None:
         """Register a verb."""
         if not override_existing and verb.name in self._verbs:
-            raise ValueError(f"Verb {verb.name} already registered.")
+            raise VerbAlreadyRegisteredError(verb.name)
         self._verbs.update({verb.name: verb})
 
     def get_verb(self, verb: str) -> VerbDetails | None:

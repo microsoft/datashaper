@@ -16,7 +16,7 @@ from datashaper.table_store import TableContainer
 def fill(
     input: VerbInput,
     to: str,
-    value: str | int | float | bool,
+    value: str | float | bool,
 ) -> TableContainer:
     """Fill verb implementation."""
     input_table = input.get_input()
