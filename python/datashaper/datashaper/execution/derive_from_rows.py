@@ -29,7 +29,7 @@ def derive_from_rows(
         except Exception as e:
             print(f"Error in transform_pandas_table: {e}")
             traceback.print_exc()
-            raise e
+            raise
         finally:
             tick(1)
 

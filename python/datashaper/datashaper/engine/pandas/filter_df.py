@@ -18,6 +18,7 @@ from datashaper.engine.types import (
     NumericComparisonOperator,
     StringComparisonOperator,
 )
+from datashaper.errors import UnsupportedComparisonOperatorError
 
 boolean_function_map = {
     BooleanLogicalOperator.OR: lambda df, columns: df[columns].any(axis="columns")
@@ -236,4 +237,4 @@ def get_operator(
         return BooleanComparisonOperator(operator)
     except Exception:
         logging.info("%s is not a boolean comparison operator", operator)
-    raise Exception(f"{operator} is not a recognized comparison operator")
+    raise UnsupportedComparisonOperatorError(operator)

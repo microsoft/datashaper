@@ -46,7 +46,7 @@ class Step:
     verb: str
     input: str | dict[str, str]
     output: str | dict[str, str]
-    args: dict[str, Any] = field(default_factory=dict)
+    args: dict = field(default_factory=dict)
 
 
 class JoinStrategy(str, Enum):

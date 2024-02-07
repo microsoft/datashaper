@@ -5,6 +5,7 @@
 """A class to represent the table inputs into a verb."""
 from typing import cast
 
+from datashaper.errors import InvalidVerbInputError
 from datashaper.table_store import Table, TableContainer
 
 
@@ -22,13 +23,13 @@ class VerbInput:
         others: list[TableContainer] | None = None,
     ):
         if input is None and source is None:
-            raise Exception("At least input or source must be provided")
+            raise InvalidVerbInputError("At least input or source must be provided")
 
         if input is not None and source is not None:
-            raise Exception("Only one of input or source can be provided")
+            raise InvalidVerbInputError("Only one of input or source can be provided")
 
         if other is not None and others is not None:
-            raise Exception("Only one of other or others can be provided")
+            raise InvalidVerbInputError("Only one of other or others can be provided")
 
         self.source = input if input is not None else cast(TableContainer, source)
 

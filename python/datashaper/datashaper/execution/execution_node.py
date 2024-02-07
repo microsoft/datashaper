@@ -4,7 +4,6 @@
 #
 """Contains the definition for the ExecutionNode type."""
 from dataclasses import dataclass, field
-from typing import Any
 
 from datashaper.engine.verbs.types import VerbDetails
 from datashaper.table_store import TableContainer
@@ -26,7 +25,7 @@ class ExecutionNode:
     node_input: str | dict[str, list[str]]
     """The input to this node."""
 
-    args: dict[str, Any] = field(default_factory=dict)
+    args: dict = field(default_factory=dict)
     """The arguments to pass to the verb."""
 
     result: TableContainer | None = None

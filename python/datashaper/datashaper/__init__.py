@@ -35,6 +35,12 @@ from .engine import (
     parallel_verb,
     verb,
 )
+from .errors import (
+    InvalidVerbInputError,
+    UnsupportedComparisonOperatorError,
+    VerbComputeError,
+    WorkflowOutputNotReadyError,
+)
 from .execution import (
     ExecutionNode,
     VerbDefinitions,
@@ -136,4 +142,9 @@ __all__ = [
     "ProgressHandler",
     "ProgressTicker",
     "Progress",
+    # Errors
+    "UnsupportedComparisonOperatorError",
+    "InvalidVerbInputError",
+    "VerbComputeError",
+    "WorkflowOutputNotReadyError",
 ]

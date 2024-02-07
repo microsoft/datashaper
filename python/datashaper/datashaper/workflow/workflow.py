@@ -20,6 +20,7 @@ from jsonschema import validate as validate_schema
 from datashaper.engine.verbs.types import VerbDetails
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import VerbManager
+from datashaper.errors import WorkflowOutputNotReadyError
 from datashaper.execution.execution_node import ExecutionNode
 from datashaper.progress.types import Progress
 from datashaper.table_store import Table, TableContainer
@@ -43,7 +44,7 @@ DEFAULT_INPUT_NAME = "datasource"
 class Workflow(Generic[Context]):
     """A data processing graph."""
 
-    _schema: dict[str, Any]
+    _schema: dict
     _inputs: dict[str, TableContainer]
     _graph: dict[str, ExecutionNode]
     _dependency_graph: dict[str, set[str]]
@@ -55,7 +56,7 @@ class Workflow(Generic[Context]):
 
     def __init__(
         self,
-        schema: dict[str, Any],
+        schema: dict,
         input_path: str | None = None,
         input_tables: dict[str, pd.DataFrame] | None = None,
         schema_path: str | None = None,
@@ -178,7 +179,7 @@ class Workflow(Generic[Context]):
         return deps.difference(known)
 
     @staticmethod
-    def __inputs_list(input: str | dict[str, Any] | None) -> list[str]:
+    def __inputs_list(input: str | dict | None) -> list[str]:
         if isinstance(input, str):
             return [input]
 
@@ -205,7 +206,7 @@ class Workflow(Generic[Context]):
         exec_node: ExecutionNode,
         context: Context | None,
         workflow_callbacks: WorkflowCallbacks,
-    ) -> dict[str, Any]:
+    ) -> dict:
         """Injects the run context into the workflow steps."""
         callbacks = DelegatingVerbCallbacks(exec_node, workflow_callbacks)
 
@@ -213,7 +214,7 @@ class Workflow(Generic[Context]):
             return inspect.getfullargspec(fn).args
 
         verb_args = argument_names(exec_node.verb.func)
-        run_ctx: dict[str, Any] = {}
+        run_ctx: dict = {}
 
         # Pass in individual context items
         if context is not None:
@@ -242,7 +243,7 @@ class Workflow(Generic[Context]):
 
     def _resolve_inputs(
         self, verb: VerbDetails, inputs: str | dict[str, list[str]]
-    ) -> dict[str, Any]:
+    ) -> dict:
         def input_table(name: str) -> TableContainer:
             graph_node = self._graph.get(name)
             step_table_is_safe_to_mutate = (
@@ -292,9 +293,7 @@ class Workflow(Generic[Context]):
 
         container: TableContainer | None = self._graph[id].result
         if container is None:
-            raise Exception(
-                f"Value not calculated yet. {self.name}: {self._graph[id].verb.name} ."
-            )
+            raise WorkflowOutputNotReadyError(self.name, id)
 
         return container.table
 
@@ -371,7 +370,7 @@ class Workflow(Generic[Context]):
         except Exception as e:
             message = f'Error executing verb "{node.verb.name}" in {self.name}: {e}'
             callbacks.on_error(message, e, traceback.format_exc())
-            raise e
+            raise
         finally:
             callbacks.on_step_progress(node, Progress(percent=1))
             callbacks.on_step_end(node, None)

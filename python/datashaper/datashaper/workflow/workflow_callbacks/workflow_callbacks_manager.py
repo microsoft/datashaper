@@ -1,5 +1,4 @@
 """A module containing the WorkflowCallbacks registry."""
-from typing import Any
 
 from datashaper.execution.execution_node import ExecutionNode
 from datashaper.progress import Progress
@@ -33,7 +32,7 @@ class WorkflowCallbacksManager(WorkflowCallbacks):
             if hasattr(callback, "on_workflow_end"):
                 callback.on_workflow_end(name, instance)
 
-    def on_step_start(self, node: ExecutionNode, inputs: dict[str, Any]) -> None:
+    def on_step_start(self, node: ExecutionNode, inputs: dict) -> None:
         """Execute this callback every time a step starts."""
         for callback in self._callbacks:
             if hasattr(callback, "on_step_start"):

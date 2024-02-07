@@ -25,7 +25,7 @@ def _convert_int(value: str, radix: int) -> int | float:
         return np.nan
 
 
-def _to_int(column, radix: int):
+def _to_int(column: pd.Series, radix: int) -> pd.DataFrame | pd.Series:
     if radix is None:
         if column.str.startswith("0x").any() or column.str.startswith("0X").any():
             radix = 16

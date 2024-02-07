@@ -2,7 +2,6 @@
 import time
 import tracemalloc
 from collections import defaultdict
-from typing import Any
 
 import pandas as pd
 
@@ -42,7 +41,7 @@ class MemoryProfilingWorkflowCallbacks(NoopWorkflowCallbacks):
         self._snapshots["all"].append(tracemalloc.take_snapshot())
         self._workflow_start = time.time()
 
-    def on_step_start(self, node: ExecutionNode, inputs: dict[str, Any]) -> None:
+    def on_step_start(self, node: ExecutionNode, inputs: dict) -> None:
         """Call when a step starts."""
         # reset peak so we can get the peak during the verb execution
         self._snapshots[node.verb.name].append(tracemalloc.take_snapshot())

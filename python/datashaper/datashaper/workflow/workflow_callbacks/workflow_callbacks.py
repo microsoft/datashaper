@@ -1,5 +1,5 @@
 """Collection of callbacks that can be used to monitor the workflow execution."""
-from typing import Any, Protocol
+from typing import Protocol
 
 from datashaper.execution.execution_node import ExecutionNode
 from datashaper.progress import Progress
@@ -21,7 +21,7 @@ class WorkflowCallbacks(Protocol):
         """Execute this callback when a workflow ends."""
         ...
 
-    def on_step_start(self, node: ExecutionNode, inputs: dict[str, Any]) -> None:
+    def on_step_start(self, node: ExecutionNode, inputs: dict) -> None:
         """Execute this callback every time a step starts."""
         ...
 

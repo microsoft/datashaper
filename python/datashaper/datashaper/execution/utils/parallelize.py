@@ -28,7 +28,7 @@ def parallelize(
             return func(item)
         except Exception as e:
             print(f"Error in parallelize: {e}")
-            raise e
+            raise
 
     futures: list[Future] = []
     num_staggered = 0

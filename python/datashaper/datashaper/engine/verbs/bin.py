@@ -3,7 +3,7 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Bin verb implementation."""
-from typing import cast
+from typing import Any, cast
 
 import numpy as np
 import pandas as pd
@@ -15,14 +15,14 @@ from datashaper.table_store import TableContainer
 
 
 def __get_bucket_value(
-    bin_edges,
-    indices,
+    bin_edges: np.ndarray,
+    indices: np.ndarray,
     n: int,
     clamped: bool | None,
-    min_max,
-    value,
+    min_max: tuple[int, int] | tuple[float, float],
+    value: float,
     print_range: bool | None,
-):
+) -> Any:
     if value < min_max[0]:
         if print_range:
             return f"<{min_max[0]}"

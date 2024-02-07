@@ -127,7 +127,7 @@ select = [
     # "FIX", # fixme
     "ERA", # no commented-out code
     "PD", # Pandas,
-    #"TRY",
+    "TRY",
     "FLY",
     "PERF",
     #"FURB", <preview only>

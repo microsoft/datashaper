@@ -1,5 +1,4 @@
 """A no-op implementation of WorkflowCallbacks."""
-from typing import Any
 
 from datashaper.execution.execution_node import ExecutionNode
 from datashaper.progress import Progress
@@ -17,7 +16,7 @@ class NoopWorkflowCallbacks(WorkflowCallbacks):
     def on_workflow_end(self, name: str, instance: object) -> None:
         """Execute this callback when a workflow ends."""
 
-    def on_step_start(self, node: ExecutionNode, inputs: dict[str, Any]) -> None:
+    def on_step_start(self, node: ExecutionNode, inputs: dict) -> None:
         """Execute this callback every time a step starts."""
 
     def on_step_end(self, node: ExecutionNode, result: TableContainer | None) -> None:
