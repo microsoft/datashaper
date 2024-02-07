@@ -31,20 +31,20 @@ def __clean_result(
         return cast(
             pd.DataFrame, result[result["_merge"] == "left_only"][source.columns]
         )
-    elif strategy == JoinStrategy.SemiJoin:
+    if strategy == JoinStrategy.SemiJoin:
         return cast(pd.DataFrame, result[result["_merge"] == "both"][source.columns])
-    else:
-        result = cast(
-            pd.DataFrame,
-            pd.concat(
-                [
-                    result[result["_merge"] == "both"],
-                    result[result["_merge"] == "left_only"],
-                    result[result["_merge"] == "right_only"],
-                ]
-            ),
-        )
-        return result.drop("_merge", axis=1)
+
+    result = cast(
+        pd.DataFrame,
+        pd.concat(
+            [
+                result[result["_merge"] == "both"],
+                result[result["_merge"] == "left_only"],
+                result[result["_merge"] == "right_only"],
+            ]
+        ),
+    )
+    return result.drop("_merge", axis=1)
 
 
 @verb(name="join", treats_input_tables_as_immutable=True)

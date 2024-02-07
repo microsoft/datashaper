@@ -27,14 +27,17 @@ def __get_bucket_value(
         if print_range:
             return f"<{min_max[0]}"
         return -np.inf if not clamped else bin_edges[0]
-    elif value > min_max[1]:
+
+    if value > min_max[1]:
         if print_range:
             return f">{int(min_max[1])}"
         return np.inf if not clamped else bin_edges[-2]
-    elif value == bin_edges[-1]:
+
+    if value == bin_edges[-1]:
         if print_range:
             return f"{int(bin_edges[-2])} to {min_max[1]}"
         return bin_edges[-2]
+
     index = min(indices[n] - 1, len(bin_edges) - 1)
     if print_range:
         return (

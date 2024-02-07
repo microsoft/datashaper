@@ -114,8 +114,8 @@ select = [
     # "PT", # testing style
     "Q", # consistent quoting
     # "RSE", # flake8-raise
-    # "RET", # flake8-return
-    # "SLF", # no external member access
+    "RET", # flake8-return
+    "SLF", # no external member access
     "SLOT", # flake8-slots
     "SIM", # flake8-simplify
     "TID", # flake8-tidy-imports
@@ -143,9 +143,12 @@ ignore = [
     # Not really necessary
     "ANN204",
     "PYI041",
+    # Conflicts with our Pandas usage
+    "PD002",
+    "PD010",
+    "PD013",
     # Testing idioms
     "PT009",
-
     # TODO RE-Enable when we overhaul exceptions
     "EM101",
     "TRY003",

@@ -179,15 +179,15 @@ class Workflow(Generic[Context]):
     def __inputs_list(input: str | dict[str, Any] | None) -> list[str]:
         if isinstance(input, str):
             return [input]
-        else:
-            inputs = []
-            if input is not None:
-                for value in input.values():
-                    if isinstance(value, str):
-                        inputs.append(value)
-                    else:
-                        inputs.extend(value)
-            return inputs
+
+        inputs = []
+        if input is not None:
+            for value in input.values():
+                if isinstance(value, str):
+                    inputs.append(value)
+                else:
+                    inputs.extend(value)
+        return inputs
 
     @staticmethod
     def __get_verb(verb: str) -> VerbDetails:
@@ -264,20 +264,20 @@ class Workflow(Generic[Context]):
                 raise ValueError(f"Input table {name} not found in inputs or graph")
             if use_original_table:
                 return table_container
-            else:
-                table = table_container.table.copy()
-                return TableContainer(table=table)
+
+            table = table_container.table.copy()
+            return TableContainer(table=table)
 
         if isinstance(inputs, str):
             return {"input": VerbInput(input=input_table(inputs))}
-        else:
-            input_mapping: dict[str, TableContainer | list[TableContainer]] = {}
-            for key, value in inputs.items():
-                if isinstance(value, str):
-                    input_mapping[key] = input_table(value)
-                else:
-                    input_mapping[key] = [input_table(t) for t in value]
-            return {"input": VerbInput(**cast(Any, input_mapping))}
+
+        input_mapping: dict[str, TableContainer | list[TableContainer]] = {}
+        for key, value in inputs.items():
+            if isinstance(value, str):
+                input_mapping[key] = input_table(value)
+            else:
+                input_mapping[key] = [input_table(t) for t in value]
+        return {"input": VerbInput(**cast(Any, input_mapping))}
 
     def add_table(self, id: str, table: pd.DataFrame) -> None:
         """Add a dataframe to the graph with a given id."""
@@ -293,8 +293,8 @@ class Workflow(Generic[Context]):
             raise Exception(
                 f"Value not calculated yet. {self.name}: {self._graph[id].verb.name} ."
             )
-        else:
-            return container.table
+
+        return container.table
 
     async def run(
         self,
@@ -421,5 +421,5 @@ def _get_memory_profile(
             time_stats=profile.get_time_stats(),
             detailed_view=profile.get_detailed_view(),
         )
-    else:
-        return None
+
+    return None

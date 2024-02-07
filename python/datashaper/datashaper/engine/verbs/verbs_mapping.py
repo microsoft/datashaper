@@ -154,8 +154,8 @@ def parallel_verb(
                 )
             if chunk_size > 1:
                 return TableContainer(pd.concat(results))  # type: ignore
-            else:
-                return TableContainer(pd.DataFrame(results))
+
+            return TableContainer(pd.DataFrame(results))
 
         return wrapper
 

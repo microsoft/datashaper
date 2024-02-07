@@ -81,8 +81,7 @@ def _to_str(column: pd.Series, format_pattern: str) -> pd.DataFrame | pd.Series:
 def _to_datetime(column: pd.Series) -> pd.Series:
     if column.dropna().map(lambda x: isinstance(x, numbers.Number)).all():
         return pd.to_datetime(column, unit="ms", errors="coerce")
-    else:
-        return pd.to_datetime(column, errors="coerce")
+    return pd.to_datetime(column, errors="coerce")
 
 
 __type_mapping: dict[ParseType, Callable] = {

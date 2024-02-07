@@ -21,8 +21,8 @@ def _get_window_indexer(
 ) -> int | pd.api.indexers.BaseIndexer:
     if fixed_size:
         return pd.api.indexers.FixedForwardWindowIndexer(window_size=len(column))
-    else:
-        return len(column)
+
+    return len(column)
 
 
 __window_function_map = {
