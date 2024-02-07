@@ -13,7 +13,7 @@ from datashaper.table_store import Table, TableContainer
 
 
 @verb(name="intersect", treats_input_tables_as_immutable=True)
-def intersect(input: VerbInput):
+def intersect(input: VerbInput) -> TableContainer:
     """Intersect verb implementation."""
     input_table = input.get_input()
     others = cast(list[pd.DataFrame], input.get_others())

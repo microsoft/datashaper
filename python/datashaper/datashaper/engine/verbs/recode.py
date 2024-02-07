@@ -15,13 +15,13 @@ from datashaper.table_store import TableContainer
 class RecodeMap(dict):
     """Recode map class."""
 
-    def __missing__(self, key):
+    def __missing__(self, key: str):
         """Return the key if it is not found in the mapping."""
         return key
 
 
 @verb(name="recode")
-def recode(input: VerbInput, to: str, column: str, mapping: dict):
+def recode(input: VerbInput, to: str, column: str, mapping: dict) -> TableContainer:
     """Recode verb implementation."""
     mapping = RecodeMap(mapping)
 

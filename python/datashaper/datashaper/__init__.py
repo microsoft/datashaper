@@ -1,5 +1,6 @@
 """DataShaper is a library for declarative data manipulation and transformation."""
 from .engine import (
+    AsyncIOType,
     Bin,
     BinStrategy,
     BooleanComparisonOperator,
@@ -30,6 +31,8 @@ from .engine import (
     filter_df,
     get_operator,
     load_verbs,
+    new_row,
+    parallel_verb,
     verb,
 )
 from .execution import (
@@ -80,6 +83,9 @@ __all__ = [
     "verb",
     "VerbManager",
     "load_verbs",
+    "parallel_verb",
+    "AsyncIOType",
+    "new_row",
     # Verb Parameters
     "BinStrategy",
     "Bin",

@@ -85,7 +85,7 @@ def bin(
     fixedwidth: int | None = None,
     clamped: bool | None = False,
     printRange: bool | None = False,  # noqa: N803
-):
+) -> TableContainer:
     """Bin verb implementation."""
     input_table = cast(pd.DataFrame, input.get_input())
     bin_strategy = BinStrategy(strategy)

@@ -18,8 +18,8 @@ def onehot(
     input: VerbInput,
     column: str,
     prefix: str = "",
-    preserveSource=False,  # noqa: N803
-):
+    preserveSource: bool = False,  # noqa: N803
+) -> TableContainer:
     """Onehot verb implementation."""
     input_table = cast(pd.DataFrame, input.get_input())
     input_table[column] = input_table[column].astype("category")

@@ -15,7 +15,7 @@ from datashaper.table_store import TableContainer
 
 
 @verb(name="rollup", treats_input_tables_as_immutable=True)
-def rollup(input: VerbInput, column: str, to: str, operation: str):
+def rollup(input: VerbInput, column: str, to: str, operation: str) -> TableContainer:
     """Rollup verb implementation."""
     aggregate_operation = FieldAggregateOperation(operation)
     input_table = input.get_input()

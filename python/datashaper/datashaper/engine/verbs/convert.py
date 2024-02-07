@@ -25,7 +25,7 @@ def _convert_int(value: str, radix: int) -> int | float:
         return np.nan
 
 
-def _to_int(column, radix):
+def _to_int(column, radix: int):
     if radix is None:
         if column.str.startswith("0x").any() or column.str.startswith("0X").any():
             radix = 16
@@ -107,7 +107,7 @@ def convert(
     type: str,
     radix: int | None = None,
     formatPattern: str = "%Y-%m-%d",  # noqa: N803
-):
+) -> TableContainer:
     """Convert verb implementation."""
     parse_type = ParseType(type)
     input_table = input.get_input()

@@ -16,7 +16,7 @@ def sample(
     size: int | None = None,
     proportion: int | None = None,
     seed: int | None = None,
-):
+) -> TableContainer:
     """Sample verb implementation."""
     input_table = input.get_input()
     output = input_table.sample(n=size, frac=proportion, random_state=seed)

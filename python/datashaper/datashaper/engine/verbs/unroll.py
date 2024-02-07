@@ -10,7 +10,7 @@ from datashaper.table_store import TableContainer
 
 
 @verb(name="unroll", treats_input_tables_as_immutable=True)
-def unroll(input: VerbInput, column: str):
+def unroll(input: VerbInput, column: str) -> TableContainer:
     """Unroll a column."""
     input_table = input.get_input()
     output = input_table.explode(column)

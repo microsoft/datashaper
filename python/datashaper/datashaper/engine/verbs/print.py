@@ -9,7 +9,7 @@ from datashaper.table_store import TableContainer
 
 
 @verb(name="print")
-def print_verb(input: VerbInput, message: str, limit: int = 10):
+def print_verb(input: VerbInput, message: str, limit: int = 10) -> TableContainer:
     """Print verb implementation."""
     output = input.get_input()
     print(message)

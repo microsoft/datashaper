@@ -17,7 +17,7 @@ from datashaper.table_store import TableContainer
 
 
 def _get_window_indexer(
-    column: pd.Series, fixed_size=False
+    column: pd.Series, fixed_size: bool = False
 ) -> int | pd.api.indexers.BaseIndexer:
     if fixed_size:
         return pd.api.indexers.FixedForwardWindowIndexer(window_size=len(column))
@@ -59,7 +59,7 @@ __window_function_map = {
 
 
 @verb(name="window")
-def window(input: VerbInput, column: str, to: str, operation: str):
+def window(input: VerbInput, column: str, to: str, operation: str) -> TableContainer:
     """Apply a window function to a column in a table."""
     window_operation = WindowFunction(operation)
 

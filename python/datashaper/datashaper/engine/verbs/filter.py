@@ -20,7 +20,9 @@ from datashaper.table_store import Table, TableContainer
 
 
 @verb(name="filter", treats_input_tables_as_immutable=True)
-def filter(input: VerbInput, column: str, criteria: list, logical: str = "or"):
+def filter(
+    input: VerbInput, column: str, criteria: list, logical: str = "or"
+) -> TableContainer:
     """Filter verb implementation."""
     filter_criteria = [
         Criterion(

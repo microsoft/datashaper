@@ -13,7 +13,7 @@ from datashaper.table_store import Table, TableContainer
 
 
 @verb(name="difference", treats_input_tables_as_immutable=True)
-def difference(input: VerbInput):
+def difference(input: VerbInput) -> TableContainer:
     """Difference verb implementation."""
     input_table = input.get_input()
     others = cast(list[pd.DataFrame], input.get_others())

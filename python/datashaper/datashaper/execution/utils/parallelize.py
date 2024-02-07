@@ -23,7 +23,7 @@ def parallelize(
 
     executor = ThreadPoolExecutor(max_workers=num_threads)
 
-    def execute(item: InType):
+    def execute(item: InType) -> OutType:
         try:
             return func(item)
         except Exception as e:

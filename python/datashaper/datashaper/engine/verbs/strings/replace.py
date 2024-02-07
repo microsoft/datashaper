@@ -20,9 +20,9 @@ def replace(
     to: str,
     pattern: str,
     replacement: str,
-    globalMatch=False,  # noqa: N803
-    caseInsensitive=False,  # noqa: N803
-):
+    globalMatch: bool = False,  # noqa: N803
+    caseInsensitive: bool = False,  # noqa: N803
+) -> TableContainer:
     """Replace verb implementation."""
     n = 0 if globalMatch else 1
     input_table = input.get_input()

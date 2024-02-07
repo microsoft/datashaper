@@ -10,7 +10,7 @@ from datashaper.table_store import TableContainer
 
 
 @verb(name="orderby", treats_input_tables_as_immutable=True)
-def orderby(input: VerbInput, orders: list[dict]):
+def orderby(input: VerbInput, orders: list[dict]) -> TableContainer:
     """Orderby verb implementation."""
     orders_instructions = [
         OrderByInstruction(

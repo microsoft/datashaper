@@ -16,7 +16,7 @@ def unhot(
     columns: list[str],
     preserveSource: bool = False,  # noqa: N803
     prefix: str = "",
-):
+) -> TableContainer:
     """Unhot verb implementation."""
     input_table = cast(pd.DataFrame, input.get_input())
     output_table = unhot_operation(input_table, columns, to, prefix)

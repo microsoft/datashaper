@@ -10,7 +10,7 @@ from datashaper.table_store import TableContainer
 
 
 @verb(name="unorder", treats_input_tables_as_immutable=True)
-def unorder(input: VerbInput):
+def unorder(input: VerbInput) -> TableContainer:
     """Unorder verb implementation."""
     input_table = input.get_input()
 

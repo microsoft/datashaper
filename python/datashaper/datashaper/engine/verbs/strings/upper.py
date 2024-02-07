@@ -13,7 +13,7 @@ from datashaper.table_store import TableContainer
 
 
 @verb(name="strings.upper")
-def upper(input: VerbInput, column: str, to: str):
+def upper(input: VerbInput, column: str, to: str) -> TableContainer:
     """Upper verb implementation."""
     input_table = input.get_input()
     output = cast(pd.DataFrame, input_table)

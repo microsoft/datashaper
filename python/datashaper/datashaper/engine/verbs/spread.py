@@ -14,7 +14,9 @@ from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
 
 
-def __normal_spread(input_table, columns, to, delimiter):
+def __normal_spread(
+    input_table: pd.DataFrame, columns: list[str], to: list[str], delimiter: str
+) -> pd.DataFrame:
     output = input_table
     for column, new_column_name in zip(columns, to, strict=True):
         new_columns = np.array(
@@ -31,7 +33,9 @@ def __normal_spread(input_table, columns, to, delimiter):
     return output
 
 
-def __onehot_spread(input_table, columns, to, delimiter):
+def __onehot_spread(
+    input_table: pd.DataFrame, columns: list[str], to: list[str], delimiter: str
+) -> pd.DataFrame:
     output = input_table
     for column, new_column_name in zip(columns, to, strict=True):
         output[column] = output[column].astype(str).str.split(delimiter)
@@ -57,9 +61,9 @@ def spread(
     delimiter: str = ",",
     onehot: bool = False,
     preserveSource: bool = False,  # noqa: N803
-):
+) -> TableContainer:
     """Spread verb implementation."""
-    input_table = input.get_input()
+    input_table = cast(pd.DataFrame, input.get_input())
     if to is None:
         to = [column]
 

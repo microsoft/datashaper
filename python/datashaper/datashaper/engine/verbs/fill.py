@@ -17,7 +17,7 @@ def fill(
     input: VerbInput,
     to: str,
     value: str | int | float | bool,
-):
+) -> TableContainer:
     """Fill verb implementation."""
     input_table = input.get_input()
     output = cast(pd.DataFrame, input_table)

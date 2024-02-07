@@ -5,14 +5,17 @@ import logging
 import pkgutil
 import sys
 from pathlib import Path
+from typing import Any
 
+from .parallel_verb import AsyncIOType, new_row, parallel_verb
+from .types import VerbDetails
 from .verb_input import VerbInput
-from .verbs_mapping import VerbDetails, VerbManager, verb
+from .verbs_mapping import VerbManager, verb
 
 logger = logging.getLogger(__name__)
 
 
-def load_verbs(module):
+def load_verbs(module: Any) -> None:
     """
     Load the verbs from the given module path recursively.
 
@@ -40,4 +43,13 @@ mod = sys.modules[__name__]
 load_verbs(mod)
 
 
-__all__ = ["VerbInput", "VerbManager", "load_verbs", "verb", "VerbDetails"]
+__all__ = [
+    "VerbInput",
+    "VerbManager",
+    "load_verbs",
+    "verb",
+    "VerbDetails",
+    "AsyncIOType",
+    "parallel_verb",
+    "new_row",
+]

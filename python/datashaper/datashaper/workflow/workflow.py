@@ -17,7 +17,9 @@ from uuid import uuid4
 import pandas as pd
 from jsonschema import validate as validate_schema
 
-from datashaper.engine.verbs import VerbDetails, VerbInput, VerbManager
+from datashaper.engine.verbs.types import VerbDetails
+from datashaper.engine.verbs.verb_input import VerbInput
+from datashaper.engine.verbs.verbs_mapping import VerbManager
 from datashaper.execution.execution_node import ExecutionNode
 from datashaper.progress.types import Progress
 from datashaper.table_store import Table, TableContainer
@@ -30,7 +32,7 @@ from .workflow_callbacks import (
     WorkflowCallbacksManager,
 )
 
-# TODO: this won't work for a published package
+# TODO(Chris): this won't work for a published package
 SCHEMA_FILE = "../../schema/workflow.json"
 
 Context = TypeVar("Context")
@@ -90,7 +92,7 @@ class Workflow(Generic[Context]):
         self._inputs = {}
 
         # Perform JSON-schema validation
-        # TODO: the current schema definition does not work in Python
+        # TODO(Chris): the current schema definition does not work in Python
         if validate and schema_path is not None:
             with Path(schema_path).open() as schema_file:
                 schema_json = json.load(schema_file)
@@ -99,7 +101,7 @@ class Workflow(Generic[Context]):
         # Auto-load input tables if provided.
         if input_path is not None:
             for input in schema["input"]:
-                # TODO: support other file formats
+                # TODO(Chris): support other file formats
                 csv_table = pd.read_csv(
                     Path(input_path) / f"{input}.csv",
                     dtype_backend="pyarrow",
@@ -207,7 +209,7 @@ class Workflow(Generic[Context]):
         """Injects the run context into the workflow steps."""
         callbacks = DelegatingVerbCallbacks(exec_node, workflow_callbacks)
 
-        def argument_names(fn):
+        def argument_names(fn: Callable) -> list[str]:
             return inspect.getfullargspec(fn).args
 
         verb_args = argument_names(exec_node.verb.func)
@@ -229,7 +231,7 @@ class Workflow(Generic[Context]):
 
         return run_ctx
 
-    def _check_inputs(self, node_key: str, visited: set[str]):
+    def _check_inputs(self, node_key: str, visited: set[str]) -> bool:
         node = self._graph[node_key]
         return all(
             [
@@ -306,9 +308,8 @@ class Workflow(Generic[Context]):
         nodes: list[str] = []
 
         def enqueue_available_nodes(possible_nodes: Iterable[str]) -> None:
-            for possible_node in possible_nodes:
-                if self._check_inputs(possible_node, visited):
-                    nodes.append(possible_node)
+            new_nodes = [n for n in possible_nodes if self._check_inputs(n, visited)]
+            nodes.extend(new_nodes)
 
         def assert_all_visited() -> None:
             for node_id in self._graph:
@@ -395,7 +396,7 @@ class Workflow(Generic[Context]):
 
         return (callback_handler, profiler)
 
-    def export(self):
+    def export(self) -> dict:
         """Export the graph into a workflow JSON object."""
         return {
             "input": [input_name for input_name in self._inputs],

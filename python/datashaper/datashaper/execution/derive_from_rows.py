@@ -8,7 +8,7 @@ import pandas as pd
 from datashaper.execution.utils.parallelize import parallelize
 from datashaper.progress import progress_ticker
 from datashaper.table_store import Table
-from datashaper.workflow import VerbCallbacks
+from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
 
 ItemType = TypeVar("ItemType")
 

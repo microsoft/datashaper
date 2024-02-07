@@ -52,7 +52,7 @@ def join(
     input: VerbInput,
     on: list[str] | None = None,
     strategy: str = "inner",
-):
+) -> TableContainer:
     """Join verb implementation."""
     join_strategy = JoinStrategy(strategy)
     input_table = cast(pd.DataFrame, input.get_input())

@@ -19,7 +19,7 @@ strategy_mapping: dict[MergeStrategy, Callable] = {
 }
 
 
-def _correct_type(value: Any):
+def _correct_type(value: Any) -> str | int | Any:
     if is_bool(value):
         return str(value).lower()
     try:

@@ -18,7 +18,7 @@ def copy(
     input: VerbInput,
     to: str,
     column: str,
-):
+) -> TableContainer:
     """Copy verb implementation."""
     output = cast(pd.DataFrame, input.get_input())
     output[to] = output[column]

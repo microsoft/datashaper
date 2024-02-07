@@ -25,7 +25,7 @@ def merge(
     preserveSource: bool = False,  # noqa: N803
     unhot: bool = False,
     prefix: str = "",
-):
+) -> TableContainer:
     """Merge verb implementation."""
     merge_strategy = MergeStrategy(strategy)
 

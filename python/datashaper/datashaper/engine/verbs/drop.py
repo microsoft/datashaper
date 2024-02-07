@@ -13,7 +13,7 @@ from .verb_input import VerbInput
 def drop(
     input: VerbInput,
     columns: list[str],
-):
+) -> TableContainer:
     """Drop verb implementation."""
     output = input.get_input()
     output = output.drop(columns=columns)

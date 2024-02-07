@@ -13,7 +13,9 @@ from datashaper.table_store import TableContainer
 
 
 @verb(name="impute")
-def impute(input: VerbInput, column: str, value: str | int | float | bool):
+def impute(
+    input: VerbInput, column: str, value: str | int | float | bool
+) -> TableContainer:
     """Impute verb implementation."""
     input_table = input.get_input()
     output = cast(pd.DataFrame, input_table)

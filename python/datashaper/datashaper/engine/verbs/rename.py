@@ -9,7 +9,7 @@ from datashaper.table_store import TableContainer
 
 
 @verb(name="rename", treats_input_tables_as_immutable=True)
-def rename(input: VerbInput, columns: dict[str, str]):
+def rename(input: VerbInput, columns: dict[str, str]) -> TableContainer:
     """Rename verb implementation."""
     input_table = input.get_input()
     output = input_table.rename(columns=columns)

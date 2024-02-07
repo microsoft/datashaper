@@ -15,7 +15,9 @@ from datashaper.table_store import TableContainer
 
 
 @verb(name="boolean")
-def boolean(input: VerbInput, to: str, columns: list[str], operator: str):
+def boolean(
+    input: VerbInput, to: str, columns: list[str], operator: str
+) -> TableContainer:
     """Boolean verb implementation."""
     logical_operator = BooleanLogicalOperator(operator)
     input_table = input.get_input()

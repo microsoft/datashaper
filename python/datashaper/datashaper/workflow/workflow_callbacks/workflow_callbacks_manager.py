@@ -17,7 +17,7 @@ class WorkflowCallbacksManager(WorkflowCallbacks):
         """Create a new instance of WorkflowCallbacksRegistry."""
         self._callbacks = []
 
-    def register(self, callbacks: WorkflowCallbacks):
+    def register(self, callbacks: WorkflowCallbacks) -> None:
         """Register a new WorkflowCallbacks type."""
         self._callbacks.append(callbacks)
 

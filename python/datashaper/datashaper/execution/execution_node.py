@@ -6,7 +6,7 @@
 from dataclasses import dataclass, field
 from typing import Any
 
-from datashaper.engine.verbs import VerbDetails
+from datashaper.engine.verbs.types import VerbDetails
 from datashaper.table_store import TableContainer
 
 

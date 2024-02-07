@@ -17,7 +17,7 @@ def lookup(
     input: VerbInput,
     columns: list[str],
     on: list[str] | None = None,
-):
+) -> TableContainer:
     """Lookup verb implementation."""
     input_table: pd.DataFrame = cast(pd.DataFrame, input.get_input())
     other_table: pd.DataFrame = cast(pd.DataFrame, input.get_others()[0])

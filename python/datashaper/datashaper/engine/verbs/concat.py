@@ -13,7 +13,7 @@ from datashaper.table_store import TableContainer
 
 
 @verb(name="concat", treats_input_tables_as_immutable=True)
-def concat(input: VerbInput):
+def concat(input: VerbInput) -> TableContainer:
     """Concat verb implementation."""
     input_table = cast(pd.DataFrame, input.get_input())
     others = cast(list[pd.DataFrame], input.get_others())

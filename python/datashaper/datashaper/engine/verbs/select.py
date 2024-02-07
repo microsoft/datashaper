@@ -11,7 +11,7 @@ from datashaper.table_store import Table, TableContainer
 
 
 @verb(name="select", treats_input_tables_as_immutable=True)
-def select(input: VerbInput, columns: list[str]):
+def select(input: VerbInput, columns: list[str]) -> TableContainer:
     """Select verb implementation."""
     input_table = input.get_input()
     output = cast(Table, input_table[columns])

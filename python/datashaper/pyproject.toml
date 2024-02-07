@@ -94,7 +94,7 @@ select = [
     "N", # Naming Conventions
     "UP", # pyupgrade - use modern conventions
     "YTT", # Correct sys.version_info usage
-    # "ANN", # Type Annotations
+    "ANN", # Type Annotations
     "ASYNC", # Async Functions
     "S", # Bandit (security)
     # "BLE", # Don't catch blind exceptions,
@@ -125,14 +125,14 @@ select = [
     "PTH",
     # "TD", # todos
     # "FIX", # fixme
-    # "ERA", # no commented-out code
+    "ERA", # no commented-out code
     "PD", # Pandas,
-    # "TRY",
-    # "FLY",
-    # "PERF",
-    # "FURB",
-    # "LOG",
-    # "RUF"
+    #"TRY",
+    "FLY",
+    "PERF",
+    #"FURB", <preview only>
+    "LOG",
+    #"RUF"
 ]
 ignore = [
     # Deprecated Rules
@@ -143,15 +143,16 @@ ignore = [
     # Not really necessary
     "ANN204",
     "PYI041",
-    # Conflicts with our Pandas usage
+    # Testing idioms
+    "PT009",
+    # TODO: Inspect these for validity
     "PD002",
     "PD010",
     "PD013",
-    # Testing idioms
-    "PT009",
-    # TODO RE-Enable when we overhaul exceptions
+    # TODO RE-Enable when we get bandwidth
     "EM101",
     "TRY003",
+    "ANN401"
 ]
 
 [tool.ruff.lint.per-file-ignores]

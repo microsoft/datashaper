@@ -67,7 +67,7 @@ class MemoryProfilingWorkflowCallbacks(NoopWorkflowCallbacks):
         self._peak_memory["all"].append(peak - self._peak_start_workflow)
         tracemalloc.stop()
 
-    def get_snapshot_stats(self, sort_by="max"):
+    def get_snapshot_stats(self, sort_by: str = "max") -> pd.DataFrame:
         """Get the snapshot stats."""
         stats = {}
         for verb, snapshots in self._snapshots.items():
@@ -84,7 +84,7 @@ class MemoryProfilingWorkflowCallbacks(NoopWorkflowCallbacks):
             }
         return pd.DataFrame(stats).transpose().sort_values(sort_by, ascending=False)
 
-    def get_peak_stats(self, sort_by="max"):
+    def get_peak_stats(self, sort_by: str = "max") -> pd.DataFrame:
         """Get the peak memory stats."""
         stats = {}
         for verb, peak in self._peak_memory.items():
@@ -96,7 +96,7 @@ class MemoryProfilingWorkflowCallbacks(NoopWorkflowCallbacks):
             }
         return pd.DataFrame(stats).transpose().sort_values(sort_by, ascending=False)
 
-    def get_time_stats(self, sort_by="max"):
+    def get_time_stats(self, sort_by: str = "max") -> pd.DataFrame:
         """Get the time stats."""
         stats = {}
         for verb, times in self._timing.items():
@@ -108,7 +108,7 @@ class MemoryProfilingWorkflowCallbacks(NoopWorkflowCallbacks):
             }
         return pd.DataFrame(stats).transpose().sort_values(sort_by, ascending=False)
 
-    def get_detailed_view(self):
+    def get_detailed_view(self) -> pd.DataFrame:
         """Get a detailed view of the memory usage."""
         df_json = defaultdict(list)
         for verb, snapshot in self._snapshots.items():
@@ -128,6 +128,6 @@ class MemoryProfilingWorkflowCallbacks(NoopWorkflowCallbacks):
         return pd.DataFrame(df_json)
 
 
-def _bytes_to_mb(bytes):
+def _bytes_to_mb(bytes: float) -> float:
     """Convert bytes to megabytes."""
     return bytes / 1024**2

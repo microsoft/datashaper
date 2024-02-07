@@ -22,7 +22,7 @@ from datashaper.table_store import TableContainer
 @verb(name="binarize")
 def binarize(
     input: VerbInput, to: str, column: str, criteria: list, logical: str = "or"
-):
+) -> TableContainer:
     """Binarize verb implementation."""
     filter_criteria = [
         Criterion(
