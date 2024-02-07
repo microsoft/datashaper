@@ -38,8 +38,10 @@ from .engine import (
 from .errors import (
     InvalidVerbInputError,
     UnsupportedComparisonOperatorError,
-    VerbComputeError,
+    VerbError,
+    WorkflowMissingInputError,
     WorkflowOutputNotReadyError,
+    WorkflowVerbNotFoundError,
 )
 from .execution import (
     ExecutionNode,
@@ -145,6 +147,8 @@ __all__ = [
     # Errors
     "UnsupportedComparisonOperatorError",
     "InvalidVerbInputError",
-    "VerbComputeError",
+    "VerbError",
+    "WorkflowMissingInputError",
     "WorkflowOutputNotReadyError",
+    "WorkflowVerbNotFoundError",
 ]

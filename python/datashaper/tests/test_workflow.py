@@ -3,14 +3,18 @@ import unittest
 from dataclasses import dataclass
 
 import pandas as pd
+import pytest
 
 from datashaper import (
     DEFAULT_INPUT_NAME,
     Progress,
     TableContainer,
     VerbCallbacks,
+    VerbError,
     VerbInput,
     Workflow,
+    WorkflowMissingInputError,
+    WorkflowVerbNotFoundError,
     derive_from_rows,
     progress_iterable,
 )
@@ -188,23 +192,23 @@ class TestWorkflowRun(unittest.IsolatedAsyncioTestCase):
         assert row["b"] == row["a"] + 1
 
     async def test_workflow_with_transform_util_verb_throwing(self):
-        with self.assertRaises(ValueError):
-            workflow = Workflow(
-                verbs={
-                    "test_workflow_with_transform_util_verb_throwing": create_parallel_transforming_verb_throwing(),
-                },
-                schema={
-                    "name": "test_workflow",
-                    "steps": [
-                        {
-                            "verb": "test_workflow_with_transform_util_verb_throwing",
-                            "input": {"source": DEFAULT_INPUT_NAME},
-                        },
-                    ],
-                },
-                validate=False,
-            )
-            workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
+        workflow = Workflow(
+            verbs={
+                "test_workflow_with_transform_util_verb_throwing": create_parallel_transforming_verb_throwing(),
+            },
+            schema={
+                "name": "test_workflow",
+                "steps": [
+                    {
+                        "verb": "test_workflow_with_transform_util_verb_throwing",
+                        "input": {"source": DEFAULT_INPUT_NAME},
+                    },
+                ],
+            },
+            validate=False,
+        )
+        workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
+        with pytest.raises(VerbError):
             await workflow.run(create_fake_run_context())
 
     async def test_workflow_with_async_verb(self):
@@ -229,31 +233,30 @@ class TestWorkflowRun(unittest.IsolatedAsyncioTestCase):
         assert output.equals(pd.DataFrame({"a": [1, 2, 3]}))
 
     async def test_workflow_first_step_with_invalid_input_crashes(self):
-        with self.assertRaises(ValueError):
-            workflow = Workflow(
-                verbs={
-                    "test_workflow_first_step_with_invalid_input_crashes": create_passthrough_verb(),
-                },
-                schema={
-                    "name": "test_workflow",
-                    "steps": [
-                        {
-                            "verb": "test_workflow_first_step_with_invalid_input_crashes",
-                            "input": {"source": "missing_input"},
-                        },
-                    ],
-                },
-                validate=False,
-            )
+        workflow = Workflow(
+            verbs={
+                "test_workflow_first_step_with_invalid_input_crashes": create_passthrough_verb(),
+            },
+            schema={
+                "name": "test_workflow",
+                "steps": [
+                    {
+                        "verb": "test_workflow_first_step_with_invalid_input_crashes",
+                        "input": {"source": "missing_input"},
+                    },
+                ],
+            },
+            validate=False,
+        )
+        input_data = pd.DataFrame({"a": [1, 2, 3]})
+        workflow.add_table(DEFAULT_INPUT_NAME, input_data)
 
-            input_data = pd.DataFrame({"a": [1, 2, 3]})
-            workflow.add_table(DEFAULT_INPUT_NAME, input_data)
-
+        with pytest.raises(WorkflowMissingInputError):
             await workflow.run(create_fake_run_context())
 
     async def test_workflow_invalid_verb_throws_error(self):
-        with self.assertRaises(ValueError):
-            workflow = Workflow(
+        with pytest.raises(WorkflowVerbNotFoundError):
+            Workflow(
                 verbs={
                     "test_workflow_invalid_verb_throws_error": create_passthrough_verb(),
                 },
@@ -268,10 +271,6 @@ class TestWorkflowRun(unittest.IsolatedAsyncioTestCase):
                 },
                 validate=False,
             )
-
-            input_data = pd.DataFrame({"a": [1, 2, 3]})
-            workflow.add_table(DEFAULT_INPUT_NAME, input_data)
-            await workflow.run(context=create_fake_run_context())
 
     async def test_workflow_steps_with_no_input_defaults_input_correctly(self):
         workflow = Workflow(
@@ -455,7 +454,7 @@ def create_parallel_transforming_verb():
 def create_parallel_transforming_verb_throwing():
     def transform(input: VerbInput, callbacks: VerbCallbacks):
         def transform_row(_row: pd.Series):
-            raise ValueError("oh no, this should be expected")
+            raise VerbError("oh no, this should be expected")
 
         results = derive_from_rows(input.get_input(), transform_row, callbacks)
 

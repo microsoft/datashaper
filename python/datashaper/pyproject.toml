@@ -111,9 +111,9 @@ select = [
     "PIE", # flake8-pie - misc lints
     # "T20", # no print statements
     "PYI", # stub files
-    # "PT", # testing style
+    "PT", # testing style
     "Q", # consistent quoting
-    # "RSE", # flake8-raise
+    "RSE", # flake8-raise
     "RET", # flake8-return
     "SLF", # no external member access
     "SLOT", # flake8-slots

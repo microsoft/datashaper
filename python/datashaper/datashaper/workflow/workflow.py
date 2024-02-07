@@ -20,7 +20,11 @@ from jsonschema import validate as validate_schema
 from datashaper.engine.verbs.types import VerbDetails
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import VerbManager
-from datashaper.errors import WorkflowOutputNotReadyError
+from datashaper.errors import (
+    WorkflowMissingInputError,
+    WorkflowOutputNotReadyError,
+    WorkflowVerbNotFoundError,
+)
 from datashaper.execution.execution_node import ExecutionNode
 from datashaper.progress.types import Progress
 from datashaper.table_store import Table, TableContainer
@@ -198,7 +202,7 @@ class Workflow(Generic[Context]):
         verbs_manager = VerbManager.get()
         result = verbs_manager.get_verb(verb)
         if result is None:
-            raise ValueError(f"Verb {verb} not found in verbs")
+            raise WorkflowVerbNotFoundError(f"Verb {verb} not found in verbs")
         return result
 
     @staticmethod
@@ -313,7 +317,9 @@ class Workflow(Generic[Context]):
         def assert_all_visited() -> None:
             for node_id in self._graph:
                 if node_id not in visited and not self._check_inputs(node_id, visited):
-                    raise ValueError(f"Missing inputs for node {node_id}!")
+                    raise WorkflowMissingInputError(
+                        f"Missing inputs for node {node_id}!"
+                    )
 
         # Use the ensuring variant to guarantee that all protocol methods are available
         callbacks, profiler = self._get_workflow_callbacks(callbacks)
