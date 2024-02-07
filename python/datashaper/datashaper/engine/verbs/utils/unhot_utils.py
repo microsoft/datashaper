@@ -14,7 +14,7 @@ def unhot_operation(
     copyInput = copyInput.melt(id_vars=id_vars, var_name=to, value_name="_temp_value")
     copyInput = copyInput[copyInput["_temp_value"] >= 1]
     copyInput.drop(columns=["_temp_value"], inplace=True)
-    copyInput[:, to] = copyInput.loc[:, to].apply(lambda x: x.split(prefix)[1])
+    copyInput[to] = copyInput.loc[:, to].apply(lambda x: x.split(prefix)[1])
     copyInput.reset_index(drop=True, inplace=True)
 
     return copyInput
