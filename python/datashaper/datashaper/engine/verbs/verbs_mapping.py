@@ -26,7 +26,7 @@ def verb(
     name: str,
     treats_input_tables_as_immutable: bool = False,
     override_existing: bool = False,
-    **kwargs,
+    **_kwargs,
 ) -> Callable:
     """Apply a decorator for registering a verb."""
 
@@ -66,7 +66,7 @@ def parallel_verb(
     treats_input_tables_as_immutable: bool = False,
     override_existing: bool = False,
     asyncio_type: AsyncIOType = AsyncIOType.ASYNCIO,
-    **kwargs,
+    **_kwargs,
 ) -> Callable:
     """Apply a decorator for registering a parallel verb."""
 

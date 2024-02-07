@@ -8,14 +8,14 @@ from pandas.api.types import is_bool
 from datashaper.engine.types import MergeStrategy
 
 strategy_mapping: dict[MergeStrategy, Callable] = {
-    MergeStrategy.FirstOneWins: lambda values, **kwargs: values.dropna().apply(
+    MergeStrategy.FirstOneWins: lambda values, **_kwargs: values.dropna().apply(
         lambda x: _correct_type(x)
     )[0],
-    MergeStrategy.LastOneWins: lambda values, **kwargs: values.dropna().apply(
+    MergeStrategy.LastOneWins: lambda values, **_kwargs: values.dropna().apply(
         lambda x: _correct_type(x)
     )[-1],
-    MergeStrategy.Concat: lambda values, delim, **kwargs: _create_array(values, delim),
-    MergeStrategy.CreateArray: lambda values, **kwargs: _create_array(values, ","),
+    MergeStrategy.Concat: lambda values, delim, **_kwargs: _create_array(values, delim),
+    MergeStrategy.CreateArray: lambda values, **_kwargs: _create_array(values, ","),
 }
 
 

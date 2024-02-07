@@ -26,7 +26,7 @@ def onehot(
 
     dummies = pd.get_dummies(input_table[[column]], prefix=[prefix], prefix_sep="")
     cols = dummies.columns.str.startswith(prefix)
-    dummies.loc[input_table[column].isnull(), cols] = np.nan
+    dummies.loc[input_table[column].isna(), cols] = np.nan
 
     output = pd.concat([input_table, dummies], axis=1)
     if not preserveSource:

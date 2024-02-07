@@ -54,7 +54,7 @@ __window_function_map = {
         window=_get_window_indexer(column, True),
         min_periods=1,
     ).apply(lambda x: x.dropna().iloc[0] if np.isnan(x.iloc[0]) else x.iloc[0]),
-    WindowFunction.UUID: lambda column: column.apply(lambda x: str(uuid4())),
+    WindowFunction.UUID: lambda column: column.apply(lambda _x: str(uuid4())),
 }
 
 

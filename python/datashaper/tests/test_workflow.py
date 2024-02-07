@@ -426,7 +426,7 @@ def create_passthrough_verb():
 
 
 def create_verb_that_returns(static_value: pd.DataFrame):
-    return lambda input: TableContainer(table=static_value)
+    return lambda input: TableContainer(table=static_value)  # noqa: ARG005
 
 
 def create_async_verb():
@@ -454,7 +454,7 @@ def create_parallel_transforming_verb():
 
 def create_parallel_transforming_verb_throwing():
     def transform(input: VerbInput, callbacks: VerbCallbacks):
-        def transform_row(row: pd.Series):
+        def transform_row(_row: pd.Series):
             raise ValueError("oh no, this should be expected")
 
         results = derive_from_rows(input.get_input(), transform_row, callbacks)

@@ -44,14 +44,11 @@ def _convert_float(value: str) -> float:
 
 
 def _convert_bool(value: str) -> bool:
-    if (
+    return not (
         isinstance(value, str)
         and (value.lower() == "false" or len(value) == 0)
         or (isinstance(value, float) and np.isnan(value))
-    ):
-        return False
-    else:
-        return True
+    )
 
 
 def _convert_date_str(value: datetime, format_pattern: str) -> str | float:
@@ -89,15 +86,15 @@ def _to_datetime(column: pd.Series) -> pd.Series:
 
 
 __type_mapping: dict[ParseType, Callable] = {
-    ParseType.Boolean: lambda column, **kwargs: column.apply(
+    ParseType.Boolean: lambda column, **_kwargs: column.apply(
         lambda x: _convert_bool(x)
     ),
-    ParseType.Date: lambda column, format_pattern, **kwargs: _to_datetime(column),
-    ParseType.Decimal: lambda column, **kwargs: column.apply(
+    ParseType.Date: lambda column, format_pattern, **_kwargs: _to_datetime(column),  # noqa: ARG005
+    ParseType.Decimal: lambda column, **_kwargs: column.apply(
         lambda x: _convert_float(x)
     ),
-    ParseType.Integer: lambda column, radix, **kwargs: _to_int(column, radix),
-    ParseType.String: lambda column, format_pattern, **kwargs: _to_str(
+    ParseType.Integer: lambda column, radix, **_kwargs: _to_int(column, radix),
+    ParseType.String: lambda column, format_pattern, **_kwargs: _to_str(
         column, format_pattern
     ),
 }

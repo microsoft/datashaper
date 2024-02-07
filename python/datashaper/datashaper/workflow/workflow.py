@@ -6,11 +6,11 @@
 
 import inspect
 import json
-import os
 import time
 import traceback
 from collections import OrderedDict, defaultdict
 from collections.abc import Callable, Iterable
+from pathlib import Path
 from typing import Any, Generic, TypeVar, cast
 from uuid import uuid4
 
@@ -92,7 +92,7 @@ class Workflow(Generic[Context]):
         # Perform JSON-schema validation
         # TODO: the current schema definition does not work in Python
         if validate and schema_path is not None:
-            with open(schema_path) as schema_file:
+            with Path(schema_path).open() as schema_file:
                 schema_json = json.load(schema_file)
                 validate_schema(schema, schema_json)
 
@@ -101,7 +101,7 @@ class Workflow(Generic[Context]):
             for input in schema["input"]:
                 # TODO: support other file formats
                 csv_table = pd.read_csv(
-                    os.path.join(input_path, f"{input}.csv"),
+                    Path(input_path) / f"{input}.csv",
                     dtype_backend="pyarrow",
                     engine="pyarrow",
                 )
@@ -119,9 +119,7 @@ class Workflow(Generic[Context]):
         for step in schema["steps"]:
             step_has_defined_id = "id" in step
             step_id = step["id"] if step_has_defined_id else str(uuid4())
-            step_input = (
-                step["input"] if "input" in step else previous_step_id
-            ) or default_input
+            step_input = (step.get("input", previous_step_id)) or default_input
             verb = Workflow.__get_verb(step["verb"])
 
             step = ExecutionNode(
@@ -129,7 +127,7 @@ class Workflow(Generic[Context]):
                 node_input=step_input,
                 verb=verb,
                 has_explicit_id=step_has_defined_id,
-                args=step["args"] if "args" in step else {},
+                args=step.get("args", {}),
             )
             self._graph[step_id] = step
             for input in Workflow.__inputs_list(step_input):
@@ -244,7 +242,7 @@ class Workflow(Generic[Context]):
         self, verb: VerbDetails, inputs: str | dict[str, list[str]]
     ) -> dict[str, Any]:
         def input_table(name: str) -> TableContainer:
-            graph_node = self._graph[name] if name in self._graph else None
+            graph_node = self._graph.get(name)
             step_table_is_safe_to_mutate = (
                 graph_node is not None and not graph_node.has_explicit_id
             )
@@ -313,10 +311,9 @@ class Workflow(Generic[Context]):
                     nodes.append(possible_node)
 
         def assert_all_visited() -> None:
-            for node_id in self._graph.keys():
-                if node_id not in visited:
-                    if not self._check_inputs(node_id, visited):
-                        raise ValueError(f"Missing inputs for node {node_id}!")
+            for node_id in self._graph:
+                if node_id not in visited and not self._check_inputs(node_id, visited):
+                    raise ValueError(f"Missing inputs for node {node_id}!")
 
         # Use the ensuring variant to guarantee that all protocol methods are available
         callbacks, profiler = self._get_workflow_callbacks(callbacks)
@@ -401,7 +398,7 @@ class Workflow(Generic[Context]):
     def export(self):
         """Export the graph into a workflow JSON object."""
         return {
-            "input": [input_name for input_name in self._inputs.keys()],
+            "input": [input_name for input_name in self._inputs],
             "steps": [
                 {
                     "id": step.node_id,

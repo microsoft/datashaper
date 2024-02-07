@@ -8,7 +8,7 @@ aggregate_operation_mapping = {
     FieldAggregateOperation.Count: "count",
     FieldAggregateOperation.CountDistinct: "nunique",
     FieldAggregateOperation.Valid: lambda series: series.dropna().count(),
-    FieldAggregateOperation.Invalid: lambda series: series.isnull().sum(),
+    FieldAggregateOperation.Invalid: lambda series: series.isna().sum(),
     FieldAggregateOperation.Max: "max",
     FieldAggregateOperation.Min: "min",
     FieldAggregateOperation.Sum: "sum",

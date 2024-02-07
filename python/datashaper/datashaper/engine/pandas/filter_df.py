@@ -47,7 +47,7 @@ boolean_function_map = {
 
 def __correct_unknown_value(df: pd.DataFrame, columns: list[str], target: str) -> None:
     df[target] = df[columns + [target]].apply(
-        lambda x: None if pd.isnull(x[columns]).any() else x[target], axis=1
+        lambda x: None if pd.isna(x[columns]).any() else x[target], axis=1
     )
 
 
@@ -55,7 +55,7 @@ def __equals(
     df: pd.DataFrame,
     column: str,
     target: pd.Series | str | int | float | bool,
-    **kwargs,
+    **_kwargs,
 ) -> pd.Series:
     return df[column] == target
 
@@ -64,24 +64,24 @@ def __not_equals(
     df: pd.DataFrame,
     column: str,
     target: pd.Series | str | int | float | bool,
-    **kwargs,
+    **_kwargs,
 ) -> pd.Series:
     return ~df[column] == target
 
 
-def __is_null(df: pd.DataFrame, column: str, **kwargs) -> pd.DataFrame | pd.Series:
-    return df[column].isnull()
+def __is_null(df: pd.DataFrame, column: str, **_kwargs) -> pd.DataFrame | pd.Series:
+    return df[column].isna()
 
 
-def __is_not_null(df: pd.DataFrame, column: str, **kwargs) -> pd.DataFrame | pd.Series:
-    return df[column].notnull()
+def __is_not_null(df: pd.DataFrame, column: str, **_kwargs) -> pd.DataFrame | pd.Series:
+    return df[column].notna()
 
 
 def __contains(
     df: pd.DataFrame,
     column: str,
     target: pd.Series | str | int | float | bool,
-    **kwargs,
+    **_kwargs,
 ) -> pd.DataFrame | pd.Series:
     return df[column].str.contains(str(target), regex=False)
 
@@ -90,7 +90,7 @@ def __startswith(
     df: pd.DataFrame,
     column: str,
     target: pd.Series | str | int | float | bool,
-    **kwargs,
+    **_kwargs,
 ) -> pd.DataFrame | pd.Series:
     return df[column].str.startswith(str(target))
 
@@ -99,7 +99,7 @@ def __endswith(
     df: pd.DataFrame,
     column: str,
     target: pd.Series | str | int | float | bool,
-    **kwargs,
+    **_kwargs,
 ) -> pd.Series:
     return df[column].str.endswith(str(target))
 
@@ -108,7 +108,7 @@ def __regex(
     df: pd.DataFrame,
     column: str,
     target: pd.Series | str | int | float | bool,
-    **kwargs,
+    **_kwargs,
 ) -> pd.Series:
     return df[column].str.contains(str(target), regex=True)
 
@@ -117,7 +117,7 @@ def __gt(
     df: pd.DataFrame,
     column: str,
     target: pd.Series | str | int | float | bool,
-    **kwargs,
+    **_kwargs,
 ) -> pd.Series:
     return df[column] > target
 
@@ -126,7 +126,7 @@ def __gte(
     df: pd.DataFrame,
     column: str,
     target: pd.Series | str | int | float | bool,
-    **kwargs,
+    **_kwargs,
 ) -> pd.Series:
     return df[column] >= target
 
@@ -135,7 +135,7 @@ def __lt(
     df: pd.DataFrame,
     column: str,
     target: pd.Series | str | int | float | bool,
-    **kwargs,
+    **_kwargs,
 ) -> pd.Series:
     return df[column] < target
 
@@ -144,7 +144,7 @@ def __lte(
     df: pd.DataFrame,
     column: str,
     target: pd.Series | str | int | float | bool,
-    **kwargs,
+    **_kwargs,
 ) -> pd.Series:
     return df[column] <= target
 

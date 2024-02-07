@@ -95,7 +95,7 @@ select = [
     "UP", # pyupgrade - use modern conventions
     "YTT", # Correct sys.version_info usage
     # "ANN", # Type Annotations
-    # "ASYNC", # Async Functions
+    "ASYNC", # Async Functions
     "S", # Bandit (security)
     # "BLE", # Don't catch blind exceptions,
     # "FBT", # use named arguments for boolean flags
@@ -116,17 +116,17 @@ select = [
     # "RSE", # flake8-raise
     # "RET", # flake8-return
     # "SLF", # no external member access
-    # "SLOT", # flake8-slots
-    # "SIM", # flake8-simplify
+    "SLOT", # flake8-slots
+    "SIM", # flake8-simplify
     "TID", # flake8-tidy-imports
     "TCH", # flake8-ctype-checking
-    # "INT",
-    # "ARG",
-    # "PTH",
+    "INT",
+    "ARG",
+    "PTH",
     # "TD", # todos
     # "FIX", # fixme
     # "ERA", # no commented-out code
-    # "PD", # Pandas,
+    "PD", # Pandas,
     # "TRY",
     # "FLY",
     # "PERF",
