@@ -27,19 +27,20 @@ def merge(
 ):
     merge_strategy = MergeStrategy(strategy)
 
-    input_table = input.get_input()
+    input_table = cast(pd.DataFrame, input.get_input())
 
     if unhot:
         for column in input_table.columns:
             if column.startswith(prefix):
-                input_table[column] = input_table[column].apply(lambda x: column.split(prefix)[1] if x >= 1 else pd.NA)
+                input_table[column] = input_table[column].apply(
+                    lambda x: column.split(prefix)[1] if x >= 1 else pd.NA
+                )
 
     input_table[to] = input_table[columns].apply(
         partial(strategy_mapping[merge_strategy], delim=delimiter), axis=1
     )
 
     if not preserveSource:
-        id_vars = [col for col in input_table.columns if col not in columns]
         input_table.drop(columns=columns, inplace=True)
 
     return TableContainer(table=cast(Table, input_table))

@@ -103,7 +103,9 @@ class Workflow(Generic[Context]):
             for input in schema["input"]:
                 # TODO: support other file formats
                 csv_table = pd.read_csv(
-                    os.path.join(input_path, f"{input}.csv"), dtype_backend="pyarrow", engine="pyarrow"
+                    os.path.join(input_path, f"{input}.csv"),
+                    dtype_backend="pyarrow",
+                    engine="pyarrow",
                 )
                 self.add_table(input, csv_table)
 

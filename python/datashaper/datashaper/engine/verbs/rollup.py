@@ -19,7 +19,9 @@ def rollup(input: VerbInput, column: str, to: str, operation: str):
     aggregate_operation = FieldAggregateOperation(operation)
     input_table = input.get_input()
 
-    agg_result = input_table[column].agg(aggregate_operation_mapping[aggregate_operation])
+    agg_result = input_table[column].agg(
+        aggregate_operation_mapping[aggregate_operation]
+    )
 
     if not isinstance(agg_result, Iterable):
         agg_result = [agg_result]
