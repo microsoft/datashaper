@@ -1,9 +1,9 @@
 """Contains the DelegatingVerbCallback definition."""
 
-from ...execution.execution_node import ExecutionNode
-from ...progress.types import Progress
-from ..workflow_callbacks.workflow_callbacks import WorkflowCallbacks
-from .verb_callbacks import VerbCallbacks
+from datashaper.execution.execution_node import ExecutionNode
+from datashaper.progress.types import Progress
+from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
+from datashaper.workflow.workflow_callbacks.workflow_callbacks import WorkflowCallbacks
 
 
 class DelegatingVerbCallbacks(VerbCallbacks):

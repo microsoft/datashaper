@@ -35,7 +35,9 @@ def merge(
         for column in input_table.columns:
             if column.startswith(prefix):
                 input_table[column] = input_table[column].apply(
-                    lambda x: column.split(prefix)[1] if x >= 1 else pd.NA
+                    lambda x, column=column: column.split(prefix)[1]
+                    if x >= 1
+                    else pd.NA
                 )
 
     input_table[to] = input_table[columns].apply(

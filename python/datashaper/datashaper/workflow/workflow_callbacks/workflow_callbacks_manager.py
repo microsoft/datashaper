@@ -1,9 +1,10 @@
 """A module containing the WorkflowCallbacks registry."""
 from typing import Any
 
-from ...execution.execution_node import ExecutionNode
-from ...progress import Progress
-from ...table_store import TableContainer
+from datashaper.execution.execution_node import ExecutionNode
+from datashaper.progress import Progress
+from datashaper.table_store import TableContainer
+
 from .workflow_callbacks import WorkflowCallbacks
 
 

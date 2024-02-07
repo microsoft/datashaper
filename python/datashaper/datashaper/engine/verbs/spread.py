@@ -16,7 +16,7 @@ from datashaper.table_store import TableContainer
 
 def __normal_spread(input_table, columns, to, delimiter):
     output = input_table
-    for column, new_column_name in zip(columns, to):
+    for column, new_column_name in zip(columns, to, strict=True):
         new_columns = np.array(
             input_table[column].astype(str).str.split(delimiter).to_list()
         )
@@ -33,7 +33,7 @@ def __normal_spread(input_table, columns, to, delimiter):
 
 def __onehot_spread(input_table, columns, to, delimiter):
     output = input_table
-    for column, new_column_name in zip(columns, to):
+    for column, new_column_name in zip(columns, to, strict=True):
         output[column] = output[column].astype(str).str.split(delimiter)
         onehot = output[column].str.join("|").str.get_dummies()
         onehot.columns = [f"{new_column_name}_{val}" for val in onehot.columns]

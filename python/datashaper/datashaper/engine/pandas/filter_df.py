@@ -223,13 +223,13 @@ def get_operator(
     try:
         return StringComparisonOperator(operator)
     except Exception:
-        logging.info(f"[{operator}] is not a string comparison operator")
+        logging.info("%s is not a string comparison operator", operator)
     try:
         return NumericComparisonOperator(operator)
     except Exception:
-        logging.info(f"[{operator}] is not a numeric comparison operator")
+        logging.info("%s is not a numeric comparison operator", operator)
     try:
         return BooleanComparisonOperator(operator)
     except Exception:
-        logging.info(f"[{operator}] is not a boolean comparison operator")
-    raise Exception(f"[{operator}] is not a recognized comparison operator")
+        logging.info("%s is not a boolean comparison operator", operator)
+    raise Exception(f"{operator} is not a recognized comparison operator")

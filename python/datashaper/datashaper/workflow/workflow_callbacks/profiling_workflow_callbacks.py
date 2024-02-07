@@ -6,8 +6,9 @@ from typing import Any
 
 import pandas as pd
 
-from ...execution.execution_node import ExecutionNode
-from ...table_store import TableContainer
+from datashaper.execution.execution_node import ExecutionNode
+from datashaper.table_store import TableContainer
+
 from .noop_workflow_callback import NoopWorkflowCallbacks
 
 
@@ -71,7 +72,7 @@ class MemoryProfilingWorkflowCallbacks(NoopWorkflowCallbacks):
         stats = {}
         for verb, snapshots in self._snapshots.items():
             verb_stats = []
-            for first, second in zip(snapshots[::2], snapshots[1::2]):
+            for first, second in zip(snapshots[::2], snapshots[1::2], strict=True):
                 stat_diff = second.compare_to(first, "lineno")
                 diff_size = sum(stat.size_diff for stat in stat_diff)
                 verb_stats.append(_bytes_to_mb(diff_size))
@@ -112,7 +113,7 @@ class MemoryProfilingWorkflowCallbacks(NoopWorkflowCallbacks):
         df_json = defaultdict(list)
         for verb, snapshot in self._snapshots.items():
             for sample, (first, second) in enumerate(
-                zip(snapshot[::2], snapshot[1::2])
+                zip(snapshot[::2], snapshot[1::2], strict=True)
             ):
                 stat_diff = second.compare_to(first, "lineno")
                 for stat in stat_diff:

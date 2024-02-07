@@ -6,8 +6,8 @@ from typing import Any, TypeVar
 
 import pandas as pd
 
-from ..progress import progress_ticker
-from ..workflow.verb_callbacks import VerbCallbacks
+from datashaper.progress import progress_ticker
+from datashaper.workflow.verb_callbacks import VerbCallbacks
 
 ItemType = TypeVar("ItemType")
 

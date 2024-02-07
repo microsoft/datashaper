@@ -74,7 +74,7 @@ def _to_str(column: pd.Series, format_pattern: str) -> pd.DataFrame | pd.Series:
         try:
             column_numeric = column_numeric.astype(pd.Int64Dtype)
             return column.apply(lambda x: "" if x is None else str(x))
-        except Exception:  # nosec
+        except Exception:  # noqa: S110
             pass
     if is_bool_dtype(column):
         return column.apply(lambda x: "" if pd.isna(x) else str(x).lower())
@@ -118,7 +118,7 @@ def convert(
     output = cast(pd.DataFrame, input_table)
 
     output[to] = __type_mapping[parse_type](
-        column=output[column], radix=radix, formatPattern=formatPattern
+        column=output[column], radix=radix, format_pattern=formatPattern
     )
 
     return TableContainer(table=output)

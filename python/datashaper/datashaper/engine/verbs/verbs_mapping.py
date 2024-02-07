@@ -7,13 +7,12 @@
 import asyncio
 import math
 import traceback
-from collections import namedtuple
 from collections.abc import Awaitable, Callable
 from dataclasses import dataclass, field
 from enum import Enum
 from functools import cache
 from inspect import signature
-from typing import Any, Concatenate, ParamSpec
+from typing import Any, Concatenate, NamedTuple, ParamSpec
 
 import numpy as np
 import pandas as pd
@@ -54,7 +53,7 @@ def new_row(old_tuple: tuple, new_column_name: str, value: Any) -> tuple:
     """Return rows in row-wise operations."""
     old_named_tuple_type = type(old_tuple)
     original_fields = old_named_tuple_type._fields  # type: ignore
-    return namedtuple("NewRow", original_fields + (new_column_name,))(
+    return NamedTuple("NewRow", original_fields + (new_column_name,))(
         *(old_tuple + (value,))
     )
 
@@ -143,7 +142,7 @@ def parallel_verb(
 
             tick.done()
 
-            for error, stack_trace in zip(errors, stack_traces):
+            for error, stack_trace in zip(errors, stack_traces, strict=True):
                 callbacks.error(
                     "Received errors during parallel transformation",
                     error,

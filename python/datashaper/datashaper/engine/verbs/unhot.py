@@ -28,7 +28,9 @@ def unhot(
         for column in output_table.columns:
             if column.startswith(prefix):
                 output_table[column] = output_table[column].apply(
-                    lambda x: column.split(prefix)[1] if x == 1 else pd.NA
+                    lambda x, column=column: column.split(prefix)[1]
+                    if x == 1
+                    else pd.NA
                 )
 
     return TableContainer(table=cast(pd.DataFrame, output_table))

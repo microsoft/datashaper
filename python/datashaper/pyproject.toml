@@ -93,33 +93,33 @@ select = [
     "I", # Isort
     "N", # Naming Conventions
     "UP", # pyupgrade - use modern conventions
-    # "YTT", # Correct sys.version_info usage
+    "YTT", # Correct sys.version_info usage
     # "ANN", # Type Annotations
     # "ASYNC", # Async Functions
-    # "S", # Bandit (security)
+    "S", # Bandit (security)
     # "BLE", # Don't catch blind exceptions,
     # "FBT", # use named arguments for boolean flags
-    # "B", # Bugbear, design issues
+    "B", # Bugbear, design issues
     # "A", # Don't shadow builtins
     # "C4", # Comprehension checks
-    # "DTZ", # Datetime checks
-    # "T10", # Remove debug statements
+    "DTZ", # Datetime checks
+    "T10", # Remove debug statements
     # "EM", # Error messages
-    # "ICN", # Import Conventions
-    # "G", # Logging Formats
-    # "INP", # check for missing __init__.py
-    # "PIE", # flake8-pie - misc lints
+    "ICN", # Import Conventions
+    "G", # Logging Formats
+    "INP", # check for missing __init__.py
+    "PIE", # flake8-pie - misc lints
     # "T20", # no print statements
-    # "PYI", # stub files
+    "PYI", # stub files
     # "PT", # testing style
-    # "Q", # consistent quoting
+    "Q", # consistent quoting
     # "RSE", # flake8-raise
     # "RET", # flake8-return
     # "SLF", # no external member access
     # "SLOT", # flake8-slots
     # "SIM", # flake8-simplify
-    # "TID", # flake8-tidy-imports
-    # "TCH", # flake8-ctype-checking
+    "TID", # flake8-tidy-imports
+    "TCH", # flake8-ctype-checking
     # "INT",
     # "ARG",
     # "PTH",
@@ -142,6 +142,7 @@ ignore = [
     "ARG002",
     # Not really necessary
     "ANN204",
+    "PYI041",
     # Testing idioms
     "PT009",
 
