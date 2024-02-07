@@ -18,25 +18,15 @@ def unhot(
     preserveSource: bool = False,
     prefix: str = "",
 ):
-    merge_strategy = MergeStrategy(MergeStrategy.FirstOneWins)
+    input_table = input.get_input()
+    output_table = unhot_operation(input_table, columns, to, prefix)
 
-    input_table = unhot_operation(input, columns, prefix).get_input()
+    if preserveSource:
+        id_vars = [col for col in input_table.columns if col not in columns]
+        output_table.drop(columns=id_vars, inplace=True)
+        output_table = pd.concat([input_table, output_table], axis=1)
+        for column in output_table.columns:
+            if column.startswith("Name_"):
+                output_table[column] = output_table[column].apply(lambda x: column.split("Name_")[1] if x == 1 else pd.NA)
 
-    output = cast(pd.DataFrame, input_table)
-
-    output[to] = output[columns].apply(
-        partial(strategy_mapping[merge_strategy]), axis=1
-    )
-
-    filtered_list: list[str] = []
-
-    for col in output.columns:
-        try:
-            columns.index(col)
-        except ValueError:
-            filtered_list.append(col)
-
-    if not preserveSource:
-        output = output[filtered_list]
-
-    return TableContainer(table=cast(Table, output))
+    return TableContainer(table=output_table)

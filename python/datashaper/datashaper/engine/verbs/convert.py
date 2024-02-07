@@ -10,6 +10,7 @@ from typing import Callable, Optional, Union, cast
 
 import numpy as np
 import pandas as pd
+import pyarrow as pa
 
 from pandas.api.types import is_bool_dtype, is_datetime64_any_dtype, is_numeric_dtype
 
@@ -63,10 +64,8 @@ def convert_date_str(value: datetime, formatPattern: str) -> Union[str, float]:
 
 
 def to_str(column: pd.Series, formatPattern: str) -> pd.DataFrame | pd.Series:
-    column_datetime: pd.Series | None = None
-    if is_datetime64_any_dtype(column):
-        column_datetime = pd.to_datetime(column, errors="ignore")
-        return column_datetime.apply(lambda x: convert_date_str(x, formatPattern))
+    if is_datetime64_any_dtype(column) or (isinstance(column.dtype, pd.ArrowDtype) and "timestamp" in column.dtype.name):
+        return column.apply(lambda x: convert_date_str(x, formatPattern))
 
     column_numeric: pd.Series | None = None
     if is_numeric_dtype(column):
