@@ -224,7 +224,7 @@ class Workflow(Generic[Context]):
 
         return run_ctx
 
-    def _missing_inputs(self, node_key: str, visited: set[str]) -> list[str]:
+    def _get_missing_inputs(self, node_key: str, visited: set[str]) -> list[str]:
         node = self._graph[node_key]
         return [
             input
@@ -299,14 +299,16 @@ class Workflow(Generic[Context]):
 
         def enqueue_available_nodes(possible_nodes: Iterable[str]) -> None:
             new_nodes = [
-                n for n in possible_nodes if len(self._missing_inputs(n, visited)) == 0
+                n
+                for n in possible_nodes
+                if len(self._get_missing_inputs(n, visited)) == 0
             ]
             nodes.extend(new_nodes)
 
         def assert_all_visited() -> None:
             for node_id in self._graph:
                 if node_id not in visited:
-                    missing_inputs = self._missing_inputs(node_id, visited)
+                    missing_inputs = self._get_missing_inputs(node_id, visited)
                     raise WorkflowMissingInputError(missing_inputs[0])
 
         # Use the ensuring variant to guarantee that all protocol methods are available
