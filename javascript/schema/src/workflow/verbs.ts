@@ -5,7 +5,7 @@
 import type { CodebookSchema } from '../codebook/CodebookSchema.js'
 import type { DataType, Value } from '../data.js'
 import type { SortDirection } from '../enums/index.js'
-import { WorkflowSchema } from './WorkflowSchema.js'
+import type { WorkflowSchema } from './WorkflowSchema.js'
 
 export enum Verb {
 	Aggregate = 'aggregate',

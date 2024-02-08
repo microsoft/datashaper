@@ -94,7 +94,7 @@ const descriptions = {
 export function selectStepDescription(
 	step: Step,
 ): React.FC<StepDescriptionProps> {
-	const result: React.FC<StepDescriptionProps<any>> = get(
+	const result: React.FC<StepDescriptionProps<any>> | undefined = get(
 		descriptions,
 		step.verb,
 	)
