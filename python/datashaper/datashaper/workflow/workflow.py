@@ -42,7 +42,7 @@ SCHEMA_FILE = "../../schema/workflow.json"
 
 Context = TypeVar("Context")
 
-DEFAULT_INPUT_NAME = "datasource"
+DEFAULT_INPUT_NAME = "source"
 
 
 class Workflow(Generic[Context]):

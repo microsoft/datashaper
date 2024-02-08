@@ -33,13 +33,6 @@ class WorkflowNode extends BaseNode<TableContainer, WorkflowArgs> {
 			// set the default input
 			this._workflow.input$ = this.inputValue$()
 
-			// set the named inputs
-			const inputs = new Map<string, TableObservable>()
-			for (const input of Object.keys(config?.input ?? {})) {
-				inputs.set(input, this.inputValue$(input))
-			}
-			this._workflow.addInputs(inputs)
-
 			// Listen to the workflow outputs
 			this._outputSub = this._workflow.output$.subscribe((output) => {
 				this.emit(output)

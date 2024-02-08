@@ -739,14 +739,4 @@ export interface WorkflowArgs {
 	 * The workflow configuration.
 	 */
 	workflow: WorkflowSchema
-
-	/**
-	 * The input data to apply the workflow to.
-	 * key: the table name in the parent workflow
-	 * values: the table name to use in the inner workflow.
-	 * 
-	 * By default, the _default input_ of the prior step (or the outer workflow) will be passed into the inner 
-	 * workflow as the default input. The inner workflow's default output will be used as the default output of the step.
-	 */
-	input?: Record<string, string>
 }
