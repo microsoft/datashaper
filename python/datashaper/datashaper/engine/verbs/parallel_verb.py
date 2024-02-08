@@ -8,10 +8,11 @@ import asyncio
 import logging
 import math
 import traceback
+from collections import namedtuple
 from collections.abc import Awaitable, Callable
 from enum import Enum
 from inspect import signature
-from typing import Any, Concatenate, NamedTuple, ParamSpec
+from typing import Any, Concatenate, ParamSpec
 
 import numpy as np
 import pandas as pd
@@ -40,10 +41,10 @@ _CHUNKS_NOT_SUPPORTED = "chunk_size > 1 is only supported for DataFrame inputs a
 
 
 def new_row(old_tuple: tuple, new_column_name: str, value: Any) -> tuple:
-    """Return rows in row-wise operations."""
+    """Emit a new row for a row-wise operations."""
     old_named_tuple_type = type(old_tuple)
     original_fields = old_named_tuple_type._fields  # type: ignore
-    return NamedTuple("NewRow", original_fields + (new_column_name,))(
+    return namedtuple("NewRow", original_fields + (new_column_name,))(  # noqa: PYI024
         *(old_tuple + (value,))
     )
 

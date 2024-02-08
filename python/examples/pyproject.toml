@@ -17,17 +17,14 @@ nbconvert = "^7.13.0"
 [tool.poetry.group.dev.dependencies]
 jupyter = "^1.0.0"
 poethepoet = "^0.20.0"
-bandit = "^1.7.4"
-black = { version = "^22.6.0", extras = ["jupyter"] }
 codespell = "^2.1.0"
-flake8 = "^4.0.1"
-isort = "^5.10.1"
 pydocstyle = "^6.1.1"
 pytest = "^7"
 pytest-cov = "^3.0.0"
 ipykernel = "^6.27.1"
 nbformat = "^5.9.2"
 pyright = "^1.1.349"
+ruff = "^0.2.1"
 
 
 [build-system]
@@ -36,54 +33,83 @@ build-backend = "poetry.core.masonry.api"
 
 
 [tool.poe.tasks]
-_flake8 = 'flake8 examples'
-_bandit = 'bandit -r examples'
-_black = 'black examples notebooks'
-_isort = 'isort examples'
-_black_check = 'black --check examples'
-_isort_check = 'isort --check examples'
-_pydocstyle = 'pydocstyle examples'
+_sort_imports = "ruff check --select I --fix ."
+_format_code = "ruff format ."
+_format_check = 'ruff format . --check'
+_ruff_check = 'ruff check .'
 _codespell = 'codespell dodiscover/ doc/ examples/ --ignore-words=.codespellignore --skip "**/_build/*,**/auto_examples/*"'
 _test_with_coverage = 'coverage run -m pytest'
 _coverage_report = 'coverage report --show-missing'
 _pyright = "pyright"
+
+fix = "ruff check --fix ."
 
 [[tool.poe.tasks.test]]
 sequence = ['_test_with_coverage', '_coverage_report']
 ignore_fail = 'return_non_zero'
 
 [[tool.poe.tasks.check]]
-sequence = ['_pyright', '_flake8', '_bandit', '_codespell', 'check_format', '_pydocstyle']
+sequence = ['_format_check', '_ruff_check', '_pyright', '_codespell']
 ignore_fail = 'return_non_zero'
 
 [[tool.poe.tasks.format]]
-sequence = ['_black', '_isort']
-ignore_fail = 'return_non_zero'
-
-[[tool.poe.tasks.check_format]]
-sequence = ['_black_check', '_isort_check']
+sequence = ['_sort_imports', '_format_code']
 ignore_fail = 'return_non_zero'
 
 [tool.pydocstyle]
 match = '^(?!setup|__init__|test_).*\.py'
 match-dir = '^datashaper.*'
 
-[tool.black]
-target-version = ['py36']
-force-exclude = '''
-.*/setup\.py$
-'''
-
-[tool.isort]
-py_version = 36
-profile = "black"
-force_single_line = false
-combine_as_imports = true
-lines_between_types = 1
-lines_after_imports = 2
-src_paths = ["datashaper", "tests"]
-extend_skip = ["setup.py"]
-
 [tool.pyright]
 include = ["examples"]
 exclude = ["**/node_modules", "**/__pycache__"]
+
+[tool.ruff]
+target-version = "py310"
+extend-include = ["*.ipynb"]
+
+[tool.ruff.format]
+docstring-code-format = true
+docstring-code-line-length = 20
+
+[tool.ruff.lint]
+select = [
+    "E4", "E7", "E9", "F", "D", "W291", "I", "N", "UP", "YTT", "ANN", "ASYNC", "S", "B", "DTZ", "T10", "EM", "ICN", "G", "INP", "PIE", "PYI", "PT", "Q",
+    "RSE", "RET", "SLF", "SLOT", "SIM", "TID", "TCH", "INT", "ARG", "PTH", 'ERA', "PD", "TRY", "FLY", "PERF", "LOG", "A", "C90", "T20",
+    # "BLE", # Don't catch blind exceptions,
+    # "FBT", # use named arguments for boolean flags
+    # "C4", # Comprehension checks
+    # "TD", # todos
+    #"FIX", # fixme
+    #"FURB", <preview only>
+    #"RUF"
+]
+ignore = [
+    # Not necessary for examples
+    "A002",
+    "T201",
+    "ARG001",
+    # Deprecated Rules
+    "ANN101",
+    "ANN102",
+    # Conflicts with interface argument checking
+    "ARG002",
+    "ANN204",
+    # TODO: Inspect these pandas rules for validity
+    "PD002",
+    "PD010",
+    "PD013",
+    # TODO RE-Enable when we get bandwidth
+    "ANN401",
+    "C901",
+    
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S", "D", "ANN"]
+
+[tool.ruff.lint.flake8-builtins]
+builtins-ignorelist = ["input", "id", "bytes"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"

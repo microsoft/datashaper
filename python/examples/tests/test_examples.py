@@ -7,7 +7,10 @@ import pytest
 
 NOTEBOOKS_PATH = "notebooks/"
 
-notebooks_list = [file.name for file in os.scandir(NOTEBOOKS_PATH) if file.name.endswith(".ipynb")]
+notebooks_list = [
+    file.name for file in os.scandir(NOTEBOOKS_PATH) if file.name.endswith(".ipynb")
+]
+
 
 def _notebook_run(filepath):
     """Execute a notebook via nbconvert and collect output.
@@ -34,7 +37,11 @@ def _notebook_run(filepath):
         nb = nbformat.read(temp_file, nbformat.current_nbformat)
 
     errors = [
-        output for cell in nb.cells if "outputs" in cell for output in cell["outputs"] if output.output_type == "error"
+        output
+        for cell in nb.cells
+        if "outputs" in cell
+        for output in cell["outputs"]
+        if output.output_type == "error"
     ]
 
     return nb, errors
