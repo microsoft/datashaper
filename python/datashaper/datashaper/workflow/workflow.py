@@ -55,7 +55,8 @@ class Workflow(Generic[Context]):
     _last_step_id: str
     _dependencies: set[str]
     _memory_profile: bool | None
-
+    _validate_schema: bool | None
+    _schema_path: str | None
     """Externals that this workflow depends on"""
 
     def __init__(
@@ -66,7 +67,6 @@ class Workflow(Generic[Context]):
         schema_path: str | None = None,
         verbs: dict[str, Callable] | None = None,
         validate: bool | None = False,
-        default_input: str | None = None,
         memory_profile: bool | None = False,
     ):
         """Create an execution graph from the Dict provided in workflow.
@@ -87,8 +87,8 @@ class Workflow(Generic[Context]):
         :param default_input: Optional value, the default input for the first step.
         :type default_input: str, optional
         """
-        schema_path = schema_path or SCHEMA_FILE
-        default_input = default_input or DEFAULT_INPUT_NAME
+        self._schema_path = schema_path = schema_path or SCHEMA_FILE
+        self._validate_schema = validate
         self._schema = schema
         self._memory_profile = memory_profile
         self._dependencies = self._compute_dependencies()
@@ -126,7 +126,7 @@ class Workflow(Generic[Context]):
         for step in schema["steps"]:
             step_has_defined_id = "id" in step
             step_id = step["id"] if step_has_defined_id else str(uuid4())
-            step_input = (step.get("input", previous_step_id)) or default_input
+            step_input = (step.get("input", previous_step_id)) or DEFAULT_INPUT_NAME
             verb = Workflow.__get_verb(step["verb"])
 
             step = ExecutionNode(
@@ -205,8 +205,8 @@ class Workflow(Generic[Context]):
             raise WorkflowVerbNotFoundError(verb)
         return result
 
-    @staticmethod
-    def __resolve_run_context(
+    def _resolve_run_context(
+        self,
         exec_node: ExecutionNode,
         context: Context | None,
         workflow_callbacks: WorkflowCallbacks,
@@ -234,16 +234,21 @@ class Workflow(Generic[Context]):
         if "callbacks" in verb_args and "callbacks" not in exec_node.args:
             run_ctx["callbacks"] = callbacks
 
+        if (
+            "workflow_instance" in verb_args
+            and "workflow_instance" not in exec_node.args
+        ):
+            run_ctx["workflow_instance"] = self
+
         return run_ctx
 
-    def _check_inputs(self, node_key: str, visited: set[str]) -> bool:
+    def _missing_inputs(self, node_key: str, visited: set[str]) -> list[str]:
         node = self._graph[node_key]
-        return all(
-            [
-                input in visited or input in self._inputs
-                for input in Workflow.__inputs_list(node.node_input)
-            ]
-        )
+        return [
+            input
+            for input in Workflow.__inputs_list(node.node_input)
+            if input not in visited and input not in self._inputs
+        ]
 
     def _resolve_inputs(
         self, verb: VerbDetails, inputs: str | dict[str, list[str]]
@@ -311,13 +316,16 @@ class Workflow(Generic[Context]):
         nodes: list[str] = []
 
         def enqueue_available_nodes(possible_nodes: Iterable[str]) -> None:
-            new_nodes = [n for n in possible_nodes if self._check_inputs(n, visited)]
+            new_nodes = [
+                n for n in possible_nodes if len(self._missing_inputs(n, visited)) == 0
+            ]
             nodes.extend(new_nodes)
 
         def assert_all_visited() -> None:
             for node_id in self._graph:
-                if node_id not in visited and not self._check_inputs(node_id, visited):
-                    raise WorkflowMissingInputError
+                if node_id not in visited:
+                    missing_inputs = self._missing_inputs(node_id, visited)
+                    raise WorkflowMissingInputError(missing_inputs[0])
 
         # Use the ensuring variant to guarantee that all protocol methods are available
         callbacks, profiler = self._get_workflow_callbacks(callbacks)
@@ -359,10 +367,9 @@ class Workflow(Generic[Context]):
     ) -> float:
         start_verb_time = time.time()
 
-        result = None
         try:
             inputs = self._resolve_inputs(node.verb, node.node_input)
-            verb_context = Workflow.__resolve_run_context(node, context, callbacks)
+            verb_context = self._resolve_run_context(node, context, callbacks)
             callbacks.on_step_start(node, inputs)
             callbacks.on_step_progress(node, Progress(percent=0))
             result = node.verb.func(**node.args, **inputs, **verb_context)
@@ -375,11 +382,11 @@ class Workflow(Generic[Context]):
             message = f'Error executing verb "{node.verb.name}" in {self.name}: {e}'
             callbacks.on_error(message, e, traceback.format_exc())
             raise
+        else:
+            node.result = result
         finally:
             callbacks.on_step_progress(node, Progress(percent=1))
             callbacks.on_step_end(node, None)
-
-        node.result = result
 
         # Return verb timing
         return time.time() - start_verb_time
@@ -413,6 +420,18 @@ class Workflow(Generic[Context]):
                 for step in self._graph.values()
             ],
         }
+
+    def derive(
+        self, schema: dict[str, Any], input_tables: dict[str, pd.DataFrame]
+    ) -> "Workflow":
+        """Derive a new workflow from the current one."""
+        # Verbs are already registered, and we don't need to validate the schema again
+        return Workflow(
+            schema,
+            input_tables=input_tables,
+            validate=self._validate_schema,
+            schema_path=self._schema_path,
+        )
 
 
 def _get_memory_profile(
