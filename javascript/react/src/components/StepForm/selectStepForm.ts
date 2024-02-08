@@ -94,7 +94,7 @@ const forms = {
 export function selectStepForm(
 	step: Step<unknown>,
 ): React.FC<StepFormProps<unknown>> {
-	const result: React.FC<StepFormProps<any>> = get(forms, step.verb)
+	const result: React.FC<StepFormProps<any>> | undefined = get(forms, step.verb)
 	if (!result) {
 		throw new Error(`verb ${step.verb} not found`)
 	}
