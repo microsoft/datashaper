@@ -5,7 +5,7 @@
 ```ts
 
 import type { AggregateArgs } from '@datashaper/schema';
-import type { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import type { BinArgs } from '@datashaper/schema';
 import type { BinarizeArgs } from '@datashaper/schema';
 import type { BooleanArgs } from '@datashaper/schema';
@@ -57,6 +57,7 @@ import { TableContainer } from '@datashaper/tables';
 import type { UnhotArgs } from '@datashaper/schema';
 import type { Verb } from '@datashaper/schema';
 import type { WindowArgs } from '@datashaper/schema';
+import type { WorkflowArgs } from '@datashaper/schema';
 import type { WorkflowSchema } from '@datashaper/schema';
 import type { WorkflowStepId } from '@datashaper/schema';
 
@@ -102,7 +103,13 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     // (undocumented)
     id: NodeId;
     // (undocumented)
+    protected inputError$(name?: SocketName): BehaviorSubject<Maybe<unknown>>;
+    // (undocumented)
+    protected inputError(name?: SocketName): Maybe<unknown>;
+    // (undocumented)
     readonly inputs: SocketName[];
+    // (undocumented)
+    protected inputValue$(name?: SocketName): BehaviorSubject<Maybe<T>>;
     // (undocumented)
     protected inputValue(name?: SocketName): Maybe<T>;
     protected get isBindingRequired(): boolean;
@@ -1207,6 +1214,12 @@ export class Workflow extends Resource implements TableTransformer {
     // (undocumented)
     static validate(workflowJson: WorkflowSchema): Promise<boolean>;
 }
+
+// Warning: (ae-forgotten-export) The symbol "WorkflowNode" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "workflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function workflow(id: string): WorkflowNode;
 
 // Warning: (ae-missing-release-tag) "WorkflowProfile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

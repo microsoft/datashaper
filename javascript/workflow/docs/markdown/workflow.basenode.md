@@ -47,7 +47,10 @@ export declare abstract class BaseNode<T, Config> implements Node<T, Config>
 |  [getVariadicInputValues()](./workflow.basenode.getvariadicinputvalues.md) | <code>protected</code> |  |
 |  [hasBoundInput(name)](./workflow.basenode.hasboundinput.md) | <code>protected</code> |  |
 |  [hasBoundInputWithNode(name, nodeId)](./workflow.basenode.hasboundinputwithnode.md) | <code>protected</code> |  |
+|  [inputError(name)](./workflow.basenode.inputerror.md) | <code>protected</code> |  |
+|  [inputError$(name)](./workflow.basenode.inputerror_.md) | <code>protected</code> |  |
 |  [inputValue(name)](./workflow.basenode.inputvalue.md) | <code>protected</code> |  |
+|  [inputValue$(name)](./workflow.basenode.inputvalue_.md) | <code>protected</code> |  |
 |  [isSocketNameEqual(name, name2)](./workflow.basenode.issocketnameequal.md) | <code>protected</code> |  |
 |  [unbind(name)](./workflow.basenode.unbind.md) |  |  |
 |  [verifyInputSocketName(name)](./workflow.basenode.verifyinputsocketname.md) | <code>protected</code> | Verifies that an input socket name is known |

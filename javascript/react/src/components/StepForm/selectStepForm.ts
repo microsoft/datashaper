@@ -35,6 +35,7 @@ import {
 	UnfoldForm,
 	UnhotForm,
 	WindowForm,
+	WorkflowForm,
 } from '../verbs/forms/index.js'
 import type { StepFormProps } from '../verbs/index.js'
 import { StringsReplaceForm } from '../verbs/forms/strings/StringsReplaceForm/StringsReplaceForm.js'
@@ -85,6 +86,7 @@ const forms = {
 	unorder: NoParametersForm,
 	unroll: NoParametersForm,
 	window: WindowForm,
+	workflow: WorkflowForm
 }
 
 /**
@@ -94,7 +96,7 @@ const forms = {
 export function selectStepForm(
 	step: Step<unknown>,
 ): React.FC<StepFormProps<unknown>> {
-	const result: React.FC<StepFormProps<any>> = get(forms, step.verb)
+	const result: React.FC<StepFormProps<any>> | undefined = get(forms, step.verb)
 	if (!result) {
 		throw new Error(`verb ${step.verb} not found`)
 	}

@@ -57,4 +57,5 @@ export declare enum Verb
 |  Unorder | <code>&quot;unorder&quot;</code> |  |
 |  Unroll | <code>&quot;unroll&quot;</code> |  |
 |  Window | <code>&quot;window&quot;</code> |  |
+|  Workflow | <code>&quot;workflow&quot;</code> |  |
 

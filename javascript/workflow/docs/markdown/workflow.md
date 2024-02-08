@@ -62,6 +62,7 @@
 |  [readStep({ verb, args, id, input }, previous)](./workflow.readstep.md) | Factory function to create new verb configs with as many reasonable defaults as possible. |
 |  [stepNodeFactory(stepFunction)](./workflow.stepnodefactory.md) |  |
 |  [verbs(filter)](./workflow.verbs.md) | Returns all verbs, subject to optional filter. |
+|  [workflow(id)](./workflow.workflow.md) |  |
 
 ## Interfaces
 
