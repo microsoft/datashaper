@@ -1,14 +1,13 @@
 """A module containing the derive_from_rows_async method."""
 import asyncio
-
-from typing import Awaitable, Callable, Optional, TypeVar
+from collections.abc import Awaitable, Callable
+from typing import TypeVar
 
 import pandas as pd
 
-from datashaper.workflow import VerbCallbacks
+from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
 
 from .derive_from_rows_base import ExecuteFn, derive_from_rows_base
-
 
 ItemType = TypeVar("ItemType")
 
@@ -17,7 +16,7 @@ async def derive_from_rows_asyncio_threads(
     input: pd.DataFrame,
     transform: Callable[[pd.Series], Awaitable[ItemType]],
     callbacks: VerbCallbacks,
-    max_parallelism: Optional[int] = 4,
+    max_parallelism: int | None = 4,
 ) -> list[ItemType | None]:
     """
     Derive from rows asynchronously.

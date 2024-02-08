@@ -2,6 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Merge verb implementation."""
 from functools import partial
 from typing import cast
 
@@ -21,10 +22,11 @@ def merge(
     columns: list[str],
     strategy: str,
     delimiter: str = "",
-    preserveSource: bool = False,
+    preserveSource: bool = False,  # noqa: N803
     unhot: bool = False,
     prefix: str = "",
-):
+) -> TableContainer:
+    """Merge verb implementation."""
     merge_strategy = MergeStrategy(strategy)
 
     input_table = cast(pd.DataFrame, input.get_input())
@@ -33,7 +35,9 @@ def merge(
         for column in input_table.columns:
             if column.startswith(prefix):
                 input_table[column] = input_table[column].apply(
-                    lambda x: column.split(prefix)[1] if x >= 1 else pd.NA
+                    lambda x, column=column: column.split(prefix)[1]
+                    if x >= 1
+                    else pd.NA
                 )
 
     input_table[to] = input_table[columns].apply(

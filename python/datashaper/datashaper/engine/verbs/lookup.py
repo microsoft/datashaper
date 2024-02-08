@@ -2,7 +2,8 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-from typing import Optional, cast
+"""Lookup verb implementation."""
+from typing import cast
 
 import pandas as pd
 
@@ -15,8 +16,9 @@ from datashaper.table_store import TableContainer
 def lookup(
     input: VerbInput,
     columns: list[str],
-    on: Optional[list[str]] = None,
-):
+    on: list[str] | None = None,
+) -> TableContainer:
+    """Lookup verb implementation."""
     input_table: pd.DataFrame = cast(pd.DataFrame, input.get_input())
     other_table: pd.DataFrame = cast(pd.DataFrame, input.get_others()[0])
 

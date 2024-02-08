@@ -2,12 +2,11 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-
-from typing import Optional, cast
+"""Spread verb implementation."""
+from typing import cast
 
 import numpy as np
 import pandas as pd
-
 from pandas._typing import Axes
 
 from datashaper.engine.verbs.verb_input import VerbInput
@@ -15,9 +14,11 @@ from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
 
 
-def __normal_spread(input_table, columns, to, delimiter):
+def __normal_spread(
+    input_table: pd.DataFrame, columns: list[str], to: list[str], delimiter: str
+) -> pd.DataFrame:
     output = input_table
-    for column, new_column_name in zip(columns, to):
+    for column, new_column_name in zip(columns, to, strict=True):
         new_columns = np.array(
             input_table[column].astype(str).str.split(delimiter).to_list()
         )
@@ -32,9 +33,11 @@ def __normal_spread(input_table, columns, to, delimiter):
     return output
 
 
-def __onehot_spread(input_table, columns, to, delimiter):
+def __onehot_spread(
+    input_table: pd.DataFrame, columns: list[str], to: list[str], delimiter: str
+) -> pd.DataFrame:
     output = input_table
-    for column, new_column_name in zip(columns, to):
+    for column, new_column_name in zip(columns, to, strict=True):
         output[column] = output[column].astype(str).str.split(delimiter)
         onehot = output[column].str.join("|").str.get_dummies()
         onehot.columns = [f"{new_column_name}_{val}" for val in onehot.columns]
@@ -54,12 +57,13 @@ def __onehot_spread(input_table, columns, to, delimiter):
 def spread(
     input: VerbInput,
     column: str,
-    to: Optional[list[str]] = None,
+    to: list[str] | None = None,
     delimiter: str = ",",
     onehot: bool = False,
-    preserveSource: bool = False,
-):
-    input_table = input.get_input()
+    preserveSource: bool = False,  # noqa: N803
+) -> TableContainer:
+    """Spread verb implementation."""
+    input_table = cast(pd.DataFrame, input.get_input())
     if to is None:
         to = [column]
 

@@ -21,10 +21,10 @@ def test_sample_seed():
     verb_input = make_verb_input([[1], [2], [3], [4], [5]], ["id"])
 
     values = None
-    for i in range(0, 10):
+    for i in range(10):
         sample = VerbManager.get().get_verb("sample").func
         output = sample(input=verb_input, size=2, seed=0xBEEF)
-        ids = output.table["id"].values
+        ids = output.table["id"].tolist()
 
         if i == 0:
             values = ids

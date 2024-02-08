@@ -2,7 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-
+"""Orderby verb implementation."""
 from datashaper.engine.types import OrderByInstruction, SortDirection
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -10,7 +10,8 @@ from datashaper.table_store import TableContainer
 
 
 @verb(name="orderby", treats_input_tables_as_immutable=True)
-def orderby(input: VerbInput, orders: list[dict]):
+def orderby(input: VerbInput, orders: list[dict]) -> TableContainer:
+    """Orderby verb implementation."""
     orders_instructions = [
         OrderByInstruction(
             column=order["column"], direction=SortDirection(order["direction"])

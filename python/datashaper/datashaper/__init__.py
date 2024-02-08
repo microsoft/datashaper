@@ -1,4 +1,6 @@
+"""DataShaper is a library for declarative data manipulation and transformation."""
 from .engine import (
+    AsyncIOType,
     Bin,
     BinStrategy,
     BooleanComparisonOperator,
@@ -20,7 +22,6 @@ from .engine import (
     SortDirection,
     Step,
     StringComparisonOperator,
-    Union,
     VerbDetails,
     VerbInput,
     VerbManager,
@@ -30,7 +31,24 @@ from .engine import (
     filter_df,
     get_operator,
     load_verbs,
+    new_row,
+    parallel_verb,
     verb,
+)
+from .errors import (
+    InvalidVerbInputError,
+    NoVerbInputsProvidedError,
+    UnsupportedComparisonOperatorError,
+    VerbAlreadyRegisteredError,
+    VerbError,
+    VerbHasMultipleDefaultInputsError,
+    VerbHasMultipleDefaultOthersError,
+    VerbOperationNotSupportedError,
+    VerbParallelizationError,
+    WorkflowError,
+    WorkflowMissingInputError,
+    WorkflowOutputNotReadyError,
+    WorkflowVerbNotFoundError,
 )
 from .execution import (
     ExecutionNode,
@@ -67,7 +85,6 @@ from .workflow import (
     WorkflowRunResult,
 )
 
-
 __all__ = [
     "derive_from_rows",
     "derive_from_rows_asyncio",
@@ -81,6 +98,9 @@ __all__ = [
     "verb",
     "VerbManager",
     "load_verbs",
+    "parallel_verb",
+    "AsyncIOType",
+    "new_row",
     # Verb Parameters
     "BinStrategy",
     "Bin",
@@ -102,7 +122,6 @@ __all__ = [
     "SetOp",
     "SortDirection",
     "StringComparisonOperator",
-    "Union",
     "WindowFunction",
     "Step",
     "aggregate_operation_mapping",
@@ -132,4 +151,18 @@ __all__ = [
     "ProgressHandler",
     "ProgressTicker",
     "Progress",
+    # Errors
+    "UnsupportedComparisonOperatorError",
+    "InvalidVerbInputError",
+    "VerbError",
+    "WorkflowMissingInputError",
+    "WorkflowOutputNotReadyError",
+    "WorkflowVerbNotFoundError",
+    "VerbAlreadyRegisteredError",
+    "VerbParallelizationError",
+    "WorkflowError",
+    "NoVerbInputsProvidedError",
+    "VerbHasMultipleDefaultInputsError",
+    "VerbHasMultipleDefaultOthersError",
+    "VerbOperationNotSupportedError",
 ]

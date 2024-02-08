@@ -2,6 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Unfold verb implementation."""
 from typing import cast
 
 import numpy as np
@@ -13,7 +14,8 @@ from datashaper.table_store import Table, TableContainer
 
 
 @verb(name="unfold")
-def unfold(input: VerbInput, key: str, value: str):
+def unfold(input: VerbInput, key: str, value: str) -> TableContainer:
+    """Unfold verb implementation."""
     input_table = input.get_input()
     output = cast(pd.DataFrame, input_table)
 

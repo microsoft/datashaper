@@ -1,3 +1,4 @@
+"""Unhot verb implementation."""
 from typing import cast
 
 import pandas as pd
@@ -13,9 +14,10 @@ def unhot(
     input: VerbInput,
     to: str,
     columns: list[str],
-    preserveSource: bool = False,
+    preserveSource: bool = False,  # noqa: N803
     prefix: str = "",
-):
+) -> TableContainer:
+    """Unhot verb implementation."""
     input_table = cast(pd.DataFrame, input.get_input())
     output_table = unhot_operation(input_table, columns, to, prefix)
 
@@ -26,7 +28,9 @@ def unhot(
         for column in output_table.columns:
             if column.startswith(prefix):
                 output_table[column] = output_table[column].apply(
-                    lambda x: column.split(prefix)[1] if x == 1 else pd.NA
+                    lambda x, column=column: column.split(prefix)[1]
+                    if x == 1
+                    else pd.NA
                 )
 
     return TableContainer(table=cast(pd.DataFrame, output_table))

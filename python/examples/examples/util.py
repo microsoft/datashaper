@@ -1,8 +1,7 @@
 """Utility functions for examples."""
-import os
+from pathlib import Path
 
 
-def mkdirp(dir: str) -> None:
+def mkdirp(dirname: str) -> None:
     """Create a directory if it does not exist."""
-    if not os.path.exists(dir):
-        os.makedirs(dir)
+    Path(dirname).mkdir(parents=True, exist_ok=True)

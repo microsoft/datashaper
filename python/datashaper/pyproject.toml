@@ -16,13 +16,8 @@ jsonschema = "^4.21.1"
 pyarrow = "^15.0.0"
 
 [tool.poetry.group.dev.dependencies]
-bandit = "^1.7.7"
-black = "^23.12.1"
 codespell = "^2.2.6"
-flake8 = "^7.0.0"
-isort = "^5.13.2"
 poethepoet = "^0.24.4"
-pydocstyle = "^6.3.0"
 pytest = "^7.4.4"
 pytest-cov = "^4.1.0"
 semversioner = "^2.0.1"
@@ -30,39 +25,19 @@ toml = "^0.10.2"
 coverage = "^7.4.0"
 pyright = "^1.1.349"
 pytest-asyncio = "^0.23.4"
+ruff = "^0.2.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.isort]
-py_version = 36
-profile = "black"
-force_single_line = false
-combine_as_imports = true
-lines_between_types = 1
-lines_after_imports = 2
-src_paths = ["datashaper", "tests"]
-extend_skip = ["setup.py"]
-
-
-[tool.black]
-target-version = ['py36']
-force-exclude = '''
-.*/setup\.py$
-'''
-
 [tool.coverage.run]
 omit = ["tests/*", ".*", "data/*"]
 
 [tool.poe.tasks]
-_flake8 = 'flake8 datashaper'
-_bandit = 'bandit -r datashaper'
-_black = 'black datashaper tests'
-_isort = 'isort datashaper tests'
-_black_check = 'black --check datashaper tests'
-_isort_check = 'isort --check datashaper tests'
-_pydocstyle = 'pydocstyle datashaper'
+_sort_imports = "ruff check --select I --fix ."
+_format_code = "ruff format ."
+_ruff_check = 'ruff check .'
 _codespell = 'codespell dodiscover/ doc/ examples/ --ignore-words=.codespellignore --skip "**/_build/*,**/auto_examples/*"'
 _changelog = 'semversioner changelog > CHANGELOG.md'
 _apply_version = 'semversioner release'
@@ -71,22 +46,20 @@ _coverage_report = 'coverage report --show-missing'
 _pyright = "pyright"
 
 # Pass in a test pattern
+check_format = 'ruff format . --check'
 test_only = "pytest -k"
+fix = "ruff check --fix ."
+
+[[tool.poe.tasks.format]]
+sequence = ['_sort_imports', '_format_code']
+ignore_fail = 'return_non_zero'
 
 [[tool.poe.tasks.test]]
 sequence = ['_test_with_coverage', '_coverage_report']
 ignore_fail = 'return_non_zero'
 
 [[tool.poe.tasks.check]]
-sequence = ['_pyright', '_flake8', '_bandit', '_codespell', 'check_format', '_pydocstyle']
-ignore_fail = 'return_non_zero'
-
-[[tool.poe.tasks.format]]
-sequence = ['_black', '_isort']
-ignore_fail = 'return_non_zero'
-
-[[tool.poe.tasks.check_format]]
-sequence = ['_black_check', '_isort_check']
+sequence = ['check_format', '_ruff_check', '_pyright', '_codespell']
 ignore_fail = 'return_non_zero'
 
 [tool.pydocstyle]
@@ -102,3 +75,47 @@ exclude = ["**/node_modules", "**/__pycache__"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
+
+[tool.ruff]
+target-version = "py310"
+
+[tool.ruff.format]
+docstring-code-format = true
+docstring-code-line-length = 20
+
+[tool.ruff.lint]
+select = [
+    "E4", "E7", "E9", "F", "D", "W291", "I", "N", "UP", "YTT", "ANN", "ASYNC", "S", "B", "DTZ", "T10", "EM", "ICN", "G", "INP", "PIE", "PYI", "PT", "Q",
+    "RSE", "RET", "SLF", "SLOT", "SIM", "TID", "TCH", "INT", "ARG", "PTH", 'ERA', "PD", "TRY", "FLY", "PERF", "LOG", "A", "C90", "T20",
+    # "BLE", # Don't catch blind exceptions,
+    # "FBT", # use named arguments for boolean flags
+    # "C4", # Comprehension checks
+    # "TD", # todos
+    #"FIX", # fixme
+    #"FURB", <preview only>
+    #"RUF"
+]
+ignore = [
+    # Deprecated Rules
+    "ANN101",
+    "ANN102",
+    # Conflicts with interface argument checking
+    "ARG002",
+    "ANN204",
+    # TODO: Inspect these pandas rules for validity
+    "PD002",
+    "PD010",
+    "PD013",
+    # TODO RE-Enable when we get bandwidth
+    "ANN401",
+    "C901",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S", "D", "ANN"]
+
+[tool.ruff.lint.flake8-builtins]
+builtins-ignorelist = ["input", "id", "bytes"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
