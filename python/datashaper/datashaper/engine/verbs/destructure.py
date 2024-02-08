@@ -15,7 +15,6 @@ def destructure(
     input: VerbInput,
     column: str,
     keys: list[str] = [],
-    prefix: str = "array_",
     preserveSource: bool = False,
 ):
     df = input.get_input().copy()
