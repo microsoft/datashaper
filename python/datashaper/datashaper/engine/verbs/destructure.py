@@ -2,67 +2,64 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-
-from typing import List
-
-import json
-
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
-
+import math
+from typing import Any
+import pandas as pd
+import json
 
 @verb(name="destructure")
 def destructure(
     input: VerbInput,
     column: str,
-    keys: List[str] = [],
+    keys: list[str] = [],
     prefix: str = "array_",
     preserveSource: bool = False,
 ):
-    input_table = input.get_input()
-    output = input_table
+    df = input.get_input().copy()
 
-    for index in output.index:
-        if output[column][index] != None:
-            counter = 0
-            object = None
-            isArray = False
+    results = []
+    for row_idx, row in df.iterrows():
+        try:
+            cleaned_row = {col: row[col] for col in df.columns}
+            rest_row = row[column] if row[column] is not None else {}
 
-            print(output[column][index])
+            if is_null(rest_row):
+                rest_row = {}
 
-            try:
-                if(json.loads(output[column][index])): #object
-                    object = json.loads(output[column][index])
-            except: #array
-                object = json.loads(json.dumps(output[column][index].split(",")))
-                isArray = True
+            cleaned_row_string = str(cleaned_row).replace("'", "\"").replace("\"{\"", "{\"").replace("\"}\"}", "\"}}")
 
-            if isArray:
-                print("Array test")
-                for i in range(len(object)):
-                    print(object[i])
-                    output.loc[index, prefix + str(counter)] = object[i]
-                    counter = counter + 1
+            cleaned_row_dict = json.loads(cleaned_row_string)
+            rest_row_dict = json.loads(rest_row)
+            filtered_dict = {}
+
+            if keys != []:
+                for property in rest_row_dict:
+                    if property in keys:
+                        filtered_dict[property] = rest_row_dict[property]
             else:
-                print("Object test")
-                for property in object:
-                    print(property)
-                    if (keys == None or len(keys) == 0) or (keys != None and property in keys):
-                        output.loc[index, property] = object[property] 
-                    
-    print(output)
-    
-    filteredList: list[str] = []
+                filtered_dict = rest_row_dict
 
-    for col in output.columns:
-        if col != column:
-            filteredList.append(col)
+            results.append({**cleaned_row_dict, **filtered_dict})  # type: ignore
+        except Exception as e:
+            print(f"Error spreading row: {row}")
+            raise e
+    df = pd.DataFrame(results, index=df.index)
 
     if not preserveSource:
-        output = output[filteredList]
+        df = df.drop(columns=[column])
 
-    print("Final result")
-    print(output)
+    return TableContainer(table=df)
 
-    return TableContainer(table=output)
+def is_null(value: Any) -> bool:
+    """Check if value is null or is nan."""
+
+    def is_none() -> bool:
+        return value is None
+
+    def is_nan() -> bool:
+        return isinstance(value, float) and math.isnan(value)
+
+    return is_none() or is_nan()
