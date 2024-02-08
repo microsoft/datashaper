@@ -477,7 +477,6 @@ export interface DestructureArgs extends InputColumnArgs {
 	 * Keep the original columns (default is to remove source columns).
 	 */
 	preserveSource?: boolean
-	prefix?: string
 }
 
 export interface EncodeDecodeArgs {

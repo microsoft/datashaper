@@ -10,7 +10,6 @@ import { type FormInput, FormInputType, VerbForm } from '../forms/index.js'
 import type { StepFormBaseProps } from '../types.js'
 import { getSimpleDropdownOptions } from '../../../../hooks/fluent/useSimpleDropdownOptions.js'
 import { EMPTY_ARRAY } from '../../../../empty.js'
-import { DataType } from '@datashaper/schema'
 
 /**
  * Just the json object inputs for spread json.
@@ -19,13 +18,11 @@ import { DataType } from '@datashaper/schema'
 export const DestructureFormBase: React.FC<
 	StepFormBaseProps<DestructureArgs> & {
 		keyNames: string[]
-		columnDataType: DataType
 	}
 > = memo(function DestructureFormBase({
 	step,
 	onChange,
 	keyNames,
-	columnDataType,
 }) {
 	const inputs = useMemo<FormInput<DestructureArgs>[]>(
 		() => [
@@ -33,7 +30,6 @@ export const DestructureFormBase: React.FC<
 				label: 'Keys to filter',
 				placeholder: 'Choose keys',
 				required: false,
-				if: columnDataType === DataType.Object,
 				type: FormInputType.MultiChoice,
 				current: step.args.keys,
 				options: getSimpleDropdownOptions(keyNames),
@@ -48,17 +44,6 @@ export const DestructureFormBase: React.FC<
 				},
 			},
 			{
-				label: 'Column prefix',
-				type: FormInputType.Text,
-				current: step.args.prefix,
-				placeholder: 'Enter a prefix',
-				if: columnDataType === DataType.Array,
-				required: false,
-				onChange: (s, val) => {
-					s.args.prefix = val as string
-				},
-			},
-			{
 				label: 'Keep source column',
 				type: FormInputType.Checkbox,
 				current: step.args.preserveSource,
@@ -68,7 +53,7 @@ export const DestructureFormBase: React.FC<
 				advanced: false,
 			},
 		],
-		[step, keyNames, columnDataType],
+		[step, keyNames],
 	)
 
 	return <VerbForm inputs={inputs} step={step} onChange={onChange} />

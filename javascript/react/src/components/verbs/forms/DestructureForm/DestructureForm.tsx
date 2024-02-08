@@ -7,7 +7,7 @@ import { memo } from 'react'
 
 import type { StepFormProps } from '../types.js'
 import { DestructureFormBase } from './DestructureForm.base.js'
-import { useColumnType, useStepInputTable } from '../../../../hooks/index.js'
+import { useStepInputTable } from '../../../../hooks/index.js'
 import { useKeyNames } from '../../../../hooks/columns/useKeyNames.js'
 
 /**
@@ -18,14 +18,10 @@ export const DestructureForm: React.FC<StepFormProps<DestructureArgs>> = memo(
 	function DestructureForm({ step, workflow, input, table, onChange }) {
 		const dataTable = useStepInputTable(step, workflow, input, table)
 		const keyNames = useKeyNames(dataTable, step.args.column)
-		const columnDataType = useColumnType(dataTable, step.args.column)
-
-		console.log(columnDataType)
 
 		return (
 			<DestructureFormBase
 				keyNames={keyNames}
-				columnDataType={columnDataType}
 				step={step}
 				onChange={onChange}
 			/>

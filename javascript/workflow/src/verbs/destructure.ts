@@ -12,7 +12,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 
 export const destructureStep: ColumnTableStep<DestructureArgs> = (
 	input,
-	{ column, keys, prefix = 'array_', preserveSource = false },
+	{ column, keys, preserveSource = false },
 ) => {
 	const tableArray: RowObject[] = input.objects()
 
@@ -21,8 +21,6 @@ export const destructureStep: ColumnTableStep<DestructureArgs> = (
 			tableArray[i] = destructureSingleValue(
 				tableArray[i]!,
 				tableArray[i]![column]!,
-				Array.isArray(tableArray[i]![column]!),
-				prefix,
 				keys,
 			)
 		}
@@ -36,24 +34,15 @@ export const destructureStep: ColumnTableStep<DestructureArgs> = (
 function destructureSingleValue(
 	row: RowObject,
 	object: JSON,
-	isArray: boolean,
-	prefix: string,
 	keys?: string[],
 ): RowObject {
-	let index = 0
 	for (let property in object) {
 		if (
 			keys === undefined ||
 			keys.length === 0 ||
 			(keys !== undefined && keys.includes(property))
 		) {
-			if (isArray) {
-				row[prefix + index] = (object as any)[property]
-			} else {
-				row[property] = (object as any)[property]
-			}
-
-			index++
+			row[property] = (object as any)[property]
 		}
 	}
 

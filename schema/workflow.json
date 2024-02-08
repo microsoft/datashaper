@@ -436,9 +436,6 @@
                     },
                     "type": "array"
                 },
-                "prefix": {
-                    "type": "string"
-                },
                 "preserveSource": {
                     "description": "Keep the original columns (default is to remove source columns).",
                     "type": "boolean"

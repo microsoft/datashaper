@@ -3831,33 +3831,6 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!DestructureArgs#prefix:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "prefix?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "prefix",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!DestructureArgs#preserveSource:member",
               "docComment": "/**\n * Keep the original columns (default is to remove source columns).\n */\n",
               "excerptTokens": [
