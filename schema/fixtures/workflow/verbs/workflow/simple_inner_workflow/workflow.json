@@ -2,6 +2,7 @@
 	"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v2.json",
 	"steps": [
 		{
+			"id": "expected",
 			"verb": "workflow",
 			"args": {
 				"workflow": {

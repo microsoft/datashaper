@@ -110,6 +110,7 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	unorder: [Tags.InputTable, Tags.NoArgs],
 	unroll: [Tags.InputTable, Tags.RowModifying, Tags.InputColumn],
 	window: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
+	workflow: [Tags.InputTable],
 }
 
 const INPUT_TABLE_VERBS = filterByTag(Tags.InputTable)

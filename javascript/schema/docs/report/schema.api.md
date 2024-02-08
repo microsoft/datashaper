@@ -1024,6 +1024,9 @@ export type Step = StepJsonCommon & (({
 } & BasicInput) | ({
     verb: Verb.Window;
     args?: WindowArgs;
+} & BasicInput) | ({
+    verb: Verb.Workflow;
+    args?: WorkflowArgs;
 } & BasicInput)
 /**
 * Custom step - we may not know the verb, args, or binding pattern
@@ -1269,7 +1272,9 @@ export enum Verb {
     // (undocumented)
     Unroll = "unroll",
     // (undocumented)
-    Window = "window"
+    Window = "window",
+    // (undocumented)
+    Workflow = "workflow"
 }
 
 // Warning: (ae-missing-release-tag) "WindowArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1301,6 +1306,14 @@ export enum WindowFunction {
     RowNumber = "row_number",
     // (undocumented)
     UUID = "uuid"
+}
+
+// Warning: (ae-missing-release-tag) "WorkflowArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface WorkflowArgs {
+    input?: Record<string, string>;
+    workflow: WorkflowSchema;
 }
 
 // Warning: (ae-missing-release-tag) "WorkflowSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

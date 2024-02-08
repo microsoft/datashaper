@@ -35,8 +35,8 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	private _bindings$ = new BehaviorSubject<NodeBinding<T>[]>([])
 
 	// Input Subscriptions
-	private _inputValues = new Map<SocketName, BehaviorSubject<Maybe<T>>>()
-	private _inputErrors = new Map<SocketName, BehaviorSubject<unknown>>()
+	private _inputValues$ = new Map<SocketName, BehaviorSubject<Maybe<T>>>()
+	private _inputErrors$ = new Map<SocketName, BehaviorSubject<unknown>>()
 	private _inputSubscriptions = new Map<SocketName, Subscription>()
 
 	// Variadic Inputs
@@ -104,8 +104,33 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	}
 
 	protected inputValue(name: SocketName = DEFAULT_INPUT_NAME): Maybe<T> {
+		return this.inputValue$(name)?.value
+	}
+
+	protected inputValue$(
+		name: SocketName = DEFAULT_INPUT_NAME,
+	): BehaviorSubject<Maybe<T>> {
+		this._ensureInput(name)
+		return this._inputValues$.get(name) as BehaviorSubject<Maybe<T>>
+	}
+
+	protected inputError(name: SocketName = DEFAULT_INPUT_NAME): Maybe<unknown> {
+		return this.inputError$(name)?.value
+	}
+
+	protected inputError$(
+		name: SocketName = DEFAULT_INPUT_NAME,
+	): BehaviorSubject<Maybe<unknown>> {
+		this._ensureInput(name)
+		return this._inputErrors$.get(name) as BehaviorSubject<Maybe<unknown>>
+	}
+
+	private _ensureInput(name: SocketName): void {
 		name = this.verifyInputSocketName(name)
-		return this._inputValues.get(name)?.value
+		if (!this._inputValues$.has(name)) {
+			this._inputValues$.set(name, new BehaviorSubject<Maybe<T>>(undefined))
+			this._inputErrors$.set(name, new BehaviorSubject<unknown>(undefined))
+		}
 	}
 
 	/**
@@ -114,7 +139,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	protected getInputValues(): Record<SocketName, Maybe<T>> {
 		const result: Record<SocketName, Maybe<T>> = {}
 		for (const input of this.inputs) {
-			result[input] = this._inputValues.get(input)?.value
+			result[input] = this._inputValues$.get(input)?.value
 		}
 		return result
 	}
@@ -129,7 +154,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	protected getInputErrors(): Record<SocketName, unknown> {
 		const result: Record<SocketName, unknown> = {}
 		for (const input of this.inputs) {
-			result[input] = this._inputErrors.get(input)?.value
+			result[input] = this.inputError(input)
 		}
 		return result
 	}
@@ -177,24 +202,11 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 					binding,
 				])
 			}
-			const lazilyAddInputObservable = () => {
-				if (!this._inputValues.has(input)) {
-					this._inputValues.set(input, new BehaviorSubject<Maybe<T>>(undefined))
-					this._inputErrors.set(input, new BehaviorSubject<unknown>(undefined))
-				}
-			}
 			const listenToInput = () => {
 				this._inputSubscriptions.set(
 					input,
 					binding.node.output$.subscribe({
 						next: (value) => {
-							const values = this._inputValues.get(input) as BehaviorSubject<
-								Maybe<T>
-							>
-							const errors = this._inputErrors.get(
-								input,
-							) as BehaviorSubject<unknown>
-
 							if (errors.value != null) {
 								errors.next(undefined)
 							}
@@ -204,13 +216,6 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 							}
 						},
 						error: (error: unknown) => {
-							const values = this._inputValues.get(input) as BehaviorSubject<
-								Maybe<T>
-							>
-							const errors = this._inputErrors.get(
-								input,
-							) as BehaviorSubject<unknown>
-
 							values.next(undefined)
 							errors.next(error)
 							this?.recalculate('input_error')
@@ -220,13 +225,14 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 			}
 
 			const input = this.verifyInputSocketName(binding.input)
+			const values = this.inputValue$(input)
+			const errors = this.inputError$(input)
 			if (this.hasBoundInputWithNode(input, binding.node.id)) {
 				return
 			}
 
 			this.unbindSilent(input)
 			addBinding()
-			lazilyAddInputObservable()
 			listenToInput()
 		}
 

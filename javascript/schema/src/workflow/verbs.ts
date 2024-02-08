@@ -5,6 +5,7 @@
 import type { CodebookSchema } from '../codebook/CodebookSchema.js'
 import type { DataType, Value } from '../data.js'
 import type { SortDirection } from '../enums/index.js'
+import { WorkflowSchema } from './WorkflowSchema.js'
 
 export enum Verb {
 	Aggregate = 'aggregate',
@@ -47,6 +48,7 @@ export enum Verb {
 	Unorder = 'unorder',
 	Unroll = 'unroll',
 	Window = 'window',
+	Workflow = 'workflow',
 
 	StringsReplace = 'strings.replace',
 	StringsLower = 'strings.lower',
@@ -730,4 +732,21 @@ export interface WindowArgs extends InputColumnArgs, OutputColumnArgs {
 	 * Window function to apply to the column.
 	 */
 	operation: WindowFunction
+}
+
+export interface WorkflowArgs {
+	/**
+	 * The workflow configuration.
+	 */
+	workflow: WorkflowSchema
+
+	/**
+	 * The input data to apply the workflow to.
+	 * key: the table name in the parent workflow
+	 * values: the table name to use in the inner workflow.
+	 * 
+	 * By default, the _default input_ of the prior step (or the outer workflow) will be passed into the inner 
+	 * workflow as the default input. The inner workflow's default output will be used as the default output of the step.
+	 */
+	input?: Record<string, string>
 }

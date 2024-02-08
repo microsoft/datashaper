@@ -108,6 +108,7 @@
 |  [ValidationResult](./schema.validationresult.md) |  |
 |  [VariadicInput](./schema.variadicinput.md) | Multi-input, single output step I/O |
 |  [WindowArgs](./schema.windowargs.md) |  |
+|  [WorkflowArgs](./schema.workflowargs.md) |  |
 |  [WorkflowSchema](./schema.workflowschema.md) | The root wrangling workflow specification. resource profile: 'workflow' |
 
 ## Variables
