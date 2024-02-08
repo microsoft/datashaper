@@ -35,6 +35,7 @@ import {
 	UnfoldForm,
 	UnhotForm,
 	WindowForm,
+	WorkflowForm,
 } from '../verbs/forms/index.js'
 import type { StepFormProps } from '../verbs/index.js'
 import { StringsReplaceForm } from '../verbs/forms/strings/StringsReplaceForm/StringsReplaceForm.js'
@@ -85,6 +86,7 @@ const forms = {
 	unorder: NoParametersForm,
 	unroll: NoParametersForm,
 	window: WindowForm,
+	workflow: WorkflowForm
 }
 
 /**

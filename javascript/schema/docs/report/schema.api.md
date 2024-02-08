@@ -1312,7 +1312,6 @@ export enum WindowFunction {
 //
 // @public (undocumented)
 export interface WorkflowArgs {
-    input?: Record<string, string>;
     workflow: WorkflowSchema;
 }
 

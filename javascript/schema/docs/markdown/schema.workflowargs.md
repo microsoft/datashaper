@@ -14,6 +14,5 @@ export interface WorkflowArgs
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [input?](./schema.workflowargs.input.md) |  | Record&lt;string, string&gt; | <p><i>(Optional)</i> The input data to apply the workflow to. key: the table name in the parent workflow values: the table name to use in the inner workflow.</p><p>By default, the \_default input\_ of the prior step (or the outer workflow) will be passed into the inner workflow as the default input. The inner workflow's default output will be used as the default output of the step.</p> |
 |  [workflow](./schema.workflowargs.workflow.md) |  | [WorkflowSchema](./schema.workflowschema.md) | The workflow configuration. |
 

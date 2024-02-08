@@ -35,6 +35,7 @@ import {
 	UnfoldDescription,
 	UnhotDescription,
 	WindowDescription,
+	WorkflowDescription,
 } from '../verbs/descriptions/index.js'
 import type { StepDescriptionProps } from '../verbs/index.js'
 
@@ -84,6 +85,7 @@ const descriptions = {
 	unorder: NoParametersDescription,
 	unroll: NoParametersDescription,
 	window: WindowDescription,
+	workflow: WorkflowDescription
 }
 
 /**

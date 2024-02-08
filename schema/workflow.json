@@ -2236,10 +2236,6 @@
         },
         "WorkflowArgs": {
             "properties": {
-                "input": {
-                    "$ref": "#/definitions/Record<string,string>",
-                    "description": "The input data to apply the workflow to.\nkey: the table name in the parent workflow\nvalues: the table name to use in the inner workflow.\n\nBy default, the _default input_ of the prior step (or the outer workflow) will be passed into the inner \nworkflow as the default input. The inner workflow's default output will be used as the default output of the step."
-                },
                 "workflow": {
                     "$ref": "#/definitions/WorkflowSchema",
                     "description": "The workflow configuration."

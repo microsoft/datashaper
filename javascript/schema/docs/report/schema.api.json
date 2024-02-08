@@ -13015,38 +13015,6 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!WorkflowArgs#input:member",
-              "docComment": "/**\n * The input data to apply the workflow to. key: the table name in the parent workflow values: the table name to use in the inner workflow.\n *\n * By default, the _default input_ of the prior step (or the outer workflow) will be passed into the inner workflow as the default input. The inner workflow's default output will be used as the default output of the step.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "input?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Record",
-                  "canonicalReference": "!Record:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<string, string>"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "input",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              }
-            },
-            {
-              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!WorkflowArgs#workflow:member",
               "docComment": "/**\n * The workflow configuration.\n */\n",
               "excerptTokens": [
