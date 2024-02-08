@@ -37,7 +37,6 @@ omit = ["tests/*", ".*", "data/*"]
 [tool.poe.tasks]
 _sort_imports = "ruff check --select I --fix ."
 _format_code = "ruff format ."
-_format_check = 'ruff format . --check'
 _ruff_check = 'ruff check .'
 _codespell = 'codespell dodiscover/ doc/ examples/ --ignore-words=.codespellignore --skip "**/_build/*,**/auto_examples/*"'
 _changelog = 'semversioner changelog > CHANGELOG.md'
@@ -47,6 +46,7 @@ _coverage_report = 'coverage report --show-missing'
 _pyright = "pyright"
 
 # Pass in a test pattern
+check_format = 'ruff format . --check'
 test_only = "pytest -k"
 fix = "ruff check --fix ."
 
@@ -59,7 +59,7 @@ sequence = ['_test_with_coverage', '_coverage_report']
 ignore_fail = 'return_non_zero'
 
 [[tool.poe.tasks.check]]
-sequence = ['_format_check', '_ruff_check', '_pyright', '_codespell']
+sequence = ['check_format', '_ruff_check', '_pyright', '_codespell']
 ignore_fail = 'return_non_zero'
 
 [tool.pydocstyle]

@@ -42,6 +42,7 @@ _test_with_coverage = 'coverage run -m pytest'
 _coverage_report = 'coverage report --show-missing'
 _pyright = "pyright"
 
+check_format = 'ruff format . --check'
 fix = "ruff check --fix ."
 
 [[tool.poe.tasks.test]]
@@ -49,7 +50,7 @@ sequence = ['_test_with_coverage', '_coverage_report']
 ignore_fail = 'return_non_zero'
 
 [[tool.poe.tasks.check]]
-sequence = ['_format_check', '_ruff_check', '_pyright', '_codespell']
+sequence = ['check_format', '_ruff_check', '_pyright', '_codespell']
 ignore_fail = 'return_non_zero'
 
 [[tool.poe.tasks.format]]
