@@ -1,5 +1,5 @@
 import type { WorkflowArgs } from '@datashaper/schema'
-import { TableObservable, Workflow } from '../resources/Workflow/Workflow.js'
+import { Workflow } from '../resources/Workflow/Workflow.js'
 import { BaseNode } from '../dataflow/index.js'
 import { TableContainer } from '@datashaper/tables'
 import { Subscription } from 'rxjs'
