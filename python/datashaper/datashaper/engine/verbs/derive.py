@@ -2,27 +2,28 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-
-from typing import Callable, cast
+"""Derive verb implementation."""
+from collections.abc import Callable
+from typing import cast
 
 import numpy as np
 import pandas as pd
-
 from pandas.api.types import is_numeric_dtype
 
 from datashaper.engine.types import MathOperator
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
+from datashaper.errors import VerbOperationNotSupportedError
 from datashaper.table_store import TableContainer
 
 
-def __multiply(col1: pd.Series, col2: pd.Series):
+def __multiply(col1: pd.Series, col2: pd.Series) -> np.ndarray:
     if is_numeric_dtype(col1) and is_numeric_dtype(col2):
         return np.multiply(col1, col2)
-    raise Exception("Operation not supported")
+    raise VerbOperationNotSupportedError
 
 
-def __concatenate(col1: pd.Series, col2: pd.Series):
+def __concatenate(col1: pd.Series, col2: pd.Series) -> pd.Series:
     return col1.astype(str) + col2.astype(str)
 
 
@@ -38,7 +39,10 @@ __op_mapping: dict[MathOperator, Callable] = {
 
 
 @verb(name="derive")
-def derive(input: VerbInput, to: str, column1: str, column2: str, operator: str):
+def derive(
+    input: VerbInput, to: str, column1: str, column2: str, operator: str
+) -> TableContainer:
+    """Derive verb implementation."""
     math_operator = MathOperator(operator)
 
     input_table = input.get_input()

@@ -1,25 +1,25 @@
-from typing import Any, Callable, Dict
+"""Contains the merge strategy functions for the merge verb."""
+from collections.abc import Callable
+from typing import Any
 
 import pandas as pd
-
 from pandas.api.types import is_bool
 
 from datashaper.engine.types import MergeStrategy
 
-
-strategy_mapping: Dict[MergeStrategy, Callable] = {
-    MergeStrategy.FirstOneWins: lambda values, **kwargs: values.dropna().apply(
+strategy_mapping: dict[MergeStrategy, Callable] = {
+    MergeStrategy.FirstOneWins: lambda values, **_kwargs: values.dropna().apply(
         lambda x: _correct_type(x)
     )[0],
-    MergeStrategy.LastOneWins: lambda values, **kwargs: values.dropna().apply(
+    MergeStrategy.LastOneWins: lambda values, **_kwargs: values.dropna().apply(
         lambda x: _correct_type(x)
     )[-1],
-    MergeStrategy.Concat: lambda values, delim, **kwargs: _create_array(values, delim),
-    MergeStrategy.CreateArray: lambda values, **kwargs: _create_array(values, ","),
+    MergeStrategy.Concat: lambda values, delim, **_kwargs: _create_array(values, delim),
+    MergeStrategy.CreateArray: lambda values, **_kwargs: _create_array(values, ","),
 }
 
 
-def _correct_type(value: Any):
+def _correct_type(value: Any) -> str | int | Any:
     if is_bool(value):
         return str(value).lower()
     try:

@@ -1,7 +1,7 @@
 """Data-types for workflow runs."""
-import pandas as pd
-
 from dataclasses import dataclass, field
+
+import pandas as pd
 
 
 @dataclass
@@ -23,6 +23,8 @@ class VerbTiming:
 
 @dataclass
 class MemoryProfile:
+    """The memory profile of a workflow run."""
+
     snapshot_stats: pd.DataFrame
     """Snapshot statistics."""
 

@@ -3,11 +3,9 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Contains the definition for the ExecutionNode type."""
-from typing import Any, Optional, Union
-
 from dataclasses import dataclass, field
 
-from datashaper.engine.verbs.verbs_mapping import VerbDetails
+from datashaper.engine.verbs.types import VerbDetails
 from datashaper.table_store import TableContainer
 
 
@@ -24,11 +22,11 @@ class ExecutionNode:
     verb: VerbDetails
     """The verb to execute in this graph node."""
 
-    node_input: Union[str, dict[str, list[str]]]
+    node_input: str | dict[str, list[str]]
     """The input to this node."""
 
-    args: dict[str, Any] = field(default_factory=dict)
+    args: dict = field(default_factory=dict)
     """The arguments to pass to the verb."""
 
-    result: Optional[TableContainer] = None
+    result: TableContainer | None = None
     """The result of executing this node."""

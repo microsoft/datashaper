@@ -1,4 +1,4 @@
-from .constants import DEFAULT_INPUT_NAME
+"""Datashaper Workflow module."""
 from .types import MemoryProfile, VerbTiming, WorkflowRunResult
 from .verb_callbacks import DelegatingVerbCallbacks, VerbCallbacks
 from .workflow import Workflow
@@ -8,7 +8,6 @@ from .workflow_callbacks import (
     WorkflowCallbacks,
     WorkflowCallbacksManager,
 )
-
 
 __all__ = [
     "DEFAULT_INPUT_NAME",

@@ -2,6 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Aggregate verb implementation."""
 from datashaper.engine.pandas import aggregate_operation_mapping
 from datashaper.engine.types import FieldAggregateOperation
 from datashaper.engine.verbs.verb_input import VerbInput
@@ -13,6 +14,7 @@ from datashaper.table_store import TableContainer
 def aggregate(
     input: VerbInput, to: str, groupby: list[str], column: str, operation: str
 ) -> TableContainer:
+    """Aggregate verb implementation."""
     aggregate_operation = FieldAggregateOperation(operation)
     input_table = input.get_input()
     output = (

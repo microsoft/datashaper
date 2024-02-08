@@ -4,16 +4,15 @@
 #
 """Common types used across the datashaper codebase."""
 
-from enum import Enum
-from typing import Any, Union
-
 from dataclasses import dataclass, field
+from enum import Enum
+from typing import Any
 
 
 class Bin:
     """A data bin."""
 
-    min: Union[float, str]
+    min: float | str
     count: int
 
 
@@ -45,9 +44,9 @@ class Step:
     """A workflow processing step."""
 
     verb: str
-    input: Union[str, dict[str, str]]
-    output: Union[str, dict[str, str]]
-    args: dict[str, Any] = field(default_factory=dict)
+    input: str | dict[str, str]
+    output: str | dict[str, str]
+    args: dict = field(default_factory=dict)
 
 
 class JoinStrategy(str, Enum):
@@ -155,9 +154,7 @@ class Criterion:
 
     value: Any
     type: FilterCompareType
-    operator: Union[
-        NumericComparisonOperator, StringComparisonOperator, BooleanComparisonOperator
-    ]
+    operator: NumericComparisonOperator | StringComparisonOperator | BooleanComparisonOperator
 
 
 class BooleanLogicalOperator(str, Enum):

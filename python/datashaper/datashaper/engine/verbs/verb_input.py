@@ -2,31 +2,38 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""A class to represent the table inputs into a verb."""
+from typing import cast
 
-from typing import Optional, cast
-
+from datashaper.errors import (
+    NoVerbInputsProvidedError,
+    VerbHasMultipleDefaultInputsError,
+    VerbHasMultipleDefaultOthersError,
+)
 from datashaper.table_store import Table, TableContainer
 
 
 class VerbInput:
+    """A class to represent the table inputs into a verb."""
+
     source: TableContainer
     others: list[TableContainer] | None = None
 
     def __init__(
         self,
-        input: Optional[TableContainer] = None,
-        source: Optional[TableContainer] = None,
-        other: Optional[TableContainer] = None,
-        others: Optional[list[TableContainer]] = None,
+        input: TableContainer | None = None,
+        source: TableContainer | None = None,
+        other: TableContainer | None = None,
+        others: list[TableContainer] | None = None,
     ):
         if input is None and source is None:
-            raise Exception("At least input or source must be provided")
+            raise NoVerbInputsProvidedError
 
         if input is not None and source is not None:
-            raise Exception("Only one of input or source can be provided")
+            raise VerbHasMultipleDefaultInputsError
 
         if other is not None and others is not None:
-            raise Exception("Only one of other or others can be provided")
+            raise VerbHasMultipleDefaultOthersError
 
         self.source = input if input is not None else cast(TableContainer, source)
 
@@ -34,9 +41,11 @@ class VerbInput:
             self.others = [other] if other is not None else others
 
     def get_input(self) -> Table:
+        """Get the input table."""
         return self.source.table
 
     def get_others(self) -> list[Table]:
+        """Get the other tables."""
         if self.others is None:
             return []
         return [other.table for other in self.others]

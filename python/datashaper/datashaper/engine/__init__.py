@@ -1,3 +1,4 @@
+"""Verbs and Execution Utilities."""
 from .pandas import (
     aggregate_operation_mapping,
     boolean_function_map,
@@ -26,14 +27,22 @@ from .types import (
     SortDirection,
     Step,
     StringComparisonOperator,
-    Union,
     WindowFunction,
 )
-from .verbs import AsyncIOType, VerbDetails, VerbInput, VerbManager, load_verbs, verb
-
+from .verbs import (
+    AsyncIOType,
+    VerbDetails,
+    VerbInput,
+    VerbManager,
+    load_verbs,
+    new_row,
+    parallel_verb,
+    verb,
+)
 
 __all__ = [
     "AsyncIOType",
+    "parallel_verb",
     "VerbInput",
     "VerbDetails",
     "verb",
@@ -59,11 +68,11 @@ __all__ = [
     "SetOp",
     "SortDirection",
     "StringComparisonOperator",
-    "Union",
     "WindowFunction",
     "Step",
     "aggregate_operation_mapping",
     "boolean_function_map",
     "filter_df",
     "get_operator",
+    "new_row",
 ]

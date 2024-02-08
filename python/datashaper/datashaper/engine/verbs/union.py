@@ -2,7 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-
+"""Union verb implementation."""
 from typing import cast
 
 import pandas as pd
@@ -13,9 +13,10 @@ from datashaper.table_store import TableContainer
 
 
 @verb(name="union", treats_input_tables_as_immutable=True)
-def union(input: VerbInput):
+def union(input: VerbInput) -> TableContainer:
+    """Union verb implementation."""
     input_table = cast(pd.DataFrame, input.get_input())
     others = cast(list[pd.DataFrame], input.get_others())
-    output = pd.concat([input_table] + others, ignore_index=True).drop_duplicates()
+    output = pd.concat([input_table, *others], ignore_index=True).drop_duplicates()
 
     return TableContainer(table=output)

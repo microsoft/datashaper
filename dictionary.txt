@@ -8,6 +8,9 @@ ipynb
 pymodule
 pyarrow
 dtypes
+ndarray
+isna
+notna
 
 # JavaScript Idioms
 QNAN

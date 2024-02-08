@@ -2,6 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Difference verb implementation."""
 from typing import cast
 
 import pandas as pd
@@ -12,7 +13,8 @@ from datashaper.table_store import Table, TableContainer
 
 
 @verb(name="difference", treats_input_tables_as_immutable=True)
-def difference(input: VerbInput):
+def difference(input: VerbInput) -> TableContainer:
+    """Difference verb implementation."""
     input_table = input.get_input()
     others = cast(list[pd.DataFrame], input.get_others())
     others = pd.concat(others)
