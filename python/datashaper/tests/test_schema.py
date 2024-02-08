@@ -16,9 +16,21 @@ SCHEMA_PATH = "workflow.json"
 
 os.chdir("../../schema")
 
+
 server = HTTPServer(("localhost", 8080), SimpleHTTPRequestHandler)
 thread = Thread(target=server.serve_forever, daemon=True)
 thread.start()
+
+dataframes: dict[str, pd.DataFrame] = {}
+for file in os.listdir(TABLE_STORE_PATH):
+    if file.endswith(".csv"):
+        path = Path(TABLE_STORE_PATH) / file
+        table = pd.read_csv(
+            path,
+            dtype_backend="pyarrow",
+            engine="pyarrow",
+        )
+        dataframes[file.removesuffix(".csv")] = table
 
 
 def read_csv(path: str) -> pd.DataFrame:
@@ -45,9 +57,14 @@ def get_verb_test_specs(root: str) -> list[str]:
 )
 async def test_verbs_schema_input(fixture_path: str):
     with (Path(fixture_path) / "workflow.json").open() as schema:
+        schema_dict = json.load(schema)
+        tables: dict[str, pd.DataFrame] = {}
+        for input in schema_dict["input"]:
+            tables[input] = dataframes[input]
+
         workflow = Workflow(
-            schema=json.load(schema),
-            input_path=TABLE_STORE_PATH,
+            schema=schema_dict,
+            input_tables=tables,
             validate=True,
             schema_path=SCHEMA_PATH,
         )
@@ -55,20 +72,24 @@ async def test_verbs_schema_input(fixture_path: str):
     await workflow.run()
     for expected in os.listdir(fixture_path):
         if expected.endswith(".csv"):
-            table_name = expected.split(".")[0]
-            table_name_arg = table_name if table_name != "expected" else None
-            result = workflow.output(table_name_arg)
-            if isinstance(result, pd.DataFrame):
-                result.to_csv(Path(fixture_path) / f"result_{expected}", index=False)
-            else:
-                result.obj.to_csv(
-                    Path(fixture_path) / f"result_{expected}", index=False
+            try:
+                table_name = expected.split(".")[0]
+                table_name_arg = table_name if table_name != "expected" else None
+                result = workflow.output(table_name_arg)
+                if isinstance(result, pd.DataFrame):
+                    result.to_csv(
+                        Path(fixture_path) / f"result_{expected}", index=False
+                    )
+                else:
+                    result.obj.to_csv(
+                        Path(fixture_path) / f"result_{expected}", index=False
+                    )
+                assert_frame_equal(
+                    read_csv(Path(fixture_path) / expected),
+                    read_csv(Path(fixture_path) / f"result_{expected}"),
+                    check_like=True,
+                    check_dtype=False,
+                    check_column_type=False,
                 )
-            assert_frame_equal(
-                read_csv(Path(fixture_path) / expected),
-                read_csv(Path(fixture_path) / f"result_{expected}"),
-                check_like=True,
-                check_dtype=False,
-                check_column_type=False,
-            )
-            (Path(fixture_path) / f"result_{expected}").unlink()
+            finally:
+                (Path(fixture_path) / f"result_{expected}").unlink()

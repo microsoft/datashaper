@@ -62,7 +62,6 @@ class Workflow(Generic[Context]):
     def __init__(
         self,
         schema: dict,
-        input_path: str | None = None,
         input_tables: dict[str, pd.DataFrame] | None = None,
         schema_path: str | None = None,
         verbs: dict[str, Callable] | None = None,
@@ -73,9 +72,6 @@ class Workflow(Generic[Context]):
 
         :param schema: the Dict object that contains the workflow
         :type schema: Dict
-        :param input_path: Optional input path, if provided input
-                           tables will be loaded relative to that path, defaults to None
-        :type input_path: str, optional
         :param schema_path: Optional Workflow schema path, if provided input
                            tables will be loaded relative to that path, defaults to
                            a known JSON schema path.
@@ -83,9 +79,6 @@ class Workflow(Generic[Context]):
         :param validate: Optional value, if true perform JSON-schema validation.
                          Defaults to False.
         :type validate: bool, optional
-
-        :param default_input: Optional value, the default input for the first step.
-        :type default_input: str, optional
         """
         self._schema_path = schema_path = schema_path or SCHEMA_FILE
         self._validate_schema = validate
@@ -102,17 +95,6 @@ class Workflow(Generic[Context]):
             with Path(schema_path).open() as schema_file:
                 schema_json = json.load(schema_file)
                 validate_schema(schema, schema_json)
-
-        # Auto-load input tables if provided.
-        if input_path is not None:
-            for input in schema["input"]:
-                # TODO(Chris): support other file formats
-                csv_table = pd.read_csv(
-                    Path(input_path) / f"{input}.csv",
-                    dtype_backend="pyarrow",
-                    engine="pyarrow",
-                )
-                self.add_table(input, csv_table)
 
         if input_tables is not None:
             for input, table in input_tables.items():
