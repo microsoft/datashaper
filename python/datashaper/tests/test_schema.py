@@ -1,5 +1,6 @@
 import json
 import os
+from functools import cache
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
 from threading import Thread
@@ -8,7 +9,7 @@ import pandas as pd
 import pytest
 from pandas.testing import assert_frame_equal
 
-from datashaper import Workflow
+from datashaper import PandasDtypeBackend, Workflow
 
 FIXTURES_PATH = "fixtures/workflow"
 TABLE_STORE_PATH = "fixtures/workflow_inputs"
@@ -21,16 +22,20 @@ server = HTTPServer(("localhost", 8080), SimpleHTTPRequestHandler)
 thread = Thread(target=server.serve_forever, daemon=True)
 thread.start()
 
-dataframes: dict[str, pd.DataFrame] = {}
-for file in os.listdir(TABLE_STORE_PATH):
-    if file.endswith(".csv"):
-        path = Path(TABLE_STORE_PATH) / file
-        table = pd.read_csv(
-            path,
-            dtype_backend="pyarrow",
-            engine="pyarrow",
-        )
-        dataframes[file.removesuffix(".csv")] = table
+
+@cache
+def load_inputs(pandas_dtype_backend: PandasDtypeBackend, engine: str):
+    dataframes: dict[str, pd.DataFrame] = {}
+    for file in os.listdir(TABLE_STORE_PATH):
+        if file.endswith(".csv"):
+            path = Path(TABLE_STORE_PATH) / file
+            table = pd.read_csv(
+                path,
+                dtype_backend=pandas_dtype_backend,
+                engine=engine,
+            )
+            dataframes[file.removesuffix(".csv")] = table
+    return dataframes
 
 
 def read_csv(path: str) -> pd.DataFrame:
@@ -51,22 +56,32 @@ def get_verb_test_specs(root: str) -> list[str]:
     return subfolders
 
 
+@pytest.mark.parametrize("fixture_path", get_verb_test_specs(FIXTURES_PATH))
 @pytest.mark.parametrize(
-    "fixture_path",
-    get_verb_test_specs(FIXTURES_PATH),
+    "pandas_dtype_backend",
+    [PandasDtypeBackend.NUMPY_NULLABLE, PandasDtypeBackend.PYARROW],
 )
-async def test_verbs_schema_input(fixture_path: str):
+@pytest.mark.parametrize(
+    "engine",
+    ["python", "pyarrow"],
+)
+async def test_verbs_schema_input(
+    fixture_path: str,
+    pandas_dtype_backend: PandasDtypeBackend,
+    engine: str,
+):
     with (Path(fixture_path) / "workflow.json").open() as schema:
         schema_dict = json.load(schema)
         tables: dict[str, pd.DataFrame] = {}
         for input in schema_dict["input"]:
-            tables[input] = dataframes[input]
+            tables[input] = load_inputs(pandas_dtype_backend, engine)[input]
 
         workflow = Workflow(
             schema=schema_dict,
             input_tables=tables,
             validate=True,
             schema_path=SCHEMA_PATH,
+            pandas_dtype_backend=pandas_dtype_backend,
         )
 
     await workflow.run()

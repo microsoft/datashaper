@@ -77,6 +77,7 @@ from .workflow import (
     DEFAULT_INPUT_NAME,
     MemoryProfile,
     NoopWorkflowCallbacks,
+    PandasDtypeBackend,
     VerbCallbacks,
     VerbTiming,
     Workflow,
@@ -138,6 +139,7 @@ __all__ = [
     "WorkflowCallbacks",
     "NoopWorkflowCallbacks",
     "WorkflowCallbacksManager",
+    "PandasDtypeBackend",
     # Tablestore Exports
     "ColumnStats",
     "ColumnMetadata",
