@@ -10,6 +10,7 @@ import time
 import traceback
 from collections import OrderedDict, defaultdict
 from collections.abc import Callable, Iterable
+from enum import Enum
 from pathlib import Path
 from typing import Any, Generic, TypeVar, cast
 from uuid import uuid4
@@ -45,6 +46,13 @@ Context = TypeVar("Context")
 DEFAULT_INPUT_NAME = "source"
 
 
+class PandasDtypeBackend(str, Enum):
+    """Pandas dtype backend."""
+
+    NUMPY_NULLABLE = "numpy_nullable"
+    PYARROW = "pyarrow"
+
+
 class Workflow(Generic[Context]):
     """A data processing graph."""
 
@@ -67,6 +75,7 @@ class Workflow(Generic[Context]):
         verbs: dict[str, Callable] | None = None,
         validate: bool | None = False,
         memory_profile: bool | None = False,
+        pandas_dtype_backend: PandasDtypeBackend = PandasDtypeBackend.NUMPY_NULLABLE,
     ):
         """Create an execution graph from the Dict provided in workflow.
 
@@ -98,7 +107,10 @@ class Workflow(Generic[Context]):
 
         if input_tables is not None:
             for input, table in input_tables.items():
-                self.add_table(input, table.convert_dtypes(dtype_backend="pyarrow"))
+                self.add_table(
+                    input,
+                    table.convert_dtypes(dtype_backend=pandas_dtype_backend.value),
+                )
 
         if verbs is not None:
             VerbManager.get().register_verbs(verbs, override_existing=True)

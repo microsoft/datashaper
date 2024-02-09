@@ -59,20 +59,21 @@ def _convert_date_str(value: datetime, format_pattern: str) -> str | float:
 
 
 def _to_str(column: pd.Series, format_pattern: str) -> pd.DataFrame | pd.Series:
-    if is_datetime64_any_dtype(column) or (
-        isinstance(column.dtype, pd.ArrowDtype) and "timestamp" in column.dtype.name
-    ):
-        return column.apply(lambda x: _convert_date_str(x, format_pattern))
-
     column_numeric: pd.Series | None = None
     if is_numeric_dtype(column):
         column_numeric = cast(pd.Series, pd.to_numeric(column, errors="ignore"))
     if column_numeric is not None and is_numeric_dtype(column_numeric):
         try:
-            column_numeric = column_numeric.astype(pd.Int64Dtype)
             return column.apply(lambda x: "" if x is None else str(x))
         except Exception:  # noqa: S110
             pass
+
+    datetime_column = pd.to_datetime(column, errors="ignore")
+    if is_datetime64_any_dtype(datetime_column):
+        return datetime_column.apply(lambda x: _convert_date_str(x, format_pattern))
+    if isinstance(column.dtype, pd.ArrowDtype) and "timestamp" in column.dtype.name:
+        return column.apply(lambda x: _convert_date_str(x, format_pattern))
+
     if is_bool_dtype(column):
         return column.apply(lambda x: "" if pd.isna(x) else str(x).lower())
     return column.apply(lambda x: "" if pd.isna(x) else str(x))
