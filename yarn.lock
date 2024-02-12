@@ -2661,7 +2661,7 @@ __metadata:
     allotment: "npm:1.19.0"
     arquero: "npm:^5.2.0"
     monaco-editor: "npm:^0.37.1"
-    observable-hooks: "npm:^4.2.2"
+    observable-hooks: "npm:^4.2.3"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     react-if: "npm:^4.1.4"
@@ -2776,7 +2776,7 @@ __metadata:
     d3-format: "npm:^3.1.0"
     immer: "npm:^9.0.21"
     lodash-es: "npm:^4.17.21"
-    observable-hooks: "npm:^4.2.2"
+    observable-hooks: "npm:^4.2.3"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     react-if: "npm:^4.1.4"
@@ -2965,7 +2965,7 @@ __metadata:
     chroma-js: "npm:2.4.2"
     debug: "npm:^4.3.4"
     lodash-es: "npm:^4.17.21"
-    observable-hooks: "npm:^4.2.2"
+    observable-hooks: "npm:^4.2.3"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     react-dropzone: "npm:^12.1.0"
@@ -16295,14 +16295,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"observable-hooks@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "observable-hooks@npm:4.2.2"
+"observable-hooks@npm:^4.2.3":
+  version: 4.2.3
+  resolution: "observable-hooks@npm:4.2.3"
   peerDependencies:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
     rxjs: ">=6.0.0"
-  checksum: 10/ace315159db17b707832a99294b125c60c0eafe62b5b99b0caab402ed0c84ee2acd7b7ca59672e0b4e4191e344843998e18a1bc0943610bd5a572b719bb4bae7
+  checksum: 10/b36c22f51ef15fe50083f959655fe7fbe587c01cf75a6b3437a55562ba4b00e0578abd3c22f736470ebcafd048b0563e726b95c7bba42b01dc00de2fc40576f8
   languageName: node
   linkType: hard
 
