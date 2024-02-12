@@ -63,7 +63,7 @@
 		"@thematic/fluent": "^5.0.8",
 		"@thematic/react": "^2.1.9",
 		"@types/d3-format": "^3.0.1",
-		"@types/lodash-es": "^4.17.7",
+		"@types/lodash-es": "^4.17.12",
 		"@types/node": "^20.2.5",
 		"@types/react": "^18.2.9",
 		"@types/react-dom": "^18.2.4",
