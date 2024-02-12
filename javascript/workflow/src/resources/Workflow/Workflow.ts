@@ -28,6 +28,7 @@ import type { Step, StepInput, TableExportOptions } from './types.js'
 import { unique } from './utils.js'
 import { WorkflowSchemaValidator } from './WorkflowSchemaValidator.js'
 import { isTableEmitter } from '../../predicates.js'
+import { SocketName } from '../../dataflow/types.js'
 const log = debug('datashaper:workflow')
 
 /**
@@ -262,7 +263,9 @@ export class Workflow extends Resource implements TableTransformer {
 
 	public addInputTables(inputs: TableContainer[]): void {
 		const map = new Map<string, Observable<Maybe<TableContainer>>>()
-		inputs.forEach((i) => map.set(i.id, of(i)))
+		for (const i of inputs) {
+			map.set(i.id, of(i))
+		}
 		this.addInputs(map)
 	}
 
@@ -356,7 +359,9 @@ export class Workflow extends Resource implements TableTransformer {
 
 		// Remove step outputs from the configuration
 		const stepOutputs = this.outputNames.filter((o) => o === node.id)
-		stepOutputs.forEach((o) => this.removeOutput(o))
+		for (const o of stepOutputs) {
+			this.removeOutput(o)
+		}
 
 		this.rebindDefaultOutput()
 		this._onChange.next()
@@ -401,7 +406,9 @@ export class Workflow extends Resource implements TableTransformer {
 		const input = unique(schema?.input ?? [])
 
 		this._nameMgr.setNames(input)
-		input.forEach((i) => this._graphMgr.ensureInput(i))
+		for (const i of input) {
+			this._graphMgr.ensureInput(i)
+		}
 
 		this._graphMgr.setSteps(schema?.steps?.map((i) => i as StepInput) ?? [])
 		this.rebindDefaultOutput()
@@ -410,10 +417,10 @@ export class Workflow extends Resource implements TableTransformer {
 		}
 	}
 
-	private observeOutput(name: string) {
-		const [outputTable] = this._tableMgr.ensure(name)
-		const n = this._graphMgr.getOrCreateNode(name)
-		outputTable.input = n.output$
+	private observeOutput(nodeId: string, socketName: SocketName | undefined = undefined) {
+		const [outputTable] = this._tableMgr.ensure(nodeId)
+		const n = this._graphMgr.getOrCreateNode(nodeId)
+		outputTable.input = n.output$(socketName)
 	}
 
 	public static async validate(workflowJson: WorkflowSchema): Promise<boolean> {

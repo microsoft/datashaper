@@ -75,7 +75,7 @@ export function argsHasOutputColumn(args: any): boolean;
 //
 // @public (undocumented)
 export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
-    constructor(inputs?: SocketName[]);
+    constructor(inputs?: SocketName[], outputs?: SocketName[]);
     // (undocumented)
     bind(binding: NodeBinding<T> | VariadicNodeBinding<T>): void;
     // (undocumented)
@@ -90,8 +90,11 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     get config(): Maybe<Config>;
     set config(value: Maybe<Config>);
     protected abstract doRecalculate(): void;
-    protected emit: (value: Maybe<T>) => void;
-    protected emitError: (error: unknown) => void;
+    protected emit: (value: Maybe<T>, socketName?: SocketName) => void;
+    protected emitError: (error: unknown, socketName?: SocketName) => void;
+    protected ensureInput(name: SocketName): void;
+    // (undocumented)
+    protected ensureOutput(name: SocketName): void;
     protected getInputErrors(): Record<SocketName, unknown>;
     protected getInputValues(): Record<SocketName, Maybe<T>>;
     // (undocumented)
@@ -107,7 +110,9 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     // (undocumented)
     protected inputError(name?: SocketName): Maybe<unknown>;
     // (undocumented)
-    readonly inputs: SocketName[];
+    get inputs(): SocketName[];
+    // (undocumented)
+    protected _inputs: SocketName[];
     // (undocumented)
     protected inputValue$(name?: SocketName): BehaviorSubject<Maybe<T>>;
     // (undocumented)
@@ -116,15 +121,22 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     // (undocumented)
     protected isSocketNameEqual(name: SocketName | undefined, name2: SocketName): boolean;
     // (undocumented)
-    get output$(): Observable<Maybe<T>>;
+    output$(name?: SocketName): BehaviorSubject<Maybe<T>>;
     // (undocumented)
-    get output(): Maybe<T>;
+    output(name?: SocketName): Maybe<T>;
+    // (undocumented)
+    get outputs(): SocketName[];
+    // (undocumented)
+    protected _outputs: SocketName[];
     protected recalculate: (cause: string) => void;
     // (undocumented)
     get stats(): NodeStats;
     // (undocumented)
     unbind(name: SocketName): void;
+    // (undocumented)
     protected verifyInputSocketName(name?: SocketName): SocketName;
+    // (undocumented)
+    protected verifyOutputSocketName(name: SocketName): SocketName;
 }
 
 // Warning: (ae-missing-release-tag) "bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -521,6 +533,11 @@ export const isDataTableSchema: (r: ResourceSchema | undefined) => r is DataTabl
 // @public (undocumented)
 export const isDefaultInput: (name?: SocketName) => name is undefined;
 
+// Warning: (ae-missing-release-tag) "isDefaultOutput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const isDefaultOutput: (name?: SocketName) => name is undefined;
+
 // Warning: (ae-missing-release-tag) "isInputColumnListStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -668,8 +685,8 @@ interface Node_2<T, Config = unknown> {
     config: Maybe<Config>;
     readonly id: NodeId;
     readonly inputs: SocketName[];
-    readonly output$: Observable<Maybe<T>>;
-    readonly output: Maybe<T>;
+    output$(name?: SocketName): Observable<Maybe<T>>;
+    output(name?: SocketName): Maybe<T>;
     readonly stats: NodeStats;
     unbind(name?: SocketName): void;
 }
@@ -681,6 +698,7 @@ export { Node_2 as Node }
 export interface NodeBinding<T> {
     input?: SocketName;
     node: Node_2<T>;
+    output?: SocketName;
 }
 
 // Warning: (ae-missing-release-tag) "NodeId" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -703,7 +721,7 @@ export enum NodeInput {
 // @public (undocumented)
 export enum NodeOutput {
     // (undocumented)
-    Target = "target"
+    Result = "result"
 }
 
 // Warning: (ae-missing-release-tag) "NodeStats" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

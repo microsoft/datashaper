@@ -14,5 +14,5 @@ export declare enum NodeOutput
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  Target | <code>&quot;target&quot;</code> |  |
+|  Result | <code>&quot;result&quot;</code> |  |
 

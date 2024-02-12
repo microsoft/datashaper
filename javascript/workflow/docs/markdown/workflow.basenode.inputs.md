@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-readonly inputs: SocketName[];
+get inputs(): SocketName[];
 ```

@@ -171,9 +171,8 @@ export class GraphManager extends Disposable {
 		if (g.hasNode(id)) {
 			// try to find the named node in the graph
 			return g.node(id)
-		} else {
-			return this.createNode(id, from([]))
-		}
+		} 
+		return this.createNode(id, from([]))
 	}
 
 	public get lastOutput$(): Observable<Maybe<TableContainer>> | undefined {
@@ -189,7 +188,7 @@ export class GraphManager extends Disposable {
 		const lastStepId = lastStep.id
 		const lastNode = this.getNode(lastStepId)
 		// Nodes use BehaviorSubject internally
-		return lastNode.output$ as Observable<Maybe<TableContainer>>
+		return lastNode.output$() as Observable<Maybe<TableContainer>>
 	}
 
 	public setSource(id: string, value: Observable<Maybe<TableContainer>>): void {
@@ -206,12 +205,12 @@ export class GraphManager extends Disposable {
 		}
 		if (this._graph.hasNode(id)) {
 			throw new Error(`node ${id} already exists without an input seam`)
-		} else {
-			const stream = new DelegateSubject<TableContainer>()
-			this._inputDelegates.set(id, stream)
-			const node = observableNode(id, stream)
-			this._graph.add(node)
-		}
+		} 
+		const stream = new DelegateSubject<TableContainer>()
+		this._inputDelegates.set(id, stream)
+		const node = observableNode(id, stream)
+		this._graph.add(node)
+		
 	}
 
 	public removeInput(id: string): void {

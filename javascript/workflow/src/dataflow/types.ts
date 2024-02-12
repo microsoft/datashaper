@@ -65,12 +65,12 @@ export interface Node<T, Config = unknown> {
 	/**
 	 * Gets the output value stream
 	 */
-	readonly output$: Observable<Maybe<T>>
+	output$(name?: SocketName): Observable<Maybe<T>>
 
 	/**
 	 * Gets a current output value
 	 */
-	readonly output: Maybe<T>
+	output(name?: SocketName): Maybe<T>
 
 	/**
 	 * The diagnostic statistics for this node
@@ -111,6 +111,11 @@ export interface NodeBinding<T> {
 	 * The source node to bind data from
 	 */
 	node: Node<T>
+
+	/**
+	 * The named output on the source node (otherwise default)
+	 */
+	output?: SocketName
 
 	/**
 	 * The named input on the target node (otherwise default)
@@ -163,5 +168,5 @@ export enum NodeInput {
 }
 
 export enum NodeOutput {
-	Target = 'target',
+	Result = 'result',
 }

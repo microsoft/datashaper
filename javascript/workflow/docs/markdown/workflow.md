@@ -112,6 +112,7 @@
 |  [isDataTable](./workflow.isdatatable.md) |  |
 |  [isDataTableSchema](./workflow.isdatatableschema.md) |  |
 |  [isDefaultInput](./workflow.isdefaultinput.md) |  |
+|  [isDefaultOutput](./workflow.isdefaultoutput.md) |  |
 |  [isReference](./workflow.isreference.md) |  |
 |  [isTableBundle](./workflow.istablebundle.md) |  |
 |  [isTableBundleSchema](./workflow.istablebundleschema.md) |  |
