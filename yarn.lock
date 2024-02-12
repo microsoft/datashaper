@@ -2644,7 +2644,7 @@ __metadata:
     "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/workflow": "workspace:^"
-    "@essex/components": "npm:^4.0.0"
+    "@essex/components": "npm:^4.2.0"
     "@essex/scripts": "npm:^24.0.5"
     "@essex/tsconfig-base": "npm:^2.0.0"
     "@fluentui/react": "npm:^8.110.2"
@@ -2754,7 +2754,7 @@ __metadata:
     "@datashaper/utilities": "workspace:^"
     "@datashaper/workflow": "workspace:^"
     "@essex/charts-react": "npm:^1.1.12"
-    "@essex/components": "npm:^4.0.0"
+    "@essex/components": "npm:^4.2.0"
     "@essex/scripts": "npm:^24.0.5"
     "@essex/styled-components": "npm:^0.0.13"
     "@essex/tsconfig-base": "npm:^2.0.0"
@@ -2842,7 +2842,7 @@ __metadata:
   dependencies:
     "@datashaper/react": "workspace:^"
     "@datashaper/webapp": "workspace:^"
-    "@essex/components": "npm:^4.0.0"
+    "@essex/components": "npm:^4.2.0"
     "@essex/scripts": "npm:^24.0.5"
     "@essex/storybook-config": "npm:^0.1.4"
     "@essex/tsconfig-base": "npm:^2.0.0"
@@ -2942,7 +2942,7 @@ __metadata:
     "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/workflow": "workspace:^"
-    "@essex/components": "npm:^4.0.0"
+    "@essex/components": "npm:^4.2.0"
     "@essex/hooks": "npm:^4.0.21"
     "@essex/scripts": "npm:^24.0.5"
     "@fluentui/font-icons-mdl2": "npm:^8.5.21"
@@ -3388,9 +3388,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/components@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "@essex/components@npm:4.0.0"
+"@essex/components@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "@essex/components@npm:4.2.0"
   dependencies:
     "@essex/toolbox": "npm:^3.0.18"
     "@fluentui/utilities": "npm:^8.13.18"
@@ -3453,7 +3453,7 @@ __metadata:
       optional: false
     styled-components:
       optional: true
-  checksum: 10/97067cb400c630d2bde58161038e1f1eef856a9789c6a312d8f9b68d214bf05ae84b80c68b13f0db2d8619d739bb4e467525a223a9b87143dc88cf983aa134b2
+  checksum: 10/807e614d137de2b27ffc409ee761e3e7432763d75c2d37a3dae3dde81c3c239b631e237b6037ae16bfe20aebe9408a23b49023d0165db485c797a27e0d46c1db
   languageName: node
   linkType: hard
 
