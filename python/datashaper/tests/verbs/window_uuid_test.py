@@ -1,7 +1,7 @@
 import pandas as pd
 
 from datashaper.engine.verbs import VerbInput, VerbManager
-from datashaper.table_store import TableContainer
+from datashaper.table_store.types import TableContainer
 
 
 def make_verb_input(data: list, columns: list[str]):

@@ -16,7 +16,7 @@ from datashaper.engine.types import (
 )
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store import Table, TableContainer
+from datashaper.table_store.types import Table, TableContainer
 
 
 @verb(name="filter", treats_input_tables_as_immutable=True)

@@ -9,7 +9,7 @@ from dataclasses import dataclass, field
 from functools import cache
 
 from datashaper.errors import VerbAlreadyRegisteredError
-from datashaper.table_store import TableContainer
+from datashaper.table_store.types import TableContainer
 
 from .types import VerbDetails
 

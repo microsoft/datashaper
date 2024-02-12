@@ -14,7 +14,7 @@ from datashaper.engine.types import MathOperator
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.errors import VerbOperationNotSupportedError
-from datashaper.table_store import TableContainer
+from datashaper.table_store.types import TableContainer
 
 
 def __multiply(col1: pd.Series, col2: pd.Series) -> np.ndarray:

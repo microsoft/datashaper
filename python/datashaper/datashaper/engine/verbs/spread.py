@@ -11,7 +11,7 @@ from pandas._typing import Axes
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store import TableContainer
+from datashaper.table_store.types import TableContainer
 
 
 def __normal_spread(

@@ -6,7 +6,6 @@
 from dataclasses import dataclass, field
 
 from datashaper.engine.verbs.types import VerbDetails
-from datashaper.table_store import TableContainer
 
 
 @dataclass
@@ -27,6 +26,3 @@ class ExecutionNode:
 
     args: dict = field(default_factory=dict)
     """The arguments to pass to the verb."""
-
-    result: TableContainer | None = None
-    """The result of executing this node."""
