@@ -6,7 +6,7 @@
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store import TableContainer
+from datashaper.table_store.types import TableContainer
 
 
 @verb(name="ungroup", treats_input_tables_as_immutable=True)

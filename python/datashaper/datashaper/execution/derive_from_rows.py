@@ -8,7 +8,7 @@ import pandas as pd
 from datashaper.errors import VerbParallelizationError
 from datashaper.execution.utils.parallelize import parallelize
 from datashaper.progress import progress_ticker
-from datashaper.table_store import Table
+from datashaper.table_store.types import Table
 from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
 
 logger = logging.getLogger(__name__)

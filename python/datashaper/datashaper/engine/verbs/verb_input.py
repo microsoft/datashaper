@@ -10,7 +10,7 @@ from datashaper.errors import (
     VerbHasMultipleDefaultInputsError,
     VerbHasMultipleDefaultOthersError,
 )
-from datashaper.table_store import Table, TableContainer
+from datashaper.table_store.types import Table, TableContainer
 
 
 class VerbInput:

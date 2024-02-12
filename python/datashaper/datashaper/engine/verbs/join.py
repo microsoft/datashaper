@@ -11,7 +11,7 @@ from pandas._typing import MergeHow, Suffixes
 from datashaper.engine.types import JoinStrategy
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store import TableContainer
+from datashaper.table_store.types import TableContainer
 
 __strategy_mapping: dict[JoinStrategy, MergeHow] = {
     JoinStrategy.Inner: "inner",

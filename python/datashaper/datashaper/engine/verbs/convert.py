@@ -15,7 +15,7 @@ from pandas.api.types import is_bool_dtype, is_datetime64_any_dtype, is_numeric_
 from datashaper.engine.types import ParseType
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store import TableContainer
+from datashaper.table_store.types import TableContainer
 
 
 def _convert_int(value: str, radix: int) -> int | float:

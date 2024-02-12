@@ -66,7 +66,7 @@ from .progress import (
     progress_iterable,
     progress_ticker,
 )
-from .table_store import (
+from .table_store.types import (
     ColumnMetadata,
     ColumnStats,
     Table,

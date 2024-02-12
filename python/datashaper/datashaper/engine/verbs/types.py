@@ -2,7 +2,7 @@
 from collections.abc import Callable
 from dataclasses import dataclass
 
-from datashaper.table_store import TableContainer
+from datashaper.table_store.types import TableContainer
 
 
 @dataclass

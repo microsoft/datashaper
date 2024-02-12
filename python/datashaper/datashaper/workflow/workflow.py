@@ -28,7 +28,9 @@ from datashaper.errors import (
 )
 from datashaper.execution.execution_node import ExecutionNode
 from datashaper.progress.types import Progress
-from datashaper.table_store import Table, TableContainer
+from datashaper.table_store.in_memory_table_store import InMemoryTableStore
+from datashaper.table_store.table_store import TableStore
+from datashaper.table_store.types import Table, TableContainer
 
 from .types import MemoryProfile, VerbTiming, WorkflowRunResult
 from .verb_callbacks import DelegatingVerbCallbacks
@@ -76,6 +78,7 @@ class Workflow(Generic[Context]):
         validate: bool | None = False,
         memory_profile: bool | None = False,
         pandas_dtype_backend: PandasDtypeBackend = PandasDtypeBackend.NUMPY_NULLABLE,
+        table_store: TableStore | None = None,
     ):
         """Create an execution graph from the Dict provided in workflow.
 
@@ -96,7 +99,9 @@ class Workflow(Generic[Context]):
         self._dependencies = self._compute_dependencies()
         self._dependency_graph = defaultdict(set)
         self._graph = OrderedDict()
-        self._inputs = {}
+        self._table_store = (
+            table_store if table_store is not None else InMemoryTableStore()
+        )
 
         # Perform JSON-schema validation
         # TODO(Chris): the current schema definition does not work in Python
@@ -241,7 +246,7 @@ class Workflow(Generic[Context]):
         return [
             input
             for input in Workflow.__inputs_list(node.node_input)
-            if input not in visited and input not in self._inputs
+            if input not in visited and input not in self._table_store.list()
         ]
 
     def _resolve_inputs(
@@ -261,13 +266,11 @@ class Workflow(Generic[Context]):
                 verb.treats_input_tables_as_immutable or step_table_is_safe_to_mutate
             )
 
-            # pick either the input table or the original table
-            table_container = (
-                self._inputs[name] if name in self._inputs else self._graph[name].result
-            )
-
-            if table_container is None:
+            if name not in self._table_store.list():
                 raise WorkflowMissingInputError(name)
+
+            table_container = self._table_store.get(name)
+
             if use_original_table:
                 return table_container
 
@@ -287,14 +290,14 @@ class Workflow(Generic[Context]):
 
     def add_table(self, id: str, table: pd.DataFrame) -> None:
         """Add a dataframe to the graph with a given id."""
-        self._inputs[id] = TableContainer(table=table)
+        self._table_store.add(id, TableContainer(table=table), tag="input")
 
     def output(self, id: str | None = None) -> Table:
         """Get a dataframe from the graph by id."""
         if id is None:
             id = self._last_step_id
 
-        container: TableContainer | None = self._graph[id].result
+        container: TableContainer | None = self._table_store.get(id)
         if container is None:
             raise WorkflowOutputNotReadyError(self.name, id)
 
@@ -379,7 +382,9 @@ class Workflow(Generic[Context]):
             callbacks.on_error(message, e, traceback.format_exc())
             raise
         else:
-            node.result = result
+            self._table_store.add(
+                node.node_id, cast(TableContainer, result), tag="output"
+            )
         finally:
             callbacks.on_step_progress(node, Progress(percent=1))
             callbacks.on_step_end(node, None)
@@ -405,7 +410,7 @@ class Workflow(Generic[Context]):
     def export(self) -> dict:
         """Export the graph into a workflow JSON object."""
         return {
-            "input": [input_name for input_name in self._inputs],
+            "input": [table for table in self._table_store.list(tag="input")],
             "steps": [
                 {
                     "id": step.node_id,

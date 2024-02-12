@@ -4,7 +4,7 @@
 #
 """Drop verb implementation."""
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store import TableContainer
+from datashaper.table_store.types import TableContainer
 
 from .verb_input import VerbInput
 
