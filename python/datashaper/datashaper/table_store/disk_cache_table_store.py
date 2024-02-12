@@ -6,6 +6,7 @@
 import shutil
 from io import BytesIO
 from typing import cast
+from uuid import uuid4
 
 import diskcache as dc
 import pandas as pd
@@ -17,9 +18,13 @@ from datashaper.table_store.types import TableContainer
 class DiskCacheTableStore(TableStore):
     """A table store for storing and retrieving tables."""
 
-    def __init__(self, persist: bool = False) -> None:
+    def __init__(
+        self, table_store_name: str | None = None, persist: bool = False
+    ) -> None:
         """Initialize the default table store."""
-        self._tables: dc.Cache = dc.Cache("table_store")
+        if table_store_name is None:
+            table_store_name = str(uuid4())
+        self._tables: dc.Cache = dc.Cache(table_store_name)
         self._keys: dict[str, str] = {}
         self._persist = persist
 
