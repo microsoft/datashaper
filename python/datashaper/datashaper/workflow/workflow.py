@@ -55,13 +55,6 @@ class PandasDtypeBackend(str, Enum):
     PYARROW = "pyarrow"
 
 
-class PandasDtypeBackend(str, Enum):
-    """Pandas dtype backend."""
-
-    NUMPY_NULLABLE = "numpy_nullable"
-    PYARROW = "pyarrow"
-
-
 class Workflow(Generic[Context]):
     """A data processing graph."""
 
