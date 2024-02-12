@@ -51,7 +51,7 @@
 		"chroma-js": "2.4.2",
 		"debug": "^4.3.4",
 		"lodash-es": "^4.17.21",
-		"observable-hooks": "^4.2.2",
+		"observable-hooks": "^4.2.3",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-dropzone": "^12.1.0",
