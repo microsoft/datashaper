@@ -93,6 +93,17 @@ class WorkflowMissingInputError(WorkflowError):
         )
 
 
+class WorkflowInvalidInputError(WorkflowError):
+    """Exception for invalid verb input."""
+
+    def __init__(self, name: str | None = None):
+        super().__init__(
+            f"Workflow invalid input encountered: {name}"
+            if name is not None
+            else "Workflow invalid input encountered"
+        )
+
+
 class NodeNotVisitedError(WorkflowError):
     """Exception for invalid verb input."""
 

@@ -24,11 +24,12 @@ from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import VerbManager
 from datashaper.errors import (
     NodeNotVisitedError,
+    WorkflowInvalidInputError,
     WorkflowMissingInputError,
     WorkflowOutputNotReadyError,
     WorkflowVerbNotFoundError,
 )
-from datashaper.execution.execution_node import ExecutionNode
+from datashaper.execution.execution_node import ExecutionNode, WorkflowInput
 from datashaper.progress.types import Progress
 from datashaper.table_store.in_memory_table_store import InMemoryTableStore
 from datashaper.table_store.table_store import TableStore
@@ -255,7 +256,9 @@ class Workflow(Generic[Context]):
         ]
 
     def _resolve_inputs(
-        self, verb: VerbDetails, inputs: str | dict[str, list[str]]
+        self,
+        verb: VerbDetails,
+        inputs: str | dict[str, WorkflowInput | list[WorkflowInput]],
     ) -> dict:
         def input_table(name: str, output: str | None = None) -> TableContainer:
             graph_node = self._graph.get(name)
@@ -293,21 +296,33 @@ class Workflow(Generic[Context]):
             if isinstance(value, str):
                 input_mapping[key] = input_table(value)
             elif isinstance(value, dict):
+                value = cast(dict, value)
                 input_mapping[key] = input_table(value["node"], value["output"])
-            else:
-                input_mapping[key] = [input_table(t) for t in value]
+            elif isinstance(value, list):
 
-        input_tbl = input_mapping.pop("input", None)
-        source_tbl = input_mapping.pop("source", None)
-        other_tbl = input_mapping.pop("other", None)
-        others_tbl = input_mapping.pop("others", None)
+                def resolve(t: WorkflowInput) -> TableContainer:
+                    if isinstance(t, str):
+                        return input_table(t)
+                    if isinstance(t, dict):
+                        return input_table(t["node"], t["output"])
+                    raise WorkflowInvalidInputError(str(type(t)))
+
+                input_mapping[key] = [resolve(t) for t in value]
+            else:
+                raise WorkflowInvalidInputError(str(type(value)))
+
+        input_tbl = cast(TableContainer, input_mapping.pop("input", None))
+        source_tbl = cast(TableContainer, input_mapping.pop("source", None))
+        other_tbl = cast(TableContainer, input_mapping.pop("other", None))
+        others_tbl = cast(list[TableContainer], input_mapping.pop("others", None))
+        input_mapping = cast(dict, input_mapping)
         return {
             "input": VerbInput(
                 input=input_tbl,
                 source=source_tbl,
                 other=other_tbl,
                 others=others_tbl,
-                named=input_mapping,
+                named=cast(dict[str, TableContainer], input_mapping),
             )
         }
 

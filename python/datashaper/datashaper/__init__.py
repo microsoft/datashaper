@@ -47,6 +47,7 @@ from .errors import (
     VerbOperationNotSupportedError,
     VerbParallelizationError,
     WorkflowError,
+    WorkflowInvalidInputError,
     WorkflowMissingInputError,
     WorkflowOutputNotReadyError,
     WorkflowVerbNotFoundError,
@@ -169,4 +170,5 @@ __all__ = [
     "VerbHasMultipleDefaultOthersError",
     "VerbOperationNotSupportedError",
     "NodeNotVisitedError",
+    "WorkflowInvalidInputError",
 ]
