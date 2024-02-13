@@ -14,7 +14,7 @@ export class DefaultGraph<T> implements Graph<T> {
 	private _nodes: Map<NodeId, Node<T>> = new Map()
 
 	/**
-	 * A mapping of NodeID to Subscription for listening to node bindnigs
+	 * A mapping of NodeID to Subscription for listening to node dindings
 	 */
 	private _nodeBindingSubscriptions: Map<NodeId, Subscription> = new Map()
 
