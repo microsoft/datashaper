@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { WorkflowInput, WorkflowStepId, Verb } from '@datashaper/schema'
+import type { WorkflowInput, Verb } from '@datashaper/schema'
 
 /**
  * Options for exporting data-tables within Workflow instances.w

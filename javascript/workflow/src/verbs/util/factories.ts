@@ -11,7 +11,6 @@ import type { SocketName, StepApi, StepFunction } from '../../dataflow/index.js'
 import { BaseNode, StepNode } from '../../dataflow/index.js'
 import type { Maybe } from '../../primitives.js'
 import { set } from './sets.js'
-import { Socket } from 'dgram'
 
 export type ColumnTableStep<Args> = StepFunction<ColumnTable, Args>
 export type TableContainerStep<Args> = StepFunction<TableContainer, Args>

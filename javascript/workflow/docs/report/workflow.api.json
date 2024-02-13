@@ -12952,7 +12952,7 @@
             },
             {
               "kind": "Content",
-              "text": "string | symbol"
+              "text": "string"
             },
             {
               "kind": "Content",
@@ -13154,8 +13154,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowStepId",
-                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                  "text": "WorkflowInput",
+                  "canonicalReference": "@datashaper/schema!WorkflowInput:type"
                 },
                 {
                   "kind": "Content",
@@ -13163,8 +13163,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowStepId",
-                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                  "text": "WorkflowInput",
+                  "canonicalReference": "@datashaper/schema!WorkflowInput:type"
                 },
                 {
                   "kind": "Content",
@@ -13172,8 +13172,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowStepId",
-                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                  "text": "WorkflowInput",
+                  "canonicalReference": "@datashaper/schema!WorkflowInput:type"
                 },
                 {
                   "kind": "Content",
@@ -13181,8 +13181,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowStepId",
-                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                  "text": "WorkflowInput",
+                  "canonicalReference": "@datashaper/schema!WorkflowInput:type"
                 },
                 {
                   "kind": "Content",
@@ -13573,8 +13573,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowStepId",
-                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                  "text": "WorkflowInput",
+                  "canonicalReference": "@datashaper/schema!WorkflowInput:type"
                 },
                 {
                   "kind": "Content",
@@ -13582,8 +13582,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowStepId",
-                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                  "text": "WorkflowInput",
+                  "canonicalReference": "@datashaper/schema!WorkflowInput:type"
                 },
                 {
                   "kind": "Content",
@@ -13705,6 +13705,32 @@
                 },
                 {
                   "kind": "Content",
+                  "text": ", inputs?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", outputs?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
                   "text": ");"
                 }
               ],
@@ -13719,6 +13745,22 @@
                     "endIndex": 3
                   },
                   "isOptional": false
+                },
+                {
+                  "parameterName": "inputs",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 6
+                  },
+                  "isOptional": true
+                },
+                {
+                  "parameterName": "outputs",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 7,
+                    "endIndex": 9
+                  },
+                  "isOptional": true
                 }
               ]
             },

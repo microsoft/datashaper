@@ -19,6 +19,6 @@ export interface StepInput<T extends object | void | unknown = unknown>
 |  [args?](./workflow.stepinput.args.md) |  | T | <i>(Optional)</i> The verb arguments |
 |  [description?](./workflow.stepinput.description.md) |  | string | <i>(Optional)</i> |
 |  [id?](./workflow.stepinput.id.md) |  | string | <i>(Optional)</i> A unique identifier for this step |
-|  [input?](./workflow.stepinput.input.md) |  | Record&lt;string, WorkflowStepId \| WorkflowStepId\[\] \| undefined&gt; | <i>(Optional)</i> The bound inputs Key = Input Socket Name Value = Socket Binding to other node |
+|  [input?](./workflow.stepinput.input.md) |  | Record&lt;string, WorkflowInput \| WorkflowInput\[\] \| undefined&gt; | <i>(Optional)</i> The bound inputs Key = Input Socket Name Value = Socket Binding to other node |
 |  [verb](./workflow.stepinput.verb.md) |  | Verb | The verb being executed |
 

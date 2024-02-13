@@ -19,6 +19,7 @@ import {
 	hasPossibleInputs,
 	isVariadicSocketName as isVariadic,
 } from './utils.js'
+import { WorkflowInput } from '@datashaper/schema'
 
 const DEFAULT_INPUT = '__DEFAULT_INPUT__'
 
@@ -243,6 +244,9 @@ export class GraphManager extends Disposable {
 		const node = this.getNode(step.id)
 		node.config = step.args
 
+		const getNodeId = (binding: WorkflowInput) => typeof binding === 'string' ? binding : binding.node
+		const getOutput = (binding: WorkflowInput) => typeof binding === 'string' ? undefined : binding.output
+
 		// first bind the standard input to the step, either the previous step or the default input
 		if (prevStep == null) {
 			node.bind({ node: this.getDefaultInput() })
@@ -255,18 +259,21 @@ export class GraphManager extends Disposable {
 				if (binding != null) {
 					if (isVariadic(input, binding)) {
 						// Bind variadic input
-						node.bind(binding.map((b) => ({ node: this.getNode(b) })))
-						return
-					} 
-					
-					const nodeId = typeof binding === 'string' ? binding : binding.node
-					const output = typeof binding === 'string' ? undefined : binding.output
-					if (this.hasNode(nodeId)) {
-						// Bind Non-Variadic Input
-						const node = this.getNode(nodeId)
-						node.bind({ input, node, output })
+						node.bind(binding.map((b) => {
+							const nodeId = getNodeId(b)
+							const output = getOutput(b)
+							return { node: this.getNode(nodeId), output }
+						}))
 					} else {
-						console.warn(`node ${nodeId} not found`)
+						const nodeId = getNodeId(binding)
+						const output = getOutput(binding)
+						if (this.hasNode(nodeId)) {
+							// Bind Non-Variadic Input
+							const node = this.getNode(nodeId)
+							node.bind({ input, node, output })
+						} else {
+							console.warn(`node ${nodeId} not found`)
+						}
 					}
 				}
 			}

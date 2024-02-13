@@ -15,7 +15,7 @@ export declare class StepNode<T, Args> extends BaseNode<T, Args>
 
 |  Constructor | Modifiers | Description |
 |  --- | --- | --- |
-|  [(constructor)(step)](./workflow.stepnode._constructor_.md) |  | Constructs a new instance of the <code>StepNode</code> class |
+|  [(constructor)(step, inputs, outputs)](./workflow.stepnode._constructor_.md) |  | Constructs a new instance of the <code>StepNode</code> class |
 
 ## Properties
 

@@ -58,8 +58,8 @@ import type { UnhotArgs } from '@datashaper/schema';
 import type { Verb } from '@datashaper/schema';
 import type { WindowArgs } from '@datashaper/schema';
 import type { WorkflowArgs } from '@datashaper/schema';
+import type { WorkflowInput } from '@datashaper/schema';
 import type { WorkflowSchema } from '@datashaper/schema';
-import type { WorkflowStepId } from '@datashaper/schema';
 
 // Warning: (ae-missing-release-tag) "aggregate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -971,7 +971,7 @@ export const select: (id: string) => StepNode<TableContainer<unknown>, InputColu
 // Warning: (ae-missing-release-tag) "SocketName" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type SocketName = string | symbol;
+export type SocketName = string;
 
 // Warning: (ae-missing-release-tag) "spread" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -987,9 +987,9 @@ export interface Step<T extends object | void | unknown = unknown> {
     description?: string;
     id: string;
     input: {
-        source?: WorkflowStepId;
-        others?: WorkflowStepId[];
-        [key: string]: WorkflowStepId | WorkflowStepId[] | undefined;
+        source?: WorkflowInput;
+        others?: WorkflowInput[];
+        [key: string]: WorkflowInput | WorkflowInput[] | undefined;
     };
     verb: Verb;
 }
@@ -1015,7 +1015,7 @@ export interface StepInput<T extends object | void | unknown = unknown> {
     // (undocumented)
     description?: string;
     id?: string;
-    input?: Record<string, WorkflowStepId | WorkflowStepId[] | undefined>;
+    input?: Record<string, WorkflowInput | WorkflowInput[] | undefined>;
     verb: Verb;
 }
 
@@ -1023,7 +1023,7 @@ export interface StepInput<T extends object | void | unknown = unknown> {
 //
 // @public (undocumented)
 export class StepNode<T, Args> extends BaseNode<T, Args> {
-    constructor(step: StepFunction<T, Args>);
+    constructor(step: StepFunction<T, Args>, inputs?: SocketName[], outputs?: SocketName[]);
     // (undocumented)
     protected doRecalculate(): void;
     // (undocumented)
