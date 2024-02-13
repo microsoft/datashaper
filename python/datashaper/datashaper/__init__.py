@@ -74,6 +74,8 @@ from .table_store.types import (
     Table,
     TableContainer,
     TableMetadata,
+    VerbResult,
+    create_verb_result,
 )
 from .workflow import (
     DEFAULT_INPUT_NAME,
@@ -148,6 +150,8 @@ __all__ = [
     "TableMetadata",
     "TableContainer",
     "Table",
+    "VerbResult",
+    "create_verb_result",
     # Progress Exports
     "progress_callback",
     "progress_iterable",

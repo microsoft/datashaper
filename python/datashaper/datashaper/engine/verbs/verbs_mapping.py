@@ -9,7 +9,7 @@ from dataclasses import dataclass, field
 from functools import cache
 
 from datashaper.errors import VerbAlreadyRegisteredError
-from datashaper.table_store.types import TableContainer, VerbResult
+from datashaper.table_store.types import VerbResult
 
 from .types import VerbDetails
 
@@ -25,9 +25,9 @@ def verb(
     def inner(
         func: Callable[
             ...,
-            TableContainer | VerbResult,
+            VerbResult,
         ],
-    ) -> Callable[..., TableContainer | VerbResult]:
+    ) -> Callable[..., VerbResult]:
         verb = VerbDetails(
             name=name,
             func=func,

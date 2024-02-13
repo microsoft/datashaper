@@ -11,11 +11,11 @@ from datashaper.engine.pandas import aggregate_operation_mapping
 from datashaper.engine.types import FieldAggregateOperation
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import TableContainer
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 @verb(name="rollup", treats_input_tables_as_immutable=True)
-def rollup(input: VerbInput, column: str, to: str, operation: str) -> TableContainer:
+def rollup(input: VerbInput, column: str, to: str, operation: str) -> VerbResult:
     """Rollup verb implementation."""
     aggregate_operation = FieldAggregateOperation(operation)
     input_table = input.get_input()
@@ -31,4 +31,4 @@ def rollup(input: VerbInput, column: str, to: str, operation: str) -> TableConta
 
     output = pd.DataFrame({to: agg_result})
 
-    return TableContainer(table=output)
+    return create_verb_result(output)

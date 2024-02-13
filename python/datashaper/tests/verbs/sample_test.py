@@ -1,7 +1,7 @@
 import pandas as pd
 
 from datashaper.engine.verbs import VerbInput, VerbManager
-from datashaper.table_store.types import TableContainer
+from datashaper.table_store.types import TableContainer, VerbResult
 
 
 def make_verb_input(data: list, columns: list[str]):
@@ -13,8 +13,8 @@ def make_verb_input(data: list, columns: list[str]):
 def test_sample():
     verb_input = make_verb_input([[1], [2], [3], [4], [5]], ["id"])
     sample = VerbManager.get().get_verb("sample").func
-    output = sample(input=verb_input, size=2)
-    assert len(output.table) == 2
+    output: VerbResult = sample(input=verb_input, size=2)
+    assert len(output.output.table) == 2
 
 
 def test_sample_seed():
@@ -23,7 +23,8 @@ def test_sample_seed():
     values = None
     for i in range(10):
         sample = VerbManager.get().get_verb("sample").func
-        output = sample(input=verb_input, size=2, seed=0xBEEF)
+        output: VerbResult = sample(input=verb_input, size=2, seed=0xBEEF)
+        output = output.output
         ids = output.table["id"].tolist()
 
         if i == 0:

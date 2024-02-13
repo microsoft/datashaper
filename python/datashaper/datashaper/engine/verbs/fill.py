@@ -9,7 +9,7 @@ import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import TableContainer
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 @verb(name="fill")
@@ -17,9 +17,9 @@ def fill(
     input: VerbInput,
     to: str,
     value: str | float | bool,
-) -> TableContainer:
+) -> VerbResult:
     """Fill verb implementation."""
     input_table = input.get_input()
     output = cast(pd.DataFrame, input_table)
     output[to] = value
-    return TableContainer(table=output)
+    return create_verb_result(output)

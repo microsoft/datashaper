@@ -5,11 +5,14 @@
 """Sample verb implementation."""
 from typing import cast
 
-import pandas as pd
-
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import Table, TableContainer, VerbResult
+from datashaper.table_store.types import (
+    Table,
+    TableContainer,
+    VerbResult,
+    create_verb_result,
+)
 
 
 @verb(name="sample", treats_input_tables_as_immutable=True)
@@ -19,12 +22,12 @@ def sample(
     proportion: int | None = None,
     seed: int | None = None,
     emitRemainder: bool | None = False,  # noqa F403 - schema argument
-) -> TableContainer | VerbResult:
+) -> VerbResult:
     """Sample verb implementation."""
     input_table = input.get_input()
     if not emitRemainder:
         output = input_table.sample(n=size, frac=proportion, random_state=seed)
-        return TableContainer(table=cast(Table, output))
+        return create_verb_result(cast(Table, output))
 
     result = input_table.sample(n=size, frac=proportion, random_state=seed)
 
@@ -35,7 +38,6 @@ def sample(
 
     unsampled = input_table.loc[non_sampled_ids].reset_index(drop=True)
 
-    return VerbResult(
-        TableContainer(cast(pd.DataFrame, result)),
-        {"remainder": TableContainer(unsampled)},
+    return create_verb_result(
+        cast(Table, result), named_outputs={"remainder": TableContainer(unsampled)}
     )

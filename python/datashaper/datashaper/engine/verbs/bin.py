@@ -11,7 +11,7 @@ import pandas as pd
 from datashaper.engine.types import BinStrategy
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import TableContainer
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 def __get_bucket_value(
@@ -85,7 +85,7 @@ def bin_verb(
     fixedwidth: int | None = None,
     clamped: bool | None = False,
     printRange: bool | None = False,  # noqa: N803
-) -> TableContainer:
+) -> VerbResult:
     """Bin verb implementation."""
     input_table = cast(pd.DataFrame, input.get_input())
     bin_strategy = BinStrategy(strategy)
@@ -125,4 +125,4 @@ def bin_verb(
 
     output = input_table
     output[to] = value_edges
-    return TableContainer(table=output)
+    return create_verb_result(output)

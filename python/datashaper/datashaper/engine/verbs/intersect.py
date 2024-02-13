@@ -9,11 +9,15 @@ import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import Table, TableContainer
+from datashaper.table_store.types import (
+    Table,
+    VerbResult,
+    create_verb_result,
+)
 
 
 @verb(name="intersect", treats_input_tables_as_immutable=True)
-def intersect(input: VerbInput) -> TableContainer:
+def intersect(input: VerbInput) -> VerbResult:
     """Intersect verb implementation."""
     input_table = input.get_input()
     others = cast(list[pd.DataFrame], input.get_others())
@@ -23,4 +27,4 @@ def intersect(input: VerbInput) -> TableContainer:
     output = output[output["_merge"] == "both"]
     output = output.drop("_merge", axis=1).reset_index(drop=True)
 
-    return TableContainer(table=cast(Table, output))
+    return create_verb_result(cast(Table, output))

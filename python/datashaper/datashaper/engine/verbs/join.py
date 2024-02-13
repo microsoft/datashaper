@@ -11,7 +11,7 @@ from pandas._typing import MergeHow, Suffixes
 from datashaper.engine.types import JoinStrategy
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import TableContainer
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 __strategy_mapping: dict[JoinStrategy, MergeHow] = {
     JoinStrategy.Inner: "inner",
@@ -52,7 +52,7 @@ def join(
     input: VerbInput,
     on: list[str] | None = None,
     strategy: str = "inner",
-) -> TableContainer:
+) -> VerbResult:
     """Join verb implementation."""
     join_strategy = JoinStrategy(strategy)
     input_table = cast(pd.DataFrame, input.get_input())
@@ -79,4 +79,4 @@ def join(
             indicator=True,
         )
 
-    return TableContainer(table=__clean_result(join_strategy, output, input_table))
+    return create_verb_result(__clean_result(join_strategy, output, input_table))

@@ -13,7 +13,7 @@ from pandas.core.groupby import DataFrameGroupBy
 from datashaper.engine.types import WindowFunction
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import TableContainer
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 def _get_window_indexer(
@@ -59,7 +59,7 @@ __window_function_map = {
 
 
 @verb(name="window")
-def window(input: VerbInput, column: str, to: str, operation: str) -> TableContainer:
+def window(input: VerbInput, column: str, to: str, operation: str) -> VerbResult:
     """Apply a window function to a column in a table."""
     window_operation = WindowFunction(operation)
 
@@ -76,4 +76,4 @@ def window(input: VerbInput, column: str, to: str, operation: str) -> TableConta
         output = input_table
         output[to] = window
 
-    return TableContainer(table=output)
+    return create_verb_result(output)

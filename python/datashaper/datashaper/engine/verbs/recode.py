@@ -9,7 +9,7 @@ import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import TableContainer
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 class RecodeMap(dict):
@@ -21,7 +21,7 @@ class RecodeMap(dict):
 
 
 @verb(name="recode")
-def recode(input: VerbInput, to: str, column: str, mapping: dict) -> TableContainer:
+def recode(input: VerbInput, to: str, column: str, mapping: dict) -> VerbResult:
     """Recode verb implementation."""
     mapping = RecodeMap(mapping)
 
@@ -29,4 +29,4 @@ def recode(input: VerbInput, to: str, column: str, mapping: dict) -> TableContai
 
     output = cast(pd.DataFrame, input_table)
     output[to] = output[column].map(cast(Any, mapping))
-    return TableContainer(table=output)
+    return create_verb_result(output)

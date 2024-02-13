@@ -9,13 +9,13 @@ import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import TableContainer
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 @verb(name="strings.lower")
-def lower(input: VerbInput, column: str, to: str) -> TableContainer:
+def lower(input: VerbInput, column: str, to: str) -> VerbResult:
     """Transform a column by applying a string-lowercase."""
     input_table = input.get_input()
     output = cast(pd.DataFrame, input_table)
     output[to] = output[column].str.lower()
-    return TableContainer(table=output)
+    return create_verb_result(output)

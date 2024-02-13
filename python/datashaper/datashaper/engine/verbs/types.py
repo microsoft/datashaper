@@ -2,7 +2,7 @@
 from collections.abc import Callable
 from dataclasses import dataclass
 
-from datashaper.table_store.types import TableContainer, VerbResult
+from datashaper.table_store.types import VerbResult
 
 
 @dataclass
@@ -14,7 +14,7 @@ class VerbDetails:
 
     func: Callable[
         ...,
-        TableContainer | VerbResult,
+        VerbResult,
     ]
     """Function to execute."""
 
