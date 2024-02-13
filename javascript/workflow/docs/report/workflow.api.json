@@ -9608,6 +9608,27 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "@datashaper/workflow!NodeInput.Others:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Others = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"others\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Others"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "@datashaper/workflow!NodeInput.Source:member",
               "docComment": "",
               "excerptTokens": [
@@ -9643,6 +9664,27 @@
           "name": "NodeOutput",
           "preserveMemberOrder": false,
           "members": [
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/workflow!NodeOutput.Remainder:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Remainder = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"remainder\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Remainder"
+            },
             {
               "kind": "EnumMember",
               "canonicalReference": "@datashaper/workflow!NodeOutput.Result:member",

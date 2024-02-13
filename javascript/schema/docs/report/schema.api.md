@@ -865,7 +865,7 @@ export interface RollupArgs extends InputColumnArgs, OutputColumnArgs {
 //
 // @public (undocumented)
 export interface SampleArgs {
-    emitUnsampled?: boolean;
+    emitRemainder?: boolean;
     proportion?: number;
     seed?: number;
     size?: number;

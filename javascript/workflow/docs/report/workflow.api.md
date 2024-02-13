@@ -710,6 +710,8 @@ export enum NodeInput {
     // (undocumented)
     Other = "other",
     // (undocumented)
+    Others = "others",
+    // (undocumented)
     Source = "source"
 }
 
@@ -717,6 +719,8 @@ export enum NodeInput {
 //
 // @public (undocumented)
 export enum NodeOutput {
+    // (undocumented)
+    Remainder = "remainder",
     // (undocumented)
     Result = "result"
 }

@@ -8928,12 +8928,12 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!SampleArgs#emitUnsampled:member",
+              "canonicalReference": "@datashaper/schema!SampleArgs#emitRemainder:member",
               "docComment": "/**\n * Whether to preserve and emit the non-sampled records via the 'unsampled' output port.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "emitUnsampled?: "
+                  "text": "emitRemainder?: "
                 },
                 {
                   "kind": "Content",
@@ -8947,7 +8947,7 @@
               "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
-              "name": "emitUnsampled",
+              "name": "emitRemainder",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
