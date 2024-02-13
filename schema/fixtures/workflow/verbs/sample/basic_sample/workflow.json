@@ -1,0 +1,15 @@
+{
+	"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v2.json",
+	"steps": [
+		{
+			"verb": "sample",
+			"input": "companies",
+			"args": {
+				"size": 2,
+                "seed": 12345
+			},
+			"id": "expected"
+		}
+	],
+	"input": ["companies"]
+}

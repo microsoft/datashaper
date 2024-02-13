@@ -49,6 +49,7 @@ atable
 strptime
 isin
 itertuples
+unsampled
 
 # Technical Terms / Studies
 Freedman-Diaconis

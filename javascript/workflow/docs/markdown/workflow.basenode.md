@@ -30,9 +30,9 @@ export declare abstract class BaseNode<T, Config> implements Node<T, Config>
 |  [emit](./workflow.basenode.emit.md) | <code>protected</code> | (value: [Maybe](./workflow.maybe.md)<!-- -->&lt;T&gt;, socketName?: [SocketName](./workflow.socketname.md)<!-- -->) =&gt; void | Emits a new value into the named output socket |
 |  [emitError](./workflow.basenode.emiterror.md) | <code>protected</code> | (error: unknown, socketName?: [SocketName](./workflow.socketname.md)<!-- -->) =&gt; void | Emits a downstream error |
 |  [id](./workflow.basenode.id.md) |  | [NodeId](./workflow.nodeid.md) |  |
-|  [inputs](./workflow.basenode.inputs.md) | <code>readonly</code> | [SocketName](./workflow.socketname.md)<!-- -->\[\] |  |
+|  [inputs](./workflow.basenode.inputs.md) |  | [SocketName](./workflow.socketname.md)<!-- -->\[\] |  |
 |  [isBindingRequired](./workflow.basenode.isbindingrequired.md) | <p><code>protected</code></p><p><code>readonly</code></p> | boolean | If 'isBindingRequired' is true (the default), then config-changes will not drive recomputes if no input bindings are present. |
-|  [outputs](./workflow.basenode.outputs.md) | <code>readonly</code> | [SocketName](./workflow.socketname.md)<!-- -->\[\] |  |
+|  [outputs](./workflow.basenode.outputs.md) |  | [SocketName](./workflow.socketname.md)<!-- -->\[\] |  |
 |  [recalculate](./workflow.basenode.recalculate.md) | <code>protected</code> | (cause: string) =&gt; void | Calculate the value of this processing node. This may be invoked even if this processing node is not fully configured. recalculate() should account for this |
 |  [stats](./workflow.basenode.stats.md) | <code>readonly</code> | [NodeStats](./workflow.nodestats.md) |  |
 

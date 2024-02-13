@@ -7,10 +7,11 @@ import type { TableContainer } from '@datashaper/tables'
 import { container } from '@datashaper/tables'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import type { StepFunction } from '../../dataflow/index.js'
+import type { SocketName, StepApi, StepFunction } from '../../dataflow/index.js'
 import { BaseNode, StepNode } from '../../dataflow/index.js'
 import type { Maybe } from '../../primitives.js'
 import { set } from './sets.js'
+import { Socket } from 'dgram'
 
 export type ColumnTableStep<Args> = StepFunction<ColumnTable, Args>
 export type TableContainerStep<Args> = StepFunction<TableContainer, Args>
@@ -44,28 +45,42 @@ export class SetOperationNode<Args = unknown> extends BaseNode<
 
 export function stepVerbFactory<Args>(
 	columnTableStep: ColumnTableStep<Args>,
+	inputs: SocketName[] | undefined = undefined,
+	outputs: SocketName[] | undefined = undefined,
 ): (id: string) => StepNode<TableContainer, Args> {
 	return (id: string) => {
 		const step: TableContainerStep<Args> = function step(
 			this: StepNode<TableContainer, Args>,
 			source: TableContainer<unknown>,
 			args: Args,
+			api: StepApi<TableContainer>,
 		) {
-			if (source.table) {
-				let result: ColumnTable | undefined
-				try {
-					result = columnTableStep(source.table, args)
-				} catch (err) {
-					console.warn('error processing step', err)
-					this.emitError(err)
-				}
-				return container(id, result as Maybe<ColumnTable>)
-			} else {
-				// handle source.table ==null
+			// Wrap the Step API to work with ColumnTables instead of TableContainers
+			const subapi: StepApi<ColumnTable> = {
+				emit: (value: ColumnTable, socket?: SocketName) => {
+					const tableId = socket == null ? id : `${id}.${String(socket)}`
+					api.emit(container(tableId, value), socket)
+				},
+				input: (socket?: SocketName) => {
+					const input = this.inputValue(socket)
+					if (input) {
+						return input.table
+					}
+				},
+			}
+			if (source.table == null) {
 				return container(id)
 			}
+			let result: ColumnTable | undefined
+			try {
+				result = columnTableStep(source.table, args, subapi)
+			} catch (err) {
+				console.warn('error processing step', err)
+				this.emitError(err)
+			}
+			return container(id, result as Maybe<ColumnTable>)
 		}
-		const result = new StepNode<TableContainer, Args>(step)
+		const result = new StepNode<TableContainer, Args>(step, inputs, outputs)
 		result.id = id
 		return result
 	}

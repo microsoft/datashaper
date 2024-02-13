@@ -111,6 +111,7 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     protected inputError(name?: SocketName): Maybe<unknown>;
     // (undocumented)
     get inputs(): SocketName[];
+    protected set inputs(value: SocketName[]);
     // (undocumented)
     protected _inputs: SocketName[];
     // (undocumented)
@@ -126,6 +127,7 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     output(name?: SocketName): Maybe<T>;
     // (undocumented)
     get outputs(): SocketName[];
+    protected set outputs(value: SocketName[]);
     // (undocumented)
     protected _outputs: SocketName[];
     protected recalculate: (cause: string) => void;
@@ -992,10 +994,18 @@ export interface Step<T extends object | void | unknown = unknown> {
     verb: Verb;
 }
 
+// Warning: (ae-missing-release-tag) "StepApi" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface StepApi<T> {
+    emit(value: T, socket?: SocketName): void;
+    input(socket?: SocketName): T | undefined;
+}
+
 // Warning: (ae-missing-release-tag) "StepFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type StepFunction<T, Args> = (source: T, args: Args) => T;
+export type StepFunction<T, Args> = (source: T, args: Args, api: StepApi<T>) => T;
 
 // Warning: (ae-missing-release-tag) "StepInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1016,6 +1026,8 @@ export class StepNode<T, Args> extends BaseNode<T, Args> {
     constructor(step: StepFunction<T, Args>);
     // (undocumented)
     protected doRecalculate(): void;
+    // (undocumented)
+    protected get stepApi(): StepApi<T>;
 }
 
 // Warning: (ae-missing-release-tag) "stepNodeFactory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

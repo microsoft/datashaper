@@ -45,8 +45,8 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	private _getVariadicInputs: Maybe<() => Maybe<T>[]>
 
 	// Socket Names
-	protected _inputs: SocketName[]
-	protected _outputs: SocketName[]
+	protected _inputs: SocketName[] = []
+	protected _outputs: SocketName[] = []
 
 	/**
 	 * Creates a new instance of the BaseNode
@@ -55,8 +55,10 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	public constructor(
 		inputs: SocketName[] = [], 
 		outputs: SocketName[] = []) {
-		this._inputs = inputs
-		this._outputs = outputs
+		this.inputs = inputs
+		this.outputs = outputs
+		this.ensureInput(DEFAULT_INPUT_NAME)
+		this.ensureOutput(DEFAULT_OUTPUT_NAME)
 	}
 
 	public get inputs(): SocketName[] {
@@ -65,6 +67,42 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 
 	public get outputs(): SocketName[] {
 		return this._outputs
+	}
+
+	protected set inputs(value: SocketName[]) {
+		// Evict expired inputs
+		for (const name of this._inputValues$.keys()) {
+			if (!isDefaultInput(name) && !value.includes(name)) {
+				this._inputValues$.get(name)?.complete()
+				this._inputErrors$.get(name)?.complete()
+				this._inputValues$.delete(name)
+				this._inputErrors$.delete(name)
+			}
+		}
+
+		this._inputs = value
+
+		// Set up new input observables
+		for (const input of value) {
+			this.ensureInput(input)
+		}
+	}
+
+	protected set outputs(value: SocketName[]) {
+		// Evict expired outputs
+		for (const name of this._output$.keys()) {
+			if (!isDefaultOutput(name) && !value.includes(name)) {
+				this._output$.get(name)?.complete()
+				this._output$.delete(name)
+			}
+		}
+
+		this._outputs = value
+
+		// Set up new input observables
+		for (const output of value) {
+			this.ensureOutput(output)
+		}
 	}
 
 	public get stats(): NodeStats {
@@ -311,9 +349,8 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	}
 	protected ensureOutput(name: SocketName): void {
 		name = this.verifyOutputSocketName(name)
-		if (!this._inputValues$.has(name)) {
-			this._inputValues$.set(name, new BehaviorSubject<Maybe<T>>(undefined))
-			this._inputErrors$.set(name, new BehaviorSubject<unknown>(undefined))
+		if (!this._output$.has(name)) {
+			this._output$.set(name, new BehaviorSubject<Maybe<T>>(undefined))
 		}
 	}
 
@@ -375,10 +412,10 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * @param output - The output socket name
 	 */
 	protected emit = (value: Maybe<T>, socketName: SocketName = DEFAULT_OUTPUT_NAME): void => {
-		if (value !== this.output) {
+		if (value !== this.output(socketName)) {
 			this._version++
 			log(`${this.id} emitting ${value == null ? 'undefined' : 'value'}`)
-			this.output$(socketName).next(value ?? undefined)
+			this.output$(socketName).next(value)
 		}
 	}
 

@@ -8,4 +8,6 @@
 
 ```typescript
 get outputs(): SocketName[];
+
+protected set outputs(value: SocketName[]);
 ```

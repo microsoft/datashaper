@@ -78,6 +78,7 @@
 |  [ProfileInitializationContext](./workflow.profileinitializationcontext.md) |  |
 |  [ResourceConstructor](./workflow.resourceconstructor.md) | A constructor for a resource |
 |  [Step](./workflow.step.md) | Resolved step data, used in living workflows |
+|  [StepApi](./workflow.stepapi.md) | The API available to step functions. |
 |  [StepInput](./workflow.stepinput.md) | Step input data for parsing workflow schemas |
 |  [TableExportOptions](./workflow.tableexportoptions.md) | Options for exporting data-tables within Workflow instances.w |
 |  [Transformer\_2](./workflow.transformer_2.md) | A transformer for a type of I/O |

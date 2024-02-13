@@ -13,7 +13,7 @@ import { Workflow } from '../resources/index.js'
 // Static data paths.
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const SCHEMA_PATH = path.join(__dirname, '../../../../schema')
-const CASES_PATH = path.join(SCHEMA_PATH, 'fixtures', 'workflow')
+const CASES_PATH = path.join(SCHEMA_PATH, 'fixtures', 'workflow', 'verbs', 'sample')
 
 // Json-schema validator
 const schema = await readJson(path.join(SCHEMA_PATH, 'workflow.json'))
@@ -69,6 +69,9 @@ function defineTestCase(parentPath: string, test: string) {
 				const expected = await readCsv(path.join(casePath, `${o}.csv`))
 				await new Promise<void>((resolve) => {
 					const result = workflow.read(o)
+					if (o === "unsampled")
+						console.log("OPEN; expected=%s, actual=%s", expected.numRows(), result?.table?.numRows())
+
 					if (result?.table) {
 						compareTables(expected, result.table, o)
 						resolve()
