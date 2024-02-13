@@ -254,9 +254,10 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 				])
 			}
 			const listenToInput = () => {
+				const outputSocket = binding.node.output$(binding.output)
 				this._inputSubscriptions.set(
 					input,
-					binding.node.output$(binding.output).subscribe({
+					outputSocket.subscribe({
 						next: (value) => {
 							if (errors.value != null) {
 								errors.next(undefined)
@@ -343,14 +344,17 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	protected ensureInput(name: SocketName): void {
 		name = this.verifyInputSocketName(name)
 		if (!this._inputValues$.has(name)) {
-			this._inputValues$.set(name, new BehaviorSubject<Maybe<T>>(undefined))
-			this._inputErrors$.set(name, new BehaviorSubject<unknown>(undefined))
+			const input$ = new BehaviorSubject<Maybe<T>>(undefined)
+			const error$ = new BehaviorSubject<unknown>(undefined)
+			this._inputValues$.set(name, input$)
+			this._inputErrors$.set(name, error$)
 		}
 	}
 	protected ensureOutput(name: SocketName): void {
 		name = this.verifyOutputSocketName(name)
 		if (!this._output$.has(name)) {
-			this._output$.set(name, new BehaviorSubject<Maybe<T>>(undefined))
+			const output$ = new BehaviorSubject<Maybe<T>>(undefined)
+			this._output$.set(name,  output$)
 		}
 	}
 
