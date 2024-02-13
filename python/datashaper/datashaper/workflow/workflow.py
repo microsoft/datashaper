@@ -259,7 +259,7 @@ class Workflow(Generic[Context]):
         self,
         verb: VerbDetails,
         inputs: str | dict[str, WorkflowInput | list[WorkflowInput]],
-    ) -> dict:
+    ) -> VerbInput:
         def input_table(name: str, output: str | None = None) -> TableContainer:
             graph_node = self._graph.get(name)
             step_table_is_safe_to_mutate = (
@@ -289,7 +289,7 @@ class Workflow(Generic[Context]):
             return TableContainer(table=table)
 
         if isinstance(inputs, str):
-            return {"input": VerbInput(input=input_table(inputs))}
+            return VerbInput(input=input_table(inputs))
 
         input_mapping: dict[str, TableContainer | list[TableContainer]] = {}
         for key, value in inputs.items():
@@ -316,15 +316,13 @@ class Workflow(Generic[Context]):
         other_tbl = cast(TableContainer, input_mapping.pop("other", None))
         others_tbl = cast(list[TableContainer], input_mapping.pop("others", None))
         input_mapping = cast(dict, input_mapping)
-        return {
-            "input": VerbInput(
-                input=input_tbl,
-                source=source_tbl,
-                other=other_tbl,
-                others=others_tbl,
-                named=cast(dict[str, TableContainer], input_mapping),
-            )
-        }
+        return VerbInput(
+            input=input_tbl,
+            source=source_tbl,
+            other=other_tbl,
+            others=others_tbl,
+            named=cast(dict[str, TableContainer], input_mapping),
+        )
 
     def add_table(self, id: str, table: pd.DataFrame) -> None:
         """Add a dataframe to the graph with a given id."""
@@ -409,11 +407,11 @@ class Workflow(Generic[Context]):
         start_verb_time = time.time()
 
         try:
-            inputs = self._resolve_inputs(node.verb, node.node_input)
+            input = self._resolve_inputs(node.verb, node.node_input)
             verb_context = self._resolve_run_context(node, context, callbacks)
-            callbacks.on_step_start(node, inputs)
+            callbacks.on_step_start(node, input)
             callbacks.on_step_progress(node, Progress(percent=0))
-            result = node.verb.func(**node.args, **inputs, **verb_context)
+            result = node.verb.func(input=input, **node.args, **verb_context)
 
             # Unroll the result if it's a coroutine
             # (we need to do this before calling on_step_end)
