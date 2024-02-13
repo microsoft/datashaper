@@ -349,6 +349,7 @@ class Workflow(Generic[Context]):
 
                 if node_id not in visited:
                     missing_inputs = self._get_missing_inputs(node_id, visited)
+                    node_id = node.node_id if node is not None else node_id
                     verb_name = node.verb.name if node is not None else "unknown"
                     raise NodeNotVisitedError(node_id, verb_name, missing_inputs)
 
