@@ -33,7 +33,7 @@ from datashaper.execution.execution_node import ExecutionNode, WorkflowInput
 from datashaper.progress.types import Progress
 from datashaper.table_store.in_memory_table_store import InMemoryTableStore
 from datashaper.table_store.table_store import TableStore
-from datashaper.table_store.types import ComplexVerbResult, Table, TableContainer
+from datashaper.table_store.types import Table, TableContainer, VerbResult
 
 from .types import MemoryProfile, VerbTiming, WorkflowRunResult
 from .verb_callbacks import DelegatingVerbCallbacks
@@ -426,7 +426,7 @@ class Workflow(Generic[Context]):
         else:
             if isinstance(result, TableContainer):
                 self._table_store.add(node.node_id, result, tag="output")
-            elif isinstance(result, ComplexVerbResult):
+            elif isinstance(result, VerbResult):
                 self._table_store.add(node.node_id, result.output, tag="output")
                 for name, table in result.named_outputs.items():
                     self._table_store.add(f"{node.node_id}.{name}", table, tag="output")

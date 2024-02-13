@@ -65,7 +65,7 @@ class TableContainer(Generic[T]):
 
 
 @dataclass
-class ComplexVerbResult(Generic[T]):
+class VerbResult(Generic[T]):
     """A container for the results from a verb that emits multiple tables."""
 
     output: TableContainer[T]

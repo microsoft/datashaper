@@ -9,7 +9,7 @@ import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import ComplexVerbResult, Table, TableContainer
+from datashaper.table_store.types import Table, TableContainer, VerbResult
 
 
 @verb(name="sample", treats_input_tables_as_immutable=True)
@@ -19,7 +19,7 @@ def sample(
     proportion: int | None = None,
     seed: int | None = None,
     emitRemainder: bool | None = False,  # noqa F403 - schema argument
-) -> TableContainer | ComplexVerbResult:
+) -> TableContainer | VerbResult:
     """Sample verb implementation."""
     input_table = input.get_input()
     if not emitRemainder:
@@ -35,7 +35,7 @@ def sample(
 
     unsampled = input_table.loc[non_sampled_ids].reset_index(drop=True)
 
-    return ComplexVerbResult(
+    return VerbResult(
         TableContainer(cast(pd.DataFrame, result)),
         {"remainder": TableContainer(unsampled)},
     )
