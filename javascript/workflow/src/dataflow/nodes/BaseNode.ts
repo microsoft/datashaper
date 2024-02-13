@@ -229,6 +229,9 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 			// empty array of initial inputs
 			const values: Maybe<T>[] = binding.map(() => undefined)
 			const subs = binding.map((i, index) => {
+				if (i.node === this) {
+					throw new Error('cannot bind to self')
+				}
 				return i.node.output$(i.output).subscribe((v) => {
 					values[index] = v
 					this.recalculate(`input_variadic@${i}`)
@@ -255,10 +258,15 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 			}
 			const listenToInput = () => {
 				const outputSocket = binding.node.output$(binding.output)
+				log(`${this.id} listening to ${binding.node.id}`)
+				if (binding.node === this) {
+					throw new Error('cannot bind to self')
+				}
 				this._inputSubscriptions.set(
 					input,
 					outputSocket.subscribe({
 						next: (value) => {
+							log(`${this.id} receive ${value == null ? value : 'valid value'}`)
 							if (errors.value != null) {
 								errors.next(undefined)
 							}
@@ -268,6 +276,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 							}
 						},
 						error: (error: unknown) => {
+							log(`${this.id} error from ${binding.node.id}`, error)
 							values.next(undefined)
 							errors.next(error)
 							this?.recalculate('input_error')
@@ -416,10 +425,11 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * @param output - The output socket name
 	 */
 	protected emit = (value: Maybe<T>, socketName: SocketName = DEFAULT_OUTPUT_NAME): void => {
-		if (value !== this.output(socketName)) {
-			this._version++
+		const socket = this.output$(socketName)
+		if (value !== socket.value) {
 			log(`${this.id} emitting ${value == null ? 'undefined' : 'value'}`)
-			this.output$(socketName).next(value)
+ 			this._version++
+			socket.next(value)
 		}
 	}
 

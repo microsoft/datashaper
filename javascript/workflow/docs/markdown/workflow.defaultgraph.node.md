@@ -4,6 +4,8 @@
 
 ## DefaultGraph.node() method
 
+Get a node by id
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,9 +16,10 @@ node(id: NodeId): Node<T>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  id | [NodeId](./workflow.nodeid.md) |  |
+|  id | [NodeId](./workflow.nodeid.md) | The node ID to retrieve |
 
 <b>Returns:</b>
 
 Node&lt;T&gt;
+
 

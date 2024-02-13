@@ -25,9 +25,18 @@ const DEFAULT_INPUT = '__DEFAULT_INPUT__'
 
 export class GraphManager extends Disposable {
 	private readonly _graph = new DefaultGraph<TableContainer>()
+	
 	private readonly _defaultInputNode: Node<TableContainer>
+
+	/**
+	 * The steps in the workflow
+	 */
 	private readonly _steps$ = new BehaviorSubject<Step[]>([])
+	/**
+	 * The number of steps in the workflow
+	 */
 	private readonly _numSteps$ = this._steps$.pipe(map((steps) => steps.length))
+
 	private readonly _inputDelegates = new Map<
 		string,
 		DelegateSubject<TableContainer>
@@ -37,6 +46,10 @@ export class GraphManager extends Disposable {
 		super()
 		this._defaultInputNode = observableNode(DEFAULT_INPUT, defaultInput$)
 		this._graph.add(this._defaultInputNode)
+	}
+
+	public get defaultInput(): Node<TableContainer> {
+		return this._defaultInputNode
 	}
 
 	public get steps(): Step[] {
@@ -78,18 +91,6 @@ export class GraphManager extends Disposable {
 		this._graph.clear()
 		this._steps$.complete()
 		super.dispose()
-	}
-
-	public getDefaultInput(): Node<TableContainer> {
-		return this._defaultInputNode
-	}
-
-	public getNode(id: string): Node<TableContainer> {
-		return this._graph.node(id)
-	}
-
-	public hasNode(id: string): boolean {
-		return this._graph.hasNode(id)
 	}
 
 	public addStep(input: StepInput): Step {
@@ -191,7 +192,12 @@ export class GraphManager extends Disposable {
 		return lastNode.output$() as Observable<Maybe<TableContainer>>
 	}
 
-	public setSource(id: string, value: Observable<Maybe<TableContainer>>): void {
+	/**
+	 * Binds the input of a node to an observable
+	 * @param id - The input value to bind
+	 * @param value - The observable to bind the input to 
+	 */
+	public bind(id: string, value: Observable<Maybe<TableContainer>>): void {
 		const input = this._inputDelegates.get(id)
 		if (input == null) {
 			throw new Error(`input ${id} not observed`)
@@ -199,7 +205,7 @@ export class GraphManager extends Disposable {
 		input.input = value
 	}
 
-	public ensureInput(id: string): void {
+	public ensureInputNode(id: string): void {
 		if (this._inputDelegates.has(id)) {
 			return
 		}
@@ -249,7 +255,7 @@ export class GraphManager extends Disposable {
 
 		// first bind the standard input to the step, either the previous step or the default input
 		if (prevStep == null) {
-			node.bind({ node: this.getDefaultInput() })
+			node.bind({ node: this.defaultInput })
 		} else if (prevStep != null) {
 			node.bind({ node: this.getNode(prevStep.id) })
 		}
@@ -269,8 +275,7 @@ export class GraphManager extends Disposable {
 						const output = getOutput(binding)
 						if (this.hasNode(nodeId)) {
 							// Bind Non-Variadic Input
-							const node = this.getNode(nodeId)
-							node.bind({ input, node, output })
+							node.bind({ input, node: this.getNode(nodeId), output })
 						} else {
 							console.warn(`node ${nodeId} not found`)
 						}
@@ -278,5 +283,13 @@ export class GraphManager extends Disposable {
 				}
 			}
 		}
+	}
+
+	private getNode(id: string): Node<TableContainer> {
+		return this._graph.node(id)
+	}
+
+	private hasNode(id: string): boolean {
+		return this._graph.hasNode(id)
 	}
 }

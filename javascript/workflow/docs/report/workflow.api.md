@@ -391,20 +391,13 @@ export const dedupe: (id: string) => StepNode<TableContainer<unknown>, Partial<I
 //
 // @public (undocumented)
 export class DefaultGraph<T> implements Graph<T> {
-    // (undocumented)
     add(node: Node_2<T>): void;
-    // (undocumented)
     clear(): void;
-    // (undocumented)
     hasNode(id: NodeId): boolean;
-    // (undocumented)
     node(id: NodeId): Node_2<T>;
     get nodes(): NodeId[];
-    // (undocumented)
     printStats(): void;
-    // (undocumented)
     remove(removeId: NodeId): void;
-    // (undocumented)
     validate(): void;
 }
 
@@ -1180,8 +1173,6 @@ export class Workflow extends Resource implements TableTransformer {
     addInputTables(inputs: TableContainer[]): void;
     addOutput(name: string): void;
     addStep(input: StepInput): Step;
-    get allTableNames$(): Observable<string[]>;
-    get allTableNames(): string[];
     // (undocumented)
     connect(dp: DataPackage, top: boolean): void;
     // (undocumented)
@@ -1235,6 +1226,8 @@ export class Workflow extends Resource implements TableTransformer {
     get steps(): Step[];
     // (undocumented)
     suggestOutputName(name: string): string;
+    get tableNames$(): Observable<string[]>;
+    get tableNames(): string[];
     // (undocumented)
     toArray({ includeDefaultInput, includeDefaultOutput, includeInputs, }?: TableExportOptions): Maybe<TableContainer>[];
     // (undocumented)

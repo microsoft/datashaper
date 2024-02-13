@@ -50,7 +50,7 @@ export class Workflow extends Resource implements TableTransformer {
 	// Delegated Facade Managers
 	private readonly _nameMgr = new NameManager()
 	private readonly _tableMgr = new TableManager()
-	private readonly _graphMgr = new GraphManager(this._tableMgr.in$)
+	private readonly _graphMgr = new GraphManager(this._tableMgr.defaultInput$)
 	private _dataPackageSub?: Unsubscribe
 
 	public constructor(
@@ -91,23 +91,15 @@ export class Workflow extends Resource implements TableTransformer {
 		}
 	}
 
-	public printStats(): void {
-		this._graphMgr.printStats()
-	}
-
-	private rebindDefaultOutput() {
-		const data$ = this._graphMgr.lastOutput$ ?? this._tableMgr.in$
-		this._tableMgr.setDefaultOutputSource(data$)
-	}
-
 	/**
 	 * Observe an output name
 	 * @param name - The output to observe. If falsy, this will observe the default output of the final step.
 	 * If no observable is ready yet, a new observable will be created
 	 */
 	public read(name?: string): Maybe<TableContainer> {
-		const result = this._read(name).value
-		return { ...(result ?? {}), id: name ?? this.name }
+		const table = this._read(name).value
+		const result = this.renameTo(name)(table)
+		return result
 	}
 
 	/**
@@ -116,12 +108,12 @@ export class Workflow extends Resource implements TableTransformer {
 	 * If no observable is ready yet, a new observable will be created
 	 */
 	public read$(name?: string): Observable<Maybe<TableContainer>> {
-		return this._read(name).pipe(map(this.renameTo(name ?? this.name)))
+		return this._read(name).pipe(map(this.renameTo(name)))
 	}
 
 	private _read(name?: string): BehaviorSubject<Maybe<TableContainer>> {
 		if (name == null) {
-			return this._tableMgr.out$
+			return this._tableMgr.defaultOutput$
 		}
 		const [result, created] = this._tableMgr.ensure(name)
 		if (created) {
@@ -135,24 +127,10 @@ export class Workflow extends Resource implements TableTransformer {
 	// #region Inputs
 
 	/**
-	 * Get the default output observable
-	 */
-	public get output$(): Observable<Maybe<TableContainer>> {
-		return this.read$()
-	}
-
-	/**
-	 * Get the current default output
-	 */
-	public get output(): Maybe<TableContainer> {
-		return this.read()
-	}
-
-	/**
 	 * Get an observable of the names of all declared inputs and outputs.
 	 * This does not include the default input or default output tables.
 	 */
-	public get allTableNames$(): Observable<string[]> {
+	public get tableNames$(): Observable<string[]> {
 		return this._nameMgr.all$
 	}
 
@@ -160,7 +138,7 @@ export class Workflow extends Resource implements TableTransformer {
 	 * Get the names of all declared inputs and outputs.
 	 * This does not include the default input or default output tables.
 	 */
-	public get allTableNames(): string[] {
+	public get tableNames(): string[] {
 		return unique(this.inputNames.concat(this.outputNames))
 	}
 
@@ -174,7 +152,7 @@ export class Workflow extends Resource implements TableTransformer {
 
 	public addInputName(input: string): void {
 		if (!this._nameMgr.addInput(input)) {
-			this._graphMgr.ensureInput(input)
+			this._graphMgr.ensureInputNode(input)
 			this._onChange.next()
 		}
 	}
@@ -192,21 +170,21 @@ export class Workflow extends Resource implements TableTransformer {
 	}
 
 	public get input$(): TableObservable {
-		return this._tableMgr.in$
+		return this._tableMgr.defaultInput$
 	}
 
 	public set input$(source: Maybe<TableObservable>) {
-		this._tableMgr.setDefaultInputSource(source ?? EMPTY)
+		this._tableMgr.defaultInput$ = source ?? EMPTY
 		this._graphMgr.configureAllSteps()
 		this._onChange.next()
 	}
 
 	public get input(): Maybe<TableContainer> {
-		return this._tableMgr.in$.value
+		return this._tableMgr.defaultInput$.value
 	}
 
 	public set input(source: Maybe<TableContainer>) {
-		this._tableMgr.setDefaultInput(source)
+		this._tableMgr.defaultInput = source
 		this._graphMgr.configureAllSteps()
 		this._onChange.next()
 	}
@@ -217,7 +195,7 @@ export class Workflow extends Resource implements TableTransformer {
 	 */
 	public addInput(source: TableObservable, id: string): void {
 		this._assertInputName(id)
-		this._graphMgr.ensureInput(id)
+		this._graphMgr.ensureInputNode(id)
 		this._bindInputObservable(id, source)
 
 		this._graphMgr.configureAllSteps()
@@ -234,7 +212,7 @@ export class Workflow extends Resource implements TableTransformer {
 		}
 
 		for (const [id, source] of values.entries()) {
-			this._graphMgr.ensureInput(id)
+			this._graphMgr.ensureInputNode(id)
 			this._bindInputObservable(id, source)
 		}
 
@@ -246,6 +224,7 @@ export class Workflow extends Resource implements TableTransformer {
 		this._removeInputObservableSilent(id)
 		this._onChange.next()
 	}
+
 
 	private _removeInputObservableSilent(id: string): void {
 		this._graphMgr.removeNode(id)
@@ -270,8 +249,8 @@ export class Workflow extends Resource implements TableTransformer {
 	}
 
 	private _bindInputObservable(id: string, source: TableObservable): void {
-		const d$ = this._tableMgr.setSource(id, source)
-		this._graphMgr.setSource(id, d$)
+		const d$ = this._tableMgr.bind(id, source)
+		this._graphMgr.bind(id, d$)
 	}
 
 	private _assertInputName(id: string | undefined): void {
@@ -281,6 +260,21 @@ export class Workflow extends Resource implements TableTransformer {
 	// #endregion
 
 	// #region Outputs
+
+	/**
+	 * Get the default output observable
+	 */
+	public get output$(): Observable<Maybe<TableContainer>> {
+		return this.read$()
+	}
+
+	/**
+	 * Get the current default output
+	 */
+	public get output(): Maybe<TableContainer> {
+		return this.read()
+	}
+
 	public hasOutputName(name: string): boolean {
 		return this._nameMgr.hasOutput(name)
 	}
@@ -324,6 +318,7 @@ export class Workflow extends Resource implements TableTransformer {
 	// #endregion
 
 	// #region Steps
+
 	public get steps(): Step[] {
 		return this._graphMgr.steps
 	}
@@ -376,20 +371,8 @@ export class Workflow extends Resource implements TableTransformer {
 
 	// #endregion
 
-	public toArray({
-		includeDefaultInput,
-		includeDefaultOutput,
-		includeInputs,
-	}: TableExportOptions = {}): Maybe<TableContainer>[] {
-		return this._tableMgr.toArray(
-			includeInputs
-				? [...this.inputNames, ...this.outputNames]
-				: this.outputNames,
-			includeDefaultInput,
-			includeDefaultOutput,
-		)
-	}
-
+	// #region Schema Save, Load, and Validation
+	
 	public override toSchema(): WorkflowSchema {
 		return createWorkflowSchemaObject({
 			...super.toSchema(),
@@ -407,7 +390,7 @@ export class Workflow extends Resource implements TableTransformer {
 
 		this._nameMgr.setNames(input)
 		for (const i of input) {
-			this._graphMgr.ensureInput(i)
+			this._graphMgr.ensureInputNode(i)
 		}
 
 		this._graphMgr.setSteps(schema?.steps?.map((i) => i as StepInput) ?? [])
@@ -417,21 +400,13 @@ export class Workflow extends Resource implements TableTransformer {
 		}
 	}
 
-	private observeOutput(nodeId: string, socketName: SocketName | undefined = undefined) {
-		const [outputTable] = this._tableMgr.ensure(nodeId)
-		const n = this._graphMgr.getOrCreateNode(nodeId)
-		outputTable.input = n.output$(socketName)
-	}
-
 	public static async validate(workflowJson: WorkflowSchema): Promise<boolean> {
 		return WorkflowSchemaValidator.validate(workflowJson)
 	}
 
-	private renameTo =
-		(name: string) => (table: Maybe<TableContainer>): TableContainer => ({
-			...(table ?? {}),
-			id: name,
-		})
+	// #endregion
+
+	// #region Debugging Utilities
 
 	public override dispose(): void {
 		log('disposing')
@@ -441,4 +416,42 @@ export class Workflow extends Resource implements TableTransformer {
 		this._nameMgr.dispose()
 		super.dispose()
 	}
+
+
+	public printStats(): void {
+		this._graphMgr.printStats()
+	}
+
+	public toArray({
+		includeDefaultInput,
+		includeDefaultOutput,
+		includeInputs,
+	}: TableExportOptions = {}): Maybe<TableContainer>[] {
+		return this._tableMgr.toArray(
+			includeInputs
+				? [...this.inputNames, ...this.outputNames]
+				: this.outputNames,
+			includeDefaultInput,
+			includeDefaultOutput,
+		)
+	}
+
+	// #endregion
+
+	private rebindDefaultOutput() {
+		const data$ = this._graphMgr.lastOutput$ ?? this._tableMgr.defaultInput$
+		this._tableMgr.defaultOutput$ = data$
+	}
+
+	private observeOutput(nodeId: string, socketName: SocketName | undefined = undefined) {
+		const [outputTable] = this._tableMgr.ensure(nodeId)
+		const n = this._graphMgr.getOrCreateNode(nodeId)
+		outputTable.input = n.output$(socketName)
+	}
+
+	private renameTo =
+		(name: string | undefined) => (table: Maybe<TableContainer>): TableContainer => ({
+			...(table ?? {}),
+			id: name ?? this.name,
+		})
 }

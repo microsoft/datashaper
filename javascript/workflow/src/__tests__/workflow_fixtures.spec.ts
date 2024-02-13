@@ -7,8 +7,10 @@ import fs from 'fs'
 import fsp from 'fs/promises'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
-
+import debug from 'debug'
 import { Workflow } from '../resources/index.js'
+
+const log = debug("datashaper:workflow")
 
 // Static data paths.
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -136,7 +138,7 @@ function compareTables(
 		}
 	} catch (e) {
 		console.log(
-			`data mismatch; \n-----EXPECTED-----\n${expected.toCSV()}\n\n-----ACTUAL-----\n${actual.toCSV()}`,
+			`data mismatch on ${name}; \n-----EXPECTED-----\n${expected.toCSV()}\n\n-----ACTUAL-----\n${actual.toCSV()}`,
 		)
 		throw e
 	}

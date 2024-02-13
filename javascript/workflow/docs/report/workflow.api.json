@@ -5791,7 +5791,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!DefaultGraph#add:member(1)",
-              "docComment": "",
+              "docComment": "/**\n * Add a node to the graph\n *\n * @param node - The node to add to the graph\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -5843,7 +5843,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!DefaultGraph#clear:member(1)",
-              "docComment": "",
+              "docComment": "/**\n * Clear the graph and remove all nodes\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -5873,7 +5873,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!DefaultGraph#hasNode:member(1)",
-              "docComment": "",
+              "docComment": "/**\n * Check if the graph has a node with the given ID\n *\n * @param id - The node ID to check\n *\n * @returns Whether the graph has a node with the given ID\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -5921,7 +5921,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!DefaultGraph#node:member(1)",
-              "docComment": "",
+              "docComment": "/**\n * Get a node by id\n *\n * @param id - The node ID to retrieve\n *\n * @returns \n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -6008,7 +6008,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!DefaultGraph#printStats:member(1)",
-              "docComment": "",
+              "docComment": "/**\n * Print per-node stats of the graph\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -6038,7 +6038,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!DefaultGraph#remove:member(1)",
-              "docComment": "",
+              "docComment": "/**\n * Remove a node by ID from the graph\n *\n * @param removeId - The node ID to remove\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -6086,7 +6086,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!DefaultGraph#validate:member(1)",
-              "docComment": "",
+              "docComment": "/**\n * Validate the graph, checking for any cycles\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -15940,69 +15940,6 @@
               "name": "addStep"
             },
             {
-              "kind": "Property",
-              "canonicalReference": "@datashaper/workflow!Workflow#allTableNames:member",
-              "docComment": "/**\n * Get the names of all declared inputs and outputs. This does not include the default input or default output tables.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get allTableNames(): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "allTableNames",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isStatic": false,
-              "isProtected": false
-            },
-            {
-              "kind": "Property",
-              "canonicalReference": "@datashaper/workflow!Workflow#allTableNames$:member",
-              "docComment": "/**\n * Get an observable of the names of all declared inputs and outputs. This does not include the default input or default output tables.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get allTableNames$(): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Observable",
-                  "canonicalReference": "rxjs!Observable:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<string[]>"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "allTableNames$",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              },
-              "isStatic": false,
-              "isProtected": false
-            },
-            {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!Workflow#connect:member(1)",
               "docComment": "",
@@ -17235,6 +17172,69 @@
               ],
               "isOptional": false,
               "name": "suggestOutputName"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!Workflow#tableNames:member",
+              "docComment": "/**\n * Get the names of all declared inputs and outputs. This does not include the default input or default output tables.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get tableNames(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "tableNames",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!Workflow#tableNames$:member",
+              "docComment": "/**\n * Get an observable of the names of all declared inputs and outputs. This does not include the default input or default output tables.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get tableNames$(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Observable",
+                  "canonicalReference": "rxjs!Observable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string[]>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "tableNames$",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
