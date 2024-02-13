@@ -16,6 +16,7 @@ def sample(
     size: int | None = None,
     proportion: int | None = None,
     seed: int | None = None,
+    emitUnsampled: bool | None = False,  # noqa F403 - schema argument
 ) -> TableContainer:
     """Sample verb implementation."""
     input_table = input.get_input()

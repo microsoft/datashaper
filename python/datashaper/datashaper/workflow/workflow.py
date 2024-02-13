@@ -166,17 +166,23 @@ class Workflow(Generic[Context]):
                     known.add(step["id"])
 
                 if "input" in step:
-                    step_input = step["input"]
+                    step_input: str | dict[str, dict | str] = step["input"]
+
                     if isinstance(step_input, str):
                         deps.add(step_input)
                     else:
-                        deps.add(step_input["source"])
-                        if "others" in step_input:
-                            for e in step_input["others"]:
-                                deps.add(e)
-                        if "depends_on" in step_input:
-                            for e in step_input["depends_on"]:
-                                deps.add(e)
+
+                        def resolve(value: str | dict) -> None:
+                            if isinstance(value, str):
+                                return value
+                            return value["node"]
+
+                        for value in step_input.values():
+                            if isinstance(value, list):
+                                for dep in value:
+                                    deps.add(resolve(dep))
+                            else:
+                                deps.add(resolve(value))
 
         # Remove known steps from dep list
         return deps.difference(known)

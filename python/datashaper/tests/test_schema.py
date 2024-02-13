@@ -4,6 +4,7 @@ from functools import cache
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
 from threading import Thread
+from logging import getLogger
 
 import pandas as pd
 import pytest
@@ -14,7 +15,7 @@ from datashaper import PandasDtypeBackend, Workflow
 FIXTURES_PATH = "fixtures/workflow"
 TABLE_STORE_PATH = "fixtures/workflow_inputs"
 SCHEMA_PATH = "workflow.json"
-
+log = getLogger(__name__)
 os.chdir("../../schema")
 
 
@@ -85,26 +86,40 @@ async def test_verbs_schema_input(
         )
 
     await workflow.run()
-    for expected in os.listdir(fixture_path):
+    py_path = Path(fixture_path) / "py"
+    table_path = str(py_path) if py_path.exists() else fixture_path
+
+    for expected in os.listdir(table_path):
+        result_table_path = Path(table_path) / f"result_{expected}"
+        expected_table_path = Path(table_path) / expected
+
         if expected.endswith(".csv"):
             try:
                 table_name = expected.split(".")[0]
                 table_name_arg = table_name if table_name != "expected" else None
                 result = workflow.output(table_name_arg)
                 if isinstance(result, pd.DataFrame):
-                    result.to_csv(
-                        Path(fixture_path) / f"result_{expected}", index=False
-                    )
+                    result.to_csv(result_table_path, index=False)
                 else:
-                    result.obj.to_csv(
-                        Path(fixture_path) / f"result_{expected}", index=False
-                    )
+                    result.obj.to_csv(result_table_path, index=False)
+
+                expected_table = read_csv(expected_table_path)
+                result_table = read_csv(result_table_path)
+
                 assert_frame_equal(
-                    read_csv(Path(fixture_path) / expected),
-                    read_csv(Path(fixture_path) / f"result_{expected}"),
+                    expected_table,
+                    result_table,
                     check_like=True,
                     check_dtype=False,
                     check_column_type=False,
                 )
+            except AssertionError:
+                log.info(
+                    "Error in %s;\nExpected:\n%s\n\nActual:\n%s",
+                    fixture_path,
+                    expected_table.head(),
+                    result_table.head(),
+                )
+                raise
             finally:
-                (Path(fixture_path) / f"result_{expected}").unlink()
+                result_table_path.unlink()

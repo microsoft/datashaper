@@ -49,8 +49,11 @@ function doDescribe(targetPath: string) {
 function defineTestCase(parentPath: string, test: string) {
 	const casePath = path.join(parentPath, test)
 	const testName = test.split('_').join(' ')
+	const jsTablePath = path.join(casePath, "js")
+	const tablesPath = fs.existsSync(jsTablePath) ? jsTablePath : casePath
+
 	const expectedOutputTables = fs
-		.readdirSync(casePath)
+		.readdirSync(tablesPath)
 		.filter((f) => f.endsWith('.csv'))
 		.map((f) => f.replace('.csv', ''))
 
@@ -68,7 +71,7 @@ function defineTestCase(parentPath: string, test: string) {
 		// check the output tables
 		await Promise.all(
 			expectedOutputTables.map(async (o) => {
-				const expected = await readCsv(path.join(casePath, `${o}.csv`))
+				const expected = await readCsv(path.join(tablesPath, `${o}.csv`))
 				await new Promise<void>((resolve) => {
 					const result = workflow.read(o)
 					if (result?.table) {
