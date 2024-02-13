@@ -7,7 +7,7 @@
 			"args": {
 				"size": 2,
                 "seed": 12345,
-				"emitUnsampled": true
+				"emitRemainder": true
 			},
 			"id": "expected"
 		},
@@ -16,7 +16,7 @@
 			"input": {
 				"source": {
 					"node": "expected",
-					"output": "unsampled"
+					"output": "remainder"
 				}
 			},
 			"args": {

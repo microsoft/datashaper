@@ -18,11 +18,11 @@ def sample(
     size: int | None = None,
     proportion: int | None = None,
     seed: int | None = None,
-    emitUnsampled: bool | None = False,  # noqa F403 - schema argument
+    emitRemainder: bool | None = False,  # noqa F403 - schema argument
 ) -> TableContainer | ComplexVerbResult:
     """Sample verb implementation."""
     input_table = input.get_input()
-    if not emitUnsampled:
+    if not emitRemainder:
         output = input_table.sample(n=size, frac=proportion, random_state=seed)
         return TableContainer(table=cast(Table, output))
 
@@ -37,5 +37,5 @@ def sample(
 
     return ComplexVerbResult(
         TableContainer(cast(pd.DataFrame, result)),
-        {"unsampled": TableContainer(unsampled)},
+        {"remainder": TableContainer(unsampled)},
     )

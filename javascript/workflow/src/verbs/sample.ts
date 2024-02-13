@@ -6,12 +6,11 @@ import type { SampleArgs } from '@datashaper/schema'
 import { from, seed, op } from 'arquero'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
-
-const UNSAMPLED_TABLE = 'unsampled'
+import { NodeOutput } from '../dataflow/types.js'
 
 export const sampleStep: ColumnTableStep<SampleArgs> = (
 	input,
-	{ size, proportion, seed: seedArg, emitUnsampled },
+	{ size, proportion, seed: seedArg, emitRemainder },
 	{ emit },
 ) => {
 	const executeSampling = () => {
@@ -19,7 +18,7 @@ export const sampleStep: ColumnTableStep<SampleArgs> = (
 		const s = size || p
 
 		// Handle the simple case where we don't have to track what was not sampled
-		if (!emitUnsampled) {
+		if (!emitRemainder) {
 			return input.sample(s)
 		}
 
@@ -51,7 +50,7 @@ export const sampleStep: ColumnTableStep<SampleArgs> = (
 
 		// Emit the unsampled data table
 		const unsampled = from(unsampledRows)
-		emit(unsampled, UNSAMPLED_TABLE)
+		emit(unsampled, NodeOutput.Remainder)
 
 		// Return the sampled data without the temporary index
 		return sampled.select(
@@ -68,4 +67,4 @@ export const sampleStep: ColumnTableStep<SampleArgs> = (
 	}
 }
 
-export const sample = stepVerbFactory(sampleStep, [], [UNSAMPLED_TABLE])
+export const sample = stepVerbFactory(sampleStep, [], [NodeOutput.Remainder])

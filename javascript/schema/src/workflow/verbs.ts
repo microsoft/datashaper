@@ -681,7 +681,7 @@ export interface SampleArgs {
 	/**
 	 * Whether to preserve and emit the non-sampled records via the 'unsampled' output port.
 	 */
-	emitUnsampled?: boolean
+	emitRemainder?: boolean
 }
 
 export type SelectArgs = InputColumnListArgs

@@ -37,29 +37,30 @@ describe('test for sample verb', () => {
 		expect(result.numRows()).toBe(4)
 	})
 
-	test('sample test with size and preserve unsampled', () => {
-		let unsampled: ColumnTable | undefined = undefined
+	test('sample test with size and preserve remainder', () => {
+		let remainder: ColumnTable | undefined = undefined
 		const result = sampleStep(
 			store.table('table6'),
 			{
 				size: 4,
-				emitUnsampled: true,
+				emitRemainder: true,
 				seed: 0xdeadbeef,
 			},
 			{
 				emit: (table: ColumnTable) => {
-					unsampled = table
+					remainder = table
 				},
 			} as any,
 		)
 
 		expect(result.numRows()).toBe(4)
 		expect(result.numCols()).toBe(3)
-		expect(unsampled).not.toBeNull()
+		expect(remainder).not.toBeNull()
 
 		// 6 total rows, 4 sampled, so 2 should be leftover
 		// rome-ignore: lint/style/noNonNullAssertion
-		expect(unsampled!.numRows()).toBe(2)
-		expect(unsampled!.numCols()).toBe(3)
+		expect(remainder!.numRows()).toBe(2)
+		// rome-ignore: lint/style/noNonNullAssertion
+		expect(remainder!.numCols()).toBe(3)
 	})
 })
