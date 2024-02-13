@@ -16,6 +16,7 @@ import {
 	VerbForm,
 } from '../forms/index.js'
 import type { StepFormBaseProps } from '../types.js'
+import { getInputNode } from '../../../../util.js'
 
 /**
  * Provides inputs for a Join step.
@@ -38,9 +39,11 @@ export const JoinFormBase: React.FC<
 			tableDropdown(
 				'Join table',
 				tableOptions,
-				(step.input[NodeInput.Other] as InputBinding)?.node as WorkflowStepId,
+				getInputNode(step, NodeInput.Other),
 				(s, val) => {
-					const binding: InputBinding = s.input[NodeInput.Other] as InputBinding || {node: val as WorkflowStepId}
+					const binding: InputBinding = (s.input[
+						NodeInput.Other
+					] as InputBinding) ?? { node: val as WorkflowStepId }
 					binding.node = val as WorkflowStepId
 				},
 				{ required: true, placeholder: 'Choose table' },

@@ -9,6 +9,7 @@ import { memo, useMemo } from 'react'
 import { createRowEntries } from '../../StepDescription/createRowEntries.js'
 import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
+import { getInputNode } from '../../../util.js'
 
 export const LookupDescription: React.FC<StepDescriptionProps<LookupArgs>> =
 	memo(function LookupDescription(props) {
@@ -27,7 +28,7 @@ export const LookupDescription: React.FC<StepDescriptionProps<LookupArgs>> =
 			return [
 				{
 					before: 'lookup from',
-					value: props.step.input[NodeInput.Other],
+					value: getInputNode(props.step, NodeInput.Other) ?? '',
 				},
 				{
 					before: 'on',

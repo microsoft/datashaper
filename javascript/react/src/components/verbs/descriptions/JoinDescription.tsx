@@ -8,6 +8,7 @@ import { memo, useMemo } from 'react'
 
 import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
+import { getInputNode } from '../../../util.js'
 
 export const JoinDescription: React.FC<StepDescriptionProps<JoinArgs>> = memo(
 	function JoinDescription(props) {
@@ -18,7 +19,7 @@ export const JoinDescription: React.FC<StepDescriptionProps<JoinArgs>> = memo(
 			return [
 				{
 					before: 'with',
-					value: props.step.input[NodeInput.Other],
+					value: getInputNode(props.step, NodeInput.Other) ?? '',
 				},
 				{
 					before: 'on',

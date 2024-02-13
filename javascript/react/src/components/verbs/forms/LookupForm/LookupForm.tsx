@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { InputBinding, LookupArgs } from '@datashaper/schema'
+import type { LookupArgs } from '@datashaper/schema'
 import { NodeInput } from '@datashaper/workflow'
 import { memo } from 'react'
 
@@ -13,6 +13,7 @@ import {
 } from '../../../../hooks/index.js'
 import type { StepFormProps } from '../types.js'
 import { LookupFormBase } from './LookupForm.base.js'
+import { getInputNode } from '../../../../util.js'
 
 /**
  * Provides inputs for a Lookup step.
@@ -20,11 +21,11 @@ import { LookupFormBase } from './LookupForm.base.js'
 export const LookupForm: React.FC<StepFormProps<LookupArgs>> = memo(
 	function LookupForm({ step, workflow, onChange }) {
 		const leftTable = useWorkflowDataTable(
-			(step.input[NodeInput.Source] as InputBinding).node,
+			getInputNode(step, NodeInput.Source),
 			workflow,
 		)
 		const rightTable = useWorkflowDataTable(
-			(step.input[NodeInput.Other] as InputBinding).node,
+			getInputNode(step, NodeInput.Other),
 			workflow,
 		)
 		const tableOptions = useTableDropdownOptions(workflow)

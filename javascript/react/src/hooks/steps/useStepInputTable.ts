@@ -8,7 +8,7 @@ import { NodeInput } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { useWorkflowDataTable } from '../index.js'
-import { InputBinding } from '@datashaper/schema'
+import { getInputNode } from '../../util.js'
 
 /**
  * Use an input table for a step
@@ -24,7 +24,7 @@ export function useStepInputTable(
 	input?: string | undefined,
 	table?: ColumnTable | undefined,
 ): ColumnTable | undefined {
-	const id = input || (step.input[NodeInput.Source] as InputBinding).node
+	const id = input || getInputNode(step, NodeInput.Source)
 	const result = useWorkflowDataTable(id, workflow, table)
 	return result
 }
