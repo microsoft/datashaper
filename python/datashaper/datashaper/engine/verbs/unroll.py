@@ -6,12 +6,12 @@
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import TableContainer
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 @verb(name="unroll", treats_input_tables_as_immutable=True)
-def unroll(input: VerbInput, column: str) -> TableContainer:
+def unroll(input: VerbInput, column: str) -> VerbResult:
     """Unroll a column."""
     input_table = input.get_input()
     output = input_table.explode(column)
-    return TableContainer(table=output)
+    return create_verb_result(output)

@@ -4,6 +4,8 @@
 
 ## DefaultGraph.printStats() method
 
+Print per-node stats of the graph
+
 <b>Signature:</b>
 
 ```typescript

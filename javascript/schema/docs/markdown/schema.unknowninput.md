@@ -14,5 +14,5 @@ export interface UnknownInput
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [input?](./schema.unknowninput.input.md) |  | string \| { source?: [WorkflowStepId](./schema.workflowstepid.md)<!-- -->; others?: [WorkflowStepId](./schema.workflowstepid.md)<!-- -->\[\]; \[key: string\]: [WorkflowStepId](./schema.workflowstepid.md) \| [WorkflowStepId](./schema.workflowstepid.md)<!-- -->\[\] \| undefined; } | <i>(Optional)</i> |
+|  [input?](./schema.unknowninput.input.md) |  | [WorkflowInput](./schema.workflowinput.md) \| { source?: [WorkflowInput](./schema.workflowinput.md)<!-- -->; others?: [WorkflowInput](./schema.workflowinput.md)<!-- -->\[\]; \[key: string\]: [WorkflowInput](./schema.workflowinput.md) \| [WorkflowInput](./schema.workflowinput.md)<!-- -->\[\] \| undefined; } | <i>(Optional)</i> |
 

@@ -12,7 +12,11 @@ from datashaper.engine.types import MergeStrategy
 from datashaper.engine.verbs.utils import strategy_mapping
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import Table, TableContainer
+from datashaper.table_store.types import (
+    Table,
+    VerbResult,
+    create_verb_result,
+)
 
 
 @verb(name="merge")
@@ -25,7 +29,7 @@ def merge(
     preserveSource: bool = False,  # noqa: N803
     unhot: bool = False,
     prefix: str = "",
-) -> TableContainer:
+) -> VerbResult:
     """Merge verb implementation."""
     merge_strategy = MergeStrategy(strategy)
 
@@ -47,4 +51,4 @@ def merge(
     if not preserveSource:
         input_table.drop(columns=columns, inplace=True)
 
-    return TableContainer(table=cast(Table, input_table))
+    return create_verb_result(cast(Table, input_table))

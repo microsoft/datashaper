@@ -4,6 +4,8 @@
 
 ## DefaultGraph.clear() method
 
+Clear the graph and remove all nodes
+
 <b>Signature:</b>
 
 ```typescript

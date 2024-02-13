@@ -14,7 +14,7 @@ from datashaper.engine.types import MathOperator
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.errors import VerbOperationNotSupportedError
-from datashaper.table_store.types import TableContainer
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 def __multiply(col1: pd.Series, col2: pd.Series) -> np.ndarray:
@@ -41,7 +41,7 @@ __op_mapping: dict[MathOperator, Callable] = {
 @verb(name="derive")
 def derive(
     input: VerbInput, to: str, column1: str, column2: str, operator: str
-) -> TableContainer:
+) -> VerbResult:
     """Derive verb implementation."""
     math_operator = MathOperator(operator)
 
@@ -51,4 +51,4 @@ def derive(
         output[to] = __op_mapping[math_operator](output[column1], output[column2])
     except Exception:
         output[to] = np.nan
-    return TableContainer(table=output)
+    return create_verb_result(output)

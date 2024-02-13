@@ -1,0 +1,31 @@
+{
+	"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v2.json",
+	"steps": [
+		{
+			"verb": "sample",
+			"input": "companies",
+			"args": {
+				"size": 2,
+                "seed": 12345,
+				"emitRemainder": true
+			},
+			"id": "expected"
+		},
+		{
+			"verb": "rename",
+			"input": {
+				"source": {
+					"node": "expected",
+					"output": "remainder"
+				}
+			},
+			"args": {
+				"columns": {
+					"ID": "ID"
+				}
+			},
+			"id": "unsampled"
+		}
+	],
+	"input": ["companies"]
+}

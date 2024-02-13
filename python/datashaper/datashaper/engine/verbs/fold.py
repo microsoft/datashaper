@@ -7,11 +7,15 @@ from typing import cast
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import Table, TableContainer
+from datashaper.table_store.types import (
+    Table,
+    VerbResult,
+    create_verb_result,
+)
 
 
 @verb(name="fold")
-def fold(input: VerbInput, to: tuple[str, str], columns: list[str]) -> TableContainer:
+def fold(input: VerbInput, to: tuple[str, str], columns: list[str]) -> VerbResult:
     """Fold verb implementation."""
     input_table = input.get_input()
     output = input_table
@@ -26,4 +30,4 @@ def fold(input: VerbInput, to: tuple[str, str], columns: list[str]) -> TableCont
         columns + [to[0], to[1]]
     ]
 
-    return TableContainer(table=cast(Table, output))
+    return create_verb_result(cast(Table, output))

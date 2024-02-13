@@ -10,7 +10,7 @@ import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import TableContainer
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 @verb(name="onehot")
@@ -19,7 +19,7 @@ def onehot(
     column: str,
     prefix: str = "",
     preserveSource: bool = False,  # noqa: N803
-) -> TableContainer:
+) -> VerbResult:
     """Onehot verb implementation."""
     input_table = cast(pd.DataFrame, input.get_input())
     input_table[column] = input_table[column].astype("category")
@@ -32,4 +32,4 @@ def onehot(
     if not preserveSource:
         output = output.drop(columns=column)
 
-    return TableContainer(table=output)
+    return create_verb_result(output)

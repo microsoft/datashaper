@@ -9,5 +9,5 @@ Emits a downstream error
 <b>Signature:</b>
 
 ```typescript
-protected emitError: (error: unknown) => void;
+protected emitError: (error: unknown, socketName?: SocketName) => void;
 ```

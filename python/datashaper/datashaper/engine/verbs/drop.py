@@ -4,7 +4,7 @@
 #
 """Drop verb implementation."""
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import TableContainer
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 from .verb_input import VerbInput
 
@@ -13,9 +13,9 @@ from .verb_input import VerbInput
 def drop(
     input: VerbInput,
     columns: list[str],
-) -> TableContainer:
+) -> VerbResult:
     """Drop verb implementation."""
     output = input.get_input()
     output = output.drop(columns=columns)
 
-    return TableContainer(table=output)
+    return create_verb_result(output)

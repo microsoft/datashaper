@@ -10,7 +10,7 @@ import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import TableContainer
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 @verb(name="strings.replace")
@@ -22,7 +22,7 @@ def replace(
     replacement: str,
     globalMatch: bool = False,  # noqa: N803
     caseInsensitive: bool = False,  # noqa: N803
-) -> TableContainer:
+) -> VerbResult:
     """Replace verb implementation."""
     n = 0 if globalMatch else 1
     input_table = input.get_input()
@@ -30,4 +30,4 @@ def replace(
     pat = re.compile(pattern, flags=re.IGNORECASE if caseInsensitive else 0)
     output[to] = output[column].apply(lambda x: pat.sub(replacement, x, count=n))
 
-    return TableContainer(table=output)
+    return create_verb_result(output)

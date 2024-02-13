@@ -85,7 +85,7 @@ const descriptions = {
 	unorder: NoParametersDescription,
 	unroll: NoParametersDescription,
 	window: WindowDescription,
-	workflow: WorkflowDescription
+	workflow: WorkflowDescription,
 }
 
 /**

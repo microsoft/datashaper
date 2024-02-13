@@ -37,6 +37,7 @@ from .engine import (
 )
 from .errors import (
     InvalidVerbInputError,
+    NodeNotVisitedError,
     NoVerbInputsProvidedError,
     UnsupportedComparisonOperatorError,
     VerbAlreadyRegisteredError,
@@ -46,6 +47,7 @@ from .errors import (
     VerbOperationNotSupportedError,
     VerbParallelizationError,
     WorkflowError,
+    WorkflowInvalidInputError,
     WorkflowMissingInputError,
     WorkflowOutputNotReadyError,
     WorkflowVerbNotFoundError,
@@ -72,6 +74,8 @@ from .table_store.types import (
     Table,
     TableContainer,
     TableMetadata,
+    VerbResult,
+    create_verb_result,
 )
 from .workflow import (
     DEFAULT_INPUT_NAME,
@@ -146,6 +150,8 @@ __all__ = [
     "TableMetadata",
     "TableContainer",
     "Table",
+    "VerbResult",
+    "create_verb_result",
     # Progress Exports
     "progress_callback",
     "progress_iterable",
@@ -167,4 +173,6 @@ __all__ = [
     "VerbHasMultipleDefaultInputsError",
     "VerbHasMultipleDefaultOthersError",
     "VerbOperationNotSupportedError",
+    "NodeNotVisitedError",
+    "WorkflowInvalidInputError",
 ]

@@ -17,8 +17,8 @@ export interface AggregateArgs extends RollupArgs {
 //
 // @public
 export interface BasicInput {
-    input?: string | {
-        source: WorkflowStepId;
+    input?: WorkflowStepId | {
+        source: WorkflowInput;
     };
 }
 
@@ -358,10 +358,10 @@ export type DropArgs = InputColumnListArgs;
 // Warning: (ae-missing-release-tag) "DualInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface DualInput extends BasicInput {
+export interface DualInput {
     input: {
-        source: WorkflowStepId;
-        other: WorkflowStepId;
+        source: WorkflowInput;
+        other: WorkflowInput;
     };
 }
 
@@ -522,6 +522,14 @@ export type GroupbyArgs = InputColumnListArgs;
 export interface ImputeArgs extends InputColumnArgs {
     value: Value;
 }
+
+// Warning: (ae-missing-release-tag) "InputBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type InputBinding = {
+    node: WorkflowStepId;
+    output?: string;
+};
 
 // Warning: (ae-missing-release-tag) "InputColumnArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -857,6 +865,7 @@ export interface RollupArgs extends InputColumnArgs, OutputColumnArgs {
 //
 // @public (undocumented)
 export interface SampleArgs {
+    emitRemainder?: boolean;
     proportion?: number;
     seed?: number;
     size?: number;
@@ -1132,10 +1141,10 @@ export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
 // @public (undocumented)
 export interface UnknownInput {
     // (undocumented)
-    input?: string | {
-        source?: WorkflowStepId;
-        others?: WorkflowStepId[];
-        [key: string]: WorkflowStepId | WorkflowStepId[] | undefined;
+    input?: WorkflowInput | {
+        source?: WorkflowInput;
+        others?: WorkflowInput[];
+        [key: string]: WorkflowInput | WorkflowInput[] | undefined;
     };
 }
 
@@ -1176,10 +1185,10 @@ export enum VariableNature {
 // Warning: (ae-missing-release-tag) "VariadicInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface VariadicInput extends BasicInput {
+export interface VariadicInput {
     input: {
-        source: WorkflowStepId;
-        others?: WorkflowStepId[];
+        source: WorkflowInput;
+        others?: WorkflowInput[];
     };
 }
 
@@ -1314,6 +1323,11 @@ export enum WindowFunction {
 export interface WorkflowArgs {
     workflow: WorkflowSchema;
 }
+
+// Warning: (ae-missing-release-tag) "WorkflowInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type WorkflowInput = WorkflowStepId | InputBinding;
 
 // Warning: (ae-missing-release-tag) "WorkflowSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

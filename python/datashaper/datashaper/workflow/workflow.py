@@ -11,6 +11,7 @@ import traceback
 from collections import OrderedDict, defaultdict
 from collections.abc import Callable, Iterable
 from enum import Enum
+from logging import getLogger
 from pathlib import Path
 from typing import Any, Generic, TypeVar, cast
 from uuid import uuid4
@@ -22,15 +23,17 @@ from datashaper.engine.verbs.types import VerbDetails
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import VerbManager
 from datashaper.errors import (
+    NodeNotVisitedError,
+    WorkflowInvalidInputError,
     WorkflowMissingInputError,
     WorkflowOutputNotReadyError,
     WorkflowVerbNotFoundError,
 )
-from datashaper.execution.execution_node import ExecutionNode
+from datashaper.execution.execution_node import ExecutionNode, WorkflowInput
 from datashaper.progress.types import Progress
 from datashaper.table_store.in_memory_table_store import InMemoryTableStore
 from datashaper.table_store.table_store import TableStore
-from datashaper.table_store.types import Table, TableContainer
+from datashaper.table_store.types import Table, TableContainer, VerbResult
 
 from .types import MemoryProfile, VerbTiming, WorkflowRunResult
 from .verb_callbacks import DelegatingVerbCallbacks
@@ -39,6 +42,8 @@ from .workflow_callbacks import (
     WorkflowCallbacks,
     WorkflowCallbacksManager,
 )
+
+log = getLogger(__name__)
 
 # TODO(Chris): this won't work for a published package
 SCHEMA_FILE = "../../schema/workflow.json"
@@ -136,7 +141,7 @@ class Workflow(Generic[Context]):
                 args=step.get("args", {}),
             )
             self._graph[step_id] = step
-            for input in Workflow.__inputs_list(step_input):
+            for input in Workflow.__list_inputs(step_input):
                 self._dependency_graph[input].add(step_id)
             previous_step_id = step.node_id
 
@@ -166,33 +171,34 @@ class Workflow(Generic[Context]):
                     known.add(step["id"])
 
                 if "input" in step:
-                    step_input = step["input"]
-                    if isinstance(step_input, str):
-                        deps.add(step_input)
-                    else:
-                        deps.add(step_input["source"])
-                        if "others" in step_input:
-                            for e in step_input["others"]:
-                                deps.add(e)
-                        if "depends_on" in step_input:
-                            for e in step_input["depends_on"]:
-                                deps.add(e)
+                    step_inputs = Workflow.__list_inputs(step["input"])
+                    deps.update(step_inputs)
 
         # Remove known steps from dep list
         return deps.difference(known)
 
     @staticmethod
-    def __inputs_list(input: str | dict | None) -> list[str]:
-        if isinstance(input, str):
-            return [input]
+    def __list_inputs(input: str | dict | None) -> list[str]:
+        if input is None:
+            return []
 
-        inputs = []
-        if input is not None:
+        inputs: list[str] = []
+
+        def resolve(value: str | dict) -> str:
+            if isinstance(value, str):
+                return value
+            return value["node"]
+
+        if isinstance(input, str):
+            inputs.append(input)
+        else:
             for value in input.values():
-                if isinstance(value, str):
-                    inputs.append(value)
+                if isinstance(value, list):
+                    for dep in value:
+                        inputs.append(resolve(dep))  # noqa: PERF401
                 else:
-                    inputs.extend(value)
+                    inputs.append(resolve(value))
+
         return inputs
 
     @staticmethod
@@ -245,18 +251,23 @@ class Workflow(Generic[Context]):
         node = self._graph[node_key]
         return [
             input
-            for input in Workflow.__inputs_list(node.node_input)
+            for input in Workflow.__list_inputs(node.node_input)
             if input not in visited and input not in self._table_store.list()
         ]
 
     def _resolve_inputs(
-        self, verb: VerbDetails, inputs: str | dict[str, list[str]]
-    ) -> dict:
-        def input_table(name: str) -> TableContainer:
+        self,
+        verb: VerbDetails,
+        inputs: str | dict[str, WorkflowInput | list[WorkflowInput]],
+    ) -> VerbInput:
+        def input_table(name: str, output: str | None = None) -> TableContainer:
             graph_node = self._graph.get(name)
             step_table_is_safe_to_mutate = (
                 graph_node is not None and not graph_node.has_explicit_id
             )
+
+            if output is not None:
+                name = f"{name}.{output}"
 
             # if the node has an explicit id or if the verb is mutation-free, skip the copy
             #
@@ -278,15 +289,40 @@ class Workflow(Generic[Context]):
             return TableContainer(table=table)
 
         if isinstance(inputs, str):
-            return {"input": VerbInput(input=input_table(inputs))}
+            return VerbInput(input=input_table(inputs))
 
         input_mapping: dict[str, TableContainer | list[TableContainer]] = {}
         for key, value in inputs.items():
             if isinstance(value, str):
                 input_mapping[key] = input_table(value)
+            elif isinstance(value, dict):
+                value = cast(dict, value)
+                input_mapping[key] = input_table(value["node"], value["output"])
+            elif isinstance(value, list):
+
+                def resolve(t: WorkflowInput) -> TableContainer:
+                    if isinstance(t, str):
+                        return input_table(t)
+                    if isinstance(t, dict):
+                        return input_table(t["node"], t["output"])
+                    raise WorkflowInvalidInputError(str(type(t)))
+
+                input_mapping[key] = [resolve(t) for t in value]
             else:
-                input_mapping[key] = [input_table(t) for t in value]
-        return {"input": VerbInput(**cast(Any, input_mapping))}
+                raise WorkflowInvalidInputError(str(type(value)))
+
+        input_tbl = cast(TableContainer, input_mapping.pop("input", None))
+        source_tbl = cast(TableContainer, input_mapping.pop("source", None))
+        other_tbl = cast(TableContainer, input_mapping.pop("other", None))
+        others_tbl = cast(list[TableContainer], input_mapping.pop("others", None))
+        input_mapping = cast(dict, input_mapping)
+        return VerbInput(
+            input=input_tbl,
+            source=source_tbl,
+            other=other_tbl,
+            others=others_tbl,
+            named=cast(dict[str, TableContainer], input_mapping),
+        )
 
     def add_table(self, id: str, table: pd.DataFrame) -> None:
         """Add a dataframe to the graph with a given id."""
@@ -322,9 +358,13 @@ class Workflow(Generic[Context]):
 
         def assert_all_visited() -> None:
             for node_id in self._graph:
+                node = self._graph.get(node_id)
+
                 if node_id not in visited:
                     missing_inputs = self._get_missing_inputs(node_id, visited)
-                    raise WorkflowMissingInputError(missing_inputs[0])
+                    node_id = node.node_id if node is not None else node_id
+                    verb_name = node.verb.name if node is not None else "unknown"
+                    raise NodeNotVisitedError(node_id, verb_name, missing_inputs)
 
         # Use the ensuring variant to guarantee that all protocol methods are available
         callbacks, profiler = self._get_workflow_callbacks(callbacks)
@@ -367,11 +407,16 @@ class Workflow(Generic[Context]):
         start_verb_time = time.time()
 
         try:
-            inputs = self._resolve_inputs(node.verb, node.node_input)
+            input = self._resolve_inputs(node.verb, node.node_input)
             verb_context = self._resolve_run_context(node, context, callbacks)
-            callbacks.on_step_start(node, inputs)
+            verb_args = {
+                "input": input,
+                **node.args,
+                **verb_context,
+            }
+            callbacks.on_step_start(node, verb_args)
             callbacks.on_step_progress(node, Progress(percent=0))
-            result = node.verb.func(**node.args, **inputs, **verb_context)
+            result = node.verb.func(**verb_args)
 
             # Unroll the result if it's a coroutine
             # (we need to do this before calling on_step_end)
@@ -382,9 +427,12 @@ class Workflow(Generic[Context]):
             callbacks.on_error(message, e, traceback.format_exc())
             raise
         else:
-            self._table_store.add(
-                node.node_id, cast(TableContainer, result), tag="output"
-            )
+            if isinstance(result, TableContainer):
+                self._table_store.add(node.node_id, result, tag="output")
+            elif isinstance(result, VerbResult):
+                self._table_store.add(node.node_id, result.output, tag="output")
+                for name, table in result.named_outputs.items():
+                    self._table_store.add(f"{node.node_id}.{name}", table, tag="output")
         finally:
             callbacks.on_step_progress(node, Progress(percent=1))
             callbacks.on_step_end(node, None)

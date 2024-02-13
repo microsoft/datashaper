@@ -7,13 +7,13 @@ import pytest
 
 from datashaper import (
     DEFAULT_INPUT_NAME,
+    NodeNotVisitedError,
     Progress,
     TableContainer,
     VerbCallbacks,
     VerbError,
     VerbInput,
     Workflow,
-    WorkflowMissingInputError,
     WorkflowVerbNotFoundError,
     derive_from_rows,
     progress_iterable,
@@ -248,7 +248,7 @@ class TestWorkflowRun(unittest.IsolatedAsyncioTestCase):
         input_data = pd.DataFrame({"a": [1, 2, 3]})
         workflow.add_table(DEFAULT_INPUT_NAME, input_data)
 
-        with pytest.raises(WorkflowMissingInputError):
+        with pytest.raises(NodeNotVisitedError):
             await workflow.run(create_fake_run_context())
 
     async def test_workflow_invalid_verb_throws_error(self):

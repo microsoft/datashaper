@@ -62,3 +62,23 @@ class TableContainer(Generic[T]):
     table: Table
     metadata: TableMetadata | None = None
     context: T | None = None
+
+
+@dataclass
+class VerbResult(Generic[T]):
+    """A container for the results from a verb that emits multiple tables."""
+
+    output: TableContainer[T]
+    named_outputs: dict[str, TableContainer[T]]
+
+
+def create_verb_result(
+    table: Table,
+    metadata: TableMetadata | None = None,
+    named_outputs: dict[str, TableContainer] | None = None,
+) -> VerbResult:
+    """Create a VerbResult from a table and metadata."""
+    return VerbResult(
+        output=TableContainer(table=table, metadata=metadata),
+        named_outputs=named_outputs or {},
+    )

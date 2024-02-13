@@ -132,6 +132,7 @@
 |  [DropArgs](./schema.dropargs.md) |  |
 |  [FactoryInput](./schema.factoryinput.md) |  |
 |  [GroupbyArgs](./schema.groupbyargs.md) |  |
+|  [InputBinding](./schema.inputbinding.md) |  |
 |  [Profile](./schema.profile.md) | Resources must have a profile, which is a key defining how it should be interpreted. Profiles are essentially shorthand for a schema URL. The core profiles for DataShaper are defined here, but any application can define one as a string. |
 |  [Rel](./schema.rel.md) | A rel is a string that describes the relationship between a resource and its child. |
 |  [RenameArgs](./schema.renameargs.md) |  |
@@ -141,5 +142,6 @@
 |  [UnrollArgs](./schema.unrollargs.md) |  |
 |  [ValidationFunction](./schema.validationfunction.md) |  |
 |  [Value](./schema.value.md) | A cell/property value of any type. |
+|  [WorkflowInput](./schema.workflowinput.md) |  |
 |  [WorkflowStepId](./schema.workflowstepid.md) | The Id of the step to which the input is bound |
 

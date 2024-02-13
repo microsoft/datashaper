@@ -677,6 +677,11 @@ export interface SampleArgs {
 	 * The randomization seed to use for sampling to ensure stable sampling.
 	 */
 	seed?: number
+
+	/**
+	 * Whether to preserve and emit the non-sampled records via the 'unsampled' output port.
+	 */
+	emitRemainder?: boolean
 }
 
 export type SelectArgs = InputColumnListArgs

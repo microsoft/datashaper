@@ -16,13 +16,13 @@ from datashaper.engine.types import (
 )
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import TableContainer
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 @verb(name="binarize")
 def binarize(
     input: VerbInput, to: str, column: str, criteria: list, logical: str = "or"
-) -> TableContainer:
+) -> VerbResult:
     """Binarize verb implementation."""
     filter_criteria = [
         Criterion(
@@ -42,4 +42,4 @@ def binarize(
     output = input_table
     output[to] = filter_result.map(cast(Any, {True: 1, False: 0}), na_action="ignore")
 
-    return TableContainer(table=output)
+    return create_verb_result(output)

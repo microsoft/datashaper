@@ -9,7 +9,7 @@ import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import TableContainer
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 @verb(name="lookup", treats_input_tables_as_immutable=True)
@@ -17,7 +17,7 @@ def lookup(
     input: VerbInput,
     columns: list[str],
     on: list[str] | None = None,
-) -> TableContainer:
+) -> VerbResult:
     """Lookup verb implementation."""
     input_table: pd.DataFrame = cast(pd.DataFrame, input.get_input())
     other_table: pd.DataFrame = cast(pd.DataFrame, input.get_others()[0])
@@ -42,4 +42,4 @@ def lookup(
             how="left",
         )
 
-    return TableContainer(table=output)
+    return create_verb_result(output)

@@ -9,6 +9,21 @@ from datashaper.engine.verbs.types import VerbDetails
 
 
 @dataclass
+class InputBinding:
+    """A binding specification to an input node."""
+
+    node: str
+    """The input node id."""
+
+    output: str | None = None
+    """The output name to bind to. Default Output if None"""
+
+
+"""A workflow input specification"""
+WorkflowInput = InputBinding | str
+
+
+@dataclass
 class ExecutionNode:
     """A data processing node in the execution pipeline."""
 
@@ -21,7 +36,7 @@ class ExecutionNode:
     verb: VerbDetails
     """The verb to execute in this graph node."""
 
-    node_input: str | dict[str, list[str]]
+    node_input: str | dict[str, WorkflowInput | list[WorkflowInput]]
     """The input to this node."""
 
     args: dict = field(default_factory=dict)

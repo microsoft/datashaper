@@ -35,6 +35,7 @@ import {
 } from './StepForm.hooks.js'
 import { Container } from './StepForm.styles.js'
 import type { StepFormProps } from './StepForm.types.js'
+import { getInputNode } from '../../util.js'
 
 /**
  * Let's us render the Steps in a loop while memoizing all the functions
@@ -50,7 +51,7 @@ export const StepForm: React.FC<StepFormProps> = memo(function StepForm({
 	hideInputColumn,
 }) {
 	/* Current Table Selection */
-	const tableId = s.input[NodeInput.Source]
+	const tableId = getInputNode(s, NodeInput.Source)
 	const table = useWorkflowDataTable(tableId, g)
 
 	/* Column Options */

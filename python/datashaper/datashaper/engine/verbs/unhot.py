@@ -6,7 +6,7 @@ import pandas as pd
 from datashaper.engine.verbs.utils import unhot_operation
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import TableContainer
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 @verb(name="unhot")
@@ -16,7 +16,7 @@ def unhot(
     columns: list[str],
     preserveSource: bool = False,  # noqa: N803
     prefix: str = "",
-) -> TableContainer:
+) -> VerbResult:
     """Unhot verb implementation."""
     input_table = cast(pd.DataFrame, input.get_input())
     output_table = unhot_operation(input_table, columns, to, prefix)
@@ -33,4 +33,4 @@ def unhot(
                     else pd.NA
                 )
 
-    return TableContainer(table=cast(pd.DataFrame, output_table))
+    return create_verb_result(cast(pd.DataFrame, output_table))

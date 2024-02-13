@@ -7,11 +7,11 @@ from datashaper.engine.pandas import aggregate_operation_mapping
 from datashaper.engine.types import FieldAggregateOperation
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import TableContainer
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 @verb(name="pivot", treats_input_tables_as_immutable=True)
-def pivot(input: VerbInput, key: str, value: str, operation: str) -> TableContainer:
+def pivot(input: VerbInput, key: str, value: str, operation: str) -> VerbResult:
     """Pivot verb implementation."""
     aggregate_operation = FieldAggregateOperation(operation)
 
@@ -23,4 +23,4 @@ def pivot(input: VerbInput, key: str, value: str, operation: str) -> TableContai
         aggfunc=aggregate_operation_mapping[aggregate_operation],
     )
 
-    return TableContainer(table=output)
+    return create_verb_result(output)

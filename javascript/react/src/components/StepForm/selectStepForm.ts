@@ -86,7 +86,7 @@ const forms = {
 	unorder: NoParametersForm,
 	unroll: NoParametersForm,
 	window: WindowForm,
-	workflow: WorkflowForm
+	workflow: WorkflowForm,
 }
 
 /**

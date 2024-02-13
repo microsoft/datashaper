@@ -5,11 +5,11 @@
 """Print verb implementation."""
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import TableContainer
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 @verb(name="print")
-def print_verb(input: VerbInput, message: str, limit: int = 10) -> TableContainer:
+def print_verb(input: VerbInput, message: str, limit: int = 10) -> VerbResult:
     """Print verb implementation."""
     output = input.get_input()
 
@@ -17,4 +17,4 @@ def print_verb(input: VerbInput, message: str, limit: int = 10) -> TableContaine
     print(message)  # noqa: T201
     print(output.to_string(max_rows=limit))  # noqa: T201
 
-    return TableContainer(table=output)
+    return create_verb_result(output)

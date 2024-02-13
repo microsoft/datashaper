@@ -16,13 +16,17 @@ from datashaper.engine.types import (
 )
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import Table, TableContainer
+from datashaper.table_store.types import (
+    Table,
+    VerbResult,
+    create_verb_result,
+)
 
 
 @verb(name="filter", treats_input_tables_as_immutable=True)
 def filter_verb(
     input: VerbInput, column: str, criteria: list, logical: str = "or"
-) -> TableContainer:
+) -> VerbResult:
     """Filter verb implementation."""
     filter_criteria = [
         Criterion(
@@ -42,4 +46,4 @@ def filter_verb(
     idx = filter_index[sub_idx].index  # type: ignore
     output = input_table[input_table.index.isin(idx)].reset_index(drop=True)
 
-    return TableContainer(table=cast(Table, output))
+    return create_verb_result(cast(Table, output))

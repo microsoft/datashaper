@@ -3,7 +3,15 @@
 from .disk_cache_table_store import DiskCacheTableStore
 from .in_memory_table_store import InMemoryTableStore
 from .table_store import TableStore
-from .types import ColumnMetadata, ColumnStats, Table, TableContainer, TableMetadata
+from .types import (
+    ColumnMetadata,
+    ColumnStats,
+    Table,
+    TableContainer,
+    TableMetadata,
+    VerbResult,
+    create_verb_result,
+)
 
 __all__ = [
     "DiskCacheTableStore",
@@ -14,4 +22,6 @@ __all__ = [
     "TableMetadata",
     "ColumnMetadata",
     "ColumnStats",
+    "VerbResult",
+    "create_verb_result",
 ]

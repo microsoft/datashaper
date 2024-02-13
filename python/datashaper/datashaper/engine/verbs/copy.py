@@ -8,7 +8,7 @@ from typing import cast
 import pandas as pd
 
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import TableContainer
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 from .verb_input import VerbInput
 
@@ -18,9 +18,9 @@ def copy(
     input: VerbInput,
     to: str,
     column: str,
-) -> TableContainer:
+) -> VerbResult:
     """Copy verb implementation."""
     output = cast(pd.DataFrame, input.get_input())
     output[to] = output[column]
 
-    return TableContainer(table=output)
+    return create_verb_result(output)

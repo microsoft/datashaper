@@ -7,7 +7,7 @@ import type { Observable } from 'rxjs'
 import type { Maybe } from './../primitives.js'
 
 export type NodeId = string
-export type SocketName = string | symbol
+export type SocketName = string
 export type VariadicNodeBinding<T> = Omit<NodeBinding<T>, 'input'>[]
 
 /**
@@ -65,12 +65,12 @@ export interface Node<T, Config = unknown> {
 	/**
 	 * Gets the output value stream
 	 */
-	readonly output$: Observable<Maybe<T>>
+	output$(name?: SocketName): Observable<Maybe<T>>
 
 	/**
 	 * Gets a current output value
 	 */
-	readonly output: Maybe<T>
+	output(name?: SocketName): Maybe<T>
 
 	/**
 	 * The diagnostic statistics for this node
@@ -111,6 +111,11 @@ export interface NodeBinding<T> {
 	 * The source node to bind data from
 	 */
 	node: Node<T>
+
+	/**
+	 * The named output on the source node (otherwise default)
+	 */
+	output?: SocketName
 
 	/**
 	 * The named input on the target node (otherwise default)
@@ -160,8 +165,10 @@ export interface Graph<T> {
 export enum NodeInput {
 	Source = 'source',
 	Other = 'other',
+	Others = 'others'
 }
 
 export enum NodeOutput {
-	Target = 'target',
+	Result = 'result',
+	Remainder = 'remainder',
 }

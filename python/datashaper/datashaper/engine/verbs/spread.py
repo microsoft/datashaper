@@ -11,7 +11,7 @@ from pandas._typing import Axes
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import TableContainer
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 def __normal_spread(
@@ -61,7 +61,7 @@ def spread(
     delimiter: str = ",",
     onehot: bool = False,
     preserveSource: bool = False,  # noqa: N803
-) -> TableContainer:
+) -> VerbResult:
     """Spread verb implementation."""
     input_table = cast(pd.DataFrame, input.get_input())
     if to is None:
@@ -75,4 +75,4 @@ def spread(
     if not preserveSource:
         output = output.drop(columns=[column])
 
-    return TableContainer(table=output)
+    return create_verb_result(output)
