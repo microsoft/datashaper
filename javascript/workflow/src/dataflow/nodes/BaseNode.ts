@@ -368,8 +368,8 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		if (isDefaultOutput(name)) {
 			return DEFAULT_OUTPUT_NAME
 		} 
-		if (!this.outputs.some((s) => s === name)) {
-			throw new Error(`unknown output socket name "${String(name)}"`)
+		if (!this.outputs.some((s) => String(s) === String(name))) {
+			throw new Error(`unknown output socket name "${String(name)} of ${this.outputs.map(s => String(s)).join(", ")}"`)
 		}
 		return name
 	}

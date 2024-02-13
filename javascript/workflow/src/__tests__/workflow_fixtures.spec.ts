@@ -69,9 +69,6 @@ function defineTestCase(parentPath: string, test: string) {
 				const expected = await readCsv(path.join(casePath, `${o}.csv`))
 				await new Promise<void>((resolve) => {
 					const result = workflow.read(o)
-					if (o === "unsampled")
-						console.log("OPEN; expected=%s, actual=%s", expected.numRows(), result?.table?.numRows())
-
 					if (result?.table) {
 						compareTables(expected, result.table, o)
 						resolve()

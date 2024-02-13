@@ -7,7 +7,7 @@
  * The Id of the step to which the input is bound
  */
 export type WorkflowStepId = string
-export type InputBinding = { source: WorkflowStepId, output?: string }
+export type InputBinding = { node: WorkflowStepId, output?: string }
 export type WorkflowInput = WorkflowStepId | InputBinding
 
 

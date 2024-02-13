@@ -4,7 +4,6 @@
  */
 import type { TableContainer } from '@datashaper/tables'
 import { type Observable, BehaviorSubject, from, map } from 'rxjs'
-import type { WorkflowStepId } from '@datashaper/schema'
 
 import { DefaultGraph } from '../../dataflow/DefaultGraph.js'
 import { observableNode } from '../../dataflow/index.js'
@@ -257,10 +256,17 @@ export class GraphManager extends Disposable {
 					if (isVariadic(input, binding)) {
 						// Bind variadic input
 						node.bind(binding.map((b) => ({ node: this.getNode(b) })))
-					} else if (this.hasNode(binding as WorkflowStepId)) {
+						return
+					} 
+					
+					const nodeId = typeof binding === 'string' ? binding : binding.node
+					const output = typeof binding === 'string' ? undefined : binding.output
+					if (this.hasNode(nodeId)) {
 						// Bind Non-Variadic Input
-						const inputNode = this.getNode(binding)
-						node.bind({ input, node: inputNode })
+						const node = this.getNode(nodeId)
+						node.bind({ input, node, output })
+					} else {
+						console.warn(`node ${nodeId} not found`)
 					}
 				}
 			}

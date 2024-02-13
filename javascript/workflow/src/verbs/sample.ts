@@ -7,7 +7,7 @@ import aq, { seed, op } from 'arquero'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 
-const UNSAMPLED_TABLE = Symbol("unsampled")
+const UNSAMPLED_TABLE = "unsampled"
 
 export const sampleStep: ColumnTableStep<SampleArgs> = (
 	input,
@@ -50,7 +50,6 @@ export const sampleStep: ColumnTableStep<SampleArgs> = (
 		}
 
 		const unsampled = aq.from(unsampledRows)
-		console.log("UNSAMPLED", unsampled.data())
 		emit(unsampled, UNSAMPLED_TABLE)
 
 		// Return the sampled data without the temporary index
