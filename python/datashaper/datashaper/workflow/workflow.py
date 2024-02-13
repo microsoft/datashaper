@@ -409,9 +409,14 @@ class Workflow(Generic[Context]):
         try:
             input = self._resolve_inputs(node.verb, node.node_input)
             verb_context = self._resolve_run_context(node, context, callbacks)
-            callbacks.on_step_start(node, input)
+            verb_args = {
+                "input": input,
+                **node.args,
+                **verb_context,
+            }
+            callbacks.on_step_start(node, verb_args)
             callbacks.on_step_progress(node, Progress(percent=0))
-            result = node.verb.func(input=input, **node.args, **verb_context)
+            result = node.verb.func(**verb_args)
 
             # Unroll the result if it's a coroutine
             # (we need to do this before calling on_step_end)

@@ -30,8 +30,9 @@ def sample(
         return create_verb_result(cast(Table, output))
 
     result = input_table.sample(n=size, frac=proportion, random_state=seed)
-    unsampled = unsampled = input_table[~input_table.index.isin(result.index)]
+    unsampled = input_table[~input_table.index.isin(result.index)]
 
     return create_verb_result(
-        cast(Table, result), named_outputs={"remainder": TableContainer(unsampled)}
+        cast(Table, result),
+        named_outputs={"remainder": TableContainer(cast(Table, unsampled))},
     )
