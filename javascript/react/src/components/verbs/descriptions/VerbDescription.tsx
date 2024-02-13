@@ -41,7 +41,7 @@ function VerbDescriptionFn<T extends object | void>({
 		return loop(rows)
 	}, [rows])
 	const shouldShowOutputColumn = showOutputColumn && isOutputColumnStep(step)
-	const input = step.input[NodeInput.Source]
+	const input = step.input[NodeInput.Source]?.node
 	return (
 		<Container style={style}>
 			<Verb>{step.verb}</Verb>

@@ -225,7 +225,6 @@ export class Workflow extends Resource implements TableTransformer {
 		this._onChange.next()
 	}
 
-
 	private _removeInputObservableSilent(id: string): void {
 		this._graphMgr.removeNode(id)
 		this._tableMgr.remove(id, RemoveMode.Soft)
@@ -372,7 +371,7 @@ export class Workflow extends Resource implements TableTransformer {
 	// #endregion
 
 	// #region Schema Save, Load, and Validation
-	
+
 	public override toSchema(): WorkflowSchema {
 		return createWorkflowSchemaObject({
 			...super.toSchema(),
@@ -417,7 +416,6 @@ export class Workflow extends Resource implements TableTransformer {
 		super.dispose()
 	}
 
-
 	public printStats(): void {
 		this._graphMgr.printStats()
 	}
@@ -443,14 +441,18 @@ export class Workflow extends Resource implements TableTransformer {
 		this._tableMgr.defaultOutput$ = data$
 	}
 
-	private observeOutput(nodeId: string, socketName: SocketName | undefined = undefined) {
+	private observeOutput(
+		nodeId: string,
+		socketName: SocketName | undefined = undefined,
+	) {
 		const [outputTable] = this._tableMgr.ensure(nodeId)
 		const n = this._graphMgr.getOrCreateNode(nodeId)
 		outputTable.input = n.output$(socketName)
 	}
 
 	private renameTo =
-		(name: string | undefined) => (table: Maybe<TableContainer>): TableContainer => ({
+		(name: string | undefined) =>
+		(table: Maybe<TableContainer>): TableContainer => ({
 			...(table ?? {}),
 			id: name ?? this.name,
 		})

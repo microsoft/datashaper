@@ -25,7 +25,7 @@ const DEFAULT_INPUT = '__DEFAULT_INPUT__'
 
 export class GraphManager extends Disposable {
 	private readonly _graph = new DefaultGraph<TableContainer>()
-	
+
 	private readonly _defaultInputNode: Node<TableContainer>
 
 	/**
@@ -172,7 +172,7 @@ export class GraphManager extends Disposable {
 		if (g.hasNode(id)) {
 			// try to find the named node in the graph
 			return g.node(id)
-		} 
+		}
 		return this.createNode(id, from([]))
 	}
 
@@ -195,7 +195,7 @@ export class GraphManager extends Disposable {
 	/**
 	 * Binds the input of a node to an observable
 	 * @param id - The input value to bind
-	 * @param value - The observable to bind the input to 
+	 * @param value - The observable to bind the input to
 	 */
 	public bind(id: string, value: Observable<Maybe<TableContainer>>): void {
 		const input = this._inputDelegates.get(id)
@@ -211,12 +211,11 @@ export class GraphManager extends Disposable {
 		}
 		if (this._graph.hasNode(id)) {
 			throw new Error(`node ${id} already exists without an input seam`)
-		} 
+		}
 		const stream = new DelegateSubject<TableContainer>()
 		this._inputDelegates.set(id, stream)
 		const node = observableNode(id, stream)
 		this._graph.add(node)
-		
 	}
 
 	public removeInput(id: string): void {
@@ -250,9 +249,12 @@ export class GraphManager extends Disposable {
 		const node = this.getNode(step.id)
 		node.config = step.args
 
-		const stepInput = typeof step.input === 'string' ? { source: step.input } : step.input
-		const getNodeId = (binding: WorkflowInput) => typeof binding === 'string' ? binding : binding.node
-		const getOutput = (binding: WorkflowInput) => typeof binding === 'string' ? undefined : binding.output
+		const stepInput =
+			typeof step.input === 'string' ? { source: step.input } : step.input
+		const getNodeId = (binding: WorkflowInput) =>
+			typeof binding === 'string' ? binding : binding.node
+		const getOutput = (binding: WorkflowInput) =>
+			typeof binding === 'string' ? undefined : binding.output
 
 		// first bind the standard input to the step, either the previous step or the default input
 		if (prevStep == null) {
@@ -266,11 +268,13 @@ export class GraphManager extends Disposable {
 				if (binding != null) {
 					if (isVariadic(input, binding)) {
 						// Bind variadic input
-						node.bind(binding.map((b) => {
-							const nodeId = getNodeId(b)
-							const output = getOutput(b)
-							return { node: this.getNode(nodeId), output }
-						}))
+						node.bind(
+							binding.map((b) => {
+								const nodeId = getNodeId(b)
+								const output = getOutput(b)
+								return { node: this.getNode(nodeId), output }
+							}),
+						)
 					} else {
 						const nodeId = getNodeId(binding)
 						const output = getOutput(binding)

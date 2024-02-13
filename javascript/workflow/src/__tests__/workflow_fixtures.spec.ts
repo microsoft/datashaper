@@ -10,7 +10,7 @@ import { fileURLToPath } from 'url'
 import debug from 'debug'
 import { Workflow } from '../resources/index.js'
 
-const log = debug("datashaper:workflow")
+const log = debug('datashaper:workflow')
 
 // Static data paths.
 const __dirname = dirname(fileURLToPath(import.meta.url))

@@ -48,7 +48,7 @@ export class DefaultGraph<T> implements Graph<T> {
 	/**
 	 * Get a node by id
 	 * @param id - The node ID to retrieve
-	 * @returns 
+	 * @returns
 	 */
 	public node(id: NodeId): Node<T> {
 		const result = this._nodes.get(id)

@@ -12,18 +12,26 @@ describe('test for sample verb', () => {
 		store = new TestStore()
 	})
 	test('sample test with percentage', () => {
-		const result = sampleStep(store.table('table6'), {
-			proportion: 0.4,
-		}, { emit: () => null} as any)
+		const result = sampleStep(
+			store.table('table6'),
+			{
+				proportion: 0.4,
+			},
+			{ emit: () => null } as any,
+		)
 
 		expect(result.numCols()).toBe(3)
 		expect(result.numRows()).toBe(2)
 	})
 
 	test('sample test with size', () => {
-		const result = sampleStep(store.table('table6'), {
-			size: 4,
-		},  { emit: () => null} as any)
+		const result = sampleStep(
+			store.table('table6'),
+			{
+				size: 4,
+			},
+			{ emit: () => null } as any,
+		)
 
 		expect(result.numCols()).toBe(3)
 		expect(result.numRows()).toBe(4)
@@ -31,13 +39,19 @@ describe('test for sample verb', () => {
 
 	test('sample test with size and preserve unsampled', () => {
 		let unsampled: ColumnTable | undefined = undefined
-		const result = sampleStep(store.table('table6'), {
-			size: 4,
-			emitUnsampled: true,
-			seed: 0xDEADBEEF,
-		},  { emit: (table: ColumnTable) => {
-			unsampled = table
-		}} as any)
+		const result = sampleStep(
+			store.table('table6'),
+			{
+				size: 4,
+				emitUnsampled: true,
+				seed: 0xdeadbeef,
+			},
+			{
+				emit: (table: ColumnTable) => {
+					unsampled = table
+				},
+			} as any,
+		)
 
 		expect(result.numRows()).toBe(4)
 		expect(result.numCols()).toBe(3)

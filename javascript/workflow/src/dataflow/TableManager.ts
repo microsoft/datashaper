@@ -38,25 +38,23 @@ export class TableManager {
 		return this._defaultOutput$
 	}
 
-
 	/**
 	 * Set the default input observable (does not change underlying observable, just delegation link)
 	 */
-	public set defaultInput$(
-		source: Observable<Maybe<TableContainer>> | undefined
-	) {
+	public set defaultInput$(source:
+		| Observable<Maybe<TableContainer>>
+		| undefined) {
 		this._defaultInput$.input = source
 	}
 
 	/**
 	 * Set the default output observable (does not change underlying observable, just delegation link)
 	 */
-	public set defaultOutput$(
-		source: Observable<Maybe<TableContainer>> | undefined
-	) {
+	public set defaultOutput$(source:
+		| Observable<Maybe<TableContainer>>
+		| undefined) {
 		this._defaultOutput$.input = source
 	}
-
 
 	/**
 	 * Get the default input value

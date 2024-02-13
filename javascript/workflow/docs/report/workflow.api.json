@@ -13166,18 +13166,13 @@
                   "text": "input: "
                 },
                 {
-                  "kind": "Reference",
-                  "text": "WorkflowStepId",
-                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
-                },
-                {
                   "kind": "Content",
-                  "text": " | {\n        source?: "
+                  "text": "{\n        source?: "
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowInput",
-                  "canonicalReference": "@datashaper/schema!WorkflowInput:type"
+                  "text": "InputBinding",
+                  "canonicalReference": "@datashaper/schema!InputBinding:type"
                 },
                 {
                   "kind": "Content",
@@ -13185,8 +13180,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowInput",
-                  "canonicalReference": "@datashaper/schema!WorkflowInput:type"
+                  "text": "InputBinding",
+                  "canonicalReference": "@datashaper/schema!InputBinding:type"
                 },
                 {
                   "kind": "Content",
@@ -13194,8 +13189,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowInput",
-                  "canonicalReference": "@datashaper/schema!WorkflowInput:type"
+                  "text": "InputBinding",
+                  "canonicalReference": "@datashaper/schema!InputBinding:type"
                 },
                 {
                   "kind": "Content",
@@ -13203,8 +13198,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowInput",
-                  "canonicalReference": "@datashaper/schema!WorkflowInput:type"
+                  "text": "InputBinding",
+                  "canonicalReference": "@datashaper/schema!InputBinding:type"
                 },
                 {
                   "kind": "Content",
@@ -13221,7 +13216,7 @@
               "name": "input",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 11
+                "endIndex": 10
               }
             },
             {
@@ -13586,6 +13581,15 @@
                 },
                 {
                   "kind": "Reference",
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
                   "text": "Record",
                   "canonicalReference": "!Record:type"
                 },
@@ -13622,7 +13626,7 @@
               "name": "input",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 7
+                "endIndex": 9
               }
             },
             {

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { JoinArgs, WorkflowStepId } from '@datashaper/schema'
+import type { InputBinding, JoinArgs, WorkflowStepId } from '@datashaper/schema'
 import { JoinStrategy } from '@datashaper/schema'
 import { NodeInput } from '@datashaper/workflow'
 import type { IDropdownOption } from '@fluentui/react'
@@ -38,9 +38,10 @@ export const JoinFormBase: React.FC<
 			tableDropdown(
 				'Join table',
 				tableOptions,
-				step.input[NodeInput.Other] as WorkflowStepId,
+				(step.input[NodeInput.Other] as InputBinding)?.node as WorkflowStepId,
 				(s, val) => {
-					s.input[NodeInput.Other] = val as WorkflowStepId
+					const binding: InputBinding = s.input[NodeInput.Other] as InputBinding || {node: val as WorkflowStepId}
+					binding.node = val as WorkflowStepId
 				},
 				{ required: true, placeholder: 'Choose table' },
 			),

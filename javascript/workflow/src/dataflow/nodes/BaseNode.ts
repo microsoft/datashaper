@@ -52,9 +52,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * Creates a new instance of the BaseNode
 	 * @param inputs - the input socket names
 	 */
-	public constructor(
-		inputs: SocketName[] = [], 
-		outputs: SocketName[] = []) {
+	public constructor(inputs: SocketName[] = [], outputs: SocketName[] = []) {
 		this.inputs = inputs
 		this.outputs = outputs
 		this.ensureInput(DEFAULT_INPUT_NAME)
@@ -209,7 +207,9 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 
 	// #region output
 
-	public output$(name: SocketName = DEFAULT_OUTPUT_NAME): BehaviorSubject<Maybe<T>> {
+	public output$(
+		name: SocketName = DEFAULT_OUTPUT_NAME,
+	): BehaviorSubject<Maybe<T>> {
 		this.ensureOutput(name)
 		return this._output$.get(name) as BehaviorSubject<Maybe<T>>
 	}
@@ -289,11 +289,10 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 			const input = this.verifyInputSocketName(binding.input)
 			const values = this.inputValue$(input)
 			const errors = this.inputError$(input)
-			
+
 			this.unbindSilent(input)
 			addBinding()
 			listenToInput()
-			
 		}
 
 		if (Array.isArray(binding)) {
@@ -303,9 +302,16 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		}
 	}
 
-	protected hasBoundInputWithNode(name: SocketName, nodeId: NodeId, output: SocketName): boolean {
+	protected hasBoundInputWithNode(
+		name: SocketName,
+		nodeId: NodeId,
+		output: SocketName,
+	): boolean {
 		return this.bindings.some(
-			(i) => this.isSocketNameEqual(i.input, name) && i.node.id === nodeId && output === i.output,
+			(i) =>
+				this.isSocketNameEqual(i.input, name) &&
+				i.node.id === nodeId &&
+				output === i.output,
 		)
 	}
 
@@ -362,14 +368,16 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		name = this.verifyOutputSocketName(name)
 		if (!this._output$.has(name)) {
 			const output$ = new BehaviorSubject<Maybe<T>>(undefined)
-			this._output$.set(name,  output$)
+			this._output$.set(name, output$)
 		}
 	}
 
-	protected verifyInputSocketName(name: SocketName = DEFAULT_INPUT_NAME): SocketName {
+	protected verifyInputSocketName(
+		name: SocketName = DEFAULT_INPUT_NAME,
+	): SocketName {
 		if (isDefaultInput(name)) {
 			return DEFAULT_INPUT_NAME
-		} 
+		}
 		if (!this.inputs.some((s) => s === name)) {
 			throw new Error(`unknown input socket name "${String(name)}"`)
 		}
@@ -379,13 +387,16 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	protected verifyOutputSocketName(name: SocketName): SocketName {
 		if (isDefaultOutput(name)) {
 			return DEFAULT_OUTPUT_NAME
-		} 
+		}
 		if (!this.outputs.some((s) => String(s) === String(name))) {
-			throw new Error(`unknown output socket name "${String(name)} of ${this.outputs.map(s => String(s)).join(", ")}"`)
+			throw new Error(
+				`unknown output socket name "${String(name)} of ${this.outputs
+					.map((s) => String(s))
+					.join(', ')}"`,
+			)
 		}
 		return name
 	}
-
 
 	// #endregion
 
@@ -423,11 +434,14 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * @param value - The output value
 	 * @param output - The output socket name
 	 */
-	protected emit = (value: Maybe<T>, socketName: SocketName = DEFAULT_OUTPUT_NAME): void => {
+	protected emit = (
+		value: Maybe<T>,
+		socketName: SocketName = DEFAULT_OUTPUT_NAME,
+	): void => {
 		const socket = this.output$(socketName)
 		if (value !== socket.value) {
 			log(`${this.id} emitting ${value == null ? 'undefined' : 'value'}`)
- 			this._version++
+			this._version++
 			socket.next(value)
 		}
 	}
@@ -436,7 +450,10 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * Emits a downstream error
 	 * @param name - The input socket name
 	 */
-	protected emitError = (error: unknown, socketName: SocketName = DEFAULT_OUTPUT_NAME): void => {
+	protected emitError = (
+		error: unknown,
+		socketName: SocketName = DEFAULT_OUTPUT_NAME,
+	): void => {
 		this.output$(socketName).error(error)
 	}
 

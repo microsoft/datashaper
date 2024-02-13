@@ -26,6 +26,7 @@ import type { FillArgs } from '@datashaper/schema';
 import type { FilterArgs } from '@datashaper/schema';
 import type { FoldArgs } from '@datashaper/schema';
 import type { ImputeArgs } from '@datashaper/schema';
+import type { InputBinding } from '@datashaper/schema';
 import { InputColumnArgs } from '@datashaper/schema';
 import { InputColumnListArgs } from '@datashaper/schema';
 import { InputColumnRecordArgs } from '@datashaper/schema';
@@ -980,10 +981,10 @@ export interface Step<T extends object | void | unknown = unknown> {
     // (undocumented)
     description?: string;
     id: string;
-    input: WorkflowStepId | {
-        source?: WorkflowInput;
-        others?: WorkflowInput[];
-        [key: string]: WorkflowInput | WorkflowInput[] | undefined;
+    input: {
+        source?: InputBinding;
+        others?: InputBinding[];
+        [key: string]: InputBinding | InputBinding[] | undefined;
     };
     verb: Verb;
 }
@@ -1009,7 +1010,7 @@ export interface StepInput<T extends object | void | unknown = unknown> {
     // (undocumented)
     description?: string;
     id?: string;
-    input?: Record<string, WorkflowInput | WorkflowInput[] | undefined>;
+    input?: WorkflowStepId | Record<string, WorkflowInput | WorkflowInput[] | undefined>;
     verb: Verb;
 }
 

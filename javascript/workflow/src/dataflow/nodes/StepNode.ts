@@ -15,16 +15,20 @@ export interface StepApi<T> {
 	 */
 	input(socket?: SocketName): T | undefined
 
-	/** 
+	/**
 	 * Emits data to an output socket. If undefined, default output.
-	 * 
+	 *
 	 * @param value - The value to emit
 	 * @param socket - The socket name to emit data to
 	 */
 	emit(value: T, socket?: SocketName): void
 }
 
-export type StepFunction<T, Args> = (source: T, args: Args, api: StepApi<T>) => T
+export type StepFunction<T, Args> = (
+	source: T,
+	args: Args,
+	api: StepApi<T>,
+) => T
 
 export class StepNode<T, Args> extends BaseNode<T, Args> {
 	private _step: StepFunction<T, Args>
@@ -33,7 +37,11 @@ export class StepNode<T, Args> extends BaseNode<T, Args> {
 		emit: (value: T, name?: SocketName) => this.emit(value, name),
 	}
 
-	constructor(step: StepFunction<T, Args>, inputs?: SocketName[], outputs?: SocketName[]) {
+	constructor(
+		step: StepFunction<T, Args>,
+		inputs?: SocketName[],
+		outputs?: SocketName[],
+	) {
 		super(inputs, outputs)
 		this._step = step.bind(this)
 	}
