@@ -9,7 +9,7 @@ from dataclasses import dataclass, field
 from functools import cache
 
 from datashaper.errors import VerbAlreadyRegisteredError
-from datashaper.table_store.types import TableContainer
+from datashaper.table_store.types import ComplexVerbResult, TableContainer
 
 from .types import VerbDetails
 
@@ -22,7 +22,12 @@ def verb(
 ) -> Callable:
     """Apply a decorator for registering a verb."""
 
-    def inner(func: Callable[..., TableContainer]) -> Callable[..., TableContainer]:
+    def inner(
+        func: Callable[
+            ...,
+            TableContainer | ComplexVerbResult,
+        ],
+    ) -> Callable[..., TableContainer | ComplexVerbResult]:
         verb = VerbDetails(
             name=name,
             func=func,

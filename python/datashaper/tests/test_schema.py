@@ -2,9 +2,9 @@ import json
 import os
 from functools import cache
 from http.server import HTTPServer, SimpleHTTPRequestHandler
+from logging import getLogger
 from pathlib import Path
 from threading import Thread
-from logging import getLogger
 
 import pandas as pd
 import pytest
@@ -96,7 +96,7 @@ async def test_verbs_schema_input(
         if expected.endswith(".csv"):
             try:
                 table_name = expected.split(".")[0]
-                table_name_arg = table_name if table_name != "expected" else None
+                table_name_arg = table_name
                 result = workflow.output(table_name_arg)
                 if isinstance(result, pd.DataFrame):
                     result.to_csv(result_table_path, index=False)
@@ -114,11 +114,8 @@ async def test_verbs_schema_input(
                     check_column_type=False,
                 )
             except AssertionError:
-                log.info(
-                    "Error in %s;\nExpected:\n%s\n\nActual:\n%s",
-                    fixture_path,
-                    expected_table.head(),
-                    result_table.head(),
+                print(  # noqa: T201
+                    f"Error in {fixture_path}@{expected.removesuffix('.csv')};\nExpected:\n{expected_table.head()}\n\nActual:{result_table.head()}",
                 )
                 raise
             finally:

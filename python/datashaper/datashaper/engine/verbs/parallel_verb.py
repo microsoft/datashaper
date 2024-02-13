@@ -60,7 +60,10 @@ def parallel_verb(
 
     def inner(
         func: Callable[Concatenate[Table | tuple, P], Awaitable[Table]],
-    ) -> Callable[Concatenate[VerbInput, Any, int, P], Awaitable[TableContainer]]:
+    ) -> Callable[
+        Concatenate[VerbInput, Any, int, P],
+        Awaitable[TableContainer],
+    ]:
         @verb(
             name=name,
             treats_input_tables_as_immutable=treats_input_tables_as_immutable,

@@ -62,3 +62,11 @@ class TableContainer(Generic[T]):
     table: Table
     metadata: TableMetadata | None = None
     context: T | None = None
+
+
+@dataclass
+class ComplexVerbResult(Generic[T]):
+    """A container for the results from a verb that emits multiple tables."""
+
+    output: TableContainer[T]
+    named_outputs: dict[str, TableContainer[T]]

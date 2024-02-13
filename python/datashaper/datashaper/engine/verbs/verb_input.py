@@ -18,6 +18,7 @@ class VerbInput:
 
     source: TableContainer
     others: list[TableContainer] | None = None
+    named: dict[str, TableContainer] | None = None
 
     def __init__(
         self,
@@ -25,6 +26,7 @@ class VerbInput:
         source: TableContainer | None = None,
         other: TableContainer | None = None,
         others: list[TableContainer] | None = None,
+        named: dict[str, TableContainer] | None = None,
     ):
         if input is None and source is None:
             raise NoVerbInputsProvidedError
@@ -39,6 +41,8 @@ class VerbInput:
 
         if other is not None or others is not None:
             self.others = [other] if other is not None else others
+
+        self.named = named if named is not None else {}
 
     def get_input(self) -> Table:
         """Get the input table."""

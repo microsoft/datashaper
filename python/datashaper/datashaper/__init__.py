@@ -37,6 +37,7 @@ from .engine import (
 )
 from .errors import (
     InvalidVerbInputError,
+    NodeNotVisitedError,
     NoVerbInputsProvidedError,
     UnsupportedComparisonOperatorError,
     VerbAlreadyRegisteredError,
@@ -167,4 +168,5 @@ __all__ = [
     "VerbHasMultipleDefaultInputsError",
     "VerbHasMultipleDefaultOthersError",
     "VerbOperationNotSupportedError",
+    "NodeNotVisitedError",
 ]
