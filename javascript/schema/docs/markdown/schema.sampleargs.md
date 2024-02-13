@@ -14,6 +14,7 @@ export interface SampleArgs
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [emitUnsampled?](./schema.sampleargs.emitunsampled.md) |  | boolean | <i>(Optional)</i> Whether to preserve and emit the non-sampled records via the 'unsampled' output port. |
 |  [proportion?](./schema.sampleargs.proportion.md) |  | number | <i>(Optional)</i> If table size is unknown ahead of time, specify a proportion of rows to sample. If size is specified, it will be used instead, otherwise computed from this proportion using the table.numRows() |
 |  [seed?](./schema.sampleargs.seed.md) |  | number | <i>(Optional)</i> The randomization seed to use for sampling to ensure stable sampling. |
 |  [size?](./schema.sampleargs.size.md) |  | number | <i>(Optional)</i> Number of rows to sample from the table. This takes precedence over proportion. |

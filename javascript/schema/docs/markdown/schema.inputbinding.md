@@ -8,7 +8,7 @@
 
 ```typescript
 export type InputBinding = {
-    source: WorkflowStepId;
+    node: WorkflowStepId;
     output?: string;
 };
 ```

@@ -17,7 +17,9 @@ export interface AggregateArgs extends RollupArgs {
 //
 // @public
 export interface BasicInput {
-    input?: WorkflowInput;
+    input?: WorkflowStepId | {
+        source: WorkflowInput;
+    };
 }
 
 // Warning: (ae-missing-release-tag) "Bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -525,7 +527,7 @@ export interface ImputeArgs extends InputColumnArgs {
 //
 // @public (undocumented)
 export type InputBinding = {
-    source: WorkflowStepId;
+    node: WorkflowStepId;
     output?: string;
 };
 
@@ -863,6 +865,7 @@ export interface RollupArgs extends InputColumnArgs, OutputColumnArgs {
 //
 // @public (undocumented)
 export interface SampleArgs {
+    emitUnsampled?: boolean;
     proportion?: number;
     seed?: number;
     size?: number;

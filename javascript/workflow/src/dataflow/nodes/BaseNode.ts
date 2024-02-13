@@ -250,6 +250,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		}
 
 		const bindSingleInput = (binding: NodeBinding<T>) => {
+			log(`${this.id} binding to ${binding.node.id}@${binding.output}`)
 			const addBinding = () => {
 				this._bindings$.next([
 					...this.bindings.filter((i) => i.input !== input),
@@ -258,7 +259,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 			}
 			const listenToInput = () => {
 				const outputSocket = binding.node.output$(binding.output)
-				log(`${this.id} listening to ${binding.node.id}`)
+				log(`${this.id} listening to ${binding.node.id}@${binding.output}`)
 				if (binding.node === this) {
 					throw new Error('cannot bind to self')
 				}
@@ -288,13 +289,11 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 			const input = this.verifyInputSocketName(binding.input)
 			const values = this.inputValue$(input)
 			const errors = this.inputError$(input)
-			if (this.hasBoundInputWithNode(input, binding.node.id)) {
-				return
-			}
-
+			
 			this.unbindSilent(input)
 			addBinding()
 			listenToInput()
+			
 		}
 
 		if (Array.isArray(binding)) {
@@ -304,9 +303,9 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		}
 	}
 
-	protected hasBoundInputWithNode(name: SocketName, nodeId: NodeId) {
+	protected hasBoundInputWithNode(name: SocketName, nodeId: NodeId, output: SocketName): boolean {
 		return this.bindings.some(
-			(i) => this.isSocketNameEqual(i.input, name) && i.node.id === nodeId,
+			(i) => this.isSocketNameEqual(i.input, name) && i.node.id === nodeId && output === i.output,
 		)
 	}
 

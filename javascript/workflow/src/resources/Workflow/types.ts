@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { WorkflowInput, Verb } from '@datashaper/schema'
+import type { WorkflowInput, Verb, WorkflowStepId } from '@datashaper/schema'
 
 /**
  * Options for exporting data-tables within Workflow instances.w
@@ -78,7 +78,7 @@ export interface Step<T extends object | void | unknown = unknown> {
 	 * Key = Input Socket Name
 	 * Value = Socket Binding to other node
 	 */
-	input: {
+	input: WorkflowStepId | {
 		source?: WorkflowInput
 		others?: WorkflowInput[]
 		[key: string]: WorkflowInput | WorkflowInput[] | undefined

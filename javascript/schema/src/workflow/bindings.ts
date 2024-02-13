@@ -21,7 +21,9 @@ export interface BasicInput {
 	 * If undefined, the default output of the previous step will be used (if available).
 	 * If no previous step is available, this will remain undefined
 	 */
-	input?: WorkflowInput
+	input?: WorkflowStepId | {
+		source: WorkflowInput
+	}
 }
 
 /**

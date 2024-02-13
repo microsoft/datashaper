@@ -60,6 +60,7 @@ import type { WindowArgs } from '@datashaper/schema';
 import type { WorkflowArgs } from '@datashaper/schema';
 import type { WorkflowInput } from '@datashaper/schema';
 import type { WorkflowSchema } from '@datashaper/schema';
+import type { WorkflowStepId } from '@datashaper/schema';
 
 // Warning: (ae-missing-release-tag) "aggregate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -102,7 +103,7 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     // (undocumented)
     protected hasBoundInput(name: SocketName): boolean;
     // (undocumented)
-    protected hasBoundInputWithNode(name: SocketName, nodeId: NodeId): boolean;
+    protected hasBoundInputWithNode(name: SocketName, nodeId: NodeId, output: SocketName): boolean;
     // (undocumented)
     id: NodeId;
     // (undocumented)
@@ -979,7 +980,7 @@ export interface Step<T extends object | void | unknown = unknown> {
     // (undocumented)
     description?: string;
     id: string;
-    input: {
+    input: WorkflowStepId | {
         source?: WorkflowInput;
         others?: WorkflowInput[];
         [key: string]: WorkflowInput | WorkflowInput[] | undefined;

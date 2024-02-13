@@ -31,7 +31,19 @@
             "description": "Single-input, single-output step I/O",
             "properties": {
                 "input": {
-                    "$ref": "#/definitions/WorkflowInput",
+                    "anyOf": [
+                        {
+                            "properties": {
+                                "source": {
+                                    "$ref": "#/definitions/WorkflowInput"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
                     "description": "Standard step input; single source with default name \"source\".\n\nIf undefined, the default output of the previous step will be used (if available).\nIf no previous step is available, this will remain undefined"
                 }
             },
@@ -1004,6 +1016,10 @@
         },
         "SampleArgs": {
             "properties": {
+                "emitUnsampled": {
+                    "description": "Whether to preserve and emit the non-sampled records via the 'unsampled' output port.",
+                    "type": "boolean"
+                },
                 "proportion": {
                     "description": "If table size is unknown ahead of time, specify a proportion of rows to sample.\nIf size is specified, it will be used instead, otherwise computed from this\nproportion using the table.numRows()",
                     "type": "number"
@@ -2116,11 +2132,11 @@
                     "anyOf": [
                         {
                             "properties": {
-                                "output": {
+                                "node": {
+                                    "description": "The Id of the step to which the input is bound",
                                     "type": "string"
                                 },
-                                "source": {
-                                    "description": "The Id of the step to which the input is bound",
+                                "output": {
                                     "type": "string"
                                 }
                             },
@@ -2131,11 +2147,11 @@
                                 "anyOf": [
                                     {
                                         "properties": {
-                                            "output": {
+                                            "node": {
+                                                "description": "The Id of the step to which the input is bound",
                                                 "type": "string"
                                             },
-                                            "source": {
-                                                "description": "The Id of the step to which the input is bound",
+                                            "output": {
                                                 "type": "string"
                                             }
                                         },
@@ -2258,11 +2274,11 @@
             "anyOf": [
                 {
                     "properties": {
-                        "output": {
+                        "node": {
+                            "description": "The Id of the step to which the input is bound",
                             "type": "string"
                         },
-                        "source": {
-                            "description": "The Id of the step to which the input is bound",
+                        "output": {
                             "type": "string"
                         }
                     },

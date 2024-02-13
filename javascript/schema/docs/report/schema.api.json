@@ -255,8 +255,21 @@
                 },
                 {
                   "kind": "Reference",
+                  "text": "WorkflowStepId",
+                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | {\n        source: "
+                },
+                {
+                  "kind": "Reference",
                   "text": "WorkflowInput",
                   "canonicalReference": "@datashaper/schema!WorkflowInput:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
                 },
                 {
                   "kind": "Content",
@@ -269,7 +282,7 @@
               "name": "input",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 2
+                "endIndex": 5
               }
             }
           ],
@@ -5883,7 +5896,7 @@
             },
             {
               "kind": "Content",
-              "text": "{\n    source: "
+              "text": "{\n    node: "
             },
             {
               "kind": "Reference",
@@ -8913,6 +8926,33 @@
           "name": "SampleArgs",
           "preserveMemberOrder": false,
           "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!SampleArgs#emitUnsampled:member",
+              "docComment": "/**\n * Whether to preserve and emit the non-sampled records via the 'unsampled' output port.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "emitUnsampled?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "emitUnsampled",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!SampleArgs#proportion:member",

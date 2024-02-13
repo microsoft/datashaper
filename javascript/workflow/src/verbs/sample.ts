@@ -49,14 +49,12 @@ export const sampleStep: ColumnTableStep<SampleArgs> = (
 			}
 		}
 
+		// Emit the unsampled data table
 		const unsampled = aq.from(unsampledRows)
-		console.log("UNSAMPLED", unsampled.data())
 		emit(unsampled, UNSAMPLED_TABLE)
 
-		const result = sampled.select(sampled.columnNames((name)=> name !== "__temp_index"))
-		console.log("SAMPLED", result.data())
 		// Return the sampled data without the temporary index
-		return result
+		return sampled.select(sampled.columnNames((name)=> name !== "__temp_index"))
 	}
 
 

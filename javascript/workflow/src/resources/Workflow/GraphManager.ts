@@ -250,6 +250,7 @@ export class GraphManager extends Disposable {
 		const node = this.getNode(step.id)
 		node.config = step.args
 
+		const stepInput = typeof step.input === 'string' ? { source: step.input } : step.input
 		const getNodeId = (binding: WorkflowInput) => typeof binding === 'string' ? binding : binding.node
 		const getOutput = (binding: WorkflowInput) => typeof binding === 'string' ? undefined : binding.output
 
@@ -261,7 +262,7 @@ export class GraphManager extends Disposable {
 		}
 		// if any inputs nodes are in the graph explicitly, bind them
 		if (hasDefinedInputs(step)) {
-			for (const [input, binding] of Object.entries(step.input)) {
+			for (const [input, binding] of Object.entries(stepInput)) {
 				if (binding != null) {
 					if (isVariadic(input, binding)) {
 						// Bind variadic input

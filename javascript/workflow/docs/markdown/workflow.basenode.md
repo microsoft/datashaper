@@ -49,7 +49,7 @@ export declare abstract class BaseNode<T, Config> implements Node<T, Config>
 |  [getInputValues()](./workflow.basenode.getinputvalues.md) | <code>protected</code> | Gets a map of named inputs to the current value. |
 |  [getVariadicInputValues()](./workflow.basenode.getvariadicinputvalues.md) | <code>protected</code> |  |
 |  [hasBoundInput(name)](./workflow.basenode.hasboundinput.md) | <code>protected</code> |  |
-|  [hasBoundInputWithNode(name, nodeId)](./workflow.basenode.hasboundinputwithnode.md) | <code>protected</code> |  |
+|  [hasBoundInputWithNode(name, nodeId, output)](./workflow.basenode.hasboundinputwithnode.md) | <code>protected</code> |  |
 |  [inputError(name)](./workflow.basenode.inputerror.md) | <code>protected</code> |  |
 |  [inputError$(name)](./workflow.basenode.inputerror_.md) | <code>protected</code> |  |
 |  [inputValue(name)](./workflow.basenode.inputvalue.md) | <code>protected</code> |  |

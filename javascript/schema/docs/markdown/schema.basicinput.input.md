@@ -11,5 +11,7 @@ If undefined, the default output of the previous step will be used (if available
 <b>Signature:</b>
 
 ```typescript
-input?: WorkflowInput;
+input?: WorkflowStepId | {
+        source: WorkflowInput;
+    };
 ```
