@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { SampleArgs } from '@datashaper/schema'
-import aq, { seed, op } from 'arquero'
+import { from, seed, op } from 'arquero'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 
@@ -50,7 +50,7 @@ export const sampleStep: ColumnTableStep<SampleArgs> = (
 		}
 
 		// Emit the unsampled data table
-		const unsampled = aq.from(unsampledRows)
+		const unsampled = from(unsampledRows)
 		emit(unsampled, UNSAMPLED_TABLE)
 
 		// Return the sampled data without the temporary index
