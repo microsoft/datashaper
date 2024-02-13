@@ -30,13 +30,7 @@ def sample(
         return create_verb_result(cast(Table, output))
 
     result = input_table.sample(n=size, frac=proportion, random_state=seed)
-
-    sampled_ids: list = [row[0] for row in result.iterrows()]
-    non_sampled_ids: list = [
-        row[0] for row in input_table.iterrows() if row[0] not in sampled_ids
-    ]
-
-    unsampled = input_table.loc[non_sampled_ids].reset_index(drop=True)
+    unsampled = unsampled = input_table[~input_table.index.isin(result.index)]
 
     return create_verb_result(
         cast(Table, result), named_outputs={"remainder": TableContainer(unsampled)}
