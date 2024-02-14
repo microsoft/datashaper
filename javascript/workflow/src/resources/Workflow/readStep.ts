@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Verb } from '@datashaper/schema'
+import type { InputBinding, Verb } from '@datashaper/schema'
 
 import * as defaults from '../../verbs/defaults/index.js'
 import type { Step, StepInput } from './types.js'
@@ -70,21 +70,28 @@ function resolveInputs(
 			 * This is the first step
 			 */
 			return {}
-		} else {
-			/**
-			 * Case: No input is defined, previous step is available, use it's default output
-			 */
-			return { source: previous.id }
 		}
-	} else if (typeof input === 'string') {
+		/**
+		 * Case: No input is defined, previous step is available, use it's default output
+		 */
+		return { source: { node: previous.id } }
+	}
+	if (typeof input === 'string') {
 		/**
 		 * Case: String shorthand is used, convert to object specification
 		 */
-		return { source: input }
-	} else {
-		/**
-		 * Case 4: Object specification is used, return as-is
-		 */
-		return input
+		return { source: { node: input } }
 	}
+	/**
+	 * Case 4: Object specification is used. Create bindings
+	 */
+	const result: Record<string, InputBinding> = {}
+	for (const [key, value] of Object.entries(input)) {
+		if (typeof value === 'string') {
+			result[key] = { node: value }
+		} else {
+			result[key] = value as InputBinding
+		}
+	}
+	return result
 }

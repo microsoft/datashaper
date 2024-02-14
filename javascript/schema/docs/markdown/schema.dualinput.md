@@ -9,13 +9,12 @@ Dual-input, single-output step I/O
 <b>Signature:</b>
 
 ```typescript
-export interface DualInput extends BasicInput 
+export interface DualInput 
 ```
-<b>Extends:</b> [BasicInput](./schema.basicinput.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [input](./schema.dualinput.input.md) |  | { source: [WorkflowStepId](./schema.workflowstepid.md)<!-- -->; other: [WorkflowStepId](./schema.workflowstepid.md)<!-- -->; } | The inputs that must be bound; "source" &amp; "other". |
+|  [input](./schema.dualinput.input.md) |  | { source: [WorkflowInput](./schema.workflowinput.md)<!-- -->; other: [WorkflowInput](./schema.workflowinput.md)<!-- -->; } | The inputs that must be bound; "source" &amp; "other". |
 

@@ -5,7 +5,7 @@
 ```ts
 
 import type { AggregateArgs } from '@datashaper/schema';
-import type { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import type { BinArgs } from '@datashaper/schema';
 import type { BinarizeArgs } from '@datashaper/schema';
 import type { BooleanArgs } from '@datashaper/schema';
@@ -27,6 +27,7 @@ import type { FillArgs } from '@datashaper/schema';
 import type { FilterArgs } from '@datashaper/schema';
 import type { FoldArgs } from '@datashaper/schema';
 import type { ImputeArgs } from '@datashaper/schema';
+import type { InputBinding } from '@datashaper/schema';
 import { InputColumnArgs } from '@datashaper/schema';
 import { InputColumnListArgs } from '@datashaper/schema';
 import { InputColumnRecordArgs } from '@datashaper/schema';
@@ -59,6 +60,8 @@ import { TableContainer } from '@datashaper/tables';
 import type { UnhotArgs } from '@datashaper/schema';
 import { Verb } from '@datashaper/schema';
 import type { WindowArgs } from '@datashaper/schema';
+import type { WorkflowArgs } from '@datashaper/schema';
+import type { WorkflowInput } from '@datashaper/schema';
 import type { WorkflowSchema } from '@datashaper/schema';
 import type { WorkflowStepId } from '@datashaper/schema';
 
@@ -76,7 +79,7 @@ export function argsHasOutputColumn(args: any): boolean;
 //
 // @public (undocumented)
 export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
-    constructor(inputs?: SocketName[]);
+    constructor(inputs?: SocketName[], outputs?: SocketName[]);
     // (undocumented)
     bind(binding: NodeBinding<T> | VariadicNodeBinding<T>): void;
     // (undocumented)
@@ -91,8 +94,11 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     get config(): Maybe<Config>;
     set config(value: Maybe<Config>);
     protected abstract doRecalculate(): void;
-    protected emit: (value: Maybe<T>) => void;
-    protected emitError: (error: unknown) => void;
+    protected emit: (value: Maybe<T>, socketName?: SocketName) => void;
+    protected emitError: (error: unknown, socketName?: SocketName) => void;
+    protected ensureInput(name: SocketName): void;
+    // (undocumented)
+    protected ensureOutput(name: SocketName): void;
     protected getInputErrors(): Record<SocketName, unknown>;
     protected getInputValues(): Record<SocketName, Maybe<T>>;
     // (undocumented)
@@ -100,26 +106,43 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     // (undocumented)
     protected hasBoundInput(name: SocketName): boolean;
     // (undocumented)
-    protected hasBoundInputWithNode(name: SocketName, nodeId: NodeId): boolean;
+    protected hasBoundInputWithNode(name: SocketName, nodeId: NodeId, output: SocketName): boolean;
     // (undocumented)
     id: NodeId;
     // (undocumented)
-    readonly inputs: SocketName[];
+    protected inputError$(name?: SocketName): BehaviorSubject<Maybe<unknown>>;
+    // (undocumented)
+    protected inputError(name?: SocketName): Maybe<unknown>;
+    // (undocumented)
+    get inputs(): SocketName[];
+    protected set inputs(value: SocketName[]);
+    // (undocumented)
+    protected _inputs: SocketName[];
+    // (undocumented)
+    protected inputValue$(name?: SocketName): BehaviorSubject<Maybe<T>>;
     // (undocumented)
     protected inputValue(name?: SocketName): Maybe<T>;
     protected get isBindingRequired(): boolean;
     // (undocumented)
     protected isSocketNameEqual(name: SocketName | undefined, name2: SocketName): boolean;
     // (undocumented)
-    get output$(): Observable<Maybe<T>>;
+    output$(name?: SocketName): BehaviorSubject<Maybe<T>>;
     // (undocumented)
-    get output(): Maybe<T>;
+    output(name?: SocketName): Maybe<T>;
+    // (undocumented)
+    get outputs(): SocketName[];
+    protected set outputs(value: SocketName[]);
+    // (undocumented)
+    protected _outputs: SocketName[];
     protected recalculate: (cause: string) => void;
     // (undocumented)
     get stats(): NodeStats;
     // (undocumented)
     unbind(name: SocketName): void;
+    // (undocumented)
     protected verifyInputSocketName(name?: SocketName): SocketName;
+    // (undocumented)
+    protected verifyOutputSocketName(name: SocketName): SocketName;
 }
 
 // Warning: (ae-missing-release-tag) "bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -367,20 +390,13 @@ export const dedupe: (id: string) => StepNode<TableContainer<unknown>, Partial<I
 //
 // @public (undocumented)
 export class DefaultGraph<T> implements Graph<T> {
-    // (undocumented)
     add(node: Node_2<T>): void;
-    // (undocumented)
     clear(): void;
-    // (undocumented)
     hasNode(id: NodeId): boolean;
-    // (undocumented)
     node(id: NodeId): Node_2<T>;
     get nodes(): NodeId[];
-    // (undocumented)
     printStats(): void;
-    // (undocumented)
     remove(removeId: NodeId): void;
-    // (undocumented)
     validate(): void;
 }
 
@@ -515,6 +531,11 @@ export function isDataTypeSupported(verb: Verb, type?: DataType): boolean;
 //
 // @public (undocumented)
 export const isDefaultInput: (name?: SocketName) => name is undefined;
+
+// Warning: (ae-missing-release-tag) "isDefaultOutput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const isDefaultOutput: (name?: SocketName) => name is undefined;
 
 // Warning: (ae-missing-release-tag) "isInputColumnListStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -658,8 +679,8 @@ interface Node_2<T, Config = unknown> {
     config: Maybe<Config>;
     readonly id: NodeId;
     readonly inputs: SocketName[];
-    readonly output$: Observable<Maybe<T>>;
-    readonly output: Maybe<T>;
+    output$(name?: SocketName): Observable<Maybe<T>>;
+    output(name?: SocketName): Maybe<T>;
     readonly stats: NodeStats;
     unbind(name?: SocketName): void;
 }
@@ -671,6 +692,7 @@ export { Node_2 as Node }
 export interface NodeBinding<T> {
     input?: SocketName;
     node: Node_2<T>;
+    output?: SocketName;
 }
 
 // Warning: (ae-missing-release-tag) "NodeId" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -685,6 +707,8 @@ export enum NodeInput {
     // (undocumented)
     Other = "other",
     // (undocumented)
+    Others = "others",
+    // (undocumented)
     Source = "source"
 }
 
@@ -693,7 +717,9 @@ export enum NodeInput {
 // @public (undocumented)
 export enum NodeOutput {
     // (undocumented)
-    Target = "target"
+    Remainder = "remainder",
+    // (undocumented)
+    Result = "result"
 }
 
 // Warning: (ae-missing-release-tag) "NodeStats" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -941,7 +967,7 @@ export const select: (id: string) => StepNode<TableContainer<unknown>, InputColu
 // Warning: (ae-missing-release-tag) "SocketName" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type SocketName = string | symbol;
+export type SocketName = string;
 
 // Warning: (ae-missing-release-tag) "spread" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -957,17 +983,25 @@ export interface Step<T extends object | void | unknown = unknown> {
     description?: string;
     id: string;
     input: {
-        source?: WorkflowStepId;
-        others?: WorkflowStepId[];
-        [key: string]: WorkflowStepId | WorkflowStepId[] | undefined;
+        source?: InputBinding;
+        others?: InputBinding[];
+        [key: string]: InputBinding | InputBinding[] | undefined;
     };
     verb: Verb;
+}
+
+// Warning: (ae-missing-release-tag) "StepApi" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface StepApi<T> {
+    emit(value: T, socket?: SocketName): void;
+    input(socket?: SocketName): T | undefined;
 }
 
 // Warning: (ae-missing-release-tag) "StepFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type StepFunction<T, Args> = (source: T, args: Args) => T;
+export type StepFunction<T, Args> = (source: T, args: Args, api: StepApi<T>) => T;
 
 // Warning: (ae-missing-release-tag) "StepInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -977,7 +1011,7 @@ export interface StepInput<T extends object | void | unknown = unknown> {
     // (undocumented)
     description?: string;
     id?: string;
-    input?: Record<string, WorkflowStepId | WorkflowStepId[] | undefined>;
+    input?: WorkflowStepId | Record<string, WorkflowInput | WorkflowInput[] | undefined>;
     verb: Verb;
 }
 
@@ -985,9 +1019,11 @@ export interface StepInput<T extends object | void | unknown = unknown> {
 //
 // @public (undocumented)
 export class StepNode<T, Args> extends BaseNode<T, Args> {
-    constructor(step: StepFunction<T, Args>);
+    constructor(step: StepFunction<T, Args>, inputs?: SocketName[], outputs?: SocketName[]);
     // (undocumented)
     protected doRecalculate(): void;
+    // (undocumented)
+    protected get stepApi(): StepApi<T>;
 }
 
 // Warning: (ae-missing-release-tag) "stepNodeFactory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1167,8 +1203,6 @@ export class Workflow extends Resource implements TableTransformer {
     addInputTables(inputs: TableContainer[]): void;
     addOutput(name: string): void;
     addStep(input: StepInput): Step;
-    get allTableNames$(): Observable<string[]>;
-    get allTableNames(): string[];
     // (undocumented)
     connect(dp: DataPackage, top: boolean): void;
     // (undocumented)
@@ -1222,6 +1256,8 @@ export class Workflow extends Resource implements TableTransformer {
     get steps(): Step[];
     // (undocumented)
     suggestOutputName(name: string): string;
+    get tableNames$(): Observable<string[]>;
+    get tableNames(): string[];
     // (undocumented)
     toArray({ includeDefaultInput, includeDefaultOutput, includeInputs, }?: TableExportOptions): Maybe<TableContainer>[];
     // (undocumented)
@@ -1231,6 +1267,12 @@ export class Workflow extends Resource implements TableTransformer {
     // (undocumented)
     static validate(workflowJson: WorkflowSchema): Promise<boolean>;
 }
+
+// Warning: (ae-forgotten-export) The symbol "WorkflowNode" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "workflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function workflow(id: string): WorkflowNode;
 
 // Warning: (ae-missing-release-tag) "WorkflowProfile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

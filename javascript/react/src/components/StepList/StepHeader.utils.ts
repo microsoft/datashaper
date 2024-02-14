@@ -49,7 +49,8 @@ export function deriveDetails(step: Step): string | undefined {
 
 	if (isInputColumnStep(verb)) {
 		return (args as InputColumnArgs).column
-	} else if (isInputColumnListStep(verb)) {
+	}
+	if (isInputColumnListStep(verb)) {
 		return (args as InputColumnListArgs).columns.join(',')
 	} else if (isInputColumnRecordStep(verb)) {
 		return Object.keys((args as InputColumnRecordArgs).columns).join(',')

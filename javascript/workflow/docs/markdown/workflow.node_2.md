@@ -22,8 +22,6 @@ export interface Node<T, Config = unknown>
 |  [config$](./workflow.node_2.config_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;Config&gt;&gt; | A configuration observable |
 |  [id](./workflow.node_2.id.md) | <code>readonly</code> | [NodeId](./workflow.nodeid.md) | A unique identifier for this node |
 |  [inputs](./workflow.node_2.inputs.md) | <code>readonly</code> | [SocketName](./workflow.socketname.md)<!-- -->\[\] | Named input sockets |
-|  [output](./workflow.node_2.output.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;T&gt; | Gets a current output value |
-|  [output$](./workflow.node_2.output_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;T&gt;&gt; | Gets the output value stream |
 |  [stats](./workflow.node_2.stats.md) | <code>readonly</code> | [NodeStats](./workflow.nodestats.md) | The diagnostic statistics for this node |
 
 ## Methods
@@ -32,5 +30,7 @@ export interface Node<T, Config = unknown>
 |  --- | --- |
 |  [bind(binding)](./workflow.node_2.bind.md) | Binds an input socket to an upstream node |
 |  [binding(input)](./workflow.node_2.binding.md) | Retrieves an existing input binding by id |
+|  [output(name)](./workflow.node_2.output.md) | Gets a current output value |
+|  [output$(name)](./workflow.node_2.output_.md) | Gets the output value stream |
 |  [unbind(name)](./workflow.node_2.unbind.md) | Clear an input socket |
 

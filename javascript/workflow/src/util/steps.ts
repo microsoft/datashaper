@@ -211,6 +211,7 @@ const TaggedVerbs: Record<Verb, TaggedVerb> = {
 		inputColumn: true,
 		outputColumn: true,
 	},
+	workflow: {}
 }
 
 /**

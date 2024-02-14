@@ -117,7 +117,7 @@ describe('The Workflow Resource', () => {
 		expect(output?.table?.column('price')).toBeDefined()
 	})
 
-	it('can process a basic workflow', () => {
+	it('can be constructed iteratively with addStep', () => {
 		const wf = new Workflow()
 		wf.addStep({
 			verb: Verb.Bin,

@@ -5,6 +5,7 @@
 import type { CodebookSchema } from '../codebook/CodebookSchema.js'
 import type { DataType, Value } from '../data.js'
 import type { SortDirection } from '../enums/index.js'
+import type { WorkflowSchema } from './WorkflowSchema.js'
 
 export enum Verb {
 	Aggregate = 'aggregate',
@@ -47,6 +48,7 @@ export enum Verb {
 	Unorder = 'unorder',
 	Unroll = 'unroll',
 	Window = 'window',
+	Workflow = 'workflow',
 
 	StringsReplace = 'strings.replace',
 	StringsLower = 'strings.lower',
@@ -675,6 +677,11 @@ export interface SampleArgs {
 	 * The randomization seed to use for sampling to ensure stable sampling.
 	 */
 	seed?: number
+
+	/**
+	 * Whether to preserve and emit the non-sampled records via the 'unsampled' output port.
+	 */
+	emitRemainder?: boolean
 }
 
 export type SelectArgs = InputColumnListArgs
@@ -730,4 +737,11 @@ export interface WindowArgs extends InputColumnArgs, OutputColumnArgs {
 	 * Window function to apply to the column.
 	 */
 	operation: WindowFunction
+}
+
+export interface WorkflowArgs {
+	/**
+	 * The workflow configuration.
+	 */
+	workflow: WorkflowSchema
 }

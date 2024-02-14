@@ -45,6 +45,7 @@ import type {
 	UnrollArgs,
 	Verb,
 	WindowArgs,
+	WorkflowArgs
 } from './verbs.js'
 
 /**
@@ -105,6 +106,7 @@ export type Step = StepJsonCommon &
 		| ({ verb: Verb.Unorder } & BasicInput)
 		| ({ verb: Verb.Unroll; args?: UnrollArgs } & BasicInput)
 		| ({ verb: Verb.Window; args?: WindowArgs } & BasicInput)
+		| ({ verb: Verb.Workflow, args?: WorkflowArgs } & BasicInput)
 
 		/**
 		 * Custom step - we may not know the verb, args, or binding pattern

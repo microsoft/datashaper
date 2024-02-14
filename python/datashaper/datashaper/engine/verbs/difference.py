@@ -2,17 +2,19 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Difference verb implementation."""
 from typing import cast
 
 import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store import Table, TableContainer
+from datashaper.table_store.types import Table, VerbResult, create_verb_result
 
 
 @verb(name="difference", treats_input_tables_as_immutable=True)
-def difference(input: VerbInput):
+def difference(input: VerbInput) -> VerbResult:
+    """Difference verb implementation."""
     input_table = input.get_input()
     others = cast(list[pd.DataFrame], input.get_others())
     others = pd.concat(others)
@@ -21,4 +23,4 @@ def difference(input: VerbInput):
     output = output[output["_merge"] == "left_only"]
     output = output.drop("_merge", axis=1)
 
-    return TableContainer(table=cast(Table, output))
+    return create_verb_result(cast(Table, output))

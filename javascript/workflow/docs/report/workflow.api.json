@@ -317,6 +317,74 @@
           "preserveMemberOrder": false,
           "members": [
             {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!BaseNode#_inputs:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "protected _inputs: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "_inputs",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": true
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!BaseNode#_outputs:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "protected _outputs: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "_outputs",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": true
+            },
+            {
               "kind": "Constructor",
               "canonicalReference": "@datashaper/workflow!BaseNode:constructor(1)",
               "docComment": "/**\n * Creates a new instance of the BaseNode\n *\n * @param inputs - the input socket names\n */\n",
@@ -324,6 +392,19 @@
                 {
                   "kind": "Content",
                   "text": "constructor(inputs?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", outputs?: "
                 },
                 {
                   "kind": "Reference",
@@ -348,6 +429,14 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 3
+                  },
+                  "isOptional": true
+                },
+                {
+                  "parameterName": "outputs",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 6
                   },
                   "isOptional": true
                 }
@@ -689,7 +778,16 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<T>) => void"
+                  "text": "<T>, socketName?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ") => void"
                 },
                 {
                   "kind": "Content",
@@ -702,7 +800,7 @@
               "name": "emit",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 4
+                "endIndex": 6
               },
               "isStatic": false,
               "isProtected": true
@@ -718,7 +816,16 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "(error: unknown) => void"
+                  "text": "(error: unknown, socketName?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ") => void"
                 },
                 {
                   "kind": "Content",
@@ -731,10 +838,106 @@
               "name": "emitError",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 2
+                "endIndex": 4
               },
               "isStatic": false,
               "isProtected": true
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!BaseNode#ensureInput:member(1)",
+              "docComment": "/**\n * Verifies that an input socket name is known\n *\n * @param name - The input socket name\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "protected ensureInput(name: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": true,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "name",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "name": "ensureInput"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!BaseNode#ensureOutput:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "protected ensureOutput(name: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": true,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "name",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "name": "ensureOutput"
             },
             {
               "kind": "Method",
@@ -941,6 +1144,15 @@
                 },
                 {
                   "kind": "Content",
+                  "text": ", output: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
                   "text": "): "
                 },
                 {
@@ -954,8 +1166,8 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 5,
-                "endIndex": 6
+                "startIndex": 7,
+                "endIndex": 8
               },
               "releaseTag": "Public",
               "isProtected": true,
@@ -974,6 +1186,14 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 3,
                     "endIndex": 4
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "output",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 5,
+                    "endIndex": 6
                   },
                   "isOptional": false
                 }
@@ -1012,13 +1232,128 @@
               "isProtected": false
             },
             {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!BaseNode#inputError:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "protected inputError(name?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Maybe",
+                  "canonicalReference": "@datashaper/workflow!Maybe:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<unknown>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "isProtected": true,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "name",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "name": "inputError"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!BaseNode#inputError$:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "protected inputError$(name?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BehaviorSubject",
+                  "canonicalReference": "rxjs!BehaviorSubject:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Maybe",
+                  "canonicalReference": "@datashaper/workflow!Maybe:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<unknown>>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "isProtected": true,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "name",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "name": "inputError$"
+            },
+            {
               "kind": "Property",
               "canonicalReference": "@datashaper/workflow!BaseNode#inputs:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "readonly inputs: "
+                  "text": "get inputs(): "
                 },
                 {
                   "kind": "Reference",
@@ -1031,10 +1366,19 @@
                 },
                 {
                   "kind": "Content",
-                  "text": ";"
+                  "text": ";\n\nprotected set inputs(value: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]);"
                 }
               ],
-              "isReadonly": true,
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "inputs",
@@ -1097,6 +1441,68 @@
               ],
               "isOptional": false,
               "name": "inputValue"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!BaseNode#inputValue$:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "protected inputValue$(name?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BehaviorSubject",
+                  "canonicalReference": "rxjs!BehaviorSubject:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Maybe",
+                  "canonicalReference": "@datashaper/workflow!Maybe:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T>>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "isProtected": true,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "name",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "name": "inputValue$"
             },
             {
               "kind": "Property",
@@ -1197,13 +1603,22 @@
               "name": "isSocketNameEqual"
             },
             {
-              "kind": "Property",
-              "canonicalReference": "@datashaper/workflow!BaseNode#output:member",
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!BaseNode#output:member(1)",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "get output(): "
+                  "text": "output(name?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
                 },
                 {
                   "kind": "Reference",
@@ -1219,30 +1634,49 @@
                   "text": ";"
                 }
               ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "output",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              },
               "isStatic": false,
-              "isProtected": false
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "name",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "name": "output"
             },
             {
-              "kind": "Property",
-              "canonicalReference": "@datashaper/workflow!BaseNode#output$:member",
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!BaseNode#output$:member(1)",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "get output$(): "
+                  "text": "output$(name?: "
                 },
                 {
                   "kind": "Reference",
-                  "text": "Observable",
-                  "canonicalReference": "rxjs!Observable:class"
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BehaviorSubject",
+                  "canonicalReference": "rxjs!BehaviorSubject:class"
                 },
                 {
                   "kind": "Content",
@@ -1262,13 +1696,66 @@
                   "text": ";"
                 }
               ],
-              "isReadonly": true,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "name",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "name": "output$"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!BaseNode#outputs:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get outputs(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n\nprotected set outputs(value: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]);"
+                }
+              ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "output$",
+              "name": "outputs",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 5
+                "endIndex": 3
               },
               "isStatic": false,
               "isProtected": false
@@ -1383,7 +1870,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!BaseNode#verifyInputSocketName:member(1)",
-              "docComment": "/**\n * Verifies that an input socket name is known\n *\n * @param name - The input socket name\n */\n",
+              "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1428,6 +1915,55 @@
               ],
               "isOptional": false,
               "name": "verifyInputSocketName"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!BaseNode#verifyOutputSocketName:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "protected verifyOutputSocketName(name: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": true,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "name",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "name": "verifyOutputSocketName"
             }
           ],
           "implementsTokenRanges": [
@@ -5214,7 +5750,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!DefaultGraph#add:member(1)",
-              "docComment": "",
+              "docComment": "/**\n * Add a node to the graph\n *\n * @param node - The node to add to the graph\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -5266,7 +5802,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!DefaultGraph#clear:member(1)",
-              "docComment": "",
+              "docComment": "/**\n * Clear the graph and remove all nodes\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -5296,7 +5832,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!DefaultGraph#hasNode:member(1)",
-              "docComment": "",
+              "docComment": "/**\n * Check if the graph has a node with the given ID\n *\n * @param id - The node ID to check\n *\n * @returns Whether the graph has a node with the given ID\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -5344,7 +5880,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!DefaultGraph#node:member(1)",
-              "docComment": "",
+              "docComment": "/**\n * Get a node by id\n *\n * @param id - The node ID to retrieve\n *\n * @returns \n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -5431,7 +5967,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!DefaultGraph#printStats:member(1)",
-              "docComment": "",
+              "docComment": "/**\n * Print per-node stats of the graph\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -5461,7 +5997,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!DefaultGraph#remove:member(1)",
-              "docComment": "",
+              "docComment": "/**\n * Remove a node by ID from the graph\n *\n * @param removeId - The node ID to remove\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -5509,7 +6045,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!DefaultGraph#validate:member(1)",
-              "docComment": "",
+              "docComment": "/**\n * Validate the graph, checking for any cycles\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -6978,6 +7514,46 @@
           "isReadonly": true,
           "releaseTag": "Public",
           "name": "isDefaultInput",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 6
+          }
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@datashaper/workflow!isDefaultOutput:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "isDefaultOutput: "
+            },
+            {
+              "kind": "Content",
+              "text": "(name?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "SocketName",
+              "canonicalReference": "@datashaper/workflow!SocketName:type"
+            },
+            {
+              "kind": "Content",
+              "text": ") => "
+            },
+            {
+              "kind": "Reference",
+              "text": "name",
+              "canonicalReference": "@datashaper/workflow!~name"
+            },
+            {
+              "kind": "Content",
+              "text": " is undefined"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "isDefaultOutput",
           "variableTypeTokenRange": {
             "startIndex": 1,
             "endIndex": 6
@@ -8624,13 +9200,22 @@
               }
             },
             {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/workflow!Node_2#output:member",
+              "kind": "MethodSignature",
+              "canonicalReference": "@datashaper/workflow!Node_2#output:member(1)",
               "docComment": "/**\n * Gets a current output value\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "readonly output: "
+                  "text": "output(name?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
                 },
                 {
                   "kind": "Reference",
@@ -8646,23 +9231,42 @@
                   "text": ";"
                 }
               ],
-              "isReadonly": true,
               "isOptional": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
               "releaseTag": "Public",
-              "name": "output",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              }
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "name",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": true
+                }
+              ],
+              "name": "output"
             },
             {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/workflow!Node_2#output$:member",
+              "kind": "MethodSignature",
+              "canonicalReference": "@datashaper/workflow!Node_2#output$:member(1)",
               "docComment": "/**\n * Gets the output value stream\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "readonly output$: "
+                  "text": "output$(name?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
                 },
                 {
                   "kind": "Reference",
@@ -8687,14 +9291,24 @@
                   "text": ";"
                 }
               ],
-              "isReadonly": true,
               "isOptional": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 7
+              },
               "releaseTag": "Public",
-              "name": "output$",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 5
-              }
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "name",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": true
+                }
+              ],
+              "name": "output$"
             },
             {
               "kind": "PropertySignature",
@@ -8859,6 +9473,34 @@
                 "startIndex": 1,
                 "endIndex": 3
               }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/workflow!NodeBinding#output:member",
+              "docComment": "/**\n * The named output on the source node (otherwise default)\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "output?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "output",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
             }
           ],
           "extendsTokenRanges": []
@@ -8925,6 +9567,27 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "@datashaper/workflow!NodeInput.Others:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Others = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"others\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Others"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "@datashaper/workflow!NodeInput.Source:member",
               "docComment": "",
               "excerptTokens": [
@@ -8962,16 +9625,16 @@
           "members": [
             {
               "kind": "EnumMember",
-              "canonicalReference": "@datashaper/workflow!NodeOutput.Target:member",
+              "canonicalReference": "@datashaper/workflow!NodeOutput.Remainder:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "Target = "
+                  "text": "Remainder = "
                 },
                 {
                   "kind": "Content",
-                  "text": "\"target\""
+                  "text": "\"remainder\""
                 }
               ],
               "initializerTokenRange": {
@@ -8979,7 +9642,28 @@
                 "endIndex": 2
               },
               "releaseTag": "Public",
-              "name": "Target"
+              "name": "Remainder"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/workflow!NodeOutput.Result:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Result = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"result\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Result"
             }
           ]
         },
@@ -12286,7 +12970,7 @@
             },
             {
               "kind": "Content",
-              "text": "string | symbol"
+              "text": "string"
             },
             {
               "kind": "Content",
@@ -12488,8 +13172,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowStepId",
-                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                  "text": "InputBinding",
+                  "canonicalReference": "@datashaper/schema!InputBinding:type"
                 },
                 {
                   "kind": "Content",
@@ -12497,8 +13181,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowStepId",
-                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                  "text": "InputBinding",
+                  "canonicalReference": "@datashaper/schema!InputBinding:type"
                 },
                 {
                   "kind": "Content",
@@ -12506,8 +13190,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowStepId",
-                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                  "text": "InputBinding",
+                  "canonicalReference": "@datashaper/schema!InputBinding:type"
                 },
                 {
                   "kind": "Content",
@@ -12515,8 +13199,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowStepId",
-                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                  "text": "InputBinding",
+                  "canonicalReference": "@datashaper/schema!InputBinding:type"
                 },
                 {
                   "kind": "Content",
@@ -12568,6 +13252,144 @@
           "extendsTokenRanges": []
         },
         {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/workflow!StepApi:interface",
+          "docComment": "/**\n * The API available to step functions.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface StepApi<T> "
+            }
+          ],
+          "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "StepApi",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "MethodSignature",
+              "canonicalReference": "@datashaper/workflow!StepApi#emit:member(1)",
+              "docComment": "/**\n * Emits data to an output socket. If undefined, default output.\n *\n * @param value - The value to emit\n *\n * @param socket - The socket name to emit data to\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "emit(value: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "T"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", socket?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "value",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "socket",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": true
+                }
+              ],
+              "name": "emit"
+            },
+            {
+              "kind": "MethodSignature",
+              "canonicalReference": "@datashaper/workflow!StepApi#input:member(1)",
+              "docComment": "/**\n * Gets data from an input socket. If undefined, default input\n *\n * @param socket - The socket name to get data for\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "input(socket?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "T | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "socket",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": true
+                }
+              ],
+              "name": "input"
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
           "kind": "TypeAlias",
           "canonicalReference": "@datashaper/workflow!StepFunction:type",
           "docComment": "",
@@ -12578,7 +13400,16 @@
             },
             {
               "kind": "Content",
-              "text": "(source: T, args: Args) => T"
+              "text": "(source: T, args: Args, api: "
+            },
+            {
+              "kind": "Reference",
+              "text": "StepApi",
+              "canonicalReference": "@datashaper/workflow!StepApi:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>) => T"
             },
             {
               "kind": "Content",
@@ -12613,7 +13444,7 @@
           ],
           "typeTokenRange": {
             "startIndex": 1,
-            "endIndex": 2
+            "endIndex": 4
           }
         },
         {
@@ -12751,15 +13582,6 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "Record",
-                  "canonicalReference": "!Record:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<string, "
-                },
-                {
-                  "kind": "Reference",
                   "text": "WorkflowStepId",
                   "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
                 },
@@ -12769,8 +13591,26 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowStepId",
-                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                  "text": "Record",
+                  "canonicalReference": "!Record:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorkflowInput",
+                  "canonicalReference": "@datashaper/schema!WorkflowInput:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorkflowInput",
+                  "canonicalReference": "@datashaper/schema!WorkflowInput:type"
                 },
                 {
                   "kind": "Content",
@@ -12787,7 +13627,7 @@
               "name": "input",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 7
+                "endIndex": 9
               }
             },
             {
@@ -12892,6 +13732,32 @@
                 },
                 {
                   "kind": "Content",
+                  "text": ", inputs?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", outputs?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SocketName",
+                  "canonicalReference": "@datashaper/workflow!SocketName:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
                   "text": ");"
                 }
               ],
@@ -12906,6 +13772,22 @@
                     "endIndex": 3
                   },
                   "isOptional": false
+                },
+                {
+                  "parameterName": "inputs",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 6
+                  },
+                  "isOptional": true
+                },
+                {
+                  "parameterName": "outputs",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 7,
+                    "endIndex": 9
+                  },
+                  "isOptional": true
                 }
               ]
             },
@@ -12938,6 +13820,40 @@
               "parameters": [],
               "isOptional": false,
               "name": "doRecalculate"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!StepNode#stepApi:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "protected get stepApi(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "StepApi",
+                  "canonicalReference": "@datashaper/workflow!StepApi:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "stepApi",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": true
             }
           ],
           "extendsTokenRange": {
@@ -15413,69 +16329,6 @@
               "name": "addStep"
             },
             {
-              "kind": "Property",
-              "canonicalReference": "@datashaper/workflow!Workflow#allTableNames:member",
-              "docComment": "/**\n * Get the names of all declared inputs and outputs. This does not include the default input or default output tables.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get allTableNames(): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "allTableNames",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isStatic": false,
-              "isProtected": false
-            },
-            {
-              "kind": "Property",
-              "canonicalReference": "@datashaper/workflow!Workflow#allTableNames$:member",
-              "docComment": "/**\n * Get an observable of the names of all declared inputs and outputs. This does not include the default input or default output tables.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get allTableNames$(): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Observable",
-                  "canonicalReference": "rxjs!Observable:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<string[]>"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "allTableNames$",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              },
-              "isStatic": false,
-              "isProtected": false
-            },
-            {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!Workflow#connect:member(1)",
               "docComment": "",
@@ -16710,6 +17563,69 @@
               "name": "suggestOutputName"
             },
             {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!Workflow#tableNames:member",
+              "docComment": "/**\n * Get the names of all declared inputs and outputs. This does not include the default input or default output tables.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get tableNames(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "tableNames",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!Workflow#tableNames$:member",
+              "docComment": "/**\n * Get an observable of the names of all declared inputs and outputs. This does not include the default input or default output tables.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get tableNames$(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Observable",
+                  "canonicalReference": "rxjs!Observable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string[]>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "tableNames$",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!Workflow#toArray:member(1)",
               "docComment": "",
@@ -16931,6 +17847,51 @@
               "endIndex": 4
             }
           ]
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/workflow!workflow:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function workflow(id: "
+            },
+            {
+              "kind": "Content",
+              "text": "string"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "WorkflowNode",
+              "canonicalReference": "@datashaper/workflow!~WorkflowNode:class"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 4
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "id",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "workflow"
         },
         {
           "kind": "Class",

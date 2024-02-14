@@ -7,5 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export type StepFunction<T, Args> = (source: T, args: Args) => T;
+export type StepFunction<T, Args> = (source: T, args: Args, api: StepApi<T>) => T;
 ```
+<b>References:</b> [StepApi](./workflow.stepapi.md)
+

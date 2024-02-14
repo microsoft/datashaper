@@ -1,14 +1,14 @@
+"""Mapping of FieldAggregateOperation to pandas aggregate functions."""
 from functools import reduce
 
 from datashaper.engine.types import FieldAggregateOperation
-
 
 aggregate_operation_mapping = {
     FieldAggregateOperation.Any: "first",
     FieldAggregateOperation.Count: "count",
     FieldAggregateOperation.CountDistinct: "nunique",
     FieldAggregateOperation.Valid: lambda series: series.dropna().count(),
-    FieldAggregateOperation.Invalid: lambda series: series.isnull().sum(),
+    FieldAggregateOperation.Invalid: lambda series: series.isna().sum(),
     FieldAggregateOperation.Max: "max",
     FieldAggregateOperation.Min: "min",
     FieldAggregateOperation.Sum: "sum",
@@ -18,6 +18,6 @@ aggregate_operation_mapping = {
     FieldAggregateOperation.StDev: "std",
     FieldAggregateOperation.StDevPopulation: "",
     FieldAggregateOperation.Variance: "variance",
-    FieldAggregateOperation.ArrayAgg: lambda series: list(series),
-    FieldAggregateOperation.ArrayAggDistinct: lambda series: list(set(series)),
+    FieldAggregateOperation.ArrayAgg: lambda series: f"[{', '.join(series)}]",
+    FieldAggregateOperation.ArrayAggDistinct: lambda series: f"[{', '.join(series.unique())}]",
 }
