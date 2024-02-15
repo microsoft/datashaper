@@ -54,6 +54,9 @@ def parallel_verb(
     treats_input_tables_as_immutable: bool = False,
     override_existing: bool = False,
     asyncio_type: AsyncIOType = AsyncIOType.ASYNCIO,
+    merge: Callable[[list[Table | tuple | None]], Table] = lambda results: pd.concat(
+        results
+    ),
     **_kwargs: dict,
 ) -> Callable:
     """Apply a decorator for registering a parallel verb."""
@@ -141,7 +144,7 @@ def parallel_verb(
             if len(errors) > 0:
                 raise VerbParallelizationError(len(errors))
             if chunk_size > 1:
-                return TableContainer(pd.concat(results))  # type: ignore
+                return TableContainer(merge(results))  # type: ignore
 
             return TableContainer(pd.DataFrame(results))
 
