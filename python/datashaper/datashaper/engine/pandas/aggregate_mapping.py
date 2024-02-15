@@ -18,6 +18,8 @@ aggregate_operation_mapping = {
     FieldAggregateOperation.StDev: "std",
     FieldAggregateOperation.StDevPopulation: "",
     FieldAggregateOperation.Variance: "variance",
-    FieldAggregateOperation.ArrayAgg: lambda series: f"[{', '.join([str(e) for e in series])}]",
-    FieldAggregateOperation.ArrayAggDistinct: lambda series: f"[{', '.join([str(e) for e in series.unique()])}]",
+    FieldAggregateOperation.ArrayAgg: lambda series: [e for e in series],
+    FieldAggregateOperation.ArrayAggDistinct: lambda series: [
+        e for e in series.unique()
+    ],
 }
