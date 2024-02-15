@@ -43,8 +43,9 @@ export const JoinFormBase: React.FC<
 				(s, val) => {
 					const binding: InputBinding = (s.input[
 						NodeInput.Other
-					] as InputBinding) ?? { node: val as WorkflowStepId }
+					] as InputBinding) ?? { }
 					binding.node = val as WorkflowStepId
+					step.input[NodeInput.Other] = binding
 				},
 				{ required: true, placeholder: 'Choose table' },
 			),
