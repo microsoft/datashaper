@@ -23,7 +23,7 @@ export const RecoilBasedProfileHost: React.FC<
 		[loadState, resource],
 	)
 	return (
-		<RecoilRoot key={resource.id} initializeState={initializeState} override>
+		<RecoilRoot key={`resource-recoil-root-${resource.id}`} initializeState={initializeState} override>
 			<HostInner resource={resource} saveState={saveState}>
 				{children}
 			</HostInner>

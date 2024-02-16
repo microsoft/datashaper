@@ -77,7 +77,7 @@ export const Codebook: React.FC<CodebookProps> = memo(function Codebook({
 				{fields.map((field: Field, index: number) => {
 					return (
 						<div
-							key={`${field.name}@${index}`}
+							key={`${field.name}-${index}`}
 							style={getRootStyle(
 								theme,
 								field.exclude,

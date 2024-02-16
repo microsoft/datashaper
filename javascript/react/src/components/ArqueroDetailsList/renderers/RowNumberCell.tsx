@@ -14,9 +14,7 @@ import type { FormattedCellProps } from './types.js'
 export const RowNumberCell: React.FC<FormattedCellProps> = memo(
 	function RowNumberCell({ index }) {
 		return (
-			<Container>
-				<span>{index}</span>
-			</Container>
+			<Container>{index}</Container>
 		)
 	},
 )

@@ -42,7 +42,7 @@ export const WorkflowExample: React.FC<WorkflowExampleProps> = memo(
 						<StepOutput
 							step={step}
 							index={index}
-							key={step.id}
+							key={`${step.id}-${index}`}
 							workflow={wf}
 							output={outputs[index]}
 							onStepChange={onStepSave}

@@ -91,7 +91,7 @@ export const StepList: React.FC<StepListProps> = memo(function StepStack({
 						onDeleteClicked && (() => onDeleteClicked(stepIndex))
 					return (
 						<CollapsiblePanel
-							key={step.id}
+							key={`step-${step.id}`}
 							styles={collapsiblePanelStyles}
 							onHeaderClick={() => onSelect?.(step.id)}
 							onRenderHeader={() =>

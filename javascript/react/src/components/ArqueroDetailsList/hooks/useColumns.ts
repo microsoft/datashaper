@@ -180,7 +180,7 @@ export function useColumns(
 		})
 
 		if (!features.hideRowNumber) {
-			mappedColumns.unshift(createRenderRowNumberColumn())
+			mappedColumns.unshift(createRenderRowNumberColumn(table.numRows()))
 		}
 
 		return mappedColumns

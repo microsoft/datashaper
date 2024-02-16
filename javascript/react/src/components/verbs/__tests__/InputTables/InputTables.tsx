@@ -22,7 +22,7 @@ export const InputTables: React.FC<InputTablesProps> = memo(
 			<Container>
 				{tables.map((table) => {
 					return (
-						<Table key={table.id}>
+						<Table key={`table-${table.id}`}>
 							<ArqueroTableHeader name={table.id} table={table.table} />
 							<ArqueroDetailsList
 								table={table.table}

@@ -25,7 +25,7 @@ export const CommandBarsStory: ComponentStory<typeof ArqueroTableHeader> = (
 		<>
 			<Checkboxes>
 				{checkboxes.map((checkbox) => (
-					<Checkbox key={checkbox.label} {...checkbox} />
+					<Checkbox key={`checkbox-${checkbox.label}`} {...checkbox} />
 				))}
 			</Checkboxes>
 			<ArqueroTableHeader
