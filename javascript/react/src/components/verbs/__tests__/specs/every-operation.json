@@ -446,6 +446,14 @@
 				"column": "Product",
 				"operation": "first_value"
 			}
+		},
+		{
+			"id": "workflow",
+			"verb": "workflow",
+			"input": "companies",
+			"args": {
+				"workflow": {}
+			}
 		}
 	],
 	"input": ["companies", "companies2", "products", "stocks"]
