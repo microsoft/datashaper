@@ -24,6 +24,7 @@ import {
 	NodeInput
 } from '@datashaper/workflow'
 import { format } from 'd3-format'
+import { getInputNode } from '../../util.js'
 
 /**
  * Create reasonable short detail text for a step.
@@ -34,7 +35,8 @@ import { format } from 'd3-format'
  */
 export function deriveDetails(step: Step): string | undefined {
 	const { verb, args } = step
-
+	console.log('step', step)
+	
 	// handle special case verbs first
 	switch (verb) {
 		case Verb.Derive:
@@ -59,10 +61,10 @@ export function deriveDetails(step: Step): string | undefined {
 	} else if (isOutputColumnStep(verb)) {
 		return (args as OutputColumnArgs).to
 	} else if (isInputTableListStep(verb)) {
-		const others = step.input[NodeInput.Other]
-			? step.input[NodeInput.Other]
-			: step.input.others?.join(',')
-		return `with ${others}`
+		const other = getInputNode(step, NodeInput.Other)
+		const others = listOthers(step)
+		const list = other || others
+		return `with ${list}`
 	}
 }
 
@@ -73,4 +75,9 @@ function sample(step: Step): string {
 	return args.proportion
 		? `${whole(args.proportion * 100)}% of rows`
 		: `${args.size} rows`
+}
+
+function listOthers(step: Step): string | undefined {
+	const binding = step.input?.others
+	return binding?.map(b => b.node).join(',')
 }
