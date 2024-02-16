@@ -679,7 +679,7 @@ export interface SampleArgs {
 	seed?: number
 
 	/**
-	 * Whether to preserve and emit the non-sampled records via the 'unsampled' output port.
+	 * Whether to preserve and emit the non-sampled records via the 'remainder' output port.
 	 */
 	emitRemainder?: boolean
 }

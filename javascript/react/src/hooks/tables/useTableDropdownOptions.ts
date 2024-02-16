@@ -19,19 +19,18 @@ import { useWorkflowInputTableNames } from '../workflow/useWorkflowInputTableNam
  */
 export function useTableDropdownOptions(
 	workflow?: Workflow,
+	filter?: (element: string, index: number, array: string[]) => boolean,
 ): IDropdownOption[] {
 	const inputNames = useWorkflowInputTableNames(workflow)
 	return useMemo(() => {
-		let inputOptions = getSimpleDropdownOptions(inputNames)
+		let combined = inputNames
 		if (workflow) {
-			inputOptions = inputOptions.concat(
-				workflow?.outputNames.map((a) => ({
-					key: a,
-					text: a,
-				})),
-			)
+			combined = combined.concat(workflow.outputNames)
 		}
-
+		if (filter) {
+			combined = combined.filter(filter)
+		}
+		const inputOptions = getSimpleDropdownOptions(combined)
 		return inputOptions
-	}, [inputNames, workflow])
+	}, [inputNames, workflow, filter])
 }
