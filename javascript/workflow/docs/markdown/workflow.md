@@ -62,6 +62,7 @@
 |  [readStep({ verb, args, id, input }, previous)](./workflow.readstep.md) | Factory function to create new verb configs with as many reasonable defaults as possible. |
 |  [stepNodeFactory(stepFunction)](./workflow.stepnodefactory.md) |  |
 |  [verbs(filter)](./workflow.verbs.md) | Returns all verbs, subject to optional filter. |
+|  [workflow(id)](./workflow.workflow.md) |  |
 
 ## Interfaces
 
@@ -77,6 +78,7 @@
 |  [ProfileInitializationContext](./workflow.profileinitializationcontext.md) |  |
 |  [ResourceConstructor](./workflow.resourceconstructor.md) | A constructor for a resource |
 |  [Step](./workflow.step.md) | Resolved step data, used in living workflows |
+|  [StepApi](./workflow.stepapi.md) | The API available to step functions. |
 |  [StepInput](./workflow.stepinput.md) | Step input data for parsing workflow schemas |
 |  [TableExportOptions](./workflow.tableexportoptions.md) | Options for exporting data-tables within Workflow instances.w |
 |  [Transformer\_2](./workflow.transformer_2.md) | A transformer for a type of I/O |
@@ -112,6 +114,7 @@
 |  [isDataTable](./workflow.isdatatable.md) |  |
 |  [isDataTableSchema](./workflow.isdatatableschema.md) |  |
 |  [isDefaultInput](./workflow.isdefaultinput.md) |  |
+|  [isDefaultOutput](./workflow.isdefaultoutput.md) |  |
 |  [isReference](./workflow.isreference.md) |  |
 |  [isTableBundle](./workflow.istablebundle.md) |  |
 |  [isTableBundleSchema](./workflow.istablebundleschema.md) |  |

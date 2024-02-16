@@ -33,16 +33,15 @@
 		"@datashaper/tables": "workspace:^",
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/workflow": "workspace:^",
-		"@essex/components": "^4.0.0",
+		"@essex/components": "^4.2.0",
 		"@monaco-editor/react": "^4.5.1",
 		"ahooks": "^3.7.7",
 		"allotment": "1.19.0",
 		"monaco-editor": "^0.37.1",
-		"observable-hooks": "^4.2.2",
+		"observable-hooks": "^4.2.3",
 		"react-if": "^4.1.4",
 		"rxjs": "^7.8.1",
-		"tslib": "^2.5.3",
-		"yarn": "^1.22.19"
+		"tslib": "^2.5.3"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^24.0.5",

@@ -56,3 +56,4 @@ export const sample = empty
 export const ungroup = empty
 export const union = empty
 export const unorder = empty
+export const workflow = empty

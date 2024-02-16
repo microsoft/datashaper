@@ -4,6 +4,8 @@
 
 ## DefaultGraph.hasNode() method
 
+Check if the graph has a node with the given ID
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,9 +16,11 @@ hasNode(id: NodeId): boolean;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  id | [NodeId](./workflow.nodeid.md) |  |
+|  id | [NodeId](./workflow.nodeid.md) | The node ID to check |
 
 <b>Returns:</b>
 
 boolean
+
+Whether the graph has a node with the given ID
 

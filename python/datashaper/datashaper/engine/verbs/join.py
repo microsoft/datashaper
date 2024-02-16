@@ -2,17 +2,16 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-from typing import Optional, cast
+"""Join verb implementation."""
+from typing import cast
 
 import pandas as pd
-
 from pandas._typing import MergeHow, Suffixes
 
 from datashaper.engine.types import JoinStrategy
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store import TableContainer
-
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 __strategy_mapping: dict[JoinStrategy, MergeHow] = {
     JoinStrategy.Inner: "inner",
@@ -32,28 +31,29 @@ def __clean_result(
         return cast(
             pd.DataFrame, result[result["_merge"] == "left_only"][source.columns]
         )
-    elif strategy == JoinStrategy.SemiJoin:
+    if strategy == JoinStrategy.SemiJoin:
         return cast(pd.DataFrame, result[result["_merge"] == "both"][source.columns])
-    else:
-        result = cast(
-            pd.DataFrame,
-            pd.concat(
-                [
-                    result[result["_merge"] == "both"],
-                    result[result["_merge"] == "left_only"],
-                    result[result["_merge"] == "right_only"],
-                ]
-            ),
-        )
-        return result.drop("_merge", axis=1)
+
+    result = cast(
+        pd.DataFrame,
+        pd.concat(
+            [
+                result[result["_merge"] == "both"],
+                result[result["_merge"] == "left_only"],
+                result[result["_merge"] == "right_only"],
+            ]
+        ),
+    )
+    return result.drop("_merge", axis=1)
 
 
 @verb(name="join", treats_input_tables_as_immutable=True)
 def join(
     input: VerbInput,
-    on: Optional[list[str]] = None,
+    on: list[str] | None = None,
     strategy: str = "inner",
-):
+) -> VerbResult:
+    """Join verb implementation."""
     join_strategy = JoinStrategy(strategy)
     input_table = cast(pd.DataFrame, input.get_input())
     other = cast(pd.DataFrame, input.get_others()[0])
@@ -79,4 +79,4 @@ def join(
             indicator=True,
         )
 
-    return TableContainer(table=__clean_result(join_strategy, output, input_table))
+    return create_verb_result(__clean_result(join_strategy, output, input_table))

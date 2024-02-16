@@ -7,8 +7,10 @@ import fs from 'fs'
 import fsp from 'fs/promises'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
-
+import debug from 'debug'
 import { Workflow } from '../resources/index.js'
+
+const log = debug('datashaper:workflow')
 
 // Static data paths.
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -47,8 +49,11 @@ function doDescribe(targetPath: string) {
 function defineTestCase(parentPath: string, test: string) {
 	const casePath = path.join(parentPath, test)
 	const testName = test.split('_').join(' ')
+	const jsTablePath = path.join(casePath, "js")
+	const tablesPath = fs.existsSync(jsTablePath) ? jsTablePath : casePath
+
 	const expectedOutputTables = fs
-		.readdirSync(casePath)
+		.readdirSync(tablesPath)
 		.filter((f) => f.endsWith('.csv'))
 		.map((f) => f.replace('.csv', ''))
 
@@ -66,7 +71,7 @@ function defineTestCase(parentPath: string, test: string) {
 		// check the output tables
 		await Promise.all(
 			expectedOutputTables.map(async (o) => {
-				const expected = await readCsv(path.join(casePath, `${o}.csv`))
+				const expected = await readCsv(path.join(tablesPath, `${o}.csv`))
 				await new Promise<void>((resolve) => {
 					const result = workflow.read(o)
 					if (result?.table) {
@@ -136,7 +141,7 @@ function compareTables(
 		}
 	} catch (e) {
 		console.log(
-			`data mismatch; \n-----EXPECTED-----\n${expected.toCSV()}\n\n-----ACTUAL-----\n${actual.toCSV()}`,
+			`data mismatch on ${name}; \n-----EXPECTED-----\n${expected.toCSV()}\n\n-----ACTUAL-----\n${actual.toCSV()}`,
 		)
 		throw e
 	}

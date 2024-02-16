@@ -1,4 +1,5 @@
 {
+    "$ref": "#/definitions/WorkflowSchema",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
         "AggregateArgs": {
@@ -34,8 +35,7 @@
                         {
                             "properties": {
                                 "source": {
-                                    "description": "The Id of the step to which the input is bound",
-                                    "type": "string"
+                                    "$ref": "#/definitions/WorkflowInput"
                                 }
                             },
                             "type": "object"
@@ -450,12 +450,12 @@
                     "description": "The inputs that must be bound; \"source\" & \"other\".",
                     "properties": {
                         "other": {
-                            "description": "The secondary input, which must be specified",
-                            "type": "string"
+                            "$ref": "#/definitions/WorkflowInput",
+                            "description": "The secondary input, which must be specified"
                         },
                         "source": {
-                            "description": "The primary input, which must be specified",
-                            "type": "string"
+                            "$ref": "#/definitions/WorkflowInput",
+                            "description": "The primary input, which must be specified"
                         }
                     },
                     "type": "object"
@@ -1039,6 +1039,10 @@
         },
         "SampleArgs": {
             "properties": {
+                "emitRemainder": {
+                    "description": "Whether to preserve and emit the non-sampled records via the 'unsampled' output port.",
+                    "type": "boolean"
+                },
                 "proportion": {
                     "description": "If table size is unknown ahead of time, specify a proportion of rows to sample.\nIf size is specified, it will be used instead, otherwise computed from this\nproportion using the table.numRows()",
                     "type": "number"
@@ -2051,6 +2055,28 @@
                         },
                         {
                             "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/WorkflowArgs"
+                                },
+                                "verb": {
+                                    "const": "workflow",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
                                 "args": {},
                                 "verb": {
                                     "type": "string"
@@ -2150,11 +2176,35 @@
                 "input": {
                     "anyOf": [
                         {
+                            "properties": {
+                                "node": {
+                                    "description": "The Id of the step to which the input is bound",
+                                    "type": "string"
+                                },
+                                "output": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
                             "additionalProperties": {
                                 "anyOf": [
                                     {
+                                        "properties": {
+                                            "node": {
+                                                "description": "The Id of the step to which the input is bound",
+                                                "type": "string"
+                                            },
+                                            "output": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    {
                                         "items": {
-                                            "type": "string"
+                                            "$ref": "#/definitions/WorkflowInput"
                                         },
                                         "type": "array"
                                     },
@@ -2167,13 +2217,13 @@
                                 "others": {
                                     "description": "Possible variadic input",
                                     "items": {
-                                        "type": "string"
+                                        "$ref": "#/definitions/WorkflowInput"
                                     },
                                     "type": "array"
                                 },
                                 "source": {
-                                    "description": "Possible main input",
-                                    "type": "string"
+                                    "$ref": "#/definitions/WorkflowInput",
+                                    "description": "Possible main input"
                                 }
                             },
                             "type": "object"
@@ -2206,13 +2256,13 @@
                         "others": {
                             "description": "The variadic secondary inputs",
                             "items": {
-                                "type": "string"
+                                "$ref": "#/definitions/WorkflowInput"
                             },
                             "type": "array"
                         },
                         "source": {
-                            "description": "The primary input",
-                            "type": "string"
+                            "$ref": "#/definitions/WorkflowInput",
+                            "description": "The primary input"
                         }
                     },
                     "type": "object"
@@ -2255,86 +2305,117 @@
                 "uuid"
             ],
             "type": "string"
-        }
-    },
-    "description": "The root wrangling workflow specification.\nresource profile: 'workflow'",
-    "properties": {
-        "$schema": {
-            "description": "The JSON schema for this resource.",
-            "type": "string"
         },
-        "description": {
-            "description": "Description of the named resource.",
-            "type": "string"
-        },
-        "homepage": {
-            "description": "URL to a public webpage that describes this resource.",
-            "type": "string"
-        },
-        "input": {
-            "description": "A list of input names that are expected to be provided in addition to the workflow steps",
-            "items": {
-                "type": "string"
+        "WorkflowArgs": {
+            "properties": {
+                "workflow": {
+                    "$ref": "#/definitions/WorkflowSchema",
+                    "description": "The workflow configuration."
+                }
             },
-            "type": "array"
+            "type": "object"
         },
-        "license": {
-            "description": "SPDX license string.\nhttps://spdx.org/licenses/",
-            "type": "string"
-        },
-        "name": {
-            "description": "User-specified name. This will serve as the local id (i.e., like a filename.) and should be URI-compatible.\nThis should be editable, just like any other filename on a file system.",
-            "type": "string"
-        },
-        "path": {
+        "WorkflowInput": {
             "anyOf": [
                 {
+                    "properties": {
+                        "node": {
+                            "description": "The Id of the step to which the input is bound",
+                            "type": "string"
+                        },
+                        "output": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "WorkflowSchema": {
+            "description": "The root wrangling workflow specification.\nresource profile: 'workflow'",
+            "properties": {
+                "$schema": {
+                    "description": "The JSON schema for this resource.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Description of the named resource.",
+                    "type": "string"
+                },
+                "homepage": {
+                    "description": "URL to a public webpage that describes this resource.",
+                    "type": "string"
+                },
+                "input": {
+                    "description": "A list of input names that are expected to be provided in addition to the workflow steps",
                     "items": {
                         "type": "string"
                     },
                     "type": "array"
                 },
-                {
+                "license": {
+                    "description": "SPDX license string.\nhttps://spdx.org/licenses/",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "User-specified name. This will serve as the local id (i.e., like a filename.) and should be URI-compatible.\nThis should be editable, just like any other filename on a file system.",
+                    "type": "string"
+                },
+                "path": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).\nURI-compliant path to the referenced resource (local or remote)."
+                },
+                "profile": {
+                    "const": "workflow",
+                    "description": "Defines the resource type.\nKnown resource types should have accompanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
+                    "type": "string"
+                },
+                "rel": {
+                    "description": "The relationship of this resource to the parent resource.\n\nNote: If the resource is a profile-free reference object (e.g.\n{ \"rel\": \"input\", \"path\": \"path/to/datatable.json\" },\n\nThen the relationship is _external_ the target resource and should not be persisted\nin the object\n)",
+                    "type": "string"
+                },
+                "sources": {
+                    "description": "List of resources that underlie this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/ResourceSchema"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "steps": {
+                    "description": "The workflow steps",
+                    "items": {
+                        "$ref": "#/definitions/Step"
+                    },
+                    "type": "array"
+                },
+                "title": {
+                    "description": "Friendly name of the resource. Used for display only.",
                     "type": "string"
                 }
-            ],
-            "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).\nURI-compliant path to the referenced resource (local or remote)."
-        },
-        "profile": {
-            "const": "workflow",
-            "description": "Defines the resource type.\nKnown resource types should have accompanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
-            "type": "string"
-        },
-        "rel": {
-            "description": "The relationship of this resource to the parent resource.\n\nNote: If the resource is a profile-free reference object (e.g.\n{ \"rel\": \"input\", \"path\": \"path/to/datatable.json\" },\n\nThen the relationship is _external_ the target resource and should not be persisted\nin the object\n)",
-            "type": "string"
-        },
-        "sources": {
-            "description": "List of resources that underlie this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
-            "items": {
-                "anyOf": [
-                    {
-                        "$ref": "#/definitions/ResourceSchema"
-                    },
-                    {
-                        "type": "string"
-                    }
-                ]
             },
-            "type": "array"
-        },
-        "steps": {
-            "description": "The workflow steps",
-            "items": {
-                "$ref": "#/definitions/Step"
-            },
-            "type": "array"
-        },
-        "title": {
-            "description": "Friendly name of the resource. Used for display only.",
-            "type": "string"
+            "type": "object"
         }
     },
-    "type": "object"
+    "description": "The root wrangling workflow specification.\nresource profile: 'workflow'"
 }
 

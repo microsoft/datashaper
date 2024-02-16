@@ -4,7 +4,6 @@
  */
 import type { TableContainer } from '@datashaper/tables'
 import { type Observable, BehaviorSubject, from, map } from 'rxjs'
-import type { WorkflowStepId } from '@datashaper/schema'
 
 import { DefaultGraph } from '../../dataflow/DefaultGraph.js'
 import { observableNode } from '../../dataflow/index.js'
@@ -20,14 +19,24 @@ import {
 	hasPossibleInputs,
 	isVariadicSocketName as isVariadic,
 } from './utils.js'
+import { WorkflowInput } from '@datashaper/schema'
 
 const DEFAULT_INPUT = '__DEFAULT_INPUT__'
 
 export class GraphManager extends Disposable {
 	private readonly _graph = new DefaultGraph<TableContainer>()
+
 	private readonly _defaultInputNode: Node<TableContainer>
+
+	/**
+	 * The steps in the workflow
+	 */
 	private readonly _steps$ = new BehaviorSubject<Step[]>([])
+	/**
+	 * The number of steps in the workflow
+	 */
 	private readonly _numSteps$ = this._steps$.pipe(map((steps) => steps.length))
+
 	private readonly _inputDelegates = new Map<
 		string,
 		DelegateSubject<TableContainer>
@@ -37,6 +46,10 @@ export class GraphManager extends Disposable {
 		super()
 		this._defaultInputNode = observableNode(DEFAULT_INPUT, defaultInput$)
 		this._graph.add(this._defaultInputNode)
+	}
+
+	public get defaultInput(): Node<TableContainer> {
+		return this._defaultInputNode
 	}
 
 	public get steps(): Step[] {
@@ -78,18 +91,6 @@ export class GraphManager extends Disposable {
 		this._graph.clear()
 		this._steps$.complete()
 		super.dispose()
-	}
-
-	public getDefaultInput(): Node<TableContainer> {
-		return this._defaultInputNode
-	}
-
-	public getNode(id: string): Node<TableContainer> {
-		return this._graph.node(id)
-	}
-
-	public hasNode(id: string): boolean {
-		return this._graph.hasNode(id)
 	}
 
 	public addStep(input: StepInput): Step {
@@ -171,9 +172,8 @@ export class GraphManager extends Disposable {
 		if (g.hasNode(id)) {
 			// try to find the named node in the graph
 			return g.node(id)
-		} else {
-			return this.createNode(id, from([]))
 		}
+		return this.createNode(id, from([]))
 	}
 
 	public get lastOutput$(): Observable<Maybe<TableContainer>> | undefined {
@@ -189,10 +189,15 @@ export class GraphManager extends Disposable {
 		const lastStepId = lastStep.id
 		const lastNode = this.getNode(lastStepId)
 		// Nodes use BehaviorSubject internally
-		return lastNode.output$ as Observable<Maybe<TableContainer>>
+		return lastNode.output$() as Observable<Maybe<TableContainer>>
 	}
 
-	public setSource(id: string, value: Observable<Maybe<TableContainer>>): void {
+	/**
+	 * Binds the input of a node to an observable
+	 * @param id - The input value to bind
+	 * @param value - The observable to bind the input to
+	 */
+	public bind(id: string, value: Observable<Maybe<TableContainer>>): void {
 		const input = this._inputDelegates.get(id)
 		if (input == null) {
 			throw new Error(`input ${id} not observed`)
@@ -200,18 +205,17 @@ export class GraphManager extends Disposable {
 		input.input = value
 	}
 
-	public ensureInput(id: string): void {
+	public ensureInputNode(id: string): void {
 		if (this._inputDelegates.has(id)) {
 			return
 		}
 		if (this._graph.hasNode(id)) {
 			throw new Error(`node ${id} already exists without an input seam`)
-		} else {
-			const stream = new DelegateSubject<TableContainer>()
-			this._inputDelegates.set(id, stream)
-			const node = observableNode(id, stream)
-			this._graph.add(node)
 		}
+		const stream = new DelegateSubject<TableContainer>()
+		this._inputDelegates.set(id, stream)
+		const node = observableNode(id, stream)
+		this._graph.add(node)
 	}
 
 	public removeInput(id: string): void {
@@ -245,26 +249,52 @@ export class GraphManager extends Disposable {
 		const node = this.getNode(step.id)
 		node.config = step.args
 
+		const stepInput =
+			typeof step.input === 'string' ? { source: step.input } : step.input
+		const getNodeId = (binding: WorkflowInput) =>
+			typeof binding === 'string' ? binding : binding.node
+		const getOutput = (binding: WorkflowInput) =>
+			typeof binding === 'string' ? undefined : binding.output
+
 		// first bind the standard input to the step, either the previous step or the default input
 		if (prevStep == null) {
-			node.bind({ node: this.getDefaultInput() })
+			node.bind({ node: this.defaultInput })
 		} else if (prevStep != null) {
 			node.bind({ node: this.getNode(prevStep.id) })
 		}
 		// if any inputs nodes are in the graph explicitly, bind them
 		if (hasDefinedInputs(step)) {
-			for (const [input, binding] of Object.entries(step.input)) {
+			for (const [input, binding] of Object.entries(stepInput)) {
 				if (binding != null) {
 					if (isVariadic(input, binding)) {
 						// Bind variadic input
-						node.bind(binding.map((b) => ({ node: this.getNode(b) })))
-					} else if (this.hasNode(binding as WorkflowStepId)) {
-						// Bind Non-Variadic Input
-						const inputNode = this.getNode(binding)
-						node.bind({ input, node: inputNode })
+						node.bind(
+							binding.map((b) => {
+								const nodeId = getNodeId(b)
+								const output = getOutput(b)
+								return { node: this.getNode(nodeId), output }
+							}),
+						)
+					} else {
+						const nodeId = getNodeId(binding)
+						const output = getOutput(binding)
+						if (this.hasNode(nodeId)) {
+							// Bind Non-Variadic Input
+							node.bind({ input, node: this.getNode(nodeId), output })
+						} else {
+							console.warn(`node ${nodeId} not found`)
+						}
 					}
 				}
 			}
 		}
+	}
+
+	private getNode(id: string): Node<TableContainer> {
+		return this._graph.node(id)
+	}
+
+	private hasNode(id: string): boolean {
+		return this._graph.hasNode(id)
 	}
 }

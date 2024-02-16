@@ -2,28 +2,27 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Window verb implementation."""
 
-from typing import Union
 from uuid import uuid4
 
 import numpy as np
 import pandas as pd
-
 from pandas.core.groupby import DataFrameGroupBy
 
 from datashaper.engine.types import WindowFunction
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store import TableContainer
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 def _get_window_indexer(
-    column: pd.Series, fixed_size=False
-) -> Union[int, pd.api.indexers.BaseIndexer]:
+    column: pd.Series, fixed_size: bool = False
+) -> int | pd.api.indexers.BaseIndexer:
     if fixed_size:
         return pd.api.indexers.FixedForwardWindowIndexer(window_size=len(column))
-    else:
-        return len(column)
+
+    return len(column)
 
 
 __window_function_map = {
@@ -55,12 +54,13 @@ __window_function_map = {
         window=_get_window_indexer(column, True),
         min_periods=1,
     ).apply(lambda x: x.dropna().iloc[0] if np.isnan(x.iloc[0]) else x.iloc[0]),
-    WindowFunction.UUID: lambda column: column.apply(lambda x: str(uuid4())),
+    WindowFunction.UUID: lambda column: column.apply(lambda _x: str(uuid4())),
 }
 
 
 @verb(name="window")
-def window(input: VerbInput, column: str, to: str, operation: str):
+def window(input: VerbInput, column: str, to: str, operation: str) -> VerbResult:
+    """Apply a window function to a column in a table."""
     window_operation = WindowFunction(operation)
 
     input_table = input.get_input()
@@ -76,4 +76,4 @@ def window(input: VerbInput, column: str, to: str, operation: str):
         output = input_table
         output[to] = window
 
-    return TableContainer(table=output)
+    return create_verb_result(output)

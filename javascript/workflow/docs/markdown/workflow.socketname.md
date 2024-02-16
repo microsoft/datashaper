@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-export type SocketName = string | symbol;
+export type SocketName = string;
 ```

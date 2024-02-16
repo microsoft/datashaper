@@ -6,22 +6,34 @@
 
 import inspect
 import json
-import os
 import time
 import traceback
-
 from collections import OrderedDict, defaultdict
-from typing import Any, Callable, Generic, Iterable, Optional, TypeVar, cast
+from collections.abc import Callable, Iterable
+from enum import Enum
+from logging import getLogger
+from pathlib import Path
+from typing import Any, Generic, TypeVar, cast
 from uuid import uuid4
 
 import pandas as pd
-
 from jsonschema import validate as validate_schema
 
-from datashaper.engine.verbs import VerbDetails, VerbInput, VerbManager
-from datashaper.execution.execution_node import ExecutionNode
+from datashaper.engine.verbs.types import VerbDetails
+from datashaper.engine.verbs.verb_input import VerbInput
+from datashaper.engine.verbs.verbs_mapping import VerbManager
+from datashaper.errors import (
+    NodeNotVisitedError,
+    WorkflowInvalidInputError,
+    WorkflowMissingInputError,
+    WorkflowOutputNotReadyError,
+    WorkflowVerbNotFoundError,
+)
+from datashaper.execution.execution_node import ExecutionNode, WorkflowInput
 from datashaper.progress.types import Progress
-from datashaper.table_store import Table, TableContainer
+from datashaper.table_store.in_memory_table_store import InMemoryTableStore
+from datashaper.table_store.table_store import TableStore
+from datashaper.table_store.types import Table, TableContainer, VerbResult
 
 from .types import MemoryProfile, VerbTiming, WorkflowRunResult
 from .verb_callbacks import DelegatingVerbCallbacks
@@ -31,46 +43,52 @@ from .workflow_callbacks import (
     WorkflowCallbacksManager,
 )
 
+log = getLogger(__name__)
 
-# TODO: this won't work for a published package
+# TODO(Chris): this won't work for a published package
 SCHEMA_FILE = "../../schema/workflow.json"
 
 Context = TypeVar("Context")
 
-DEFAULT_INPUT_NAME = "datasource"
+DEFAULT_INPUT_NAME = "source"
+
+
+class PandasDtypeBackend(str, Enum):
+    """Pandas dtype backend."""
+
+    NUMPY_NULLABLE = "numpy_nullable"
+    PYARROW = "pyarrow"
 
 
 class Workflow(Generic[Context]):
     """A data processing graph."""
 
-    _schema: dict[str, Any]
+    _schema: dict
     _inputs: dict[str, TableContainer]
     _graph: dict[str, ExecutionNode]
     _dependency_graph: dict[str, set[str]]
     _last_step_id: str
     _dependencies: set[str]
     _memory_profile: bool | None
-
+    _validate_schema: bool | None
+    _schema_path: str | None
     """Externals that this workflow depends on"""
 
     def __init__(
         self,
-        schema: dict[str, Any],
-        input_path: Optional[str] = None,
-        input_tables: Optional[dict[str, pd.DataFrame]] = None,
-        schema_path: Optional[str] = None,
-        verbs: Optional[dict[str, Callable]] = None,
-        validate: Optional[bool] = False,
-        default_input: Optional[str] = None,
-        memory_profile: Optional[bool] = False,
+        schema: dict,
+        input_tables: dict[str, pd.DataFrame] | None = None,
+        schema_path: str | None = None,
+        verbs: dict[str, Callable] | None = None,
+        validate: bool | None = False,
+        memory_profile: bool | None = False,
+        pandas_dtype_backend: PandasDtypeBackend = PandasDtypeBackend.NUMPY_NULLABLE,
+        table_store: TableStore | None = None,
     ):
         """Create an execution graph from the Dict provided in workflow.
 
         :param schema: the Dict object that contains the workflow
         :type schema: Dict
-        :param input_path: Optional input path, if provided input
-                           tables will be loaded relative to that path, defaults to None
-        :type input_path: str, optional
         :param schema_path: Optional Workflow schema path, if provided input
                            tables will be loaded relative to that path, defaults to
                            a known JSON schema path.
@@ -78,38 +96,31 @@ class Workflow(Generic[Context]):
         :param validate: Optional value, if true perform JSON-schema validation.
                          Defaults to False.
         :type validate: bool, optional
-
-        :param default_input: Optional value, the default input for the first step.
-        :type default_input: str, optional
         """
-        schema_path = schema_path or SCHEMA_FILE
-        default_input = default_input or DEFAULT_INPUT_NAME
+        self._schema_path = schema_path = schema_path or SCHEMA_FILE
+        self._validate_schema = validate
         self._schema = schema
         self._memory_profile = memory_profile
         self._dependencies = self._compute_dependencies()
         self._dependency_graph = defaultdict(set)
         self._graph = OrderedDict()
-        self._inputs = {}
+        self._table_store = (
+            table_store if table_store is not None else InMemoryTableStore()
+        )
 
         # Perform JSON-schema validation
-        # TODO: the current schema definition does not work in Python
+        # TODO(Chris): the current schema definition does not work in Python
         if validate and schema_path is not None:
-            with open(schema_path) as schema_file:
+            with Path(schema_path).open() as schema_file:
                 schema_json = json.load(schema_file)
                 validate_schema(schema, schema_json)
 
-        # Auto-load input tables if provided.
-        if input_path is not None:
-            for input in schema["input"]:
-                # TODO: support other file formats
-                csv_table = pd.read_csv(
-                    os.path.join(input_path, f"{input}.csv"), engine="pyarrow"
-                )
-                self.add_table(input, csv_table)
-
         if input_tables is not None:
             for input, table in input_tables.items():
-                self.add_table(input, table.convert_dtypes(dtype_backend="pyarrow"))
+                self.add_table(
+                    input,
+                    table.convert_dtypes(dtype_backend=pandas_dtype_backend.value),
+                )
 
         if verbs is not None:
             VerbManager.get().register_verbs(verbs, override_existing=True)
@@ -119,9 +130,7 @@ class Workflow(Generic[Context]):
         for step in schema["steps"]:
             step_has_defined_id = "id" in step
             step_id = step["id"] if step_has_defined_id else str(uuid4())
-            step_input = (
-                step["input"] if "input" in step else previous_step_id
-            ) or default_input
+            step_input = (step.get("input", previous_step_id)) or DEFAULT_INPUT_NAME
             verb = Workflow.__get_verb(step["verb"])
 
             step = ExecutionNode(
@@ -129,10 +138,10 @@ class Workflow(Generic[Context]):
                 node_input=step_input,
                 verb=verb,
                 has_explicit_id=step_has_defined_id,
-                args=step["args"] if "args" in step else {},
+                args=step.get("args", {}),
             )
             self._graph[step_id] = step
-            for input in Workflow.__inputs_list(step_input):
+            for input in Workflow.__list_inputs(step_input):
                 self._dependency_graph[input].add(step_id)
             previous_step_id = step.node_id
 
@@ -162,34 +171,35 @@ class Workflow(Generic[Context]):
                     known.add(step["id"])
 
                 if "input" in step:
-                    step_input = step["input"]
-                    if isinstance(step_input, str):
-                        deps.add(step_input)
-                    else:
-                        deps.add(step_input["source"])
-                        if "others" in step_input:
-                            for e in step_input["others"]:
-                                deps.add(e)
-                        if "depends_on" in step_input:
-                            for e in step_input["depends_on"]:
-                                deps.add(e)
+                    step_inputs = Workflow.__list_inputs(step["input"])
+                    deps.update(step_inputs)
 
         # Remove known steps from dep list
         return deps.difference(known)
 
     @staticmethod
-    def __inputs_list(input: str | dict[str, Any] | None) -> list[str]:
+    def __list_inputs(input: str | dict | None) -> list[str]:
+        if input is None:
+            return []
+
+        inputs: list[str] = []
+
+        def resolve(value: str | dict) -> str:
+            if isinstance(value, str):
+                return value
+            return value["node"]
+
         if isinstance(input, str):
-            return [input]
+            inputs.append(input)
         else:
-            inputs = []
-            if input is not None:
-                for value in input.values():
-                    if isinstance(value, str):
-                        inputs.append(value)
-                    else:
-                        inputs.extend(value)
-            return inputs
+            for value in input.values():
+                if isinstance(value, list):
+                    for dep in value:
+                        inputs.append(resolve(dep))  # noqa: PERF401
+                else:
+                    inputs.append(resolve(value))
+
+        return inputs
 
     @staticmethod
     def __get_verb(verb: str) -> VerbDetails:
@@ -197,23 +207,23 @@ class Workflow(Generic[Context]):
         verbs_manager = VerbManager.get()
         result = verbs_manager.get_verb(verb)
         if result is None:
-            raise ValueError(f"Verb {verb} not found in verbs")
+            raise WorkflowVerbNotFoundError(verb)
         return result
 
-    @staticmethod
-    def __resolve_run_context(
+    def _resolve_run_context(
+        self,
         exec_node: ExecutionNode,
-        context: Optional[Context],
+        context: Context | None,
         workflow_callbacks: WorkflowCallbacks,
-    ) -> dict[str, Any]:
+    ) -> dict:
         """Injects the run context into the workflow steps."""
         callbacks = DelegatingVerbCallbacks(exec_node, workflow_callbacks)
 
-        def argument_names(fn):
+        def argument_names(fn: Callable) -> list[str]:
             return inspect.getfullargspec(fn).args
 
         verb_args = argument_names(exec_node.verb.func)
-        run_ctx: dict[str, Any] = {}
+        run_ctx: dict = {}
 
         # Pass in individual context items
         if context is not None:
@@ -229,25 +239,35 @@ class Workflow(Generic[Context]):
         if "callbacks" in verb_args and "callbacks" not in exec_node.args:
             run_ctx["callbacks"] = callbacks
 
+        if (
+            "workflow_instance" in verb_args
+            and "workflow_instance" not in exec_node.args
+        ):
+            run_ctx["workflow_instance"] = self
+
         return run_ctx
 
-    def _check_inputs(self, node_key: str, visited: set[str]):
+    def _get_missing_inputs(self, node_key: str, visited: set[str]) -> list[str]:
         node = self._graph[node_key]
-        return all(
-            [
-                input in visited or input in self._inputs
-                for input in Workflow.__inputs_list(node.node_input)
-            ]
-        )
+        return [
+            input
+            for input in Workflow.__list_inputs(node.node_input)
+            if input not in visited and input not in self._table_store.list()
+        ]
 
     def _resolve_inputs(
-        self, verb: VerbDetails, inputs: str | dict[str, list[str]]
-    ) -> dict[str, Any]:
-        def input_table(name: str) -> TableContainer:
-            graph_node = self._graph[name] if name in self._graph else None
+        self,
+        verb: VerbDetails,
+        inputs: str | dict[str, WorkflowInput | list[WorkflowInput]],
+    ) -> VerbInput:
+        def input_table(name: str, output: str | None = None) -> TableContainer:
+            graph_node = self._graph.get(name)
             step_table_is_safe_to_mutate = (
                 graph_node is not None and not graph_node.has_explicit_id
             )
+
+            if output is not None:
+                name = f"{name}.{output}"
 
             # if the node has an explicit id or if the verb is mutation-free, skip the copy
             #
@@ -257,66 +277,94 @@ class Workflow(Generic[Context]):
                 verb.treats_input_tables_as_immutable or step_table_is_safe_to_mutate
             )
 
-            # pick either the input table or the original table
-            table_container = (
-                self._inputs[name] if name in self._inputs else self._graph[name].result
-            )
+            if name not in self._table_store.list():
+                raise WorkflowMissingInputError(name)
 
-            if table_container is None:
-                raise ValueError(f"Input table {name} not found in inputs or graph")
+            table_container = self._table_store.get(name)
+
             if use_original_table:
                 return table_container
-            else:
-                table = table_container.table.copy()
-                return TableContainer(table=table)
+
+            table = table_container.table.copy()
+            return TableContainer(table=table)
 
         if isinstance(inputs, str):
-            return {"input": VerbInput(input=input_table(inputs))}
-        else:
-            input_mapping: dict[str, TableContainer | list[TableContainer]] = {}
-            for key, value in inputs.items():
-                if isinstance(value, str):
-                    input_mapping[key] = input_table(value)
-                else:
-                    input_mapping[key] = [input_table(t) for t in value]
-            return {"input": VerbInput(**cast(Any, input_mapping))}
+            return VerbInput(input=input_table(inputs))
+
+        input_mapping: dict[str, TableContainer | list[TableContainer]] = {}
+        for key, value in inputs.items():
+            if isinstance(value, str):
+                input_mapping[key] = input_table(value)
+            elif isinstance(value, dict):
+                value = cast(dict, value)
+                input_mapping[key] = input_table(value["node"], value["output"])
+            elif isinstance(value, list):
+
+                def resolve(t: WorkflowInput) -> TableContainer:
+                    if isinstance(t, str):
+                        return input_table(t)
+                    if isinstance(t, dict):
+                        return input_table(t["node"], t["output"])
+                    raise WorkflowInvalidInputError(str(type(t)))
+
+                input_mapping[key] = [resolve(t) for t in value]
+            else:
+                raise WorkflowInvalidInputError(str(type(value)))
+
+        input_tbl = cast(TableContainer, input_mapping.pop("input", None))
+        source_tbl = cast(TableContainer, input_mapping.pop("source", None))
+        other_tbl = cast(TableContainer, input_mapping.pop("other", None))
+        others_tbl = cast(list[TableContainer], input_mapping.pop("others", None))
+        input_mapping = cast(dict, input_mapping)
+        return VerbInput(
+            input=input_tbl,
+            source=source_tbl,
+            other=other_tbl,
+            others=others_tbl,
+            named=cast(dict[str, TableContainer], input_mapping),
+        )
 
     def add_table(self, id: str, table: pd.DataFrame) -> None:
         """Add a dataframe to the graph with a given id."""
-        self._inputs[id] = TableContainer(table=table)
+        self._table_store.add(id, TableContainer(table=table), tag="input")
 
-    def output(self, id: Optional[str] = None) -> Table:
+    def output(self, id: str | None = None) -> Table:
         """Get a dataframe from the graph by id."""
         if id is None:
             id = self._last_step_id
 
-        container: Optional[TableContainer] = self._graph[id].result
+        container: TableContainer | None = self._table_store.get(id)
         if container is None:
-            raise Exception(
-                f"Value not calculated yet. {self.name}: {self._graph[id].verb.name} ."
-            )
-        else:
-            return container.table
+            raise WorkflowOutputNotReadyError(self.name, id)
+
+        return container.table
 
     async def run(
         self,
-        context: Optional[Context] = None,
-        callbacks: Optional[WorkflowCallbacks] = None,
+        context: Context | None = None,
+        callbacks: WorkflowCallbacks | None = None,
     ) -> WorkflowRunResult:
         """Run the execution graph."""
         visited: set[str] = set()
         nodes: list[str] = []
 
         def enqueue_available_nodes(possible_nodes: Iterable[str]) -> None:
-            for possible_node in possible_nodes:
-                if self._check_inputs(possible_node, visited):
-                    nodes.append(possible_node)
+            new_nodes = [
+                n
+                for n in possible_nodes
+                if len(self._get_missing_inputs(n, visited)) == 0
+            ]
+            nodes.extend(new_nodes)
 
         def assert_all_visited() -> None:
-            for node_id in self._graph.keys():
+            for node_id in self._graph:
+                node = self._graph.get(node_id)
+
                 if node_id not in visited:
-                    if not self._check_inputs(node_id, visited):
-                        raise ValueError(f"Missing inputs for node {node_id}!")
+                    missing_inputs = self._get_missing_inputs(node_id, visited)
+                    node_id = node.node_id if node is not None else node_id
+                    verb_name = node.verb.name if node is not None else "unknown"
+                    raise NodeNotVisitedError(node_id, verb_name, missing_inputs)
 
         # Use the ensuring variant to guarantee that all protocol methods are available
         callbacks, profiler = self._get_workflow_callbacks(callbacks)
@@ -353,18 +401,22 @@ class Workflow(Generic[Context]):
     async def _execute_verb(
         self,
         node: ExecutionNode,
-        context: Optional[Context],
+        context: Context | None,
         callbacks: WorkflowCallbacks,
     ) -> float:
         start_verb_time = time.time()
 
-        result = None
         try:
-            inputs = self._resolve_inputs(node.verb, node.node_input)
-            verb_context = Workflow.__resolve_run_context(node, context, callbacks)
-            callbacks.on_step_start(node, inputs)
+            input = self._resolve_inputs(node.verb, node.node_input)
+            verb_context = self._resolve_run_context(node, context, callbacks)
+            verb_args = {
+                "input": input,
+                **node.args,
+                **verb_context,
+            }
+            callbacks.on_step_start(node, verb_args)
             callbacks.on_step_progress(node, Progress(percent=0))
-            result = node.verb.func(**node.args, **inputs, **verb_context)
+            result = node.verb.func(**verb_args)
 
             # Unroll the result if it's a coroutine
             # (we need to do this before calling on_step_end)
@@ -373,12 +425,17 @@ class Workflow(Generic[Context]):
         except Exception as e:
             message = f'Error executing verb "{node.verb.name}" in {self.name}: {e}'
             callbacks.on_error(message, e, traceback.format_exc())
-            raise e
+            raise
+        else:
+            if isinstance(result, TableContainer):
+                self._table_store.add(node.node_id, result, tag="output")
+            elif isinstance(result, VerbResult):
+                self._table_store.add(node.node_id, result.output, tag="output")
+                for name, table in result.named_outputs.items():
+                    self._table_store.add(f"{node.node_id}.{name}", table, tag="output")
         finally:
             callbacks.on_step_progress(node, Progress(percent=1))
             callbacks.on_step_end(node, None)
-
-        node.result = result
 
         # Return verb timing
         return time.time() - start_verb_time
@@ -398,10 +455,10 @@ class Workflow(Generic[Context]):
 
         return (callback_handler, profiler)
 
-    def export(self):
+    def export(self) -> dict:
         """Export the graph into a workflow JSON object."""
         return {
-            "input": [input_name for input_name in self._inputs.keys()],
+            "input": [table for table in self._table_store.list(tag="input")],
             "steps": [
                 {
                     "id": step.node_id,
@@ -412,6 +469,18 @@ class Workflow(Generic[Context]):
                 for step in self._graph.values()
             ],
         }
+
+    def derive(
+        self, schema: dict[str, Any], input_tables: dict[str, pd.DataFrame]
+    ) -> "Workflow":
+        """Derive a new workflow from the current one."""
+        # Verbs are already registered, and we don't need to validate the schema again
+        return Workflow(
+            schema,
+            input_tables=input_tables,
+            validate=self._validate_schema,
+            schema_path=self._schema_path,
+        )
 
 
 def _get_memory_profile(
@@ -424,5 +493,5 @@ def _get_memory_profile(
             time_stats=profile.get_time_stats(),
             detailed_view=profile.get_detailed_view(),
         )
-    else:
-        return None
+
+    return None

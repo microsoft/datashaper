@@ -4,6 +4,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -42,11 +45,21 @@ jobs:
       - run: yarn generate:versions
         name: Versions
 
-      - run: yarn build  --api="http://127.0.0.1:9080" --token="${{ secrets.TURBO_SERVER_TOKEN }}" --team="essex"
-        name: build
+      - run: yarn build:javascript
+        name: Build JS
+        env:
+          DEBUG: "datashaper:network,datashaper:DataTableProfile"
+          TURBO_API: "http://127.0.0.1:9080"
+          TURBO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TURBO_TEAM: "essex"
 
-      - run: yarn bundle  --api="http://127.0.0.1:9080" --token="${{ secrets.TURBO_SERVER_TOKEN }}" --team="essex"
-        name: bundle
+      - run: yarn bundle:javascript
+        name: Bundle JS
+        env:
+          DEBUG: "datashaper:network,datashaper:DataTableProfile"
+          TURBO_API: "http://127.0.0.1:9080"
+          TURBO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TURBO_TEAM: "essex"
 
       - run: cp -R javascript/stories/storybook-static javascript/webapp/build/storybook
 

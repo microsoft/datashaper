@@ -254,13 +254,18 @@
                   "text": "input?: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "string | {\n        source: "
-                },
-                {
                   "kind": "Reference",
                   "text": "WorkflowStepId",
                   "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | {\n        source: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorkflowInput",
+                  "canonicalReference": "@datashaper/schema!WorkflowInput:type"
                 },
                 {
                   "kind": "Content",
@@ -277,7 +282,7 @@
               "name": "input",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 4
+                "endIndex": 5
               }
             }
           ],
@@ -3897,16 +3902,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface DualInput extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "BasicInput",
-              "canonicalReference": "@datashaper/schema!BasicInput:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " "
+              "text": "export interface DualInput "
             }
           ],
           "releaseTag": "Public",
@@ -3928,8 +3924,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowStepId",
-                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                  "text": "WorkflowInput",
+                  "canonicalReference": "@datashaper/schema!WorkflowInput:type"
                 },
                 {
                   "kind": "Content",
@@ -3937,8 +3933,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowStepId",
-                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                  "text": "WorkflowInput",
+                  "canonicalReference": "@datashaper/schema!WorkflowInput:type"
                 },
                 {
                   "kind": "Content",
@@ -3959,12 +3955,7 @@
               }
             }
           ],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 2
-            }
-          ]
+          "extendsTokenRanges": []
         },
         {
           "kind": "Interface",
@@ -5978,6 +5969,40 @@
               "endIndex": 2
             }
           ]
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@datashaper/schema!InputBinding:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export type InputBinding = "
+            },
+            {
+              "kind": "Content",
+              "text": "{\n    node: "
+            },
+            {
+              "kind": "Reference",
+              "text": "WorkflowStepId",
+              "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n    output?: string;\n}"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "InputBinding",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 4
+          }
         },
         {
           "kind": "Interface",
@@ -8988,6 +9013,33 @@
           "members": [
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!SampleArgs#emitRemainder:member",
+              "docComment": "/**\n * Whether to preserve and emit the non-sampled records via the 'unsampled' output port.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "emitRemainder?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "emitRemainder",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!SampleArgs#proportion:member",
               "docComment": "/**\n * If table size is unknown ahead of time, specify a proportion of rows to sample. If size is specified, it will be used instead, otherwise computed from this proportion using the table.numRows()\n */\n",
               "excerptTokens": [
@@ -10543,6 +10595,33 @@
             },
             {
               "kind": "Content",
+              "text": ") | ({\n    verb: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Verb.Workflow",
+              "canonicalReference": "@datashaper/schema!Verb.Workflow:member"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n    args?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "WorkflowArgs",
+              "canonicalReference": "@datashaper/schema!WorkflowArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n} & "
+            },
+            {
+              "kind": "Reference",
+              "text": "BasicInput",
+              "canonicalReference": "@datashaper/schema!BasicInput:interface"
+            },
+            {
+              "kind": "Content",
               "text": ")\n/**\n * Custom step - we may not know the verb, args, or binding pattern\n */\n | ({\n    verb: string;\n    args?: unknown;\n} & "
             },
             {
@@ -10563,7 +10642,7 @@
           "name": "Step",
           "typeTokenRange": {
             "startIndex": 1,
-            "endIndex": 257
+            "endIndex": 263
           }
         },
         {
@@ -11480,13 +11559,18 @@
                   "text": "input?: "
                 },
                 {
+                  "kind": "Reference",
+                  "text": "WorkflowInput",
+                  "canonicalReference": "@datashaper/schema!WorkflowInput:type"
+                },
+                {
                   "kind": "Content",
-                  "text": "string | {\n        source?: "
+                  "text": " | {\n        source?: "
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowStepId",
-                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                  "text": "WorkflowInput",
+                  "canonicalReference": "@datashaper/schema!WorkflowInput:type"
                 },
                 {
                   "kind": "Content",
@@ -11494,8 +11578,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowStepId",
-                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                  "text": "WorkflowInput",
+                  "canonicalReference": "@datashaper/schema!WorkflowInput:type"
                 },
                 {
                   "kind": "Content",
@@ -11503,8 +11587,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowStepId",
-                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                  "text": "WorkflowInput",
+                  "canonicalReference": "@datashaper/schema!WorkflowInput:type"
                 },
                 {
                   "kind": "Content",
@@ -11512,8 +11596,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowStepId",
-                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                  "text": "WorkflowInput",
+                  "canonicalReference": "@datashaper/schema!WorkflowInput:type"
                 },
                 {
                   "kind": "Content",
@@ -11530,7 +11614,7 @@
               "name": "input",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 10
+                "endIndex": 11
               }
             }
           ],
@@ -11798,16 +11882,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface VariadicInput extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "BasicInput",
-              "canonicalReference": "@datashaper/schema!BasicInput:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " "
+              "text": "export interface VariadicInput "
             }
           ],
           "releaseTag": "Public",
@@ -11829,8 +11904,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowStepId",
-                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                  "text": "WorkflowInput",
+                  "canonicalReference": "@datashaper/schema!WorkflowInput:type"
                 },
                 {
                   "kind": "Content",
@@ -11838,8 +11913,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "WorkflowStepId",
-                  "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+                  "text": "WorkflowInput",
+                  "canonicalReference": "@datashaper/schema!WorkflowInput:type"
                 },
                 {
                   "kind": "Content",
@@ -11860,12 +11935,7 @@
               }
             }
           ],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 2
-            }
-          ]
+          "extendsTokenRanges": []
         },
         {
           "kind": "Enum",
@@ -12804,6 +12874,27 @@
               },
               "releaseTag": "Public",
               "name": "Window"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!Verb.Workflow:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Workflow = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"workflow\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Workflow"
             }
           ]
         },
@@ -13083,6 +13174,86 @@
               "name": "UUID"
             }
           ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!WorkflowArgs:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface WorkflowArgs "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "WorkflowArgs",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!WorkflowArgs#workflow:member",
+              "docComment": "/**\n * The workflow configuration.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "workflow: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorkflowSchema",
+                  "canonicalReference": "@datashaper/schema!WorkflowSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "workflow",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@datashaper/schema!WorkflowInput:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export type WorkflowInput = "
+            },
+            {
+              "kind": "Reference",
+              "text": "WorkflowStepId",
+              "canonicalReference": "@datashaper/schema!WorkflowStepId:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | "
+            },
+            {
+              "kind": "Reference",
+              "text": "InputBinding",
+              "canonicalReference": "@datashaper/schema!InputBinding:type"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "WorkflowInput",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 4
+          }
         },
         {
           "kind": "Interface",

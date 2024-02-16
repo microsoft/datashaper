@@ -48,7 +48,8 @@ export function deriveDetails(step: Step): string | undefined {
 
 	if (isInputColumnStep(step)) {
 		return (args as InputColumnArgs).column
-	} else if (isInputColumnListStep(step)) {
+	}
+	if (isInputColumnListStep(step)) {
 		return (args as InputColumnListArgs).columns.join(',')
 	} else if (isInputColumnRecordStep(step)) {
 		return Object.keys((args as InputColumnRecordArgs).columns).join(',')

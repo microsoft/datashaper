@@ -1,14 +1,14 @@
 """A module containing the derive_from_rows_async method."""
 import asyncio
 import traceback
-
-from typing import Any, Awaitable, Callable, TypeVar
+from collections.abc import Awaitable, Callable
+from typing import Any, TypeVar
 
 import pandas as pd
 
-from ..progress import progress_ticker
-from ..workflow.verb_callbacks import VerbCallbacks
-
+from datashaper.errors import VerbParallelizationError
+from datashaper.progress import progress_ticker
+from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
 
 ItemType = TypeVar("ItemType")
 
@@ -55,8 +55,6 @@ async def derive_from_rows_base(
         callbacks.error("parallel transformation error", error, stack)
 
     if len(errors) > 0:
-        raise ValueError(
-            f"{len(errors)} Errors occurred while running parallel transformation, could not complete!"
-        )
+        raise VerbParallelizationError(len(errors))
 
     return result

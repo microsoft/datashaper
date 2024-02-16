@@ -4,6 +4,8 @@
 
 ## DefaultGraph.add() method
 
+Add a node to the graph
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,7 +16,7 @@ add(node: Node<T>): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  node | Node&lt;T&gt; |  |
+|  node | Node&lt;T&gt; | The node to add to the graph |
 
 <b>Returns:</b>
 
