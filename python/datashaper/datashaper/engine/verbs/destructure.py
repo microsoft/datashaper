@@ -18,7 +18,7 @@ from datashaper.table_store.types import VerbResult, create_verb_result
 def destructure(
     input: VerbInput,
     column: str,
-    keys: list[str] = [],
+    keys: list[str],
     preserveSource: bool = False,  # noqa: N803
 ) -> VerbResult:
     """Destructure verb implementation."""
@@ -45,7 +45,7 @@ def destructure(
         rest_row_dict = json.loads(rest_row_string)
         filtered_dict = {}
 
-        if keys != []:
+        if len(keys) != 0:
             for index in rest_row_dict:
                 if index in keys:
                     filtered_dict[index] = rest_row_dict[index]
