@@ -45,14 +45,14 @@ def destructure(
         filtered_dict = {}
 
         if keys != []:
-            for property in rest_row_dict:
-                if property in keys:
-                    filtered_dict[property] = rest_row_dict[property]
+            for index in rest_row_dict:
+                if index in keys:
+                    filtered_dict[index] = rest_row_dict[index]
         else:
             filtered_dict = rest_row_dict
 
         results.append({**cleaned_row_dict, **filtered_dict})  # type: ignore
-        
+
     input_table = pd.DataFrame(results, index=input_table.index)
 
     if not preserveSource:
