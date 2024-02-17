@@ -2,6 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Destructure verb implementation."""
 import json
 import math
 from typing import Any
@@ -18,48 +19,46 @@ def destructure(
     input: VerbInput,
     column: str,
     keys: list[str] = [],
-    preserveSource: bool = False,
+    preserveSource: bool = False,  # noqa: N803
 ):
-    df = input.get_input().copy()
+    input_table = input.get_input().copy()
 
     results = []
-    for row_idx, row in df.iterrows():
-        try:
-            cleaned_row = {col: row[col] for col in df.columns}
-            rest_row = row[column] if row[column] is not None else {}
+    for tuple in input_table.iterrows():
+        row = tuple[1]
+        cleaned_row = {col: row[col] for col in input_table.columns}
+        rest_row = row[column] if row[column] is not None else {}
 
-            if is_null(rest_row):
-                rest_row = {}
+        if is_null(rest_row):
+            rest_row = {}
 
-            cleaned_row_string = (
-                str(cleaned_row)
-                .replace("'", '"')
-                .replace('"{"', '{"')
-                .replace('"}"}', '"}}')
-            )
-            rest_row_string = str(rest_row).replace("'", '"')
+        cleaned_row_string = (
+            str(cleaned_row)
+            .replace("'", '"')
+            .replace('"{"', '{"')
+            .replace('"}"}', '"}}')
+        )
+        rest_row_string = str(rest_row).replace("'", '"')
 
-            cleaned_row_dict = json.loads(cleaned_row_string)
-            rest_row_dict = json.loads(rest_row_string)
-            filtered_dict = {}
+        cleaned_row_dict = json.loads(cleaned_row_string)
+        rest_row_dict = json.loads(rest_row_string)
+        filtered_dict = {}
 
-            if keys != []:
-                for property in rest_row_dict:
-                    if property in keys:
-                        filtered_dict[property] = rest_row_dict[property]
-            else:
-                filtered_dict = rest_row_dict
+        if keys != []:
+            for property in rest_row_dict:
+                if property in keys:
+                    filtered_dict[property] = rest_row_dict[property]
+        else:
+            filtered_dict = rest_row_dict
 
-            results.append({**cleaned_row_dict, **filtered_dict})  # type: ignore
-        except Exception as e:
-            print(f"Error spreading row: {row}")
-            raise e
-    df = pd.DataFrame(results, index=df.index)
+        results.append({**cleaned_row_dict, **filtered_dict})  # type: ignore
+        
+    input_table = pd.DataFrame(results, index=input_table.index)
 
     if not preserveSource:
-        df = df.drop(columns=[column])
+        input_table = input_table.drop(columns=[column])
 
-    return TableContainer(table=df)
+    return TableContainer(table=input_table)
 
 
 def is_null(value: Any) -> bool:
