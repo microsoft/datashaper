@@ -1,4 +1,4 @@
-ID,item,quantity,info,a
+ID,item,quantity,json_object,a
 1,bed,45,"{""a"":123,""b"":""BBBB"",""c"":""FALSE"",""d"":"""",""e"":""null""}",123
 1,pillow,78,"{""a"":234,""b"":""CCCC"",""c"":""TRUE"",""d"":"""",""e"":""null""}",234
 2,sofa,100,"{""a"":345,""b"":""DDDD"",""c"":""FALSE"",""d"":"""",""e"":""null""}",345

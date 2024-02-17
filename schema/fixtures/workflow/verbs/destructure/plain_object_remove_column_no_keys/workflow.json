@@ -5,7 +5,7 @@
 			"verb": "destructure",
 			"input": "table32",
 			"args": {
-				"column": "info",
+				"column": "json_object",
 				"keys": [],
                 "preserveSource": false
 			},

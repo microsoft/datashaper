@@ -2,13 +2,16 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+import json
+import math
+from typing import Any
+
+import pandas as pd
+
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store import TableContainer
-import math
-from typing import Any
-import pandas as pd
-import json
+
 
 @verb(name="destructure")
 def destructure(
@@ -28,10 +31,16 @@ def destructure(
             if is_null(rest_row):
                 rest_row = {}
 
-            cleaned_row_string = str(cleaned_row).replace("'", "\"").replace("\"{\"", "{\"").replace("\"}\"}", "\"}}")
+            cleaned_row_string = (
+                str(cleaned_row)
+                .replace("'", '"')
+                .replace('"{"', '{"')
+                .replace('"}"}', '"}}')
+            )
+            rest_row_string = str(rest_row).replace("'", '"')
 
             cleaned_row_dict = json.loads(cleaned_row_string)
-            rest_row_dict = json.loads(rest_row)
+            rest_row_dict = json.loads(rest_row_string)
             filtered_dict = {}
 
             if keys != []:
@@ -51,6 +60,7 @@ def destructure(
         df = df.drop(columns=[column])
 
     return TableContainer(table=df)
+
 
 def is_null(value: Any) -> bool:
     """Check if value is null or is nan."""
