@@ -11,7 +11,7 @@ import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store import TableContainer
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 @verb(name="destructure")
@@ -20,12 +20,13 @@ def destructure(
     column: str,
     keys: list[str] = [],
     preserveSource: bool = False,  # noqa: N803
-):
+) -> VerbResult:
+    """Destructure verb implementation."""
     input_table = input.get_input().copy()
 
     results = []
-    for tuple in input_table.iterrows():
-        row = tuple[1]
+    for tuple_result in input_table.iterrows():
+        row = tuple_result[1]
         cleaned_row = {col: row[col] for col in input_table.columns}
         rest_row = row[column] if row[column] is not None else {}
 
@@ -58,7 +59,7 @@ def destructure(
     if not preserveSource:
         input_table = input_table.drop(columns=[column])
 
-    return TableContainer(table=input_table)
+    return create_verb_result(input_table)
 
 
 def is_null(value: Any) -> bool:
