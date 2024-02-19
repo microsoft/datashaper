@@ -3897,7 +3897,7 @@ __metadata:
     "@thematic/d3": "npm:^2.0.22"
     "@thematic/react": "npm:^2.1.9"
     "@types/node": "npm:^20.2.5"
-    "@types/react": "npm:^18.2.9"
+    "@types/react": "npm:^18.2.56"
     "@types/react-dom": "npm:^18.2.4"
     "@types/styled-components": "npm:^5.1.26"
     ahooks: "npm:^3.7.7"
@@ -4011,7 +4011,7 @@ __metadata:
     "@types/d3-format": "npm:^3.0.1"
     "@types/lodash-es": "npm:^4.17.12"
     "@types/node": "npm:^20.2.5"
-    "@types/react": "npm:^18.2.9"
+    "@types/react": "npm:^18.2.56"
     "@types/react-dom": "npm:^18.2.4"
     "@types/styled-components": "npm:^5.1.26"
     ahooks: "npm:^3.7.7"
@@ -4199,7 +4199,7 @@ __metadata:
     "@types/debug": "npm:^4.1.8"
     "@types/lodash-es": "npm:^4.17.12"
     "@types/node": "npm:^20.2.5"
-    "@types/react": "npm:^18.2.9"
+    "@types/react": "npm:^18.2.56"
     "@types/react-dom": "npm:^18.2.4"
     "@types/react-router-dom": "npm:^5.3.3"
     "@types/styled-components": "npm:^5.1.26"
@@ -9034,14 +9034,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.2.9":
-  version: 18.2.9
-  resolution: "@types/react@npm:18.2.9"
+"@types/react@npm:^18.2.56":
+  version: 18.2.56
+  resolution: "@types/react@npm:18.2.56"
   dependencies:
     "@types/prop-types": "npm:*"
     "@types/scheduler": "npm:*"
     csstype: "npm:^3.0.2"
-  checksum: 10/7b2218b8e0cc7b391f4328cf2cde6039ba56e48f2036edbb358d68aa2c7be208ba1437f1716a6ea9da16f3e5c06b89aa5a9cb1ef3042fad088e21b6edff2d9cd
+  checksum: 10/de0df184f2b80e8724d79eead47f23e43e91a68c0712a5d989db3f1242f2c24179cf8e26520b5a141396b55f4928ce9a6c3a3a121a98eca8e82973920209f06c
   languageName: node
   linkType: hard
 
