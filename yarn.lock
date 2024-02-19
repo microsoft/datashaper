@@ -3892,7 +3892,7 @@ __metadata:
     "@essex/tsconfig-base": "npm:^2.0.0"
     "@fluentui/react": "npm:^8.110.2"
     "@fluentui/react-hooks": "npm:^8.6.27"
-    "@monaco-editor/react": "npm:^4.5.1"
+    "@monaco-editor/react": "npm:^4.6.0"
     "@thematic/core": "npm:^4.0.7"
     "@thematic/d3": "npm:^2.0.22"
     "@thematic/react": "npm:^2.1.9"
@@ -6172,27 +6172,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monaco-editor/loader@npm:^1.3.3":
-  version: 1.3.3
-  resolution: "@monaco-editor/loader@npm:1.3.3"
+"@monaco-editor/loader@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "@monaco-editor/loader@npm:1.4.0"
   dependencies:
     state-local: "npm:^1.0.6"
   peerDependencies:
     monaco-editor: ">= 0.21.0 < 1"
-  checksum: 10/55398b3c39e1746d5fba926571b526beb490e0bd331bd19f52a9e43583cc3fb0a81fe2df7cc766c6a7c2884f05617eb790fa4a21502ddc2dbe90622f8eb9cce8
+  checksum: 10/32ad01de015fc187450aa1cc0aa763af167664b6a61efcb9e1523a0f51ca5d0b35ba11ed95889edd6d774dfe98f196ef58f1607243abcbdd3d6d743f82ba8285
   languageName: node
   linkType: hard
 
-"@monaco-editor/react@npm:^4.5.1":
-  version: 4.5.1
-  resolution: "@monaco-editor/react@npm:4.5.1"
+"@monaco-editor/react@npm:^4.6.0":
+  version: 4.6.0
+  resolution: "@monaco-editor/react@npm:4.6.0"
   dependencies:
-    "@monaco-editor/loader": "npm:^1.3.3"
+    "@monaco-editor/loader": "npm:^1.4.0"
   peerDependencies:
     monaco-editor: ">= 0.25.0 < 1"
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 10/f9cf478eaf4a78906b480411a91dc6fbe62d09e56f847754fef39a091c7a9c3aee492c598c64fe9b3470f58358b3ec119d7bed9425f8c57a14aa03f80fe80c70
+  checksum: 10/e32724ebcc2fc81e91169d69eff8533e15a595c13156ec57965238a0f0afa67e2ed2abbf735a57cfaae15430bbc905b016b644bf7383a82d607501d557a6dd82
   languageName: node
   linkType: hard
 
