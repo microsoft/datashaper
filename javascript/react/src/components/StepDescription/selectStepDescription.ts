@@ -11,6 +11,7 @@ import {
 	BooleanLogicDescription,
 	ConvertDescription,
 	DeriveDescription,
+	DestructureDescription,
 	EncodeDecodeDescription,
 	EraseDescription,
 	FillDescription,
@@ -73,7 +74,7 @@ const descriptions = {
 	sample: SampleDescription,
 	select: NoParametersDescription,
 	spread: SpreadDescription,
-	destructure: NoParametersDescription,
+	destructure: DestructureDescription,
 	strings: {
 		replace: StringsReplaceDescription,
 		lower: NoParametersDescription,

@@ -5,27 +5,21 @@
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 import type { RowObject } from 'arquero/dist/types/table/table'
+import { op } from 'arquero'
 
 export function useKeyNames(
 	table: ColumnTable | undefined,
 	column: string,
 ): string[] {
-	return useMemo(() => {
-		const distinctKeys = new Set<string>()
+	return useMemo(() => {		
+		let arrayResult = [] 
 
 		if (table !== undefined) {
 			const columnSelected: RowObject[] = table.select(column).objects()
-
 			for (let i = 0; i < columnSelected.length; i++) {
-				if (!Array.isArray(columnSelected[i]![column])) {
-					//is an object
-					const singleObj = JSON.parse(columnSelected[i]![column])
-
-					for (const property in singleObj) distinctKeys.add(property)
-				}
+				arrayResult.push(...op.keys(JSON.parse(columnSelected[i]![column])))
 			}
 		}
-
-		return Array.from(distinctKeys.values())
+		return [...new Set(arrayResult)]
 	}, [table, column])
 }

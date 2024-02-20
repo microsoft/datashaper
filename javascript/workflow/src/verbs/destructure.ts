@@ -9,6 +9,7 @@ import { stepVerbFactory } from './util/factories.js'
 import { not, from } from 'arquero'
 import type { RowObject } from 'arquero/dist/types/table/table'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
+import { op } from 'arquero'
 
 export const destructureStep: ColumnTableStep<DestructureArgs> = (
 	input,
