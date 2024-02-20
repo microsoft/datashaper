@@ -527,8 +527,8 @@ export interface ImputeArgs extends InputColumnArgs {
 //
 // @public (undocumented)
 export type InputBinding = {
-    node: WorkflowStepId;
-    output?: string;
+    step: WorkflowStepId;
+    table?: string;
 };
 
 // Warning: (ae-missing-release-tag) "InputColumnArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

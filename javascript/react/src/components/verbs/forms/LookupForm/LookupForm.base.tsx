@@ -44,7 +44,7 @@ export const LookupFormBase: React.FC<
 				getInputNode(step, NodeInput.Other),
 				(s, val) => {
 					const binding: InputBinding = (s.input[NodeInput.Other] as InputBinding) ?? { }
-					binding.node = val as WorkflowStepId
+					binding.step = val as WorkflowStepId
 					step.input[NodeInput.Other] = binding
 				},
 				{ required: true, placeholder: 'Choose column' },

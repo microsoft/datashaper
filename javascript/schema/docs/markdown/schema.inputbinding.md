@@ -8,8 +8,8 @@
 
 ```typescript
 export type InputBinding = {
-    node: WorkflowStepId;
-    output?: string;
+    step: WorkflowStepId;
+    table?: string;
 };
 ```
 <b>References:</b> [WorkflowStepId](./schema.workflowstepid.md)

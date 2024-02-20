@@ -187,7 +187,7 @@ class Workflow(Generic[Context]):
         def resolve(value: str | dict) -> str:
             if isinstance(value, str):
                 return value
-            return value["node"]
+            return value["step"]
 
         if isinstance(input, str):
             inputs.append(input)
@@ -297,14 +297,14 @@ class Workflow(Generic[Context]):
                 input_mapping[key] = input_table(value)
             elif isinstance(value, dict):
                 value = cast(dict, value)
-                input_mapping[key] = input_table(value["node"], value["output"])
+                input_mapping[key] = input_table(value["step"], value["table"])
             elif isinstance(value, list):
 
                 def resolve(t: WorkflowInput) -> TableContainer:
                     if isinstance(t, str):
                         return input_table(t)
                     if isinstance(t, dict):
-                        return input_table(t["node"], t["output"])
+                        return input_table(t["step"], t["table"])
                     raise WorkflowInvalidInputError(str(type(t)))
 
                 input_mapping[key] = [resolve(t) for t in value]

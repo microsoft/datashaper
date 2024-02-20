@@ -2132,11 +2132,11 @@
                     "anyOf": [
                         {
                             "properties": {
-                                "node": {
+                                "step": {
                                     "description": "The Id of the step to which the input is bound",
                                     "type": "string"
                                 },
-                                "output": {
+                                "table": {
                                     "type": "string"
                                 }
                             },
@@ -2147,11 +2147,11 @@
                                 "anyOf": [
                                     {
                                         "properties": {
-                                            "node": {
+                                            "step": {
                                                 "description": "The Id of the step to which the input is bound",
                                                 "type": "string"
                                             },
-                                            "output": {
+                                            "table": {
                                                 "type": "string"
                                             }
                                         },
@@ -2274,11 +2274,11 @@
             "anyOf": [
                 {
                     "properties": {
-                        "node": {
+                        "step": {
                             "description": "The Id of the step to which the input is bound",
                             "type": "string"
                         },
-                        "output": {
+                        "table": {
                             "type": "string"
                         }
                     },

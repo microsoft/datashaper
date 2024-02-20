@@ -5896,7 +5896,7 @@
             },
             {
               "kind": "Content",
-              "text": "{\n    node: "
+              "text": "{\n    step: "
             },
             {
               "kind": "Reference",
@@ -5905,7 +5905,7 @@
             },
             {
               "kind": "Content",
-              "text": ";\n    output?: string;\n}"
+              "text": ";\n    table?: string;\n}"
             },
             {
               "kind": "Content",
