@@ -12,6 +12,7 @@ import {
 	BooleanLogicForm,
 	ConvertForm,
 	DeriveForm,
+	DestructureForm,
 	EncodeDecodeForm,
 	EraseForm,
 	FillForm,
@@ -74,6 +75,7 @@ const forms = {
 	sample: SampleForm,
 	select: NoParametersForm,
 	spread: SpreadForm,
+	destructure: DestructureForm,
 	strings: {
 		replace: StringsReplaceForm,
 		lower: NoParametersForm,

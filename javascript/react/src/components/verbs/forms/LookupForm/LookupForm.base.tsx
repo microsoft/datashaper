@@ -43,7 +43,8 @@ export const LookupFormBase: React.FC<
 				tableOptions,
 				getInputNode(step, NodeInput.Other),
 				(s, val) => {
-					const binding: InputBinding = (s.input[NodeInput.Other] as InputBinding) ?? { }
+					const binding: InputBinding =
+						(s.input[NodeInput.Other] as InputBinding) ?? {}
 					binding.node = val as WorkflowStepId
 					step.input[NodeInput.Other] = binding
 				},

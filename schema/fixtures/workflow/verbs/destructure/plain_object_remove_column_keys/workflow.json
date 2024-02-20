@@ -1,0 +1,16 @@
+{
+	"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v2.json",
+	"steps": [
+		{
+			"verb": "destructure",
+			"input": "table32",
+			"args": {
+				"column": "json_object",
+				"keys": ["a"],
+                "preserveSource": false
+			},
+			"id": "expected"
+		}
+	],
+	"input": ["table32"]
+}

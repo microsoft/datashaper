@@ -19,6 +19,7 @@ export enum Verb {
 	Derive = 'derive',
 	Difference = 'difference',
 	Decode = 'decode',
+	Destructure = 'destructure',
 	Drop = 'drop',
 	Encode = 'encode',
 	Erase = 'erase',
@@ -470,6 +471,14 @@ export interface EraseArgs extends InputColumnArgs {
 	 * Value to match and erase (set to undefined) in the column
 	 */
 	value: Value
+}
+
+export interface DestructureArgs extends InputColumnArgs {
+	keys?: string[]
+	/**
+	 * Keep the original columns (default is to remove source columns).
+	 */
+	preserveSource?: boolean
 }
 
 export interface EncodeDecodeArgs {

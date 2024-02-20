@@ -19,6 +19,7 @@ import type { DataPackageSchema } from '@datashaper/schema';
 import type { DataShape as DataShape_2 } from '@datashaper/schema/dist/datatable/DataShape.js';
 import type { DataTableSchema } from '@datashaper/schema';
 import type { DeriveArgs } from '@datashaper/schema';
+import type { DestructureArgs } from '@datashaper/schema';
 import type { EncodeDecodeArgs } from '@datashaper/schema';
 import type { EraseArgs } from '@datashaper/schema';
 import type { Field } from '@datashaper/schema';
@@ -412,6 +413,11 @@ export const dereference: (r: Resource | ResourceReference) => Resource | undefi
 //
 // @public (undocumented)
 export const derive: (id: string) => StepNode<TableContainer<unknown>, DeriveArgs>;
+
+// Warning: (ae-missing-release-tag) "destructure" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const destructure: (id: string) => StepNode<TableContainer<unknown>, DestructureArgs>;
 
 // Warning: (ae-missing-release-tag) "difference" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
