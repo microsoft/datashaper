@@ -12,7 +12,7 @@ export function useKeyNames(
 	column: string,
 ): string[] {
 	return useMemo(() => {		
-		let arrayResult = [] 
+		const arrayResult = [] 
 
 		if (table !== undefined) {
 			const columnSelected: RowObject[] = table.select(column).objects()
