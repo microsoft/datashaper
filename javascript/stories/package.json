@@ -24,7 +24,7 @@
 		"@thematic/d3": "^2.0.22",
 		"@thematic/fluent": "^5.0.8",
 		"@thematic/react": "^2.1.9",
-		"arquero": "^5.2.0",
+		"arquero": "^5.4.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-is": "^18.2.0",
