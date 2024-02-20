@@ -37,16 +37,16 @@ function destructureSingleValue(
 	object: JSON,
 	keys?: string[],
 ): RowObject {
-	for (let property in object) {
+	op.entries(object).forEach(function (entry) {
+		const [key, value] = entry
 		if (
 			keys === undefined ||
 			keys.length === 0 ||
-			(keys !== undefined && keys.includes(property))
+			(keys !== undefined && keys.includes(key))
 		) {
-			row[property] = (object as any)[property]
+			row[key] = value
 		}
-	}
-
+	})
 	return row
 }
 

@@ -1,0 +1,52 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "RelationshipConstraint": {
+            "properties": {
+                "accepts": {
+                    "description": "The kinds of profiles that are accepted in this relationship",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "Description of the named resource.",
+                    "type": "string"
+                },
+                "multi": {
+                    "description": "Whether multiple relationships of this kind may be defined on a resource\nDefaults to false",
+                    "type": "boolean"
+                },
+                "rel": {
+                    "description": "The relationship definition",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "Friendly name of the relationship type. Used for display only.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "description": "A schema for defining custom bundle types.",
+    "properties": {
+        "$schema": {
+            "type": "string"
+        },
+        "accepts": {
+            "description": "The kinds of relationships that may be defined in bundle sources.",
+            "items": {
+                "$ref": "#/definitions/RelationshipConstraint"
+            },
+            "type": "array"
+        },
+        "profile": {
+            "description": "Defines the resource type.\nKnown resource types should have accompanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
+            "type": "string"
+        }
+    },
+    "type": "object"
+}
+
