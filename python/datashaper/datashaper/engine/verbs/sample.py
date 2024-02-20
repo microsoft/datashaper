@@ -22,6 +22,7 @@ def sample(
     proportion: int | None = None,
     seed: int | None = None,
     emitRemainder: bool | None = False,  # noqa F403 - schema argument
+    **_kwargs: dict,
 ) -> VerbResult:
     """Sample verb implementation."""
     input_table = input.get_input()

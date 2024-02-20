@@ -16,6 +16,7 @@ def unhot(
     columns: list[str],
     preserveSource: bool = False,  # noqa: N803
     prefix: str = "",
+    **_kwargs: dict,
 ) -> VerbResult:
     """Unhot verb implementation."""
     input_table = cast(pd.DataFrame, input.get_input())

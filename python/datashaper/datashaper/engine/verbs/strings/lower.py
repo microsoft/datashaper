@@ -13,7 +13,7 @@ from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 @verb(name="strings.lower")
-def lower(input: VerbInput, column: str, to: str) -> VerbResult:
+def lower(input: VerbInput, column: str, to: str, **_kwargs: dict) -> VerbResult:
     """Transform a column by applying a string-lowercase."""
     input_table = input.get_input()
     output = cast(pd.DataFrame, input_table)

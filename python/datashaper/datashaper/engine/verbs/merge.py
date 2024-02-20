@@ -29,6 +29,7 @@ def merge(
     preserveSource: bool = False,  # noqa: N803
     unhot: bool = False,
     prefix: str = "",
+    **_kwargs: dict,
 ) -> VerbResult:
     """Merge verb implementation."""
     merge_strategy = MergeStrategy(strategy)

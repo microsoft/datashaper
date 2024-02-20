@@ -17,7 +17,7 @@ from datashaper.table_store.types import (
 
 
 @verb(name="intersect", treats_input_tables_as_immutable=True)
-def intersect(input: VerbInput) -> VerbResult:
+def intersect(input: VerbInput, **_kwargs: dict) -> VerbResult:
     """Intersect verb implementation."""
     input_table = input.get_input()
     others = cast(list[pd.DataFrame], input.get_others())
