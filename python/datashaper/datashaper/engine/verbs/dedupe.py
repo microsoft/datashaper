@@ -10,7 +10,11 @@ from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 @verb(name="dedupe", treats_input_tables_as_immutable=True)
-def dedupe(input: VerbInput, columns: list[str] | None = None) -> VerbResult:
+def dedupe(
+    input: VerbInput,
+    columns: list[str] | None = None,
+    **_kwargs: dict,
+) -> VerbResult:
     """Dedupe verb implementation."""
     input_table = input.get_input()
     output = input_table.drop_duplicates(columns)

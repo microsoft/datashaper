@@ -19,6 +19,7 @@ def onehot(
     column: str,
     prefix: str = "",
     preserveSource: bool = False,  # noqa: N803
+    **_kwargs: dict,
 ) -> VerbResult:
     """Onehot verb implementation."""
     input_table = cast(pd.DataFrame, input.get_input())

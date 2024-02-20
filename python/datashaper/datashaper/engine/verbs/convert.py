@@ -108,6 +108,7 @@ def convert(
     type: str,  # noqa: A002
     radix: int | None = None,
     formatPattern: str = "%Y-%m-%d",  # noqa: N803
+    **_kwargs: dict,
 ) -> VerbResult:
     """Convert verb implementation."""
     parse_type = ParseType(type)

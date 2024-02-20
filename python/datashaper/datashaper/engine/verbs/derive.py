@@ -40,7 +40,12 @@ __op_mapping: dict[MathOperator, Callable] = {
 
 @verb(name="derive")
 def derive(
-    input: VerbInput, to: str, column1: str, column2: str, operator: str
+    input: VerbInput,
+    to: str,
+    column1: str,
+    column2: str,
+    operator: str,
+    **_kwargs: dict,
 ) -> VerbResult:
     """Derive verb implementation."""
     math_operator = MathOperator(operator)

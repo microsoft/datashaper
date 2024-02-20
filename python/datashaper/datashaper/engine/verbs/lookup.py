@@ -17,6 +17,7 @@ def lookup(
     input: VerbInput,
     columns: list[str],
     on: list[str] | None = None,
+    **_kwargs: dict,
 ) -> VerbResult:
     """Lookup verb implementation."""
     input_table: pd.DataFrame = cast(pd.DataFrame, input.get_input())

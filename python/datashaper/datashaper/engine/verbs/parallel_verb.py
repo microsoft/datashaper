@@ -115,7 +115,9 @@ def parallel_verb(
             ) -> Table | tuple | None:
                 async with semaphore:
                     try:
-                        output = await func(chunk, *args, **kwargs)
+                        output = await func(
+                            chunk, *args, **{"callbacks": callbacks, **kwargs}
+                        )
                         tick(1)
                     except Exception as e:
                         stack_trace = traceback.format_exc()

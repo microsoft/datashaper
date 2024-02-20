@@ -21,7 +21,12 @@ from datashaper.table_store.types import VerbResult, create_verb_result
 
 @verb(name="binarize")
 def binarize(
-    input: VerbInput, to: str, column: str, criteria: list, logical: str = "or"
+    input: VerbInput,
+    to: str,
+    column: str,
+    criteria: list,
+    logical: str = "or",
+    **_kwargs: dict,
 ) -> VerbResult:
     """Binarize verb implementation."""
     filter_criteria = [
