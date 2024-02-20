@@ -165,7 +165,7 @@ export interface Graph<T> {
 export enum NodeInput {
 	Source = 'source',
 	Other = 'other',
-	Others = 'others'
+	Others = 'others',
 }
 
 export enum NodeOutput {

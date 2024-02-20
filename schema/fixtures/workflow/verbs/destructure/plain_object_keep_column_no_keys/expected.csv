@@ -1,0 +1,7 @@
+ID,item,quantity,json_object,a,b,c,d,e
+1,bed,45,"{""a"":123,""b"":""BBBB"",""c"":""FALSE"",""d"":"""",""e"":""null""}",123,BBBB,FALSE,,
+1,pillow,78,"{""a"":234,""b"":""CCCC"",""c"":""TRUE"",""d"":"""",""e"":""null""}",234,CCCC,TRUE,,null
+2,sofa,100,"{""a"":345,""b"":""DDDD"",""c"":""FALSE"",""d"":"""",""e"":""null""}",345,DDDD,FALSE,,null
+4,sofa,89,"{""a"":456,""b"":""EEEE"",""c"":""TRUE"",""d"":"""",""e"":""null""}",456,EEEE,TRUE,,null
+4,chair,50,"{""a"":678,""b"":""FFFF"",""c"":""FALSE"",""d"":"""",""e"":""null""}",678,FFFF,FALSE,,null
+4,stool,45,"{""a"":789,""b"":""GGGG"",""c"":""TRUE"",""d"":"""",""e"":""null""}",789,GGGG,TRUE,,null

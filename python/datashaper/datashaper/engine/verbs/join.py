@@ -52,6 +52,7 @@ def join(
     input: VerbInput,
     on: list[str] | None = None,
     strategy: str = "inner",
+    **_kwargs: dict,
 ) -> VerbResult:
     """Join verb implementation."""
     join_strategy = JoinStrategy(strategy)

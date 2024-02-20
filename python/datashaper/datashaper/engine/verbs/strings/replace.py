@@ -22,6 +22,7 @@ def replace(
     replacement: str,
     globalMatch: bool = False,  # noqa: N803
     caseInsensitive: bool = False,  # noqa: N803
+    **_kwargs: dict,
 ) -> VerbResult:
     """Replace verb implementation."""
     n = 0 if globalMatch else 1

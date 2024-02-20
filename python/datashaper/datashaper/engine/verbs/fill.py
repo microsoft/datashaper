@@ -17,6 +17,7 @@ def fill(
     input: VerbInput,
     to: str,
     value: str | float | bool,
+    **_kwargs: dict,
 ) -> VerbResult:
     """Fill verb implementation."""
     input_table = input.get_input()

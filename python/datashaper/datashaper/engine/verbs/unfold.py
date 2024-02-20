@@ -18,7 +18,12 @@ from datashaper.table_store.types import (
 
 
 @verb(name="unfold")
-def unfold(input: VerbInput, key: str, value: str) -> VerbResult:
+def unfold(
+    input: VerbInput,
+    key: str,
+    value: str,
+    **_kwargs: dict,
+) -> VerbResult:
     """Unfold verb implementation."""
     input_table = input.get_input()
     output = cast(pd.DataFrame, input_table)

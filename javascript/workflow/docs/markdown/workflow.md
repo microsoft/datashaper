@@ -98,6 +98,7 @@
 |  [dedupe](./workflow.dedupe.md) |  |
 |  [dereference](./workflow.dereference.md) |  |
 |  [derive](./workflow.derive.md) |  |
+|  [destructure](./workflow.destructure.md) |  |
 |  [difference](./workflow.difference.md) |  |
 |  [drop](./workflow.drop.md) |  |
 |  [encode](./workflow.encode.md) |  |

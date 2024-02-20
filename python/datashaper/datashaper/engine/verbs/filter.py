@@ -25,7 +25,11 @@ from datashaper.table_store.types import (
 
 @verb(name="filter", treats_input_tables_as_immutable=True)
 def filter_verb(
-    input: VerbInput, column: str, criteria: list, logical: str = "or"
+    input: VerbInput,
+    column: str,
+    criteria: list,
+    logical: str = "or",
+    **_kwargs: dict,
 ) -> VerbResult:
     """Filter verb implementation."""
     filter_criteria = [

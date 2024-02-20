@@ -13,7 +13,12 @@ from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 @verb(name="erase")
-def erase(input: VerbInput, column: str, value: str | float) -> VerbResult:
+def erase(
+    input: VerbInput,
+    column: str,
+    value: str | float,
+    **_kwargs: dict,
+) -> VerbResult:
     """Erase verb implementation."""
     input_table = input.get_input()
     output = cast(pd.DataFrame, input_table)

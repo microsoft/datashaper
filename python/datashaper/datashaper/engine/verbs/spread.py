@@ -61,6 +61,7 @@ def spread(
     delimiter: str = ",",
     onehot: bool = False,
     preserveSource: bool = False,  # noqa: N803
+    **_kwargs: dict,
 ) -> VerbResult:
     """Spread verb implementation."""
     input_table = cast(pd.DataFrame, input.get_input())

@@ -9,7 +9,12 @@ from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 @verb(name="print")
-def print_verb(input: VerbInput, message: str, limit: int = 10) -> VerbResult:
+def print_verb(
+    input: VerbInput,
+    message: str,
+    limit: int = 10,
+    **_kwargs: dict,
+) -> VerbResult:
     """Print verb implementation."""
     output = input.get_input()
 

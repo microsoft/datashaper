@@ -59,7 +59,13 @@ __window_function_map = {
 
 
 @verb(name="window")
-def window(input: VerbInput, column: str, to: str, operation: str) -> VerbResult:
+def window(
+    input: VerbInput,
+    column: str,
+    to: str,
+    operation: str,
+    **_kwargs: dict,
+) -> VerbResult:
     """Apply a window function to a column in a table."""
     window_operation = WindowFunction(operation)
 

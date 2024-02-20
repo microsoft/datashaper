@@ -13,7 +13,10 @@ from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 @verb(name="union", treats_input_tables_as_immutable=True)
-def union(input: VerbInput) -> VerbResult:
+def union(
+    input: VerbInput,
+    **_kwargs: dict,
+) -> VerbResult:
     """Union verb implementation."""
     input_table = cast(pd.DataFrame, input.get_input())
     others = cast(list[pd.DataFrame], input.get_others())

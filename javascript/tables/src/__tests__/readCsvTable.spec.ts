@@ -195,6 +195,17 @@ describe('readCsvTable', () => {
 				expect(table.columnNames()).toEqual(['A', 'B', 'C', 'D'])
 			})
 		})
+		describe('json csv', () => {
+			const csv = fs.readFileSync('./src/__tests__/data/column-json.csv', {
+				encoding: 'utf8',
+				flag: 'r',
+			})
+
+			it('column names', () => {
+				const table = readCsvTable(csv)
+				expect(table.columnNames()).toEqual(['ID', 'item', 'quantity', 'info'])
+			})
+		})
 	})
 
 	describe('Large tables', () => {
