@@ -49,7 +49,7 @@ function doDescribe(targetPath: string) {
 function defineTestCase(parentPath: string, test: string) {
 	const casePath = path.join(parentPath, test)
 	const testName = test.split('_').join(' ')
-	const jsTablePath = path.join(casePath, "js")
+	const jsTablePath = path.join(casePath, 'js')
 	const tablesPath = fs.existsSync(jsTablePath) ? jsTablePath : casePath
 
 	const expectedOutputTables = fs

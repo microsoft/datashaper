@@ -10,32 +10,32 @@ import { createRowEntries } from '../../StepDescription/createRowEntries.js'
 import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
 
-export const DestructureDescription: React.FC<StepDescriptionProps<DestructureArgs>> = memo(
-	function DestructureDescription(props) {
-		const rows = useMemo(() => {
-			const {
-				step: { args },
-			} = props
-			const sub = createRowEntries(
-				args.keys || EMPTY_ARRAY,
-				(c) => ({
-					value: c,
-				}),
-				1,
-				props,
-			)
-			return [
-				{
-					before: `key${args.keys?.length !== 1 ? 's' : ''}`,
-					value: args.keys?.length === 0 ? undefined : '',
-					sub,
-				},
-				{
-					before: 'keep source columns',
-					value: args.preserveSource ? 'yes' : 'no',
-				},
-			]
-		}, [props])
-		return <VerbDescription {...props} rows={rows} />
-	},
-)
+export const DestructureDescription: React.FC<
+	StepDescriptionProps<DestructureArgs>
+> = memo(function DestructureDescription(props) {
+	const rows = useMemo(() => {
+		const {
+			step: { args },
+		} = props
+		const sub = createRowEntries(
+			args.keys || EMPTY_ARRAY,
+			(c) => ({
+				value: c,
+			}),
+			1,
+			props,
+		)
+		return [
+			{
+				before: `key${args.keys?.length !== 1 ? 's' : ''}`,
+				value: args.keys?.length === 0 ? undefined : '',
+				sub,
+			},
+			{
+				before: 'keep source columns',
+				value: args.preserveSource ? 'yes' : 'no',
+			},
+		]
+	}, [props])
+	return <VerbDescription {...props} rows={rows} />
+})

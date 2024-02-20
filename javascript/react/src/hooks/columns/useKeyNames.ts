@@ -11,8 +11,8 @@ export function useKeyNames(
 	table: ColumnTable | undefined,
 	column: string,
 ): string[] {
-	return useMemo(() => {		
-		const arrayResult = [] 
+	return useMemo(() => {
+		const arrayResult = []
 
 		if (table !== undefined) {
 			const columnSelected: RowObject[] = table.select(column).objects()

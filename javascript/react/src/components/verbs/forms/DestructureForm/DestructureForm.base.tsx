@@ -19,11 +19,7 @@ export const DestructureFormBase: React.FC<
 	StepFormBaseProps<DestructureArgs> & {
 		keyNames: string[]
 	}
-> = memo(function DestructureFormBase({
-	step,
-	onChange,
-	keyNames,
-}) {
+> = memo(function DestructureFormBase({ step, onChange, keyNames }) {
 	const inputs = useMemo<FormInput<DestructureArgs>[]>(
 		() => [
 			{
