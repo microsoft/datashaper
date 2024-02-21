@@ -11,7 +11,13 @@ from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 @verb(name="pivot", treats_input_tables_as_immutable=True)
-def pivot(input: VerbInput, key: str, value: str, operation: str) -> VerbResult:
+def pivot(
+    input: VerbInput,
+    key: str,
+    value: str,
+    operation: str,
+    **_kwargs: dict,
+) -> VerbResult:
     """Pivot verb implementation."""
     aggregate_operation = FieldAggregateOperation(operation)
 

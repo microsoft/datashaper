@@ -18,6 +18,7 @@ def copy(
     input: VerbInput,
     to: str,
     column: str,
+    **_kwargs: dict,
 ) -> VerbResult:
     """Copy verb implementation."""
     output = cast(pd.DataFrame, input.get_input())

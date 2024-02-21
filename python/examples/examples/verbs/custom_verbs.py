@@ -6,7 +6,9 @@ from datashaper import TableContainer, VerbInput, verb
 
 
 @verb(name="genid")
-def genid(input: VerbInput, hash: list[str], to: str) -> TableContainer:
+def genid(
+    input: VerbInput, hash: list[str], to: str, **_kwargs: dict
+) -> TableContainer:
     """Generate IDs for each row. A pipeline verb."""
     table = cast(pd.DataFrame, input.source.table)
 
@@ -19,7 +21,7 @@ def genid(input: VerbInput, hash: list[str], to: str) -> TableContainer:
 
 
 @verb(name="embed")
-def embed(input: VerbInput, column: str, to: str) -> TableContainer:
+def embed(input: VerbInput, column: str, to: str, **_kwargs: dict) -> TableContainer:
     """Embed text per row. A pipeline verb."""
     table = cast(pd.DataFrame, input.source.table)
     table[to] = table.apply(lambda row: _embed(row[column]), axis=1)
@@ -27,7 +29,9 @@ def embed(input: VerbInput, column: str, to: str) -> TableContainer:
 
 
 @verb(name="embed_mock")
-def embed_mock(input: VerbInput, column: str, to: str) -> TableContainer:
+def embed_mock(
+    input: VerbInput, column: str, to: str, **_kwargs: dict
+) -> TableContainer:
     """Embed text per row. A pipeline verb."""
     table = cast(pd.DataFrame, input.source.table)
     table[to] = table.apply(lambda _row: [0.1, 0.2, 0.3], axis=1)

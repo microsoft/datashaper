@@ -85,6 +85,7 @@ def bin_verb(
     fixedwidth: int | None = None,
     clamped: bool | None = False,
     printRange: bool | None = False,  # noqa: N803
+    **_kwargs: dict,
 ) -> VerbResult:
     """Bin verb implementation."""
     input_table = cast(pd.DataFrame, input.get_input())

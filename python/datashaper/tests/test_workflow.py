@@ -418,15 +418,18 @@ def create_fake_run_context() -> PipelineRunContext:
 
 
 def create_passthrough_verb():
-    return lambda input: TableContainer(table=input.get_input())
+    return lambda input, **_kwargs: TableContainer(table=input.get_input())
 
 
 def create_verb_that_returns(static_value: pd.DataFrame):
-    return lambda input: TableContainer(table=static_value)  # noqa: ARG005
+    return lambda input, **_kwargs: TableContainer(table=static_value)  # noqa: ARG005
 
 
 def create_async_verb():
-    async def async_verb(input: TableContainer):
+    async def async_verb(
+        input: TableContainer,
+        **_kwargs: dict,
+    ):
         await asyncio.sleep(0)
         return TableContainer(table=input.get_input())
 
@@ -434,7 +437,11 @@ def create_async_verb():
 
 
 def create_parallel_transforming_verb():
-    def transform(input: VerbInput, callbacks: VerbCallbacks):
+    def transform(
+        input: VerbInput,
+        callbacks: VerbCallbacks,
+        **_kwargs: dict,
+    ):
         def transform_row(row: pd.Series):
             items = [1, 2, 3]
             progress_iterable(items, callbacks.progress)
@@ -449,7 +456,11 @@ def create_parallel_transforming_verb():
 
 
 def create_parallel_transforming_verb_throwing():
-    def transform(input: VerbInput, callbacks: VerbCallbacks):
+    def transform(
+        input: VerbInput,
+        callbacks: VerbCallbacks,
+        **_kwargs: dict,
+    ):
         def transform_row(_row: pd.Series):
             raise VerbError
 
@@ -467,6 +478,7 @@ def create_context_consuming_verb():
         callbacks: VerbCallbacks,
         a: int,
         b: int,
+        **_kwargs: dict,
     ):
         assert context is not None
         assert a is not None

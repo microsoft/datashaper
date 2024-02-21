@@ -15,7 +15,12 @@ from datashaper.table_store.types import (
 
 
 @verb(name="fold")
-def fold(input: VerbInput, to: tuple[str, str], columns: list[str]) -> VerbResult:
+def fold(
+    input: VerbInput,
+    to: tuple[str, str],
+    columns: list[str],
+    **_kwargs: dict,
+) -> VerbResult:
     """Fold verb implementation."""
     input_table = input.get_input()
     output = input_table

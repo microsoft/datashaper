@@ -218,33 +218,16 @@ class Workflow(Generic[Context]):
     ) -> dict:
         """Injects the run context into the workflow steps."""
         callbacks = DelegatingVerbCallbacks(exec_node, workflow_callbacks)
-
-        def argument_names(fn: Callable) -> list[str]:
-            return inspect.getfullargspec(fn).args
-
-        verb_args = argument_names(exec_node.verb.func)
         run_ctx: dict = {}
 
         # Pass in individual context items
         if context is not None:
             for context_key in dir(context):
-                if context_key in verb_args and context_key not in exec_node.args:
-                    run_ctx[context_key] = getattr(context, context_key)
+                run_ctx[context_key] = getattr(context, context_key)
 
-        # Pass in the top-level context
-        if "context" in verb_args and "context" not in exec_node.args:
-            run_ctx["context"] = context
-
-        # Pass in the verb callbacks
-        if "callbacks" in verb_args and "callbacks" not in exec_node.args:
-            run_ctx["callbacks"] = callbacks
-
-        if (
-            "workflow_instance" in verb_args
-            and "workflow_instance" not in exec_node.args
-        ):
-            run_ctx["workflow_instance"] = self
-
+        run_ctx["context"] = context
+        run_ctx["callbacks"] = callbacks
+        run_ctx["workflow_instance"] = self
         return run_ctx
 
     def _get_missing_inputs(self, node_key: str, visited: set[str]) -> list[str]:
@@ -411,8 +394,8 @@ class Workflow(Generic[Context]):
             verb_context = self._resolve_run_context(node, context, callbacks)
             verb_args = {
                 "input": input,
-                **node.args,
                 **verb_context,
+                **node.args,
             }
             callbacks.on_step_start(node, verb_args)
             callbacks.on_step_progress(node, Progress(percent=0))

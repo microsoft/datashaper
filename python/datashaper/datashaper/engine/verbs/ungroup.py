@@ -10,7 +10,10 @@ from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 @verb(name="ungroup", treats_input_tables_as_immutable=True)
-def ungroup(input: VerbInput) -> VerbResult:
+def ungroup(
+    input: VerbInput,
+    **_kwargs: dict,
+) -> VerbResult:
     """Ungroup verb implementation."""
     input_table = input.get_input()
     output = input_table.obj

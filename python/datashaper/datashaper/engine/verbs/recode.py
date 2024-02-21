@@ -21,7 +21,13 @@ class RecodeMap(dict):
 
 
 @verb(name="recode")
-def recode(input: VerbInput, to: str, column: str, mapping: dict) -> VerbResult:
+def recode(
+    input: VerbInput,
+    to: str,
+    column: str,
+    mapping: dict,
+    **_kwargs: dict,
+) -> VerbResult:
     """Recode verb implementation."""
     mapping = RecodeMap(mapping)
 
