@@ -11649,7 +11649,7 @@
             },
             {
               "kind": "Content",
-              "text": "object | void | unknown"
+              "text": "object | unknown"
             },
             {
               "kind": "Content",
