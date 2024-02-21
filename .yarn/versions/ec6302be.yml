@@ -1,9 +1,0 @@
-releases:
-  "@datashaper/schema": minor
-  "@datashaper/workflow": minor
-
-declined:
-  - "@datashaper/app-framework"
-  - "@datashaper/react"
-  - "@datashaper/tables"
-  - "@datashaper/webapp"
