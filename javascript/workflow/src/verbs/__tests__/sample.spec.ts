@@ -59,8 +59,8 @@ describe('test for sample verb', () => {
 
 		// 6 total rows, 4 sampled, so 2 should be leftover
 		// rome-ignore: lint/style/noNonNullAssertion
-		expect(remainder!.numRows()).toBe(2)
+		expect(remainder?.numRows()).toBe(2)
 		// rome-ignore: lint/style/noNonNullAssertion
-		expect(remainder!.numCols()).toBe(3)
+		expect(remainder?.numCols()).toBe(3)
 	})
 })

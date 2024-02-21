@@ -20,6 +20,7 @@ def destructure(
     column: str,
     keys: list[str],
     preserveSource: bool = False,  # noqa: N803
+    **_kwargs: dict,
 ) -> VerbResult:
     """Destructure verb implementation."""
     input_table = input.get_input().copy()
