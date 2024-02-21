@@ -437,18 +437,18 @@ def create_async_verb():
 
 
 def create_parallel_transforming_verb():
-    def transform(
+    async def transform(
         input: VerbInput,
         callbacks: VerbCallbacks,
         **_kwargs: dict,
     ):
-        def transform_row(row: pd.Series):
+        async def transform_row(row: pd.Series):
             items = [1, 2, 3]
             progress_iterable(items, callbacks.progress)
             row["b"] = row["a"] + 1
             return row
 
-        results = derive_from_rows(input.get_input(), transform_row, callbacks)
+        results = await derive_from_rows(input.get_input(), transform_row, callbacks)
 
         return TableContainer(table=pd.DataFrame(results))
 
@@ -456,15 +456,15 @@ def create_parallel_transforming_verb():
 
 
 def create_parallel_transforming_verb_throwing():
-    def transform(
+    async def transform(
         input: VerbInput,
         callbacks: VerbCallbacks,
         **_kwargs: dict,
     ):
-        def transform_row(_row: pd.Series):
+        async def transform_row(_row: pd.Series):
             raise VerbError
 
-        results = derive_from_rows(input.get_input(), transform_row, callbacks)
+        results = await derive_from_rows(input.get_input(), transform_row, callbacks)
 
         return TableContainer(table=pd.DataFrame(results))
 
