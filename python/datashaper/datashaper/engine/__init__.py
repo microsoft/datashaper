@@ -6,6 +6,7 @@ from .pandas import (
     get_operator,
 )
 from .types import (
+    AsyncType,
     Bin,
     BinStrategy,
     BooleanComparisonOperator,
@@ -30,7 +31,6 @@ from .types import (
     WindowFunction,
 )
 from .verbs import (
-    AsyncIOType,
     VerbDetails,
     VerbInput,
     VerbManager,
@@ -41,7 +41,7 @@ from .verbs import (
 )
 
 __all__ = [
-    "AsyncIOType",
+    "AsyncType",
     "parallel_verb",
     "VerbInput",
     "VerbDetails",
