@@ -1,46 +1,44 @@
 """Apply a generic transform function to each row in a table."""
 import logging
-from collections.abc import Callable
-from typing import Any, TypeVar
+from collections.abc import Awaitable, Callable
+from enum import Enum
+from typing import TypeVar
 
 import pandas as pd
 
-from datashaper.errors import VerbParallelizationError
-from datashaper.execution.utils.parallelize import parallelize
-from datashaper.progress import progress_ticker
-from datashaper.table_store.types import Table
 from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
+
+from .derive_from_rows_asyncio import derive_from_rows_asyncio
+from .derive_from_rows_asyncio_threads import derive_from_rows_asyncio_threads
 
 logger = logging.getLogger(__name__)
 ItemType = TypeVar("ItemType")
 
 
-def derive_from_rows(
-    input: Table,
-    transform: Callable[[pd.Series], ItemType],
+class AsyncIOType(str, Enum):
+    """Enum for the type of asyncio to use."""
+
+    AsyncIO = "asyncio"
+    AsyncIOThreads = "asyncio_threads"
+
+
+async def derive_from_rows(
+    input: pd.DataFrame,
+    transform: Callable[[pd.Series], Awaitable[ItemType]],
     callbacks: VerbCallbacks,
     num_threads: int = 4,
-    stagger: int = 0,
-) -> list[ItemType]:
+    scheduling_type: AsyncIOType = AsyncIOType.AsyncIO,
+) -> list[ItemType | None]:
     """Apply a generic transform function to each row. Any errors will be reported and thrown."""
-    tick = progress_ticker(callbacks.progress, num_total=len(input))
-
-    def transform_row(row: tuple[Any, pd.Series]) -> ItemType:
-        try:
-            return transform(row[1])
-        except Exception:
-            logger.exception("error transforming row")
-            raise
-        finally:
-            tick(1)
-
-    results, errors = parallelize(input.iterrows(), transform_row, num_threads, stagger)
-    tick.done()
-
-    for error in errors:
-        callbacks.error("Received errors during parallel transformation", error)
-
-    if len(errors) > 0:
-        raise VerbParallelizationError(len(errors))
-
-    return results
+    match scheduling_type:
+        case AsyncIOType.AsyncIO:
+            return await derive_from_rows_asyncio(
+                input, transform, callbacks, num_threads
+            )
+        case AsyncIOType.AsyncIOThreads:
+            return await derive_from_rows_asyncio_threads(
+                input, transform, callbacks, num_threads
+            )
+        case _:
+            msg = f"Unsupported scheduling type {scheduling_type}"
+            raise ValueError(msg)

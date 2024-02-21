@@ -96,6 +96,7 @@ __all__ = [
     "derive_from_rows_asyncio_threads",
     "parallelize",
     "VerbDefinitions",
+    "AsyncIOType",
     "ExecutionNode",
     # Verb Exports
     "VerbInput",

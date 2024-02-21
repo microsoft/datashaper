@@ -1,5 +1,6 @@
 """A module containing the derive_from_rows_async method."""
 import asyncio
+import logging
 import traceback
 from collections.abc import Awaitable, Callable
 from typing import Any, TypeVar
@@ -37,17 +38,21 @@ async def derive_from_rows_base(
     async def execute(
         row: tuple[Any, pd.Series], sem: asyncio.Semaphore
     ) -> ItemType | None:
-        async with sem:
-            try:
-                return await transform(row[1])
-            except Exception as e:
-                traceback.print_exc()
-                errors.append((e, traceback.format_exc()))
-                return None
-            finally:
-                tick(1)
+        if max_parallelism > 0:
+            await sem.acquire()
+        try:
+            return await transform(row[1])
+        except Exception as e:
+            logging.exception("parallel transformation error")
+            errors.append((e, traceback.format_exc()))
+            return None
+        finally:
+            if max_parallelism > 0:
+                sem.release()
+            tick(1)
 
-    result = await gather(asyncio.Semaphore(max_parallelism), execute)
+    semaphore = asyncio.Semaphore(max_parallelism)
+    result = await gather(semaphore, execute)
 
     tick.done()
 
