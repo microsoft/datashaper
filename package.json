@@ -38,7 +38,7 @@
 		"ci:javascript": "run-s _ci_js_packages spellcheck",
 		"ci:python": "run-s _ci_py_packages spellcheck",
 		"is_clean": "git diff-index HEAD --quiet || (git status && exit 1)",
-		"release": "run-s clean _version_cut ci _release_packages _cut_schema _copy_versions",
+		"release": "run-s clean _version_cut ci:javascript _release_packages _cut_schema _copy_versions",
 		"update_sdks": "yarn dlx @yarnpkg/sdks vscode"
 	},
 	"devDependencies": {
