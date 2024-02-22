@@ -22,6 +22,7 @@ import {
 	useUndoCommands,
 } from './TableCommands.hooks.js'
 import type { TableCommandsProps } from './TableCommands.types.js'
+import { useNewStepInputName } from '../../hooks/workflow/index.js'
 
 export const TableCommands: React.FC<TableCommandsProps> = memo(
 	function TableCommands({
@@ -55,17 +56,15 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 			onRemoveStep?.(workflow.length - 1)
 		}, [onRemoveStep, workflow])
 
+		const input = useNewStepInputName(workflow)
+
 		const onCallStep = useCallback(
 			(
 				_?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
 				item?: IContextualMenuItem,
 			) => {
 				const verb = item?.key as Verb
-				const target = item?.data?.id ? item?.data?.id : verb
 				const id = createTableId(verb)
-				// if there is a previous step, explicitly set it as the input to the new step
-				// this avoids arbitrary lookup issues later, such as when editing from the StepList
-				const input = workflow.outputNames[workflow.outputNames.length - 1]
 				const args = { } as any
 				const _step = readStep({
 					id,
@@ -82,10 +81,11 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 					_step.args.to = selectedColumn
 				}
 				setStep(_step)
+				const target = item?.data?.id ? item?.data?.id : verb
 				setModalTarget(target)
 				showModal()
 			},
-			[showModal, setStep, selectedColumn, createTableId, setModalTarget, workflow],
+			[showModal, setStep, selectedColumn, createTableId, setModalTarget, input],
 		)
 
 		const allTablesLengthObservable = useObservable(

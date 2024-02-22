@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+export { useNewStepInputName } from './useNewStepInputName.js'
 export { useWorkflow } from './useWorkflow.js'
 export { useWorkflowDataTable } from './useWorkflowDataTable.js'
 export { useWorkflowInputTableNames } from './useWorkflowInputTableNames.js'
