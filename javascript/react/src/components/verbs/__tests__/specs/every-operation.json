@@ -230,7 +230,8 @@
 			"args": {
 				"strategy": "concat",
 				"to": "result",
-				"columns": ["FY20 Sales", "FY21 Sales"]
+				"columns": ["FY20 Sales", "FY21 Sales"],
+				"delimiter": "|"
 			}
 		},
 		{
@@ -239,9 +240,7 @@
 			"input": "stocks",
 			"args": {
 				"column": "Symbol",
-				"prefixes": {
-					"Symbol": "ticker-"
-				}
+				"prefix": "ticker-"
 			}
 		},
 		{
