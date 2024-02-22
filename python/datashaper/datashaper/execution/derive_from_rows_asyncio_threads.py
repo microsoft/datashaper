@@ -1,6 +1,6 @@
 """A module containing the derive_from_rows_async method."""
 import asyncio
-from collections.abc import Awaitable, Callable
+from collections.abc import Awaitable, Callable, Coroutine
 from typing import TypeVar
 
 import pandas as pd
@@ -23,13 +23,17 @@ async def derive_from_rows_asyncio_threads(
 
     This is useful for IO bound operations.
     """
+    semaphore = asyncio.Semaphore(max_parallelism or 4)
 
-    async def gather(
-        sem: asyncio.Semaphore, execute: ExecuteFn[ItemType]
-    ) -> list[ItemType | None]:
-        tasks = [await asyncio.to_thread(execute, row, sem) for row in input.iterrows()]
-        return await asyncio.gather(*tasks)
+    async def gather(execute: ExecuteFn[ItemType]) -> list[ItemType | None]:
+        tasks = [asyncio.to_thread(execute, row) for row in input.iterrows()]
 
-    return await derive_from_rows_base(
-        input, transform, callbacks, max_parallelism, gather
-    )
+        async def execute_task(task: Coroutine) -> ItemType | None:
+            async with semaphore:
+                # fire off the thread
+                thread = await task
+                return await thread
+
+        return await asyncio.gather(*[execute_task(task) for task in tasks])
+
+    return await derive_from_rows_base(input, transform, callbacks, gather)

@@ -79,7 +79,9 @@ from .table_store.types import (
 )
 from .workflow import (
     DEFAULT_INPUT_NAME,
+    DelegatingVerbCallbacks,
     MemoryProfile,
+    NoopVerbCallbacks,
     NoopWorkflowCallbacks,
     PandasDtypeBackend,
     VerbCallbacks,
@@ -140,6 +142,8 @@ __all__ = [
     "VerbTiming",
     "MemoryProfile",
     "VerbCallbacks",
+    "DelegatingVerbCallbacks",
+    "NoopVerbCallbacks",
     "WorkflowCallbacks",
     "NoopWorkflowCallbacks",
     "WorkflowCallbacksManager",
