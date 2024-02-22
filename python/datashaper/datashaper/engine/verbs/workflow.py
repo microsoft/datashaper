@@ -14,6 +14,7 @@ async def workflow(
     input: VerbInput,
     workflow: dict,
     workflow_instance: Workflow,
+    **_kwargs: dict,
 ) -> VerbResult:
     """Apply a sequence of operations to the input table."""
     # Set up the input tables for the subworkflow

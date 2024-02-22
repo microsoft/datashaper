@@ -10,13 +10,13 @@ import math
 import traceback
 from collections import namedtuple
 from collections.abc import Awaitable, Callable
-from enum import Enum
 from inspect import signature
 from typing import Any, Concatenate, ParamSpec, cast
 
 import numpy as np
 import pandas as pd
 
+from datashaper.engine.types import AsyncType
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.errors import VerbParallelizationError
 from datashaper.progress import ProgressTicker, progress_ticker
@@ -26,13 +26,6 @@ from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
 from .verbs_mapping import verb
 
 logger = logging.getLogger(__name__)
-
-
-class AsyncIOType(str, Enum):
-    """Enum for asyncio type."""
-
-    ASYNCIO = "asyncio"
-    THREADED = "threaded"
 
 
 P = ParamSpec("P")
@@ -58,7 +51,7 @@ def parallel_verb(
     name: str,
     treats_input_tables_as_immutable: bool = False,
     override_existing: bool = False,
-    asyncio_type: AsyncIOType = AsyncIOType.ASYNCIO,
+    asyncio_type: AsyncType = AsyncType.AsyncIO,
     merge: Callable[[list[Table | tuple | None]], Table] = default_merge,
     **_kwargs: dict,
 ) -> Callable:
@@ -115,7 +108,9 @@ def parallel_verb(
             ) -> Table | tuple | None:
                 async with semaphore:
                     try:
-                        output = await func(chunk, *args, **kwargs)
+                        output = await func(
+                            chunk, *args, **{"callbacks": callbacks, **kwargs}
+                        )
                         tick(1)
                     except Exception as e:
                         stack_trace = traceback.format_exc()
@@ -131,7 +126,7 @@ def parallel_verb(
                 execute(chunk, tick, semaphore, *args, **kwargs) for chunk in chunks
             ]
 
-            if asyncio_type == AsyncIOType.THREADED:
+            if asyncio_type == AsyncType.Threaded:
                 futures = [asyncio.to_thread(future) for future in futures]  # type: ignore
 
             results = await asyncio.gather(*futures)

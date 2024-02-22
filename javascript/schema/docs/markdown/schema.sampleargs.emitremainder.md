@@ -4,7 +4,7 @@
 
 ## SampleArgs.emitRemainder property
 
-Whether to preserve and emit the non-sampled records via the 'unsampled' output port.
+Whether to preserve and emit the non-sampled records via the 'remainder' output port.
 
 <b>Signature:</b>
 

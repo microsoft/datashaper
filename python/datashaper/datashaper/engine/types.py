@@ -9,6 +9,13 @@ from enum import Enum
 from typing import Any
 
 
+class AsyncType(str, Enum):
+    """Enum for the type of async to use."""
+
+    AsyncIO = "asyncio"
+    Threaded = "threaded"
+
+
 class Bin:
     """A data bin."""
 

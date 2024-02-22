@@ -15,8 +15,8 @@
 			"verb": "rename",
 			"input": {
 				"source": {
-					"node": "expected",
-					"output": "remainder"
+					"step": "expected",
+					"table": "remainder"
 				}
 			},
 			"args": {

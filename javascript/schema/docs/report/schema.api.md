@@ -350,6 +350,15 @@ export interface DeriveArgs extends OutputColumnArgs {
     operator: MathOperator;
 }
 
+// Warning: (ae-missing-release-tag) "DestructureArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface DestructureArgs extends InputColumnArgs {
+    // (undocumented)
+    keys?: string[];
+    preserveSource?: boolean;
+}
+
 // Warning: (ae-missing-release-tag) "DropArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -527,8 +536,8 @@ export interface ImputeArgs extends InputColumnArgs {
 //
 // @public (undocumented)
 export type InputBinding = {
-    node: WorkflowStepId;
-    output?: string;
+    step: WorkflowStepId;
+    table?: string;
 };
 
 // Warning: (ae-missing-release-tag) "InputColumnArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1009,6 +1018,9 @@ export type Step = StepJsonCommon & (({
     verb: Verb.Spread;
     args?: SpreadArgs;
 } & BasicInput) | ({
+    verb: Verb.Destructure;
+    args?: DestructureArgs;
+} & BasicInput) | ({
     verb: Verb.StringsReplace;
     args?: StringsReplaceArgs;
 } & BasicInput) | ({
@@ -1218,6 +1230,8 @@ export enum Verb {
     Dedupe = "dedupe",
     // (undocumented)
     Derive = "derive",
+    // (undocumented)
+    Destructure = "destructure",
     // (undocumented)
     Difference = "difference",
     // (undocumented)

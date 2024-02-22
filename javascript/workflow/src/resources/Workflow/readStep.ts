@@ -27,7 +27,7 @@ const uid = (() => {
  * with as many reasonable defaults as possible.
  * @param verb -
  */
-export function readStep<T extends object | void | unknown = any>(
+export function readStep<T extends object | unknown = any>(
 	{ verb, args = {} as any, id, input }: StepInput<T>,
 	previous?: Step | undefined,
 ): Step<T> {
@@ -74,13 +74,13 @@ function resolveInputs(
 		/**
 		 * Case: No input is defined, previous step is available, use it's default output
 		 */
-		return { source: { node: previous.id } }
+		return { source: { step: previous.id } }
 	}
 	if (typeof input === 'string') {
 		/**
 		 * Case: String shorthand is used, convert to object specification
 		 */
-		return { source: { node: input } }
+		return { source: { step: input } }
 	}
 	/**
 	 * Case 4: Object specification is used. Create bindings
@@ -88,7 +88,7 @@ function resolveInputs(
 	const result: Record<string, InputBinding> = {}
 	for (const [key, value] of Object.entries(input)) {
 		if (typeof value === 'string') {
-			result[key] = { node: value }
+			result[key] = { step: value }
 		} else {
 			result[key] = value as InputBinding
 		}

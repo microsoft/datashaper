@@ -252,9 +252,9 @@ export class GraphManager extends Disposable {
 		const stepInput =
 			typeof step.input === 'string' ? { source: step.input } : step.input
 		const getNodeId = (binding: WorkflowInput) =>
-			typeof binding === 'string' ? binding : binding.node
+			typeof binding === 'string' ? binding : binding.step
 		const getOutput = (binding: WorkflowInput) =>
-			typeof binding === 'string' ? undefined : binding.output
+			typeof binding === 'string' ? undefined : binding.table
 
 		// first bind the standard input to the step, either the previous step or the default input
 		if (prevStep == null) {

@@ -20,5 +20,5 @@ export function getInputNode(
 		return undefined
 	}
 	const binding = (step.input as any)[input] as InputBinding
-	return binding?.node
+	return binding?.step
 }

@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/app-framework",
-	"version": "1.0.0",
+	"version": "2.0.0",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -34,7 +34,7 @@
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/workflow": "workspace:^",
 		"@essex/components": "^4.2.0",
-		"@monaco-editor/react": "^4.5.1",
+		"@monaco-editor/react": "^4.6.0",
 		"ahooks": "^3.7.7",
 		"allotment": "1.19.0",
 		"monaco-editor": "^0.37.1",
@@ -55,7 +55,7 @@
 		"@types/react": "^18.2.9",
 		"@types/react-dom": "^18.2.4",
 		"@types/styled-components": "^5.1.26",
-		"arquero": "^5.2.0",
+		"arquero": "^5.4.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-is": "^18.2.0",

@@ -35,7 +35,6 @@ import { getInputNode } from '../../util.js'
  */
 export function deriveDetails(step: Step): string | undefined {
 	const { verb, args } = step
-	console.log('step', step)
 	
 	// handle special case verbs first
 	switch (verb) {
@@ -79,5 +78,5 @@ function sample(step: Step): string {
 
 function listOthers(step: Step): string | undefined {
 	const binding = step.input?.others
-	return binding?.map(b => b.node).join(',')
+	return binding?.map(b => b.step).join(',')
 }

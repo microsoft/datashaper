@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/react",
-	"version": "20.2.0",
+	"version": "21.0.0",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -68,7 +68,7 @@
 		"@types/react": "^18.2.9",
 		"@types/react-dom": "^18.2.4",
 		"@types/styled-components": "^5.1.26",
-		"arquero": "^5.2.0",
+		"arquero": "^5.4.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-is": "^18.2.0",

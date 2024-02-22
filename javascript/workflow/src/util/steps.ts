@@ -95,6 +95,10 @@ const TaggedVerbs: Record<Verb, TaggedVerb> = {
 		rowModifying: true,
 	},
 	decode: {},
+	destructure: {
+		inputColumn: true,
+		dataTypeConstraints: [DataType.Object],
+	},
 	drop: {
 		inputColumnList: true,
 	},

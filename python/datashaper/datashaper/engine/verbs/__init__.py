@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 from types import ModuleType
 
-from .parallel_verb import AsyncIOType, new_row, parallel_verb
+from .parallel_verb import new_row, parallel_verb
 from .types import VerbDetails
 from .verb_input import VerbInput
 from .verbs_mapping import VerbManager, verb
@@ -54,7 +54,6 @@ __all__ = [
     "load_verbs",
     "verb",
     "VerbDetails",
-    "AsyncIOType",
     "parallel_verb",
     "new_row",
 ]

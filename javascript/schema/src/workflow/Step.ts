@@ -17,6 +17,7 @@ import type {
 	CopyArgs,
 	DedupeArgs,
 	DeriveArgs,
+	DestructureArgs,
 	DropArgs,
 	EncodeDecodeArgs,
 	EraseArgs,
@@ -96,6 +97,7 @@ export type Step = StepJsonCommon &
 		| ({ verb: Verb.Sample; args?: SampleArgs } & BasicInput)
 		| ({ verb: Verb.Select; args?: SelectArgs } & BasicInput)
 		| ({ verb: Verb.Spread; args?: SpreadArgs } & BasicInput)
+		| ({ verb: Verb.Destructure; args?: DestructureArgs } & BasicInput)
 		| ({ verb: Verb.StringsReplace; args?: StringsReplaceArgs } & BasicInput)
 		| ({ verb: Verb.StringsLower; args?: StringsArgs } & BasicInput)
 		| ({ verb: Verb.StringsUpper; args?: StringsArgs } & BasicInput)

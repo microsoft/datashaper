@@ -24,6 +24,7 @@ export declare enum Verb
 |  Decode | <code>&quot;decode&quot;</code> |  |
 |  Dedupe | <code>&quot;dedupe&quot;</code> |  |
 |  Derive | <code>&quot;derive&quot;</code> |  |
+|  Destructure | <code>&quot;destructure&quot;</code> |  |
 |  Difference | <code>&quot;difference&quot;</code> |  |
 |  Drop | <code>&quot;drop&quot;</code> |  |
 |  Encode | <code>&quot;encode&quot;</code> |  |

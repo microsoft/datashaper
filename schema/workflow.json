@@ -420,6 +420,29 @@
             },
             "type": "object"
         },
+        "DestructureArgs": {
+            "properties": {
+                "column": {
+                    "description": "Name of the input column for columnar operations",
+                    "type": "string"
+                },
+                "dataType": {
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
+                },
+                "keys": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "preserveSource": {
+                    "description": "Keep the original columns (default is to remove source columns).",
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
         "DualInput": {
             "description": "Dual-input, single-output step I/O",
             "properties": {
@@ -1017,7 +1040,7 @@
         "SampleArgs": {
             "properties": {
                 "emitRemainder": {
-                    "description": "Whether to preserve and emit the non-sampled records via the 'unsampled' output port.",
+                    "description": "Whether to preserve and emit the non-sampled records via the 'remainder' output port.",
                     "type": "boolean"
                 },
                 "proportion": {
@@ -1800,6 +1823,28 @@
                         {
                             "properties": {
                                 "args": {
+                                    "$ref": "#/definitions/DestructureArgs"
+                                },
+                                "verb": {
+                                    "const": "destructure",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
                                     "$ref": "#/definitions/StringsReplaceArgs"
                                 },
                                 "verb": {
@@ -2132,11 +2177,11 @@
                     "anyOf": [
                         {
                             "properties": {
-                                "node": {
+                                "step": {
                                     "description": "The Id of the step to which the input is bound",
                                     "type": "string"
                                 },
-                                "output": {
+                                "table": {
                                     "type": "string"
                                 }
                             },
@@ -2147,11 +2192,11 @@
                                 "anyOf": [
                                     {
                                         "properties": {
-                                            "node": {
+                                            "step": {
                                                 "description": "The Id of the step to which the input is bound",
                                                 "type": "string"
                                             },
-                                            "output": {
+                                            "table": {
                                                 "type": "string"
                                             }
                                         },
@@ -2274,11 +2319,11 @@
             "anyOf": [
                 {
                     "properties": {
-                        "node": {
+                        "step": {
                             "description": "The Id of the step to which the input is bound",
                             "type": "string"
                         },
-                        "output": {
+                        "table": {
                             "type": "string"
                         }
                     },

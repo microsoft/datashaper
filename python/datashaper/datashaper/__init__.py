@@ -1,6 +1,6 @@
 """DataShaper is a library for declarative data manipulation and transformation."""
 from .engine import (
-    AsyncIOType,
+    AsyncType,
     Bin,
     BinStrategy,
     BooleanComparisonOperator,
@@ -91,6 +91,7 @@ from .workflow import (
 )
 
 __all__ = [
+    "AsyncType",
     "derive_from_rows",
     "derive_from_rows_asyncio",
     "derive_from_rows_asyncio_threads",
@@ -104,7 +105,6 @@ __all__ = [
     "VerbManager",
     "load_verbs",
     "parallel_verb",
-    "AsyncIOType",
     "new_row",
     # Verb Parameters
     "BinStrategy",

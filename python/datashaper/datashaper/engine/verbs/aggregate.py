@@ -12,7 +12,12 @@ from datashaper.table_store.types import VerbResult, create_verb_result
 
 @verb(name="aggregate", treats_input_tables_as_immutable=True)
 def aggregate(
-    input: VerbInput, to: str, groupby: list[str], column: str, operation: str
+    input: VerbInput,
+    to: str,
+    groupby: list[str],
+    column: str,
+    operation: str,
+    **_kwargs: dict,
 ) -> VerbResult:
     """Aggregate verb implementation."""
     aggregate_operation = FieldAggregateOperation(operation)
