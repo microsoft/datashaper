@@ -11,7 +11,7 @@ import { DataType } from '@datashaper/schema'
 import { columnType, columnTypes } from '@datashaper/tables'
 import { toggleListItem } from '@datashaper/utilities'
 import type { Step } from '@datashaper/workflow'
-import { isNumericInputStep } from '@datashaper/workflow'
+import { isDataTypeSupported } from '@datashaper/workflow'
 import type { IDropdownOption } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type React from 'react'
@@ -61,9 +61,7 @@ export function useColumnFilter(
 	}, [table])
 	return useCallback(
 		(name: string) => {
-			return isNumericInputStep(step.verb)
-				? typeMap[name] === DataType.Number
-				: true
+			return isDataTypeSupported(step.verb, typeMap[name])
 		},
 		[typeMap, step],
 	)
