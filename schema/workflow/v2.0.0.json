@@ -1,14 +1,16 @@
 {
+    "$ref": "#/definitions/WorkflowSchema",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
         "AggregateArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "groupby": {
                     "description": "Column to group by",
@@ -33,8 +35,7 @@
                         {
                             "properties": {
                                 "source": {
-                                    "description": "The Id of the step to which the input is bound",
-                                    "type": "string"
+                                    "$ref": "#/definitions/WorkflowInput"
                                 }
                             },
                             "type": "object"
@@ -55,13 +56,15 @@
                     "type": "boolean"
                 },
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "fixedcount": {
+                    "description": "Fixed number of bins.\nNote that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary -\nthis means there is always one extra bin for the max value when using fixed count.",
                     "type": "number"
                 },
                 "fixedwidth": {
@@ -77,15 +80,16 @@
                     "type": "number"
                 },
                 "nice": {
-                    "description": "Fixed number of bins.\nNote that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary -\nthis means there is always one extra bin for the max value when using fixed count.",
+                    "description": "Indicates whether bins should be rounded in a readable human-friendly way.",
                     "type": "boolean"
                 },
                 "printRange": {
-                    "description": "If true, the range for each bin will be printed as the cell value instead of the truncated numeric value.\nThis is useful for treating the",
+                    "description": "If true, the range for each bin will be printed as the cell value instead of the truncated numeric value.",
                     "type": "boolean"
                 },
                 "strategy": {
-                    "$ref": "#/definitions/BinStrategy"
+                    "$ref": "#/definitions/BinStrategy",
+                    "description": "Binning technique to use."
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
@@ -95,6 +99,7 @@
             "type": "object"
         },
         "BinStrategy": {
+            "description": "Describes the binning technique to use.\nSee numpy for detailed definitions: https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html",
             "enum": [
                 "auto",
                 "doane",
@@ -111,20 +116,23 @@
         "BinarizeArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "criteria": {
+                    "description": "Filter criteria to apply to the column.",
                     "items": {
                         "$ref": "#/definitions/Criterion"
                     },
                     "type": "array"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "logical": {
-                    "$ref": "#/definitions/BooleanOperator"
+                    "$ref": "#/definitions/BooleanOperator",
+                    "description": "Boolean operator to apply to the criteria if more than one."
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
@@ -136,13 +144,15 @@
         "BooleanArgs": {
             "properties": {
                 "columns": {
+                    "description": "List of input columns for operations that work across multiple columns",
                     "items": {
                         "type": "string"
                     },
                     "type": "array"
                 },
                 "operator": {
-                    "$ref": "#/definitions/BooleanOperator"
+                    "$ref": "#/definitions/BooleanOperator",
+                    "description": "Boolean comparison type to apply across the list of input column values"
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
@@ -208,7 +218,7 @@
                 },
                 "profile": {
                     "const": "codebook",
-                    "description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
+                    "description": "Defines the resource type.\nKnown resource types should have accompanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
                     "type": "string"
                 },
                 "rel": {
@@ -216,7 +226,7 @@
                     "type": "string"
                 },
                 "sources": {
-                    "description": "List of resources that underly this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
+                    "description": "List of resources that underlie this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
                     "items": {
                         "anyOf": [
                             {
@@ -288,20 +298,23 @@
         "ConvertArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "delimiter": {
+                    "description": "Delimiter to use for identifying decimals when converting strings to numbers.",
                     "type": "string"
                 },
                 "formatPattern": {
+                    "description": "Format string to use when converting strings to dates. Follows strptime format.",
                     "type": "string"
                 },
                 "radix": {
-                    "description": "Optional radix to use for parsing strings into ints",
+                    "description": "Radix to use for parsing strings into ints",
                     "type": "number"
                 },
                 "to": {
@@ -309,7 +322,25 @@
                     "type": "string"
                 },
                 "type": {
-                    "$ref": "#/definitions/ParseType"
+                    "$ref": "#/definitions/ParseType",
+                    "description": "Output type to convert the column values to."
+                }
+            },
+            "type": "object"
+        },
+        "CopyArgs": {
+            "properties": {
+                "column": {
+                    "description": "Name of the input column for columnar operations",
+                    "type": "string"
+                },
+                "dataType": {
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
+                },
+                "to": {
+                    "description": "Name of the output column to receive the operation's result.",
+                    "type": "string"
                 }
             },
             "type": "object"
@@ -317,6 +348,7 @@
         "Criterion": {
             "properties": {
                 "operator": {
+                    "description": "Filter operator to execute. Note the correct operator for the column data type must be used.",
                     "enum": [
                         "!=",
                         "<",
@@ -378,11 +410,35 @@
                     "type": "string"
                 },
                 "operator": {
-                    "$ref": "#/definitions/MathOperator"
+                    "$ref": "#/definitions/MathOperator",
+                    "description": "Math operation to perform row-by-row on the two columns"
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
                     "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "DestructureArgs": {
+            "properties": {
+                "column": {
+                    "description": "Name of the input column for columnar operations",
+                    "type": "string"
+                },
+                "dataType": {
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
+                },
+                "keys": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "preserveSource": {
+                    "description": "Keep the original columns (default is to remove source columns).",
+                    "type": "boolean"
                 }
             },
             "type": "object"
@@ -394,12 +450,12 @@
                     "description": "The inputs that must be bound; \"source\" & \"other\".",
                     "properties": {
                         "other": {
-                            "description": "The secondary input, which must be specified",
-                            "type": "string"
+                            "$ref": "#/definitions/WorkflowInput",
+                            "description": "The secondary input, which must be specified"
                         },
                         "source": {
-                            "description": "The primary input, which must be specified",
-                            "type": "string"
+                            "$ref": "#/definitions/WorkflowInput",
+                            "description": "The primary input, which must be specified"
                         }
                     },
                     "type": "object"
@@ -410,10 +466,12 @@
         "EncodeDecodeArgs": {
             "properties": {
                 "codebook": {
-                    "$ref": "#/definitions/CodebookSchema"
+                    "$ref": "#/definitions/CodebookSchema",
+                    "description": "Codebook to apply to the table."
                 },
                 "strategy": {
-                    "$ref": "#/definitions/CodebookStrategy"
+                    "$ref": "#/definitions/CodebookStrategy",
+                    "description": "Strategy for applying the codebook to the table."
                 }
             },
             "type": "object"
@@ -421,14 +479,15 @@
         "EraseArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "value": {
-                    "description": "A cell/property value of any type."
+                    "description": "Value to match and erase (set to undefined) in the column"
                 }
             },
             "type": "object"
@@ -538,7 +597,7 @@
                     "type": "string"
                 },
                 "value": {
-                    "description": "Value to fill in the new column"
+                    "description": "Value to fill in the new column. All rows will receive this value."
                 }
             },
             "type": "object"
@@ -546,25 +605,29 @@
         "FilterArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "criteria": {
+                    "description": "Filter criteria to apply to the column.",
                     "items": {
                         "$ref": "#/definitions/Criterion"
                     },
                     "type": "array"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "logical": {
-                    "$ref": "#/definitions/BooleanOperator"
+                    "$ref": "#/definitions/BooleanOperator",
+                    "description": "Boolean operator to apply to the criteria if more than one."
                 }
             },
             "type": "object"
         },
         "FilterCompareType": {
+            "description": "Indicates the comparison type used for a filter operation.\nThis is done on a row-by-row basis.",
             "enum": [
                 "column",
                 "value"
@@ -574,6 +637,7 @@
         "FoldArgs": {
             "properties": {
                 "columns": {
+                    "description": "List of input columns for operations that work across multiple columns",
                     "items": {
                         "type": "string"
                     },
@@ -599,11 +663,12 @@
         "ImputeArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "value": {
                     "description": "Value to fill in empty cells"
@@ -614,11 +679,12 @@
         "InputColumnArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 }
             },
             "type": "object"
@@ -627,6 +693,7 @@
             "description": "Base interface for a number of operations that work on a column list.",
             "properties": {
                 "columns": {
+                    "description": "List of input columns for operations that work across multiple columns",
                     "items": {
                         "type": "string"
                     },
@@ -667,7 +734,8 @@
                     "type": "array"
                 },
                 "strategy": {
-                    "$ref": "#/definitions/JoinStrategy"
+                    "$ref": "#/definitions/JoinStrategy",
+                    "description": "Type of join to perform"
                 }
             },
             "type": "object"
@@ -687,6 +755,7 @@
         "LookupArgs": {
             "properties": {
                 "columns": {
+                    "description": "List of input columns for operations that work across multiple columns",
                     "items": {
                         "type": "string"
                     },
@@ -714,29 +783,34 @@
         "MergeArgs": {
             "properties": {
                 "columns": {
+                    "description": "List of input columns for operations that work across multiple columns",
                     "items": {
                         "type": "string"
                     },
                     "type": "array"
                 },
                 "delimiter": {
-                    "description": "This is only necessary if mergeStrategy.Concat is used.\nIf it is not supplied, the values are just mashed together.",
+                    "description": "Delimiter to use when merging columns into a string.\nThis is only necessary if MergeStrategy.Concat is used.\nIf it is not supplied, the values are just mashed together.",
                     "type": "string"
                 },
                 "prefix": {
+                    "description": "Prefix to strip from column names when using unhot (only relevant if columns were originally onehot encoded with a prefix).",
                     "type": "string"
                 },
                 "preserveSource": {
+                    "description": "Keep the original columns (default is to remove source columns).",
                     "type": "boolean"
                 },
                 "strategy": {
-                    "$ref": "#/definitions/MergeStrategy"
+                    "$ref": "#/definitions/MergeStrategy",
+                    "description": "Strategy to use for merging the input columns"
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
                     "type": "string"
                 },
                 "unhot": {
+                    "description": "Indicates that columns should be \"unhot\" before merging. In other words, replace all 1s with the column name, and 0s with undefined.",
                     "type": "boolean"
                 }
             },
@@ -754,17 +828,19 @@
         "OnehotArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "prefix": {
                     "description": "Optional prefixes for the output column names",
                     "type": "string"
                 },
                 "preserveSource": {
+                    "description": "Keep the original columns (default is to remove source columns).",
                     "type": "boolean"
                 }
             },
@@ -785,16 +861,18 @@
         "OrderbyInstruction": {
             "properties": {
                 "column": {
+                    "description": "Name of the column to order by",
                     "type": "string"
                 },
                 "direction": {
-                    "$ref": "#/definitions/SortDirection"
+                    "$ref": "#/definitions/SortDirection",
+                    "description": "Direction to order by"
                 }
             },
             "type": "object"
         },
         "ParseType": {
-            "description": "This is a subset of data types available for parsing operations",
+            "description": "This is a subset of data types available for parsing operations.",
             "enum": [
                 "array",
                 "boolean",
@@ -808,6 +886,7 @@
         "Partial<InputColumnListArgs>": {
             "properties": {
                 "columns": {
+                    "description": "List of input columns for operations that work across multiple columns",
                     "items": {
                         "type": "string"
                     },
@@ -823,7 +902,8 @@
                     "type": "string"
                 },
                 "operation": {
-                    "$ref": "#/definitions/FieldAggregateOperation"
+                    "$ref": "#/definitions/FieldAggregateOperation",
+                    "description": "Aggregate/rollup operation to perform when doing the pivot."
                 },
                 "value": {
                     "description": "Value column for the operation",
@@ -832,18 +912,30 @@
             },
             "type": "object"
         },
+        "PrintArgs": {
+            "properties": {
+                "limit": {
+                    "type": "number"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "RecodeArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "mapping": {
                     "$ref": "#/definitions/Record<any,any>",
-                    "description": "Mapping of old value to new for the recoding.\nNote that the key must be coercable to a string for map lookup."
+                    "description": "Mapping of old value to new for the recoding.\nNote that the key must be coercible to a string for map lookup."
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
@@ -859,7 +951,7 @@
             "type": "object"
         },
         "ResourceSchema": {
-            "description": "Parent class for any resource type understood by the system.\nAny object type that extends from Resouce is expected to have a standalone schema published.\nFor project state, this can be left as generic as possible for now.",
+            "description": "Parent class for any resource type understood by the system.\nAny object type that extends from Resource is expected to have a standalone schema published.\nFor project state, this can be left as generic as possible for now.",
             "properties": {
                 "$schema": {
                     "description": "The JSON schema for this resource.",
@@ -896,7 +988,7 @@
                     "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).\nURI-compliant path to the referenced resource (local or remote)."
                 },
                 "profile": {
-                    "description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
+                    "description": "Defines the resource type.\nKnown resource types should have accompanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
                     "type": "string"
                 },
                 "rel": {
@@ -904,7 +996,7 @@
                     "type": "string"
                 },
                 "sources": {
-                    "description": "List of resources that underly this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
+                    "description": "List of resources that underlie this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
                     "items": {
                         "anyOf": [
                             {
@@ -927,11 +1019,12 @@
         "RollupArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "operation": {
                     "$ref": "#/definitions/FieldAggregateOperation",
@@ -946,6 +1039,10 @@
         },
         "SampleArgs": {
             "properties": {
+                "emitRemainder": {
+                    "description": "Whether to preserve and emit the non-sampled records via the 'unsampled' output port.",
+                    "type": "boolean"
+                },
                 "proportion": {
                     "description": "If table size is unknown ahead of time, specify a proportion of rows to sample.\nIf size is specified, it will be used instead, otherwise computed from this\nproportion using the table.numRows()",
                     "type": "number"
@@ -971,11 +1068,12 @@
         "SpreadArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "delimiter": {
                     "description": "Delimiter to use when converting string cell values into an array with String.split",
@@ -986,6 +1084,7 @@
                     "type": "boolean"
                 },
                 "preserveSource": {
+                    "description": "Keep the original columns (default is to remove source columns).",
                     "type": "boolean"
                 },
                 "to": {
@@ -1136,6 +1235,28 @@
                         {
                             "properties": {
                                 "args": {
+                                    "$ref": "#/definitions/CopyArgs"
+                                },
+                                "verb": {
+                                    "const": "copy",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
                                     "$ref": "#/definitions/Partial<InputColumnListArgs>"
                                 },
                                 "verb": {
@@ -1203,6 +1324,28 @@
                                 },
                                 "verb": {
                                     "const": "decode",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/InputColumnListArgs"
+                                },
+                                "verb": {
+                                    "const": "drop",
                                     "type": "string"
                                 }
                             },
@@ -1460,6 +1603,28 @@
                         {
                             "properties": {
                                 "args": {
+                                    "$ref": "#/definitions/PrintArgs"
+                                },
+                                "verb": {
+                                    "const": "print",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
                                     "$ref": "#/definitions/OnehotArgs"
                                 },
                                 "verb": {
@@ -1658,6 +1823,94 @@
                         {
                             "properties": {
                                 "args": {
+                                    "$ref": "#/definitions/DestructureArgs"
+                                },
+                                "verb": {
+                                    "const": "destructure",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/StringsReplaceArgs"
+                                },
+                                "verb": {
+                                    "const": "strings.replace",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/StringsArgs"
+                                },
+                                "verb": {
+                                    "const": "strings.lower",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/StringsArgs"
+                                },
+                                "verb": {
+                                    "const": "strings.upper",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
+                                "args": {
                                     "$ref": "#/definitions/InputKeyValueArgs"
                                 },
                                 "verb": {
@@ -1802,6 +2055,28 @@
                         },
                         {
                             "properties": {
+                                "args": {
+                                    "$ref": "#/definitions/WorkflowArgs"
+                                },
+                                "verb": {
+                                    "const": "workflow",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/BasicInput"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StepJsonCommon"
+                        },
+                        {
+                            "properties": {
                                 "args": {},
                                 "verb": {
                                     "type": "string"
@@ -1827,9 +2102,56 @@
             },
             "type": "object"
         },
+        "StringsArgs": {
+            "properties": {
+                "column": {
+                    "description": "Name of the input column for columnar operations",
+                    "type": "string"
+                },
+                "dataType": {
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
+                },
+                "to": {
+                    "description": "Name of the output column to receive the operation's result.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "StringsReplaceArgs": {
+            "properties": {
+                "caseInsensitive": {
+                    "type": "boolean"
+                },
+                "column": {
+                    "description": "Name of the input column for columnar operations",
+                    "type": "string"
+                },
+                "dataType": {
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
+                },
+                "globalSearch": {
+                    "type": "boolean"
+                },
+                "pattern": {
+                    "type": "string"
+                },
+                "replacement": {
+                    "type": "string"
+                },
+                "to": {
+                    "description": "Name of the output column to receive the operation's result.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "UnhotArgs": {
             "properties": {
                 "columns": {
+                    "description": "List of input columns for operations that work across multiple columns",
                     "items": {
                         "type": "string"
                     },
@@ -1839,6 +2161,7 @@
                     "type": "string"
                 },
                 "preserveSource": {
+                    "description": "Keep the original columns (default is to remove source columns).",
                     "type": "boolean"
                 },
                 "to": {
@@ -1853,11 +2176,35 @@
                 "input": {
                     "anyOf": [
                         {
+                            "properties": {
+                                "step": {
+                                    "description": "The Id of the step to which the input is bound",
+                                    "type": "string"
+                                },
+                                "table": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
                             "additionalProperties": {
                                 "anyOf": [
                                     {
+                                        "properties": {
+                                            "step": {
+                                                "description": "The Id of the step to which the input is bound",
+                                                "type": "string"
+                                            },
+                                            "table": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    {
                                         "items": {
-                                            "type": "string"
+                                            "$ref": "#/definitions/WorkflowInput"
                                         },
                                         "type": "array"
                                     },
@@ -1870,13 +2217,13 @@
                                 "others": {
                                     "description": "Possible variadic input",
                                     "items": {
-                                        "type": "string"
+                                        "$ref": "#/definitions/WorkflowInput"
                                     },
                                     "type": "array"
                                 },
                                 "source": {
-                                    "description": "Possible main input",
-                                    "type": "string"
+                                    "$ref": "#/definitions/WorkflowInput",
+                                    "description": "Possible main input"
                                 }
                             },
                             "type": "object"
@@ -1890,7 +2237,7 @@
             "type": "object"
         },
         "VariableNature": {
-            "description": "Describes the semantic shape of a variable.\nThis has particular effect on how we display and compare data,\nsuch as using line charts for continuous versus bar charts for categorical.\nThis mostly applies to numeric variables, but strings for instance can be categorial.",
+            "description": "Describes the semantic shape of a variable.\nThis has particular effect on how we display and compare data,\nsuch as using line charts for continuous versus bar charts for categorical.\nThis mostly applies to numeric variables, but strings for instance can be categorical.",
             "enum": [
                 "binary",
                 "continuous",
@@ -1909,13 +2256,13 @@
                         "others": {
                             "description": "The variadic secondary inputs",
                             "items": {
-                                "type": "string"
+                                "$ref": "#/definitions/WorkflowInput"
                             },
                             "type": "array"
                         },
                         "source": {
-                            "description": "The primary input",
-                            "type": "string"
+                            "$ref": "#/definitions/WorkflowInput",
+                            "description": "The primary input"
                         }
                     },
                     "type": "object"
@@ -1926,14 +2273,16 @@
         "WindowArgs": {
             "properties": {
                 "column": {
-                    "description": "Name of the input column for columnnar operations.",
+                    "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/DataType"
+                    "$ref": "#/definitions/DataType",
+                    "description": "Expected data type for values in the column"
                 },
                 "operation": {
-                    "$ref": "#/definitions/WindowFunction"
+                    "$ref": "#/definitions/WindowFunction",
+                    "description": "Window function to apply to the column."
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
@@ -1952,89 +2301,121 @@
                 "last_value",
                 "percent_rank",
                 "rank",
-                "row_number"
+                "row_number",
+                "uuid"
             ],
             "type": "string"
-        }
-    },
-    "description": "The root wrangling workflow specification.\nresource profile: 'workflow'",
-    "properties": {
-        "$schema": {
-            "description": "The JSON schema for this resource.",
-            "type": "string"
         },
-        "description": {
-            "description": "Description of the named resource.",
-            "type": "string"
-        },
-        "homepage": {
-            "description": "URL to a public webpage that describes this resource.",
-            "type": "string"
-        },
-        "input": {
-            "description": "A list of input names that are expected to be provided in addition to the workflow steps",
-            "items": {
-                "type": "string"
+        "WorkflowArgs": {
+            "properties": {
+                "workflow": {
+                    "$ref": "#/definitions/WorkflowSchema",
+                    "description": "The workflow configuration."
+                }
             },
-            "type": "array"
+            "type": "object"
         },
-        "license": {
-            "description": "SPDX license string.\nhttps://spdx.org/licenses/",
-            "type": "string"
-        },
-        "name": {
-            "description": "User-specified name. This will serve as the local id (i.e., like a filename.) and should be URI-compatible.\nThis should be editable, just like any other filename on a file system.",
-            "type": "string"
-        },
-        "path": {
+        "WorkflowInput": {
             "anyOf": [
                 {
+                    "properties": {
+                        "step": {
+                            "description": "The Id of the step to which the input is bound",
+                            "type": "string"
+                        },
+                        "table": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "WorkflowSchema": {
+            "description": "The root wrangling workflow specification.\nresource profile: 'workflow'",
+            "properties": {
+                "$schema": {
+                    "description": "The JSON schema for this resource.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Description of the named resource.",
+                    "type": "string"
+                },
+                "homepage": {
+                    "description": "URL to a public webpage that describes this resource.",
+                    "type": "string"
+                },
+                "input": {
+                    "description": "A list of input names that are expected to be provided in addition to the workflow steps",
                     "items": {
                         "type": "string"
                     },
                     "type": "array"
                 },
-                {
+                "license": {
+                    "description": "SPDX license string.\nhttps://spdx.org/licenses/",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "User-specified name. This will serve as the local id (i.e., like a filename.) and should be URI-compatible.\nThis should be editable, just like any other filename on a file system.",
+                    "type": "string"
+                },
+                "path": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).\nURI-compliant path to the referenced resource (local or remote)."
+                },
+                "profile": {
+                    "const": "workflow",
+                    "description": "Defines the resource type.\nKnown resource types should have accompanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
+                    "type": "string"
+                },
+                "rel": {
+                    "description": "The relationship of this resource to the parent resource.\n\nNote: If the resource is a profile-free reference object (e.g.\n{ \"rel\": \"input\", \"path\": \"path/to/datatable.json\" },\n\nThen the relationship is _external_ the target resource and should not be persisted\nin the object\n)",
+                    "type": "string"
+                },
+                "sources": {
+                    "description": "List of resources that underlie this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/ResourceSchema"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "steps": {
+                    "description": "The workflow steps",
+                    "items": {
+                        "$ref": "#/definitions/Step"
+                    },
+                    "type": "array"
+                },
+                "title": {
+                    "description": "Friendly name of the resource. Used for display only.",
                     "type": "string"
                 }
-            ],
-            "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).\nURI-compliant path to the referenced resource (local or remote)."
-        },
-        "profile": {
-            "const": "workflow",
-            "description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
-            "type": "string"
-        },
-        "rel": {
-            "description": "The relationship of this resource to the parent resource.\n\nNote: If the resource is a profile-free reference object (e.g.\n{ \"rel\": \"input\", \"path\": \"path/to/datatable.json\" },\n\nThen the relationship is _external_ the target resource and should not be persisted\nin the object\n)",
-            "type": "string"
-        },
-        "sources": {
-            "description": "List of resources that underly this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
-            "items": {
-                "anyOf": [
-                    {
-                        "$ref": "#/definitions/ResourceSchema"
-                    },
-                    {
-                        "type": "string"
-                    }
-                ]
             },
-            "type": "array"
-        },
-        "steps": {
-            "description": "The workflow steps",
-            "items": {
-                "$ref": "#/definitions/Step"
-            },
-            "type": "array"
-        },
-        "title": {
-            "description": "Friendly name of the resource. Used for display only.",
-            "type": "string"
+            "type": "object"
         }
     },
-    "type": "object"
+    "description": "The root wrangling workflow specification.\nresource profile: 'workflow'"
 }
 
