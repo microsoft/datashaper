@@ -24,8 +24,7 @@
 						},
 						{
 							"name": "Name",
-							"type": "string",
-							"nature": "nominal"
+							"type": "string"
 						},
 						{
 							"name": "Employees",
@@ -60,12 +59,11 @@
 						{
 							"name": "ID",
 							"type": "number",
-							"nature": "discrete"
+							"nature": "ordinal"
 						},
 						{
 							"name": "Name",
-							"type": "string",
-							"nature": "binary"
+							"type": "string"
 						},
 						{
 							"name": "Employees",
@@ -89,8 +87,11 @@
 						},
 						{
 							"name": "Array",
-							"type": "array",
-							"nature": "nominal"
+							"type": "array"
+						},
+						{
+							"name": "Object",
+							"type": "object"
 						}
 					]
 				}
@@ -119,8 +120,7 @@
 						},
 						{
 							"name": "Product",
-							"type": "string",
-							"nature": "continuous"
+							"type": "string"
 						},
 						{
 							"name": "FY20 Sales",

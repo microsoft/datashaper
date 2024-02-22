@@ -150,8 +150,8 @@ export function parseObject(
 		if (isNull(value)) {
 			return null
 		}
-		const obj = JSON.parse(value)
 		try {
+			const obj = JSON.parse(value)
 			const parsed = Object.keys(obj).reduce(
 				(acc: Record<string, any>, key: string) => {
 					const item = `${obj[key]}`
@@ -165,7 +165,7 @@ export function parseObject(
 			)
 			return parsed
 		} catch {
-			return obj
+			return value as any
 		}
 	}
 }

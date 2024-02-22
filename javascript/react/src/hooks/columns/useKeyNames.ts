@@ -13,11 +13,10 @@ export function useKeyNames(
 ): string[] {
 	return useMemo(() => {
 		const arrayResult = []
-
 		if (table !== undefined) {
 			const columnSelected: RowObject[] = table.select(column).objects()
 			for (let i = 0; i < columnSelected.length; i++) {
-				arrayResult.push(...op.keys(JSON.parse(columnSelected[i]?.[column])))
+				arrayResult.push(...op.keys(columnSelected[i]?.[column]))
 			}
 		}
 		return [...new Set(arrayResult)]

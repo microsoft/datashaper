@@ -18,7 +18,6 @@ export const DestructureForm: React.FC<StepFormProps<DestructureArgs>> = memo(
 	function DestructureForm({ step, workflow, input, table, onChange }) {
 		const dataTable = useStepInputTable(step, workflow, input, table)
 		const keyNames = useKeyNames(dataTable, step.args.column)
-
 		return (
 			<DestructureFormBase
 				keyNames={keyNames}
