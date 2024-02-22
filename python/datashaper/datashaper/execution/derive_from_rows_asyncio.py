@@ -16,7 +16,6 @@ async def derive_from_rows_asyncio(
     input: pd.DataFrame,
     transform: Callable[[pd.Series], Awaitable[ItemType]],
     callbacks: VerbCallbacks,
-    max_parallelism: int | None = 4,
 ) -> list[ItemType | None]:
     """
     Derive from rows asynchronously.
@@ -24,15 +23,10 @@ async def derive_from_rows_asyncio(
     This is useful for IO bound operations.
     """
 
-    async def gather(
-        sem: asyncio.Semaphore, execute: ExecuteFn[ItemType]
-    ) -> list[ItemType | None]:
+    async def gather(execute: ExecuteFn[ItemType]) -> list[ItemType | None]:
         tasks = [
-            asyncio.create_task(cast(Any, execute(row, sem)))
-            for row in input.iterrows()
+            asyncio.create_task(cast(Any, execute(row))) for row in input.iterrows()
         ]
         return await asyncio.gather(*tasks)
 
-    return await derive_from_rows_base(
-        input, transform, callbacks, max_parallelism, gather
-    )
+    return await derive_from_rows_base(input, transform, callbacks, gather)
