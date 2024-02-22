@@ -63,11 +63,15 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 				const verb = item?.key as Verb
 				const target = item?.data?.id ? item?.data?.id : verb
 				const id = createTableId(verb)
+				// if there is a previous step, explicitly set it as the input to the new step
+				// this avoids arbitrary lookup issues later, such as when editing from the StepList
+				const input = workflow.outputNames[workflow.outputNames.length - 1]
 				const args = { } as any
 				const _step = readStep({
 					id,
 					verb,
 					args,
+					input
 				})
 				// if the verb has an input column, use the selected column
 				if (isInputColumnStep(verb)) {
@@ -81,7 +85,7 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 				setModalTarget(target)
 				showModal()
 			},
-			[showModal, setStep, selectedColumn, createTableId, setModalTarget],
+			[showModal, setStep, selectedColumn, createTableId, setModalTarget, workflow],
 		)
 
 		const allTablesLengthObservable = useObservable(

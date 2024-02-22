@@ -17,7 +17,8 @@ export function useWorkflowDataTable(
 	const observable = useMemo(() => {
 		let result: Observable<Maybe<TableContainer>> | undefined
 		if (id == null) {
-			result = workflow?.output$
+			// if there is no table id, default to the workflow input since this should be the first step
+			result = workflow?.input$
 		} else {
 			result = workflow?.read$(id)
 		}
