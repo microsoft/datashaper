@@ -10,7 +10,7 @@
 					"rel": "input",
 					"$schema": "https://microsoft.github.io/datashaper/schema/datatable/v1.json",
 					"profile": "datatable",
-					"path": "https://raw.githubusercontent.com/BiomedSciAI/causallib/master/causallib/datasets/data/nhefs/NHEFS.csv",
+					"path": "https://raw.githubusercontent.com/microsoft/datashaper/gh-pages/data/NHEFS.csv",
 					"format": "csv",
 					"layout": "micro"
 				},

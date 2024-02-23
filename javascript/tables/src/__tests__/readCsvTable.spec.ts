@@ -209,14 +209,15 @@ describe('readCsvTable', () => {
 	})
 
 	describe('Large tables', () => {
-		let remoteDataset = ''
+
 		let largeDataset = ''
 
 		beforeAll(async () => {
-			remoteDataset = await fetch(
-				'https://covid19.who.int/WHO-COVID-19-global-data.csv',
-			).then((r) => r.text())
-			largeDataset = remoteDataset + remoteDataset
+			const csv = fs.readFileSync('./src/__tests__/data/column-json.csv', {
+				encoding: 'utf8',
+				flag: 'r',
+			})
+			largeDataset = csv
 			while (largeDataset.split('\n').length < 466890) {
 				// Double size if it's not big enough
 				largeDataset = largeDataset + largeDataset
