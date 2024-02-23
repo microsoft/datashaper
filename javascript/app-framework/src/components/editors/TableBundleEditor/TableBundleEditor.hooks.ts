@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableCommandsProps } from '@datashaper/react'
-import { KnownProfile } from '@datashaper/schema'
+import { Field, KnownProfile } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import type { Maybe, Step, TableBundle, Workflow } from '@datashaper/workflow'
+import type { Maybe, Step, TableBundle, Workflow, Codebook } from '@datashaper/workflow'
 import type { IColumn } from '@fluentui/react'
 import { useObservableState } from 'observable-hooks'
 import { useCallback, useMemo, useState } from 'react'
@@ -55,16 +55,30 @@ export function useColumnState(): [
 	return [selectedColumn, onColumnClick]
 }
 
-function useTableBundleWorkflow(table: TableBundle): Workflow | undefined {
+function useTableBundleWorkflow(resource: TableBundle): Workflow | undefined {
 	return useMemo(
 		() =>
-			table
+			resource
 				.getSourcesWithProfile(KnownProfile.Workflow)
 				.find((t) => !!t) as Workflow,
 
 		/* eslint-disable-next-line react-hooks/exhaustive-deps */
-		[table, table.sources],
+		[resource, resource.sources],
 	)
+}
+
+export function useCodebookFields(resource: TableBundle): Field[] | undefined {
+	const codebook = useMemo(() => {
+		const result = resource
+		.getSourcesWithProfile(KnownProfile.Codebook)
+		.find((t) => !!t) as Codebook | undefined
+		return result
+		/* eslint-disable-next-line react-hooks/exhaustive-deps */
+	}, [resource, resource.sources])
+	const fields$ = useMemo(() => {
+		return codebook?.fields$ || from([])
+	}, [codebook])
+	return useObservableState(fields$)
 }
 
 /**

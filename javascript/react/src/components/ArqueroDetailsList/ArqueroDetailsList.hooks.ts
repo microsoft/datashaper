@@ -178,6 +178,7 @@ export function useFields(table: ColumnTable, fields?: Field[]): Field[] {
 		const types = columnTypes(table)
 		return Object.entries(types).map(([name, type]) => ({
 			name,
+			title: name,
 			type,
 		}))
 	}, [table, fields])

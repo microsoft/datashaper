@@ -25,6 +25,7 @@ import {
 	useToolPanelStyles,
 } from '../styles.js'
 import {
+	useCodebookFields,
 	useColumnState,
 	useOnCreateStep,
 	useOnDeleteStep,
@@ -52,7 +53,9 @@ export const TableBundleEditor: React.FC<ProfileComponentProps<TableBundle>> =
 			return [result ?? defaultWorkflow(), !!result]
 			/* eslint-disable-next-line react-hooks/exhaustive-deps */
 		}, [resource, resource.sources])
-
+		
+		const fields = useCodebookFields(resource)
+		
 		const [selectedId, setSelectedId] = useState<string | undefined>(undefined)
 		const [isLatestSelected, setIsLatestSelected] = useState(true)
 		const [isInputSelected, setIsInputSelected] = useState(false)
@@ -135,6 +138,7 @@ export const TableBundleEditor: React.FC<ProfileComponentProps<TableBundle>> =
 						isHeaderFixed
 						fill
 						selectedColumn={selectedColumn}
+						fields={fields}
 						metadata={selectedTable.metadata}
 						table={selectedTable?.table}
 						onColumnSelect={onColumnClick}
