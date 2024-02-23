@@ -12,6 +12,7 @@
 	},
 	"dependencies": {
 		"@datashaper/react": "workspace:^",
+		"@datashaper/tables": "workspace:^",
 		"@datashaper/webapp": "workspace:^",
 		"@essex/components": "^4.2.0",
 		"@essex/storybook-config": "^0.1.4",
