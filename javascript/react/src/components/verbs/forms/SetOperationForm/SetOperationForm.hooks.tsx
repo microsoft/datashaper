@@ -6,7 +6,7 @@ import type { Step, Workflow } from '@datashaper/workflow'
 import { IconButton } from '@fluentui/react'
 import { useMemo } from 'react'
 
-import { useTableDropdownOptions } from '../../../../hooks/index.js'
+import { useTableDropdownOptions, useWorkflowInput } from '../../../../hooks/index.js'
 import { TableDropdown } from '../../../controls/index.js'
 import { LeftAlignedRow } from '../styles.js'
 import { icons } from './SetOperationForm.styles.js'
@@ -14,9 +14,10 @@ import { icons } from './SetOperationForm.styles.js'
 export function useOthers(
 	step: Step,
 	onChange?: (step: Step) => void,
-	store?: Workflow,
+	workflow?: Workflow,
 ): (JSX.Element | null)[] {
-	const tableOptions = useTableDropdownOptions(store)
+	const input = useWorkflowInput(workflow)
+	const tableOptions = useTableDropdownOptions(workflow, (name) => name !== input?.id)
 	return useMemo<(JSX.Element | null)[]>(() => {
 		return (step.input.others || EMPTY).map((other, index) => {
 			// on delete, remove the input
@@ -29,7 +30,7 @@ export function useOthers(
 					} as Step['input'],
 				})
 			}
-			if (!store) {
+			if (!workflow) {
 				return null
 			}
 			return (
@@ -54,7 +55,7 @@ export function useOthers(
 				</LeftAlignedRow>
 			)
 		})
-	}, [step, store, tableOptions, onChange])
+	}, [step, workflow, tableOptions, onChange])
 }
 
 const EMPTY: any[] = []
