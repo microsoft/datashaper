@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function parseBoolean(naValues?: string[], trueValues?: string[], falseValues?: string[]): (value: string) => boolean | null;
+export declare function parseBoolean(naValues?: string[], trueValues?: string[], falseValues?: string[]): (value: string | undefined) => boolean | null;
 ```
 
 ## Parameters
@@ -20,5 +20,5 @@ export declare function parseBoolean(naValues?: string[], trueValues?: string[],
 
 <b>Returns:</b>
 
-(value: string) =&gt; boolean \| null
+(value: string \| undefined) =&gt; boolean \| null
 

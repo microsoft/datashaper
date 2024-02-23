@@ -174,12 +174,14 @@ export function useFields(table: ColumnTable, fields?: Field[]): Field[] {
 	return useMemo(() => {
 		const types = columnTypes(table)
 		return Object.entries(types).map(([name, type]) => {
-			const existing = fields?.find(f => f.name === name)
-			return existing || {
-				name,
-				title: name,
-				type,
-			}
-	})
+			const existing = fields?.find((f) => f.name === name)
+			return (
+				existing || {
+					name,
+					title: name,
+					type,
+				}
+			)
+		})
 	}, [table, fields])
 }

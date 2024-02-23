@@ -2513,7 +2513,7 @@
             },
             {
               "kind": "Content",
-              "text": "(value: string) => boolean | null"
+              "text": "(value: string | undefined) => boolean | null"
             },
             {
               "kind": "Content",
@@ -2573,7 +2573,7 @@
             },
             {
               "kind": "Content",
-              "text": "(value: string) => "
+              "text": "(value: string | undefined) => "
             },
             {
               "kind": "Reference",
@@ -2642,7 +2642,7 @@
             },
             {
               "kind": "Content",
-              "text": "(values: string) => number | null"
+              "text": "(values: string | undefined) => number | null"
             },
             {
               "kind": "Content",
@@ -2703,7 +2703,7 @@
             },
             {
               "kind": "Content",
-              "text": "(value: string) => object | null"
+              "text": "(value: string | undefined) => object | null"
             },
             {
               "kind": "Content",
@@ -2747,7 +2747,7 @@
             },
             {
               "kind": "Content",
-              "text": "(value: string) => string | null"
+              "text": "(value: string | undefined) => string | null"
             },
             {
               "kind": "Content",
@@ -2791,7 +2791,7 @@
             },
             {
               "kind": "Content",
-              "text": "(value: string) => undefined | null"
+              "text": "(value: string | undefined) => undefined | null"
             },
             {
               "kind": "Content",

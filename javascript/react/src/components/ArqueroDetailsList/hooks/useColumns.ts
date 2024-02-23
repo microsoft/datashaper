@@ -89,7 +89,6 @@ export function useColumns(
 		])
 		const virtualNames = virtualColumns?.map((c) => c.key) || emptyArray()
 		const mappedColumns = [...names, ...virtualNames].map((name) => {
-
 			const field = fields.find((f) => f.name === name) as Field
 
 			const column = columnMap[name] || {

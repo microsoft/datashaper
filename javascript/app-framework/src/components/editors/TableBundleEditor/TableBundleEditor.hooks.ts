@@ -3,9 +3,16 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableCommandsProps } from '@datashaper/react'
-import { Field, KnownProfile } from '@datashaper/schema'
+import type { Field } from '@datashaper/schema'
+import { KnownProfile } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import type { Maybe, Step, TableBundle, Workflow, Codebook } from '@datashaper/workflow'
+import type {
+	Maybe,
+	Step,
+	TableBundle,
+	Workflow,
+	Codebook,
+} from '@datashaper/workflow'
 import type { IColumn } from '@fluentui/react'
 import { useObservableState } from 'observable-hooks'
 import { useCallback, useMemo, useState } from 'react'
@@ -70,8 +77,8 @@ function useTableBundleWorkflow(resource: TableBundle): Workflow | undefined {
 export function useCodebookFields(resource: TableBundle): Field[] | undefined {
 	const codebook = useMemo(() => {
 		const result = resource
-		.getSourcesWithProfile(KnownProfile.Codebook)
-		.find((t) => !!t) as Codebook | undefined
+			.getSourcesWithProfile(KnownProfile.Codebook)
+			.find((t) => !!t) as Codebook | undefined
 		return result
 		/* eslint-disable-next-line react-hooks/exhaustive-deps */
 	}, [resource, resource.sources])

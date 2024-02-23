@@ -8,9 +8,8 @@ import {
 	NumericComparisonOperator,
 	StringComparisonOperator,
 } from '@datashaper/schema'
+import { parseBoolean } from '@datashaper/tables'
 import { op } from 'arquero'
-
-import { bool } from './data-types.js'
 
 export function compareValues(
 	left: string | number | boolean | Date | null | undefined,
@@ -43,7 +42,7 @@ export function compareValues(
 		// null values should be ignored
 		return null
 	} else if (typeof left === 'boolean') {
-		const r = !!bool(right)
+		const r = !!parseBoolean()(right as string)
 		return compareBooleans(left, r, operator as BooleanComparisonOperator)
 		// test this after bools, because some boolean just ask if true or false, ignoring the right side
 	} else if (isEmpty(right)) {

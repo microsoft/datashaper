@@ -4,11 +4,10 @@
  */
 import type { ConvertArgs } from '@datashaper/schema'
 import { DataType, ParseType } from '@datashaper/schema'
-import { determineType } from '@datashaper/tables'
+import { determineType, parseBoolean } from '@datashaper/tables'
 import { escape, op } from 'arquero'
 import { isoParse, timeFormat, timeParse } from 'd3-time-format'
 
-import { bool } from './util/data-types.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 
@@ -36,14 +35,15 @@ function parseType(
 ) {
 	const parseTime = timeParse(formatPattern ?? '%Y-%m-%d')
 	const formatTime = timeFormat(formatPattern ?? '%Y-%m-%d')
+	// this just uses the defaults, though there may be customization in the data table settings
+	const parseBool = parseBoolean()
 
 	return escape((d: any) => {
 		const value = d[column]
 		const inputType = determineType(value)
 		switch (type) {
 			case ParseType.Boolean:
-				// arquero has no boolean operation
-				return bool(value)
+				return parseBool(value)
 			case ParseType.Date: {
 				if (value !== null && !isNaN(value)) return new Date(value)
 

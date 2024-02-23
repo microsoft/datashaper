@@ -253,8 +253,8 @@ describe('test for convert verb', () => {
 		expect(result.numRows()).toBe(4)
 		expect(result.get('newColumn', 0)).toBe(true)
 		expect(result.get('newColumn', 1)).toBe(false)
-		expect(result.get('newColumn', 2)).toBe(true)
-		expect(result.get('newColumn', 3)).toBe(false)
+		expect(result.get('newColumn', 2)).toBeNull()
+		expect(result.get('newColumn', 3)).toBeNull()
 	})
 })
 

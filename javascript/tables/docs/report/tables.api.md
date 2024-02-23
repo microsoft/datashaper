@@ -211,32 +211,32 @@ export function parseAs(type?: DataType, subtype?: DataType, hints?: TypeHints):
 // Warning: (ae-missing-release-tag) "parseBoolean" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function parseBoolean(naValues?: string[], trueValues?: string[], falseValues?: string[]): (value: string) => boolean | null;
+export function parseBoolean(naValues?: string[], trueValues?: string[], falseValues?: string[]): (value: string | undefined) => boolean | null;
 
 // Warning: (ae-missing-release-tag) "parseDate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function parseDate(naValues?: string[]): (value: string) => Date | null;
+export function parseDate(naValues?: string[]): (value: string | undefined) => Date | null;
 
 // Warning: (ae-missing-release-tag) "parseNumber" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function parseNumber(naValues?: string[], decimal?: string, thousands?: string): (values: string) => number | null;
+export function parseNumber(naValues?: string[], decimal?: string, thousands?: string): (values: string | undefined) => number | null;
 
 // Warning: (ae-missing-release-tag) "parseObject" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function parseObject(options?: TypeHints): (value: string) => object | null;
+export function parseObject(options?: TypeHints): (value: string | undefined) => object | null;
 
 // Warning: (ae-missing-release-tag) "parseString" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function parseString(naValues?: string[]): (value: string) => string | null;
+export function parseString(naValues?: string[]): (value: string | undefined) => string | null;
 
 // Warning: (ae-missing-release-tag) "parseUndefined" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function parseUndefined(naValues?: string[]): (value: string) => undefined | null;
+export function parseUndefined(naValues?: string[]): (value: string | undefined) => undefined | null;
 
 // Warning: (ae-missing-release-tag) "patternValidator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
