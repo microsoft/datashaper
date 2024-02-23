@@ -7,7 +7,6 @@ import { Label } from '@fluentui/react'
 
 export const Container = styled.div`
 	margin-top: 8px;
-	margin-left: 16px;
 `
 
 export const Input = styled.div`
@@ -30,6 +29,6 @@ export const OrLabel = styled(Label as any)`
 
 export const spinStyles = {
 	root: {
-		width: 120,
+		width: 135,
 	},
 }

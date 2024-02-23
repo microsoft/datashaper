@@ -4,7 +4,7 @@
  */
 import type { SampleArgs } from '@datashaper/schema'
 import { num } from '@datashaper/utilities'
-import { SpinButton } from '@fluentui/react'
+import { Position, SpinButton } from '@fluentui/react'
 import { format } from 'd3-format'
 import { memo } from 'react'
 
@@ -16,7 +16,9 @@ import {
 	InputLabel,
 	OrLabel,
 	spinStyles,
-} from './Sample.styles.js'
+} from './SampleForm.styles.js'
+import { Expando } from '@essex/components'
+import { dropdownStyles } from '../styles.js'
 
 const whole = format('d')
 
@@ -77,16 +79,21 @@ export const SampleForm: React.FC<StepFormProps<SampleArgs>> = memo(
 						onChange={handlePercentChange}
 					/>
 				</Input>
-				<Input>
-					<InputLabel>seed</InputLabel>
+				<Expando label={'Advanced'} styles={{
+					root: {
+						marginTop: 8,
+					}
+				}}>
 					<SpinButton
+						label="Randomizing seed"
+						labelPosition={Position.top}
 						step={1}
 						max={1000}
 						value={step.args.seed ? `${step.args.seed}` : ''}
-						styles={spinStyles}
+						styles={dropdownStyles}
 						onChange={handleSeedChange}
 					/>
-				</Input>
+				</Expando>
 			</Container>
 		)
 	},
