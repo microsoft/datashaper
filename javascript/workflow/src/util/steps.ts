@@ -78,7 +78,7 @@ const TaggedVerbs: Record<Verb, TaggedVerb> = {
 	},
 	convert: {
 		inputColumn: true,
-		outputColumn: true
+		outputColumn: true,
 	},
 	copy: {
 		inputColumn: true,
@@ -214,7 +214,7 @@ const TaggedVerbs: Record<Verb, TaggedVerb> = {
 		inputColumn: true,
 		outputColumn: true,
 	},
-	workflow: {}
+	workflow: {},
 }
 
 /**

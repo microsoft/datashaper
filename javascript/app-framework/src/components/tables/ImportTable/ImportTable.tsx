@@ -53,7 +53,9 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 		const isTextFormat = format === DataFormat.CSV || format === DataFormat.JSON
 		const isDataFormatTyped = format === DataFormat.ARROW
 		// use the dp to avoid duplicate resource names
-		const [name, setName] = useState<string>(dp.suggestResourceName(removeExtension(file.name ?? '')))
+		const [name, setName] = useState<string>(
+			dp.suggestResourceName(removeExtension(file.name ?? '')),
+		)
 		const [autoType, setAutoType] = useState<boolean>(true)
 
 		const { table, metadata, previewError, onLoadPreview } = usePreview(

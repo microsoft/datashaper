@@ -21,9 +21,11 @@ import { getInputNode } from '../../../../util.js'
  */
 export const JoinForm: React.FC<StepFormProps<JoinArgs>> = memo(
 	function JoinForm({ step, workflow, onChange }) {
-		
 		const input = useWorkflowInput(workflow)
-		const tableOptions = useTableDropdownOptions(workflow, (name) => name !== input?.id)
+		const tableOptions = useTableDropdownOptions(
+			workflow,
+			(name) => name !== input?.id,
+		)
 
 		const leftTable = useWorkflowDataTable(
 			getInputNode(step, NodeInput.Source),
@@ -33,7 +35,7 @@ export const JoinForm: React.FC<StepFormProps<JoinArgs>> = memo(
 			getInputNode(step, NodeInput.Other),
 			workflow,
 		)
-		
+
 		const leftColumns = useColumnNames(leftTable)
 		const rightColumns = useColumnNames(rightTable)
 

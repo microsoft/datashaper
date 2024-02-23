@@ -5,7 +5,11 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import type { Verb } from '@datashaper/schema'
 import type { Step } from '@datashaper/workflow'
-import { readStep, isInputColumnStep, isOutputColumnStep } from '@datashaper/workflow'
+import {
+	readStep,
+	isInputColumnStep,
+	isOutputColumnStep,
+} from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
 import { CommandBar } from '@fluentui/react'
 import { useObservable, useObservableState } from 'observable-hooks'
@@ -65,12 +69,12 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 			) => {
 				const verb = item?.key as Verb
 				const id = createTableId(verb)
-				const args = { } as any
+				const args = {} as any
 				const _step = readStep({
 					id,
 					verb,
 					args,
-					input
+					input,
 				})
 				// if the verb has an input column, use the selected column
 				if (isInputColumnStep(verb)) {
@@ -85,7 +89,14 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 				setModalTarget(target)
 				showModal()
 			},
-			[showModal, setStep, selectedColumn, createTableId, setModalTarget, input],
+			[
+				showModal,
+				setStep,
+				selectedColumn,
+				createTableId,
+				setModalTarget,
+				input,
+			],
 		)
 
 		const allTablesLengthObservable = useObservable(

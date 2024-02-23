@@ -21,7 +21,7 @@ import {
 	isInputKeyValueStep,
 	isInputTableListStep,
 	isOutputColumnStep,
-	NodeInput
+	NodeInput,
 } from '@datashaper/workflow'
 import { format } from 'd3-format'
 import { getInputNode } from '../../util.js'
@@ -35,7 +35,7 @@ import { getInputNode } from '../../util.js'
  */
 export function deriveDetails(step: Step): string | undefined {
 	const { verb, args } = step
-	
+
 	// handle special case verbs first
 	switch (verb) {
 		case Verb.Derive:
@@ -78,5 +78,5 @@ function sample(step: Step): string {
 
 function listOthers(step: Step): string | undefined {
 	const binding = step.input?.others
-	return binding?.map(b => b.step).join(',')
+	return binding?.map((b) => b.step).join(',')
 }

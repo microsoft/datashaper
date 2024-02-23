@@ -209,10 +209,9 @@ describe('readCsvTable', () => {
 	})
 
 	describe('Large tables', () => {
-
 		let largeDataset = ''
 
-		beforeAll(async () => {
+		beforeAll(() => {
 			const csv = fs.readFileSync('./src/__tests__/data/column-json.csv', {
 				encoding: 'utf8',
 				flag: 'r',

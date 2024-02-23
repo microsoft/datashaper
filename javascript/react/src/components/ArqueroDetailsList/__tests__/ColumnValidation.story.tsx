@@ -2,7 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { CodebookSchema, Constraints, ValidationResult } from '@datashaper/schema'
+import type {
+	CodebookSchema,
+	Constraints,
+	ValidationResult,
+} from '@datashaper/schema'
 import { generateCodebook, introspect, validateTable } from '@datashaper/tables'
 import type { ComponentStory } from '@storybook/react'
 
@@ -20,7 +24,7 @@ export const ColumnValidationStory: ComponentStory<typeof ArqueroDetailsList> =
 			const f = async () => setCodebook(await generateCodebook(companiesRaw))
 			f()
 		}, [companiesRaw])
-		
+
 		const metadata = introspect(companiesRaw, true)
 
 		// inject a few constraints to test & render
@@ -30,7 +34,7 @@ export const ColumnValidationStory: ComponentStory<typeof ArqueroDetailsList> =
 			minimum: 2,
 			maximum: 3,
 		})
-		enrichField(codebook, 'Name',{
+		enrichField(codebook, 'Name', {
 			enum: ['Microsoft', 'Apple', 'Google'],
 		})
 		enrichField(codebook, 'Employees', { minimum: 160000 })
@@ -38,14 +42,9 @@ export const ColumnValidationStory: ComponentStory<typeof ArqueroDetailsList> =
 		const [validationResult, setValidationResult] = useState<ValidationResult>()
 		useEffect(() => {
 			if (codebook) {
-				setValidationResult(validateTable(
-					companiesRaw,
-					codebook,
-					false,
-				))
+				setValidationResult(validateTable(companiesRaw, codebook, false))
 			}
 		}, [companiesRaw, codebook])
-		
 
 		return (
 			<ArqueroDetailsList
@@ -61,7 +60,11 @@ export const ColumnValidationStory: ComponentStory<typeof ArqueroDetailsList> =
 	}
 ColumnValidationStory.storyName = 'Column validation'
 
-function enrichField(codebook: CodebookSchema | undefined, name: string, constraints: Constraints) {
+function enrichField(
+	codebook: CodebookSchema | undefined,
+	name: string,
+	constraints: Constraints,
+) {
 	const found = codebook?.fields?.find((e) => e.name === name)
 	if (found) {
 		found.constraints = constraints

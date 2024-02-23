@@ -12,9 +12,10 @@ describe('test for print verb', () => {
 		store = new TestStore()
 	})
 	test('print test', () => {
-		
-		const mockedLog = jest.spyOn(console, 'log').mockImplementation(() => { })
-		const mockedTable = jest.spyOn(console, 'table').mockImplementation(() => { })
+		const mockedLog = jest.spyOn(console, 'log').mockImplementation(() => {})
+		const mockedTable = jest
+			.spyOn(console, 'table')
+			.mockImplementation(() => {})
 
 		printStep(store.table('table4'), {
 			message: 'Test print verb',

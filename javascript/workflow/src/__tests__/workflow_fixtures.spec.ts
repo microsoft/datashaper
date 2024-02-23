@@ -29,8 +29,8 @@ const inputTables = await readInputTables()
 doDescribe(CASES_PATH)
 
 // mock out console.log and console.table during tests, this avoids chatty output (including arquero table.print, which uses console.table)
-jest.spyOn(console, 'log').mockImplementation(() => { })
-jest.spyOn(console, 'table').mockImplementation(() => { })
+jest.spyOn(console, 'log').mockImplementation(() => {})
+jest.spyOn(console, 'table').mockImplementation(() => {})
 
 function doDescribe(targetPath: string) {
 	const entries = fs.readdirSync(targetPath)

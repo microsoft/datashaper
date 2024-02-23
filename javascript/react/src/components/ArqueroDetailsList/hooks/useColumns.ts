@@ -186,6 +186,7 @@ export function useColumns(
 		return mappedColumns
 	}, [
 		theme,
+		table,
 		columns,
 		names,
 		features,

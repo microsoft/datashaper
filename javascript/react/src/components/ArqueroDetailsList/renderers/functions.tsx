@@ -193,7 +193,9 @@ export const createRenderRowNumberColumn = (rowCount = 1): IColumn => {
 		name: '',
 		fieldName: ROW_NUMBER_COLUMN_NAME,
 		minWidth: minWidth > 12 ? minWidth : 12,
-		onRender: (_?: any, index?: number) => <RowNumberCell key={`row-number-${index}`} index={index} />,
+		onRender: (_?: any, index?: number) => (
+			<RowNumberCell key={`row-number-${index}`} index={index} />
+		),
 	}
 }
 

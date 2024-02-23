@@ -12,10 +12,9 @@ import { from } from 'rxjs'
  * @param workflow -
  * @returns
  */
-export function useWorkflowInput(workflow?: Workflow): TableContainer | undefined {
-	const observable = useMemo(
-		() => workflow?.input$ ?? from([]),
-		[workflow],
-	)
+export function useWorkflowInput(
+	workflow?: Workflow,
+): TableContainer | undefined {
+	const observable = useMemo(() => workflow?.input$ ?? from([]), [workflow])
 	return useObservableState(observable)
 }

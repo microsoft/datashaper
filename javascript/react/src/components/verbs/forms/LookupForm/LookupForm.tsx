@@ -21,9 +21,11 @@ import { getInputNode } from '../../../../util.js'
  */
 export const LookupForm: React.FC<StepFormProps<LookupArgs>> = memo(
 	function LookupForm({ step, workflow, onChange }) {
-
 		const input = useWorkflowInput(workflow)
-		const tableOptions = useTableDropdownOptions(workflow, (name) => name !== input?.id)
+		const tableOptions = useTableDropdownOptions(
+			workflow,
+			(name) => name !== input?.id,
+		)
 
 		const leftTable = useWorkflowDataTable(
 			getInputNode(step, NodeInput.Source),
@@ -33,7 +35,7 @@ export const LookupForm: React.FC<StepFormProps<LookupArgs>> = memo(
 			getInputNode(step, NodeInput.Other),
 			workflow,
 		)
-		
+
 		const leftColumns = useColumnNames(leftTable)
 		const rightColumns = useColumnNames(rightTable)
 		return (

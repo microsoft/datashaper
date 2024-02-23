@@ -79,13 +79,16 @@ export const SampleForm: React.FC<StepFormProps<SampleArgs>> = memo(
 						onChange={handlePercentChange}
 					/>
 				</Input>
-				<Expando label={'Advanced'} styles={{
-					root: {
-						marginTop: 8,
-					}
-				}}>
+				<Expando
+					label={'Advanced'}
+					styles={{
+						root: {
+							marginTop: 8,
+						},
+					}}
+				>
 					<SpinButton
-						label="Randomizing seed"
+						label='Randomizing seed'
 						labelPosition={Position.top}
 						step={1}
 						max={1000}

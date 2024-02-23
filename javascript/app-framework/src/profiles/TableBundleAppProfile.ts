@@ -62,8 +62,9 @@ export class TableBundleAppProfile
 				iconProps: { iconName: this.iconName },
 				onClick: () => {
 					void this.createInstance().then((derived) => {
-						
-						derived.name = dp.suggestResourceName(resource.title || resource.name)
+						derived.name = dp.suggestResourceName(
+							resource.title || resource.name,
+						)
 
 						// Create a reference to the source resource
 						const reference = new ResourceReference()
