@@ -12,7 +12,6 @@ import { type Observable, from, map } from 'rxjs'
 export function useWorkflowDataTable(
 	id: string | undefined,
 	workflow?: Workflow,
-	existingTable?: ColumnTable,
 ): ColumnTable | undefined {
 	const observable = useMemo(() => {
 		let result: Observable<Maybe<TableContainer>> | undefined
@@ -22,7 +21,7 @@ export function useWorkflowDataTable(
 		} else {
 			result = workflow?.read$(id)
 		}
-		return result ? result.pipe(map((t) => t?.table)) : from([existingTable])
-	}, [workflow, id, existingTable])
-	return useObservableState(observable, () => existingTable)
+		return result ? result.pipe(map((t) => t?.table)) : from([])
+	}, [workflow, id])
+	return useObservableState(observable)
 }
