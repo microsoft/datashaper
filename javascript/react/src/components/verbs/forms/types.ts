@@ -4,7 +4,6 @@
  */
 import type { TableMetadata } from '@datashaper/tables'
 import type { Step, Workflow } from '@datashaper/workflow'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import type { StepChangeFunction } from '../../../types.js'
 
@@ -36,10 +35,6 @@ export interface StepFormProps<T extends object | void | unknown = unknown>
 	 * TableStore to use for table lookups of step parameters.
 	 */
 	workflow?: Workflow
-	/**
-	 * ColumnTable to execute the step against if no store is provided.
-	 */
-	table?: ColumnTable
 	/**
 	 * Optional override of step input - there are many scenarios
 	 * (particularly chains) where the driving input table for UI visibility should be shared,

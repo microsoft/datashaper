@@ -27,8 +27,8 @@ import {
  * Provides inputs for a RecodeStep.
  */
 export const RecodeForm: React.FC<StepFormProps<RecodeArgs>> = memo(
-	function RecodeForm({ step, workflow, input, table, onChange }) {
-		const dataTable = useStepInputTable(step, workflow, input, table)
+	function RecodeForm({ step, workflow, input, onChange }) {
+		const dataTable = useStepInputTable(step, workflow, input)
 		const dataType = useColumnType(dataTable, step.args.column)
 		const initialValues = useColumnValues(step, dataTable)
 		const values =

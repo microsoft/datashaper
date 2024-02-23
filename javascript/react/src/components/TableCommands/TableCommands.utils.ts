@@ -67,8 +67,8 @@ export const groupedTableVerbs: GroupedVerbs[] = [
 		label: 'Transform table',
 		alwaysEnabled: true,
 		verbs: [
-			Verb.Decode,
 			Verb.Encode,
+			Verb.Decode,
 			Verb.Groupby,
 			Verb.Ungroup,
 			Verb.Orderby,
