@@ -128,7 +128,6 @@ function compareBooleans(
 	right: boolean,
 	operator: BooleanComparisonOperator,
 ): 1 | 0 {
-	console.log(left, right, operator)
 	switch (operator) {
 		case BooleanComparisonOperator.Equals:
 			return left === right ? 1 : 0
