@@ -76,7 +76,7 @@
 			"verb": "concat",
 			"input": {
 				"source": "companies",
-				"others": ["companies2"]
+				"others": [{ "step": "companies2" }]
 			}
 		},
 		{
@@ -128,7 +128,7 @@
 			"verb": "difference",
 			"input": {
 				"source": "companies",
-				"others": ["companies2"]
+				"others": [{ "step": "companies2" }]
 			}
 		},
 		{
@@ -205,7 +205,7 @@
 			"verb": "intersect",
 			"input": {
 				"source": "companies",
-				"others": ["companies2"]
+				"others": [{ "step": "companies2" }]
 			}
 		},
 		{
@@ -420,7 +420,7 @@
 			"verb": "union",
 			"input": {
 				"source": "companies",
-				"others": ["companies2"]
+				"others": [{ "step": "companies2" }]
 			}
 		},
 		{

@@ -19,13 +19,13 @@ export const SetOperationForm: React.FC<StepFormProps> = memo(
 	function SetOperationForm({ step, workflow, input, table, onChange }) {
 		const dataTable = useStepInputTable(step, workflow, input, table)
 		const others = useOthers(step, onChange, workflow)
-
+		
 		const handleButtonClick = useCallback(() => {
 			onChange?.({
 				...step,
 				input: {
 					...step.input,
-					others: [...(step.input.others || EMPTY_ARRAY), { node: '' }] as any,
+					others: [...(step.input.others || EMPTY_ARRAY), { step: '' }] as any,
 				},
 			})
 		}, [step, onChange])
