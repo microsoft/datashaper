@@ -7,8 +7,8 @@
 import { CodebookSchema } from '@datashaper/schema';
 import { CodebookStrategy } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
-import type { default as ColumnTable_2 } from 'arquero/dist/types/table/column-table.js';
-import type { CSVParseOptions } from 'arquero/dist/types/format/from-csv.js';
+import { default as ColumnTable_2 } from 'arquero/dist/types/table/column-table.js';
+import { CSVParseOptions } from 'arquero/dist/types/format/from-csv.js';
 import { DataFormat } from '@datashaper/schema';
 import type { DataTableSchema } from '@datashaper/schema';
 import { DataType } from '@datashaper/schema';
@@ -172,6 +172,11 @@ export function isObject(value: unknown): boolean;
 //
 // @public (undocumented)
 export function isValidNumber(value: string): boolean;
+
+// Warning: (ae-missing-release-tag) "loadCSV" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function loadCSV(url: string, options: CSVParseOptions): Promise<ColumnTable_2>;
 
 // Warning: (ae-missing-release-tag) "maximumValidator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
