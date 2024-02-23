@@ -10,6 +10,7 @@ import {
 	useColumnNames,
 	useTableDropdownOptions,
 	useWorkflowDataTable,
+	useWorkflowInput,
 } from '../../../../hooks/index.js'
 import type { StepFormProps } from '../types.js'
 import { JoinFormBase } from './Join.base.js'
@@ -19,17 +20,20 @@ import { getInputNode } from '../../../../util.js'
  * Provides inputs for a Join step.
  */
 export const JoinForm: React.FC<StepFormProps<JoinArgs>> = memo(
-	function JoinForm({ step, workflow, input, onChange }) {
-		const tableOptions = useTableDropdownOptions(workflow)
+	function JoinForm({ step, workflow, onChange }) {
+		
+		const input = useWorkflowInput(workflow)
+		const tableOptions = useTableDropdownOptions(workflow, (name) => name !== input?.id)
 
 		const leftTable = useWorkflowDataTable(
-			input || getInputNode(step, NodeInput.Source),
+			getInputNode(step, NodeInput.Source),
 			workflow,
 		)
 		const rightTable = useWorkflowDataTable(
 			getInputNode(step, NodeInput.Other),
 			workflow,
 		)
+		
 		const leftColumns = useColumnNames(leftTable)
 		const rightColumns = useColumnNames(rightTable)
 
