@@ -94,7 +94,7 @@ export function useColumns(
 
 			const column = columnMap[name] || {
 				key: name,
-				name: field.title || field.name,
+				name: field?.title || field?.name || name,
 				minWidth: columnMinWidth,
 				fieldName: name,
 			}
