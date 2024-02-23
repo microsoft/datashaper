@@ -37,10 +37,16 @@ export function compareValues(
 	) {
 		const empty = isEmpty(left)
 		return empty === 1 ? 0 : 1
-	} else if (isEmpty(left) || isEmpty(right)) {
+	} else if (isEmpty(left)) {
 		// TODO: we need to differentiate NaN/invalid date
 		// but basically if the compare is not explicitly requesting a compare check,
 		// null values should be ignored
+		return null
+	} else if (typeof left === 'boolean') {
+		const r = !!bool(right)
+		return compareBooleans(left, r, operator as BooleanComparisonOperator)
+	// test this after bools, because some boolean just ask if true or false, ignoring the right side
+	} else if (isEmpty(right)) {
 		return null
 	} else if (typeof left === 'number' && right != null) {
 		const num = +right
@@ -51,9 +57,6 @@ export function compareValues(
 			`${right}`,
 			operator as StringComparisonOperator,
 		)
-	} else if (typeof left === 'boolean') {
-		const r = !!bool(right)
-		return compareBooleans(left, r, operator as BooleanComparisonOperator)
 	} else if (typeof left === 'object' && left instanceof Date) {
 		return compareDates(left, right as Date, operator as DateComparisonOperator)
 	}
@@ -125,6 +128,7 @@ function compareBooleans(
 	right: boolean,
 	operator: BooleanComparisonOperator,
 ): 1 | 0 {
+	console.log(left, right, operator)
 	switch (operator) {
 		case BooleanComparisonOperator.Equals:
 			return left === right ? 1 : 0
