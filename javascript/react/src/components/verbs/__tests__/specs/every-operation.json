@@ -114,6 +114,16 @@
 			}
 		},
 		{
+			"id": "destructure",
+			"verb": "destructure",
+			"input": {
+				"source": "companies2"
+			},
+			"args": {
+				"column": "Object"
+			}
+		},
+		{
 			"id": "difference",
 			"verb": "difference",
 			"input": {
