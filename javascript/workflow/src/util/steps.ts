@@ -69,8 +69,8 @@ const TaggedVerbs: Record<Verb, TaggedVerb> = {
 		outputColumn: true,
 	},
 	boolean: {
-		outputColumn: true,
 		inputColumnList: true,
+		outputColumn: true,
 	},
 	concat: {
 		inputTableList: true,
@@ -81,8 +81,8 @@ const TaggedVerbs: Record<Verb, TaggedVerb> = {
 		outputColumn: true
 	},
 	copy: {
-		outputColumn: true,
 		inputColumn: true,
+		outputColumn: true,
 	},
 	dedupe: {
 		rowModifying: true,
@@ -198,7 +198,6 @@ const TaggedVerbs: Record<Verb, TaggedVerb> = {
 		outputColumn: true,
 		inputColumnList: true,
 	},
-
 	union: {
 		inputTableList: true,
 		rowModifying: true,
@@ -206,7 +205,6 @@ const TaggedVerbs: Record<Verb, TaggedVerb> = {
 	unorder: {
 		noArgs: true,
 	},
-
 	unroll: {
 		rowModifying: true,
 		inputColumn: true,

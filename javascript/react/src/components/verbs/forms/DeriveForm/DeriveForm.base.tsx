@@ -16,7 +16,7 @@ import {
 import type { StepFormBaseProps } from '../types.js'
 
 /**
- * Provides inputs for a Binarize step.
+ * Provides inputs for a Derive step.
  */
 export const DeriveFormBase: React.FC<
 	StepFormBaseProps<DeriveArgs> & { columns: string[] }
