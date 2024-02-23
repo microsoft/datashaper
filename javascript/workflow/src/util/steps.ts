@@ -78,6 +78,7 @@ const TaggedVerbs: Record<Verb, TaggedVerb> = {
 	},
 	convert: {
 		inputColumn: true,
+		outputColumn: true
 	},
 	copy: {
 		outputColumn: true,
