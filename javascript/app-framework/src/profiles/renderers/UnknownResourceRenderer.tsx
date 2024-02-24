@@ -18,7 +18,7 @@ export const UnknownResourceRenderer: React.FC<
 
 const editors = [
 	{
-		key: 'unkown-json',
+		key: 'unknown-json',
 		title: 'View and edit raw JSON for unknown schemas',
 		iconName: profileIcons.json,
 		renderer: ResourceSchemaEditor,
