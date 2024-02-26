@@ -1,4 +1,4 @@
-ID,Name,Employees,US,Headquarters,Founded,Array
-6,Nokia,10000,false,,,a;b
-7,,100500,true,null,,a;c
-1,Microsoft,160000,true,Redmond,1975-04-04,b;d
+ID,Name,Employees,US,Headquarters,Founded,Array,Object
+6,Nokia,10000,false,,,"a,b","{""a"":123,""b"":""Hi""}"
+7,,100500,true,null,,"a,c","{""a"":456,""b"":""Hello""}"
+1,Microsoft,160000,true,Redmond,1975-04-04,"b,d","{""a"":789,""b"":""Bye""}"
