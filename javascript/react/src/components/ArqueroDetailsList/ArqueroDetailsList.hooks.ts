@@ -176,7 +176,7 @@ export function useFields(table: ColumnTable, fields?: Field[]): Field[] {
 		return Object.entries(types).map(([name, type]) => {
 			const existing = fields?.find((f) => f.name === name)
 			return (
-				existing || {
+				existing ?? {
 					name,
 					title: name,
 					type,

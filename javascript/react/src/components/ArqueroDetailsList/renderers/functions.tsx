@@ -153,7 +153,6 @@ export const createRenderCommandBarColumnHeader = (
 		if (!(props && defaultRender)) {
 			return null
 		}
-
 		return (
 			<CommandBarContainer
 				key={props.key}
@@ -192,7 +191,7 @@ export const createRenderRowNumberColumn = (rowCount = 1): IColumn => {
 		key: ROW_NUMBER_COLUMN_NAME,
 		name: '',
 		fieldName: ROW_NUMBER_COLUMN_NAME,
-		minWidth: minWidth > 12 ? minWidth : 12,
+		minWidth: Math.max(minWidth, 12),
 		onRender: (_?: any, index?: number) => (
 			<RowNumberCell key={`row-number-${index}`} index={index} />
 		),

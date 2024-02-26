@@ -82,9 +82,7 @@ export function useCodebookFields(resource: TableBundle): Field[] | undefined {
 		return result
 		/* eslint-disable-next-line react-hooks/exhaustive-deps */
 	}, [resource, resource.sources])
-	const fields$ = useMemo(() => {
-		return codebook?.fields$ || from([])
-	}, [codebook])
+	const fields$ = useMemo(() => codebook?.fields$ ?? from([]), [codebook])
 	return useObservableState(fields$)
 }
 
