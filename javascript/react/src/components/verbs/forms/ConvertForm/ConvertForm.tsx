@@ -16,8 +16,8 @@ import { ConvertFormBase } from './ConvertForm.base.js'
  * Provides inputs for a Convert step.
  */
 export const ConvertForm: React.FC<StepFormProps<ConvertArgs>> = memo(
-	function ConvertForm({ step, workflow, input, table, onChange }) {
-		const dataTable = useStepInputTable(step, workflow, input, table)
+	function ConvertForm({ step, workflow, input, onChange }) {
+		const dataTable = useStepInputTable(step, workflow, input)
 		// TODO: replace this with introspect
 		const fields = useColumnsMetadata(dataTable)
 		return <ConvertFormBase step={step} onChange={onChange} fields={fields} />

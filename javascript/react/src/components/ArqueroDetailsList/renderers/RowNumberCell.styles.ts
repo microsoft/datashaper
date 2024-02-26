@@ -8,8 +8,10 @@ import styled from 'styled-components'
 export const Container = styled.div`
     font-size: 12px;
     color: ${({ theme }) => theme.palette.neutralQuaternary};
-    padding-left: 8px;
+    padding: 8px;
     display: flex;
+    text-align: right;
+    justify-content: flex-end;
     align-items: center;
     height: 100%;
 `

@@ -15,10 +15,9 @@ import { useKeyNames } from '../../../../hooks/columns/useKeyNames.js'
  * Input table is expected to be edited elsewhere and configured as the step input.
  */
 export const DestructureForm: React.FC<StepFormProps<DestructureArgs>> = memo(
-	function DestructureForm({ step, workflow, input, table, onChange }) {
-		const dataTable = useStepInputTable(step, workflow, input, table)
+	function DestructureForm({ step, workflow, input, onChange }) {
+		const dataTable = useStepInputTable(step, workflow, input)
 		const keyNames = useKeyNames(dataTable, step.args.column)
-
 		return (
 			<DestructureFormBase
 				keyNames={keyNames}

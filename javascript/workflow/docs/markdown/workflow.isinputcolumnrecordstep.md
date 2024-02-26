@@ -9,14 +9,14 @@ Indicates whether the supplied step requires a map of input columns.
 <b>Signature:</b>
 
 ```typescript
-export declare function isInputColumnRecordStep(step: Step): boolean;
+export declare function isInputColumnRecordStep(verb: Verb): boolean;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  step | [Step](./workflow.step.md) |  |
+|  verb | Verb |  |
 
 <b>Returns:</b>
 

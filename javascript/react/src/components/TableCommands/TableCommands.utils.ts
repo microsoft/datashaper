@@ -8,7 +8,6 @@ import { Verb } from '@datashaper/schema'
 import type { GroupedVerbs } from './TableCommands.types.js'
 
 export const mainColumnVerbs = [
-	Verb.Print,
 	Verb.Bin,
 	Verb.Binarize,
 	Verb.Filter,
@@ -68,8 +67,8 @@ export const groupedTableVerbs: GroupedVerbs[] = [
 		label: 'Transform table',
 		alwaysEnabled: true,
 		verbs: [
-			Verb.Decode,
 			Verb.Encode,
+			Verb.Decode,
 			Verb.Groupby,
 			Verb.Ungroup,
 			Verb.Orderby,
@@ -78,5 +77,10 @@ export const groupedTableVerbs: GroupedVerbs[] = [
 			Verb.Select,
 			Verb.Drop,
 		],
+	},
+	{
+		label: 'Debug',
+		alwaysEnabled: true,
+		verbs: [Verb.Print],
 	},
 ]

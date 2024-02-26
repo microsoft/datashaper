@@ -23,8 +23,8 @@ import { Container, Criteria, Vertical } from './FilterForm.styles.js'
  * Provides inputs for a Filter step.
  */
 export const FilterForm: React.FC<StepFormProps<FilterArgs>> = memo(
-	function FilterForm({ step, workflow, input, table, onChange }) {
-		const dataTable = useStepInputTable(step, workflow, input, table)
+	function FilterForm({ step, workflow, input, onChange }) {
+		const dataTable = useStepInputTable(step, workflow, input)
 		const handleButtonClick = useCallback(() => {
 			onChange?.({
 				...step,

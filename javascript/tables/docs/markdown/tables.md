@@ -36,6 +36,7 @@
 |  [isNumber(decimal, thousands)](./tables.isnumber.md) |  |
 |  [isObject(value)](./tables.isobject.md) |  |
 |  [isValidNumber(value)](./tables.isvalidnumber.md) |  |
+|  [loadCSV(url, options)](./tables.loadcsv.md) | Drop-in replacement for arquero loadCSV, using our internal parsing with auto-typing turned on. Meant for quick-and-dirty reads, with the advantage that our default parsing aligns with pandas. Use readTable for more control over schema options and formats. |
 |  [maximumValidator(field, includeIndexes)](./tables.maximumvalidator.md) | Constructs a function that validates a column against the <code>maximum</code> constraint. |
 |  [maxLengthValidator(field, includeIndexes)](./tables.maxlengthvalidator.md) | Constructs a function that validates a column against the <code>maxLength</code> constraint. |
 |  [minimumValidator(field, includeIndexes)](./tables.minimumvalidator.md) | Constructs a function that validates a column against the <code>minimum</code> constraint. |

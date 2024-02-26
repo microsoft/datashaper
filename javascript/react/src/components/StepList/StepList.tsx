@@ -84,14 +84,14 @@ export const StepList: React.FC<StepListProps> = memo(function StepStack({
 				{steps.map((step) => {
 					const stepIndex = workflow.steps.findIndex((s) => s.id === step.id)
 					const handleSave =
-						isNoArgsStep(step) || !onSave
+						isNoArgsStep(step.verb) || !onSave
 							? undefined
 							: (s: Step) => onSave(s, stepIndex)
 					const handleDelete =
 						onDeleteClicked && (() => onDeleteClicked(stepIndex))
 					return (
 						<CollapsiblePanel
-							key={step.id}
+							key={`step-${step.id}`}
 							styles={collapsiblePanelStyles}
 							onHeaderClick={() => onSelect?.(step.id)}
 							onRenderHeader={() =>

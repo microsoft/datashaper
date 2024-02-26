@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function parseUndefined(naValues?: string[]): (value: string) => undefined | null;
+export declare function parseUndefined(naValues?: string[]): (value: string | undefined) => undefined | null;
 ```
 
 ## Parameters
@@ -18,5 +18,5 @@ export declare function parseUndefined(naValues?: string[]): (value: string) => 
 
 <b>Returns:</b>
 
-(value: string) =&gt; undefined \| null
+(value: string \| undefined) =&gt; undefined \| null
 

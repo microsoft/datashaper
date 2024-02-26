@@ -153,7 +153,6 @@ export const createRenderCommandBarColumnHeader = (
 		if (!(props && defaultRender)) {
 			return null
 		}
-
 		return (
 			<CommandBarContainer
 				key={props.key}
@@ -186,13 +185,16 @@ export const createRenderHistogramColumnHeader = (
 	}
 }
 
-export const createRenderRowNumberColumn = (): IColumn => {
+export const createRenderRowNumberColumn = (rowCount = 1): IColumn => {
+	const minWidth = `${rowCount}`.length * 6
 	return {
 		key: ROW_NUMBER_COLUMN_NAME,
 		name: '',
 		fieldName: ROW_NUMBER_COLUMN_NAME,
-		minWidth: 20,
-		onRender: (_?: any, index?: number) => <RowNumberCell index={index} />,
+		minWidth: Math.max(minWidth, 12),
+		onRender: (_?: any, index?: number) => (
+			<RowNumberCell key={`row-number-${index}`} index={index} />
+		),
 	}
 }
 

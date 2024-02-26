@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function parseObject(options?: TypeHints): (value: string) => object | null;
+export declare function parseObject(options?: TypeHints): (value: string | undefined) => object | null;
 ```
 
 ## Parameters
@@ -18,5 +18,5 @@ export declare function parseObject(options?: TypeHints): (value: string) => obj
 
 <b>Returns:</b>
 
-(value: string) =&gt; object \| null
+(value: string \| undefined) =&gt; object \| null
 

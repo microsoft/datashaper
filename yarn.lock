@@ -4094,6 +4094,7 @@ __metadata:
   resolution: "@datashaper/stories@workspace:javascript/stories"
   dependencies:
     "@datashaper/react": "workspace:^"
+    "@datashaper/tables": "workspace:^"
     "@datashaper/webapp": "workspace:^"
     "@essex/components": "npm:^4.2.0"
     "@essex/scripts": "npm:^24.0.5"

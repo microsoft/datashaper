@@ -20,4 +20,5 @@ export enum KnownProfile {
 	Codebook = 'codebook',
 	Workflow = 'workflow',
 	TableBundle = 'tablebundle',
+	UnknownResource = 'unknown'
 }

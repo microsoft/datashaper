@@ -9,13 +9,14 @@ import { memo } from 'react'
 import { StepEditor } from '../StepEditor/StepEditor.js'
 import { useModalStyles } from '../StepEditor/StepEditor.styles.js'
 import { GuidanceExpansion } from './GuidanceExpansion.js'
-import { useTitle } from './StepEditorModal.hooks.js'
+import { useSubTitle, useTitle } from './StepEditorModal.hooks.js'
 import {
 	ContainerBody,
 	Header,
 	HeaderButtons,
 	StepComponentContainer,
 	Title,
+	Subtitle,
 	useIconProps,
 } from './StepEditorModal.styles.js'
 import type { StepEditorModalProps } from './StepEditorModal.types.js'
@@ -34,6 +35,7 @@ export const StepEditorModal: React.FC<StepEditorModalProps> = memo(
 		const [showGuidance, { toggle: toggleGuidance }] = useBoolean(false)
 		const adaptedStyles = useModalStyles(styles)
 		const title = useTitle(step)
+		const subtitle = useSubTitle(step)
 		const icons = useIconProps()
 		return (
 			<Callout
@@ -42,7 +44,10 @@ export const StepEditorModal: React.FC<StepEditorModalProps> = memo(
 				{...props}
 			>
 				<Header>
-					<Title>{title}</Title>
+					<Title>
+						{title}
+						<Subtitle>{subtitle}</Subtitle>
+					</Title>
 					<HeaderButtons>
 						{step?.verb ? (
 							<IconButton

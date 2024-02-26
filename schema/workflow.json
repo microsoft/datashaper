@@ -1040,7 +1040,7 @@
         "SampleArgs": {
             "properties": {
                 "emitRemainder": {
-                    "description": "Whether to preserve and emit the non-sampled records via the 'unsampled' output port.",
+                    "description": "Whether to preserve and emit the non-sampled records via the 'remainder' output port.",
                     "type": "boolean"
                 },
                 "proportion": {

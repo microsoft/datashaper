@@ -13,8 +13,8 @@ import { DeriveFormBase } from './DeriveForm.base.js'
  * Provides inputs for a Binarize step.
  */
 export const DeriveForm: React.FC<StepFormProps<DeriveArgs>> = memo(
-	function DeriveForm({ step, workflow, input, table, onChange }) {
-		const dataTable = useStepInputTable(step, workflow, input, table)
+	function DeriveForm({ step, workflow, input, onChange }) {
+		const dataTable = useStepInputTable(step, workflow, input)
 		const columns = useColumnNames(dataTable)
 		return <DeriveFormBase columns={columns} step={step} onChange={onChange} />
 	},

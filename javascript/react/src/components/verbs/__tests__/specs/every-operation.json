@@ -76,7 +76,7 @@
 			"verb": "concat",
 			"input": {
 				"source": "companies",
-				"others": ["companies2"]
+				"others": [{ "step": "companies2" }]
 			}
 		},
 		{
@@ -114,11 +114,21 @@
 			}
 		},
 		{
+			"id": "destructure",
+			"verb": "destructure",
+			"input": {
+				"source": "companies2"
+			},
+			"args": {
+				"column": "Object"
+			}
+		},
+		{
 			"id": "difference",
 			"verb": "difference",
 			"input": {
 				"source": "companies",
-				"others": ["companies2"]
+				"others": [{ "step": "companies2" }]
 			}
 		},
 		{
@@ -195,7 +205,7 @@
 			"verb": "intersect",
 			"input": {
 				"source": "companies",
-				"others": ["companies2"]
+				"others": [{ "step": "companies2" }]
 			}
 		},
 		{
@@ -230,7 +240,8 @@
 			"args": {
 				"strategy": "concat",
 				"to": "result",
-				"columns": ["FY20 Sales", "FY21 Sales"]
+				"columns": ["FY20 Sales", "FY21 Sales"],
+				"delimiter": "|"
 			}
 		},
 		{
@@ -239,9 +250,7 @@
 			"input": "stocks",
 			"args": {
 				"column": "Symbol",
-				"prefixes": {
-					"Symbol": "ticker-"
-				}
+				"prefix": "ticker-"
 			}
 		},
 		{
@@ -411,7 +420,7 @@
 			"verb": "union",
 			"input": {
 				"source": "companies",
-				"others": ["companies2"]
+				"others": [{ "step": "companies2" }]
 			}
 		},
 		{
@@ -445,6 +454,14 @@
 				"to": "First Product",
 				"column": "Product",
 				"operation": "first_value"
+			}
+		},
+		{
+			"id": "workflow",
+			"verb": "workflow",
+			"input": "companies",
+			"args": {
+				"workflow": {}
 			}
 		}
 	],

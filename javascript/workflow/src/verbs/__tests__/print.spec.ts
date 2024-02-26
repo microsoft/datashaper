@@ -12,13 +12,17 @@ describe('test for print verb', () => {
 		store = new TestStore()
 	})
 	test('print test', () => {
-		const mockedConsole = jest.spyOn(console, 'log')
+		const mockedLog = jest.spyOn(console, 'log').mockImplementation(() => {})
+		const mockedTable = jest
+			.spyOn(console, 'table')
+			.mockImplementation(() => {})
 
-		const result = printStep(store.table('table4'), {
+		printStep(store.table('table4'), {
 			message: 'Test print verb',
 			limit: 4,
 		})
 
-		expect(mockedConsole).toHaveBeenCalledWith('Test print verb')
+		expect(mockedLog).toHaveBeenCalledWith('Test print verb')
+		expect(mockedTable).toHaveBeenCalled()
 	})
 })

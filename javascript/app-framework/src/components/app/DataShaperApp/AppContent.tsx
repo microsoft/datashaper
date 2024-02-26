@@ -35,9 +35,9 @@ export const AppContent: React.FC<AppContentProps> = memo(function AppContent({
 					(r) =>
 						r.renderer && (
 							<Route
-								key={r.href}
+								key={`route-${r.href}`}
 								path={(r.children?.length ?? 0) > 0 ? r.href : `${r.href}/*`}
-								element={<MatchedRoute key={r.href} data={r} />}
+								element={<MatchedRoute key={`matched-${r.href}`} data={r} />}
 							/>
 						),
 				)}

@@ -7,10 +7,8 @@ import fs from 'fs'
 import fsp from 'fs/promises'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
-import debug from 'debug'
 import { Workflow } from '../resources/index.js'
-
-const log = debug('datashaper:workflow')
+import { jest } from '@jest/globals'
 
 // Static data paths.
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -29,6 +27,10 @@ const FLOAT_COMPARISON_DECIMALS = 5
  */
 const inputTables = await readInputTables()
 doDescribe(CASES_PATH)
+
+// mock out console.log and console.table during tests, this avoids chatty output (including arquero table.print, which uses console.table)
+jest.spyOn(console, 'log').mockImplementation(() => {})
+jest.spyOn(console, 'table').mockImplementation(() => {})
 
 function doDescribe(targetPath: string) {
 	const entries = fs.readdirSync(targetPath)

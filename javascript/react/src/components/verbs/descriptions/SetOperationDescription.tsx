@@ -27,5 +27,5 @@ export const SetOperationDescription: React.FC<StepDescriptionProps<void>> =
 		return <VerbDescription {...props} rows={rows} />
 	})
 export function otherInputNames(step: Step): string[] {
-	return (step.input.others || EMPTY_ARRAY).map((i) => i.node)
+	return (step.input.others || EMPTY_ARRAY).map((i) => i.step)
 }

@@ -10,4 +10,5 @@ export const profileIcons = {
 	interactive: 'PreviewLink',
 	json: 'Code',
 	text: 'PageData',
+	unknown: 'SurveyQuestions',
 }

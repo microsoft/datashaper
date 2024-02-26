@@ -14,12 +14,12 @@ import {
 	FilterCompareType,
 	WindowFunction,
 } from '@datashaper/schema'
+import { parseBoolean } from '@datashaper/tables'
 import { escape, op, addWindowFunction } from 'arquero'
 import type { Op } from 'arquero/dist/types/op/op'
 
 import { evaluateBoolean } from './boolean-logic.js'
 import { compareValues } from './compare.js'
-import { bool } from './data-types.js'
 import type { CompareWrapper } from './types.js'
 import { v4 as uuid } from 'uuid'
 
@@ -88,10 +88,11 @@ export function deriveBoolean(
 	columns: string[],
 	operator: BooleanOperator,
 ): CompareWrapper {
+	const parseBool = parseBoolean([], ['1'], ['0'])
 	return escape((d: Record<string, string | number>): 0 | 1 | null => {
 		// gather all of the column values, coerce to booleans (or null)
 		const values = columns.map((c) => {
-			const val = bool(d[c])
+			const val = parseBool(`${d[c]}`)
 			return val === null ? null : val ? 1 : 0
 		})
 		return evaluateBoolean(values, operator)

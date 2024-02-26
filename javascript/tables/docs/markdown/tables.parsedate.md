@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function parseDate(naValues?: string[]): (value: string) => Date | null;
+export declare function parseDate(naValues?: string[]): (value: string | undefined) => Date | null;
 ```
 
 ## Parameters
@@ -18,5 +18,5 @@ export declare function parseDate(naValues?: string[]): (value: string) => Date 
 
 <b>Returns:</b>
 
-(value: string) =&gt; Date \| null
+(value: string \| undefined) =&gt; Date \| null
 

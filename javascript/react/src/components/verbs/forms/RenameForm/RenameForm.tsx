@@ -36,8 +36,8 @@ import {
  * Provides inputs for a RenameStep.
  */
 export const RenameForm: React.FC<StepFormProps<RenameArgs>> = memo(
-	function RenameForm({ step, workflow, input, table, onChange }) {
-		const dataTable = useStepInputTable(step, workflow, input, table)
+	function RenameForm({ step, workflow, input, onChange }) {
+		const dataTable = useStepInputTable(step, workflow, input)
 		const handleColumnChange = useHandleColumnChange(step, onChange)
 		const handleColumnDelete = useOnDeleteStepColumn(step, onChange)
 		const handleButtonClick = useHandleAddButtonClick(step, dataTable, onChange)

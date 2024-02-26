@@ -22,9 +22,8 @@ export function useStepInputTable(
 	step: Step,
 	workflow: Workflow | undefined,
 	input?: string | undefined,
-	table?: ColumnTable | undefined,
 ): ColumnTable | undefined {
 	const id = input || getInputNode(step, NodeInput.Source)
-	const result = useWorkflowDataTable(id, workflow, table)
+	const result = useWorkflowDataTable(id, workflow)
 	return result
 }

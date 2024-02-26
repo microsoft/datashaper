@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { loadCSV } from 'arquero'
+import { loadCSV } from '@datashaper/tables'
 export * from '@essex/storybook-config/preview'
 
 export const loaders = [

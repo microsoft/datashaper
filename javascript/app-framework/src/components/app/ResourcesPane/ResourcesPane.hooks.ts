@@ -13,6 +13,7 @@ import { useCallback, useContext } from 'react'
 import { DataPackageContext } from '../../../context/index.js'
 import type { OpenTableHandler } from '../../tables/ImportTable/ImportTable.types.js'
 import type { AddTableHandler } from './ResourcesPane.types.js'
+import { useNavigate } from 'react-router-dom'
 
 export function useOnOpenTable(
 	file: BaseFile,
@@ -34,6 +35,7 @@ export function useOnOpenTable(
 
 function useAddTable(): AddTableHandler {
 	const store = useContext(DataPackageContext)
+	const navigate = useNavigate()
 	return useCallback(
 		(
 			file: BaseFile,
@@ -54,7 +56,8 @@ function useAddTable(): AddTableHandler {
 			tableBundle.name = name
 
 			store.addResource(tableBundle)
+			navigate(`/resource/${name}`)
 		},
-		[store],
+		[store, navigate],
 	)
 }

@@ -18,5 +18,6 @@ export declare enum KnownProfile
 |  DataPackage | <code>&quot;datapackage&quot;</code> |  |
 |  DataTable | <code>&quot;datatable&quot;</code> |  |
 |  TableBundle | <code>&quot;tablebundle&quot;</code> |  |
+|  UnknownResource | <code>&quot;unknown&quot;</code> |  |
 |  Workflow | <code>&quot;workflow&quot;</code> |  |
 

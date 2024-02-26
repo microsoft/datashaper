@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function parseNumber(naValues?: string[], decimal?: string, thousands?: string): (values: string) => number | null;
+export declare function parseNumber(naValues?: string[], decimal?: string, thousands?: string): (values: string | undefined) => number | null;
 ```
 
 ## Parameters
@@ -20,5 +20,5 @@ export declare function parseNumber(naValues?: string[], decimal?: string, thous
 
 <b>Returns:</b>
 
-(values: string) =&gt; number \| null
+(values: string \| undefined) =&gt; number \| null
 

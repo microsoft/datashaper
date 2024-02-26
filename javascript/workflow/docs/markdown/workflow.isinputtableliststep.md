@@ -9,14 +9,14 @@ Indicates whether this step requires more than one input table.
 <b>Signature:</b>
 
 ```typescript
-export declare function isInputTableListStep(step: Step): boolean;
+export declare function isInputTableListStep(verb: Verb): boolean;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  step | [Step](./workflow.step.md) |  |
+|  verb | Verb |  |
 
 <b>Returns:</b>
 
