@@ -34,6 +34,8 @@
 |  [StepNode](./workflow.stepnode.md) |  |
 |  [TableBundle](./workflow.tablebundle.md) |  |
 |  [TableBundleProfile](./workflow.tablebundleprofile.md) |  |
+|  [UnknownResource](./workflow.unknownresource.md) | Represents an instance of an unknown resource type. This allows us to load and display arbitrary resources that have not been explicitly registered. |
+|  [UnknownResourceProfile](./workflow.unknownresourceprofile.md) |  |
 |  [Workflow](./workflow.workflow.md) |  |
 |  [WorkflowProfile](./workflow.workflowprofile.md) |  |
 
@@ -50,19 +52,18 @@
 |  --- | --- |
 |  [argsHasOutputColumn(args)](./workflow.argshasoutputcolumn.md) |  |
 |  [cloneStep(step, columnNames)](./workflow.clonestep.md) |  |
-|  [columnTransformVerbs(filter)](./workflow.columntransformverbs.md) | These are steps that specifically operate on an input/output column only. In other words, they do not cause a change in the number of rows in a table, such as an aggregate or filter would, and only replace or add one column. |
 |  [createNode(step)](./workflow.createnode.md) |  |
 |  [fetchFile(url)](./workflow.fetchfile.md) |  |
 |  [fetchJson(url)](./workflow.fetchjson.md) |  |
-|  [isInputColumnListStep(step)](./workflow.isinputcolumnliststep.md) | Indicates whether the supplied step requires multiple input columns. |
-|  [isInputColumnRecordStep(step)](./workflow.isinputcolumnrecordstep.md) | Indicates whether the supplied step requires a map of input columns. |
-|  [isInputColumnStep(step)](./workflow.isinputcolumnstep.md) | Indicates whether the supplied step requires a single input column. |
-|  [isInputKeyValueStep(step)](./workflow.isinputkeyvaluestep.md) | Indicates whether the supplied step requires an input key and value column. |
-|  [isInputTableListStep(step)](./workflow.isinputtableliststep.md) | Indicates whether this step requires more than one input table. |
-|  [isInputTableStep(step)](./workflow.isinputtablestep.md) | Indicates whether this step requires an input table. |
-|  [isNoArgsStep(step)](./workflow.isnoargsstep.md) | Indicates whether this step accepts arguments |
-|  [isNumericInputStep(step)](./workflow.isnumericinputstep.md) | Indicates whether this step can only operate on numeric values. |
-|  [isOutputColumnStep(step)](./workflow.isoutputcolumnstep.md) | Indicates whether the supplied step requires a single output column. |
+|  [isDataTypeSupported(verb, type)](./workflow.isdatatypesupported.md) | Indicates whether the specified data type is supported by the step. |
+|  [isInputColumnListStep(verb)](./workflow.isinputcolumnliststep.md) | Indicates whether the supplied step requires multiple input columns. |
+|  [isInputColumnRecordStep(verb)](./workflow.isinputcolumnrecordstep.md) | Indicates whether the supplied step requires a map of input columns. |
+|  [isInputColumnStep(verb)](./workflow.isinputcolumnstep.md) | Indicates whether the supplied step requires a single input column. |
+|  [isInputKeyValueStep(verb)](./workflow.isinputkeyvaluestep.md) | Indicates whether the supplied step requires an input key and value column. |
+|  [isInputTableListStep(verb)](./workflow.isinputtableliststep.md) | Indicates whether this step requires more than one input table. |
+|  [isNoArgsStep(verb)](./workflow.isnoargsstep.md) | Indicates whether this step accepts arguments |
+|  [isNumericInputStep(verb)](./workflow.isnumericinputstep.md) |  |
+|  [isOutputColumnStep(verb)](./workflow.isoutputcolumnstep.md) | Indicates whether the supplied step requires a single output column. |
 |  [isReferenceSchema(entry)](./workflow.isreferenceschema.md) |  |
 |  [join(id)](./workflow.join.md) |  |
 |  [lookup(id)](./workflow.lookup.md) |  |
@@ -71,6 +72,7 @@
 |  [readStep({ verb, args, id, input }, previous)](./workflow.readstep.md) | Factory function to create new verb configs with as many reasonable defaults as possible. |
 |  [stepNodeFactory(stepFunction)](./workflow.stepnodefactory.md) |  |
 |  [verbs(filter)](./workflow.verbs.md) | Returns all verbs, subject to optional filter. |
+|  [workflow(id)](./workflow.workflow.md) |  |
 
 ## Interfaces
 
@@ -86,6 +88,7 @@
 |  [ProfileInitializationContext](./workflow.profileinitializationcontext.md) |  |
 |  [ResourceConstructor](./workflow.resourceconstructor.md) | A constructor for a resource |
 |  [Step](./workflow.step.md) | Resolved step data, used in living workflows |
+|  [StepApi](./workflow.stepapi.md) | The API available to step functions. |
 |  [StepInput](./workflow.stepinput.md) | Step input data for parsing workflow schemas |
 |  [TableExportOptions](./workflow.tableexportoptions.md) | Options for exporting data-tables within Workflow instances.w |
 |  [Transformer\_2](./workflow.transformer_2.md) | A transformer for a type of I/O |
@@ -105,6 +108,7 @@
 |  [dedupe](./workflow.dedupe.md) |  |
 |  [dereference](./workflow.dereference.md) |  |
 |  [derive](./workflow.derive.md) |  |
+|  [destructure](./workflow.destructure.md) |  |
 |  [difference](./workflow.difference.md) |  |
 |  [drop](./workflow.drop.md) |  |
 |  [encode](./workflow.encode.md) |  |
@@ -120,6 +124,7 @@
 |  [isDataTable](./workflow.isdatatable.md) |  |
 |  [isDataTableSchema](./workflow.isdatatableschema.md) |  |
 |  [isDefaultInput](./workflow.isdefaultinput.md) |  |
+|  [isDefaultOutput](./workflow.isdefaultoutput.md) |  |
 |  [isReference](./workflow.isreference.md) |  |
 |  [isTableBundle](./workflow.istablebundle.md) |  |
 |  [isTableBundleSchema](./workflow.istablebundleschema.md) |  |
@@ -131,6 +136,7 @@
 |  [onehot](./workflow.onehot.md) |  |
 |  [orderby](./workflow.orderby.md) |  |
 |  [pivot](./workflow.pivot.md) |  |
+|  [print\_2](./workflow.print_2.md) |  |
 |  [recode](./workflow.recode.md) |  |
 |  [rename](./workflow.rename.md) |  |
 |  [rollup](./workflow.rollup.md) |  |

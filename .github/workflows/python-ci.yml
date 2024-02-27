@@ -5,6 +5,7 @@ on:
   pull_request:
     paths:
       - 'python/**/*'
+      - 'schema/**/*w'
       - '**/*.py'
       - '**/*.toml'
       - .github/workflows/python-ci.yml

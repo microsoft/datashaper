@@ -30,6 +30,7 @@ export const groupedColumnVerbs: GroupedVerbs[] = [
 			Verb.Impute,
 			Verb.Onehot,
 			Verb.Spread,
+			Verb.Destructure,
 			Verb.Recode,
 			Verb.StringsReplace,
 			Verb.StringsLower,
@@ -66,8 +67,8 @@ export const groupedTableVerbs: GroupedVerbs[] = [
 		label: 'Transform table',
 		alwaysEnabled: true,
 		verbs: [
-			Verb.Decode,
 			Verb.Encode,
+			Verb.Decode,
 			Verb.Groupby,
 			Verb.Ungroup,
 			Verb.Orderby,
@@ -76,5 +77,10 @@ export const groupedTableVerbs: GroupedVerbs[] = [
 			Verb.Select,
 			Verb.Drop,
 		],
+	},
+	{
+		label: 'Debug',
+		alwaysEnabled: true,
+		verbs: [Verb.Print],
 	},
 ]

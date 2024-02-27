@@ -8,6 +8,7 @@ import { CodebookAppProfile } from './CodebookAppProfile.js'
 import { DataGraphAppProfile } from './DataGraphAppProfile.js'
 import { DataTableAppProfile } from './DataTableAppProfile.js'
 import { TableBundleAppProfile } from './TableBundleAppProfile.js'
+import { UnknownResourceAppProfile } from './UnknownResourceAppProfile.js'
 import { WorkflowAppProfile } from './WorkflowAppProfile.js'
 
 export * from './CodebookAppProfile.js'
@@ -22,5 +23,6 @@ export function defaultAppProfiles(): AppProfile<any, any>[] {
 	const workflow = new WorkflowAppProfile()
 	const datagraph = new DataGraphAppProfile()
 	const tableBundle = new TableBundleAppProfile(datatable, codebook, workflow)
-	return [datatable, codebook, workflow, tableBundle, datagraph]
+	const unknown = new UnknownResourceAppProfile()
+	return [datatable, codebook, workflow, tableBundle, datagraph, unknown]
 }

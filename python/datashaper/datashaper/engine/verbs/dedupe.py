@@ -2,17 +2,20 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Dedupe verb implementation."""
 
-from typing import List
-
+from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-
-from ...table_store import TableContainer
-from .verb_input import VerbInput
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 
-@verb(name="dedupe")
-def dedupe(input: VerbInput, columns: List[str] = None):
+@verb(name="dedupe", treats_input_tables_as_immutable=True)
+def dedupe(
+    input: VerbInput,
+    columns: list[str] | None = None,
+    **_kwargs: dict,
+) -> VerbResult:
+    """Dedupe verb implementation."""
     input_table = input.get_input()
     output = input_table.drop_duplicates(columns)
-    return TableContainer(table=output)
+    return create_verb_result(output)

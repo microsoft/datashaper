@@ -9,7 +9,7 @@ Constructs a new instance of the `StepNode` class
 <b>Signature:</b>
 
 ```typescript
-constructor(step: StepFunction<T, Args>);
+constructor(step: StepFunction<T, Args>, inputs?: SocketName[], outputs?: SocketName[]);
 ```
 
 ## Parameters
@@ -17,4 +17,6 @@ constructor(step: StepFunction<T, Args>);
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  step | [StepFunction](./workflow.stepfunction.md)<!-- -->&lt;T, Args&gt; |  |
+|  inputs | [SocketName](./workflow.socketname.md)<!-- -->\[\] | <i>(Optional)</i> |
+|  outputs | [SocketName](./workflow.socketname.md)<!-- -->\[\] | <i>(Optional)</i> |
 

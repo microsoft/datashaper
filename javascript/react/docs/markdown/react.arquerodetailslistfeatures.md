@@ -17,6 +17,7 @@ export interface ArqueroDetailsListFeatures
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [commandBar?](./react.arquerodetailslistfeatures.commandbar.md) |  | IRenderFunction&lt;IDetailsColumnProps&gt;\[\] | <i>(Optional)</i> Receive elements to render in the column header as commands, passing the column details to be used in the component |
+|  [hideRowNumber?](./react.arquerodetailslistfeatures.hiderownumber.md) |  | boolean | <i>(Optional)</i> Option to hide the default row number, which is the first column with a detail styling. Default as false |
 |  [histogramColumnHeaders?](./react.arquerodetailslistfeatures.histogramcolumnheaders.md) |  | boolean | <i>(Optional)</i> Include histograms in the headers of numeric columns. |
 |  [lazyLoadGroups?](./react.arquerodetailslistfeatures.lazyloadgroups.md) |  | boolean | <i>(Optional)</i> Collapse most groups so we can lazy load them. Default as true |
 |  [showBooleanSymbol?](./react.arquerodetailslistfeatures.showbooleansymbol.md) |  | boolean | <i>(Optional)</i> Without smartCells, if datatype is boolean, shows a symbol |

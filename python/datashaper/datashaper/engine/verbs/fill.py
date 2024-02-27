@@ -2,22 +2,25 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Fill verb implementation."""
+from typing import cast
 
-from typing import Union
+import pandas as pd
 
+from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-
-from ...table_store import TableContainer
-from .verb_input import VerbInput
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 @verb(name="fill")
 def fill(
     input: VerbInput,
     to: str,
-    value: Union[str, int, float, bool],
-):
+    value: str | float | bool,
+    **_kwargs: dict,
+) -> VerbResult:
+    """Fill verb implementation."""
     input_table = input.get_input()
-    output = input_table.copy()
+    output = cast(pd.DataFrame, input_table)
     output[to] = value
-    return TableContainer(table=output)
+    return create_verb_result(output)

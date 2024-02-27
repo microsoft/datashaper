@@ -9,13 +9,12 @@ Multi-input, single output step I/O
 <b>Signature:</b>
 
 ```typescript
-export interface VariadicInput extends BasicInput 
+export interface VariadicInput 
 ```
-<b>Extends:</b> [BasicInput](./schema.basicinput.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [input](./schema.variadicinput.input.md) |  | { source: [WorkflowStepId](./schema.workflowstepid.md)<!-- -->; others?: [WorkflowStepId](./schema.workflowstepid.md)<!-- -->\[\]; } | The step inputs; a required "source" and optional, variadic "others". If this is a string, it is used to bind the primary input. |
+|  [input](./schema.variadicinput.input.md) |  | { source: [WorkflowInput](./schema.workflowinput.md)<!-- -->; others?: [WorkflowInput](./schema.workflowinput.md)<!-- -->\[\]; } | The step inputs; a required "source" and optional, variadic "others". If this is a string, it is used to bind the primary input. |
 

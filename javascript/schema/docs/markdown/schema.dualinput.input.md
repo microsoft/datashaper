@@ -10,7 +10,7 @@ The inputs that must be bound; "source" &amp; "other".
 
 ```typescript
 input: {
-        source: WorkflowStepId;
-        other: WorkflowStepId;
+        source: WorkflowInput;
+        other: WorkflowInput;
     };
 ```

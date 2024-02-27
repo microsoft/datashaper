@@ -2,14 +2,15 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-
+"""Verb filtering utilities."""
+import logging
+from collections.abc import Callable
 from functools import partial
-from typing import Callable, Dict, List, Tuple, Union
 from uuid import uuid4
 
 import pandas as pd
 
-from ..types import (
+from datashaper.engine.types import (
     BooleanComparisonOperator,
     BooleanLogicalOperator,
     FilterArgs,
@@ -17,9 +18,9 @@ from ..types import (
     NumericComparisonOperator,
     StringComparisonOperator,
 )
+from datashaper.errors import UnsupportedComparisonOperatorError
 
-
-_boolean_function_map = {
+boolean_function_map = {
     BooleanLogicalOperator.OR: lambda df, columns: df[columns].any(axis="columns")
     if columns != ""
     else df.any(axis="columns"),
@@ -45,26 +46,17 @@ _boolean_function_map = {
 }
 
 
-def __check_unknown(row: Tuple, column_indexes: List[int]) -> bool:
-    for index in column_indexes:
-        if pd.isna(row[index]) or pd.isnull(row[index]):
-            return True
-    return False
-
-
-def __correct_unknown_value(
-    df: pd.DataFrame, columns: List[str], target: str
-) -> pd.DataFrame:
+def __correct_unknown_value(df: pd.DataFrame, columns: list[str], target: str) -> None:
     df[target] = df[columns + [target]].apply(
-        lambda x: None if pd.isnull(x[columns]).any() else x[target], axis=1
+        lambda x: None if pd.isna(x[columns]).any() else x[target], axis=1
     )
 
 
 def __equals(
     df: pd.DataFrame,
     column: str,
-    target: Union[pd.Series, str, int, float, bool],
-    **kwargs,
+    target: pd.Series | str | float | bool,
+    **_kwargs: dict,
 ) -> pd.Series:
     return df[column] == target
 
@@ -72,43 +64,47 @@ def __equals(
 def __not_equals(
     df: pd.DataFrame,
     column: str,
-    target: Union[pd.Series, str, int, float, bool],
-    **kwargs,
+    target: pd.Series | str | float | bool,
+    **_kwargs: dict,
 ) -> pd.Series:
     return ~df[column] == target
 
 
-def __is_null(df: pd.DataFrame, column: str, **kwargs) -> pd.Series:
-    return df[column].isnull()
+def __is_null(
+    df: pd.DataFrame, column: str, **_kwargs: dict
+) -> pd.DataFrame | pd.Series:
+    return df[column].isna()
 
 
-def __is_not_null(df: pd.DataFrame, column: str, **kwargs) -> pd.Series:
-    return df[column].notnull()
+def __is_not_null(
+    df: pd.DataFrame, column: str, **_kwargs: dict
+) -> pd.DataFrame | pd.Series:
+    return df[column].notna()
 
 
 def __contains(
     df: pd.DataFrame,
     column: str,
-    target: Union[pd.Series, str, int, float, bool],
-    **kwargs,
-) -> pd.Series:
+    target: pd.Series | str | float | bool,
+    **_kwargs: dict,
+) -> pd.DataFrame | pd.Series:
     return df[column].str.contains(str(target), regex=False)
 
 
 def __startswith(
     df: pd.DataFrame,
     column: str,
-    target: Union[pd.Series, str, int, float, bool],
-    **kwargs,
-) -> pd.Series:
+    target: pd.Series | str | float | bool,
+    **_kwargs: dict,
+) -> pd.DataFrame | pd.Series:
     return df[column].str.startswith(str(target))
 
 
 def __endswith(
     df: pd.DataFrame,
     column: str,
-    target: Union[pd.Series, str, int, float, bool],
-    **kwargs,
+    target: pd.Series | str | float | bool,
+    **_kwargs: dict,
 ) -> pd.Series:
     return df[column].str.endswith(str(target))
 
@@ -116,8 +112,8 @@ def __endswith(
 def __regex(
     df: pd.DataFrame,
     column: str,
-    target: Union[pd.Series, str, int, float, bool],
-    **kwargs,
+    target: pd.Series | str | float | bool,
+    **_kwargs: dict,
 ) -> pd.Series:
     return df[column].str.contains(str(target), regex=True)
 
@@ -125,8 +121,8 @@ def __regex(
 def __gt(
     df: pd.DataFrame,
     column: str,
-    target: Union[pd.Series, str, int, float, bool],
-    **kwargs,
+    target: pd.Series | str | float | bool,
+    **_kwargs: dict,
 ) -> pd.Series:
     return df[column] > target
 
@@ -134,8 +130,8 @@ def __gt(
 def __gte(
     df: pd.DataFrame,
     column: str,
-    target: Union[pd.Series, str, int, float, bool],
-    **kwargs,
+    target: pd.Series | str | float | bool,
+    **_kwargs: dict,
 ) -> pd.Series:
     return df[column] >= target
 
@@ -143,8 +139,8 @@ def __gte(
 def __lt(
     df: pd.DataFrame,
     column: str,
-    target: Union[pd.Series, str, int, float, bool],
-    **kwargs,
+    target: pd.Series | str | float | bool,
+    **_kwargs: dict,
 ) -> pd.Series:
     return df[column] < target
 
@@ -152,8 +148,8 @@ def __lt(
 def __lte(
     df: pd.DataFrame,
     column: str,
-    target: Union[pd.Series, str, int, float, bool],
-    **kwargs,
+    target: pd.Series | str | float | bool,
+    **_kwargs: dict,
 ) -> pd.Series:
     return df[column] <= target
 
@@ -167,10 +163,8 @@ _empty_comparisons = {
     BooleanComparisonOperator.IsNotEmpty,
 }
 
-_operator_map: Dict[
-    Union[
-        StringComparisonOperator, NumericComparisonOperator, BooleanComparisonOperator
-    ],
+_operator_map: dict[
+    StringComparisonOperator | NumericComparisonOperator | BooleanComparisonOperator,
     Callable,
 ] = {
     StringComparisonOperator.Contains: __contains,
@@ -197,8 +191,9 @@ _operator_map: Dict[
 }
 
 
-def filter_df(df: pd.DataFrame, args: FilterArgs) -> pd.Series:
-    filters: List[str] = []
+def filter_df(df: pd.DataFrame, args: FilterArgs) -> pd.DataFrame | pd.Series:
+    """Filter a DataFrame based on the input criteria."""
+    filters: list[str] = []
     filtered_df: pd.DataFrame = df.copy()
 
     for criteria in args.criteria:
@@ -217,10 +212,29 @@ def filter_df(df: pd.DataFrame, args: FilterArgs) -> pd.Series:
                 df=df, column=args.column, target=criteria.value
             )
 
-    filtered_df["dwc_filter_result"] = _boolean_function_map[args.logical](
+    filtered_df["dwc_filter_result"] = boolean_function_map[args.logical](
         filtered_df[filters], ""
     )
 
     __correct_unknown_value(filtered_df, filters, "dwc_filter_result")
 
     return filtered_df["dwc_filter_result"]
+
+
+def get_operator(
+    operator: str,
+) -> StringComparisonOperator | NumericComparisonOperator | BooleanComparisonOperator:
+    """Get a comparison operator based on the input string."""
+    try:
+        return StringComparisonOperator(operator)
+    except Exception:
+        logging.info("%s is not a string comparison operator", operator)
+    try:
+        return NumericComparisonOperator(operator)
+    except Exception:
+        logging.info("%s is not a numeric comparison operator", operator)
+    try:
+        return BooleanComparisonOperator(operator)
+    except Exception:
+        logging.info("%s is not a boolean comparison operator", operator)
+    raise UnsupportedComparisonOperatorError(operator)

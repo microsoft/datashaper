@@ -9,14 +9,14 @@ Indicates whether the supplied step requires multiple input columns.
 <b>Signature:</b>
 
 ```typescript
-export declare function isInputColumnListStep(step: Step): boolean;
+export declare function isInputColumnListStep(verb: Verb): boolean;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  step | [Step](./workflow.step.md) |  |
+|  verb | Verb |  |
 
 <b>Returns:</b>
 

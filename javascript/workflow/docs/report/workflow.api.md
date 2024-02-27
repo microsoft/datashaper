@@ -5,7 +5,7 @@
 ```ts
 
 import type { AggregateArgs } from '@datashaper/schema';
-import type { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import type { BinArgs } from '@datashaper/schema';
 import type { BinarizeArgs } from '@datashaper/schema';
 import type { BooleanArgs } from '@datashaper/schema';
@@ -25,7 +25,9 @@ import type { DataOrientation } from '@datashaper/schema';
 import type { DataPackageSchema } from '@datashaper/schema';
 import type { DataShape as DataShape_2 } from '@datashaper/schema/dist/datatable/DataShape.js';
 import type { DataTableSchema } from '@datashaper/schema';
+import { DataType } from '@datashaper/schema';
 import type { DeriveArgs } from '@datashaper/schema';
+import type { DestructureArgs } from '@datashaper/schema';
 import type { EncodeDecodeArgs } from '@datashaper/schema';
 import type { EraseArgs } from '@datashaper/schema';
 import type { Field } from '@datashaper/schema';
@@ -33,11 +35,13 @@ import type { FillArgs } from '@datashaper/schema';
 import type { FilterArgs } from '@datashaper/schema';
 import type { FoldArgs } from '@datashaper/schema';
 import type { ImputeArgs } from '@datashaper/schema';
+import type { InputBinding } from '@datashaper/schema';
 import { InputColumnArgs } from '@datashaper/schema';
 import { InputColumnListArgs } from '@datashaper/schema';
 import { InputColumnRecordArgs } from '@datashaper/schema';
 import { InputKeyValueArgs } from '@datashaper/schema';
 import type { JoinArgs } from '@datashaper/schema';
+import { KnownProfile } from '@datashaper/schema';
 import type { LookupArgs } from '@datashaper/schema';
 import type { Maybe as Maybe_2 } from '@datashaper/workflow';
 import type { MergeArgs } from '@datashaper/schema';
@@ -48,6 +52,7 @@ import type { OnehotArgs } from '@datashaper/schema';
 import type { OrderbyArgs } from '@datashaper/schema';
 import type { ParserOptions as ParserOptions_2 } from '@datashaper/schema';
 import type { PivotArgs } from '@datashaper/schema';
+import type { PrintArgs } from '@datashaper/schema';
 import type { Profile } from '@datashaper/schema';
 import type { RecodeArgs } from '@datashaper/schema';
 import type { ResourceSchema } from '@datashaper/schema';
@@ -62,8 +67,10 @@ import type { Subscription } from 'rxjs';
 import type { TableBundleSchema } from '@datashaper/schema';
 import { TableContainer } from '@datashaper/tables';
 import type { UnhotArgs } from '@datashaper/schema';
-import type { Verb } from '@datashaper/schema';
+import { Verb } from '@datashaper/schema';
 import type { WindowArgs } from '@datashaper/schema';
+import type { WorkflowArgs } from '@datashaper/schema';
+import type { WorkflowInput } from '@datashaper/schema';
 import type { WorkflowSchema } from '@datashaper/schema';
 import type { WorkflowStepId } from '@datashaper/schema';
 
@@ -81,7 +88,7 @@ export function argsHasOutputColumn(args: any): boolean;
 //
 // @public (undocumented)
 export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
-    constructor(inputs?: SocketName[]);
+    constructor(inputs?: SocketName[], outputs?: SocketName[]);
     // (undocumented)
     bind(binding: NodeBinding<T> | VariadicNodeBinding<T>): void;
     // (undocumented)
@@ -96,8 +103,11 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     get config(): Maybe<Config>;
     set config(value: Maybe<Config>);
     protected abstract doRecalculate(): void;
-    protected emit: (value: Maybe<T>) => void;
-    protected emitError: (error: unknown) => void;
+    protected emit: (value: Maybe<T>, socketName?: SocketName) => void;
+    protected emitError: (error: unknown, socketName?: SocketName) => void;
+    protected ensureInput(name: SocketName): void;
+    // (undocumented)
+    protected ensureOutput(name: SocketName): void;
     protected getInputErrors(): Record<SocketName, unknown>;
     protected getInputValues(): Record<SocketName, Maybe<T>>;
     // (undocumented)
@@ -105,26 +115,43 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     // (undocumented)
     protected hasBoundInput(name: SocketName): boolean;
     // (undocumented)
-    protected hasBoundInputWithNode(name: SocketName, nodeId: NodeId): boolean;
+    protected hasBoundInputWithNode(name: SocketName, nodeId: NodeId, output: SocketName): boolean;
     // (undocumented)
     id: NodeId;
     // (undocumented)
-    readonly inputs: SocketName[];
+    protected inputError$(name?: SocketName): BehaviorSubject<Maybe<unknown>>;
+    // (undocumented)
+    protected inputError(name?: SocketName): Maybe<unknown>;
+    // (undocumented)
+    get inputs(): SocketName[];
+    protected set inputs(value: SocketName[]);
+    // (undocumented)
+    protected _inputs: SocketName[];
+    // (undocumented)
+    protected inputValue$(name?: SocketName): BehaviorSubject<Maybe<T>>;
     // (undocumented)
     protected inputValue(name?: SocketName): Maybe<T>;
     protected get isBindingRequired(): boolean;
     // (undocumented)
     protected isSocketNameEqual(name: SocketName | undefined, name2: SocketName): boolean;
     // (undocumented)
-    get output$(): Observable<Maybe<T>>;
+    output$(name?: SocketName): BehaviorSubject<Maybe<T>>;
     // (undocumented)
-    get output(): Maybe<T>;
+    output(name?: SocketName): Maybe<T>;
+    // (undocumented)
+    get outputs(): SocketName[];
+    protected set outputs(value: SocketName[]);
+    // (undocumented)
+    protected _outputs: SocketName[];
     protected recalculate: (cause: string) => void;
     // (undocumented)
     get stats(): NodeStats;
     // (undocumented)
     unbind(name: SocketName): void;
+    // (undocumented)
     protected verifyInputSocketName(name?: SocketName): SocketName;
+    // (undocumented)
+    protected verifyOutputSocketName(name: SocketName): SocketName;
 }
 
 // Warning: (ae-missing-release-tag) "bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -246,11 +273,6 @@ export class ColorBinding extends Observed implements ColorBinding_2 {
     // (undocumented)
     toSchema(): ColorBinding_2;
 }
-
-// Warning: (ae-missing-release-tag) "columnTransformVerbs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function columnTransformVerbs(filter?: (verb: Verb) => boolean): Verb[];
 
 // Warning: (ae-forgotten-export) The symbol "SetOperationNode" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "concat" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -546,20 +568,13 @@ export const dedupe: (id: string) => StepNode<TableContainer<unknown>, Partial<I
 //
 // @public (undocumented)
 export class DefaultGraph<T> implements Graph<T> {
-    // (undocumented)
     add(node: Node_2<T>): void;
-    // (undocumented)
     clear(): void;
-    // (undocumented)
     hasNode(id: NodeId): boolean;
-    // (undocumented)
     node(id: NodeId): Node_2<T>;
     get nodes(): NodeId[];
-    // (undocumented)
     printStats(): void;
-    // (undocumented)
     remove(removeId: NodeId): void;
-    // (undocumented)
     validate(): void;
 }
 
@@ -572,6 +587,11 @@ export const dereference: (r: Resource | ResourceReference) => Resource | undefi
 //
 // @public (undocumented)
 export const derive: (id: string) => StepNode<TableContainer<unknown>, DeriveArgs>;
+
+// Warning: (ae-missing-release-tag) "destructure" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const destructure: (id: string) => StepNode<TableContainer<unknown>, DestructureArgs>;
 
 // Warning: (ae-missing-release-tag) "difference" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -685,55 +705,60 @@ export const isDataTable: (r: Resource | undefined) => r is DataTable;
 // @public (undocumented)
 export const isDataTableSchema: (r: ResourceSchema | undefined) => r is DataTableSchema;
 
+// Warning: (ae-missing-release-tag) "isDataTypeSupported" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function isDataTypeSupported(verb: Verb, type?: DataType): boolean;
+
 // Warning: (ae-missing-release-tag) "isDefaultInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export const isDefaultInput: (name?: SocketName) => name is undefined;
 
+// Warning: (ae-missing-release-tag) "isDefaultOutput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const isDefaultOutput: (name?: SocketName) => name is undefined;
+
 // Warning: (ae-missing-release-tag) "isInputColumnListStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function isInputColumnListStep(step: Step): boolean;
+export function isInputColumnListStep(verb: Verb): boolean;
 
 // Warning: (ae-missing-release-tag) "isInputColumnRecordStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function isInputColumnRecordStep(step: Step): boolean;
+export function isInputColumnRecordStep(verb: Verb): boolean;
 
 // Warning: (ae-missing-release-tag) "isInputColumnStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function isInputColumnStep(step: Step): boolean;
+export function isInputColumnStep(verb: Verb): boolean;
 
 // Warning: (ae-missing-release-tag) "isInputKeyValueStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function isInputKeyValueStep(step: Step): boolean;
+export function isInputKeyValueStep(verb: Verb): boolean;
 
 // Warning: (ae-missing-release-tag) "isInputTableListStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function isInputTableListStep(step: Step): boolean;
-
-// Warning: (ae-missing-release-tag) "isInputTableStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function isInputTableStep(step: Step): boolean;
+export function isInputTableListStep(verb: Verb): boolean;
 
 // Warning: (ae-missing-release-tag) "isNoArgsStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function isNoArgsStep(step: Step): boolean;
+export function isNoArgsStep(verb: Verb): boolean;
 
 // Warning: (ae-missing-release-tag) "isNumericInputStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public
-export function isNumericInputStep(step: Step): boolean;
+// @public (undocumented)
+export function isNumericInputStep(verb: Verb): boolean;
 
 // Warning: (ae-missing-release-tag) "isOutputColumnStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function isOutputColumnStep(step: Step): boolean;
+export function isOutputColumnStep(verb: Verb): boolean;
 
 // Warning: (ae-missing-release-tag) "isReference" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -837,8 +862,8 @@ interface Node_2<T, Config = unknown> {
     config: Maybe<Config>;
     readonly id: NodeId;
     readonly inputs: SocketName[];
-    readonly output$: Observable<Maybe<T>>;
-    readonly output: Maybe<T>;
+    output$(name?: SocketName): Observable<Maybe<T>>;
+    output(name?: SocketName): Maybe<T>;
     readonly stats: NodeStats;
     unbind(name?: SocketName): void;
 }
@@ -850,6 +875,7 @@ export { Node_2 as Node }
 export interface NodeBinding<T> {
     input?: SocketName;
     node: Node_2<T>;
+    output?: SocketName;
 }
 
 // Warning: (ae-missing-release-tag) "NodeId" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -864,6 +890,8 @@ export enum NodeInput {
     // (undocumented)
     Other = "other",
     // (undocumented)
+    Others = "others",
+    // (undocumented)
     Source = "source"
 }
 
@@ -872,7 +900,9 @@ export enum NodeInput {
 // @public (undocumented)
 export enum NodeOutput {
     // (undocumented)
-    Target = "target"
+    Remainder = "remainder",
+    // (undocumented)
+    Result = "result"
 }
 
 // Warning: (ae-missing-release-tag) "NodeStats" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1014,6 +1044,12 @@ export class ParserOptions extends Observed implements ParserOptions_2 {
 // @public (undocumented)
 export const pivot: (id: string) => StepNode<TableContainer<unknown>, PivotArgs>;
 
+// Warning: (ae-missing-release-tag) "print" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+const print_2: (id: string) => StepNode<TableContainer<unknown>, PrintArgs>;
+export { print_2 as print }
+
 // Warning: (ae-missing-release-tag) "ProfileHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -1043,7 +1079,7 @@ export type Readable<T extends ResourceSchema> = {
 // Warning: (ae-missing-release-tag) "readStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function readStep<T extends object | void | unknown = any>({ verb, args, id, input }: StepInput<T>, previous?: Step | undefined): Step<T>;
+export function readStep<T extends object | unknown = any>({ verb, args, id, input }: StepInput<T>, previous?: Step | undefined): Step<T>;
 
 // Warning: (ae-missing-release-tag) "recode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1140,7 +1176,7 @@ export const select: (id: string) => StepNode<TableContainer<unknown>, InputColu
 // Warning: (ae-missing-release-tag) "SocketName" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type SocketName = string | symbol;
+export type SocketName = string;
 
 // Warning: (ae-missing-release-tag) "spread" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1156,17 +1192,25 @@ export interface Step<T extends object | void | unknown = unknown> {
     description?: string;
     id: string;
     input: {
-        source?: WorkflowStepId;
-        others?: WorkflowStepId[];
-        [key: string]: WorkflowStepId | WorkflowStepId[] | undefined;
+        source?: InputBinding;
+        others?: InputBinding[];
+        [key: string]: InputBinding | InputBinding[] | undefined;
     };
     verb: Verb;
+}
+
+// Warning: (ae-missing-release-tag) "StepApi" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface StepApi<T> {
+    emit(value: T, socket?: SocketName): void;
+    input(socket?: SocketName): T | undefined;
 }
 
 // Warning: (ae-missing-release-tag) "StepFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type StepFunction<T, Args> = (source: T, args: Args) => T;
+export type StepFunction<T, Args> = (source: T, args: Args, api: StepApi<T>) => T;
 
 // Warning: (ae-missing-release-tag) "StepInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1176,7 +1220,7 @@ export interface StepInput<T extends object | void | unknown = unknown> {
     // (undocumented)
     description?: string;
     id?: string;
-    input?: Record<string, WorkflowStepId | WorkflowStepId[] | undefined>;
+    input?: WorkflowStepId | Record<string, WorkflowInput | WorkflowInput[] | undefined>;
     verb: Verb;
 }
 
@@ -1184,9 +1228,11 @@ export interface StepInput<T extends object | void | unknown = unknown> {
 //
 // @public (undocumented)
 export class StepNode<T, Args> extends BaseNode<T, Args> {
-    constructor(step: StepFunction<T, Args>);
+    constructor(step: StepFunction<T, Args>, inputs?: SocketName[], outputs?: SocketName[]);
     // (undocumented)
     protected doRecalculate(): void;
+    // (undocumented)
+    protected get stepApi(): StepApi<T>;
 }
 
 // Warning: (ae-missing-release-tag) "stepNodeFactory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1292,6 +1338,33 @@ export const unhot: (id: string) => StepNode<TableContainer<unknown>, UnhotArgs>
 // @public (undocumented)
 export const union: (id: string) => SetOperationNode<unknown>;
 
+// Warning: (ae-missing-release-tag) "UnknownResource" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export class UnknownResource extends Resource {
+    // (undocumented)
+    $schema: string;
+    constructor(resource?: ResourceSchema);
+    // (undocumented)
+    defaultName(): string;
+    // (undocumented)
+    defaultTitle(): string;
+    // (undocumented)
+    profile: KnownProfile;
+    // (undocumented)
+    toSchema(): ResourceSchema;
+}
+
+// Warning: (ae-missing-release-tag) "UnknownResourceProfile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class UnknownResourceProfile implements ProfileHandler<UnknownResource, ResourceSchema> {
+    // (undocumented)
+    createInstance(schema: ResourceSchema | undefined): Promise<UnknownResource>;
+    // (undocumented)
+    readonly profile: Profile;
+}
+
 // Warning: (ae-missing-release-tag) "unorder" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -1339,8 +1412,6 @@ export class Workflow extends Resource implements TableTransformer {
     addInputTables(inputs: TableContainer[]): void;
     addOutput(name: string): void;
     addStep(input: StepInput): Step;
-    get allTableNames$(): Observable<string[]>;
-    get allTableNames(): string[];
     // (undocumented)
     connect(dp: DataPackage, top: boolean): void;
     // (undocumented)
@@ -1394,6 +1465,8 @@ export class Workflow extends Resource implements TableTransformer {
     get steps(): Step[];
     // (undocumented)
     suggestOutputName(name: string): string;
+    get tableNames$(): Observable<string[]>;
+    get tableNames(): string[];
     // (undocumented)
     toArray({ includeDefaultInput, includeDefaultOutput, includeInputs, }?: TableExportOptions): Maybe<TableContainer>[];
     // (undocumented)
@@ -1403,6 +1476,12 @@ export class Workflow extends Resource implements TableTransformer {
     // (undocumented)
     static validate(workflowJson: WorkflowSchema): Promise<boolean>;
 }
+
+// Warning: (ae-forgotten-export) The symbol "WorkflowNode" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "workflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function workflow(id: string): WorkflowNode;
 
 // Warning: (ae-missing-release-tag) "WorkflowProfile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

@@ -53,10 +53,10 @@ export function parseNumber(
 	naValues = TypeHintsDefaults.naValues,
 	decimal = TypeHintsDefaults.decimal,
 	thousands = TypeHintsDefaults.thousands,
-): (values: string) => number | null {
+): (values: string | undefined) => number | null {
 	const { isNull } = typeGuesserFactory({ naValues })
-	return function parseNumber(value: string) {
-		if (isNull(value)) {
+	return function parseNumber(value: string | undefined) {
+		if (isNull(value) || value === undefined) {
 			return null
 		}
 		if (typeof value === 'number') {
@@ -73,12 +73,12 @@ export function parseBoolean(
 	naValues = TypeHintsDefaults.naValues,
 	trueValues = TypeHintsDefaults.trueValues,
 	falseValues = TypeHintsDefaults.falseValues,
-): (value: string) => boolean | null {
+): (value: string | undefined) => boolean | null {
 	const { isNull } = typeGuesserFactory({ naValues })
 	const trueSet = new Set(trueValues.map((v) => v.toLowerCase()))
 	const falseSet = new Set(falseValues.map((v) => v.toLowerCase()))
-	return function parseBoolean(value: string) {
-		if (isNull(value)) {
+	return function parseBoolean(value: string | undefined) {
+		if (isNull(value) || value === undefined) {
 			return null
 		}
 		if (typeof value === 'boolean') {
@@ -97,10 +97,10 @@ export function parseBoolean(
 
 export function parseString(
 	naValues = TypeHintsDefaults.naValues,
-): (value: string) => string | null {
+): (value: string | undefined) => string | null {
 	const { isNull } = typeGuesserFactory({ naValues })
-	return function parseString(value: string) {
-		if (isNull(value)) {
+	return function parseString(value: string | undefined) {
+		if (isNull(value) || value === undefined) {
 			return null
 		}
 		return value
@@ -143,15 +143,15 @@ export function parseArray(
 
 export function parseObject(
 	options?: TypeHints,
-): (value: string) => object | null {
+): (value: string | undefined) => object | null {
 	const { isNull } = typeGuesserFactory(options)
 	const subTypeChecker = guessDataType(options)
-	return function parseObject(value: string) {
-		if (isNull(value)) {
+	return function parseObject(value: string | undefined) {
+		if (isNull(value) || value === undefined) {
 			return null
 		}
-		const obj = JSON.parse(value)
 		try {
+			const obj = JSON.parse(value)
 			const parsed = Object.keys(obj).reduce(
 				(acc: Record<string, any>, key: string) => {
 					const item = `${obj[key]}`
@@ -165,17 +165,17 @@ export function parseObject(
 			)
 			return parsed
 		} catch {
-			return obj
+			return value as any
 		}
 	}
 }
 
 export function parseDate(
 	naValues = TypeHintsDefaults.naValues,
-): (value: string) => Date | null {
+): (value: string | undefined) => Date | null {
 	const { isNull } = typeGuesserFactory({ naValues })
-	return function parseDate(value: string) {
-		if (isNull(value)) {
+	return function parseDate(value: string | undefined) {
+		if (isNull(value) || value === undefined) {
 			return null
 		}
 		return moment(getDate(value)).toDate()
@@ -184,9 +184,9 @@ export function parseDate(
 
 export function parseUndefined(
 	naValues = TypeHintsDefaults.naValues,
-): (value: string) => undefined | null {
+): (value: string | undefined) => undefined | null {
 	const { isNull } = typeGuesserFactory({ naValues })
-	return function parseUndefined(value: string) {
+	return function parseUndefined(value: string | undefined) {
 		if (isNull(value)) {
 			return null
 		}

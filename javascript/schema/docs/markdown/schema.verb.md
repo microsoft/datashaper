@@ -24,6 +24,7 @@ export declare enum Verb
 |  Decode | <code>&quot;decode&quot;</code> |  |
 |  Dedupe | <code>&quot;dedupe&quot;</code> |  |
 |  Derive | <code>&quot;derive&quot;</code> |  |
+|  Destructure | <code>&quot;destructure&quot;</code> |  |
 |  Difference | <code>&quot;difference&quot;</code> |  |
 |  Drop | <code>&quot;drop&quot;</code> |  |
 |  Encode | <code>&quot;encode&quot;</code> |  |
@@ -40,6 +41,7 @@ export declare enum Verb
 |  Onehot | <code>&quot;onehot&quot;</code> |  |
 |  Orderby | <code>&quot;orderby&quot;</code> |  |
 |  Pivot | <code>&quot;pivot&quot;</code> |  |
+|  Print | <code>&quot;print&quot;</code> |  |
 |  Recode | <code>&quot;recode&quot;</code> |  |
 |  Rename | <code>&quot;rename&quot;</code> |  |
 |  Rollup | <code>&quot;rollup&quot;</code> |  |
@@ -56,4 +58,5 @@ export declare enum Verb
 |  Unorder | <code>&quot;unorder&quot;</code> |  |
 |  Unroll | <code>&quot;unroll&quot;</code> |  |
 |  Window | <code>&quot;window&quot;</code> |  |
+|  Workflow | <code>&quot;workflow&quot;</code> |  |
 

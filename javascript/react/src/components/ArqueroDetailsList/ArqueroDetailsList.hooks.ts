@@ -169,16 +169,19 @@ export function useListProps(version: number): IListProps<any> {
 }
 
 export function useFields(table: ColumnTable, fields?: Field[]): Field[] {
-	// TODO: this uses the older type determination, which is not as sophisticated as our new codebook.
-	// however, dates are well detected in the new codebooks, but not well parsed.
+	// TODO: this uses a bit of a kludge, because codebooks are not updated when the workflow produces new columns
+	// this supplements the known fields with guesses from the table
 	return useMemo(() => {
-		if (fields) {
-			return fields
-		}
 		const types = columnTypes(table)
-		return Object.entries(types).map(([name, type]) => ({
-			name,
-			type,
-		}))
+		return Object.entries(types).map(([name, type]) => {
+			const existing = fields?.find((f) => f.name === name)
+			return (
+				existing ?? {
+					name,
+					title: name,
+					type,
+				}
+			)
+		})
 	}, [table, fields])
 }

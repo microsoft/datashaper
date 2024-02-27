@@ -4,6 +4,8 @@
 
 ## DefaultGraph.validate() method
 
+Validate the graph, checking for any cycles
+
 <b>Signature:</b>
 
 ```typescript

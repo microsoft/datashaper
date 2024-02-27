@@ -26,6 +26,7 @@ import {
 	createRenderDefaultColumnHeader,
 	createRenderFeaturesCell,
 	createRenderHistogramColumnHeader,
+	createRenderRowNumberColumn,
 	createRenderSmartCell,
 	createRenderStatsColumnHeader,
 } from '../renderers/index.js'
@@ -87,10 +88,12 @@ export function useColumns(
 			...(virtualColumns || EMPTY_ARRAY),
 		])
 		const virtualNames = virtualColumns?.map((c) => c.key) || emptyArray()
-		return [...names, ...virtualNames].map((name) => {
+		const mappedColumns = [...names, ...virtualNames].map((name) => {
+			const field = fields.find((f) => f.name === name) as Field
+
 			const column = columnMap[name] || {
 				key: name,
-				name,
+				name: field?.title || field?.name || name,
 				minWidth: columnMinWidth,
 				fieldName: name,
 			}
@@ -107,7 +110,6 @@ export function useColumns(
 			// without completely recreating the details header render
 			const { iconName, ...defaults } = column
 
-			const field = fields.find((f) => f.name === name) as Field
 			const meta = metadata?.columns[name]
 			const color = theme.rect().fill().hex()
 			const onRender =
@@ -175,10 +177,17 @@ export function useColumns(
 					...column.data,
 				},
 				isResizable: resizable,
-			}
+			} as IColumn
 		})
+
+		if (!features.hideRowNumber) {
+			mappedColumns.unshift(createRenderRowNumberColumn(table.numRows()))
+		}
+
+		return mappedColumns
 	}, [
 		theme,
+		table,
 		columns,
 		names,
 		features,

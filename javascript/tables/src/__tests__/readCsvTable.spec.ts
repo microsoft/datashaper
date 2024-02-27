@@ -4,7 +4,6 @@
  */
 
 import fs from 'fs'
-import fetch from 'node-fetch'
 
 import { readCsvTable } from '../readCsvTable.js'
 
@@ -195,18 +194,31 @@ describe('readCsvTable', () => {
 				expect(table.columnNames()).toEqual(['A', 'B', 'C', 'D'])
 			})
 		})
+		describe('json csv', () => {
+			const csv = fs.readFileSync('./src/__tests__/data/column-json.csv', {
+				encoding: 'utf8',
+				flag: 'r',
+			})
+
+			it('column names', () => {
+				const table = readCsvTable(csv)
+				expect(table.columnNames()).toEqual(['ID', 'item', 'quantity', 'info'])
+			})
+		})
 	})
 
-	describe('large tables', () => {
-		let remoteDataset = ''
+	describe('Large tables', () => {
 		let largeDataset = ''
 
-		beforeAll(async () => {
-			remoteDataset = await fetch(
-				'https://covid19.who.int/WHO-COVID-19-global-data.csv',
-			).then((r) => r.text())
-			for (let x = 0; x < 10; x++) {
-				largeDataset += remoteDataset
+		beforeAll(() => {
+			const csv = fs.readFileSync('./src/__tests__/data/column-json.csv', {
+				encoding: 'utf8',
+				flag: 'r',
+			})
+			largeDataset = csv
+			while (largeDataset.split('\n').length < 466890) {
+				// Double size if it's not big enough
+				largeDataset = largeDataset + largeDataset
 			}
 		})
 

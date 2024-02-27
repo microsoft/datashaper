@@ -17,8 +17,8 @@ export interface AggregateArgs extends RollupArgs {
 //
 // @public
 export interface BasicInput {
-    input?: string | {
-        source: WorkflowStepId;
+    input?: WorkflowStepId | {
+        source: WorkflowInput;
     };
 }
 
@@ -423,6 +423,15 @@ export interface DeriveArgs extends OutputColumnArgs {
     operator: MathOperator;
 }
 
+// Warning: (ae-missing-release-tag) "DestructureArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface DestructureArgs extends InputColumnArgs {
+    // (undocumented)
+    keys?: string[];
+    preserveSource?: boolean;
+}
+
 // Warning: (ae-missing-release-tag) "DropArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -431,10 +440,10 @@ export type DropArgs = InputColumnListArgs;
 // Warning: (ae-missing-release-tag) "DualInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface DualInput extends BasicInput {
+export interface DualInput {
     input: {
-        source: WorkflowStepId;
-        other: WorkflowStepId;
+        source: WorkflowInput;
+        other: WorkflowInput;
     };
 }
 
@@ -596,6 +605,14 @@ export interface ImputeArgs extends InputColumnArgs {
     value: Value;
 }
 
+// Warning: (ae-missing-release-tag) "InputBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type InputBinding = {
+    step: WorkflowStepId;
+    table?: string;
+};
+
 // Warning: (ae-missing-release-tag) "InputColumnArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -674,6 +691,8 @@ export enum KnownProfile {
     DataTable = "datatable",
     // (undocumented)
     TableBundle = "tablebundle",
+    // (undocumented)
+    UnknownResource = "unknown",
     // (undocumented)
     Workflow = "workflow"
 }
@@ -865,6 +884,16 @@ export interface PivotArgs extends InputKeyValueArgs {
     operation: FieldAggregateOperation;
 }
 
+// Warning: (ae-missing-release-tag) "PrintArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface PrintArgs {
+    // (undocumented)
+    limit?: number;
+    // (undocumented)
+    message?: string;
+}
+
 // Warning: (ae-missing-release-tag) "Profile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -930,6 +959,7 @@ export interface RollupArgs extends InputColumnArgs, OutputColumnArgs {
 //
 // @public (undocumented)
 export interface SampleArgs {
+    emitRemainder?: boolean;
     proportion?: number;
     seed?: number;
     size?: number;
@@ -1041,6 +1071,9 @@ export type Step = StepJsonCommon & (({
     verb: Verb.Merge;
     args?: MergeArgs;
 } & BasicInput) | ({
+    verb: Verb.Print;
+    args?: PrintArgs;
+} & BasicInput) | ({
     verb: Verb.Onehot;
     args?: OnehotArgs;
 } & BasicInput) | ({
@@ -1068,6 +1101,9 @@ export type Step = StepJsonCommon & (({
     verb: Verb.Spread;
     args?: SpreadArgs;
 } & BasicInput) | ({
+    verb: Verb.Destructure;
+    args?: DestructureArgs;
+} & BasicInput) | ({
     verb: Verb.StringsReplace;
     args?: StringsReplaceArgs;
 } & BasicInput) | ({
@@ -1094,6 +1130,9 @@ export type Step = StepJsonCommon & (({
 } & BasicInput) | ({
     verb: Verb.Window;
     args?: WindowArgs;
+} & BasicInput) | ({
+    verb: Verb.Workflow;
+    args?: WorkflowArgs;
 } & BasicInput)
 /**
 * Custom step - we may not know the verb, args, or binding pattern
@@ -1199,10 +1238,10 @@ export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
 // @public (undocumented)
 export interface UnknownInput {
     // (undocumented)
-    input?: string | {
-        source?: WorkflowStepId;
-        others?: WorkflowStepId[];
-        [key: string]: WorkflowStepId | WorkflowStepId[] | undefined;
+    input?: WorkflowInput | {
+        source?: WorkflowInput;
+        others?: WorkflowInput[];
+        [key: string]: WorkflowInput | WorkflowInput[] | undefined;
     };
 }
 
@@ -1243,10 +1282,10 @@ export enum VariableNature {
 // Warning: (ae-missing-release-tag) "VariadicInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface VariadicInput extends BasicInput {
+export interface VariadicInput {
     input: {
-        source: WorkflowStepId;
-        others?: WorkflowStepId[];
+        source: WorkflowInput;
+        others?: WorkflowInput[];
     };
 }
 
@@ -1274,6 +1313,8 @@ export enum Verb {
     Dedupe = "dedupe",
     // (undocumented)
     Derive = "derive",
+    // (undocumented)
+    Destructure = "destructure",
     // (undocumented)
     Difference = "difference",
     // (undocumented)
@@ -1307,6 +1348,8 @@ export enum Verb {
     // (undocumented)
     Pivot = "pivot",
     // (undocumented)
+    Print = "print",
+    // (undocumented)
     Recode = "recode",
     // (undocumented)
     Rename = "rename",
@@ -1337,7 +1380,9 @@ export enum Verb {
     // (undocumented)
     Unroll = "unroll",
     // (undocumented)
-    Window = "window"
+    Window = "window",
+    // (undocumented)
+    Workflow = "workflow"
 }
 
 // Warning: (ae-missing-release-tag) "WindowArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1366,8 +1411,22 @@ export enum WindowFunction {
     // (undocumented)
     Rank = "rank",
     // (undocumented)
-    RowNumber = "row_number"
+    RowNumber = "row_number",
+    // (undocumented)
+    UUID = "uuid"
 }
+
+// Warning: (ae-missing-release-tag) "WorkflowArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface WorkflowArgs {
+    workflow: WorkflowSchema;
+}
+
+// Warning: (ae-missing-release-tag) "WorkflowInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type WorkflowInput = WorkflowStepId | InputBinding;
 
 // Warning: (ae-missing-release-tag) "WorkflowSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

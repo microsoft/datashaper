@@ -2,18 +2,20 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-
-from typing import Dict, List
-
+"""Orderby verb implementation."""
+from datashaper.engine.types import OrderByInstruction, SortDirection
+from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-
-from ...table_store import TableContainer
-from ..types import OrderByInstruction, SortDirection
-from .verb_input import VerbInput
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 
-@verb(name="orderby")
-def orderby(input: VerbInput, orders: List[Dict]):
+@verb(name="orderby", treats_input_tables_as_immutable=True)
+def orderby(
+    input: VerbInput,
+    orders: list[dict],
+    **_kwargs: dict,
+) -> VerbResult:
+    """Orderby verb implementation."""
     orders_instructions = [
         OrderByInstruction(
             column=order["column"], direction=SortDirection(order["direction"])
@@ -28,4 +30,4 @@ def orderby(input: VerbInput, orders: List[Dict]):
     ]
 
     output = input_table.sort_values(by=columns, ascending=ascending)
-    return TableContainer(table=output)
+    return create_verb_result(output)

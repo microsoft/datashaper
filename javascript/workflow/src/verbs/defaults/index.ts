@@ -12,12 +12,14 @@ export { binarize } from './binarize.js'
 export { boolean } from './boolean.js'
 export { convert } from './convert.js'
 export { copy } from './copy.js'
+export { destructure } from './destructure.js'
 export { filter } from './filter.js'
 export { fold } from './fold.js'
 export { join } from './join.js'
 export { lookup } from './lookup.js'
 export { merge } from './merge.js'
 export { pivot } from './pivot.js'
+export { print } from './print.js'
 export { spread } from './spread.js'
 export { unfold } from './unfold.js'
 export { unhot } from './unhot.js'
@@ -54,3 +56,4 @@ export const sample = empty
 export const ungroup = empty
 export const union = empty
 export const unorder = empty
+export const workflow = empty

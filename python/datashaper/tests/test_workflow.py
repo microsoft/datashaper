@@ -1,77 +1,100 @@
 import asyncio
 import unittest
+from dataclasses import dataclass
 
 import pandas as pd
-
-from dataclasses import dataclass
+import pytest
 
 from datashaper import (
     DEFAULT_INPUT_NAME,
-    ConsoleStatusReporter,
-    FileStatusReporter,
-    ProgressStatus,
-    StatusReportHandler,
+    NodeNotVisitedError,
+    Progress,
     TableContainer,
+    VerbCallbacks,
+    VerbError,
     VerbInput,
-    VerbStatusReporter,
     Workflow,
+    WorkflowVerbNotFoundError,
     derive_from_rows,
     progress_iterable,
 )
 
-from .helpers import mock_verbs, mock_workflows
 
-
-class TestWorkflowRun(unittest.TestCase):
-    def test_define_basic_workflow_does_not_crash(self):
+class TestWorkflowRun(unittest.IsolatedAsyncioTestCase):
+    async def test_define_basic_workflow_does_not_crash(self):
         workflow = Workflow(
             verbs={
-                "test_verb": create_passthrough_verb(),
+                "test_define_basic_workflow_does_not_crash": create_passthrough_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
-                    {"verb": "test_verb", "input": {"source": DEFAULT_INPUT_NAME}},
+                    {
+                        "verb": "test_define_basic_workflow_does_not_crash",
+                        "input": {"source": DEFAULT_INPUT_NAME},
+                    },
                 ],
             },
             validate=False,
         )
         workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
-        workflow.run(
-            context=create_fake_run_context(),
-        )
-        self.assertIsNotNone(workflow.export())
+        await workflow.run(context=create_fake_run_context())
+        assert workflow.export() is not None
 
-    def test_run_basic_workflow_does_not_crash(self):
+    async def test_define_basic_workflow_with_profiling_creates_profile(self):
         workflow = Workflow(
+            memory_profile=True,
             verbs={
-                "test_verb": create_passthrough_verb(),
+                "test_define_basic_workflow_does_not_crash": create_passthrough_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
-                    {"verb": "test_verb", "input": {"source": DEFAULT_INPUT_NAME}},
+                    {
+                        "verb": "test_define_basic_workflow_does_not_crash",
+                        "input": {"source": DEFAULT_INPUT_NAME},
+                    },
                 ],
             },
             validate=False,
         )
         workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
-        workflow.run(
-            context=create_fake_run_context(),
-        )
-        self.assertIsNotNone(workflow.export())
+        result = await workflow.run(create_fake_run_context())
+        assert result.memory_profile is not None
+        assert result.verb_timings is not None
+        assert workflow.export() is not None
 
-    def test_create_basic_workflow_with_test_inputs_does_not_crash(self):
+    async def test_run_basic_workflow_does_not_crash(self):
+        workflow = Workflow(
+            verbs={
+                "test_run_basic_workflow_does_not_crash": create_passthrough_verb(),
+            },
+            schema={
+                "name": "test_workflow",
+                "steps": [
+                    {
+                        "verb": "test_run_basic_workflow_does_not_crash",
+                        "input": {"source": DEFAULT_INPUT_NAME},
+                    },
+                ],
+            },
+            validate=False,
+        )
+        workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
+        await workflow.run(create_fake_run_context())
+        assert workflow.export() is not None
+
+    async def test_create_basic_workflow_with_test_inputs_does_not_crash(self):
         wf = Workflow(
             verbs={
-                "test_verb": create_passthrough_verb(),
+                "test_create_basic_workflow_with_test_inputs_does_not_crash": create_passthrough_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
                     {
                         "id": "123",
-                        "verb": "test_verb",
+                        "verb": "test_create_basic_workflow_with_test_inputs_does_not_crash",
                         "input": {"source": DEFAULT_INPUT_NAME},
                     },
                 ],
@@ -79,20 +102,20 @@ class TestWorkflowRun(unittest.TestCase):
             validate=False,
             input_tables={DEFAULT_INPUT_NAME: pd.DataFrame({"a": [1, 2, 3]})},
         )
-        self.assertSetEqual(wf.dependencies, set([DEFAULT_INPUT_NAME]))
-        wf.run()
+        assert wf.dependencies == set([DEFAULT_INPUT_NAME])
+        await wf.run()
 
     def test_workflow_dependencies(self):
         wf = Workflow(
             verbs={
-                "test_verb": create_passthrough_verb(),
+                "test_workflow_dependencies": create_passthrough_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
                     {
                         "id": "123",
-                        "verb": "test_verb",
+                        "verb": "test_workflow_dependencies",
                         "input": {
                             "source": DEFAULT_INPUT_NAME,
                             "depends_on": ["external_1", "external_2"],
@@ -100,174 +123,139 @@ class TestWorkflowRun(unittest.TestCase):
                     },
                     {
                         "id": "123",
-                        "verb": "test_verb",
+                        "verb": "test_workflow_dependencies",
                         "input": {"source": "external_3"},
                     },
-                    {"id": "123", "verb": "test_verb", "input": "external_4"},
+                    {
+                        "id": "123",
+                        "verb": "test_workflow_dependencies",
+                        "input": "external_4",
+                    },
                 ],
             },
             validate=False,
             input_tables={DEFAULT_INPUT_NAME: pd.DataFrame({"a": [1, 2, 3]})},
         )
-        self.assertSetEqual(
-            wf.dependencies,
-            set(
-                [
-                    DEFAULT_INPUT_NAME,
-                    "external_1",
-                    "external_2",
-                    "external_3",
-                    "external_4",
-                ]
-            ),
+        assert wf.dependencies == set(
+            [
+                DEFAULT_INPUT_NAME,
+                "external_1",
+                "external_2",
+                "external_3",
+                "external_4",
+            ]
         )
         # don't run, will throw because dependencies are explicitly missing
 
-    def test_basic_workflow_with_context_passing(self):
+    async def test_basic_workflow_with_context_passing(self):
         workflow = Workflow(
             verbs={
-                "test_verb": create_context_consuming_verb(),
+                "test_basic_workflow_with_context_passing": create_context_consuming_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
-                    {"verb": "test_verb", "input": {"source": DEFAULT_INPUT_NAME}},
+                    {
+                        "verb": "test_basic_workflow_with_context_passing",
+                        "input": {"source": DEFAULT_INPUT_NAME},
+                    },
                 ],
             },
             validate=False,
         )
         workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
-        workflow.run(
-            context=create_fake_run_context(),
-        )
+        await workflow.run(create_fake_run_context())
 
-    def test_workflow_with(self):
+    async def test_workflow_with(self):
         workflow = Workflow(
             verbs={
-                "test_verb": create_parallel_transforming_verb(),
+                "test_workflow_with": create_parallel_transforming_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
-                    {"verb": "test_verb", "input": {"source": DEFAULT_INPUT_NAME}},
+                    {
+                        "verb": "test_workflow_with",
+                        "input": {"source": DEFAULT_INPUT_NAME},
+                    },
                 ],
             },
             validate=False,
         )
         workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
-        workflow.run(
-            context=create_fake_run_context(),
-        )
+        await workflow.run(create_fake_run_context())
         result = workflow.output()
         row = result.iloc[0]
         assert row["b"] == row["a"] + 1
 
-    def test_workflow_with_transform_util_verb_throwing(self):
-        with self.assertRaises(ValueError) as ctx:
-            workflow = Workflow(
-                verbs={
-                    "test_verb": create_parallel_transforming_verb_throwing(),
-                },
-                schema={
-                    "name": "test_workflow",
-                    "steps": [
-                        {"verb": "test_verb", "input": {"source": DEFAULT_INPUT_NAME}},
-                    ],
-                },
-                validate=False,
-            )
-            workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
-            workflow.run(
-                context=create_fake_run_context(),
-            )
-
-    def test_basic_workflow_with_file_status_reporter(self):
-        reporter = FileStatusReporter("./.temp")
+    async def test_workflow_with_transform_util_verb_throwing(self):
         workflow = Workflow(
             verbs={
-                "test_verb": create_context_consuming_verb(),
+                "test_workflow_with_transform_util_verb_throwing": create_parallel_transforming_verb_throwing(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
-                    {"verb": "test_verb", "input": {"source": DEFAULT_INPUT_NAME}},
+                    {
+                        "verb": "test_workflow_with_transform_util_verb_throwing",
+                        "input": {"source": DEFAULT_INPUT_NAME},
+                    },
                 ],
             },
             validate=False,
         )
         workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
-        workflow.run(
-            context=create_fake_run_context(),
-            status_reporter=reporter,
-        )
+        with pytest.raises(VerbError):
+            await workflow.run(create_fake_run_context())
 
-    def test_basic_workflow_with_console_status_reporter(self):
-        reporter = ConsoleStatusReporter()
-        workflow = Workflow(
-            verbs={
-                "test_verb": create_context_consuming_verb(),
-            },
-            schema={
-                "name": "test_workflow",
-                "steps": [
-                    {"verb": "test_verb", "input": {"source": DEFAULT_INPUT_NAME}},
-                ],
-            },
-            validate=False,
-        )
-        workflow.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
-        workflow.run(
-            context=create_fake_run_context(),
-            status_reporter=reporter,
-        )
-
-    def test_workflow_with_async_verb(self):
+    async def test_workflow_with_async_verb(self):
         wf = Workflow(
             verbs={
-                "test_verb": create_async_verb(),
+                "test_workflow_with_async_verb": create_async_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
-                    {"verb": "test_verb", "input": {"source": DEFAULT_INPUT_NAME}},
+                    {
+                        "verb": "test_workflow_with_async_verb",
+                        "input": {"source": DEFAULT_INPUT_NAME},
+                    },
                 ],
             },
             validate=False,
         )
         wf.add_table(DEFAULT_INPUT_NAME, pd.DataFrame({"a": [1, 2, 3]}))
-        wf.run(
-            context=create_fake_run_context(),
-        )
+        await wf.run(create_fake_run_context())
         output = wf.output()
+        assert output.equals(pd.DataFrame({"a": [1, 2, 3]}))
 
-    def test_workflow_first_step_with_invalid_input_crashes(self):
-        with self.assertRaises(ValueError) as context:
-            workflow = Workflow(
+    async def test_workflow_first_step_with_invalid_input_crashes(self):
+        workflow = Workflow(
+            verbs={
+                "test_workflow_first_step_with_invalid_input_crashes": create_passthrough_verb(),
+            },
+            schema={
+                "name": "test_workflow",
+                "steps": [
+                    {
+                        "verb": "test_workflow_first_step_with_invalid_input_crashes",
+                        "input": {"source": "missing_input"},
+                    },
+                ],
+            },
+            validate=False,
+        )
+        input_data = pd.DataFrame({"a": [1, 2, 3]})
+        workflow.add_table(DEFAULT_INPUT_NAME, input_data)
+
+        with pytest.raises(NodeNotVisitedError):
+            await workflow.run(create_fake_run_context())
+
+    async def test_workflow_invalid_verb_throws_error(self):
+        with pytest.raises(WorkflowVerbNotFoundError):
+            Workflow(
                 verbs={
-                    "test_verb": create_passthrough_verb(),
-                },
-                schema={
-                    "name": "test_workflow",
-                    "steps": [
-                        {
-                            "verb": "test_verb",
-                            "input": {"source": "missing_input"},
-                        },
-                    ],
-                },
-                validate=False,
-            )
-
-            input_data = pd.DataFrame({"a": [1, 2, 3]})
-            workflow.add_table(DEFAULT_INPUT_NAME, input_data.copy())
-
-            workflow.run(context=create_fake_run_context())
-
-    def test_workflow_invalid_verb_throws_error(self):
-        with self.assertRaises(ValueError) as context:
-            workflow = Workflow(
-                verbs={
-                    "test_verb": create_passthrough_verb(),
+                    "test_workflow_invalid_verb_throws_error": create_passthrough_verb(),
                 },
                 schema={
                     "name": "test_workflow",
@@ -281,21 +269,17 @@ class TestWorkflowRun(unittest.TestCase):
                 validate=False,
             )
 
-            input_data = pd.DataFrame({"a": [1, 2, 3]})
-            workflow.add_table(DEFAULT_INPUT_NAME, input_data.copy())
-            workflow.run(context=create_fake_run_context())
-
-    def test_workflow_steps_with_no_input_defaults_input_correctly(self):
+    async def test_workflow_steps_with_no_input_defaults_input_correctly(self):
         workflow = Workflow(
             verbs={
-                "test_verb": create_passthrough_verb(),
+                "test_workflow_steps_with_no_input_defaults_input_correctly": create_passthrough_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
                     {
                         "id": "test",
-                        "verb": "test_verb"
+                        "verb": "test_workflow_steps_with_no_input_defaults_input_correctly",
                         # First step is missing the input, it should default to DEFAULT_INPUT_NAME
                     },
                 ],
@@ -304,91 +288,98 @@ class TestWorkflowRun(unittest.TestCase):
         )
 
         input_data = pd.DataFrame({"a": [1, 2, 3]})
-        workflow.add_table(DEFAULT_INPUT_NAME, input_data.copy())
-        workflow.run(context=create_fake_run_context())
+        workflow.add_table(DEFAULT_INPUT_NAME, input_data)
+        await workflow.run(context=create_fake_run_context())
 
         # Our test verb doesn't do anything, so the output should be the same as the input
         input_json = input_data.to_json(orient="records")
         output_json = workflow.output().to_json(orient="records")
-        self.assertEqual(input_json, output_json)
+        assert input_json == output_json
 
-    def test_workflow_second_step_gets_first_steps_input(self):
+    async def test_workflow_second_step_gets_first_steps_input(self):
         first_step_output = pd.DataFrame({"b": [1, 2, 3]})
         workflow = Workflow(
             verbs={
-                "test_verb": create_verb_that_returns(first_step_output),
+                "test_workflow_second_step_gets_first_steps_input": create_verb_that_returns(
+                    first_step_output
+                ),
                 # Pass along the input to the output
-                "test_verb2": create_passthrough_verb(),
+                "test_workflow_second_step_gets_first_steps_input2": create_passthrough_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
-                    {"verb": "test_verb"},
-                    {"verb": "test_verb2"},
+                    {"verb": "test_workflow_second_step_gets_first_steps_input"},
+                    {"verb": "test_workflow_second_step_gets_first_steps_input2"},
                 ],
             },
             validate=False,
         )
 
         input_data = pd.DataFrame({"a": [1, 2, 3]})
-        workflow.add_table(DEFAULT_INPUT_NAME, input_data.copy())
-        workflow.run(context=create_fake_run_context())
+        workflow.add_table(DEFAULT_INPUT_NAME, input_data)
+        await workflow.run(context=create_fake_run_context())
 
         # Ensure the output looks like the "first_step_output"
         input_json = first_step_output.to_json(orient="records")
         output_json = workflow.output().to_json(orient="records")
-        self.assertEqual(input_json, output_json)
+        assert input_json == output_json
 
-    def test_workflow_second_step_gets_first_steps_input_when_first_step_has_non_default_input(
+    async def test_workflow_second_step_gets_first_steps_input_when_first_step_has_non_default_input(
         self,
     ):
         non_default_input = pd.DataFrame({"c": [1, 2, 3]})
         workflow = Workflow(
             verbs={
                 # Pass along the input to the output
-                "test_verb": create_passthrough_verb(),
+                "test_workflow_second_step_gets_first_steps_input_when_first_step_has_non_default_input": create_passthrough_verb(),
                 # Pass along the input to the output
-                "test_verb2": create_passthrough_verb(),
+                "test_workflow_second_step_gets_first_steps_input_when_first_step_has_non_default_input2": create_passthrough_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
-                    {"verb": "test_verb", "input": {"source": "non_default_input"}},
-                    {"verb": "test_verb2"},
+                    {
+                        "verb": "test_workflow_second_step_gets_first_steps_input_when_first_step_has_non_default_input",
+                        "input": {"source": "non_default_input"},
+                    },
+                    {
+                        "verb": "test_workflow_second_step_gets_first_steps_input_when_first_step_has_non_default_input2"
+                    },
                 ],
             },
             validate=False,
         )
 
-        workflow.add_table("non_default_input", non_default_input.copy())
-        workflow.run(context=create_fake_run_context())
+        workflow.add_table("non_default_input", non_default_input)
+        await workflow.run(context=create_fake_run_context())
 
         # Ensure the output looks like the "first_step_output"
         input_json = non_default_input.to_json(orient="records")
         output_json = workflow.output().to_json(orient="records")
-        self.assertEqual(input_json, output_json)
+        assert input_json == output_json
 
-    def test_workflow_second_step_gets_current_input_when_it_specifies_a_custom_input(
+    async def test_workflow_second_step_gets_current_input_when_it_specifies_a_custom_input(
         self,
     ):
         second_verb_input = pd.DataFrame({"c": [1, 2, 3]})
         workflow = Workflow(
             verbs={
                 # Pass along the input to the output
-                "test_verb": create_passthrough_verb(),
+                "test_workflow_second_step_gets_current_input_when_it_specifies_a_custom_input": create_passthrough_verb(),
                 # Pass along the input to the output
-                "test_verb2": create_passthrough_verb(),
+                "test_workflow_second_step_gets_current_input_when_it_specifies_a_custom_input2": create_passthrough_verb(),
             },
             schema={
                 "name": "test_workflow",
                 "steps": [
                     {
                         "id": "step_1",
-                        "verb": "test_verb",
+                        "verb": "test_workflow_second_step_gets_current_input_when_it_specifies_a_custom_input",
                     },
                     {
                         "id": "step_2",
-                        "verb": "test_verb2",
+                        "verb": "test_workflow_second_step_gets_current_input_when_it_specifies_a_custom_input2",
                         "input": {"source": "second_verb_input"},
                     },
                 ],
@@ -402,18 +393,18 @@ class TestWorkflowRun(unittest.TestCase):
         input_data = pd.DataFrame({"a": [1, 2, 3]})
 
         # Provide the default input
-        workflow.add_table(DEFAULT_INPUT_NAME, input_data.copy())
+        workflow.add_table(DEFAULT_INPUT_NAME, input_data)
 
         # provide the input data for the second verb
-        workflow.add_table("second_verb_input", second_verb_input.copy())
+        workflow.add_table("second_verb_input", second_verb_input)
 
         # Run the workflow
-        workflow.run(context=create_fake_run_context())
+        await workflow.run(create_fake_run_context())
 
         # Ensure the output looks like the "second_verb_input"
         input_json = second_verb_input.to_json(orient="records")
         output_json = workflow.output().to_json(orient="records")
-        self.assertEqual(input_json, output_json)
+        assert input_json == output_json
 
 
 @dataclass
@@ -427,15 +418,18 @@ def create_fake_run_context() -> PipelineRunContext:
 
 
 def create_passthrough_verb():
-    return lambda input: TableContainer(table=input.get_input())
+    return lambda input, **_kwargs: TableContainer(table=input.get_input())
 
 
 def create_verb_that_returns(static_value: pd.DataFrame):
-    return lambda input: TableContainer(table=static_value)
+    return lambda input, **_kwargs: TableContainer(table=static_value)  # noqa: ARG005
 
 
 def create_async_verb():
-    async def async_verb(input: TableContainer):
+    async def async_verb(
+        input: TableContainer,
+        **_kwargs: dict,
+    ):
         await asyncio.sleep(0)
         return TableContainer(table=input.get_input())
 
@@ -443,16 +437,18 @@ def create_async_verb():
 
 
 def create_parallel_transforming_verb():
-    def transform(
-        input: VerbInput, reporter: VerbStatusReporter, progress: VerbStatusReporter
+    async def transform(
+        input: VerbInput,
+        callbacks: VerbCallbacks,
+        **_kwargs: dict,
     ):
-        def transform_row(row: pd.Series):
+        async def transform_row(row: pd.Series):
             items = [1, 2, 3]
-            progress_iterable(items, progress)
+            progress_iterable(items, callbacks.progress)
             row["b"] = row["a"] + 1
             return row
 
-        results = derive_from_rows(input.get_input().copy(), transform_row, reporter)
+        results = await derive_from_rows(input.get_input(), transform_row, callbacks)
 
         return TableContainer(table=pd.DataFrame(results))
 
@@ -460,11 +456,15 @@ def create_parallel_transforming_verb():
 
 
 def create_parallel_transforming_verb_throwing():
-    def transform(input: VerbInput, reporter: VerbStatusReporter):
-        def transform_row(row: pd.Series):
-            raise ValueError("oh no, this should be expected")
+    async def transform(
+        input: VerbInput,
+        callbacks: VerbCallbacks,
+        **_kwargs: dict,
+    ):
+        async def transform_row(_row: pd.Series):
+            raise VerbError
 
-        results = derive_from_rows(input.get_input().copy(), transform_row, reporter)
+        results = await derive_from_rows(input.get_input(), transform_row, callbacks)
 
         return TableContainer(table=pd.DataFrame(results))
 
@@ -475,21 +475,20 @@ def create_context_consuming_verb():
     def context_verb(
         input: TableContainer,
         context: PipelineRunContext,
-        reporter: VerbStatusReporter,
-        progress: StatusReportHandler,
+        callbacks: VerbCallbacks,
         a: int,
         b: int,
+        **_kwargs: dict,
     ):
         assert context is not None
-        assert reporter is not None
         assert a is not None
         assert b is not None
-        assert progress is not None
-        reporter.error("test error")
-        reporter.warning("test warning")
-        reporter.log("test log")
-        reporter.progress(ProgressStatus(progress=0.5, description="test progress"))
-        reporter.progress(ProgressStatus(progress=0.7))
+        assert callbacks is not None
+        callbacks.error("test error")
+        callbacks.warning("test warning")
+        callbacks.log("test log")
+        callbacks.progress(Progress(percent=0.5, description="test progress"))
+        callbacks.progress(Progress(percent=0.7))
         return TableContainer(table=input.get_input())
 
     return context_verb

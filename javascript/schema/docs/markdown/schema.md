@@ -75,6 +75,7 @@
 |  [DataShape](./schema.datashape.md) | Defines parameters for understanding the logical structure of data contents. |
 |  [DataTableSchema](./schema.datatableschema.md) | This defines the table-containing resource type. A dataset can be embedded directly using the <code>data</code> property, or it can be linked to a raw file using the <code>path</code>. If the latter, optional format and parsing options can be applied to aid interpreting the file contents. resource profile: 'datatable' |
 |  [DeriveArgs](./schema.deriveargs.md) |  |
+|  [DestructureArgs](./schema.destructureargs.md) |  |
 |  [DualInput](./schema.dualinput.md) | Dual-input, single-output step I/O |
 |  [EncodeDecodeArgs](./schema.encodedecodeargs.md) |  |
 |  [EraseArgs](./schema.eraseargs.md) |  |
@@ -101,6 +102,7 @@
 |  [OutputColumnArgs](./schema.outputcolumnargs.md) |  |
 |  [ParserOptions](./schema.parseroptions.md) | Parsing options for delimited files. This is a mix of the options from pandas and spark. |
 |  [PivotArgs](./schema.pivotargs.md) |  |
+|  [PrintArgs](./schema.printargs.md) |  |
 |  [RecodeArgs](./schema.recodeargs.md) |  |
 |  [RelationshipConstraint](./schema.relationshipconstraint.md) |  |
 |  [ResourceSchema](./schema.resourceschema.md) | Parent class for any resource type understood by the system. Any object type that extends from Resource is expected to have a standalone schema published. For project state, this can be left as generic as possible for now. |
@@ -117,6 +119,7 @@
 |  [ValidationResult](./schema.validationresult.md) |  |
 |  [VariadicInput](./schema.variadicinput.md) | Multi-input, single output step I/O |
 |  [WindowArgs](./schema.windowargs.md) |  |
+|  [WorkflowArgs](./schema.workflowargs.md) |  |
 |  [WorkflowSchema](./schema.workflowschema.md) | The root wrangling workflow specification. resource profile: 'workflow' |
 
 ## Variables
@@ -140,6 +143,7 @@
 |  [DropArgs](./schema.dropargs.md) |  |
 |  [FactoryInput](./schema.factoryinput.md) |  |
 |  [GroupbyArgs](./schema.groupbyargs.md) |  |
+|  [InputBinding](./schema.inputbinding.md) |  |
 |  [Profile](./schema.profile.md) | Resources must have a profile, which is a key defining how it should be interpreted. Profiles are essentially shorthand for a schema URL. The core profiles for DataShaper are defined here, but any application can define one as a string. |
 |  [Rel](./schema.rel.md) | A rel is a string that describes the relationship between a resource and its child. |
 |  [RenameArgs](./schema.renameargs.md) |  |
@@ -149,5 +153,6 @@
 |  [UnrollArgs](./schema.unrollargs.md) |  |
 |  [ValidationFunction](./schema.validationfunction.md) |  |
 |  [Value](./schema.value.md) | A cell/property value of any type. |
+|  [WorkflowInput](./schema.workflowinput.md) |  |
 |  [WorkflowStepId](./schema.workflowstepid.md) | The Id of the step to which the input is bound |
 

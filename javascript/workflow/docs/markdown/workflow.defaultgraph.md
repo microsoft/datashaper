@@ -21,11 +21,11 @@ export declare class DefaultGraph<T> implements Graph<T>
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [add(node)](./workflow.defaultgraph.add.md) |  |  |
-|  [clear()](./workflow.defaultgraph.clear.md) |  |  |
-|  [hasNode(id)](./workflow.defaultgraph.hasnode.md) |  |  |
-|  [node(id)](./workflow.defaultgraph.node.md) |  |  |
-|  [printStats()](./workflow.defaultgraph.printstats.md) |  |  |
-|  [remove(removeId)](./workflow.defaultgraph.remove.md) |  |  |
-|  [validate()](./workflow.defaultgraph.validate.md) |  |  |
+|  [add(node)](./workflow.defaultgraph.add.md) |  | Add a node to the graph |
+|  [clear()](./workflow.defaultgraph.clear.md) |  | Clear the graph and remove all nodes |
+|  [hasNode(id)](./workflow.defaultgraph.hasnode.md) |  | Check if the graph has a node with the given ID |
+|  [node(id)](./workflow.defaultgraph.node.md) |  | Get a node by id |
+|  [printStats()](./workflow.defaultgraph.printstats.md) |  | Print per-node stats of the graph |
+|  [remove(removeId)](./workflow.defaultgraph.remove.md) |  | Remove a node by ID from the graph |
+|  [validate()](./workflow.defaultgraph.validate.md) |  | Validate the graph, checking for any cycles |
 

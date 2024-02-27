@@ -16,8 +16,8 @@ import { Container, icons, Tables } from './SetOperationForm.styles.js'
  * E.g., for set operations
  */
 export const SetOperationForm: React.FC<StepFormProps> = memo(
-	function SetOperationForm({ step, workflow, input, table, onChange }) {
-		const dataTable = useStepInputTable(step, workflow, input, table)
+	function SetOperationForm({ step, workflow, input, onChange }) {
+		const dataTable = useStepInputTable(step, workflow, input)
 		const others = useOthers(step, onChange, workflow)
 
 		const handleButtonClick = useCallback(() => {
@@ -25,7 +25,7 @@ export const SetOperationForm: React.FC<StepFormProps> = memo(
 				...step,
 				input: {
 					...step.input,
-					others: [...(step.input.others || EMPTY_ARRAY), { node: '' }] as any,
+					others: [...(step.input.others || EMPTY_ARRAY), { step: '' }] as any,
 				},
 			})
 		}, [step, onChange])

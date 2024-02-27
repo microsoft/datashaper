@@ -21,4 +21,5 @@ export enum KnownProfile {
 	DataGraph = 'datagraph',
 	Workflow = 'workflow',
 	TableBundle = 'tablebundle',
+	UnknownResource = 'unknown'
 }

@@ -51,7 +51,10 @@ describe('DefaultGraph', () => {
 		const add = new AddNode()
 		const two = new ValueNode(2)
 		add.bind({ input: Input.LHS, node: two })
-		add.bind({ input: Input.RHS, node: add })
+		const addTwo = new AddNode()
+		addTwo.bind({ input: Input.LHS, node: add })
+		addTwo.bind({ input: Input.RHS, node: two })
+		add.bind({ input: Input.RHS, node: addTwo })
 		graph.add(add)
 
 		expect(graph.nodes).toContain(add.id)

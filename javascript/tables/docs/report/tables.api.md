@@ -7,7 +7,7 @@
 import { CodebookSchema } from '@datashaper/schema';
 import { CodebookStrategy } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
-import type { default as ColumnTable_2 } from 'arquero/dist/types/table/column-table.js';
+import { default as ColumnTable_2 } from 'arquero/dist/types/table/column-table.js';
 import type { CSVParseOptions } from 'arquero/dist/types/format/from-csv.js';
 import { DataFormat } from '@datashaper/schema';
 import type { DataTableSchema } from '@datashaper/schema';
@@ -24,6 +24,11 @@ import type { Value } from '@datashaper/schema';
 //
 // @public (undocumented)
 export function applyCodebook(table: ColumnTable, codebook: CodebookSchema, strategy: CodebookStrategy, dataTableSchema?: Partial<DataTableSchema>): ColumnTable;
+
+// Warning: (ae-missing-release-tag) "assignDefaultNodePositions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function assignDefaultNodePositions(nodes: ColumnTable_2, x?: string, y?: string, positioner?: Positioner): ColumnTable_2;
 
 // Warning: (ae-missing-release-tag) "coerce" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -54,6 +59,11 @@ export function columnTypes(table: ColumnTable, columns?: string[]): Record<stri
 //
 // @public (undocumented)
 export function container(id: string, table?: ColumnTable, metadata?: TableMetadata): TableContainer;
+
+// Warning: (ae-missing-release-tag) "deriveNodesFromEdges" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function deriveNodesFromEdges(edges: ColumnTable_2, source: string, target: string, nodeId?: string, defaultPositions?: boolean): ColumnTable_2;
 
 // Warning: (ae-missing-release-tag) "determineType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -173,6 +183,11 @@ export function isObject(value: unknown): boolean;
 // @public (undocumented)
 export function isValidNumber(value: string): boolean;
 
+// Warning: (ae-missing-release-tag) "loadCSV" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function loadCSV(url: string, options: CSVParseOptions): Promise<ColumnTable_2>;
+
 // Warning: (ae-missing-release-tag) "maximumValidator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -206,37 +221,47 @@ export function parseAs(type?: DataType, subtype?: DataType, hints?: TypeHints):
 // Warning: (ae-missing-release-tag) "parseBoolean" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function parseBoolean(naValues?: string[], trueValues?: string[], falseValues?: string[]): (value: string) => boolean | null;
+export function parseBoolean(naValues?: string[], trueValues?: string[], falseValues?: string[]): (value: string | undefined) => boolean | null;
 
 // Warning: (ae-missing-release-tag) "parseDate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function parseDate(naValues?: string[]): (value: string) => Date | null;
+export function parseDate(naValues?: string[]): (value: string | undefined) => Date | null;
 
 // Warning: (ae-missing-release-tag) "parseNumber" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function parseNumber(naValues?: string[], decimal?: string, thousands?: string): (values: string) => number | null;
+export function parseNumber(naValues?: string[], decimal?: string, thousands?: string): (values: string | undefined) => number | null;
 
 // Warning: (ae-missing-release-tag) "parseObject" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function parseObject(options?: TypeHints): (value: string) => object | null;
+export function parseObject(options?: TypeHints): (value: string | undefined) => object | null;
 
 // Warning: (ae-missing-release-tag) "parseString" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function parseString(naValues?: string[]): (value: string) => string | null;
+export function parseString(naValues?: string[]): (value: string | undefined) => string | null;
 
 // Warning: (ae-missing-release-tag) "parseUndefined" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function parseUndefined(naValues?: string[]): (value: string) => undefined | null;
+export function parseUndefined(naValues?: string[]): (value: string | undefined) => undefined | null;
 
 // Warning: (ae-missing-release-tag) "patternValidator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export function patternValidator(field: Field, includeIndexes: boolean): ValidationFunction | undefined;
+
+// Warning: (ae-missing-release-tag) "Positioner" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum Positioner {
+    // (undocumented)
+    Grid = "grid",
+    // (undocumented)
+    Random = "random"
+}
 
 // Warning: (ae-missing-release-tag) "readTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

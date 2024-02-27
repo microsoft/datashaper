@@ -21,8 +21,10 @@ import {
 	isInputKeyValueStep,
 	isInputTableListStep,
 	isOutputColumnStep,
+	NodeInput,
 } from '@datashaper/workflow'
 import { format } from 'd3-format'
+import { getInputNode } from '../../util.js'
 
 /**
  * Create reasonable short detail text for a step.
@@ -46,21 +48,22 @@ export function deriveDetails(step: Step): string | undefined {
 			return sample(step)
 	}
 
-	if (isInputColumnStep(step)) {
+	if (isInputColumnStep(verb)) {
 		return (args as InputColumnArgs).column
-	} else if (isInputColumnListStep(step)) {
+	}
+	if (isInputColumnListStep(verb)) {
 		return (args as InputColumnListArgs).columns.join(',')
-	} else if (isInputColumnRecordStep(step)) {
+	} else if (isInputColumnRecordStep(verb)) {
 		return Object.keys((args as InputColumnRecordArgs).columns).join(',')
-	} else if (isInputKeyValueStep(step)) {
+	} else if (isInputKeyValueStep(verb)) {
 		return `${(args as PivotArgs).key} & ${(args as PivotArgs).value}`
-	} else if (isOutputColumnStep(step)) {
+	} else if (isOutputColumnStep(verb)) {
 		return (args as OutputColumnArgs).to
-	} else if (isInputTableListStep(step)) {
-		const others = step.input['other']
-			? step.input['other']
-			: step.input.others?.join(',')
-		return `with ${others}`
+	} else if (isInputTableListStep(verb)) {
+		const other = getInputNode(step, NodeInput.Other)
+		const others = listOthers(step)
+		const list = other || others
+		return `with ${list}`
 	}
 }
 
@@ -71,4 +74,9 @@ function sample(step: Step): string {
 	return args.proportion
 		? `${whole(args.proportion * 100)}% of rows`
 		: `${args.size} rows`
+}
+
+function listOthers(step: Step): string | undefined {
+	const binding = step.input?.others
+	return binding?.map((b) => b.step).join(',')
 }

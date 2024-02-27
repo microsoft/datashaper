@@ -44,6 +44,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps>;
 // @public
 export interface ArqueroDetailsListFeatures {
     commandBar?: IRenderFunction<IDetailsColumnProps>[];
+    hideRowNumber?: boolean;
     histogramColumnHeaders?: boolean;
     lazyLoadGroups?: boolean;
     showBooleanSymbol?: boolean;

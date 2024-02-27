@@ -7,9 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-input?: string | {
-        source?: WorkflowStepId;
-        others?: WorkflowStepId[];
-        [key: string]: WorkflowStepId | WorkflowStepId[] | undefined;
+input?: WorkflowInput | {
+        source?: WorkflowInput;
+        others?: WorkflowInput[];
+        [key: string]: WorkflowInput | WorkflowInput[] | undefined;
     };
 ```

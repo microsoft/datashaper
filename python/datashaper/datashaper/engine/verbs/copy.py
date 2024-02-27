@@ -2,9 +2,14 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-from datashaper.engine.verbs.verbs_mapping import verb
+"""Copy verb implementation."""
+from typing import cast
 
-from ...table_store import TableContainer
+import pandas as pd
+
+from datashaper.engine.verbs.verbs_mapping import verb
+from datashaper.table_store.types import VerbResult, create_verb_result
+
 from .verb_input import VerbInput
 
 
@@ -13,8 +18,10 @@ def copy(
     input: VerbInput,
     to: str,
     column: str,
-):
-    output = input.get_input()
+    **_kwargs: dict,
+) -> VerbResult:
+    """Copy verb implementation."""
+    output = cast(pd.DataFrame, input.get_input())
     output[to] = output[column]
 
-    return TableContainer(table=output)
+    return create_verb_result(output)

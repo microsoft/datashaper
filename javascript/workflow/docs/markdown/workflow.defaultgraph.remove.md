@@ -4,6 +4,8 @@
 
 ## DefaultGraph.remove() method
 
+Remove a node by ID from the graph
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,7 +16,7 @@ remove(removeId: NodeId): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  removeId | [NodeId](./workflow.nodeid.md) |  |
+|  removeId | [NodeId](./workflow.nodeid.md) | The node ID to remove |
 
 <b>Returns:</b>
 

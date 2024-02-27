@@ -16,7 +16,7 @@ export function useGetColumnValidationErrors(
 					<p>{header}</p>
 					<ul>
 						{errors.map((e: FieldError) => (
-							<li key={e.rule}>{getMessage(e)}</li>
+							<li key={`validation-rule-${e.rule}`}>{getMessage(e)}</li>
 						))}
 					</ul>
 				</>

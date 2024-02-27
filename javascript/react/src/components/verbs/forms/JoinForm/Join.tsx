@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { JoinArgs, WorkflowStepId } from '@datashaper/schema'
+import type { JoinArgs } from '@datashaper/schema'
 import { NodeInput } from '@datashaper/workflow'
 import { memo } from 'react'
 
@@ -10,25 +10,32 @@ import {
 	useColumnNames,
 	useTableDropdownOptions,
 	useWorkflowDataTable,
+	useWorkflowInput,
 } from '../../../../hooks/index.js'
 import type { StepFormProps } from '../types.js'
 import { JoinFormBase } from './Join.base.js'
+import { getInputNode } from '../../../../util.js'
 
 /**
  * Provides inputs for a Join step.
  */
 export const JoinForm: React.FC<StepFormProps<JoinArgs>> = memo(
-	function JoinForm({ step, workflow, input, onChange }) {
-		const tableOptions = useTableDropdownOptions(workflow)
+	function JoinForm({ step, workflow, onChange }) {
+		const input = useWorkflowInput(workflow)
+		const tableOptions = useTableDropdownOptions(
+			workflow,
+			(name) => name !== input?.id,
+		)
 
 		const leftTable = useWorkflowDataTable(
-			input || step.input[NodeInput.Source],
+			getInputNode(step, NodeInput.Source),
 			workflow,
 		)
 		const rightTable = useWorkflowDataTable(
-			step.input[NodeInput.Other] as WorkflowStepId,
+			getInputNode(step, NodeInput.Other),
 			workflow,
 		)
+
 		const leftColumns = useColumnNames(leftTable)
 		const rightColumns = useColumnNames(rightTable)
 

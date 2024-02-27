@@ -2,65 +2,52 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Filter verb implementation."""
+from typing import cast
 
-import logging
+import pandas as pd
 
-from typing import List, Union
-
-from datashaper.engine.verbs.verbs_mapping import verb
-
-from ...table_store import TableContainer
-from ..pandas.filter_df import filter_df
-from ..types import (
-    BooleanComparisonOperator,
+from datashaper.engine.pandas import filter_df, get_operator
+from datashaper.engine.types import (
     BooleanLogicalOperator,
     Criterion,
     FilterArgs,
     FilterCompareType,
-    NumericComparisonOperator,
-    StringComparisonOperator,
 )
-from .verb_input import VerbInput
+from datashaper.engine.verbs.verb_input import VerbInput
+from datashaper.engine.verbs.verbs_mapping import verb
+from datashaper.table_store.types import (
+    Table,
+    VerbResult,
+    create_verb_result,
+)
 
 
-def _get_operator(
-    operator: str,
-) -> Union[
-    StringComparisonOperator, NumericComparisonOperator, BooleanComparisonOperator
-]:
-    try:
-        return StringComparisonOperator(operator)
-    except Exception:
-        logging.info(f"[{operator}] is not a string comparison operator")
-    try:
-        return NumericComparisonOperator(operator)
-    except Exception:
-        logging.info(f"[{operator}] is not a numeric comparison operator")
-    try:
-        return BooleanComparisonOperator(operator)
-    except Exception:
-        logging.info(f"[{operator}] is not a boolean comparison operator")
-    raise Exception(f"[{operator}] is not a recognized comparison operator")
-
-
-@verb(name="filter")
-def filter(input: VerbInput, column: str, criteria: List, logical: str = "or"):
+@verb(name="filter", treats_input_tables_as_immutable=True)
+def filter_verb(
+    input: VerbInput,
+    column: str,
+    criteria: list,
+    logical: str = "or",
+    **_kwargs: dict,
+) -> VerbResult:
+    """Filter verb implementation."""
     filter_criteria = [
         Criterion(
             value=arg.get("value", None),
             type=FilterCompareType(arg["type"]),
-            operator=_get_operator(arg["operator"]),
+            operator=get_operator(arg["operator"]),
         )
         for arg in criteria
     ]
     logical_operator = BooleanLogicalOperator(logical)
-    input_table = input.get_input()
+    input_table = cast(pd.DataFrame, input.get_input())
 
     filter_index = filter_df(
         input_table, FilterArgs(column, filter_criteria, logical_operator)
     )
-
-    idx = filter_index[filter_index == True].index  # noqa: E712
+    sub_idx = filter_index == True  # noqa: E712
+    idx = filter_index[sub_idx].index  # type: ignore
     output = input_table[input_table.index.isin(idx)].reset_index(drop=True)
 
-    return TableContainer(table=output)
+    return create_verb_result(cast(Table, output))

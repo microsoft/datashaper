@@ -9,7 +9,7 @@ Factory function to create new verb configs with as many reasonable defaults as 
 <b>Signature:</b>
 
 ```typescript
-export declare function readStep<T extends object | void | unknown = any>({ verb, args, id, input }: StepInput<T>, previous?: Step | undefined): Step<T>;
+export declare function readStep<T extends object | unknown = any>({ verb, args, id, input }: StepInput<T>, previous?: Step | undefined): Step<T>;
 ```
 
 ## Parameters

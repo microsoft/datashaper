@@ -40,6 +40,7 @@ import {
 } from './ImportTable.styles.js'
 import type { ImportTableProps } from './ImportTable.types.js'
 import { DataFormat } from '@datashaper/schema'
+import { useDataPackage } from '../../../hooks/useDataPackage.js'
 
 const icons = {
 	cancel: { iconName: 'Cancel' },
@@ -47,11 +48,14 @@ const icons = {
 
 export const ImportTable: React.FC<ImportTableProps> = memo(
 	function ImportTable({ file, onCancel, onOpenTable }) {
+		const dp = useDataPackage()
 		const { delimiter, format, extension, content } = useFileAttributes(file)
 		const isTextFormat = format === DataFormat.CSV || format === DataFormat.JSON
 		const isDataFormatTyped = format === DataFormat.ARROW
-
-		const [name, setName] = useState<string>(removeExtension(file.name ?? ''))
+		// use the dp to avoid duplicate resource names
+		const [name, setName] = useState<string>(
+			dp.suggestResourceName(removeExtension(file.name ?? '')),
+		)
 		const [autoType, setAutoType] = useState<boolean>(true)
 
 		const { table, metadata, previewError, onLoadPreview } = usePreview(

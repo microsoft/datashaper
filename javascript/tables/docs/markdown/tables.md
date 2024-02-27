@@ -4,17 +4,25 @@
 
 ## tables package
 
+## Enumerations
+
+|  Enumeration | Description |
+|  --- | --- |
+|  [Positioner](./tables.positioner.md) |  |
+
 ## Functions
 
 |  Function | Description |
 |  --- | --- |
 |  [applyCodebook(table, codebook, strategy, dataTableSchema)](./tables.applycodebook.md) |  |
+|  [assignDefaultNodePositions(nodes, x, y, positioner)](./tables.assigndefaultnodepositions.md) | Assigns a default position to each node in a table to ensure that it is plottable. Note that this is NOT a layout algorithm. |
 |  [coerce(value, dataType)](./tables.coerce.md) | Ensure an incoming value matches its datatype. For example, if user input is from a textfield, parse it. |
 |  [columnIndexesWithZeros(table)](./tables.columnindexeswithzeros.md) | Returns a list of column indices that contain at least one 0. |
 |  [columnNamesWithZeros(table)](./tables.columnnameswithzeros.md) | Returns a list of column names that contain at least one 0. |
 |  [columnType(table, column)](./tables.columntype.md) |  |
 |  [columnTypes(table, columns)](./tables.columntypes.md) | Generates column typings info for a table. |
 |  [container(id, table, metadata)](./tables.container.md) |  |
+|  [deriveNodesFromEdges(edges, source, target, nodeId, defaultPositions)](./tables.derivenodesfromedges.md) | Derives a table of unique nodes from an edge list |
 |  [determineType(value)](./tables.determinetype.md) | Guess the type of a table value with more discernment than typeof https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof |
 |  [enumValidator(field, includeIndexes)](./tables.enumvalidator.md) | Constructs a function that validates a column against the <code>enum</code> constraint. |
 |  [fixedBinCount(column, min, max, count, clamped, format)](./tables.fixedbincount.md) | Bins column values using a fixed number of bins. The standard behavior here is to truncate a numeric value to the lower bound of its bin range. This keeps the output numerical but loses information about specific bin boundaries. Because binning is a conversion from continuous to categorical, many use cases prefer an output value that displays the range. The format parameter here will produce a printed string as output. |
@@ -36,6 +44,7 @@
 |  [isNumber(decimal, thousands)](./tables.isnumber.md) |  |
 |  [isObject(value)](./tables.isobject.md) |  |
 |  [isValidNumber(value)](./tables.isvalidnumber.md) |  |
+|  [loadCSV(url, options)](./tables.loadcsv.md) | Drop-in replacement for arquero loadCSV, using our internal parsing with auto-typing turned on. Meant for quick-and-dirty reads, with the advantage that our default parsing aligns with pandas. Use readTable for more control over schema options and formats. |
 |  [maximumValidator(field, includeIndexes)](./tables.maximumvalidator.md) | Constructs a function that validates a column against the <code>maximum</code> constraint. |
 |  [maxLengthValidator(field, includeIndexes)](./tables.maxlengthvalidator.md) | Constructs a function that validates a column against the <code>maxLength</code> constraint. |
 |  [minimumValidator(field, includeIndexes)](./tables.minimumvalidator.md) | Constructs a function that validates a column against the <code>minimum</code> constraint. |

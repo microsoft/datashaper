@@ -29,8 +29,8 @@ import {
 	useDetailsHeaderRenderer,
 	useDetailsListStyles,
 	useSlicedTable,
-	useSortedTable,
 	useSortHandling,
+	useSortedTable,
 	useStripedRowsRenderer,
 	useSubsetTable,
 } from './hooks/index.js'

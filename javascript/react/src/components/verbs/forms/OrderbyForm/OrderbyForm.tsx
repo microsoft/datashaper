@@ -19,8 +19,8 @@ import { Container, icons, Sorts } from './OrderbyForm.styles.js'
  * Provides inputs for an OrderBy step.
  */
 export const OrderbyForm: React.FC<StepFormProps<OrderbyArgs>> = memo(
-	function OrderbyForm({ step, workflow, input, table, onChange }) {
-		const dataTable = useStepInputTable(step, workflow, input, table)
+	function OrderbyForm({ step, workflow, input, onChange }) {
+		const dataTable = useStepInputTable(step, workflow, input)
 		const columns = useColumnNames(dataTable)
 		const columnOptions = useSimpleDropdownOptions(columns)
 		const sorts = useSorts(step, columnOptions, onChange)

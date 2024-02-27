@@ -10,7 +10,7 @@ The step inputs; a required "source" and optional, variadic "others". If this is
 
 ```typescript
 input: {
-        source: WorkflowStepId;
-        others?: WorkflowStepId[];
+        source: WorkflowInput;
+        others?: WorkflowInput[];
     };
 ```

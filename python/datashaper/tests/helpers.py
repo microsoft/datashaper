@@ -4,7 +4,7 @@ mock_verbs = {
 }
 
 mock_workflows = {
-    "mock_workflow": lambda x: [
+    "mock_workflow": lambda _x: [
         {
             "verb": "mock_verb",
             "args": {
@@ -12,7 +12,7 @@ mock_workflows = {
             },
         }
     ],
-    "mock_workflow_2": lambda x: [
+    "mock_workflow_2": lambda _x: [
         {
             "verb": "mock_verb",
             "args": {

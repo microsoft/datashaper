@@ -2,10 +2,21 @@
 
 [Home](./index.md) &gt; [@datashaper/workflow](./workflow.md) &gt; [BaseNode](./workflow.basenode.md) &gt; [output$](./workflow.basenode.output_.md)
 
-## BaseNode.output$ property
+## BaseNode.output$() method
 
 <b>Signature:</b>
 
 ```typescript
-get output$(): Observable<Maybe<T>>;
+output$(name?: SocketName): BehaviorSubject<Maybe<T>>;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  name | [SocketName](./workflow.socketname.md) | <i>(Optional)</i> |
+
+<b>Returns:</b>
+
+BehaviorSubject&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;T&gt;&gt;
+

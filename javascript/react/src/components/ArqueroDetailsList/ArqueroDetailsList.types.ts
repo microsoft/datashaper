@@ -123,6 +123,10 @@ export interface ArqueroDetailsListFeatures {
 	 * Receive elements to render in the column header as commands, passing the column details to be used in the component
 	 */
 	commandBar?: IRenderFunction<IDetailsColumnProps>[]
+	/**
+	 * Option to hide the default row number, which is the first column with a detail styling. Default as false
+	 */
+	hideRowNumber?: boolean
 }
 
 /**

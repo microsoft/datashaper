@@ -17,10 +17,9 @@ export const BinForm: React.FC<StepFormProps<BinArgs>> = memo(function Bin({
 	step,
 	workflow,
 	input,
-	table,
 	onChange,
 }) {
-	const dataTable = useStepInputTable(step, workflow, input, table)
+	const dataTable = useStepInputTable(step, workflow, input)
 
 	useEffect(() => {
 		if (dataTable != null && onChange != null) {

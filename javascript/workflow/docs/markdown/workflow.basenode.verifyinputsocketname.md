@@ -4,8 +4,6 @@
 
 ## BaseNode.verifyInputSocketName() method
 
-Verifies that an input socket name is known
-
 <b>Signature:</b>
 
 ```typescript
@@ -16,7 +14,7 @@ protected verifyInputSocketName(name?: SocketName): SocketName;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  name | [SocketName](./workflow.socketname.md) | <i>(Optional)</i> The input socket name |
+|  name | [SocketName](./workflow.socketname.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

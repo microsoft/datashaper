@@ -106,7 +106,7 @@
             "type": "object"
         },
         "ResourceSchema": {
-            "description": "Parent class for any resource type understood by the system.\nAny object type that extends from Resouce is expected to have a standalone schema published.\nFor project state, this can be left as generic as possible for now.",
+            "description": "Parent class for any resource type understood by the system.\nAny object type that extends from Resource is expected to have a standalone schema published.\nFor project state, this can be left as generic as possible for now.",
             "properties": {
                 "$schema": {
                     "description": "The JSON schema for this resource.",
@@ -143,7 +143,7 @@
                     "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).\nURI-compliant path to the referenced resource (local or remote)."
                 },
                 "profile": {
-                    "description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
+                    "description": "Defines the resource type.\nKnown resource types should have accompanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
                     "type": "string"
                 },
                 "rel": {
@@ -151,7 +151,7 @@
                     "type": "string"
                 },
                 "sources": {
-                    "description": "List of resources that underly this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
+                    "description": "List of resources that underlie this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
                     "items": {
                         "anyOf": [
                             {
@@ -191,7 +191,7 @@
                     "type": "string"
                 },
                 "falseValues": {
-                    "description": "Default: case-insenstive word \"false\".",
+                    "description": "Default: case-insensitive word \"false\".",
                     "items": {
                         "type": "string"
                     },
@@ -223,7 +223,7 @@
                     "type": "string"
                 },
                 "trueValues": {
-                    "description": "Default: case-insenstive word \"true\".",
+                    "description": "Default: case-insensitive word \"true\".",
                     "items": {
                         "type": "string"
                     },
@@ -299,7 +299,7 @@
         },
         "profile": {
             "const": "datatable",
-            "description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
+            "description": "Defines the resource type.\nKnown resource types should have accompanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
             "type": "string"
         },
         "rel": {
@@ -315,7 +315,7 @@
             "description": "Defines the shape and structure of stored data."
         },
         "sources": {
-            "description": "List of resources that underly this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
+            "description": "List of resources that underlie this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
             "items": {
                 "anyOf": [
                     {

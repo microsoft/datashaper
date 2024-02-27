@@ -15,6 +15,10 @@
 	"[typescriptreact]": {
 		"editor.defaultFormatter": "rome.rome"
 	},
+	"[python]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "charliermarsh.ruff"
+	},
 	"eslint.nodePath": ".yarn/sdks",
 	"prettier.prettierPath": ".yarn/sdks/prettier/index.js",
 	"typescript.tsdk": ".yarn/sdks/typescript/lib",
@@ -39,20 +43,11 @@
 		".yarnrc.yml": "yarn.lock, .pnp.*",
 		"jest.config.js": "jest.setup.mjs"
 	},
-	"python.linting.flake8Enabled": true,
-	"python.linting.enabled": true,
-	"python.formatting.provider": "black",
-	"python.linting.flake8Args": ["--max-line-length=88"],
+
 	"python.testing.pytestArgs": ["tests"],
 	"python.testing.unittestEnabled": false,
 	"python.testing.pytestEnabled": true,
-	"python.sortImports.args": ["--profile", "black"],
-	"[python]": {
-		"editor.codeActionsOnSave": {
-			"source.organizeImports": "explicit"
-		}
-	},
-	"autoDocstring.docstringFormat": "sphinx",
+	"autoDocstring.docstringFormat": "numpy",
 	"cSpell.customDictionaries": {
 		"project-words": {
 			"name": "project-words",

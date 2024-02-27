@@ -12,6 +12,7 @@ import {
 	BooleanLogicForm,
 	ConvertForm,
 	DeriveForm,
+	DestructureForm,
 	EncodeDecodeForm,
 	EraseForm,
 	FillForm,
@@ -21,6 +22,7 @@ import {
 	JoinForm,
 	LookupForm,
 	MergeForm,
+	PrintForm,
 	NoParametersForm,
 	OneHotForm,
 	OrderbyForm,
@@ -31,12 +33,13 @@ import {
 	SampleForm,
 	SetOperationForm,
 	SpreadForm,
+	StringsReplaceForm,
 	UnfoldForm,
 	UnhotForm,
 	WindowForm,
+	WorkflowForm,
 } from '../verbs/forms/index.js'
 import type { StepFormProps } from '../verbs/index.js'
-import { StringsReplaceForm } from '../verbs/forms/strings/StringsReplaceForm/StringsReplaceForm.js'
 
 const forms = {
 	aggregate: AggregateForm,
@@ -62,6 +65,7 @@ const forms = {
 	join: JoinForm,
 	lookup: LookupForm,
 	merge: MergeForm,
+	print: PrintForm,
 	onehot: OneHotForm,
 	orderby: OrderbyForm,
 	pivot: PivotForm,
@@ -71,6 +75,7 @@ const forms = {
 	sample: SampleForm,
 	select: NoParametersForm,
 	spread: SpreadForm,
+	destructure: DestructureForm,
 	strings: {
 		replace: StringsReplaceForm,
 		lower: NoParametersForm,
@@ -83,6 +88,7 @@ const forms = {
 	unorder: NoParametersForm,
 	unroll: NoParametersForm,
 	window: WindowForm,
+	workflow: WorkflowForm,
 }
 
 /**
@@ -92,7 +98,7 @@ const forms = {
 export function selectStepForm(
 	step: Step<unknown>,
 ): React.FC<StepFormProps<unknown>> {
-	const result: React.FC<StepFormProps<any>> = get(forms, step.verb)
+	const result: React.FC<StepFormProps<any>> | undefined = get(forms, step.verb)
 	if (!result) {
 		throw new Error(`verb ${step.verb} not found`)
 	}

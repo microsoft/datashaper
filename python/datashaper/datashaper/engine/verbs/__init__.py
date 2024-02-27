@@ -1,40 +1,59 @@
-from . import strings  # noqa F401, F403
-from .aggregate import aggregate  # noqa F401, F403
-from .bin import bin  # noqa F401, F403
-from .binarize import binarize  # noqa F401, F403
-from .boolean import boolean  # noqa F401, F403
-from .concat import concat  # noqa F401, F403
-from .convert import convert  # noqa F401, F403
-from .copy import copy  # noqa F401, F403
-from .dedupe import dedupe  # noqa F401, F403
-from .derive import derive  # noqa F401, F403
-from .difference import difference  # noqa F401, F403
-from .drop import drop  # noqa F401, F403
-from .erase import erase  # noqa F401, F403
-from .fill import fill  # noqa F401, F403
-from .filter import filter  # noqa F401, F403
-from .fold import fold  # noqa F401, F403
-from .groupby import groupby  # noqa F401, F403
-from .impute import impute  # noqa F401, F403
-from .intersect import intersect  # noqa F401, F403
-from .join import join  # noqa F401, F403
-from .lookup import lookup  # noqa F401, F403
-from .merge import merge  # noqa F401, F403
-from .onehot import onehot  # noqa F401, F403
-from .orderby import orderby  # noqa F401, F403
-from .pivot import pivot  # noqa F401, F403
-from .recode import recode  # noqa F401, F403
-from .rename import rename  # noqa F401, F403
-from .rollup import rollup  # noqa F401, F403
-from .sample import sample  # noqa F401, F403
-from .select import select  # noqa F401, F403
-from .spread import spread  # noqa F401, F403
-from .unfold import unfold  # noqa F401, F403
-from .ungroup import ungroup  # noqa F401, F403
-from .unhot import unhot  # noqa F401, F403
-from .union import union  # noqa F401, F403
-from .unorder import unorder  # noqa F401, F403
-from .unroll import unroll  # noqa F401, F403
-from .verb_input import VerbInput  # noqa F401, F403
-from .verbs_mapping import VerbManager, verb  # noqa F401, F403
-from .window import window  # noqa F401, F403
+"""A package containing the base verbs."""
+import importlib
+import importlib.util
+import logging
+import pkgutil
+import sys
+from pathlib import Path
+from types import ModuleType
+
+from .parallel_verb import new_row, parallel_verb
+from .types import VerbDetails
+from .verb_input import VerbInput
+from .verbs_mapping import VerbManager, verb
+
+logger = logging.getLogger(__name__)
+
+
+def load_verbs(module: ModuleType) -> None:
+    """
+    Load the verbs from the given module path recursively.
+
+    This is useful to run all the @verb decorators and register the verbs in the verb manager.
+    """
+    if module.__file__ is None:
+        return
+
+    module_path = Path(module.__file__).parent
+    module_name = module.__name__
+    for _, sub_module, is_module in pkgutil.iter_modules([str(module_path)]):
+        if not is_module:
+            full_path = Path(module_path) / f"{sub_module}.py"
+            module_spec = importlib.util.spec_from_file_location(
+                module_name, str(full_path)
+            )
+            if module_spec is not None:
+                module_to_load = f"{module_spec.name}.{sub_module}"
+                importlib.import_module(module_to_load)
+                logger.info("Found module: %s", module_to_load)
+        else:
+            full_path = Path(module_path) / sub_module
+            sub_module_name = f"{module_name}.{sub_module}"
+            sub_module_rec = importlib.import_module(sub_module_name)
+            load_verbs(sub_module_rec)
+
+
+# Load core verbs into VerbManager
+mod = sys.modules[__name__]
+load_verbs(mod)
+
+
+__all__ = [
+    "VerbInput",
+    "VerbManager",
+    "load_verbs",
+    "verb",
+    "VerbDetails",
+    "parallel_verb",
+    "new_row",
+]

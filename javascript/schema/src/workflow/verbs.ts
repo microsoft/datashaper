@@ -5,6 +5,7 @@
 import type { CodebookSchema } from '../codebook/CodebookSchema.js'
 import type { DataType, Value } from '../data.js'
 import type { SortDirection } from '../enums/index.js'
+import type { WorkflowSchema } from './WorkflowSchema.js'
 
 export enum Verb {
 	Aggregate = 'aggregate',
@@ -18,6 +19,7 @@ export enum Verb {
 	Derive = 'derive',
 	Difference = 'difference',
 	Decode = 'decode',
+	Destructure = 'destructure',
 	Drop = 'drop',
 	Encode = 'encode',
 	Erase = 'erase',
@@ -30,6 +32,7 @@ export enum Verb {
 	Join = 'join',
 	Lookup = 'lookup',
 	Merge = 'merge',
+	Print = 'print',
 	Onehot = 'onehot',
 	Orderby = 'orderby',
 	Pivot = 'pivot',
@@ -46,6 +49,7 @@ export enum Verb {
 	Unorder = 'unorder',
 	Unroll = 'unroll',
 	Window = 'window',
+	Workflow = 'workflow',
 
 	StringsReplace = 'strings.replace',
 	StringsLower = 'strings.lower',
@@ -351,6 +355,7 @@ export enum WindowFunction {
 	LastValue = 'last_value',
 	FillDown = 'fill_down',
 	FillUp = 'fill_up',
+	UUID = 'uuid'
 }
 
 export interface AggregateArgs extends RollupArgs {
@@ -466,6 +471,14 @@ export interface EraseArgs extends InputColumnArgs {
 	 * Value to match and erase (set to undefined) in the column
 	 */
 	value: Value
+}
+
+export interface DestructureArgs extends InputColumnArgs {
+	keys?: string[]
+	/**
+	 * Keep the original columns (default is to remove source columns).
+	 */
+	preserveSource?: boolean
 }
 
 export interface EncodeDecodeArgs {
@@ -673,6 +686,11 @@ export interface SampleArgs {
 	 * The randomization seed to use for sampling to ensure stable sampling.
 	 */
 	seed?: number
+
+	/**
+	 * Whether to preserve and emit the non-sampled records via the 'remainder' output port.
+	 */
+	emitRemainder?: boolean
 }
 
 export type SelectArgs = InputColumnListArgs
@@ -699,6 +717,11 @@ export interface SpreadArgs extends InputColumnArgs {
 
 export interface StringsArgs extends InputColumnArgs, OutputColumnArgs {}
 
+export interface PrintArgs {
+	message?: string
+	limit?: number 
+}
+
 export interface StringsReplaceArgs extends StringsArgs {
 	pattern: string
 	replacement: string
@@ -723,4 +746,11 @@ export interface WindowArgs extends InputColumnArgs, OutputColumnArgs {
 	 * Window function to apply to the column.
 	 */
 	operation: WindowFunction
+}
+
+export interface WorkflowArgs {
+	/**
+	 * The workflow configuration.
+	 */
+	workflow: WorkflowSchema
 }

@@ -3,11 +3,24 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Contains the definition for the ExecutionNode type."""
-from typing import Any, Callable, Optional, Union
-
 from dataclasses import dataclass, field
 
-from ..table_store import TableContainer
+from datashaper.engine.verbs.types import VerbDetails
+
+
+@dataclass
+class InputBinding:
+    """A binding specification to an input node."""
+
+    node: str
+    """The input node id."""
+
+    output: str | None = None
+    """The output name to bind to. Default Output if None"""
+
+
+"""A workflow input specification"""
+WorkflowInput = InputBinding | str
 
 
 @dataclass
@@ -15,7 +28,16 @@ class ExecutionNode:
     """A data processing node in the execution pipeline."""
 
     node_id: str
-    verb: Callable
-    node_input: Union[str, dict[str, list[str]]]
-    args: dict[str, Any] = field(default_factory=dict)
-    result: Optional[TableContainer] = None
+    """The unique identifier for this node."""
+
+    has_explicit_id: bool
+    """A flag to indicate whether the node has an explicit ID."""
+
+    verb: VerbDetails
+    """The verb to execute in this graph node."""
+
+    node_input: str | dict[str, WorkflowInput | list[WorkflowInput]]
+    """The input to this node."""
+
+    args: dict = field(default_factory=dict)
+    """The arguments to pass to the verb."""

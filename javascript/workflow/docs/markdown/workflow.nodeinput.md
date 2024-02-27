@@ -15,5 +15,6 @@ export declare enum NodeInput
 |  Member | Value | Description |
 |  --- | --- | --- |
 |  Other | <code>&quot;other&quot;</code> |  |
+|  Others | <code>&quot;others&quot;</code> |  |
 |  Source | <code>&quot;source&quot;</code> |  |
 

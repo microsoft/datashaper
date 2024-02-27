@@ -17,6 +17,7 @@ import type {
 	CopyArgs,
 	DedupeArgs,
 	DeriveArgs,
+	DestructureArgs,
 	DropArgs,
 	EncodeDecodeArgs,
 	EraseArgs,
@@ -28,6 +29,7 @@ import type {
 	JoinArgs,
 	LookupArgs,
 	MergeArgs,
+	PrintArgs,
 	OnehotArgs,
 	OrderbyArgs,
 	PivotArgs,
@@ -44,6 +46,7 @@ import type {
 	UnrollArgs,
 	Verb,
 	WindowArgs,
+	WorkflowArgs
 } from './verbs.js'
 
 /**
@@ -84,6 +87,7 @@ export type Step = StepJsonCommon &
 		| ({ verb: Verb.Join; args?: JoinArgs } & DualInput)
 		| ({ verb: Verb.Lookup; args?: LookupArgs } & DualInput)
 		| ({ verb: Verb.Merge; args?: MergeArgs } & BasicInput)
+		| ({ verb: Verb.Print; args?: PrintArgs } & BasicInput)
 		| ({ verb: Verb.Onehot; args?: OnehotArgs } & BasicInput)
 		| ({ verb: Verb.Orderby; args?: OrderbyArgs } & BasicInput)
 		| ({ verb: Verb.Pivot; args?: PivotArgs } & BasicInput)
@@ -93,6 +97,7 @@ export type Step = StepJsonCommon &
 		| ({ verb: Verb.Sample; args?: SampleArgs } & BasicInput)
 		| ({ verb: Verb.Select; args?: SelectArgs } & BasicInput)
 		| ({ verb: Verb.Spread; args?: SpreadArgs } & BasicInput)
+		| ({ verb: Verb.Destructure; args?: DestructureArgs } & BasicInput)
 		| ({ verb: Verb.StringsReplace; args?: StringsReplaceArgs } & BasicInput)
 		| ({ verb: Verb.StringsLower; args?: StringsArgs } & BasicInput)
 		| ({ verb: Verb.StringsUpper; args?: StringsArgs } & BasicInput)
@@ -103,6 +108,7 @@ export type Step = StepJsonCommon &
 		| ({ verb: Verb.Unorder } & BasicInput)
 		| ({ verb: Verb.Unroll; args?: UnrollArgs } & BasicInput)
 		| ({ verb: Verb.Window; args?: WindowArgs } & BasicInput)
+		| ({ verb: Verb.Workflow, args?: WorkflowArgs } & BasicInput)
 
 		/**
 		 * Custom step - we may not know the verb, args, or binding pattern

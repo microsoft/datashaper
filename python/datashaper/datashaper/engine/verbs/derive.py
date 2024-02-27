@@ -2,32 +2,32 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-
-from typing import Callable, Dict
+"""Derive verb implementation."""
+from collections.abc import Callable
+from typing import cast
 
 import numpy as np
 import pandas as pd
-
 from pandas.api.types import is_numeric_dtype
 
+from datashaper.engine.types import MathOperator
+from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-
-from ...table_store import TableContainer
-from ..types import MathOperator
-from .verb_input import VerbInput
+from datashaper.errors import VerbOperationNotSupportedError
+from datashaper.table_store.types import VerbResult, create_verb_result
 
 
-def __multiply(col1: pd.Series, col2: pd.Series):
+def __multiply(col1: pd.Series, col2: pd.Series) -> np.ndarray:
     if is_numeric_dtype(col1) and is_numeric_dtype(col2):
         return np.multiply(col1, col2)
-    raise Exception("Operation not supported")
+    raise VerbOperationNotSupportedError
 
 
-def __concatenate(col1: pd.Series, col2: pd.Series):
+def __concatenate(col1: pd.Series, col2: pd.Series) -> pd.Series:
     return col1.astype(str) + col2.astype(str)
 
 
-__op_mapping: Dict[MathOperator, Callable] = {
+__op_mapping: dict[MathOperator, Callable] = {
     MathOperator.Add: lambda col1, col2: np.add(col1, col2)
     if is_numeric_dtype(col1) and is_numeric_dtype(col2)
     else __concatenate(col1, col2),
@@ -39,13 +39,21 @@ __op_mapping: Dict[MathOperator, Callable] = {
 
 
 @verb(name="derive")
-def derive(input: VerbInput, to: str, column1: str, column2: str, operator: str):
+def derive(
+    input: VerbInput,
+    to: str,
+    column1: str,
+    column2: str,
+    operator: str,
+    **_kwargs: dict,
+) -> VerbResult:
+    """Derive verb implementation."""
     math_operator = MathOperator(operator)
 
     input_table = input.get_input()
-    output = input_table.copy()
+    output = cast(pd.DataFrame, input_table)
     try:
         output[to] = __op_mapping[math_operator](output[column1], output[column2])
     except Exception:
         output[to] = np.nan
-    return TableContainer(table=output)
+    return create_verb_result(output)

@@ -1,2 +1,4 @@
-from .pandas import transform_pandas_table  # noqa 401
-from .parallelize import parallelize  # noqa 401
+"""Execution utility methods."""
+from .parallelize import parallelize
+
+__all__ = ["parallelize"]

@@ -11,4 +11,5 @@ export const profileIcons = {
 	json: 'Code',
 	text: 'PageData',
 	datagraph: 'SplitObject',
+	unknown: 'SurveyQuestions',
 }
