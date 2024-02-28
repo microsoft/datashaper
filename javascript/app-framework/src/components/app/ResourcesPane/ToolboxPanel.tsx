@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ActionButton, IconButton, Modal } from '@fluentui/react'
+import { ActionButton, IconButton } from '@fluentui/react'
 import { memo, useCallback, useMemo, useState } from 'react'
 import type { Resource } from '@datashaper/workflow'
 import { Container, Content, Header, ToolboxList, ToolboxListItem } from './ToolboxPanel.styles.js'
@@ -11,6 +11,7 @@ import { icons } from './ResourcesPane.styles.js'
 import { AppProfile, ResourceRouteGroup, ToolboxItem } from '../../../types.js'
 import { useBoolean } from '@fluentui/react-hooks'
 import { ModalHost } from '../../modals/ModalHost.js'
+import { useDataPackage } from '../../../hooks/useDataPackage.js'
 
 export const ToolboxPanel: React.FC<ToolboxPanelProps> = memo(function ToolboxPanel({
 	onToggleExpanded,
@@ -18,6 +19,7 @@ export const ToolboxPanel: React.FC<ToolboxPanelProps> = memo(function ToolboxPa
 	profiles,
 	selectedKey
 }) {
+	const dp = useDataPackage()
 	const profile = useProfileFromHref(selectedKey, resources, profiles)
 	const items = profile?.getToolboxItems?.() || []
 	const [isOpen, { toggle: onToggleModal, setFalse: onDismiss }] = useBoolean(false)
@@ -27,6 +29,12 @@ export const ToolboxPanel: React.FC<ToolboxPanelProps> = memo(function ToolboxPa
 		onToggleModal()
 	}, [onToggleModal, setCurrentTool])
 	const res = useResources(resources)
+	const handleResourceCreated = useCallback((resource: Resource) => {
+		console.log('resource created', resource)
+		dp.addResource(resource)
+		onDismiss()
+		}, [dp])
+		console.log('is open', isOpen)
 	return (
 		<Container>
 			<Header>
@@ -41,7 +49,7 @@ export const ToolboxPanel: React.FC<ToolboxPanelProps> = memo(function ToolboxPa
 				title={currentTool?.title}
 				isOpen={isOpen}
 				onDismiss={onDismiss}
-			><currentTool.renderer resources={res} /></ModalHost>
+			><currentTool.renderer resources={res} onResourceCreated={handleResourceCreated} /></ModalHost>
 			: null }
 		</Container>
 	)

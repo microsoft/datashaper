@@ -41,6 +41,7 @@
 |  [RecoilBasedProfileHostProps](./app-framework.recoilbasedprofilehostprops.md) |  |
 |  [ResourceRoute](./app-framework.resourceroute.md) | Data attached to resource-tree nodes |
 |  [ResourceRouteGroup](./app-framework.resourceroutegroup.md) |  |
+|  [ToolboxItem](./app-framework.toolboxitem.md) |  |
 
 ## Variables
 

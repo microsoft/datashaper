@@ -11,7 +11,7 @@ import { CommandBarSection, ResourceGroupType } from '../types.js'
 import { profileIcons } from './icons.js'
 import { DataGraphRenderer } from './renderers/DataGraphRenderer.js'
 import type { IContextualMenuItem } from '@fluentui/react'
-import { KnownRel, createDataGraphSchemaObject } from '@datashaper/schema'
+import { KnownRel, createDataGraphSchemaObject, KnownProfile } from '@datashaper/schema'
 import { DeriveNodesFromEdges } from './renderers/datagraph/DeriveNodesFromEdgesTool.js'
 
 export class DataGraphAppProfile
@@ -62,7 +62,8 @@ export class DataGraphAppProfile
 		}
 
 		const result: IContextualMenuItem[] = []
-		// TODO: these could actually exist even if inputs are mapped, which would trigger a replacement
+		// TODO: these could actually exist even if inputs are mapped, which should trigger a replacement
+		// but it is important that there is only one nodes and one edges table per graph
 		if (resource.nodesInput == null) {
 			result.push({
 				key: 'add-nodes',
@@ -70,7 +71,7 @@ export class DataGraphAppProfile
 				iconProps: { iconName: profileIcons.tablebundle },
 				subMenuProps: {
 					items: dp.resources
-						.filter((r) => r.profile === 'tablebundle')
+						.filter((r) => r.profile === KnownProfile.TableBundle || r.profile === KnownProfile.DataTable)
 						.map((r) => ({
 							key: r.name,
 							text: r.name,

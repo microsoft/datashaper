@@ -34,6 +34,7 @@ export interface AppProfile<Res extends Resource = Resource, Schema extends Reso
     getHelp?: () => Record<string, string>;
     getMenuItems?: (resource: Res) => IContextualMenuItem[];
     getSettingsConfig?: () => SettingsConfig;
+    getToolboxItems?: () => ToolboxItem[];
     group?: ResourceGroupType;
     iconName: string;
     renderer: React.ComponentType<{
@@ -173,6 +174,18 @@ export enum ResourceTreeViewMode {
     Expanded = "expanded",
     // (undocumented)
     Hidden = "hidden"
+}
+
+// Warning: (ae-missing-release-tag) "ToolboxItem" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ToolboxItem {
+    // (undocumented)
+    key: string;
+    // (undocumented)
+    renderer: React.ComponentType<any>;
+    // (undocumented)
+    title: string;
 }
 
 // Warning: (ae-missing-release-tag) "useApplicationSettingsValue" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
