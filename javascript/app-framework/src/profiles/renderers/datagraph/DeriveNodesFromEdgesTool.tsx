@@ -5,10 +5,10 @@
 
 import { memo, useCallback, useMemo, useState } from 'react'
 import type { Resource } from '@datashaper/workflow'
-import { DataTableProfile, CodebookProfile, TableBundleProfile, DataGraph } from '@datashaper/workflow'
+import { DataTableProfile, CodebookProfile, TableBundleProfile, DataGraph, ResourceReference } from '@datashaper/workflow'
 import { ToolboxRendererProps } from '../../toolbox/types.js'
 import styled from 'styled-components'
-import { KnownProfile } from '@datashaper/schema'
+import { KnownProfile, KnownRel } from '@datashaper/schema'
 import { Dropdown, PrimaryButton, type IDropdownOption } from '@fluentui/react'
 import { deriveNodesFromEdges, generateCodebook } from '@datashaper/tables'
 
@@ -45,15 +45,6 @@ export const DeriveNodesFromEdges: React.FC<ToolboxRendererProps> = memo(
 
 				const codebook = await (new CodebookProfile).createInstance?.(await generateCodebook(nodes))
 
-				// link it directly to a graph if one is selected
-				// otherwise, the user can manually bind it
-				if (selectedGraph) {
-					selectedGraph.sources = [table, ...selectedGraph.sources]
-					selectedGraph.nodes.input = table.name
-					selectedGraph.nodes.bindings.x.field = 'x'
-					selectedGraph.nodes.bindings.y.field = 'y'
-				}
-												
 				const bundle = await (new TableBundleProfile).createInstance?.({
 					profile: KnownProfile.TableBundle,
 					name: 'New Nodes'
@@ -61,6 +52,21 @@ export const DeriveNodesFromEdges: React.FC<ToolboxRendererProps> = memo(
 
 				bundle.sources = [table, codebook]
 				onResourceCreated?.(bundle)
+
+				// link it directly to a graph if one is selected
+				// otherwise, the user can manually bind it
+				// TODO: remove existing nodes if one exists
+				// TODO: should we link the edges table here automatically too?
+				if (selectedGraph) {
+					const reference = new ResourceReference()
+					reference.target = bundle
+					reference.rel = KnownRel.Input
+					selectedGraph.sources = [reference, ...selectedGraph.sources]
+					selectedGraph.nodes.input = bundle.name
+					selectedGraph.nodes.bindings.x.field = 'x'
+					selectedGraph.nodes.bindings.y.field = 'y'
+				}
+												
 			}
 		}, [selectedTable, selectedGraph, onResourceCreated])
 		return <Container>
