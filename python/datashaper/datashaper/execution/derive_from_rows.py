@@ -1,4 +1,5 @@
 """Apply a generic transform function to each row in a table."""
+
 import logging
 from collections.abc import Awaitable, Callable
 from typing import TypeVar
@@ -25,7 +26,9 @@ async def derive_from_rows(
     """Apply a generic transform function to each row. Any errors will be reported and thrown."""
     match scheduling_type:
         case AsyncType.AsyncIO:
-            return await derive_from_rows_asyncio(input, transform, callbacks)
+            return await derive_from_rows_asyncio(
+                input, transform, callbacks, num_threads
+            )
         case AsyncType.Threaded:
             return await derive_from_rows_asyncio_threads(
                 input, transform, callbacks, num_threads
