@@ -399,6 +399,7 @@ class Workflow(Generic[Context]):
             }
             callbacks.on_step_start(node, verb_args)
             callbacks.on_step_progress(node, Progress(percent=0))
+            log.info("executing verb %s", node.verb.name)
             result = node.verb.func(**verb_args)
 
             # Unroll the result if it's a coroutine
@@ -407,6 +408,7 @@ class Workflow(Generic[Context]):
                 result = await result
         except Exception as e:
             message = f'Error executing verb "{node.verb.name}" in {self.name}: {e}'
+            log.exception(message)
             callbacks.on_error(message, e, traceback.format_exc())
             raise
         else:

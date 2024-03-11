@@ -1,7 +1,8 @@
 """A module containing the derive_from_rows_async method."""
+
 import logging
 import traceback
-from collections.abc import Awaitable, Callable
+from collections.abc import Awaitable, Callable, Hashable
 from typing import Any, TypeVar
 
 import pandas as pd
@@ -12,7 +13,7 @@ from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
 
 ItemType = TypeVar("ItemType")
 
-ExecuteFn = Callable[[tuple[Any, pd.Series]], Awaitable[ItemType | None]]
+ExecuteFn = Callable[[tuple[Hashable, pd.Series]], Awaitable[ItemType | None]]
 GatherFn = Callable[[ExecuteFn], Awaitable[list[ItemType | None]]]
 
 
