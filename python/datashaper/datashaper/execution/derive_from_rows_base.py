@@ -4,7 +4,7 @@ import inspect
 import logging
 import traceback
 from collections.abc import Awaitable, Callable, Hashable
-from typing import Any, TypeVar
+from typing import Any, TypeVar, cast
 
 import pandas as pd
 
@@ -42,7 +42,7 @@ async def derive_from_rows_base(
             errors.append((e, traceback.format_exc()))
             return None
         else:
-            return result
+            return cast(ItemType, result)
         finally:
             tick(1)
 
