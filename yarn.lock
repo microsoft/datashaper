@@ -4105,7 +4105,7 @@ __metadata:
     "@fluentui/react-hooks": "npm:^8.6.27"
     "@fluentui/utilities": "npm:^8.13.16"
     "@open-wc/webpack-import-meta-loader": "npm:^0.4.7"
-    "@storybook/addon-a11y": "npm:7.0.20"
+    "@storybook/addon-a11y": "npm:7.6.17"
     "@storybook/addon-docs": "npm:7.0.20"
     "@storybook/addon-essentials": "npm:7.0.20"
     "@storybook/addon-interactions": "npm:7.0.20"
@@ -6489,32 +6489,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-a11y@npm:7.0.20":
-  version: 7.0.20
-  resolution: "@storybook/addon-a11y@npm:7.0.20"
+"@storybook/addon-a11y@npm:7.6.17":
+  version: 7.6.17
+  resolution: "@storybook/addon-a11y@npm:7.6.17"
   dependencies:
-    "@storybook/addon-highlight": "npm:7.0.20"
-    "@storybook/channels": "npm:7.0.20"
-    "@storybook/client-logger": "npm:7.0.20"
-    "@storybook/components": "npm:7.0.20"
-    "@storybook/core-events": "npm:7.0.20"
-    "@storybook/global": "npm:^5.0.0"
-    "@storybook/manager-api": "npm:7.0.20"
-    "@storybook/preview-api": "npm:7.0.20"
-    "@storybook/theming": "npm:7.0.20"
-    "@storybook/types": "npm:7.0.20"
+    "@storybook/addon-highlight": "npm:7.6.17"
     axe-core: "npm:^4.2.0"
-    lodash: "npm:^4.17.21"
-    react-resize-detector: "npm:^7.1.2"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  peerDependenciesMeta:
-    react:
-      optional: true
-    react-dom:
-      optional: true
-  checksum: 10/5f9be317b1876e3d855494e2e75de83c111b620bbef3416e403cfef8567d961d7c8904d491481079fbe4d7415f69a35d154da5e6fc68138f7986ed99ad9152b1
+  checksum: 10/9c3570f74c38794b793133945c5e84b6d403bc60461196a666273a5e21b80a3b89c63f9a426a9ed9d51a3a198e07e2192d24fa6e30957f0a01ee551f719c0df9
   languageName: node
   linkType: hard
 
@@ -6668,6 +6649,15 @@ __metadata:
     "@storybook/global": "npm:^5.0.0"
     "@storybook/preview-api": "npm:7.0.20"
   checksum: 10/bd0d7355ecb434c158427d7932b12c563c87e5f7ed8318cc3379fed2936385c4862eab1991eb37e1db30dfc40180484fe1fd740b8bda70e89240b5bab1ea13ea
+  languageName: node
+  linkType: hard
+
+"@storybook/addon-highlight@npm:7.6.17":
+  version: 7.6.17
+  resolution: "@storybook/addon-highlight@npm:7.6.17"
+  dependencies:
+    "@storybook/global": "npm:^5.0.0"
+  checksum: 10/b2d213b101013de5da40d6b66999b36e66a321834684c5c594de1a5c96e527d9ee9add844006e0ca36a4a638cea8325c9db0e3618616da04a1039b8d18b92ea3
   languageName: node
   linkType: hard
 
@@ -19446,18 +19436,6 @@ __metadata:
   version: 0.11.0
   resolution: "react-refresh@npm:0.11.0"
   checksum: 10/1275699e2edc39dbced9bdb00e2e167e3a2868e0c8ae117ba9551556368cfe70453068e5209240d827122aad5504a64c59a24b9b9a2a0ab932472c8750203ea3
-  languageName: node
-  linkType: hard
-
-"react-resize-detector@npm:^7.1.2":
-  version: 7.1.2
-  resolution: "react-resize-detector@npm:7.1.2"
-  dependencies:
-    lodash: "npm:^4.17.21"
-  peerDependencies:
-    react: ^16.0.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: 10/a8a564577f41622a3c98a2abef84b703de1ae20197819598aa738062162e2660a370fb7b0bc1598d5bcb0f8cb8b69337ea199e7c56fc507d32f6d0cd48a386df
   languageName: node
   linkType: hard
 
