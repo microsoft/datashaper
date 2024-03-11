@@ -1,5 +1,6 @@
 """A module containing the derive_from_rows_async method."""
 
+import inspect
 import logging
 import traceback
 from collections.abc import Awaitable, Callable, Hashable
@@ -33,11 +34,15 @@ async def derive_from_rows_base(
 
     async def execute(row: tuple[Any, pd.Series]) -> ItemType | None:
         try:
-            return await transform(row[1])
+            result = transform(row[1])
+            if inspect.iscoroutine(result):
+                result = await result
         except Exception as e:
             logging.exception("parallel transformation error")
             errors.append((e, traceback.format_exc()))
             return None
+        else:
+            return result
         finally:
             tick(1)
 
