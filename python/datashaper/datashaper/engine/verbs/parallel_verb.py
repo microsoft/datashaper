@@ -9,7 +9,8 @@ import logging
 import math
 import traceback
 from collections import namedtuple
-from collections.abc import Awaitable, Callable
+from collections.abc import Awaitable, Callable, Sized
+from enum import Enum
 from inspect import signature
 from typing import Any, Concatenate, ParamSpec, cast
 
@@ -32,6 +33,15 @@ P = ParamSpec("P")
 
 _CHUNKS_NOT_SUPPORTED = "chunk_size > 1 is only supported for DataFrame inputs and outputs. Use chunk_size = 1 for item-wise operations."
 
+_DEFAULT_CHUNK_SIZE = 250
+
+
+class OperationType(str, Enum):
+    """The type of operation to perform."""
+
+    ROW_WISE = "row_wise"
+    CHUNK = "chunk"
+
 
 def new_row(old_tuple: tuple, new_column_name: str, value: Any) -> tuple:
     """Emit a new row for a row-wise operations."""
@@ -53,6 +63,7 @@ def parallel_verb(
     override_existing: bool = False,
     asyncio_type: AsyncType = AsyncType.AsyncIO,
     merge: Callable[[list[Table | tuple | None]], Table] = default_merge,
+    operation_type: OperationType = OperationType.ROW_WISE,
     **_kwargs: dict,
 ) -> Callable:
     """Apply a decorator for registering a parallel verb."""
@@ -76,14 +87,15 @@ def parallel_verb(
             **kwargs: P.kwargs,
         ) -> TableContainer:
             input_table = input.source.table
-            chunk_size: int = kwargs.pop("chunk_size", 1)  # type: ignore
-            if chunk_size == 1:
+            if operation_type == OperationType.ROW_WISE:
                 chunks = input_table.itertuples()
             elif (
-                chunk_size > 0
-                and signature(func).parameters["chunk"].annotation == Table
+                signature(func).parameters["chunk"].annotation == Table
                 and signature(func).return_annotation == Table
             ):
+                chunk_size: int = cast(
+                    int, kwargs.pop("chunk_size", _DEFAULT_CHUNK_SIZE)
+                )
                 chunks = np.array_split(  # type: ignore
                     input_table,  # type: ignore
                     math.ceil(len(input_table) / chunk_size),  # type: ignore
@@ -93,7 +105,9 @@ def parallel_verb(
 
             tick = progress_ticker(
                 callbacks.progress,
-                num_total=len(chunks) if chunk_size > 1 else len(input_table),  # type: ignore
+                num_total=len(cast(Sized, chunks))
+                if operation_type == OperationType.CHUNK
+                else len(input_table),  # type: ignore
             )
             errors = []
             stack_traces = []
@@ -141,7 +155,7 @@ def parallel_verb(
                 )
             if len(errors) > 0:
                 raise VerbParallelizationError(len(errors))
-            if chunk_size > 1:
+            if operation_type == OperationType.CHUNK:
                 return TableContainer(merge(results))  # type: ignore
 
             return TableContainer(pd.DataFrame(results))
