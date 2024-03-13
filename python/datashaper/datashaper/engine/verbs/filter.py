@@ -43,10 +43,11 @@ async def filter_verb(
     ]
     logical_operator = BooleanLogicalOperator(logical)
 
+    input_table = cast(pd.DataFrame, chunk)
+
     filter_index = filter_df(
-        chunk, FilterArgs(column, filter_criteria, logical_operator)
+        input_table, FilterArgs(column, filter_criteria, logical_operator)
     )
     sub_idx = filter_index == True  # noqa: E712
     idx = filter_index[sub_idx].index  # type: ignore
-    result = chunk[chunk.index.isin(idx)].reset_index(drop=True)
-    return result
+    return cast(Table, input_table[chunk.index.isin(idx)].reset_index(drop=True))

@@ -9,7 +9,7 @@ import logging
 import math
 import traceback
 from collections import namedtuple
-from collections.abc import Awaitable, Callable
+from collections.abc import Awaitable, Callable, Sized
 from enum import Enum
 from inspect import signature
 from typing import Any, Concatenate, ParamSpec, cast
@@ -105,7 +105,7 @@ def parallel_verb(
 
             tick = progress_ticker(
                 callbacks.progress,
-                num_total=len(chunks)
+                num_total=len(cast(Sized, chunks))
                 if operation_type == OperationType.CHUNK
                 else len(input_table),  # type: ignore
             )
