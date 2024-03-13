@@ -14,23 +14,24 @@ from datashaper.engine.types import (
     FilterArgs,
     FilterCompareType,
 )
-from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import (
-    Table,
-    VerbResult,
-    create_verb_result,
+from datashaper.engine.verbs.parallel_verb import OperationType, parallel_verb
+from datashaper.table_store.types import Table
+from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
+
+
+@parallel_verb(
+    name="filter",
+    treats_input_tables_as_immutable=True,
+    operation_type=OperationType.CHUNK,
 )
-
-
-@verb(name="filter", treats_input_tables_as_immutable=True)
-def filter_verb(
-    input: VerbInput,
+async def filter_verb(
+    chunk: Table,
+    callbacks: VerbCallbacks,  # noqa: ARG001
     column: str,
     criteria: list,
     logical: str = "or",
     **_kwargs: dict,
-) -> VerbResult:
+) -> Table:
     """Filter verb implementation."""
     filter_criteria = [
         Criterion(
@@ -41,13 +42,11 @@ def filter_verb(
         for arg in criteria
     ]
     logical_operator = BooleanLogicalOperator(logical)
-    input_table = cast(pd.DataFrame, input.get_input())
 
     filter_index = filter_df(
-        input_table, FilterArgs(column, filter_criteria, logical_operator)
+        chunk, FilterArgs(column, filter_criteria, logical_operator)
     )
     sub_idx = filter_index == True  # noqa: E712
     idx = filter_index[sub_idx].index  # type: ignore
-    output = input_table[input_table.index.isin(idx)].reset_index(drop=True)
-
-    return create_verb_result(cast(Table, output))
+    result = chunk[chunk.index.isin(idx)].reset_index(drop=True)
+    return result
