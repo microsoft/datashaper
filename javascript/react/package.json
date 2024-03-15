@@ -45,7 +45,7 @@
 		"@essex/styled-components": "^0.0.13",
 		"ahooks": "^3.7.7",
 		"d3-format": "^3.1.0",
-		"immer": "^9.0.21",
+		"immer": "^10.0.3",
 		"lodash-es": "^4.17.21",
 		"observable-hooks": "^4.2.3",
 		"react-if": "^4.1.4",

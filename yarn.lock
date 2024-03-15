@@ -4027,7 +4027,7 @@ __metadata:
     ahooks: "npm:^3.7.7"
     arquero: "npm:^5.4.0"
     d3-format: "npm:^3.1.0"
-    immer: "npm:^9.0.21"
+    immer: "npm:^10.0.3"
     lodash-es: "npm:^4.17.21"
     observable-hooks: "npm:^4.2.3"
     react: "npm:^18.2.0"
@@ -15276,10 +15276,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"immer@npm:^9.0.21":
-  version: 9.0.21
-  resolution: "immer@npm:9.0.21"
-  checksum: 10/8455d6b4dc8abfe40f06eeec9bcc944d147c81279424c0f927a4d4905ae34e5af19ab6da60bcc700c14f51c452867d7089b3b9236f5a9a2248e39b4a09ee89de
+"immer@npm:^10.0.3":
+  version: 10.0.3
+  resolution: "immer@npm:10.0.3"
+  checksum: 10/0be07be2f278bd1988112613648e0cf9a64fc316d5b4817f273b519fbfed0f1714275b041911f0b8c560c199b2e3430824ce620c23262c96c9d4efc9909ff1cc
   languageName: node
   linkType: hard
 
