@@ -94,7 +94,7 @@ def _to_array(column: pd.Series, delimiter: str) -> pd.Series | pd.DataFrame:
             return value
         if isinstance(value, str):
             return value.split(delimiter)
-        return []
+        return [value]
 
     return column.apply(convert_value)
 
