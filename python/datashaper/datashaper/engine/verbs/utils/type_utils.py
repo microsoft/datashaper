@@ -25,4 +25,4 @@ def to_array_column(input: pd.Series, delimiter: str) -> pd.DataFrame:
                 v if v.strip() != "" else None for v in value.split(delimiter)
             ]
         )
-    raise ValueError(_COLUMN_NOT_ARRAY_ERROR)
+    return input.apply(lambda x: [x] if not pd.isna(x) else [])
