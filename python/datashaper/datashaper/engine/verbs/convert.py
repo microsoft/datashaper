@@ -96,7 +96,7 @@ def _to_array(column: pd.Series, delimiter: str) -> pd.Series | pd.DataFrame:
             return value.split(delimiter)
         return []
 
-    return column.apply(lambda x: convert_value(x))
+    return column.apply(convert_value)
 
 
 __type_mapping: dict[ParseType, Callable] = {
