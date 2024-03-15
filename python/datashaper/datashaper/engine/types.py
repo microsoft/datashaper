@@ -217,6 +217,7 @@ class ParseType(str, Enum):
     Integer = "int"
     Decimal = "float"
     String = "string"
+    Array = "array"
 
 
 class MergeStrategy(str, Enum):
