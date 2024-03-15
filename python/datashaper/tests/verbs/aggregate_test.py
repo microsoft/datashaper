@@ -42,3 +42,4 @@ def test_aggregate_unique():
     result = result.output.table
     assert result["id"].to_list() == [1, 2, 3]
     assert result["item_aggregated"].to_list() == [["a", "b"], ["c", "d"], ["e"]]
+    assert result.get("item") is None
