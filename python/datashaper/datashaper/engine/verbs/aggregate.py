@@ -3,6 +3,11 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Aggregate verb implementation."""
+
+from typing import cast
+
+import pandas as pd
+
 from datashaper.engine.pandas import aggregate_operation_mapping
 from datashaper.engine.types import FieldAggregateOperation
 from datashaper.engine.verbs.verb_input import VerbInput
@@ -16,16 +21,19 @@ def aggregate(
     to: str,
     groupby: list[str],
     column: str,
-    operation: str,
+    operation: FieldAggregateOperation,
     **_kwargs: dict,
 ) -> VerbResult:
     """Aggregate verb implementation."""
-    aggregate_operation = FieldAggregateOperation(operation)
-    input_table = input.get_input()
-    output = (
-        input_table[[groupby, column]]
-        .groupby(groupby)
-        .agg(aggregate_operation_mapping[aggregate_operation])
+    result = cast(
+        pd.DataFrame,
+        (
+            input.get_input()
+            .groupby(groupby)
+            .agg({column: aggregate_operation_mapping[operation]})
+        ),
     )
-    output.columns = [to]
-    return create_verb_result(table=output.reset_index())
+    result[to] = result[column]
+    result.drop(column, axis=1, inplace=True)
+
+    return create_verb_result(table=result.reset_index())

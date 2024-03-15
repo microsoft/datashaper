@@ -22,14 +22,15 @@ def _get_array_item(array: list, index: int) -> Any:
 
 
 def __normal_spread(
-    table: pd.DataFrame, column: str, to: list[str] | None, delimiter: str
+    table: pd.DataFrame, column: str, to: str | list[str] | None, delimiter: str
 ) -> pd.DataFrame:
-    input_col = to_array_column(table[column], delimiter)
-    max_length = input_col.apply(len).max()
+    input_col = to_array_column(cast(pd.Series, table[column]), delimiter)
+    max_length = cast(int, input_col.apply(len).max())
     num_output_columns = min(max_length, len(to)) if to is not None else max_length
+    to_is_array = isinstance(to, list)
 
     for col in range(num_output_columns):
-        col_name = to[col] if to is not None else f"{column}_{col + 1}"
+        col_name = to[col] if to_is_array else f"{to or column}_{col + 1}"
         table[col_name] = input_col.apply(lambda x, col=col: _get_array_item(x, col))
 
     return table
@@ -38,7 +39,7 @@ def __normal_spread(
 def __onehot_spread(
     table: pd.DataFrame, column: str, to: str | None, delimiter: str
 ) -> pd.DataFrame:
-    input_col = to_array_column(table[column], delimiter)
+    input_col = to_array_column(cast(pd.Series, table[column]), delimiter)
     onehot = input_col.str.join("|").str.get_dummies()
 
     for column_name in onehot.columns:
