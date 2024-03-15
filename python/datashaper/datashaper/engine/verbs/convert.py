@@ -3,10 +3,11 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Convert verb implementation."""
+
 import numbers
 from collections.abc import Callable
 from datetime import datetime
-from typing import cast
+from typing import Any, cast
 
 import numpy as np
 import pandas as pd
@@ -85,11 +86,24 @@ def _to_datetime(column: pd.Series) -> pd.Series:
     return pd.to_datetime(column, errors="coerce")
 
 
+def _to_array(column: pd.Series, delimiter: str) -> pd.Series | pd.DataFrame:
+    def convert_value(value: Any) -> list:
+        if pd.isna(value):
+            return []
+        if isinstance(value, list):
+            return value
+        if isinstance(value, str):
+            return value.split(delimiter)
+        return []
+
+    return column.apply(lambda x: convert_value(x))
+
+
 __type_mapping: dict[ParseType, Callable] = {
     ParseType.Boolean: lambda column, **_kwargs: column.apply(
         lambda x: _convert_bool(x)
     ),
-    ParseType.Date: lambda column, format_pattern, **_kwargs: _to_datetime(column),  # noqa: ARG005
+    ParseType.Date: lambda column, **_kwargs: _to_datetime(column),
     ParseType.Decimal: lambda column, **_kwargs: column.apply(
         lambda x: _convert_float(x)
     ),
@@ -97,6 +111,7 @@ __type_mapping: dict[ParseType, Callable] = {
     ParseType.String: lambda column, format_pattern, **_kwargs: _to_str(
         column, format_pattern
     ),
+    ParseType.Array: lambda column, delimiter, **_kwargs: _to_array(column, delimiter),
 }
 
 
@@ -107,6 +122,7 @@ def convert(
     to: str,
     type: str,  # noqa: A002
     radix: int | None = None,
+    delimiter: str | None = ",",
     formatPattern: str = "%Y-%m-%d",  # noqa: N803
     **_kwargs: dict,
 ) -> VerbResult:
@@ -116,7 +132,10 @@ def convert(
     output = cast(pd.DataFrame, input_table)
 
     output[to] = __type_mapping[parse_type](
-        column=output[column], radix=radix, format_pattern=formatPattern
+        column=output[column],
+        radix=radix,
+        format_pattern=formatPattern,
+        delimiter=delimiter,
     )
 
     return create_verb_result(output)
