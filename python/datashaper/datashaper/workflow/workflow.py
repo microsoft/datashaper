@@ -74,6 +74,13 @@ class Workflow(Generic[Context]):
     _schema_path: str | None
     """Externals that this workflow depends on"""
 
+    def dispose(self) -> None:
+        """Dispose of the workflow and its resources."""
+        self._inputs.clear()
+        self._graph.clear()
+        self._dependency_graph.clear()
+        self._schema.clear()
+
     def __init__(
         self,
         schema: dict,
