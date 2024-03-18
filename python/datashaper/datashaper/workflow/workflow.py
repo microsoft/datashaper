@@ -63,8 +63,8 @@ class PandasDtypeBackend(str, Enum):
 class Workflow(Generic[Context]):
     """A data processing graph."""
 
+    _table_store: TableStore
     _schema: dict
-    _inputs: dict[str, TableContainer]
     _graph: dict[str, ExecutionNode]
     _dependency_graph: dict[str, set[str]]
     _last_step_id: str
@@ -76,7 +76,7 @@ class Workflow(Generic[Context]):
 
     def dispose(self) -> None:
         """Dispose of the workflow and its resources."""
-        self._inputs.clear()
+        self._table_store.dispose()
         self._graph.clear()
         self._dependency_graph.clear()
         self._schema.clear()
