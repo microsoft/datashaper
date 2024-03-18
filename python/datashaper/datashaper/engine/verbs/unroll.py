@@ -16,6 +16,5 @@ def unroll(
     **_kwargs: dict,
 ) -> VerbResult:
     """Unroll a column."""
-    input_table = input.get_input()
-    output = input_table.explode(column)
-    return create_verb_result(output)
+    table = input.get_input()
+    return create_verb_result(table.explode(column))
