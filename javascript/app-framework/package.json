@@ -62,7 +62,7 @@
 		"react-router-dom": "^6.12.1",
 		"recoil": "^0.7.7",
 		"styled-components": "^5.3.11",
-		"typescript": "^5.1.3"
+		"typescript": "^5.4.2"
 	},
 	"peerDependencies": {
 		"@fluentui/react": ">= 8",
