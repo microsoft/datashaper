@@ -47,9 +47,8 @@ boolean_function_map = {
 
 
 def __correct_unknown_value(df: pd.DataFrame, columns: list[str], target: str) -> None:
-    df[target] = df[columns + [target]].apply(
-        lambda x: None if pd.isna(x[columns]).any() else x[target], axis=1
-    )
+    na_index = df[df[columns].isna().any(axis=1)].index
+    df.loc[na_index, target] = None
 
 
 def __equals(
