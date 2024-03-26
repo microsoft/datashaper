@@ -6,15 +6,13 @@ import type { CopyArgs } from '@datashaper/schema'
 
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
-import { escape } from 'arquero'
 
 export const copyStep: ColumnTableStep<CopyArgs> = (input, { column, to }) => {
-	// eslint-disable-next-line
-	const func: object = escape((d: any) => {
-		return d[column]
-	})
-
-	return input.derive({ [to]: func })
+	return input
+		.params({
+			column,
+		})
+		.derive({ [to]: (d: any, $: any) => d[$.column] })
 }
 
 export const copy = stepVerbFactory(copyStep)

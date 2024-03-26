@@ -7,14 +7,15 @@ import type { StringsArgs } from '@datashaper/schema'
 
 import type { ColumnTableStep } from '../util/factories.js'
 import { stepVerbFactory } from '../util/factories.js'
-import { escape, op } from 'arquero'
+import { op } from 'arquero'
 
 export const lowerStep: ColumnTableStep<StringsArgs> = (
 	input,
 	{ column, to },
 ) => {
-	const fn = escape((d: any) => op.lower(d[column]))
-	return input.derive({ [to]: fn })
+	return input
+		.params({ column })
+		.derive({ [to]: (d: any, $: any) => op.lower(d[$.column]) })
 }
 
 export const lower = stepVerbFactory(lowerStep)
