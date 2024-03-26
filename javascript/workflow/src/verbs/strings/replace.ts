@@ -7,7 +7,7 @@ import type { StringsReplaceArgs } from '@datashaper/schema'
 
 import type { ColumnTableStep } from '../util/factories.js'
 import { stepVerbFactory } from '../util/factories.js'
-import { escape, op } from 'arquero'
+import { op } from 'arquero'
 
 export const replaceStep: ColumnTableStep<StringsReplaceArgs> = (
 	input,
@@ -15,8 +15,15 @@ export const replaceStep: ColumnTableStep<StringsReplaceArgs> = (
 ) => {
 	const flags = `${globalSearch ? 'g' : ''}${caseInsensitive ? 'i' : ''}`
 	const regex = new RegExp(pattern, flags)
-	const fn = escape((d: any) => op.replace(d[column], regex, replacement))
-	return input.derive({ [to]: fn })
+	return input
+		.params({
+			column,
+			regex,
+			replacement,
+		})
+		.derive({
+			[to]: (d: any, $: any) => op.replace(d[$.column], $.regex, $.replacement),
+		})
 }
 
 export const replace = stepVerbFactory(replaceStep)
