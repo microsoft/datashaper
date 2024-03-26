@@ -10,7 +10,7 @@ import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 
 /**
- * Executes a  one-hot encoding. This creates a new column for each unique value in the specified columns.
+ * Executes a one-hot encoding. This creates a new column for each unique value in the specified columns.
  * Optional prefixes can be specified for the output columns, to help differentiate source columns on large tables.
  */
 export const onehotStep: ColumnTableStep<OnehotArgs> = (
@@ -30,9 +30,7 @@ export const onehotStep: ColumnTableStep<OnehotArgs> = (
 		) as ExprObject
 		return acc
 	}, {} as Record<string, ExprObject>)
-	const onehotted = input.derive(args, {
-		after: input.columnNames()[input.numCols() - 1],
-	})
+	const onehotted = input.derive(args)
 	return preserveSource ? onehotted : onehotted.select(not(column))
 }
 
