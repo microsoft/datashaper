@@ -20,6 +20,7 @@ export const Container = styled.footer`
 
 export const constants = {
 	privacyUrl: 'https://go.microsoft.com/fwlink/?LinkId=521839',
+	consumerHealthUrl: 'https://go.microsoft.com/fwlink/?LinkId=2259814',
 	termsOfUseUrl: 'https://go.microsoft.com/fwlink/?LinkID=206977',
 	trademarksUrl: 'https://www.microsoft.com/trademarks',
 	microsoft: 'https://www.microsoft.com',
