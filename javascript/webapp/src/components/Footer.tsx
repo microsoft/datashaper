@@ -28,6 +28,10 @@ export const Footer: FC = memo(function Footer() {
 				Privacy
 			</Link>
 			{' | '}
+			<Link href={constants.consumerHealthUrl} style={style}>
+				Consumer Health Privacy
+			</Link>
+			{' | '}
 			<Link id={'managecookies'} onClick={manageConsent} style={style}>
 				Cookies
 			</Link>
