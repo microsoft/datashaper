@@ -173,7 +173,7 @@ class Workflow(Generic[Context]):
             if "input" not in steps[0]:
                 deps.add(DEFAULT_INPUT_NAME)
 
-            for step in self._schema["steps"]:
+            for step in steps:
                 if "id" in step:
                     known.add(step["id"])
 
@@ -186,27 +186,24 @@ class Workflow(Generic[Context]):
 
     @staticmethod
     def __list_inputs(input: str | dict | None) -> list[str]:
+        """List inputs on `step.input`."""
         if input is None:
             return []
+        if isinstance(input, str):
+            return [input]
 
-        inputs: list[str] = []
+        result: list[str] = []
 
         def resolve(value: str | dict) -> str:
-            if isinstance(value, str):
-                return value
-            return value["step"]
+            return value if isinstance(value, str) else value["step"]
 
-        if isinstance(input, str):
-            inputs.append(input)
-        else:
-            for value in input.values():
-                if isinstance(value, list):
-                    for dep in value:
-                        inputs.append(resolve(dep))  # noqa: PERF401
-                else:
-                    inputs.append(resolve(value))
+        for value in input.values():
+            if isinstance(value, list):
+                result += [resolve(v) for v in value]
+            else:
+                result.append(resolve(value))
 
-        return inputs
+        return result
 
     @staticmethod
     def __get_verb(verb: str) -> VerbDetails:

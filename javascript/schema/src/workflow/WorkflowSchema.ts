@@ -4,6 +4,7 @@
  */
 import type { ResourceSchema } from '../datapackage/ResourceSchema.js'
 import type { Step } from './Step.js'
+import type { WorkflowStepOutput } from './bindings.js'
 
 /**
  * The root wrangling workflow specification.
@@ -20,4 +21,13 @@ export interface WorkflowSchema extends ResourceSchema {
 	 * A list of input names that are expected to be provided in addition to the workflow steps
 	 */
 	input?: string[]
+
+	/**
+	 * A set of named outputs that this workflow will provide. 
+	 * By default, workflows emit a default output, which is bound to the default output
+	 * of the last step, but this configuration allows for more named outputs to be available.
+	 */
+	output?: {
+		[key: string]: WorkflowStepOutput
+	}
 }
