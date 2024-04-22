@@ -490,6 +490,18 @@ export interface FieldMetadata {
     type?: DataType;
 }
 
+// Warning: (ae-missing-release-tag) "FileType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export enum FileType {
+    // (undocumented)
+    Csv = "csv",
+    // (undocumented)
+    Json = "json",
+    // (undocumented)
+    Parquet = "parquet"
+}
+
 // Warning: (ae-missing-release-tag) "FillArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -895,6 +907,16 @@ export enum SetOp {
     Difference = "difference",
     Intersect = "intersect",
     Union = "union"
+}
+
+// Warning: (ae-missing-release-tag) "SnapshotArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface SnapshotArgs {
+    // (undocumented)
+    fileType: FileType;
+    // (undocumented)
+    name: string;
 }
 
 // Warning: (ae-missing-release-tag) "SortDirection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
