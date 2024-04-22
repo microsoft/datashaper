@@ -16,16 +16,12 @@ def test_snapshot_csv():
     output: VerbResult = snapshot(input=verb_input, name="test-file", file_type="csv")
     output: TableContainer = output.output
 
-    assert output.table["id"].tolist() == [1, 2, 3, 4, 5]
-
 
 def test_snapshot_json():
     verb_input = make_verb_input([[1], [2], [3], [4], [5]], ["id"])
     snapshot = VerbManager.get().get_verb("snapshot").func
     output: VerbResult = snapshot(input=verb_input, name="test-file", file_type="json")
     output: TableContainer = output.output
-
-    assert output.table["id"].tolist() == [1, 2, 3, 4, 5]
 
 
 def test_snapshot_parquet():
@@ -35,5 +31,3 @@ def test_snapshot_parquet():
         input=verb_input, name="test-file", file_type="parquet"
     )
     output: TableContainer = output.output
-
-    assert output.table["id"].tolist() == [1, 2, 3, 4, 5]

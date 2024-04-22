@@ -23,15 +23,15 @@ def snapshot(
 ) -> VerbResult:
     """Snapshot verb implementation."""
     output = cast(pd.DataFrame, input.get_input())
-    file_name = name + "." + file_type
+    file_name = "./" + name + "." + file_type
 
-    if format == FileType.Csv:
+    if file_type == FileType.Csv:
         output.to_csv(file_name)
 
-    if format == FileType.Json:
+    if file_type == FileType.Json:
         output.to_json(file_name, orient="records", compression="infer")
 
-    if format == FileType.Parquet:
+    if file_type == FileType.Parquet:
         output.to_parquet(file_name)
 
     return create_verb_result(output)
