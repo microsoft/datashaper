@@ -243,6 +243,14 @@ class WindowFunction(str, Enum):
     UUID = "uuid"
 
 
+class FileType(str, Enum):
+    """File type used for the snapshot verb.."""
+
+    Json = "json"
+    Csv = "csv"
+    Parquet = "parquet"
+
+
 @dataclass
 class OrderByInstruction:
     """Details regarding how to order a column."""
