@@ -13,7 +13,7 @@ def make_verb_input(data: list, columns: list[str]):
 def test_snapshot_csv():
     verb_input = make_verb_input([[1], [2], [3], [4], [5]], ["id"])
     window = VerbManager.get().get_verb("snapshot").func
-    output: VerbResult = window(input=verb_input, name="test-file", fileType="csv")
+    output: VerbResult = window(input=verb_input, name="test-file", file_type="csv")
     output: TableContainer = output.output
 
     assert 5 == 5
@@ -22,7 +22,7 @@ def test_snapshot_csv():
 def test_snapshot_json():
     verb_input = make_verb_input([[1], [2], [3], [4], [5]], ["id"])
     window = VerbManager.get().get_verb("snapshot").func
-    output: VerbResult = window(input=verb_input, name="test-file", fileType="json")
+    output: VerbResult = window(input=verb_input, name="test-file", file_type="json")
     output: TableContainer = output.output
 
     assert 5 == 5
@@ -31,7 +31,7 @@ def test_snapshot_json():
 def test_snapshot_parquet():
     verb_input = make_verb_input([[1], [2], [3], [4], [5]], ["id"])
     window = VerbManager.get().get_verb("snapshot").func
-    output: VerbResult = window(input=verb_input, name="test-file", fileType="parquet")
+    output: VerbResult = window(input=verb_input, name="test-file", file_type="parquet")
     output: TableContainer = output.output
 
     assert 5 == 5
