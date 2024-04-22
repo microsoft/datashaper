@@ -19,6 +19,7 @@
 |  [DateComparisonOperator](./schema.datecomparisonoperator.md) |  |
 |  [ErrorCode](./schema.errorcode.md) |  |
 |  [FieldAggregateOperation](./schema.fieldaggregateoperation.md) | This is the subset of aggregate functions that can operate on a single field so we don't accommodate additional args. See https://uwdata.github.io/arquero/api/op\#aggregate-functions |
+|  [FileType](./schema.filetype.md) | These are the available formats for the snapshot verb. |
 |  [FilterCompareType](./schema.filtercomparetype.md) | Indicates the comparison type used for a filter operation. This is done on a row-by-row basis. |
 |  [JoinStrategy](./schema.joinstrategy.md) |  |
 |  [KnownProfile](./schema.knownprofile.md) |  |
@@ -98,6 +99,7 @@
 |  [ResourceSchema](./schema.resourceschema.md) | Parent class for any resource type understood by the system. Any object type that extends from Resource is expected to have a standalone schema published. For project state, this can be left as generic as possible for now. |
 |  [RollupArgs](./schema.rollupargs.md) |  |
 |  [SampleArgs](./schema.sampleargs.md) |  |
+|  [SnapshotArgs](./schema.snapshotargs.md) |  |
 |  [SpreadArgs](./schema.spreadargs.md) |  |
 |  [StepJsonCommon](./schema.stepjsoncommon.md) | Common step properties |
 |  [StringsArgs](./schema.stringsargs.md) |  |

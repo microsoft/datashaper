@@ -358,6 +358,15 @@ export enum WindowFunction {
 	UUID = 'uuid'
 }
 
+/**
+ * These are the available formats for the snapshot verb.
+ */
+export enum FileType {
+	Csv = 'csv',
+	Json = 'json',
+	Parquet = 'parquet'
+}
+
 export interface AggregateArgs extends RollupArgs {
 	/**
 	 * Column to group by
@@ -720,6 +729,11 @@ export interface StringsArgs extends InputColumnArgs, OutputColumnArgs {}
 export interface PrintArgs {
 	message?: string
 	limit?: number 
+}
+
+export interface SnapshotArgs {
+	name: string
+	fileType: FileType 
 }
 
 export interface StringsReplaceArgs extends StringsArgs {

@@ -5620,6 +5620,85 @@
           "extendsTokenRanges": []
         },
         {
+          "kind": "Enum",
+          "canonicalReference": "@datashaper/schema!FileType:enum",
+          "docComment": "/**\n * These are the available formats for the snapshot verb.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare enum FileType "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "FileType",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!FileType.Csv:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Csv = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"csv\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Csv"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!FileType.Json:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Json = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"json\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Json"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!FileType.Parquet:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Parquet = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"parquet\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Parquet"
+            }
+          ]
+        },
+        {
           "kind": "Interface",
           "canonicalReference": "@datashaper/schema!FillArgs:interface",
           "docComment": "",
@@ -9268,6 +9347,78 @@
               "name": "Union"
             }
           ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!SnapshotArgs:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface SnapshotArgs "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "SnapshotArgs",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!SnapshotArgs#fileType:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fileType: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FileType",
+                  "canonicalReference": "@datashaper/schema!FileType:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "fileType",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!SnapshotArgs#name:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "name: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "name",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
         },
         {
           "kind": "Enum",
