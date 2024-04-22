@@ -2,7 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-"""Copy verb implementation."""
+"""Snapshot verb implementation."""
 from typing import cast
 
 import pandas as pd
@@ -18,12 +18,12 @@ from .verb_input import VerbInput
 def snapshot(
     input: VerbInput,
     name: str,
-    file_type: FileType,
+    type: FileType,
     **_kwargs: dict,
 ) -> VerbResult:
     """Snapshot verb implementation."""
     output = cast(pd.DataFrame, input.get_input())
-    file_name = name + "." + file_type
+    file_name = name + "." + type
 
     if format == FileType.Csv:
         output.to_csv(file_name)
