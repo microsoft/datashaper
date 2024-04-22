@@ -31,7 +31,9 @@ def test_snapshot_json():
 def test_snapshot_parquet():
     verb_input = make_verb_input([[1], [2], [3], [4], [5]], ["id"])
     snapshot = VerbManager.get().get_verb("snapshot").func
-    output: VerbResult = snapshot(input=verb_input, name="test-file", file_type="parquet")
+    output: VerbResult = snapshot(
+        input=verb_input, name="test-file", file_type="parquet"
+    )
     output: TableContainer = output.output
 
     assert output.table["id"].tolist() == [1, 2, 3, 4, 5]
