@@ -18,12 +18,12 @@ from .verb_input import VerbInput
 def snapshot(
     input: VerbInput,
     name: str,
-    format: FileType,
+    fileType: FileType,
     **_kwargs: dict,
 ) -> VerbResult:
     """Snapshot verb implementation."""
     output = cast(pd.DataFrame, input.get_input())
-    file_name = name + "." + format
+    file_name = name + "." + fileType
 
     if format == FileType.Csv:
         output.to_csv(file_name)
