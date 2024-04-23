@@ -20,7 +20,7 @@ export const RollupFormBase: React.FC<StepFormProps<RollupArgs>> = memo(
 				enumDropdown(
 					'Function',
 					FieldAggregateOperation,
-					step.args.operation,
+					step.args.operation || FieldAggregateOperation.Count,
 					(s, val) => {
 						s.args.operation = val as FieldAggregateOperation
 					},
