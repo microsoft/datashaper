@@ -18,7 +18,7 @@ export const mainTableVerbs = [Verb.Join, Verb.Lookup]
 export const groupedColumnVerbs: GroupedVerbs[] = [
 	{
 		label: 'Aggregates',
-		verbs: [Verb.Pivot, Verb.Rollup, Verb.Unroll, Verb.Window],
+		verbs: [Verb.Rollup, Verb.Unroll, Verb.Window],
 	},
 	{
 		label: 'Transforms',
@@ -48,6 +48,7 @@ export const groupedTableVerbs: GroupedVerbs[] = [
 			Verb.Fold,
 			Verb.Unfold,
 			Verb.Merge,
+			Verb.Pivot,
 			Verb.Unhot,
 			Verb.Rename,
 		],
