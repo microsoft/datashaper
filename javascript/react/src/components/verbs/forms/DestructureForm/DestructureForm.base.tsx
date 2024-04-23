@@ -23,7 +23,7 @@ export const DestructureFormBase: React.FC<
 	const inputs = useMemo<FormInput<DestructureArgs>[]>(
 		() => [
 			{
-				label: 'Keys to filter',
+				label: 'Keys to include',
 				placeholder: 'Choose keys',
 				required: false,
 				type: FormInputType.MultiChoice,
@@ -46,7 +46,7 @@ export const DestructureFormBase: React.FC<
 				onChange: (s, val) => {
 					s.args.preserveSource = val as boolean
 				},
-				advanced: false,
+				advanced: true,
 			},
 		],
 		[step, keyNames],

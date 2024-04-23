@@ -4,8 +4,9 @@ de-structures a column containing an object into multiple columns, using keys as
 
 Additional options:
 
-- Preserve source column: retains the original column alongside with the new columns.
-- Keys: provide a list of which keys from the object the user wants to add as new columns.
+- Keys: provide a list of which keys from the object the user wants to add as new columns. Default is to use all keys.
+- Keep source columns: retains the original columns instead of replacing.
+
 
 Example
 
