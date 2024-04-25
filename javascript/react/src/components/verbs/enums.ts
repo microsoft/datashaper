@@ -28,7 +28,7 @@ export function getEnumDropdownOptions<E = Record<string, string>>(
  * @returns
  */
 function formatEnumName(name: string): string {
-	const parts = name.replace(/([A-Z])/g, ' $1').trim().split(/\s/)
+	const parts = name.replace(/([A-Z])([a-z]+)/g, ' $1$2').trim().split(/\s/)
 	const first = parts[0]
 	const rest = parts.slice(1).map((p) => p.toLocaleLowerCase())
 	return [first, ...rest].join(' ')

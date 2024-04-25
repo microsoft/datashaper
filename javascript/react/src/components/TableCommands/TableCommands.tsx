@@ -81,7 +81,7 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 					_step.args.column = selectedColumn
 				}
 				// if the verb has an output column, default it to the selected column as a direct replacement
-				if (isOutputColumnStep(verb)) {
+				if (isOutputColumnStep(verb) && selectedColumn) {
 					_step.args.to = selectedColumn
 				}
 				setStep(_step)

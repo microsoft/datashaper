@@ -21,13 +21,18 @@ export const SetOperationForm: React.FC<StepFormProps> = memo(
 		const others = useOthers(step, onChange, workflow)
 
 		const handleButtonClick = useCallback(() => {
-			onChange?.({
-				...step,
-				input: {
-					...step.input,
-					others: [...(step.input.others || EMPTY_ARRAY), { step: '' }] as any,
-				},
-			})
+			if (!step.input.others) {
+				onChange?.({
+					...step,
+					input: {
+						...step.input,
+						others: [
+							...(step.input.others || EMPTY_ARRAY),
+							{ step: '' },
+						] as any,
+					},
+				})
+			}
 		}, [step, onChange])
 
 		return (

@@ -4,7 +4,7 @@
  */
 import type { Step, Workflow } from '@datashaper/workflow'
 import { IconButton } from '@fluentui/react'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 
 import {
 	useTableDropdownOptions,
@@ -24,7 +24,26 @@ export function useOthers(
 		workflow,
 		(name) => name !== input?.id,
 	)
+	// this will ensure there is a starting dropdown to choose from
+	useEffect(() => {
+		if (input != null && onChange != null) {
+			if (!step.input.others || step.input.others.length === 0) {
+				const first = tableOptions[0]
+				onChange({
+					...step,
+					input: {
+						...step.input,
+						others: [{ step: `${first?.key}` || '' }],
+					},
+				})
+			}
+		}
+	}, [input, onChange, step, tableOptions])
+
 	return useMemo<(JSX.Element | null)[]>(() => {
+		if (!workflow) {
+			return []
+		}
 		return (step.input.others || EMPTY).map((other, index) => {
 			// on delete, remove the input
 			const handleDeleteClick = () => {
@@ -37,9 +56,6 @@ export function useOthers(
 						),
 					} as Step['input'],
 				})
-			}
-			if (!workflow) {
-				return null
 			}
 			return (
 				<LeftAlignedRow key={`set-op-${other}-${index}`}>
