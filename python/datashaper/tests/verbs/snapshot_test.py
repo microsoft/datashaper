@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 
 from datashaper.engine.verbs import VerbInput, VerbManager
 from datashaper.table_store.types import TableContainer, VerbResult
@@ -15,6 +16,8 @@ def test_snapshot_csv():
     snapshot = VerbManager.get().get_verb("snapshot").func
     output: VerbResult = snapshot(input=verb_input, name="test-file", file_type="csv")
     output: TableContainer = output.output
+    assert os.path.exists("test-file.csv")
+    os.remove("test-file.csv")
 
 
 def test_snapshot_json():
@@ -22,6 +25,8 @@ def test_snapshot_json():
     snapshot = VerbManager.get().get_verb("snapshot").func
     output: VerbResult = snapshot(input=verb_input, name="test-file", file_type="json")
     output: TableContainer = output.output
+    assert os.path.exists("test-file.json")
+    os.remove("test-file.json")
 
 
 def test_snapshot_parquet():
@@ -31,3 +36,5 @@ def test_snapshot_parquet():
         input=verb_input, name="test-file", file_type="parquet"
     )
     output: TableContainer = output.output
+    assert os.path.exists("test-file.parquet")
+    os.remove("test-file.parquet")
