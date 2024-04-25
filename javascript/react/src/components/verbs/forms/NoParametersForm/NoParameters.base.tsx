@@ -6,7 +6,7 @@ import { memo } from 'react'
 
 import type { StepFormProps } from '../types.js'
 import styled from 'styled-components'
-import { ITheme } from '@fluentui/react'
+import type { ITheme } from '@fluentui/react'
 
 /**
  * Provides inputs for an ungroup step.

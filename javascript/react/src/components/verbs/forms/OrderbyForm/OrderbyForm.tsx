@@ -28,11 +28,12 @@ export const OrderbyForm: React.FC<StepFormProps<OrderbyArgs>> = memo(
 					onChange({
 						...step,
 						args: {
-							orders: [{
-								column: dataTable.columnNames()[0] || '',
-								direction: SortDirection.Ascending,
-							}]
-							
+							orders: [
+								{
+									column: dataTable.columnNames()[0] || '',
+									direction: SortDirection.Ascending,
+								},
+							],
 						},
 					})
 				}

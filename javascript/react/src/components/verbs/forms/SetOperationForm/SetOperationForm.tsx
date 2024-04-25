@@ -26,7 +26,10 @@ export const SetOperationForm: React.FC<StepFormProps> = memo(
 					...step,
 					input: {
 						...step.input,
-						others: [...(step.input.others || EMPTY_ARRAY), { step: '' }] as any,
+						others: [
+							...(step.input.others || EMPTY_ARRAY),
+							{ step: '' },
+						] as any,
 					},
 				})
 			}

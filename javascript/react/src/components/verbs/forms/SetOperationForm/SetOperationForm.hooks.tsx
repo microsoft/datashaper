@@ -33,8 +33,8 @@ export function useOthers(
 					...step,
 					input: {
 						...step.input,
-						others: [{ step: `${first?.key}` || ''}],
-					}
+						others: [{ step: `${first?.key}` || '' }],
+					},
 				})
 			}
 		}
