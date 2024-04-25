@@ -38,7 +38,7 @@ export function useOthers(
 				})
 			}
 		}
-	}, [input, onChange, step])
+	}, [input, onChange, step, tableOptions])
 
 	return useMemo<(JSX.Element | null)[]>(() => {
 		if (!workflow) {
