@@ -3985,7 +3985,7 @@ __metadata:
     "@essex/scripts": "npm:^24.0.5"
     "@types/jest": "npm:^29.5.2"
     "@types/node": "npm:^20.2.5"
-    "@types/semver": "npm:^7.5.0"
+    "@types/semver": "npm:^7.5.8"
     arquero: "npm:^5.4.0"
     cspell: "npm:^7.3.8"
     eslint: "npm:^8.42.0"
@@ -9069,10 +9069,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/semver@npm:^7.5.0":
-  version: 7.5.0
-  resolution: "@types/semver@npm:7.5.0"
-  checksum: 10/8fbfbf79e9c14c3c20160a42145a146cba44d9763d0fac78358b394dc36e41bc2590bc4f0129c6fcbbc9b30f12ea1ba821bfe84b29dc80897f315cc7dd251393
+"@types/semver@npm:^7.5.8":
+  version: 7.5.8
+  resolution: "@types/semver@npm:7.5.8"
+  checksum: 10/3496808818ddb36deabfe4974fd343a78101fa242c4690044ccdc3b95dcf8785b494f5d628f2f47f38a702f8db9c53c67f47d7818f2be1b79f2efb09692e1178
   languageName: node
   linkType: hard
 
