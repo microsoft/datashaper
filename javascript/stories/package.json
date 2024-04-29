@@ -26,7 +26,7 @@
 		"@thematic/fluent": "^5.0.8",
 		"@thematic/react": "^2.1.9",
 		"arquero": "^5.4.0",
-		"react": "^18.2.0",
+		"react": "^18.3.1",
 		"react-dom": "^18.2.0",
 		"react-is": "^18.2.0",
 		"styled-components": "^5.3.11"
