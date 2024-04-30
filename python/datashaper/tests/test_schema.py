@@ -30,7 +30,6 @@ def load_inputs():
     
     for file in os.listdir(TABLE_STORE_PATH):
         path = Path(TABLE_STORE_PATH) / file
-        log.warning(path)
         if file.endswith(".csv"):
             table = pd.read_csv(path)
             dataframes[file.removesuffix(".csv")] = table

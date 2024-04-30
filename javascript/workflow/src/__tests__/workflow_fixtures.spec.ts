@@ -58,8 +58,8 @@ function defineTestCase(parentPath: string, test: string) {
 	const expectedOutputTables = fs
 		.readdirSync(tablesPath)
 		.filter((f) => f !== 'workflow.json')
-		.filter((f) => f.endsWith('.csv') || f.endsWith('.json'))
-	
+		.filter((f) => /\.((csv)|(json))$/.test(f))
+
 	it(testName, async () => {
 		// execute the dataflow
 		const workflowPath = path.join(casePath, 'workflow.json')
@@ -72,19 +72,19 @@ function defineTestCase(parentPath: string, test: string) {
 		workflow.addInputTables(inputTables)
 		// check the output tables
 		await Promise.all(
-			expectedOutputTables.map(async (outfile) => {
-				const filename = path.join(tablesPath, outfile)
+			expectedOutputTables.map(async (entry) => {
+				const filename = path.join(tablesPath, entry)
 				const expected = await readTable(filename)
 				await new Promise<void>((resolve) => {
-					const name = outfile.replace('.csv', '').replace('.json', '')
-					const result = workflow.read(name)
+					const tableName = entry.replace(/\.((csv)|(json))$/, '')
+					const result = workflow.read(tableName)
 					if (result?.table) {
-						compareTables(expected, result.table, name)
+						compareTables(expected, result.table, tableName)
 						resolve()
 					} else {
-						workflow.read$(name)?.subscribe((actual) => {
+						workflow.read$(tableName)?.subscribe((actual) => {
 							if (actual?.table) {
-								compareTables(expected, actual?.table, name)
+								compareTables(expected, actual?.table, tableName)
 								resolve()
 							}
 						})
@@ -100,9 +100,9 @@ async function readInputTables(): Promise<TableContainer[]> {
 	const entries = fs.readdirSync(inputsPaths)
 	return Promise.all(
 		entries.map(async (entry) => {
-			const tableName = entry.replace('.csv', '').replace('.json', '')
-			const dataPath = path.join(inputsPaths, entry)
-			const table = await readTable(dataPath)
+			const tableName = entry.replace(/\.((csv)|(json))$/, '')
+			const filename = path.join(inputsPaths, entry)
+			const table = await readTable(filename)
 			return container(tableName, table)
 		}),
 	)
@@ -116,9 +116,10 @@ function readText(dataPath: string): Promise<string> {
 	return fsp.readFile(dataPath, 'utf8')
 }
 
-
 function readTable(dataPath: string): Promise<ColumnTable> {
-	return dataPath.endsWith('csv') ? readCsvTable(dataPath) : readJsonTable(dataPath)
+	return dataPath.endsWith('csv')
+		? readCsvTable(dataPath)
+		: readJsonTable(dataPath)
 }
 
 function readCsvTable(dataPath: string): Promise<ColumnTable> {
@@ -126,7 +127,7 @@ function readCsvTable(dataPath: string): Promise<ColumnTable> {
 }
 
 function readJsonTable(dataPath: string): Promise<ColumnTable> {
-	return readJson(dataPath).then(json => fromJSON(json))
+	return readJson(dataPath).then((json) => fromJSON(json))
 }
 
 function compareTables(
