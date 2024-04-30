@@ -3,13 +3,13 @@
 	"steps": [
 		{
 			"verb": "spread",
-			"input": "table6",
+			"input": "companies-json",
 			"args": {
-				"column": "ID",
-				"to": ["ID_X"]
+				"column": "Array",
+				"to": ["Out"]
 			},
 			"id": "expected"
 		}
 	],
-	"input": ["table6"]
+	"input": ["companies-json"]
 }
