@@ -44,15 +44,13 @@ def _convert_float(value: str) -> float:
         return np.nan
 
 
+# todo: our schema TypeHints allows strict definition of what should be allowed for a bool, so we should provide a way to inject these beyond the defaults
+# see https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#boolean-values
 def _convert_bool(value: str) -> bool:
-    return not (
-        isinstance(value, str)
-        and (value.lower() == "false" or len(value) == 0)
-        or (isinstance(value, float) and np.isnan(value))
-    )
+    return isinstance(value, str) and (value.lower() == "true")
 
 
-def _convert_date_str(value: datetime, format_pattern: str) -> str | float:
+def _convert_date_to_str(value: datetime, format_pattern: str) -> str | float:
     try:
         return datetime.strftime(value, format_pattern)
     except Exception:
@@ -62,18 +60,21 @@ def _convert_date_str(value: datetime, format_pattern: str) -> str | float:
 def _to_str(column: pd.Series, format_pattern: str) -> pd.DataFrame | pd.Series:
     column_numeric: pd.Series | None = None
     if is_numeric_dtype(column):
-        column_numeric = cast(pd.Series, pd.to_numeric(column, errors="ignore"))
+        column_numeric = cast(pd.Series, pd.to_numeric(column))
     if column_numeric is not None and is_numeric_dtype(column_numeric):
         try:
             return column.apply(lambda x: "" if x is None else str(x))
         except Exception:  # noqa: S110
             pass
 
-    datetime_column = pd.to_datetime(column, errors="ignore")
+    try:
+        datetime_column = pd.to_datetime(column)
+    except Exception:
+        datetime_column = column
     if is_datetime64_any_dtype(datetime_column):
-        return datetime_column.apply(lambda x: _convert_date_str(x, format_pattern))
+        return datetime_column.apply(lambda x: _convert_date_to_str(x, format_pattern))
     if isinstance(column.dtype, pd.ArrowDtype) and "timestamp" in column.dtype.name:
-        return column.apply(lambda x: _convert_date_str(x, format_pattern))
+        return column.apply(lambda x: _convert_date_to_str(x, format_pattern))
 
     if is_bool_dtype(column):
         return column.apply(lambda x: "" if pd.isna(x) else str(x).lower())
@@ -82,8 +83,8 @@ def _to_str(column: pd.Series, format_pattern: str) -> pd.DataFrame | pd.Series:
 
 def _to_datetime(column: pd.Series) -> pd.Series:
     if column.dropna().map(lambda x: isinstance(x, numbers.Number)).all():
-        return pd.to_datetime(column, unit="ms", errors="coerce")
-    return pd.to_datetime(column, errors="coerce")
+        return pd.to_datetime(column, unit="ms")
+    return pd.to_datetime(column)
 
 
 def _to_array(column: pd.Series, delimiter: str) -> pd.Series | pd.DataFrame:

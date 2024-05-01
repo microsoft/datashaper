@@ -9,6 +9,7 @@ import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { Workflow } from '../resources/index.js'
 import { jest } from '@jest/globals'
+import { fromJSON } from 'arquero'
 
 // Static data paths.
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -56,8 +57,8 @@ function defineTestCase(parentPath: string, test: string) {
 
 	const expectedOutputTables = fs
 		.readdirSync(tablesPath)
-		.filter((f) => f.endsWith('.csv'))
-		.map((f) => f.replace('.csv', ''))
+		.filter((f) => f !== 'workflow.json')
+		.filter((f) => /\.((csv)|(json))$/.test(f))
 
 	it(testName, async () => {
 		// execute the dataflow
@@ -69,20 +70,21 @@ function defineTestCase(parentPath: string, test: string) {
 		}
 		const workflow = new Workflow(workflowJson)
 		workflow.addInputTables(inputTables)
-
 		// check the output tables
 		await Promise.all(
-			expectedOutputTables.map(async (o) => {
-				const expected = await readCsv(path.join(tablesPath, `${o}.csv`))
+			expectedOutputTables.map(async (entry) => {
+				const filename = path.join(tablesPath, entry)
+				const expected = await readTable(filename)
 				await new Promise<void>((resolve) => {
-					const result = workflow.read(o)
+					const tableName = entry.replace(/\.((csv)|(json))$/, '')
+					const result = workflow.read(tableName)
 					if (result?.table) {
-						compareTables(expected, result.table, o)
+						compareTables(expected, result.table, tableName)
 						resolve()
 					} else {
-						workflow.read$(o)?.subscribe((actual) => {
+						workflow.read$(tableName)?.subscribe((actual) => {
 							if (actual?.table) {
-								compareTables(expected, actual?.table, o)
+								compareTables(expected, actual?.table, tableName)
 								resolve()
 							}
 						})
@@ -98,9 +100,10 @@ async function readInputTables(): Promise<TableContainer[]> {
 	const entries = fs.readdirSync(inputsPaths)
 	return Promise.all(
 		entries.map(async (entry) => {
-			const tableName = entry.replace('.csv', '')
-			const dataPath = path.join(inputsPaths, entry)
-			return container(tableName, await readCsv(dataPath))
+			const tableName = entry.replace(/\.((csv)|(json))$/, '')
+			const filename = path.join(inputsPaths, entry)
+			const table = await readTable(filename)
+			return container(tableName, table)
 		}),
 	)
 }
@@ -113,8 +116,18 @@ function readText(dataPath: string): Promise<string> {
 	return fsp.readFile(dataPath, 'utf8')
 }
 
-function readCsv(dataPath: string): Promise<ColumnTable> {
+function readTable(dataPath: string): Promise<ColumnTable> {
+	return dataPath.endsWith('csv')
+		? readCsvTable(dataPath)
+		: readJsonTable(dataPath)
+}
+
+function readCsvTable(dataPath: string): Promise<ColumnTable> {
 	return readText(dataPath).then((txt) => fromCSV(txt))
+}
+
+function readJsonTable(dataPath: string): Promise<ColumnTable> {
+	return readJson(dataPath).then((json) => fromJSON(json))
 }
 
 function compareTables(
