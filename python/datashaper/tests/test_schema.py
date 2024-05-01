@@ -12,7 +12,7 @@ from pandas.testing import assert_frame_equal
 
 from datashaper import PandasDtypeBackend, Workflow
 
-FIXTURES_PATH = "fixtures/workflow"
+FIXTURES_PATH = "fixtures/workflow/verbs"
 TABLE_STORE_PATH = "fixtures/workflow_inputs"
 SCHEMA_PATH = "workflow.json"
 log = getLogger(__name__)
@@ -31,7 +31,7 @@ def load_inputs():
     for file in os.listdir(TABLE_STORE_PATH):
         path = Path(TABLE_STORE_PATH) / file
         if file.endswith(".csv"):
-            table = pd.read_csv(path)
+            table = read_csv(path)
             dataframes[file.removesuffix(".csv")] = table
         if file.endswith(".json") and file != "workflow.json":
             table = pd.read_json(path)
@@ -40,13 +40,12 @@ def load_inputs():
 
 
 def read_csv(path: str) -> pd.DataFrame:
-    table = pd.read_csv(path)
+    return pd.read_csv(path)
 
-    if "date" in table.columns:
-        table["date"] = pd.to_datetime(table["date"], errors="coerce")
-        table["newColumn"] = pd.to_datetime(table["newColumn"], errors="coerce")
-
-    return table
+# pandas won't auto-guess iso dates on import, so we define an explicit iso output for comparison as strings
+# this means that the expected.csv _must_ match the expected iso format to seconds granularity
+def to_csv(df: pd.DataFrame, path: str) -> None:
+    df.to_csv(path, date_format="%Y-%m-%dT%H:%M:%SZ", index=False)
 
 
 def get_verb_test_specs(root: str) -> list[str]:
@@ -66,6 +65,7 @@ async def test_verbs_schema_input(
     fixture_path: str,
     pandas_dtype_backend: PandasDtypeBackend,
 ):
+    
     with (Path(fixture_path) / "workflow.json").open() as schema:
         schema_dict = json.load(schema)
         tables: dict[str, pd.DataFrame] = {}
@@ -98,9 +98,9 @@ async def test_verbs_schema_input(
                 # TODO: this cycle is outdated and should be removed. it masks potential verbs issues
                 if expected.endswith(".csv"):
                     if isinstance(result, pd.DataFrame):
-                        result.to_csv(result_table_path, index=False)
+                        to_csv(result, result_table_path)
                     else:
-                        result.obj.to_csv(result_table_path, index=False)
+                        to_csv(result.obj, result_table_path)
                     expected_table = read_csv(expected_table_path)
                     result_table = read_csv(result_table_path)
                 elif expected.endswith(".json"):
