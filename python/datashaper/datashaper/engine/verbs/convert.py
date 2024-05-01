@@ -57,13 +57,6 @@ def _convert_date_to_str(value: datetime, format_pattern: str) -> str | float:
         return np.nan
 
 
-def _convert_str_to_date(value: str, format_pattern: str) -> datetime:
-    try:
-        return datetime.strptime(value, format_pattern)  # noqa: DTZ007: there is no indication here that a timezone flag is missing...
-    except Exception:
-        return np.nan
-
-
 def _to_str(column: pd.Series, format_pattern: str) -> pd.DataFrame | pd.Series:
     column_numeric: pd.Series | None = None
     if is_numeric_dtype(column):
@@ -88,10 +81,10 @@ def _to_str(column: pd.Series, format_pattern: str) -> pd.DataFrame | pd.Series:
     return column.apply(lambda x: "" if pd.isna(x) else str(x))
 
 
-def _to_datetime(column: pd.Series, format_pattern: str) -> pd.Series:
+def _to_datetime(column: pd.Series) -> pd.Series:
     if column.dropna().map(lambda x: isinstance(x, numbers.Number)).all():
         return pd.to_datetime(column, unit="ms")
-    return column.apply(lambda x: _convert_str_to_date(x, format_pattern))
+    return pd.to_datetime(column)
 
 
 def _to_array(column: pd.Series, delimiter: str) -> pd.Series | pd.DataFrame:
@@ -111,9 +104,7 @@ __type_mapping: dict[ParseType, Callable] = {
     ParseType.Boolean: lambda column, **_kwargs: column.apply(
         lambda x: _convert_bool(x)
     ),
-    ParseType.Date: lambda column, format_pattern, **_kwargs: _to_datetime(
-        column, format_pattern
-    ),
+    ParseType.Date: lambda column, **_kwargs: _to_datetime(column),
     ParseType.Decimal: lambda column, **_kwargs: column.apply(
         lambda x: _convert_float(x)
     ),
