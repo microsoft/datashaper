@@ -27,7 +27,7 @@ thread.start()
 @cache
 def load_inputs():
     dataframes: dict[str, pd.DataFrame] = {}
-    
+
     for file in os.listdir(TABLE_STORE_PATH):
         path = Path(TABLE_STORE_PATH) / file
         if file.endswith(".csv"):
@@ -41,6 +41,7 @@ def load_inputs():
 
 def read_csv(path: str) -> pd.DataFrame:
     return pd.read_csv(path)
+
 
 # pandas won't auto-guess iso dates on import, so we define an explicit iso output for comparison as strings
 # this means that the expected.csv _must_ match the expected iso format to seconds granularity
@@ -65,7 +66,6 @@ async def test_verbs_schema_input(
     fixture_path: str,
     pandas_dtype_backend: PandasDtypeBackend,
 ):
-    
     with (Path(fixture_path) / "workflow.json").open() as schema:
         schema_dict = json.load(schema)
         tables: dict[str, pd.DataFrame] = {}

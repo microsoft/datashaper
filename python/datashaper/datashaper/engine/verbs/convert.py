@@ -47,10 +47,7 @@ def _convert_float(value: str) -> float:
 # todo: our schema TypeHints allows strict definition of what should be allowed for a bool, so we should provide a way to inject these beyond the defaults
 # see https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#boolean-values
 def _convert_bool(value: str) -> bool:
-    return (
-        isinstance(value, str)
-        and (value.lower() == "true")
-    )
+    return isinstance(value, str) and (value.lower() == "true")
 
 
 def _convert_date_to_str(value: datetime, format_pattern: str) -> str | float:
@@ -114,7 +111,9 @@ __type_mapping: dict[ParseType, Callable] = {
     ParseType.Boolean: lambda column, **_kwargs: column.apply(
         lambda x: _convert_bool(x)
     ),
-    ParseType.Date: lambda column, format_pattern, **_kwargs: _to_datetime(column, format_pattern),
+    ParseType.Date: lambda column, format_pattern, **_kwargs: _to_datetime(
+        column, format_pattern
+    ),
     ParseType.Decimal: lambda column, **_kwargs: column.apply(
         lambda x: _convert_float(x)
     ),
