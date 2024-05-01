@@ -1,0 +1,66 @@
+{
+    "ID": [
+        1,
+        1,
+        2,
+        4,
+        4,
+        4
+    ],
+    "item": [
+        "bed",
+        "pillow",
+        "sofa",
+        "sofa",
+        "chair",
+        "stool"
+    ],
+    "quantity": [
+        45,
+        78,
+        100,
+        89,
+        50,
+        45
+    ],
+    "a": [
+        123,
+        234,
+        345,
+        456,
+        678,
+        789
+    ],
+    "b": [
+        "BBBB",
+        "CCCC",
+        "DDDD",
+        "EEEE",
+        "FFFF",
+        "GGGG"
+    ],
+    "c": [
+        false,
+        true,
+        false,
+        true,
+        false,
+        true
+    ],
+    "d": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+    ],
+    "e": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+    ]
+}

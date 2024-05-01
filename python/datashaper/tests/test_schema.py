@@ -46,21 +46,7 @@ def read_csv(path: str) -> pd.DataFrame:
         table["date"] = pd.to_datetime(table["date"], errors="coerce")
         table["newColumn"] = pd.to_datetime(table["newColumn"], errors="coerce")
 
-    if "json_object" in table.columns:
-        table["json_object"] = __conversion_function_map["json_object"](
-            table["json_object"]
-        )
-
     return table
-
-
-__conversion_function_map = {
-    "json_object": lambda column: column.apply(
-        lambda _x: json.loads(
-            str(_x).replace("'", '"').replace('"{"', '{"').replace('"}"}', '"}}')
-        )
-    ),
-}
 
 
 def get_verb_test_specs(root: str) -> list[str]:
@@ -120,7 +106,6 @@ async def test_verbs_schema_input(
                 elif expected.endswith(".json"):
                     result_table = result
                     expected_table = pd.read_json(expected_table_path)
-                
                 assert_frame_equal(
                     expected_table,
                     result_table,

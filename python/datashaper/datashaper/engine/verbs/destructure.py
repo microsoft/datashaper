@@ -3,7 +3,6 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Destructure verb implementation."""
-import json
 import math
 from typing import Any
 
@@ -28,22 +27,12 @@ def destructure(
     results = []
     for tuple_result in input_table.iterrows():
         row = tuple_result[1]
-        cleaned_row = {col: row[col] for col in input_table.columns}
-        rest_row = row[column] if row[column] is not None else {}
+        cleaned_row_dict = {col: row[col] for col in input_table.columns}
+        rest_row_dict = row[column] if row[column] is not None else {}
 
-        if is_null(rest_row):
-            rest_row = {}
+        if is_null(rest_row_dict):
+            rest_row_dict = {}
 
-        cleaned_row_string = (
-            str(cleaned_row)
-            .replace("'", '"')
-            .replace('"{"', '{"')
-            .replace('"}"}', '"}}')
-        )
-        rest_row_string = str(rest_row).replace("'", '"')
-
-        cleaned_row_dict = json.loads(cleaned_row_string)
-        rest_row_dict = json.loads(rest_row_string)
         filtered_dict = {}
 
         if len(keys) != 0:
