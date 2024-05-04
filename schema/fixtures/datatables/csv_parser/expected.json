@@ -1,0 +1,29 @@
+[{
+    "integer": 1,
+    "string": "hi",
+    "boolean": null,
+    "decimal": 1.0
+},
+{
+    "integer": 2,
+    "string": "hello",
+    "boolean": false,
+    "decimal": 2.345
+},
+{
+    "integer": 3,
+    "string": "bye",
+    "boolean": true,
+    "decimal": null
+}, {
+    "integer": null,
+    "string": null,
+    "boolean": null,
+    "decimal": null
+}, {
+
+    "integer": 4000,
+    "string": null,
+    "boolean": null,
+    "decimal": null
+}]

@@ -2,16 +2,17 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { DataFormat, DataType } from '@datashaper/schema'
+import type { TypeHints } from '@datashaper/schema'
+import { DataFormat, DataType, TypeHintsDefaults } from '@datashaper/schema'
 
 import { guessDataType } from './guessDataType.js'
 
 export function guessDataTypeFromValues(
 	values: unknown[],
-	format: DataFormat = DataFormat.CSV,
+	typeHints: TypeHints = TypeHintsDefaults,
 	limit = Infinity,
 ): DataType {
-	const guesser = guessDataType({ dataFormat: format })
+	const guesser = guessDataType(typeHints)
 	const detectedTypes = new Set<DataType>()
 
 	for (let i = 0; i < limit && i < values.length; i++) {
@@ -28,7 +29,10 @@ export function guessDataTypeFromValues(
 			return key
 		}
 		throw new Error('should not be possible')
-	} else if (detectedTypes.has(DataType.Array) && format === DataFormat.CSV) {
+	} else if (
+		detectedTypes.has(DataType.Array) &&
+		typeHints.dataFormat === DataFormat.CSV
+	) {
 		// arrays will be detected even if some cells have other types (which would parse as single-length arrays)
 		// so we'll call it an array type if even one exists
 		return DataType.Array

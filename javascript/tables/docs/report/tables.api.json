@@ -1272,20 +1272,20 @@
             },
             {
               "kind": "Content",
+              "text": ", typeHints?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "TypeHints",
+              "canonicalReference": "@datashaper/schema!TypeHints:interface"
+            },
+            {
+              "kind": "Content",
               "text": ", options?: "
             },
             {
               "kind": "Content",
-              "text": "{\n    format?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "DataFormat",
-              "canonicalReference": "@datashaper/schema!DataFormat:enum"
-            },
-            {
-              "kind": "Content",
-              "text": ";\n    autoType?: boolean;\n    autoMax?: number;\n    onInferring?: (column: string) => void;\n    onProgress?: (numComplete: number) => void;\n}"
+              "text": "{\n    autoType?: boolean;\n    autoMax?: number;\n    onInferring?: (column: string) => void;\n    onProgress?: (numComplete: number) => void;\n}"
             },
             {
               "kind": "Content",
@@ -1330,9 +1330,17 @@
               "isOptional": false
             },
             {
-              "parameterName": "options",
+              "parameterName": "typeHints",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": true
+            },
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 5,
                 "endIndex": 6
               },
               "isOptional": true
@@ -1832,6 +1840,50 @@
             }
           ],
           "name": "isNull"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/tables!isNullOrUndefined:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function isNullOrUndefined(naValues?: "
+            },
+            {
+              "kind": "Content",
+              "text": "string[]"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "(value: unknown) => boolean"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 4
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "naValues",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "isNullOrUndefined"
         },
         {
           "kind": "Function",
@@ -2336,20 +2388,20 @@
             },
             {
               "kind": "Content",
+              "text": ", delimiter?: "
+            },
+            {
+              "kind": "Content",
+              "text": "string"
+            },
+            {
+              "kind": "Content",
               "text": ", options?: "
             },
             {
               "kind": "Reference",
               "text": "TypeHints",
               "canonicalReference": "@datashaper/schema!TypeHints:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ", delimiter?: "
-            },
-            {
-              "kind": "Content",
-              "text": "string"
             },
             {
               "kind": "Content",
@@ -2380,7 +2432,7 @@
               "isOptional": true
             },
             {
-              "parameterName": "options",
+              "parameterName": "delimiter",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
@@ -2388,7 +2440,7 @@
               "isOptional": true
             },
             {
-              "parameterName": "delimiter",
+              "parameterName": "options",
               "parameterTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 6
@@ -2414,21 +2466,21 @@
             },
             {
               "kind": "Content",
-              "text": ", subtype?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "DataType",
-              "canonicalReference": "@datashaper/schema!DataType:enum"
-            },
-            {
-              "kind": "Content",
               "text": ", hints?: "
             },
             {
               "kind": "Reference",
               "text": "TypeHints",
               "canonicalReference": "@datashaper/schema!TypeHints:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", subtype?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "DataType",
+              "canonicalReference": "@datashaper/schema!DataType:enum"
             },
             {
               "kind": "Content",
@@ -2460,7 +2512,7 @@
               "isOptional": true
             },
             {
-              "parameterName": "subtype",
+              "parameterName": "hints",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
@@ -2468,7 +2520,7 @@
               "isOptional": true
             },
             {
-              "parameterName": "hints",
+              "parameterName": "subtype",
               "parameterTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 6
@@ -3755,7 +3807,7 @@
             },
             {
               "kind": "Content",
-              "text": "{\n    isNull: (value: unknown) => boolean;\n    isBoolean: (value: unknown) => boolean;\n    isNumber: (value: unknown) => boolean;\n    isArray: (value: unknown) => boolean;\n    isObject: (value: unknown) => boolean;\n    isDate: (value: unknown) => boolean;\n}"
+              "text": "{\n    isNull: (value: unknown) => boolean;\n    isNullOrUndefined: (value: unknown) => boolean;\n    isBoolean: (value: unknown) => boolean;\n    isNumber: (value: unknown) => boolean;\n    isArray: (value: unknown) => boolean;\n    isObject: (value: unknown) => boolean;\n    isDate: (value: unknown) => boolean;\n}"
             },
             {
               "kind": "Content",

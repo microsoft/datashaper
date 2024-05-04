@@ -4,7 +4,7 @@
  */
 
 import type { ParserOptions } from '@datashaper/schema'
-import { from, fromCSV } from 'arquero'
+import { escape, from, fromCSV } from 'arquero'
 import type { CSVParseOptions } from 'arquero/dist/types/format/from-csv'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { uniq } from 'lodash-es'
@@ -42,9 +42,19 @@ export function getParser(
 function arqueroParser(text: string, options: ParserOptions = {}): ColumnTable {
 	const mappedOptions = mapToArqueroOptions(options)
 	const table = fromCSV(text, mappedOptions)
+	// arquero no longer skips blank lines by default, but that's the pandas standard
+	// filtering them here allows to still default to arquero for simple use cases, since papaparse is slower
+	const cleaned = options.skipBlankLines
+		? table.filter(
+				escape(
+					(r: any) =>
+						!Object.values(r).every((v) => v === null || v === undefined),
+				),
+		  )
+		: table
 	const skip = options.skipRows || 0
-	const read = options.readRows || Infinity
-	return table.slice(skip, read)
+	const read = (options.readRows || Infinity) + skip
+	return cleaned.slice(skip, read)
 }
 
 function papaParser(text: string, options: ParserOptions = {}): ColumnTable {

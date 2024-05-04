@@ -20,7 +20,7 @@ export interface ParserOptions
 |  [delimiter?](./schema.parseroptions.delimiter.md) |  | string | <i>(Optional)</i> Column delimiter. Default: , |
 |  [escapeChar?](./schema.parseroptions.escapechar.md) |  | string | <i>(Optional)</i> String to use for escaping quotes. Default: none |
 |  [header?](./schema.parseroptions.header.md) |  | boolean | <i>(Optional)</i> Indicates that the first row of the file contains column header names. If false, <code>names</code> should be supplied, otherwise incrementing numbers will be assigned as header names. Default: true |
-|  [lineTerminator?](./schema.parseroptions.lineterminator.md) |  | string | <i>(Optional)</i> Character that indicates the end of a line (row). Default: \\<!-- -->r, \\<!-- -->r<!-- -->\\<!-- -->n, or \\<!-- -->n |
+|  [lineTerminator?](./schema.parseroptions.lineterminator.md) |  | string | <i>(Optional)</i> Character that indicates the end of a line (row). Default: \\<!-- -->r, \\<!-- -->r<!-- -->\\<!-- -->n, or \\<!-- -->n, and \*must\* be one of these. |
 |  [names?](./schema.parseroptions.names.md) |  | string\[\] | <i>(Optional)</i> List of column names to use. If this is not supplied, column names will be inferred from the first row of the data. |
 |  [quoteChar?](./schema.parseroptions.quotechar.md) |  | string | <i>(Optional)</i> Character to use for quoting strings. Default: " |
 |  [readRows?](./schema.parseroptions.readrows.md) |  | number | <i>(Optional)</i> Number of rows to read from the data, starting at skip\_rows (honors skipBlankLines). Default: Infinity |

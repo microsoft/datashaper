@@ -76,7 +76,7 @@
                     "type": "boolean"
                 },
                 "lineTerminator": {
-                    "description": "Character that indicates the end of a line (row).\nDefault: \\\\r, \\\\r\\\\n, or \\\\n",
+                    "description": "Character that indicates the end of a line (row).\nDefault: \\\\r, \\\\r\\\\n, or \\\\n, and *must* be one of these.",
                     "type": "string"
                 },
                 "names": {

@@ -4,12 +4,13 @@ import type { TableContainer } from '@datashaper/tables'
 import { container, fromCSV } from '@datashaper/tables'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import fs from 'fs'
-import fsp from 'fs/promises'
+
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { Workflow } from '../resources/index.js'
 import { jest } from '@jest/globals'
 import { fromJSON } from 'arquero'
+import { readJson, readText } from './utils.js'
 
 // Static data paths.
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -106,14 +107,6 @@ async function readInputTables(): Promise<TableContainer[]> {
 			return container(tableName, table)
 		}),
 	)
-}
-
-function readJson(dataPath: string): Promise<any> {
-	return readText(dataPath).then((data) => JSON.parse(data))
-}
-
-function readText(dataPath: string): Promise<string> {
-	return fsp.readFile(dataPath, 'utf8')
 }
 
 function readTable(dataPath: string): Promise<ColumnTable> {

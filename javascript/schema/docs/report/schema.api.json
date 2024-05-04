@@ -7996,7 +7996,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!ParserOptions#lineTerminator:member",
-              "docComment": "/**\n * Character that indicates the end of a line (row). Default: \\\\r, \\\\r\\\\n, or \\\\n\n */\n",
+              "docComment": "/**\n * Character that indicates the end of a line (row). Default: \\\\r, \\\\r\\\\n, or \\\\n, and *must* be one of these.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

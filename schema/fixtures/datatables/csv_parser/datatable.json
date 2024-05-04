@@ -1,0 +1,13 @@
+{
+    "$schema": "https://microsoft.github.io/datashaper/schema/datatable/v1.json",
+    "profile": "datatable",
+    "name": "table",
+    "path": "table.csv",
+    "parser": {
+        "delimiter": ";",
+        "header": false,
+        "names": ["integer", "string", "boolean", "decimal"],
+        "comment": "#",
+        "skipBlankLines": false
+    }
+}

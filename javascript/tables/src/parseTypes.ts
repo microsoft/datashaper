@@ -20,8 +20,8 @@ import { formatNumberStr, getDate } from './util.js'
  */
 export function parseAs(
 	type?: DataType,
-	subtype?: DataType,
 	hints?: TypeHints,
+	subtype?: DataType,
 ): Value {
 	switch (type) {
 		// TODO: differentiate integer and decimal (if type is integer and it has decimals, it should return null)
@@ -35,7 +35,7 @@ export function parseAs(
 				hints?.falseValues,
 			)
 		case DataType.Array:
-			return parseArray(subtype, hints)
+			return parseArray(subtype, hints?.arrayDelimiter, hints)
 		case DataType.Object:
 			return parseObject(hints)
 		case DataType.Date:
@@ -109,8 +109,8 @@ export function parseString(
 
 export function parseArray(
 	subtype = DataType.String,
+	delimiter = TypeHintsDefaults.arrayDelimiter,
 	options?: TypeHints,
-	delimiter = ',',
 ): (value: unknown) => any[] | null {
 	const { isNull } = typeGuesserFactory(options)
 	return function parseArray(value: unknown) {
@@ -129,7 +129,7 @@ export function parseArray(
 			try {
 				const parsed = array.map((i) => {
 					const item = `${i}`
-					const parser = parseAs(subtype, subtype, options)
+					const parser = parseAs(subtype, options, subtype)
 					return parser(item)
 				})
 				return parsed
@@ -157,7 +157,7 @@ export function parseObject(
 					const item = `${obj[key]}`
 					// for objects we'll just do our best with property types - we don't support detailed sub-object structures right now
 					const type = subTypeChecker(item)
-					const parser = parseAs(type, type, options)
+					const parser = parseAs(type, options, type)
 					acc[key] = parser(item)
 					return acc
 				},

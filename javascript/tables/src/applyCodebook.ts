@@ -24,10 +24,11 @@ export function applyCodebook(
 	) {
 		const args = codebook.fields.reduce((acc, cur) => {
 			if (!cur.exclude) {
-				const parser =
-					dataTableSchema?.typeHints != null
-						? parseAs(cur.type, cur.subtype, dataTableSchema.typeHints)
-						: parseAs(cur.type, cur.subtype)
+				const parser = parseAs(
+					cur.type,
+					dataTableSchema?.typeHints,
+					cur.subtype,
+				)
 				acc[cur.name] = escape((d: any) => parser(d[cur.name]))
 			}
 			return acc

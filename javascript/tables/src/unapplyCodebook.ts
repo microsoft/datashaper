@@ -22,10 +22,11 @@ export function unapplyCodebook(
 		strategy === CodebookStrategy.DataTypeAndMapping
 	) {
 		const args = table.columnNames().reduce((acc, cur) => {
-			const parser =
-				dataTableSchema?.typeHints != null
-					? parseAs(DataType.String, DataType.String, dataTableSchema.typeHints)
-					: parseAs(DataType.String, DataType.String)
+			const parser = parseAs(
+				DataType.String,
+				dataTableSchema?.typeHints,
+				DataType.String,
+			)
 			acc[cur] = escape((d: any) => parser(d[cur]))
 			return acc
 		}, {} as Record<string, object>)

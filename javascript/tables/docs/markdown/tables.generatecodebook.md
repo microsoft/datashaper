@@ -7,8 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function generateCodebook(table: ColumnTable, options?: {
-    format?: DataFormat;
+export declare function generateCodebook(table: ColumnTable, typeHints?: TypeHints, options?: {
     autoType?: boolean;
     autoMax?: number;
     onInferring?: (column: string) => void;
@@ -21,7 +20,8 @@ export declare function generateCodebook(table: ColumnTable, options?: {
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  table | ColumnTable |  |
-|  options | { format?: DataFormat; autoType?: boolean; autoMax?: number; onInferring?: (column: string) =&gt; void; onProgress?: (numComplete: number) =&gt; void; } | <i>(Optional)</i> |
+|  typeHints | TypeHints | <i>(Optional)</i> |
+|  options | { autoType?: boolean; autoMax?: number; onInferring?: (column: string) =&gt; void; onProgress?: (numComplete: number) =&gt; void; } | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

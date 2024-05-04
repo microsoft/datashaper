@@ -24,10 +24,10 @@ import { formatNumberStr, getDate } from './util.js'
 export function guessDataType(
 	options?: TypeHints,
 ): (value: unknown) => DataType {
-	const { isNull, isBoolean, isNumber, isArray, isObject, isDate } =
+	const { isNullOrUndefined, isBoolean, isNumber, isArray, isObject, isDate } =
 		typeGuesserFactory(options)
 	return function (value: unknown) {
-		if (isNull(value)) {
+		if (isNullOrUndefined(value)) {
 			return DataType.Null
 		}
 		if (isNumber(value)) {
@@ -54,6 +54,7 @@ export function guessDataType(
 
 export function typeGuesserFactory(options?: TypeHints): {
 	isNull: (value: unknown) => boolean
+	isNullOrUndefined: (value: unknown) => boolean
 	isBoolean: (value: unknown) => boolean
 	isNumber: (value: unknown) => boolean
 	isArray: (value: unknown) => boolean
@@ -62,6 +63,7 @@ export function typeGuesserFactory(options?: TypeHints): {
 } {
 	return {
 		isNull: isNull(options?.naValues),
+		isNullOrUndefined: isNullOrUndefined(options?.naValues),
 		isBoolean: isBoolean(options?.trueValues, options?.falseValues),
 		isNumber: isNumber(options?.decimal, options?.thousands),
 		isArray: isArray(
@@ -79,7 +81,16 @@ export function isNull(
 	const naValuesSet = new Set<unknown>(naValues)
 	return function (value: unknown) {
 		if (value === null) return true
+		return naValuesSet.has(value)
+	}
+}
 
+export function isNullOrUndefined(
+	naValues = TypeHintsDefaults.naValues,
+): (value: unknown) => boolean {
+	const naValuesSet = new Set<unknown>(naValues)
+	return function (value: unknown) {
+		if (value === null || value === undefined) return true
 		return naValuesSet.has(value)
 	}
 }

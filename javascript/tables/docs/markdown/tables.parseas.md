@@ -9,7 +9,7 @@ Factory function to create a value parser based on defined data type and type hi
 <b>Signature:</b>
 
 ```typescript
-export declare function parseAs(type?: DataType, subtype?: DataType, hints?: TypeHints): Value;
+export declare function parseAs(type?: DataType, hints?: TypeHints, subtype?: DataType): Value;
 ```
 
 ## Parameters
@@ -17,8 +17,8 @@ export declare function parseAs(type?: DataType, subtype?: DataType, hints?: Typ
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  type | DataType | <i>(Optional)</i> the datatype to interpret as |
-|  subtype | DataType | <i>(Optional)</i> the subtype of the datatype (i.e., if the main type is an array) |
 |  hints | TypeHints | <i>(Optional)</i> type hinting information |
+|  subtype | DataType | <i>(Optional)</i> the subtype of the datatype (i.e., if the main type is an array) |
 
 <b>Returns:</b>
 
