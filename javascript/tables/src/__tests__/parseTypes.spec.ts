@@ -66,10 +66,12 @@ describe('parseTypes', () => {
 			expect(parseBoolean()('FALSE')).toBe(false)
 		})
 		it('should parse a custom true', () => {
-			expect(parseBoolean(undefined, ['Hola'])('hola')).toBe(true)
+			expect(parseBoolean(undefined, ['Hola'])('Hola')).toBe(true)
+			expect(parseBoolean(undefined, ['Hola'])('hola')).toBeNull()
 		})
 		it('should parse a custom false', () => {
-			expect(parseBoolean(undefined, undefined, ['Ciao'])('ciao')).toBe(false)
+			expect(parseBoolean(undefined, undefined, ['Ciao'])('Ciao')).toBe(false)
+			expect(parseBoolean(undefined, undefined, ['Ciao'])('ciao')).toBeNull()
 		})
 		it('should return null', () => {
 			expect(parseBoolean()('NA')).toBeNull()

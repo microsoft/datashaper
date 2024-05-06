@@ -11412,7 +11412,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!TypeHints#falseValues:member",
-              "docComment": "/**\n * Default: case-insensitive word \"false\".\n */\n",
+              "docComment": "/**\n * Default: case-insensitive word \"false\". Note that if you configure this, pandas considers the custom values case-sensitive. Case-insensitive true/false is always valid.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -11520,7 +11520,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!TypeHints#trueValues:member",
-              "docComment": "/**\n * Default: case-insensitive word \"true\".\n */\n",
+              "docComment": "/**\n * Default: case-insensitive word \"true\". Note that if you configure this, pandas considers the custom values case-sensitive. Case-insensitive true/false is always valid.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

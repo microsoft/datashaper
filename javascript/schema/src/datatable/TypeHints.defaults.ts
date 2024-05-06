@@ -14,8 +14,8 @@ import type { TypeHints } from './TypeHints.js'
 export const TypeHintsDefaults: Required<TypeHints> = {
 	dataFormat: DataFormat.CSV,
 	arrayDelimiter: ",",
-	trueValues: ['true'],
-	falseValues: ['false'],
+	trueValues: [],
+	falseValues: [],
 	naValues: [
 		'-1.#IND',
 		'1.#QNAN',

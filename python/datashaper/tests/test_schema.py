@@ -12,11 +12,10 @@ from pandas.testing import assert_frame_equal
 
 from datashaper import PandasDtypeBackend, Workflow
 
-FIXTURES_PATH = "fixtures/workflow/verbs"
-TABLE_STORE_PATH = "fixtures/workflow_inputs"
-SCHEMA_PATH = "workflow.json"
+FIXTURES_PATH = "../../schema/fixtures/workflow/verbs"
+TABLE_STORE_PATH = "../../schema/fixtures/workflow_inputs"
+SCHEMA_PATH = "../../schema/workflow.json"
 log = getLogger(__name__)
-os.chdir("../../schema")
 
 
 server = HTTPServer(("localhost", 8080), SimpleHTTPRequestHandler)

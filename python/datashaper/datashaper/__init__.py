@@ -78,6 +78,12 @@ from .table_store.types import (
     VerbResult,
     create_verb_result,
 )
+from .tables import (
+    DataTable,
+    ParserOptions,
+    TypeHints,
+    load_csv_table,
+)
 from .workflow import (
     DEFAULT_INPUT_NAME,
     DelegatingVerbCallbacks,
@@ -158,6 +164,11 @@ __all__ = [
     "Table",
     "VerbResult",
     "create_verb_result",
+    # table utilities
+    "DataTable",
+    "ParserOptions",
+    "TypeHints",
+    "load_csv_table",
     # Progress Exports
     "progress_callback",
     "progress_iterable",

@@ -4,9 +4,8 @@
     "name": "table",
     "path": "table.csv",
     "typeHints": {
-        "arrayDelimiter": ";",
-        "trueValues": ["yes", "ok"],
-        "falseValues": ["no", "nope"],
+        "trueValues": ["Yes"],
+        "falseValues": ["No", "nope"],
         "decimal": ","
     }
 }

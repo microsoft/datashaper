@@ -75,8 +75,11 @@ export function parseBoolean(
 	falseValues = TypeHintsDefaults.falseValues,
 ): (value: string | undefined) => boolean | null {
 	const { isNull } = typeGuesserFactory({ naValues })
-	const trueSet = new Set(trueValues.map((v) => v.toLowerCase()))
-	const falseSet = new Set(falseValues.map((v) => v.toLowerCase()))
+	// to align with pandas functionality:
+	// 1. case-insensitive true/false are always valid
+	// 2. trueValues/falseValues are in addition, and they are case-sensitive
+	const trueSet = new Set(trueValues)
+	const falseSet = new Set(falseValues)
 	return function parseBoolean(value: string | undefined) {
 		if (isNull(value) || value === undefined) {
 			return null
@@ -84,11 +87,17 @@ export function parseBoolean(
 		if (typeof value === 'boolean') {
 			return value as boolean
 		}
-		const str = value.toLowerCase()
-		if (trueSet.has(str)) {
+		if (trueSet.has(value)) {
 			return true
 		}
-		if (falseSet.has(str)) {
+		if (falseSet.has(value)) {
+			return false
+		}
+		const str = value.toLowerCase()
+		if (str === 'true') {
+			return true
+		}
+		if (str === 'false') {
 			return false
 		}
 		return null

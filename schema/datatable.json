@@ -191,7 +191,7 @@
                     "type": "string"
                 },
                 "falseValues": {
-                    "description": "Default: case-insensitive word \"false\".",
+                    "description": "Default: case-insensitive word \"false\".\nNote that if you configure this, pandas considers the custom values case-sensitive.\nCase-insensitive true/false is always valid.",
                     "items": {
                         "type": "string"
                     },
@@ -223,7 +223,7 @@
                     "type": "string"
                 },
                 "trueValues": {
-                    "description": "Default: case-insensitive word \"true\".",
+                    "description": "Default: case-insensitive word \"true\".\nNote that if you configure this, pandas considers the custom values case-sensitive.\nCase-insensitive true/false is always valid.",
                     "items": {
                         "type": "string"
                     },

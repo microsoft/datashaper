@@ -1,0 +1,5 @@
+integer,boolean,decimal
+1,Yes,"1,3"
+2,No,"2,0"
+3,true,"4500,91"
+4000,nope,"5,0987"
