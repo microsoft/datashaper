@@ -55,26 +55,25 @@ function defineTestCase(parentPath: string, test: string) {
 	})
 }
 
-// TODO: this supports the ResourceSchema, paths array; we need to build that into some utilities
 async function readDataTable(
 	definition: DataTableSchema,
 	casePath: string,
 ): Promise<ColumnTable | undefined> {
-	if (!definition.path) {
-		return undefined
+	const p = definition.path
+	if (!p) {
+		throw new Error('No path for datatable')
 	}
-	const paths = isArray(definition.path) ? definition.path : [definition.path]
-	const texts = await Promise.all(
-		paths.map((p) => readText(path.join(casePath, p))),
-	)
-	const allText = texts.join('\n')
-	return readTable(allText, definition)
+	if (isArray(p)) {
+		throw new Error('path array option not implemented for datatable')
+	}
+	const filepath = path.join(casePath, p)
+	return readText(filepath).then((txt) => readTable(txt, definition))
 }
 
 /**
  * The expectation we're going to go with for these tests is that all of the _expected_ values
  * are in a JSON format that is interpretable with the default arquero read.
- * This allows us to read as default with no schema, since we're testing the schema with the datatable.
+ * This allows us to read as default with no schema, since we're testing the schema with the datatable fixtures.
  * @param filePath
  * @returns
  */

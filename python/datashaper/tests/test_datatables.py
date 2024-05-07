@@ -1,28 +1,17 @@
 import json
 import os
-from http.server import HTTPServer, SimpleHTTPRequestHandler
 from logging import getLogger
 from pathlib import Path
-from threading import Thread
 
 import pandas as pd
 import pytest
 from pandas.testing import assert_frame_equal
 
-from datashaper import DataTable, load_csv_table
+from datashaper import DataTable, load_table
 
 FIXTURES_PATH = "../../schema/fixtures/datatables"
 
 log = getLogger(__name__)
-
-server = HTTPServer(("localhost", 8081), SimpleHTTPRequestHandler)
-thread = Thread(target=server.serve_forever, daemon=True)
-thread.start()
-
-
-
-def read_csv(path: str) -> pd.DataFrame:
-    return pd.read_csv(path)
 
 
 # pandas won't auto-guess iso dates on import, so we define an explicit iso output for comparison as strings
@@ -54,7 +43,7 @@ async def test_verbs_schema_input(
     try:
                 
         expected_table = pd.read_json(expected_path)
-        result_table = load_csv_table(result_path, schema)
+        result_table = load_table(result_path, schema)
         assert_frame_equal(
             expected_table,
             result_table,

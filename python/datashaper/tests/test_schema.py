@@ -10,7 +10,7 @@ import pandas as pd
 import pytest
 from pandas.testing import assert_frame_equal
 
-from datashaper import PandasDtypeBackend, Workflow, load_csv_table
+from datashaper import PandasDtypeBackend, Workflow, load_csv_table, load_json_table
 
 FIXTURES_PATH = "../../schema/fixtures/workflow/verbs"
 TABLE_STORE_PATH = "../../schema/fixtures/workflow_inputs"
@@ -33,7 +33,7 @@ def load_inputs():
             table = load_csv_table(path)
             dataframes[file.removesuffix(".csv")] = table
         if file.endswith(".json") and file != "workflow.json":
-            table = pd.read_json(path)
+            table = load_json_table(path)
             dataframes[file.removesuffix(".json")] = table
     return dataframes
 

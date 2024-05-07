@@ -55,7 +55,7 @@ class ParserOptions:
 class TypeHints:
     """Options that define core type casting behavior when parsing files. Primarily oriented toward CSV since there are  no strong types in CSV."""
 
-    format: DataFormat | None
+    dataFormat: DataFormat | None
     trueValues: list[str] | None
     falseValues: list[str] | None
     naValues: list[str] | None
@@ -68,7 +68,7 @@ class TypeHints:
     def from_dict(data: dict):  # noqa ANN205 can't reference type before it is declared
         """Create a TypeHints instance from a dictionary."""
         return TypeHints(
-            format=data.get("format", type_hints_defaults.format),
+            dataFormat=data.get("dataFormat", type_hints_defaults.dataFormat),
             trueValues=data.get("trueValues", type_hints_defaults.trueValues),
             falseValues=data.get("falseValues", type_hints_defaults.falseValues),
             naValues=data.get("naValues", type_hints_defaults.naValues),
@@ -84,12 +84,14 @@ class DataTable:
 
     _schema: dict
     path: str | list[str] | None
+    format: DataFormat | None
     parser: ParserOptions
     typeHints: TypeHints
 
     def __init__(self, schema: dict = None):
         self._schema = schema or {}
         self.path = self._schema.get("path")
+        self.format = self._schema.get("format", DataFormat.CSV)
         self.parser = ParserOptions.from_dict(self._schema.get("parser", {}))
         self.typeHints = TypeHints.from_dict(self._schema.get("typeHints", {}))
         
@@ -110,7 +112,7 @@ parser_options_defaults = ParserOptions(
 
 # most of these are None because we want to use the pandas defaults
 type_hints_defaults = TypeHints(
-    format="csv",
+    dataFormat="csv",
     trueValues=None,
     falseValues=None,
     naValues=None,

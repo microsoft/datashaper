@@ -83,6 +83,8 @@ from .tables import (
     ParserOptions,
     TypeHints,
     load_csv_table,
+    load_json_table,
+    load_table,
 )
 from .workflow import (
     DEFAULT_INPUT_NAME,
@@ -169,6 +171,8 @@ __all__ = [
     "ParserOptions",
     "TypeHints",
     "load_csv_table",
+    "load_json_table",
+    "load_table",
     # Progress Exports
     "progress_callback",
     "progress_iterable",
