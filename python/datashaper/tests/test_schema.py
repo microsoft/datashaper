@@ -106,8 +106,7 @@ async def test_verbs_schema_input(
                     expected_table,
                     result_table,
                     check_like=True,
-                    check_dtype=False,
-                    check_column_type=False,
+                    check_dtype=False
                 )
             except AssertionError:
                 print(  # noqa: T201
