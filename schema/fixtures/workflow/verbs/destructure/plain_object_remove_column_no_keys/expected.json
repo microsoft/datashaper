@@ -1,66 +1,55 @@
-{
-    "ID": [
-        1,
-        1,
-        2,
-        4,
-        4,
-        4
-    ],
-    "item": [
-        "bed",
-        "pillow",
-        "sofa",
-        "sofa",
-        "chair",
-        "stool"
-    ],
-    "quantity": [
-        45,
-        78,
-        100,
-        89,
-        50,
-        45
-    ],
-    "a": [
-        123,
-        234,
-        345,
-        456,
-        678,
-        789
-    ],
-    "b": [
-        "BBBB",
-        "CCCC",
-        "DDDD",
-        "EEEE",
-        "FFFF",
-        "GGGG"
-    ],
-    "c": [
-        false,
-        true,
-        false,
-        true,
-        false,
-        true
-    ],
-    "d": [
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
-    ],
-    "e": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-    ]
-}
+[{
+    "ID": 1,
+    "item": "bed",
+    "quantity": 45,
+    "a": 123,
+    "b": "BBBB",
+    "c": false,
+    "d": "",
+    "e": null
+}, {
+    "ID": 2,
+    "item": "pillow",
+    "quantity": 78,
+    "a": 234,
+    "b": "CCCC",
+    "c": true,
+    "d": "",
+    "e": null
+}, {
+    "ID": 3,
+    "item": "sofa",
+    "quantity": 100,
+    "a": 345,
+    "b": "DDDD",
+    "c": false,
+    "d": "",
+    "e": null
+}, {
+    "ID": 4,
+    "item": "sofa",
+    "quantity": 89,
+    "a": 456,
+    "b": "EEEE",
+    "c": true,
+    "d": "",
+    "e": null
+}, {
+    "ID": 5,
+    "item": "chair",
+    "quantity": 50,
+    "a": 678,
+    "b": "FFFF",
+    "c": false,
+    "d": "",
+    "e": null
+}, {
+    "ID": 6,
+    "item": "stool",
+    "quantity": 45,
+    "a": 789,
+    "b": "GGGG",
+    "c": true,
+    "d": "",
+    "e": null
+}]

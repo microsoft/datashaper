@@ -101,7 +101,7 @@ async def test_verbs_schema_input(
                     result_table = load_csv_table(result_table_path)
                 elif expected.endswith(".json"):
                     result_table = result
-                    expected_table = pd.read_json(expected_table_path)
+                    expected_table = load_json_table(expected_table_path)
                 assert_frame_equal(
                     expected_table,
                     result_table,

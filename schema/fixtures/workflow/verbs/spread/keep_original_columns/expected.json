@@ -1,51 +1,41 @@
-{
-    "ID": [
-        1,
-        2,
-        3,
-        4,
-        5
-    ],
-    "Name": [
-        "Microsoft",
-        "Apple",
-        "Google",
-        "Amazon",
-        "Samsung"
-    ],
-    "Employees": [
-        160000,
-        150000,
-        135000,
-        1250000,
-        270000
-    ],
-    "US": [
-        true,
-        true,
-        true,
-        true,
-        false
-    ],
-    "Array": [
-        ["a", "b"],
-        ["c", "d"],
-        ["e", "f"],
-        ["g", "h"],
-        ["i", "j"]
-    ],
-    "Array_1": [
-        "a",
-        "c",
-        "e",
-        "g",
-        "i"
-    ],
-    "Array_2": [
-        "b",
-        "d",
-        "f",
-        "h",
-        "j"
-    ]
-}
+[{
+    "ID": 1,
+    "Name": "Microsoft",
+    "Employees": 160000,
+    "US": true,
+    "Array": ["a", "b"],
+    "Array_1": "a",
+    "Array_2": "b"
+}, {
+    "ID": 2,
+    "Name": "Apple",
+    "Employees": 150000,
+    "US": true,
+    "Array": ["c", "d"],
+    "Array_1": "c",
+    "Array_2": "d"
+}, {
+    "ID": 3,
+    "Name": "Google",
+    "Employees": 135000,
+    "US": true,
+    "Array": ["e", "f"],
+    "Array_1": "e",
+    "Array_2": "f"
+}, {
+    "ID": 4,
+    "Name": "Amazon",
+    "Employees": 1250000,
+    "US": true,
+    "Array": ["g", "h"],
+    "Array_1": "g",
+    "Array_2": "h"
+}, {
+    "ID": 5,
+    "Name": "Samsung",
+    "Employees": 270000,
+    "US": false,
+    "Array": ["i", "j"],
+    "Array_1": "i",
+    "Array_2": "j"
+}]

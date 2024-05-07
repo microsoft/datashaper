@@ -9,7 +9,7 @@ import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { Workflow } from '../resources/index.js'
 import { jest } from '@jest/globals'
-import { fromJSON } from 'arquero'
+import { from } from 'arquero'
 import { readJson, readText } from './utils.js'
 
 // Static data paths.
@@ -120,7 +120,7 @@ function readCsvTable(dataPath: string): Promise<ColumnTable> {
 }
 
 function readJsonTable(dataPath: string): Promise<ColumnTable> {
-	return readJson(dataPath).then((json) => fromJSON(json))
+	return readJson(dataPath).then((json) => from(json))
 }
 
 function compareTables(

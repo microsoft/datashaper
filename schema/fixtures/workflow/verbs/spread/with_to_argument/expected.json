@@ -1,37 +1,31 @@
-{
-    "ID": [
-        1,
-        2,
-        3,
-        4,
-        5
-    ],
-    "Name": [
-        "Microsoft",
-        "Apple",
-        "Google",
-        "Amazon",
-        "Samsung"
-    ],
-    "Employees": [
-        160000,
-        150000,
-        135000,
-        1250000,
-        270000
-    ],
-    "US": [
-        true,
-        true,
-        true,
-        true,
-        false
-    ],
-    "Out": [
-        "a",
-        "c",
-        "e",
-        "g",
-        "i"
-    ]
-}
+[{
+    "ID": 1,
+    "Name": "Microsoft",
+    "Employees": 160000,
+    "US": true,
+    "Out": "a"
+}, {
+    "ID": 2,
+    "Name": "Apple",
+    "Employees": 150000,
+    "US": true,
+    "Out": "c"
+}, {
+    "ID": 3,
+    "Name": "Google",
+    "Employees": 135000,
+    "US": true,
+    "Out": "e"
+}, {
+    "ID": 4,
+    "Name": "Amazon",
+    "Employees": 1250000,
+    "US": true,
+    "Out": "g"
+}, {
+    "ID": 5,
+    "Name": "Samsung",
+    "Employees": 270000,
+    "US": false,
+    "Out": "i"
+}]
