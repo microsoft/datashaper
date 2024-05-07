@@ -1,7 +1,7 @@
 /* eslint-disable jest/expect-expect, jest/valid-title */
 import { createSchemaValidator } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import { container, fromCSV } from '@datashaper/tables'
+import { container } from '@datashaper/tables'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import fs from 'fs'
 
@@ -9,8 +9,7 @@ import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { Workflow } from '../resources/index.js'
 import { jest } from '@jest/globals'
-import { from } from 'arquero'
-import { readJson, readText } from './utils.js'
+import { readDataTable, readJson } from './utils.js'
 
 // Static data paths.
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -75,7 +74,7 @@ function defineTestCase(parentPath: string, test: string) {
 		await Promise.all(
 			expectedOutputTables.map(async (entry) => {
 				const filename = path.join(tablesPath, entry)
-				const expected = await readTable(filename)
+				const expected = await readDataTable(filename)
 				await new Promise<void>((resolve) => {
 					const tableName = entry.replace(/\.((csv)|(json))$/, '')
 					const result = workflow.read(tableName)
@@ -103,39 +102,22 @@ async function readInputTables(): Promise<TableContainer[]> {
 		entries.map(async (entry) => {
 			const tableName = entry.replace(/\.((csv)|(json))$/, '')
 			const filename = path.join(inputsPaths, entry)
-			const table = await readTable(filename)
+			const table = await readDataTable(filename)
 			return container(tableName, table)
 		}),
 	)
 }
 
-function readTable(dataPath: string): Promise<ColumnTable> {
-	return dataPath.endsWith('csv')
-		? readCsvTable(dataPath)
-		: readJsonTable(dataPath)
-}
-
-function readCsvTable(dataPath: string): Promise<ColumnTable> {
-	return readText(dataPath).then((txt) => fromCSV(txt))
-}
-
-function readJsonTable(dataPath: string): Promise<ColumnTable> {
-	return readJson(dataPath).then((json) => from(json))
-}
-
 function compareTables(
-	expected: ColumnTable,
+	expected: ColumnTable | undefined,
 	actual: ColumnTable | undefined,
 	name: string,
 ) {
-	if (!actual) {
+	if (!expected || !actual) {
 		throw new Error(`expected output table "${name}" to exist`)
 	}
 
 	try {
-		// TODO: the python tests write the tables to disk and re-read before comparing.
-		// this is all that "really" matters, because we need to reproduce the saved contents identically.
-		// we have any issue with that though due to JS floating point precision.
 		expect(actual.numRows()).toEqual(expected.numRows())
 		expect(actual.numCols()).toEqual(expected.numCols())
 		expect(actual.columnNames()).toEqual(expected.columnNames())
@@ -181,7 +163,7 @@ function compareValue(expected: any, actual: any): void {
 		// don't sweat null vs undefined
 	} else if (expected === false && actual == null) {
 		// don't sweat nullish values for false
-	} else if (expected.getTime != null) {
+	} else if (expected?.getTime != null) {
 		const actualDate = new Date(actual)
 		expect(expected.getTime()).toEqual(actualDate.getTime())
 	} else {

@@ -40,10 +40,24 @@ function destructureSingleValue(
 	op.entries(object).forEach(function (entry) {
 		const [key, value] = entry
 		if (keys === undefined || keys.length === 0 || keys?.includes(key)) {
-			row[key] = value
+			const val = isEmpty(value) ? null : value
+			row[key] = val
 		}
 	})
 	return row
 }
 
 export const destructure = stepVerbFactory(destructureStep)
+
+function isEmpty(value: string | number | boolean | Date | null | undefined) {
+	if (value === null || value === undefined) {
+		return true
+	}
+	if (typeof value === 'number' && isNaN(value)) {
+		return true
+	}
+	if (typeof value === 'string' && value.length === 0) {
+		return true
+	}
+	return false
+}

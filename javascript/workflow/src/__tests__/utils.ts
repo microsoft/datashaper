@@ -3,6 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import fsp from 'fs/promises'
+import path from 'path'
+import { DataFormat, DataTableSchema } from '@datashaper/schema'
+import { readTable } from '@datashaper/tables'
 
 import {
 	CodebookProfile,
@@ -10,6 +13,7 @@ import {
 	TableBundleProfile,
 	WorkflowProfile,
 } from '../resources/index.js'
+import ColumnTable from 'arquero/dist/types/table/column-table.js'
 
 export const tick = (): Promise<void> => new Promise((r) => setTimeout(r, 0))
 
@@ -28,4 +32,22 @@ export function readJson(dataPath: string): Promise<any> {
 
 export function readText(dataPath: string): Promise<string> {
 	return fsp.readFile(dataPath, 'utf8')
+}
+
+/**
+ * Uses our data table loading with a default schema,
+ * so our tests are consistent with how we read files.
+ * @param dataPath - should be a containing folder if the schema has a path, otherwise a full filename
+ * @returns
+ */
+export function readDataTable(
+	dataPath: string,
+	schema?: DataTableSchema,
+): Promise<ColumnTable | undefined> {
+	const p = schema?.path ?? ''
+	const filename = path.join(dataPath, p as string)
+	const _schema = schema || {
+		format: filename.endsWith('.csv') ? DataFormat.CSV : DataFormat.JSON,
+	}
+	return readText(filename).then((txt) => readTable(txt, _schema))
 }

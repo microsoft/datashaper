@@ -1,17 +1,11 @@
 /* eslint-disable jest/expect-expect, jest/valid-title, jest/no-conditional-expect */
 import { DataTableSchema } from '@datashaper/schema'
-import { readTable } from '@datashaper/tables'
 import { from } from 'arquero'
-import ColumnTable from 'arquero/dist/types/table/column-table.js'
 import fs from 'fs'
-import { isArray } from 'lodash-es'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
-import { readJson, readText } from './utils.js'
+import { readDataTable, readJson } from './utils.js'
 
-// Set the root cwd to the package root.
-// this makes loading datafiles by file-url in the project more straightforward
-process.chdir('../..')
 
 // Static data paths.
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -50,24 +44,9 @@ function defineTestCase(parentPath: string, test: string) {
 	it(testName, async () => {
 		const definition = await readJson(path.join(casePath, 'datatable.json'))
 		const expected = await readJsonTable(path.join(casePath, 'expected.json'))
-		const table = await readDataTable(definition as DataTableSchema, casePath)
+		const table = await readDataTable(casePath, definition as DataTableSchema)
 		expect(table?.objects()).toEqual(expected.objects())
 	})
-}
-
-async function readDataTable(
-	definition: DataTableSchema,
-	casePath: string,
-): Promise<ColumnTable | undefined> {
-	const p = definition.path
-	if (!p) {
-		throw new Error('No path for datatable')
-	}
-	if (isArray(p)) {
-		throw new Error('path array option not implemented for datatable')
-	}
-	const filepath = path.join(casePath, p)
-	return readText(filepath).then((txt) => readTable(txt, definition))
 }
 
 /**
