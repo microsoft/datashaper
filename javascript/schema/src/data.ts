@@ -125,7 +125,7 @@ export enum DataFormat {
             colB: valueB2
         \}]
     
-	columnar: 
+	columns: 
         \{
             colA: [valueA1, valueA2],
             colB: [valueB1, valueB2]
@@ -151,7 +151,7 @@ export enum DataOrientation {
 	 * Data is oriented in a columnar manner, such as that used by Apache Arrow or Parquet.
 	 * Column headers run down the vertical axis, and cell values run across the horizontal.
 	 */
-	Columnar = 'columnar',
+	Columnar = 'columns',
 	/**
 	 * Data is stored in a flat array.
 	 * If a matrix definition is provided,

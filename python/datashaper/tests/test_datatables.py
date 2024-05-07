@@ -14,12 +14,6 @@ FIXTURES_PATH = "../../schema/fixtures/datatables"
 log = getLogger(__name__)
 
 
-# pandas won't auto-guess iso dates on import, so we define an explicit iso output for comparison as strings
-# this means that the expected.csv _must_ match the expected iso format to seconds granularity
-def to_csv(df: pd.DataFrame, path: str) -> None:
-    df.to_csv(path, date_format="%Y-%m-%dT%H:%M:%SZ", index=False)
-
-
 def get_test_specs(root: str) -> list[str]:
     subfolders: list[str] = []
     for data_dir, _, files in os.walk(root):

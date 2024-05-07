@@ -19,6 +19,15 @@ class DataFormat(str, Enum):
     JSON = "json"
 
 
+class DataOrientation(str, Enum):
+    """Enum for the data orientation. See https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#json."""
+
+    Records = "records"
+    Columnar = "columns"
+    Array = "array"
+    Values = "values"
+
+
 @dataclass
 class ParserOptions:
     """Options that define core parsing behavior."""
@@ -79,12 +88,27 @@ class TypeHints:
         )
 
 
+@dataclass
+class DataShape:
+    """Defines the shape of the data."""
+
+    orientation: DataOrientation | None
+
+    @staticmethod
+    def from_dict(data: dict):  # noqa ANN205 can't reference type before it is declared
+        """Create a DataShape instance from a dictionary."""
+        return DataShape(
+            orientation=data.get("orientation", DataOrientation.Values),
+        )
+
+
 class DataTable:
     """Definition for DataTable including where to find it and how to load/parse it."""
 
     _schema: dict
     path: str | list[str] | None
     format: DataFormat | None
+    shape: DataShape | None
     parser: ParserOptions
     typeHints: TypeHints
 
@@ -92,6 +116,7 @@ class DataTable:
         self._schema = schema or {}
         self.path = self._schema.get("path")
         self.format = self._schema.get("format", DataFormat.CSV)
+        self.shape = DataShape.from_dict(self._schema.get("shape", {}))
         self.parser = ParserOptions.from_dict(self._schema.get("parser", {}))
         self.typeHints = TypeHints.from_dict(self._schema.get("typeHints", {}))
         
