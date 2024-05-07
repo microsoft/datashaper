@@ -9,10 +9,11 @@ import pandas as pd
 from .types import DataTable, parser_options_defaults, type_hints_defaults
 
 
-def load_csv_table(path: str, schema: DataTable) -> pd.DataFrame:
+def load_csv_table(path: str, schema: DataTable | None = None) -> pd.DataFrame:
     """Read a CSV file into a pandas DataFrame using the provided schema."""
-    parser = schema.parser or parser_options_defaults
-    type_hints = schema.typeHints or type_hints_defaults
+    _schema = schema or DataTable()
+    parser = _schema.parser or parser_options_defaults
+    type_hints = _schema.typeHints or type_hints_defaults
     header = 0 if parser.header is True else None
     table_df = pd.read_csv(path,
                      sep=parser.delimiter,

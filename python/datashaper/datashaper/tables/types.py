@@ -83,13 +83,13 @@ class DataTable:
     """Definition for DataTable including where to find it and how to load/parse it."""
 
     _schema: dict
-    path: str | list[str]
+    path: str | list[str] | None
     parser: ParserOptions
     typeHints: TypeHints
 
-    def __init__(self, schema: dict):
-        self._schema = schema
-        self.path = self._schema["path"]
+    def __init__(self, schema: dict = None):
+        self._schema = schema or {}
+        self.path = self._schema.get("path")
         self.parser = ParserOptions.from_dict(self._schema.get("parser", {}))
         self.typeHints = TypeHints.from_dict(self._schema.get("typeHints", {}))
         

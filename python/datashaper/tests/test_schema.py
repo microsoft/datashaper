@@ -10,7 +10,7 @@ import pandas as pd
 import pytest
 from pandas.testing import assert_frame_equal
 
-from datashaper import PandasDtypeBackend, Workflow
+from datashaper import PandasDtypeBackend, Workflow, load_csv_table
 
 FIXTURES_PATH = "../../schema/fixtures/workflow/verbs"
 TABLE_STORE_PATH = "../../schema/fixtures/workflow_inputs"
@@ -30,16 +30,13 @@ def load_inputs():
     for file in os.listdir(TABLE_STORE_PATH):
         path = Path(TABLE_STORE_PATH) / file
         if file.endswith(".csv"):
-            table = read_csv(path)
+            table = load_csv_table(path)
             dataframes[file.removesuffix(".csv")] = table
         if file.endswith(".json") and file != "workflow.json":
             table = pd.read_json(path)
             dataframes[file.removesuffix(".json")] = table
     return dataframes
 
-
-def read_csv(path: str) -> pd.DataFrame:
-    return pd.read_csv(path)
 
 
 # pandas won't auto-guess iso dates on import, so we define an explicit iso output for comparison as strings
@@ -100,8 +97,8 @@ async def test_verbs_schema_input(
                         to_csv(result, result_table_path)
                     else:
                         to_csv(result.obj, result_table_path)
-                    expected_table = read_csv(expected_table_path)
-                    result_table = read_csv(result_table_path)
+                    expected_table = load_csv_table(expected_table_path)
+                    result_table = load_csv_table(result_table_path)
                 elif expected.endswith(".json"):
                     result_table = result
                     expected_table = pd.read_json(expected_table_path)
