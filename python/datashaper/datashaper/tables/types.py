@@ -7,8 +7,16 @@
 # ruff: noqa: N815
 """Basic data models for defining data reads. Based on DataTableSchema: https://microsoft.github.io/datashaper/schema/datatable/datatable.json."""
 from dataclasses import dataclass
+from enum import Enum
 
 import numpy as np
+
+
+class DataFormat(str, Enum):
+    """Enum for the data format."""
+
+    CSV = "csv"
+    JSON = "json"
 
 
 @dataclass
@@ -47,8 +55,7 @@ class ParserOptions:
 class TypeHints:
     """Options that define core type casting behavior when parsing files. Primarily oriented toward CSV since there are  no strong types in CSV."""
 
-    # todo: convert strings that are enums in ts to python enums
-    dataFormat: str | None
+    format: DataFormat | None
     trueValues: list[str] | None
     falseValues: list[str] | None
     naValues: list[str] | None
@@ -61,7 +68,7 @@ class TypeHints:
     def from_dict(data: dict):  # noqa ANN205 can't reference type before it is declared
         """Create a TypeHints instance from a dictionary."""
         return TypeHints(
-            dataFormat=data.get("dataFormat", type_hints_defaults.dataFormat),
+            format=data.get("format", type_hints_defaults.format),
             trueValues=data.get("trueValues", type_hints_defaults.trueValues),
             falseValues=data.get("falseValues", type_hints_defaults.falseValues),
             naValues=data.get("naValues", type_hints_defaults.naValues),
@@ -72,23 +79,20 @@ class TypeHints:
         )
 
 
-@dataclass
 class DataTable:
     """Definition for DataTable including where to find it and how to load/parse it."""
 
+    _schema: dict
     path: str | list[str]
     parser: ParserOptions
     typeHints: TypeHints
 
-    @staticmethod
-    def from_dict(data: dict):  # noqa ANN205 can't reference type before it is declared
-        """Create a DataTable instance from a dictionary."""
-        return DataTable(
-            path=data["path"],
-            parser=ParserOptions.from_dict(data.get("parser", {})),
-            typeHints=TypeHints.from_dict(data.get("typeHints", {})),
-        )
-
+    def __init__(self, schema: dict):
+        self._schema = schema
+        self.path = self._schema["path"]
+        self.parser = ParserOptions.from_dict(self._schema.get("parser", {}))
+        self.typeHints = TypeHints.from_dict(self._schema.get("typeHints", {}))
+        
 
 parser_options_defaults = ParserOptions(
     delimiter=",",
@@ -106,7 +110,7 @@ parser_options_defaults = ParserOptions(
 
 # most of these are None because we want to use the pandas defaults
 type_hints_defaults = TypeHints(
-    dataFormat="csv",
+    format="csv",
     trueValues=None,
     falseValues=None,
     naValues=None,

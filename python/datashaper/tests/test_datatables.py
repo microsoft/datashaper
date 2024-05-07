@@ -48,7 +48,7 @@ async def test_verbs_schema_input(
 
     with (datatable_path).open() as schema:
         schema_dict = json.load(schema)
-        schema = DataTable.from_dict(schema_dict)
+        schema = DataTable(schema_dict)
         result_path = Path(fixture_path) / schema_dict["path"]
 
     try:
