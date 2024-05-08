@@ -9,8 +9,6 @@
 from dataclasses import dataclass
 from enum import Enum
 
-import numpy as np
-
 
 class DataFormat(str, Enum):
     """Enum for the data format."""
@@ -39,7 +37,7 @@ class ParserOptions:
     quoteChar: str | None
     escapeChar: str | None
     comment: str | None
-    skipBlankLines: bool | None
+    skipBlankLines: bool
     skipRows: int | None
     readRows: int | None
 
@@ -111,12 +109,12 @@ class DataTable:
 
     _schema: dict
     path: str | list[str] | None
-    format: DataFormat | None
-    shape: DataShape | None
+    format: DataFormat
+    shape: DataShape
     parser: ParserOptions
     typeHints: TypeHints
 
-    def __init__(self, schema: dict = None):
+    def __init__(self, schema: dict | None = None):
         self._schema = schema or {}
         self.path = self._schema.get("path")
         self.format = self._schema.get("format", DataFormat.CSV)
@@ -134,14 +132,14 @@ parser_options_defaults = ParserOptions(
     escapeChar=None,
     comment=None,
     skipBlankLines=True,
-    skipRows=0,
-    readRows=np.inf,
+    skipRows=None,  # will start at 0
+    readRows=None,  # will read all rows
 )
 
 
 # most of these are None because we want to use the pandas defaults
 type_hints_defaults = TypeHints(
-    dataFormat="csv",
+    dataFormat=DataFormat.CSV,
     trueValues=None,
     falseValues=None,
     naValues=None,
@@ -150,3 +148,5 @@ type_hints_defaults = TypeHints(
     infinity=None,
     dateFormat=None,
 )
+
+data_shape_defaults = DataShape(orientation=DataOrientation.Values)
