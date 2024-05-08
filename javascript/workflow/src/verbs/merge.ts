@@ -17,13 +17,7 @@ import {
 
 export const mergeStep: ColumnTableStep<MergeArgs> = (
 	input,
-	{
-		columns = [],
-		strategy,
-		to,
-		delimiter = '',
-		preserveSource = false,
-	},
+	{ columns = [], strategy, to, delimiter = '', preserveSource = false },
 ) => {
 	// eslint-disable-next-line
 	const func: object = escape((d: any) => {
@@ -40,7 +34,7 @@ export const mergeStep: ColumnTableStep<MergeArgs> = (
 	})
 
 	const derived = input.derive({ [to]: func })
-	
+
 	return preserveSource ? derived : derived.select(not(columns))
 }
 

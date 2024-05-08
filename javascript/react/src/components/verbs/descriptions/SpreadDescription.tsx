@@ -19,14 +19,6 @@ export const SpreadDescription: React.FC<StepDescriptionProps<SpreadArgs>> =
 					before: 'column',
 					value: args.column,
 				},
-				{
-					before: 'split delimiter',
-					value: args.delimiter,
-				},
-				{
-					before: 'onehot values',
-					value: args.onehot ? 'yes' : 'no',
-				},
 			]
 		}, [props])
 		return <VerbDescription {...props} rows={rows} />
