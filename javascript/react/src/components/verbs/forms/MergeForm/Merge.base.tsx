@@ -49,25 +49,6 @@ export const MergeFormBase: React.FC<StepFormBaseProps<MergeArgs>> = memo(
 					},
 					advanced: true,
 				},
-				{
-					label: 'Unhot',
-					type: FormInputType.Checkbox,
-					current: step.args.unhot,
-					onChange: (s, val) => {
-						s.args.unhot = val as boolean
-					},
-					advanced: true,
-				},
-				{
-					label: 'Prefix',
-					type: FormInputType.Text,
-					if: step.args.unhot === true,
-					current: step.args.prefix,
-					onChange: (s, val) => {
-						s.args.prefix = val as string
-					},
-					advanced: true,
-				},
 			],
 			[step],
 		)

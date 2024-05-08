@@ -793,10 +793,6 @@
                     "description": "Delimiter to use when merging columns into a string.\nThis is only necessary if MergeStrategy.Concat is used.\nIf it is not supplied, the values are just mashed together.",
                     "type": "string"
                 },
-                "prefix": {
-                    "description": "Prefix to strip from column names when using unhot (only relevant if columns were originally onehot encoded with a prefix).",
-                    "type": "string"
-                },
                 "preserveSource": {
                     "description": "Keep the original columns (default is to remove source columns).",
                     "type": "boolean"
@@ -808,10 +804,6 @@
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
                     "type": "string"
-                },
-                "unhot": {
-                    "description": "Indicates that columns should be \"unhot\" before merging. In other words, replace all 1s with the column name, and 0s with undefined.",
-                    "type": "boolean"
                 }
             },
             "type": "object"

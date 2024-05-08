@@ -7120,33 +7120,6 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!MergeArgs#prefix:member",
-              "docComment": "/**\n * Prefix to strip from column names when using unhot (only relevant if columns were originally onehot encoded with a prefix).\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "prefix?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "prefix",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!MergeArgs#preserveSource:member",
               "docComment": "/**\n * Keep the original columns (default is to remove source columns).\n */\n",
               "excerptTokens": [
@@ -7195,33 +7168,6 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "strategy",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!MergeArgs#unhot:member",
-              "docComment": "/**\n * Indicates that columns should be \"unhot\" before merging. In other words, replace all 1s with the column name, and 0s with undefined.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "unhot?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "unhot",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

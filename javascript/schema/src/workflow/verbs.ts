@@ -609,14 +609,6 @@ export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
 	 */
 	delimiter?: string
 	/**
-	 * Indicates that columns should be "unhot" before merging. In other words, replace all 1s with the column name, and 0s with undefined.
-	 */
-	unhot?: boolean
-	/**
-	 * Prefix to strip from column names when using unhot (only relevant if columns were originally onehot encoded with a prefix).
-	 */
-	prefix?: string
-	/**
 	 * Keep the original columns (default is to remove source columns).
 	 */
 	preserveSource?: boolean

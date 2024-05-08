@@ -696,10 +696,8 @@ export enum MathOperator {
 // @public (undocumented)
 export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
     delimiter?: string;
-    prefix?: string;
     preserveSource?: boolean;
     strategy: MergeStrategy;
-    unhot?: boolean;
 }
 
 // Warning: (ae-missing-release-tag) "MergeStrategy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
