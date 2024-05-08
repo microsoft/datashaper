@@ -11,6 +11,7 @@ dtypes
 ndarray
 isna
 notna
+semversioner
 
 # JavaScript Idioms
 QNAN
