@@ -3873,20 +3873,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@datashaper-py/core@workspace:^, @datashaper-py/core@workspace:python/datashaper":
-  version: 0.0.0-use.local
-  resolution: "@datashaper-py/core@workspace:python/datashaper"
-  languageName: unknown
-  linkType: soft
-
-"@datashaper-py/examples@workspace:python/examples":
-  version: 0.0.0-use.local
-  resolution: "@datashaper-py/examples@workspace:python/examples"
-  dependencies:
-    "@datashaper-py/core": "workspace:^"
-  languageName: unknown
-  linkType: soft
-
 "@datashaper/app-framework@workspace:^, @datashaper/app-framework@workspace:javascript/app-framework":
   version: 0.0.0-use.local
   resolution: "@datashaper/app-framework@workspace:javascript/app-framework"
