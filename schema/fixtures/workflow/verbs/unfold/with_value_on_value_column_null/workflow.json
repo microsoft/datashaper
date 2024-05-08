@@ -2,17 +2,8 @@
 	"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v2.json",
 	"steps": [
 		{
-			"id": "folded",
-			"verb": "fold",
-			"input": "table15",
-			"args": {
-				"to": ["key", "value"],
-				"columns": ["y", "z"]
-			}
-		},
-		{
 			"verb": "unfold",
-			"input": "folded",
+			"input": "table33",
 			"args": {
 				"key": "key",
 				"value": "value"
@@ -20,5 +11,5 @@
 			"id": "expected"
 		}
 	],
-	"input": ["table15"]
+	"input": ["table33"]
 }

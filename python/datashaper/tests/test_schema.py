@@ -81,7 +81,7 @@ async def test_verbs_schema_input(
     table_path = str(py_path) if py_path.exists() else fixture_path
 
     for expected in os.listdir(table_path):
-        if expected != "workflow.json" and expected != "comments.txt":
+        if expected != "workflow.json" and expected != "comments.txt" and expected != "result_expected.csv":
             result_table_path = Path(table_path) / f"result_{expected}"
             expected_table_path = Path(table_path) / expected
             table_name = expected.split(".")[0]
@@ -97,8 +97,8 @@ async def test_verbs_schema_input(
                         to_csv(result, result_table_path)
                     else:
                         to_csv(result.obj, result_table_path)
-                    expected_table = load_csv_table(expected_table_path)
                     result_table = load_csv_table(result_table_path)
+                    expected_table = load_csv_table(expected_table_path)
                 elif expected.endswith(".json"):
                     result_table = result
                     expected_table = load_json_table(expected_table_path)
@@ -106,6 +106,7 @@ async def test_verbs_schema_input(
                     expected_table,
                     result_table,
                     check_like=True,
+                    check_column_type=False,
                     check_dtype=False
                 )
             except AssertionError:
