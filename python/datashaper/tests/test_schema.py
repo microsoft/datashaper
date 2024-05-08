@@ -38,7 +38,6 @@ def load_inputs():
     return dataframes
 
 
-
 # pandas won't auto-guess iso dates on import, so we define an explicit iso output for comparison as strings
 # this means that the expected.csv _must_ match the expected iso format to seconds granularity
 def to_csv(df: pd.DataFrame, path: str) -> None:
@@ -81,7 +80,11 @@ async def test_verbs_schema_input(
     table_path = str(py_path) if py_path.exists() else fixture_path
 
     for expected in os.listdir(table_path):
-        if expected != "workflow.json" and expected != "comments.txt" and expected != "result_expected.csv":
+        if (
+            expected != "workflow.json"
+            and expected != "comments.txt"
+            and expected != "result_expected.csv"
+        ):
             result_table_path = Path(table_path) / f"result_{expected}"
             expected_table_path = Path(table_path) / expected
             table_name = expected.split(".")[0]
@@ -107,7 +110,7 @@ async def test_verbs_schema_input(
                     result_table,
                     check_like=True,
                     check_column_type=False,
-                    check_dtype=False
+                    check_dtype=False,
                 )
             except AssertionError:
                 print(  # noqa: T201

@@ -15,16 +15,22 @@ def load_csv_table(path: str, schema: DataTable | None = None) -> pd.DataFrame:
     parser = _schema.parser or parser_options_defaults
     type_hints = _schema.typeHints or type_hints_defaults
     header = 0 if parser.header is True else None
-    table_df = pd.read_csv(path,
-                     sep=parser.delimiter,
-                     header=header,
-                     names=parser.names,
-                     comment=parser.comment,
-                     skip_blank_lines=parser.skipBlankLines,
-                     true_values=type_hints.trueValues,
-                     false_values=type_hints.falseValues,
-                     decimal=type_hints.decimal,
-                     thousands=type_hints.thousands,)
+    table_df = pd.read_csv(
+        path,
+        sep=parser.delimiter,
+        header=header,
+        names=parser.names,
+        comment=parser.comment,
+        skip_blank_lines=parser.skipBlankLines,
+        true_values=type_hints.trueValues,
+        false_values=type_hints.falseValues,
+        decimal=type_hints.decimal,
+        thousands=type_hints.thousands,
+    )
     # pandas skiprows includes _all_ rows even the header, so we have to post-slice
-    end_index = len(table_df.index) if parser.readRows is np.inf else parser.skipRows + parser.readRows
+    end_index = (
+        len(table_df.index)
+        if parser.readRows is np.inf
+        else parser.skipRows + parser.readRows
+    )
     return table_df[parser.skipRows : end_index].reset_index(drop=True)

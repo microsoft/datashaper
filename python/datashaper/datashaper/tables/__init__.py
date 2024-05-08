@@ -18,5 +18,5 @@ __all__ = [
     "type_hints_defaults",
     "load_csv_table",
     "load_json_table",
-    "load_table"
+    "load_table",
 ]

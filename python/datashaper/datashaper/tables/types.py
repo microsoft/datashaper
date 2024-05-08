@@ -50,11 +50,15 @@ class ParserOptions:
             delimiter=data.get("delimiter", parser_options_defaults.delimiter),
             names=data.get("names", parser_options_defaults.names),
             header=data.get("header", parser_options_defaults.header),
-            lineTerminator=data.get("lineTerminator", parser_options_defaults.lineTerminator),
+            lineTerminator=data.get(
+                "lineTerminator", parser_options_defaults.lineTerminator
+            ),
             quoteChar=data.get("quoteChar", parser_options_defaults.quoteChar),
             escapeChar=data.get("escapeChar", parser_options_defaults.escapeChar),
             comment=data.get("comment", parser_options_defaults.comment),
-            skipBlankLines=data.get("skipBlankLines", parser_options_defaults.skipBlankLines),
+            skipBlankLines=data.get(
+                "skipBlankLines", parser_options_defaults.skipBlankLines
+            ),
             skipRows=data.get("skipRows", parser_options_defaults.skipRows),
             readRows=data.get("readRows", parser_options_defaults.readRows),
         )
@@ -119,7 +123,7 @@ class DataTable:
         self.shape = DataShape.from_dict(self._schema.get("shape", {}))
         self.parser = ParserOptions.from_dict(self._schema.get("parser", {}))
         self.typeHints = TypeHints.from_dict(self._schema.get("typeHints", {}))
-        
+
 
 parser_options_defaults = ParserOptions(
     delimiter=",",

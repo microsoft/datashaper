@@ -47,4 +47,3 @@ class WorkflowRunResult:
 
     memory_profile: MemoryProfile | None = None
     """The memory profile of the workflow run."""
-
