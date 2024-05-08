@@ -1,0 +1,6 @@
+integer,string,boolean,decimal
+1,hi,N/A,1.0
+2,hello,false,2.345
+3,"1",True,NA
+
+4000,NA,null,-nan

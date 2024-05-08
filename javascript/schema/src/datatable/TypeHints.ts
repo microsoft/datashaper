@@ -20,10 +20,14 @@ export interface TypeHints {
 	arrayDelimiter?: string
 	/**
 	 * Default: case-insensitive word "true".
+	 * Note that if you configure this, pandas considers the custom values case-sensitive.
+	 * Case-insensitive true/false is always valid.
 	 */
 	trueValues?: string[]
 	/**
 	 * Default: case-insensitive word "false".
+	 * Note that if you configure this, pandas considers the custom values case-sensitive.
+	 * Case-insensitive true/false is always valid.
 	 */
 	falseValues?: string[]
 	/**

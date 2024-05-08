@@ -4,7 +4,7 @@
 
 ## TypeHints.trueValues property
 
-Default: case-insensitive word "true".
+Default: case-insensitive word "true". Note that if you configure this, pandas considers the custom values case-sensitive. Case-insensitive true/false is always valid.
 
 <b>Signature:</b>
 

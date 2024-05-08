@@ -10,6 +10,7 @@ import { ParserOptionsDefaults } from '@datashaper/schema'
  */
 export const ARQUERO_SUPPORTED_OPTS = new Set([
 	'delimiter',
+	'decimal',
 	'names',
 	'header',
 	'comment',

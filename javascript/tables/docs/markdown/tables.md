@@ -23,7 +23,7 @@
 |  [formatIfNumber(value)](./tables.formatifnumber.md) | Returns a formatted string for a number, otherwise returns the original value |
 |  [formatNumberStr(value, options)](./tables.formatnumberstr.md) | Formats a string using specified numeric parser options, so that it is ready for standard numeric parsing. (i.e., default js impl is to consider '.' a decimal). If the string has invalid construction to be a number, an empty string will be returned, which will be parsed as NaN. We do this because parseInt does not recognize the thousands separator, but if we remove them all even in invalid cases (e.g., '1,00'), invalid numbers could be parsed downstream as valid. The same occurs with decimal separators: parseFloat will ignore anything after the first. |
 |  [fromCSV(text, options)](./tables.fromcsv.md) | Drop-in replacement for arquero fromCSV, using our internal parsing with auto-typing turned on. Meant for quick-and-dirty reads, with the advantage that our default parsing aligns with pandas. Use readTable for more control over schema options and formats. |
-|  [generateCodebook(table, options)](./tables.generatecodebook.md) |  |
+|  [generateCodebook(table, typeHints, options)](./tables.generatecodebook.md) |  |
 |  [getDate(value)](./tables.getdate.md) |  |
 |  [getters(table)](./tables.getters.md) | Returns a map of all of the column getters for a table. |
 |  [guessDataType(options)](./tables.guessdatatype.md) | Factory function to provide a type guessing function for any string value. This uses optional type hints to account for string values such as boolean and null formats. |
@@ -33,6 +33,7 @@
 |  [isBoolean(falseValues, trueValues)](./tables.isboolean.md) |  |
 |  [isDate(value)](./tables.isdate.md) |  |
 |  [isNull(naValues)](./tables.isnull.md) |  |
+|  [isNullOrUndefined(naValues)](./tables.isnullorundefined.md) |  |
 |  [isNumber(decimal, thousands)](./tables.isnumber.md) |  |
 |  [isObject(value)](./tables.isobject.md) |  |
 |  [isValidNumber(value)](./tables.isvalidnumber.md) |  |
@@ -41,8 +42,8 @@
 |  [maxLengthValidator(field, includeIndexes)](./tables.maxlengthvalidator.md) | Constructs a function that validates a column against the <code>maxLength</code> constraint. |
 |  [minimumValidator(field, includeIndexes)](./tables.minimumvalidator.md) | Constructs a function that validates a column against the <code>minimum</code> constraint. |
 |  [minLengthValidator(field, includeIndexes)](./tables.minlengthvalidator.md) | Constructs a function that validates a column against the <code>minLength</code> constraint. |
-|  [parseArray(subtype, options, delimiter)](./tables.parsearray.md) |  |
-|  [parseAs(type, subtype, hints)](./tables.parseas.md) | Factory function to create a value parser based on defined data type and type hints |
+|  [parseArray(subtype, delimiter, options)](./tables.parsearray.md) |  |
+|  [parseAs(type, hints, subtype)](./tables.parseas.md) | Factory function to create a value parser based on defined data type and type hints |
 |  [parseBoolean(naValues, trueValues, falseValues)](./tables.parseboolean.md) |  |
 |  [parseDate(naValues)](./tables.parsedate.md) |  |
 |  [parseNumber(naValues, decimal, thousands)](./tables.parsenumber.md) |  |

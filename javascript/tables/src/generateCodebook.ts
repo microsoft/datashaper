@@ -7,7 +7,8 @@ import {
 	type Field,
 	createCodebookSchemaObject,
 	DataType,
-	type DataFormat,
+	TypeHintsDefaults,
+	type TypeHints,
 } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
@@ -17,8 +18,8 @@ import { parseAs } from './parseTypes.js'
 
 export async function generateCodebook(
 	table: ColumnTable,
+	typeHints: TypeHints = TypeHintsDefaults,
 	options?: {
-		format?: DataFormat
 		autoType?: boolean
 		autoMax?: number
 		onInferring?: (column: string) => void
@@ -51,7 +52,7 @@ export async function generateCodebook(
 						const values: string[] = table.array(column) as string[]
 						const columnType = guessDataTypeFromValues(
 							values,
-							opts?.format,
+							typeHints,
 							opts.autoMax,
 						)
 
@@ -60,14 +61,14 @@ export async function generateCodebook(
 						if (columnType === DataType.Array) {
 							// TODO: is it worth finding the nature _within_ arrays?
 							// right now they will not be assigned a nature
-							const arrayParse = parseAs(DataType.Array)
+							const arrayParse = parseAs(DataType.Array, typeHints)
 							// we re-parse arrays as strings in case the table is already typed and the value is a live array
 							const flat = values.flatMap((v) =>
 								v ? arrayParse(v.toString()) : null,
 							)
 							const subtype = guessDataTypeFromValues(
 								flat,
-								opts?.format,
+								typeHints,
 								opts.autoMax,
 							)
 							field.subtype = subtype

@@ -6,6 +6,7 @@ import {
 	DataFormat,
 	DataOrientation,
 	type CodebookSchema,
+	TypeHintsDefaults,
 } from '@datashaper/schema'
 import { type TableMetadata, introspect, readTable } from '@datashaper/tables'
 import type { BaseFile } from '@datashaper/utilities'
@@ -136,9 +137,8 @@ export function useCodebook(
 			setColumnBeingInferred(undefined)
 			setProgress(0)
 
-			generateCodebook(table, {
+			generateCodebook(table, TypeHintsDefaults, {
 				autoType,
-				format,
 				onInferring: setColumnBeingInferred,
 				onProgress: setProgress,
 			})

@@ -37,7 +37,7 @@ export async function readTable(
 	// TODO: should we eventually perform some casting/typing work on arrow tables? They're already strongly typed
 	if (!isBinaryFormat(schema.format) && (opts?.codebook || opts?.autoType)) {
 		const codebook =
-			opts?.codebook ?? (await inferCodebook(table, schema.format, opts))
+			opts?.codebook ?? (await inferCodebook(table, schema, opts))
 		return applyCodebook(table, codebook, CodebookStrategy.DataTypeOnly, schema)
 	}
 	return table
@@ -49,14 +49,13 @@ function isBinaryFormat(format: DataFormat | undefined) {
 
 async function inferCodebook(
 	table: ColumnTable,
-	format: DataFormat | undefined,
+	schema: Partial<DataTableSchema>,
 	opts: ReadTableOptions,
 ) {
 	if (opts.codebook != null) {
 		return opts.codebook
 	} else {
-		return await generateCodebook(table, {
-			format,
+		return await generateCodebook(table, schema.typeHints, {
 			autoType: opts.autoType,
 			autoMax: opts.autoMax,
 		})

@@ -4,7 +4,7 @@
 
 ## ParserOptions.lineTerminator property
 
-Character that indicates the end of a line (row). Default: \\<!-- -->r, \\<!-- -->r<!-- -->\\<!-- -->n, or \\<!-- -->n
+Character that indicates the end of a line (row). Default: \\<!-- -->r, \\<!-- -->r<!-- -->\\<!-- -->n, or \\<!-- -->n, and \*must\* be one of these.
 
 <b>Signature:</b>
 

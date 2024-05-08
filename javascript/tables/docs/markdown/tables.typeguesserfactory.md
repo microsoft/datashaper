@@ -9,6 +9,7 @@
 ```typescript
 export declare function typeGuesserFactory(options?: TypeHints): {
     isNull: (value: unknown) => boolean;
+    isNullOrUndefined: (value: unknown) => boolean;
     isBoolean: (value: unknown) => boolean;
     isNumber: (value: unknown) => boolean;
     isArray: (value: unknown) => boolean;
@@ -25,5 +26,5 @@ export declare function typeGuesserFactory(options?: TypeHints): {
 
 <b>Returns:</b>
 
-{ isNull: (value: unknown) =&gt; boolean; isBoolean: (value: unknown) =&gt; boolean; isNumber: (value: unknown) =&gt; boolean; isArray: (value: unknown) =&gt; boolean; isObject: (value: unknown) =&gt; boolean; isDate: (value: unknown) =&gt; boolean; }
+{ isNull: (value: unknown) =&gt; boolean; isNullOrUndefined: (value: unknown) =&gt; boolean; isBoolean: (value: unknown) =&gt; boolean; isNumber: (value: unknown) =&gt; boolean; isArray: (value: unknown) =&gt; boolean; isObject: (value: unknown) =&gt; boolean; isDate: (value: unknown) =&gt; boolean; }
 

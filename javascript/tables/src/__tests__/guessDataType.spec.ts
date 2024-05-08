@@ -12,19 +12,21 @@ describe('Validators tests', () => {
 			expect(isBoolean('true')).toBe(true)
 			expect(isBoolean('FALSE')).toBe(true)
 			isBoolean = typeGuesserFactory({ trueValues: ['yes'] }).isBoolean
-			expect(isBoolean('Yes')).toBe(true)
+			expect(isBoolean('yes')).toBe(true)
+			expect(isBoolean('Yes')).toBe(false)
 			isBoolean = typeGuesserFactory({ trueValues: ['T'] }).isBoolean
-			expect(isBoolean('t')).toBe(true)
+			expect(isBoolean('T')).toBe(true)
 			isBoolean = typeGuesserFactory({ trueValues: ['Y'] }).isBoolean
-			expect(isBoolean('y')).toBe(true)
+			expect(isBoolean('Y')).toBe(true)
+			expect(isBoolean('y')).toBe(false)
 			isBoolean = typeGuesserFactory({ trueValues: ['1'] }).isBoolean
 			expect(isBoolean('1')).toBe(true)
 			isBoolean = typeGuesserFactory({ falseValues: ['NO'] }).isBoolean
-			expect(isBoolean('no')).toBe(true)
+			expect(isBoolean('NO')).toBe(true)
 			isBoolean = typeGuesserFactory({ falseValues: ['F'] }).isBoolean
-			expect(isBoolean('f')).toBe(true)
+			expect(isBoolean('F')).toBe(true)
 			isBoolean = typeGuesserFactory({ falseValues: ['n'] }).isBoolean
-			expect(isBoolean('N')).toBe(true)
+			expect(isBoolean('n')).toBe(true)
 			isBoolean = typeGuesserFactory({ falseValues: ['0'] }).isBoolean
 			expect(isBoolean('0')).toBe(true)
 		})

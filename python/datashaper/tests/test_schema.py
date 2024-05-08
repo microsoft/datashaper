@@ -10,13 +10,12 @@ import pandas as pd
 import pytest
 from pandas.testing import assert_frame_equal
 
-from datashaper import PandasDtypeBackend, Workflow
+from datashaper import PandasDtypeBackend, Workflow, load_csv_table, load_json_table
 
-FIXTURES_PATH = "fixtures/workflow/verbs"
-TABLE_STORE_PATH = "fixtures/workflow_inputs"
-SCHEMA_PATH = "workflow.json"
+FIXTURES_PATH = "../../schema/fixtures/workflow/verbs"
+TABLE_STORE_PATH = "../../schema/fixtures/workflow_inputs"
+SCHEMA_PATH = "../../schema/workflow.json"
 log = getLogger(__name__)
-os.chdir("../../schema")
 
 
 server = HTTPServer(("localhost", 8080), SimpleHTTPRequestHandler)
@@ -31,16 +30,12 @@ def load_inputs():
     for file in os.listdir(TABLE_STORE_PATH):
         path = Path(TABLE_STORE_PATH) / file
         if file.endswith(".csv"):
-            table = read_csv(path)
+            table = load_csv_table(path)
             dataframes[file.removesuffix(".csv")] = table
         if file.endswith(".json") and file != "workflow.json":
-            table = pd.read_json(path)
+            table = load_json_table(path)
             dataframes[file.removesuffix(".json")] = table
     return dataframes
-
-
-def read_csv(path: str) -> pd.DataFrame:
-    return pd.read_csv(path)
 
 
 # pandas won't auto-guess iso dates on import, so we define an explicit iso output for comparison as strings
@@ -85,7 +80,11 @@ async def test_verbs_schema_input(
     table_path = str(py_path) if py_path.exists() else fixture_path
 
     for expected in os.listdir(table_path):
-        if expected != "workflow.json" and expected != "comments.txt":
+        if (
+            expected != "workflow.json"
+            and expected != "comments.txt"
+            and expected != "result_expected.csv"
+        ):
             result_table_path = Path(table_path) / f"result_{expected}"
             expected_table_path = Path(table_path) / expected
             table_name = expected.split(".")[0]
@@ -101,17 +100,17 @@ async def test_verbs_schema_input(
                         to_csv(result, result_table_path)
                     else:
                         to_csv(result.obj, result_table_path)
-                    expected_table = read_csv(expected_table_path)
-                    result_table = read_csv(result_table_path)
+                    result_table = load_csv_table(result_table_path)
+                    expected_table = load_csv_table(expected_table_path)
                 elif expected.endswith(".json"):
                     result_table = result
-                    expected_table = pd.read_json(expected_table_path)
+                    expected_table = load_json_table(expected_table_path)
                 assert_frame_equal(
                     expected_table,
                     result_table,
                     check_like=True,
-                    check_dtype=False,
                     check_column_type=False,
+                    check_dtype=False,
                 )
             except AssertionError:
                 print(  # noqa: T201

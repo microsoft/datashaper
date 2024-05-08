@@ -20,8 +20,8 @@ import { formatNumberStr, getDate } from './util.js'
  */
 export function parseAs(
 	type?: DataType,
-	subtype?: DataType,
 	hints?: TypeHints,
+	subtype?: DataType,
 ): Value {
 	switch (type) {
 		// TODO: differentiate integer and decimal (if type is integer and it has decimals, it should return null)
@@ -35,7 +35,7 @@ export function parseAs(
 				hints?.falseValues,
 			)
 		case DataType.Array:
-			return parseArray(subtype, hints)
+			return parseArray(subtype, hints?.arrayDelimiter, hints)
 		case DataType.Object:
 			return parseObject(hints)
 		case DataType.Date:
@@ -75,8 +75,11 @@ export function parseBoolean(
 	falseValues = TypeHintsDefaults.falseValues,
 ): (value: string | undefined) => boolean | null {
 	const { isNull } = typeGuesserFactory({ naValues })
-	const trueSet = new Set(trueValues.map((v) => v.toLowerCase()))
-	const falseSet = new Set(falseValues.map((v) => v.toLowerCase()))
+	// to align with pandas functionality:
+	// 1. case-insensitive true/false are always valid
+	// 2. trueValues/falseValues are in addition, and they are case-sensitive
+	const trueSet = new Set(trueValues)
+	const falseSet = new Set(falseValues)
 	return function parseBoolean(value: string | undefined) {
 		if (isNull(value) || value === undefined) {
 			return null
@@ -84,11 +87,17 @@ export function parseBoolean(
 		if (typeof value === 'boolean') {
 			return value as boolean
 		}
-		const str = value.toLowerCase()
-		if (trueSet.has(str)) {
+		if (trueSet.has(value)) {
 			return true
 		}
-		if (falseSet.has(str)) {
+		if (falseSet.has(value)) {
+			return false
+		}
+		const str = value.toLowerCase()
+		if (str === 'true') {
+			return true
+		}
+		if (str === 'false') {
 			return false
 		}
 		return null
@@ -109,8 +118,8 @@ export function parseString(
 
 export function parseArray(
 	subtype = DataType.String,
+	delimiter = TypeHintsDefaults.arrayDelimiter,
 	options?: TypeHints,
-	delimiter = ',',
 ): (value: unknown) => any[] | null {
 	const { isNull } = typeGuesserFactory(options)
 	return function parseArray(value: unknown) {
@@ -129,7 +138,7 @@ export function parseArray(
 			try {
 				const parsed = array.map((i) => {
 					const item = `${i}`
-					const parser = parseAs(subtype, subtype, options)
+					const parser = parseAs(subtype, options, subtype)
 					return parser(item)
 				})
 				return parsed
@@ -157,7 +166,7 @@ export function parseObject(
 					const item = `${obj[key]}`
 					// for objects we'll just do our best with property types - we don't support detailed sub-object structures right now
 					const type = subTypeChecker(item)
-					const parser = parseAs(type, type, options)
+					const parser = parseAs(type, options, type)
 					acc[key] = parser(item)
 					return acc
 				},

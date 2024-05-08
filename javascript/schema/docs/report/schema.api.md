@@ -242,7 +242,7 @@ export enum DataNature {
 // @public
 export enum DataOrientation {
     Array = "array",
-    Columnar = "columnar",
+    Columnar = "columns",
     Records = "records",
     Values = "values"
 }

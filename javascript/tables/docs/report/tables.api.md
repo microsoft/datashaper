@@ -104,8 +104,7 @@ export function fromCSV(text: string, options?: CSVParseOptions): Promise<Column
 // Warning: (ae-missing-release-tag) "generateCodebook" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function generateCodebook(table: ColumnTable, options?: {
-    format?: DataFormat;
+export function generateCodebook(table: ColumnTable, typeHints?: TypeHints, options?: {
     autoType?: boolean;
     autoMax?: number;
     onInferring?: (column: string) => void;
@@ -158,6 +157,11 @@ export function isDate(value: unknown): boolean;
 // @public (undocumented)
 export function isNull(naValues?: string[]): (value: unknown) => boolean;
 
+// Warning: (ae-missing-release-tag) "isNullOrUndefined" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function isNullOrUndefined(naValues?: string[]): (value: unknown) => boolean;
+
 // Warning: (ae-missing-release-tag) "isNumber" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -201,12 +205,12 @@ export function minLengthValidator(field: Field, includeIndexes: boolean): Valid
 // Warning: (ae-missing-release-tag) "parseArray" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function parseArray(subtype?: DataType, options?: TypeHints, delimiter?: string): (value: unknown) => any[] | null;
+export function parseArray(subtype?: DataType, delimiter?: string, options?: TypeHints): (value: unknown) => any[] | null;
 
 // Warning: (ae-missing-release-tag) "parseAs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function parseAs(type?: DataType, subtype?: DataType, hints?: TypeHints): Value;
+export function parseAs(type?: DataType, hints?: TypeHints, subtype?: DataType): Value;
 
 // Warning: (ae-missing-release-tag) "parseBoolean" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -312,6 +316,7 @@ export interface TableMetadata {
 // @public (undocumented)
 export function typeGuesserFactory(options?: TypeHints): {
     isNull: (value: unknown) => boolean;
+    isNullOrUndefined: (value: unknown) => boolean;
     isBoolean: (value: unknown) => boolean;
     isNumber: (value: unknown) => boolean;
     isArray: (value: unknown) => boolean;

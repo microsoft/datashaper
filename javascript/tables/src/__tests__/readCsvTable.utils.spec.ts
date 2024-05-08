@@ -29,7 +29,6 @@ describe('readCsvTable.utils', () => {
 				delimiter: '\t',
 				lineTerminator: '\n',
 				quoteChar: '"',
-				skipBlankLines: true,
 			})
 			expect(type).toBe(ParserType.Arquero)
 		})

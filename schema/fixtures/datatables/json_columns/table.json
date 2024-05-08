@@ -1,0 +1,6 @@
+{
+    "integer": [1,2,3,4000],
+    "string": ["hi","hello","1",null],
+    "boolean": [null,false,true,null],
+    "decimal": [1.0,2.345,null,null]
+}

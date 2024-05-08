@@ -2588,7 +2588,7 @@
         {
           "kind": "Enum",
           "canonicalReference": "@datashaper/schema!DataOrientation:enum",
-          "docComment": "/**\n * Indicates the orientation of the data within the file.\n *\n * Most CSV data files are 'values' (row-oriented).\n *\n * JSON files can commonly be either. Records are probably more common, though require more space due to replication of keys. Apache Arrow or Parquet are columnar. This nearly aligns with pandas: https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#json\n *\n * A key difference (which probably needs resolved) is that we don't yet support the notion of an index. See their example for \"columns\" or \"index\" orientation, which is a nested structure.\n *\n * Example JSON formats: records: [\\{ colA: valueA1, colB: valueB1 \\}, \\{ colA: valueA2, colB: valueB2 \\}]\n *\n * columnar: \\{ colA: [valueA1, valueA2], colB: [valueB1, valueB2] \\}\n *\n * array: [\"value1\", \"value2\"]\n *\n * values: [ [\"colA\", \"colB\"], [\"valueA1\", \"valueA2\"], [\"valueA2\", \"valueB2\"] ]\n */\n",
+          "docComment": "/**\n * Indicates the orientation of the data within the file.\n *\n * Most CSV data files are 'values' (row-oriented).\n *\n * JSON files can commonly be either. Records are probably more common, though require more space due to replication of keys. Apache Arrow or Parquet are columnar. This nearly aligns with pandas: https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#json\n *\n * A key difference (which probably needs resolved) is that we don't yet support the notion of an index. See their example for \"columns\" or \"index\" orientation, which is a nested structure.\n *\n * Example JSON formats: records: [\\{ colA: valueA1, colB: valueB1 \\}, \\{ colA: valueA2, colB: valueB2 \\}]\n *\n * columns: \\{ colA: [valueA1, valueA2], colB: [valueB1, valueB2] \\}\n *\n * array: [\"value1\", \"value2\"]\n *\n * values: [ [\"colA\", \"colB\"], [\"valueA1\", \"valueA2\"], [\"valueA2\", \"valueB2\"] ]\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -2631,7 +2631,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "\"columnar\""
+                  "text": "\"columns\""
                 }
               ],
               "initializerTokenRange": {
@@ -7996,7 +7996,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!ParserOptions#lineTerminator:member",
-              "docComment": "/**\n * Character that indicates the end of a line (row). Default: \\\\r, \\\\r\\\\n, or \\\\n\n */\n",
+              "docComment": "/**\n * Character that indicates the end of a line (row). Default: \\\\r, \\\\r\\\\n, or \\\\n, and *must* be one of these.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -11412,7 +11412,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!TypeHints#falseValues:member",
-              "docComment": "/**\n * Default: case-insensitive word \"false\".\n */\n",
+              "docComment": "/**\n * Default: case-insensitive word \"false\". Note that if you configure this, pandas considers the custom values case-sensitive. Case-insensitive true/false is always valid.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -11520,7 +11520,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!TypeHints#trueValues:member",
-              "docComment": "/**\n * Default: case-insensitive word \"true\".\n */\n",
+              "docComment": "/**\n * Default: case-insensitive word \"true\". Note that if you configure this, pandas considers the custom values case-sensitive. Case-insensitive true/false is always valid.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

@@ -68,6 +68,7 @@ describe('generateCodebook', () => {
 			it('should return a codebook object', async () => {
 				const parsed = await fromCSV(csv, { autoType: false })
 				const codebook = await generateCodebook(parsed)
+
 				expect(codebook.fields).toHaveLength(9)
 				expect(codebook.fields[0]?.name).toBe('Symbol')
 				expect(codebook.fields[0]?.type).toBe(DataType.String)
