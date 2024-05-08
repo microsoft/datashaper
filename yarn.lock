@@ -3462,7 +3462,7 @@ __metadata:
     rxjs: "npm:^7.8.1"
     styled-components: "npm:^5.3.11"
     tslib: "npm:^2.5.3"
-    typescript: "npm:^5.1.3"
+    typescript: "npm:^5.4.5"
   peerDependencies:
     "@fluentui/react": ">= 8"
     "@fluentui/react-hooks": ">= 8"
@@ -3509,7 +3509,7 @@ __metadata:
     "@types/express": "npm:^4.17.17"
     "@types/node": "npm:^20.2.5"
     express: "npm:^4.19.2"
-    typescript: "npm:^5.1.3"
+    typescript: "npm:^5.4.5"
   languageName: unknown
   linkType: soft
 
@@ -3530,7 +3530,7 @@ __metadata:
     rome: "npm:^12.1.3"
     semver: "npm:^7.6.0"
     turbo: "npm:1.12.2"
-    typescript: "npm:^5.1.3"
+    typescript: "npm:^5.4.5"
   languageName: unknown
   linkType: soft
 
@@ -3574,7 +3574,7 @@ __metadata:
     rxjs: "npm:^7.8.1"
     styled-components: "npm:^5.3.11"
     tslib: "npm:^2.5.3"
-    typescript: "npm:^5.1.3"
+    typescript: "npm:^5.4.5"
   peerDependencies:
     "@fluentui/react": ">= 8"
     "@fluentui/react-hooks": ">= 8"
@@ -3621,7 +3621,7 @@ __metadata:
     jest: "npm:^29.5.0"
     npm-run-all: "npm:^4.1.5"
     shx: "npm:^0.3.4"
-    typescript: "npm:^5.1.3"
+    typescript: "npm:^5.4.5"
     typescript-json-schema: "npm:^0.57.0"
   languageName: unknown
   linkType: soft
@@ -3665,7 +3665,7 @@ __metadata:
     require-from-string: "npm:^2.0.2"
     storybook: "npm:7.6.14"
     styled-components: "npm:^5.3.11"
-    typescript: "npm:^5.1.3"
+    typescript: "npm:^5.4.5"
     webpack: "npm:^5.91.0"
   languageName: unknown
   linkType: soft
@@ -3687,7 +3687,7 @@ __metadata:
     moment: "npm:^2.29.4"
     node-fetch: "npm:^3.3.1"
     papaparse: "npm:^5.4.1"
-    typescript: "npm:^5.1.3"
+    typescript: "npm:^5.4.5"
   peerDependencies:
     arquero: ^5.1.0
   peerDependenciesMeta:
@@ -3714,7 +3714,7 @@ __metadata:
     jest: "npm:^29.5.0"
     jest-environment-jsdom: "npm:^29.5.0"
     tslib: "npm:^2.5.3"
-    typescript: "npm:^5.1.3"
+    typescript: "npm:^5.4.5"
   peerDependencies:
     arquero: ^5.1.0
   peerDependenciesMeta:
@@ -3767,7 +3767,7 @@ __metadata:
     rxjs: "npm:^7.8.1"
     shx: "npm:^0.3.4"
     styled-components: "npm:^5.3.11"
-    typescript: "npm:^5.1.3"
+    typescript: "npm:^5.4.5"
     webpack: "npm:^5.91.0"
   languageName: unknown
   linkType: soft
@@ -3801,7 +3801,7 @@ __metadata:
     percentile: "npm:^1.6.0"
     regenerator-runtime: "npm:^0.13.11"
     rxjs: "npm:^7.8.1"
-    typescript: "npm:^5.1.3"
+    typescript: "npm:^5.4.5"
     uuid: "npm:^9.0.0"
     web-file-polyfill: "npm:^1.0.4"
   peerDependencies:
@@ -21073,13 +21073,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.1.3":
-  version: 5.1.3
-  resolution: "typescript@npm:5.1.3"
+"typescript@npm:^5.4.5":
+  version: 5.4.5
+  resolution: "typescript@npm:5.4.5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10/2d656e635d85a8354955d4f63e5835f5217b1d2b0cea7d82409e324bd7d24f68883e43208a9b250b764bbf2833d83878c05de55dbe4b8b73996b2025c6e50140
+  checksum: 10/d04a9e27e6d83861f2126665aa8d84847e8ebabcea9125b9ebc30370b98cb38b5dff2508d74e2326a744938191a83a69aa9fddab41f193ffa43eabfdf3f190a5
   languageName: node
   linkType: hard
 
@@ -21113,13 +21113,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5.1.3#optional!builtin<compat/typescript>":
-  version: 5.1.3
-  resolution: "typescript@patch:typescript@npm%3A5.1.3#optional!builtin<compat/typescript>::version=5.1.3&hash=5da071"
+"typescript@patch:typescript@npm%3A^5.4.5#optional!builtin<compat/typescript>":
+  version: 5.4.5
+  resolution: "typescript@patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=d69c25"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10/dade91ba4155d0e9eb58a83cfec0d8271fefedc87b106443c396f9961aa8b231f8585d283b126a8373897aff7823da7874ce5c0b3b18a548b51ffb474f01565e
+  checksum: 10/584be8bac7112ad49a9eb9992f71d542b1ff2fafb5bb315e1c196145e8feab589f1d7223cfb2d5df6770789582e6918f8287d1f2f89911b38eb80e29c560ad00
   languageName: node
   linkType: hard
 

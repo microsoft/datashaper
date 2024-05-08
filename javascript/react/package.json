@@ -73,7 +73,7 @@
 		"react-dom": "^18.2.0",
 		"react-is": "^18.2.0",
 		"styled-components": "^5.3.11",
-		"typescript": "^5.1.3"
+		"typescript": "^5.4.5"
 	},
 	"peerDependencies": {
 		"@fluentui/react": ">= 8",
