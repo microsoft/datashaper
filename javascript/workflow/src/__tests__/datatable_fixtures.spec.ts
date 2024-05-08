@@ -6,7 +6,6 @@ import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { readDataTable, readJson } from './utils.js'
 
-
 // Static data paths.
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const SCHEMA_PATH = path.join(__dirname, '../../../../schema')
