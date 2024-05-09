@@ -4,11 +4,11 @@
 		{
 			"id": "expected",
 			"verb": "unroll",
-			"input": "table1",
+			"input": "table34",
 			"args": {
-				"column": "ID"
+				"column": "items"
 			}
 		}
 	],
-	"input": ["table1"]
+	"input": ["table34"]
 }
