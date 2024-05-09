@@ -1,0 +1,8 @@
+releases:
+  "@datashaper/app-framework": major
+  "@datashaper/react": major
+  "@datashaper/schema": major
+  "@datashaper/stories": major
+  "@datashaper/tables": major
+  "@datashaper/webapp": major
+  "@datashaper/workflow": major

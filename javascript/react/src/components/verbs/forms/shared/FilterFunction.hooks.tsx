@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Criterion } from '@datashaper/schema'
+import type { Criteria } from '@datashaper/schema'
 import {
 	BooleanComparisonOperator,
 	DataType,
@@ -14,9 +14,9 @@ import { columnTypes } from '@datashaper/tables'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 
-export function useIsEmpty(criterion: Criterion): boolean {
+export function useIsEmpty(criteria: Criteria): boolean {
 	return useMemo(() => {
-		const { operator } = criterion
+		const { operator } = criteria
 		return (
 			operator === NumericComparisonOperator.IsEmpty ||
 			operator === NumericComparisonOperator.IsNotEmpty ||
@@ -29,7 +29,7 @@ export function useIsEmpty(criterion: Criterion): boolean {
 			operator === DateComparisonOperator.IsEmpty ||
 			operator === DateComparisonOperator.IsNotEmpty
 		)
-	}, [criterion])
+	}, [criteria])
 }
 
 export function usePlaceholderText(

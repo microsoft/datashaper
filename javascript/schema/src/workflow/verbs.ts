@@ -102,7 +102,7 @@ export interface OutputColumnArgs {
 	to: string
 }
 
-export interface Criterion {
+export interface Criteria {
 	/**
 	 * Comparison value for the column.
 	 * Not required if the operator is self-defining (e.g., 'is empty')
@@ -512,11 +512,7 @@ export interface FilterArgs extends InputColumnArgs {
 	/**
 	 * Filter criteria to apply to the column.
 	 */
-	criteria: Criterion[]
-	/**
-	 * Boolean operator to apply to the criteria if more than one.
-	 */
-	logical?: BooleanOperator
+	criteria: Criteria
 }
 
 export interface FoldArgs extends InputColumnListArgs {

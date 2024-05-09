@@ -120,19 +120,12 @@
                     "type": "string"
                 },
                 "criteria": {
-                    "description": "Filter criteria to apply to the column.",
-                    "items": {
-                        "$ref": "#/definitions/Criterion"
-                    },
-                    "type": "array"
+                    "$ref": "#/definitions/Criteria",
+                    "description": "Filter criteria to apply to the column."
                 },
                 "dataType": {
                     "$ref": "#/definitions/DataType",
                     "description": "Expected data type for values in the column"
-                },
-                "logical": {
-                    "$ref": "#/definitions/BooleanOperator",
-                    "description": "Boolean operator to apply to the criteria if more than one."
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
@@ -345,7 +338,7 @@
             },
             "type": "object"
         },
-        "Criterion": {
+        "Criteria": {
             "properties": {
                 "operator": {
                     "description": "Filter operator to execute. Note the correct operator for the column data type must be used.",
@@ -609,19 +602,12 @@
                     "type": "string"
                 },
                 "criteria": {
-                    "description": "Filter criteria to apply to the column.",
-                    "items": {
-                        "$ref": "#/definitions/Criterion"
-                    },
-                    "type": "array"
+                    "$ref": "#/definitions/Criteria",
+                    "description": "Filter criteria to apply to the column."
                 },
                 "dataType": {
                     "$ref": "#/definitions/DataType",
                     "description": "Expected data type for values in the column"
-                },
-                "logical": {
-                    "$ref": "#/definitions/BooleanOperator",
-                    "description": "Boolean operator to apply to the criteria if more than one."
                 }
             },
             "type": "object"

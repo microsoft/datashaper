@@ -9,8 +9,7 @@ import pandas as pd
 
 from datashaper.engine.pandas import filter_df, get_operator
 from datashaper.engine.types import (
-    BooleanLogicalOperator,
-    Criterion,
+    Criteria,
     FilterArgs,
     FilterCompareType,
 )
@@ -28,26 +27,19 @@ async def filter_verb(
     chunk: Table,
     callbacks: VerbCallbacks,  # noqa: ARG001
     column: str,
-    criteria: list,
-    logical: str = "or",
+    criteria: Criteria,
     **_kwargs: dict,
 ) -> Table:
     """Filter verb implementation."""
-    filter_criteria = [
-        Criterion(
-            value=arg.get("value", None),
-            type=FilterCompareType(arg["type"]),
-            operator=get_operator(arg["operator"]),
-        )
-        for arg in criteria
-    ]
-    logical_operator = BooleanLogicalOperator(logical)
+    filter_criteria = Criteria(
+        value=criteria.value | None,
+        type=FilterCompareType(criteria.type),
+        operator=get_operator(criteria.operator),
+    )
 
     input_table = cast(pd.DataFrame, chunk)
 
-    filter_index = filter_df(
-        input_table, FilterArgs(column, filter_criteria, logical_operator)
-    )
+    filter_index = filter_df(input_table, FilterArgs(column, filter_criteria))
     sub_idx = filter_index == True  # noqa: E712
     idx = filter_index[sub_idx].index  # type: ignore
     return cast(Table, input_table[chunk.index.isin(idx)].reset_index(drop=True))

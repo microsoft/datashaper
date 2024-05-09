@@ -9,5 +9,5 @@ Filter criteria to apply to the column.
 <b>Signature:</b>
 
 ```typescript
-criteria: Criterion[];
+criteria: Criteria;
 ```

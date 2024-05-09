@@ -4,27 +4,47 @@
 	"description": "Use multiple criteria chained together to create a boolean condition OR for a single binarized output column.",
 	"steps": [
 		{
-			"id": "binarize",
+			"id": "binarize-smallest",
 			"verb": "binarize",
 			"input": {
 				"source": "companies"
 			},
 			"args": {
 				"column": "Employees",
-				"to": "Smallest and Largest",
-				"criteria": [
-					{
-						"operator": "<",
-						"value": 150000,
-						"type": "value"
-					},
-					{
-						"operator": ">",
-						"value": 200000,
-						"type": "value"
-					}
-				],
-				"logical": "or"
+				"to": "Smallest",
+				"criteria": {
+					"operator": "<",
+					"value": 150000,
+					"type": "value"
+				}
+			}
+		},
+		{
+			"id": "binarize-largest",
+			"verb": "binarize",
+			"input": {
+				"source": "binarize-smallest"
+			},
+			"args": {
+				"column": "Employees",
+				"to": "Largest",
+				"criteria": {
+					"operator": ">",
+					"value": 200000,
+					"type": "value"
+				}
+			}
+		},
+		{
+			"id": "boolean",
+			"verb": "boolean",
+			"input": {
+				"source": "binarize-largest"
+			},
+			"args": {
+				"columns": ["Smallest", "Largest"],
+				"operator": "or",
+				"to": "Smallest & Largest"
 			}
 		}
 	],

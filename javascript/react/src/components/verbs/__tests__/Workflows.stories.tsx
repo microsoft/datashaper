@@ -95,4 +95,3 @@ export const Sparkline = {
 		schema: sparkline as WorkflowSchema,
 	},
 }
-

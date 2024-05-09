@@ -7,12 +7,10 @@
 			"args": {
 				"to": "newColumn",
 				"column": "item",
-				"criteria": [
-					{
-						"type": "value",
-						"operator": "is empty"
-					}
-				]
+				"criteria": {
+					"type": "value",
+					"operator": "is empty"
+				}
 			},
 			"id": "expected"
 		}

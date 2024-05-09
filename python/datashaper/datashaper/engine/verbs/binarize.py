@@ -9,8 +9,7 @@ import pandas as pd
 
 from datashaper.engine.pandas import filter_df, get_operator
 from datashaper.engine.types import (
-    BooleanLogicalOperator,
-    Criterion,
+    Criteria,
     FilterArgs,
     FilterCompareType,
 )
@@ -24,26 +23,19 @@ def binarize(
     input: VerbInput,
     to: str,
     column: str,
-    criteria: list,
-    logical: str = "or",
+    criteria: Criteria,
     **_kwargs: dict,
 ) -> VerbResult:
     """Binarize verb implementation."""
-    filter_criteria = [
-        Criterion(
-            value=arg.get("value", None),
-            type=FilterCompareType(arg["type"]),
-            operator=get_operator(arg["operator"]),
-        )
-        for arg in criteria
-    ]
-    logical_operator = BooleanLogicalOperator(logical)
+    filter_criteria = Criteria(
+        value=criteria.value | None,
+        type=FilterCompareType(criteria.type),
+        operator=get_operator(criteria.operator),
+    )
 
     input_table = cast(pd.DataFrame, input.get_input())
 
-    filter_result = filter_df(
-        input_table, FilterArgs(column, filter_criteria, logical_operator)
-    )
+    filter_result = filter_df(input_table, FilterArgs(column, filter_criteria))
     output = input_table
     output[to] = filter_result.map(cast(Any, {True: 1, False: 0}), na_action="ignore")
 

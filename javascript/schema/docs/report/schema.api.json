@@ -2322,21 +2322,21 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@datashaper/schema!Criterion:interface",
+          "canonicalReference": "@datashaper/schema!Criteria:interface",
           "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface Criterion "
+              "text": "export interface Criteria "
             }
           ],
           "releaseTag": "Public",
-          "name": "Criterion",
+          "name": "Criteria",
           "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!Criterion#operator:member",
+              "canonicalReference": "@datashaper/schema!Criteria#operator:member",
               "docComment": "/**\n * Filter operator to execute. Note the correct operator for the column data type must be used.\n */\n",
               "excerptTokens": [
                 {
@@ -2391,7 +2391,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!Criterion#type:member",
+              "canonicalReference": "@datashaper/schema!Criteria#type:member",
               "docComment": "/**\n * Indicates whether the filter should be directly against a value, or against the value of another column\n */\n",
               "excerptTokens": [
                 {
@@ -2419,7 +2419,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!Criterion#value:member",
+              "canonicalReference": "@datashaper/schema!Criteria#value:member",
               "docComment": "/**\n * Comparison value for the column. Not required if the operator is self-defining (e.g., 'is empty')\n */\n",
               "excerptTokens": [
                 {
@@ -5791,12 +5791,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "Criterion",
-                  "canonicalReference": "@datashaper/schema!Criterion:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "[]"
+                  "text": "Criteria",
+                  "canonicalReference": "@datashaper/schema!Criteria:interface"
                 },
                 {
                   "kind": "Content",
@@ -5807,34 +5803,6 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "criteria",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!FilterArgs#logical:member",
-              "docComment": "/**\n * Boolean operator to apply to the criteria if more than one.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "logical?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "BooleanOperator",
-                  "canonicalReference": "@datashaper/schema!BooleanOperator:enum"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "logical",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

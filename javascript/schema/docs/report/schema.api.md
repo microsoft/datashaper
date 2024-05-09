@@ -211,10 +211,10 @@ export function createTableBundleSchemaObject(input: FactoryInput<TableBundleSch
 // @public (undocumented)
 export function createWorkflowSchemaObject(input: FactoryInput<WorkflowSchema>): WorkflowSchema;
 
-// Warning: (ae-missing-release-tag) "Criterion" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Criteria" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface Criterion {
+export interface Criteria {
     operator: NumericComparisonOperator | StringComparisonOperator | BooleanComparisonOperator | DateComparisonOperator;
     type: FilterCompareType;
     value?: Value;
@@ -513,8 +513,7 @@ export interface FillArgs extends OutputColumnArgs {
 //
 // @public (undocumented)
 export interface FilterArgs extends InputColumnArgs {
-    criteria: Criterion[];
-    logical?: BooleanOperator;
+    criteria: Criteria;
 }
 
 // Warning: (ae-missing-release-tag) "FilterCompareType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
