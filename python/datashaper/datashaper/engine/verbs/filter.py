@@ -12,6 +12,7 @@ from datashaper.engine.types import (
     Criteria,
     FilterArgs,
     FilterCompareType,
+    StringComparisonOperator,
 )
 from datashaper.engine.verbs.parallel_verb import OperationType, parallel_verb
 from datashaper.table_store.types import Table
@@ -27,14 +28,16 @@ async def filter_verb(
     chunk: Table,
     callbacks: VerbCallbacks,  # noqa: ARG001
     column: str,
-    criteria: Criteria,
+    criteria: dict,
     **_kwargs: dict,
 ) -> Table:
     """Filter verb implementation."""
     filter_criteria = Criteria(
-        value=criteria.value | None,
-        type=FilterCompareType(criteria.type),
-        operator=get_operator(criteria.operator),
+        value=criteria.get("value"),
+        type=FilterCompareType(criteria.get("type", FilterCompareType.Value.value)),
+        operator=get_operator(
+            criteria.get("operator", StringComparisonOperator.Equals.value)
+        ),
     )
 
     input_table = cast(pd.DataFrame, chunk)

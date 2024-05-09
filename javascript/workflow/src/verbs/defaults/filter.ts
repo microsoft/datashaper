@@ -5,12 +5,12 @@
 import {
 	FilterCompareType,
 	type FilterArgs,
-	NumericComparisonOperator,
+	StringComparisonOperator,
 } from '@datashaper/schema'
 
 export const filter = (): Omit<FilterArgs, 'column'> => ({
 	criteria: {
 		type: FilterCompareType.Value,
-		operator: NumericComparisonOperator.Equals,
+		operator: StringComparisonOperator.Equals,
 	},
 })

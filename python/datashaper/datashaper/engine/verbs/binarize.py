@@ -12,6 +12,7 @@ from datashaper.engine.types import (
     Criteria,
     FilterArgs,
     FilterCompareType,
+    StringComparisonOperator,
 )
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -23,14 +24,16 @@ def binarize(
     input: VerbInput,
     to: str,
     column: str,
-    criteria: Criteria,
+    criteria: dict,
     **_kwargs: dict,
 ) -> VerbResult:
     """Binarize verb implementation."""
     filter_criteria = Criteria(
-        value=criteria.value | None,
-        type=FilterCompareType(criteria.type),
-        operator=get_operator(criteria.operator),
+        value=criteria.get("value"),
+        type=FilterCompareType(criteria.get("type", FilterCompareType.Value.value)),
+        operator=get_operator(
+            criteria.get("operator", StringComparisonOperator.Equals.value)
+        ),
     )
 
     input_table = cast(pd.DataFrame, input.get_input())
