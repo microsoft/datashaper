@@ -362,9 +362,9 @@
 		{
 			"id": "spread",
 			"verb": "spread",
-			"input": "aggregate (1)",
+			"input": "companies2",
 			"args": {
-				"column": "Product List"
+				"column": "Array"
 			}
 		},
 		{
