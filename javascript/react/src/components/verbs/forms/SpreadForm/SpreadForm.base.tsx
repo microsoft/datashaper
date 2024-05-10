@@ -16,6 +16,17 @@ export const SpreadFormBase: React.FC<StepFormBaseProps<SpreadArgs>> = memo(
 		const inputs = useMemo<FormInput<SpreadArgs>[]>(
 			() => [
 				{
+					label: 'Output columns',
+					placeholder: 'Comma-delimited list of names',
+					type: FormInputType.Text,
+					required: false,
+					current: step.args.to ? step.args.to.join(',') : '',
+					onChange: (s, val) => {
+						s.args.to = (val as string)?.split(',').map((v) => v.trim())
+					},
+					advanced: true,
+				},
+				{
 					label: 'Keep source column',
 					type: FormInputType.Checkbox,
 					current: step.args.preserveSource,
