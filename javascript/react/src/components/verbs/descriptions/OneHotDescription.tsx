@@ -23,6 +23,10 @@ export const OneHotDescription: React.FC<StepDescriptionProps<OnehotArgs>> =
 					before: 'with prefix',
 					value: args.prefix,
 				},
+				{
+					before: 'keep source column',
+					value: args.preserveSource ? 'yes' : 'no',
+				},
 			]
 		}, [props])
 		return <VerbDescription {...props} rows={rows} />

@@ -7,9 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-export interface FoldArgs extends InputColumnListArgs 
+export interface FoldArgs extends InputColumnListArgs, SourcePreservingArgs 
 ```
-<b>Extends:</b> [InputColumnListArgs](./schema.inputcolumnlistargs.md)
+<b>Extends:</b> [InputColumnListArgs](./schema.inputcolumnlistargs.md)<!-- -->, [SourcePreservingArgs](./schema.sourcepreservingargs.md)
 
 ## Properties
 

@@ -7,14 +7,13 @@
 <b>Signature:</b>
 
 ```typescript
-export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs 
+export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs, SourcePreservingArgs 
 ```
-<b>Extends:</b> [InputColumnListArgs](./schema.inputcolumnlistargs.md)<!-- -->, [OutputColumnArgs](./schema.outputcolumnargs.md)
+<b>Extends:</b> [InputColumnListArgs](./schema.inputcolumnlistargs.md)<!-- -->, [OutputColumnArgs](./schema.outputcolumnargs.md)<!-- -->, [SourcePreservingArgs](./schema.sourcepreservingargs.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [prefix?](./schema.unhotargs.prefix.md) |  | string | <i>(Optional)</i> |
-|  [preserveSource?](./schema.unhotargs.preservesource.md) |  | boolean | <i>(Optional)</i> Keep the original columns (default is to remove source columns). |
 

@@ -19,6 +19,10 @@ export const SpreadDescription: React.FC<StepDescriptionProps<SpreadArgs>> =
 					before: 'column',
 					value: args.column,
 				},
+				{
+					before: 'keep source column',
+					value: args.preserveSource ? 'yes' : 'no',
+				},
 			]
 		}, [props])
 		return <VerbDescription {...props} rows={rows} />

@@ -40,6 +40,10 @@ export const FoldDescription: React.FC<StepDescriptionProps<FoldArgs>> = memo(
 					before: 'into value column',
 					value: args.to != null ? args.to[1] : '',
 				},
+				{
+					before: 'keep source columns',
+					value: args.preserveSource ? 'yes' : 'no',
+				},
 			]
 		}, [props])
 		return <VerbDescription {...props} rows={rows} />

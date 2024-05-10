@@ -353,10 +353,9 @@ export interface DeriveArgs extends OutputColumnArgs {
 // Warning: (ae-missing-release-tag) "DestructureArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface DestructureArgs extends InputColumnArgs {
+export interface DestructureArgs extends InputColumnArgs, SourcePreservingArgs {
     // (undocumented)
     keys?: string[];
-    preserveSource?: boolean;
 }
 
 // Warning: (ae-missing-release-tag) "DropArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -527,7 +526,7 @@ export enum FilterCompareType {
 // Warning: (ae-missing-release-tag) "FoldArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface FoldArgs extends InputColumnListArgs {
+export interface FoldArgs extends InputColumnListArgs, SourcePreservingArgs {
     to?: [string, string];
 }
 
@@ -693,9 +692,8 @@ export enum MathOperator {
 // Warning: (ae-missing-release-tag) "MergeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
+export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs, SourcePreservingArgs {
     delimiter?: string;
-    preserveSource?: boolean;
     strategy: MergeStrategy;
 }
 
@@ -743,9 +741,8 @@ export enum NumericComparisonOperator {
 // Warning: (ae-missing-release-tag) "OnehotArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface OnehotArgs extends InputColumnArgs {
+export interface OnehotArgs extends InputColumnArgs, SourcePreservingArgs {
     prefix?: string;
-    preserveSource?: boolean;
 }
 
 // Warning: (ae-missing-release-tag) "OrderbyArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -926,13 +923,17 @@ export enum SortDirection {
     Descending = "desc"
 }
 
+// Warning: (ae-missing-release-tag) "SourcePreservingArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface SourcePreservingArgs {
+    preserveSource?: boolean;
+}
+
 // Warning: (ae-missing-release-tag) "SpreadArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface SpreadArgs extends InputColumnArgs {
-    delimiter?: string;
-    onehot?: boolean;
-    preserveSource?: boolean;
+export interface SpreadArgs extends InputColumnArgs, SourcePreservingArgs {
     // (undocumented)
     to: string[];
 }
@@ -1163,10 +1164,9 @@ export type UnfoldArgs = InputKeyValueArgs;
 // Warning: (ae-missing-release-tag) "UnhotArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
+export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs, SourcePreservingArgs {
     // (undocumented)
     prefix?: string;
-    preserveSource?: boolean;
 }
 
 // Warning: (ae-missing-release-tag) "UnknownInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

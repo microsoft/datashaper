@@ -41,6 +41,15 @@ export const FoldFormBase: React.FC<StepFormBaseProps<FoldArgs>> = memo(
 						}
 					},
 				},
+				{
+					label: 'Keep source columns',
+					type: FormInputType.Checkbox,
+					current: step.args.preserveSource,
+					onChange: (s, val) => {
+						s.args.preserveSource = val as boolean
+					},
+					advanced: true,
+				},
 			],
 			[step],
 		)

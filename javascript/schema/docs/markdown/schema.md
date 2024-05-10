@@ -100,6 +100,7 @@
 |  [RollupArgs](./schema.rollupargs.md) |  |
 |  [SampleArgs](./schema.sampleargs.md) |  |
 |  [SnapshotArgs](./schema.snapshotargs.md) |  |
+|  [SourcePreservingArgs](./schema.sourcepreservingargs.md) |  |
 |  [SpreadArgs](./schema.spreadargs.md) |  |
 |  [StepJsonCommon](./schema.stepjsoncommon.md) | Common step properties |
 |  [StringsArgs](./schema.stringsargs.md) |  |

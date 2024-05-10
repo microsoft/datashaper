@@ -7,15 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs 
+export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs, SourcePreservingArgs 
 ```
-<b>Extends:</b> [InputColumnListArgs](./schema.inputcolumnlistargs.md)<!-- -->, [OutputColumnArgs](./schema.outputcolumnargs.md)
+<b>Extends:</b> [InputColumnListArgs](./schema.inputcolumnlistargs.md)<!-- -->, [OutputColumnArgs](./schema.outputcolumnargs.md)<!-- -->, [SourcePreservingArgs](./schema.sourcepreservingargs.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [delimiter?](./schema.mergeargs.delimiter.md) |  | string | <i>(Optional)</i> Delimiter to use when merging columns into a string. This is only necessary if MergeStrategy.Concat is used. If it is not supplied, the values are just mashed together. |
-|  [preserveSource?](./schema.mergeargs.preservesource.md) |  | boolean | <i>(Optional)</i> Keep the original columns (default is to remove source columns). |
 |  [strategy](./schema.mergeargs.strategy.md) |  | [MergeStrategy](./schema.mergestrategy.md) | Strategy to use for merging the input columns |
 

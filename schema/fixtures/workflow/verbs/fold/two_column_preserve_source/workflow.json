@@ -1,0 +1,17 @@
+{
+	"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v2.json",
+	"steps": [
+		{
+			"verb": "fold",
+			"input": "table1",
+			"args": {
+				"to": ["key", "value"],
+				"columns": ["ID", "name"],
+				"preserveSource": true
+			},
+			"id": "expected"
+		}
+	],
+
+	"input": ["table1"]
+}

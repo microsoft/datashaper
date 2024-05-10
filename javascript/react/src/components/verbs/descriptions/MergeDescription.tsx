@@ -34,6 +34,10 @@ export const MergeDescription: React.FC<StepDescriptionProps<MergeArgs>> = memo(
 					before: 'with strategy',
 					value: args.strategy,
 				},
+				{
+					before: 'keep source columns',
+					value: args.preserveSource ? 'yes' : 'no',
+				},
 			]
 		}, [props])
 		return <VerbDescription {...props} rows={rows} />
