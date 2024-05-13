@@ -7,20 +7,17 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
+import { escape } from 'arquero'
 
 export const eraseStep: ColumnTableStep<EraseArgs> = (
 	input: ColumnTable,
 	{ value, column }: EraseArgs,
 ) => {
-	return input
-		.params({
-			column,
-			value,
-		})
-		.derive({
-			[column]: (d: any, $: any) =>
-				`${d[$.column]}` === `${$.value}` ? null : d[$.column],
-		})
+	return input.derive({
+		[column]: escape((d: any) =>
+			`${d[column]}` === `${value}` ? null : d[column],
+		),
+	})
 }
 
 export const erase = stepVerbFactory(eraseStep)

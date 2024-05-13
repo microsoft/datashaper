@@ -74,7 +74,7 @@ export function stepVerbFactory<Args>(
 			try {
 				result = columnTableStep(source.table, args, subapi)
 			} catch (err) {
-				console.warn('error processing step', err)
+				console.warn(`error processing step ${id}`, err)
 				this.emitError(err)
 			}
 			return container(id, result as Maybe<ColumnTable>)
