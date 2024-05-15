@@ -114,7 +114,7 @@ async def test_verbs_schema_input(
                 )
             except AssertionError:
                 print(  # noqa: T201
-                    f"Error in {fixture_path}@{expected};\nExpected:\n{expected_table.head()}\n\nActual:\n{result_table.head()}",
+                    f"Error in {fixture_path}@{expected};\nExpected:\n{expected_table.head(10)}\n\nActual:\n{result_table.head(10)}",
                 )
                 raise
             finally:

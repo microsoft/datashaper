@@ -7,13 +7,11 @@
 			"args": {
 				"to": "newColumn",
 				"column": "item",
-				"criteria": [
-					{
-						"type": "value",
-						"operator": "ends with",
-						"value": "a"
-					}
-				]
+				"criteria": {
+					"type": "value",
+					"operator": "ends with",
+					"value": "a"
+				}
 			},
 			"id": "expected"
 		}

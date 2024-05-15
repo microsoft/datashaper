@@ -27,23 +27,12 @@ def merge(
     strategy: str,
     delimiter: str = "",
     preserveSource: bool = False,  # noqa: N803
-    unhot: bool = False,
-    prefix: str = "",
     **_kwargs: dict,
 ) -> VerbResult:
     """Merge verb implementation."""
     merge_strategy = MergeStrategy(strategy)
 
     input_table = cast(pd.DataFrame, input.get_input())
-
-    if unhot:
-        for column in input_table.columns:
-            if column.startswith(prefix):
-                input_table[column] = input_table[column].apply(
-                    lambda x, column=column: column.split(prefix)[1]
-                    if x >= 1
-                    else pd.NA
-                )
 
     input_table[to] = input_table[columns].apply(
         partial(strategy_mapping[merge_strategy], delim=delimiter), axis=1

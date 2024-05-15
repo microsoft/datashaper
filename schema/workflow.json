@@ -120,19 +120,12 @@
                     "type": "string"
                 },
                 "criteria": {
-                    "description": "Filter criteria to apply to the column.",
-                    "items": {
-                        "$ref": "#/definitions/Criterion"
-                    },
-                    "type": "array"
+                    "$ref": "#/definitions/Criteria",
+                    "description": "Filter criteria to apply to the column."
                 },
                 "dataType": {
                     "$ref": "#/definitions/DataType",
                     "description": "Expected data type for values in the column"
-                },
-                "logical": {
-                    "$ref": "#/definitions/BooleanOperator",
-                    "description": "Boolean operator to apply to the criteria if more than one."
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
@@ -345,7 +338,7 @@
             },
             "type": "object"
         },
-        "Criterion": {
+        "Criteria": {
             "properties": {
                 "operator": {
                     "description": "Filter operator to execute. Note the correct operator for the column data type must be used.",
@@ -437,7 +430,7 @@
                     "type": "array"
                 },
                 "preserveSource": {
-                    "description": "Keep the original columns (default is to remove source columns).",
+                    "description": "Indicates whether source column(s) should be preserved on operations that normally drop the source(s).\nE.g., merge, fold, spread, etc.",
                     "type": "boolean"
                 }
             },
@@ -609,19 +602,12 @@
                     "type": "string"
                 },
                 "criteria": {
-                    "description": "Filter criteria to apply to the column.",
-                    "items": {
-                        "$ref": "#/definitions/Criterion"
-                    },
-                    "type": "array"
+                    "$ref": "#/definitions/Criteria",
+                    "description": "Filter criteria to apply to the column."
                 },
                 "dataType": {
                     "$ref": "#/definitions/DataType",
                     "description": "Expected data type for values in the column"
-                },
-                "logical": {
-                    "$ref": "#/definitions/BooleanOperator",
-                    "description": "Boolean operator to apply to the criteria if more than one."
                 }
             },
             "type": "object"
@@ -642,6 +628,10 @@
                         "type": "string"
                     },
                     "type": "array"
+                },
+                "preserveSource": {
+                    "description": "Indicates whether source column(s) should be preserved on operations that normally drop the source(s).\nE.g., merge, fold, spread, etc.",
+                    "type": "boolean"
                 },
                 "to": {
                     "description": "Two-element array of names for the output [key, value]",
@@ -793,12 +783,8 @@
                     "description": "Delimiter to use when merging columns into a string.\nThis is only necessary if MergeStrategy.Concat is used.\nIf it is not supplied, the values are just mashed together.",
                     "type": "string"
                 },
-                "prefix": {
-                    "description": "Prefix to strip from column names when using unhot (only relevant if columns were originally onehot encoded with a prefix).",
-                    "type": "string"
-                },
                 "preserveSource": {
-                    "description": "Keep the original columns (default is to remove source columns).",
+                    "description": "Indicates whether source column(s) should be preserved on operations that normally drop the source(s).\nE.g., merge, fold, spread, etc.",
                     "type": "boolean"
                 },
                 "strategy": {
@@ -808,10 +794,6 @@
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
                     "type": "string"
-                },
-                "unhot": {
-                    "description": "Indicates that columns should be \"unhot\" before merging. In other words, replace all 1s with the column name, and 0s with undefined.",
-                    "type": "boolean"
                 }
             },
             "type": "object"
@@ -840,7 +822,7 @@
                     "type": "string"
                 },
                 "preserveSource": {
-                    "description": "Keep the original columns (default is to remove source columns).",
+                    "description": "Indicates whether source column(s) should be preserved on operations that normally drop the source(s).\nE.g., merge, fold, spread, etc.",
                     "type": "boolean"
                 }
             },
@@ -1075,16 +1057,8 @@
                     "$ref": "#/definitions/DataType",
                     "description": "Expected data type for values in the column"
                 },
-                "delimiter": {
-                    "description": "Delimiter to use when converting string cell values into an array with String.split",
-                    "type": "string"
-                },
-                "onehot": {
-                    "description": "Indicates that a onehot-style spread should be performed.\nThis maps all unique cell values to new columns and sets the output cell value to a binary 1/0 based on column match.\nThis is in contrast to the default spread, which just maps array values to column by index.",
-                    "type": "boolean"
-                },
                 "preserveSource": {
-                    "description": "Keep the original columns (default is to remove source columns).",
+                    "description": "Indicates whether source column(s) should be preserved on operations that normally drop the source(s).\nE.g., merge, fold, spread, etc.",
                     "type": "boolean"
                 },
                 "to": {
@@ -2161,7 +2135,7 @@
                     "type": "string"
                 },
                 "preserveSource": {
-                    "description": "Keep the original columns (default is to remove source columns).",
+                    "description": "Indicates whether source column(s) should be preserved on operations that normally drop the source(s).\nE.g., merge, fold, spread, etc.",
                     "type": "boolean"
                 },
                 "to": {

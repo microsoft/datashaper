@@ -12,7 +12,7 @@ import {
 } from '@datashaper/schema'
 import { EnumDropdown } from '@essex/components'
 import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'
-import { IconButton, SpinButton } from '@fluentui/react'
+import { SpinButton } from '@fluentui/react'
 import { memo, useCallback, useMemo, useState } from 'react'
 
 import {
@@ -43,11 +43,11 @@ import type { FilterFunctionProps } from './FilterFunction.types.js'
  * This is split out from FilterInputs to allow just the comparison logic to be reused elsewhere.
  */
 export const FilterFunction: React.FC<FilterFunctionProps> = memo(
-	function FilterFunction({ table, column, criterion, onChange }) {
+	function FilterFunction({ table, column, criteria, onChange }) {
 		const handleOpChange = useCallback(
 			(_e: React.FormEvent<HTMLDivElement>, opt?: IDropdownOption) => {
 				onChange?.({
-					...criterion,
+					...criteria,
 					operator: opt?.key as
 						| StringComparisonOperator
 						| NumericComparisonOperator
@@ -55,20 +55,20 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 						| DateComparisonOperator,
 				})
 			},
-			[criterion, onChange],
+			[criteria, onChange],
 		)
 
 		const onSelectDate = useCallback(
 			(date: Date): void => {
 				const update = {
-					...criterion,
+					...criteria,
 					type: FilterCompareType.Value,
 					value: date,
 				}
 				onChange?.(update)
 				setCleanLabel(false)
 			},
-			[criterion, onChange],
+			[criteria, onChange],
 		)
 
 		const handleDateComboBoxChange = useCallback(
@@ -79,7 +79,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 				value: string | undefined,
 			) => {
 				const update = {
-					...criterion,
+					...criteria,
 					type: FilterCompareType.Column,
 					value: option ? option.key : value,
 				}
@@ -87,7 +87,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 
 				setCleanLabel(true)
 			},
-			[criterion, onChange],
+			[criteria, onChange],
 		)
 
 		const handleComboBoxChange = useCallback(
@@ -98,13 +98,13 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 				value: string | undefined,
 			) => {
 				const update = {
-					...criterion,
+					...criteria,
 					type: FilterCompareType.Column,
 					value: option ? option.key : value,
 				}
 				onChange?.(update)
 			},
-			[criterion, onChange],
+			[criteria, onChange],
 		)
 
 		const onChangeTextFieldValue = useCallback(
@@ -113,27 +113,27 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 				newValue?: string,
 			) => {
 				const update = {
-					...criterion,
+					...criteria,
 					type: FilterCompareType.Value,
 					value: newValue,
 				}
 				onChange?.(update)
 			},
-			[criterion, onChange],
+			[criteria, onChange],
 		)
 
 		const spinButtonOnChange = useCallback(
 			(_event: React.SyntheticEvent<HTMLElement>, newValue?: string) => {
 				if (newValue != null) {
 					const update = {
-						...criterion,
+						...criteria,
 						type: FilterCompareType.Value,
 						value: newValue,
 					}
 					onChange?.(update)
 				}
 			},
-			[criterion, onChange],
+			[criteria, onChange],
 		)
 
 		const onToggleChange = (
@@ -141,7 +141,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 			checked?: boolean,
 		) => {
 			const update = {
-				...criterion,
+				...criteria,
 				type: FilterCompareType.Value,
 				value: checked,
 			}
@@ -155,7 +155,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 			const shared = {
 				label: '',
 				placeholder: 'Choose',
-				selectedKey: criterion.operator,
+				selectedKey: criteria.operator,
 				onChange: handleOpChange,
 				styles: dropdownStyles,
 			}
@@ -191,23 +191,15 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 					labels={labels}
 				/>
 			)
-		}, [type, column, criterion, handleOpChange])
+		}, [type, column, criteria, handleOpChange])
 
-		const isEmpty = useIsEmpty(criterion)
-		const handleDeleteClick = useCallback(() => onChange?.(), [onChange])
+		const isEmpty = useIsEmpty(criteria)
 		const columns = useColumnNames(table, columnFilter)
 		const columnOptions = useSimpleDropdownOptions(columns)
 
 		return (
 			<Container>
-				<LeftAlignedRow>
-					{operatorDropdown}
-					<IconButton
-						title={'Remove this criterion'}
-						iconProps={deleteIconProps}
-						onClick={handleDeleteClick}
-					/>
-				</LeftAlignedRow>
+				<LeftAlignedRow>{operatorDropdown}</LeftAlignedRow>
 
 				<FilterContainer>
 					<Input>
@@ -222,7 +214,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 
 						{type === DataType.String ? (
 							<TextValue
-								value={criterion.value}
+								value={criteria.value}
 								onChange={onChangeTextFieldValue}
 								disabled={isEmpty}
 							/>
@@ -232,7 +224,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 							<SpinButton
 								min={0}
 								step={1}
-								value={criterion.value}
+								value={criteria.value}
 								styles={narrowDropdownStyles}
 								disabled={isEmpty}
 								onChange={spinButtonOnChange}
@@ -277,5 +269,3 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 		)
 	},
 )
-
-const deleteIconProps = { iconName: 'Delete' }

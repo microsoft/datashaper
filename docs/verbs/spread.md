@@ -5,7 +5,6 @@ Unrolls array-valued cells into new columns. Similar to [unroll](./unroll.md), b
 Additional options:
 
 - Keep source column: retains the original column instead of replacing it with the new columns.
-- Split delimiter: if supplied, `spread` will create an array in the cell by first splitting string values with this delimiter.
 
 ## Example
 

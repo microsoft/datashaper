@@ -12,7 +12,6 @@ Available collapse strategies are:
 Additional options:
 
 - Keep source columns: retains the original columns instead of replacing.
-- Unhot: reverses a onehot encoding before merging by replacing cell values with the column name if 1 or empty if 0.
 
 ## Examples
 

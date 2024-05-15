@@ -7,13 +7,11 @@
 			"args": {
 				"to": "newColumn",
 				"column": "count",
-				"criteria": [
-					{
-						"type": "value",
-						"operator": "<",
-						"value": 40
-					}
-				]
+				"criteria": {
+					"type": "value",
+					"operator": "<",
+					"value": 40
+				}
 			},
 			"id": "expected"
 		}

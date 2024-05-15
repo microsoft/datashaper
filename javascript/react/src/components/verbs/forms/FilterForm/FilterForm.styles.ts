@@ -10,7 +10,7 @@ export const Container = styled.div`
 	align-items: flex-start;
 `
 
-export const Criteria = styled.div`
+export const CriteriaContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 20px;

@@ -6,11 +6,13 @@ import type { FilterArgs } from '@datashaper/schema'
 
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
-import { compareAll } from './util/index.js'
-
+import { compare } from './util/expressions.js'
 export const filterStep: ColumnTableStep<FilterArgs> = (
 	input,
-	{ column, criteria, logical },
-) => input.filter(compareAll(column, criteria, logical))
+	{ column, criteria },
+) =>
+	input.filter(
+		compare(column, criteria.value, criteria.operator, criteria.type),
+	)
 
 export const filter = stepVerbFactory(filterStep)

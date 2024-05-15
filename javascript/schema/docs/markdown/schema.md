@@ -62,7 +62,7 @@
 |  [Constraints](./schema.constraints.md) | Validation constraints for a field. |
 |  [ConvertArgs](./schema.convertargs.md) |  |
 |  [CopyArgs](./schema.copyargs.md) |  |
-|  [Criterion](./schema.criterion.md) |  |
+|  [Criteria](./schema.criteria.md) |  |
 |  [DataPackageSchema](./schema.datapackageschema.md) | Defines a Data Package, which is a collection of data resources such as files and schemas. Loosely based on the Frictionless spec, but modified where needed to meet our needs. https://specs.frictionlessdata.io/data-package/ |
 |  [DataShape](./schema.datashape.md) | Defines parameters for understanding the logical structure of data contents. |
 |  [DataTableSchema](./schema.datatableschema.md) | This defines the table-containing resource type. A dataset can be embedded directly using the <code>data</code> property, or it can be linked to a raw file using the <code>path</code>. If the latter, optional format and parsing options can be applied to aid interpreting the file contents. resource profile: 'datatable' |
@@ -100,6 +100,7 @@
 |  [RollupArgs](./schema.rollupargs.md) |  |
 |  [SampleArgs](./schema.sampleargs.md) |  |
 |  [SnapshotArgs](./schema.snapshotargs.md) |  |
+|  [SourcePreservingArgs](./schema.sourcepreservingargs.md) |  |
 |  [SpreadArgs](./schema.spreadargs.md) |  |
 |  [StepJsonCommon](./schema.stepjsoncommon.md) | Common step properties |
 |  [StringsArgs](./schema.stringsargs.md) |  |

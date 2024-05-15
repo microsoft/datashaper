@@ -7,14 +7,13 @@
 <b>Signature:</b>
 
 ```typescript
-export interface DestructureArgs extends InputColumnArgs 
+export interface DestructureArgs extends InputColumnArgs, SourcePreservingArgs 
 ```
-<b>Extends:</b> [InputColumnArgs](./schema.inputcolumnargs.md)
+<b>Extends:</b> [InputColumnArgs](./schema.inputcolumnargs.md)<!-- -->, [SourcePreservingArgs](./schema.sourcepreservingargs.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [keys?](./schema.destructureargs.keys.md) |  | string\[\] | <i>(Optional)</i> |
-|  [preserveSource?](./schema.destructureargs.preservesource.md) |  | boolean | <i>(Optional)</i> Keep the original columns (default is to remove source columns). |
 

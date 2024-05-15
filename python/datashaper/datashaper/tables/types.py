@@ -33,7 +33,7 @@ class ParserOptions:
     delimiter: str | None
     names: list[str] | None
     header: bool | None
-    lineTerminator: str | None  # noqa: N815
+    lineTerminator: str | None
     quoteChar: str | None
     escapeChar: str | None
     comment: str | None

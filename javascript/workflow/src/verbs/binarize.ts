@@ -6,11 +6,14 @@ import type { BinarizeArgs } from '@datashaper/schema'
 
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
-import { compareAll } from './util/index.js'
+import { compare } from './util/index.js'
 
 export const binarizeStep: ColumnTableStep<BinarizeArgs> = (
 	input,
-	{ to, column, criteria, logical },
-) => input.derive({ [to]: compareAll(column, criteria, logical) })
+	{ to, column, criteria },
+) =>
+	input.derive({
+		[to]: compare(column, criteria.value, criteria.operator, criteria.type),
+	})
 
 export const binarize = stepVerbFactory(binarizeStep)

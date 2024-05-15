@@ -20,12 +20,8 @@ export const SpreadDescription: React.FC<StepDescriptionProps<SpreadArgs>> =
 					value: args.column,
 				},
 				{
-					before: 'split delimiter',
-					value: args.delimiter,
-				},
-				{
-					before: 'onehot values',
-					value: args.onehot ? 'yes' : 'no',
+					before: 'keep source column',
+					value: args.preserveSource ? 'yes' : 'no',
 				},
 			]
 		}, [props])

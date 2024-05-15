@@ -7,14 +7,13 @@
 <b>Signature:</b>
 
 ```typescript
-export interface OnehotArgs extends InputColumnArgs 
+export interface OnehotArgs extends InputColumnArgs, SourcePreservingArgs 
 ```
-<b>Extends:</b> [InputColumnArgs](./schema.inputcolumnargs.md)
+<b>Extends:</b> [InputColumnArgs](./schema.inputcolumnargs.md)<!-- -->, [SourcePreservingArgs](./schema.sourcepreservingargs.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [prefix?](./schema.onehotargs.prefix.md) |  | string | <i>(Optional)</i> Optional prefixes for the output column names |
-|  [preserveSource?](./schema.onehotargs.preservesource.md) |  | boolean | <i>(Optional)</i> Keep the original columns (default is to remove source columns). |
 

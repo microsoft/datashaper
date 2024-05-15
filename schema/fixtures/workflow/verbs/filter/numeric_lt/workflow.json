@@ -6,13 +6,11 @@
 			"input": "table8",
 			"args": {
 				"column": "count",
-				"criteria": [
-					{
-						"operator": "<",
-						"type": "value",
-						"value": 100
-					}
-				]
+				"criteria": {
+					"operator": "<",
+					"type": "value",
+					"value": 100
+				}
 			},
 			"id": "expected"
 		}

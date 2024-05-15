@@ -14,22 +14,11 @@ import {
 	firstOneWinsStrategy,
 	lastOneWinsStrategy,
 } from './util/merge.js'
-import { unhotOperation } from './util/unhot-logic.js'
 
 export const mergeStep: ColumnTableStep<MergeArgs> = (
 	input,
-	{
-		columns = [],
-		strategy,
-		to,
-		delimiter = '',
-		unhot = false,
-		prefix = '',
-		preserveSource = false,
-	},
+	{ columns = [], strategy, to, delimiter = '', preserveSource = false },
 ) => {
-	const tempTable = unhot ? unhotOperation(input, columns, prefix) : input
-
 	// eslint-disable-next-line
 	const func: object = escape((d: any) => {
 		switch (strategy) {
@@ -44,9 +33,9 @@ export const mergeStep: ColumnTableStep<MergeArgs> = (
 		}
 	})
 
-	if (preserveSource) return tempTable.derive({ [to]: func })
+	const derived = input.derive({ [to]: func })
 
-	return tempTable.derive({ [to]: func }).select(not(columns))
+	return preserveSource ? derived : derived.select(not(columns))
 }
 
 export const merge = stepVerbFactory(mergeStep)

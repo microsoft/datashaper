@@ -4,7 +4,8 @@
  */
 import type {
 	BooleanComparisonOperator,
-	Criterion,
+	Criteria,
+	DateComparisonOperator,
 	NumericComparisonOperator,
 	StringComparisonOperator,
 } from '@datashaper/schema'
@@ -25,7 +26,7 @@ import { v4 as uuid } from 'uuid'
 
 export function compareAll(
 	column: string,
-	criteria: Criterion[],
+	criteria: Criteria[],
 	logical = BooleanOperator.OR,
 ): CompareWrapper {
 	return escape((d: Record<string, string | number>): 0 | 1 | null => {
@@ -63,7 +64,8 @@ export function compare(
 	operator:
 		| NumericComparisonOperator
 		| StringComparisonOperator
-		| BooleanComparisonOperator,
+		| BooleanComparisonOperator
+		| DateComparisonOperator,
 	type: FilterCompareType,
 ): CompareWrapper {
 	return escape((d: Record<string, string | number>): 0 | 1 | null => {

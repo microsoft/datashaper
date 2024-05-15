@@ -102,7 +102,15 @@ export interface OutputColumnArgs {
 	to: string
 }
 
-export interface Criterion {
+export interface SourcePreservingArgs {
+	/**
+	 * Indicates whether source column(s) should be preserved on operations that normally drop the source(s).
+	 * E.g., merge, fold, spread, etc.
+	 */
+	preserveSource?: boolean
+}
+
+export interface Criteria {
 	/**
 	 * Comparison value for the column.
 	 * Not required if the operator is self-defining (e.g., 'is empty')
@@ -482,12 +490,8 @@ export interface EraseArgs extends InputColumnArgs {
 	value: Value
 }
 
-export interface DestructureArgs extends InputColumnArgs {
+export interface DestructureArgs extends InputColumnArgs, SourcePreservingArgs {
 	keys?: string[]
-	/**
-	 * Keep the original columns (default is to remove source columns).
-	 */
-	preserveSource?: boolean
 }
 
 export interface EncodeDecodeArgs {
@@ -512,14 +516,10 @@ export interface FilterArgs extends InputColumnArgs {
 	/**
 	 * Filter criteria to apply to the column.
 	 */
-	criteria: Criterion[]
-	/**
-	 * Boolean operator to apply to the criteria if more than one.
-	 */
-	logical?: BooleanOperator
+	criteria: Criteria
 }
 
-export interface FoldArgs extends InputColumnListArgs {
+export interface FoldArgs extends InputColumnListArgs, SourcePreservingArgs {
 	/**
 	 * Two-element array of names for the output [key, value]
 	 */
@@ -597,7 +597,7 @@ export enum MergeStrategy {
 	CreateArray = 'array',
 }
 
-export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
+export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs, SourcePreservingArgs {
 	/**
 	 * Strategy to use for merging the input columns
 	 */
@@ -608,31 +608,15 @@ export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
 	 * If it is not supplied, the values are just mashed together.
 	 */
 	delimiter?: string
-	/**
-	 * Indicates that columns should be "unhot" before merging. In other words, replace all 1s with the column name, and 0s with undefined.
-	 */
-	unhot?: boolean
-	/**
-	 * Prefix to strip from column names when using unhot (only relevant if columns were originally onehot encoded with a prefix).
-	 */
-	prefix?: string
-	/**
-	 * Keep the original columns (default is to remove source columns).
-	 */
-	preserveSource?: boolean
 }
 
 export interface CopyArgs extends InputColumnArgs, OutputColumnArgs {}
 
-export interface OnehotArgs extends InputColumnArgs {
+export interface OnehotArgs extends InputColumnArgs, SourcePreservingArgs {
 	/**
 	 * Optional prefixes for the output column names
 	 */
 	prefix?: string
-	/**
-	 * Keep the original columns (default is to remove source columns).
-	 */
-	preserveSource?: boolean
 }
 
 export interface OrderbyArgs {
@@ -706,22 +690,8 @@ export type SelectArgs = InputColumnListArgs
 
 export type DropArgs = InputColumnListArgs
 
-export interface SpreadArgs extends InputColumnArgs {
+export interface SpreadArgs extends InputColumnArgs, SourcePreservingArgs {
 	to: string[]
-	/**
-	 * Delimiter to use when converting string cell values into an array with String.split
-	 */
-	delimiter?: string
-	/**
-	 * Indicates that a onehot-style spread should be performed.
-	 * This maps all unique cell values to new columns and sets the output cell value to a binary 1/0 based on column match.
-	 * This is in contrast to the default spread, which just maps array values to column by index.
-	 */
-	onehot?: boolean
-	/**
-	 * Keep the original columns (default is to remove source columns).
-	 */
-	preserveSource?: boolean
 }
 
 export interface StringsArgs extends InputColumnArgs, OutputColumnArgs {}
@@ -745,12 +715,8 @@ export interface StringsReplaceArgs extends StringsArgs {
 
 export type UnfoldArgs = InputKeyValueArgs
 
-export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
+export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs, SourcePreservingArgs {
 	prefix?: string
-	/**
-	 * Keep the original columns (default is to remove source columns).
-	 */
-	preserveSource?: boolean
 }
 
 export type UnrollArgs = InputColumnArgs

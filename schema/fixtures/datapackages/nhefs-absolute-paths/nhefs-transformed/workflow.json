@@ -17,14 +17,11 @@
 		{
 			"args": {
 				"to": "high-cholesterol",
-				"criteria": [
-					{
-						"operator": ">",
-						"type": "value",
-						"value": "200"
-					}
-				],
-				"logical": "or",
+				"criteria": {
+					"operator": ">",
+					"type": "value",
+					"value": "200"
+				},
 				"column": "cholesterol"
 			},
 			"verb": "binarize"

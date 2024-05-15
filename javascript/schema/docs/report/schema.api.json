@@ -2322,21 +2322,21 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@datashaper/schema!Criterion:interface",
+          "canonicalReference": "@datashaper/schema!Criteria:interface",
           "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface Criterion "
+              "text": "export interface Criteria "
             }
           ],
           "releaseTag": "Public",
-          "name": "Criterion",
+          "name": "Criteria",
           "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!Criterion#operator:member",
+              "canonicalReference": "@datashaper/schema!Criteria#operator:member",
               "docComment": "/**\n * Filter operator to execute. Note the correct operator for the column data type must be used.\n */\n",
               "excerptTokens": [
                 {
@@ -2391,7 +2391,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!Criterion#type:member",
+              "canonicalReference": "@datashaper/schema!Criteria#type:member",
               "docComment": "/**\n * Indicates whether the filter should be directly against a value, or against the value of another column\n */\n",
               "excerptTokens": [
                 {
@@ -2419,7 +2419,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!Criterion#value:member",
+              "canonicalReference": "@datashaper/schema!Criteria#value:member",
               "docComment": "/**\n * Comparison value for the column. Not required if the operator is self-defining (e.g., 'is empty')\n */\n",
               "excerptTokens": [
                 {
@@ -3800,6 +3800,15 @@
             },
             {
               "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "SourcePreservingArgs",
+              "canonicalReference": "@datashaper/schema!SourcePreservingArgs:interface"
+            },
+            {
+              "kind": "Content",
               "text": " "
             }
           ],
@@ -3833,39 +3842,16 @@
                 "startIndex": 1,
                 "endIndex": 2
               }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!DestructureArgs#preserveSource:member",
-              "docComment": "/**\n * Keep the original columns (default is to remove source columns).\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "preserveSource?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "preserveSource",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
             }
           ],
           "extendsTokenRanges": [
             {
               "startIndex": 1,
               "endIndex": 2
+            },
+            {
+              "startIndex": 3,
+              "endIndex": 4
             }
           ]
         },
@@ -5791,12 +5777,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "Criterion",
-                  "canonicalReference": "@datashaper/schema!Criterion:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "[]"
+                  "text": "Criteria",
+                  "canonicalReference": "@datashaper/schema!Criteria:interface"
                 },
                 {
                   "kind": "Content",
@@ -5807,34 +5789,6 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "criteria",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!FilterArgs#logical:member",
-              "docComment": "/**\n * Boolean operator to apply to the criteria if more than one.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "logical?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "BooleanOperator",
-                  "canonicalReference": "@datashaper/schema!BooleanOperator:enum"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "logical",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -5922,6 +5876,15 @@
             },
             {
               "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "SourcePreservingArgs",
+              "canonicalReference": "@datashaper/schema!SourcePreservingArgs:interface"
+            },
+            {
+              "kind": "Content",
               "text": " "
             }
           ],
@@ -5961,6 +5924,10 @@
             {
               "startIndex": 1,
               "endIndex": 2
+            },
+            {
+              "startIndex": 3,
+              "endIndex": 4
             }
           ]
         },
@@ -7084,6 +7051,15 @@
             },
             {
               "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "SourcePreservingArgs",
+              "canonicalReference": "@datashaper/schema!SourcePreservingArgs:interface"
+            },
+            {
+              "kind": "Content",
               "text": " "
             }
           ],
@@ -7120,60 +7096,6 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!MergeArgs#prefix:member",
-              "docComment": "/**\n * Prefix to strip from column names when using unhot (only relevant if columns were originally onehot encoded with a prefix).\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "prefix?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "prefix",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!MergeArgs#preserveSource:member",
-              "docComment": "/**\n * Keep the original columns (default is to remove source columns).\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "preserveSource?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "preserveSource",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!MergeArgs#strategy:member",
               "docComment": "/**\n * Strategy to use for merging the input columns\n */\n",
               "excerptTokens": [
@@ -7199,33 +7121,6 @@
                 "startIndex": 1,
                 "endIndex": 2
               }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!MergeArgs#unhot:member",
-              "docComment": "/**\n * Indicates that columns should be \"unhot\" before merging. In other words, replace all 1s with the column name, and 0s with undefined.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "unhot?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "unhot",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
             }
           ],
           "extendsTokenRanges": [
@@ -7236,6 +7131,10 @@
             {
               "startIndex": 3,
               "endIndex": 4
+            },
+            {
+              "startIndex": 5,
+              "endIndex": 6
             }
           ]
         },
@@ -7637,6 +7536,15 @@
             },
             {
               "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "SourcePreservingArgs",
+              "canonicalReference": "@datashaper/schema!SourcePreservingArgs:interface"
+            },
+            {
+              "kind": "Content",
               "text": " "
             }
           ],
@@ -7670,39 +7578,16 @@
                 "startIndex": 1,
                 "endIndex": 2
               }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!OnehotArgs#preserveSource:member",
-              "docComment": "/**\n * Keep the original columns (default is to remove source columns).\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "preserveSource?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "preserveSource",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
             }
           ],
           "extendsTokenRanges": [
             {
               "startIndex": 1,
               "endIndex": 2
+            },
+            {
+              "startIndex": 3,
+              "endIndex": 4
             }
           ]
         },
@@ -9480,85 +9365,22 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@datashaper/schema!SpreadArgs:interface",
+          "canonicalReference": "@datashaper/schema!SourcePreservingArgs:interface",
           "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface SpreadArgs extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "InputColumnArgs",
-              "canonicalReference": "@datashaper/schema!InputColumnArgs:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " "
+              "text": "export interface SourcePreservingArgs "
             }
           ],
           "releaseTag": "Public",
-          "name": "SpreadArgs",
+          "name": "SourcePreservingArgs",
           "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!SpreadArgs#delimiter:member",
-              "docComment": "/**\n * Delimiter to use when converting string cell values into an array with String.split\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "delimiter?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "delimiter",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!SpreadArgs#onehot:member",
-              "docComment": "/**\n * Indicates that a onehot-style spread should be performed. This maps all unique cell values to new columns and sets the output cell value to a binary 1/0 based on column match. This is in contrast to the default spread, which just maps array values to column by index.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onehot?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "onehot",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!SpreadArgs#preserveSource:member",
-              "docComment": "/**\n * Keep the original columns (default is to remove source columns).\n */\n",
+              "canonicalReference": "@datashaper/schema!SourcePreservingArgs#preserveSource:member",
+              "docComment": "/**\n * Indicates whether source column(s) should be preserved on operations that normally drop the source(s). E.g., merge, fold, spread, etc.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -9581,7 +9403,42 @@
                 "startIndex": 1,
                 "endIndex": 2
               }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!SpreadArgs:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface SpreadArgs extends "
             },
+            {
+              "kind": "Reference",
+              "text": "InputColumnArgs",
+              "canonicalReference": "@datashaper/schema!InputColumnArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "SourcePreservingArgs",
+              "canonicalReference": "@datashaper/schema!SourcePreservingArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "SpreadArgs",
+          "preserveMemberOrder": false,
+          "members": [
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!SpreadArgs#to:member",
@@ -9614,6 +9471,10 @@
             {
               "startIndex": 1,
               "endIndex": 2
+            },
+            {
+              "startIndex": 3,
+              "endIndex": 4
             }
           ]
         },
@@ -11634,6 +11495,15 @@
             },
             {
               "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "SourcePreservingArgs",
+              "canonicalReference": "@datashaper/schema!SourcePreservingArgs:interface"
+            },
+            {
+              "kind": "Content",
               "text": " "
             }
           ],
@@ -11667,33 +11537,6 @@
                 "startIndex": 1,
                 "endIndex": 2
               }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!UnhotArgs#preserveSource:member",
-              "docComment": "/**\n * Keep the original columns (default is to remove source columns).\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "preserveSource?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "preserveSource",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
             }
           ],
           "extendsTokenRanges": [
@@ -11704,6 +11547,10 @@
             {
               "startIndex": 3,
               "endIndex": 4
+            },
+            {
+              "startIndex": 5,
+              "endIndex": 6
             }
           ]
         },

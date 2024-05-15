@@ -156,7 +156,7 @@ class BooleanComparisonOperator(str, Enum):
 
 
 @dataclass
-class Criterion:
+class Criteria:
     """A filter criterion."""
 
     value: Any
@@ -179,8 +179,7 @@ class BooleanLogicalOperator(str, Enum):
 class FilterArgs(InputColumnArgs):
     """Filter criteria for a column."""
 
-    criteria: list[Criterion]
-    logical: BooleanLogicalOperator = BooleanLogicalOperator.OR
+    criteria: Criteria
 
 
 class SetOp(str, Enum):
