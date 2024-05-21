@@ -54,10 +54,13 @@ export const GenerativeMigration: React.FC<GenerativeMigrationProps> = memo(
 
 const StepUIs: React.FC<any> = ({ workflow, index, step }) => {
 	const [local, setLocal] = useState<Step>(step)
-	const onStepSave = useCallback((s: Step) => {
-		workflow.updateStep(s, index)
-		setLocal(s)
-	}, [workflow, index])
+	const onStepSave = useCallback(
+		(s: Step) => {
+			workflow.updateStep(s, index)
+			setLocal(s)
+		},
+		[workflow, index],
+	)
 	const StepArgs = selectStepForm(local)
 	return (
 		<StepContainer>
@@ -74,19 +77,11 @@ const StepUIs: React.FC<any> = ({ workflow, index, step }) => {
 				</Column>
 				<Column>
 					<Subtitle>Hand-built StepArgs</Subtitle>
-					<StepArgs
-						step={local}
-						workflow={workflow}
-						onChange={onStepSave}
-					/>
+					<StepArgs step={local} workflow={workflow} onChange={onStepSave} />
 				</Column>
 				<Column>
 					<Subtitle>Generative</Subtitle>
-					<RJSFForm
-						step={local}
-						workflow={workflow}
-						onChange={onStepSave}
-					/>
+					<RJSFForm step={local} workflow={workflow} onChange={onStepSave} />
 				</Column>
 			</Columns>
 		</StepContainer>

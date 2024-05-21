@@ -6,13 +6,16 @@ import { memo } from 'react'
 
 import Form from '@rjsf/fluent-ui'
 import validator from '@rjsf/validator-ajv8'
-import { StepFormProps } from '../types.js'
+import type { StepFormProps } from '../types.js'
 
 import './rjsf.css'
-import { useDataBoundArgsSchema, useOnFormChange, useVerbArgsSchema, useWorkflowSchema } from './RJSFForm.hooks.js'
+import {
+	useDataBoundArgsSchema,
+	useOnFormChange,
+	useVerbArgsSchema,
+	useWorkflowSchema,
+} from './RJSFForm.hooks.js'
 import { UI_SCHEMA_DEFAULTS } from './RJSFForm.constants.js'
-
-
 
 /**
  * Encapsulates standard handling for generated UX using RJSF with our verbs and fluent.
@@ -22,7 +25,6 @@ export const RJSFForm: React.FC<StepFormProps> = memo(function RJSFForm({
 	workflow,
 	onChange,
 }) {
-	
 	const schema = useWorkflowSchema()
 	const args = useVerbArgsSchema(step, schema)
 	const finalSchema = useDataBoundArgsSchema(args, step, workflow)

@@ -6,28 +6,30 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import capitalize from 'lodash-es/capitalize.js'
 import get from 'lodash-es/get.js'
-import { COLUMN_ARGS, EXCLUDE_PROPERTIES, FIXED_ENUM_TITLES, FIXED_LABELS } from './RJSFForm.constants.js'
+import {
+	COLUMN_ARGS,
+	EXCLUDE_PROPERTIES,
+	FIXED_ENUM_TITLES,
+	FIXED_LABELS,
+} from './RJSFForm.constants.js'
 import { useColumnNames, useStepInputTable } from '../../../../hooks/index.js'
-import { Step, Workflow } from '@datashaper/workflow'
-import { StepChangeFunction } from '../../../../types.js'
+import type { Step, Workflow } from '@datashaper/workflow'
+import type { StepChangeFunction } from '../../../../types.js'
 
 /**
  * Fetches and resolves the latest workflow schema for extracting step form args.
- * @returns 
+ * @returns
  */
-export function useWorkflowSchema() {
+export function useWorkflowSchema(): any | undefined {
 	const [schema, setSchema] = useState<any>()
 	useEffect(() => {
-		fetch(
-			'http://localhost:8080/schema/workflow/workflow.json',
-		)
+		fetch('http://localhost:8080/schema/workflow/workflow.json')
 			.then((res) => res.json())
 			.then(resolve)
 			.then(setSchema)
 	}, [])
 	return schema
 }
-
 
 // TODO: does this need to be recursive?
 // TODO RJSF claims to do resolution: https://rjsf-team.github.io/react-jsonschema-form/docs/json-schema/definitions
@@ -39,13 +41,8 @@ function resolve(schema: any) {
 				Object.entries(definition.properties).forEach(
 					([propKey, property]: [string, any]) => {
 						if (property.$ref) {
-							const path = property.$ref
-								.replace('#/', '')
-								.replaceAll('/', '.')
-							schema.definitions[defKey].properties[propKey] = get(
-								schema,
-								path,
-							)
+							const path = property.$ref.replace('#/', '').replaceAll('/', '.')
+							schema.definitions[defKey].properties[propKey] = get(schema, path)
 						}
 					},
 				)
@@ -60,12 +57,12 @@ function resolve(schema: any) {
  * This does a little bit of massaging for missing functionality:
  * - avoids certain properties that are managed by HOCs elsewhere (e.g., input columns).
  * - uses some pre-defined labels for certain properties to read better.
- * - formats enums in a jsonschema-standard way for rendering as dropdowns. 
- * @param step 
- * @param schema 
- * @returns 
+ * - formats enums in a jsonschema-standard way for rendering as dropdowns.
+ * @param step
+ * @param schema
+ * @returns
  */
-export function useVerbArgsSchema(step: any, schema: any) {
+export function useVerbArgsSchema(step: Step, schema: any): any {
 	return useMemo(() => {
 		if (step && schema) {
 			const verb = capitalize(step.verb)
@@ -119,12 +116,16 @@ function prettyEnum(
 
 /**
  * Binds any special verb args properties to data from the workflow.
- * @param args 
- * @param step 
- * @param workflow 
- * @returns 
+ * @param args
+ * @param step
+ * @param workflow
+ * @returns
  */
-export function useDataBoundArgsSchema(args: any, step: Step, workflow: Workflow | undefined) {
+export function useDataBoundArgsSchema(
+	args: any,
+	step: Step,
+	workflow: Workflow | undefined,
+): any {
 	const dataTable = useStepInputTable(step, workflow)
 	const columns = useColumnNames(dataTable)
 	return useMemo(() => {
@@ -141,8 +142,10 @@ export function useDataBoundArgsSchema(args: any, step: Step, workflow: Workflow
 	}, [args, columns])
 }
 
-
-export function useOnFormChange(step: Step, onChange?: StepChangeFunction) {
+export function useOnFormChange(
+	step: Step,
+	onChange?: StepChangeFunction,
+): any {
 	return useCallback(
 		(data: any) => {
 			// rjsf gives back the entire props on change - just pluck the formData, which are the step args
