@@ -14,5 +14,5 @@ export interface JoinArgsBase
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [on?](./schema.joinargsbase.on.md) |  | string\[\] | <i>(Optional)</i> Column names to join with. If only one is specified, it will use for both tables. If none are specified, all matching column names will be used. |
+|  [on?](./schema.joinargsbase.on.md) |  | [InputColumn](./schema.inputcolumn.md)<!-- -->\[\] | <i>(Optional)</i> Column names to join with. If only one is specified, it will use for both tables. If none are specified, all matching column names will be used. |
 

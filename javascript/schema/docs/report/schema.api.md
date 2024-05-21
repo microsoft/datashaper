@@ -10,7 +10,7 @@ import Ajv from 'ajv';
 //
 // @public (undocumented)
 export interface AggregateArgs extends RollupArgs {
-    groupby: string;
+    groupby: InputColumn;
 }
 
 // Warning: (ae-missing-release-tag) "BasicInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -345,8 +345,8 @@ export type DedupeArgs = Partial<InputColumnListArgs>;
 //
 // @public (undocumented)
 export interface DeriveArgs extends OutputColumnArgs {
-    column1: string;
-    column2: string;
+    column1: InputColumn;
+    column2: InputColumn;
     operator: MathOperator;
 }
 
@@ -550,11 +550,16 @@ export type InputBinding = {
     table?: string;
 };
 
+// Warning: (ae-missing-release-tag) "InputColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type InputColumn = string;
+
 // Warning: (ae-missing-release-tag) "InputColumnArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export interface InputColumnArgs {
-    column: string;
+    column: InputColumn;
     dataType?: DataType;
 }
 
@@ -562,22 +567,22 @@ export interface InputColumnArgs {
 //
 // @public
 export interface InputColumnListArgs {
-    columns: string[];
+    columns: InputColumn[];
 }
 
 // Warning: (ae-missing-release-tag) "InputColumnRecordArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export interface InputColumnRecordArgs {
-    columns: Record<string, string>;
+    columns: Record<InputColumn, string>;
 }
 
 // Warning: (ae-missing-release-tag) "InputKeyValueArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export interface InputKeyValueArgs {
-    key: string;
-    value: string;
+    key: InputColumn;
+    value: InputColumn;
 }
 
 // Warning: (ae-missing-release-tag) "JoinArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -591,7 +596,7 @@ export interface JoinArgs extends JoinArgsBase {
 //
 // @public (undocumented)
 export interface JoinArgsBase {
-    on?: string[];
+    on?: InputColumn[];
 }
 
 // Warning: (ae-missing-release-tag) "JoinStrategy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -756,7 +761,7 @@ export interface OrderbyArgs {
 //
 // @public (undocumented)
 export interface OrderbyInstruction {
-    column: string;
+    column: InputColumn;
     direction?: SortDirection;
 }
 

@@ -205,8 +205,9 @@
                   "text": "groupby: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "string"
+                  "kind": "Reference",
+                  "text": "InputColumn",
+                  "canonicalReference": "@datashaper/schema!InputColumn:type"
                 },
                 {
                   "kind": "Content",
@@ -3704,8 +3705,9 @@
                   "text": "column1: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "string"
+                  "kind": "Reference",
+                  "text": "InputColumn",
+                  "canonicalReference": "@datashaper/schema!InputColumn:type"
                 },
                 {
                   "kind": "Content",
@@ -3731,8 +3733,9 @@
                   "text": "column2: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "string"
+                  "kind": "Reference",
+                  "text": "InputColumn",
+                  "canonicalReference": "@datashaper/schema!InputColumn:type"
                 },
                 {
                   "kind": "Content",
@@ -6051,6 +6054,31 @@
           }
         },
         {
+          "kind": "TypeAlias",
+          "canonicalReference": "@datashaper/schema!InputColumn:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export type InputColumn = "
+            },
+            {
+              "kind": "Content",
+              "text": "string"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "InputColumn",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
+        },
+        {
           "kind": "Interface",
           "canonicalReference": "@datashaper/schema!InputColumnArgs:interface",
           "docComment": "",
@@ -6074,8 +6102,9 @@
                   "text": "column: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "string"
+                  "kind": "Reference",
+                  "text": "InputColumn",
+                  "canonicalReference": "@datashaper/schema!InputColumn:type"
                 },
                 {
                   "kind": "Content",
@@ -6146,8 +6175,13 @@
                   "text": "columns: "
                 },
                 {
+                  "kind": "Reference",
+                  "text": "InputColumn",
+                  "canonicalReference": "@datashaper/schema!InputColumn:type"
+                },
+                {
                   "kind": "Content",
-                  "text": "string[]"
+                  "text": "[]"
                 },
                 {
                   "kind": "Content",
@@ -6160,7 +6194,7 @@
               "name": "columns",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 2
+                "endIndex": 3
               }
             }
           ],
@@ -6196,7 +6230,16 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<string, string>"
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "InputColumn",
+                  "canonicalReference": "@datashaper/schema!InputColumn:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", string>"
                 },
                 {
                   "kind": "Content",
@@ -6209,7 +6252,7 @@
               "name": "columns",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 5
               }
             }
           ],
@@ -6239,8 +6282,9 @@
                   "text": "key: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "string"
+                  "kind": "Reference",
+                  "text": "InputColumn",
+                  "canonicalReference": "@datashaper/schema!InputColumn:type"
                 },
                 {
                   "kind": "Content",
@@ -6266,8 +6310,9 @@
                   "text": "value: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "string"
+                  "kind": "Reference",
+                  "text": "InputColumn",
+                  "canonicalReference": "@datashaper/schema!InputColumn:type"
                 },
                 {
                   "kind": "Content",
@@ -6369,8 +6414,13 @@
                   "text": "on?: "
                 },
                 {
+                  "kind": "Reference",
+                  "text": "InputColumn",
+                  "canonicalReference": "@datashaper/schema!InputColumn:type"
+                },
+                {
                   "kind": "Content",
-                  "text": "string[]"
+                  "text": "[]"
                 },
                 {
                   "kind": "Content",
@@ -6383,7 +6433,7 @@
               "name": "on",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 2
+                "endIndex": 3
               }
             }
           ],
@@ -7664,8 +7714,9 @@
                   "text": "column: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "string"
+                  "kind": "Reference",
+                  "text": "InputColumn",
+                  "canonicalReference": "@datashaper/schema!InputColumn:type"
                 },
                 {
                   "kind": "Content",

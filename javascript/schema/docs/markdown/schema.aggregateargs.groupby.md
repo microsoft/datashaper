@@ -9,5 +9,5 @@ Column to group by
 <b>Signature:</b>
 
 ```typescript
-groupby: string;
+groupby: InputColumn;
 ```

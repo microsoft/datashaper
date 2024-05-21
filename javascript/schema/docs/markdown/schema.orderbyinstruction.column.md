@@ -9,5 +9,5 @@ Name of the column to order by
 <b>Signature:</b>
 
 ```typescript
-column: string;
+column: InputColumn;
 ```

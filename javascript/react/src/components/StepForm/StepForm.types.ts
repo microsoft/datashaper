@@ -45,5 +45,5 @@ export interface StepFormProps {
 	/**
 	 * Event handler for when the output table name changes
 	 */
-	onChangeOutput: (value: string | undefined) => void
+	onChangeOutput?: (value: string | undefined) => void
 }

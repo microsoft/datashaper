@@ -15,5 +15,5 @@ export interface AggregateArgs extends RollupArgs
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [groupby](./schema.aggregateargs.groupby.md) |  | string | Column to group by |
+|  [groupby](./schema.aggregateargs.groupby.md) |  | [InputColumn](./schema.inputcolumn.md) | Column to group by |
 

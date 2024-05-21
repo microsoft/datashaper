@@ -9,5 +9,5 @@ Column on the right side of the operation
 <b>Signature:</b>
 
 ```typescript
-column2: string;
+column2: InputColumn;
 ```

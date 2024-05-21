@@ -130,11 +130,11 @@ export function useOutputColumnChanged(
 export function useDefaultOutputNameInitially(
 	step: Step,
 	output: string | undefined,
-	onChangeOutput: (value: string | undefined) => void,
+	onChangeOutput?: (value: string | undefined) => void,
 ): void {
 	useEffect(
 		() => {
-			onChangeOutput(output ?? step.id)
+			onChangeOutput?.(output ?? step.id)
 		},
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[

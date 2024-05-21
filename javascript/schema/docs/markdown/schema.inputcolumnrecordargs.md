@@ -14,5 +14,5 @@ export interface InputColumnRecordArgs
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [columns](./schema.inputcolumnrecordargs.columns.md) |  | Record&lt;string, string&gt; | Map of old column to new column names |
+|  [columns](./schema.inputcolumnrecordargs.columns.md) |  | Record&lt;[InputColumn](./schema.inputcolumn.md)<!-- -->, string&gt; | Map of old column to new column names |
 

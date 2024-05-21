@@ -9,5 +9,5 @@ List of input columns for operations that work across multiple columns
 <b>Signature:</b>
 
 ```typescript
-columns: string[];
+columns: InputColumn[];
 ```

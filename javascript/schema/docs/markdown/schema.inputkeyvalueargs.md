@@ -14,6 +14,6 @@ export interface InputKeyValueArgs
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [key](./schema.inputkeyvalueargs.key.md) |  | string | Key column for the operation |
-|  [value](./schema.inputkeyvalueargs.value.md) |  | string | Value column for the operation |
+|  [key](./schema.inputkeyvalueargs.key.md) |  | [InputColumn](./schema.inputcolumn.md) | Key column for the operation |
+|  [value](./schema.inputkeyvalueargs.value.md) |  | [InputColumn](./schema.inputcolumn.md) | Value column for the operation |
 

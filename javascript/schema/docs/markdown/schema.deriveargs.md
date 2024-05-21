@@ -15,7 +15,7 @@ export interface DeriveArgs extends OutputColumnArgs
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [column1](./schema.deriveargs.column1.md) |  | string | Column on the left side of the operation |
-|  [column2](./schema.deriveargs.column2.md) |  | string | Column on the right side of the operation |
+|  [column1](./schema.deriveargs.column1.md) |  | [InputColumn](./schema.inputcolumn.md) | Column on the left side of the operation |
+|  [column2](./schema.deriveargs.column2.md) |  | [InputColumn](./schema.inputcolumn.md) | Column on the right side of the operation |
 |  [operator](./schema.deriveargs.operator.md) |  | [MathOperator](./schema.mathoperator.md) | Math operation to perform row-by-row on the two columns |
 

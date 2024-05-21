@@ -9,5 +9,5 @@ Column names to join with. If only one is specified, it will use for both tables
 <b>Signature:</b>
 
 ```typescript
-on?: string[];
+on?: InputColumn[];
 ```

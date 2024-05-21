@@ -56,11 +56,13 @@ export enum Verb {
 	StringsUpper = 'strings.upper',
 }
 
+export type InputColumn = string
+
 export interface InputColumnArgs {
 	/**
 	 * Name of the input column for columnar operations
 	 */
-	column: string
+	column: InputColumn
 	/**
 	 * Expected data type for values in the column
 	 */
@@ -74,25 +76,25 @@ export interface InputColumnListArgs {
 	/**
 	 * List of input columns for operations that work across multiple columns
 	 */
-	columns: string[]
+	columns: InputColumn[]
 }
 
 export interface InputColumnRecordArgs {
 	/**
 	 * Map of old column to new column names
 	 */
-	columns: Record<string, string>
+	columns: Record<InputColumn, string>
 }
 
 export interface InputKeyValueArgs {
 	/**
 	 * Key column for the operation
 	 */
-	key: string
+	key: InputColumn
 	/**
 	 * Value column for the operation
 	 */
-	value: string
+	value: InputColumn
 }
 
 export interface OutputColumnArgs {
@@ -379,7 +381,7 @@ export interface AggregateArgs extends RollupArgs {
 	/**
 	 * Column to group by
 	 */
-	groupby: string
+	groupby: InputColumn
 }
 
 /**
@@ -472,11 +474,11 @@ export interface DeriveArgs extends OutputColumnArgs {
 	/**
 	 * Column on the left side of the operation
 	 */
-	column1: string
+	column1: InputColumn
 	/**
 	 * Column on the right side of the operation
 	 */
-	column2: string
+	column2: InputColumn
 	/**
 	 * Math operation to perform row-by-row on the two columns
 	 */
@@ -541,7 +543,7 @@ export interface JoinArgsBase {
 	 * If only one is specified, it will use for both tables.
 	 * If none are specified, all matching column names will be used.
 	 */
-	on?: string[]
+	on?: InputColumn[]
 }
 
 export interface JoinArgs extends JoinArgsBase {
@@ -630,7 +632,7 @@ export interface OrderbyInstruction {
 	/**
 	 * Name of the column to order by
 	 */
-	column: string
+	column: InputColumn
 	/**
 	 * Direction to order by
 	 */

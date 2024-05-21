@@ -51,7 +51,7 @@ export interface StepFormProps<T extends object | void | unknown = unknown>
 	 * The optional output table name; this information isn't stored on the step, so it has to
 	 * be injected separately
 	 */
-	output: string | undefined
+	output?: string | undefined
 
 	/**
 	 * Optional override for the label
@@ -61,5 +61,5 @@ export interface StepFormProps<T extends object | void | unknown = unknown>
 	/**
 	 * Event handler for when the output table name changes
 	 */
-	onChangeOutput: (value: string | undefined) => void
+	onChangeOutput?: (value: string | undefined) => void
 }

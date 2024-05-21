@@ -16,5 +16,5 @@ export interface InputColumnListArgs
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [columns](./schema.inputcolumnlistargs.columns.md) |  | string\[\] | List of input columns for operations that work across multiple columns |
+|  [columns](./schema.inputcolumnlistargs.columns.md) |  | [InputColumn](./schema.inputcolumn.md)<!-- -->\[\] | List of input columns for operations that work across multiple columns |
 

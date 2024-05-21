@@ -9,5 +9,5 @@ Name of the input column for columnar operations
 <b>Signature:</b>
 
 ```typescript
-column: string;
+column: InputColumn;
 ```

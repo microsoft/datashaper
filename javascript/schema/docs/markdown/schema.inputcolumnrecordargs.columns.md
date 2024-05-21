@@ -9,5 +9,5 @@ Map of old column to new column names
 <b>Signature:</b>
 
 ```typescript
-columns: Record<string, string>;
+columns: Record<InputColumn, string>;
 ```

@@ -14,11 +14,20 @@ import onehotunhot from './specs/onehot-unhot.json'
 import sparkbar from './specs/sparkbar.json'
 import sparkline from './specs/sparkline.json'
 import { WorkflowExampleStory } from './WorkflowExample/WorkflowExample.story.js'
+import { GenerativeMigrationStory } from './GenerativeMigration/GenerativeMigration.story.js'
 
 const storyMetadata = {
 	title: 'Workflows/Examples',
 }
 export default storyMetadata
+
+export const GenerativeUX = {
+	render: GenerativeMigrationStory.bind({}),
+
+	args: {
+		schema: everyOperation as WorkflowSchema,
+	},
+}
 
 export const EveryOperation = {
 	render: WorkflowExampleStory.bind({}),
