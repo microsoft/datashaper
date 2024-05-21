@@ -23,6 +23,7 @@ import {
 import { StepForm } from '../../../StepForm/StepForm.js'
 import { selectStepForm } from '../../../StepForm/selectStepForm.js'
 import { RJSFForm } from '../../forms/forms/RJSFForm.js'
+import { useWorkflowSchema } from '../../forms/forms/RJSFForm.hooks.js'
 
 export interface GenerativeMigrationProps {
 	schema: WorkflowSchema
@@ -35,6 +36,11 @@ export const GenerativeMigration: React.FC<GenerativeMigrationProps> = memo(
 		const workflow = useMemo(() => new Workflow(schema), [schema])
 		const wf = useWorkflow(workflow, tables)
 		const steps = useWorkflowSteps(wf, DisplayOrder.FirstOnTop)
+
+		const workflowSchema = useWorkflowSchema()
+		if (!workflowSchema) {
+			return null
+		}
 		return (
 			<Container>
 				{steps.map((step, index) => {
@@ -44,6 +50,7 @@ export const GenerativeMigration: React.FC<GenerativeMigrationProps> = memo(
 							workflow={wf}
 							index={index}
 							step={step}
+							workflowSchema={workflowSchema}
 						/>
 					)
 				})}
@@ -52,7 +59,7 @@ export const GenerativeMigration: React.FC<GenerativeMigrationProps> = memo(
 	},
 )
 
-const StepUIs: React.FC<any> = ({ workflow, index, step }) => {
+const StepUIs: React.FC<any> = ({ workflow, index, step, workflowSchema }) => {
 	const [local, setLocal] = useState<Step>(step)
 	const onStepSave = useCallback(
 		(s: Step) => {
@@ -81,7 +88,7 @@ const StepUIs: React.FC<any> = ({ workflow, index, step }) => {
 				</Column>
 				<Column>
 					<Subtitle>Generative</Subtitle>
-					<RJSFForm step={local} workflow={workflow} onChange={onStepSave} />
+					<RJSFForm step={local} workflow={workflow} onChange={onStepSave} schema={workflowSchema}/>
 				</Column>
 			</Columns>
 		</StepContainer>

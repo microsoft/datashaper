@@ -13,7 +13,6 @@ import {
 	useDataBoundArgsSchema,
 	useOnFormChange,
 	useVerbArgsSchema,
-	useWorkflowSchema,
 } from './RJSFForm.hooks.js'
 import { UI_SCHEMA_DEFAULTS } from './RJSFForm.constants.js'
 
@@ -21,16 +20,18 @@ import { UI_SCHEMA_DEFAULTS } from './RJSFForm.constants.js'
  * Encapsulates standard handling for generated UX using RJSF with our verbs and fluent.
  */
 export const RJSFForm: React.FC<StepFormProps> = memo(function RJSFForm({
+	schema,
 	step,
 	workflow,
 	onChange,
 }) {
-	const schema = useWorkflowSchema()
+	
 	const args = useVerbArgsSchema(step, schema)
 	const finalSchema = useDataBoundArgsSchema(args, step, workflow)
 
 	const handleChange = useOnFormChange(step, onChange)
 
+	console.log(step.verb, finalSchema)
 	if (!finalSchema) {
 		return null
 	}

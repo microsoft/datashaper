@@ -37,16 +37,19 @@ export function useWorkflowSchema(): any | undefined {
 function resolve(schema: any) {
 	Object.entries(schema.definitions).forEach(
 		([defKey, definition]: [string, any]) => {
-			if (definition.properties) {
-				Object.entries(definition.properties).forEach(
-					([propKey, property]: [string, any]) => {
-						if (property.$ref) {
-							const path = property.$ref.replace('#/', '').replaceAll('/', '.')
-							schema.definitions[defKey].properties[propKey] = get(schema, path)
-						}
-					},
-				)
+			if (definition.enum) {
+				definition.oneOf = prettyEnum(definition.enum, true)
 			}
+			// if (definition.properties) {
+			// 	Object.entries(definition.properties).forEach(
+			// 		([propKey, property]: [string, any]) => {
+			// 			if (property.$ref) {
+			// 				const path = property.$ref.replace('#/', '').replaceAll('/', '.')
+			// 				schema.definitions[defKey].properties[propKey] = get(schema, path)
+			// 			}
+			// 		},
+			// 	)
+			// }
 		},
 	)
 	return schema
@@ -65,6 +68,7 @@ function resolve(schema: any) {
 export function useVerbArgsSchema(step: Step, schema: any): any {
 	return useMemo(() => {
 		if (step && schema) {
+			const copy = {...schema}
 			const verb = capitalize(step.verb)
 			const args = schema.definitions[`${verb}Args`]
 			if (!args) {
@@ -74,21 +78,27 @@ export function useVerbArgsSchema(step: Step, schema: any): any {
 				(acc: any, [key, value]: [any, any]) => {
 					if (!EXCLUDE_PROPERTIES.has(key)) {
 						acc[key] = {
+							//...value,
 							title: FIXED_LABELS[key] || capitalize(key),
 							type: value.type || 'string', // this covers "any", which translates to _no type_ in jsonschema
 						}
 						if (value.enum) {
 							acc[key].oneOf = prettyEnum(value.enum, true)
 						}
+						if (value.items) {
+							acc[key].items = value.items
+						}
 					}
 					return acc
 				},
 				{} as any,
 			)
-			return {
-				...args,
-				properties,
-			}
+			copy.properties = properties
+			return copy
+			// return {
+			// 	...args,
+			// 	properties,
+			// }
 		}
 	}, [step, schema])
 }
@@ -106,7 +116,7 @@ function prettyEnum(
 		// we don't format column names, since they should stay as-is
 		// also note that this formatting differs from how we split enum keys; we should do a better regex for prettier acronyms
 		const title =
-			FIXED_ENUM_TITLES[v] ?  FIXED_ENUM_TITLES[v] : format ? capitalize(v.replaceAll('_', ' ')) : v
+			(FIXED_ENUM_TITLES[v] ?  FIXED_ENUM_TITLES[v] : format ? capitalize(v.replaceAll('_', ' ')) : v) as string
 		return {
 			enum: [v],
 			title,

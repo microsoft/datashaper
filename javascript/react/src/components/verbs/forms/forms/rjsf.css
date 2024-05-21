@@ -1,3 +1,7 @@
 .rjsf-root {
     min-width: 220px;
 }
+
+#root__description {
+    display: none;
+}
