@@ -104,9 +104,9 @@ function prettyEnum(
 }[] {
 	return values.map((v) => {
 		// we don't format column names, since they should stay as-is
-		// also not that this formatting differs from how we split enum keys; we should do a better regex for prettier acronyms
+		// also note that this formatting differs from how we split enum keys; we should do a better regex for prettier acronyms
 		const title =
-			FIXED_ENUM_TITLES[v] || format ? capitalize(v.replaceAll('_', ' ')) : v
+			FIXED_ENUM_TITLES[v] ?  FIXED_ENUM_TITLES[v] : format ? capitalize(v.replaceAll('_', ' ')) : v
 		return {
 			enum: [v],
 			title,
