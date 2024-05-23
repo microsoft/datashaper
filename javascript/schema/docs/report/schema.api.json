@@ -1569,6 +1569,64 @@
           ]
         },
         {
+          "kind": "Enum",
+          "canonicalReference": "@datashaper/schema!ComparisonStrategy:enum",
+          "docComment": "/**\n * Indicates the comparison type used for a filter operation. This is done on a row-by-row basis.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare enum ComparisonStrategy "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ComparisonStrategy",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!ComparisonStrategy.Column:member",
+              "docComment": "/**\n * The comparison value is the value from the same row in another column\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Column = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"column\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Column"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!ComparisonStrategy.Value:member",
+              "docComment": "/**\n * The comparison value is a literal value\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Value = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"value\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Value"
+            }
+          ]
+        },
+        {
           "kind": "Interface",
           "canonicalReference": "@datashaper/schema!Constraints:interface",
           "docComment": "/**\n * Validation constraints for a field.\n */\n",
@@ -2391,17 +2449,17 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!Criteria#type:member",
+              "canonicalReference": "@datashaper/schema!Criteria#strategy:member",
               "docComment": "/**\n * Indicates whether the filter should be directly against a value, or against the value of another column\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "type: "
+                  "text": "strategy: "
                 },
                 {
                   "kind": "Reference",
-                  "text": "FilterCompareType",
-                  "canonicalReference": "@datashaper/schema!FilterCompareType:enum"
+                  "text": "ComparisonStrategy",
+                  "canonicalReference": "@datashaper/schema!ComparisonStrategy:enum"
                 },
                 {
                   "kind": "Content",
@@ -2411,7 +2469,7 @@
               "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "type",
+              "name": "strategy",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -5754,6 +5812,15 @@
             },
             {
               "kind": "Reference",
+              "text": "Criteria",
+              "canonicalReference": "@datashaper/schema!Criteria:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
               "text": "InputColumnArgs",
               "canonicalReference": "@datashaper/schema!InputColumnArgs:interface"
             },
@@ -5765,98 +5832,15 @@
           "releaseTag": "Public",
           "name": "FilterArgs",
           "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!FilterArgs#criteria:member",
-              "docComment": "/**\n * Filter criteria to apply to the column.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "criteria: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Criteria",
-                  "canonicalReference": "@datashaper/schema!Criteria:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "criteria",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
+          "members": [],
           "extendsTokenRanges": [
             {
               "startIndex": 1,
               "endIndex": 2
-            }
-          ]
-        },
-        {
-          "kind": "Enum",
-          "canonicalReference": "@datashaper/schema!FilterCompareType:enum",
-          "docComment": "/**\n * Indicates the comparison type used for a filter operation. This is done on a row-by-row basis.\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare enum FilterCompareType "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "FilterCompareType",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "EnumMember",
-              "canonicalReference": "@datashaper/schema!FilterCompareType.Column:member",
-              "docComment": "/**\n * The comparison value is the value from the same row in another column\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "Column = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "\"column\""
-                }
-              ],
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "name": "Column"
             },
             {
-              "kind": "EnumMember",
-              "canonicalReference": "@datashaper/schema!FilterCompareType.Value:member",
-              "docComment": "/**\n * The comparison value is a literal value\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "Value = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "\"value\""
-                }
-              ],
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "name": "Value"
+              "startIndex": 3,
+              "endIndex": 4
             }
           ]
         },

@@ -12,7 +12,7 @@ import type {
 import {
 	BooleanOperator,
 	FieldAggregateOperation,
-	FilterCompareType,
+	ComparisonStrategy,
 	WindowFunction,
 } from '@datashaper/schema'
 import { parseBoolean } from '@datashaper/tables'
@@ -36,9 +36,11 @@ export function compareAll(
 		// this check by shortcutting evaluation once it is clear the logical operator
 		// cannot be satisfied
 		const comparisons = criteria.map((filter) => {
-			const { value, operator, type } = filter
+			const { value, operator, strategy } = filter
 			const right =
-				type === FilterCompareType.Column ? d[`${value.toString()}`] : value
+				strategy === ComparisonStrategy.Column
+					? d[`${value.toString()}`]
+					: value
 
 			return compareValues(left, right, operator)
 		})
@@ -66,12 +68,12 @@ export function compare(
 		| StringComparisonOperator
 		| BooleanComparisonOperator
 		| DateComparisonOperator,
-	type: FilterCompareType,
+	strategy: ComparisonStrategy,
 ): CompareWrapper {
 	return escape((d: Record<string, string | number>): 0 | 1 | null => {
 		const left = d[column]
 		const right =
-			type === FilterCompareType.Column ? d[`${value.toString()}`] : value
+			strategy === ComparisonStrategy.Column ? d[`${value.toString()}`] : value
 
 		return compareValues(left, right, operator)
 	}) as CompareWrapper

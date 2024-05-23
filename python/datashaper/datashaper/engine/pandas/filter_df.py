@@ -13,8 +13,8 @@ import pandas as pd
 from datashaper.engine.types import (
     BooleanComparisonOperator,
     BooleanLogicalOperator,
+    ComparisonStrategy,
     FilterArgs,
-    FilterCompareType,
     NumericComparisonOperator,
     StringComparisonOperator,
 )
@@ -197,17 +197,15 @@ def filter_df(df: pd.DataFrame, args: FilterArgs) -> pd.DataFrame | pd.Series:
 
     filter_name = str(uuid4())
     filters.append(filter_name)
-    if args.criteria.type == FilterCompareType.Column:
-        filtered_df[filter_name] = _operator_map[args.criteria.operator](
-            df=df, column=args.column, target=df[args.criteria.value]
+    if args.strategy == ComparisonStrategy.Column:
+        filtered_df[filter_name] = _operator_map[args.operator](
+            df=df, column=args.column, target=df[args.value]
         )
-        if args.criteria.operator not in _empty_comparisons:
-            __correct_unknown_value(
-                filtered_df, [args.column, args.criteria.value], filter_name
-            )
+        if args.operator not in _empty_comparisons:
+            __correct_unknown_value(filtered_df, [args.column, args.value], filter_name)
     else:
-        filtered_df[filter_name] = _operator_map[args.criteria.operator](
-            df=df, column=args.column, target=args.criteria.value
+        filtered_df[filter_name] = _operator_map[args.operator](
+            df=df, column=args.column, target=args.value
         )
 
     filtered_df["dwc_filter_result"] = boolean_function_map[BooleanLogicalOperator.OR](

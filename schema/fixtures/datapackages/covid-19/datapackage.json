@@ -196,121 +196,99 @@
 						{
 							"args": {
 								"column": "age",
-								"criteria": {
-									"operator": "is not equal",
-									"type": "value",
-									"value": "0-6"
-								}
+								"operator": "is not equal",
+								"strategy": "value",
+								"value": "0-6"
 							},
 							"verb": "filter"
 						},
 						{
 							"args": {
 								"column": "age",
-								"criteria": {
-									"operator": "is not equal",
-									"type": "value",
-									"value": "0-10"
-								}
+								"operator": "is not equal",
+								"strategy": "value",
+								"value": "0-10"
 							},
 							"verb": "filter"
 						},
 						{
 							"args": {
 								"column": "age",
-								"criteria": {
-									"operator": "is not equal",
-									"type": "value",
-									"value": "1"
-								}
+								"operator": "is not equal",
+								"strategy": "value",
+								"value": "1"
 							},
 							"verb": "filter"
 						},
 						{
 							"args": {
 								"column": "age",
-								"criteria": {
-									"operator": "is not equal",
-									"type": "value",
-									"value": "2"
-								}
+								"operator": "is not equal",
+								"strategy": "value",
+								"value": "2"
 							},
 							"verb": "filter"
 						},
 						{
 							"args": {
 								"column": "age",
-								"criteria": {
-									"operator": "is not equal",
-									"type": "value",
-									"value": "3"
-								}
+								"operator": "is not equal",
+								"strategy": "value",
+								"value": "3"
 							},
 							"verb": "filter"
 						},
 						{
 							"args": {
 								"column": "age",
-								"criteria": {
-									"operator": "is not equal",
-									"type": "value",
-									"value": "4"
-								}
+								"operator": "is not equal",
+								"strategy": "value",
+								"value": "4"
 							},
 							"verb": "filter"
 						},
 						{
 							"args": {
 								"column": "age",
-								"criteria": {
-									"operator": "is not equal",
-									"type": "value",
-									"value": "5"
-								}
+								"operator": "is not equal",
+								"strategy": "value",
+								"value": "5"
 							},
 							"verb": "filter"
 						},
 						{
 							"args": {
 								"column": "age",
-								"criteria": {
-									"operator": "is not equal",
-									"type": "value",
-									"value": "6"
-								}
+								"operator": "is not equal",
+								"strategy": "value",
+								"value": "6"
 							},
 							"verb": "filter"
 						},
 						{
 							"args": {
 								"column": "age",
-								"criteria": {
-									"operator": "is not equal",
-									"type": "value",
-									"value": "7"
-								}
+								"operator": "is not equal",
+								"strategy": "value",
+								"value": "7"
 							},
 							"verb": "filter"
 						},
 						{
 							"args": {
 								"column": "age",
-								"criteria": {
-									"operator": "is not equal",
-									"type": "value",
-									"value": "8"
-								}
+								"operator": "is not equal",
+								"strategy": "value",
+								"value": "8"
 							},
 							"verb": "filter"
 						},
 						{
 							"args": {
 								"column": "age",
-								"criteria": {
-									"operator": "is not equal",
-									"type": "value",
-									"value": "9"
-								}
+								"operator": "is not equal",
+								"strategy": "value",
+								"value": "9"
 							},
 							"verb": "filter"
 						},
@@ -318,11 +296,9 @@
 							"args": {
 								"to": "age_10_19",
 								"column": "age",
-								"criteria": {
-									"operator": "starts with",
-									"type": "value",
-									"value": "1"
-								}
+								"operator": "starts with",
+								"strategy": "value",
+								"value": "1"
 							},
 							"verb": "binarize"
 						},
@@ -330,11 +306,9 @@
 							"args": {
 								"to": "age_20_29",
 								"column": "age",
-								"criteria": {
-									"operator": "starts with",
-									"type": "value",
-									"value": "2"
-								}
+								"operator": "starts with",
+								"strategy": "value",
+								"value": "2"
 							},
 							"verb": "binarize"
 						},
@@ -342,11 +316,9 @@
 							"args": {
 								"to": "age_30_39",
 								"column": "age",
-								"criteria": {
-									"operator": "starts with",
-									"type": "value",
-									"value": "3"
-								}
+								"operator": "starts with",
+								"strategy": "value",
+								"value": "3"
 							},
 							"verb": "binarize"
 						},
@@ -354,11 +326,9 @@
 							"args": {
 								"to": "age_40_49",
 								"column": "age",
-								"criteria": {
-									"operator": "starts with",
-									"type": "value",
-									"value": "4"
-								}
+								"operator": "starts with",
+								"strategy": "value",
+								"value": "4"
 							},
 							"verb": "binarize"
 						},
@@ -366,11 +336,9 @@
 							"args": {
 								"to": "age_50_59",
 								"column": "age",
-								"criteria": {
-									"operator": "starts with",
-									"type": "value",
-									"value": "5"
-								}
+								"operator": "starts with",
+								"strategy": "value",
+								"value": "5"
 							},
 							"verb": "binarize"
 						},
@@ -378,11 +346,9 @@
 							"args": {
 								"to": "age_60_69",
 								"column": "age",
-								"criteria": {
-									"operator": "starts with",
-									"type": "value",
-									"value": "6"
-								}
+								"operator": "starts with",
+								"strategy": "value",
+								"value": "6"
 							},
 							"verb": "binarize"
 						},
@@ -390,11 +356,9 @@
 							"args": {
 								"to": "age_70_79",
 								"column": "age",
-								"criteria": {
-									"operator": "starts with",
-									"type": "value",
-									"value": "7"
-								}
+								"operator": "starts with",
+								"strategy": "value",
+								"value": "7"
 							},
 							"verb": "binarize"
 						},
@@ -402,11 +366,9 @@
 							"args": {
 								"to": "age_80_89",
 								"column": "age",
-								"criteria": {
-									"operator": "starts with",
-									"type": "value",
-									"value": "8"
-								}
+								"operator": "starts with",
+								"strategy": "value",
+								"value": "8"
 							},
 							"verb": "binarize"
 						},
@@ -414,11 +376,9 @@
 							"args": {
 								"to": "age_90_99",
 								"column": "age",
-								"criteria": {
-									"operator": "starts with",
-									"type": "value",
-									"value": "9"
-								}
+								"operator": "starts with",
+								"strategy": "value",
+								"value": "9"
 							},
 							"verb": "binarize"
 						},
@@ -651,11 +611,9 @@
 							"args": {
 								"column": "Combined",
 								"to": "diabetes_hypertension",
-								"criteria": {
-									"operator": ">",
-									"value": 0,
-									"type": "value"
-								}
+								"operator": ">",
+								"value": 0,
+								"strategy": "value"
 							},
 							"verb": "binarize"
 						},

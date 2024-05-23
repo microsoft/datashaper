@@ -119,17 +119,44 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "criteria": {
-                    "$ref": "#/definitions/Criteria",
-                    "description": "Filter criteria to apply to the column."
-                },
                 "dataType": {
                     "$ref": "#/definitions/DataType",
                     "description": "Expected data type for values in the column"
                 },
+                "operator": {
+                    "description": "Filter operator to execute. Note the correct operator for the column data type must be used.",
+                    "enum": [
+                        "!=",
+                        "<",
+                        "<=",
+                        "=",
+                        ">",
+                        ">=",
+                        "after",
+                        "before",
+                        "contains",
+                        "ends with",
+                        "equals",
+                        "is empty",
+                        "is false",
+                        "is not empty",
+                        "is not equal",
+                        "is true",
+                        "regex",
+                        "starts with"
+                    ],
+                    "type": "string"
+                },
+                "strategy": {
+                    "$ref": "#/definitions/ComparisonStrategy",
+                    "description": "Indicates whether the filter should be directly against a value,\nor against the value of another column"
+                },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
                     "type": "string"
+                },
+                "value": {
+                    "description": "Comparison value for the column.\nNot required if the operator is self-defining (e.g., 'is empty')"
                 }
             },
             "type": "object"
@@ -247,6 +274,14 @@
             ],
             "type": "string"
         },
+        "ComparisonStrategy": {
+            "description": "Indicates the comparison type used for a filter operation.\nThis is done on a row-by-row basis.",
+            "enum": [
+                "column",
+                "value"
+            ],
+            "type": "string"
+        },
         "Constraints": {
             "description": "Validation constraints for a field.",
             "properties": {
@@ -334,42 +369,6 @@
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
                     "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "Criteria": {
-            "properties": {
-                "operator": {
-                    "description": "Filter operator to execute. Note the correct operator for the column data type must be used.",
-                    "enum": [
-                        "!=",
-                        "<",
-                        "<=",
-                        "=",
-                        ">",
-                        ">=",
-                        "after",
-                        "before",
-                        "contains",
-                        "ends with",
-                        "equals",
-                        "is empty",
-                        "is false",
-                        "is not empty",
-                        "is not equal",
-                        "is true",
-                        "regex",
-                        "starts with"
-                    ],
-                    "type": "string"
-                },
-                "type": {
-                    "$ref": "#/definitions/FilterCompareType",
-                    "description": "Indicates whether the filter should be directly against a value,\nor against the value of another column"
-                },
-                "value": {
-                    "description": "Comparison value for the column.\nNot required if the operator is self-defining (e.g., 'is empty')"
                 }
             },
             "type": "object"
@@ -601,24 +600,43 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "criteria": {
-                    "$ref": "#/definitions/Criteria",
-                    "description": "Filter criteria to apply to the column."
-                },
                 "dataType": {
                     "$ref": "#/definitions/DataType",
                     "description": "Expected data type for values in the column"
+                },
+                "operator": {
+                    "description": "Filter operator to execute. Note the correct operator for the column data type must be used.",
+                    "enum": [
+                        "!=",
+                        "<",
+                        "<=",
+                        "=",
+                        ">",
+                        ">=",
+                        "after",
+                        "before",
+                        "contains",
+                        "ends with",
+                        "equals",
+                        "is empty",
+                        "is false",
+                        "is not empty",
+                        "is not equal",
+                        "is true",
+                        "regex",
+                        "starts with"
+                    ],
+                    "type": "string"
+                },
+                "strategy": {
+                    "$ref": "#/definitions/ComparisonStrategy",
+                    "description": "Indicates whether the filter should be directly against a value,\nor against the value of another column"
+                },
+                "value": {
+                    "description": "Comparison value for the column.\nNot required if the operator is self-defining (e.g., 'is empty')"
                 }
             },
             "type": "object"
-        },
-        "FilterCompareType": {
-            "description": "Indicates the comparison type used for a filter operation.\nThis is done on a row-by-row basis.",
-            "enum": [
-                "column",
-                "value"
-            ],
-            "type": "string"
         },
         "FoldArgs": {
             "properties": {

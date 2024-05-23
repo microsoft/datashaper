@@ -120,7 +120,7 @@ export interface Criteria {
 	 * Indicates whether the filter should be directly against a value,
 	 * or against the value of another column
 	 */
-	type: FilterCompareType
+	strategy: ComparisonStrategy
 	/**
 	 * Filter operator to execute. Note the correct operator for the column data type must be used.
 	 */
@@ -263,7 +263,7 @@ export enum SetOp {
  * Indicates the comparison type used for a filter operation.
  * This is done on a row-by-row basis.
  */
-export enum FilterCompareType {
+export enum ComparisonStrategy {
 	/**
 	 * The comparison value is a literal value
 	 */
@@ -512,12 +512,7 @@ export interface FillArgs extends OutputColumnArgs {
 	value: Value
 }
 
-export interface FilterArgs extends InputColumnArgs {
-	/**
-	 * Filter criteria to apply to the column.
-	 */
-	criteria: Criteria
-}
+export interface FilterArgs extends Criteria, InputColumnArgs {}
 
 export interface FoldArgs extends InputColumnListArgs, SourcePreservingArgs {
 	/**

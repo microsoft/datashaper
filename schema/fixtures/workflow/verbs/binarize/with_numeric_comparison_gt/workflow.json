@@ -7,11 +7,9 @@
 			"args": {
 				"to": "newColumn",
 				"column": "count",
-				"criteria": {
-					"type": "value",
-					"operator": ">",
-					"value": 40
-				}
+				"strategy": "value",
+				"operator": ">",
+				"value": 40
 			},
 			"id": "expected"
 		}

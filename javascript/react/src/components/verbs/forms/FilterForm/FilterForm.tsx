@@ -24,7 +24,7 @@ export const FilterForm: React.FC<StepFormProps<FilterArgs>> = memo(
 					...step,
 					args: {
 						...step.args,
-						criteria,
+						...criteria,
 					},
 				})
 			},
@@ -42,7 +42,7 @@ export const FilterForm: React.FC<StepFormProps<FilterArgs>> = memo(
 						<FilterFunction
 							table={dataTable}
 							column={step.args.column}
-							criteria={step.args.criteria}
+							criteria={step.args}
 							onChange={handleFilterChange}
 						/>
 					</Vertical>

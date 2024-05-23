@@ -7,13 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface FilterArgs extends InputColumnArgs 
+export interface FilterArgs extends Criteria, InputColumnArgs 
 ```
-<b>Extends:</b> [InputColumnArgs](./schema.inputcolumnargs.md)
-
-## Properties
-
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [criteria](./schema.filterargs.criteria.md) |  | [Criteria](./schema.criteria.md) | Filter criteria to apply to the column. |
+<b>Extends:</b> [Criteria](./schema.criteria.md)<!-- -->, [InputColumnArgs](./schema.inputcolumnargs.md)
 

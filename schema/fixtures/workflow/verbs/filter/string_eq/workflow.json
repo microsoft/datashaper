@@ -6,11 +6,9 @@
 			"input": "table8",
 			"args": {
 				"column": "name",
-				"criteria": {
-					"operator": "equals",
-					"type": "value",
-					"value": "D"
-				}
+				"operator": "equals",
+				"strategy": "value",
+				"value": "D"
 			},
 			"id": "expected"
 		}

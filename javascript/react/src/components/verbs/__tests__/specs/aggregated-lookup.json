@@ -22,11 +22,9 @@
 			},
 			"args": {
 				"column": "FY21 Sales",
-				"criteria": {
-					"value": 10000,
-					"operator": ">=",
-					"type": "value"
-				}
+				"value": 10000,
+				"operator": ">=",
+				"strategy": "value"
 			}
 		},
 		{

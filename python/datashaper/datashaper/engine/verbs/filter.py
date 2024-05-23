@@ -3,15 +3,14 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Filter verb implementation."""
-from typing import cast
+from typing import Any, cast
 
 import pandas as pd
 
 from datashaper.engine.pandas import filter_df, get_operator
 from datashaper.engine.types import (
-    Criteria,
+    ComparisonStrategy,
     FilterArgs,
-    FilterCompareType,
     StringComparisonOperator,
 )
 from datashaper.engine.verbs.parallel_verb import OperationType, parallel_verb
@@ -27,22 +26,24 @@ from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
 async def filter_verb(
     chunk: Table,
     callbacks: VerbCallbacks,  # noqa: ARG001
-    column: str,
-    criteria: dict,
+    column: str | None,
+    value: Any | None,
+    strategy: ComparisonStrategy = ComparisonStrategy.Value,
+    operator: StringComparisonOperator = StringComparisonOperator.Equals,
     **_kwargs: dict,
 ) -> Table:
     """Filter verb implementation."""
-    filter_criteria = Criteria(
-        value=criteria.get("value"),
-        type=FilterCompareType(criteria.get("type", FilterCompareType.Value.value)),
-        operator=get_operator(
-            criteria.get("operator", StringComparisonOperator.Equals.value)
-        ),
-    )
-
     input_table = cast(pd.DataFrame, chunk)
 
-    filter_index = filter_df(input_table, FilterArgs(column, filter_criteria))
+    filter_index = filter_df(
+        input_table,
+        FilterArgs(
+            column,
+            value=value,
+            strategy=ComparisonStrategy(strategy),
+            operator=get_operator(operator),
+        ),
+    )
     sub_idx = filter_index == True  # noqa: E712
     idx = filter_index[sub_idx].index  # type: ignore
     return cast(Table, input_table[chunk.index.isin(idx)].reset_index(drop=True))

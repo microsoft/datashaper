@@ -408,11 +408,9 @@
 							"args": {
 								"to": "smoke_reduction_25pct",
 								"column": "smoke_intensity_change_pct",
-								"criteria": {
-									"operator": "<=",
-									"type": "value",
-									"value": "-0.25"
-								}
+								"operator": "<=",
+								"strategy": "value",
+								"value": "-0.25"
 							}
 						},
 						{
@@ -420,11 +418,9 @@
 							"args": {
 								"to": "smoke_reduction_50pct",
 								"column": "smoke_intensity_change_pct",
-								"criteria": {
-									"operator": "<=",
-									"type": "value",
-									"value": "-0.5"
-								}
+								"operator": "<=",
+								"strategy": "value",
+								"value": "-0.5"
 							}
 						},
 						{
@@ -432,11 +428,9 @@
 							"args": {
 								"to": "smoke_reduction_75pct",
 								"column": "smoke_intensity_change_pct",
-								"criteria": {
-									"operator": "<=",
-									"type": "value",
-									"value": "-0.75"
-								}
+								"operator": "<=",
+								"strategy": "value",
+								"value": "-0.75"
 							}
 						},
 						{
@@ -444,11 +438,9 @@
 							"args": {
 								"to": "quit_smoking",
 								"column": "smoke_intensity_change_pct",
-								"criteria": {
-									"operator": "=",
-									"type": "value",
-									"value": "-1"
-								}
+								"operator": "=",
+								"strategy": "value",
+								"value": "-1"
 							}
 						},
 						{
@@ -456,9 +448,7 @@
 							"args": {
 								"to": "subject_inclusion",
 								"column": "weight_change",
-								"criteria": {
-									"operator": "is not empty"
-								}
+								"operator": "is not empty"
 							}
 						},
 						{

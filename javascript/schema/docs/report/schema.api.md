@@ -151,6 +151,14 @@ export enum CodebookStrategy {
     MappingOnly = "mapping only"
 }
 
+// Warning: (ae-missing-release-tag) "ComparisonStrategy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export enum ComparisonStrategy {
+    Column = "column",
+    Value = "value"
+}
+
 // Warning: (ae-missing-release-tag) "Constraints" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -216,7 +224,7 @@ export function createWorkflowSchemaObject(input: FactoryInput<WorkflowSchema>):
 // @public (undocumented)
 export interface Criteria {
     operator: NumericComparisonOperator | StringComparisonOperator | BooleanComparisonOperator | DateComparisonOperator;
-    type: FilterCompareType;
+    strategy: ComparisonStrategy;
     value?: Value;
 }
 
@@ -511,16 +519,7 @@ export interface FillArgs extends OutputColumnArgs {
 // Warning: (ae-missing-release-tag) "FilterArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface FilterArgs extends InputColumnArgs {
-    criteria: Criteria;
-}
-
-// Warning: (ae-missing-release-tag) "FilterCompareType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export enum FilterCompareType {
-    Column = "column",
-    Value = "value"
+export interface FilterArgs extends Criteria, InputColumnArgs {
 }
 
 // Warning: (ae-missing-release-tag) "FoldArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
