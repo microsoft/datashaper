@@ -19,6 +19,7 @@ href
 hrefs
 noscript
 unclickable
+biomejs
 
 # Libraries
 datashaper
