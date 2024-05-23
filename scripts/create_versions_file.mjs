@@ -2,7 +2,7 @@
 import { writeFileSync } from 'fs'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
-import pkg from '../javascript/schema/package.json' assert { type: 'json' }
+import pkg from '../javascript/schema/package.json' with { type: 'json' }
 const { versions } = pkg
 
 const __filename = fileURLToPath(import.meta.url)
