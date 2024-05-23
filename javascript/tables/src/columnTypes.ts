@@ -21,8 +21,11 @@ export function columnTypes(
 ): Record<string, DataType> {
 	const selected = columns ? table.select(columns) : table
 	const sampled = selected.sample(SAMPLE_MAX)
-	return sampled.columnNames().reduce((acc, cur) => {
-		acc[cur] = columnType(table, cur)
-		return acc
-	}, {} as Record<string, DataType>)
+	return sampled.columnNames().reduce(
+		(acc, cur) => {
+			acc[cur] = columnType(table, cur)
+			return acc
+		},
+		{} as Record<string, DataType>,
+	)
 }

@@ -8,10 +8,10 @@ import type {
 	OutputColumnArgs,
 } from '@datashaper/schema'
 import {
+	NodeInput,
 	isInputColumnListStep,
 	isInputColumnStep,
 	isOutputColumnStep,
-	NodeInput,
 } from '@datashaper/workflow'
 import { MultiDropdown } from '@essex/components'
 import { TextField } from '@fluentui/react'
@@ -20,6 +20,7 @@ import { memo, useMemo } from 'react'
 import { useColumnNames } from '../../hooks/columns/useColumnNames.js'
 import { useSimpleDropdownOptions } from '../../hooks/fluent/useSimpleDropdownOptions.js'
 import { useWorkflowDataTable } from '../../hooks/index.js'
+import { getInputNode } from '../../util.js'
 import { TableColumnDropdown } from '../controls/TableColumnDropdown/TableColumnDropdown.js'
 import { dropdownStyles } from '../styles.js'
 import {
@@ -35,7 +36,6 @@ import {
 } from './StepForm.hooks.js'
 import { Container } from './StepForm.styles.js'
 import type { StepFormProps } from './StepForm.types.js'
-import { getInputNode } from '../../util.js'
 
 /**
  * Lets us render the Steps in a loop while memoizing all the functions
@@ -76,7 +76,7 @@ export const StepForm: React.FC<StepFormProps> = memo(function StepForm({
 		return parts[parts.length - 1]
 	}, [s.verb])
 	return StepArgs == null ? null : (
-		<Container className='step-component'>
+		<Container className="step-component">
 			{/* Input Column List */}
 			{isInputColumnListStep(s.verb) ? (
 				<MultiDropdown

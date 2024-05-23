@@ -5,8 +5,8 @@
 import type { EncodeDecodeArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
-import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
+import type { StepDescriptionProps } from './types.js'
 
 export const EncodeDecodeDescription: React.FC<
 	StepDescriptionProps<EncodeDecodeArgs>

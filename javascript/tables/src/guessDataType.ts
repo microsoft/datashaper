@@ -3,16 +3,16 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import {
-	DataType,
-	TypeHintsDefaults,
 	DataFormat,
+	DataType,
 	type TypeHints,
+	TypeHintsDefaults,
 } from '@datashaper/schema'
 import isFinite from 'lodash-es/isFinite.js'
 import isPlainObject from 'lodash-es/isPlainObject.js'
+import isTypedArray from 'lodash-es/isTypedArray.js'
 import toNumber from 'lodash-es/toNumber.js'
 import moment from 'moment'
-import isTypedArray from 'lodash-es/isTypedArray.js'
 
 import { formatNumberStr, getDate } from './util.js'
 /**

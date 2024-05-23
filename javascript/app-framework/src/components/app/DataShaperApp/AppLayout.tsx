@@ -2,11 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+
+import { useBoolean } from '@fluentui/react-hooks'
 import type { AllotmentHandle } from 'allotment'
 import { Allotment } from 'allotment'
 import { memo, useRef } from 'react'
 import { EMPTY_ARRAY } from '../../../empty.js'
 import { ResourceTreeViewMode } from '../../../types.js'
+import { AppContent } from './AppContent.js'
 import {
 	ctrlShiftEnter,
 	useAppServices,
@@ -16,15 +19,13 @@ import {
 	useRegisteredProfiles,
 	useSetDefaultAppSettings,
 } from './AppLayout.hooks.js'
-import type { DataShaperAppProps } from './DataShaperApp.types.js'
-import { AppContent } from './AppContent.js'
-import { AppResources } from './AppResources.js'
 import {
 	PANE_COLLAPSED_SIZE,
 	PANE_EXPANDED_SIZE,
 	PANE_MAX_SIZE,
 } from './AppLayout.styles.js'
-import { useBoolean } from '@fluentui/react-hooks'
+import { AppResources } from './AppResources.js'
+import type { DataShaperAppProps } from './DataShaperApp.types.js'
 
 export const AppLayout: React.FC<DataShaperAppProps> = memo(function AppInner({
 	className,

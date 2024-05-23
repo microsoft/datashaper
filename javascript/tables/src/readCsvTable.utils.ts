@@ -50,7 +50,7 @@ function arqueroParser(text: string, options: ParserOptions = {}): ColumnTable {
 					(r: any) =>
 						!Object.values(r).every((v) => v === null || v === undefined),
 				),
-		  )
+			)
 		: table
 	const skip = options.skipRows || 0
 	const read = (options.readRows || Infinity) + skip

@@ -10,9 +10,9 @@ import { FileImport } from './FileImport.js'
 import { useFileManagementCommands } from './FileTreeCommands.hooks.js'
 import {
 	CollapsedButton,
-	collapsedButtonStyles,
 	CollapsedCommands,
 	Commands,
+	collapsedButtonStyles,
 	icons,
 	useCommandbarStyles,
 } from './FileTreeCommands.styles.js'
@@ -37,7 +37,7 @@ export const FileTreeCommands: React.FC<FileTreeCommandsProps> = memo(
 				<FileImport file={file} setFile={setFile} />
 				{narrow ? (
 					<CollapsedCommands>
-						<FileTreeTooltip content='New'>
+						<FileTreeTooltip content="New">
 							<CollapsedButton
 								styles={collapsedButtonStyles}
 								iconProps={icons.newFile}
@@ -46,7 +46,7 @@ export const FileTreeCommands: React.FC<FileTreeCommandsProps> = memo(
 								}}
 							/>
 						</FileTreeTooltip>
-						<FileTreeTooltip content='Open'>
+						<FileTreeTooltip content="Open">
 							<CollapsedButton
 								styles={collapsedButtonStyles}
 								iconProps={icons.openFile}
@@ -55,7 +55,7 @@ export const FileTreeCommands: React.FC<FileTreeCommandsProps> = memo(
 								}}
 							/>
 						</FileTreeTooltip>
-						<FileTreeTooltip content='Save'>
+						<FileTreeTooltip content="Save">
 							<CollapsedButton
 								styles={collapsedButtonStyles}
 								iconProps={icons.save}

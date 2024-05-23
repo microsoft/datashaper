@@ -7,11 +7,11 @@ import type { Field } from '@datashaper/schema'
 import { KnownProfile } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import type {
+	Codebook,
 	Maybe,
 	Step,
 	TableBundle,
 	Workflow,
-	Codebook,
 } from '@datashaper/workflow'
 import type { IColumn } from '@fluentui/react'
 import { useObservableState } from 'observable-hooks'

@@ -10,15 +10,15 @@ import { memo } from 'react'
 import { FileTreeCommands } from './FileTreeCommands.js'
 import { FileTreeTooltip as Tooltip } from './FileTreeTooltip.js'
 import { HelpPanel } from './HelpPanel.js'
+import { ResourceTree } from './ResourceTree.js'
 import {
 	Container,
 	FooterMenu,
 	PanelContainer,
-	icons,
 	TreeContainer,
+	icons,
 } from './ResourcesPane.styles.js'
 import type { ResourcesPaneProps } from './ResourcesPane.types.js'
-import { ResourceTree } from './ResourceTree.js'
 import { SettingsPanel } from './SettingsPanel.js'
 export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 	function ResourcesPane({
@@ -92,14 +92,14 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 								<IconButton
 									onClick={onToggleHelp}
 									iconProps={icons.help}
-									ariaLabel='Open help'
+									ariaLabel="Open help"
 								/>
 							</Tooltip>
 							<Tooltip content={settingsTooltip} styles={tooltipStyles}>
 								<IconButton
 									onClick={onToggleSettings}
 									iconProps={icons.settings}
-									ariaLabel='Open settings'
+									ariaLabel="Open settings"
 								/>
 							</Tooltip>
 						</div>
@@ -108,7 +108,7 @@ export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 						<IconButton
 							onClick={onToggleNarrow}
 							iconProps={narrow ? icons.expand : icons.collapse}
-							ariaLabel='Collapse resource pane'
+							ariaLabel="Collapse resource pane"
 						/>
 					</Tooltip>
 				</FooterMenu>

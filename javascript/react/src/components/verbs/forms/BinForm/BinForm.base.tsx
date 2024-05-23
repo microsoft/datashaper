@@ -9,10 +9,10 @@ import { memo, useMemo } from 'react'
 
 import {
 	type FormInput,
-	checkbox,
-	enumDropdown,
 	FormInputType,
 	VerbForm,
+	checkbox,
+	enumDropdown,
 } from '../forms/index.js'
 import type { StepFormBaseProps } from '../types.js'
 

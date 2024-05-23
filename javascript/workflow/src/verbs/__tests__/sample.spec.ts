@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import ColumnTable from 'arquero/dist/types/table/column-table.js'
+import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import { TestStore } from '../../__tests__/TestStore.js'
 import { sampleStep } from '../sample.js'
 

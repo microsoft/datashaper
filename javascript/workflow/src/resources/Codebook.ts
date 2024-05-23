@@ -5,13 +5,13 @@
 import type { CodebookSchema, Field } from '@datashaper/schema'
 import {
 	CodebookStrategy,
-	createCodebookSchemaObject,
 	KnownProfile,
 	LATEST_CODEBOOK_SCHEMA,
+	createCodebookSchemaObject,
 } from '@datashaper/schema'
 import { type TableContainer, applyCodebook } from '@datashaper/tables'
 import type { Subscription } from 'rxjs'
-import { type Observable, BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, type Observable } from 'rxjs'
 
 import type { Maybe } from '../primitives.js'
 import { Resource } from './Resource.js'

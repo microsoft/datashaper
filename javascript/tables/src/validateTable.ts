@@ -11,10 +11,10 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import {
 	enumValidator,
-	maximumValidator,
 	maxLengthValidator,
-	minimumValidator,
+	maximumValidator,
 	minLengthValidator,
+	minimumValidator,
 	patternValidator,
 	requiredValidator,
 	uniqueValidator,

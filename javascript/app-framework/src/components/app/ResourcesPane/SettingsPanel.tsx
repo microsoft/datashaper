@@ -2,17 +2,18 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+
+import type { Configurable, Resource } from '@datashaper/workflow'
 import type { SettingsConfig } from '@essex/components'
+import { CollapsiblePanel, Settings } from '@essex/components'
 import { IconButton } from '@fluentui/react'
-import React, { memo, useCallback, useMemo } from 'react'
+import { useObservableState } from 'observable-hooks'
+import { memo, useCallback, useMemo } from 'react'
+import { useApplicationSettings } from '../../../settings/application.js'
+import type { AppProfile, ResourceRouteGroup } from '../../../types.js'
+import { icons } from './ResourcesPane.styles.js'
 import { Container, Content, Header, Inner } from './SettingsPanel.styles.js'
 import type { SettingsPanelProps } from './SettingsPanel.types.js'
-import { icons } from './ResourcesPane.styles.js'
-import type { Resource, Configurable } from '@datashaper/workflow'
-import { CollapsiblePanel, Settings } from '@essex/components'
-import type { AppProfile, ResourceRouteGroup } from '../../../types.js'
-import { useApplicationSettings } from '../../../settings/application.js'
-import { useObservableState } from 'observable-hooks'
 
 /**
  * Manages the display of settings for any resources in the application that declared a settings configuration.

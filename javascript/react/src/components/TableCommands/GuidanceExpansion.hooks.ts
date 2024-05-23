@@ -12,12 +12,15 @@ import { useMemo } from 'react'
 export function useGuidanceContent(): Record<string, string> {
 	return useMemo(
 		() =>
-			Object.entries(guidance).reduce((acc, [key, value]: [string, string]) => {
-				if (key.startsWith('verbs')) {
-					acc[key.replace('verbs.', '')] = value
-				}
-				return acc
-			}, {} as Record<string, string>),
+			Object.entries(guidance).reduce(
+				(acc, [key, value]: [string, string]) => {
+					if (key.startsWith('verbs')) {
+						acc[key.replace('verbs.', '')] = value
+					}
+					return acc
+				},
+				{} as Record<string, string>,
+			),
 		[],
 	)
 }

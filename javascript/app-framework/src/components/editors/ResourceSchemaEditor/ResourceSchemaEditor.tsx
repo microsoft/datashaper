@@ -2,9 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+
+import type { Resource } from '@datashaper/workflow'
 import { memo } from 'react'
 import type { ProfileComponentProps } from '../../../types.js'
-import type { Resource } from '@datashaper/workflow'
 import { LanguageEditor } from '../LanguageEditor/index.js'
 import { useContent, useOnChange } from './ResourceSchemaEditor.hooks.js'
 

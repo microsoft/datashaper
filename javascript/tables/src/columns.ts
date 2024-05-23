@@ -13,10 +13,13 @@ import { determineType } from './data.js'
 export function getters(
 	table: ColumnTable,
 ): Record<string, (i: number) => any> {
-	return table.columnNames().reduce((acc, cur) => {
-		acc[cur] = table.getter(cur)
-		return acc
-	}, {} as Record<string, (i: number) => any>)
+	return table.columnNames().reduce(
+		(acc, cur) => {
+			acc[cur] = table.getter(cur)
+			return acc
+		},
+		{} as Record<string, (i: number) => any>,
+	)
 }
 
 /**

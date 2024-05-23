@@ -1,19 +1,21 @@
+import type { WorkflowSchema } from '@datashaper/schema'
+import {
+	KnownProfile,
+	LATEST_WORKFLOW_SCHEMA,
+	createWorkflowSchemaObject,
+} from '@datashaper/schema'
+import type { TableContainer } from '@datashaper/tables'
 /*!
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import debug from 'debug'
-import type { WorkflowSchema } from '@datashaper/schema'
-import {
-	createWorkflowSchemaObject,
-	KnownProfile,
-	LATEST_WORKFLOW_SCHEMA,
-} from '@datashaper/schema'
-import type { TableContainer } from '@datashaper/tables'
 import type { BehaviorSubject, Observable } from 'rxjs'
 import { EMPTY, map, of } from 'rxjs'
 
 import { RemoveMode, TableManager } from '../../dataflow/TableManager.js'
+import type { SocketName } from '../../dataflow/types.js'
+import { isTableEmitter } from '../../predicates.js'
 import type { Maybe, Unsubscribe } from '../../primitives.js'
 import type { DataPackage } from '../DataPackage/DataPackage.js'
 import { Resource } from '../Resource.js'
@@ -24,11 +26,9 @@ import type {
 } from '../types/index.js'
 import { GraphManager } from './GraphManager.js'
 import { NameManager } from './NameManager.js'
+import { WorkflowSchemaValidator } from './WorkflowSchemaValidator.js'
 import type { Step, StepInput, TableExportOptions } from './types.js'
 import { unique } from './utils.js'
-import { WorkflowSchemaValidator } from './WorkflowSchemaValidator.js'
-import { isTableEmitter } from '../../predicates.js'
-import { SocketName } from '../../dataflow/types.js'
 const log = debug('datashaper:workflow')
 
 /**

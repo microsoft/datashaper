@@ -4,7 +4,11 @@
  */
 
 export class FileWithPath extends File {
-	constructor(blob: Blob, name: string, private _path: string) {
+	constructor(
+		blob: Blob,
+		name: string,
+		private _path: string,
+	) {
 		super([blob], name)
 	}
 

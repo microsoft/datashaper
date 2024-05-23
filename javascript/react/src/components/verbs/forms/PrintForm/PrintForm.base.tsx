@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { PrintArgs } from '@datashaper/schema'
-import { memo, useMemo } from 'react'
 import { num } from '@datashaper/utilities'
+import { memo, useMemo } from 'react'
 
 import { type FormInput, FormInputType, VerbForm } from '../forms/index.js'
 import type { StepFormBaseProps } from '../types.js'

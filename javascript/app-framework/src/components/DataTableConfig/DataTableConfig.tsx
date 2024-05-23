@@ -30,7 +30,7 @@ export const DataTableConfig: React.FC<DataTableSchemaComponentProps> = memo(
 			<Container>
 				<FormatContainer>
 					<Dropdown
-						label='Data Format'
+						label="Data Format"
 						options={DATA_FORMAT_OPTIONS}
 						selectedKey={format}
 						onChange={onChangeFormat}

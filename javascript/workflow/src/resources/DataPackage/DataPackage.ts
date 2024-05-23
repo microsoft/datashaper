@@ -5,9 +5,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-assignment */
 import type { DataPackageSchema } from '@datashaper/schema'
 import {
-	createDataPackageSchemaObject,
 	KnownProfile,
 	LATEST_DATAPACKAGE_SCHEMA,
+	createDataPackageSchemaObject,
 } from '@datashaper/schema'
 import {
 	extension as ext,
@@ -17,8 +17,8 @@ import type { Observable } from 'rxjs'
 
 import { Resource } from '../Resource.js'
 import type { ProfileHandler } from '../types/index.js'
-import { write } from './io.js'
 import { ResourceManager } from './ResourceManager.js'
+import { write } from './io.js'
 
 export class DataPackage extends Resource {
 	public readonly $schema = LATEST_DATAPACKAGE_SCHEMA

@@ -5,8 +5,8 @@
 import type { WindowArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
-import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
+import type { StepDescriptionProps } from './types.js'
 
 export const WindowDescription: React.FC<StepDescriptionProps<WindowArgs>> =
 	memo(function WindowDescription(props) {

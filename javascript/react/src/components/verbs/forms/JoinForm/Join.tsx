@@ -12,9 +12,9 @@ import {
 	useWorkflowDataTable,
 	useWorkflowInput,
 } from '../../../../hooks/index.js'
+import { getInputNode } from '../../../../util.js'
 import type { StepFormProps } from '../types.js'
 import { JoinFormBase } from './Join.base.js'
-import { getInputNode } from '../../../../util.js'
 
 /**
  * Provides inputs for a Join step.

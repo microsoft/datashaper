@@ -44,11 +44,14 @@ export function categories(values: any[]): Record<string, number> | undefined {
 	if (!isArray(values)) {
 		return undefined
 	}
-	return values.reduce((acc, cur) => {
-		const existing = acc[cur] || 0
-		acc[cur] = existing + 1
-		return acc
-	}, {} as Record<string, number>)
+	return values.reduce(
+		(acc, cur) => {
+			const existing = acc[cur] || 0
+			acc[cur] = existing + 1
+			return acc
+		},
+		{} as Record<string, number>,
+	)
 }
 
 /**

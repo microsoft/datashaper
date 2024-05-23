@@ -28,7 +28,8 @@
 				"useLiteralKeys": "off",
 				"noStaticOnlyClass": "off",
 				"noBannedTypes": "off",
-				"useArrowFunction": "off"
+				"useArrowFunction": "off",
+				"noUselessTernary": "off"
 			},
 			"suspicious": {
 				"noExplicitAny": "off",

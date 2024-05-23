@@ -71,8 +71,8 @@ export function useColumns(checkboxes: ICheckboxProps[]): {
 					label === 'Symbol'
 						? 'FavoriteStarFill'
 						: label === 'Date'
-						? 'Calendar'
-						: undefined,
+							? 'Calendar'
+							: undefined,
 			}))
 	}, [checkboxes])
 

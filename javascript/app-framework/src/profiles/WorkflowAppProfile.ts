@@ -6,10 +6,10 @@ import content from '@datashaper/guidance'
 import type { Workflow } from '@datashaper/workflow'
 import { WorkflowProfile } from '@datashaper/workflow'
 
-import { WorkflowRenderer } from './renderers/WorkflowRenderer.js'
 import type { AppProfile } from '../index.js'
 import { ResourceGroupType } from '../index.js'
 import { profileIcons } from './icons.js'
+import { WorkflowRenderer } from './renderers/WorkflowRenderer.js'
 
 export class WorkflowAppProfile
 	extends WorkflowProfile

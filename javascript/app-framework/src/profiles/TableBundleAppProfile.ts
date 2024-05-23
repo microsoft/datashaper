@@ -3,27 +3,27 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import content from '@datashaper/guidance'
-import { generateCodebook } from '@datashaper/tables'
 import {
-	type TableBundleSchema,
 	KnownProfile,
 	KnownRel,
+	type TableBundleSchema,
 } from '@datashaper/schema'
+import { generateCodebook } from '@datashaper/tables'
 import {
 	type Codebook,
 	type DataPackage,
 	type DataTable,
-	type TableBundle,
-	type Workflow,
 	ResourceReference,
+	type TableBundle,
 	TableBundleProfile,
+	type Workflow,
 } from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
 
-import type { AppProfileInitializationContext, AppProfile } from '../types.js'
+import type { AppProfile, AppProfileInitializationContext } from '../types.js'
 import { ResourceGroupType } from '../types.js'
-import { TableBundleRenderer } from './renderers/TableBundleRenderer.js'
 import { profileIcons } from './icons.js'
+import { TableBundleRenderer } from './renderers/TableBundleRenderer.js'
 
 export class TableBundleAppProfile
 	extends TableBundleProfile

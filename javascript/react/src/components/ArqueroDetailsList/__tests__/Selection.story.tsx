@@ -27,9 +27,9 @@ export const SelectionStory: ComponentStory<typeof ArqueroDetailsList> = (
 	return (
 		<>
 			<Toggle
-				label='Show row number'
-				onText='On'
-				offText='Off'
+				label="Show row number"
+				onText="On"
+				offText="Off"
 				defaultChecked={showRowNumber}
 				onChange={() => setShowRowNumber((prev) => !prev)}
 			/>
@@ -42,7 +42,7 @@ export const SelectionStory: ComponentStory<typeof ArqueroDetailsList> = (
 				}}
 				showColumnBorders
 				sortable
-				defaultSortColumn='Date'
+				defaultSortColumn="Date"
 				{...args}
 				table={stocks}
 				metadata={metadata}

@@ -8,7 +8,9 @@ import { Position, SpinButton } from '@fluentui/react'
 import { format } from 'd3-format'
 import { memo } from 'react'
 
+import { Expando } from '@essex/components'
 import { useSpinButtonChangeHandler } from '../../../../hooks/index.js'
+import { dropdownStyles } from '../styles.js'
 import type { StepFormProps } from '../types.js'
 import {
 	Container,
@@ -17,8 +19,6 @@ import {
 	OrLabel,
 	spinStyles,
 } from './SampleForm.styles.js'
-import { Expando } from '@essex/components'
-import { dropdownStyles } from '../styles.js'
 
 const whole = format('d')
 
@@ -88,7 +88,7 @@ export const SampleForm: React.FC<StepFormProps<SampleArgs>> = memo(
 					}}
 				>
 					<SpinButton
-						label='Randomizing seed'
+						label="Randomizing seed"
 						labelPosition={Position.top}
 						step={1}
 						max={1000}

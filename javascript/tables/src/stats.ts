@@ -25,52 +25,58 @@ export function stats(
 	const optStats = optionalStats(selected, reqStats)
 	const bins = binning(selected, reqStats, optStats)
 	const cats = categories(selected, reqStats)
-	const results = selected.columnNames().reduce((acc, cur) => {
-		// mode should only include valid values, so a reasonable value for checking type
-		const mode = reqStats[`${cur}.mode`]
-		const type = determineType(mode)
-		const req = {
-			type,
-			count: reqStats[`${cur}.count`],
-			distinct: reqStats[`${cur}.distinct`],
-			invalid: reqStats[`${cur}.invalid`],
-			mode,
-		}
-		const optsNum =
-			type === DataType.Number
-				? {
-						minimum: optStats[`${cur}.minimum`],
-						maximum: optStats[`${cur}.maximum`],
-						mean: optStats[`${cur}.mean`],
-						median: optStats[`${cur}.median`],
-						stdev: optStats[`${cur}.stdev`],
-						bins: bins[`${cur}.bins`],
-				  }
-				: {}
-		const optsStr =
-			type === DataType.String
-				? {
-						categories: cats[`${cur}`],
-				  }
-				: {}
-		acc[cur] = {
-			...req,
-			...optsNum,
-			...optsStr,
-		}
-		return acc
-	}, {} as Record<string, FieldMetadata>)
+	const results = selected.columnNames().reduce(
+		(acc, cur) => {
+			// mode should only include valid values, so a reasonable value for checking type
+			const mode = reqStats[`${cur}.mode`]
+			const type = determineType(mode)
+			const req = {
+				type,
+				count: reqStats[`${cur}.count`],
+				distinct: reqStats[`${cur}.distinct`],
+				invalid: reqStats[`${cur}.invalid`],
+				mode,
+			}
+			const optsNum =
+				type === DataType.Number
+					? {
+							minimum: optStats[`${cur}.minimum`],
+							maximum: optStats[`${cur}.maximum`],
+							mean: optStats[`${cur}.mean`],
+							median: optStats[`${cur}.median`],
+							stdev: optStats[`${cur}.stdev`],
+							bins: bins[`${cur}.bins`],
+						}
+					: {}
+			const optsStr =
+				type === DataType.String
+					? {
+							categories: cats[`${cur}`],
+						}
+					: {}
+			acc[cur] = {
+				...req,
+				...optsNum,
+				...optsStr,
+			}
+			return acc
+		},
+		{} as Record<string, FieldMetadata>,
+	)
 	return results
 }
 
 function requiredStats(table: ColumnTable): Record<string, any> {
-	const args = table.columnNames().reduce((acc, cur) => {
-		acc[`${cur}.count`] = op.count()
-		acc[`${cur}.distinct`] = op.distinct(cur)
-		acc[`${cur}.invalid`] = op.invalid(cur)
-		acc[`${cur}.mode`] = op.mode(cur)
-		return acc
-	}, {} as Record<string, any>)
+	const args = table.columnNames().reduce(
+		(acc, cur) => {
+			acc[`${cur}.count`] = op.count()
+			acc[`${cur}.distinct`] = op.distinct(cur)
+			acc[`${cur}.invalid`] = op.invalid(cur)
+			acc[`${cur}.mode`] = op.mode(cur)
+			return acc
+		},
+		{} as Record<string, any>,
+	)
 	const result = table.rollup(args).objects()[0]
 	return result ?? {}
 }
@@ -79,18 +85,21 @@ function optionalStats(
 	table: ColumnTable,
 	reqStats: Record<string, any>,
 ): Record<string, any> {
-	const args = table.columnNames().reduce((acc, cur) => {
-		const mode = reqStats[`${cur}.mode`]
-		const type = determineType(mode)
-		if (type === DataType.Number || type === DataType.Date) {
-			acc[`${cur}.minimum`] = op.min(cur)
-			acc[`${cur}.maximum`] = op.max(cur)
-			acc[`${cur}.mean`] = op.mean(cur)
-			acc[`${cur}.median`] = op.median(cur)
-			acc[`${cur}.stdev`] = op.stdev(cur)
-		}
-		return acc
-	}, {} as Record<string, any>)
+	const args = table.columnNames().reduce(
+		(acc, cur) => {
+			const mode = reqStats[`${cur}.mode`]
+			const type = determineType(mode)
+			if (type === DataType.Number || type === DataType.Date) {
+				acc[`${cur}.minimum`] = op.min(cur)
+				acc[`${cur}.maximum`] = op.max(cur)
+				acc[`${cur}.mean`] = op.mean(cur)
+				acc[`${cur}.median`] = op.median(cur)
+				acc[`${cur}.stdev`] = op.stdev(cur)
+			}
+			return acc
+		},
+		{} as Record<string, any>,
+	)
 
 	const result = table.rollup(args).objects()[0]
 	return result ?? {}
@@ -108,42 +117,48 @@ function binning(
 		return type === DataType.Number
 	})
 	const numeric = table.columnNames(filter)
-	const binArgs = numeric.reduce((acc, cur) => {
-		const min = optStats[`${cur}.minimum`]
-		const max = optStats[`${cur}.maximum`]
-		const distinct = reqStats[`${cur}.distinct`]
-		if (distinct > 10) {
-			acc[cur] = fixedBinCount(cur, min, max, 10, true)
-		}
-		return acc
-	}, {} as Record<string, any>)
+	const binArgs = numeric.reduce(
+		(acc, cur) => {
+			const min = optStats[`${cur}.minimum`]
+			const max = optStats[`${cur}.maximum`]
+			const distinct = reqStats[`${cur}.distinct`]
+			if (distinct > 10) {
+				acc[cur] = fixedBinCount(cur, min, max, 10, true)
+			}
+			return acc
+		},
+		{} as Record<string, any>,
+	)
 
 	const binRollup = table.select(numeric).derive(binArgs)
 	// for each binned column, derive a sorted & counted subtable.
 	// note that only bins with at least one entry will have a row,
 	// so we could have less than 10 bins - hence the fill
-	const counted = numeric.reduce((acc, cur) => {
-		const min = optStats[`${cur}.minimum`]
-		const max = optStats[`${cur}.maximum`]
-		const distinct = reqStats[`${cur}.distinct`]
-		const bins = binRollup
-			.groupby(cur)
-			.count()
-			.orderby(cur)
-			.objects()
-			.map((d: any) => ({
-				min: d[cur],
-				count: d['count'],
-			}))
-		// numeric sort puts null at the front - format to match categories style if present
-		const firstBin = bins[0]
-		if (firstBin != null && firstBin.min === null) {
-			firstBin.min = '(empty)'
-		}
-		// make sure we actually have 10
-		acc[`${cur}.bins`] = fillBins(bins, min, max, 10, distinct)
-		return acc
-	}, {} as Record<string, Bin[]>)
+	const counted = numeric.reduce(
+		(acc, cur) => {
+			const min = optStats[`${cur}.minimum`]
+			const max = optStats[`${cur}.maximum`]
+			const distinct = reqStats[`${cur}.distinct`]
+			const bins = binRollup
+				.groupby(cur)
+				.count()
+				.orderby(cur)
+				.objects()
+				.map((d: any) => ({
+					min: d[cur],
+					count: d['count'],
+				}))
+			// numeric sort puts null at the front - format to match categories style if present
+			const firstBin = bins[0]
+			if (firstBin != null && firstBin.min === null) {
+				firstBin.min = '(empty)'
+			}
+			// make sure we actually have 10
+			acc[`${cur}.bins`] = fillBins(bins, min, max, 10, distinct)
+			return acc
+		},
+		{} as Record<string, Bin[]>,
+	)
 	return counted
 }
 
@@ -158,10 +173,13 @@ function fillBins(
 		return bins
 	}
 	const step = (max - min) / count
-	const hash = bins.reduce((acc, cur) => {
-		acc[cur.min] = cur
-		return acc
-	}, {} as Record<string, Bin>)
+	const hash = bins.reduce(
+		(acc, cur) => {
+			acc[cur.min] = cur
+			return acc
+		},
+		{} as Record<string, Bin>,
+	)
 	const mins = new Array(10).fill(step).map((v, i) => v * i + min)
 	const filled = mins.map(
 		(v) =>
@@ -189,19 +207,22 @@ function categories(
 		const type = determineType(mode)
 		return type === DataType.String && distinct <= limit
 	})
-	return text.reduce((acc, cur) => {
-		const counted = table
-			// insert empty text for strings upfront, otherwise localeCompare will fail
-			.impute({ [cur]: () => '(empty)' })
-			.groupby(cur)
-			.count()
-			.objects()
-			// sorting manually here so strings are alpha ignoring case
-			.sort((a: any, b: any) => `${a[cur]}`.localeCompare(`${b[cur]}`))
-			.map((d: any) => ({ name: d[cur], count: d['count'] }))
-		acc[cur] = counted
-		return acc
-	}, {} as Record<string, Category[]>)
+	return text.reduce(
+		(acc, cur) => {
+			const counted = table
+				// insert empty text for strings upfront, otherwise localeCompare will fail
+				.impute({ [cur]: () => '(empty)' })
+				.groupby(cur)
+				.count()
+				.objects()
+				// sorting manually here so strings are alpha ignoring case
+				.sort((a: any, b: any) => `${a[cur]}`.localeCompare(`${b[cur]}`))
+				.map((d: any) => ({ name: d[cur], count: d['count'] }))
+			acc[cur] = counted
+			return acc
+		},
+		{} as Record<string, Category[]>,
+	)
 }
 
 type FilterFunction = (name: string, index: number, array: string[]) => boolean

@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import {
+	DirectionalHint,
 	type ITooltipHostStyles,
 	TooltipHost,
-	DirectionalHint,
 } from '@fluentui/react'
 import { useId } from '@fluentui/react-hooks'
 import { memo } from 'react'
@@ -13,8 +13,8 @@ import { memo } from 'react'
 import { getValue } from '../ArqueroDetailsList.utils.js'
 import { useGetColumnValidationErrors } from '../hooks/useGetColumnValidationErrors.js'
 import { useValidationErrors } from '../hooks/useValidationErrors.js'
-import type { FormattedCellProps } from './types.js'
 import { Warning, WarningContainer } from './ValidationCellWrapper.styles.js'
+import type { FormattedCellProps } from './types.js'
 
 const hostStyles: Partial<ITooltipHostStyles> = {
 	root: { display: 'inline-block' },

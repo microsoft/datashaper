@@ -5,9 +5,9 @@
 
 import type { InputBinding, Verb } from '@datashaper/schema'
 
+import get from 'lodash-es/get.js'
 import * as defaults from '../../verbs/defaults/index.js'
 import type { Step, StepInput } from './types.js'
-import get from 'lodash-es/get.js'
 
 // TEMP: this creates a more readable id by doing a simple increment for each verb type
 // since this is global it will not align across pipelines or tables.

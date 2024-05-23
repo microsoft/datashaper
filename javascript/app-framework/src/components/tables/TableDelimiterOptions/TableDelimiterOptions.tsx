@@ -8,10 +8,10 @@ import { useDebounceFn } from 'ahooks'
 import { memo, useCallback, useState } from 'react'
 
 import {
-	choiceGroupStyles,
 	Container,
 	OtherTextField,
 	RadioGroup,
+	choiceGroupStyles,
 } from './TableDelimiterOptions.styles.js'
 
 export const TableDelimiterOptions: React.FC<{
@@ -67,9 +67,9 @@ export const TableDelimiterOptions: React.FC<{
 				styles={choiceGroupStyles}
 			/>
 			<OtherTextField
-				autoComplete='off'
-				title='custom delimiter'
-				name='customDelimiter'
+				autoComplete="off"
+				title="custom delimiter"
+				name="customDelimiter"
 				disabled={!isOther}
 				value={value}
 				onChange={onChangeCustomDelimiter}

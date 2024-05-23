@@ -4,12 +4,12 @@
  */
 import type { DestructureArgs } from '@datashaper/schema'
 
+import { from, not } from 'arquero'
+import { op } from 'arquero'
+import type ColumnTable from 'arquero/dist/types/table/column-table.js'
+import type { RowObject } from 'arquero/dist/types/table/table'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
-import { not, from } from 'arquero'
-import type { RowObject } from 'arquero/dist/types/table/table'
-import type ColumnTable from 'arquero/dist/types/table/column-table.js'
-import { op } from 'arquero'
 
 export const destructureStep: ColumnTableStep<DestructureArgs> = (
 	input,

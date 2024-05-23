@@ -5,9 +5,9 @@
 import type { TreeGroup, TreeItem } from '@essex/components'
 import { useMemo } from 'react'
 
+import { FieldWell } from '@datashaper/react'
 import type { ResourceRoute, ResourceRouteGroup } from '../../../types.js'
 import { ResourceGroupType } from '../../../types.js'
-import { FieldWell } from '@datashaper/react'
 
 /**
  * Extract the grouping instructions for the Tree component.

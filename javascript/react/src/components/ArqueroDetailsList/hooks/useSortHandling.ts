@@ -38,8 +38,8 @@ export function useSortHandling(
 						sortDirection === SortDirection.Ascending
 							? SortDirection.Descending
 							: sortDirection === SortDirection.Descending
-							? undefined
-							: SortDirection.Ascending,
+								? undefined
+								: SortDirection.Ascending,
 					)
 				}
 				setSortColumn(column?.fieldName)

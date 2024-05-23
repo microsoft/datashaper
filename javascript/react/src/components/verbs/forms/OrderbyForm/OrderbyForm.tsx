@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { SortDirection, type OrderbyArgs } from '@datashaper/schema'
+import { type OrderbyArgs, SortDirection } from '@datashaper/schema'
 import { ActionButton, Label } from '@fluentui/react'
 import { memo, useEffect } from 'react'
 
@@ -13,7 +13,7 @@ import {
 } from '../../../../hooks/index.js'
 import type { StepFormProps } from '../types.js'
 import { useAddButtonClickedHandler, useSorts } from './OrderbyForm.hooks.js'
-import { Container, icons, Sorts } from './OrderbyForm.styles.js'
+import { Container, Sorts, icons } from './OrderbyForm.styles.js'
 
 /**
  * Provides inputs for an OrderBy step.

@@ -18,6 +18,7 @@ import { useObservableState } from 'observable-hooks'
 import { memo, useCallback, useMemo, useState } from 'react'
 import type { ProfileComponentProps } from '../../../types.js'
 
+import { useDataPackage } from '../../../hooks/useDataPackage.js'
 import { useToolPanelExpandCollapse } from '../hooks.js'
 import {
 	useTableHeaderColors,
@@ -34,7 +35,6 @@ import {
 	useTableCommandProps,
 } from './TableBundleEditor.hooks.js'
 import { Container, DetailsListContainer } from './TableBundleEditor.styles.js'
-import { useDataPackage } from '../../../hooks/useDataPackage.js'
 
 export const TableBundleEditor: React.FC<ProfileComponentProps<TableBundle>> =
 	memo(function TableBundleEditor({ resource }) {

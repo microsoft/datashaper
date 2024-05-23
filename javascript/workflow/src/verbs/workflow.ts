@@ -1,8 +1,8 @@
 import type { WorkflowArgs } from '@datashaper/schema'
-import { Workflow } from '../resources/Workflow/Workflow.js'
+import type { TableContainer } from '@datashaper/tables'
+import type { Subscription } from 'rxjs'
 import { BaseNode } from '../dataflow/index.js'
-import { TableContainer } from '@datashaper/tables'
-import { Subscription } from 'rxjs'
+import { Workflow } from '../resources/Workflow/Workflow.js'
 
 class WorkflowNode extends BaseNode<TableContainer, WorkflowArgs> {
 	private _workflow: Workflow | null = null

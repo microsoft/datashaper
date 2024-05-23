@@ -7,8 +7,8 @@ import { memo, useMemo } from 'react'
 
 import { EMPTY_ARRAY } from '../../../empty.js'
 import { createRowEntries } from '../../StepDescription/createRowEntries.js'
-import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
+import type { StepDescriptionProps } from './types.js'
 
 export const OrderbyDescription: React.FC<StepDescriptionProps<OrderbyArgs>> =
 	memo(function OrderbyDescription(props) {

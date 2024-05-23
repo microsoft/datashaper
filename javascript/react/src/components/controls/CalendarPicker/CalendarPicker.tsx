@@ -5,9 +5,9 @@
 import {
 	Calendar,
 	Callout,
-	defaultCalendarStrings,
 	DirectionalHint,
 	FocusTrapZone,
+	defaultCalendarStrings,
 	useTheme,
 } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
@@ -52,8 +52,8 @@ export const CalendarPicker: React.FC<CalendarPickerProps> = memo(
 			<Container>
 				<CalendarContainer ref={buttonContainerRef}>
 					<CalendarButton
-						aria-label='Compass'
-						iconName='Calendar'
+						aria-label="Compass"
+						iconName="Calendar"
 						className={iconClass}
 						onClick={!disabled ? toggleShowCalendar : undefined}
 						style={
