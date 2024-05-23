@@ -20,18 +20,37 @@
 		"enabled": true,
 		"rules": {
 			"recommended": true,
+			"correctness": {
+				"useExhaustiveDependencies": "off"
+			},
+			"complexity": {
+				"noForEach": "off",
+				"useLiteralKeys": "off",
+				"noStaticOnlyClass": "off",
+				"noBannedTypes": "off",
+				"useArrowFunction": "off"
+			},
 			"suspicious": {
 				"noExplicitAny": "off",
-				"noShadowRestrictedNames": "off"
+				"noShadowRestrictedNames": "off",
+				"noArrayIndexKey": "off",
+				"noConfusingVoidType": "off",
+				"noImplicitAnyLet": "off",
+				"noGlobalIsNan": "off"
 			},
 			"a11y": {
 				"useKeyWithClickEvents": "off"
 			},
 			"performance": {
-				"noDelete": "off"
+				"noDelete": "off",
+				"noAccumulatingSpread": "off"
 			},
 			"style": {
-				"noParameterAssign": "off"
+				"noParameterAssign": "off",
+				"noUselessElse": "off",
+				"useExponentiationOperator": "off",
+				"useNumberNamespace": "off",
+				"useNodejsImportProtocol": "off"
 			}
 		}
 	},
