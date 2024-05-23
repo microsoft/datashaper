@@ -11,7 +11,7 @@ export type { CommandBarContainerProps } from './CommandBarContainer.types.js'
 export const CommandBarContainer: React.FC<CommandBarContainerProps> = memo(
 	function CommandBarContainer({ props, renderers }) {
 		return (
-			<Container className="header-command-bar">
+			<Container className='header-command-bar'>
 				{renderers.map((renderer, i) => (
 					<div key={`${renderer.name}@${i}`}>{renderer(props)}</div>
 				))}

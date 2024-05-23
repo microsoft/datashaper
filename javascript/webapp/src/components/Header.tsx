@@ -11,7 +11,7 @@ export const Header: React.FC<HeaderProps> = memo(function Header() {
 	return (
 		<Container>
 			<Title>
-				<TitleLink href="/">DataShaper</TitleLink>
+				<TitleLink href='/'>DataShaper</TitleLink>
 			</Title>
 		</Container>
 	)

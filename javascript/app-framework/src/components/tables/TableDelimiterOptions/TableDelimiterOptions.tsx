@@ -67,9 +67,9 @@ export const TableDelimiterOptions: React.FC<{
 				styles={choiceGroupStyles}
 			/>
 			<OtherTextField
-				autoComplete="off"
-				title="custom delimiter"
-				name="customDelimiter"
+				autoComplete='off'
+				title='custom delimiter'
+				name='customDelimiter'
 				disabled={!isOther}
 				value={value}
 				onChange={onChangeCustomDelimiter}

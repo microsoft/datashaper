@@ -50,7 +50,7 @@ export const StepList: React.FC<StepListProps> = memo(function StepStack({
 		<Container style={styles?.root}>
 			<DialogConfirm
 				toggle={toggleDeleteModal}
-				title="Are you sure you want to delete this step?"
+				title='Are you sure you want to delete this step?'
 				subText={
 					'You will also lose any table transformations made after this step.'
 				}
@@ -60,7 +60,7 @@ export const StepList: React.FC<StepListProps> = memo(function StepStack({
 			{(onSelectInputTable || onSelectLatestTable) && (
 				<ButtonContainer style={styles?.buttonContainer}>
 					<Action
-						type="default"
+						type='default'
 						disabled={!steps.length}
 						iconProps={icons.preview}
 						style={buttonStyles}
@@ -70,7 +70,7 @@ export const StepList: React.FC<StepListProps> = memo(function StepStack({
 					</Action>
 
 					<Action
-						type="default"
+						type='default'
 						disabled={!steps.length}
 						iconProps={icons.preview}
 						style={buttonStyles}

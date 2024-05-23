@@ -45,7 +45,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 	)
 
 	return (
-		<Container className="table-container">
+		<Container className='table-container'>
 			<ArqueroTableHeader
 				table={table}
 				name={name}

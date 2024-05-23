@@ -15,7 +15,7 @@ export const CodebookDataNatureField: React.FC<CodebookEnumDropdownFieldProps> =
 
 		return (
 			<EnumDropdown
-				title="nature"
+				title='nature'
 				disabled={field.exclude}
 				selectedKey={field.nature}
 				{...props}

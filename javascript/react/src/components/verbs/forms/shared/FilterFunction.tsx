@@ -234,8 +234,8 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 						{type === DataType.Boolean ? (
 							<BooleanToggle
 								defaultChecked
-								onText="True"
-								offText="False"
+								onText='True'
+								offText='False'
 								onChange={onToggleChange}
 								disabled={isEmpty}
 							/>

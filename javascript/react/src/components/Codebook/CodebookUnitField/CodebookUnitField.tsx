@@ -17,7 +17,7 @@ export const CodebookUnitField: React.FC<CodebookTextFieldProps> = memo(
 			<TextField
 				styles={styles}
 				disabled={field.exclude}
-				name="unit"
+				name='unit'
 				value={field.unit}
 				onChange={onChangeValue}
 				{...props}

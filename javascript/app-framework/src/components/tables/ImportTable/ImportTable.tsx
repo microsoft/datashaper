@@ -87,13 +87,13 @@ export const ImportTable: React.FC<ImportTableProps> = memo(
 				<ModalBody>
 					<Sidebar>
 						<TextField
-							label="Table name"
+							label='Table name'
 							onChange={(_, value) => setName(value ?? '')}
 							description={file.path ?? ''}
 							value={name}
-							name="fileName"
-							title="Table name"
-							autoComplete="off"
+							name='fileName'
+							title='Table name'
+							autoComplete='off'
 						/>
 						<DataTableConfig resource={draftSchema} />
 					</Sidebar>
@@ -154,7 +154,7 @@ const ModalHeader: React.FC<{ onHideModal: () => void }> = memo(
 				<HeaderTitle>Open table</HeaderTitle>
 				<IconButton
 					iconProps={icons.cancel}
-					ariaLabel="Close popup modal"
+					ariaLabel='Close popup modal'
 					onClick={onHideModal}
 				/>
 			</Header>
@@ -183,7 +183,7 @@ const ModalFooter: React.FC<{
 					onAutoTypeChange(checked ?? false)
 				}
 			/>
-			<PrimaryButton disabled={disabled} text="OK" onClick={onClick} />
+			<PrimaryButton disabled={disabled} text='OK' onClick={onClick} />
 		</Footer>
 	)
 })

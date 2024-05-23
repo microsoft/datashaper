@@ -43,23 +43,23 @@ export const RenameModal: React.FC<RenameModalProps> = memo(
 					<IconButton
 						styles={iconButtonStyles}
 						iconProps={cancelIcon}
-						ariaLabel="Close popup modal"
+						ariaLabel='Close popup modal'
 						onClick={onDismiss}
 					/>
 				</div>
 				<div className={contentStyles.body}>
 					<TextField
-						label="Rename resource"
+						label='Rename resource'
 						defaultValue={resource?.name}
 						onChange={onTextFieldChange}
 					/>
 					<div style={buttonRowStyle}>
 						<PrimaryButton
-							text="OK"
+							text='OK'
 							style={okButtonStyle}
 							onClick={onOkClick}
 						/>
-						<DefaultButton text="Cancel" onClick={onDismiss} />
+						<DefaultButton text='Cancel' onClick={onDismiss} />
 					</div>
 				</div>
 			</Modal>

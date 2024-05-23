@@ -31,9 +31,9 @@ export const StepOutput: React.FC<StepOutputProps> = memo(function StepOutput({
 	const table = useWorkflowDataTable(output, workflow)
 	const metadata = useMemo(() => table && introspect(table, true), [table])
 	return (
-		<StepBlock className="step-block">
+		<StepBlock className='step-block'>
 			<Section title={`Step ${index + 1}`} subtitle={step.verb}>
-				<StepColumn className="steps-column">
+				<StepColumn className='steps-column'>
 					<StepConfig>
 						<StepForm
 							step={step}
@@ -48,9 +48,9 @@ export const StepOutput: React.FC<StepOutputProps> = memo(function StepOutput({
 						<StepDescription step={step} output={output} />
 					</StepDisplay>
 				</StepColumn>
-				<OutputColumn className="outputs-column">
+				<OutputColumn className='outputs-column'>
 					{table ? (
-						<TableSection className="table-section">
+						<TableSection className='table-section'>
 							<Table
 								name={output}
 								table={table}

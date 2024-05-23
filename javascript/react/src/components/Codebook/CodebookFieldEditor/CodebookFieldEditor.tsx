@@ -25,14 +25,14 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 					field={field}
 				/>
 				<CodebookDisplayNameField
-					label="Display name"
+					label='Display name'
 					field={field}
 					styles={_styles.displayName}
 					onChangeField={onChangeField}
 				/>
 
 				<CodebookDescriptionField
-					label="Description"
+					label='Description'
 					field={field}
 					styles={_styles.description}
 					onChangeField={onChangeField}
@@ -40,25 +40,25 @@ export const CodebookFieldEditor: React.FC<CodebookFieldEditorProps> = memo(
 				<CodebookDataTypeField
 					enumeration={DataType}
 					field={field}
-					label="Data type"
+					label='Data type'
 					styles={_styles.dataType}
 					onChangeField={onChangeField}
 				/>
 				<CodebookDataNatureField
 					enumeration={VariableNature}
 					field={field}
-					label="Data nature"
+					label='Data nature'
 					styles={_styles.dataNature}
 					onChangeField={onChangeField}
 				/>
 				<CodebookUnitField
-					label="Units"
+					label='Units'
 					field={field}
 					styles={_styles.units}
 					onChangeField={onChangeField}
 				/>
 				<MappingFields
-					label="Mapping"
+					label='Mapping'
 					styles={_styles?.mapping}
 					field={field}
 					onChangeField={onChangeField}

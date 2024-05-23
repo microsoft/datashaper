@@ -22,7 +22,7 @@ export const DateFormatPatternComboBox: React.FC<DateFormatPatternComboBoxProps>
 				allowFreeform={true}
 				label={'Date format pattern'}
 				placeholder={'Select date format'}
-				autoComplete="off"
+				autoComplete='off'
 				options={options}
 				styles={dropdownStyles}
 				dropdownMaxWidth={200}

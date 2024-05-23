@@ -41,7 +41,7 @@ export const Columns: React.FC<ArqueroDetailsListProps> = memo(
 					onColumnSelect={onSelect}
 					showColumnBorders
 					sortable
-					defaultSortColumn="Date"
+					defaultSortColumn='Date'
 				/>
 			</Table>
 		)

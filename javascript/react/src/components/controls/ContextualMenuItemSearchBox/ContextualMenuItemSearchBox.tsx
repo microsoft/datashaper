@@ -18,8 +18,8 @@ export const ContextualMenuItemSearchBox: React.FC<ContextualMenuItemSearchBoxPr
 
 		return (
 			<SearchBox
-				ariaLabel="Find a verb by text"
-				placeholder="Find a verb"
+				ariaLabel='Find a verb by text'
+				placeholder='Find a verb'
 				styles={searchBoxStyles}
 				{...handlers}
 			/>

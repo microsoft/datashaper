@@ -88,7 +88,7 @@ export const SampleForm: React.FC<StepFormProps<SampleArgs>> = memo(
 					}}
 				>
 					<SpinButton
-						label="Randomizing seed"
+						label='Randomizing seed'
 						labelPosition={Position.top}
 						step={1}
 						max={1000}

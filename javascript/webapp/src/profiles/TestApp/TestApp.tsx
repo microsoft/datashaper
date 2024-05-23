@@ -62,8 +62,8 @@ const TestAppInner: React.FC<TestAppProps> = memo(function TestAppInner({
 					gap: 10,
 				}}
 			>
-				<DefaultButton text="Increment" onClick={increment} />
-				<DefaultButton text="Decrement" onClick={decrement} />
+				<DefaultButton text='Increment' onClick={increment} />
+				<DefaultButton text='Decrement' onClick={decrement} />
 			</div>
 		</div>
 	)

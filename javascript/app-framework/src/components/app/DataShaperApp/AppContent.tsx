@@ -30,7 +30,7 @@ export const AppContent: React.FC<AppContentProps> = memo(function AppContent({
 	return (
 		<AppServicesContext.Provider value={api}>
 			<Routes>
-				<Route path="/" element={children} />
+				<Route path='/' element={children} />
 				{flattenedRoutes.map(
 					(r) =>
 						r.renderer && (
@@ -41,7 +41,7 @@ export const AppContent: React.FC<AppContentProps> = memo(function AppContent({
 							/>
 						),
 				)}
-				<Route path="*" element={fallback} />
+				<Route path='*' element={fallback} />
 			</Routes>
 			<>
 				<RenameModal

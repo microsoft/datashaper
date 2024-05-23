@@ -25,15 +25,15 @@ export const RowGrouping: React.FC<ArqueroDetailsListProps> = memo(
 				<Label>Group by: </Label>
 				<ButtonContainer>
 					<GroupByToggle
-						label="Symbol"
-						onText="On"
-						offText="Off"
+						label='Symbol'
+						onText='On'
+						offText='Off'
 						onChange={(_e, checked) => onGroupChange('Symbol', checked)}
 					/>
 					<GroupByToggle
-						label="Month"
-						onText="On"
-						offText="Off"
+						label='Month'
+						onText='On'
+						offText='Off'
 						onChange={(_e, checked) => onGroupChange('Month', checked)}
 					/>
 				</ButtonContainer>

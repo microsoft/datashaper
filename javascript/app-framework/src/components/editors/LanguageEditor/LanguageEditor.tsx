@@ -29,7 +29,7 @@ export const LanguageEditor: React.FC<LanguageEditorProps> = memo(
 		return (
 			<Container>
 				<Editor
-					height="90vh"
+					height='90vh'
 					language={language}
 					defaultValue={content}
 					value={content}

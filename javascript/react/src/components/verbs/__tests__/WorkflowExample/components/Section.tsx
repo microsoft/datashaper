@@ -22,7 +22,7 @@ export const Section: React.FC<React.PropsWithChildren<SectionProps>> = memo(
 			[subtitle],
 		)
 		return (
-			<Container className="section">
+			<Container className='section'>
 				<Titles>
 					<H1>{title}</H1>
 					<H2>{subtitleParts[0]}</H2>

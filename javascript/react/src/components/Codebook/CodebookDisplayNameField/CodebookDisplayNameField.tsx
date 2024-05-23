@@ -17,7 +17,7 @@ export const CodebookDisplayNameField: React.FC<CodebookTextFieldProps> = memo(
 			<TextField
 				styles={styles}
 				disabled={field.exclude}
-				name="displayName"
+				name='displayName'
 				value={field.title}
 				{...props}
 				onChange={onChange}
