@@ -58,9 +58,9 @@ describe('test for sample verb', () => {
 		expect(remainder).not.toBeNull()
 
 		// 6 total rows, 4 sampled, so 2 should be leftover
-		// rome-ignore: lint/style/noNonNullAssertion
+		// biome-ignore: lint/style/noNonNullAssertion
 		expect(remainder?.numRows()).toBe(2)
-		// rome-ignore: lint/style/noNonNullAssertion
+		// biome-ignore: lint/style/noNonNullAssertion
 		expect(remainder?.numCols()).toBe(3)
 	})
 })
