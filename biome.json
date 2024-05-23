@@ -13,7 +13,8 @@
 			"javascript/schema/versions.js",
 			".devcontainer",
 			"javascript/schema/versions.d.ts",
-			"schema/"
+			"schema/",
+			"package.json"
 		]
 	},
 	"linter": {

@@ -48,6 +48,8 @@
 		"turbo": "1.13.3",
 		"typescript": "^5.1.3"
 	},
-	"workspaces": ["javascript/*"],
+	"workspaces": [
+		"javascript/*"
+	],
 	"packageManager": "yarn@4.2.2"
 }
