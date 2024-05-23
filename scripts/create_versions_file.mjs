@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { writeFileSync } from 'fs'
-import path, { dirname } from 'path'
 import { createRequire } from 'module'
+import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
 const require = createRequire(import.meta.url)
