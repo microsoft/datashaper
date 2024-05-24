@@ -3619,7 +3619,7 @@ __metadata:
     arquero: "npm:^5.4.0"
     eslint: "npm:^8.42.0"
     npm-run-all: "npm:^4.1.5"
-    semver: "npm:^7.6.0"
+    semver: "npm:^7.6.1"
     turbo: "npm:1.13.3"
     typescript: "npm:^5.1.3"
   languageName: unknown
@@ -19584,14 +19584,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.6.0":
-  version: 7.6.0
-  resolution: "semver@npm:7.6.0"
-  dependencies:
-    lru-cache: "npm:^6.0.0"
+"semver@npm:^7.6.1":
+  version: 7.6.2
+  resolution: "semver@npm:7.6.2"
   bin:
     semver: bin/semver.js
-  checksum: 10/1b41018df2d8aca5a1db4729985e8e20428c650daea60fcd16e926e9383217d00f574fab92d79612771884a98d2ee2a1973f49d630829a8d54d6570defe62535
+  checksum: 10/296b17d027f57a87ef645e9c725bff4865a38dfc9caf29b26aa084b85820972fbe7372caea1ba6857162fa990702c6d9c1d82297cecb72d56c78ab29070d2ca2
   languageName: node
   linkType: hard
 
