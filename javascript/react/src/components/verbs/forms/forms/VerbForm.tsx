@@ -20,10 +20,10 @@ import { SingleChoiceInput } from './SingleChoiceInput.js'
 import type { SingleChoiceFormInput } from './SingleChoiceInput.types.js'
 import { TextInput } from './TextInput.js'
 import type { TextFormInput } from './TextInput.types.js'
-import type { FormInput } from './types.js'
-import { FormInputType } from './types.js'
 import { useSortedInputs } from './VerbForm.hooks.js'
 import { Container, InputsBlock, Row } from './VerbForm.styles.js'
+import type { FormInput } from './types.js'
+import { FormInputType } from './types.js'
 
 /**
  * Generates a component for editing verbs based on declarative config.

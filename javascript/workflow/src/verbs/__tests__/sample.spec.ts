@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import ColumnTable from 'arquero/dist/types/table/column-table.js'
+import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import { TestStore } from '../../__tests__/TestStore.js'
 import { sampleStep } from '../sample.js'
 
@@ -58,9 +58,9 @@ describe('test for sample verb', () => {
 		expect(remainder).not.toBeNull()
 
 		// 6 total rows, 4 sampled, so 2 should be leftover
-		// rome-ignore: lint/style/noNonNullAssertion
+		// biome-ignore: lint/style/noNonNullAssertion
 		expect(remainder?.numRows()).toBe(2)
-		// rome-ignore: lint/style/noNonNullAssertion
+		// biome-ignore: lint/style/noNonNullAssertion
 		expect(remainder?.numCols()).toBe(3)
 	})
 })

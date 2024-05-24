@@ -15,13 +15,13 @@ import type {
 import { Verb } from '@datashaper/schema'
 import type { Step } from '@datashaper/workflow'
 import {
+	NodeInput,
 	isInputColumnListStep,
 	isInputColumnRecordStep,
 	isInputColumnStep,
 	isInputKeyValueStep,
 	isInputTableListStep,
 	isOutputColumnStep,
-	NodeInput,
 } from '@datashaper/workflow'
 import { format } from 'd3-format'
 import { getInputNode } from '../../util.js'

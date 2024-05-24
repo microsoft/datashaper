@@ -45,7 +45,7 @@ jobs:
       - run: yarn generate:versions
         name: Versions
 
-      - run: yarn build:javascript
+      - run: yarn build
         name: Build JS
         env:
           DEBUG: "datashaper:network,datashaper:DataTableProfile"
@@ -53,7 +53,7 @@ jobs:
           TURBO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TURBO_TEAM: "essex"
 
-      - run: yarn bundle:javascript
+      - run: yarn bundle
         name: Bundle JS
         env:
           DEBUG: "datashaper:network,datashaper:DataTableProfile"

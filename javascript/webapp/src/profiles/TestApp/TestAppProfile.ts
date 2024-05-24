@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type {
-	AppProfileInitializationContext,
 	AppProfile,
+	AppProfileInitializationContext,
 } from '@datashaper/app-framework'
 import { CommandBarSection, ResourceGroupType } from '@datashaper/app-framework'
 import type { FieldWellItem } from '@datashaper/react'
@@ -12,15 +12,15 @@ import type { ResourceSchema } from '@datashaper/schema'
 import { KnownProfile, KnownRel } from '@datashaper/schema'
 import type { DataPackage, Resource } from '@datashaper/workflow'
 import { ResourceReference, isReference } from '@datashaper/workflow'
-import type { SettingsConfig, SettingConfig } from '@essex/components'
+import type { SettingConfig, SettingsConfig } from '@essex/components'
 import type { IContextualMenuItem, IDropdownOption } from '@fluentui/react'
 import { DropdownMenuItemType } from '@fluentui/react'
 
-import { TEST_APP_PROFILE } from './constants.js'
+import type { AppContext } from '../../types.js'
 import { TestApp } from './TestApp.js'
 import type { TestAppConfig } from './TestAppResource.js'
 import { TestAppResource } from './TestAppResource.js'
-import type { AppContext } from '../../types.js'
+import { TEST_APP_PROFILE } from './constants.js'
 
 export class TestAppProfile
 	implements AppProfile<TestAppResource, ResourceSchema, AppContext>

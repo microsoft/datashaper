@@ -7,13 +7,13 @@ import type { Field } from '@datashaper/schema'
 import { useMemo, useState } from 'react'
 
 import {
-	NAME,
 	DATA_NATURE,
 	DATA_TYPE,
 	DESCRIPTION,
 	DISPLAY_NAME,
 	MAPPING_FIELD,
 	MAPPING_WRAPPER,
+	NAME,
 	STATS_WRAPPER,
 	UNITS,
 } from './constants.js'

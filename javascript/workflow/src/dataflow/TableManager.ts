@@ -1,9 +1,9 @@
+import type { TableContainer } from '@datashaper/tables'
 /*!
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import debug from 'debug'
-import type { TableContainer } from '@datashaper/tables'
 import type { BehaviorSubject, Observable } from 'rxjs'
 
 import type { Maybe } from '../primitives.js'

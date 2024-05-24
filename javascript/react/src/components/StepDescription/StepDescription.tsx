@@ -4,9 +4,9 @@
  */
 import { memo, useMemo } from 'react'
 
-import { selectStepDescription } from './selectStepDescription.js'
 import { Container } from './StepDescription.styles.js'
 import type { StepDescriptionProps } from './StepDescription.types.js'
+import { selectStepDescription } from './selectStepDescription.js'
 
 /**
  * Let's us render the Steps in a loop while memoizing all the functions

@@ -5,8 +5,8 @@
 import type { EraseArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
-import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
+import type { StepDescriptionProps } from './types.js'
 
 export const EraseDescription: React.FC<StepDescriptionProps<EraseArgs>> = memo(
 	function EraseDescription(props) {

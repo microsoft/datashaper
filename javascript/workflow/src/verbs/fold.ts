@@ -5,11 +5,11 @@
 
 import type { FoldArgs } from '@datashaper/schema'
 
+import { not, op } from 'arquero'
+import type ColumnTable from 'arquero/dist/types/table/column-table.js'
+import type { FoldOptions } from 'arquero/dist/types/table/transformable.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
-import { not, op } from 'arquero'
-import ColumnTable from 'arquero/dist/types/table/column-table.js'
-import { FoldOptions } from 'arquero/dist/types/table/transformable.js'
 
 export const foldStep: ColumnTableStep<FoldArgs> = (
 	input,

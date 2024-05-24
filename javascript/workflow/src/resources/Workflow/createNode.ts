@@ -5,10 +5,10 @@
 
 import type { TableContainer } from '@datashaper/tables'
 
+import get from 'lodash-es/get.js'
 import type { Node } from '../../dataflow/index.js'
 import * as verbs from '../../verbs/index.js'
 import type { Step } from './types.js'
-import get from 'lodash-es/get.js'
 
 type NodeFactory = (id: string) => Node<TableContainer>
 

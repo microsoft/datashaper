@@ -14,8 +14,8 @@ import {
 	Middle,
 	Right,
 } from './ArqueroTableHeader.styles.js'
-import type { ArqueroTableHeaderProps } from './index.js'
 import { TableName } from './TableName.js'
+import type { ArqueroTableHeaderProps } from './index.js'
 
 /**
  * Renders a header for an Arquero table

@@ -1,12 +1,12 @@
+import type { TableBundleSchema } from '@datashaper/schema'
+import { KnownProfile, LATEST_TABLEBUNDLE_SCHEMA } from '@datashaper/schema'
+import type { TableContainer } from '@datashaper/tables'
+import { introspect } from '@datashaper/tables'
 /*!
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import debug from 'debug'
-import type { TableBundleSchema } from '@datashaper/schema'
-import { KnownProfile, LATEST_TABLEBUNDLE_SCHEMA } from '@datashaper/schema'
-import type { TableContainer } from '@datashaper/tables'
-import { introspect } from '@datashaper/tables'
 import type { Observable, Subscription } from 'rxjs'
 import { BehaviorSubject, map } from 'rxjs'
 

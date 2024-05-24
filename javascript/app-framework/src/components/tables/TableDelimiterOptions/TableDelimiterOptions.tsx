@@ -8,10 +8,10 @@ import { useDebounceFn } from 'ahooks'
 import { memo, useCallback, useState } from 'react'
 
 import {
-	choiceGroupStyles,
 	Container,
 	OtherTextField,
 	RadioGroup,
+	choiceGroupStyles,
 } from './TableDelimiterOptions.styles.js'
 
 export const TableDelimiterOptions: React.FC<{

@@ -21,15 +21,18 @@ export function unapplyCodebook(
 		strategy === CodebookStrategy.DataTypeOnly ||
 		strategy === CodebookStrategy.DataTypeAndMapping
 	) {
-		const args = table.columnNames().reduce((acc, cur) => {
-			const parser = parseAs(
-				DataType.String,
-				dataTableSchema?.typeHints,
-				DataType.String,
-			)
-			acc[cur] = escape((d: any) => parser(d[cur]))
-			return acc
-		}, {} as Record<string, object>)
+		const args = table.columnNames().reduce(
+			(acc, cur) => {
+				const parser = parseAs(
+					DataType.String,
+					dataTableSchema?.typeHints,
+					DataType.String,
+				)
+				acc[cur] = escape((d: any) => parser(d[cur]))
+				return acc
+			},
+			{} as Record<string, object>,
+		)
 
 		applied = table.derive(args)
 	}
@@ -42,17 +45,20 @@ export function unapplyCodebook(
 			(element) => element.mapping != null,
 		)
 
-		const args2 = fieldList.reduce((acc, cur) => {
-			const finalMap: Record<any, any> = {}
+		const args2 = fieldList.reduce(
+			(acc, cur) => {
+				const finalMap: Record<any, any> = {}
 
-			for (const key in cur.mapping) {
-				const value = cur.mapping[key]
-				finalMap[value] = key
-			}
+				for (const key in cur.mapping) {
+					const value = cur.mapping[key]
+					finalMap[value] = key
+				}
 
-			acc[cur.name] = escape((d: any) => op.recode(d[cur.name], finalMap))
-			return acc
-		}, {} as Record<string, object>)
+				acc[cur.name] = escape((d: any) => op.recode(d[cur.name], finalMap))
+				return acc
+			},
+			{} as Record<string, object>,
+		)
 
 		return applied.derive(args2)
 	}

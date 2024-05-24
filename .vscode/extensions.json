@@ -2,7 +2,7 @@
 	"recommendations": [
 		"arcanis.vscode-zipfs",
 		"dbaeumer.vscode-eslint",
-		"rome.rome",
+		"biomejs.biome",
 		"streetsidesoftware.code-spell-checker",
 		"charliermarsh.ruff"
 	]

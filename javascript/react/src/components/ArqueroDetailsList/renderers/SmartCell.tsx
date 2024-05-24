@@ -24,49 +24,49 @@ import type { RichCellProps } from './types.js'
 /**
  * Chooses what to render based on data type.
  */
-export const SmartCell: React.FC<RichCellProps> = memo(function SmartCell(
-	props,
-) {
-	const { field, metadata, item, column, onSelect } = props
-	const type = field?.type
-	const value = getValue(item, column)
-	const magnitude = useNumberMagnitude(value, metadata, type)
+export const SmartCell: React.FC<RichCellProps> = memo(
+	function SmartCell(props) {
+		const { field, metadata, item, column, onSelect } = props
+		const type = field?.type
+		const value = getValue(item, column)
+		const magnitude = useNumberMagnitude(value, metadata, type)
 
-	return (
-		<CellContainer onClick={onSelect} {...props}>
-			<Switch>
-				<Case condition={isBlank(value)}>
-					<BlankCell />
-				</Case>
-				<Case condition={isEmpty(value)}>
-					<EmptyCell
-						textAlign={
-							type === DataType.Number || type === DataType.Boolean
-								? 'right'
-								: 'left'
-						}
-						virtual={column?.data.virtual}
-					/>
-				</Case>
-				<Case condition={type === DataType.String}>
-					<TextCell {...props} />
-				</Case>
-				<Case condition={type === DataType.Boolean}>
-					<BooleanSymbolCell {...props} />
-				</Case>
-				<Case condition={type === DataType.Number}>
-					<NumberMagnitudeCell {...props} magnitude={magnitude} />
-				</Case>
-				<Case condition={type === DataType.Date}>
-					<DateCell {...props} />
-				</Case>
-				<Case condition={type === DataType.Array}>
-					<SmartArrayCell {...props} />
-				</Case>
-				<Default>
-					<ObjectCell {...props} />
-				</Default>
-			</Switch>
-		</CellContainer>
-	)
-})
+		return (
+			<CellContainer onClick={onSelect} {...props}>
+				<Switch>
+					<Case condition={isBlank(value)}>
+						<BlankCell />
+					</Case>
+					<Case condition={isEmpty(value)}>
+						<EmptyCell
+							textAlign={
+								type === DataType.Number || type === DataType.Boolean
+									? 'right'
+									: 'left'
+							}
+							virtual={column?.data.virtual}
+						/>
+					</Case>
+					<Case condition={type === DataType.String}>
+						<TextCell {...props} />
+					</Case>
+					<Case condition={type === DataType.Boolean}>
+						<BooleanSymbolCell {...props} />
+					</Case>
+					<Case condition={type === DataType.Number}>
+						<NumberMagnitudeCell {...props} magnitude={magnitude} />
+					</Case>
+					<Case condition={type === DataType.Date}>
+						<DateCell {...props} />
+					</Case>
+					<Case condition={type === DataType.Array}>
+						<SmartArrayCell {...props} />
+					</Case>
+					<Default>
+						<ObjectCell {...props} />
+					</Default>
+				</Switch>
+			</CellContainer>
+		)
+	},
+)

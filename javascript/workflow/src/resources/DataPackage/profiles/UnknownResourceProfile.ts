@@ -5,8 +5,8 @@
 import type { Profile, ResourceSchema } from '@datashaper/schema'
 import { KnownProfile } from '@datashaper/schema'
 
-import type { ProfileHandler } from '../../types/index.js'
 import { UnknownResource } from '../../UnknownResource.js'
+import type { ProfileHandler } from '../../types/index.js'
 
 export class UnknownResourceProfile
 	implements ProfileHandler<UnknownResource, ResourceSchema>

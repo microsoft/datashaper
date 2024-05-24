@@ -8,8 +8,8 @@ import { memo, useMemo } from 'react'
 
 import { getValue } from '../ArqueroDetailsList.utils.js'
 import { useCellDimensions, useFormattedNumber } from '../hooks/index.js'
-import { useTextAlignStyle } from './hooks.js'
 import { useBarColor } from './NumberMagnitudeCell.hooks.js'
+import { useTextAlignStyle } from './hooks.js'
 import type { MagnitudeCellProps } from './types.js'
 /**
  * Basic rendering of number values.

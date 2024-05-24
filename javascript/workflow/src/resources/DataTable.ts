@@ -4,16 +4,16 @@
  */
 import type { DataTableSchema } from '@datashaper/schema'
 import {
-	createDataTableSchemaObject,
 	DataFormat,
 	KnownProfile,
 	LATEST_DATATABLE_SCHEMA,
+	createDataTableSchemaObject,
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import { readTable } from '@datashaper/tables'
 import type { Maybe } from '@datashaper/workflow'
 import debug from 'debug'
-import { type Observable, BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, type Observable } from 'rxjs'
 
 import { DataShape } from './DataShape.js'
 import { ParserOptions } from './ParserOptions.js'

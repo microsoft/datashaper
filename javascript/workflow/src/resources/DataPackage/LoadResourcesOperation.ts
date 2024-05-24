@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import {
-	KnownProfile,
 	type DataPackageSchema,
+	KnownProfile,
 	type ResourceSchema,
 } from '@datashaper/schema'
 

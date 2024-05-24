@@ -6,7 +6,7 @@ import type { EncodeDecodeArgs } from '@datashaper/schema'
 import { CodebookStrategy } from '@datashaper/schema'
 import { useMemo } from 'react'
 
-import { type FormInput, enumDropdown, VerbForm } from '../forms/index.js'
+import { type FormInput, VerbForm, enumDropdown } from '../forms/index.js'
 import type { StepFormBaseProps } from '../types.js'
 
 /**

@@ -6,9 +6,9 @@
 import type { Verb } from '@datashaper/schema'
 import type { Step } from '@datashaper/workflow'
 import {
-	readStep,
 	isInputColumnStep,
 	isOutputColumnStep,
+	readStep,
 } from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
 import { CommandBar } from '@fluentui/react'
@@ -18,6 +18,7 @@ import { map } from 'rxjs'
 import styled from 'styled-components'
 
 import { useSuggestedTableName } from '../../hooks/tables/useSuggestedTableName.js'
+import { useNewStepInputName } from '../../hooks/workflow/index.js'
 import { StepEditorModal } from './StepEditorModal.js'
 import {
 	useColumnCommands,
@@ -26,7 +27,6 @@ import {
 	useUndoCommands,
 } from './TableCommands.hooks.js'
 import type { TableCommandsProps } from './TableCommands.types.js'
-import { useNewStepInputName } from '../../hooks/workflow/index.js'
 
 export const TableCommands: React.FC<TableCommandsProps> = memo(
 	function TableCommands({

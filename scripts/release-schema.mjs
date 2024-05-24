@@ -4,8 +4,8 @@
  */
 import fs from 'fs'
 import path, { dirname } from 'path'
-import semver from 'semver'
 import { fileURLToPath } from 'url'
+import semver from 'semver'
 
 // this script copies the latest built version of the schema into a releases folder with rolled up version specificity
 const __filename = fileURLToPath(import.meta.url)

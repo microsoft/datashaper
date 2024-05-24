@@ -22,7 +22,7 @@ export const isWorkflowSchema = (
 	r == null
 		? false
 		: r.profile === KnownProfile.Workflow ||
-		  (r.$schema?.indexOf('/workflow/') ?? -1) > -1
+			(r.$schema?.indexOf('/workflow/') ?? -1) > -1
 
 export const isWorkflow = (r: Resource | undefined): boolean =>
 	r == null ? false : r.profile === KnownProfile.Workflow
@@ -33,7 +33,7 @@ export const isCodebookSchema = (
 	r == null
 		? false
 		: r.profile === KnownProfile.Codebook ||
-		  (r.$schema?.indexOf('/codebook/') ?? -1) > -1
+			(r.$schema?.indexOf('/codebook/') ?? -1) > -1
 
 export const isCodebook = (r: Resource | undefined): boolean =>
 	r == null ? false : r.profile === KnownProfile.Codebook
@@ -52,7 +52,7 @@ export const isDataTableSchema = (
 	r == null
 		? false
 		: r.profile === KnownProfile.DataTable ||
-		  (r.$schema?.indexOf('/datatable/') ?? -1) > -1
+			(r.$schema?.indexOf('/datatable/') ?? -1) > -1
 
 export const isDataTable = (r: Resource | undefined): r is DataTable =>
 	r == null ? false : r.profile === KnownProfile.DataTable

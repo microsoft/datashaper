@@ -5,8 +5,8 @@
 import type { OnehotArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
-import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
+import type { StepDescriptionProps } from './types.js'
 
 export const OneHotDescription: React.FC<StepDescriptionProps<OnehotArgs>> =
 	memo(function OneHotDescription(props) {

@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import {
-	FilterCompareType,
 	type FilterArgs,
+	FilterCompareType,
 	StringComparisonOperator,
 } from '@datashaper/schema'
 

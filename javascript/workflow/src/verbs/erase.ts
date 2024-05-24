@@ -5,9 +5,9 @@
 import type { EraseArgs } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
+import { escape } from 'arquero'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
-import { escape } from 'arquero'
 
 export const eraseStep: ColumnTableStep<EraseArgs> = (
 	input: ColumnTable,

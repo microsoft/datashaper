@@ -10,8 +10,8 @@ import { map } from 'rxjs'
 import { EMPTY_ARRAY } from '../../../empty.js'
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
 import type {
-	AppServices,
 	AppProfile,
+	AppServices,
 	ResourceRoute,
 	ResourceRouteGroup,
 } from '../../../types.js'

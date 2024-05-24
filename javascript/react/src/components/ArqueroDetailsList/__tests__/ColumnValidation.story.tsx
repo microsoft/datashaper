@@ -10,9 +10,9 @@ import type {
 import { generateCodebook, introspect, validateTable } from '@datashaper/tables'
 import type { ComponentStory } from '@storybook/react'
 
+import { useEffect, useState } from 'react'
 import { ArqueroDetailsList } from '../ArqueroDetailsList.js'
 import type { ArqueroDetailsListProps } from '../ArqueroDetailsList.types.js'
-import { useEffect, useState } from 'react'
 
 export const ColumnValidationStory: ComponentStory<typeof ArqueroDetailsList> =
 	(

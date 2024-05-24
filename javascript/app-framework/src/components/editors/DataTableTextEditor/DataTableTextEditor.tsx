@@ -2,11 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { memo } from 'react'
+
 import type { DataTable } from '@datashaper/workflow'
+import { memo } from 'react'
+import type { ProfileComponentProps } from '../../../types.js'
 import { LanguageEditor } from '../LanguageEditor/index.js'
 import { useContent, useOnChange } from './DataTableTextEditor.hooks.js'
-import type { ProfileComponentProps } from '../../../types.js'
 
 export const DataTableTextEditor: React.FC<ProfileComponentProps<DataTable>> =
 	memo(function DataTableTextEditor({ resource }) {

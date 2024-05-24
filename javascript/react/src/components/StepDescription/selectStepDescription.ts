@@ -6,8 +6,8 @@ import type { Step } from '@datashaper/workflow'
 import get from 'lodash-es/get.js'
 import {
 	AggregateDescription,
-	BinarizeDescription,
 	BinDescription,
+	BinarizeDescription,
 	BooleanLogicDescription,
 	ConvertDescription,
 	DeriveDescription,
@@ -24,8 +24,8 @@ import {
 	NoParametersDescription,
 	OneHotDescription,
 	OrderbyDescription,
-	PrintDescription,
 	PivotDescription,
+	PrintDescription,
 	RecodeDescription,
 	RenameDescription,
 	RollupDescription,

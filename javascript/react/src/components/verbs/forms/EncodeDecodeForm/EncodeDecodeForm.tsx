@@ -5,10 +5,10 @@
 import type { EncodeDecodeArgs } from '@datashaper/schema'
 import { memo, useEffect } from 'react'
 
+import { useStepInputTable } from '../../../../hooks/index.js'
 import type { StepFormProps } from '../types.js'
 import { EncodeDecodeFormBase } from './EncodeDecodeForm.base.js'
 import { useCodebookContent } from './EncodeDecodeForm.hooks.js'
-import { useStepInputTable } from '../../../../hooks/index.js'
 
 /*
  *

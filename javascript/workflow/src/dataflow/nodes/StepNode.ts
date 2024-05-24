@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { SocketName } from '../types.js'
+import type { SocketName } from '../types.js'
 import { BaseNode } from './BaseNode.js'
 
 /**

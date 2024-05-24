@@ -12,9 +12,9 @@ import {
 	useWorkflowDataTable,
 	useWorkflowInput,
 } from '../../../../hooks/index.js'
+import { getInputNode } from '../../../../util.js'
 import type { StepFormProps } from '../types.js'
 import { LookupFormBase } from './LookupForm.base.js'
-import { getInputNode } from '../../../../util.js'
 
 /**
  * Provides inputs for a Lookup step.

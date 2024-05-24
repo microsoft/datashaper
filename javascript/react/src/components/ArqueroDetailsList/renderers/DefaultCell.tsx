@@ -26,49 +26,49 @@ import type { RichCellProps } from './types.js'
  * Designed to look like a basic Excel-style sheet (e.g., right-align numbers by default).
  * But with no fancy/costly visualization
  */
-export const DefaultCell: React.FC<RichCellProps> = memo(function DefaultCell(
-	props,
-) {
-	const { field, item, column, onSelect } = props
-	const value = getValue(item, column)
-	const type = field?.type || determineType(value)
+export const DefaultCell: React.FC<RichCellProps> = memo(
+	function DefaultCell(props) {
+		const { field, item, column, onSelect } = props
+		const value = getValue(item, column)
+		const type = field?.type || determineType(value)
 
-	const cellStyle = useCellStyle(column, onSelect)
-	return (
-		<div style={cellStyle}>
-			<Switch>
-				<Case condition={isBlank(value)}>
-					<BlankCell />
-				</Case>
-				<Case condition={isEmpty(value)}>
-					<EmptyCell
-						textAlign={
-							type === DataType.Number || type === DataType.Boolean
-								? 'right'
-								: 'left'
-						}
-						virtual={column?.data.virtual}
-					/>
-				</Case>
-				<Case condition={type === DataType.Boolean}>
-					<BooleanTextCell {...props} />
-				</Case>
-				<Case condition={type === DataType.String}>
-					<TextCell {...props} />
-				</Case>
-				<Case condition={type === DataType.Number}>
-					<NumberCell {...props} numberFormat={','} />
-				</Case>
-				<Case condition={type === DataType.Date}>
-					<DateCell {...props} />
-				</Case>
-				<Case condition={type === DataType.Array}>
-					<ArrayCell {...props} />
-				</Case>
-				<Default>
-					<ObjectCell {...props} />
-				</Default>
-			</Switch>
-		</div>
-	)
-})
+		const cellStyle = useCellStyle(column, onSelect)
+		return (
+			<div style={cellStyle}>
+				<Switch>
+					<Case condition={isBlank(value)}>
+						<BlankCell />
+					</Case>
+					<Case condition={isEmpty(value)}>
+						<EmptyCell
+							textAlign={
+								type === DataType.Number || type === DataType.Boolean
+									? 'right'
+									: 'left'
+							}
+							virtual={column?.data.virtual}
+						/>
+					</Case>
+					<Case condition={type === DataType.Boolean}>
+						<BooleanTextCell {...props} />
+					</Case>
+					<Case condition={type === DataType.String}>
+						<TextCell {...props} />
+					</Case>
+					<Case condition={type === DataType.Number}>
+						<NumberCell {...props} numberFormat={','} />
+					</Case>
+					<Case condition={type === DataType.Date}>
+						<DateCell {...props} />
+					</Case>
+					<Case condition={type === DataType.Array}>
+						<ArrayCell {...props} />
+					</Case>
+					<Default>
+						<ObjectCell {...props} />
+					</Default>
+				</Switch>
+			</div>
+		)
+	},
+)

@@ -6,8 +6,8 @@ import type { ConvertArgs } from '@datashaper/schema'
 import { ParseType } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
-import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
+import type { StepDescriptionProps } from './types.js'
 
 export const ConvertDescription: React.FC<StepDescriptionProps<ConvertArgs>> =
 	memo(function ConvertDescription(props) {
@@ -30,7 +30,7 @@ export const ConvertDescription: React.FC<StepDescriptionProps<ConvertArgs>> =
 										before: 'with base',
 										value: args.radix,
 									},
-							  ]
+								]
 							: undefined,
 				},
 			]

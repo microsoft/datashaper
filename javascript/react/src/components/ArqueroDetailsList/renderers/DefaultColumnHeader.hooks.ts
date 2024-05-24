@@ -37,8 +37,8 @@ export function useTextStyle(
 			color: column.data?.virtual
 				? 'transparent'
 				: column.data?.selected
-				? theme.palette.themePrimary
-				: theme.palette.neutralPrimary,
+					? theme.palette.themePrimary
+					: theme.palette.neutralPrimary,
 			width: '100%',
 			textAlign: 'center' as const,
 			overflow: 'hidden' as const,

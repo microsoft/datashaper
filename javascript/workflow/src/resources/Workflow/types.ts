@@ -4,10 +4,10 @@
  */
 
 import type {
-	WorkflowInput,
-	Verb,
-	WorkflowStepId,
 	InputBinding,
+	Verb,
+	WorkflowInput,
+	WorkflowStepId,
 } from '@datashaper/schema'
 
 /**

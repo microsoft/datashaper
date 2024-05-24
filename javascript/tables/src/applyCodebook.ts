@@ -22,17 +22,20 @@ export function applyCodebook(
 		strategy === CodebookStrategy.DataTypeOnly ||
 		strategy === CodebookStrategy.DataTypeAndMapping
 	) {
-		const args = codebook.fields.reduce((acc, cur) => {
-			if (!cur.exclude) {
-				const parser = parseAs(
-					cur.type,
-					dataTableSchema?.typeHints,
-					cur.subtype,
-				)
-				acc[cur.name] = escape((d: any) => parser(d[cur.name]))
-			}
-			return acc
-		}, {} as Record<string, object>)
+		const args = codebook.fields.reduce(
+			(acc, cur) => {
+				if (!cur.exclude) {
+					const parser = parseAs(
+						cur.type,
+						dataTableSchema?.typeHints,
+						cur.subtype,
+					)
+					acc[cur.name] = escape((d: any) => parser(d[cur.name]))
+				}
+				return acc
+			},
+			{} as Record<string, object>,
+		)
 
 		applied = applied.derive(args)
 	}
@@ -45,12 +48,15 @@ export function applyCodebook(
 			(element) => element.mapping != null,
 		)
 
-		const args2 = fieldList.reduce((acc, cur) => {
-			acc[cur.name] = escape((d: any) =>
-				op.recode(d[cur.name], cur.mapping ? cur.mapping : {}),
-			)
-			return acc
-		}, {} as Record<string, object>)
+		const args2 = fieldList.reduce(
+			(acc, cur) => {
+				acc[cur.name] = escape((d: any) =>
+					op.recode(d[cur.name], cur.mapping ? cur.mapping : {}),
+				)
+				return acc
+			},
+			{} as Record<string, object>,
+		)
 
 		return applied.derive(args2)
 	}

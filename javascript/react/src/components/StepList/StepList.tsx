@@ -10,17 +10,17 @@ import { memo } from 'react'
 
 import { DisplayOrder } from '../../enums.js'
 import { useWorkflowSteps } from '../../hooks/workflow/useWorkflowSteps.js'
-import { Action } from '../controls/index.js'
 import { StepEditor } from '../StepEditor/index.js'
+import { Action } from '../controls/index.js'
 import { StepHeader } from './StepHeader.js'
 import type { StepHeaderStyles } from './StepHeader.types.js'
 import { useDeleteConfirm } from './StepList.hooks.js'
 import {
 	ButtonContainer,
-	buttonStyles,
 	Container,
-	icons,
 	StepsContainer,
+	buttonStyles,
+	icons,
 	useCollapsiblePanelStyles,
 } from './StepList.styles.js'
 import type { StepListProps } from './StepList.types.js'

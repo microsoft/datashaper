@@ -5,8 +5,8 @@
 import type { RollupArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
-import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
+import type { StepDescriptionProps } from './types.js'
 
 export const RollupDescription: React.FC<StepDescriptionProps<RollupArgs>> =
 	memo(function RollupDescription(props) {

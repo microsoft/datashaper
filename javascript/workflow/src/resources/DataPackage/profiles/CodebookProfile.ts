@@ -8,7 +8,9 @@ import { KnownProfile } from '@datashaper/schema'
 import { Codebook } from '../../Codebook.js'
 import type { ProfileHandler } from '../../types/index.js'
 
-export class CodebookProfile implements ProfileHandler<Codebook, CodebookSchema> {
+export class CodebookProfile
+	implements ProfileHandler<Codebook, CodebookSchema>
+{
 	public readonly profile: Profile = KnownProfile.Codebook
 
 	public createInstance(schema: CodebookSchema | undefined): Promise<Codebook> {

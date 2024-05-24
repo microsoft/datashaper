@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { DataType, Verb } from '@datashaper/schema'
+import { DataType, type Verb } from '@datashaper/schema'
 import cloneDeep from 'lodash-es/cloneDeep.js'
 
 import type { Step } from '../resources/index.js'

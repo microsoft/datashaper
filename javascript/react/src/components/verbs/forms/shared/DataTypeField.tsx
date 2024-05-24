@@ -5,7 +5,7 @@
 import { DataType } from '@datashaper/schema'
 import { coerce } from '@datashaper/tables'
 import type { IDropdownOption } from '@fluentui/react'
-import { Dropdown, mergeStyleSets, SpinButton } from '@fluentui/react'
+import { Dropdown, SpinButton, mergeStyleSets } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
 import { CalendarPicker } from '../../../controls/index.js'
@@ -38,11 +38,11 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 					? onKeyChange(
 							new Date(value).toISOString(),
 							new Date(val).toISOString(),
-					  )
+						)
 					: onValueChange(
 							new Date(keyValue).toISOString(),
 							new Date(val).toISOString(),
-					  )
+						)
 			},
 			[onKeyChange, onValueChange, dataType, isKey, value, keyValue],
 		)

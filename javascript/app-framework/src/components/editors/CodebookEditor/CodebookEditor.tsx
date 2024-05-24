@@ -9,8 +9,8 @@ import { useObservableState } from 'observable-hooks'
 import { memo } from 'react'
 import { useHelpOnMount } from '../../../hooks/useHelpOnMount.js'
 
-import { useOnFieldsChanged } from './CodebookEditor.hooks.js'
 import type { ProfileComponentProps } from '../../../types.js'
+import { useOnFieldsChanged } from './CodebookEditor.hooks.js'
 
 export const CodebookEditor: React.FC<ProfileComponentProps<Codebook>> = memo(
 	function CodebookEditor({ resource }) {
