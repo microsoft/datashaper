@@ -24,7 +24,7 @@ def intersect(input: VerbInput, **_kwargs: dict) -> VerbResult:
     others = cast(list[pl.DataFrame], input.get_others())
     others = pl.concat(others)
 
-    output = input_table.merge(others, how="left", indicator=True)
+    output = input_table.join(others, how="left", indicator=True)
     output = output[output["_merge"] == "both"]
     output = output.drop("_merge")
 

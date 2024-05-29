@@ -5,6 +5,7 @@ import logging
 import traceback
 from collections.abc import Awaitable, Callable, Hashable
 from typing import Any, TypeVar, cast
+
 import polars as pl
 
 from datashaper.errors import VerbParallelizationError

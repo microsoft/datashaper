@@ -16,7 +16,6 @@ from typing import Any, Concatenate, ParamSpec, cast
 
 import numpy as np
 import pandas as pd
-
 import polars as pl
 
 from datashaper.engine.types import AsyncType

@@ -2,8 +2,8 @@
 
 from typing import cast
 
-import polars as pl
 import pandas as pd
+import polars as pl
 
 
 def is_array_column(column: pl.Series) -> bool:

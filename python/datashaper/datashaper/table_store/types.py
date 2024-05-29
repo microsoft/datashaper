@@ -8,9 +8,9 @@ from dataclasses import dataclass
 from typing import Any, Generic, TypeVar
 
 import polars as pl
+from polars.dataframe.group_by import GroupBy
 
 from datashaper.engine.types import Bin, Category, DataType
-from polars.dataframe.group_by import GroupBy
 
 
 @dataclass
