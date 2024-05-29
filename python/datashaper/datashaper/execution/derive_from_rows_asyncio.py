@@ -34,7 +34,7 @@ async def derive_from_rows_asyncio(
                 return await execute(row)
 
         tasks = [
-            asyncio.create_task(execute_row_protected(row)) for row in input.iterrows()
+            asyncio.create_task(execute_row_protected(row)) for row in input.iter_rows()
         ]
         return await asyncio.gather(*tasks)
 

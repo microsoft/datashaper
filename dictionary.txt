@@ -39,7 +39,7 @@ dtype
 mkdirp
 iloc
 virtualenvs
-iterrows
+iter_rows
 dropna
 astype
 aggfunc

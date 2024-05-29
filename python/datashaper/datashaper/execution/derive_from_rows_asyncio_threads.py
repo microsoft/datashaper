@@ -27,7 +27,7 @@ async def derive_from_rows_asyncio_threads(
     semaphore = asyncio.Semaphore(num_threads or 4)
 
     async def gather(execute: ExecuteFn[ItemType]) -> list[ItemType | None]:
-        tasks = [asyncio.to_thread(execute, row) for row in input.iterrows()]
+        tasks = [asyncio.to_thread(execute, row) for row in input.iter_rows()]
 
         async def execute_task(task: Coroutine) -> ItemType | None:
             async with semaphore:

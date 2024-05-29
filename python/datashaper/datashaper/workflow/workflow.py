@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Any, Generic, TypeVar, cast
 from uuid import uuid4
 
-import pandas as pd
+import polars as pl
 from jsonschema import validate as validate_schema
 
 from datashaper.engine.verbs.types import VerbDetails
@@ -84,7 +84,7 @@ class Workflow(Generic[Context]):
     def __init__(
         self,
         schema: dict,
-        input_tables: dict[str, pd.DataFrame] | None = None,
+        input_tables: dict[str, pl.DataFrame] | None = None,
         schema_path: str | None = None,
         verbs: dict[str, Callable] | None = None,
         validate: bool | None = False,
@@ -126,7 +126,7 @@ class Workflow(Generic[Context]):
             for input, table in input_tables.items():
                 self.add_table(
                     input,
-                    table.convert_dtypes(dtype_backend=pandas_dtype_backend.value),
+                    table,
                 )
 
         if verbs is not None:
@@ -275,7 +275,7 @@ class Workflow(Generic[Context]):
             if use_original_table:
                 return table_container
 
-            table = table_container.table.copy()
+            table = table_container.table.clone()
             return TableContainer(table=table)
 
         if isinstance(inputs, str):
@@ -314,7 +314,7 @@ class Workflow(Generic[Context]):
             named=cast(dict[str, TableContainer], input_mapping),
         )
 
-    def add_table(self, id: str, table: pd.DataFrame) -> None:
+    def add_table(self, id: str, table: pl.DataFrame) -> None:
         """Add a dataframe to the graph with a given id."""
         self._table_store.add(id, TableContainer(table=table), tag="input")
 
@@ -463,7 +463,7 @@ class Workflow(Generic[Context]):
         }
 
     def derive(
-        self, schema: dict[str, Any], input_tables: dict[str, pd.DataFrame]
+        self, schema: dict[str, Any], input_tables: dict[str, pl.DataFrame]
     ) -> "Workflow":
         """Derive a new workflow from the current one."""
         # Verbs are already registered, and we don't need to validate the schema again
