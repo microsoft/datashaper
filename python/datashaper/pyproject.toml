@@ -17,6 +17,7 @@ pyarrow = "^15.0.0"
 diskcache = "^5.6.3"
 dacite = "^1.8.1"
 
+polars = "^0.20.30"
 [tool.poetry.group.dev.dependencies]
 codespell = "^2.2.6"
 poethepoet = "^0.24.4"
