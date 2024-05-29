@@ -3,12 +3,13 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Verb filtering utilities."""
+
 import logging
 from collections.abc import Callable
 from functools import partial
 from uuid import uuid4
 
-import pandas as pd
+import polars as pl
 
 from datashaper.engine.types import (
     BooleanComparisonOperator,
@@ -21,135 +22,135 @@ from datashaper.engine.types import (
 from datashaper.errors import UnsupportedComparisonOperatorError
 
 boolean_function_map = {
-    BooleanLogicalOperator.OR: lambda df, columns: df[columns].any(axis="columns")
+    BooleanLogicalOperator.OR: lambda df, columns: df[columns].any()
     if columns != ""
-    else df.any(axis="columns"),
-    BooleanLogicalOperator.AND: lambda df, columns: df[columns].all(axis="columns")
+    else df.any(),
+    BooleanLogicalOperator.AND: lambda df, columns: df[columns].all()
     if columns != ""
-    else df.all(axis="columns"),
-    BooleanLogicalOperator.NOR: lambda df, columns: ~df[columns].any(axis="columns")
+    else df.all(),
+    BooleanLogicalOperator.NOR: lambda df, columns: ~df[columns].any()
     if columns != ""
-    else ~df.any(axis="columns"),
-    BooleanLogicalOperator.NAND: lambda df, columns: ~df[columns].all(axis="columns")
+    else ~df.any(),
+    BooleanLogicalOperator.NAND: lambda df, columns: ~df[columns].all()
     if columns != ""
-    else ~df.all(axis="columns"),
+    else ~df.all(),
     BooleanLogicalOperator.XNOR: lambda df, columns: df[columns]
-    .sum(axis="columns")
+    .sum()
     .apply(lambda x: (x % 2) == 0 or x == 0)
     if columns != ""
-    else df.sum(axis="columns").apply(lambda x: (x % 2) == 0 or x == 0),
+    else df.sum().apply(lambda x: (x % 2) == 0 or x == 0),
     BooleanLogicalOperator.XOR: lambda df, columns: df[columns]
-    .sum(axis="columns")
+    .sum()
     .apply(lambda x: (x % 2) != 0 and x != 0)
     if columns != ""
-    else df.sum(axis="columns").apply(lambda x: (x % 2) != 0 and x != 0),
+    else df.sum().apply(lambda x: (x % 2) != 0 and x != 0),
 }
 
 
-def __correct_unknown_value(df: pd.DataFrame, columns: list[str], target: str) -> None:
-    na_index = df[df[columns].isna().any(axis=1)].index
+def __correct_unknown_value(df: pl.DataFrame, columns: list[str], target: str) -> None:
+    na_index = df[df[columns].is_nan().any()].index
     df.loc[na_index, target] = None
 
 
 def __equals(
-    df: pd.DataFrame,
+    df: pl.DataFrame,
     column: str,
-    target: pd.Series | str | float | bool,
+    target: pl.Series | str | float | bool,
     **_kwargs: dict,
-) -> pd.Series:
+) -> pl.Series:
     return df[column] == target
 
 
 def __not_equals(
-    df: pd.DataFrame,
+    df: pl.DataFrame,
     column: str,
-    target: pd.Series | str | float | bool,
+    target: pl.Series | str | float | bool,
     **_kwargs: dict,
-) -> pd.Series:
+) -> pl.Series:
     return ~df[column] == target
 
 
 def __is_null(
-    df: pd.DataFrame, column: str, **_kwargs: dict
-) -> pd.DataFrame | pd.Series:
+    df: pl.DataFrame, column: str, **_kwargs: dict
+) -> pl.DataFrame | pl.Series:
     return df[column].isna()
 
 
 def __is_not_null(
-    df: pd.DataFrame, column: str, **_kwargs: dict
-) -> pd.DataFrame | pd.Series:
+    df: pl.DataFrame, column: str, **_kwargs: dict
+) -> pl.DataFrame | pl.Series:
     return df[column].notna()
 
 
 def __contains(
-    df: pd.DataFrame,
+    df: pl.DataFrame,
     column: str,
-    target: pd.Series | str | float | bool,
+    target: pl.Series | str | float | bool,
     **_kwargs: dict,
-) -> pd.DataFrame | pd.Series:
+) -> pl.DataFrame | pl.Series:
     return df[column].str.contains(str(target), regex=False)
 
 
 def __startswith(
-    df: pd.DataFrame,
+    df: pl.DataFrame,
     column: str,
-    target: pd.Series | str | float | bool,
+    target: pl.Series | str | float | bool,
     **_kwargs: dict,
-) -> pd.DataFrame | pd.Series:
-    return df[column].str.startswith(str(target))
+) -> pl.DataFrame | pl.Series:
+    return df[column].str.starts_with(str(target))
 
 
 def __endswith(
-    df: pd.DataFrame,
+    df: pl.DataFrame,
     column: str,
-    target: pd.Series | str | float | bool,
+    target: pl.Series | str | float | bool,
     **_kwargs: dict,
-) -> pd.Series:
+) -> pl.Series:
     return df[column].str.endswith(str(target))
 
 
 def __regex(
-    df: pd.DataFrame,
+    df: pl.DataFrame,
     column: str,
-    target: pd.Series | str | float | bool,
+    target: pl.Series | str | float | bool,
     **_kwargs: dict,
-) -> pd.Series:
+) -> pl.Series:
     return df[column].str.contains(str(target), regex=True)
 
 
 def __gt(
-    df: pd.DataFrame,
+    df: pl.DataFrame,
     column: str,
-    target: pd.Series | str | float | bool,
+    target: pl.Series | str | float | bool,
     **_kwargs: dict,
-) -> pd.Series:
+) -> pl.Series:
     return df[column] > target
 
 
 def __gte(
-    df: pd.DataFrame,
+    df: pl.DataFrame,
     column: str,
-    target: pd.Series | str | float | bool,
+    target: pl.Series | str | float | bool,
     **_kwargs: dict,
-) -> pd.Series:
+) -> pl.Series:
     return df[column] >= target
 
 
 def __lt(
-    df: pd.DataFrame,
+    df: pl.DataFrame,
     column: str,
-    target: pd.Series | str | float | bool,
+    target: pl.Series | str | float | bool,
     **_kwargs: dict,
-) -> pd.Series:
+) -> pl.Series:
     return df[column] < target
 
 
 def __lte(
-    df: pd.DataFrame,
+    df: pl.DataFrame,
     column: str,
-    target: pd.Series | str | float | bool,
+    target: pl.Series | str | float | bool,
     **_kwargs: dict,
-) -> pd.Series:
+) -> pl.Series:
     return df[column] <= target
 
 
@@ -190,10 +191,10 @@ _operator_map: dict[
 }
 
 
-def filter_df(df: pd.DataFrame, args: FilterArgs) -> pd.DataFrame | pd.Series:
+def filter_df(df: pl.DataFrame, args: FilterArgs) -> pl.DataFrame | pl.Series:
     """Filter a DataFrame based on the input criteria."""
     filters: list[str] = []
-    filtered_df: pd.DataFrame = df.copy()
+    filtered_df: pl.DataFrame = df.clone()
 
     filter_name = str(uuid4())
     filters.append(filter_name)

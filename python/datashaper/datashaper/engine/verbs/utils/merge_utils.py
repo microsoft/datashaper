@@ -1,8 +1,9 @@
 """Contains the merge strategy functions for the merge verb."""
+
 from collections.abc import Callable
 from typing import Any
 
-import pandas as pd
+import polars as pl
 from pandas.api.types import is_bool
 
 from datashaper.engine.types import MergeStrategy
@@ -28,6 +29,6 @@ def _correct_type(value: Any) -> str | int | Any:
         return value
 
 
-def _create_array(column: pd.Series, delim: str) -> str:
-    col: pd.DataFrame | pd.Series = column.dropna().apply(lambda x: _correct_type(x))
+def _create_array(column: pl.Series, delim: str) -> str:
+    col: pl.DataFrame | pl.Series = column.dropna().apply(lambda x: _correct_type(x))
     return delim.join(col.astype(str))

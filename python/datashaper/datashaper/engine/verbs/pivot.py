@@ -3,6 +3,7 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Pivot verb implementation."""
+
 from datashaper.engine.pandas import aggregate_operation_mapping
 from datashaper.engine.types import FieldAggregateOperation
 from datashaper.engine.verbs.verb_input import VerbInput
@@ -23,10 +24,10 @@ def pivot(
 
     input_table = input.get_input()
 
-    output = input_table.pivot_table(
+    output = input_table.pivot(
         values=value,
         columns=key,
-        aggfunc=aggregate_operation_mapping[aggregate_operation],
+        aggregate_function=aggregate_operation_mapping[aggregate_operation],
     )
 
     return create_verb_result(output)

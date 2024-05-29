@@ -3,9 +3,10 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Copy verb implementation."""
+
 from typing import cast
 
-import pandas as pd
+import polars as pl
 
 from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store.types import VerbResult, create_verb_result
@@ -21,7 +22,7 @@ def copy(
     **_kwargs: dict,
 ) -> VerbResult:
     """Copy verb implementation."""
-    output = cast(pd.DataFrame, input.get_input())
+    output = cast(pl.DataFrame, input.get_input())
     output[to] = output[column]
 
     return create_verb_result(output)

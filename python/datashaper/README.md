@@ -27,7 +27,7 @@ import pandas as pd
 # 1    bob
 # 2    joe
 # 3    jane
-parents = pd.DataFrame({
+parents = pl.DataFrame({
     "id": [1, 2, 3],
     "name": ['bob', 'joe', 'jane']
 })
@@ -38,7 +38,7 @@ parents = pd.DataFrame({
 # 2    kaden
 # 2    kyle
 # 3    moe
-kids = pd.DataFrame({
+kids = pl.DataFrame({
     "id": [1, 1, 2, 2, 3],
     "kid": ['billy', 'jill', 'kaden', 'kyle', 'moe']
 })

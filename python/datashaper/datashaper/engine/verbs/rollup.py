@@ -3,9 +3,10 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Rollup verb implementation."""
+
 from collections.abc import Iterable
 
-import pandas as pd
+import polars as pl
 
 from datashaper.engine.pandas import aggregate_operation_mapping
 from datashaper.engine.types import FieldAggregateOperation
@@ -32,9 +33,9 @@ def rollup(
 
     if not isinstance(agg_result, Iterable):
         agg_result = [agg_result]
-    if isinstance(agg_result, pd.Series):
-        agg_result = agg_result.reset_index(drop=True)
+    if isinstance(agg_result, pl.Series):
+        agg_result = agg_result
 
-    output = pd.DataFrame({to: agg_result})
+    output = pl.DataFrame({to: agg_result})
 
     return create_verb_result(output)

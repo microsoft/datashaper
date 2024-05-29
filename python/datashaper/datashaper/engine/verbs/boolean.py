@@ -3,9 +3,10 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Boolean verb implementation."""
+
 from typing import cast
 
-import pandas as pd
+import polars as pl
 
 from datashaper.engine.pandas import boolean_function_map
 from datashaper.engine.types import BooleanLogicalOperator
@@ -25,7 +26,7 @@ def boolean(
     """Boolean verb implementation."""
     logical_operator = BooleanLogicalOperator(operator)
     input_table = input.get_input()
-    output = cast(pd.DataFrame, input_table)
+    output = cast(pl.DataFrame, input_table)
     output[to] = boolean_function_map[logical_operator](output, columns)
 
     return create_verb_result(output)

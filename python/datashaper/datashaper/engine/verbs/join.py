@@ -3,9 +3,11 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Join verb implementation."""
+
 from typing import cast
 
 import pandas as pd
+import polars as pl
 from pandas._typing import MergeHow, Suffixes
 
 from datashaper.engine.types import JoinStrategy
@@ -25,18 +27,18 @@ __strategy_mapping: dict[JoinStrategy, MergeHow] = {
 
 
 def __clean_result(
-    strategy: JoinStrategy, result: pd.DataFrame, source: pd.DataFrame
-) -> pd.DataFrame:
+    strategy: JoinStrategy, result: pl.DataFrame, source: pl.DataFrame
+) -> pl.DataFrame:
     if strategy == JoinStrategy.AntiJoin:
         return cast(
-            pd.DataFrame, result[result["_merge"] == "left_only"][source.columns]
+            pl.DataFrame, result[result["_merge"] == "left_only"][source.columns]
         )
     if strategy == JoinStrategy.SemiJoin:
-        return cast(pd.DataFrame, result[result["_merge"] == "both"][source.columns])
+        return cast(pl.DataFrame, result[result["_merge"] == "both"][source.columns])
 
     result = cast(
-        pd.DataFrame,
-        pd.concat(
+        pl.DataFrame,
+        pl.concat(
             [
                 result[result["_merge"] == "both"],
                 result[result["_merge"] == "left_only"],
@@ -44,7 +46,7 @@ def __clean_result(
             ]
         ),
     )
-    return result.drop("_merge", axis=1)
+    return result.drop("_merge")
 
 
 @verb(name="join", treats_input_tables_as_immutable=True)
@@ -56,14 +58,14 @@ def join(
 ) -> VerbResult:
     """Join verb implementation."""
     join_strategy = JoinStrategy(strategy)
-    input_table = cast(pd.DataFrame, input.get_input())
-    other = cast(pd.DataFrame, input.get_others()[0])
+    input_table = cast(pl.DataFrame, input.get_input())
+    other = cast(pl.DataFrame, input.get_others()[0])
 
     if on is not None and len(on) > 1:
         left_column = on[0]
         right_column = on[1]
 
-        output = input_table.merge(
+        output = input_table.join(
             other,
             left_on=left_column,
             right_on=right_column,
@@ -72,7 +74,7 @@ def join(
             indicator=True,
         )
     else:
-        output = input_table.merge(
+        output = input_table.join(
             other,
             on=on,
             how=__strategy_mapping[join_strategy],

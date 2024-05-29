@@ -3,9 +3,10 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Erase verb implementation."""
+
 from typing import cast
 
-import pandas as pd
+import polars as pl
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -21,7 +22,7 @@ def erase(
 ) -> VerbResult:
     """Erase verb implementation."""
     input_table = input.get_input()
-    output = cast(pd.DataFrame, input_table)
+    output = cast(pl.DataFrame, input_table)
 
     output[column] = output[column].apply(
         lambda df_value: None if df_value == value else df_value

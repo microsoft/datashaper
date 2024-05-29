@@ -3,9 +3,10 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Snapshot verb implementation."""
+
 from typing import cast
 
-import pandas as pd
+import polars as pl
 
 from datashaper.engine.types import FileType
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -22,16 +23,16 @@ def snapshot(
     **_kwargs: dict,
 ) -> VerbResult:
     """Snapshot verb implementation."""
-    output = cast(pd.DataFrame, input.get_input())
+    output = cast(pl.DataFrame, input.get_input())
     file_name = "./" + name + "." + file_type
 
     if file_type == FileType.Csv:
-        output.to_csv(file_name)
+        output.write_csv(file_name)
 
     if file_type == FileType.Json:
-        output.to_json(file_name, orient="records", compression="infer")
+        output.write_json(file_name)
 
     if file_type == FileType.Parquet:
-        output.to_parquet(file_name)
+        output.write_parquet(file_name)
 
     return create_verb_result(output)

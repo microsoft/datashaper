@@ -17,7 +17,7 @@ def test_window():
         input=verb_input, column="id", to="newColumn", operation="uuid"
     )
     output: TableContainer = output.output
-    uuids = output.table["newColumn"].tolist()
+    uuids = output.table["newColumn"].to_list()
 
     assert len(uuids) == 5
     assert len(output.table) == 5

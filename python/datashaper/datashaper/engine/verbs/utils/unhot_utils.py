@@ -1,12 +1,13 @@
 """Unwind one-hot encoding."""
-import pandas as pd
+
+import polars as pl
 
 
 def unhot_operation(
-    input: pd.DataFrame, columns: list[str], to: str, prefix: str
-) -> pd.DataFrame | pd.Series:
+    input: pl.DataFrame, columns: list[str], to: str, prefix: str
+) -> pl.DataFrame | pl.Series:
     """Unwind one-hot encoding."""
-    output = input.copy()
+    output = input.clone()
 
     id_vars = [col for col in output.columns if col not in columns]
 
@@ -14,6 +15,4 @@ def unhot_operation(
     output = output[output["_temp_value"] >= 1]
     output.drop(columns=["_temp_value"], inplace=True)
     output[to] = output.loc[:, to].apply(lambda x: x.split(prefix)[1])
-    output.reset_index(drop=True, inplace=True)
-
     return output

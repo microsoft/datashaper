@@ -3,9 +3,10 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Binarize verb implementation."""
+
 from typing import Any, cast
 
-import pandas as pd
+import polars as pl
 
 from datashaper.engine.pandas import filter_df, get_operator
 from datashaper.engine.types import (
@@ -36,7 +37,7 @@ def binarize(
         ),
     )
 
-    input_table = cast(pd.DataFrame, input.get_input())
+    input_table = cast(pl.DataFrame, input.get_input())
 
     filter_result = filter_df(input_table, FilterArgs(column, filter_criteria))
     output = input_table

@@ -3,9 +3,10 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Difference verb implementation."""
+
 from typing import cast
 
-import pandas as pd
+import polars as pl
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -19,11 +20,11 @@ def difference(
 ) -> VerbResult:
     """Difference verb implementation."""
     input_table = input.get_input()
-    others = cast(list[pd.DataFrame], input.get_others())
-    others = pd.concat(others)
+    others = cast(list[pl.DataFrame], input.get_others())
+    others = pl.concat(others)
 
-    output = input_table.merge(others, how="left", indicator=True)
+    output = input_table.join(others, how="left", indicator=True)
     output = output[output["_merge"] == "left_only"]
-    output = output.drop("_merge", axis=1)
+    output = output.drop("_merge")
 
     return create_verb_result(cast(Table, output))

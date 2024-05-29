@@ -1,7 +1,8 @@
 """Contains the workflow verb definition."""
+
 from typing import cast
 
-import pandas as pd
+import polars as pl
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -18,8 +19,8 @@ async def workflow(
 ) -> VerbResult:
     """Apply a sequence of operations to the input table."""
     # Set up the input tables for the subworkflow
-    input_tables: dict[str, pd.DataFrame] = {
-        DEFAULT_INPUT_NAME: cast(pd.DataFrame, input.get_input())
+    input_tables: dict[str, pl.DataFrame] = {
+        DEFAULT_INPUT_NAME: cast(pl.DataFrame, input.get_input())
     }
 
     # Create and run the subworkflow

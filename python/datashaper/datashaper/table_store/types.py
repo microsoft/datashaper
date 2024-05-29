@@ -7,10 +7,10 @@
 from dataclasses import dataclass
 from typing import Any, Generic, TypeVar
 
-import pandas as pd
-from pandas.core.groupby import DataFrameGroupBy
+import polars as pl
 
 from datashaper.engine.types import Bin, Category, DataType
+from polars.dataframe.group_by import GroupBy
 
 
 @dataclass
@@ -52,7 +52,7 @@ class TableMetadata:
 T = TypeVar("T")
 
 
-Table = pd.DataFrame | DataFrameGroupBy
+Table = pl.DataFrame | GroupBy
 
 
 @dataclass

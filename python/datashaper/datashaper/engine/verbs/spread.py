@@ -6,7 +6,7 @@
 
 from typing import Any, cast
 
-import pandas as pd
+import polars as pl
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -18,9 +18,9 @@ def _get_array_item(array: list, index: int) -> Any:
 
 
 def _spread(
-    table: pd.DataFrame, column: str, to: str | list[str] | None
-) -> pd.DataFrame:
-    input_col = cast(pd.Series, table[column])
+    table: pl.DataFrame, column: str, to: str | list[str] | None
+) -> pl.DataFrame:
+    input_col = cast(pl.Series, table[column])
     max_length = cast(int, input_col.apply(len).max())
     num_output_columns = min(max_length, len(to)) if to is not None else max_length
     to_is_array = isinstance(to, list)
@@ -41,7 +41,7 @@ def spread(
     **_kwargs: dict,
 ) -> VerbResult:
     """Spread verb implementation."""
-    input_table = cast(pd.DataFrame, input.get_input())
+    input_table = cast(pl.DataFrame, input.get_input())
     output = _spread(input_table, column, to)
 
     if not preserveSource:

@@ -3,13 +3,14 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """A table store for storing and retrieving tables using diskcache."""
+
 import shutil
 from io import BytesIO
 from typing import cast
 from uuid import uuid4
 
 import diskcache as dc
-import pandas as pd
+import polars as pl
 
 from datashaper.table_store.table_store import TableStore
 from datashaper.table_store.types import TableContainer
@@ -47,7 +48,7 @@ class DiskCacheTableStore(TableStore):
     def get(self, name: str) -> TableContainer:
         """Get a table from the store."""
         data = BytesIO(cast(bytes, self._tables.get(name)))
-        return TableContainer(table=pd.read_parquet(data))
+        return TableContainer(table=pl.read_parquet(data))
 
     def remove(self, name: str) -> None:
         """Remove a table from the store."""

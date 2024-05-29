@@ -3,10 +3,11 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Bin verb implementation."""
+
 from typing import Any, cast
 
 import numpy as np
-import pandas as pd
+import polars as pl
 
 from datashaper.engine.types import BinStrategy
 from datashaper.engine.verbs.verb_input import VerbInput
@@ -88,7 +89,7 @@ def bin_verb(
     **_kwargs: dict,
 ) -> VerbResult:
     """Bin verb implementation."""
-    input_table = cast(pd.DataFrame, input.get_input())
+    input_table = cast(pl.DataFrame, input.get_input())
     bin_strategy = BinStrategy(strategy)
     min_max = (
         (min, max)

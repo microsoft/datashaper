@@ -3,10 +3,11 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Replace verb implementation."""
+
 import re
 from typing import cast
 
-import pandas as pd
+import polars as pl
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -27,7 +28,7 @@ def replace(
     """Replace verb implementation."""
     n = 0 if globalMatch else 1
     input_table = input.get_input()
-    output = cast(pd.DataFrame, input_table)
+    output = cast(pl.DataFrame, input_table)
     pat = re.compile(pattern, flags=re.IGNORECASE if caseInsensitive else 0)
     output[to] = output[column].apply(lambda x: pat.sub(replacement, x, count=n))
 

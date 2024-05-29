@@ -6,7 +6,7 @@
 
 from typing import cast
 
-import pandas as pd
+import polars as pl
 
 from datashaper.engine.pandas import aggregate_operation_mapping
 from datashaper.engine.types import FieldAggregateOperation
@@ -26,7 +26,7 @@ def aggregate(
 ) -> VerbResult:
     """Aggregate verb implementation."""
     result = cast(
-        pd.DataFrame,
+        pl.DataFrame,
         (
             input.get_input()
             .groupby(groupby)
@@ -34,6 +34,6 @@ def aggregate(
         ),
     )
     result[to] = result[column]
-    result.drop(column, axis=1, inplace=True)
+    result.drop(column)
 
-    return create_verb_result(table=result.reset_index())
+    return create_verb_result(table=result)

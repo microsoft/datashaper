@@ -3,10 +3,11 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Merge verb implementation."""
+
 from functools import partial
 from typing import cast
 
-import pandas as pd
+import polars as pl
 
 from datashaper.engine.types import MergeStrategy
 from datashaper.engine.verbs.utils import strategy_mapping
@@ -32,10 +33,10 @@ def merge(
     """Merge verb implementation."""
     merge_strategy = MergeStrategy(strategy)
 
-    input_table = cast(pd.DataFrame, input.get_input())
+    input_table = cast(pl.DataFrame, input.get_input())
 
     input_table[to] = input_table[columns].apply(
-        partial(strategy_mapping[merge_strategy], delim=delimiter), axis=1
+        partial(strategy_mapping[merge_strategy], delim=delimiter)
     )
 
     if not preserveSource:

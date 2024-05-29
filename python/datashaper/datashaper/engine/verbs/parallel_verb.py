@@ -17,6 +17,8 @@ from typing import Any, Concatenate, ParamSpec, cast
 import numpy as np
 import pandas as pd
 
+import polars as pl
+
 from datashaper.engine.types import AsyncType
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.errors import VerbParallelizationError
@@ -54,7 +56,7 @@ def new_row(old_tuple: tuple, new_column_name: str, value: Any) -> tuple:
 
 def default_merge(results: list[Table | tuple | None]) -> Table:
     """Merge a collection of parallel results into a table."""
-    return pd.concat([cast(pd.DataFrame, r) for r in results if results is not None])
+    return pl.concat([cast(pl.DataFrame, r) for r in results if results is not None])
 
 
 def parallel_verb(
@@ -158,7 +160,7 @@ def parallel_verb(
             if operation_type == OperationType.CHUNK:
                 return TableContainer(merge(results))  # type: ignore
 
-            return TableContainer(pd.DataFrame(results))
+            return TableContainer(pl.DataFrame(results))
 
         return wrapper
 

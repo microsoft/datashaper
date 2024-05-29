@@ -3,9 +3,10 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Impute verb implementation."""
+
 from typing import cast
 
-import pandas as pd
+import polars as pl
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -21,6 +22,6 @@ def impute(
 ) -> VerbResult:
     """Impute verb implementation."""
     input_table = input.get_input()
-    output = cast(pd.DataFrame, input_table)
-    output[column] = cast(pd.Series, output[column].fillna(value))
+    output = cast(pl.DataFrame, input_table)
+    output[column] = cast(pl.Series, output[column].fill_nan(value))
     return create_verb_result(output)

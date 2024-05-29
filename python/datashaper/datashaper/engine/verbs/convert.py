@@ -11,6 +11,7 @@ from typing import Any, cast
 
 import numpy as np
 import pandas as pd
+import polars as pl
 from pandas.api.types import is_bool_dtype, is_datetime64_any_dtype, is_numeric_dtype
 
 from datashaper.engine.types import ParseType
@@ -26,11 +27,11 @@ def _convert_int(value: str, radix: int) -> int | float:
         return np.nan
 
 
-def _to_int(column: pd.Series, radix: int) -> pd.DataFrame | pd.Series:
+def _to_int(column: pl.Series, radix: int) -> pl.DataFrame | pl.Series:
     if radix is None:
-        if column.str.startswith("0x").any() or column.str.startswith("0X").any():
+        if column.str.starts_with("0x").any() or column.str.starts_with("0X").any():
             radix = 16
-        elif column.str.startswith("0").any():
+        elif column.str.starts_with("0").any():
             radix = 8
         else:
             radix = 10
@@ -57,10 +58,10 @@ def _convert_date_to_str(value: datetime, format_pattern: str) -> str | float:
         return np.nan
 
 
-def _to_str(column: pd.Series, format_pattern: str) -> pd.DataFrame | pd.Series:
-    column_numeric: pd.Series | None = None
+def _to_str(column: pl.Series, format_pattern: str) -> pl.DataFrame | pl.Series:
+    column_numeric: pl.Series | None = None
     if is_numeric_dtype(column):
-        column_numeric = cast(pd.Series, pd.to_numeric(column))
+        column_numeric = cast(pl.Series, pd.to_numeric(column))
     if column_numeric is not None and is_numeric_dtype(column_numeric):
         try:
             return column.apply(lambda x: "" if x is None else str(x))
@@ -81,13 +82,13 @@ def _to_str(column: pd.Series, format_pattern: str) -> pd.DataFrame | pd.Series:
     return column.apply(lambda x: "" if pd.isna(x) else str(x))
 
 
-def _to_datetime(column: pd.Series) -> pd.Series:
+def _to_datetime(column: pl.Series) -> pl.Series:
     if column.dropna().map(lambda x: isinstance(x, numbers.Number)).all():
         return pd.to_datetime(column, unit="ms")
     return pd.to_datetime(column)
 
 
-def _to_array(column: pd.Series, delimiter: str) -> pd.Series | pd.DataFrame:
+def _to_array(column: pl.Series, delimiter: str) -> pl.Series | pl.DataFrame:
     def convert_value(value: Any) -> list:
         if pd.isna(value):
             return []
@@ -130,7 +131,7 @@ def convert(
     """Convert verb implementation."""
     parse_type = ParseType(type)
     input_table = input.get_input()
-    output = cast(pd.DataFrame, input_table)
+    output = cast(pl.DataFrame, input_table)
 
     output[to] = __type_mapping[parse_type](
         column=output[column],

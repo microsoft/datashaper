@@ -3,6 +3,7 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Sample verb implementation."""
+
 from typing import cast
 
 from datashaper.engine.verbs.verb_input import VerbInput
@@ -27,10 +28,10 @@ def sample(
     """Sample verb implementation."""
     input_table = input.get_input()
     if not emitRemainder:
-        output = input_table.sample(n=size, frac=proportion, random_state=seed)
+        output = input_table.sample(n=size, fraction=proportion, seed=seed)
         return create_verb_result(cast(Table, output))
 
-    result = input_table.sample(n=size, frac=proportion, random_state=seed)
+    result = input_table.sample(n=size, fraction=proportion, seed=seed)
     unsampled = input_table[~input_table.index.isin(result.index)]
 
     return create_verb_result(

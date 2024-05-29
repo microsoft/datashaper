@@ -3,9 +3,10 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Filter verb implementation."""
+
 from typing import cast
 
-import pandas as pd
+import polars as pl
 
 from datashaper.engine.pandas import filter_df, get_operator
 from datashaper.engine.types import (
@@ -40,9 +41,9 @@ async def filter_verb(
         ),
     )
 
-    input_table = cast(pd.DataFrame, chunk)
+    input_table = cast(pl.DataFrame, chunk)
 
     filter_index = filter_df(input_table, FilterArgs(column, filter_criteria))
     sub_idx = filter_index == True  # noqa: E712
     idx = filter_index[sub_idx].index  # type: ignore
-    return cast(Table, input_table[chunk.index.isin(idx)].reset_index(drop=True))
+    return cast(Table, input_table[chunk.index.isin(idx)])

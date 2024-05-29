@@ -3,9 +3,10 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Fill verb implementation."""
+
 from typing import cast
 
-import pandas as pd
+import polars as pl
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -21,6 +22,6 @@ def fill(
 ) -> VerbResult:
     """Fill verb implementation."""
     input_table = input.get_input()
-    output = cast(pd.DataFrame, input_table)
+    output = cast(pl.DataFrame, input_table)
     output[to] = value
     return create_verb_result(output)

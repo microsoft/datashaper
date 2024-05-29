@@ -4,7 +4,7 @@ import asyncio
 from collections.abc import Awaitable, Callable, Coroutine
 from typing import TypeVar
 
-import pandas as pd
+import polars as pl
 
 from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
 
@@ -14,8 +14,8 @@ ItemType = TypeVar("ItemType")
 
 
 async def derive_from_rows_asyncio_threads(
-    input: pd.DataFrame,
-    transform: Callable[[pd.Series], Awaitable[ItemType]],
+    input: pl.DataFrame,
+    transform: Callable[[pl.Series], Awaitable[ItemType]],
     callbacks: VerbCallbacks,
     num_threads: int | None = 4,
 ) -> list[ItemType | None]:

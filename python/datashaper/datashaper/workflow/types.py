@@ -1,7 +1,8 @@
 """Data-types for workflow runs."""
+
 from dataclasses import dataclass, field
 
-import pandas as pd
+import polars as pl
 
 
 @dataclass
@@ -25,16 +26,16 @@ class VerbTiming:
 class MemoryProfile:
     """The memory profile of a workflow run."""
 
-    snapshot_stats: pd.DataFrame
+    snapshot_stats: pl.DataFrame
     """Snapshot statistics."""
 
-    peak_stats: pd.DataFrame
+    peak_stats: pl.DataFrame
     """Peak memory statistics."""
 
-    time_stats: pd.DataFrame
+    time_stats: pl.DataFrame
     """Time statistics."""
 
-    detailed_view: pd.DataFrame
+    detailed_view: pl.DataFrame
     """Detailed view of memory usage."""
 
 

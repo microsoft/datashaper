@@ -25,7 +25,7 @@ def test_sample_seed():
         sample = VerbManager.get().get_verb("sample").func
         output: VerbResult = sample(input=verb_input, size=2, seed=0xBEEF)
         output = output.output
-        ids = output.table["id"].tolist()
+        ids = output.table["id"].to_list()
 
         if i == 0:
             values = ids

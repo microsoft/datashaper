@@ -1,9 +1,10 @@
 """Memory profiling callbacks."""
+
 import time
 import tracemalloc
 from collections import defaultdict
 
-import pandas as pd
+import polars as pl
 
 from datashaper.execution.execution_node import ExecutionNode
 from datashaper.table_store.types import TableContainer
@@ -66,7 +67,7 @@ class MemoryProfilingWorkflowCallbacks(NoopWorkflowCallbacks):
         self._peak_memory["all"].append(peak - self._peak_start_workflow)
         tracemalloc.stop()
 
-    def get_snapshot_stats(self, sort_by: str = "max") -> pd.DataFrame:
+    def get_snapshot_stats(self, sort_by: str = "max") -> pl.DataFrame:
         """Get the snapshot stats."""
         stats = {}
         for verb, snapshots in self._snapshots.items():
@@ -81,9 +82,9 @@ class MemoryProfilingWorkflowCallbacks(NoopWorkflowCallbacks):
                 "min": min(verb_stats),
                 "samples": len(verb_stats),
             }
-        return pd.DataFrame(stats).transpose().sort_values(sort_by, ascending=False)
+        return pl.DataFrame(stats).transpose().sort_values(sort_by, ascending=False)
 
-    def get_peak_stats(self, sort_by: str = "max") -> pd.DataFrame:
+    def get_peak_stats(self, sort_by: str = "max") -> pl.DataFrame:
         """Get the peak memory stats."""
         stats = {}
         for verb, peak in self._peak_memory.items():
@@ -93,9 +94,9 @@ class MemoryProfilingWorkflowCallbacks(NoopWorkflowCallbacks):
                 "min": _bytes_to_mb(min(peak)),
                 "samples": len(peak),
             }
-        return pd.DataFrame(stats).transpose().sort_values(sort_by, ascending=False)
+        return pl.DataFrame(stats).transpose().sort_values(sort_by, ascending=False)
 
-    def get_time_stats(self, sort_by: str = "max") -> pd.DataFrame:
+    def get_time_stats(self, sort_by: str = "max") -> pl.DataFrame:
         """Get the time stats."""
         stats = {}
         for verb, times in self._timing.items():
@@ -105,9 +106,9 @@ class MemoryProfilingWorkflowCallbacks(NoopWorkflowCallbacks):
                 "min": min(times),
                 "samples": len(times),
             }
-        return pd.DataFrame(stats).transpose().sort_values(sort_by, ascending=False)
+        return pl.DataFrame(stats).transpose().sort_values(sort_by, ascending=False)
 
-    def get_detailed_view(self) -> pd.DataFrame:
+    def get_detailed_view(self) -> pl.DataFrame:
         """Get a detailed view of the memory usage."""
         df_json = defaultdict(list)
         for verb, snapshot in self._snapshots.items():
@@ -124,7 +125,7 @@ class MemoryProfilingWorkflowCallbacks(NoopWorkflowCallbacks):
                     df_json["filename"].append(stat.traceback[0].filename)
                     df_json["lineno"].append(stat.traceback[0].lineno)
                     df_json["sample"].append(sample)
-        return pd.DataFrame(df_json)
+        return pl.DataFrame(df_json)
 
 
 def _bytes_to_mb(bytes: float) -> float:

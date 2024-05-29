@@ -4,7 +4,7 @@ import logging
 from collections.abc import Awaitable, Callable
 from typing import TypeVar
 
-import pandas as pd
+import polars as pl
 
 from datashaper.engine.types import AsyncType
 from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
@@ -17,8 +17,8 @@ ItemType = TypeVar("ItemType")
 
 
 async def derive_from_rows(
-    input: pd.DataFrame,
-    transform: Callable[[pd.Series], Awaitable[ItemType]],
+    input: pl.DataFrame,
+    transform: Callable[[pl.Series], Awaitable[ItemType]],
     callbacks: VerbCallbacks,
     num_threads: int = 4,
     scheduling_type: AsyncType = AsyncType.AsyncIO,

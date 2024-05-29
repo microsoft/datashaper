@@ -3,6 +3,7 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Fold verb implementation."""
+
 from typing import cast
 
 from datashaper.engine.verbs.verb_input import VerbInput
@@ -31,7 +32,7 @@ def fold(
     # names as values in the meantime
     rename_mapper: dict[str, str] = {}
     if preserveSource is True:
-        output = output.copy()
+        output = output.clone()
         for column in columns:
             output[f"__datashaper_fold_{column}"] = output[column]
             rename_mapper[f"__datashaper_fold_{column}"] = column
@@ -41,15 +42,13 @@ def fold(
     if len(columns) > 0:
         output = output.set_index(columns)
 
-    output = output.stack(dropna=False).reset_index()
+    output = output.stack(dropna=False)
 
     col: str = cast(str, output.filter(regex="level_[1-9]").columns[0])
-    output = output.rename({col: to[0], 0: to[1]}, axis=1).reset_index()[
-        columns + [to[0], to[1]]
-    ]
+    output = output.rename({col: to[0], 0: to[1]})[columns + [to[0], to[1]]]
 
     if preserveSource is True:
         # (pyright reports a false call issue with the args to rename)
-        output.rename(mapper=rename_mapper, axis=1, inplace=True)  # type: ignore
+        output.rename(mapper=rename_mapper)
 
     return create_verb_result(cast(Table, output))

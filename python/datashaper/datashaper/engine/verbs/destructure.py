@@ -3,10 +3,11 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Destructure verb implementation."""
+
 import math
 from typing import Any
 
-import pandas as pd
+import polars as pl
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -22,10 +23,10 @@ def destructure(
     **_kwargs: dict,
 ) -> VerbResult:
     """Destructure verb implementation."""
-    input_table = input.get_input().copy()
+    input_table = input.get_input()
 
     results = []
-    for tuple_result in input_table.iterrows():
+    for tuple_result in input_table.iter_rows():
         row = tuple_result[1]
         cleaned_row_dict = {col: row[col] for col in input_table.columns}
         rest_row_dict = row[column] if row[column] is not None else {}
@@ -44,7 +45,7 @@ def destructure(
 
         results.append({**cleaned_row_dict, **filtered_dict})  # type: ignore
 
-    input_table = pd.DataFrame(results, index=input_table.index)
+    input_table = pl.DataFrame(results)
 
     if not preserveSource:
         input_table = input_table.drop(columns=[column])

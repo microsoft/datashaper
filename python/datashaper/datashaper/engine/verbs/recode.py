@@ -3,9 +3,10 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Recode verb implementation."""
+
 from typing import Any, cast
 
-import pandas as pd
+import polars as pl
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -33,6 +34,6 @@ def recode(
 
     input_table = input.get_input()
 
-    output = cast(pd.DataFrame, input_table)
+    output = cast(pl.DataFrame, input_table)
     output[to] = output[column].map(cast(Any, mapping))
     return create_verb_result(output)

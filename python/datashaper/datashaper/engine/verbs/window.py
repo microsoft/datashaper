@@ -8,6 +8,7 @@ from uuid import uuid4
 
 import numpy as np
 import pandas as pd
+import polars as pl
 from pandas.core.groupby import DataFrameGroupBy
 
 from datashaper.engine.types import WindowFunction
@@ -17,7 +18,7 @@ from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 def _get_window_indexer(
-    column: pd.Series, fixed_size: bool = False
+    column: pl.Series, fixed_size: bool = False
 ) -> int | pd.api.indexers.BaseIndexer:
     if fixed_size:
         return pd.api.indexers.FixedForwardWindowIndexer(window_size=len(column))
@@ -75,7 +76,7 @@ def window(
     if isinstance(input_table, DataFrameGroupBy):
         # ungroup table to add new column
         output = input_table.obj
-        output[to] = window.reset_index()[column]
+        output[to] = window[column]
         # group again by original group by
         output = output.groupby(input_table.keys)
     else:

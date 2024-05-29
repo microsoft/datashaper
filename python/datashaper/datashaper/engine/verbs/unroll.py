@@ -17,4 +17,4 @@ def unroll(
 ) -> VerbResult:
     """Unroll a column."""
     table = input.get_input()
-    return create_verb_result(table.explode(column).reset_index(drop=True))
+    return create_verb_result(table.explode(column))
