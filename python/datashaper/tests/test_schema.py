@@ -6,9 +6,9 @@ from logging import getLogger
 from pathlib import Path
 from threading import Thread
 
-import pandas as pd
+import polars as pl
 import pytest
-from pandas.testing import assert_frame_equal
+from polars.testing import assert_frame_equal
 
 from datashaper import PandasDtypeBackend, Workflow, load_csv_table, load_json_table
 
@@ -25,7 +25,7 @@ thread.start()
 
 @cache
 def load_inputs():
-    dataframes: dict[str, pd.DataFrame] = {}
+    dataframes: dict[str, pl.DataFrame] = {}
 
     for file in os.listdir(TABLE_STORE_PATH):
         path = Path(TABLE_STORE_PATH) / file
@@ -40,7 +40,7 @@ def load_inputs():
 
 # pandas won't auto-guess iso dates on import, so we define an explicit iso output for comparison as strings
 # this means that the expected.csv _must_ match the expected iso format to seconds granularity
-def to_csv(df: pd.DataFrame, path: str) -> None:
+def to_csv(df: pl.DataFrame, path: str) -> None:
     df.to_csv(path, date_format="%Y-%m-%dT%H:%M:%SZ", index=False)
 
 
@@ -63,7 +63,7 @@ async def test_verbs_schema_input(
 ):
     with (Path(fixture_path) / "workflow.json").open() as schema:
         schema_dict = json.load(schema)
-        tables: dict[str, pd.DataFrame] = {}
+        tables: dict[str, pl.DataFrame] = {}
         for input in schema_dict["input"]:
             tables[input] = load_inputs()[input]
 
@@ -96,7 +96,7 @@ async def test_verbs_schema_input(
                 # if it's a csv we cycle it through file system to confirm read/write
                 # TODO: this cycle is outdated and should be removed. it masks potential verbs issues
                 if expected.endswith(".csv"):
-                    if isinstance(result, pd.DataFrame):
+                    if isinstance(result, pl.DataFrame):
                         to_csv(result, result_table_path)
                     else:
                         to_csv(result.obj, result_table_path)

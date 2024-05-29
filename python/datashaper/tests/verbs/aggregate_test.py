@@ -1,11 +1,11 @@
-import pandas as pd
+import polars as pl
 
 from datashaper import TableContainer, VerbInput
 from datashaper.engine.verbs.aggregate import FieldAggregateOperation, aggregate
 
 
 def test_aggregate_count():
-    data = pd.DataFrame(
+    data = pl.DataFrame(
         {
             "id": [1, 1, 2, 2, 3],
             "item": ["a", "b", "c", "d", "e"],
@@ -25,7 +25,7 @@ def test_aggregate_count():
 
 
 def test_aggregate_unique():
-    data = pd.DataFrame(
+    data = pl.DataFrame(
         {
             "id": [1, 1, 2, 2, 3],
             "item": ["a", "b", "c", "d", "e"],

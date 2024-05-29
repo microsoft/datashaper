@@ -1,7 +1,7 @@
 import asyncio
 from threading import Lock
 
-import pandas as pd
+import polars as pl
 
 from datashaper import NoopVerbCallbacks, derive_from_rows_asyncio
 
@@ -9,12 +9,12 @@ from datashaper import NoopVerbCallbacks, derive_from_rows_asyncio
 async def test_derive_from_rows_asyncio():
     """Test the derive_from_rows_asyncio_threads function."""
 
-    table = pd.DataFrame({"x": range(100), "y": range(100)})
+    table = pl.DataFrame({"x": range(100), "y": range(100)})
 
     num_concurrent = 0
     lock = Lock()
 
-    async def strategy(series: pd.Series) -> int:
+    async def strategy(series: pl.Series) -> int:
         nonlocal num_concurrent
         with lock:
             num_concurrent += 1

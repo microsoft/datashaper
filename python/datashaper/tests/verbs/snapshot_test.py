@@ -1,19 +1,19 @@
 from pathlib import Path
 
-import pandas as pd
+import polars as pl
 
 from datashaper.engine.verbs import VerbInput, VerbManager
 from datashaper.table_store.types import TableContainer, VerbResult
 
 
-def make_verb_input(data: list, columns: list[str]):
-    pd_table = pd.DataFrame(data=data, columns=columns)
-    table_container = TableContainer(pd_table)
+def make_verb_input(data: dict):
+    table = pl.DataFrame(data)
+    table_container = TableContainer(table)
     return VerbInput(table_container)
 
 
 def test_snapshot_csv():
-    verb_input = make_verb_input([[1], [2], [3], [4], [5]], ["id"])
+    verb_input = make_verb_input({"id": [1, 2, 3, 4, 5]})
     snapshot = VerbManager.get().get_verb("snapshot").func
     output: VerbResult = snapshot(input=verb_input, name="test-file", file_type="csv")
     output: TableContainer = output.output
@@ -23,7 +23,7 @@ def test_snapshot_csv():
 
 
 def test_snapshot_json():
-    verb_input = make_verb_input([[1], [2], [3], [4], [5]], ["id"])
+    verb_input = make_verb_input({"id": [1, 2, 3, 4, 5]})
     snapshot = VerbManager.get().get_verb("snapshot").func
     output: VerbResult = snapshot(input=verb_input, name="test-file", file_type="json")
     output: TableContainer = output.output
@@ -33,7 +33,7 @@ def test_snapshot_json():
 
 
 def test_snapshot_parquet():
-    verb_input = make_verb_input([[1], [2], [3], [4], [5]], ["id"])
+    verb_input = make_verb_input({"id": [1, 2, 3, 4, 5]})
     snapshot = VerbManager.get().get_verb("snapshot").func
     output: VerbResult = snapshot(
         input=verb_input, name="test-file", file_type="parquet"

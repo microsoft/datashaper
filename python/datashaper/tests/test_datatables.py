@@ -3,9 +3,9 @@ import os
 from logging import getLogger
 from pathlib import Path
 
-import pandas as pd
+import polars as pl
 import pytest
-from pandas.testing import assert_frame_equal
+from polars.testing import assert_frame_equal
 
 from datashaper import DataTable, load_table
 
@@ -33,7 +33,7 @@ async def test_verbs_schema_input(fixture_path: str):
         result_path = Path(fixture_path) / schema_dict["path"]
 
     try:
-        expected_table = pd.read_json(expected_path)
+        expected_table = pl.read_json(expected_path)
         result_table = load_table(result_path, schema)
 
         assert_frame_equal(expected_table, result_table, check_dtype=False)
