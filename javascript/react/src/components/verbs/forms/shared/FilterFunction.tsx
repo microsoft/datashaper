@@ -4,9 +4,9 @@
  */
 import {
 	BooleanComparisonOperator,
+	ComparisonStrategy,
 	DataType,
 	DateComparisonOperator,
-	ComparisonStrategy,
 	NumericComparisonOperator,
 	StringComparisonOperator,
 } from '@datashaper/schema'

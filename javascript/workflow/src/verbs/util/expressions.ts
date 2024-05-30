@@ -11,8 +11,8 @@ import type {
 } from '@datashaper/schema'
 import {
 	BooleanOperator,
-	FieldAggregateOperation,
 	ComparisonStrategy,
+	FieldAggregateOperation,
 	WindowFunction,
 } from '@datashaper/schema'
 import { parseBoolean } from '@datashaper/tables'
