@@ -554,7 +554,6 @@ export type InputBinding = {
 // @public (undocumented)
 export interface InputColumnArgs {
     column: string;
-    dataType?: DataType;
 }
 
 // Warning: (ae-missing-release-tag) "InputColumnListArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

@@ -15,5 +15,4 @@ export interface InputColumnArgs
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [column](./schema.inputcolumnargs.column.md) |  | string | Name of the input column for columnar operations |
-|  [dataType?](./schema.inputcolumnargs.datatype.md) |  | [DataType](./schema.datatype.md) | <i>(Optional)</i> Expected data type for values in the column |
 

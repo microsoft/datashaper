@@ -6074,34 +6074,6 @@
                 "startIndex": 1,
                 "endIndex": 2
               }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!InputColumnArgs#dataType:member",
-              "docComment": "/**\n * Expected data type for values in the column\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "dataType?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "DataType",
-                  "canonicalReference": "@datashaper/schema!DataType:enum"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "dataType",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
             }
           ],
           "extendsTokenRanges": []

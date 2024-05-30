@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { CodebookSchema } from '../codebook/CodebookSchema.js'
-import type { DataType, Value } from '../data.js'
+import type { Value } from '../data.js'
 import type { SortDirection } from '../enums/index.js'
 import type { WorkflowSchema } from './WorkflowSchema.js'
 
@@ -61,10 +61,6 @@ export interface InputColumnArgs {
 	 * Name of the input column for columnar operations
 	 */
 	column: string
-	/**
-	 * Expected data type for values in the column
-	 */
-	dataType?: DataType
 }
 
 /**

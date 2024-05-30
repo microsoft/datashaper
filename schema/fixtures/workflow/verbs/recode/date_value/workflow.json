@@ -1,0 +1,20 @@
+{
+	"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v2.json",
+	"steps": [
+		{
+			"verb": "recode",
+			"input": "table21",
+			"args": {
+				"column": "date",
+				"to": "newColumn",
+				"mapping": {
+					"1994-03-24T08:00:00Z": "1999-11-01T08:00:00Z",
+					"2022-03-28T07:00:00Z": "2021-02-14T07:00:00Z"
+				}
+			},
+			"id": "expected"
+		}
+	],
+
+	"input": ["table21"]
+}
