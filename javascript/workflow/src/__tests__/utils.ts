@@ -1,19 +1,19 @@
+import path from 'path'
+import { DataFormat, type DataTableSchema } from '@datashaper/schema'
+import { readTable } from '@datashaper/tables'
 /*!
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import fsp from 'fs/promises'
-import path from 'path'
-import { DataFormat, DataTableSchema } from '@datashaper/schema'
-import { readTable } from '@datashaper/tables'
 
+import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import {
 	CodebookProfile,
 	DataTableProfile,
 	TableBundleProfile,
 	WorkflowProfile,
 } from '../resources/index.js'
-import ColumnTable from 'arquero/dist/types/table/column-table.js'
 
 export const tick = (): Promise<void> => new Promise((r) => setTimeout(r, 0))
 

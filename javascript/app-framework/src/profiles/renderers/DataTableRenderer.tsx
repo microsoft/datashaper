@@ -2,8 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { memo } from 'react'
+
 import type { DataTable } from '@datashaper/workflow'
+import { memo } from 'react'
 import { CompoundEditor } from '../../components/editors/CompoundEditor/index.js'
 import { DataTableEditor } from '../../components/editors/DataTableEditor/index.js'
 import { DataTableTextEditor } from '../../components/editors/DataTableTextEditor/index.js'

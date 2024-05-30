@@ -7,11 +7,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { memo, useState, useMemo } from 'react'
+import { memo, useMemo, useState } from 'react'
 
 import type {
-	EditorConfig,
 	CompoundEditorProps,
+	EditorConfig,
 } from './CompoundEditor.types.js'
 import { ViewOptions } from './ViewOptions.js'
 

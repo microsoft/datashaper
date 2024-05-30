@@ -4,8 +4,8 @@
  */
 import { memo } from 'react'
 import { DataPackageProvider } from '../../../context/index.js'
-import type { DataShaperAppProps } from './DataShaperApp.types.js'
 import { AppLayout } from './AppLayout.js'
+import type { DataShaperAppProps } from './DataShaperApp.types.js'
 
 /**
  * A component for rendering a data-shaper application.

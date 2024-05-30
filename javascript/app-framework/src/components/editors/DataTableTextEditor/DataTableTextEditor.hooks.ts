@@ -3,8 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-argument */
-import { useState, useEffect, useCallback } from 'react'
+
 import type { DataTable } from '@datashaper/workflow'
+import { useCallback, useEffect, useState } from 'react'
 
 export function useContent(resource: DataTable): string | undefined {
 	const [content, setContent] = useState<string | undefined>()

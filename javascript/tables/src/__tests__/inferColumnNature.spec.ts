@@ -1,9 +1,9 @@
+import fs from 'fs'
 /*!
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { VariableNature } from '@datashaper/schema'
-import fs from 'fs'
 
 import { fromCSV } from '../fromCSV.js'
 import { inferColumnNature } from '../inferColumnNature.js'

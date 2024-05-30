@@ -24,12 +24,15 @@ export const onehotStep: ColumnTableStep<OnehotArgs> = (
 		})
 		.get('distinct', 0) as any[]
 
-	const args = distinct.sort().reduce((acc, cur) => {
-		acc[prefix ? `${prefix}${cur}` : `${cur}`] = escape((d: any) =>
-			d[column] === null ? null : d[column] === cur ? 1 : 0,
-		) as ExprObject
-		return acc
-	}, {} as Record<string, ExprObject>)
+	const args = distinct.sort().reduce(
+		(acc, cur) => {
+			acc[prefix ? `${prefix}${cur}` : `${cur}`] = escape((d: any) =>
+				d[column] === null ? null : d[column] === cur ? 1 : 0,
+			) as ExprObject
+			return acc
+		},
+		{} as Record<string, ExprObject>,
+	)
 	const onehotted = input.derive(args)
 	return preserveSource ? onehotted : onehotted.select(not(column))
 }

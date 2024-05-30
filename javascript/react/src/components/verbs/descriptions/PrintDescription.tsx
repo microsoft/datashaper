@@ -5,8 +5,8 @@
 import type { PrintArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
-import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
+import type { StepDescriptionProps } from './types.js'
 
 export const PrintDescription: React.FC<StepDescriptionProps<PrintArgs>> = memo(
 	function PrintDescription(props) {

@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs'
+import type { Observable } from 'rxjs'
 
 /**
  * Implement this to signal that your resource is configurable.

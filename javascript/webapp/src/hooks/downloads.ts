@@ -6,11 +6,11 @@
 import type { TableContainer } from '@datashaper/tables'
 import type { FileWithPath } from '@datashaper/utilities'
 import {
+	FileCollection,
+	FileMimeType,
 	createFileWithPath,
 	download,
 	downloadTable,
-	FileCollection,
-	FileMimeType,
 } from '@datashaper/utilities'
 import type { Workflow } from '@datashaper/workflow'
 import { useCallback, useState } from 'react'
@@ -97,6 +97,6 @@ function tableFile(t: TableContainer, name?: string) {
 	return t.table
 		? createFileWithPath(new Blob([t.table.toCSV()]), {
 				name: tableName(name || t.id),
-		  })
+			})
 		: null
 }

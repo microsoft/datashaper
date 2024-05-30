@@ -10,9 +10,9 @@ import { FileImport } from './FileImport.js'
 import { useFileManagementCommands } from './FileTreeCommands.hooks.js'
 import {
 	CollapsedButton,
-	collapsedButtonStyles,
 	CollapsedCommands,
 	Commands,
+	collapsedButtonStyles,
 	icons,
 	useCommandbarStyles,
 } from './FileTreeCommands.styles.js'

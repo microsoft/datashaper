@@ -6,7 +6,7 @@ import type { BooleanArgs } from '@datashaper/schema'
 import { BooleanOperator } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
-import { type FormInput, enumDropdown, VerbForm } from '../forms/index.js'
+import { type FormInput, VerbForm, enumDropdown } from '../forms/index.js'
 import type { StepFormBaseProps } from '../types.js'
 
 /**

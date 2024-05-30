@@ -5,10 +5,12 @@
 import type { Profile, WorkflowSchema } from '@datashaper/schema'
 import { KnownProfile } from '@datashaper/schema'
 
-import type { ProfileHandler } from '../../types/index.js'
 import { Workflow } from '../../Workflow/index.js'
+import type { ProfileHandler } from '../../types/index.js'
 
-export class WorkflowProfile implements ProfileHandler<Workflow, WorkflowSchema> {
+export class WorkflowProfile
+	implements ProfileHandler<Workflow, WorkflowSchema>
+{
 	public readonly profile: Profile = KnownProfile.Workflow
 
 	public createInstance(schema: WorkflowSchema | undefined): Promise<Workflow> {

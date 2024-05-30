@@ -3,13 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { memo, useCallback, useMemo } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import type { ResourceRoute } from '../../../types.js'
 import { ResourcesPane } from '../ResourcesPane/ResourcesPane.js'
 import { useRegisterProfileHelp } from './AppLayout.hooks.js'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { useResourceRoutes } from './useResourceRoutes.js'
-import type { ResourceRoute } from '../../../types.js'
 import { useFileTreeStyle } from './AppLayout.styles.js'
 import type { AppResourcesProps } from './AppResources.types.js'
+import { useResourceRoutes } from './useResourceRoutes.js'
 
 export const AppResources: React.FC<AppResourcesProps> = memo(
 	function AppResources({

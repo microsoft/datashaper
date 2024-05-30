@@ -17,9 +17,9 @@ import { Delimiter } from './Delimiter.js'
 import { Headers } from './Headers.js'
 import {
 	Container,
-	expandoStyles,
 	FieldContainer,
 	FlexContainer,
+	expandoStyles,
 } from './Parser.styles.js'
 import type { ParserProps } from './Parser.types.js'
 

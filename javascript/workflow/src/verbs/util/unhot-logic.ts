@@ -17,12 +17,15 @@ export function unhotOperation(
 	columns: string[],
 	prefix = '',
 ): ColumnTable {
-	const args = columns.reduce((acc, cur) => {
-		const pxp = new RegExp(`^${prefix}`)
-		const value = cur.replace(pxp, '')
-		acc[cur] = escape((d: any) => (d[cur] === 1 ? value : null))
-		return acc
-	}, {} as Record<string, object>)
+	const args = columns.reduce(
+		(acc, cur) => {
+			const pxp = new RegExp(`^${prefix}`)
+			const value = cur.replace(pxp, '')
+			acc[cur] = escape((d: any) => (d[cur] === 1 ? value : null))
+			return acc
+		},
+		{} as Record<string, object>,
+	)
 
 	return input.derive(args)
 }

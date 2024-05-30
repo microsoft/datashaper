@@ -7,18 +7,20 @@ import type { TableContainer, TableMetadata } from '@datashaper/tables'
 import { removeExtension } from '@datashaper/utilities'
 import { ReadOnlyTextField } from '@essex/components'
 import {
-	Spinner,
-	ProgressIndicator,
 	Checkbox,
 	IconButton,
 	Label,
 	Modal,
 	PrimaryButton,
+	ProgressIndicator,
+	Spinner,
 	TextField,
 } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import { memo, useCallback, useState } from 'react'
 
+import { DataFormat } from '@datashaper/schema'
+import { useDataPackage } from '../../../hooks/useDataPackage.js'
 import { DataTableConfig } from '../../DataTableConfig/DataTableConfig.js'
 import { RawTable } from '../RawTable/RawTable.js'
 import {
@@ -33,14 +35,12 @@ import {
 	HeaderTitle,
 	MainContent,
 	ModalBody,
-	modalStyles,
 	PreviewContent,
 	Sidebar,
+	modalStyles,
 	textFieldStyles,
 } from './ImportTable.styles.js'
 import type { ImportTableProps } from './ImportTable.types.js'
-import { DataFormat } from '@datashaper/schema'
-import { useDataPackage } from '../../../hooks/useDataPackage.js'
 
 const icons = {
 	cancel: { iconName: 'Cancel' },

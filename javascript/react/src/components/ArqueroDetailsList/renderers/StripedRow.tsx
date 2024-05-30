@@ -11,9 +11,9 @@ import type { RichRowProps } from './types.js'
 /**
  * Render a striped DetailsRow
  */
-export const StripedRow: React.FC<RichRowProps> = memo(function StripedRow(
-	props,
-) {
-	const customStyles = useStyles(props)
-	return <DetailsRow {...props} styles={customStyles} />
-})
+export const StripedRow: React.FC<RichRowProps> = memo(
+	function StripedRow(props) {
+		const customStyles = useStyles(props)
+		return <DetailsRow {...props} styles={customStyles} />
+	},
+)

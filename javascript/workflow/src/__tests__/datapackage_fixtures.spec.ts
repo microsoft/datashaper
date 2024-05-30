@@ -1,14 +1,14 @@
+import fs from 'fs'
+import path, { dirname } from 'path'
+import { fileURLToPath } from 'url'
 /* eslint-disable jest/expect-expect, jest/valid-title, jest/no-conditional-expect */
 import { KnownProfile } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import fs from 'fs'
 import fsp from 'fs/promises'
-import path, { dirname } from 'path'
-import { fileURLToPath } from 'url'
 
 import { DataPackage } from '../resources/DataPackage/DataPackage.js'
-import type { TableEmitter, Workflow } from '../resources/index.js'
 import type { TableBundle } from '../resources/TableBundle.js'
+import type { TableEmitter, Workflow } from '../resources/index.js'
 import { defaultProfiles } from './utils.js'
 
 // Set the root cwd to the package root.

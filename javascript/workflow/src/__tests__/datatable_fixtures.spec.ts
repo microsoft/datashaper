@@ -1,9 +1,9 @@
-/* eslint-disable jest/expect-expect, jest/valid-title, jest/no-conditional-expect */
-import { DataTableSchema } from '@datashaper/schema'
-import { from } from 'arquero'
 import fs from 'fs'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
+/* eslint-disable jest/expect-expect, jest/valid-title, jest/no-conditional-expect */
+import type { DataTableSchema } from '@datashaper/schema'
+import { from } from 'arquero'
 import { readDataTable, readJson } from './utils.js'
 
 // Static data paths.

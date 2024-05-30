@@ -25,10 +25,13 @@ export function checkedItemsCommand(
 	) => boolean | void,
 	props?: Partial<ICommandBarItemProps>,
 ): ICommandBarItemProps {
-	const hash = (checked || EMPTY_ARRAY).reduce((acc, cur) => {
-		acc[cur] = true
-		return acc
-	}, {} as Record<string, boolean>)
+	const hash = (checked || EMPTY_ARRAY).reduce(
+		(acc, cur) => {
+			acc[cur] = true
+			return acc
+		},
+		{} as Record<string, boolean>,
+	)
 	const items = list.map((name, index) => ({
 		key: name,
 		text: name,

@@ -15,8 +15,8 @@ import {
 	Header,
 	HeaderButtons,
 	StepComponentContainer,
-	Title,
 	Subtitle,
+	Title,
 	useIconProps,
 } from './StepEditorModal.styles.js'
 import type { StepEditorModalProps } from './StepEditorModal.types.js'

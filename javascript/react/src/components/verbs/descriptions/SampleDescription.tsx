@@ -6,8 +6,8 @@ import type { SampleArgs } from '@datashaper/schema'
 import { format } from 'd3-format'
 import { memo, useMemo } from 'react'
 
-import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
+import type { StepDescriptionProps } from './types.js'
 
 const pct = format('.0%')
 

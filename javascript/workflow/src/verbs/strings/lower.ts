@@ -5,9 +5,9 @@
 
 import type { StringsArgs } from '@datashaper/schema'
 
+import { op } from 'arquero'
 import type { ColumnTableStep } from '../util/factories.js'
 import { stepVerbFactory } from '../util/factories.js'
-import { op } from 'arquero'
 
 export const lowerStep: ColumnTableStep<StringsArgs> = (
 	input,

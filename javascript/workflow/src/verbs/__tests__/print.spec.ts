@@ -1,10 +1,10 @@
+import { jest } from '@jest/globals'
 /*!
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
 import { printStep } from '../print.js'
-import { jest } from '@jest/globals'
 
 describe('test for print verb', () => {
 	let store: TestStore

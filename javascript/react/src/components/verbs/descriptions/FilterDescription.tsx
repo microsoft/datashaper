@@ -6,8 +6,8 @@ import type { FilterArgs } from '@datashaper/schema'
 import { ComparisonStrategy } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
-import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
+import type { StepDescriptionProps } from './types.js'
 
 export const FilterDescription: React.FC<StepDescriptionProps<FilterArgs>> =
 	memo(function FilterDescription(props) {

@@ -11,9 +11,9 @@ import { memo, useCallback, useMemo } from 'react'
 import { DisplayOrder } from '../../../../enums.js'
 import { useWorkflow } from '../../../../hooks/index.js'
 import { useWorkflowSteps } from '../../../../hooks/workflow/useWorkflowSteps.js'
-import { StepOutput } from './components/StepOutput.js'
 import { useInputTables } from './WorkflowExample.hooks.js'
 import { Container, Description, Output } from './WorkflowExample.styles.js'
+import { StepOutput } from './components/StepOutput.js'
 
 export interface WorkflowExampleProps {
 	schema: WorkflowSchema

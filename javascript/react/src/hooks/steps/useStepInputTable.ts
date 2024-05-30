@@ -7,8 +7,8 @@ import type { Step, Workflow } from '@datashaper/workflow'
 import { NodeInput } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { useWorkflowDataTable } from '../index.js'
 import { getInputNode } from '../../util.js'
+import { useWorkflowDataTable } from '../index.js'
 
 /**
  * Use an input table for a step

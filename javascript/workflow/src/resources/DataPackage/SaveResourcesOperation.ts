@@ -4,8 +4,8 @@
  */
 /* eslint-disable @essex/adjacent-await */
 import type { Resource } from '../Resource.js'
-import { write } from './io.js'
 import type { ResourceManager } from './ResourceManager.js'
+import { write } from './io.js'
 
 export class SaveResourcesOperation {
 	private _nameToPath = new Map<string, string>()

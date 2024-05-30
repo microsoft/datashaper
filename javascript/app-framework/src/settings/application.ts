@@ -2,20 +2,22 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	atom,
-	useRecoilValue,
-	useRecoilState,
-	useSetRecoilState,
-	type SetterOrUpdater,
-} from 'recoil'
+
 import { useCallback } from 'react'
+import {
+	type SetterOrUpdater,
+	atom,
+	useRecoilState,
+	useRecoilValue,
+	useSetRecoilState,
+} from 'recoil'
 
 const LOCAL_STORAGE_KEY = 'app-framework-application-settings'
 const DEFAULT = {}
 
 const storageEffect =
-	(key: string) => ({ setSelf, onSet }: { setSelf: any; onSet: any }) => {
+	(key: string) =>
+	({ setSelf, onSet }: { setSelf: any; onSet: any }) => {
 		// initialize from ls if present
 		try {
 			const saved = localStorage.getItem(key)

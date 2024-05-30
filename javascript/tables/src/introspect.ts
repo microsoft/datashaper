@@ -39,15 +39,18 @@ function detailedMeta(
 ): Record<string, FieldMetadata> {
 	// Force to get stats from ungrouped table, otherwise will get stats with grouped information and graph will not show
 	const sts = stats(table.ungroup(), columns)
-	return Object.entries(sts).reduce((acc, cur) => {
-		const [name, stat] = cur
-		const type = determineType(stat.mode)
-		acc[name] = {
-			type,
-			...stat,
-		}
-		return acc
-	}, {} as Record<string, FieldMetadata>)
+	return Object.entries(sts).reduce(
+		(acc, cur) => {
+			const [name, stat] = cur
+			const type = determineType(stat.mode)
+			acc[name] = {
+				type,
+				...stat,
+			}
+			return acc
+		},
+		{} as Record<string, FieldMetadata>,
+	)
 }
 
 function basicMeta(
@@ -56,11 +59,14 @@ function basicMeta(
 ): Record<string, FieldMetadata> {
 	// Force to get stats from ungrouped table, otherwise will get stats with grouped information and graph will not show
 	const t = columnTypes(table.ungroup(), columns)
-	return Object.entries(t).reduce((acc, cur) => {
-		const [name, type] = cur
-		acc[name] = {
-			type,
-		}
-		return acc
-	}, {} as Record<string, FieldMetadata>)
+	return Object.entries(t).reduce(
+		(acc, cur) => {
+			const [name, type] = cur
+			acc[name] = {
+				type,
+			}
+			return acc
+		},
+		{} as Record<string, FieldMetadata>,
+	)
 }

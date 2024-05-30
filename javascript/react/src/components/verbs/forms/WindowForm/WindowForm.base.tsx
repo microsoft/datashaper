@@ -6,7 +6,7 @@ import type { WindowArgs } from '@datashaper/schema'
 import { WindowFunction } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
-import { type FormInput, enumDropdown, VerbForm } from '../forms/index.js'
+import { type FormInput, VerbForm, enumDropdown } from '../forms/index.js'
 import type { StepFormProps } from '../types.js'
 
 /**

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { StoryObj, StoryFn } from '@storybook/react'
+import type { StoryFn, StoryObj } from '@storybook/react'
 
 import type { InputTablesProps } from './InputTables.js'
 import { InputTables } from './InputTables.js'

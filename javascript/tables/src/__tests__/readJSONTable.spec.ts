@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { DataOrientation } from '@datashaper/schema'
 import fs from 'fs'
+import { DataOrientation } from '@datashaper/schema'
 
 import { readJSONTable } from '../readJSONTable.js'
 

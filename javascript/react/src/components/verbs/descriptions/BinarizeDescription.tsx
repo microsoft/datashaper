@@ -6,8 +6,8 @@ import type { BinarizeArgs } from '@datashaper/schema'
 import { ComparisonStrategy } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
-import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
+import type { StepDescriptionProps } from './types.js'
 
 export const BinarizeDescription: React.FC<StepDescriptionProps<BinarizeArgs>> =
 	memo(function BinarizeDescription(props) {

@@ -13,13 +13,13 @@ import { useObservableState } from 'observable-hooks'
 import { useCallback, useMemo } from 'react'
 
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
+import { useLoadDataPackage } from '../../../hooks/useLoadDataPackage.js'
 import { usePersistenceService } from '../../../hooks/usePersistenceService.js'
 import type { AppProfile } from '../../../types.js'
 import { CommandBarSection } from '../../../types.js'
 import { TABLE_TYPES, ZIP_TYPES } from './ResourcesPane.constants.js'
 import { icons } from './ResourcesPane.styles.js'
 import type { FileDefinition } from './ResourcesPane.types.js'
-import { useLoadDataPackage } from '../../../hooks/useLoadDataPackage.js'
 
 /**
  * Gets the file-management commandbar items

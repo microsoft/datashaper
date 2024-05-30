@@ -15,7 +15,7 @@ import type {
 	SocketName,
 	VariadicNodeBinding,
 } from '../types'
-import { NodeInput, NodeOutput, NodeStats } from '../types.js'
+import { NodeInput, NodeOutput, type NodeStats } from '../types.js'
 
 const log = debug('datashaper:BaseNode')
 

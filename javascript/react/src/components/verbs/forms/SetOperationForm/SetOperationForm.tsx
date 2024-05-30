@@ -9,7 +9,7 @@ import { EMPTY_ARRAY } from '../../../../empty.js'
 import { useStepInputTable } from '../../../../hooks/steps/useStepInputTable.js'
 import type { StepFormProps } from '../types.js'
 import { useOthers } from './SetOperationForm.hooks.js'
-import { Container, icons, Tables } from './SetOperationForm.styles.js'
+import { Container, Tables, icons } from './SetOperationForm.styles.js'
 
 /**
  * Provides inputs to create a list of tables.
