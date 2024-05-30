@@ -170,9 +170,9 @@ class BooleanLogicalOperator(str, Enum):
 class FilterArgs(InputColumnArgs):
     """Filter criteria for a column."""
 
-    value: Any | None
-    strategy: ComparisonStrategy | None
-    operator: NumericComparisonOperator | StringComparisonOperator | BooleanComparisonOperator | None
+    value: Any
+    strategy: ComparisonStrategy
+    operator: NumericComparisonOperator | StringComparisonOperator | BooleanComparisonOperator
 
 
 class SetOp(str, Enum):

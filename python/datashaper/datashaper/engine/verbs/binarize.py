@@ -22,8 +22,8 @@ from datashaper.table_store.types import VerbResult, create_verb_result
 def binarize(
     input: VerbInput,
     to: str,
-    column: str | None,
-    value: Any | None,
+    column: str,
+    value: Any,
     strategy: ComparisonStrategy = ComparisonStrategy.Value,
     operator: StringComparisonOperator = StringComparisonOperator.Equals,
     **_kwargs: dict,

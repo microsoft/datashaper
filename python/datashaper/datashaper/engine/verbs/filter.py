@@ -26,8 +26,8 @@ from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
 async def filter_verb(
     chunk: Table,
     callbacks: VerbCallbacks,  # noqa: ARG001
-    column: str | None,
-    value: Any | None,
+    column: str,
+    value: Any,
     strategy: ComparisonStrategy = ComparisonStrategy.Value,
     operator: StringComparisonOperator = StringComparisonOperator.Equals,
     **_kwargs: dict,
