@@ -111,7 +111,7 @@ class BinStrategy(str, Enum):
     FixedWidth = "fixed width"
 
 
-class FilterCompareType(str, Enum):
+class ComparisonStrategy(str, Enum):
     """Filter compare type."""
 
     Value = "value"
@@ -155,15 +155,6 @@ class BooleanComparisonOperator(str, Enum):
     IsNotEmpty = "is not empty"
 
 
-@dataclass
-class Criteria:
-    """A filter criterion."""
-
-    value: Any
-    type: FilterCompareType
-    operator: NumericComparisonOperator | StringComparisonOperator | BooleanComparisonOperator
-
-
 class BooleanLogicalOperator(str, Enum):
     """Boolean logical operators."""
 
@@ -179,7 +170,9 @@ class BooleanLogicalOperator(str, Enum):
 class FilterArgs(InputColumnArgs):
     """Filter criteria for a column."""
 
-    criteria: Criteria
+    value: Any
+    strategy: ComparisonStrategy
+    operator: NumericComparisonOperator | StringComparisonOperator | BooleanComparisonOperator
 
 
 class SetOp(str, Enum):

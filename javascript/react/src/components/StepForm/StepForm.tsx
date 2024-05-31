@@ -63,7 +63,7 @@ export const StepForm: React.FC<StepFormProps> = memo(function StepForm({
 
 	/* Change Events */
 	const change = useStepChangeHandler(index, onChange)
-	const onInputColumnChange = useInputColumnChanged(s, change, table)
+	const onInputColumnChange = useInputColumnChanged(s, change)
 	const onInputColumnListChange = useInputColumnListChanged(s, change)
 	const onInputColumnListChangeAll = useInputColumnListAllChanged(s, change)
 	const onOutputColumnChange = useOutputColumnChanged(s, change)

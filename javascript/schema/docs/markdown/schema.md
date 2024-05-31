@@ -12,6 +12,7 @@
 |  [BooleanComparisonOperator](./schema.booleancomparisonoperator.md) |  |
 |  [BooleanOperator](./schema.booleanoperator.md) |  |
 |  [CodebookStrategy](./schema.codebookstrategy.md) |  |
+|  [ComparisonStrategy](./schema.comparisonstrategy.md) | Indicates the comparison type used for a filter operation. This is done on a row-by-row basis. |
 |  [DataFormat](./schema.dataformat.md) | Base format the data is stored within. This will expand to include additional formats such as Arrow and Parquet over time. TODO: we've seen a number of examples in the wild using JSON Lines https://jsonlines.org/ |
 |  [DataNature](./schema.datanature.md) | Indicates the expected general layout of the data. This could be used to provide validation hints. For example, microdata must have one row per subject. TODO: "timeseries" as distinct from "panel"? others? |
 |  [DataOrientation](./schema.dataorientation.md) | <p>Indicates the orientation of the data within the file.</p><p>Most CSV data files are 'values' (row-oriented).</p><p>JSON files can commonly be either. Records are probably more common, though require more space due to replication of keys. Apache Arrow or Parquet are columnar. This nearly aligns with pandas: https://pandas.pydata.org/pandas-docs/stable/user\_guide/io.html\#json</p><p>A key difference (which probably needs resolved) is that we don't yet support the notion of an index. See their example for "columns" or "index" orientation, which is a nested structure.</p><p>Example JSON formats: records: \[{ colA: valueA1, colB: valueB1 }<!-- -->, { colA: valueA2, colB: valueB2 }<!-- -->\]</p><p>columns: { colA: \[valueA1, valueA2\], colB: \[valueB1, valueB2\] }</p><p>array: \["value1", "value2"\]</p><p>values: \[ \["colA", "colB"\], \["valueA1", "valueA2"\], \["valueA2", "valueB2"\] \]</p> |
@@ -20,7 +21,6 @@
 |  [ErrorCode](./schema.errorcode.md) |  |
 |  [FieldAggregateOperation](./schema.fieldaggregateoperation.md) | This is the subset of aggregate functions that can operate on a single field so we don't accommodate additional args. See https://uwdata.github.io/arquero/api/op\#aggregate-functions |
 |  [FileType](./schema.filetype.md) | These are the available formats for the snapshot verb. |
-|  [FilterCompareType](./schema.filtercomparetype.md) | Indicates the comparison type used for a filter operation. This is done on a row-by-row basis. |
 |  [JoinStrategy](./schema.joinstrategy.md) |  |
 |  [KnownProfile](./schema.knownprofile.md) |  |
 |  [KnownRel](./schema.knownrel.md) |  |

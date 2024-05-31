@@ -50,10 +50,8 @@
 			"args": {
 				"column": "FY21 Sales",
 				"to": "FY21 Sales < 10k",
-				"criteria": {
-					"operator": "<",
-					"value": 10000
-				}
+				"operator": "<",
+				"value": 10000
 			}
 		},
 		{
@@ -158,10 +156,8 @@
 			},
 			"args": {
 				"column": "Employees",
-				"criteria": {
-					"operator": "<=",
-					"value": 300000
-				}
+				"operator": "<=",
+				"value": 300000
 			}
 		},
 		{

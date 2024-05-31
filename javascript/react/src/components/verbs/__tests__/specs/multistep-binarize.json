@@ -12,11 +12,9 @@
 			"args": {
 				"column": "Employees",
 				"to": "Smallest",
-				"criteria": {
-					"operator": "<",
-					"value": 150000,
-					"type": "value"
-				}
+				"operator": "<",
+				"value": 150000,
+				"strategy": "value"
 			}
 		},
 		{
@@ -28,11 +26,9 @@
 			"args": {
 				"column": "Employees",
 				"to": "Largest",
-				"criteria": {
-					"operator": ">",
-					"value": 200000,
-					"type": "value"
-				}
+				"operator": ">",
+				"value": 200000,
+				"strategy": "value"
 			}
 		},
 		{

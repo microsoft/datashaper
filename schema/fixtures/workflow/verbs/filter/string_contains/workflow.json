@@ -6,11 +6,9 @@
 			"input": "table3",
 			"args": {
 				"column": "item",
-				"criteria": {
-					"operator": "contains",
-					"type": "value",
-					"value": "be"
-				}
+				"operator": "contains",
+				"strategy": "value",
+				"value": "be"
 			},
 			"id": "expected"
 		}

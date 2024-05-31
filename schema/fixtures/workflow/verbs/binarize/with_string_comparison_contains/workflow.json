@@ -7,11 +7,9 @@
 			"args": {
 				"to": "newColumn",
 				"column": "item",
-				"criteria": {
-					"type": "value",
-					"operator": "contains",
-					"value": "so"
-				}
+				"strategy": "value",
+				"operator": "contains",
+				"value": "so"
 			},
 			"id": "expected"
 		}

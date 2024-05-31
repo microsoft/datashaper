@@ -6,11 +6,9 @@
 			"input": "table8",
 			"args": {
 				"column": "count",
-				"criteria": {
-					"operator": ">",
-					"type": "value",
-					"value": 100
-				}
+				"operator": ">",
+				"strategy": "value",
+				"value": 100
 			},
 			"id": "expected"
 		}

@@ -7,11 +7,9 @@
 			"args": {
 				"to": "newColumn",
 				"column": "item",
-				"criteria": {
-					"type": "value",
-					"operator": "ends with",
-					"value": "a"
-				}
+				"strategy": "value",
+				"operator": "ends with",
+				"value": "a"
 			},
 			"id": "expected"
 		}

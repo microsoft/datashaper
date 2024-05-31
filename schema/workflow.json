@@ -8,10 +8,6 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
-                },
                 "groupby": {
                     "description": "Column to group by",
                     "type": "string"
@@ -58,10 +54,6 @@
                 "column": {
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
-                },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
                 },
                 "fixedcount": {
                     "description": "Fixed number of bins.\nNote that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary -\nthis means there is always one extra bin for the max value when using fixed count.",
@@ -119,17 +111,40 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "criteria": {
-                    "$ref": "#/definitions/Criteria",
-                    "description": "Filter criteria to apply to the column."
+                "operator": {
+                    "description": "Filter operator to execute. Note the correct operator for the column data type must be used.",
+                    "enum": [
+                        "!=",
+                        "<",
+                        "<=",
+                        "=",
+                        ">",
+                        ">=",
+                        "after",
+                        "before",
+                        "contains",
+                        "ends with",
+                        "equals",
+                        "is empty",
+                        "is false",
+                        "is not empty",
+                        "is not equal",
+                        "is true",
+                        "regex",
+                        "starts with"
+                    ],
+                    "type": "string"
                 },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
+                "strategy": {
+                    "$ref": "#/definitions/ComparisonStrategy",
+                    "description": "Indicates whether the filter should be directly against a value,\nor against the value of another column"
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
                     "type": "string"
+                },
+                "value": {
+                    "description": "Comparison value for the column.\nNot required if the operator is self-defining (e.g., 'is empty')"
                 }
             },
             "type": "object"
@@ -247,6 +262,14 @@
             ],
             "type": "string"
         },
+        "ComparisonStrategy": {
+            "description": "Indicates the comparison type used for a filter operation.\nThis is done on a row-by-row basis.",
+            "enum": [
+                "column",
+                "value"
+            ],
+            "type": "string"
+        },
         "Constraints": {
             "description": "Validation constraints for a field.",
             "properties": {
@@ -294,10 +317,6 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
-                },
                 "delimiter": {
                     "description": "Delimiter to use for identifying decimals when converting strings to numbers.",
                     "type": "string"
@@ -327,49 +346,9 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
-                },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
                     "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "Criteria": {
-            "properties": {
-                "operator": {
-                    "description": "Filter operator to execute. Note the correct operator for the column data type must be used.",
-                    "enum": [
-                        "!=",
-                        "<",
-                        "<=",
-                        "=",
-                        ">",
-                        ">=",
-                        "after",
-                        "before",
-                        "contains",
-                        "ends with",
-                        "equals",
-                        "is empty",
-                        "is false",
-                        "is not empty",
-                        "is not equal",
-                        "is true",
-                        "regex",
-                        "starts with"
-                    ],
-                    "type": "string"
-                },
-                "type": {
-                    "$ref": "#/definitions/FilterCompareType",
-                    "description": "Indicates whether the filter should be directly against a value,\nor against the value of another column"
-                },
-                "value": {
-                    "description": "Comparison value for the column.\nNot required if the operator is self-defining (e.g., 'is empty')"
                 }
             },
             "type": "object"
@@ -418,10 +397,6 @@
                 "column": {
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
-                },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
                 },
                 "keys": {
                     "items": {
@@ -474,10 +449,6 @@
                 "column": {
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
-                },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
                 },
                 "value": {
                     "description": "Value to match and erase (set to undefined) in the column"
@@ -601,24 +572,39 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "criteria": {
-                    "$ref": "#/definitions/Criteria",
-                    "description": "Filter criteria to apply to the column."
+                "operator": {
+                    "description": "Filter operator to execute. Note the correct operator for the column data type must be used.",
+                    "enum": [
+                        "!=",
+                        "<",
+                        "<=",
+                        "=",
+                        ">",
+                        ">=",
+                        "after",
+                        "before",
+                        "contains",
+                        "ends with",
+                        "equals",
+                        "is empty",
+                        "is false",
+                        "is not empty",
+                        "is not equal",
+                        "is true",
+                        "regex",
+                        "starts with"
+                    ],
+                    "type": "string"
                 },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
+                "strategy": {
+                    "$ref": "#/definitions/ComparisonStrategy",
+                    "description": "Indicates whether the filter should be directly against a value,\nor against the value of another column"
+                },
+                "value": {
+                    "description": "Comparison value for the column.\nNot required if the operator is self-defining (e.g., 'is empty')"
                 }
             },
             "type": "object"
-        },
-        "FilterCompareType": {
-            "description": "Indicates the comparison type used for a filter operation.\nThis is done on a row-by-row basis.",
-            "enum": [
-                "column",
-                "value"
-            ],
-            "type": "string"
         },
         "FoldArgs": {
             "properties": {
@@ -656,10 +642,6 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
-                },
                 "value": {
                     "description": "Value to fill in empty cells"
                 }
@@ -671,10 +653,6 @@
                 "column": {
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
-                },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
                 }
             },
             "type": "object"
@@ -813,10 +791,6 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
-                },
                 "prefix": {
                     "description": "Optional prefixes for the output column names",
                     "type": "string"
@@ -911,10 +885,6 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
-                },
                 "mapping": {
                     "$ref": "#/definitions/Record<any,any>",
                     "description": "Mapping of old value to new for the recoding.\nNote that the key must be coercible to a string for map lookup."
@@ -1004,10 +974,6 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
-                },
                 "operation": {
                     "$ref": "#/definitions/FieldAggregateOperation",
                     "description": "Aggregate/rollup operation"
@@ -1052,10 +1018,6 @@
                 "column": {
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
-                },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
                 },
                 "preserveSource": {
                     "description": "Indicates whether source column(s) should be preserved on operations that normally drop the source(s).\nE.g., merge, fold, spread, etc.",
@@ -2082,10 +2044,6 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
-                },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
                     "type": "string"
@@ -2101,10 +2059,6 @@
                 "column": {
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
-                },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
                 },
                 "globalSearch": {
                     "type": "boolean"
@@ -2249,10 +2203,6 @@
                 "column": {
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
-                },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
                 },
                 "operation": {
                     "$ref": "#/definitions/WindowFunction",

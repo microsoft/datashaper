@@ -9,10 +9,7 @@ import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 export const filterStep: ColumnTableStep<FilterArgs> = (
 	input,
-	{ column, criteria },
-) =>
-	input.filter(
-		compare(column, criteria.value, criteria.operator, criteria.type),
-	)
+	{ column, value, operator, strategy },
+) => input.filter(compare(column, value, operator, strategy))
 
 export const filter = stepVerbFactory(filterStep)

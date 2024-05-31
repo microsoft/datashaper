@@ -17,11 +17,9 @@
 		{
 			"args": {
 				"to": "high-cholesterol",
-				"criteria": {
-					"operator": ">",
-					"type": "value",
-					"value": "200"
-				},
+				"operator": ">",
+				"strategy": "value",
+				"value": "200",
 				"column": "cholesterol"
 			},
 			"verb": "binarize"
