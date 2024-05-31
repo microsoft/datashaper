@@ -5,9 +5,9 @@
 import {
 	Calendar,
 	Callout,
-	defaultCalendarStrings,
 	DirectionalHint,
 	FocusTrapZone,
+	defaultCalendarStrings,
 	useTheme,
 } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'

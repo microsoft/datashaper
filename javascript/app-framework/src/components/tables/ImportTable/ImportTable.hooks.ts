@@ -3,19 +3,19 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import {
+	type CodebookSchema,
 	DataFormat,
 	DataOrientation,
-	type CodebookSchema,
 	TypeHintsDefaults,
 } from '@datashaper/schema'
 import { type TableMetadata, introspect, readTable } from '@datashaper/tables'
+import { generateCodebook } from '@datashaper/tables'
 import type { BaseFile } from '@datashaper/utilities'
 import { extension, guessDelimiter } from '@datashaper/utilities'
 import { DataTable } from '@datashaper/workflow'
 import { table as atable } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { generateCodebook } from '@datashaper/tables'
 
 export function useFileAttributes(file: BaseFile): {
 	delimiter: string

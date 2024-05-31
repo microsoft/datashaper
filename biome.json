@@ -1,0 +1,70 @@
+{
+	"files": {
+		"ignore": [
+			"dist",
+			"lib",
+			"build",
+			"python",
+			"docs",
+			"storybook-static",
+			".turbo",
+			".pnp.cjs",
+			".pnp.loader.mjs",
+			"javascript/schema/versions.js",
+			".devcontainer",
+			"javascript/schema/versions.d.ts",
+			"schema/",
+			"package.json"
+		]
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"correctness": {
+				"useExhaustiveDependencies": "off"
+			},
+			"complexity": {
+				"noForEach": "off",
+				"useLiteralKeys": "off",
+				"noStaticOnlyClass": "off",
+				"noBannedTypes": "off",
+				"useArrowFunction": "off",
+				"noUselessTernary": "off"
+			},
+			"suspicious": {
+				"noExplicitAny": "off",
+				"noShadowRestrictedNames": "off",
+				"noArrayIndexKey": "off",
+				"noConfusingVoidType": "off",
+				"noImplicitAnyLet": "off",
+				"noGlobalIsNan": "off"
+			},
+			"a11y": {
+				"useKeyWithClickEvents": "off"
+			},
+			"performance": {
+				"noDelete": "off",
+				"noAccumulatingSpread": "off"
+			},
+			"style": {
+				"noParameterAssign": "off",
+				"noUselessElse": "off",
+				"useExponentiationOperator": "off",
+				"useNumberNamespace": "off",
+				"useNodejsImportProtocol": "off"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"semicolons": "asNeeded",
+			"quoteStyle": "single",
+			"jsxQuoteStyle": "single",
+			"trailingComma": "all"
+		}
+	},
+	"formatter": {
+		"indentStyle": "tab"
+	}
+}

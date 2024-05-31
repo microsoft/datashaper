@@ -15,6 +15,6 @@ export interface Criteria
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [operator](./schema.criteria.operator.md) |  | [NumericComparisonOperator](./schema.numericcomparisonoperator.md) \| [StringComparisonOperator](./schema.stringcomparisonoperator.md) \| [BooleanComparisonOperator](./schema.booleancomparisonoperator.md) \| [DateComparisonOperator](./schema.datecomparisonoperator.md) | Filter operator to execute. Note the correct operator for the column data type must be used. |
-|  [type](./schema.criteria.type.md) |  | [FilterCompareType](./schema.filtercomparetype.md) | Indicates whether the filter should be directly against a value, or against the value of another column |
-|  [value?](./schema.criteria.value.md) |  | [Value](./schema.value.md) | <i>(Optional)</i> Comparison value for the column. Not required if the operator is self-defining (e.g., 'is empty') |
+|  [strategy](./schema.criteria.strategy.md) |  | [ComparisonStrategy](./schema.comparisonstrategy.md) | Indicates whether the filter should be directly against a value, or against the value of another column |
+|  [value?](./schema.criteria.value.md) |  | [Value](./schema.value.md) | <i>(Optional)</i> Comparison value for the column. This is either a direct value to compare if strategy is ComparisonStrategy.Value, or the name of another column to compare if strategy is ComparisonStrategy.Column. Not required if the operator is self-defining (e.g., 'is empty') |
 

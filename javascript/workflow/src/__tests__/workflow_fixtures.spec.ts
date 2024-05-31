@@ -1,14 +1,14 @@
+import fs from 'fs'
 /* eslint-disable jest/expect-expect, jest/valid-title */
 import { createSchemaValidator } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import { container } from '@datashaper/tables'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import fs from 'fs'
 
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
-import { Workflow } from '../resources/index.js'
 import { jest } from '@jest/globals'
+import { Workflow } from '../resources/index.js'
 import { readDataTable, readJson } from './utils.js'
 
 // Static data paths.

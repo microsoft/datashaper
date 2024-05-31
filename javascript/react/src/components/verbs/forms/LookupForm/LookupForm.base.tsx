@@ -11,15 +11,15 @@ import { NodeInput } from '@datashaper/workflow'
 import type { IDropdownOption } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 
+import { getInputNode } from '../../../../util.js'
 import {
 	type FormInput,
+	VerbForm,
 	inputColumnList,
 	joinInputs,
 	tableDropdown,
-	VerbForm,
 } from '../forms/index.js'
 import type { StepFormBaseProps } from '../types.js'
-import { getInputNode } from '../../../../util.js'
 /**
  * Provides inputs for a Lookup step.
  */

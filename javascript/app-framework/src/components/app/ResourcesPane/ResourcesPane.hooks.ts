@@ -10,10 +10,10 @@ import { removeExtension } from '@datashaper/utilities'
 import { Codebook, DataTable, TableBundle } from '@datashaper/workflow'
 import { useCallback, useContext } from 'react'
 
+import { useNavigate } from 'react-router-dom'
 import { DataPackageContext } from '../../../context/index.js'
 import type { OpenTableHandler } from '../../tables/ImportTable/ImportTable.types.js'
 import type { AddTableHandler } from './ResourcesPane.types.js'
-import { useNavigate } from 'react-router-dom'
 
 export function useOnOpenTable(
 	file: BaseFile,

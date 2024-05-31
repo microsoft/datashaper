@@ -6,10 +6,9 @@
 			"input": "table5",
 			"args": {
 				"column": "item",
-				"criteria": {
-					"operator": "is empty",
-					"type": "value"
-				}
+				"operator": "is empty",
+				"strategy": "value",
+				"value": null
 			},
 			"id": "expected"
 		}

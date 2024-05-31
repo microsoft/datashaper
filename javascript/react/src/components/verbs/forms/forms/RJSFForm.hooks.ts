@@ -5,7 +5,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import capitalize from 'lodash-es/capitalize.js'
-import get from 'lodash-es/get.js'
+// import get from 'lodash-es/get.js'
 import {
 	COLUMN_ARGS,
 	EXCLUDE_PROPERTIES,
@@ -36,7 +36,7 @@ export function useWorkflowSchema(): any | undefined {
 // TODO: how to deal with subobjects? (e.g., Criteria on `binarize`)
 function resolve(schema: any) {
 	Object.entries(schema.definitions).forEach(
-		([defKey, definition]: [string, any]) => {
+		([_defKey, definition]: [string, any]) => {
 			if (definition.enum) {
 				definition.oneOf = prettyEnum(definition.enum, true)
 			}

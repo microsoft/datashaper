@@ -6,8 +6,8 @@ import type { BinArgs } from '@datashaper/schema'
 import { BinStrategy } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
-import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
+import type { StepDescriptionProps } from './types.js'
 
 export const BinDescription: React.FC<StepDescriptionProps<BinArgs>> = memo(
 	function BinDescription(props) {
@@ -48,7 +48,7 @@ export const BinDescription: React.FC<StepDescriptionProps<BinArgs>> = memo(
 											{
 												value: args.clamped ? 'clamped' : 'not clamped',
 											},
-									  ]
+										]
 									: undefined,
 						},
 						{

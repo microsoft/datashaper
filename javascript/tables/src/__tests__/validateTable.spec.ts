@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import fs from 'fs'
 import type { CodebookSchema, Constraints } from '@datashaper/schema'
 import { ErrorCode } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
-import fs from 'fs'
 
 import { fromCSV } from '../fromCSV.js'
 import { generateCodebook } from '../generateCodebook.js'

@@ -10,15 +10,15 @@ import { memo } from 'react'
 import { FileTreeCommands } from './FileTreeCommands.js'
 import { FileTreeTooltip as Tooltip } from './FileTreeTooltip.js'
 import { HelpPanel } from './HelpPanel.js'
+import { ResourceTree } from './ResourceTree.js'
 import {
 	Container,
 	FooterMenu,
 	PanelContainer,
-	icons,
 	TreeContainer,
+	icons,
 } from './ResourcesPane.styles.js'
 import type { ResourcesPaneProps } from './ResourcesPane.types.js'
-import { ResourceTree } from './ResourceTree.js'
 import { SettingsPanel } from './SettingsPanel.js'
 export const ResourcesPane: React.FC<ResourcesPaneProps> = memo(
 	function ResourcesPane({

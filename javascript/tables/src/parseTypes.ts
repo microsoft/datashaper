@@ -5,9 +5,9 @@
 
 import type { TypeHints, Value } from '@datashaper/schema'
 import { DataType, TypeHintsDefaults } from '@datashaper/schema'
+import isTypedArray from 'lodash-es/isTypedArray.js'
 import toNumber from 'lodash-es/toNumber.js'
 import moment from 'moment'
-import isTypedArray from 'lodash-es/isTypedArray.js'
 import { guessDataType, typeGuesserFactory } from './guessDataType.js'
 import { formatNumberStr, getDate } from './util.js'
 

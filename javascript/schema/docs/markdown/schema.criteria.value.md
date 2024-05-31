@@ -4,7 +4,7 @@
 
 ## Criteria.value property
 
-Comparison value for the column. Not required if the operator is self-defining (e.g., 'is empty')
+Comparison value for the column. This is either a direct value to compare if strategy is ComparisonStrategy.Value, or the name of another column to compare if strategy is ComparisonStrategy.Column. Not required if the operator is self-defining (e.g., 'is empty')
 
 <b>Signature:</b>
 

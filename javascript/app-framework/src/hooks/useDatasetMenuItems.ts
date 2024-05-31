@@ -21,7 +21,7 @@ export function useDatasetMenuItems(
 						key: dataPackage.name,
 						text: dataPackage.name,
 						onClick: () => onClick(dataPackage.name),
-				  }))
+					}))
 				: [],
 		}),
 		[tables, onClick],

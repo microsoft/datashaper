@@ -6,9 +6,9 @@ import type { JoinArgs } from '@datashaper/schema'
 import { NodeInput } from '@datashaper/workflow'
 import { memo, useMemo } from 'react'
 
-import type { StepDescriptionProps } from './types.js'
-import { VerbDescription } from './VerbDescription.js'
 import { getInputNode } from '../../../util.js'
+import { VerbDescription } from './VerbDescription.js'
+import type { StepDescriptionProps } from './types.js'
 
 export const JoinDescription: React.FC<StepDescriptionProps<JoinArgs>> = memo(
 	function JoinDescription(props) {

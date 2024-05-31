@@ -3,8 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@datashaper/tables'
-import { type Observable, BehaviorSubject, from, map } from 'rxjs'
+import { BehaviorSubject, type Observable, from, map } from 'rxjs'
 
+import type { WorkflowInput } from '@datashaper/schema'
 import { DefaultGraph } from '../../dataflow/DefaultGraph.js'
 import { observableNode } from '../../dataflow/index.js'
 import type { Node } from '../../dataflow/types.js'
@@ -19,7 +20,6 @@ import {
 	hasPossibleInputs,
 	isVariadicSocketName as isVariadic,
 } from './utils.js'
-import { WorkflowInput } from '@datashaper/schema'
 
 const DEFAULT_INPUT = '__DEFAULT_INPUT__'
 

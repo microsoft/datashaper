@@ -3,13 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { DestructureArgs } from '@datashaper/schema'
-import { memo, useMemo } from 'react'
 import { toggleListItem } from '@datashaper/utilities'
+import { memo, useMemo } from 'react'
 
+import { EMPTY_ARRAY } from '../../../../empty.js'
+import { getSimpleDropdownOptions } from '../../../../hooks/fluent/useSimpleDropdownOptions.js'
 import { type FormInput, FormInputType, VerbForm } from '../forms/index.js'
 import type { StepFormBaseProps } from '../types.js'
-import { getSimpleDropdownOptions } from '../../../../hooks/fluent/useSimpleDropdownOptions.js'
-import { EMPTY_ARRAY } from '../../../../empty.js'
 
 /**
  * Just the json object inputs for spread json.

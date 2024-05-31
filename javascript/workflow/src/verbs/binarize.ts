@@ -10,10 +10,10 @@ import { compare } from './util/index.js'
 
 export const binarizeStep: ColumnTableStep<BinarizeArgs> = (
 	input,
-	{ to, column, criteria },
+	{ to, column, value, operator, strategy },
 ) =>
 	input.derive({
-		[to]: compare(column, criteria.value, criteria.operator, criteria.type),
+		[to]: compare(column, value, operator, strategy),
 	})
 
 export const binarize = stepVerbFactory(binarizeStep)

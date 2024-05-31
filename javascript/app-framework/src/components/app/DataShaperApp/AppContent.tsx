@@ -9,9 +9,9 @@ import { AppServicesContext } from '../../../context/app_services/index.js'
 import { EMPTY_OBJECT } from '../../../empty.js'
 import type { ResourceRoute } from '../../../types.js'
 import { RenameModal } from '../../modals/index.js'
+import type { AppContentProps } from './AppContent.types.js'
 import { useFlattened } from './AppLayout.hooks.js'
 import { useResourceRoutes } from './useResourceRoutes.js'
-import type { AppContentProps } from './AppContent.types.js'
 
 export const AppContent: React.FC<AppContentProps> = memo(function AppContent({
 	api,

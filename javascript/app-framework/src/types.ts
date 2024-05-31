@@ -2,15 +2,16 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ResourceSchema } from '@datashaper/schema'
+
 import type { FieldWellItem } from '@datashaper/react'
-import type { IContextualMenuItem } from '@fluentui/react'
+import type { ResourceSchema } from '@datashaper/schema'
 import type {
-	Resource,
 	DataPackage,
 	ProfileHandler,
+	Resource,
 } from '@datashaper/workflow'
 import type { SettingsConfig } from '@essex/components'
+import type { IContextualMenuItem } from '@fluentui/react'
 /**
  * Data attached to resource-tree nodes
  */

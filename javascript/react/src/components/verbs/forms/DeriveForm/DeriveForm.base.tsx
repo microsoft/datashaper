@@ -9,9 +9,9 @@ import { memo, useMemo } from 'react'
 import { useSimpleDropdownOptions } from '../../../../hooks/index.js'
 import {
 	type FormInput,
-	enumDropdown,
 	FormInputType,
 	VerbForm,
+	enumDropdown,
 } from '../forms/index.js'
 import type { StepFormBaseProps } from '../types.js'
 

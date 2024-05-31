@@ -5,8 +5,8 @@
 /* eslint-disable @typescript-eslint/consistent-type-imports */
 import { ArqueroDetailsList } from '../ArqueroDetailsList.js'
 import { BasicStory } from './Basic.story.js'
-import { ColumnsStory } from './Columns/Columns.story.js'
 import { ColumnValidationStory } from './ColumnValidation.story.js'
+import { ColumnsStory } from './Columns/Columns.story.js'
 import { FeaturesStory } from './Features.story.js'
 import { FillStory } from './Fill.story.js'
 import { MicroStory } from './Micro.story.js'

@@ -5,7 +5,7 @@
 import {
 	BooleanComparisonOperator,
 	BooleanOperator,
-	FilterCompareType,
+	ComparisonStrategy,
 	NumericComparisonOperator,
 	StringComparisonOperator,
 } from '@datashaper/schema'
@@ -19,7 +19,7 @@ describe('expressions', () => {
 				'count',
 				1,
 				NumericComparisonOperator.Equals,
-				FilterCompareType.Value,
+				ComparisonStrategy.Value,
 			)
 
 			expect(
@@ -52,7 +52,7 @@ describe('expressions', () => {
 				'count',
 				1,
 				NumericComparisonOperator.GreaterThan,
-				FilterCompareType.Value,
+				ComparisonStrategy.Value,
 			)
 
 			expect(
@@ -85,7 +85,7 @@ describe('expressions', () => {
 				'count',
 				1,
 				NumericComparisonOperator.GreaterThanOrEqual,
-				FilterCompareType.Value,
+				ComparisonStrategy.Value,
 			)
 
 			expect(
@@ -118,7 +118,7 @@ describe('expressions', () => {
 				'count',
 				1,
 				NumericComparisonOperator.LessThan,
-				FilterCompareType.Value,
+				ComparisonStrategy.Value,
 			)
 
 			expect(
@@ -151,7 +151,7 @@ describe('expressions', () => {
 				'count',
 				1,
 				NumericComparisonOperator.LessThanOrEqual,
-				FilterCompareType.Value,
+				ComparisonStrategy.Value,
 			)
 
 			expect(
@@ -184,7 +184,7 @@ describe('expressions', () => {
 				'count',
 				1,
 				NumericComparisonOperator.NotEqual,
-				FilterCompareType.Value,
+				ComparisonStrategy.Value,
 			)
 
 			expect(
@@ -217,7 +217,7 @@ describe('expressions', () => {
 				'count',
 				1,
 				NumericComparisonOperator.IsNotEmpty,
-				FilterCompareType.Value,
+				ComparisonStrategy.Value,
 			)
 
 			expect(
@@ -250,7 +250,7 @@ describe('expressions', () => {
 				'count',
 				1,
 				NumericComparisonOperator.IsEmpty,
-				FilterCompareType.Value,
+				ComparisonStrategy.Value,
 			)
 
 			expect(
@@ -283,7 +283,7 @@ describe('expressions', () => {
 				'item',
 				'be',
 				StringComparisonOperator.Contains,
-				FilterCompareType.Value,
+				ComparisonStrategy.Value,
 			)
 
 			expect(
@@ -316,7 +316,7 @@ describe('expressions', () => {
 				'item',
 				'',
 				StringComparisonOperator.IsEmpty,
-				FilterCompareType.Value,
+				ComparisonStrategy.Value,
 			)
 
 			expect(
@@ -337,7 +337,7 @@ describe('expressions', () => {
 				'item',
 				'e',
 				StringComparisonOperator.EndsWith,
-				FilterCompareType.Value,
+				ComparisonStrategy.Value,
 			)
 
 			expect(
@@ -370,7 +370,7 @@ describe('expressions', () => {
 				'item',
 				'table',
 				StringComparisonOperator.Equals,
-				FilterCompareType.Value,
+				ComparisonStrategy.Value,
 			)
 
 			expect(
@@ -403,7 +403,7 @@ describe('expressions', () => {
 				'item',
 				'',
 				StringComparisonOperator.IsNotEmpty,
-				FilterCompareType.Value,
+				ComparisonStrategy.Value,
 			)
 
 			expect(
@@ -424,7 +424,7 @@ describe('expressions', () => {
 				'item',
 				'table',
 				StringComparisonOperator.NotEqual,
-				FilterCompareType.Value,
+				ComparisonStrategy.Value,
 			)
 
 			expect(
@@ -457,7 +457,7 @@ describe('expressions', () => {
 				'item',
 				'la',
 				StringComparisonOperator.StartsWith,
-				FilterCompareType.Value,
+				ComparisonStrategy.Value,
 			)
 
 			expect(
@@ -490,7 +490,7 @@ describe('expressions', () => {
 				'item',
 				'(be)|(bl)',
 				StringComparisonOperator.RegularExpression,
-				FilterCompareType.Value,
+				ComparisonStrategy.Value,
 			)
 
 			expect(
@@ -523,7 +523,7 @@ describe('expressions', () => {
 				'count',
 				'count2',
 				NumericComparisonOperator.GreaterThanOrEqual,
-				FilterCompareType.Column,
+				ComparisonStrategy.Column,
 			)
 
 			expect(
@@ -560,7 +560,7 @@ describe('expressions', () => {
 				'count',
 				'count2',
 				NumericComparisonOperator.GreaterThan,
-				FilterCompareType.Column,
+				ComparisonStrategy.Column,
 			)
 
 			expect(
@@ -597,7 +597,7 @@ describe('expressions', () => {
 				'count',
 				'count2',
 				NumericComparisonOperator.LessThan,
-				FilterCompareType.Column,
+				ComparisonStrategy.Column,
 			)
 
 			expect(
@@ -634,7 +634,7 @@ describe('expressions', () => {
 				'count',
 				'count2',
 				NumericComparisonOperator.LessThanOrEqual,
-				FilterCompareType.Column,
+				ComparisonStrategy.Column,
 			)
 
 			expect(
@@ -671,7 +671,7 @@ describe('expressions', () => {
 				'count',
 				'count2',
 				NumericComparisonOperator.Equals,
-				FilterCompareType.Column,
+				ComparisonStrategy.Column,
 			)
 
 			expect(
@@ -708,7 +708,7 @@ describe('expressions', () => {
 				'count',
 				'count2',
 				NumericComparisonOperator.NotEqual,
-				FilterCompareType.Column,
+				ComparisonStrategy.Column,
 			)
 
 			expect(
@@ -745,7 +745,7 @@ describe('expressions', () => {
 				'count',
 				'count2',
 				NumericComparisonOperator.IsEmpty,
-				FilterCompareType.Column,
+				ComparisonStrategy.Column,
 			)
 
 			expect(
@@ -768,7 +768,7 @@ describe('expressions', () => {
 				'count',
 				'count2',
 				NumericComparisonOperator.IsNotEmpty,
-				FilterCompareType.Column,
+				ComparisonStrategy.Column,
 			)
 
 			expect(
@@ -791,7 +791,7 @@ describe('expressions', () => {
 				'item',
 				'item2',
 				StringComparisonOperator.Contains,
-				FilterCompareType.Column,
+				ComparisonStrategy.Column,
 			)
 
 			expect(
@@ -821,7 +821,7 @@ describe('expressions', () => {
 				'item',
 				'item2',
 				StringComparisonOperator.EndsWith,
-				FilterCompareType.Column,
+				ComparisonStrategy.Column,
 			)
 
 			expect(
@@ -844,7 +844,7 @@ describe('expressions', () => {
 				'item',
 				'item2',
 				StringComparisonOperator.Equals,
-				FilterCompareType.Column,
+				ComparisonStrategy.Column,
 			)
 
 			expect(
@@ -867,7 +867,7 @@ describe('expressions', () => {
 				'item',
 				'item2',
 				StringComparisonOperator.NotEqual,
-				FilterCompareType.Column,
+				ComparisonStrategy.Column,
 			)
 
 			expect(
@@ -890,7 +890,7 @@ describe('expressions', () => {
 				'item',
 				'item2',
 				StringComparisonOperator.StartsWith,
-				FilterCompareType.Column,
+				ComparisonStrategy.Column,
 			)
 
 			expect(
@@ -920,7 +920,7 @@ describe('expressions', () => {
 				'flag',
 				true,
 				BooleanComparisonOperator.Equals,
-				FilterCompareType.Value,
+				ComparisonStrategy.Value,
 			)
 
 			expect(
@@ -941,7 +941,7 @@ describe('expressions', () => {
 				'flag',
 				true,
 				BooleanComparisonOperator.NotEqual,
-				FilterCompareType.Value,
+				ComparisonStrategy.Value,
 			)
 
 			expect(
@@ -965,7 +965,7 @@ describe('compareAll', () => {
 			const { expr } = compareAll('flag', [
 				{
 					value: true,
-					type: FilterCompareType.Value,
+					strategy: ComparisonStrategy.Value,
 					operator: BooleanComparisonOperator.Equals,
 				},
 			])
@@ -981,12 +981,12 @@ describe('compareAll', () => {
 			const { expr } = compareAll('flag', [
 				{
 					value: true,
-					type: FilterCompareType.Value,
+					strategy: ComparisonStrategy.Value,
 					operator: BooleanComparisonOperator.Equals,
 				},
 				{
 					value: false,
-					type: FilterCompareType.Value,
+					strategy: ComparisonStrategy.Value,
 					operator: BooleanComparisonOperator.Equals,
 				},
 			])
@@ -1006,7 +1006,7 @@ describe('compareAll', () => {
 				[
 					{
 						value: true,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
@@ -1026,12 +1026,12 @@ describe('compareAll', () => {
 				[
 					{
 						value: true,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 					{
 						value: true,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
@@ -1051,12 +1051,12 @@ describe('compareAll', () => {
 				[
 					{
 						value: true,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 					{
 						value: false,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
@@ -1073,7 +1073,7 @@ describe('compareAll', () => {
 
 	describe('boolean XOR - exactly one match to pass', () => {
 		const base = {
-			type: FilterCompareType.Value,
+			strategy: ComparisonStrategy.Value,
 			operator: BooleanComparisonOperator.Equals,
 		}
 
@@ -1181,7 +1181,7 @@ describe('compareAll', () => {
 				[
 					{
 						value: false,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
@@ -1201,12 +1201,12 @@ describe('compareAll', () => {
 				[
 					{
 						value: false,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 					{
 						value: false,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
@@ -1226,12 +1226,12 @@ describe('compareAll', () => {
 				[
 					{
 						value: true,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 					{
 						value: false,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
@@ -1251,17 +1251,17 @@ describe('compareAll', () => {
 				[
 					{
 						value: false,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 					{
 						value: false,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 					{
 						value: false,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
@@ -1281,17 +1281,17 @@ describe('compareAll', () => {
 				[
 					{
 						value: false,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 					{
 						value: true,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 					{
 						value: false,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
@@ -1313,7 +1313,7 @@ describe('compareAll', () => {
 				[
 					{
 						value: false,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
@@ -1333,12 +1333,12 @@ describe('compareAll', () => {
 				[
 					{
 						value: false,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 					{
 						value: false,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
@@ -1358,12 +1358,12 @@ describe('compareAll', () => {
 				[
 					{
 						value: true,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 					{
 						value: false,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
@@ -1383,17 +1383,17 @@ describe('compareAll', () => {
 				[
 					{
 						value: false,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 					{
 						value: false,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 					{
 						value: false,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
@@ -1413,17 +1413,17 @@ describe('compareAll', () => {
 				[
 					{
 						value: false,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 					{
 						value: true,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 					{
 						value: false,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
@@ -1443,17 +1443,17 @@ describe('compareAll', () => {
 				[
 					{
 						value: true,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 					{
 						value: true,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 					{
 						value: true,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],

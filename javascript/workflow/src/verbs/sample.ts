@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { SampleArgs } from '@datashaper/schema'
-import { from, seed, op } from 'arquero'
+import { from, op, seed } from 'arquero'
+import { NodeOutput } from '../dataflow/types.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
-import { NodeOutput } from '../dataflow/types.js'
 
 export const sampleStep: ColumnTableStep<SampleArgs> = (
 	input,

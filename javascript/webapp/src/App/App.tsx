@@ -7,16 +7,16 @@ import 'allotment/dist/style.css'
 import { type AppProfile, DataShaperApp } from '@datashaper/app-framework'
 import { Spinner } from '@fluentui/react'
 import { useConst } from '@fluentui/react-hooks'
-import { memo, Suspense } from 'react'
+import { Suspense, memo } from 'react'
 import { HashRouter } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
 
 import { Layout } from '../components/Layout.js'
 import { TestAppProfile } from '../profiles/index.js'
+import type { AppContext, AppSettings } from '../types.js'
 import { About } from './About.js'
 import { ErrorBoundary } from './ErrorBoundary.js'
 import { StyleContext } from './StyleContext.js'
-import type { AppContext, AppSettings } from '../types.js'
 
 const examples = [
 	{ name: 'Smoking', url: 'examples/smoking.json' },

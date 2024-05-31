@@ -214,6 +214,9 @@ function hasDuplicatedNames(names: string[]): boolean {
 
 function cleanFileName(name: string): string {
 	const ext = extension(name)
-	const clean = name.replace(`.${ext}`, '').replace(/\([0-9]\)/g, '').trimEnd()
+	const clean = name
+		.replace(`.${ext}`, '')
+		.replace(/\([0-9]\)/g, '')
+		.trimEnd()
 	return `${clean}.${ext}`
 }

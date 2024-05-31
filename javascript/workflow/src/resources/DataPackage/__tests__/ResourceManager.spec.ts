@@ -3,8 +3,8 @@ import { defaultProfiles } from '../../../__tests__/utils.js'
 
 import type { Resource } from '../../Resource.js'
 import { DataPackage } from '../DataPackage.js'
-import { toBlob } from '../io.js'
 import { ResourceManager } from '../ResourceManager.js'
+import { toBlob } from '../io.js'
 
 describe('The ResourceManager class', () => {
 	let mgr: ResourceManager

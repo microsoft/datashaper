@@ -5,8 +5,8 @@
 import type { FillArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
-import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
+import type { StepDescriptionProps } from './types.js'
 
 export const FillDescription: React.FC<StepDescriptionProps<FillArgs>> = memo(
 	function FillDescription(props) {

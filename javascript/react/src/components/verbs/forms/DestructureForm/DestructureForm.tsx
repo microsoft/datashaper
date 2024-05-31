@@ -5,10 +5,10 @@
 import type { DestructureArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
+import { useKeyNames } from '../../../../hooks/columns/useKeyNames.js'
+import { useStepInputTable } from '../../../../hooks/index.js'
 import type { StepFormProps } from '../types.js'
 import { DestructureFormBase } from './DestructureForm.base.js'
-import { useStepInputTable } from '../../../../hooks/index.js'
-import { useKeyNames } from '../../../../hooks/columns/useKeyNames.js'
 
 /**
  * Just the json object inputs for spread json.

@@ -7,8 +7,8 @@ import get from 'lodash-es/get.js'
 
 import {
 	AggregateForm,
-	BinarizeForm,
 	BinForm,
+	BinarizeForm,
 	BooleanLogicForm,
 	ConvertForm,
 	DeriveForm,
@@ -22,11 +22,11 @@ import {
 	JoinForm,
 	LookupForm,
 	MergeForm,
-	PrintForm,
 	NoParametersForm,
 	OneHotForm,
 	OrderbyForm,
 	PivotForm,
+	PrintForm,
 	RecodeForm,
 	RenameForm,
 	RollupForm,

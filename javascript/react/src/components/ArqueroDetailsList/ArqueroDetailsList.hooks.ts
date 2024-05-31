@@ -5,10 +5,10 @@
 import type { Field, SortDirection } from '@datashaper/schema'
 import { columnTypes } from '@datashaper/tables'
 import {
+	GroupedListV2_unstable as GroupedListV2,
 	type IColumn,
 	type IDetailsGroupRenderProps,
 	type IListProps,
-	GroupedListV2_unstable as GroupedListV2,
 } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import type { RowObject } from 'arquero/dist/types/table/table'

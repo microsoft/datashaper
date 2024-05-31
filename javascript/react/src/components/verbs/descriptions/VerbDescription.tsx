@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { isOutputColumnStep, NodeInput } from '@datashaper/workflow'
+import { NodeInput, isOutputColumnStep } from '@datashaper/workflow'
 import styled from '@essex/styled-components'
 import isNil from 'lodash-es/isNil.js'
 import { memo, useMemo } from 'react'
 
-import type { DescriptionRow, VerbDescriptionProps } from './types.js'
 import { getInputNode } from '../../../util.js'
+import type { DescriptionRow, VerbDescriptionProps } from './types.js'
 
 function VerbDescriptionFn<T extends object | void>({
 	step,

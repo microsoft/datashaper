@@ -6,8 +6,8 @@ import type { Step } from '@datashaper/workflow'
 import { memo, useState } from 'react'
 
 import { EMPTY_OBJECT } from '../../empty.js'
-import { Action } from '../controls/index.js'
 import { StepForm } from '../StepForm/StepForm.js'
+import { Action } from '../controls/index.js'
 import {
 	useHandleSaveClick,
 	useStepOutputHandling,

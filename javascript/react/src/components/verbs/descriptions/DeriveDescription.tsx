@@ -5,8 +5,8 @@
 import type { DeriveArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
-import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
+import type { StepDescriptionProps } from './types.js'
 
 export const DeriveDescription: React.FC<StepDescriptionProps<DeriveArgs>> =
 	memo(function DeriveDescription(props) {

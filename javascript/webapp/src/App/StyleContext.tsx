@@ -4,12 +4,12 @@
  */
 import { useApplicationSettingsValue } from '@datashaper/app-framework'
 import { loadById } from '@thematic/core'
-import { loadFluentTheme, ThematicFluentProvider } from '@thematic/fluent'
+import { ThematicFluentProvider, loadFluentTheme } from '@thematic/fluent'
 import { ApplicationStyles } from '@thematic/react'
 import { memo, useMemo } from 'react'
 import {
-	createGlobalStyle,
 	ThemeProvider as ThemeProviderRaw,
+	createGlobalStyle,
 } from 'styled-components'
 import type { AppSettings } from '../types.js'
 

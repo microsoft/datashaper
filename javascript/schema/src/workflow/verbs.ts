@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { CodebookSchema } from '../codebook/CodebookSchema.js'
-import type { DataType, Value } from '../data.js'
+import type { Value } from '../data.js'
 import type { SortDirection } from '../enums/index.js'
 import type { WorkflowSchema } from './WorkflowSchema.js'
 
@@ -62,11 +62,7 @@ export interface InputColumnArgs {
 	/**
 	 * Name of the input column for columnar operations
 	 */
-	column: InputColumn
-	/**
-	 * Expected data type for values in the column
-	 */
-	dataType?: DataType
+	column: string
 }
 
 /**
@@ -114,7 +110,8 @@ export interface SourcePreservingArgs {
 
 export interface Criteria {
 	/**
-	 * Comparison value for the column.
+	 * Comparison value for the column. This is either a direct value to compare if strategy is
+	 * ComparisonStrategy.Value, or the name of another column to compare if strategy is ComparisonStrategy.Column.
 	 * Not required if the operator is self-defining (e.g., 'is empty')
 	 */
 	value?: Value
@@ -122,7 +119,7 @@ export interface Criteria {
 	 * Indicates whether the filter should be directly against a value,
 	 * or against the value of another column
 	 */
-	type: FilterCompareType
+	strategy: ComparisonStrategy
 	/**
 	 * Filter operator to execute. Note the correct operator for the column data type must be used.
 	 */
@@ -265,7 +262,7 @@ export enum SetOp {
  * Indicates the comparison type used for a filter operation.
  * This is done on a row-by-row basis.
  */
-export enum FilterCompareType {
+export enum ComparisonStrategy {
 	/**
 	 * The comparison value is a literal value
 	 */
@@ -514,12 +511,7 @@ export interface FillArgs extends OutputColumnArgs {
 	value: Value
 }
 
-export interface FilterArgs extends InputColumnArgs {
-	/**
-	 * Filter criteria to apply to the column.
-	 */
-	criteria: Criteria
-}
+export interface FilterArgs extends Criteria, InputColumnArgs {}
 
 export interface FoldArgs extends InputColumnListArgs, SourcePreservingArgs {
 	/**

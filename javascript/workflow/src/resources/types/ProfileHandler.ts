@@ -13,7 +13,8 @@ import type { ProfileInitializationContext } from './ProfileInitializationContex
 export interface ProfileHandler<
 	Res extends Resource = Resource,
 	Schema extends ResourceSchema = ResourceSchema,
-	InitializationContext extends ProfileInitializationContext = ProfileInitializationContext,
+	InitializationContext extends
+		ProfileInitializationContext = ProfileInitializationContext,
 > {
 	/**
 	 * The profile name of the resource

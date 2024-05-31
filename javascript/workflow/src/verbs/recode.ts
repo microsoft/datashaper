@@ -4,6 +4,7 @@
  */
 import type { RecodeArgs, Value } from '@datashaper/schema'
 import { DataType } from '@datashaper/schema'
+import { columnType } from '@datashaper/tables'
 import { escape, op } from 'arquero'
 
 import type { ColumnTableStep } from './util/factories.js'
@@ -11,11 +12,10 @@ import { stepVerbFactory } from './util/factories.js'
 
 export const recodeStep: ColumnTableStep<RecodeArgs> = (
 	input,
-	{ column, to, mapping, dataType },
+	{ column, to, mapping },
 ) => {
-	const finalMap: Record<Value, Value> = {}
-
-	if (dataType === DataType.Date) {
+	const finalMap: Record<Value, Value> = mapping
+	if (columnType(input, column) === DataType.Date) {
 		for (const key in mapping) {
 			const dateConversion = new Date(key)
 			const valueConversion = new Date(mapping[key])
@@ -24,9 +24,7 @@ export const recodeStep: ColumnTableStep<RecodeArgs> = (
 	}
 
 	return input.derive({
-		[to]: escape((d: any) =>
-			op.recode(d[column], dataType === DataType.Date ? finalMap : mapping),
-		),
+		[to]: escape((d: any) => op.recode(d[column], finalMap)),
 	})
 }
 

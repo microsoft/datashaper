@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { type Value, DataType } from '@datashaper/schema'
+import { DataType, type Value } from '@datashaper/schema'
 import { coerce } from '@datashaper/tables'
 import styled from '@essex/styled-components'
 import type {

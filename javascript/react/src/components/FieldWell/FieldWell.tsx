@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { IDropdownOption } from '@fluentui/react'
-import { IconButton, Icon, Dropdown } from '@fluentui/react'
+import { Dropdown, Icon, IconButton } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 import { When } from 'react-if'
 
@@ -11,10 +11,10 @@ import {
 	Container,
 	Required,
 	Title,
+	Well,
 	useFieldDropdownProps,
 	useFieldWellStyles,
 	useResetButtonProps,
-	Well,
 } from './FieldWell.styles.js'
 import type { FieldWellProps } from './FieldWell.types.js'
 

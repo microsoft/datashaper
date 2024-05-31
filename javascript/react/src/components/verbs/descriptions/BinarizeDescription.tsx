@@ -3,11 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { BinarizeArgs } from '@datashaper/schema'
-import { FilterCompareType } from '@datashaper/schema'
+import { ComparisonStrategy } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
-import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
+import type { StepDescriptionProps } from './types.js'
 
 export const BinarizeDescription: React.FC<StepDescriptionProps<BinarizeArgs>> =
 	memo(function BinarizeDescription(props) {
@@ -22,13 +22,9 @@ export const BinarizeDescription: React.FC<StepDescriptionProps<BinarizeArgs>> =
 					after: 'row value',
 					sub: [
 						{
-							value: `${args.criteria.operator || ''} ${
-								args.criteria.value || ''
-							}`,
+							value: `${args.operator || ''} ${args.value || ''}`,
 							after:
-								args.criteria.type === FilterCompareType.Column
-									? 'row value'
-									: '',
+								args.strategy === ComparisonStrategy.Column ? 'row value' : '',
 						},
 					],
 				},

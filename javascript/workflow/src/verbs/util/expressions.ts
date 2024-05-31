@@ -11,18 +11,18 @@ import type {
 } from '@datashaper/schema'
 import {
 	BooleanOperator,
+	ComparisonStrategy,
 	FieldAggregateOperation,
-	FilterCompareType,
 	WindowFunction,
 } from '@datashaper/schema'
 import { parseBoolean } from '@datashaper/tables'
-import { escape, op, addWindowFunction } from 'arquero'
+import { addWindowFunction, escape, op } from 'arquero'
 import type { Op } from 'arquero/dist/types/op/op'
 
+import { v4 as uuid } from 'uuid'
 import { evaluateBoolean } from './boolean-logic.js'
 import { compareValues } from './compare.js'
 import type { CompareWrapper } from './types.js'
-import { v4 as uuid } from 'uuid'
 
 export function compareAll(
 	column: string,
@@ -36,9 +36,11 @@ export function compareAll(
 		// this check by shortcutting evaluation once it is clear the logical operator
 		// cannot be satisfied
 		const comparisons = criteria.map((filter) => {
-			const { value, operator, type } = filter
+			const { value, operator, strategy } = filter
 			const right =
-				type === FilterCompareType.Column ? d[`${value.toString()}`] : value
+				strategy === ComparisonStrategy.Column
+					? d[`${value.toString()}`]
+					: value
 
 			return compareValues(left, right, operator)
 		})
@@ -66,12 +68,12 @@ export function compare(
 		| StringComparisonOperator
 		| BooleanComparisonOperator
 		| DateComparisonOperator,
-	type: FilterCompareType,
+	strategy: ComparisonStrategy,
 ): CompareWrapper {
 	return escape((d: Record<string, string | number>): 0 | 1 | null => {
 		const left = d[column]
 		const right =
-			type === FilterCompareType.Column ? d[`${value.toString()}`] : value
+			strategy === ComparisonStrategy.Column ? d[`${value.toString()}`] : value
 
 		return compareValues(left, right, operator)
 	}) as CompareWrapper

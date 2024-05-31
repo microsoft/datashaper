@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { DataType, VariableNature } from '@datashaper/schema'
 import fs from 'fs'
+import { DataType, VariableNature } from '@datashaper/schema'
 
 import { fromCSV } from '../fromCSV.js'
 import { generateCodebook } from '../generateCodebook.js'

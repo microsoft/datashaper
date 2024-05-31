@@ -121,7 +121,7 @@ export function useColumns(
 							onColumnSelect,
 							onCellDropdownSelect,
 							errors,
-					  )
+						)
 					: createRenderFeaturesCell(
 							features,
 							field,
@@ -130,7 +130,7 @@ export function useColumns(
 							onColumnSelect,
 							onCellDropdownSelect,
 							errors,
-					  )
+						)
 
 			const headerRenderers = [
 				createRenderDefaultColumnHeader(
@@ -210,10 +210,13 @@ export function useColumns(
 }
 
 function reduce(columns: IColumn[]): Record<string, IColumn> {
-	return columns.reduce((acc, cur) => {
-		acc[cur.key] = cur
-		return acc
-	}, {} as Record<string, IColumn>)
+	return columns.reduce(
+		(acc, cur) => {
+			acc[cur.key] = cur
+			return acc
+		},
+		{} as Record<string, IColumn>,
+	)
 }
 
 function getColumnValidation(

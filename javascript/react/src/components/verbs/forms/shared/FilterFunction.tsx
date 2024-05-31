@@ -4,9 +4,9 @@
  */
 import {
 	BooleanComparisonOperator,
+	ComparisonStrategy,
 	DataType,
 	DateComparisonOperator,
-	FilterCompareType,
 	NumericComparisonOperator,
 	StringComparisonOperator,
 } from '@datashaper/schema'
@@ -62,7 +62,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 			(date: Date): void => {
 				const update = {
 					...criteria,
-					type: FilterCompareType.Value,
+					strategy: ComparisonStrategy.Value,
 					value: date,
 				}
 				onChange?.(update)
@@ -80,7 +80,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 			) => {
 				const update = {
 					...criteria,
-					type: FilterCompareType.Column,
+					strategy: ComparisonStrategy.Column,
 					value: option ? option.key : value,
 				}
 				onChange?.(update)
@@ -99,7 +99,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 			) => {
 				const update = {
 					...criteria,
-					type: FilterCompareType.Column,
+					strategy: ComparisonStrategy.Column,
 					value: option ? option.key : value,
 				}
 				onChange?.(update)
@@ -114,7 +114,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 			) => {
 				const update = {
 					...criteria,
-					type: FilterCompareType.Value,
+					strategy: ComparisonStrategy.Value,
 					value: newValue,
 				}
 				onChange?.(update)
@@ -127,7 +127,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 				if (newValue != null) {
 					const update = {
 						...criteria,
-						type: FilterCompareType.Value,
+						strategy: ComparisonStrategy.Value,
 						value: newValue,
 					}
 					onChange?.(update)
@@ -142,7 +142,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 		) => {
 			const update = {
 				...criteria,
-				type: FilterCompareType.Value,
+				type: ComparisonStrategy.Value,
 				value: checked,
 			}
 			onChange?.(update)

@@ -9,19 +9,19 @@ import type { AllotmentHandle } from 'allotment'
 import type React from 'react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
+import { useLocation, useNavigate } from 'react-router-dom'
 import { EMPTY_ARRAY } from '../../../empty.js'
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
+import { useLoadDataPackage } from '../../../hooks/useLoadDataPackage.js'
 import { defaultAppProfiles } from '../../../profiles/index.js'
+import { useSetDefaultApplicationSettings } from '../../../settings/application.js'
 import type {
-	AppServices,
 	AppProfile,
+	AppServices,
 	ResourceRoute,
 	ResourceRouteGroup,
 } from '../../../types.js'
 import { PANE_BREAK_WIDTH, PANE_COLLAPSED_SIZE } from './AppLayout.styles.js'
-import { useLoadDataPackage } from '../../../hooks/useLoadDataPackage.js'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { useSetDefaultApplicationSettings } from '../../../settings/application.js'
 
 function useKnownAppProfiles(): AppProfile[] {
 	return useConst(() => defaultAppProfiles() as AppProfile<any, any>[])

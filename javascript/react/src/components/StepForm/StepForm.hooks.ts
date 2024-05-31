@@ -7,8 +7,7 @@ import type {
 	InputColumnListArgs,
 	OutputColumnArgs,
 } from '@datashaper/schema'
-import { DataType } from '@datashaper/schema'
-import { columnType, columnTypes } from '@datashaper/tables'
+import { columnTypes } from '@datashaper/tables'
 import { toggleListItem } from '@datashaper/utilities'
 import type { Step } from '@datashaper/workflow'
 import { isDataTypeSupported } from '@datashaper/workflow'
@@ -70,16 +69,11 @@ export function useColumnFilter(
 export function useInputColumnChanged(
 	step: Step,
 	onChange: (step: Step) => void,
-	dataTable?: ColumnTable,
 ): DropdownChangeHandler {
 	return useDropdownChangeHandler<InputColumnArgs>(
 		step as Step<InputColumnArgs>,
 		(s, val) => {
 			s.args.column = val as string
-			s.args.dataType =
-				dataTable != null
-					? columnType(dataTable, val as string)
-					: DataType.Unknown
 		},
 		onChange,
 	)
