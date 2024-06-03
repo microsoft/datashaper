@@ -6,7 +6,7 @@
 
 from dataclasses import dataclass, field
 
-from datashaper.engine.types import VerbDetails
+from datashaper.types import VerbDetails
 
 
 @dataclass

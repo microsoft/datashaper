@@ -1,4 +1,5 @@
 """Memory profiling callbacks."""
+
 import time
 import tracemalloc
 from collections import defaultdict
@@ -6,7 +7,7 @@ from collections import defaultdict
 import pandas as pd
 
 from datashaper.execution.execution_node import ExecutionNode
-from datashaper.table_store.types import TableContainer
+from datashaper.types import TableContainer
 
 from .noop_workflow_callback import NoopWorkflowCallbacks
 

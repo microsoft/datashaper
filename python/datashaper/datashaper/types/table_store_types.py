@@ -7,7 +7,7 @@
 from dataclasses import dataclass
 from typing import Any, Generic, TypeVar
 
-from datashaper.types import Bin, Category, DataType, Table
+from .verb_types import Bin, Category, DataType, Table
 
 
 @dataclass

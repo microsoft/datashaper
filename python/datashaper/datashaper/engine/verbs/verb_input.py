@@ -11,8 +11,7 @@ from datashaper.errors import (
     VerbHasMultipleDefaultInputsError,
     VerbHasMultipleDefaultOthersError,
 )
-from datashaper.table_store.types import TableContainer
-from datashaper.types import Table
+from datashaper.types import Table, TableContainer
 
 
 class VerbInput:

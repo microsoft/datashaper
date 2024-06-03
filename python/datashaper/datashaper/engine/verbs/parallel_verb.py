@@ -17,11 +17,10 @@ from typing import Any, Concatenate, ParamSpec, cast
 import numpy as np
 import pandas as pd
 
-from datashaper.engine.types import AsyncType
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.errors import VerbParallelizationError
 from datashaper.progress import ProgressTicker, progress_ticker
-from datashaper.table_store.types import Table, TableContainer
+from datashaper.types import AsyncType, Table, TableContainer
 from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
 
 from .verbs_mapping import verb

@@ -9,8 +9,8 @@ from typing import Any, cast
 import pandas as pd
 
 from datashaper.engine.create_verb_result import create_verb_result
-from datashaper.engine.types import VerbResult
 from datashaper.engine.verbs.verbs_mapping import verb
+from datashaper.types import VerbResult
 from datashaper.verbs import drop
 
 from .verb_input import VerbInput

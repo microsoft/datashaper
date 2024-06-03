@@ -9,10 +9,9 @@ from typing import Any, cast
 import pandas as pd
 
 from datashaper.engine.create_verb_result import create_verb_result
-from datashaper.engine.types import VerbResult
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import TableContainer
+from datashaper.types import TableContainer, VerbResult
 from datashaper.verbs import sample
 
 

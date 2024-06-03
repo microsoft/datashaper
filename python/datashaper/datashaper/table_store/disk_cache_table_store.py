@@ -3,6 +3,7 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """A table store for storing and retrieving tables using diskcache."""
+
 import shutil
 from io import BytesIO
 from typing import cast
@@ -12,7 +13,7 @@ import diskcache as dc
 import pandas as pd
 
 from datashaper.table_store.table_store import TableStore
-from datashaper.table_store.types import TableContainer
+from datashaper.types import TableContainer
 
 
 class DiskCacheTableStore(TableStore):

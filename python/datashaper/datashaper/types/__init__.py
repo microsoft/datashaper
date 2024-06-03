@@ -1,5 +1,12 @@
 """Datashaper Types."""
 
+from .engine_types import AsyncType, Step, VerbDetails, VerbResult
+from .table_store_types import (
+    ColumnMetadata,
+    ColumnStats,
+    TableContainer,
+    TableMetadata,
+)
 from .verb_types import (
     Bin,
     BinStrategy,
@@ -26,6 +33,7 @@ from .verb_types import (
 )
 
 __all__ = [
+    ## Verb Enums
     "Bin",
     "BinStrategy",
     "BooleanComparisonOperator",
@@ -48,4 +56,14 @@ __all__ = [
     "StringComparisonOperator",
     "WindowFunction",
     "Table",
+    ## Tablestore Enums
+    "ColumnMetadata",
+    "ColumnStats",
+    "TableContainer",
+    "TableMetadata",
+    ## Engine Enums
+    "AsyncType",
+    "Step",
+    "VerbResult",
+    "VerbDetails",
 ]

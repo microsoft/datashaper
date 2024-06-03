@@ -9,8 +9,8 @@ from dataclasses import dataclass, field
 from functools import cache
 from typing import Any
 
-from datashaper.engine.types import VerbDetails, VerbResult
 from datashaper.errors import VerbAlreadyRegisteredError
+from datashaper.types import VerbDetails, VerbResult
 
 
 def verb(

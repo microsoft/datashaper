@@ -4,7 +4,7 @@
 #
 """Aggregate verb implementation."""
 
-from typing import Any
+from typing import Any, cast
 
 import pandas as pd
 
@@ -22,8 +22,9 @@ def aggregate(
     **_kwargs: Any,
 ) -> pd.DataFrame:
     """Aggregate verb implementation."""
-    result = table.groupby(groupby).agg(
-        {column: aggregate_operation_mapping[operation]}
+    result = cast(
+        pd.DataFrame,
+        table.groupby(groupby).agg({column: aggregate_operation_mapping[operation]}),
     )
     result[to] = result[column]
     result.drop(column, axis=1, inplace=True)

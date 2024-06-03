@@ -1,9 +1,10 @@
 """Collection of callbacks that can be used to monitor the workflow execution."""
+
 from typing import Protocol
 
 from datashaper.execution.execution_node import ExecutionNode
 from datashaper.progress import Progress
-from datashaper.table_store.types import TableContainer
+from datashaper.types import TableContainer
 
 
 class WorkflowCallbacks(Protocol):

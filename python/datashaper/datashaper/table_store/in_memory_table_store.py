@@ -7,7 +7,7 @@
 from dataclasses import dataclass
 
 from datashaper.table_store.table_store import TableStore
-from datashaper.table_store.types import TableContainer
+from datashaper.types import TableContainer
 
 
 @dataclass

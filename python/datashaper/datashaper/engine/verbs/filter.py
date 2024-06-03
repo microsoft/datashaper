@@ -9,11 +9,11 @@ from typing import Any, cast
 import pandas as pd
 
 from datashaper.engine.verbs.parallel_verb import OperationType, parallel_verb
-from datashaper.table_store.types import Table
 from datashaper.types import (
     ComparisonStrategy,
     FilterArgs,
     StringComparisonOperator,
+    Table,
 )
 from datashaper.verbs.pandas.filter_df import filter_df, get_operator
 from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
