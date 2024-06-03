@@ -4,18 +4,16 @@
 #
 """Unorder verb implementation."""
 
+from typing import Any
+
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store.types import VerbResult, create_verb_result
+from datashaper.verbs import unorder
 
 
 @verb(name="unorder", treats_input_tables_as_immutable=True)
-def unorder(
-    input: VerbInput,
-    **_kwargs: dict,
-) -> VerbResult:
+def unorder_verb(input: VerbInput, **kwargs: Any) -> VerbResult:
     """Unorder verb implementation."""
-    input_table = input.get_input()
-
-    output = input_table.sort_index()
-    return create_verb_result(output)
+    result = unorder(input.get_input(), **kwargs)
+    return create_verb_result(result)

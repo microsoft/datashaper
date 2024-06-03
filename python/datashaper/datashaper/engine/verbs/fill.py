@@ -3,24 +3,17 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Fill verb implementation."""
-from typing import cast
 
-import pandas as pd
+from typing import Any
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store.types import VerbResult, create_verb_result
+from datashaper.verbs import fill
 
 
 @verb(name="fill")
-def fill(
-    input: VerbInput,
-    to: str,
-    value: str | float | bool,
-    **_kwargs: dict,
-) -> VerbResult:
+def fill_verb(input: VerbInput, **kwargs: Any) -> VerbResult:
     """Fill verb implementation."""
-    input_table = input.get_input()
-    output = cast(pd.DataFrame, input_table)
-    output[to] = value
-    return create_verb_result(output)
+    result = fill(input.get_input(), **kwargs)
+    return create_verb_result(result)

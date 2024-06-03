@@ -3,42 +3,23 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Merge verb implementation."""
-from functools import partial
-from typing import cast
 
-import pandas as pd
+from typing import Any
 
-from datashaper.engine.types import MergeStrategy
-from datashaper.engine.verbs.utils import strategy_mapping
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store.types import (
-    Table,
     VerbResult,
     create_verb_result,
 )
+from datashaper.verbs import merge
 
 
 @verb(name="merge")
-def merge(
+def merge_verb(
     input: VerbInput,
-    to: str,
-    columns: list[str],
-    strategy: str,
-    delimiter: str = "",
-    preserveSource: bool = False,  # noqa: N803
-    **_kwargs: dict,
+    **kwargs: Any,
 ) -> VerbResult:
     """Merge verb implementation."""
-    merge_strategy = MergeStrategy(strategy)
-
-    input_table = cast(pd.DataFrame, input.get_input())
-
-    input_table[to] = input_table[columns].apply(
-        partial(strategy_mapping[merge_strategy], delim=delimiter), axis=1
-    )
-
-    if not preserveSource:
-        input_table.drop(columns=columns, inplace=True)
-
-    return create_verb_result(cast(Table, input_table))
+    result = merge(input.get_input(), **kwargs)
+    return create_verb_result(result)

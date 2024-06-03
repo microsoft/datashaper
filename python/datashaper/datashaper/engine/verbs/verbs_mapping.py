@@ -7,6 +7,7 @@
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from functools import cache
+from typing import Any
 
 from datashaper.errors import VerbAlreadyRegisteredError
 from datashaper.table_store.types import VerbResult
@@ -18,7 +19,7 @@ def verb(
     name: str,
     treats_input_tables_as_immutable: bool = False,
     override_existing: bool = False,
-    **_kwargs: dict,
+    **_kwargs: Any,
 ) -> Callable:
     """Apply a decorator for registering a verb."""
 

@@ -10,7 +10,7 @@ from typing import Any, Generic, TypeVar
 import pandas as pd
 from pandas.core.groupby import DataFrameGroupBy
 
-from datashaper.engine.types import Bin, Category, DataType
+from datashaper.verbs.types import Bin, Category, DataType
 
 
 @dataclass

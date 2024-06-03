@@ -64,7 +64,7 @@ def parallel_verb(
     asyncio_type: AsyncType = AsyncType.AsyncIO,
     merge: Callable[[list[Table | tuple | None]], Table] = default_merge,
     operation_type: OperationType = OperationType.ROW_WISE,
-    **_kwargs: dict,
+    **_kwargs: Any,
 ) -> Callable:
     """Apply a decorator for registering a parallel verb."""
 

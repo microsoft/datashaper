@@ -1,11 +1,12 @@
 """Contains the merge strategy functions for the merge verb."""
+
 from collections.abc import Callable
 from typing import Any
 
 import pandas as pd
 from pandas.api.types import is_bool
 
-from datashaper.engine.types import MergeStrategy
+from datashaper.verbs.types import MergeStrategy
 
 strategy_mapping: dict[MergeStrategy, Callable] = {
     MergeStrategy.FirstOneWins: lambda values, **_kwargs: values.dropna().apply(

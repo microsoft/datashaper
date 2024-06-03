@@ -3,18 +3,19 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Filter verb implementation."""
+
 from typing import Any, cast
 
 import pandas as pd
 
 from datashaper.engine.pandas import filter_df, get_operator
-from datashaper.engine.types import (
+from datashaper.engine.verbs.parallel_verb import OperationType, parallel_verb
+from datashaper.table_store.types import Table
+from datashaper.verbs.types import (
     ComparisonStrategy,
     FilterArgs,
     StringComparisonOperator,
 )
-from datashaper.engine.verbs.parallel_verb import OperationType, parallel_verb
-from datashaper.table_store.types import Table
 from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
 
 
@@ -30,7 +31,7 @@ async def filter_verb(
     value: Any,
     strategy: ComparisonStrategy = ComparisonStrategy.Value,
     operator: StringComparisonOperator = StringComparisonOperator.Equals,
-    **_kwargs: dict,
+    **_kwargs: Any,
 ) -> Table:
     """Filter verb implementation."""
     input_table = cast(pd.DataFrame, chunk)

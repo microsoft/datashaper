@@ -4,36 +4,22 @@
 #
 """Aggregate verb implementation."""
 
-from typing import cast
+from typing import Any, cast
 
 import pandas as pd
 
-from datashaper.engine.pandas import aggregate_operation_mapping
-from datashaper.engine.types import FieldAggregateOperation
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store.types import VerbResult, create_verb_result
+from datashaper.verbs import aggregate
 
 
 @verb(name="aggregate", treats_input_tables_as_immutable=True)
-def aggregate(
+def aggregate_verb(
     input: VerbInput,
-    to: str,
-    groupby: list[str],
-    column: str,
-    operation: FieldAggregateOperation,
-    **_kwargs: dict,
+    **kwargs: Any,
 ) -> VerbResult:
     """Aggregate verb implementation."""
-    result = cast(
-        pd.DataFrame,
-        (
-            input.get_input()
-            .groupby(groupby)
-            .agg({column: aggregate_operation_mapping[operation]})
-        ),
-    )
-    result[to] = result[column]
-    result.drop(column, axis=1, inplace=True)
-
-    return create_verb_result(table=result.reset_index())
+    input_table = cast(pd.DataFrame, input.get_input())
+    result = aggregate(input_table, **kwargs)
+    return create_verb_result(result)

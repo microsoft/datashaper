@@ -3,24 +3,17 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Impute verb implementation."""
-from typing import cast
 
-import pandas as pd
+from typing import Any
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store.types import VerbResult, create_verb_result
+from datashaper.verbs import impute
 
 
 @verb(name="impute")
-def impute(
-    input: VerbInput,
-    column: str,
-    value: str | float | bool,
-    **_kwargs: dict,
-) -> VerbResult:
+def impute_verb(input: VerbInput, **kwargs: Any) -> VerbResult:
     """Impute verb implementation."""
-    input_table = input.get_input()
-    output = cast(pd.DataFrame, input_table)
-    output[column] = cast(pd.Series, output[column].fillna(value))
-    return create_verb_result(output)
+    result = impute(input.get_input(), **kwargs)
+    return create_verb_result(result)

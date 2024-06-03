@@ -3,6 +3,7 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Verb filtering utilities."""
+
 import logging
 from collections.abc import Callable
 from functools import partial
@@ -10,7 +11,8 @@ from uuid import uuid4
 
 import pandas as pd
 
-from datashaper.engine.types import (
+from datashaper.errors import UnsupportedComparisonOperatorError
+from datashaper.verbs.types import (
     BooleanComparisonOperator,
     BooleanLogicalOperator,
     ComparisonStrategy,
@@ -18,7 +20,6 @@ from datashaper.engine.types import (
     NumericComparisonOperator,
     StringComparisonOperator,
 )
-from datashaper.errors import UnsupportedComparisonOperatorError
 
 boolean_function_map = {
     BooleanLogicalOperator.OR: lambda df, columns: df[columns].any(axis="columns")
