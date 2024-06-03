@@ -4,7 +4,9 @@
 #
 """Orderby verb implementation."""
 
-from typing import Any
+from typing import Any, cast
+
+import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -15,5 +17,5 @@ from datashaper.verbs import orderby
 @verb(name="orderby", treats_input_tables_as_immutable=True)
 def orderby_verb(input: VerbInput, **kwargs: Any) -> VerbResult:
     """Orderby verb implementation."""
-    result = orderby(input.get_input(), **kwargs)
+    result = orderby(cast(pd.DataFrame, input.get_input()), **kwargs)
     return create_verb_result(result)

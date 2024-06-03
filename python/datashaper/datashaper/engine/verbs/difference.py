@@ -17,7 +17,9 @@ from datashaper.verbs import difference
 @verb(name="difference", treats_input_tables_as_immutable=True)
 def difference_verb(input: VerbInput, **kwargs: Any) -> VerbResult:
     """Difference verb implementation."""
-    input_table = input.get_input()
-    others = cast(list[pd.DataFrame], input.get_others())
-    result = difference(input_table, others, **kwargs)
+    result = difference(
+        cast(pd.DataFrame, input.get_input()),
+        cast(list[pd.DataFrame], input.get_others()),
+        **kwargs,
+    )
     return create_verb_result(result)

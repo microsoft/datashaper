@@ -4,11 +4,11 @@
 #
 """Select verb implementation."""
 
-from typing import Any
+from typing import Any, cast
 
 import pandas as pd
 
 
 def select(table: pd.DataFrame, columns: list[str], **_kwargs: Any) -> pd.DataFrame:
     """Select verb implementation."""
-    return table[columns]
+    return cast(pd.DataFrame, table[columns])

@@ -1,6 +1,6 @@
 """Unhot verb implementation."""
 
-from typing import Any
+from typing import Any, cast
 
 import pandas as pd
 
@@ -30,4 +30,4 @@ def unhot(
                     else pd.NA
                 )
 
-    return output_table
+    return cast(pd.DataFrame, output_table)

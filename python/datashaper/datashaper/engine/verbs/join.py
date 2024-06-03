@@ -4,7 +4,9 @@
 #
 """Join verb implementation."""
 
-from typing import Any
+from typing import Any, cast
+
+import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -18,5 +20,9 @@ def join_verb(
     **kwargs: Any,
 ) -> VerbResult:
     """Join verb implementation."""
-    result = join(input.get_input(), input.get_others()[0], **kwargs)
+    result = join(
+        cast(pd.DataFrame, input.get_input()),
+        cast(pd.DataFrame, input.get_others()[0]),
+        **kwargs,
+    )
     return create_verb_result(result)

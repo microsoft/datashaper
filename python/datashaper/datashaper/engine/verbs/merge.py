@@ -4,7 +4,9 @@
 #
 """Merge verb implementation."""
 
-from typing import Any
+from typing import Any, cast
+
+import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -21,5 +23,5 @@ def merge_verb(
     **kwargs: Any,
 ) -> VerbResult:
     """Merge verb implementation."""
-    result = merge(input.get_input(), **kwargs)
+    result = merge(cast(pd.DataFrame, input.get_input()), **kwargs)
     return create_verb_result(result)

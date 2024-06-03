@@ -1,6 +1,8 @@
 """Unhot verb implementation."""
 
-from typing import Any
+from typing import Any, cast
+
+import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -14,5 +16,5 @@ def unhot_verb(
     **kwargs: Any,
 ) -> VerbResult:
     """Unhot verb implementation."""
-    result = unhot(input.get_input(), **kwargs)
+    result = unhot(cast(pd.DataFrame, input.get_input()), **kwargs)
     return create_verb_result(result)

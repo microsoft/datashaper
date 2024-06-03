@@ -4,7 +4,9 @@
 #
 """Fold verb implementation."""
 
-from typing import Any
+from typing import Any, cast
+
+import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -21,5 +23,5 @@ def fold_verb(
     **kwargs: Any,
 ) -> VerbResult:
     """Fold verb implementation."""
-    output = fold(input.get_input(), **kwargs)
+    output = fold(cast(pd.DataFrame, input.get_input()), **kwargs)
     return create_verb_result(output)

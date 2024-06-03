@@ -4,7 +4,9 @@
 #
 """Impute verb implementation."""
 
-from typing import Any
+from typing import Any, cast
+
+import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -15,5 +17,5 @@ from datashaper.verbs import impute
 @verb(name="impute")
 def impute_verb(input: VerbInput, **kwargs: Any) -> VerbResult:
     """Impute verb implementation."""
-    result = impute(input.get_input(), **kwargs)
+    result = impute(cast(pd.DataFrame, input.get_input()), **kwargs)
     return create_verb_result(result)

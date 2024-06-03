@@ -4,7 +4,9 @@
 #
 """Drop verb implementation."""
 
-from typing import Any
+from typing import Any, cast
+
+import pandas as pd
 
 from datashaper.engine.verbs.verbs_mapping import verb
 from datashaper.table_store.types import VerbResult, create_verb_result
@@ -19,5 +21,5 @@ def drop_verb(
     **kwargs: Any,
 ) -> VerbResult:
     """Drop verb implementation."""
-    result = drop(input.get_input(), **kwargs)
+    result = drop(cast(pd.DataFrame, input.get_input()), **kwargs)
     return create_verb_result(result)

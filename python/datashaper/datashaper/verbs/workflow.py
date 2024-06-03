@@ -4,6 +4,7 @@ from typing import Any
 
 import pandas as pd
 
+from datashaper.table_store.types import Table
 from datashaper.workflow.workflow import DEFAULT_INPUT_NAME, Workflow
 
 
@@ -13,7 +14,7 @@ async def workflow(
     workflow_instance: Workflow,
     tables: dict[str, Any] | None = None,
     **_kwargs: Any,
-) -> pd.DataFrame:
+) -> Table:
     """Apply a sequence of operations to the input table."""
     # Set up the input tables for the subworkflow
     input_tables: dict[str, pd.DataFrame] = {

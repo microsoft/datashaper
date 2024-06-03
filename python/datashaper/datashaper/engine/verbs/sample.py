@@ -4,7 +4,9 @@
 #
 """Sample verb implementation."""
 
-from typing import Any
+from typing import Any, cast
+
+import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -22,5 +24,6 @@ def sample_verb(
     **kwargs: Any,
 ) -> VerbResult:
     """Sample verb implementation."""
-    result, unsampled = sample(input.get_input(), **kwargs)
-    return create_verb_result(result, {"remainder": TableContainer(unsampled)})
+    result, unsampled = sample(cast(pd.DataFrame, input.get_input()), **kwargs)
+    others = {"remainder": TableContainer(unsampled)} if unsampled is not None else {}
+    return create_verb_result(result, named_outputs=others)

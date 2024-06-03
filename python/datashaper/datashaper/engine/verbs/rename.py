@@ -4,7 +4,9 @@
 #
 """Rename verb implementation."""
 
-from typing import Any
+from typing import Any, cast
+
+import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -15,5 +17,5 @@ from datashaper.verbs import rename
 @verb(name="rename", treats_input_tables_as_immutable=True)
 def rename_verb(input: VerbInput, **kwargs: Any) -> VerbResult:
     """Rename verb implementation."""
-    result = rename(input.get_input(), **kwargs)
+    result = rename(cast(pd.DataFrame, input.get_input()), **kwargs)
     return create_verb_result(result)

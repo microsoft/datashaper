@@ -62,7 +62,7 @@ def window(
     to: str,
     operation: str,
     **_kwargs: Any,
-) -> pd.DataFrame:
+) -> pd.DataFrame | DataFrameGroupBy:
     """Apply a window function to a column in a table."""
     window_operation = WindowFunction(operation)
     window = __window_function_map[window_operation](table[column])

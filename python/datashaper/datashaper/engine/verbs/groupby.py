@@ -4,7 +4,9 @@
 #
 """Groupby verb implementation."""
 
-from typing import Any
+from typing import Any, cast
+
+import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -18,5 +20,5 @@ def groupby_verb(
     **kwargs: Any,
 ) -> VerbResult:
     """Groupby verb implementation."""
-    result = groupby(input.get_input(), **kwargs)
+    result = groupby(cast(pd.DataFrame, input.get_input()), **kwargs)
     return create_verb_result(result)

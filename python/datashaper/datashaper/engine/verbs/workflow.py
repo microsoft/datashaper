@@ -1,6 +1,8 @@
 """Contains the workflow verb definition."""
 
-from typing import Any
+from typing import Any, cast
+
+import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -15,5 +17,7 @@ async def workflow_verb(
 ) -> VerbResult:
     """Apply a sequence of operations to the input table."""
     # Set up the input tables for the subworkflow
-    result = await workflow_fn(input.get_input(), workflow, workflow_instance, **kwargs)
+    result = await workflow_fn(
+        cast(pd.DataFrame, input.get_input()), workflow, workflow_instance, **kwargs
+    )
     return create_verb_result(result)

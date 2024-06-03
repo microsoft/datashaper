@@ -4,7 +4,7 @@
 #
 """Difference verb implementation."""
 
-from typing import Any
+from typing import Any, cast
 
 import pandas as pd
 
@@ -15,4 +15,4 @@ def difference(
     """Difference verb implementation."""
     output = table.merge(pd.concat(others), how="left", indicator=True)
     output = output[output["_merge"] == "left_only"]
-    return output.drop("_merge", axis=1)
+    return cast(pd.DataFrame, output.drop("_merge", axis=1))

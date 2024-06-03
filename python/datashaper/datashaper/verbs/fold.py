@@ -35,9 +35,12 @@ def fold(
     table = table.stack(dropna=False).reset_index()
 
     col: str = cast(str, table.filter(regex="level_[1-9]").columns[0])
-    table = table.rename({col: to[0], 0: to[1]}, axis=1).reset_index()[
-        columns + [to[0], to[1]]
-    ]
+    table = cast(
+        pd.DataFrame,
+        table.rename({col: to[0], 0: to[1]}, axis=1).reset_index()[
+            columns + [to[0], to[1]]
+        ],
+    )
 
     if preserveSource is True:
         # (pyright reports a false call issue with the args to rename)

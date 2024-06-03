@@ -4,7 +4,9 @@
 #
 """Print verb implementation."""
 
-from typing import Any
+from typing import Any, cast
+
+import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -18,6 +20,5 @@ def print_verb(
     **kwargs: Any,
 ) -> VerbResult:
     """Print verb implementation."""
-    output = input.get_input()
-    result = ds_print(input.get_input(), **kwargs)
-    return create_verb_result(output, result)
+    result = ds_print(cast(pd.DataFrame, input.get_input()), **kwargs)
+    return create_verb_result(result)

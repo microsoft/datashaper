@@ -4,7 +4,9 @@
 #
 """Erase verb implementation."""
 
-from typing import Any
+from typing import Any, cast
+
+import pandas as pd
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
@@ -15,5 +17,5 @@ from datashaper.verbs import erase
 @verb(name="erase")
 def erase_verb(input: VerbInput, **kwargs: Any) -> VerbResult:
     """Erase verb implementation."""
-    result = erase(input.get_input(), **kwargs)
+    result = erase(cast(pd.DataFrame, input.get_input()), **kwargs)
     return create_verb_result(result)

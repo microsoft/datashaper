@@ -4,7 +4,7 @@
 #
 """Sample verb implementation."""
 
-from typing import Any
+from typing import Any, cast
 
 import pandas as pd
 
@@ -23,5 +23,5 @@ def sample(
     if not emitRemainder:
         return result, None
 
-    unsampled = table[~table.index.isin(result.index)]
+    unsampled = cast(pd.DataFrame, table[~table.index.isin(result.index)])
     return result, unsampled

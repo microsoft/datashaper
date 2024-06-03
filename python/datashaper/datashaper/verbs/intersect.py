@@ -4,6 +4,8 @@
 #
 """Intersect verb implementation."""
 
+from typing import cast
+
 import pandas as pd
 
 
@@ -13,4 +15,4 @@ def intersect(
     """Intersect verb implementation."""
     output = table.merge(pd.concat(others), how="left", indicator=True)
     output = output[output["_merge"] == "both"]
-    return output.drop("_merge", axis=1).reset_index(drop=True)
+    return cast(pd.DataFrame, output.drop("_merge", axis=1).reset_index(drop=True))
