@@ -1,7 +1,12 @@
+from typing import TYPE_CHECKING
+
 import pandas as pd
 
 from datashaper.engine.verbs import VerbInput, VerbManager
-from datashaper.table_store.types import TableContainer, VerbResult
+from datashaper.table_store.types import TableContainer
+
+if TYPE_CHECKING:
+    from python.datashaper.datashaper.engine.types import VerbResult
 
 
 def make_verb_input(data: list, columns: list[str]):

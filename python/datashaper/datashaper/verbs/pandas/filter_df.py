@@ -12,7 +12,7 @@ from uuid import uuid4
 import pandas as pd
 
 from datashaper.errors import UnsupportedComparisonOperatorError
-from datashaper.verbs.types import (
+from datashaper.types import (
     BooleanComparisonOperator,
     BooleanLogicalOperator,
     ComparisonStrategy,

@@ -3,6 +3,7 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """A class to represent the table inputs into a verb."""
+
 from typing import cast
 
 from datashaper.errors import (
@@ -10,7 +11,8 @@ from datashaper.errors import (
     VerbHasMultipleDefaultInputsError,
     VerbHasMultipleDefaultOthersError,
 )
-from datashaper.table_store.types import Table, TableContainer
+from datashaper.table_store.types import TableContainer
+from datashaper.types import Table
 
 
 class VerbInput:

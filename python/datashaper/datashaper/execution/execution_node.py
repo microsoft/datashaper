@@ -3,9 +3,10 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Contains the definition for the ExecutionNode type."""
+
 from dataclasses import dataclass, field
 
-from datashaper.engine.verbs.types import VerbDetails
+from datashaper.engine.types import VerbDetails
 
 
 @dataclass

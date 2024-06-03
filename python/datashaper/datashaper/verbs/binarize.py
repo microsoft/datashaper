@@ -8,12 +8,13 @@ from typing import Any, cast
 
 import pandas as pd
 
-from datashaper.engine.pandas import filter_df, get_operator
-from datashaper.verbs.types import (
+from datashaper.types import (
     ComparisonStrategy,
     FilterArgs,
     StringComparisonOperator,
 )
+
+from .pandas.filter_df import filter_df, get_operator
 
 
 def binarize(

@@ -4,7 +4,7 @@ from typing import Any
 
 import pandas as pd
 
-from datashaper.table_store.types import Table
+from datashaper.types import Table
 from datashaper.workflow.workflow import DEFAULT_INPUT_NAME, Workflow
 
 

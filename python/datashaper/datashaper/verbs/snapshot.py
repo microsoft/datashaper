@@ -8,7 +8,7 @@ from typing import Any
 
 import pandas as pd
 
-from datashaper.verbs.types import FileType
+from datashaper.types import FileType
 
 
 def snapshot(

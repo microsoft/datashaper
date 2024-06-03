@@ -9,7 +9,7 @@ from typing import Any, cast
 import pandas as pd
 from pandas._typing import MergeHow, Suffixes
 
-from datashaper.verbs.types import JoinStrategy
+from datashaper.types import JoinStrategy
 
 __strategy_mapping: dict[JoinStrategy, MergeHow] = {
     JoinStrategy.Inner: "inner",

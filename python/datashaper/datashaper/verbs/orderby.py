@@ -8,7 +8,7 @@ from typing import Any
 
 import pandas as pd
 
-from datashaper.verbs.types import OrderByInstruction, SortDirection
+from datashaper.types import OrderByInstruction, SortDirection
 
 
 def orderby(table: pd.DataFrame, orders: list[dict], **_kwargs: Any) -> pd.DataFrame:

@@ -1,4 +1,5 @@
 """Unwind one-hot encoding."""
+
 import pandas as pd
 
 

@@ -1,7 +1,7 @@
 import pandas as pd
 
-from datashaper import TableContainer, VerbInput
-from datashaper.engine.verbs.aggregate import FieldAggregateOperation, aggregate
+from datashaper.types import FieldAggregateOperation
+from datashaper.verbs import aggregate
 
 
 def test_aggregate_count():
@@ -13,13 +13,12 @@ def test_aggregate_count():
     )
 
     result = aggregate(
-        VerbInput(TableContainer(data)),
+        data,
         column="item",
         to="item_aggregated",
         groupby=["id"],
         operation=FieldAggregateOperation.Count,
     )
-    result = result.output.table
     assert result["id"].to_list() == [1, 2, 3]
     assert result["item_aggregated"].to_list() == [2, 2, 1]
 
@@ -33,13 +32,12 @@ def test_aggregate_unique():
     )
 
     result = aggregate(
-        VerbInput(TableContainer(data)),
+        data,
         column="item",
         to="item_aggregated",
         groupby=["id"],
         operation=FieldAggregateOperation.ArrayAggDistinct,
     )
-    result = result.output.table
     assert result["id"].to_list() == [1, 2, 3]
     assert result["item_aggregated"].to_list() == [["a", "b"], ["c", "d"], ["e"]]
     assert result.get("item") is None

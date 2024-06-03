@@ -4,7 +4,7 @@ from typing import Any, cast
 
 import pandas as pd
 
-from datashaper.engine.verbs.utils import unhot_operation
+from .pandas.unhot_operation import unhot_operation
 
 
 def unhot(

@@ -8,8 +8,9 @@ from typing import Any
 
 import pandas as pd
 
-from datashaper.engine.pandas import aggregate_operation_mapping
-from datashaper.verbs.types import FieldAggregateOperation
+from datashaper.types import FieldAggregateOperation
+
+from .pandas.aggregate_mapping import aggregate_operation_mapping
 
 
 def aggregate(
@@ -21,10 +22,8 @@ def aggregate(
     **_kwargs: Any,
 ) -> pd.DataFrame:
     """Aggregate verb implementation."""
-    result = (
-        table.get_input()
-        .groupby(groupby)
-        .agg({column: aggregate_operation_mapping[operation]})
+    result = table.groupby(groupby).agg(
+        {column: aggregate_operation_mapping[operation]}
     )
     result[to] = result[column]
     result.drop(column, axis=1, inplace=True)

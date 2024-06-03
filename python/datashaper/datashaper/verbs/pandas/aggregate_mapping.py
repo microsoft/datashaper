@@ -2,7 +2,7 @@
 
 from functools import reduce
 
-from datashaper.verbs.types import FieldAggregateOperation
+from datashaper.types import FieldAggregateOperation
 
 aggregate_operation_mapping = {
     FieldAggregateOperation.Any: "first",

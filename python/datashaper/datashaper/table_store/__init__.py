@@ -9,8 +9,6 @@ from .types import (
     Table,
     TableContainer,
     TableMetadata,
-    VerbResult,
-    create_verb_result,
 )
 
 __all__ = [
@@ -22,6 +20,4 @@ __all__ = [
     "TableMetadata",
     "ColumnMetadata",
     "ColumnStats",
-    "VerbResult",
-    "create_verb_result",
 ]

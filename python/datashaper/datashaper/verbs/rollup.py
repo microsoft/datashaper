@@ -9,8 +9,9 @@ from typing import Any
 
 import pandas as pd
 
-from datashaper.engine.pandas import aggregate_operation_mapping
-from datashaper.verbs.types import FieldAggregateOperation
+from datashaper.types import FieldAggregateOperation
+
+from .pandas.aggregate_mapping import aggregate_operation_mapping
 
 
 def rollup(

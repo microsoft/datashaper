@@ -8,8 +8,9 @@ from typing import Any
 
 import pandas as pd
 
-from datashaper.engine.pandas import boolean_function_map
-from datashaper.verbs.types import BooleanLogicalOperator
+from datashaper.types import BooleanLogicalOperator
+
+from .pandas.filter_df import boolean_function_map
 
 
 def boolean(

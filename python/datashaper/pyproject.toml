@@ -51,6 +51,7 @@ _pyright = "pyright"
 check_format = 'ruff format . --check'
 test_only = "pytest -v -k"
 fix = "ruff check --fix ."
+fix_unsafe = "ruff check --fix . --unsafe-fixes"
 
 [[tool.poe.tasks.format]]
 sequence = ['_sort_imports', '_format_code']

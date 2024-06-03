@@ -7,16 +7,18 @@ import pytest
 
 from datashaper import (
     DEFAULT_INPUT_NAME,
-    NodeNotVisitedError,
     Progress,
     TableContainer,
     VerbCallbacks,
-    VerbError,
     VerbInput,
     Workflow,
-    WorkflowVerbNotFoundError,
     derive_from_rows,
     progress_iterable,
+)
+from datashaper.errors import (
+    NodeNotVisitedError,
+    VerbError,
+    WorkflowVerbNotFoundError,
 )
 
 

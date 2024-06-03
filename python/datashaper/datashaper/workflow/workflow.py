@@ -19,7 +19,7 @@ from uuid import uuid4
 import pandas as pd
 from jsonschema import validate as validate_schema
 
-from datashaper.engine.verbs.types import VerbDetails
+from datashaper.engine.types import VerbDetails, VerbResult
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import VerbManager
 from datashaper.errors import (
@@ -33,7 +33,7 @@ from datashaper.execution.execution_node import ExecutionNode, WorkflowInput
 from datashaper.progress.types import Progress
 from datashaper.table_store.in_memory_table_store import InMemoryTableStore
 from datashaper.table_store.table_store import TableStore
-from datashaper.table_store.types import Table, TableContainer, VerbResult
+from datashaper.table_store.types import Table, TableContainer
 
 from .types import MemoryProfile, VerbTiming, WorkflowRunResult
 from .verb_callbacks import DelegatingVerbCallbacks

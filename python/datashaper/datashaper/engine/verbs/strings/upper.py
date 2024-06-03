@@ -3,13 +3,15 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Upper verb implementation."""
+
 from typing import cast
 
 import pandas as pd
 
+from datashaper.engine.create_verb_result import create_verb_result
+from datashaper.engine.types import VerbResult
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.table_store.types import VerbResult, create_verb_result
 
 
 @verb(name="strings.upper")

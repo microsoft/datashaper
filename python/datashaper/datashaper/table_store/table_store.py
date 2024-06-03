@@ -3,9 +3,10 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Abstract class to define the table store interface."""
+
 from abc import ABC, abstractmethod
 
-from datashaper.table_store.types import TableContainer
+from .types import TableContainer
 
 
 class TableStore(ABC):

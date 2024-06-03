@@ -9,8 +9,9 @@ from typing import Any
 
 import pandas as pd
 
-from datashaper.engine.verbs.utils import strategy_mapping
-from datashaper.verbs.types import MergeStrategy
+from datashaper.types import MergeStrategy
+
+from .pandas.merge_strategies import merge_strategies
 
 
 def merge(
@@ -26,7 +27,7 @@ def merge(
     merge_strategy = MergeStrategy(strategy)
 
     table[to] = table[columns].apply(
-        partial(strategy_mapping[merge_strategy], delim=delimiter), axis=1
+        partial(merge_strategies[merge_strategy], delim=delimiter), axis=1
     )
 
     if not preserveSource:

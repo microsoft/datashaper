@@ -9,7 +9,7 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from .types import BinStrategy
+from datashaper.types import BinStrategy
 
 
 def __get_bucket_value(

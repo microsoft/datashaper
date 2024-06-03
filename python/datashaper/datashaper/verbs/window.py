@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 from pandas.core.groupby import DataFrameGroupBy
 
-from datashaper.verbs.types import WindowFunction
+from datashaper.types import WindowFunction
 
 
 def _get_window_indexer(
