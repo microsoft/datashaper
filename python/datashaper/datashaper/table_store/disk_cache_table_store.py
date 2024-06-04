@@ -12,8 +12,9 @@ from uuid import uuid4
 import diskcache as dc
 import pandas as pd
 
-from datashaper.table_store.table_store import TableStore
 from datashaper.types import TableContainer
+
+from .table_store import TableStore
 
 
 class DiskCacheTableStore(TableStore):

@@ -6,8 +6,9 @@
 
 from dataclasses import dataclass
 
-from datashaper.table_store.table_store import TableStore
 from datashaper.types import TableContainer
+
+from .table_store import TableStore
 
 
 @dataclass
