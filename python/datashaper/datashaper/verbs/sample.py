@@ -8,7 +8,10 @@ from typing import Any, cast
 
 import pandas as pd
 
+from datashaper.decorators import verb
 
+
+@verb(name="sample", treats_input_tables_as_immutable=True)
 def sample(
     table: pd.DataFrame,
     size: int | None = None,
@@ -16,12 +19,12 @@ def sample(
     seed: int | None = None,
     emitRemainder: bool | None = False,  # noqa F403 - schema argument
     **_kwargs: Any,
-) -> tuple[pd.DataFrame, pd.DataFrame | None]:
+) -> tuple[pd.DataFrame, dict[str, pd.DataFrame]]:
     """Sample verb implementation."""
     result = table.sample(n=size, frac=proportion, random_state=seed)
 
     if not emitRemainder:
-        return result, None
+        return result, {}
 
     unsampled = cast(pd.DataFrame, table[~table.index.isin(result.index)])
-    return result, unsampled
+    return result, {"remainder": unsampled}

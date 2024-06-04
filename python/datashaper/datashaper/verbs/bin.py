@@ -9,6 +9,7 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
+from datashaper.decorators import verb
 from datashaper.types import BinStrategy
 
 
@@ -71,6 +72,7 @@ __bin_edges_mapping = {
 }
 
 
+@verb(name="bin")
 def ds_bin(
     table: pd.DataFrame,
     to: str,

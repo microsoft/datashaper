@@ -8,7 +8,7 @@ from typing import Any, cast
 
 import pandas as pd
 
-from datashaper.engine.verbs.parallel_verb import OperationType, parallel_verb
+from datashaper.decorators import OperationType, parallel_verb
 from datashaper.types import (
     ComparisonStrategy,
     FilterArgs,

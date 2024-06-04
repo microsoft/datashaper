@@ -8,6 +8,8 @@ from typing import Any, cast
 
 import pandas as pd
 
+from datashaper.decorators import verb
+
 
 class RecodeMap(dict):
     """Recode map class."""
@@ -17,6 +19,7 @@ class RecodeMap(dict):
         return key
 
 
+@verb(name="recode")
 def recode(
     table: pd.DataFrame, to: str, column: str, mapping: dict, **_kwargs: Any
 ) -> pd.DataFrame:

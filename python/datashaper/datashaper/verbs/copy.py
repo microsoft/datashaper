@@ -8,7 +8,10 @@ from typing import Any
 
 import pandas as pd
 
+from datashaper.decorators import verb
 
+
+@verb(name="copy")
 def copy(
     table: pd.DataFrame,
     to: str,

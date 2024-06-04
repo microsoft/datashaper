@@ -8,7 +8,10 @@ from typing import Any
 
 import pandas as pd
 
+from datashaper.decorators import verb
 
+
+@verb(name="unorder", treats_input_tables_as_immutable=True)
 def unorder(table: pd.DataFrame, **_kwargs: Any) -> pd.DataFrame:
     """Unorder verb implementation."""
     return table.sort_index()

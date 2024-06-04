@@ -44,6 +44,7 @@ from .unorder import unorder
 from .unroll import unroll
 from .window import window
 from .workflow import workflow
+from .strings import upper, lower, replace
 
 __all__ = [
     # Verbs
@@ -87,4 +88,7 @@ __all__ = [
     "unroll",
     "window",
     "workflow",
+    "upper",
+    "lower",
+    "replace",
 ]

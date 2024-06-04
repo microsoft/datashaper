@@ -9,6 +9,7 @@ from typing import Any, cast
 import pandas as pd
 from pandas._typing import MergeHow, Suffixes
 
+from datashaper.decorators import verb
 from datashaper.types import JoinStrategy
 
 __strategy_mapping: dict[JoinStrategy, MergeHow] = {
@@ -45,6 +46,7 @@ def __clean_result(
     return result.drop("_merge", axis=1)
 
 
+@verb(name="join", treats_input_tables_as_immutable=True)
 def join(
     table: pd.DataFrame,
     other: pd.DataFrame,

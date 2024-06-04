@@ -8,7 +8,10 @@ from typing import Any, cast
 
 import pandas as pd
 
+from datashaper.decorators import verb
 
+
+@verb(name="difference", treats_input_tables_as_immutable=True)
 def difference(
     table: pd.DataFrame, others: list[pd.DataFrame], **_kwargs: Any
 ) -> pd.DataFrame:

@@ -9,11 +9,13 @@ from typing import Any
 
 import pandas as pd
 
+from datashaper.decorators import verb
 from datashaper.types import FieldAggregateOperation
 
 from .pandas.aggregate_mapping import aggregate_operation_mapping
 
 
+@verb(name="rollup", treats_input_tables_as_immutable=True)
 def rollup(
     table: pd.DataFrame, column: str, to: str, operation: str, **_kwargs: Any
 ) -> pd.DataFrame:

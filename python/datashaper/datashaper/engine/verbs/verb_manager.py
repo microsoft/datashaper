@@ -7,35 +7,9 @@
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from functools import cache
-from typing import Any
 
 from datashaper.errors import VerbAlreadyRegisteredError
-from datashaper.types import VerbDetails, VerbResult
-
-
-def verb(
-    name: str,
-    treats_input_tables_as_immutable: bool = False,
-    override_existing: bool = False,
-    **_kwargs: Any,
-) -> Callable:
-    """Apply a decorator for registering a verb."""
-
-    def inner(
-        func: Callable[
-            ...,
-            VerbResult,
-        ],
-    ) -> Callable[..., VerbResult]:
-        verb = VerbDetails(
-            name=name,
-            func=func,
-            treats_input_tables_as_immutable=treats_input_tables_as_immutable,
-        )
-        VerbManager.get().register(verb, override_existing)
-        return func
-
-    return inner
+from datashaper.types import VerbDetails
 
 
 @dataclass

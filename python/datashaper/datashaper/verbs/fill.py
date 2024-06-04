@@ -8,7 +8,10 @@ from typing import Any
 
 import pandas as pd
 
+from datashaper.decorators import verb
 
+
+@verb(name="fill")
 def fill(
     table: pd.DataFrame, to: str, value: str | float | bool, **_kwargs: Any
 ) -> pd.DataFrame:

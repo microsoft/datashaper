@@ -11,6 +11,7 @@ import numpy as np
 import pandas as pd
 from pandas.api.types import is_numeric_dtype
 
+from datashaper.decorators import verb
 from datashaper.errors import VerbOperationNotSupportedError
 from datashaper.types import MathOperator
 
@@ -36,6 +37,7 @@ __op_mapping: dict[MathOperator, Callable] = {
 }
 
 
+@verb(name="derive")
 def derive(
     table: pd.DataFrame,
     to: str,

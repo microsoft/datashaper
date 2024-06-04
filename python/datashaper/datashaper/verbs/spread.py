@@ -8,13 +8,16 @@ from typing import Any, cast
 
 import pandas as pd
 
+from datashaper.decorators import verb
+
 
 def _get_array_item(array: list, index: int) -> Any:
     return array[index] if index < len(array) else None
 
 
+@verb(name="spread")
 def _spread(
-    table: pd.DataFrame, column: str, to: str | list[str] | None
+    table: pd.DataFrame, column: str, to: str | list[str] | None = None, **_kwargs: Any
 ) -> pd.DataFrame:
     input_col = cast(pd.Series, table[column])
     max_length = cast(int, input_col.apply(len).max())

@@ -6,7 +6,7 @@ from datashaper.engine.verbs import VerbInput, VerbManager
 from datashaper.types import TableContainer
 
 if TYPE_CHECKING:
-    from python.datashaper.datashaper.engine.types import VerbResult
+    from datashaper.types import VerbResult
 
 
 def make_verb_input(data: list, columns: list[str]):

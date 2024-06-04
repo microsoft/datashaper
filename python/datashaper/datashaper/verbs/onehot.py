@@ -9,7 +9,10 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
+from datashaper.decorators import verb
 
+
+@verb(name="onehot")
 def onehot(
     table: pd.DataFrame,
     column: str,

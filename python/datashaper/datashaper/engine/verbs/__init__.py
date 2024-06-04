@@ -8,9 +8,8 @@ import sys
 from pathlib import Path
 from types import ModuleType
 
-from .parallel_verb import new_row, parallel_verb
 from .verb_input import VerbInput
-from .verbs_mapping import VerbManager, verb
+from .verb_manager import VerbManager
 
 logger = logging.getLogger(__name__)
 
@@ -52,7 +51,4 @@ __all__ = [
     "VerbInput",
     "VerbManager",
     "load_verbs",
-    "verb",
-    "parallel_verb",
-    "new_row",
 ]

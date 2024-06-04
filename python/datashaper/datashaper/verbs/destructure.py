@@ -9,7 +9,10 @@ from typing import Any
 
 import pandas as pd
 
+from datashaper.decorators import verb
 
+
+@verb(name="destructure")
 def destructure(
     table: pd.DataFrame,
     column: str,

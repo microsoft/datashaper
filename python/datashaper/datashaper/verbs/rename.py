@@ -8,7 +8,10 @@ from typing import Any
 
 import pandas as pd
 
+from datashaper.decorators import verb
 
+
+@verb(name="rename", treats_input_tables_as_immutable=True)
 def rename(
     table: pd.DataFrame, columns: dict[str, str], **_kwargs: Any
 ) -> pd.DataFrame:

@@ -8,7 +8,10 @@ from typing import Any, cast
 
 import pandas as pd
 
+from datashaper.decorators import verb
 
+
+@verb(name="impute")
 def impute(
     table: pd.DataFrame, column: str, value: str | float | bool, **_kwargs: Any
 ) -> pd.DataFrame:

@@ -5,19 +5,15 @@
 """Replace verb implementation."""
 
 import re
-from typing import cast
 
 import pandas as pd
 
-from datashaper.engine.create_verb_result import create_verb_result
-from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.engine.verbs.verbs_mapping import verb
-from datashaper.types import VerbResult
+from datashaper.decorators import verb
 
 
 @verb(name="strings.replace")
 def replace(
-    input: VerbInput,
+    table: pd.DataFrame,
     column: str,
     to: str,
     pattern: str,
@@ -25,12 +21,9 @@ def replace(
     globalMatch: bool = False,  # noqa: N803
     caseInsensitive: bool = False,  # noqa: N803
     **_kwargs: dict,
-) -> VerbResult:
+) -> pd.DataFrame:
     """Replace verb implementation."""
     n = 0 if globalMatch else 1
-    input_table = input.get_input()
-    output = cast(pd.DataFrame, input_table)
     pat = re.compile(pattern, flags=re.IGNORECASE if caseInsensitive else 0)
-    output[to] = output[column].apply(lambda x: pat.sub(replacement, x, count=n))
-
-    return create_verb_result(output)
+    table[to] = table[column].apply(lambda x: pat.sub(replacement, x, count=n))
+    return table

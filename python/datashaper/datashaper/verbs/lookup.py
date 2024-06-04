@@ -8,7 +8,10 @@ from typing import Any, cast
 
 import pandas as pd
 
+from datashaper.decorators import verb
 
+
+@verb(name="lookup", treats_input_tables_as_immutable=True)
 def lookup(
     table: pd.DataFrame,
     other: pd.DataFrame,

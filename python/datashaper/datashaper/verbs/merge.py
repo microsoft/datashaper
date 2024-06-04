@@ -9,11 +9,13 @@ from typing import Any
 
 import pandas as pd
 
+from datashaper.decorators import verb
 from datashaper.types import MergeStrategy
 
 from .pandas.merge_strategies import merge_strategies
 
 
+@verb(name="merge")
 def merge(
     table: pd.DataFrame,
     to: str,

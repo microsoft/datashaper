@@ -8,7 +8,10 @@ from typing import Any
 
 import pandas as pd
 
+from datashaper.decorators import verb
 
+
+@verb(name="dedupe", treats_input_tables_as_immutable=True)
 def dedupe(
     table: pd.DataFrame, columns: list[str] | None = None, **_kwargs: Any
 ) -> pd.DataFrame:

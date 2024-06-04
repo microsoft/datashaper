@@ -8,7 +8,10 @@ from typing import Any
 
 import pandas as pd
 
+from datashaper.decorators import verb
 
+
+@verb(name="erase")
 def erase(
     table: pd.DataFrame, column: str, value: str | float, **_kwargs: Any
 ) -> pd.DataFrame:

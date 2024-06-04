@@ -8,7 +8,10 @@ from typing import Any
 
 import pandas as pd
 
+from datashaper.decorators import verb
 
+
+@verb(name="print", treats_input_tables_as_immutable=True)
 def ds_print(
     table: pd.DataFrame, message: str, limit: int = 10, **_kwargs: Any
 ) -> pd.DataFrame:

@@ -11,6 +11,7 @@ import numpy as np
 import pandas as pd
 from pandas.core.groupby import DataFrameGroupBy
 
+from datashaper.decorators import verb
 from datashaper.types import WindowFunction
 
 
@@ -56,6 +57,7 @@ __window_function_map = {
 }
 
 
+@verb(name="window")
 def window(
     table: pd.DataFrame | DataFrameGroupBy,
     column: str,

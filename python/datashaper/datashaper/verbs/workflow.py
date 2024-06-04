@@ -4,10 +4,12 @@ from typing import Any
 
 import pandas as pd
 
+from datashaper.decorators import verb
 from datashaper.types import Table
 from datashaper.workflow.workflow import DEFAULT_INPUT_NAME, Workflow
 
 
+@verb(name="workflow")
 async def workflow(
     table: pd.DataFrame,
     workflow: dict,

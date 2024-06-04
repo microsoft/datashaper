@@ -8,11 +8,13 @@ from typing import Any
 
 import pandas as pd
 
+from datashaper.decorators import verb
 from datashaper.types import BooleanLogicalOperator
 
 from .pandas.filter_df import boolean_function_map
 
 
+@verb(name="boolean")
 def boolean(
     table: pd.DataFrame, to: str, columns: list[str], operator: str, **_kwargs: Any
 ) -> pd.DataFrame:

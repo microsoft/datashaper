@@ -8,7 +8,10 @@ from typing import cast
 
 import pandas as pd
 
+from datashaper.decorators import verb
 
+
+@verb(name="intersect", treats_input_tables_as_immutable=True)
 def intersect(
     table: pd.DataFrame, others: list[pd.DataFrame], **_kwargs: dict
 ) -> pd.DataFrame:

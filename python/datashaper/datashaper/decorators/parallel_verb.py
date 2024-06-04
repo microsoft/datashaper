@@ -23,7 +23,7 @@ from datashaper.progress import ProgressTicker, progress_ticker
 from datashaper.types import AsyncType, Table, TableContainer
 from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
 
-from .verbs_mapping import verb
+from .verb import verb
 
 logger = logging.getLogger(__name__)
 
@@ -77,6 +77,7 @@ def parallel_verb(
             name=name,
             treats_input_tables_as_immutable=treats_input_tables_as_immutable,
             override_existing=override_existing,
+            raw=True,
         )
         async def wrapper(
             input: VerbInput,
@@ -155,7 +156,7 @@ def parallel_verb(
             if len(errors) > 0:
                 raise VerbParallelizationError(len(errors))
             if operation_type == OperationType.CHUNK:
-                return TableContainer(merge(results))  # type: ignore
+                return TableContainer(merge(results))
 
             return TableContainer(pd.DataFrame(results))
 

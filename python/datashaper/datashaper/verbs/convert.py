@@ -13,6 +13,7 @@ import numpy as np
 import pandas as pd
 from pandas.api.types import is_bool_dtype, is_datetime64_any_dtype, is_numeric_dtype
 
+from datashaper.decorators import verb
 from datashaper.types import ParseType
 
 
@@ -113,6 +114,7 @@ __type_mapping: dict[ParseType, Callable] = {
 }
 
 
+@verb(name="convert")
 def convert(
     table: pd.DataFrame,
     column: str,

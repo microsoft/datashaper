@@ -8,6 +8,7 @@ from typing import Any, cast
 
 import pandas as pd
 
+from datashaper.decorators import verb
 from datashaper.types import (
     ComparisonStrategy,
     FilterArgs,
@@ -17,6 +18,7 @@ from datashaper.types import (
 from .pandas.filter_df import filter_df, get_operator
 
 
+@verb(name="binarize")
 def binarize(
     table: pd.DataFrame,
     to: str,

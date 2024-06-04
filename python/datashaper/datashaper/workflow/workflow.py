@@ -20,7 +20,7 @@ import pandas as pd
 from jsonschema import validate as validate_schema
 
 from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.engine.verbs.verbs_mapping import VerbManager
+from datashaper.engine.verbs.verb_manager import VerbManager
 from datashaper.errors import (
     NodeNotVisitedError,
     WorkflowInvalidInputError,
