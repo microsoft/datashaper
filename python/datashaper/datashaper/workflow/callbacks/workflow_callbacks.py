@@ -4,7 +4,7 @@ from typing import Protocol
 
 from datashaper.execution.execution_node import ExecutionNode
 from datashaper.progress import Progress
-from datashaper.types import TableContainer
+from datashaper.types.table_store_types import TableContainer
 
 
 class WorkflowCallbacks(Protocol):

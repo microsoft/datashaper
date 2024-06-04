@@ -14,7 +14,6 @@ from .decorators import VerbInputSpec, verb
 @verb(
     name="sample",
     input=VerbInputSpec("table", immutable=True),
-    # output=VerbOutputSpec(named=["remainder"]),  # implies tuple return type
 )
 def sample(
     table: pd.DataFrame,

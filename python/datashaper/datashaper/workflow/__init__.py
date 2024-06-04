@@ -1,13 +1,13 @@
 """Datashaper Workflow module."""
 
-from .types import MemoryProfile, VerbTiming, WorkflowRunResult
-from .workflow import DEFAULT_INPUT_NAME, PandasDtypeBackend, Workflow
-from .workflow_callbacks import (
+from .callbacks import (
     MemoryProfilingWorkflowCallbacks,
     NoopWorkflowCallbacks,
     WorkflowCallbacks,
     WorkflowCallbacksManager,
 )
+from .types import MemoryProfile, VerbTiming, WorkflowRunResult
+from .workflow import DEFAULT_INPUT_NAME, PandasDtypeBackend, Workflow
 
 __all__ = [
     "Workflow",
