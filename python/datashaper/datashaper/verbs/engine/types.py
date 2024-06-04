@@ -1,7 +1,7 @@
 """Datashaper Engine types."""
 
 from collections.abc import Callable
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Generic, TypeVar
 
 from datashaper.types import TableContainer

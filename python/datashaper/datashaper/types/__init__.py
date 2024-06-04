@@ -1,6 +1,5 @@
 """Datashaper Types."""
 
-from .engine_types import Step
 from .table_store_types import (
     ColumnMetadata,
     ColumnStats,
@@ -15,7 +14,5 @@ __all__ = [
     "ColumnStats",
     "TableContainer",
     "TableMetadata",
-    ## Engine Enums
-    "Step",
     "Table",
 ]
