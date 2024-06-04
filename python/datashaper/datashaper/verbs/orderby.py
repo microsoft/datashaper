@@ -8,9 +8,8 @@ from typing import Any
 
 import pandas as pd
 
-from datashaper.types import OrderByInstruction, SortDirection
-
 from .decorators import VerbInputSpec, verb
+from .types import OrderByInstruction, SortDirection
 
 
 @verb(name="orderby", input=VerbInputSpec("table", immutable=True))

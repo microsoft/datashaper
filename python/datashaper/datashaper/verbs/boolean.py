@@ -8,10 +8,9 @@ from typing import Any
 
 import pandas as pd
 
-from datashaper.types import BooleanLogicalOperator
-
 from .decorators import VerbInputSpec, verb
 from .filter import boolean_function_map
+from .types import BooleanLogicalOperator
 
 
 @verb(name="boolean", input=VerbInputSpec("table"))

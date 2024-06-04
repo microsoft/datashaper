@@ -1,7 +1,6 @@
 import pandas as pd
 
-from datashaper.types import FieldAggregateOperation
-from datashaper.verbs import aggregate
+from datashaper.verbs import FieldAggregateOperation, aggregate
 
 
 def test_aggregate_count():

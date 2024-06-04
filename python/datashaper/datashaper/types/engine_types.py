@@ -5,7 +5,6 @@
 """Common types used across the datashaper engine."""
 
 from dataclasses import dataclass, field
-from enum import Enum
 
 
 @dataclass

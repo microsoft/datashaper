@@ -13,18 +13,18 @@ from uuid import uuid4
 import pandas as pd
 
 from datashaper.errors import UnsupportedComparisonOperatorError
-from datashaper.types import (
+from datashaper.types import Table
+
+from .callbacks import VerbCallbacks
+from .decorators import OperationType, parallel_verb
+from .types import (
     BooleanComparisonOperator,
     BooleanLogicalOperator,
     ComparisonStrategy,
     FilterArgs,
     NumericComparisonOperator,
     StringComparisonOperator,
-    Table,
 )
-
-from .callbacks import VerbCallbacks
-from .decorators import OperationType, parallel_verb
 
 log = logging.getLogger(__name__)
 

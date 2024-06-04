@@ -8,14 +8,13 @@ from typing import Any, cast
 
 import pandas as pd
 
-from datashaper.types import (
+from .decorators import VerbInputSpec, verb
+from .filter import filter, get_comparison_operator
+from .types import (
     ComparisonStrategy,
     FilterArgs,
     StringComparisonOperator,
 )
-
-from .decorators import VerbInputSpec, verb
-from .filter import filter, get_comparison_operator
 
 
 @verb(name="binarize", input=VerbInputSpec("table"))

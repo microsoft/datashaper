@@ -7,7 +7,12 @@
 from dataclasses import dataclass
 from typing import Any, Generic, TypeVar
 
-from .verb_types import Bin, Category, DataType, Table
+import pandas as pd
+from pandas.core.groupby import DataFrameGroupBy
+
+from datashaper.verbs.types import Bin, Category, DataType
+
+Table = pd.DataFrame | DataFrameGroupBy
 
 
 @dataclass

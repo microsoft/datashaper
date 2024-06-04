@@ -6,7 +6,7 @@ from typing import Any
 import pandas as pd
 from pandas.api.types import is_bool
 
-from datashaper.types import MergeStrategy
+from datashaper.verbs.types import MergeStrategy
 
 merge_strategies: dict[MergeStrategy, Callable] = {
     MergeStrategy.FirstOneWins: lambda values, **_kwargs: values.dropna().apply(

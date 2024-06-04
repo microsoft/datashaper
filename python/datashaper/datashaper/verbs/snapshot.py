@@ -8,9 +8,8 @@ from typing import Any
 
 import pandas as pd
 
-from datashaper.types import FileType
-
 from .decorators import VerbInputSpec, verb
+from .types import FileType
 
 
 @verb(name="snapshot", input=VerbInputSpec("table", immutable=True))

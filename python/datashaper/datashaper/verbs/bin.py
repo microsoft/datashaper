@@ -9,9 +9,8 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from datashaper.types import BinStrategy
-
 from .decorators import VerbInputSpec, verb
+from .types import BinStrategy
 
 
 def __get_bucket_value(

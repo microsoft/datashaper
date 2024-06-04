@@ -8,9 +8,8 @@ from typing import Any, cast
 
 import pandas as pd
 
-from datashaper.types import FieldAggregateOperation
-
 from .decorators import VerbInputSpec, verb
+from .types import FieldAggregateOperation
 from .utils.pandas.aggregate_mapping import aggregate_operation_mapping
 
 

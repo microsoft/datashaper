@@ -8,11 +8,6 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Any
 
-import pandas as pd
-from pandas.core.groupby import DataFrameGroupBy
-
-Table = pd.DataFrame | DataFrameGroupBy
-
 
 class Bin:
     """A data bin."""

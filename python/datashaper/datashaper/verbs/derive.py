@@ -12,9 +12,9 @@ import pandas as pd
 from pandas.api.types import is_numeric_dtype
 
 from datashaper.errors import VerbOperationNotSupportedError
-from datashaper.types import MathOperator
 
 from .decorators import VerbInputSpec, verb
+from .types import MathOperator
 
 
 def __multiply(col1: pd.Series, col2: pd.Series) -> np.ndarray:

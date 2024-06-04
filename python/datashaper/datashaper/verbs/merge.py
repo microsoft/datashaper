@@ -9,9 +9,8 @@ from typing import Any
 
 import pandas as pd
 
-from datashaper.types import MergeStrategy
-
 from .decorators import VerbInputSpec, verb
+from .types import MergeStrategy
 from .utils.pandas.merge_strategies import merge_strategies
 
 

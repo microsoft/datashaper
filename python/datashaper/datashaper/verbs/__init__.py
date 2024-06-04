@@ -45,6 +45,29 @@ from .select import select
 from .snapshot import snapshot
 from .spread import spread
 from .strings import lower, replace, upper
+from .types import (
+    Bin,
+    BinStrategy,
+    BooleanComparisonOperator,
+    BooleanLogicalOperator,
+    Category,
+    ComparisonStrategy,
+    DataType,
+    FieldAggregateOperation,
+    FileType,
+    FilterArgs,
+    InputColumnArgs,
+    JoinStrategy,
+    MathOperator,
+    MergeStrategy,
+    NumericComparisonOperator,
+    OrderByInstruction,
+    ParseType,
+    SetOp,
+    SortDirection,
+    StringComparisonOperator,
+    WindowFunction,
+)
 from .unfold import unfold
 from .ungroup import ungroup
 from .unhot import unhot
@@ -110,4 +133,26 @@ __all__ = [
     "VerbInputSpec",
     "verb",
     "parallel_verb",
+    # Enums,
+    "Bin",
+    "BinStrategy",
+    "BooleanComparisonOperator",
+    "BooleanLogicalOperator",
+    "Category",
+    "ComparisonStrategy",
+    "DataType",
+    "FieldAggregateOperation",
+    "FileType",
+    "FilterArgs",
+    "InputColumnArgs",
+    "JoinStrategy",
+    "MathOperator",
+    "MergeStrategy",
+    "NumericComparisonOperator",
+    "OrderByInstruction",
+    "ParseType",
+    "SetOp",
+    "SortDirection",
+    "StringComparisonOperator",
+    "WindowFunction",
 ]
