@@ -8,6 +8,8 @@ from typing import Any, cast
 
 import pandas as pd
 
+from datashaper.constants import DEFAULT_OUTPUT_NAME
+
 from .decorators import VerbInputSpec, verb
 
 
@@ -22,12 +24,12 @@ def sample(
     seed: int | None = None,
     emitRemainder: bool | None = False,  # noqa F403 - schema argument
     **_kwargs: Any,
-) -> tuple[pd.DataFrame, dict[str, pd.DataFrame]]:
+) -> dict[str, pd.DataFrame]:
     """Sample verb implementation."""
     result = table.sample(n=size, frac=proportion, random_state=seed)
 
     if not emitRemainder:
-        return result, {}
+        return {DEFAULT_OUTPUT_NAME: result}
 
     unsampled = cast(pd.DataFrame, table[~table.index.isin(result.index)])
-    return result, {"remainder": unsampled}
+    return {DEFAULT_OUTPUT_NAME: result, "remainder": unsampled}

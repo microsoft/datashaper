@@ -19,6 +19,7 @@ from uuid import uuid4
 import pandas as pd
 from jsonschema import validate as validate_schema
 
+from datashaper.constants import DEFAULT_INPUT_NAME
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verb_manager import VerbManager
 from datashaper.errors import (
@@ -48,8 +49,6 @@ log = getLogger(__name__)
 SCHEMA_FILE = "../../schema/workflow.json"
 
 Context = TypeVar("Context")
-
-DEFAULT_INPUT_NAME = "source"
 
 
 class PandasDtypeBackend(str, Enum):

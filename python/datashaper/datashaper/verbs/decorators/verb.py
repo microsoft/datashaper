@@ -13,6 +13,7 @@ from typing import Any, cast
 import pandas as pd
 from pandas.core.groupby import DataFrameGroupBy
 
+from datashaper.constants import DEFAULT_OUTPUT_NAME
 from datashaper.engine.create_verb_result import create_verb_result
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.engine.verbs.verb_manager import VerbManager
@@ -71,15 +72,10 @@ def _wrap_verb_function(
     sig = signature(verb_function)
 
     # If the verb function returns a DataFrame, wrap it in a VerbResult
-    if (
-        sig.return_annotation == pd.DataFrame
-        or sig.return_annotation == DataFrameGroupBy
-        or sig.return_annotation == (pd.DataFrame | DataFrameGroupBy)
-        or sig.return_annotation == TableContainer
-    ):
+    if _is_table_return_signature(sig):
         verb_function = _handle_dataframe_return_type(verb_function)
-    elif sig.return_annotation == tuple[pd.DataFrame, dict[str, pd.DataFrame]]:
-        verb_function = _handle_tuple_return_type(verb_function)
+    elif sig.return_annotation == dict[str, pd.DataFrame]:
+        verb_function = _handle_dict_return_type(verb_function)
     elif sig.return_annotation != VerbResult:
         log.warning("sig.return_annotation", verb_function, sig.return_annotation)
         msg = f"Verb function {verb_function} must return a DataFrame, a tuple, or VerbResult. Found {sig.return_annotation}."
@@ -89,6 +85,15 @@ def _wrap_verb_function(
         verb_function = _handle_input_spec(verb_function, input)
 
     return verb_function
+
+
+def _is_table_return_signature(sig: inspect.Signature) -> bool:
+    return (
+        sig.return_annotation == pd.DataFrame
+        or sig.return_annotation == DataFrameGroupBy
+        or sig.return_annotation == (pd.DataFrame | DataFrameGroupBy)
+        or sig.return_annotation == TableContainer
+    )
 
 
 def _handle_input_spec(
@@ -146,14 +151,18 @@ def _handle_dataframe_return_type(
     return cast(Callable, wrapper)
 
 
-def _handle_tuple_return_type(
-    verb_function: Callable[..., tuple[pd.DataFrame, dict[str, pd.DataFrame | None]]],
+def _handle_dict_return_type(
+    verb_function: Callable[..., dict[str, pd.DataFrame]],
 ) -> Callable[..., VerbResult]:
     """Handle the return type of the verb function."""
 
     def wrapper(*args: Any, **kwargs: Any) -> VerbResult:
-        result, others = verb_function(*args, **kwargs)
-        others = {k: TableContainer(v) for k, v in others.items() if v is not None}
-        return create_verb_result(result, named_outputs=others)
+        tables = verb_function(*args, **kwargs)
+        default_output = tables.pop(DEFAULT_OUTPUT_NAME, None)
+        others = {k: TableContainer(v) for k, v in tables.items() if v is not None}
+        if default_output is None:
+            msg = f"Verb function {verb_function} must return a default output."
+            raise ValueError(msg)
+        return create_verb_result(default_output, named_outputs=others)
 
     return wrapper
