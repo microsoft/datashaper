@@ -1,6 +1,6 @@
 """Datashaper Types."""
 
-from .engine_types import AsyncType, Step
+from .engine_types import Step
 from .table_store_types import (
     ColumnMetadata,
     ColumnStats,
@@ -62,6 +62,5 @@ __all__ = [
     "TableContainer",
     "TableMetadata",
     ## Engine Enums
-    "AsyncType",
     "Step",
 ]

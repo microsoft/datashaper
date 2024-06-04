@@ -6,11 +6,11 @@ from typing import TypeVar
 
 import pandas as pd
 
-from datashaper.types import AsyncType
 from datashaper.verbs.callbacks import VerbCallbacks
 
 from .derive_from_rows_asyncio import derive_from_rows_asyncio
 from .derive_from_rows_asyncio_threads import derive_from_rows_asyncio_threads
+from .types import AsyncType
 
 logger = logging.getLogger(__name__)
 ItemType = TypeVar("ItemType")

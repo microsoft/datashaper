@@ -18,8 +18,9 @@ import numpy as np
 import pandas as pd
 
 from datashaper.errors import VerbParallelizationError
+from datashaper.execution.types import AsyncType
 from datashaper.progress import ProgressTicker, progress_ticker
-from datashaper.types import AsyncType, Table, TableContainer
+from datashaper.types import Table, TableContainer
 from datashaper.verbs.callbacks import VerbCallbacks
 from datashaper.verbs.engine import VerbInput
 

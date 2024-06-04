@@ -8,13 +8,6 @@ from dataclasses import dataclass, field
 from enum import Enum
 
 
-class AsyncType(str, Enum):
-    """Enum for the type of async to use."""
-
-    AsyncIO = "asyncio"
-    Threaded = "threaded"
-
-
 @dataclass
 class Step:
     """A workflow processing step."""
