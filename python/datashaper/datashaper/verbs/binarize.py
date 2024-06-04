@@ -8,17 +8,17 @@ from typing import Any, cast
 
 import pandas as pd
 
-from datashaper.decorators import verb
 from datashaper.types import (
     ComparisonStrategy,
     FilterArgs,
     StringComparisonOperator,
 )
 
-from .pandas.filter_df import filter_df, get_operator
+from .decorators import VerbInputSpec, verb
+from .filter import filter, get_comparison_operator
 
 
-@verb(name="binarize")
+@verb(name="binarize", input=VerbInputSpec("table"))
 def binarize(
     table: pd.DataFrame,
     to: str,
@@ -29,13 +29,13 @@ def binarize(
     **_kwargs: Any,
 ) -> pd.DataFrame:
     """Binarize verb implementation."""
-    filter_result = filter_df(
+    filter_result = filter(
         table,
         FilterArgs(
             column,
             value=value,
             strategy=ComparisonStrategy(strategy),
-            operator=get_operator(operator),
+            operator=get_comparison_operator(operator),
         ),
     )
     table[to] = filter_result.map(cast(Any, {True: 1, False: 0}), na_action="ignore")

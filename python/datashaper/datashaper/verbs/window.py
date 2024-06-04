@@ -11,8 +11,9 @@ import numpy as np
 import pandas as pd
 from pandas.core.groupby import DataFrameGroupBy
 
-from datashaper.decorators import verb
 from datashaper.types import WindowFunction
+
+from .decorators import VerbInputSpec, verb
 
 
 def _get_window_indexer(
@@ -57,7 +58,7 @@ __window_function_map = {
 }
 
 
-@verb(name="window")
+@verb(name="window", input=VerbInputSpec("table"))
 def window(
     table: pd.DataFrame | DataFrameGroupBy,
     column: str,

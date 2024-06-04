@@ -6,10 +6,10 @@
 
 import pandas as pd
 
-from datashaper.decorators import verb
+from datashaper.verbs.decorators import VerbInputSpec, verb
 
 
-@verb(name="strings.lower")
+@verb(name="strings.lower", input=VerbInputSpec("table"))
 def lower(table: pd.DataFrame, column: str, to: str, **_kwargs: dict) -> pd.DataFrame:
     """Transform a column by applying a string-lowercase."""
     table[to] = table[column].str.lower()

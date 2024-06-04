@@ -10,7 +10,7 @@ import pandas as pd
 
 from datashaper.errors import VerbParallelizationError
 from datashaper.progress import progress_ticker
-from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
+from datashaper.verbs.callbacks import VerbCallbacks
 
 ItemType = TypeVar("ItemType")
 

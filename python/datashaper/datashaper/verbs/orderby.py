@@ -8,11 +8,12 @@ from typing import Any
 
 import pandas as pd
 
-from datashaper.decorators import verb
 from datashaper.types import OrderByInstruction, SortDirection
 
+from .decorators import VerbInputSpec, verb
 
-@verb(name="orderby", treats_input_tables_as_immutable=True)
+
+@verb(name="orderby", input=VerbInputSpec("table", immutable=True))
 def orderby(table: pd.DataFrame, orders: list[dict], **_kwargs: Any) -> pd.DataFrame:
     """Orderby verb implementation."""
     orders_instructions = [

@@ -8,10 +8,10 @@ from typing import Any
 
 import pandas as pd
 
-from datashaper.decorators import verb
+from .decorators import VerbInputSpec, verb
 
 
-@verb(name="drop")
+@verb(name="drop", input=VerbInputSpec("table"))
 def drop(table: pd.DataFrame, columns: list[str], **_kwargs: Any) -> pd.DataFrame:
     """Drop verb implementation."""
     return table.drop(columns=columns)

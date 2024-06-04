@@ -1,18 +1,21 @@
 """Contains the DelegatingVerbCallback definition."""
 
+from typing import Any
+
 from datashaper.execution.execution_node import ExecutionNode
 from datashaper.progress.types import Progress
-from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
-from datashaper.workflow.workflow_callbacks.workflow_callbacks import WorkflowCallbacks
+
+# from datashaper.workflow.workflow_callbacks.workflow_callbacks import WorkflowCallbacks
+from .verb_callbacks import VerbCallbacks
 
 
 class DelegatingVerbCallbacks(VerbCallbacks):
     """A wrapper that implements VerbCallbacks that delegates to the underlying WorkflowCallbacks."""
 
-    _workflow_callbacks: WorkflowCallbacks
+    _workflow_callbacks: Any
     _node: ExecutionNode
 
-    def __init__(self, node: ExecutionNode, workflow_callbacks: WorkflowCallbacks):
+    def __init__(self, node: ExecutionNode, workflow_callbacks: Any):
         """Create a new instance of DelegatingVerbCallbacks."""
         self._workflow_callbacks = workflow_callbacks
         self._node = node

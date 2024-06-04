@@ -9,7 +9,6 @@ from datashaper import (
     DEFAULT_INPUT_NAME,
     Progress,
     TableContainer,
-    VerbCallbacks,
     VerbInput,
     Workflow,
     derive_from_rows,
@@ -20,6 +19,7 @@ from datashaper.errors import (
     VerbError,
     WorkflowVerbNotFoundError,
 )
+from datashaper.verbs.callbacks import VerbCallbacks
 
 
 class TestWorkflowRun(unittest.IsolatedAsyncioTestCase):

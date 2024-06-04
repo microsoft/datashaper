@@ -8,10 +8,10 @@ from typing import Any
 
 import pandas as pd
 
-from datashaper.decorators import verb
+from .decorators import VerbInputSpec, verb
 
 
-@verb(name="unroll", treats_input_tables_as_immutable=True)
+@verb(name="unroll", input=VerbInputSpec("table", immutable=True))
 def unroll(table: pd.DataFrame, column: str, **_kwargs: Any) -> pd.DataFrame:
     """Unroll a column."""
     return table.explode(column).reset_index(drop=True)

@@ -2,11 +2,12 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-"""Verb filtering utilities."""
+"""Filter verb implementation."""
 
 import logging
 from collections.abc import Callable
 from functools import partial
+from typing import Any, cast
 from uuid import uuid4
 
 import pandas as pd
@@ -19,7 +20,72 @@ from datashaper.types import (
     FilterArgs,
     NumericComparisonOperator,
     StringComparisonOperator,
+    Table,
 )
+
+from .callbacks import VerbCallbacks
+from .decorators import OperationType, parallel_verb
+
+log = logging.getLogger(__name__)
+
+
+@parallel_verb(
+    name="filter",
+    treats_input_tables_as_immutable=True,
+    operation_type=OperationType.CHUNK,
+)
+async def filter_verb(
+    chunk: Table,
+    callbacks: VerbCallbacks,  # noqa: ARG001 - use ds verb name
+    column: str,
+    value: Any,
+    strategy: ComparisonStrategy = ComparisonStrategy.Value,
+    operator: StringComparisonOperator = StringComparisonOperator.Equals,
+    **_kwargs: Any,
+) -> Table:
+    """Filter verb implementation."""
+    input_table = cast(pd.DataFrame, chunk)
+
+    filter_index = filter(
+        input_table,
+        FilterArgs(
+            column,
+            value=value,
+            strategy=ComparisonStrategy(strategy),
+            operator=get_comparison_operator(operator),
+        ),
+    )
+    sub_idx = filter_index == True  # noqa: E712
+    idx = filter_index[sub_idx].index  # type: ignore
+    return cast(Table, input_table[chunk.index.isin(idx)].reset_index(drop=True))
+
+
+def filter(df: pd.DataFrame, args: FilterArgs) -> pd.DataFrame | pd.Series:  # noqa A001 - use ds verb name
+    """Filter a DataFrame based on the input criteria."""
+    filters: list[str] = []
+    filtered_df: pd.DataFrame = df.copy()
+
+    filter_name = str(uuid4())
+    filters.append(filter_name)
+    if args.strategy == ComparisonStrategy.Column:
+        filtered_df[filter_name] = _operator_map[args.operator](
+            df=df, column=args.column, target=df[args.value]
+        )
+        if args.operator not in _empty_comparisons:
+            __correct_unknown_value(filtered_df, [args.column, args.value], filter_name)
+    else:
+        filtered_df[filter_name] = _operator_map[args.operator](
+            df=df, column=args.column, target=args.value
+        )
+
+    filtered_df["dwc_filter_result"] = boolean_function_map[BooleanLogicalOperator.OR](
+        filtered_df[filters], ""
+    )
+
+    __correct_unknown_value(filtered_df, filters, "dwc_filter_result")
+
+    return filtered_df["dwc_filter_result"]
+
 
 boolean_function_map = {
     BooleanLogicalOperator.OR: lambda df, columns: df[columns].any(axis="columns")
@@ -163,6 +229,7 @@ _empty_comparisons = {
     BooleanComparisonOperator.IsNotEmpty,
 }
 
+
 _operator_map: dict[
     StringComparisonOperator | NumericComparisonOperator | BooleanComparisonOperator,
     Callable,
@@ -191,47 +258,20 @@ _operator_map: dict[
 }
 
 
-def filter_df(df: pd.DataFrame, args: FilterArgs) -> pd.DataFrame | pd.Series:
-    """Filter a DataFrame based on the input criteria."""
-    filters: list[str] = []
-    filtered_df: pd.DataFrame = df.copy()
-
-    filter_name = str(uuid4())
-    filters.append(filter_name)
-    if args.strategy == ComparisonStrategy.Column:
-        filtered_df[filter_name] = _operator_map[args.operator](
-            df=df, column=args.column, target=df[args.value]
-        )
-        if args.operator not in _empty_comparisons:
-            __correct_unknown_value(filtered_df, [args.column, args.value], filter_name)
-    else:
-        filtered_df[filter_name] = _operator_map[args.operator](
-            df=df, column=args.column, target=args.value
-        )
-
-    filtered_df["dwc_filter_result"] = boolean_function_map[BooleanLogicalOperator.OR](
-        filtered_df[filters], ""
-    )
-
-    __correct_unknown_value(filtered_df, filters, "dwc_filter_result")
-
-    return filtered_df["dwc_filter_result"]
-
-
-def get_operator(
+def get_comparison_operator(
     operator: str,
 ) -> StringComparisonOperator | NumericComparisonOperator | BooleanComparisonOperator:
     """Get a comparison operator based on the input string."""
     try:
         return StringComparisonOperator(operator)
     except Exception:
-        logging.info("%s is not a string comparison operator", operator)
+        log.info("%s is not a string comparison operator", operator)
     try:
         return NumericComparisonOperator(operator)
     except Exception:
-        logging.info("%s is not a numeric comparison operator", operator)
+        log.info("%s is not a numeric comparison operator", operator)
     try:
         return BooleanComparisonOperator(operator)
     except Exception:
-        logging.info("%s is not a boolean comparison operator", operator)
+        log.info("%s is not a boolean comparison operator", operator)
     raise UnsupportedComparisonOperatorError(operator)

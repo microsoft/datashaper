@@ -21,7 +21,7 @@ from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.errors import VerbParallelizationError
 from datashaper.progress import ProgressTicker, progress_ticker
 from datashaper.types import AsyncType, Table, TableContainer
-from datashaper.workflow.verb_callbacks.verb_callbacks import VerbCallbacks
+from datashaper.verbs.callbacks import VerbCallbacks
 
 from .verb import verb
 

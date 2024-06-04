@@ -8,10 +8,10 @@ from typing import Any
 
 import pandas as pd
 
-from datashaper.decorators import verb
+from .decorators import VerbInputSpec, verb
 
 
-@verb(name="ungroup", treats_input_tables_as_immutable=True)
+@verb(name="ungroup", input=VerbInputSpec("table", immutable=True))
 def ungroup(table: pd.DataFrame, **_kwargs: Any) -> pd.DataFrame:
     """Ungroup verb implementation."""
     return table.obj

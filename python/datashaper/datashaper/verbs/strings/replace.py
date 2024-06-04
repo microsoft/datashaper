@@ -8,10 +8,10 @@ import re
 
 import pandas as pd
 
-from datashaper.decorators import verb
+from datashaper.verbs.decorators import VerbInputSpec, verb
 
 
-@verb(name="strings.replace")
+@verb(name="strings.replace", input=VerbInputSpec("table"))
 def replace(
     table: pd.DataFrame,
     column: str,

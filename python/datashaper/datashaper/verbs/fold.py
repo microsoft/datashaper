@@ -8,10 +8,10 @@ from typing import Any, cast
 
 import pandas as pd
 
-from datashaper.decorators import verb
+from .decorators import VerbInputSpec, verb
 
 
-@verb(name="fold")
+@verb(name="fold", input=VerbInputSpec("table"))
 def fold(
     table: pd.DataFrame,
     to: tuple[str, str],

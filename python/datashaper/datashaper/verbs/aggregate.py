@@ -8,13 +8,13 @@ from typing import Any, cast
 
 import pandas as pd
 
-from datashaper.decorators import verb
 from datashaper.types import FieldAggregateOperation
 
-from .pandas.aggregate_mapping import aggregate_operation_mapping
+from .decorators import VerbInputSpec, verb
+from .utils.pandas.aggregate_mapping import aggregate_operation_mapping
 
 
-@verb(name="aggregate", treats_input_tables_as_immutable=True)
+@verb(name="aggregate", input=VerbInputSpec("table", immutable=True))
 def aggregate(
     table: pd.DataFrame,
     to: str,

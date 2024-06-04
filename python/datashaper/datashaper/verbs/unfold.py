@@ -9,10 +9,10 @@ from typing import Any, cast
 import numpy as np
 import pandas as pd
 
-from datashaper.decorators import verb
+from .decorators import VerbInputSpec, verb
 
 
-@verb(name="unfold")
+@verb(name="unfold", input=VerbInputSpec("table"))
 def unfold(table: pd.DataFrame, key: str, value: str, **_kwargs: Any) -> pd.DataFrame:
     """Unfold verb implementation."""
     columns = len(table[key].unique())

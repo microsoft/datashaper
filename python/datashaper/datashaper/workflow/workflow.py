@@ -33,9 +33,9 @@ from datashaper.progress.types import Progress
 from datashaper.table_store.in_memory_table_store import InMemoryTableStore
 from datashaper.table_store.table_store import TableStore
 from datashaper.types import Table, TableContainer, VerbDetails, VerbResult
+from datashaper.verbs.callbacks import DelegatingVerbCallbacks
 
 from .types import MemoryProfile, VerbTiming, WorkflowRunResult
-from .verb_callbacks import DelegatingVerbCallbacks
 from .workflow_callbacks import (
     MemoryProfilingWorkflowCallbacks,
     WorkflowCallbacks,

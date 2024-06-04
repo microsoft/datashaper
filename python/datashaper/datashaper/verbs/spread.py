@@ -8,14 +8,26 @@ from typing import Any, cast
 
 import pandas as pd
 
-from datashaper.decorators import verb
+from .decorators import VerbInputSpec, verb
 
 
-def _get_array_item(array: list, index: int) -> Any:
-    return array[index] if index < len(array) else None
+@verb(name="spread", input=VerbInputSpec("table"))
+def spread(
+    table: pd.DataFrame,
+    column: str,
+    to: str | list[str] | None = None,
+    preserveSource: bool = False,  # noqa: N803
+    **_kwargs: Any,
+) -> pd.DataFrame:
+    """Spread verb implementation."""
+    output = _spread(table, column, to)
+
+    if not preserveSource:
+        output = output.drop(columns=[column])
+
+    return output
 
 
-@verb(name="spread")
 def _spread(
     table: pd.DataFrame, column: str, to: str | list[str] | None = None, **_kwargs: Any
 ) -> pd.DataFrame:
@@ -31,17 +43,5 @@ def _spread(
     return table
 
 
-def spread(
-    table: pd.DataFrame,
-    column: str,
-    to: str | list[str] | None = None,
-    preserveSource: bool = False,  # noqa: N803
-    **_kwargs: Any,
-) -> pd.DataFrame:
-    """Spread verb implementation."""
-    output = _spread(table, column, to)
-
-    if not preserveSource:
-        output = output.drop(columns=[column])
-
-    return output
+def _get_array_item(array: list, index: int) -> Any:
+    return array[index] if index < len(array) else None

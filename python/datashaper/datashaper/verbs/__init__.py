@@ -5,7 +5,7 @@
 """Common types used in DataShaper verbs."""
 
 from .aggregate import aggregate
-from .bin import ds_bin
+from .bin import bin
 from .binarize import binarize
 from .boolean import boolean
 from .concat import concat
@@ -18,6 +18,7 @@ from .difference import difference
 from .drop import drop
 from .erase import erase
 from .fill import fill
+from .filter import filter, get_comparison_operator
 from .fold import fold
 from .groupby import groupby
 from .impute import impute
@@ -28,7 +29,7 @@ from .merge import merge
 from .onehot import onehot
 from .orderby import orderby
 from .pivot import pivot
-from .print import ds_print
+from .print import print
 from .recode import recode
 from .rename import rename
 from .rollup import rollup
@@ -36,6 +37,7 @@ from .sample import sample
 from .select import select
 from .snapshot import snapshot
 from .spread import spread
+from .strings import lower, replace, upper
 from .unfold import unfold
 from .ungroup import ungroup
 from .unhot import unhot
@@ -44,12 +46,11 @@ from .unorder import unorder
 from .unroll import unroll
 from .window import window
 from .workflow import workflow
-from .strings import upper, lower, replace
 
 __all__ = [
     # Verbs
     "aggregate",
-    "ds_bin",
+    "bin",
     "binarize",
     "boolean",
     "concat",
@@ -62,6 +63,8 @@ __all__ = [
     "drop",
     "erase",
     "fill",
+    "filter",
+    "get_comparison_operator",
     "fold",
     "groupby",
     "impute",
@@ -72,7 +75,7 @@ __all__ = [
     "onehot",
     "orderby",
     "pivot",
-    "ds_print",
+    "print",
     "recode",
     "rename",
     "rollup",

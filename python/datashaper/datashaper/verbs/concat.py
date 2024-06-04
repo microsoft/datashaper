@@ -8,13 +8,10 @@ from typing import Any
 
 import pandas as pd
 
-from datashaper.decorators import verb
+from .decorators import VerbInputSpec, verb
 
 
-@verb(
-    name="concat",
-    treats_input_tables_as_immutable=True,
-)
+@verb(name="concat", input=VerbInputSpec("table", variadic="others", immutable=True))
 def concat(
     table: pd.DataFrame, others: list[pd.DataFrame], **_kwargs: Any
 ) -> pd.DataFrame:

@@ -9,8 +9,9 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from datashaper.decorators import verb
 from datashaper.types import BinStrategy
+
+from .decorators import VerbInputSpec, verb
 
 
 def __get_bucket_value(
@@ -72,8 +73,8 @@ __bin_edges_mapping = {
 }
 
 
-@verb(name="bin")
-def ds_bin(
+@verb(name="bin", input=VerbInputSpec("table"))
+def bin(  # noqa A001 - use ds verb name
     table: pd.DataFrame,
     to: str,
     column: str,

@@ -8,10 +8,14 @@ from typing import Any, cast
 
 import pandas as pd
 
-from datashaper.decorators import verb
+from .decorators import VerbInputSpec, verb
 
 
-@verb(name="sample", treats_input_tables_as_immutable=True)
+@verb(
+    name="sample",
+    input=VerbInputSpec("table", immutable=True),
+    # output=VerbOutputSpec(named=["remainder"]),  # implies tuple return type
+)
 def sample(
     table: pd.DataFrame,
     size: int | None = None,

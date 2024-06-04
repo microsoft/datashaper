@@ -8,11 +8,12 @@ from typing import Any
 
 import pandas as pd
 
-from datashaper.decorators import verb
 from datashaper.types import FileType
 
+from .decorators import VerbInputSpec, verb
 
-@verb(name="snapshot", treats_input_tables_as_immutable=True)
+
+@verb(name="snapshot", input=VerbInputSpec("table", immutable=True))
 def snapshot(
     table: pd.DataFrame, name: str, file_type: FileType, **_kwargs: Any
 ) -> pd.DataFrame:

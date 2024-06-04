@@ -4,11 +4,11 @@
 #
 """Verb decorators and manager."""
 
-import logging
 import inspect
+import logging
 from collections.abc import Callable
 from inspect import signature
-from typing import Any
+from typing import Any, cast
 
 import pandas as pd
 from pandas.core.groupby import DataFrameGroupBy
@@ -21,21 +21,42 @@ from datashaper.types import TableContainer, VerbDetails, VerbResult
 log = logging.getLogger(__name__)
 
 
+class VerbInputSpec:
+    """Verb input specification."""
+
+    def __init__(
+        self,
+        name: str | None = None,
+        # TODO: should we augment `named` with "required" information?
+        named: list[str] | None = None,
+        named_dict: str | None = None,
+        variadic: str | None = None,
+        immutable: bool = False,
+    ):
+        self.name = name
+        self.named = named
+        self.variadic = variadic
+        self.immutable = immutable
+        self.named_dict = named_dict
+
+
 def verb(
     name: str,
-    treats_input_tables_as_immutable: bool = False,
     override_existing: bool = False,
+    input: VerbInputSpec | None = None,
     raw: bool = False,
     **_kwargs: Any,
 ) -> Callable:
     """Apply a decorator for registering a verb."""
 
     def registered_verb(verb_function: Callable) -> Callable[..., VerbResult]:
-        target_function = verb_function if raw else _wrap_verb_function(verb_function)
+        target_function = (
+            _wrap_verb_function(verb_function, input) if not raw else verb_function
+        )
         verb = VerbDetails(
             name=name,
             func=target_function,
-            treats_input_tables_as_immutable=treats_input_tables_as_immutable,
+            treats_input_tables_as_immutable=input.immutable if input else False,
         )
         VerbManager.get().register(verb, override_existing)
         return verb_function
@@ -43,7 +64,9 @@ def verb(
     return registered_verb
 
 
-def _wrap_verb_function(verb_function: Callable) -> Callable[..., VerbResult]:
+def _wrap_verb_function(
+    verb_function: Callable, input: VerbInputSpec | None
+) -> Callable[..., VerbResult]:
     """Handle the verb function."""
     sig = signature(verb_function)
 
@@ -52,6 +75,7 @@ def _wrap_verb_function(verb_function: Callable) -> Callable[..., VerbResult]:
         sig.return_annotation == pd.DataFrame
         or sig.return_annotation == DataFrameGroupBy
         or sig.return_annotation == (pd.DataFrame | DataFrameGroupBy)
+        or sig.return_annotation == TableContainer
     ):
         verb_function = _handle_dataframe_return_type(verb_function)
     elif sig.return_annotation == tuple[pd.DataFrame, dict[str, pd.DataFrame]]:
@@ -61,40 +85,51 @@ def _wrap_verb_function(verb_function: Callable) -> Callable[..., VerbResult]:
         msg = f"Verb function {verb_function} must return a DataFrame, a tuple, or VerbResult. Found {sig.return_annotation}."
         raise ValueError(msg)
 
-    # Wire in Input Tables
-    has_table_argument = "table" in sig.parameters
-    has_other_argument = "other" in sig.parameters
-    has_others_argument = "others" in sig.parameters
-    return _handle_input_table_arguments(
-        verb_function, has_table_argument, has_other_argument, has_others_argument
-    )
+    if input:
+        verb_function = _handle_input_spec(verb_function, input)
+
+    return verb_function
 
 
-def _handle_input_table_arguments(
-    verb_function: Callable[..., VerbResult],
-    has_table_argument: bool,
-    has_other_argument: bool,
-    has_others_argument: bool,
+def _handle_input_spec(
+    verb_function: Callable[..., VerbResult], input_spec: VerbInputSpec
 ) -> Callable[..., VerbResult]:
-    """Handle the input table arguments of the verb function."""
+    """Handle the input specification of the verb function."""
+    sig = signature(verb_function)
 
-    def wrapper(input: VerbInput, **kwargs: Any) -> VerbResult:
-        input_table = input.get_input()
-        others = input.get_others()
+    def wrapper(input: VerbInput, *args: Any, **kwargs: Any) -> VerbResult:
+        if input_spec.name:
+            kwargs[input_spec.name] = input.get_input()
 
-        args_dict: dict[str, Any] = {}
+        if input_spec.named:
+            for name in input_spec.named:
+                if name == "other":
+                    # TODO: hack for back-compat, use the named dictionary exclusively
+                    other_table = input.get_others()[0]
+                    if other_table is None:
+                        msg = "Expected an 'other' table."
+                        raise ValueError(msg)
+                    kwargs[name] = other_table
+                else:
+                    if input.named is None:
+                        msg = "Expected named tables."
+                        raise ValueError(msg)
+                    table = input.named.get(name)
+                    kwargs[name] = table.table if table else None
 
-        if has_table_argument:
-            args_dict["table"] = input_table
-        if has_other_argument:
-            args_dict["other"] = others[0] if others else None
-        if has_others_argument:
-            args_dict["others"] = others
+        if input_spec.named_dict:
+            kwargs[input_spec.named_dict] = input.named or {}
 
-        # TODO: cull down kwargs to actual args
-        return verb_function(**args_dict, **kwargs)
+        if input_spec.variadic:
+            kwargs[input_spec.variadic] = (
+                [o.table for o in input.others] if input.others else []
+            )
 
-    return wrapper
+        bound_args = sig.bind(*args, **kwargs)
+        bound_args.apply_defaults()
+        return verb_function(*bound_args.args, **bound_args.kwargs)
+
+    return cast(Callable, wrapper)
 
 
 def _handle_dataframe_return_type(
@@ -108,7 +143,7 @@ def _handle_dataframe_return_type(
             result = await result
         return create_verb_result(result)
 
-    return wrapper
+    return cast(Callable, wrapper)
 
 
 def _handle_tuple_return_type(

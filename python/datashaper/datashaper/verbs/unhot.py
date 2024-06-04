@@ -4,12 +4,11 @@ from typing import Any, cast
 
 import pandas as pd
 
-from datashaper.decorators import verb
+from .decorators import VerbInputSpec, verb
+from .utils.pandas.unhot_operation import unhot_operation
 
-from .pandas.unhot_operation import unhot_operation
 
-
-@verb(name="unhot")
+@verb(name="unhot", input=VerbInputSpec("table"))
 def unhot(
     table: pd.DataFrame,
     to: str,

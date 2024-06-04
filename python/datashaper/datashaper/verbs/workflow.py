@@ -4,12 +4,16 @@ from typing import Any
 
 import pandas as pd
 
-from datashaper.decorators import verb
 from datashaper.types import Table
 from datashaper.workflow.workflow import DEFAULT_INPUT_NAME, Workflow
 
+from .decorators import VerbInputSpec, verb
 
-@verb(name="workflow")
+
+@verb(
+    name="workflow",
+    input=VerbInputSpec("table", named_dict="tables"),
+)
 async def workflow(
     table: pd.DataFrame,
     workflow: dict,

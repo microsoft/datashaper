@@ -9,10 +9,10 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from datashaper.decorators import verb
+from .decorators import VerbInputSpec, verb
 
 
-@verb(name="onehot")
+@verb(name="onehot", input=VerbInputSpec("table"))
 def onehot(
     table: pd.DataFrame,
     column: str,
