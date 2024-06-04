@@ -2,11 +2,11 @@ from typing import TYPE_CHECKING
 
 import pandas as pd
 
-from datashaper.types import TableContainer
+from datashaper import TableContainer
 from datashaper.verbs import VerbInput, VerbManager
 
 if TYPE_CHECKING:
-    from datashaper.types import VerbResult
+    from datashaper.verbs import VerbResult
 
 
 def make_verb_input(data: list, columns: list[str]):

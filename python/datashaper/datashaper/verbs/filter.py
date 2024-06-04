@@ -13,7 +13,7 @@ from uuid import uuid4
 import pandas as pd
 
 from datashaper.errors import UnsupportedComparisonOperatorError
-from datashaper.types import Table
+from datashaper.table_store.types import Table
 
 from .callbacks import VerbCallbacks
 from .decorators import OperationType, parallel_verb

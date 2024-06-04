@@ -31,7 +31,7 @@ from datashaper.execution.execution_node import ExecutionNode, WorkflowInput
 from datashaper.progress.types import Progress
 from datashaper.table_store.in_memory_table_store import InMemoryTableStore
 from datashaper.table_store.table_store import TableStore
-from datashaper.types import Table, TableContainer
+from datashaper.table_store.types import Table, TableContainer
 from datashaper.verbs.engine import VerbDetails, VerbInput, VerbManager, VerbResult
 
 from .callbacks import (

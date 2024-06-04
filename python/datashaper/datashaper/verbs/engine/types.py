@@ -4,7 +4,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Generic, TypeVar
 
-from datashaper.types import TableContainer
+from datashaper.table_store.types import TableContainer
 
 T = TypeVar("T")
 

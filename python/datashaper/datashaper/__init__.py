@@ -16,6 +16,12 @@ from .progress import (
     progress_iterable,
     progress_ticker,
 )
+from .table_store import (
+    ColumnMetadata,
+    ColumnStats,
+    TableContainer,
+    TableMetadata,
+)
 from .tables import (
     DataTable,
     ParserOptions,
@@ -23,12 +29,6 @@ from .tables import (
     load_csv_table,
     load_json_table,
     load_table,
-)
-from .types.table_store_types import (
-    ColumnMetadata,
-    ColumnStats,
-    TableContainer,
-    TableMetadata,
 )
 from .workflow import (
     DEFAULT_INPUT_NAME,

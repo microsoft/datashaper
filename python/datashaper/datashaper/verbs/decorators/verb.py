@@ -14,7 +14,7 @@ import pandas as pd
 from pandas.core.groupby import DataFrameGroupBy
 
 from datashaper.constants import DEFAULT_OUTPUT_NAME
-from datashaper.types import TableContainer
+from datashaper.table_store.types import TableContainer
 from datashaper.verbs.engine import (
     VerbDetails,
     VerbInput,
