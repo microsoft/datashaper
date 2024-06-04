@@ -9,7 +9,6 @@ from datashaper import (
     DEFAULT_INPUT_NAME,
     Progress,
     TableContainer,
-    VerbInput,
     Workflow,
     derive_from_rows,
     progress_iterable,
@@ -19,6 +18,7 @@ from datashaper.errors import (
     VerbError,
     WorkflowVerbNotFoundError,
 )
+from datashaper.verbs import VerbInput
 from datashaper.verbs.callbacks import VerbCallbacks
 
 

@@ -20,8 +20,6 @@ import pandas as pd
 from jsonschema import validate as validate_schema
 
 from datashaper.constants import DEFAULT_INPUT_NAME
-from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.engine.verbs.verb_manager import VerbManager
 from datashaper.errors import (
     NodeNotVisitedError,
     WorkflowInvalidInputError,
@@ -33,7 +31,8 @@ from datashaper.execution.execution_node import ExecutionNode, WorkflowInput
 from datashaper.progress.types import Progress
 from datashaper.table_store.in_memory_table_store import InMemoryTableStore
 from datashaper.table_store.table_store import TableStore
-from datashaper.types import Table, TableContainer, VerbDetails, VerbResult
+from datashaper.types import Table, TableContainer
+from datashaper.verbs.engine import VerbDetails, VerbInput, VerbManager, VerbResult
 
 from .callbacks import (
     MemoryProfilingWorkflowCallbacks,

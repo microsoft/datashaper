@@ -2,8 +2,8 @@ from typing import TYPE_CHECKING
 
 import pandas as pd
 
-from datashaper.engine.verbs import VerbInput, VerbManager
 from datashaper.types import TableContainer
+from datashaper.verbs import VerbInput, VerbManager
 
 if TYPE_CHECKING:
     from datashaper.types import VerbResult

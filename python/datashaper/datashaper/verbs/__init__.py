@@ -11,11 +11,18 @@ from .boolean import boolean
 from .concat import concat
 from .convert import convert
 from .copy import copy
+from .decorators import VerbInputSpec, parallel_verb, verb
 from .dedupe import dedupe
 from .derive import derive
 from .destructure import destructure
 from .difference import difference
 from .drop import drop
+from .engine import (
+    VerbInput,
+    VerbManager,
+    VerbResult,
+    load_verbs,
+)
 from .erase import erase
 from .fill import fill
 from .filter import filter, get_comparison_operator
@@ -94,4 +101,13 @@ __all__ = [
     "upper",
     "lower",
     "replace",
+    # Verb Authoring
+    "VerbInput",
+    "VerbResult",
+    "VerbManager",
+    "load_verbs",
+    # Decorators
+    "VerbInputSpec",
+    "verb",
+    "parallel_verb",
 ]

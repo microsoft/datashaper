@@ -17,11 +17,11 @@ from typing import Any, Concatenate, ParamSpec, cast
 import numpy as np
 import pandas as pd
 
-from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.errors import VerbParallelizationError
 from datashaper.progress import ProgressTicker, progress_ticker
 from datashaper.types import AsyncType, Table, TableContainer
 from datashaper.verbs.callbacks import VerbCallbacks
+from datashaper.verbs.engine import VerbInput
 
 from .verb import verb
 

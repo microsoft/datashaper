@@ -14,10 +14,14 @@ import pandas as pd
 from pandas.core.groupby import DataFrameGroupBy
 
 from datashaper.constants import DEFAULT_OUTPUT_NAME
-from datashaper.engine.create_verb_result import create_verb_result
-from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.engine.verbs.verb_manager import VerbManager
-from datashaper.types import TableContainer, VerbDetails, VerbResult
+from datashaper.types import TableContainer
+from datashaper.verbs.engine import (
+    VerbDetails,
+    VerbInput,
+    VerbManager,
+    VerbResult,
+    create_verb_result,
+)
 
 log = logging.getLogger(__name__)
 

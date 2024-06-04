@@ -4,7 +4,9 @@
 #
 """Common types used across the datashaper codebase."""
 
-from datashaper.types import Table, TableContainer, TableMetadata, VerbResult
+from datashaper.types import Table, TableContainer, TableMetadata
+
+from .types import VerbResult
 
 
 def create_verb_result(

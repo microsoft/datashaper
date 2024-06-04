@@ -4,12 +4,8 @@ import importlib
 import importlib.util
 import logging
 import pkgutil
-import sys
 from pathlib import Path
 from types import ModuleType
-
-from .verb_input import VerbInput
-from .verb_manager import VerbManager
 
 logger = logging.getLogger(__name__)
 
@@ -40,15 +36,3 @@ def load_verbs(module: ModuleType) -> None:
             sub_module_name = f"{module_name}.{sub_module}"
             sub_module_rec = importlib.import_module(sub_module_name)
             load_verbs(sub_module_rec)
-
-
-# Load core verbs into VerbManager
-mod = sys.modules[__name__]
-load_verbs(mod)
-
-
-__all__ = [
-    "VerbInput",
-    "VerbManager",
-    "load_verbs",
-]
