@@ -6,7 +6,7 @@ import { memo } from 'react'
 
 import Form from '@rjsf/fluent-ui'
 import validator from '@rjsf/validator-ajv8'
-import type { StepFormProps } from '../types.js'
+import type { StepFormProps } from '../../types.js'
 
 import './rjsf.css'
 import {
@@ -31,12 +31,13 @@ export const RJSFForm: React.FC<RJSFFormProps> = memo(function RJSFForm({
 }) {
 	
 	const args = useVerbArgsSchema(step, schema)
-	const finalSchema = useDataBoundArgsSchema(args, step, workflow)
+	// const finalSchema = useDataBoundArgsSchema(args, step, workflow)
 
 	const handleChange = useOnFormChange(step, onChange)
 
-	console.log(step.verb, finalSchema)
-	if (!finalSchema) {
+	console.log(`${step.verb} schema`, args)
+	console.log(`${step.verb} data`, step.args)
+	if (!args) {
 		return null
 	}
 
@@ -44,7 +45,7 @@ export const RJSFForm: React.FC<RJSFFormProps> = memo(function RJSFForm({
 		<Form
 			className='rjsf-root'
 			uiSchema={UI_SCHEMA_DEFAULTS}
-			schema={finalSchema}
+			schema={args}
 			validator={validator}
 			formData={step.args}
 			onChange={handleChange}

@@ -7,6 +7,12 @@ export const UI_SCHEMA_DEFAULTS = {
 	'ui:submitButtonOptions': {
 		norender: true,
 	},
+	'ui:globalOptions': {
+		'ui:hideError': true,
+		'ui:description': ''
+	},
+	
+	
 }
 
 // some of our ux is intentionally managed by HOCs
@@ -16,7 +22,6 @@ export const EXCLUDE_PROPERTIES = new Set([
 	'column',
 	'columns',
 	'to',
-	'dataType',
 ])
 export const FIXED_LABELS: Record<string, string> = {
 	preserveSource: 'Keep source columns',

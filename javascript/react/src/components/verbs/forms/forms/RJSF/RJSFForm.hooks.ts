@@ -5,16 +5,16 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import capitalize from 'lodash-es/capitalize.js'
-// import get from 'lodash-es/get.js'
 import {
 	COLUMN_ARGS,
 	EXCLUDE_PROPERTIES,
 	FIXED_ENUM_TITLES,
 	FIXED_LABELS,
 } from './RJSFForm.constants.js'
-import { useColumnNames, useStepInputTable } from '../../../../hooks/index.js'
+import { useColumnNames, useStepInputTable } from '../../../../../hooks/index.js'
 import type { Step, Workflow } from '@datashaper/workflow'
-import type { StepChangeFunction } from '../../../../types.js'
+import type { StepChangeFunction } from '../../../../../types.js'
+import { resolve } from './resolve.js'
 
 /**
  * Fetches and resolves the latest workflow schema for extracting step form args.
@@ -25,35 +25,16 @@ export function useWorkflowSchema(): any | undefined {
 	useEffect(() => {
 		fetch('http://localhost:8080/schema/workflow/workflow.json')
 			.then((res) => res.json())
+			.then(json => {
+				console.log('raw schema', json)
+				return json
+			})
 			.then(resolve)
 			.then(setSchema)
 	}, [])
 	return schema
 }
 
-// TODO: does this need to be recursive?
-// TODO RJSF claims to do resolution: https://rjsf-team.github.io/react-jsonschema-form/docs/json-schema/definitions
-// TODO: how to deal with subobjects? (e.g., Criteria on `binarize`)
-function resolve(schema: any) {
-	Object.entries(schema.definitions).forEach(
-		([_defKey, definition]: [string, any]) => {
-			if (definition.enum) {
-				definition.oneOf = prettyEnum(definition.enum, true)
-			}
-			// if (definition.properties) {
-			// 	Object.entries(definition.properties).forEach(
-			// 		([propKey, property]: [string, any]) => {
-			// 			if (property.$ref) {
-			// 				const path = property.$ref.replace('#/', '').replaceAll('/', '.')
-			// 				schema.definitions[defKey].properties[propKey] = get(schema, path)
-			// 			}
-			// 		},
-			// 	)
-			// }
-		},
-	)
-	return schema
-}
 
 /**
  * Extracts specific verb args from the workflow schema.
@@ -68,33 +49,32 @@ function resolve(schema: any) {
 export function useVerbArgsSchema(step: Step, schema: any): any {
 	return useMemo(() => {
 		if (step && schema) {
-			const copy = {...schema}
 			const verb = capitalize(step.verb)
 			const args = schema.definitions[`${verb}Args`]
 			if (!args) {
 				return undefined
 			}
-			const properties = Object.entries(args.properties).reduce(
-				(acc: any, [key, value]: [any, any]) => {
-					if (!EXCLUDE_PROPERTIES.has(key)) {
-						acc[key] = {
-							//...value,
-							title: FIXED_LABELS[key] || capitalize(key),
-							type: value.type || 'string', // this covers "any", which translates to _no type_ in jsonschema
-						}
-						if (value.enum) {
-							acc[key].oneOf = prettyEnum(value.enum, true)
-						}
-						if (value.items) {
-							acc[key].items = value.items
-						}
-					}
-					return acc
-				},
-				{} as any,
-			)
-			copy.properties = properties
-			return copy
+			return args
+			// const properties = Object.entries(args.properties).reduce(
+			// 	(acc: any, [key, value]: [any, any]) => {
+			// 		if (!EXCLUDE_PROPERTIES.has(key)) {
+			// 			acc[key] = {
+			// 				// ...value,
+			// 				title: FIXED_LABELS[key] || capitalize(key),
+			// 				type: value.type || 'string', // this covers "any", which translates to _no type_ in jsonschema
+			// 			}
+			// 			if (value.enum) {
+			// 				acc[key].enum = value.enum
+			// 				// acc[key].oneOf = prettyEnum(value.enum, true)
+			// 			}
+			// 			if (value.items) {
+			// 				acc[key].items = value.items
+			// 			}
+			// 		}
+			// 		return acc
+			// 	},
+			// 	{} as any,
+			// )
 			// return {
 			// 	...args,
 			// 	properties,
@@ -143,6 +123,7 @@ export function useDataBoundArgsSchema(
 			const copy = { ...args }
 			COLUMN_ARGS.forEach((column) => {
 				if (copy.properties[column]) {
+					// copy.enum = columns
 					copy.properties[column].oneOf = prettyEnum(columns, false)
 				}
 			})

@@ -22,8 +22,9 @@ import {
 } from './GenerativeMigration.styles.js'
 import { StepForm } from '../../../StepForm/StepForm.js'
 import { selectStepForm } from '../../../StepForm/selectStepForm.js'
-import { RJSFForm } from '../../forms/forms/RJSFForm.js'
-import { useWorkflowSchema } from '../../forms/forms/RJSFForm.hooks.js'
+import { RJSFForm } from '../../forms/forms/RJSF/index.js'
+import { useWorkflowSchema } from '../../forms/forms/RJSF/RJSFForm.hooks.js'
+
 
 export interface GenerativeMigrationProps {
 	schema: WorkflowSchema
@@ -38,6 +39,7 @@ export const GenerativeMigration: React.FC<GenerativeMigrationProps> = memo(
 		const steps = useWorkflowSteps(wf, DisplayOrder.FirstOnTop)
 
 		const workflowSchema = useWorkflowSchema()
+		console.log('schema', workflowSchema)
 		if (!workflowSchema) {
 			return null
 		}

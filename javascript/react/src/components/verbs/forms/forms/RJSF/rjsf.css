@@ -1,7 +1,8 @@
 .rjsf-root {
     min-width: 220px;
+    max-width: 220px;
 }
 
-#root__description {
+/* #root__description {
     display: none;
-}
+} */
