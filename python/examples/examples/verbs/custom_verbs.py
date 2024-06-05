@@ -1,8 +1,10 @@
 """Custom verbs for data processing."""
+
 from typing import cast
 
 import pandas as pd
-from datashaper import TableContainer, VerbInput, verb
+from datashaper.table_store.types import TableContainer
+from datashaper.verbs import VerbInput, verb
 
 
 @verb(name="genid")
