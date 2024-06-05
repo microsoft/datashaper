@@ -49,8 +49,7 @@ export function useWorkflowSchema(): any | undefined {
 export function useVerbArgsSchema(step: Step, schema: any): any {
 	return useMemo(() => {
 		if (step && schema) {
-			const verb = capitalize(step.verb)
-			const args = schema.definitions[`${verb}Args`]
+			const args = findVerbSchema(step, schema)
 			if (!args) {
 				return undefined
 			}
@@ -83,6 +82,13 @@ export function useVerbArgsSchema(step: Step, schema: any): any {
 	}, [step, schema])
 }
 
+function findVerbSchema(step: Step, schema: any) {
+	const { verb } = step
+	// handle namespaced verbs, which all have an enum label of PartPart when value is part.part
+	const formatted = verb.split('.').map((v) => capitalize(v)).join('')
+	const args = schema.definitions[`${formatted}Args`]
+	return args
+}
 // TODO: can we get our jsonschema generator to create the official oneOf format and use the TS names?
 // https://github.com/rjsf-team/react-jsonschema-form/pull/581
 function prettyEnum(
