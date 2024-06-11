@@ -4,10 +4,10 @@ from typing import Any
 
 import pandas as pd
 
-from datashaper.table_store.types import Table
-from datashaper.workflow.workflow import DEFAULT_INPUT_NAME, Workflow
+from datashaper.constants import DEFAULT_INPUT_NAME
 
 from .decorators import VerbInputSpec, verb
+from .types import Table
 
 
 @verb(
@@ -17,7 +17,7 @@ from .decorators import VerbInputSpec, verb
 async def workflow(
     table: pd.DataFrame,
     workflow: dict,
-    workflow_instance: Workflow,
+    workflow_instance: Any,  # Workflow
     tables: dict[str, Any] | None = None,
     **_kwargs: Any,
 ) -> Table:

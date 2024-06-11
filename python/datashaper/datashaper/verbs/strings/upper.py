@@ -6,7 +6,7 @@
 
 import pandas as pd
 
-from datashaper.verbs.decorators import VerbInputSpec, verb
+from datashaper.verbs import VerbInputSpec, verb
 
 
 @verb(name="strings.upper", input=VerbInputSpec("table"))

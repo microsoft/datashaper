@@ -1,6 +1,8 @@
 """Datashaper Workflow module."""
+
 from .csv import load_csv_table
 from .json import load_json_table
+from .store import DiskCacheTableStore, InMemoryTableStore, TableStore
 from .table import load_table
 from .types import (
     DataTable,
@@ -19,4 +21,8 @@ __all__ = [
     "load_csv_table",
     "load_json_table",
     "load_table",
+    # Table Stores
+    "TableStore",
+    "InMemoryTableStore",
+    "DiskCacheTableStore",
 ]

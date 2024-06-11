@@ -8,16 +8,23 @@ from .aggregate import aggregate
 from .bin import bin
 from .binarize import binarize
 from .boolean import boolean
+from .callbacks import NoopVerbCallbacks, VerbCallbacks
 from .concat import concat
 from .convert import convert
 from .copy import copy
-from .decorators import VerbInputSpec, parallel_verb, verb
+from .decorators import (
+    ParallelizationOrientation,
+    VerbInputSpec,
+    parallel_verb,
+    verb,
+)
 from .dedupe import dedupe
 from .derive import derive
 from .destructure import destructure
 from .difference import difference
 from .drop import drop
 from .engine import (
+    VerbDetails,
     VerbInput,
     VerbManager,
     VerbResult,
@@ -51,6 +58,8 @@ from .types import (
     BooleanComparisonOperator,
     BooleanLogicalOperator,
     Category,
+    ColumnMetadata,
+    ColumnStats,
     ComparisonStrategy,
     DataType,
     FieldAggregateOperation,
@@ -66,6 +75,9 @@ from .types import (
     SetOp,
     SortDirection,
     StringComparisonOperator,
+    Table,
+    TableContainer,
+    TableMetadata,
     WindowFunction,
 )
 from .unfold import unfold
@@ -126,13 +138,15 @@ __all__ = [
     "replace",
     # Verb Authoring
     "VerbInput",
-    "VerbResult",
     "VerbManager",
     "load_verbs",
     # Decorators
     "VerbInputSpec",
     "verb",
     "parallel_verb",
+    "ParallelizationOrientation",
+    "VerbDetails",
+    "VerbResult",
     # Enums,
     "Bin",
     "BinStrategy",
@@ -155,4 +169,13 @@ __all__ = [
     "SortDirection",
     "StringComparisonOperator",
     "WindowFunction",
+    # Table Types
+    "Table",
+    "ColumnMetadata",
+    "ColumnStats",
+    "TableContainer",
+    "TableMetadata",
+    # Callbacks
+    "NoopVerbCallbacks",
+    "VerbCallbacks",
 ]

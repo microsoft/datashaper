@@ -1,9 +1,10 @@
 """Wraps a callback with a progress handler. Every time the callback is called, the progress handler will be called with the current progress."""
+
 from collections.abc import Callable
 from typing import TypeVar
 
-from datashaper.progress.progress_ticker import ProgressTicker
-from datashaper.progress.types import ProgressHandler
+from .progress_ticker import ProgressTicker
+from .types import ProgressHandler
 
 T = TypeVar("T")
 

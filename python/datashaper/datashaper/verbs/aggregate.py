@@ -4,13 +4,13 @@
 #
 """Aggregate verb implementation."""
 
+from functools import reduce
 from typing import Any, cast
 
 import pandas as pd
 
-from .decorators import VerbInputSpec, verb
+from .decorators.verb import VerbInputSpec, verb
 from .types import FieldAggregateOperation
-from .utils.pandas.aggregate_mapping import aggregate_operation_mapping
 
 
 @verb(name="aggregate", input=VerbInputSpec("table", immutable=True))
@@ -30,3 +30,25 @@ def aggregate(
     result[to] = result[column]
     result.drop(column, axis=1, inplace=True)
     return result.reset_index()
+
+
+aggregate_operation_mapping = {
+    FieldAggregateOperation.Any: "first",
+    FieldAggregateOperation.Count: "count",
+    FieldAggregateOperation.CountDistinct: "nunique",
+    FieldAggregateOperation.Valid: lambda series: series.dropna().count(),
+    FieldAggregateOperation.Invalid: lambda series: series.isna().sum(),
+    FieldAggregateOperation.Max: "max",
+    FieldAggregateOperation.Min: "min",
+    FieldAggregateOperation.Sum: "sum",
+    FieldAggregateOperation.Product: lambda series: reduce(lambda x, y: x * y, series),
+    FieldAggregateOperation.Mean: "mean",
+    FieldAggregateOperation.Median: "median",
+    FieldAggregateOperation.StDev: "std",
+    FieldAggregateOperation.StDevPopulation: "",
+    FieldAggregateOperation.Variance: "variance",
+    FieldAggregateOperation.ArrayAgg: lambda series: [e for e in series],
+    FieldAggregateOperation.ArrayAggDistinct: lambda series: [
+        e for e in series.unique()
+    ],
+}

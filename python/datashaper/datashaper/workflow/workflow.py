@@ -27,12 +27,10 @@ from datashaper.errors import (
     WorkflowOutputNotReadyError,
     WorkflowVerbNotFoundError,
 )
-from datashaper.execution.execution_node import ExecutionNode, WorkflowInput
-from datashaper.progress.types import Progress
-from datashaper.table_store.in_memory_table_store import InMemoryTableStore
-from datashaper.table_store.table_store import TableStore
-from datashaper.table_store.types import Table, TableContainer
-from datashaper.verbs.engine import VerbDetails, VerbInput, VerbManager, VerbResult
+from datashaper.tables import InMemoryTableStore, TableStore
+from datashaper.utils.progress import Progress
+from datashaper.verbs import Table, VerbDetails, VerbInput, VerbManager, VerbResult
+from datashaper.verbs.types import TableContainer
 
 from .callbacks import (
     MemoryProfilingWorkflowCallbacks,
@@ -40,7 +38,13 @@ from .callbacks import (
     WorkflowCallbacksManager,
 )
 from .delegating_verb_callbacks import DelegatingVerbCallbacks
-from .types import MemoryProfile, VerbTiming, WorkflowRunResult
+from .types import (
+    ExecutionNode,
+    MemoryProfile,
+    VerbTiming,
+    WorkflowInput,
+    WorkflowRunResult,
+)
 
 log = getLogger(__name__)
 

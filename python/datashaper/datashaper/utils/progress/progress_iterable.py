@@ -1,9 +1,10 @@
 """Progress iterable."""
+
 from collections.abc import Iterable
 from typing import TypeVar
 
-from datashaper.progress.progress_ticker import ProgressTicker
-from datashaper.progress.types import ProgressHandler
+from .progress_ticker import ProgressTicker
+from .types import ProgressHandler
 
 T = TypeVar("T")
 

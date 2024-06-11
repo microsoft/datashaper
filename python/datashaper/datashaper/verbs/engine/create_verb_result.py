@@ -4,7 +4,7 @@
 #
 """Common types used across the datashaper codebase."""
 
-from datashaper.table_store.types import Table, TableContainer, TableMetadata
+from datashaper.verbs.types import Table, TableContainer, TableMetadata
 
 from .types import VerbResult
 

@@ -2,9 +2,9 @@
 
 from typing import Protocol
 
-from datashaper.execution.execution_node import ExecutionNode
-from datashaper.progress import Progress
-from datashaper.table_store.types import TableContainer
+from datashaper.utils.progress import Progress
+from datashaper.verbs.types import TableContainer
+from datashaper.workflow.types import ExecutionNode
 
 
 class WorkflowCallbacks(Protocol):

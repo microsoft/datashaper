@@ -14,14 +14,13 @@ import pandas as pd
 from pandas.core.groupby import DataFrameGroupBy
 
 from datashaper.constants import DEFAULT_OUTPUT_NAME
-from datashaper.table_store.types import TableContainer
 from datashaper.verbs.engine import (
     VerbDetails,
     VerbInput,
     VerbManager,
     VerbResult,
-    create_verb_result,
 )
+from datashaper.verbs.types import TableContainer
 
 log = logging.getLogger(__name__)
 
@@ -150,7 +149,7 @@ def _handle_dataframe_return_type(
         result = verb_function(*args, **kwargs)
         if inspect.iscoroutine(result):
             result = await result
-        return create_verb_result(result)
+        return VerbResult(output=TableContainer(result), named_outputs={})
 
     return cast(Callable, wrapper)
 
@@ -167,6 +166,6 @@ def _handle_dict_return_type(
         if default_output is None:
             msg = f"Verb function {verb_function} must return a default output."
             raise ValueError(msg)
-        return create_verb_result(default_output, named_outputs=others)
+        return VerbResult(output=TableContainer(default_output), named_outputs=others)
 
     return wrapper

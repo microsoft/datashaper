@@ -2,11 +2,11 @@
 
 from typing import Any
 
-from datashaper.execution.execution_node import ExecutionNode
-from datashaper.progress.types import Progress
+from datashaper.utils.progress import Progress
 from datashaper.verbs.callbacks import VerbCallbacks
 
 from .callbacks import WorkflowCallbacks
+from .types import ExecutionNode
 
 
 class DelegatingVerbCallbacks(VerbCallbacks):

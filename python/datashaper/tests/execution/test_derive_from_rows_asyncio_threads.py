@@ -3,7 +3,7 @@ from threading import Lock
 
 import pandas as pd
 
-from datashaper import derive_from_rows_asyncio_threads
+from datashaper.utils.parallelization import derive_from_rows_asyncio_threads
 from datashaper.verbs.callbacks import NoopVerbCallbacks
 
 

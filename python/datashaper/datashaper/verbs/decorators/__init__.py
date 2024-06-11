@@ -1,6 +1,11 @@
 """Datashaper Function Decorators."""
 
-from .parallel_verb import OperationType, parallel_verb
+from .parallel_verb import ParallelizationOrientation, parallel_verb
 from .verb import VerbInputSpec, verb
 
-__all__ = ["verb", "VerbInputSpec", "parallel_verb", "OperationType"]
+__all__ = [
+    "verb",
+    "VerbInputSpec",
+    "parallel_verb",
+    "ParallelizationOrientation",
+]

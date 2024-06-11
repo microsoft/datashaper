@@ -9,9 +9,9 @@ from typing import Any
 
 import pandas as pd
 
+from .aggregate import aggregate_operation_mapping
 from .decorators import VerbInputSpec, verb
 from .types import FieldAggregateOperation
-from .utils.pandas.aggregate_mapping import aggregate_operation_mapping
 
 
 @verb(name="rollup", input=VerbInputSpec("table", immutable=True))

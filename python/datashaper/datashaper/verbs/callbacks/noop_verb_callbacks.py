@@ -1,5 +1,6 @@
 """Defines the interface for verb callbacks."""
-from datashaper.progress.types import Progress
+
+from datashaper.utils.progress import Progress
 
 from .verb_callbacks import VerbCallbacks
 

@@ -9,7 +9,7 @@ from typing import Any, TypeVar, cast
 import pandas as pd
 
 from datashaper.errors import VerbParallelizationError
-from datashaper.progress import progress_ticker
+from datashaper.utils.progress import progress_ticker
 from datashaper.verbs.callbacks import VerbCallbacks
 
 ItemType = TypeVar("ItemType")

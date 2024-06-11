@@ -4,14 +4,15 @@
 #
 """Merge verb implementation."""
 
+from collections.abc import Callable
 from functools import partial
 from typing import Any
 
 import pandas as pd
+from pandas.api.types import is_bool
 
 from .decorators import VerbInputSpec, verb
 from .types import MergeStrategy
-from .utils.pandas.merge_strategies import merge_strategies
 
 
 @verb(name="merge", input=VerbInputSpec("table"))
@@ -35,3 +36,29 @@ def merge(
         table.drop(columns=columns, inplace=True)
 
     return table
+
+
+merge_strategies: dict[MergeStrategy, Callable] = {
+    MergeStrategy.FirstOneWins: lambda values, **_kwargs: values.dropna().apply(
+        lambda x: _correct_type(x)
+    )[0],
+    MergeStrategy.LastOneWins: lambda values, **_kwargs: values.dropna().apply(
+        lambda x: _correct_type(x)
+    )[-1],
+    MergeStrategy.Concat: lambda values, delim, **_kwargs: _create_array(values, delim),
+    MergeStrategy.CreateArray: lambda values, **_kwargs: _create_array(values, ","),
+}
+
+
+def _correct_type(value: Any) -> str | int | Any:
+    if is_bool(value):
+        return str(value).lower()
+    try:
+        return int(value) if value.is_integer() else value
+    except AttributeError:
+        return value
+
+
+def _create_array(column: pd.Series, delim: str) -> str:
+    col: pd.DataFrame | pd.Series = column.dropna().apply(lambda x: _correct_type(x))
+    return delim.join(col.astype(str))

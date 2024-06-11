@@ -1,5 +1,6 @@
 """A class that emits progress reports incrementally."""
-from datashaper.progress.types import Progress, ProgressHandler
+
+from .types import Progress, ProgressHandler
 
 
 class ProgressTicker:

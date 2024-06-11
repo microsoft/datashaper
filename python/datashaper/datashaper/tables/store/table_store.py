@@ -6,7 +6,7 @@
 
 from abc import ABC, abstractmethod
 
-from .types import TableContainer
+from datashaper.verbs import TableContainer
 
 
 class TableStore(ABC):

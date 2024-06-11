@@ -1,4 +1,4 @@
 {
-  "type": "major",
+  "type": "patch",
   "description": "Schema cleanup"
 }

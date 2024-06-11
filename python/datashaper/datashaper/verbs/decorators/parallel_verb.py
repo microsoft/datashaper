@@ -18,11 +18,11 @@ import numpy as np
 import pandas as pd
 
 from datashaper.errors import VerbParallelizationError
-from datashaper.execution.types import AsyncType
-from datashaper.progress import ProgressTicker, progress_ticker
-from datashaper.table_store.types import Table, TableContainer
+from datashaper.utils.parallelization import AsyncType
+from datashaper.utils.progress import ProgressTicker, progress_ticker
 from datashaper.verbs.callbacks import VerbCallbacks
-from datashaper.verbs.engine import VerbInput
+from datashaper.verbs.engine.verb_input import VerbInput
+from datashaper.verbs.types import Table
 
 from .verb import verb
 
@@ -36,7 +36,7 @@ _CHUNKS_NOT_SUPPORTED = "chunk_size > 1 is only supported for DataFrame inputs a
 _DEFAULT_CHUNK_SIZE = 250
 
 
-class OperationType(str, Enum):
+class ParallelizationOrientation(str, Enum):
     """The type of operation to perform."""
 
     ROW_WISE = "row_wise"
@@ -63,7 +63,7 @@ def parallel_verb(
     override_existing: bool = False,
     asyncio_type: AsyncType = AsyncType.AsyncIO,
     merge: Callable[[list[Table | tuple | None]], Table] = default_merge,
-    operation_type: OperationType = OperationType.ROW_WISE,
+    operation_type: ParallelizationOrientation = ParallelizationOrientation.ROW_WISE,
     **_kwargs: Any,
 ) -> Callable:
     """Apply a decorator for registering a parallel verb."""
@@ -72,7 +72,7 @@ def parallel_verb(
         func: Callable[Concatenate[Table | tuple, P], Awaitable[Table]],
     ) -> Callable[
         Concatenate[VerbInput, Any, int, P],
-        Awaitable[TableContainer],
+        Awaitable[Table],
     ]:
         @verb(
             name=name,
@@ -86,9 +86,9 @@ def parallel_verb(
             max_parallelism: int = 4,
             *args: P.args,
             **kwargs: P.kwargs,
-        ) -> TableContainer:
+        ) -> Table:
             input_table = input.source.table
-            if operation_type == OperationType.ROW_WISE:
+            if operation_type == ParallelizationOrientation.ROW_WISE:
                 chunks = input_table.itertuples()
             elif (
                 signature(func).parameters["chunk"].annotation == Table
@@ -107,7 +107,7 @@ def parallel_verb(
             tick = progress_ticker(
                 callbacks.progress,
                 num_total=len(cast(Sized, chunks))
-                if operation_type == OperationType.CHUNK
+                if operation_type == ParallelizationOrientation.CHUNK
                 else len(input_table),  # type: ignore
             )
             errors = []
@@ -156,10 +156,10 @@ def parallel_verb(
                 )
             if len(errors) > 0:
                 raise VerbParallelizationError(len(errors))
-            if operation_type == OperationType.CHUNK:
-                return TableContainer(merge(results))
+            if operation_type == ParallelizationOrientation.CHUNK:
+                return merge(results)
 
-            return TableContainer(pd.DataFrame(results))
+            return pd.DataFrame(results)
 
         return wrapper
 
