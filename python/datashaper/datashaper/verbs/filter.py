@@ -57,7 +57,9 @@ async def filter_verb(
     )
     sub_idx = filter_index == True  # noqa: E712
     idx = filter_index[sub_idx].index  # type: ignore
-    return cast(Table, input_table[chunk.index.isin(idx)].reset_index(drop=True))
+    result = input_table[chunk.index.isin(idx)].reset_index(drop=True)
+    print("FILTER RES", result)
+    return cast(Table, result)
 
 
 def filter(df: pd.DataFrame, args: FilterArgs) -> pd.DataFrame | pd.Series:  # noqa A001 - use ds verb name

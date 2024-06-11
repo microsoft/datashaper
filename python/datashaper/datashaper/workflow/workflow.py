@@ -420,6 +420,7 @@ class Workflow(Generic[Context]):
             callbacks.on_error(message, e, traceback.format_exc())
             raise
         else:
+            print("RESULT", result, type(result))
             if isinstance(result, TableContainer):
                 self._table_store.add(node.node_id, result, tag="output")
             elif isinstance(result, VerbResult):

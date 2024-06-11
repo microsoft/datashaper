@@ -22,7 +22,7 @@ from datashaper.utils.parallelization import AsyncType
 from datashaper.utils.progress import ProgressTicker, progress_ticker
 from datashaper.verbs.callbacks import VerbCallbacks
 from datashaper.verbs.engine.verb_input import VerbInput
-from datashaper.verbs.types import Table
+from datashaper.verbs.types import Table, TableContainer
 
 from .verb import verb
 
@@ -72,7 +72,7 @@ def parallel_verb(
         func: Callable[Concatenate[Table | tuple, P], Awaitable[Table]],
     ) -> Callable[
         Concatenate[VerbInput, Any, int, P],
-        Awaitable[Table],
+        Awaitable[TableContainer],
     ]:
         @verb(
             name=name,
@@ -86,7 +86,7 @@ def parallel_verb(
             max_parallelism: int = 4,
             *args: P.args,
             **kwargs: P.kwargs,
-        ) -> Table:
+        ) -> TableContainer:
             input_table = input.source.table
             if operation_type == ParallelizationOrientation.ROW_WISE:
                 chunks = input_table.itertuples()
@@ -157,9 +157,9 @@ def parallel_verb(
             if len(errors) > 0:
                 raise VerbParallelizationError(len(errors))
             if operation_type == ParallelizationOrientation.CHUNK:
-                return merge(results)
+                return TableContainer(merge(results))
 
-            return pd.DataFrame(results)
+            return TableContainer(pd.DataFrame(results))
 
         return wrapper
 
