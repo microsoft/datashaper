@@ -3,8 +3,7 @@
 from typing import cast
 
 import pandas as pd
-from datashaper.table_store.types import TableContainer
-from datashaper.verbs import VerbInput, verb
+from datashaper.verbs import TableContainer, VerbInput, verb
 
 
 @verb(name="genid")
