@@ -58,7 +58,6 @@ async def filter_verb(
     sub_idx = filter_index == True  # noqa: E712
     idx = filter_index[sub_idx].index  # type: ignore
     result = input_table[chunk.index.isin(idx)].reset_index(drop=True)
-    print("FILTER RES", result)
     return cast(Table, result)
 
 
