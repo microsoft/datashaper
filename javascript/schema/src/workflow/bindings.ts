@@ -7,8 +7,8 @@
  * The Id of the step to which the input is bound
  */
 export type WorkflowStepId = string
-export type InputBinding = { step: WorkflowStepId, table?: string }
-export type WorkflowInput = WorkflowStepId | InputBinding
+export type WorkflowStepNamedOutput = { step: WorkflowStepId, table?: string }
+export type WorkflowStepOutput = WorkflowStepId | WorkflowStepNamedOutput
 
 
 /**
@@ -22,7 +22,7 @@ export interface BasicInput {
 	 * If no previous step is available, this will remain undefined
 	 */
 	input?: WorkflowStepId | {
-		source: WorkflowInput
+		source: WorkflowStepOutput
 	}
 }
 
@@ -37,12 +37,12 @@ export interface DualInput {
 		/**
 		 * The primary input, which must be specified
 		 */
-		source: WorkflowInput
+		source: WorkflowStepOutput
 
 		/**
 		 * The secondary input, which must be specified
 		 */
-		other: WorkflowInput
+		other: WorkflowStepOutput
 	}
 }
 
@@ -58,30 +58,30 @@ export interface VariadicInput {
 		/**
 		 * The primary input
 		 */
-		source: WorkflowInput
+		source: WorkflowStepOutput
 
 		/**
 		 * The variadic secondary inputs
 		 */
-		others?: WorkflowInput[]
+		others?: WorkflowStepOutput[]
 	}
 }
 
 export interface UnknownInput {
 	input?:
-		| WorkflowInput
+		| WorkflowStepOutput
 		| {
 				/**
 				 * Possible main input
 				 **/
-				source?: WorkflowInput
+				source?: WorkflowStepOutput
 
 				/**
 				 * Possible variadic input
 				 */
-				others?: WorkflowInput[]
+				others?: WorkflowStepOutput[]
 
 				/** Possible other input */
-				[key: string]: WorkflowInput | WorkflowInput[] | undefined
+				[key: string]: WorkflowStepOutput | WorkflowStepOutput[] | undefined
 		  }
 }
