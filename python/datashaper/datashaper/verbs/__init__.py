@@ -13,7 +13,7 @@ from .concat import concat
 from .convert import convert
 from .copy import copy
 from .decorators import (
-    ParallelizationOrientation,
+    ParallelizationMode,
     VerbInputSpec,
     parallel_verb,
     verb,
@@ -144,7 +144,7 @@ __all__ = [
     "VerbInputSpec",
     "verb",
     "parallel_verb",
-    "ParallelizationOrientation",
+    "ParallelizationMode",
     "VerbDetails",
     "VerbResult",
     # Enums,

@@ -40,7 +40,7 @@ from .verbs import (
     NoopVerbCallbacks,
     NumericComparisonOperator,
     OrderByInstruction,
-    ParallelizationOrientation,
+    ParallelizationMode,
     ParseType,
     SetOp,
     SortDirection,
@@ -61,6 +61,7 @@ from .verbs import (
 )
 from .workflow import (
     DEFAULT_INPUT_NAME,
+    ExecutionNode,
     MemoryProfile,
     NoopWorkflowCallbacks,
     PandasDtypeBackend,
@@ -82,6 +83,7 @@ __all__ = [
     "NoopWorkflowCallbacks",
     "WorkflowCallbacksManager",
     "PandasDtypeBackend",
+    "ExecutionNode",
     # table utilities
     "DataTable",
     "ParserOptions",
@@ -117,7 +119,7 @@ __all__ = [
     "VerbInputSpec",
     "verb",
     "parallel_verb",
-    "ParallelizationOrientation",
+    "ParallelizationMode",
     "VerbDetails",
     "VerbResult",
     "Bin",

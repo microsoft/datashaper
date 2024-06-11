@@ -149,7 +149,8 @@ def _handle_dataframe_return_type(
         result = verb_function(*args, **kwargs)
         if inspect.iscoroutine(result):
             result = await result
-        return VerbResult(output=TableContainer(result), named_outputs={})
+        raw_table = result.table if isinstance(result, TableContainer) else result
+        return VerbResult(output=TableContainer(raw_table), named_outputs={})
 
     return cast(Callable, wrapper)
 

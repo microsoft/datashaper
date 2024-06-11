@@ -15,7 +15,7 @@ import pandas as pd
 from datashaper.errors import UnsupportedComparisonOperatorError
 
 from .callbacks import VerbCallbacks
-from .decorators import ParallelizationOrientation, parallel_verb
+from .decorators import ParallelizationMode, parallel_verb
 from .types import (
     BooleanComparisonOperator,
     BooleanLogicalOperator,
@@ -32,7 +32,7 @@ log = logging.getLogger(__name__)
 @parallel_verb(
     name="filter",
     treats_input_tables_as_immutable=True,
-    operation_type=ParallelizationOrientation.CHUNK,
+    parallelization_mode=ParallelizationMode.CHUNK,
 )
 async def filter_verb(
     chunk: Table,

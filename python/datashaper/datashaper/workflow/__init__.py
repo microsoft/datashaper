@@ -6,7 +6,7 @@ from .callbacks import (
     WorkflowCallbacks,
     WorkflowCallbacksManager,
 )
-from .types import MemoryProfile, VerbTiming, WorkflowRunResult
+from .types import ExecutionNode, MemoryProfile, VerbTiming, WorkflowRunResult
 from .workflow import DEFAULT_INPUT_NAME, PandasDtypeBackend, Workflow
 
 __all__ = [
@@ -16,6 +16,7 @@ __all__ = [
     "VerbTiming",
     "WorkflowRunResult",
     "MemoryProfile",
+    "ExecutionNode",
     "MemoryProfilingWorkflowCallbacks",
     "NoopWorkflowCallbacks",
     "WorkflowCallbacksManager",

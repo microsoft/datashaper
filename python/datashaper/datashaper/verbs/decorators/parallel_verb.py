@@ -36,7 +36,7 @@ _CHUNKS_NOT_SUPPORTED = "chunk_size > 1 is only supported for DataFrame inputs a
 _DEFAULT_CHUNK_SIZE = 250
 
 
-class ParallelizationOrientation(str, Enum):
+class ParallelizationMode(str, Enum):
     """The type of operation to perform."""
 
     ROW_WISE = "row_wise"
@@ -63,7 +63,7 @@ def parallel_verb(
     override_existing: bool = False,
     asyncio_type: AsyncType = AsyncType.AsyncIO,
     merge: Callable[[list[Table | tuple | None]], Table] = default_merge,
-    operation_type: ParallelizationOrientation = ParallelizationOrientation.ROW_WISE,
+    parallelization_mode: ParallelizationMode = ParallelizationMode.ROW_WISE,
     **_kwargs: Any,
 ) -> Callable:
     """Apply a decorator for registering a parallel verb."""
@@ -88,7 +88,7 @@ def parallel_verb(
             **kwargs: P.kwargs,
         ) -> TableContainer:
             input_table = input.source.table
-            if operation_type == ParallelizationOrientation.ROW_WISE:
+            if parallelization_mode == ParallelizationMode.ROW_WISE:
                 chunks = input_table.itertuples()
             elif (
                 signature(func).parameters["chunk"].annotation == Table
@@ -97,9 +97,9 @@ def parallel_verb(
                 chunk_size: int = cast(
                     int, kwargs.pop("chunk_size", _DEFAULT_CHUNK_SIZE)
                 )
-                chunks = np.array_split(  # type: ignore
-                    input_table,  # type: ignore
-                    math.ceil(len(input_table) / chunk_size),  # type: ignore
+                chunks = np.array_split(
+                    cast(pd.DataFrame, input_table),
+                    math.ceil(len(input_table) / chunk_size),
                 )
             else:
                 raise NotImplementedError(_CHUNKS_NOT_SUPPORTED)
@@ -107,8 +107,8 @@ def parallel_verb(
             tick = progress_ticker(
                 callbacks.progress,
                 num_total=len(cast(Sized, chunks))
-                if operation_type == ParallelizationOrientation.CHUNK
-                else len(input_table),  # type: ignore
+                if parallelization_mode == ParallelizationMode.CHUNK
+                else len(input_table),
             )
             errors = []
             stack_traces = []
@@ -138,7 +138,8 @@ def parallel_verb(
 
             semaphore = asyncio.Semaphore(max_parallelism)
             futures = [
-                execute(chunk, tick, semaphore, *args, **kwargs) for chunk in chunks
+                execute(cast(Table, chunk), tick, semaphore, *args, **kwargs)
+                for chunk in chunks
             ]
 
             if asyncio_type == AsyncType.Threaded:
@@ -156,7 +157,7 @@ def parallel_verb(
                 )
             if len(errors) > 0:
                 raise VerbParallelizationError(len(errors))
-            if operation_type == ParallelizationOrientation.CHUNK:
+            if parallelization_mode == ParallelizationMode.CHUNK:
                 return TableContainer(merge(results))
 
             return TableContainer(pd.DataFrame(results))
