@@ -9,7 +9,13 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from .decorators import VerbInputSpec, verb
+from .decorators import (
+    OutputReturnType,
+    apply_decorators,
+    inputs,
+    outputs,
+    verb,
+)
 from .types import BinStrategy
 
 
@@ -72,7 +78,6 @@ __bin_edges_mapping = {
 }
 
 
-@verb(name="bin", input=VerbInputSpec("table"))
 def bin(  # noqa A001 - use ds verb name
     table: pd.DataFrame,
     to: str,
@@ -125,3 +130,13 @@ def bin(  # noqa A001 - use ds verb name
     output = table
     output[to] = value_edges
     return output
+
+
+apply_decorators(
+    [
+        verb(name="bin"),
+        inputs(default_argument_name="table"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    bin,
+)

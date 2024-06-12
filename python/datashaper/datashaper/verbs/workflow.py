@@ -6,14 +6,10 @@ import pandas as pd
 
 from datashaper.constants import DEFAULT_INPUT_NAME
 
-from .decorators import VerbInputSpec, verb
+from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
 from .types import Table
 
 
-@verb(
-    name="workflow",
-    input=VerbInputSpec("table", named_dict="tables"),
-)
 async def workflow(
     table: pd.DataFrame,
     workflow: dict,
@@ -34,3 +30,13 @@ async def workflow(
 
     # Return the output table
     return subworkflow.output()
+
+
+apply_decorators(
+    [
+        verb(name="workflow"),
+        inputs(default_argument_name="table", named_input_argument="tables"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    workflow,
+)

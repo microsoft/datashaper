@@ -8,12 +8,21 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import VerbInputSpec, verb
+from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
 
 
-@verb(name="concat", input=VerbInputSpec("table", variadic="others", immutable=True))
 def concat(
     table: pd.DataFrame, others: list[pd.DataFrame], **_kwargs: Any
 ) -> pd.DataFrame:
     """Concat verb implementation."""
     return pd.concat([table] + others, ignore_index=True)
+
+
+apply_decorators(
+    [
+        verb(name="concat", immutable_input=True),
+        inputs(default_argument_name="table", variadic_argument_name="others"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    concat,
+)

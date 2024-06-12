@@ -280,7 +280,7 @@ class Workflow(Generic[Context]):
             return TableContainer(table=table)
 
         if isinstance(inputs, str):
-            return VerbInput(input=input_table(inputs))
+            return VerbInput(source=input_table(inputs))
 
         input_mapping: dict[str, TableContainer | list[TableContainer]] = {}
         for key, value in inputs.items():
@@ -302,15 +302,14 @@ class Workflow(Generic[Context]):
             else:
                 raise WorkflowInvalidInputError(str(type(value)))
 
-        input_tbl = cast(TableContainer, input_mapping.pop("input", None))
         source_tbl = cast(TableContainer, input_mapping.pop("source", None))
         other_tbl = cast(TableContainer, input_mapping.pop("other", None))
         others_tbl = cast(list[TableContainer], input_mapping.pop("others", None))
         input_mapping = cast(dict, input_mapping)
+        if other_tbl is not None:
+            input_mapping["other"] = other_tbl
         return VerbInput(
-            input=input_tbl,
             source=source_tbl,
-            other=other_tbl,
             others=others_tbl,
             named=cast(dict[str, TableContainer], input_mapping),
         )

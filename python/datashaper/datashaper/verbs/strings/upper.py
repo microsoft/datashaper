@@ -6,11 +6,26 @@
 
 import pandas as pd
 
-from datashaper.verbs import VerbInputSpec, verb
+from datashaper.verbs.decorators import (
+    OutputReturnType,
+    apply_decorators,
+    inputs,
+    outputs,
+    verb,
+)
 
 
-@verb(name="strings.upper", input=VerbInputSpec("table"))
 def upper(table: pd.DataFrame, column: str, to: str, **_kwargs: dict) -> pd.DataFrame:
     """Upper verb implementation."""
     table[to] = table[column].str.upper()
     return table
+
+
+apply_decorators(
+    [
+        verb(name="strings.upper"),
+        inputs(default_argument_name="table"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    upper,
+)

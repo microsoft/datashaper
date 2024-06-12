@@ -9,11 +9,10 @@ from typing import Any
 import pandas as pd
 
 from .aggregate import aggregate_operation_mapping
-from .decorators import VerbInputSpec, verb
+from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
 from .types import FieldAggregateOperation
 
 
-@verb(name="pivot", input=VerbInputSpec("table", immutable=True))
 def pivot(
     table: pd.DataFrame, key: str, value: str, operation: str, **_kwargs: Any
 ) -> pd.DataFrame:
@@ -24,3 +23,13 @@ def pivot(
         columns=key,
         aggfunc=aggregate_operation_mapping[aggregate_operation],
     )
+
+
+apply_decorators(
+    [
+        verb(name="pivot", immutable_input=True),
+        inputs(default_argument_name="table"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    pivot,
+)

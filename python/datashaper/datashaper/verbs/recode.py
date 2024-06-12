@@ -8,7 +8,7 @@ from typing import Any, cast
 
 import pandas as pd
 
-from .decorators import VerbInputSpec, verb
+from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
 
 
 class RecodeMap(dict):
@@ -19,7 +19,6 @@ class RecodeMap(dict):
         return key
 
 
-@verb(name="recode", input=VerbInputSpec("table"))
 def recode(
     table: pd.DataFrame, to: str, column: str, mapping: dict, **_kwargs: Any
 ) -> pd.DataFrame:
@@ -27,3 +26,13 @@ def recode(
     mapping = RecodeMap(mapping)
     table[to] = table[column].map(cast(Any, mapping))
     return table
+
+
+apply_decorators(
+    [
+        verb(name="recode"),
+        inputs(default_argument_name="table"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    recode,
+)

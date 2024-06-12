@@ -8,10 +8,19 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import VerbInputSpec, verb
+from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
 
 
-@verb(name="ungroup", input=VerbInputSpec("table", immutable=True))
 def ungroup(table: pd.DataFrame, **_kwargs: Any) -> pd.DataFrame:
     """Ungroup verb implementation."""
     return table.obj
+
+
+apply_decorators(
+    [
+        verb(name="ungroup", immutable_input=True),
+        inputs(default_argument_name="table"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    ungroup,
+)

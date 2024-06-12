@@ -8,7 +8,7 @@ from typing import Any, cast
 
 import pandas as pd
 
-from .decorators import VerbInputSpec, verb
+from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
 from .filter import filter, get_comparison_operator
 from .types import (
     ComparisonStrategy,
@@ -17,7 +17,6 @@ from .types import (
 )
 
 
-@verb(name="binarize", input=VerbInputSpec("table"))
 def binarize(
     table: pd.DataFrame,
     to: str,
@@ -39,3 +38,13 @@ def binarize(
     )
     table[to] = filter_result.map(cast(Any, {True: 1, False: 0}), na_action="ignore")
     return table
+
+
+apply_decorators(
+    [
+        verb(name="binarize"),
+        inputs(default_argument_name="table"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    binarize,
+)

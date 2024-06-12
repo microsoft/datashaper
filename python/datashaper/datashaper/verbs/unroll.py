@@ -8,10 +8,19 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import VerbInputSpec, verb
+from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
 
 
-@verb(name="unroll", input=VerbInputSpec("table", immutable=True))
 def unroll(table: pd.DataFrame, column: str, **_kwargs: Any) -> pd.DataFrame:
     """Unroll a column."""
     return table.explode(column).reset_index(drop=True)
+
+
+apply_decorators(
+    [
+        verb(name="unroll", immutable_input=True),
+        inputs(default_argument_name="table"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    unroll,
+)

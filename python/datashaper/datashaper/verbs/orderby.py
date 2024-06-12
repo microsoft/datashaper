@@ -8,11 +8,10 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import VerbInputSpec, verb
+from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
 from .types import OrderByInstruction, SortDirection
 
 
-@verb(name="orderby", input=VerbInputSpec("table", immutable=True))
 def orderby(table: pd.DataFrame, orders: list[dict], **_kwargs: Any) -> pd.DataFrame:
     """Orderby verb implementation."""
     orders_instructions = [
@@ -27,3 +26,13 @@ def orderby(table: pd.DataFrame, orders: list[dict], **_kwargs: Any) -> pd.DataF
         order.direction == SortDirection.Ascending for order in orders_instructions
     ]
     return table.sort_values(by=columns, ascending=ascending)
+
+
+apply_decorators(
+    [
+        verb(name="orderby"),
+        inputs(default_argument_name="table"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    orderby,
+)

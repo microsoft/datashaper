@@ -8,12 +8,21 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import VerbInputSpec, verb
+from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
 
 
-@verb(name="rename", input=VerbInputSpec("table", immutable=True))
 def rename(
     table: pd.DataFrame, columns: dict[str, str], **_kwargs: Any
 ) -> pd.DataFrame:
     """Rename verb implementation."""
     return table.rename(columns=columns)
+
+
+apply_decorators(
+    [
+        verb(name="rename"),
+        inputs(default_argument_name="table"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    rename,
+)

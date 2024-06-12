@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 from pandas.core.groupby import DataFrameGroupBy
 
-from .decorators import VerbInputSpec, verb
+from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
 from .types import WindowFunction
 
 
@@ -57,7 +57,6 @@ __window_function_map = {
 }
 
 
-@verb(name="window", input=VerbInputSpec("table"))
 def window(
     table: pd.DataFrame | DataFrameGroupBy,
     column: str,
@@ -80,3 +79,13 @@ def window(
         output[to] = window
 
     return output
+
+
+apply_decorators(
+    [
+        verb(name="window"),
+        inputs(default_argument_name="table"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    window,
+)

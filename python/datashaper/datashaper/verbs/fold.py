@@ -8,10 +8,9 @@ from typing import Any, cast
 
 import pandas as pd
 
-from .decorators import VerbInputSpec, verb
+from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
 
 
-@verb(name="fold", input=VerbInputSpec("table"))
 def fold(
     table: pd.DataFrame,
     to: tuple[str, str],
@@ -50,3 +49,13 @@ def fold(
         table.rename(mapper=rename_mapper, axis=1, inplace=True)  # type: ignore
 
     return table
+
+
+apply_decorators(
+    [
+        verb(name="fold"),
+        inputs(default_argument_name="table"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    fold,
+)

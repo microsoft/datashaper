@@ -8,10 +8,9 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import VerbInputSpec, verb
+from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
 
 
-@verb(name="erase", input=VerbInputSpec("table"))
 def erase(
     table: pd.DataFrame, column: str, value: str | float, **_kwargs: Any
 ) -> pd.DataFrame:
@@ -20,3 +19,13 @@ def erase(
         lambda df_value: None if df_value == value else df_value
     )
     return table
+
+
+apply_decorators(
+    [
+        verb(name="erase"),
+        inputs(default_argument_name="table"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    erase,
+)

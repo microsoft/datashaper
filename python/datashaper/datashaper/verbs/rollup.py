@@ -10,11 +10,10 @@ from typing import Any
 import pandas as pd
 
 from .aggregate import aggregate_operation_mapping
-from .decorators import VerbInputSpec, verb
+from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
 from .types import FieldAggregateOperation
 
 
-@verb(name="rollup", input=VerbInputSpec("table", immutable=True))
 def rollup(
     table: pd.DataFrame, column: str, to: str, operation: str, **_kwargs: Any
 ) -> pd.DataFrame:
@@ -29,3 +28,13 @@ def rollup(
         agg_result = agg_result.reset_index(drop=True)
 
     return pd.DataFrame({to: agg_result})
+
+
+apply_decorators(
+    [
+        verb(name="rollup", immutable_input=True),
+        inputs(default_argument_name="table"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    rollup,
+)

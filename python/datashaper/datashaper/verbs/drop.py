@@ -8,10 +8,19 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import VerbInputSpec, verb
+from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
 
 
-@verb(name="drop", input=VerbInputSpec("table"))
 def drop(table: pd.DataFrame, columns: list[str], **_kwargs: Any) -> pd.DataFrame:
     """Drop verb implementation."""
     return table.drop(columns=columns)
+
+
+apply_decorators(
+    [
+        verb(name="drop"),
+        inputs(default_argument_name="table"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    drop,
+)

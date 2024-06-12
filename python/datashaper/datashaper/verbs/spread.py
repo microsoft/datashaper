@@ -8,10 +8,9 @@ from typing import Any, cast
 
 import pandas as pd
 
-from .decorators import VerbInputSpec, verb
+from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
 
 
-@verb(name="spread", input=VerbInputSpec("table"))
 def spread(
     table: pd.DataFrame,
     column: str,
@@ -26,6 +25,16 @@ def spread(
         output = output.drop(columns=[column])
 
     return output
+
+
+apply_decorators(
+    [
+        verb(name="spread"),
+        inputs(default_argument_name="table"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    spread,
+)
 
 
 def _spread(

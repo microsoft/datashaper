@@ -9,11 +9,16 @@ from typing import Any, cast
 
 import pandas as pd
 
-from .decorators.verb import VerbInputSpec, verb
+from .decorators import (
+    OutputReturnType,
+    apply_decorators,
+    inputs,
+    outputs,
+    verb,
+)
 from .types import FieldAggregateOperation
 
 
-@verb(name="aggregate", input=VerbInputSpec("table", immutable=True))
 def aggregate(
     table: pd.DataFrame,
     to: str,
@@ -52,3 +57,12 @@ aggregate_operation_mapping = {
         e for e in series.unique()
     ],
 }
+
+apply_decorators(
+    [
+        verb(name="aggregate", immutable_input=True),
+        inputs(default_argument_name="table"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    aggregate,
+)

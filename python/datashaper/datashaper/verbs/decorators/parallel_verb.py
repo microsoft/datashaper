@@ -78,7 +78,6 @@ def parallel_verb(
             name=name,
             treats_input_tables_as_immutable=treats_input_tables_as_immutable,
             override_existing=override_existing,
-            raw=True,
         )
         async def wrapper(
             input: VerbInput,
@@ -87,7 +86,7 @@ def parallel_verb(
             *args: P.args,
             **kwargs: P.kwargs,
         ) -> TableContainer:
-            input_table = input.source.table
+            input_table = input.get_input()
             if parallelization_mode == ParallelizationMode.ROW_WISE:
                 chunks = input_table.itertuples()
             elif (

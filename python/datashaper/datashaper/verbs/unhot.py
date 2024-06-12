@@ -4,10 +4,9 @@ from typing import Any, cast
 
 import pandas as pd
 
-from .decorators import VerbInputSpec, verb
+from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
 
 
-@verb(name="unhot", input=VerbInputSpec("table"))
 def unhot(
     table: pd.DataFrame,
     to: str,
@@ -32,6 +31,16 @@ def unhot(
                 )
 
     return cast(pd.DataFrame, output_table)
+
+
+apply_decorators(
+    [
+        verb(name="unhot"),
+        inputs(default_argument_name="table"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    unhot,
+)
 
 
 def _unhot_operation(

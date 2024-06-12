@@ -8,10 +8,15 @@ import re
 
 import pandas as pd
 
-from datashaper.verbs import VerbInputSpec, verb
+from datashaper.verbs.decorators import (
+    OutputReturnType,
+    apply_decorators,
+    inputs,
+    outputs,
+    verb,
+)
 
 
-@verb(name="strings.replace", input=VerbInputSpec("table"))
 def replace(
     table: pd.DataFrame,
     column: str,
@@ -27,3 +32,13 @@ def replace(
     pat = re.compile(pattern, flags=re.IGNORECASE if caseInsensitive else 0)
     table[to] = table[column].apply(lambda x: pat.sub(replacement, x, count=n))
     return table
+
+
+apply_decorators(
+    [
+        verb(name="strings.replace"),
+        inputs(default_argument_name="table"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    replace,
+)

@@ -8,10 +8,9 @@ from typing import Any, cast
 
 import pandas as pd
 
-from .decorators import VerbInputSpec, verb
+from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
 
 
-@verb(name="lookup", input=VerbInputSpec("table", named=["other"], immutable=True))
 def lookup(
     table: pd.DataFrame,
     other: pd.DataFrame,
@@ -41,3 +40,13 @@ def lookup(
         )
 
     return output
+
+
+apply_decorators(
+    [
+        verb(name="lookup", immutable_input=True),
+        inputs(default_argument_name="table", argument_names={"other": "other"}),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    lookup,
+)

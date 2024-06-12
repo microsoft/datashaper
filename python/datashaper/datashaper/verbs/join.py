@@ -9,7 +9,7 @@ from typing import Any, cast
 import pandas as pd
 from pandas._typing import MergeHow, Suffixes
 
-from .decorators import VerbInputSpec, verb
+from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
 from .types import JoinStrategy
 
 __strategy_mapping: dict[JoinStrategy, MergeHow] = {
@@ -46,7 +46,6 @@ def __clean_result(
     return result.drop("_merge", axis=1)
 
 
-@verb(name="join", input=VerbInputSpec("table", named=["other"], immutable=True))
 def join(
     table: pd.DataFrame,
     other: pd.DataFrame,
@@ -77,3 +76,13 @@ def join(
         )
 
     return __clean_result(join_strategy, output, table)
+
+
+apply_decorators(
+    [
+        verb(name="join", immutable_input=True),
+        inputs(default_argument_name="table", argument_names={"other": "other"}),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    join,
+)

@@ -14,7 +14,7 @@ from .convert import convert
 from .copy import copy
 from .decorators import (
     ParallelizationMode,
-    VerbInputSpec,
+    inputs,
     parallel_verb,
     verb,
 )
@@ -141,8 +141,8 @@ __all__ = [
     "VerbManager",
     "load_verbs",
     # Decorators
-    "VerbInputSpec",
     "verb",
+    "inputs",
     "parallel_verb",
     "ParallelizationMode",
     "VerbDetails",

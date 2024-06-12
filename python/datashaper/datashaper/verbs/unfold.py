@@ -9,10 +9,9 @@ from typing import Any, cast
 import numpy as np
 import pandas as pd
 
-from .decorators import VerbInputSpec, verb
+from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
 
 
-@verb(name="unfold", input=VerbInputSpec("table"))
 def unfold(table: pd.DataFrame, key: str, value: str, **_kwargs: Any) -> pd.DataFrame:
     """Unfold verb implementation."""
     columns = len(table[key].unique())
@@ -27,3 +26,13 @@ def unfold(table: pd.DataFrame, key: str, value: str, **_kwargs: Any) -> pd.Data
     return pd.concat(
         [cast(pd.DataFrame, table.groupby(level=0).agg("first")), output_temp], axis=1
     )
+
+
+apply_decorators(
+    [
+        verb(name="unfold"),
+        inputs(default_argument_name="table"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    unfold,
+)

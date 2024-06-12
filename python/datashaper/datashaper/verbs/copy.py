@@ -8,10 +8,9 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import VerbInputSpec, verb
+from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
 
 
-@verb(name="copy", input=VerbInputSpec("table"))
 def copy(
     table: pd.DataFrame,
     to: str,
@@ -21,3 +20,13 @@ def copy(
     """Copy verb implementation."""
     table[to] = table[column]
     return table
+
+
+apply_decorators(
+    [
+        verb(name="copy"),
+        inputs(default_argument_name="table"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    copy,
+)

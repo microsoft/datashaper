@@ -13,7 +13,7 @@ import numpy as np
 import pandas as pd
 from pandas.api.types import is_bool_dtype, is_datetime64_any_dtype, is_numeric_dtype
 
-from .decorators import VerbInputSpec, verb
+from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
 from .types import ParseType
 
 
@@ -114,7 +114,6 @@ __type_mapping: dict[ParseType, Callable] = {
 }
 
 
-@verb(name="convert", input=VerbInputSpec("table"))
 def convert(
     table: pd.DataFrame,
     column: str,
@@ -134,3 +133,13 @@ def convert(
         delimiter=delimiter,
     )
     return table
+
+
+apply_decorators(
+    [
+        verb(name="convert"),
+        inputs(default_argument_name="table"),
+        outputs(return_type=OutputReturnType.Table),
+    ],
+    convert,
+)
