@@ -15,8 +15,10 @@ from .copy import copy
 from .decorators import (
     ParallelizationMode,
     inputs,
+    outputs,
     parallel_verb,
     verb,
+    OutputReturnType,
 )
 from .dedupe import dedupe
 from .derive import derive
@@ -143,7 +145,9 @@ __all__ = [
     # Decorators
     "verb",
     "inputs",
+    "outputs",
     "parallel_verb",
+    "OutputReturnType",
     "ParallelizationMode",
     "VerbDetails",
     "VerbResult",
