@@ -23,7 +23,7 @@ def difference(
 apply_decorators(
     [
         verb(name="difference"),
-        inputs(default_argument_name="table", variadic_argument_name="others"),
+        inputs(default_input_argname="table", variadic_input_argname="others"),
         outputs(return_type=OutputReturnType.Table),
     ],
     difference,

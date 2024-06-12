@@ -45,7 +45,7 @@ def lookup(
 apply_decorators(
     [
         verb(name="lookup", immutable_input=True),
-        inputs(default_argument_name="table", argument_names={"other": "other"}),
+        inputs(default_input_argname="table", input_argnames={"other": "other"}),
         outputs(return_type=OutputReturnType.Table),
     ],
     lookup,

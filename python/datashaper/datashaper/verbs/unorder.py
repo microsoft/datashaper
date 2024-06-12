@@ -19,7 +19,7 @@ def unorder(table: pd.DataFrame, **_kwargs: Any) -> pd.DataFrame:
 apply_decorators(
     [
         verb(name="unorder", immutable_input=True),
-        inputs(default_argument_name="table"),
+        inputs(default_input_argname="table"),
         outputs(return_type=OutputReturnType.Table),
     ],
     unorder,

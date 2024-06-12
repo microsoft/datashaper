@@ -24,7 +24,7 @@ def erase(
 apply_decorators(
     [
         verb(name="erase"),
-        inputs(default_argument_name="table"),
+        inputs(default_input_argname="table"),
         outputs(return_type=OutputReturnType.Table),
     ],
     erase,

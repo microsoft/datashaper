@@ -4,7 +4,6 @@
 #
 """Verb inputs decorator."""
 
-import inspect
 from collections.abc import Callable
 from typing import Any, ParamSpec, TypeVar
 
@@ -15,10 +14,10 @@ P = ParamSpec("P")
 
 
 def inputs(
-    argument_names: dict[str, str] | None = None,
-    default_argument_name: str | None = None,
-    variadic_argument_name: str | None = None,
-    named_input_argument: str | None = None,
+    input_argnames: dict[str, str] | None = None,
+    default_input_argname: str | None = None,
+    variadic_input_argname: str | None = None,
+    input_dict_argname: str | None = None,
 ) -> Callable[[Callable[P, T]], Callable[[VerbInput], T]]:
     """Decorate an execution function with input conditions.
 
@@ -31,23 +30,18 @@ def inputs(
     ) -> Callable[[VerbInput], T]:
         def wrapped_fn(input: VerbInput, *args: P.args, **kwargs: P.kwargs) -> T:
             fn_args: dict[str, Any] = {
-                v: input.get_named_input(k) for k, v in (argument_names or {}).items()
+                v: input.get_named_input(k) for k, v in (input_argnames or {}).items()
             }
-            if default_argument_name is not None:
-                fn_args[default_argument_name] = input.get_input()
-            if variadic_argument_name is not None:
-                fn_args[variadic_argument_name] = input.get_others()
-            if named_input_argument is not None:
-                fn_args[named_input_argument] = input.get_named_inputs()
+            if default_input_argname is not None:
+                fn_args[default_input_argname] = input.get_input()
+            if variadic_input_argname is not None:
+                fn_args[variadic_input_argname] = input.get_others()
+            if input_dict_argname is not None:
+                fn_args[input_dict_argname] = input.get_named_inputs()
 
             for k, v in kwargs.items():
                 if k not in fn_args:
                     fn_args[k] = v
-
-            # # Inject any requested kwargs
-            # fn_argspec = inspect.getfullargspec(fn)
-            # named_args = set(fn_argspec.args)
-            # fn_args = {k: v for k, v in fn_args.items() if k in named_args}
 
             # Use named_args as needed
             return fn(*args, **fn_args)

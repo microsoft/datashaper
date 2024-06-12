@@ -18,7 +18,7 @@ def sample(
     seed: int | None = None,
     emitRemainder: bool | None = False,  # noqa F403 - schema argument
     **_kwargs: Any,
-) -> tuple[pd.DataFrame, pd.DataFrame]:
+) -> tuple[pd.DataFrame, pd.DataFrame | None]:
     """Sample verb implementation."""
     result = table.sample(n=size, frac=proportion, random_state=seed)
 
@@ -32,7 +32,7 @@ def sample(
 apply_decorators(
     [
         verb(name="sample", immutable_input=True),
-        inputs(default_argument_name="table"),
+        inputs(default_input_argname="table"),
         outputs(
             return_type=OutputReturnType.Tuple,
             output_names=["remainder"],

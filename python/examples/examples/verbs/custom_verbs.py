@@ -10,7 +10,7 @@ from datashaper.verbs import (
 
 
 @verb(name="genid")
-@inputs(default_argument_name="table")
+@inputs(default_input_argname="table")
 @outputs(return_type=OutputReturnType.Table)
 def genid(
     table: pd.DataFrame, hash: list[str], to: str, **_kwargs: dict
@@ -26,7 +26,7 @@ def genid(
 
 
 @verb(name="embed")
-@inputs(default_argument_name="table")
+@inputs(default_input_argname="table")
 @outputs(return_type=OutputReturnType.Table)
 def embed(table: pd.DataFrame, column: str, to: str, **_kwargs: dict) -> pd.DataFrame:
     """Embed text per row. A pipeline verb."""
@@ -35,7 +35,7 @@ def embed(table: pd.DataFrame, column: str, to: str, **_kwargs: dict) -> pd.Data
 
 
 @verb(name="embed_mock")
-@inputs(default_argument_name="table")
+@inputs(default_input_argname="table")
 @outputs(return_type=OutputReturnType.Table)
 def embed_mock(
     table: pd.DataFrame, column: str, to: str, **_kwargs: dict

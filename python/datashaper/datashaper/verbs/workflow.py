@@ -35,7 +35,7 @@ async def workflow(
 apply_decorators(
     [
         verb(name="workflow"),
-        inputs(default_argument_name="table", named_input_argument="tables"),
+        inputs(default_input_argname="table", input_dict_argname="tables"),
         outputs(return_type=OutputReturnType.Table),
     ],
     workflow,

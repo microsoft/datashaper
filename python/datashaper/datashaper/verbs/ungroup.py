@@ -19,7 +19,7 @@ def ungroup(table: pd.DataFrame, **_kwargs: Any) -> pd.DataFrame:
 apply_decorators(
     [
         verb(name="ungroup", immutable_input=True),
-        inputs(default_argument_name="table"),
+        inputs(default_input_argname="table"),
         outputs(return_type=OutputReturnType.Table),
     ],
     ungroup,

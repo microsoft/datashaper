@@ -37,7 +37,7 @@ def replace(
 apply_decorators(
     [
         verb(name="strings.replace"),
-        inputs(default_argument_name="table"),
+        inputs(default_input_argname="table"),
         outputs(return_type=OutputReturnType.Table),
     ],
     replace,

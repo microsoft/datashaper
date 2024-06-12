@@ -31,7 +31,7 @@ def orderby(table: pd.DataFrame, orders: list[dict], **_kwargs: Any) -> pd.DataF
 apply_decorators(
     [
         verb(name="orderby"),
-        inputs(default_argument_name="table"),
+        inputs(default_input_argname="table"),
         outputs(return_type=OutputReturnType.Table),
     ],
     orderby,

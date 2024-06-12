@@ -7,7 +7,6 @@ from typing import Any, ParamSpec, cast
 
 import pandas as pd
 
-from datashaper.constants import DEFAULT_OUTPUT_NAME
 from datashaper.verbs.engine import (
     VerbResult,
 )

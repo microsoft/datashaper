@@ -31,7 +31,7 @@ def unfold(table: pd.DataFrame, key: str, value: str, **_kwargs: Any) -> pd.Data
 apply_decorators(
     [
         verb(name="unfold"),
-        inputs(default_argument_name="table"),
+        inputs(default_input_argname="table"),
         outputs(return_type=OutputReturnType.Table),
     ],
     unfold,

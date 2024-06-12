@@ -81,7 +81,7 @@ def join(
 apply_decorators(
     [
         verb(name="join", immutable_input=True),
-        inputs(default_argument_name="table", argument_names={"other": "other"}),
+        inputs(default_input_argname="table", input_argnames={"other": "other"}),
         outputs(return_type=OutputReturnType.Table),
     ],
     join,

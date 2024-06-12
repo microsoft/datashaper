@@ -66,7 +66,7 @@ def _create_array(column: pd.Series, delim: str) -> str:
 apply_decorators(
     [
         verb(name="merge"),
-        inputs(default_argument_name="table"),
+        inputs(default_input_argname="table"),
         outputs(return_type=OutputReturnType.Table),
     ],
     merge,

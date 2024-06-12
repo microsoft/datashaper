@@ -58,7 +58,7 @@ def derive(
 apply_decorators(
     [
         verb(name="derive"),
-        inputs(default_argument_name="table"),
+        inputs(default_input_argname="table"),
         outputs(return_type=OutputReturnType.Table),
     ],
     derive,

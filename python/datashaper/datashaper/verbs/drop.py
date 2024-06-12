@@ -19,7 +19,7 @@ def drop(table: pd.DataFrame, columns: list[str], **_kwargs: Any) -> pd.DataFram
 apply_decorators(
     [
         verb(name="drop"),
-        inputs(default_argument_name="table"),
+        inputs(default_input_argname="table"),
         outputs(return_type=OutputReturnType.Table),
     ],
     drop,

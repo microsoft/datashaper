@@ -13,12 +13,12 @@ from .concat import concat
 from .convert import convert
 from .copy import copy
 from .decorators import (
+    OutputReturnType,
     ParallelizationMode,
     inputs,
     outputs,
     parallel_verb,
     verb,
-    OutputReturnType,
 )
 from .dedupe import dedupe
 from .derive import derive
