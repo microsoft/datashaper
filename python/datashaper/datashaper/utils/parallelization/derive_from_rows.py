@@ -10,7 +10,7 @@ from datashaper.verbs.callbacks import VerbCallbacks
 
 from .derive_from_rows_asyncio import derive_from_rows_asyncio
 from .derive_from_rows_asyncio_threads import derive_from_rows_asyncio_threads
-from .types import AsyncType
+from .types import AsyncStrategy
 
 logger = logging.getLogger(__name__)
 ItemType = TypeVar("ItemType")
@@ -21,15 +21,15 @@ async def derive_from_rows(
     transform: Callable[[pd.Series], Awaitable[ItemType]],
     callbacks: VerbCallbacks,
     num_threads: int = 4,
-    scheduling_type: AsyncType = AsyncType.AsyncIO,
+    scheduling_type: AsyncStrategy = AsyncStrategy.AsyncIO,
 ) -> list[ItemType | None]:
     """Apply a generic transform function to each row. Any errors will be reported and thrown."""
     match scheduling_type:
-        case AsyncType.AsyncIO:
+        case AsyncStrategy.AsyncIO:
             return await derive_from_rows_asyncio(
                 input, transform, callbacks, num_threads
             )
-        case AsyncType.Threaded:
+        case AsyncStrategy.Threaded:
             return await derive_from_rows_asyncio_threads(
                 input, transform, callbacks, num_threads
             )

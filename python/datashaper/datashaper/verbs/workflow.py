@@ -6,7 +6,7 @@ import pandas as pd
 
 from datashaper.constants import DEFAULT_INPUT_NAME
 
-from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
 from .types import Table
 
 
@@ -36,7 +36,7 @@ apply_decorators(
     [
         verb(name="workflow"),
         inputs(default_input_argname="table", input_dict_argname="tables"),
-        outputs(return_type=OutputReturnType.Table),
+        outputs(mode=OutputMode.Table),
     ],
     workflow,
 )

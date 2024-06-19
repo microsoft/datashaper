@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 
 from .decorators import (
-    OutputReturnType,
+    OutputMode,
     apply_decorators,
     inputs,
     outputs,
@@ -136,7 +136,7 @@ apply_decorators(
     [
         verb(name="bin"),
         inputs(default_input_argname="table"),
-        outputs(return_type=OutputReturnType.Table),
+        outputs(mode=OutputMode.Table),
     ],
     bin,
 )

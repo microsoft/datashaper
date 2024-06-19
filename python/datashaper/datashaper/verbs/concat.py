@@ -8,7 +8,7 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
 
 
 def concat(
@@ -22,7 +22,7 @@ apply_decorators(
     [
         verb(name="concat", immutable_input=True),
         inputs(default_input_argname="table", variadic_input_argname="others"),
-        outputs(return_type=OutputReturnType.Table),
+        outputs(mode=OutputMode.Table),
     ],
     concat,
 )

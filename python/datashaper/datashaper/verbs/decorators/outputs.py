@@ -13,7 +13,7 @@ from datashaper.verbs.engine import (
 from datashaper.verbs.types import TableContainer
 
 
-class OutputReturnType(str, Enum):
+class OutputMode(str, Enum):
     """Output return type."""
 
     Table = "table"
@@ -24,7 +24,7 @@ P = ParamSpec("P")
 
 
 def outputs(
-    return_type: OutputReturnType,
+    mode: OutputMode,
     output_names: list[str] | None = None,
 ) -> Callable[[Callable[..., Any]], Callable[..., VerbResult]]:
     """Decorate an execution function with output conditions.
@@ -39,10 +39,10 @@ def outputs(
             if inspect.iscoroutine(result):
                 result = await result
 
-            match return_type:
-                case OutputReturnType.Table:
+            match mode:
+                case OutputMode.Table:
                     return VerbResult(output=TableContainer(result), named_outputs={})
-                case OutputReturnType.Tuple:
+                case OutputMode.Tuple:
                     result = cast(list[pd.DataFrame], list(result))
                     if output_names is None:
                         raise ValueError

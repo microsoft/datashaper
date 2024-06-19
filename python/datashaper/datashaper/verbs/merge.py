@@ -11,7 +11,7 @@ from typing import Any
 import pandas as pd
 from pandas.api.types import is_bool
 
-from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
 from .types import MergeStrategy
 
 
@@ -67,7 +67,7 @@ apply_decorators(
     [
         verb(name="merge"),
         inputs(default_input_argname="table"),
-        outputs(return_type=OutputReturnType.Table),
+        outputs(mode=OutputMode.Table),
     ],
     merge,
 )

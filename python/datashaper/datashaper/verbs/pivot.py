@@ -9,7 +9,7 @@ from typing import Any
 import pandas as pd
 
 from .aggregate import aggregate_operation_mapping
-from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
 from .types import FieldAggregateOperation
 
 
@@ -29,7 +29,7 @@ apply_decorators(
     [
         verb(name="pivot", immutable_input=True),
         inputs(default_input_argname="table"),
-        outputs(return_type=OutputReturnType.Table),
+        outputs(mode=OutputMode.Table),
     ],
     pivot,
 )

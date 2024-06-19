@@ -13,7 +13,7 @@ from .concat import concat
 from .convert import convert
 from .copy import copy
 from .decorators import (
-    OutputReturnType,
+    OutputMode,
     ParallelizationMode,
     inputs,
     outputs,
@@ -65,7 +65,7 @@ from .types import (
     ComparisonStrategy,
     DataType,
     FieldAggregateOperation,
-    FileType,
+    FileFormat,
     FilterArgs,
     InputColumnArgs,
     JoinStrategy,
@@ -147,7 +147,7 @@ __all__ = [
     "inputs",
     "outputs",
     "parallel_verb",
-    "OutputReturnType",
+    "OutputMode",
     "ParallelizationMode",
     "VerbDetails",
     "VerbResult",
@@ -160,7 +160,7 @@ __all__ = [
     "ComparisonStrategy",
     "DataType",
     "FieldAggregateOperation",
-    "FileType",
+    "FileFormat",
     "FilterArgs",
     "InputColumnArgs",
     "JoinStrategy",

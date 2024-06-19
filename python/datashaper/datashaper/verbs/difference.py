@@ -8,7 +8,7 @@ from typing import Any, cast
 
 import pandas as pd
 
-from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
 
 
 def difference(
@@ -24,7 +24,7 @@ apply_decorators(
     [
         verb(name="difference"),
         inputs(default_input_argname="table", variadic_input_argname="others"),
-        outputs(return_type=OutputReturnType.Table),
+        outputs(mode=OutputMode.Table),
     ],
     difference,
 )

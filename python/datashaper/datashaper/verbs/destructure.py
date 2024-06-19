@@ -9,7 +9,7 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
 
 
 def destructure(
@@ -64,7 +64,7 @@ apply_decorators(
     [
         verb(name="destructure"),
         inputs(default_input_argname="table"),
-        outputs(return_type=OutputReturnType.Table),
+        outputs(mode=OutputMode.Table),
     ],
     destructure,
 )

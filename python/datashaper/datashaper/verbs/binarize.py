@@ -8,7 +8,7 @@ from typing import Any, cast
 
 import pandas as pd
 
-from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
 from .filter import filter, get_comparison_operator
 from .types import (
     ComparisonStrategy,
@@ -44,7 +44,7 @@ apply_decorators(
     [
         verb(name="binarize"),
         inputs(default_input_argname="table"),
-        outputs(return_type=OutputReturnType.Table),
+        outputs(mode=OutputMode.Table),
     ],
     binarize,
 )

@@ -9,7 +9,7 @@ from typing import Any, cast
 import pandas as pd
 from pandas._typing import MergeHow, Suffixes
 
-from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
 from .types import JoinStrategy
 
 __strategy_mapping: dict[JoinStrategy, MergeHow] = {
@@ -82,7 +82,7 @@ apply_decorators(
     [
         verb(name="join", immutable_input=True),
         inputs(default_input_argname="table", input_argnames={"other": "other"}),
-        outputs(return_type=OutputReturnType.Table),
+        outputs(mode=OutputMode.Table),
     ],
     join,
 )

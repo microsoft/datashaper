@@ -8,7 +8,7 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
 
 
 def unroll(table: pd.DataFrame, column: str, **_kwargs: Any) -> pd.DataFrame:
@@ -20,7 +20,7 @@ apply_decorators(
     [
         verb(name="unroll", immutable_input=True),
         inputs(default_input_argname="table"),
-        outputs(return_type=OutputReturnType.Table),
+        outputs(mode=OutputMode.Table),
     ],
     unroll,
 )

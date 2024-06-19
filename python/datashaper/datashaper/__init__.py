@@ -11,7 +11,7 @@ from .tables import (
     load_json_table,
     load_table,
 )
-from .utils.parallelization import AsyncType, derive_from_rows
+from .utils.parallelization import AsyncStrategy, derive_from_rows
 from .utils.progress import (
     Progress,
     ProgressHandler,
@@ -31,7 +31,7 @@ from .verbs import (
     ComparisonStrategy,
     DataType,
     FieldAggregateOperation,
-    FileType,
+    FileFormat,
     FilterArgs,
     InputColumnArgs,
     JoinStrategy,
@@ -103,7 +103,7 @@ __all__ = [
     "Progress",
     # Parallelization Utils
     "derive_from_rows",
-    "AsyncType",
+    "AsyncStrategy",
     # Verb Types
     "Table",
     "TableContainer",
@@ -130,7 +130,7 @@ __all__ = [
     "ComparisonStrategy",
     "DataType",
     "FieldAggregateOperation",
-    "FileType",
+    "FileFormat",
     "FilterArgs",
     "InputColumnArgs",
     "JoinStrategy",

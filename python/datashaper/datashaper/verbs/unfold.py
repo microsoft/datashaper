@@ -9,7 +9,7 @@ from typing import Any, cast
 import numpy as np
 import pandas as pd
 
-from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
 
 
 def unfold(table: pd.DataFrame, key: str, value: str, **_kwargs: Any) -> pd.DataFrame:
@@ -32,7 +32,7 @@ apply_decorators(
     [
         verb(name="unfold"),
         inputs(default_input_argname="table"),
-        outputs(return_type=OutputReturnType.Table),
+        outputs(mode=OutputMode.Table),
     ],
     unfold,
 )

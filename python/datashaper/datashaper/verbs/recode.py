@@ -8,7 +8,7 @@ from typing import Any, cast
 
 import pandas as pd
 
-from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
 
 
 class RecodeMap(dict):
@@ -32,7 +32,7 @@ apply_decorators(
     [
         verb(name="recode"),
         inputs(default_input_argname="table"),
-        outputs(return_type=OutputReturnType.Table),
+        outputs(mode=OutputMode.Table),
     ],
     recode,
 )

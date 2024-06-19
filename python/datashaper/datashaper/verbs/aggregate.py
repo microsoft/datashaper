@@ -10,7 +10,7 @@ from typing import Any, cast
 import pandas as pd
 
 from .decorators import (
-    OutputReturnType,
+    OutputMode,
     apply_decorators,
     inputs,
     outputs,
@@ -62,7 +62,7 @@ apply_decorators(
     [
         verb(name="aggregate", immutable_input=True),
         inputs(default_input_argname="table"),
-        outputs(return_type=OutputReturnType.Table),
+        outputs(mode=OutputMode.Table),
     ],
     aggregate,
 )

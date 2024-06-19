@@ -13,7 +13,7 @@ from pandas.api.types import is_numeric_dtype
 
 from datashaper.errors import VerbOperationNotSupportedError
 
-from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
 from .types import MathOperator
 
 
@@ -59,7 +59,7 @@ apply_decorators(
     [
         verb(name="derive"),
         inputs(default_input_argname="table"),
-        outputs(return_type=OutputReturnType.Table),
+        outputs(mode=OutputMode.Table),
     ],
     derive,
 )

@@ -9,7 +9,7 @@ import re
 import pandas as pd
 
 from datashaper.verbs.decorators import (
-    OutputReturnType,
+    OutputMode,
     apply_decorators,
     inputs,
     outputs,
@@ -38,7 +38,7 @@ apply_decorators(
     [
         verb(name="strings.replace"),
         inputs(default_input_argname="table"),
-        outputs(return_type=OutputReturnType.Table),
+        outputs(mode=OutputMode.Table),
     ],
     replace,
 )

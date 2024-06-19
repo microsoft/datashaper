@@ -8,7 +8,7 @@ from typing import Any, cast
 
 import pandas as pd
 
-from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
 
 
 def sample(
@@ -34,7 +34,7 @@ apply_decorators(
         verb(name="sample", immutable_input=True),
         inputs(default_input_argname="table"),
         outputs(
-            return_type=OutputReturnType.Tuple,
+            mode=OutputMode.Tuple,
             output_names=["remainder"],
         ),
     ],

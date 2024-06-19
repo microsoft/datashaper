@@ -225,7 +225,7 @@ class WindowFunction(str, Enum):
     UUID = "uuid"
 
 
-class FileType(str, Enum):
+class FileFormat(str, Enum):
     """File type used for the snapshot verb.."""
 
     Json = "json"

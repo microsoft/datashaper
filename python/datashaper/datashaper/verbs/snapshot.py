@@ -8,23 +8,23 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import OutputReturnType, apply_decorators, inputs, outputs, verb
-from .types import FileType
+from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
+from .types import FileFormat
 
 
 def snapshot(
-    table: pd.DataFrame, name: str, file_type: FileType, **_kwargs: Any
+    table: pd.DataFrame, name: str, file_type: FileFormat, **_kwargs: Any
 ) -> pd.DataFrame:
     """Snapshot verb implementation."""
     file_name = "./" + name + "." + file_type
 
-    if file_type == FileType.Csv:
+    if file_type == FileFormat.Csv:
         table.to_csv(file_name)
 
-    if file_type == FileType.Json:
+    if file_type == FileFormat.Json:
         table.to_json(file_name, orient="records", compression="infer")
 
-    if file_type == FileType.Parquet:
+    if file_type == FileFormat.Parquet:
         table.to_parquet(file_name)
 
     return table
@@ -34,7 +34,7 @@ apply_decorators(
     [
         verb(name="snapshot", immutable_input=True),
         inputs(default_input_argname="table"),
-        outputs(return_type=OutputReturnType.Table),
+        outputs(mode=OutputMode.Table),
     ],
     snapshot,
 )

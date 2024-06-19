@@ -18,7 +18,7 @@ import numpy as np
 import pandas as pd
 
 from datashaper.errors import VerbParallelizationError
-from datashaper.utils.parallelization import AsyncType
+from datashaper.utils.parallelization import AsyncStrategy
 from datashaper.utils.progress import ProgressTicker, progress_ticker
 from datashaper.verbs.callbacks import VerbCallbacks
 from datashaper.verbs.engine.verb_input import VerbInput
@@ -61,7 +61,7 @@ def parallel_verb(
     name: str,
     treats_input_tables_as_immutable: bool = False,
     override_existing: bool = False,
-    asyncio_type: AsyncType = AsyncType.AsyncIO,
+    asyncio_type: AsyncStrategy = AsyncStrategy.AsyncIO,
     merge: Callable[[list[Table | tuple | None]], Table] = default_merge,
     parallelization_mode: ParallelizationMode = ParallelizationMode.ROW_WISE,
     **_kwargs: Any,
@@ -141,7 +141,7 @@ def parallel_verb(
                 for chunk in chunks
             ]
 
-            if asyncio_type == AsyncType.Threaded:
+            if asyncio_type == AsyncStrategy.Threaded:
                 futures = [asyncio.to_thread(future) for future in futures]  # type: ignore
 
             results = await asyncio.gather(*futures)
