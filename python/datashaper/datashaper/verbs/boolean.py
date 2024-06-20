@@ -8,11 +8,18 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, inputs, outputs, verb
 from .filter import boolean_function_map
 from .types import BooleanLogicalOperator
 
 
+@verb(
+    name="boolean",
+    adapters=[
+        inputs(default_input_argname="table"),
+        outputs(mode=OutputMode.Table),
+    ],
+)
 def boolean(
     table: pd.DataFrame, to: str, columns: list[str], operator: str, **_kwargs: Any
 ) -> pd.DataFrame:
@@ -20,13 +27,3 @@ def boolean(
     logical_operator = BooleanLogicalOperator(operator)
     table[to] = boolean_function_map[logical_operator](table, columns)
     return table
-
-
-apply_decorators(
-    [
-        verb(name="boolean"),
-        inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
-    ],
-    boolean,
-)

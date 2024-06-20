@@ -8,9 +8,16 @@ from typing import Any, cast
 
 import pandas as pd
 
-from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, inputs, outputs, verb
 
 
+@verb(
+    name="spread",
+    adapters=[
+        inputs(default_input_argname="table"),
+        outputs(mode=OutputMode.Table),
+    ],
+)
 def spread(
     table: pd.DataFrame,
     column: str,
@@ -25,16 +32,6 @@ def spread(
         output = output.drop(columns=[column])
 
     return output
-
-
-apply_decorators(
-    [
-        verb(name="spread"),
-        inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
-    ],
-    spread,
-)
 
 
 def _spread(

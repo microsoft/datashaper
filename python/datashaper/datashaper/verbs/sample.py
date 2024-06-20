@@ -8,9 +8,20 @@ from typing import Any, cast
 
 import pandas as pd
 
-from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, inputs, outputs, verb
 
 
+@verb(
+    name="sample",
+    immutable_input=True,
+    adapters=[
+        inputs(default_input_argname="table"),
+        outputs(
+            mode=OutputMode.Tuple,
+            output_names=["remainder"],
+        ),
+    ],
+)
 def sample(
     table: pd.DataFrame,
     size: int | None = None,
@@ -27,16 +38,3 @@ def sample(
 
     unsampled = cast(pd.DataFrame, table[~table.index.isin(result.index)])
     return result, unsampled
-
-
-apply_decorators(
-    [
-        verb(name="sample", immutable_input=True),
-        inputs(default_input_argname="table"),
-        outputs(
-            mode=OutputMode.Tuple,
-            output_names=["remainder"],
-        ),
-    ],
-    sample,
-)

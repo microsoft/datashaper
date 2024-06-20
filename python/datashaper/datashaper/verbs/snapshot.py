@@ -8,10 +8,18 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, inputs, outputs, verb
 from .types import FileFormat
 
 
+@verb(
+    name="snapshot",
+    immutable_input=True,
+    adapters=[
+        inputs(default_input_argname="table"),
+        outputs(mode=OutputMode.Table),
+    ],
+)
 def snapshot(
     table: pd.DataFrame, name: str, file_type: FileFormat, **_kwargs: Any
 ) -> pd.DataFrame:
@@ -28,13 +36,3 @@ def snapshot(
         table.to_parquet(file_name)
 
     return table
-
-
-apply_decorators(
-    [
-        verb(name="snapshot", immutable_input=True),
-        inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
-    ],
-    snapshot,
-)

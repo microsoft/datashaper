@@ -8,9 +8,16 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, inputs, outputs, verb
 
 
+@verb(
+    name="erase",
+    adapters=[
+        inputs(default_input_argname="table"),
+        outputs(mode=OutputMode.Table),
+    ],
+)
 def erase(
     table: pd.DataFrame, column: str, value: str | float, **_kwargs: Any
 ) -> pd.DataFrame:
@@ -19,13 +26,3 @@ def erase(
         lambda df_value: None if df_value == value else df_value
     )
     return table
-
-
-apply_decorators(
-    [
-        verb(name="erase"),
-        inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
-    ],
-    erase,
-)

@@ -8,22 +8,19 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, inputs, outputs, verb
 
 
+@verb(
+    name="fill",
+    adapters=[
+        inputs(default_input_argname="table"),
+        outputs(mode=OutputMode.Table),
+    ],
+)
 def fill(
     table: pd.DataFrame, to: str, value: str | float | bool, **_kwargs: Any
 ) -> pd.DataFrame:
     """Fill verb implementation."""
     table[to] = value
     return table
-
-
-apply_decorators(
-    [
-        verb(name="fill"),
-        inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
-    ],
-    fill,
-)

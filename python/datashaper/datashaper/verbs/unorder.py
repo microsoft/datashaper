@@ -8,19 +8,17 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, inputs, outputs, verb
 
 
-def unorder(table: pd.DataFrame, **_kwargs: Any) -> pd.DataFrame:
-    """Unorder verb implementation."""
-    return table.sort_index()
-
-
-apply_decorators(
-    [
-        verb(name="unorder", immutable_input=True),
+@verb(
+    name="unorder",
+    immutable_input=True,
+    adapters=[
         inputs(default_input_argname="table"),
         outputs(mode=OutputMode.Table),
     ],
-    unorder,
 )
+def unorder(table: pd.DataFrame, **_kwargs: Any) -> pd.DataFrame:
+    """Unorder verb implementation."""
+    return table.sort_index()

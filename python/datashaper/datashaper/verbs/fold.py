@@ -8,9 +8,16 @@ from typing import Any, cast
 
 import pandas as pd
 
-from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, inputs, outputs, verb
 
 
+@verb(
+    name="fold",
+    adapters=[
+        inputs(default_input_argname="table"),
+        outputs(mode=OutputMode.Table),
+    ],
+)
 def fold(
     table: pd.DataFrame,
     to: tuple[str, str],
@@ -49,13 +56,3 @@ def fold(
         table.rename(mapper=rename_mapper, axis=1, inplace=True)  # type: ignore
 
     return table
-
-
-apply_decorators(
-    [
-        verb(name="fold"),
-        inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
-    ],
-    fold,
-)

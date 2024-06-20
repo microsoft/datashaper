@@ -8,11 +8,19 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, inputs, outputs, verb
 
 raw_print = print
 
 
+@verb(
+    name="print",
+    immutable_input=True,
+    adapters=[
+        inputs(default_input_argname="table"),
+        outputs(mode=OutputMode.Table),
+    ],
+)
 def print(  # noqa A001 - use ds verb name
     table: pd.DataFrame, message: str, limit: int = 10, **_kwargs: Any
 ) -> pd.DataFrame:
@@ -22,13 +30,3 @@ def print(  # noqa A001 - use ds verb name
     raw_print(table.to_string(max_rows=limit))  # noqa: T201
 
     return table
-
-
-apply_decorators(
-    [
-        verb(name="print", immutable_input=True),
-        inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
-    ],
-    print,
-)

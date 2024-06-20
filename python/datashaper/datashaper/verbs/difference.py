@@ -8,9 +8,16 @@ from typing import Any, cast
 
 import pandas as pd
 
-from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, inputs, outputs, verb
 
 
+@verb(
+    name="difference",
+    adapters=[
+        inputs(default_input_argname="table", variadic_input_argname="others"),
+        outputs(mode=OutputMode.Table),
+    ],
+)
 def difference(
     table: pd.DataFrame, others: list[pd.DataFrame], **_kwargs: Any
 ) -> pd.DataFrame:
@@ -18,13 +25,3 @@ def difference(
     output = table.merge(pd.concat(others), how="left", indicator=True)
     output = output[output["_merge"] == "left_only"]
     return cast(pd.DataFrame, output.drop("_merge", axis=1))
-
-
-apply_decorators(
-    [
-        verb(name="difference"),
-        inputs(default_input_argname="table", variadic_input_argname="others"),
-        outputs(mode=OutputMode.Table),
-    ],
-    difference,
-)

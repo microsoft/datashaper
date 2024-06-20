@@ -8,19 +8,17 @@ from typing import Any, cast
 
 import pandas as pd
 
-from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, inputs, outputs, verb
 
 
-def select(table: pd.DataFrame, columns: list[str], **_kwargs: Any) -> pd.DataFrame:
-    """Select verb implementation."""
-    return cast(pd.DataFrame, table[columns])
-
-
-apply_decorators(
-    [
-        verb(name="select", immutable_input=True),
+@verb(
+    name="select",
+    immutable_input=True,
+    adapters=[
         inputs(default_input_argname="table"),
         outputs(mode=OutputMode.Table),
     ],
-    select,
 )
+def select(table: pd.DataFrame, columns: list[str], **_kwargs: Any) -> pd.DataFrame:
+    """Select verb implementation."""
+    return cast(pd.DataFrame, table[columns])

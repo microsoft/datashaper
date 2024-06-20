@@ -11,7 +11,6 @@ import pandas as pd
 
 from .decorators import (
     OutputMode,
-    apply_decorators,
     inputs,
     outputs,
     verb,
@@ -78,6 +77,13 @@ __bin_edges_mapping = {
 }
 
 
+@verb(
+    name="bin",
+    adapters=[
+        inputs(default_input_argname="table"),
+        outputs(mode=OutputMode.Table),
+    ],
+)
 def bin(  # noqa A001 - use ds verb name
     table: pd.DataFrame,
     to: str,
@@ -130,13 +136,3 @@ def bin(  # noqa A001 - use ds verb name
     output = table
     output[to] = value_edges
     return output
-
-
-apply_decorators(
-    [
-        verb(name="bin"),
-        inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
-    ],
-    bin,
-)

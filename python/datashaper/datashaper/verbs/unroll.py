@@ -8,19 +8,14 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, inputs, outputs, verb
 
 
+@verb(
+    name="unroll",
+    immutable_input=True,
+    adapters=[inputs(default_input_argname="table"), outputs(mode=OutputMode.Table)],
+)
 def unroll(table: pd.DataFrame, column: str, **_kwargs: Any) -> pd.DataFrame:
     """Unroll a column."""
     return table.explode(column).reset_index(drop=True)
-
-
-apply_decorators(
-    [
-        verb(name="unroll", immutable_input=True),
-        inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
-    ],
-    unroll,
-)

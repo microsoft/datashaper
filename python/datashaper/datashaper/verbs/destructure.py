@@ -9,9 +9,16 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, inputs, outputs, verb
 
 
+@verb(
+    name="destructure",
+    adapters=[
+        inputs(default_input_argname="table"),
+        outputs(mode=OutputMode.Table),
+    ],
+)
 def destructure(
     table: pd.DataFrame,
     column: str,
@@ -58,13 +65,3 @@ def is_null(value: Any) -> bool:
         return isinstance(value, float) and math.isnan(value)
 
     return is_none() or is_nan()
-
-
-apply_decorators(
-    [
-        verb(name="destructure"),
-        inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
-    ],
-    destructure,
-)

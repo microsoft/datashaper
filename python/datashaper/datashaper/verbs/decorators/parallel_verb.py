@@ -77,7 +77,7 @@ def parallel_verb(
         @verb(
             name=name,
             treats_input_tables_as_immutable=treats_input_tables_as_immutable,
-            override_existing=override_existing,
+            override=override_existing,
         )
         async def wrapper(
             input: VerbInput,

@@ -9,9 +9,16 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, inputs, outputs, verb
 
 
+@verb(
+    name="onehot",
+    adapters=[
+        inputs(default_input_argname="table"),
+        outputs(mode=OutputMode.Table),
+    ],
+)
 def onehot(
     table: pd.DataFrame,
     column: str,
@@ -31,13 +38,3 @@ def onehot(
         output = output.drop(columns=column)
 
     return output
-
-
-apply_decorators(
-    [
-        verb(name="onehot"),
-        inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
-    ],
-    onehot,
-)

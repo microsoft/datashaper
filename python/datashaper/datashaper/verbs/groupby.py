@@ -9,21 +9,18 @@ from typing import Any
 import pandas as pd
 from pandas.core.groupby import DataFrameGroupBy
 
-from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, inputs, outputs, verb
 
 
+@verb(
+    name="groupby",
+    adapters=[
+        inputs(default_input_argname="table"),
+        outputs(mode=OutputMode.Table),
+    ],
+)
 def groupby(
     table: pd.DataFrame, columns: list[str], **_kwargs: Any
 ) -> DataFrameGroupBy:
     """Groupby verb implementation."""
     return table.groupby(by=columns)
-
-
-apply_decorators(
-    [
-        verb(name="groupby"),
-        inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
-    ],
-    groupby,
-)

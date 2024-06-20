@@ -11,7 +11,6 @@ import pandas as pd
 
 from .decorators import (
     OutputMode,
-    apply_decorators,
     inputs,
     outputs,
     verb,
@@ -19,6 +18,14 @@ from .decorators import (
 from .types import FieldAggregateOperation
 
 
+@verb(
+    name="aggregate",
+    immutable_input=True,
+    adapters=[
+        inputs(default_input_argname="table"),
+        outputs(mode=OutputMode.Table),
+    ],
+)
 def aggregate(
     table: pd.DataFrame,
     to: str,
@@ -57,12 +64,3 @@ aggregate_operation_mapping = {
         e for e in series.unique()
     ],
 }
-
-apply_decorators(
-    [
-        verb(name="aggregate", immutable_input=True),
-        inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
-    ],
-    aggregate,
-)

@@ -8,19 +8,17 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, inputs, outputs, verb
 
 
-def ungroup(table: pd.DataFrame, **_kwargs: Any) -> pd.DataFrame:
-    """Ungroup verb implementation."""
-    return table.obj
-
-
-apply_decorators(
-    [
-        verb(name="ungroup", immutable_input=True),
+@verb(
+    name="ungroup",
+    immutable_input=True,
+    adapters=[
         inputs(default_input_argname="table"),
         outputs(mode=OutputMode.Table),
     ],
-    ungroup,
 )
+def ungroup(table: pd.DataFrame, **_kwargs: Any) -> pd.DataFrame:
+    """Ungroup verb implementation."""
+    return table.obj

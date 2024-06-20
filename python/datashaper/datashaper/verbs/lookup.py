@@ -8,9 +8,17 @@ from typing import Any, cast
 
 import pandas as pd
 
-from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, inputs, outputs, verb
 
 
+@verb(
+    name="lookup",
+    immutable_input=True,
+    adapters=[
+        inputs(default_input_argname="table", input_argnames={"other": "other"}),
+        outputs(mode=OutputMode.Table),
+    ],
+)
 def lookup(
     table: pd.DataFrame,
     other: pd.DataFrame,
@@ -40,13 +48,3 @@ def lookup(
         )
 
     return output
-
-
-apply_decorators(
-    [
-        verb(name="lookup", immutable_input=True),
-        inputs(default_input_argname="table", input_argnames={"other": "other"}),
-        outputs(mode=OutputMode.Table),
-    ],
-    lookup,
-)

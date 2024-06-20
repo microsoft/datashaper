@@ -11,10 +11,17 @@ from typing import Any
 import pandas as pd
 from pandas.api.types import is_bool
 
-from .decorators import OutputMode, apply_decorators, inputs, outputs, verb
+from .decorators import OutputMode, inputs, outputs, verb
 from .types import MergeStrategy
 
 
+@verb(
+    name="merge",
+    adapters=[
+        inputs(default_input_argname="table"),
+        outputs(mode=OutputMode.Table),
+    ],
+)
 def merge(
     table: pd.DataFrame,
     to: str,
@@ -61,13 +68,3 @@ def _correct_type(value: Any) -> str | int | Any:
 def _create_array(column: pd.Series, delim: str) -> str:
     col: pd.DataFrame | pd.Series = column.dropna().apply(lambda x: _correct_type(x))
     return delim.join(col.astype(str))
-
-
-apply_decorators(
-    [
-        verb(name="merge"),
-        inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
-    ],
-    merge,
-)
