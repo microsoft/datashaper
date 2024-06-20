@@ -45,27 +45,6 @@ class InvalidVerbInputError(VerbError):
         super().__init__(message)
 
 
-class VerbHasMultipleDefaultInputsError(VerbError):
-    """Exception for invalid verb input."""
-
-    def __init__(self):
-        super().__init__("Only one of input or source can be provided")
-
-
-class VerbHasMultipleDefaultOthersError(VerbError):
-    """Exception for invalid verb input."""
-
-    def __init__(self):
-        super().__init__("Only one of other or others can be provided")
-
-
-class NoVerbInputsProvidedError(InvalidVerbInputError):
-    """Exception for invalid verb input."""
-
-    def __init__(self):
-        super().__init__("At least input or source must be provided")
-
-
 class WorkflowError(RuntimeError):
     """Exception for invalid verb input."""
 

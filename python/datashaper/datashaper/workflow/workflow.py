@@ -19,9 +19,7 @@ from uuid import uuid4
 import pandas as pd
 from jsonschema import validate as validate_schema
 
-from datashaper.engine.verbs.types import VerbDetails
-from datashaper.engine.verbs.verb_input import VerbInput
-from datashaper.engine.verbs.verbs_mapping import VerbManager
+from datashaper.constants import DEFAULT_INPUT_NAME
 from datashaper.errors import (
     NodeNotVisitedError,
     WorkflowInvalidInputError,
@@ -29,18 +27,23 @@ from datashaper.errors import (
     WorkflowOutputNotReadyError,
     WorkflowVerbNotFoundError,
 )
-from datashaper.execution.execution_node import ExecutionNode, WorkflowInput
-from datashaper.progress.types import Progress
-from datashaper.table_store.in_memory_table_store import InMemoryTableStore
-from datashaper.table_store.table_store import TableStore
-from datashaper.table_store.types import Table, TableContainer, VerbResult
+from datashaper.tables import InMemoryTableStore, TableStore
+from datashaper.utils.progress import Progress
+from datashaper.verbs import Table, VerbDetails, VerbInput, VerbManager, VerbResult
+from datashaper.verbs.types import TableContainer
 
-from .types import MemoryProfile, VerbTiming, WorkflowRunResult
-from .verb_callbacks import DelegatingVerbCallbacks
-from .workflow_callbacks import (
+from .callbacks import (
     MemoryProfilingWorkflowCallbacks,
     WorkflowCallbacks,
     WorkflowCallbacksManager,
+)
+from .delegating_verb_callbacks import DelegatingVerbCallbacks
+from .types import (
+    ExecutionNode,
+    MemoryProfile,
+    VerbTiming,
+    WorkflowInput,
+    WorkflowRunResult,
 )
 
 log = getLogger(__name__)
@@ -49,8 +52,6 @@ log = getLogger(__name__)
 SCHEMA_FILE = "../../schema/workflow.json"
 
 Context = TypeVar("Context")
-
-DEFAULT_INPUT_NAME = "source"
 
 
 class PandasDtypeBackend(str, Enum):
@@ -279,7 +280,7 @@ class Workflow(Generic[Context]):
             return TableContainer(table=table)
 
         if isinstance(inputs, str):
-            return VerbInput(input=input_table(inputs))
+            return VerbInput(source=input_table(inputs))
 
         input_mapping: dict[str, TableContainer | list[TableContainer]] = {}
         for key, value in inputs.items():
@@ -301,15 +302,14 @@ class Workflow(Generic[Context]):
             else:
                 raise WorkflowInvalidInputError(str(type(value)))
 
-        input_tbl = cast(TableContainer, input_mapping.pop("input", None))
         source_tbl = cast(TableContainer, input_mapping.pop("source", None))
         other_tbl = cast(TableContainer, input_mapping.pop("other", None))
         others_tbl = cast(list[TableContainer], input_mapping.pop("others", None))
         input_mapping = cast(dict, input_mapping)
+        if other_tbl is not None:
+            input_mapping["other"] = other_tbl
         return VerbInput(
-            input=input_tbl,
             source=source_tbl,
-            other=other_tbl,
             others=others_tbl,
             named=cast(dict[str, TableContainer], input_mapping),
         )

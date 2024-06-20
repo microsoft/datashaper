@@ -1,31 +1,21 @@
 import pandas as pd
 
-from datashaper.engine.verbs import VerbInput, VerbManager
-from datashaper.table_store.types import TableContainer, VerbResult
-
-
-def make_verb_input(data: list, columns: list[str]):
-    pd_table = pd.DataFrame(data=data, columns=columns)
-    table_container = TableContainer(pd_table)
-    return VerbInput(table_container)
+from datashaper.verbs import sample
 
 
 def test_sample():
-    verb_input = make_verb_input([[1], [2], [3], [4], [5]], ["id"])
-    sample = VerbManager.get().get_verb("sample").func
-    output: VerbResult = sample(input=verb_input, size=2)
-    assert len(output.output.table) == 2
+    verb_input = pd.DataFrame({"id": [1, 2, 3, 4, 5]})
+    output, _ = sample(verb_input, size=2)
+    assert len(output) == 2
 
 
 def test_sample_seed():
-    verb_input = make_verb_input([[1], [2], [3], [4], [5]], ["id"])
+    verb_input = pd.DataFrame({"id": [1, 2, 3, 4, 5]})
 
     values = None
     for i in range(10):
-        sample = VerbManager.get().get_verb("sample").func
-        output: VerbResult = sample(input=verb_input, size=2, seed=0xBEEF)
-        output = output.output
-        ids = output.table["id"].tolist()
+        output, _ = sample(verb_input, size=2, seed=0xBEEF)
+        ids = output["id"].tolist()
 
         if i == 0:
             values = ids

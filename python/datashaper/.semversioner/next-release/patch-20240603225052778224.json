@@ -1,0 +1,4 @@
+{
+  "type": "patch",
+  "description": "split verbs from execution-graph boilerplate"
+}

@@ -7,17 +7,19 @@ import pytest
 
 from datashaper import (
     DEFAULT_INPUT_NAME,
-    NodeNotVisitedError,
     Progress,
     TableContainer,
-    VerbCallbacks,
-    VerbError,
-    VerbInput,
     Workflow,
-    WorkflowVerbNotFoundError,
-    derive_from_rows,
     progress_iterable,
 )
+from datashaper.errors import (
+    NodeNotVisitedError,
+    VerbError,
+    WorkflowVerbNotFoundError,
+)
+from datashaper.utils.parallelization import derive_from_rows
+from datashaper.verbs import VerbInput
+from datashaper.verbs.callbacks import VerbCallbacks
 
 
 class TestWorkflowRun(unittest.IsolatedAsyncioTestCase):
