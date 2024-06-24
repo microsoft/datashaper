@@ -4,22 +4,30 @@
 #
 """Unfold verb implementation."""
 
-from typing import Any, cast
+from typing import cast
 
 import numpy as np
 import pandas as pd
+from reactivedataflow import ConfigPort, InputPort, verb
 
-from .decorators import OutputMode, inputs, verb, wrap_verb_result
+from datashaper import DEFAULT_INPUT_NAME
+
+from .decorators import OutputMode, copy_input_tables, wrap_verb_result
 
 
 @verb(
     name="unfold",
+    ports=[
+        InputPort(name=DEFAULT_INPUT_NAME, parameter="table", required=True),
+        ConfigPort(name="key", required=True),
+        ConfigPort(name="value", required=True),
+    ],
     adapters=[
-        inputs(default_input_argname="table"),
+        copy_input_tables("table"),
         wrap_verb_result(mode=OutputMode.Table),
     ],
 )
-def unfold(table: pd.DataFrame, key: str, value: str, **_kwargs: Any) -> pd.DataFrame:
+def unfold(table: pd.DataFrame, key: str, value: str) -> pd.DataFrame:
     """Unfold verb implementation."""
     columns = len(table[key].unique())
 

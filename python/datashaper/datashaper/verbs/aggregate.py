@@ -5,7 +5,7 @@
 """Aggregate verb implementation."""
 
 from functools import reduce
-from typing import Any, cast
+from typing import cast
 
 import pandas as pd
 from reactivedataflow import ConfigPort, InputPort, verb

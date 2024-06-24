@@ -29,7 +29,7 @@ from datashaper.errors import (
 )
 from datashaper.tables import InMemoryTableStore, TableStore
 from datashaper.utils.progress import Progress
-from datashaper.verbs import Table, VerbDetails, VerbInput, VerbManager, VerbResult
+from datashaper.verbs import Table, VerbDetails, VerbInput, VerbResult
 from datashaper.verbs.types import TableContainer
 
 from .callbacks import (

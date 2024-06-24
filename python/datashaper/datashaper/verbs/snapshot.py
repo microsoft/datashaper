@@ -4,25 +4,28 @@
 #
 """Snapshot verb implementation."""
 
-from typing import Any
 
 import pandas as pd
+from reactivedataflow import ConfigPort, InputPort, verb
 
-from .decorators import OutputMode, inputs, verb, wrap_verb_result
+from datashaper import DEFAULT_INPUT_NAME
+
+from .decorators import OutputMode, wrap_verb_result
 from .types import FileFormat
 
 
 @verb(
     name="snapshot",
-    immutable_input=True,
+    ports=[
+        InputPort(name=DEFAULT_INPUT_NAME, parameter="table", required=True),
+        ConfigPort(name="name", required=True),
+        ConfigPort(name="file_type", required=True),
+    ],
     adapters=[
-        inputs(default_input_argname="table"),
         wrap_verb_result(mode=OutputMode.Table),
     ],
 )
-def snapshot(
-    table: pd.DataFrame, name: str, file_type: FileFormat, **_kwargs: Any
-) -> pd.DataFrame:
+def snapshot(table: pd.DataFrame, name: str, file_type: FileFormat) -> pd.DataFrame:
     """Snapshot verb implementation."""
     file_name = "./" + name + "." + file_type
 

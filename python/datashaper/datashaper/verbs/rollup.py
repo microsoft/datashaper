@@ -5,26 +5,30 @@
 """Rollup verb implementation."""
 
 from collections.abc import Iterable
-from typing import Any
 
 import pandas as pd
+from reactivedataflow import ConfigPort, InputPort, verb
+
+from datashaper import DEFAULT_INPUT_NAME
 
 from .aggregate import aggregate_operation_mapping
-from .decorators import OutputMode, inputs, verb, wrap_verb_result
+from .decorators import OutputMode, wrap_verb_result
 from .types import FieldAggregateOperation
 
 
 @verb(
     name="rollup",
-    immutable_input=True,
+    ports=[
+        InputPort(name=DEFAULT_INPUT_NAME, parameter="table", required=True),
+        ConfigPort(name="column", required=True),
+        ConfigPort(name="to", required=True),
+        ConfigPort(name="operation", required=True),
+    ],
     adapters=[
-        inputs(default_input_argname="table"),
         wrap_verb_result(mode=OutputMode.Table),
     ],
 )
-def rollup(
-    table: pd.DataFrame, column: str, to: str, operation: str, **_kwargs: Any
-) -> pd.DataFrame:
+def rollup(table: pd.DataFrame, column: str, to: str, operation: str) -> pd.DataFrame:
     """Rollup verb implementation."""
     aggregate_operation = FieldAggregateOperation(operation)
 

@@ -4,25 +4,28 @@
 #
 """Print verb implementation."""
 
-from typing import Any
-
 import pandas as pd
+from reactivedataflow import ConfigPort, InputPort, verb
 
-from .decorators import OutputMode, inputs, verb, wrap_verb_result
+from datashaper import DEFAULT_INPUT_NAME
+
+from .decorators import OutputMode, wrap_verb_result
 
 raw_print = print
 
 
 @verb(
     name="print",
-    immutable_input=True,
+    ports=[
+        InputPort(name=DEFAULT_INPUT_NAME, parameter="table", required=True),
+        ConfigPort(name="message", required=True),
+    ],
     adapters=[
-        inputs(default_input_argname="table"),
         wrap_verb_result(mode=OutputMode.Table),
     ],
 )
 def print(  # noqa A001 - use ds verb name
-    table: pd.DataFrame, message: str, limit: int = 10, **_kwargs: Any
+    table: pd.DataFrame, message: str, limit: int = 10
 ) -> pd.DataFrame:
     """Print verb implementation."""
     # TODO(Chris): should we use a logger for these instead of prints?

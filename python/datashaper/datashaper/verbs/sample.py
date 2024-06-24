@@ -7,15 +7,23 @@
 from typing import Any, cast
 
 import pandas as pd
+from reactivedataflow import ConfigPort, InputPort, verb
 
-from .decorators import OutputMode, inputs, verb, wrap_verb_result
+from datashaper import DEFAULT_INPUT_NAME
+
+from .decorators import OutputMode, wrap_verb_result
 
 
 @verb(
     name="sample",
-    immutable_input=True,
+    ports=[
+        InputPort(name=DEFAULT_INPUT_NAME, parameter="table", required=True),
+        ConfigPort(name="size"),
+        ConfigPort(name="proportion"),
+        ConfigPort(name="seed"),
+        ConfigPort(name="emitRemainder"),
+    ],
     adapters=[
-        inputs(default_input_argname="table"),
         wrap_verb_result(
             mode=OutputMode.Tuple,
             output_names=["remainder"],

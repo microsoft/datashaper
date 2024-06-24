@@ -4,23 +4,25 @@
 #
 """Concat verb implementation."""
 
-from typing import Any
-
 import pandas as pd
+from reactivedataflow import ArrayInputPort, InputPort, verb
 
-from .decorators import OutputMode, inputs, verb, wrap_verb_result
+from datashaper.constants import DEFAULT_INPUT_NAME
+
+from .decorators import OutputMode, wrap_verb_result
 
 
 @verb(
     name="concat",
     immutable_input=True,
+    ports=[
+        InputPort(name=DEFAULT_INPUT_NAME, parameter="table", required=True),
+        ArrayInputPort(name="others", required=True),
+    ],
     adapters=[
-        inputs(default_input_argname="table", variadic_input_argname="others"),
         wrap_verb_result(mode=OutputMode.Table),
     ],
 )
-def concat(
-    table: pd.DataFrame, others: list[pd.DataFrame], **_kwargs: Any
-) -> pd.DataFrame:
+def concat(table: pd.DataFrame, others: list[pd.DataFrame]) -> pd.DataFrame:
     """Concat verb implementation."""
     return pd.concat([table] + others, ignore_index=True)

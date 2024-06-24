@@ -4,14 +4,16 @@
 #
 """Window verb implementation."""
 
-from typing import Any
 from uuid import uuid4
 
 import numpy as np
 import pandas as pd
 from pandas.core.groupby import DataFrameGroupBy
+from reactivedataflow import ConfigPort, InputPort, verb
 
-from .decorators import OutputMode, inputs, verb, wrap_verb_result
+from datashaper import DEFAULT_INPUT_NAME
+
+from .decorators import OutputMode, copy_input_tables, wrap_verb_result
 from .types import WindowFunction
 
 
@@ -59,8 +61,14 @@ __window_function_map = {
 
 @verb(
     name="window",
+    ports=[
+        InputPort(name=DEFAULT_INPUT_NAME, parameter="table", required=True),
+        ConfigPort(name="column", required=True),
+        ConfigPort(name="to", required=True),
+        ConfigPort(name="operation", required=True),
+    ],
     adapters=[
-        inputs(default_input_argname="table"),
+        copy_input_tables("table"),
         wrap_verb_result(mode=OutputMode.Table),
     ],
 )
@@ -69,7 +77,6 @@ def window(
     column: str,
     to: str,
     operation: str,
-    **_kwargs: Any,
 ) -> pd.DataFrame | DataFrameGroupBy:
     """Apply a window function to a column in a table."""
     window_operation = WindowFunction(operation)

@@ -4,22 +4,27 @@
 #
 """Orderby verb implementation."""
 
-from typing import Any
-
 import pandas as pd
+from reactivedataflow import ConfigPort, InputPort, verb
 
-from .decorators import OutputMode, inputs, verb, wrap_verb_result
+from datashaper import DEFAULT_INPUT_NAME
+
+from .decorators import OutputMode, copy_input_tables, wrap_verb_result
 from .types import OrderByInstruction, SortDirection
 
 
 @verb(
     name="orderby",
+    ports=[
+        InputPort(name=DEFAULT_INPUT_NAME, parameter="table", required=True),
+        ConfigPort(name="orders", required=True),
+    ],
     adapters=[
-        inputs(default_input_argname="table"),
+        copy_input_tables("table"),
         wrap_verb_result(mode=OutputMode.Table),
     ],
 )
-def orderby(table: pd.DataFrame, orders: list[dict], **_kwargs: Any) -> pd.DataFrame:
+def orderby(table: pd.DataFrame, orders: list[dict]) -> pd.DataFrame:
     """Orderby verb implementation."""
     orders_instructions = [
         OrderByInstruction(

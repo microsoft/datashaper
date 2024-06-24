@@ -15,9 +15,7 @@ from .copy import copy
 from .decorators import (
     OutputMode,
     ParallelizationMode,
-    inputs,
     parallel_verb,
-    verb,
     wrap_verb_result,
 )
 from .dedupe import dedupe
@@ -28,7 +26,6 @@ from .drop import drop
 from .engine import (
     VerbDetails,
     VerbInput,
-    VerbManager,
     VerbResult,
     load_verbs,
 )
@@ -140,11 +137,8 @@ __all__ = [
     "replace",
     # Verb Authoring
     "VerbInput",
-    "VerbManager",
     "load_verbs",
     # Decorators
-    "verb",
-    "inputs",
     "wrap_verb_result",
     "parallel_verb",
     "OutputMode",

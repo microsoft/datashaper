@@ -4,18 +4,25 @@
 #
 """Onehot verb implementation."""
 
-from typing import Any
-
 import numpy as np
 import pandas as pd
+from reactivedataflow import ConfigPort, InputPort, verb
 
-from .decorators import OutputMode, inputs, verb, wrap_verb_result
+from datashaper import DEFAULT_INPUT_NAME
+
+from .decorators import OutputMode, copy_input_tables, wrap_verb_result
 
 
 @verb(
     name="onehot",
+    ports=[
+        InputPort(name=DEFAULT_INPUT_NAME, parameter="table", required=True),
+        ConfigPort(name="column", required=True),
+        ConfigPort(name="prefix"),
+        ConfigPort(name="preserveSource"),
+    ],
     adapters=[
-        inputs(default_input_argname="table"),
+        copy_input_tables("table"),
         wrap_verb_result(mode=OutputMode.Table),
     ],
 )
@@ -24,7 +31,6 @@ def onehot(
     column: str,
     prefix: str = "",
     preserveSource: bool = False,  # noqa: N803
-    **_kwargs: Any,
 ) -> pd.DataFrame:
     """Onehot verb implementation."""
     table[column] = table[column].astype("category")
