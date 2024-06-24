@@ -9,14 +9,14 @@ from typing import Any, cast
 import numpy as np
 import pandas as pd
 
-from .decorators import OutputMode, inputs, outputs, verb
+from .decorators import OutputMode, inputs, verb, wrap_verb_result
 
 
 @verb(
     name="unfold",
     adapters=[
         inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
+        wrap_verb_result(mode=OutputMode.Table),
     ],
 )
 def unfold(table: pd.DataFrame, key: str, value: str, **_kwargs: Any) -> pd.DataFrame:

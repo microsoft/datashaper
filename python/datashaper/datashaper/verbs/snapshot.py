@@ -8,7 +8,7 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import OutputMode, inputs, outputs, verb
+from .decorators import OutputMode, inputs, verb, wrap_verb_result
 from .types import FileFormat
 
 
@@ -17,7 +17,7 @@ from .types import FileFormat
     immutable_input=True,
     adapters=[
         inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
+        wrap_verb_result(mode=OutputMode.Table),
     ],
 )
 def snapshot(

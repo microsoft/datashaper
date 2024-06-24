@@ -23,7 +23,7 @@ class OutputMode(str, Enum):
 P = ParamSpec("P")
 
 
-def outputs(
+def wrap_verb_result(
     mode: OutputMode,
     output_names: list[str] | None = None,
 ) -> Callable[[Callable[..., Any]], Callable[..., VerbResult]]:

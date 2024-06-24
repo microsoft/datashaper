@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 from pandas.core.groupby import DataFrameGroupBy
 
-from .decorators import OutputMode, inputs, outputs, verb
+from .decorators import OutputMode, inputs, verb, wrap_verb_result
 from .types import WindowFunction
 
 
@@ -61,7 +61,7 @@ __window_function_map = {
     name="window",
     adapters=[
         inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
+        wrap_verb_result(mode=OutputMode.Table),
     ],
 )
 def window(

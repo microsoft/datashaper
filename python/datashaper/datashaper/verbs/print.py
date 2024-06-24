@@ -8,7 +8,7 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import OutputMode, inputs, outputs, verb
+from .decorators import OutputMode, inputs, verb, wrap_verb_result
 
 raw_print = print
 
@@ -18,7 +18,7 @@ raw_print = print
     immutable_input=True,
     adapters=[
         inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
+        wrap_verb_result(mode=OutputMode.Table),
     ],
 )
 def print(  # noqa A001 - use ds verb name

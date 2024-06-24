@@ -11,7 +11,7 @@ from typing import Any
 import pandas as pd
 from pandas.api.types import is_bool
 
-from .decorators import OutputMode, inputs, outputs, verb
+from .decorators import OutputMode, inputs, verb, wrap_verb_result
 from .types import MergeStrategy
 
 
@@ -19,7 +19,7 @@ from .types import MergeStrategy
     name="merge",
     adapters=[
         inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
+        wrap_verb_result(mode=OutputMode.Table),
     ],
 )
 def merge(

@@ -9,14 +9,14 @@ from typing import Any
 import pandas as pd
 from pandas.core.groupby import DataFrameGroupBy
 
-from .decorators import OutputMode, inputs, outputs, verb
+from .decorators import OutputMode, inputs, verb, wrap_verb_result
 
 
 @verb(
     name="groupby",
     adapters=[
         inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
+        wrap_verb_result(mode=OutputMode.Table),
     ],
 )
 def groupby(

@@ -16,9 +16,9 @@ from .decorators import (
     OutputMode,
     ParallelizationMode,
     inputs,
-    outputs,
     parallel_verb,
     verb,
+    wrap_verb_result,
 )
 from .dedupe import dedupe
 from .derive import derive
@@ -145,7 +145,7 @@ __all__ = [
     # Decorators
     "verb",
     "inputs",
-    "outputs",
+    "wrap_verb_result",
     "parallel_verb",
     "OutputMode",
     "ParallelizationMode",

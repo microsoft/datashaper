@@ -13,7 +13,7 @@ from pandas.api.types import is_numeric_dtype
 
 from datashaper.errors import VerbOperationNotSupportedError
 
-from .decorators import OutputMode, inputs, outputs, verb
+from .decorators import OutputMode, inputs, verb, wrap_verb_result
 from .types import MathOperator
 
 
@@ -42,7 +42,7 @@ __op_mapping: dict[MathOperator, Callable] = {
     name="derive",
     adapters=[
         inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
+        wrap_verb_result(mode=OutputMode.Table),
     ],
 )
 def derive(

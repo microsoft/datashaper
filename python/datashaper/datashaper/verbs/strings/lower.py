@@ -10,8 +10,8 @@ from datashaper.verbs.decorators import (
     OutputMode,
     apply_decorators,
     inputs,
-    outputs,
     verb,
+    wrap_verb_result,
 )
 
 
@@ -25,7 +25,7 @@ apply_decorators(
     [
         verb(name="strings.lower"),
         inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
+        wrap_verb_result(mode=OutputMode.Table),
     ],
     lower,
 )

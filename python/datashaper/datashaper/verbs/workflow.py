@@ -6,7 +6,7 @@ import pandas as pd
 
 from datashaper.constants import DEFAULT_INPUT_NAME
 
-from .decorators import OutputMode, inputs, outputs, verb
+from .decorators import OutputMode, inputs, verb, wrap_verb_result
 from .types import Table
 
 
@@ -14,7 +14,7 @@ from .types import Table
     name="workflow",
     adapters=[
         inputs(default_input_argname="table", input_dict_argname="tables"),
-        outputs(mode=OutputMode.Table),
+        wrap_verb_result(mode=OutputMode.Table),
     ],
 )
 async def workflow(

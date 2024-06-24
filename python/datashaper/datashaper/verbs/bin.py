@@ -8,13 +8,11 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
+from reactivedataflow import ConfigPort, InputPort, verb
 
-from .decorators import (
-    OutputMode,
-    inputs,
-    outputs,
-    verb,
-)
+from datashaper.constants import DEFAULT_INPUT_NAME
+
+from .decorators import OutputMode, copy_input_tables, wrap_verb_result
 from .types import BinStrategy
 
 
@@ -79,9 +77,21 @@ __bin_edges_mapping = {
 
 @verb(
     name="bin",
+    ports=[
+        InputPort(name=DEFAULT_INPUT_NAME, parameter="table", required=True),
+        ConfigPort(name="to", required=True),
+        ConfigPort(name="column", required=True),
+        ConfigPort(name="strategy", required=True),
+        ConfigPort(name="min", required=False),
+        ConfigPort(name="max", required=False),
+        ConfigPort(name="fixedcount", required=False),
+        ConfigPort(name="fixedwidth", required=False),
+        ConfigPort(name="clamped", required=False),
+        ConfigPort(name="printRange", required=False),
+    ],
     adapters=[
-        inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
+        copy_input_tables("table"),
+        wrap_verb_result(mode=OutputMode.Table),
     ],
 )
 def bin(  # noqa A001 - use ds verb name
@@ -95,7 +105,6 @@ def bin(  # noqa A001 - use ds verb name
     fixedwidth: int | None = None,
     clamped: bool | None = False,
     printRange: bool | None = False,  # noqa: N803
-    **_kwargs: Any,
 ) -> pd.DataFrame:
     """Bin verb implementation."""
     bin_strategy = BinStrategy(strategy)

@@ -8,13 +8,16 @@ from typing import Any
 
 import pandas as pd
 
-from .decorators import OutputMode, inputs, outputs, verb
+from .decorators import OutputMode, inputs, verb, wrap_verb_result
 
 
 @verb(
     name="unroll",
     immutable_input=True,
-    adapters=[inputs(default_input_argname="table"), outputs(mode=OutputMode.Table)],
+    adapters=[
+        inputs(default_input_argname="table"),
+        wrap_verb_result(mode=OutputMode.Table),
+    ],
 )
 def unroll(table: pd.DataFrame, column: str, **_kwargs: Any) -> pd.DataFrame:
     """Unroll a column."""
