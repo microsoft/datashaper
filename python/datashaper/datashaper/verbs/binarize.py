@@ -7,8 +7,11 @@
 from typing import Any, cast
 
 import pandas as pd
+from reactivedataflow import ConfigPort, InputPort, verb
 
-from .decorators import OutputMode, inputs, verb, wrap_verb_result
+from datashaper.constants import DEFAULT_INPUT_NAME
+
+from .decorators import OutputMode, copy_input_tables, wrap_verb_result
 from .filter import filter, get_comparison_operator
 from .types import (
     ComparisonStrategy,
@@ -19,8 +22,16 @@ from .types import (
 
 @verb(
     name="binarize",
+    ports=[
+        InputPort(name=DEFAULT_INPUT_NAME, parameter="table", required=True),
+        ConfigPort(name="to", required=True),
+        ConfigPort(name="column", required=True),
+        ConfigPort(name="value", required=True),
+        ConfigPort(name="strategy"),
+        ConfigPort(name="operator"),
+    ],
     adapters=[
-        inputs(default_input_argname="table"),
+        copy_input_tables("table"),
         wrap_verb_result(mode=OutputMode.Table),
     ],
 )
