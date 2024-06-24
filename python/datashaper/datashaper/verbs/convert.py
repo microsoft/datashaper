@@ -12,8 +12,11 @@ from typing import Any, cast
 import numpy as np
 import pandas as pd
 from pandas.api.types import is_bool_dtype, is_datetime64_any_dtype, is_numeric_dtype
+from reactivedataflow import ConfigPort, InputPort, verb
 
-from .decorators import OutputMode, inputs, outputs, verb
+from datashaper import DEFAULT_INPUT_NAME
+
+from .decorators import OutputMode, copy_input_tables, wrap_verb_result
 from .types import ParseType
 
 
@@ -116,9 +119,18 @@ __type_mapping: dict[ParseType, Callable] = {
 
 @verb(
     name="convert",
+    ports=[
+        InputPort(name=DEFAULT_INPUT_NAME, parameter="table", required=True),
+        ConfigPort(name="column", required=True),
+        ConfigPort(name="to", required=True),
+        ConfigPort(name="type", required=True),
+        ConfigPort(name="radix"),
+        ConfigPort(name="delimiter"),
+        ConfigPort(name="formatPattern"),
+    ],
     adapters=[
-        inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
+        copy_input_tables("table"),
+        wrap_verb_result(mode=OutputMode.Table),
     ],
 )
 def convert(
@@ -129,7 +141,6 @@ def convert(
     radix: int | None = None,
     delimiter: str | None = ",",
     formatPattern: str = "%Y-%m-%d",  # noqa: N803
-    **_kwargs: Any,
 ) -> pd.DataFrame:
     """Convert verb implementation."""
     parse_type = ParseType(type)

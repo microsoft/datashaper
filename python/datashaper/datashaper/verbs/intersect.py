@@ -7,21 +7,26 @@
 from typing import cast
 
 import pandas as pd
+from reactivedataflow import ArrayInputPort, InputPort, verb
 
-from .decorators import OutputMode, inputs, outputs, verb
+from datashaper import DEFAULT_INPUT_NAME
+
+from .decorators import OutputMode, copy_input_tables, wrap_verb_result
 
 
 @verb(
     name="intersect",
     immutable_input=True,
+    ports=[
+        InputPort(name=DEFAULT_INPUT_NAME, parameter="table", required=True),
+        ArrayInputPort(name="others", required=True),
+    ],
     adapters=[
-        inputs(default_input_argname="table", variadic_input_argname="others"),
-        outputs(mode=OutputMode.Table),
+        copy_input_tables("table"),
+        wrap_verb_result(mode=OutputMode.Table),
     ],
 )
-def intersect(
-    table: pd.DataFrame, others: list[pd.DataFrame], **_kwargs: dict
-) -> pd.DataFrame:
+def intersect(table: pd.DataFrame, others: list[pd.DataFrame]) -> pd.DataFrame:
     """Intersect verb implementation."""
     output = table.merge(pd.concat(others), how="left", indicator=True)
     output = output[output["_merge"] == "both"]

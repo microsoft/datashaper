@@ -3,24 +3,24 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 """Union verb implementation."""
-
-from typing import Any
-
 import pandas as pd
+from reactivedataflow import ArrayInputPort, InputPort, verb
 
-from .decorators import OutputMode, inputs, outputs, verb
+from datashaper import DEFAULT_INPUT_NAME
+
+from .decorators import OutputMode, wrap_verb_result
 
 
 @verb(
     name="union",
-    immutable_input=True,
+    ports=[
+        InputPort(name=DEFAULT_INPUT_NAME, parameter="table", required=True),
+        ArrayInputPort(name="others", parameter="others", required=True),
+    ],
     adapters=[
-        inputs(default_input_argname="table", variadic_input_argname="others"),
-        outputs(mode=OutputMode.Table),
+        wrap_verb_result(mode=OutputMode.Table),
     ],
 )
-def union(
-    table: pd.DataFrame, others: list[pd.DataFrame], **_kwargs: Any
-) -> pd.DataFrame:
+def union(table: pd.DataFrame, others: list[pd.DataFrame]) -> pd.DataFrame:
     """Union verb implementation."""
     return pd.concat([table, *others], ignore_index=True).drop_duplicates()

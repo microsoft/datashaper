@@ -5,25 +5,31 @@
 """Aggregate verb implementation."""
 
 from functools import reduce
-from typing import Any, cast
+from typing import cast
 
 import pandas as pd
+from reactivedataflow import ConfigPort, InputPort, verb
+
+from datashaper.constants import DEFAULT_INPUT_NAME
 
 from .decorators import (
     OutputMode,
-    inputs,
-    outputs,
-    verb,
+    wrap_verb_result,
 )
 from .types import FieldAggregateOperation
 
 
 @verb(
     name="aggregate",
-    immutable_input=True,
+    ports=[
+        InputPort(name=DEFAULT_INPUT_NAME, parameter="table", required=True),
+        ConfigPort(name="to", required=True),
+        ConfigPort(name="groupby", required=True),
+        ConfigPort(name="column", required=True),
+        ConfigPort(name="operation", required=True),
+    ],
     adapters=[
-        inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
+        wrap_verb_result(mode=OutputMode.Table),
     ],
 )
 def aggregate(
@@ -32,7 +38,6 @@ def aggregate(
     groupby: list[str],
     column: str,
     operation: FieldAggregateOperation,
-    **_kwargs: Any,
 ) -> pd.DataFrame:
     """Aggregate verb implementation."""
     result = cast(

@@ -4,21 +4,23 @@
 #
 """Ungroup verb implementation."""
 
-from typing import Any
-
 import pandas as pd
+from reactivedataflow import InputPort, verb
 
-from .decorators import OutputMode, inputs, outputs, verb
+from datashaper import DEFAULT_INPUT_NAME
+
+from .decorators import OutputMode, wrap_verb_result
 
 
 @verb(
     name="ungroup",
-    immutable_input=True,
+    ports=[
+        InputPort(name=DEFAULT_INPUT_NAME, parameter="table", required=True),
+    ],
     adapters=[
-        inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
+        wrap_verb_result(mode=OutputMode.Table),
     ],
 )
-def ungroup(table: pd.DataFrame, **_kwargs: Any) -> pd.DataFrame:
+def ungroup(table: pd.DataFrame) -> pd.DataFrame:
     """Ungroup verb implementation."""
     return table.obj

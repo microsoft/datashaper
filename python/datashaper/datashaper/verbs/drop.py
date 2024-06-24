@@ -4,20 +4,25 @@
 #
 """Drop verb implementation."""
 
-from typing import Any
-
 import pandas as pd
+from reactivedataflow import ConfigPort, InputPort, verb
 
-from .decorators import OutputMode, inputs, outputs, verb
+from datashaper import DEFAULT_INPUT_NAME
+
+from .decorators import OutputMode, copy_input_tables, wrap_verb_result
 
 
 @verb(
     name="drop",
+    ports=[
+        InputPort(name=DEFAULT_INPUT_NAME, parameter="table", required=True),
+        ConfigPort(name="columns", required=True),
+    ],
     adapters=[
-        inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
+        copy_input_tables("table"),
+        wrap_verb_result(mode=OutputMode.Table),
     ],
 )
-def drop(table: pd.DataFrame, columns: list[str], **_kwargs: Any) -> pd.DataFrame:
+def drop(table: pd.DataFrame, columns: list[str]) -> pd.DataFrame:
     """Drop verb implementation."""
     return table.drop(columns=columns)

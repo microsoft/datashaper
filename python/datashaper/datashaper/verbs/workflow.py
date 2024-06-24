@@ -3,18 +3,23 @@
 from typing import Any
 
 import pandas as pd
+from reactivedataflow import ConfigPort, InputPort, verb
 
 from datashaper.constants import DEFAULT_INPUT_NAME
 
-from .decorators import OutputMode, inputs, outputs, verb
+from .decorators import OutputMode, wrap_verb_result
 from .types import Table
 
 
 @verb(
     name="workflow",
+    ports=[
+        ConfigPort(name="workflow", required=True),
+        ConfigPort(name="workflow_instance", required=True),
+    ],
+    # TODO: add support for multiple input tables
     adapters=[
-        inputs(default_input_argname="table", input_dict_argname="tables"),
-        outputs(mode=OutputMode.Table),
+        wrap_verb_result(mode=OutputMode.Table),
     ],
 )
 async def workflow(

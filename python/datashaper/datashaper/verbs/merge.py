@@ -10,16 +10,27 @@ from typing import Any
 
 import pandas as pd
 from pandas.api.types import is_bool
+from reactivedataflow import ConfigPort, InputPort, verb
 
-from .decorators import OutputMode, inputs, outputs, verb
+from datashaper import DEFAULT_INPUT_NAME
+
+from .decorators import OutputMode, copy_input_tables, wrap_verb_result
 from .types import MergeStrategy
 
 
 @verb(
     name="merge",
+    ports=[
+        InputPort(name=DEFAULT_INPUT_NAME, parameter="table", required=True),
+        ConfigPort(name="to", required=True),
+        ConfigPort(name="columns", required=True),
+        ConfigPort(name="strategy", required=True),
+        ConfigPort(name="delimiter"),
+        ConfigPort(name="preserveSource"),
+    ],
     adapters=[
-        inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
+        copy_input_tables("table"),
+        wrap_verb_result(mode=OutputMode.Table),
     ],
 )
 def merge(
@@ -29,7 +40,6 @@ def merge(
     strategy: str,
     delimiter: str = "",
     preserveSource: bool = False,  # noqa: N803
-    **_kwargs: Any,
 ) -> pd.DataFrame:
     """Merge verb implementation."""
     merge_strategy = MergeStrategy(strategy)

@@ -4,12 +4,15 @@
 #
 """Join verb implementation."""
 
-from typing import Any, cast
+from typing import cast
 
 import pandas as pd
 from pandas._typing import MergeHow, Suffixes
+from reactivedataflow import ConfigPort, InputPort, verb
 
-from .decorators import OutputMode, inputs, outputs, verb
+from datashaper import DEFAULT_INPUT_NAME
+
+from .decorators import OutputMode, wrap_verb_result
 from .types import JoinStrategy
 
 __strategy_mapping: dict[JoinStrategy, MergeHow] = {
@@ -49,9 +52,14 @@ def __clean_result(
 @verb(
     name="join",
     immutable_input=True,
+    ports=[
+        InputPort(name=DEFAULT_INPUT_NAME, parameter="table", required=True),
+        InputPort(name="other", required=True),
+        ConfigPort(name="on"),
+        ConfigPort(name="strategy"),
+    ],
     adapters=[
-        inputs(default_input_argname="table", input_argnames={"other": "other"}),
-        outputs(mode=OutputMode.Table),
+        wrap_verb_result(mode=OutputMode.Table),
     ],
 )
 def join(
@@ -59,7 +67,6 @@ def join(
     other: pd.DataFrame,
     on: list[str] | None = None,
     strategy: str = "inner",
-    **_kwargs: Any,
 ) -> pd.DataFrame:
     """Join verb implementation."""
     join_strategy = JoinStrategy(strategy)

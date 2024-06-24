@@ -5,15 +5,16 @@
 """Derive verb implementation."""
 
 from collections.abc import Callable
-from typing import Any
 
 import numpy as np
 import pandas as pd
 from pandas.api.types import is_numeric_dtype
+from reactivedataflow import ConfigPort, InputPort, verb
 
+from datashaper import DEFAULT_INPUT_NAME
 from datashaper.errors import VerbOperationNotSupportedError
 
-from .decorators import OutputMode, inputs, outputs, verb
+from .decorators import OutputMode, copy_input_tables, wrap_verb_result
 from .types import MathOperator
 
 
@@ -40,9 +41,16 @@ __op_mapping: dict[MathOperator, Callable] = {
 
 @verb(
     name="derive",
+    ports=[
+        InputPort(name=DEFAULT_INPUT_NAME, parameter="table", required=True),
+        ConfigPort(name="to", required=True),
+        ConfigPort(name="column1", required=True),
+        ConfigPort(name="column2", required=True),
+        ConfigPort(name="operator", required=True),
+    ],
     adapters=[
-        inputs(default_input_argname="table"),
-        outputs(mode=OutputMode.Table),
+        copy_input_tables("table"),
+        wrap_verb_result(mode=OutputMode.Table),
     ],
 )
 def derive(
@@ -51,7 +59,6 @@ def derive(
     column1: str,
     column2: str,
     operator: str,
-    **_kwargs: Any,
 ) -> pd.DataFrame:
     """Derive verb implementation."""
     math_operator = MathOperator(operator)
