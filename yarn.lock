@@ -6,12 +6,12 @@ __metadata:
   cacheKey: 10
 
 "@75lb/deep-merge@npm:^1.1.1":
-  version: 1.1.1
-  resolution: "@75lb/deep-merge@npm:1.1.1"
+  version: 1.1.2
+  resolution: "@75lb/deep-merge@npm:1.1.2"
   dependencies:
-    lodash.assignwith: "npm:^4.2.0"
+    lodash: "npm:^4.17.21"
     typical: "npm:^7.1.1"
-  checksum: 10/62f127818076123bcab670319cb9ab03cad9485e990870b85da5db57e5a036eb64c8d0a8c473bd3f5603912d31ead5dd3ead7a9604c7576bb349728c603922e0
+  checksum: 10/e64f8488ccd0e0237d1fb9450e5d56583c7b9421e08abcbcb277fbafaf979291c216c892834797b82ba4853329422d51e1564d02a6981debccfb2d49eee19cc1
   languageName: node
   linkType: hard
 
@@ -3619,7 +3619,7 @@ __metadata:
     arquero: "npm:^5.4.0"
     eslint: "npm:^8.42.0"
     npm-run-all: "npm:^4.1.5"
-    semver: "npm:^7.6.1"
+    semver: "npm:^7.6.3"
     turbo: "npm:1.13.3"
     typescript: "npm:^5.1.3"
   languageName: unknown
@@ -3757,7 +3757,7 @@ __metadata:
     storybook: "npm:7.6.14"
     styled-components: "npm:^5.3.11"
     typescript: "npm:^5.1.3"
-    webpack: "npm:^5.92.0"
+    webpack: "npm:^5.94.0"
   languageName: unknown
   linkType: soft
 
@@ -3859,7 +3859,7 @@ __metadata:
     shx: "npm:^0.3.4"
     styled-components: "npm:^5.3.11"
     typescript: "npm:^5.1.3"
-    webpack: "npm:^5.92.0"
+    webpack: "npm:^5.94.0"
   languageName: unknown
   linkType: soft
 
@@ -12222,13 +12222,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"enhanced-resolve@npm:^5.17.0":
-  version: 5.17.0
-  resolution: "enhanced-resolve@npm:5.17.0"
+"enhanced-resolve@npm:^5.17.1":
+  version: 5.17.1
+  resolution: "enhanced-resolve@npm:5.17.1"
   dependencies:
     graceful-fs: "npm:^4.2.4"
     tapable: "npm:^2.2.0"
-  checksum: 10/8f7bf71537d78e7d20a27363793f2c9e13ec44800c7c7830364a448f80a44994aa19d64beecefa1ab49e4de6f7fbe18cc0931dc449c115f02918ff5fcbe7705f
+  checksum: 10/e8e03cb7a4bf3c0250a89afbd29e5ec20e90ba5fcd026066232a0754864d7d0a393fa6fc0e5379314a6529165a1834b36731147080714459d98924520410d8f5
   languageName: node
   linkType: hard
 
@@ -16448,13 +16448,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.assignwith@npm:^4.2.0":
-  version: 4.2.0
-  resolution: "lodash.assignwith@npm:4.2.0"
-  checksum: 10/f313e1c9c36b67d160a15006b03f95da46dc246f35adbcfd10c2b3e93bb92de6f2cf4bad744a83e0324609913b3eaac1b92ab447b1a409cee00962a138df5a6e
-  languageName: node
-  linkType: hard
-
 "lodash.camelcase@npm:^4.3.0":
   version: 4.3.0
   resolution: "lodash.camelcase@npm:4.3.0"
@@ -19584,12 +19577,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.6.1":
-  version: 7.6.2
-  resolution: "semver@npm:7.6.2"
+"semver@npm:^7.6.3":
+  version: 7.6.3
+  resolution: "semver@npm:7.6.3"
   bin:
     semver: bin/semver.js
-  checksum: 10/296b17d027f57a87ef645e9c725bff4865a38dfc9caf29b26aa084b85820972fbe7372caea1ba6857162fa990702c6d9c1d82297cecb72d56c78ab29070d2ca2
+  checksum: 10/36b1fbe1a2b6f873559cd57b238f1094a053dbfd997ceeb8757d79d1d2089c56d1321b9f1069ce263dc64cfa922fa1d2ad566b39426fe1ac6c723c1487589e10
   languageName: node
   linkType: hard
 
@@ -21766,11 +21759,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.92.0":
-  version: 5.92.0
-  resolution: "webpack@npm:5.92.0"
+"webpack@npm:^5.94.0":
+  version: 5.94.0
+  resolution: "webpack@npm:5.94.0"
   dependencies:
-    "@types/eslint-scope": "npm:^3.7.3"
     "@types/estree": "npm:^1.0.5"
     "@webassemblyjs/ast": "npm:^1.12.1"
     "@webassemblyjs/wasm-edit": "npm:^1.12.1"
@@ -21779,7 +21771,7 @@ __metadata:
     acorn-import-attributes: "npm:^1.9.5"
     browserslist: "npm:^4.21.10"
     chrome-trace-event: "npm:^1.0.2"
-    enhanced-resolve: "npm:^5.17.0"
+    enhanced-resolve: "npm:^5.17.1"
     es-module-lexer: "npm:^1.2.1"
     eslint-scope: "npm:5.1.1"
     events: "npm:^3.2.0"
@@ -21799,7 +21791,7 @@ __metadata:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 10/1d5e7e881615df05af7e58bd7ce872495cf6361f345f2b2a7dcbd8febd8761b68b7567e14f9ebbf1d666b6c78cc90c3f304fb10b8a457ab71aa7015116a7d6d9
+  checksum: 10/648449c5fbbb0839814116e3b2b044ac6c75a7ba272435155ddeb1e64dfaa2f8079be3adfbb691f648b69900756ce0f6fb73beab0ced3cf5e0fd46868b4593a6
   languageName: node
   linkType: hard
 
