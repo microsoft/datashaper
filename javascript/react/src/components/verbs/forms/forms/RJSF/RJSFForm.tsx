@@ -31,13 +31,13 @@ export const RJSFForm: React.FC<RJSFFormProps> = memo(function RJSFForm({
 }) {
 	
 	const args = useVerbArgsSchema(step, schema)
-	// const finalSchema = useDataBoundArgsSchema(args, step, workflow)
+	const finalSchema = useDataBoundArgsSchema(args, step, workflow)
 
 	const handleChange = useOnFormChange(step, onChange)
 
 	console.log(`${step.verb} schema`, args)
 	console.log(`${step.verb} data`, step.args)
-	if (!args) {
+	if (!finalSchema) {
 		return null
 	}
 
@@ -45,7 +45,7 @@ export const RJSFForm: React.FC<RJSFFormProps> = memo(function RJSFForm({
 		<Form
 			className='rjsf-root'
 			uiSchema={UI_SCHEMA_DEFAULTS}
-			schema={args}
+			schema={finalSchema}
 			validator={validator}
 			formData={step.args}
 			onChange={handleChange}

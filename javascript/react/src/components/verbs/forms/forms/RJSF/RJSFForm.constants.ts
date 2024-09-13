@@ -7,22 +7,16 @@ export const UI_SCHEMA_DEFAULTS = {
 	'ui:submitButtonOptions': {
 		norender: true,
 	},
-	'ui:globalOptions': {
-		'ui:hideError': true,
-		'ui:description': ''
-	},
-	
-	
 }
 
 // some of our ux is intentionally managed by HOCs
 // this should eventually change, but for now we can exclude those properties to maintain compatibility with hand-built forms
-// TODO: "dataType" is on the InputColumnArgs, but should only be on Recode
 export const EXCLUDE_PROPERTIES = new Set([
 	'column',
 	'columns',
 	'to',
 ])
+
 export const FIXED_LABELS: Record<string, string> = {
 	preserveSource: 'Keep source columns',
 	printRange: 'Print range as output',

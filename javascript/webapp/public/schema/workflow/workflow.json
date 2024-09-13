@@ -8,10 +8,6 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
-                },
                 "groupby": {
                     "description": "Column to group by",
                     "type": "string"
@@ -58,10 +54,6 @@
                 "column": {
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
-                },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
                 },
                 "fixedcount": {
                     "description": "Fixed number of bins.\nNote that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary -\nthis means there is always one extra bin for the max value when using fixed count.",
@@ -119,24 +111,40 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "criteria": {
-                    "description": "Filter criteria to apply to the column.",
-                    "items": {
-                        "$ref": "#/definitions/Criterion"
-                    },
-                    "type": "array"
+                "operator": {
+                    "description": "Filter operator to execute. Note the correct operator for the column data type must be used.",
+                    "enum": [
+                        "!=",
+                        "<",
+                        "<=",
+                        "=",
+                        ">",
+                        ">=",
+                        "after",
+                        "before",
+                        "contains",
+                        "ends with",
+                        "equals",
+                        "is empty",
+                        "is false",
+                        "is not empty",
+                        "is not equal",
+                        "is true",
+                        "regex",
+                        "starts with"
+                    ],
+                    "type": "string"
                 },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
-                },
-                "logical": {
-                    "$ref": "#/definitions/BooleanOperator",
-                    "description": "Boolean operator to apply to the criteria if more than one."
+                "strategy": {
+                    "$ref": "#/definitions/ComparisonStrategy",
+                    "description": "Indicates whether the filter should be directly against a value,\nor against the value of another column"
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
                     "type": "string"
+                },
+                "value": {
+                    "description": "Comparison value for the column. This is either a direct value to compare if strategy is\nComparisonStrategy.Value, or the name of another column to compare if strategy is ComparisonStrategy.Column.\nNot required if the operator is self-defining (e.g., 'is empty')"
                 }
             },
             "type": "object"
@@ -254,6 +262,14 @@
             ],
             "type": "string"
         },
+        "ComparisonStrategy": {
+            "description": "Indicates the comparison type used for a filter operation.\nThis is done on a row-by-row basis.",
+            "enum": [
+                "column",
+                "value"
+            ],
+            "type": "string"
+        },
         "Constraints": {
             "description": "Validation constraints for a field.",
             "properties": {
@@ -301,10 +317,6 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
-                },
                 "delimiter": {
                     "description": "Delimiter to use for identifying decimals when converting strings to numbers.",
                     "type": "string"
@@ -334,49 +346,9 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
-                },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
                     "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "Criterion": {
-            "properties": {
-                "operator": {
-                    "description": "Filter operator to execute. Note the correct operator for the column data type must be used.",
-                    "enum": [
-                        "!=",
-                        "<",
-                        "<=",
-                        "=",
-                        ">",
-                        ">=",
-                        "after",
-                        "before",
-                        "contains",
-                        "ends with",
-                        "equals",
-                        "is empty",
-                        "is false",
-                        "is not empty",
-                        "is not equal",
-                        "is true",
-                        "regex",
-                        "starts with"
-                    ],
-                    "type": "string"
-                },
-                "type": {
-                    "$ref": "#/definitions/FilterCompareType",
-                    "description": "Indicates whether the filter should be directly against a value,\nor against the value of another column"
-                },
-                "value": {
-                    "description": "Comparison value for the column.\nNot required if the operator is self-defining (e.g., 'is empty')"
                 }
             },
             "type": "object"
@@ -426,10 +398,6 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
-                },
                 "keys": {
                     "items": {
                         "type": "string"
@@ -437,7 +405,7 @@
                     "type": "array"
                 },
                 "preserveSource": {
-                    "description": "Keep the original columns (default is to remove source columns).",
+                    "description": "Indicates whether source column(s) should be preserved on operations that normally drop the source(s).\nE.g., merge, fold, spread, etc.",
                     "type": "boolean"
                 }
             },
@@ -481,10 +449,6 @@
                 "column": {
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
-                },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
                 },
                 "value": {
                     "description": "Value to match and erase (set to undefined) in the column"
@@ -608,31 +572,39 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "criteria": {
-                    "description": "Filter criteria to apply to the column.",
-                    "items": {
-                        "$ref": "#/definitions/Criterion"
-                    },
-                    "type": "array"
+                "operator": {
+                    "description": "Filter operator to execute. Note the correct operator for the column data type must be used.",
+                    "enum": [
+                        "!=",
+                        "<",
+                        "<=",
+                        "=",
+                        ">",
+                        ">=",
+                        "after",
+                        "before",
+                        "contains",
+                        "ends with",
+                        "equals",
+                        "is empty",
+                        "is false",
+                        "is not empty",
+                        "is not equal",
+                        "is true",
+                        "regex",
+                        "starts with"
+                    ],
+                    "type": "string"
                 },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
+                "strategy": {
+                    "$ref": "#/definitions/ComparisonStrategy",
+                    "description": "Indicates whether the filter should be directly against a value,\nor against the value of another column"
                 },
-                "logical": {
-                    "$ref": "#/definitions/BooleanOperator",
-                    "description": "Boolean operator to apply to the criteria if more than one."
+                "value": {
+                    "description": "Comparison value for the column. This is either a direct value to compare if strategy is\nComparisonStrategy.Value, or the name of another column to compare if strategy is ComparisonStrategy.Column.\nNot required if the operator is self-defining (e.g., 'is empty')"
                 }
             },
             "type": "object"
-        },
-        "FilterCompareType": {
-            "description": "Indicates the comparison type used for a filter operation.\nThis is done on a row-by-row basis.",
-            "enum": [
-                "column",
-                "value"
-            ],
-            "type": "string"
         },
         "FoldArgs": {
             "properties": {
@@ -642,6 +614,10 @@
                         "type": "string"
                     },
                     "type": "array"
+                },
+                "preserveSource": {
+                    "description": "Indicates whether source column(s) should be preserved on operations that normally drop the source(s).\nE.g., merge, fold, spread, etc.",
+                    "type": "boolean"
                 },
                 "to": {
                     "description": "Two-element array of names for the output [key, value]",
@@ -666,10 +642,6 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
-                },
                 "value": {
                     "description": "Value to fill in empty cells"
                 }
@@ -681,10 +653,6 @@
                 "column": {
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
-                },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
                 }
             },
             "type": "object"
@@ -793,12 +761,8 @@
                     "description": "Delimiter to use when merging columns into a string.\nThis is only necessary if MergeStrategy.Concat is used.\nIf it is not supplied, the values are just mashed together.",
                     "type": "string"
                 },
-                "prefix": {
-                    "description": "Prefix to strip from column names when using unhot (only relevant if columns were originally onehot encoded with a prefix).",
-                    "type": "string"
-                },
                 "preserveSource": {
-                    "description": "Keep the original columns (default is to remove source columns).",
+                    "description": "Indicates whether source column(s) should be preserved on operations that normally drop the source(s).\nE.g., merge, fold, spread, etc.",
                     "type": "boolean"
                 },
                 "strategy": {
@@ -808,10 +772,6 @@
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
                     "type": "string"
-                },
-                "unhot": {
-                    "description": "Indicates that columns should be \"unhot\" before merging. In other words, replace all 1s with the column name, and 0s with undefined.",
-                    "type": "boolean"
                 }
             },
             "type": "object"
@@ -831,16 +791,12 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
-                },
                 "prefix": {
                     "description": "Optional prefixes for the output column names",
                     "type": "string"
                 },
                 "preserveSource": {
-                    "description": "Keep the original columns (default is to remove source columns).",
+                    "description": "Indicates whether source column(s) should be preserved on operations that normally drop the source(s).\nE.g., merge, fold, spread, etc.",
                     "type": "boolean"
                 }
             },
@@ -928,10 +884,6 @@
                 "column": {
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
-                },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
                 },
                 "mapping": {
                     "$ref": "#/definitions/Record<any,any>",
@@ -1022,10 +974,6 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
-                },
                 "operation": {
                     "$ref": "#/definitions/FieldAggregateOperation",
                     "description": "Aggregate/rollup operation"
@@ -1040,7 +988,7 @@
         "SampleArgs": {
             "properties": {
                 "emitRemainder": {
-                    "description": "Whether to preserve and emit the non-sampled records via the 'unsampled' output port.",
+                    "description": "Whether to preserve and emit the non-sampled records via the 'remainder' output port.",
                     "type": "boolean"
                 },
                 "proportion": {
@@ -1071,20 +1019,8 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
-                },
-                "delimiter": {
-                    "description": "Delimiter to use when converting string cell values into an array with String.split",
-                    "type": "string"
-                },
-                "onehot": {
-                    "description": "Indicates that a onehot-style spread should be performed.\nThis maps all unique cell values to new columns and sets the output cell value to a binary 1/0 based on column match.\nThis is in contrast to the default spread, which just maps array values to column by index.",
-                    "type": "boolean"
-                },
                 "preserveSource": {
-                    "description": "Keep the original columns (default is to remove source columns).",
+                    "description": "Indicates whether source column(s) should be preserved on operations that normally drop the source(s).\nE.g., merge, fold, spread, etc.",
                     "type": "boolean"
                 },
                 "to": {
@@ -2108,10 +2044,6 @@
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
                 },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
-                },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
                     "type": "string"
@@ -2127,10 +2059,6 @@
                 "column": {
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
-                },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
                 },
                 "globalSearch": {
                     "type": "boolean"
@@ -2161,7 +2089,7 @@
                     "type": "string"
                 },
                 "preserveSource": {
-                    "description": "Keep the original columns (default is to remove source columns).",
+                    "description": "Indicates whether source column(s) should be preserved on operations that normally drop the source(s).\nE.g., merge, fold, spread, etc.",
                     "type": "boolean"
                 },
                 "to": {
@@ -2275,10 +2203,6 @@
                 "column": {
                     "description": "Name of the input column for columnar operations",
                     "type": "string"
-                },
-                "dataType": {
-                    "$ref": "#/definitions/DataType",
-                    "description": "Expected data type for values in the column"
                 },
                 "operation": {
                     "$ref": "#/definitions/WindowFunction",

@@ -53,31 +53,30 @@ export function useVerbArgsSchema(step: Step, schema: any): any {
 			if (!args) {
 				return undefined
 			}
-			return args
-			// const properties = Object.entries(args.properties).reduce(
-			// 	(acc: any, [key, value]: [any, any]) => {
-			// 		if (!EXCLUDE_PROPERTIES.has(key)) {
-			// 			acc[key] = {
-			// 				// ...value,
-			// 				title: FIXED_LABELS[key] || capitalize(key),
-			// 				type: value.type || 'string', // this covers "any", which translates to _no type_ in jsonschema
-			// 			}
-			// 			if (value.enum) {
-			// 				acc[key].enum = value.enum
-			// 				// acc[key].oneOf = prettyEnum(value.enum, true)
-			// 			}
-			// 			if (value.items) {
-			// 				acc[key].items = value.items
-			// 			}
-			// 		}
-			// 		return acc
-			// 	},
-			// 	{} as any,
-			// )
-			// return {
-			// 	...args,
-			// 	properties,
-			// }
+			const properties = Object.entries(args.properties).reduce(
+				(acc: any, [key, value]: [any, any]) => {
+					if (!EXCLUDE_PROPERTIES.has(key)) {
+						acc[key] = {
+							// ...value,
+							title: FIXED_LABELS[key] || capitalize(key),
+							type: value.type || 'string', // this covers "any", which translates to _no type_ in jsonschema
+						}
+						if (value.enum) {
+							// acc[key].enum = value.enum
+							acc[key].oneOf = prettyEnum(value.enum, true)
+						}
+						if (value.items) {
+							acc[key].items = value.items
+						}
+					}
+					return acc
+				},
+				{} as any,
+			)
+			return {
+				...args,
+				properties,
+			}
 		}
 	}, [step, schema])
 }
@@ -89,6 +88,7 @@ function findVerbSchema(step: Step, schema: any) {
 	const args = schema.definitions[`${formatted}Args`]
 	return args
 }
+
 // TODO: can we get our jsonschema generator to create the official oneOf format and use the TS names?
 // https://github.com/rjsf-team/react-jsonschema-form/pull/581
 function prettyEnum(
@@ -124,13 +124,13 @@ export function useDataBoundArgsSchema(
 ): any {
 	const dataTable = useStepInputTable(step, workflow)
 	const columns = useColumnNames(dataTable)
+	console.log(columns)
 	return useMemo(() => {
 		if (args && columns) {
 			const copy = { ...args }
 			COLUMN_ARGS.forEach((column) => {
 				if (copy.properties[column]) {
-					// copy.enum = columns
-					copy.properties[column].oneOf = prettyEnum(columns, false)
+					copy.properties[column].enum = columns
 				}
 			})
 			return copy
