@@ -1,3 +1,5 @@
+**This repository is the result of research efforts that are no longer active. It has been marked read-only on GitHub to preserve the public code, but is no longer maintained or accepting contributions.**
+
 # DataShaper
 
 This project provides a collection of components for executing processing pipelines, particularly oriented to data wrangling. Detailed documentation is provided in subfolders, with an overview of high-level goals and concepts here. Most of the documentation within individual packages is tailored to developers needing to understand how the code is organized and executed. Higher-level concepts for the project as a whole, constructing workflows, etc. are in the root [docs](./docs/) folder.
